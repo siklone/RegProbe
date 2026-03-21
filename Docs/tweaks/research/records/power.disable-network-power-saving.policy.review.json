@@ -1,0 +1,213 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.disable-network-power-saving.policy",
+  "tweak_id": "power.disable-network-power-saving.policy",
+  "record_status": "validated",
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "summary": "Controls the official TCP/IP offload and MMCSS responsiveness values only. The opaque NetworkThrottlingIndex value remains in the deprecated parent audit trail.",
+  "setting": {
+    "name": "Network Power and Multimedia Responsiveness",
+    "category": "Power",
+    "area": "TCP/IP offload + MMCSS policy",
+    "scope": "device",
+    "casual_explanation": "These settings affect whether TCP/IP task offloads stay enabled and how much CPU is reserved for multimedia responsiveness.",
+    "why_people_change_it": "People tune these values when chasing lower latency for gaming, streaming, or other timing-sensitive workloads.",
+    "tradeoffs_overview": "The official TCP/IP offload and MMCSS values are documented by Microsoft. This child record excludes the opaque NetworkThrottlingIndex value that keeps the parent bundle from being publishable as a single preset.",
+    "professional_notes": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters and SystemResponsiveness under HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile. The current app writes the documented values for those two settings. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail and is not part of this child record.",
+    "targets": [
+      {
+        "target_id": "disable-task-offload",
+        "location_kind": "registry",
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+        "value_name": "DisableTaskOffload",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Task offload enabled",
+            "meaning": "Microsoft documents that setting DisableTaskOffload to 0 enables task offloads.",
+            "evidence_ids": [
+              "ms-task-offload",
+              "app-power-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Task offload disabled",
+            "meaning": "Microsoft documents that setting DisableTaskOffload to 1 disables all task offloads from the TCP/IP transport.",
+            "evidence_ids": [
+              "ms-task-offload"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "system-responsiveness",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+        "value_name": "SystemResponsiveness",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 10,
+            "label": "App responsiveness value",
+            "meaning": "Microsoft documents SystemResponsiveness as the percentage of CPU resources guaranteed to low-priority tasks. Values not divisible by 10 are rounded down to the nearest multiple of 10.",
+            "evidence_ids": [
+              "ms-mmcss",
+              "app-power-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+    "notes": "The app writes the documented values for DisableTaskOffload and SystemResponsiveness. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail.",
+    "writes": [
+      {
+        "target_id": "disable-task-offload",
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+        "value_name": "DisableTaskOffload",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "system-responsiveness",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+        "value_name": "SystemResponsiveness",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 10
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented defaults",
+      "applies_to": "Windows SMB client tuning surface documented by Microsoft",
+      "states": [
+        {
+          "target_id": "disable-task-offload",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Microsoft lists 0 as the enabled baseline."
+        },
+        {
+          "target_id": "system-responsiveness",
+          "state_kind": "value",
+          "value": 10,
+          "rationale": "Microsoft's MMCSS documentation uses 10 as the example baseline."
+        }
+      ],
+      "evidence_ids": [
+        "ms-task-offload",
+        "ms-mmcss"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Normal network and multimedia workloads"
+      ],
+      "avoid_for": [
+        "People reproducing the current app bundle"
+      ],
+      "states": [
+        {
+          "target_id": "disable-task-offload",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the documented task-offload enabled baseline."
+        },
+        {
+          "target_id": "system-responsiveness",
+          "state_kind": "value",
+          "value": 10,
+          "rationale": "Keep the documented MMCSS baseline."
+        }
+      ],
+      "good_when": "You want the documented Windows baseline.",
+      "bad_when": "You are targeting the broader app bundle or the opaque NetworkThrottlingIndex value.",
+      "tradeoffs": [
+        "Best match to Microsoft's documented baseline.",
+        "Does not include the unresolved opaque tuning value."
+      ],
+      "apply_allowed": true,
+      "recommended_for_general_users": false,
+      "evidence_ids": [
+        "ms-task-offload",
+        "ms-mmcss"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-task-offload",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+      "summary": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters, with 1 disabling task offloads and 0 enabling them.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-mmcss",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Multimedia Class Scheduler Service",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "summary": "Microsoft documents SystemResponsiveness under the SystemProfile key and explains how the value is rounded and clamped.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-power-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+      "summary": "The provider writes DisableTaskOffload = 0 and SystemResponsiveness = 10. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+    "exact_quote_or_path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload",
+    "key_found_on_page": true,
+    "notes": "The child record also relies on Microsoft's MMCSS documentation for SystemResponsiveness. The opaque NetworkThrottlingIndex write remains only in the deprecated parent audit trail."
+  },
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official TCP/IP offload and MMCSS values are documented and machine-checkable. The unresolved NetworkThrottlingIndex value remains in the deprecated parent audit trail.",
+    "blocking_issues": []
+  }
+}

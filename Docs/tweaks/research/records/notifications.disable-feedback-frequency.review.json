@@ -1,0 +1,188 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "notifications.disable-feedback-frequency",
+  "tweak_id": "notifications.disable-feedback-frequency",
+  "record_status": "validated",
+  "summary": "Officially documented feedback-request frequency setting. Microsoft documents NumberOfSIUFInPeriod under the current-user SIUF rules key and maps 0 to Never, which matches the app's suppression value.",
+  "setting": {
+    "name": "Windows Feedback Request Frequency",
+    "category": "Notifications",
+    "area": "Observed User Preference",
+    "scope": "user",
+    "casual_explanation": "Windows can occasionally ask for feedback. This tweak sets a user preference intended to reduce or stop those requests.",
+    "why_people_change_it": "People change this when they want a quieter system with fewer feedback prompts.",
+    "tradeoffs_overview": "Lowering or disabling feedback prompts can make Windows quieter, but it also reduces Microsoft's ability to ask for product feedback through the normal feedback-request flow.",
+    "professional_notes": "Microsoft documents HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod and pairs it with PeriodInNanoSeconds as the user-level feedback-request frequency surface. The current app only writes NumberOfSIUFInPeriod = 0, which matches the documented Never state.",
+    "targets": [
+      {
+        "target_id": "siuf-feedback-frequency",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Siuf\\Rules",
+        "value_name": "NumberOfSIUFInPeriod",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows or user default",
+            "meaning": "Windows uses the normal feedback-request behavior for the current user.",
+            "evidence_ids": [
+              "ms-feedback-frequency",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Never ask for feedback",
+            "meaning": "Windows feedback requests are disabled for the current user.",
+            "evidence_ids": [
+              "ms-feedback-frequency",
+              "app-privacy-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The provider writes NumberOfSIUFInPeriod = 0 for the current user.",
+    "writes": [
+      {
+        "target_id": "siuf-feedback-frequency",
+        "path": "HKCU\\Software\\Microsoft\\Siuf\\Rules",
+        "value_name": "NumberOfSIUFInPeriod",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "User preference baseline",
+      "applies_to": "Current-user Windows feedback preference state",
+      "states": [
+        {
+          "target_id": "siuf-feedback-frequency",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Treat the observed user value as optional and not as a validated official baseline."
+        }
+      ],
+      "evidence_ids": [
+        "ms-feedback-frequency",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users"
+      ],
+      "avoid_for": [
+        "People explicitly comparing current app behavior"
+      ],
+      "states": [
+        {
+          "target_id": "siuf-feedback-frequency",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the observed preference unset until the mapping is better sourced."
+        }
+      ],
+      "good_when": "You want the least-assumptive baseline.",
+      "bad_when": "You want to reproduce the current app behavior for research.",
+      "tradeoffs": [
+        "Keeps the setting honest.",
+        "Does not explicitly suppress feedback requests."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-feedback-frequency",
+        "app-privacy-provider"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure"
+      ],
+      "states": [
+        {
+          "target_id": "siuf-feedback-frequency",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Track the current-user value the app writes today."
+        }
+      ],
+      "good_when": "You want to suppress Windows feedback requests for the current user using the documented registry surface.",
+      "bad_when": "You still want Windows to ask for feedback periodically.",
+      "tradeoffs": [
+        "Matches the product's current behavior.",
+        "Feedback requests are suppressed for the current user."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-feedback-frequency",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-feedback-frequency",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Manage connections from Windows operating system components to Microsoft services",
+      "location": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+      "summary": "Microsoft documents HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod and maps 0 to Never, 1 to Automatically, 1/86,400,000,000,000 to Once a day, and 1/604,800,000,000,000 to Once a week.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current privacy provider feedback-frequency write",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod = 0 for the current user.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the exact current-user SIUF path, the NumberOfSIUFInPeriod value name, and the numeric mapping where 0 means Never. The app writes that same documented value on the same documented surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:02:35Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+    "exact_quote_or_path": "HKEY_CURRENT_USER\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod; Automatically = 1; Never = 0; Once a day = 1; Once a week = 1",
+    "key_found_on_page": true,
+    "notes": "The Microsoft Learn page documents the exact SIUF registry path and table entries showing NumberOfSIUFInPeriod = 0 for Never. The page also lists PeriodInNanoSeconds for the day/week variants, but the app only uses the documented Never value."
+  }
+}

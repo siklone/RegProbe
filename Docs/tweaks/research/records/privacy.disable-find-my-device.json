@@ -1,0 +1,233 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-find-my-device",
+  "tweak_id": "privacy.disable-find-my-device",
+  "record_status": "validated",
+  "summary": "Machine policy for Find My Device. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.",
+  "setting": {
+    "name": "Find My Device",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Find My Device can register the device and its location in the cloud so it can be located later. This policy decides whether that feature is allowed.",
+    "why_people_change_it": "People disable it to avoid cloud registration of the device and its location or because they do not want location-based recovery features.",
+    "tradeoffs_overview": "Disabling it reduces cloud registration and location tracking, but it also removes Find My Device recovery features.",
+    "professional_notes": "Microsoft documents AllowFindMyDevice in the Experience Policy CSP and FindMy.admx maps it to HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice\\AllowFindMyDevice with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "allow-find-my-device",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice",
+        "value_name": "AllowFindMyDevice",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Find My Device disabled",
+            "meaning": "The device and its location are not registered and Find My Device will not work.",
+            "evidence_ids": [
+              "ms-experience-allow-find-my-device",
+              "local-findmy-admx",
+              "local-findmy-adml",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Find My Device enabled",
+            "meaning": "The device and its location can be registered in the cloud so the feature can locate the device later.",
+            "evidence_ids": [
+              "ms-experience-allow-find-my-device",
+              "local-findmy-admx",
+              "local-findmy-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes AllowFindMyDevice = 0, which matches the documented disabled state.",
+    "writes": [
+      {
+        "target_id": "allow-find-my-device",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice",
+        "value_name": "AllowFindMyDevice",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows machine-policy default",
+      "applies_to": "Windows 10 version 1703 and later client systems exposing the policy",
+      "states": [
+        {
+          "target_id": "allow-find-my-device",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Microsoft documents the default value as 1."
+        }
+      ],
+      "notes": "By default, the feature is allowed to operate.",
+      "evidence_ids": [
+        "ms-experience-allow-find-my-device"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Laptop and mobile-device users",
+        "Users who want recovery features if the device is lost"
+      ],
+      "avoid_for": [
+        "Users who do not want location-based cloud registration"
+      ],
+      "states": [
+        {
+          "target_id": "allow-find-my-device",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Keep the feature available."
+        }
+      ],
+      "good_when": "You want device-location recovery features to remain available.",
+      "bad_when": "You do not want the device and its location registered in the cloud.",
+      "tradeoffs": [
+        "Find My Device can help locate the device later.",
+        "The feature relies on cloud registration and location handling."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-experience-allow-find-my-device"
+      ]
+    },
+    {
+      "profile_id": "no-cloud-device-location",
+      "label": "No cloud device location",
+      "intended_for": [
+        "Privacy-focused systems",
+        "Fixed desktop systems",
+        "Devices that should not use location recovery"
+      ],
+      "avoid_for": [
+        "Portable devices that benefit from Find My Device recovery"
+      ],
+      "states": [
+        {
+          "target_id": "allow-find-my-device",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable the feature and stop cloud registration."
+        }
+      ],
+      "good_when": "You want to avoid device-location registration and cloud recovery features.",
+      "bad_when": "You want to be able to locate the device later if it is lost.",
+      "tradeoffs": [
+        "Location-based recovery features are removed.",
+        "The device and its location are not registered for Find My Device."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-experience-allow-find-my-device",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-experience-allow-find-my-device",
+      "kind": "policy-csp",
+      "title": "Microsoft Experience Policy CSP: AllowFindMyDevice",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice",
+      "summary": "Microsoft documents the default value, allowed values 0 and 1, behavior, and registry mapping for Find My Device.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-findmy-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft FindMy.admx mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\FindMy.admx",
+      "summary": "The local ADMX file maps the policy to HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice\\AllowFindMyDevice with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-findmy-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft FindMy.adml help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\FindMy.adml",
+      "summary": "The local ADML help text explains that enabling the feature allows cloud registration for device-location recovery, while turning it off stops registration and the feature from working.",
+      "supports": [
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes AllowFindMyDevice = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-find-my-device",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents AllowFindMyDevice directly in the Experience Policy CSP and maps it to SOFTWARE\\Policies\\Microsoft\\FindMyDevice\\AllowFindMyDevice with 1 as the default allowed state and 0 as disabled. The app writes that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T13:52:31.0573715+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice",
+    "exact_quote_or_path": "This policy turns on Find My Device. ... When Find My Device is off, the device and its location aren't registered and the Find My Device feature won't work. ... Default Value 1; Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Registry Key Name SOFTWARE\\Policies\\Microsoft\\FindMyDevice; Registry Value Name AllowFindMyDevice.",
+    "key_found_on_page": true,
+    "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics."
+  }
+}

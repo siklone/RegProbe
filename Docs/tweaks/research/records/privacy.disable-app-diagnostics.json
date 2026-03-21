@@ -1,0 +1,225 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-app-diagnostics",
+  "tweak_id": "privacy.disable-app-diagnostics",
+  "record_status": "validated",
+  "summary": "Machine policy for whether Windows apps can access diagnostic information about other apps. The local Microsoft AppPrivacy.admx file documents the same AppPrivacy policy key and LetAppsGetDiagnosticInfo enum value used by the app.",
+  "setting": {
+    "name": "App Diagnostic Information Access",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Some Windows apps can request diagnostic information about other apps. This policy decides whether apps are user-controlled, always allowed, or always denied.",
+    "why_people_change_it": "People deny this access to reduce app-to-app data exposure and tighten privacy on managed devices.",
+    "tradeoffs_overview": "Force denying access reduces diagnostic exposure between apps, but it can limit features that expect this information to be available.",
+    "professional_notes": "AppPrivacy.admx maps LetAppsGetDiagnosticInfo under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy with enum values 0 for User is in control, 1 for Force Allow, and 2 for Force Deny.",
+    "targets": [
+      {
+        "target_id": "let-apps-get-diagnostic-info",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsGetDiagnosticInfo",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force a policy and the user remains in control of app diagnostic-info access.",
+            "evidence_ids": [
+              "local-appprivacy-admx-diagnostics",
+              "local-appprivacy-adml-diagnostics"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "User is in control",
+            "meaning": "The user decides whether Windows apps can access diagnostic information about other apps.",
+            "evidence_ids": [
+              "local-appprivacy-admx-diagnostics",
+              "local-appprivacy-adml-diagnostics"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Force allow",
+            "meaning": "Windows apps are allowed to access diagnostic information about other apps and the user cannot change it.",
+            "evidence_ids": [
+              "local-appprivacy-admx-diagnostics",
+              "local-appprivacy-adml-diagnostics"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Force deny",
+            "meaning": "Windows apps are not allowed to access diagnostic information about other apps and the user cannot change it.",
+            "evidence_ids": [
+              "local-appprivacy-admx-diagnostics",
+              "local-appprivacy-adml-diagnostics",
+              "app-privacy-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes LetAppsGetDiagnosticInfo = 2, which matches the documented Force Deny state.",
+    "writes": [
+      {
+        "target_id": "let-apps-get-diagnostic-info",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsGetDiagnosticInfo",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 2
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 10 RS2 and newer systems exposing the AppPrivacy diagnostics policy",
+      "states": [
+        {
+          "target_id": "let-apps-get-diagnostic-info",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The policy is not configured by default."
+        }
+      ],
+      "notes": "If the policy is disabled or not configured, the user remains in control.",
+      "evidence_ids": [
+        "local-appprivacy-admx-diagnostics",
+        "local-appprivacy-adml-diagnostics"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that do not need a strict policy here"
+      ],
+      "avoid_for": [
+        "Privacy-focused or locked-down devices"
+      ],
+      "states": [
+        {
+          "target_id": "let-apps-get-diagnostic-info",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want users to keep normal control over this app-privacy area.",
+      "bad_when": "You want to prevent apps from accessing diagnostic information about other apps.",
+      "tradeoffs": [
+        "User control is preserved.",
+        "Apps may still be allowed to use diagnostic information depending on user choice."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-appprivacy-adml-diagnostics"
+      ]
+    },
+    {
+      "profile_id": "deny-app-diagnostics",
+      "label": "Deny app diagnostics",
+      "intended_for": [
+        "Privacy-sensitive systems",
+        "Managed devices"
+      ],
+      "avoid_for": [
+        "Apps that depend on diagnostic-info access to function well"
+      ],
+      "states": [
+        {
+          "target_id": "let-apps-get-diagnostic-info",
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Use the documented Force Deny state."
+        }
+      ],
+      "good_when": "You want a strict no-access rule for app diagnostic information.",
+      "bad_when": "You want Windows apps to keep using diagnostic information about other apps.",
+      "tradeoffs": [
+        "Cross-app diagnostic access is blocked.",
+        "Some app features may stop working or show less context."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-appprivacy-admx-diagnostics",
+        "local-appprivacy-adml-diagnostics",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-appprivacy-admx-diagnostics",
+      "kind": "official-doc",
+      "title": "Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\AppPrivacy.admx",
+      "summary": "The local ADMX file maps LetAppsGetDiagnosticInfo under the AppPrivacy policy key and defines values 0, 1, and 2 for User is in control, Force Allow, and Force Deny.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-appprivacy-adml-diagnostics",
+      "kind": "official-doc",
+      "title": "Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\AppPrivacy.adml",
+      "summary": "The local ADML help text explains that the user can be in control, apps can be force allowed, or apps can be force denied from accessing diagnostic information about other apps.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes LetAppsGetDiagnosticInfo = 2 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft AppPrivacy.admx file explicitly defines the LetAppsGetDiagnosticInfo enum under Software\\Policies\\Microsoft\\Windows\\AppPrivacy, and the paired ADML help text documents the Force Deny state. The app writes that exact enum value of 2.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:45:22.0860678+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\AppPrivacy.admx",
+    "exact_quote_or_path": "<policy name=\"LetAppsGetDiagnosticInfo\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppPrivacy\"> ... <enum id=\"LetAppsGetDiagnosticInfo_Enum\" valueName=\"LetAppsGetDiagnosticInfo\">",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same AppPrivacy machine policy surface used by the app. The paired ADML help text documents the User in control, Force Allow, and Force Deny states for this enum, and the app uses Force Deny (2)."
+  }
+}

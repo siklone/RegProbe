@@ -1,0 +1,230 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "visibility.disable-spotlight-third-party",
+  "tweak_id": "visibility.disable-spotlight-third-party",
+  "record_status": "validated",
+  "summary": "User policy for third-party suggestions in Windows Spotlight. Good for a less promotional experience, but it removes recommendation surfaces that can point to third-party content or apps.",
+  "setting": {
+    "name": "Third-Party Suggestions in Windows Spotlight",
+    "category": "Visibility",
+    "area": "Registry Policy",
+    "scope": "user",
+    "casual_explanation": "Windows Spotlight can include suggestions that point to third-party content or apps. This policy decides whether those suggestions are allowed for the current user.",
+    "why_people_change_it": "People disable it to reduce third-party promotion and keep Windows from recommending outside content through Spotlight.",
+    "tradeoffs_overview": "Turning it off reduces promotional suggestions, but it can also remove discovery of some third-party content or app recommendations.",
+    "professional_notes": "The Experience Policy CSP uses the allow-form name AllowThirdPartySuggestionsInWindowsSpotlight, while CloudContent.admx maps the user Group Policy to DisableThirdPartySuggestions with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "disable-third-party-suggestions",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "value_name": "DisableThirdPartySuggestions",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the third-party Spotlight suggestions policy for the current user.",
+            "evidence_ids": [
+              "ms-experience-csp-allow-third-party-spotlight",
+              "local-cloud-content-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Third-party Spotlight suggestions allowed",
+            "meaning": "The policy is disabled and Windows Spotlight can show third-party suggestions.",
+            "evidence_ids": [
+              "ms-experience-csp-allow-third-party-spotlight",
+              "local-cloud-content-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Third-party Spotlight suggestions disabled",
+            "meaning": "Windows Spotlight won't show third-party suggestions for the current user.",
+            "evidence_ids": [
+              "ms-experience-csp-allow-third-party-spotlight",
+              "local-cloud-content-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The current app writes DisableThirdPartySuggestions = 1, which matches the documented Group Policy disable behavior.",
+    "writes": [
+      {
+        "target_id": "disable-third-party-suggestions",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "value_name": "DisableThirdPartySuggestions",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows user-policy default",
+      "applies_to": "Windows 10 and Windows 11 client systems",
+      "states": [
+        {
+          "target_id": "disable-third-party-suggestions",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The user policy is not configured by default."
+        }
+      ],
+      "notes": "The Experience Policy CSP documents the allow-form default as allowed, while the registry policy baseline remains not configured unless the policy is set.",
+      "evidence_ids": [
+        "ms-experience-csp-allow-third-party-spotlight",
+        "local-cloud-content-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who are comfortable with Spotlight recommendations"
+      ],
+      "avoid_for": [
+        "Users who want a less promotional experience"
+      ],
+      "states": [
+        {
+          "target_id": "disable-third-party-suggestions",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the user policy unset."
+        }
+      ],
+      "good_when": "You want Windows Spotlight to keep its ordinary recommendation behavior.",
+      "bad_when": "You want to stop third-party suggestions from appearing through Spotlight.",
+      "tradeoffs": [
+        "Third-party Spotlight recommendations remain possible.",
+        "No policy-based restriction is enforced for this content path."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-experience-csp-allow-third-party-spotlight"
+      ]
+    },
+    {
+      "profile_id": "quiet-ui",
+      "label": "Quiet UI",
+      "intended_for": [
+        "Users who want fewer promotions",
+        "Managed devices"
+      ],
+      "avoid_for": [
+        "Users who want Spotlight to surface broader recommendations"
+      ],
+      "states": [
+        {
+          "target_id": "disable-third-party-suggestions",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Turn off third-party Spotlight suggestions through Group Policy."
+        }
+      ],
+      "good_when": "You want Windows Spotlight to stop surfacing third-party suggestions.",
+      "bad_when": "You want Windows to keep those recommendation surfaces available.",
+      "tradeoffs": [
+        "Third-party promotional suggestions are reduced.",
+        "Some discovery of outside content or apps may disappear."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-experience-csp-allow-third-party-spotlight",
+        "local-cloud-content-admx",
+        "app-visibility-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-experience-csp-allow-third-party-spotlight",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: AllowThirdPartySuggestionsInWindowsSpotlight",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight",
+      "summary": "Official documentation for the allow-form policy controlling third-party suggestions in Windows Spotlight.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-cloud-content-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft CloudContent.admx mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\CloudContent.admx",
+      "summary": "The local ADMX file maps the user Group Policy to DisableThirdPartySuggestions with enabledValue 1 and disabledValue 0 under the CloudContent policy key.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes DisableThirdPartySuggestions = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-spotlight-third-party",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft CloudContent policy files document the exact user-policy surface, numeric mapping, and third-party Spotlight suggestion behavior. The app writes the documented disabled value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T21:25:32.4359503+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\CloudContent.admx",
+    "exact_quote_or_path": "<policy name=\"DisableThirdPartySuggestions\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\CloudContent\" valueName=\"DisableThirdPartySuggestions\">; CloudContent.adml: If you enable this policy, Windows spotlight features like lock screen spotlight, suggested apps in Start menu or Windows tips will no longer suggest apps and content from third-party software publishers.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy stops Windows Spotlight from suggesting third-party apps and content."
+  }
+}

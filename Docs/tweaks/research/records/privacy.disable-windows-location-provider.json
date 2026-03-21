@@ -1,0 +1,230 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-windows-location-provider",
+  "tweak_id": "privacy.disable-windows-location-provider",
+  "record_status": "validated",
+  "summary": "Machine policy for the Windows Location Provider. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.",
+  "setting": {
+    "name": "Windows Location Provider",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows has a built-in location provider that apps and system features can use. This policy decides whether that provider is available.",
+    "why_people_change_it": "People disable it when they want to reduce location access across the device or enforce a privacy-oriented baseline.",
+    "tradeoffs_overview": "Turning it off reduces location exposure, but maps, weather, geofencing, device location, and other location-aware features can stop working or work less well.",
+    "professional_notes": "LocationProviderAdm.admx maps this machine policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "disable-windows-location-provider",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "value_name": "DisableWindowsLocationProvider",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the machine policy for the Windows Location Provider.",
+            "evidence_ids": [
+              "ms-location-provider-policy-csp",
+              "local-location-provider-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Windows Location Provider allowed",
+            "meaning": "The policy is disabled and the provider remains available.",
+            "evidence_ids": [
+              "ms-location-provider-policy-csp",
+              "local-location-provider-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Windows Location Provider disabled",
+            "meaning": "The provider is blocked by policy.",
+            "evidence_ids": [
+              "ms-location-provider-policy-csp",
+              "local-location-provider-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DisableWindowsLocationProvider = 1, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "disable-windows-location-provider",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "value_name": "DisableWindowsLocationProvider",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 8 and newer systems with Windows Location Provider policy support",
+      "states": [
+        {
+          "target_id": "disable-windows-location-provider",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The machine policy is not configured by default."
+        }
+      ],
+      "notes": "This is a policy default and not a statement about whether location is globally enabled for every user or app.",
+      "evidence_ids": [
+        "ms-location-provider-policy-csp",
+        "local-location-provider-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Devices that use maps, weather, or other location-aware features"
+      ],
+      "avoid_for": [
+        "Strict privacy baselines"
+      ],
+      "states": [
+        {
+          "target_id": "disable-windows-location-provider",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep ordinary location-provider behavior.",
+      "bad_when": "You want the Windows Location Provider disabled across the device.",
+      "tradeoffs": [
+        "Location-aware features can continue to use the Windows provider when otherwise permitted.",
+        "No hard privacy restriction is enforced for this provider."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-location-provider-policy-csp"
+      ]
+    },
+    {
+      "profile_id": "privacy-focused",
+      "label": "Privacy focused",
+      "intended_for": [
+        "Privacy-sensitive systems",
+        "Managed devices that should not expose Windows location services"
+      ],
+      "avoid_for": [
+        "Users who rely on location-aware apps and system features"
+      ],
+      "states": [
+        {
+          "target_id": "disable-windows-location-provider",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Disable the Windows Location Provider by policy."
+        }
+      ],
+      "good_when": "You want Windows-provided location data unavailable to apps and system features.",
+      "bad_when": "You use features that expect device location to work normally.",
+      "tradeoffs": [
+        "Location exposure is reduced at the provider level.",
+        "Apps and features that rely on Windows location can lose functionality."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-location-provider-policy-csp",
+        "local-location-provider-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-location-provider-policy-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: DisableWindowsLocationProvider",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider",
+      "summary": "Official documentation for the policy that controls the Windows Location Provider.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-location-provider-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft LocationProviderAdm.admx mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\LocationProviderAdm.admx",
+      "summary": "The local ADMX file shows DisableWindowsLocationProvider with enabledValue 1 and disabledValue 0 under the LocationAndSensors policy key.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DisableWindowsLocationProvider = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-windows-location-provider",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents DisableWindowsLocationProvider directly in the ADMX_LocationProviderAdm Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider. The same page describes that enabling the policy turns off the Windows Location Provider for the computer, and the app writes that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T14:27:06.4267409+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider",
+    "exact_quote_or_path": "This policy setting turns off the Windows Location Provider feature for this computer. If you enable this policy setting, the Windows Location Provider feature will be turned off, and all programs on this computer won't be able to use the Windows Location Provider feature. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\LocationAndSensors; Registry Value Name DisableWindowsLocationProvider.",
+    "key_found_on_page": true,
+    "notes": "The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior."
+  }
+}

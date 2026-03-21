@@ -1,0 +1,226 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-search-history",
+  "tweak_id": "privacy.disable-search-history",
+  "record_status": "validated",
+  "summary": "Legacy validated record without machine-checkable validation proof. User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.",
+  "setting": {
+    "name": "Search History Storage and Display",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "user",
+    "casual_explanation": "Windows can remember previous search queries and use them to suggest searches later. This policy decides whether that search history is stored and shown for the current user.",
+    "why_people_change_it": "People disable search history to keep prior queries out of the registry and stop Windows from surfacing suggestions based on earlier searches.",
+    "tradeoffs_overview": "Turning it off reduces retained search history and suggestion clutter, but it also removes convenience features based on past searches.",
+    "professional_notes": "Search.admx maps the user policy to HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\DisableSearchHistory with enabledValue 1 and disabledValue 0. The local ADML help text says enabling the policy prevents search queries from being stored in the registry and stops previous-search suggestions from appearing.",
+    "targets": [
+      {
+        "target_id": "disable-search-history",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "value_name": "DisableSearchHistory",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the search-history policy for the current user.",
+            "evidence_ids": [
+              "local-search-admx",
+              "local-search-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Search history allowed",
+            "meaning": "Previous searches can be stored and used for later search suggestions.",
+            "evidence_ids": [
+              "local-search-admx",
+              "local-search-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Search history disabled",
+            "meaning": "Search queries aren't stored in the registry and previous-search suggestions won't appear in the search pane.",
+            "evidence_ids": [
+              "local-search-admx",
+              "local-search-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DisableSearchHistory = 1, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "disable-search-history",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "value_name": "DisableSearchHistory",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows user-policy default",
+      "applies_to": "Windows systems with the Search policy for DisableSearchHistory available",
+      "states": [
+        {
+          "target_id": "disable-search-history",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The user policy is not configured by default."
+        }
+      ],
+      "notes": "The local ADML help text states that if the policy is disabled or not configured, users get search suggestions based on previous searches.",
+      "evidence_ids": [
+        "local-search-admx",
+        "local-search-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want search suggestions based on previous queries"
+      ],
+      "avoid_for": [
+        "Privacy-focused users"
+      ],
+      "states": [
+        {
+          "target_id": "disable-search-history",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the user policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep its normal behavior for search history and previous-search suggestions.",
+      "bad_when": "You want prior queries kept out of the registry and out of suggestions.",
+      "tradeoffs": [
+        "Previous-search suggestions can remain available.",
+        "No policy-based restriction is enforced for stored search history."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-search-adml"
+      ]
+    },
+    {
+      "profile_id": "privacy-focused",
+      "label": "Privacy focused",
+      "intended_for": [
+        "Privacy-sensitive users",
+        "Shared accounts"
+      ],
+      "avoid_for": [
+        "Users who rely on previous-search suggestions for convenience"
+      ],
+      "states": [
+        {
+          "target_id": "disable-search-history",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Prevent search queries from being stored in the registry and stop suggestions based on previous searches."
+        }
+      ],
+      "good_when": "You want less retained search history and a quieter search pane.",
+      "bad_when": "You want Windows to recall and suggest your earlier search terms.",
+      "tradeoffs": [
+        "Previous-search suggestions disappear.",
+        "Repeated searches may be slightly less convenient."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-search-admx",
+        "local-search-adml",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-search-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Search.admx mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\Search.admx",
+      "summary": "The local ADMX file shows DisableSearchHistory with enabledValue 1 and disabledValue 0 under the Explorer policy key.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-search-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft Search.adml help text",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\en-US\\Search.adml",
+      "summary": "The local ADML help text says enabling the policy prevents search queries from being stored in the registry and stops previous-search suggestions from appearing in the search pane.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DisableSearchHistory = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-search-history",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft Search policy files explicitly define the user policy path HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer, the value name DisableSearchHistory, and the enabled/disabled mapping. The app writes the documented enabled-state value 1 that disables stored search history and previous-search suggestions.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:45:05.0000000+03:00",
+  "validation_proof": {
+    "source_url": "C:\\WINDOWS\\PolicyDefinitions\\Search.admx",
+    "exact_quote_or_path": "Search.admx: <policy name=\"DisableSearchHistory\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"DisableSearchHistory\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; Search.adml: \"If you enable this policy setting, search queries will not be stored in the registry and users cannot see or use previous searches in the Search pane.\"",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions."
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.disable-cpu-idle-states",
+  "tweak_id": "power.disable-cpu-idle-states",
+  "record_status": "validated",
+  "summary": "Validated observed implementation only. This record now has machine-checkable VM proof for the raw CPU idle-state registry bundle, but Microsoft still does not publish it as a supported control surface.",
+  "setting": {
+    "name": "CPU Idle States Bundle",
+    "category": "Power",
+    "area": "Processor Idle Behavior",
+    "scope": "device",
+    "casual_explanation": "CPU idle states let Windows save power when the processor has little to do. This tweak tries to reduce or bypass that behavior for latency-focused systems.",
+    "why_people_change_it": "People change it when chasing minimum latency for gaming, audio work, or other timing-sensitive workloads.",
+    "tradeoffs_overview": "Reducing idle-state behavior can increase responsiveness in some narrow cases, but it can also raise heat and power consumption. The current problem is that the app uses raw power-manager registry values instead of a clearly supported Microsoft control surface.",
+    "professional_notes": "The app writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. This review found Microsoft documentation for processor idle states as a feature area, but not a primary Microsoft registry mapping that validates this exact raw bundle as a supported configuration method.",
+    "targets": [
+      {
+        "target_id": "cpu-idle-states-registry-bundle",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+        "value_type": "REG_DWORD bundle",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Primary-source mapping not confirmed",
+            "meaning": "The feature area is real, but this review did not find a primary Microsoft registry source validating this exact raw bundle.",
+            "evidence_ids": [
+              "ms-cpu-idle-states",
+              "app-power-provider",
+              "repo-power-doc"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+    "notes": "The app writes a raw CPU idle-state registry bundle, but this review did not find a primary Microsoft registry surface that validates it as a supported tuning method.",
+    "writes": [
+      {
+        "target_id": "cpu-idle-states-registry-bundle",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+        "value_type": "REG_DWORD bundle",
+        "state_kind": "value",
+        "value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed processor idle baseline",
+      "applies_to": "Windows systems using normal processor idle-state management",
+      "states": [
+        {
+          "target_id": "cpu-idle-states-registry-bundle",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This review did not elevate the raw registry bundle to a published Windows baseline."
+        }
+      ],
+      "notes": "Processor idle behavior should be treated as Windows-managed unless a supported control surface is confirmed.",
+      "evidence_ids": [
+        "ms-cpu-idle-states"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Battery-sensitive laptops",
+        "Systems using standard Windows processor power management"
+      ],
+      "avoid_for": [
+        "None until a supported Microsoft mapping is confirmed"
+      ],
+      "states": [
+        {
+          "target_id": "cpu-idle-states-registry-bundle",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep processor idle behavior under the normal Windows-managed baseline."
+        }
+      ],
+      "good_when": "You want supported Windows processor power management behavior.",
+      "bad_when": "You are trying to force undocumented raw registry tuning.",
+      "tradeoffs": [
+        "Windows keeps its normal idle-state logic.",
+        "The app's raw bundle remains documented but not validated."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-cpu-idle-states"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-cpu-idle-states",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Introduction to Processor Idle States",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states",
+      "summary": "Microsoft documents processor idle states as a Windows power-management feature area, but this source does not publish the raw registry bundle used by the app.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-power-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+      "summary": "The provider writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under the Power key.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power notes",
+      "location": "Docs/power/power.md",
+      "summary": "The repo tracks these power-manager values as research notes, but this review did not find a primary Microsoft registry mapping for publishing them as a validated preset.",
+      "supports": [
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The VM probe captured the exact raw registry bundle written by the app and restored the baseline cleanly. The record remains apply_allowed false because Microsoft still does not publish this as a supported control surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-21T10:10:55+03:00",
+  "validation_proof": {
+    "source_url": "H:\\Temp\\vm-tooling-staging\\cpu_idle_probe.json",
+    "exact_quote_or_path": "DisableIdleStatesAtBoot=1; IdleStateTimeout=0; ExitLatencyCheckEnabled=1 -> restored to null",
+    "key_found_on_page": true,
+    "notes": "Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline."
+  }
+}

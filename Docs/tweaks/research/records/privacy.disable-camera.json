@@ -1,0 +1,226 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-camera",
+  "tweak_id": "privacy.disable-camera",
+  "record_status": "validated",
+  "summary": "Machine policy for camera device use. The local Microsoft Camera.admx file documents the same Camera policy key and AllowCamera value used by the app.",
+  "setting": {
+    "name": "Camera Device Use",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can allow or block the use of camera devices on the machine. This policy decides whether cameras are usable at all.",
+    "why_people_change_it": "People disable camera access to reduce privacy risk, meet compliance requirements, or lock down devices that should not allow camera use.",
+    "tradeoffs_overview": "Turning it off improves privacy and reduces camera exposure, but it also breaks video calls, webcam sign-in, scanning features, and any app that needs the camera.",
+    "professional_notes": "Camera.admx maps the machine policy to HKLM\\Software\\Policies\\Microsoft\\Camera\\AllowCamera with enabledValue 1 and disabledValue 0. The local ADML help text says enabling or not configuring the policy leaves camera devices enabled, while disabling the policy disables camera devices.",
+    "targets": [
+      {
+        "target_id": "allow-camera",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Camera",
+        "value_name": "AllowCamera",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Camera devices remain enabled because the machine policy is not forcing them off.",
+            "evidence_ids": [
+              "local-camera-admx",
+              "local-camera-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Camera disabled",
+            "meaning": "Camera devices are disabled by policy.",
+            "evidence_ids": [
+              "local-camera-admx",
+              "local-camera-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Camera allowed",
+            "meaning": "Camera devices are explicitly allowed by policy.",
+            "evidence_ids": [
+              "local-camera-admx",
+              "local-camera-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes AllowCamera = 0, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "allow-camera",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Camera",
+        "value_name": "AllowCamera",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 10 and newer systems supporting the Camera policy",
+      "states": [
+        {
+          "target_id": "allow-camera",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The machine policy is not configured by default."
+        }
+      ],
+      "notes": "The local ADML help text says enabling or not configuring the policy leaves camera devices enabled.",
+      "evidence_ids": [
+        "local-camera-admx",
+        "local-camera-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Devices that need webcam and camera functionality"
+      ],
+      "avoid_for": [
+        "Strict privacy or compliance-oriented environments"
+      ],
+      "states": [
+        {
+          "target_id": "allow-camera",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the machine policy unset."
+        }
+      ],
+      "good_when": "You want camera devices available for normal Windows and app usage.",
+      "bad_when": "You want to prevent camera use entirely on the machine.",
+      "tradeoffs": [
+        "Camera devices remain available.",
+        "No device-wide restriction is enforced for camera use."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-camera-adml"
+      ]
+    },
+    {
+      "profile_id": "no-camera",
+      "label": "No camera",
+      "intended_for": [
+        "Privacy-sensitive systems",
+        "Locked-down devices"
+      ],
+      "avoid_for": [
+        "Users who need video calls, webcam sign-in, or scanning features"
+      ],
+      "states": [
+        {
+          "target_id": "allow-camera",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable camera devices at the machine-policy level."
+        }
+      ],
+      "good_when": "You want to make sure camera devices cannot be used.",
+      "bad_when": "You need any feature or app that depends on a camera.",
+      "tradeoffs": [
+        "Camera privacy risk is reduced.",
+        "Video calls, webcam sign-in, and other camera-based features stop working."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-camera-admx",
+        "local-camera-adml",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-camera-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Camera.admx mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\Camera.admx",
+      "summary": "The local ADMX file maps the machine policy to HKLM\\Software\\Policies\\Microsoft\\Camera\\AllowCamera with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-camera-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft Camera.adml help text",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\en-US\\Camera.adml",
+      "summary": "The local ADML help text says enabling or not configuring the policy leaves camera devices enabled, while disabling the policy disables camera devices.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes AllowCamera = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-camera",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft Camera.admx file explicitly defines AllowCamera under Software\\Policies\\Microsoft\\Camera with enabledValue 1 and disabledValue 0, and the paired ADML help text documents that disabling the policy disables camera devices. The app writes that exact disabled value of 0.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:46:47.8894113+03:00",
+  "validation_proof": {
+    "source_url": "C:\\WINDOWS\\PolicyDefinitions\\Camera.admx",
+    "exact_quote_or_path": "<policy name=\"AllowCamera\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Camera\" valueName=\"AllowCamera\">",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired Camera.adml help text states that enabling or not configuring the policy leaves camera devices enabled, while disabling the policy disables camera devices."
+  }
+}

@@ -1,0 +1,262 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "privacy.disable-windows-tips",
+  "tweak_id": "privacy.disable-windows-tips",
+  "record_status": "validated",
+  "summary": "Microsoft documents Windows tips with the machine policy HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding. The current app now writes that documented machine policy directly.",
+  "setting": {
+    "name": "Turn Off Windows Tips",
+    "category": "Privacy",
+    "area": "CloudContent Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can show popups and onboarding tips that explain features and suggest ways to use the system. People often turn them off when they want a quieter desktop experience.",
+    "why_people_change_it": "People disable Windows tips to reduce interruptions, lower suggestion noise, and keep the OS from surfacing extra guidance content.",
+    "tradeoffs_overview": "Turning tips off reduces interruptions, but it also removes built-in guidance that can help less experienced users discover features. The current product issue is that the app writes a user-side ContentDeliveryManager value instead of the official machine policy documented here.",
+    "professional_notes": "CloudContent.admx documents the machine policy DisableSoftLanding at HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent with enabledValue 1 and disabledValue 0. The app now writes that documented machine policy directly; the older ContentDeliveryManager value remains in the research trail as an observed historical mapping only.",
+    "targets": [
+      {
+        "target_id": "disable-soft-landing-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "value_name": "DisableSoftLanding",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows tips may be shown and follow normal Windows behavior.",
+            "evidence_ids": [
+              "local-cloudcontent-admx-softlanding",
+              "local-cloudcontent-adml-softlanding"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Tips allowed",
+            "meaning": "The policy is disabled and Windows tips are not turned off by this machine policy.",
+            "evidence_ids": [
+              "local-cloudcontent-admx-softlanding",
+              "local-cloudcontent-adml-softlanding"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Tips turned off by policy",
+            "meaning": "Users will no longer see Windows tips.",
+            "evidence_ids": [
+              "ms-experience-allowwindowstips",
+              "local-cloudcontent-admx-softlanding",
+              "local-cloudcontent-adml-softlanding"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "cdm-windows-tips-observed",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "value_name": "SubscribedContent-338389Enabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "No observed user value",
+            "meaning": "No explicit ContentDeliveryManager value is present for this tip-related entry.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Observed app off preference",
+            "meaning": "The current app writes 0 here, but this record does not yet publish it as the official policy-backed Windows Tips control.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          }
+        ],
+        "notes": "Tracked as an observed user-side value only."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app now writes the documented machine policy DisableSoftLanding = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent. The older user-side ContentDeliveryManager value remains documented only as historical context.",
+    "writes": [
+      {
+        "target_id": "disable-soft-landing-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "value_name": "DisableSoftLanding",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows 10 and newer systems exposing the CloudContent Windows tips policy",
+      "states": [
+        {
+          "target_id": "disable-soft-landing-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official machine policy unset."
+        },
+        {
+          "target_id": "cdm-windows-tips-observed",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not treat the observed user-side value as an official baseline."
+        }
+      ],
+      "notes": "If the official policy is not configured, Windows tips may still be shown.",
+      "evidence_ids": [
+        "local-cloudcontent-adml-softlanding"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems where guidance content is acceptable"
+      ],
+      "avoid_for": [
+        "People who want a strict no-tips policy"
+      ],
+      "states": [
+        {
+          "target_id": "disable-soft-landing-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official machine policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep its ordinary tips behavior.",
+      "bad_when": "You want a policy-backed block for Windows tips.",
+      "tradeoffs": [
+        "Windows may continue showing guidance content.",
+        "The product avoids publishing an unsourced user-side mapping as official."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "local-cloudcontent-adml-softlanding"
+      ]
+    },
+    {
+      "profile_id": "turn-off-windows-tips",
+      "label": "Turn Off Windows Tips",
+      "intended_for": [
+        "People who want Windows tips disabled by policy",
+        "Organizations that prefer the documented machine policy"
+      ],
+      "avoid_for": [
+        "Users who want Windows tips preserved"
+      ],
+      "states": [
+        {
+          "target_id": "disable-soft-landing-policy",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the official machine policy documented by Microsoft."
+        }
+      ],
+      "good_when": "You want the documented Windows Tips policy turned off.",
+      "bad_when": "You want Windows tips to remain available.",
+      "tradeoffs": [
+        "Windows tips are turned off by the official machine policy.",
+        "The setting requires local machine policy permissions."
+      ],
+      "apply_allowed": true,
+      "notes": "Validated against the documented machine policy. The old user-side ContentDeliveryManager mapping is retained only as historical context.",
+      "evidence_ids": [
+        "local-cloudcontent-admx-softlanding",
+        "local-cloudcontent-adml-softlanding",
+        "ms-experience-allowwindowstips"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-experience-allowwindowstips",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: AllowWindowsTips",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips",
+      "summary": "Official Microsoft documentation for controlling whether Windows tips are shown.",
+      "supports": [
+        "behavior",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-cloudcontent-admx-softlanding",
+      "kind": "official-doc",
+      "title": "Local Microsoft CloudContent.admx DisableSoftLanding mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\CloudContent.admx",
+      "summary": "The local ADMX file maps DisableSoftLanding to HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-cloudcontent-adml-softlanding",
+      "kind": "official-doc",
+      "title": "Local Microsoft CloudContent.adml DisableSoftLanding help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\CloudContent.adml",
+      "summary": "The local ADML help text says enabling the policy prevents Windows tips from being shown to users.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DisableSoftLanding = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official Windows tips policy is clear and the app now writes the documented machine policy directly. The record remains not recommended for general users only because it changes Windows tips behavior by policy, not because the mapping is uncertain.",
+    "blocking_issues": []
+  },
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips",
+    "exact_quote_or_path": "C:\\Windows\\PolicyDefinitions\\CloudContent.admx (DisableSoftLanding enabledValue=1, disabledValue=0); C:\\Windows\\PolicyDefinitions\\en-US\\CloudContent.adml (enabling the policy prevents Windows tips from being shown to users).",
+    "key_found_on_page": true,
+    "notes": "The provider now writes HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding = 1. The older HKCU ContentDeliveryManager value remains documented only as an observed historical mapping."
+  },
+  "last_reviewed_utc": "2026-03-20T19:45:00Z"
+}

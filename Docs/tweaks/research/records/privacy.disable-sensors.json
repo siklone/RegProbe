@@ -1,0 +1,230 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-sensors",
+  "tweak_id": "privacy.disable-sensors",
+  "record_status": "validated",
+  "summary": "Policy-backed control for Windows sensors. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.",
+  "setting": {
+    "name": "Windows Sensors",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can use hardware sensors such as orientation, ambient light, motion, or other environmental sensors. This policy decides whether sensors are allowed.",
+    "why_people_change_it": "People disable sensors when they want a stricter privacy baseline or when a device should not expose sensor-driven behavior.",
+    "tradeoffs_overview": "Disabling sensors reduces access to sensor data, but tablets, convertibles, brightness adjustments, presence-aware experiences, and other sensor-based features can stop working properly.",
+    "professional_notes": "Sensors.admx defines both user and machine variants of DisableSensors. The current app writes the machine policy at HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableSensors with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "disable-sensors",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "value_name": "DisableSensors",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the machine policy for sensors.",
+            "evidence_ids": [
+              "ms-sensors-policy-csp-disable-sensors",
+              "local-sensors-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Sensors allowed",
+            "meaning": "The policy is disabled and sensors remain available.",
+            "evidence_ids": [
+              "ms-sensors-policy-csp-disable-sensors",
+              "local-sensors-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Sensors disabled",
+            "meaning": "Sensors are blocked by policy.",
+            "evidence_ids": [
+              "ms-sensors-policy-csp-disable-sensors",
+              "local-sensors-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DisableSensors = 1 under the machine policy key, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "disable-sensors",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "value_name": "DisableSensors",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 7 and newer systems with Location and Sensors policy support",
+      "states": [
+        {
+          "target_id": "disable-sensors",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The machine policy is not configured by default."
+        }
+      ],
+      "notes": "Sensors.admx contains both user and machine mappings. This record validates the machine-side mapping used by the current app.",
+      "evidence_ids": [
+        "ms-sensors-policy-csp-disable-sensors",
+        "local-sensors-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Devices that rely on sensor-aware behavior"
+      ],
+      "avoid_for": [
+        "Strict privacy baselines"
+      ],
+      "states": [
+        {
+          "target_id": "disable-sensors",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want ordinary Windows sensor behavior to remain available.",
+      "bad_when": "You want to cut off sensor access across the device.",
+      "tradeoffs": [
+        "Sensor-driven apps and system experiences can keep working.",
+        "No hard restriction is enforced for sensor access."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-sensors-policy-csp-disable-sensors"
+      ]
+    },
+    {
+      "profile_id": "privacy-focused",
+      "label": "Privacy focused",
+      "intended_for": [
+        "Privacy-sensitive systems",
+        "Managed devices that should not expose sensor data"
+      ],
+      "avoid_for": [
+        "Tablets, convertibles, or devices that depend on sensors"
+      ],
+      "states": [
+        {
+          "target_id": "disable-sensors",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Disable sensors by policy."
+        }
+      ],
+      "good_when": "You want to block Windows sensor access at the device-policy level.",
+      "bad_when": "You rely on orientation, brightness, presence, or other sensor-based features.",
+      "tradeoffs": [
+        "Sensor data access is blocked by policy.",
+        "Sensor-dependent hardware and software behavior can degrade or stop working."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-sensors-policy-csp-disable-sensors",
+        "local-sensors-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-sensors-policy-csp-disable-sensors",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: DisableSensors",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors",
+      "summary": "Official documentation for the policy that controls whether Windows sensors are allowed.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-sensors-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Sensors.admx mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\Sensors.admx",
+      "summary": "The local ADMX file shows DisableSensors for both user and machine scope with enabledValue 1 and disabledValue 0 under the LocationAndSensors policy key.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DisableSensors = 1 under the machine policy key for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-sensors",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents DisableSensors directly in the ADMX_Sensors Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableSensors. The same page describes that enabling the policy disables all Windows sensor features, and the app writes that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T14:14:01.2716386+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors",
+    "exact_quote_or_path": "If you enable this policy setting, all Windows Sensor features are disabled. ADMX mapping: Name DisableSensors ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\LocationAndSensors ... Registry Value Name DisableSensors.",
+    "key_found_on_page": true,
+    "notes": "The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior."
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-shortcut-arrow",
+  "tweak_id": "system.disable-shortcut-arrow",
+  "record_status": "validated",
+  "summary": "Documented Shell Icons registry mapping for the shortcut-arrow overlay. Microsoft guidance shows that Shell Icons value `29` can be pointed at `%windir%\\System32\\shell32.dll,-50` to remove shortcut arrows, and removing the custom Shell Icons value restores the default overlay behavior. The app writes that exact value.",
+  "setting": {
+    "name": "Shortcut Arrow Overlay",
+    "category": "System",
+    "area": "Explorer Overlay",
+    "scope": "device",
+    "casual_explanation": "Windows normally shows a small arrow on shortcut icons. This setting swaps that overlay resource so the arrow is no longer shown.",
+    "why_people_change_it": "People change it because they dislike the shortcut arrow and want a cleaner desktop or Explorer look.",
+    "tradeoffs_overview": "Removing the arrow makes shortcuts look cleaner, but it also removes the visual hint that an icon is a shortcut instead of the real file or app.",
+    "professional_notes": "Microsoft support documents the Explorer Shell Icons mapping and states that value `29` can reference `%windir%\\System32\\shell32.dll,-50` to remove shortcut arrows. The same Microsoft guidance states that deleting the custom Shell Icons value restores the default Windows arrow overlay.",
+    "targets": [
+      {
+        "target_id": "shell-icons-29",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons",
+        "value_name": "29",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows default arrow",
+            "meaning": "Windows uses its default shortcut-arrow overlay because no custom Shell Icons value is forcing an alternate icon.",
+            "evidence_ids": [
+              "ms-shell-icons-shortcut-arrow"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "%windir%\\System32\\shell32.dll,-50",
+            "label": "Shortcut arrow removed",
+            "meaning": "Windows uses the documented alternate icon resource for Shell Icons value 29, removing the normal shortcut arrow overlay.",
+            "evidence_ids": [
+              "ms-shell-icons-shortcut-arrow",
+              "app-system-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The app writes Shell Icons value 29 = %windir%\\System32\\shell32.dll,-50, which matches the Microsoft support guidance for removing shortcut arrows.",
+    "writes": [
+      {
+        "target_id": "shell-icons-29",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons",
+        "value_name": "29",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "%windir%\\System32\\shell32.dll,-50"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows default",
+      "applies_to": "Windows Explorer shortcut overlay behavior without a custom Shell Icons override",
+      "states": [
+        {
+          "target_id": "shell-icons-29",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Microsoft support says removing the custom Shell Icons value restores the default shortcut-arrow behavior."
+        }
+      ],
+      "notes": "This record tracks the Shell Icons override only, not every possible third-party icon-overlay customization.",
+      "evidence_ids": [
+        "ms-shell-icons-shortcut-arrow"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Anyone who wants shortcuts to stay visually obvious"
+      ],
+      "avoid_for": [
+        "Users who strongly dislike the shortcut arrow"
+      ],
+      "states": [
+        {
+          "target_id": "shell-icons-29",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the default Explorer shortcut overlay by not forcing a Shell Icons override."
+        }
+      ],
+      "good_when": "You want Windows to keep its normal shortcut indicator.",
+      "bad_when": "You want a cleaner-looking icon set without arrows.",
+      "tradeoffs": [
+        "Shortcut icons remain clearly marked.",
+        "The default Explorer visual style is preserved."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-shell-icons-shortcut-arrow"
+      ]
+    },
+    {
+      "profile_id": "no-shortcut-arrow",
+      "label": "No shortcut arrow",
+      "intended_for": [
+        "Users who care about desktop aesthetics",
+        "People who intentionally want the overlay removed"
+      ],
+      "avoid_for": [
+        "Shared or support-heavy systems where distinguishing shortcuts matters"
+      ],
+      "states": [
+        {
+          "target_id": "shell-icons-29",
+          "state_kind": "value",
+          "value": "%windir%\\System32\\shell32.dll,-50",
+          "rationale": "Use the Microsoft-documented Shell Icons value that removes the shortcut arrow."
+        }
+      ],
+      "good_when": "You want a cleaner icon appearance and already know which icons are shortcuts.",
+      "bad_when": "You rely on the arrow as an important visual cue.",
+      "tradeoffs": [
+        "Shortcut arrows are removed.",
+        "The shortcut-vs-real-item distinction becomes less obvious."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-shell-icons-shortcut-arrow",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-shell-icons-shortcut-arrow",
+      "kind": "official-doc",
+      "title": "Microsoft Q&A: remove shortcut arrow using Shell Icons value 29",
+      "location": "https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p",
+      "summary": "A Microsoft External Staff moderator documents creating Explorer\\Shell Icons, adding string value 29, and setting it to %windir%\\System32\\shell32.dll,-50 for the shortcut-arrow override.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes Shell Icons value 29 = %windir%\\System32\\shell32.dll,-50 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft guidance shows creating `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons`, adding string value `29`, and setting it to `%windir%\\System32\\shell32.dll,-50` for the no-arrow shortcut overlay. The app writes that exact Shell Icons override.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:34:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p",
+    "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer; create key Shell Icons; create String Value 29; set it to %windir%\\System32\\shell32.dll,-50.",
+    "key_found_on_page": true,
+    "notes": "The cited Microsoft Q&A answer is product guidance from a Microsoft External Staff moderator rather than an ADMX or policy page, so this record should be treated as medium-strength proof."
+  }
+}

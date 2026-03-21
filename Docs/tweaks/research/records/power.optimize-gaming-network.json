@@ -1,0 +1,303 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.optimize-gaming-network",
+  "tweak_id": "power.optimize-gaming-network",
+  "record_status": "validated",
+  "summary": "Official MMCSS task-profile registry surface for the built-in Games task. The app writes a custom high-priority Games profile using documented MMCSS keys and allowed values, while leaving the stock Games-task baseline explicitly build-dependent.",
+  "setting": {
+    "name": "Games MMCSS Task Profile",
+    "category": "Power",
+    "area": "Multimedia Class Scheduler Service",
+    "scope": "device",
+    "casual_explanation": "Windows uses MMCSS to prioritize time-sensitive multimedia work. This tweak changes the built-in Games task profile to use more aggressive scheduling values.",
+    "why_people_change_it": "People change it when they want game-related work to get a more aggressive MMCSS profile and do not mind trading some balance for responsiveness.",
+    "tradeoffs_overview": "A more aggressive Games profile can bias scheduling toward game-related work, but it is not a general-purpose setting and Microsoft does not publish one global default profile for all builds.",
+    "professional_notes": "Microsoft documents the MMCSS SystemProfile path, the built-in Games task, and the allowed values for Affinity, GPU Priority, Priority, Scheduling Category, and SFIO Priority. The app writes a custom Games profile using those documented fields. Exact stock default values for the Games task are not published in the source used here, so this record validates the control surface and allowed values rather than a single global default.",
+    "targets": [
+      {
+        "target_id": "games-priority",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "Priority",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Windows-managed baseline",
+            "meaning": "Microsoft documents the field and allowed range, but not one stock Games-task default value for every build.",
+            "evidence_ids": [
+              "ms-mmcss"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 8,
+            "label": "App high-priority profile",
+            "meaning": "A documented MMCSS task priority value in the 1-8 range. For tasks with Scheduling Category set to High, MMCSS treats this value as 2.",
+            "evidence_ids": [
+              "ms-mmcss",
+              "app-power-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "games-scheduling-category",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "Scheduling Category",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "High",
+            "label": "High scheduling category",
+            "meaning": "One of Microsoft's documented MMCSS scheduling categories: High, Medium, or Low.",
+            "evidence_ids": [
+              "ms-mmcss",
+              "app-power-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "games-sfio-priority",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "SFIO Priority",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "High",
+            "label": "High scheduled I/O priority",
+            "meaning": "One of Microsoft's documented SFIO values: Idle, Low, Normal, or High. Microsoft also notes this field is not used.",
+            "evidence_ids": [
+              "ms-mmcss",
+              "app-power-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "games-gpu-priority",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "GPU Priority",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 8,
+            "label": "App GPU priority value",
+            "meaning": "A documented GPU priority value within Microsoft's 0-31 range. Microsoft notes this field is not yet used.",
+            "evidence_ids": [
+              "ms-mmcss",
+              "app-power-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "games-affinity",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "Affinity",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Affinity not forced",
+            "meaning": "Microsoft documents that 0x00 and 0xFFFFFFFF both indicate processor affinity is not used.",
+            "evidence_ids": [
+              "ms-mmcss",
+              "app-power-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+    "notes": "The app writes documented MMCSS fields under the built-in Games task profile.",
+    "writes": [
+      {
+        "target_id": "games-priority",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "Priority",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 8
+      },
+      {
+        "target_id": "games-scheduling-category",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "Scheduling Category",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "High"
+      },
+      {
+        "target_id": "games-sfio-priority",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "SFIO Priority",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "High"
+      },
+      {
+        "target_id": "games-gpu-priority",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "GPU Priority",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 8
+      },
+      {
+        "target_id": "games-affinity",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "Affinity",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows Games-task baseline is build dependent",
+      "applies_to": "Windows systems with MMCSS and the built-in Games task",
+      "states": [
+        {
+          "target_id": "games-priority",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "The official MMCSS source documents the Games task and allowed values, but not one stock Games-task default profile for every Windows build."
+        }
+      ],
+      "notes": "This record validates the registry surface and documented value semantics rather than a universal stock Games-task baseline.",
+      "evidence_ids": [
+        "ms-mmcss"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that want the stock Games MMCSS profile"
+      ],
+      "avoid_for": [
+        "Users intentionally testing a custom Games MMCSS profile"
+      ],
+      "states": [
+        {
+          "target_id": "games-priority",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the stock Games profile because Microsoft does not publish one universal default matrix here."
+        }
+      ],
+      "good_when": "You want to leave the Games MMCSS task at the Windows-managed baseline.",
+      "bad_when": "You intentionally want the app's custom Games profile.",
+      "tradeoffs": [
+        "Windows keeps the stock Games task profile.",
+        "No custom MMCSS task tuning is forced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-mmcss"
+      ]
+    },
+    {
+      "profile_id": "custom-games-priority-profile",
+      "label": "Custom games priority profile",
+      "intended_for": [
+        "Gaming-focused desktops",
+        "Users intentionally tuning MMCSS Games-task values"
+      ],
+      "avoid_for": [
+        "Battery-sensitive systems",
+        "Users who want to stay on the stock Games profile"
+      ],
+      "states": [
+        {
+          "target_id": "games-priority",
+          "state_kind": "value",
+          "value": 8,
+          "rationale": "Use the app's documented custom MMCSS Games priority value."
+        },
+        {
+          "target_id": "games-scheduling-category",
+          "state_kind": "value",
+          "value": "High",
+          "rationale": "Use the app's documented custom MMCSS Games scheduling category."
+        }
+      ],
+      "good_when": "You explicitly want a more aggressive Games MMCSS task profile.",
+      "bad_when": "You need a fully Microsoft-default task profile.",
+      "tradeoffs": [
+        "The Games task profile becomes more aggressive than the unknown stock baseline.",
+        "This is a documented custom profile, not a Microsoft-published default."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-mmcss",
+        "app-power-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-mmcss",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Multimedia Class Scheduler Service",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "summary": "Microsoft documents the SystemProfile registry path, the built-in Games task, and the allowed values for Affinity, GPU Priority, Priority, Scheduling Category, and SFIO Priority.",
+      "supports": [
+        "path",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-power-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+      "summary": "The provider writes a custom MMCSS Games task profile using Priority, Scheduling Category, SFIO Priority, GPU Priority, and Affinity.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the exact MMCSS SystemProfile registry path, lists the built-in Games task, and publishes the allowed values for Priority, Scheduling Category, SFIO Priority, GPU Priority, and Affinity. The app writes only documented fields on that documented Games task path.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:19:50Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+    "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile; Games; Priority: range 1-8; Scheduling Category: High, Medium, or Low; SFIO Priority: Idle, Low, Normal, or High; GPU Priority: range 0-31; Affinity: 0x00 indicates that processor affinity isn't used.",
+    "key_found_on_page": true,
+    "notes": "The Microsoft MMCSS page documents the exact SystemProfile registry path, lists Games as a built-in task, and publishes the allowed values for the fields the app writes."
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-store-open-with",
+  "tweak_id": "system.disable-store-open-with",
+  "record_status": "validated",
+  "summary": "Policy-backed control for the Store option in the Open With dialog. Good for managed or offline-first systems, but it removes a fallback path for finding an app when a file type is unknown.",
+  "setting": {
+    "name": "Store in Open With",
+    "category": "System",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "When Windows cannot find an app for a file type, it can offer a Store-based option in the Open With dialog. This policy decides whether that Store option is available.",
+    "why_people_change_it": "People disable it on managed, offline, or privacy-focused systems where they do not want Windows suggesting the Store as a fallback.",
+    "tradeoffs_overview": "Turning it off makes the Open With dialog simpler and more local-only, but it removes one of the built-in ways casual users discover an app for an unknown file type.",
+    "professional_notes": "This setting maps directly to NoUseStoreOpenWith under Software\\Policies\\Microsoft\\Windows\\Explorer. ICM.admx uses enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "no-use-store-open-with",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "value_name": "NoUseStoreOpenWith",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the Store option off and standard behavior applies.",
+            "evidence_ids": [
+              "ms-icm-policy-csp",
+              "local-icm-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Store option allowed",
+            "meaning": "The Store service can still appear in Open With.",
+            "evidence_ids": [
+              "ms-icm-policy-csp",
+              "local-icm-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Store option blocked",
+            "meaning": "The Store service is not offered in Open With for unknown file associations.",
+            "evidence_ids": [
+              "ms-icm-policy-csp",
+              "local-icm-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The current app writes NoUseStoreOpenWith = 1, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "no-use-store-open-with",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "value_name": "NoUseStoreOpenWith",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows 8 and newer unmanaged systems",
+      "states": [
+        {
+          "target_id": "no-use-store-open-with",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Policy is not configured by default."
+        }
+      ],
+      "notes": "A missing value is the cleanest representation of the Windows policy baseline for this setting.",
+      "evidence_ids": [
+        "ms-icm-policy-csp",
+        "local-icm-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want Open With to keep its usual fallback behavior"
+      ],
+      "avoid_for": [
+        "Managed or offline-first systems"
+      ],
+      "states": [
+        {
+          "target_id": "no-use-store-open-with",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave Windows at its standard policy baseline."
+        }
+      ],
+      "good_when": "You want the normal Open With experience for unknown file types.",
+      "bad_when": "You want to suppress Store-based suggestions.",
+      "tradeoffs": [
+        "Windows can still suggest the Store.",
+        "No forced lock-down is applied."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-icm-policy-csp"
+      ]
+    },
+    {
+      "profile_id": "local-only-open-with",
+      "label": "Local only Open With",
+      "intended_for": [
+        "Managed devices",
+        "Offline systems",
+        "Users who do not want Store suggestions"
+      ],
+      "avoid_for": [
+        "Casual users who use the Store fallback"
+      ],
+      "states": [
+        {
+          "target_id": "no-use-store-open-with",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Hide the Store option from Open With."
+        }
+      ],
+      "good_when": "You want a more local-only and policy-controlled file association experience.",
+      "bad_when": "You want Windows to help discover apps through the Store.",
+      "tradeoffs": [
+        "The Store option disappears from Open With.",
+        "Unknown file type discovery becomes more manual."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-icm-policy-csp",
+        "local-icm-admx",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-icm-policy-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft ADMX_ICM Policy CSP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-icm#shellnousestoreopenwith_2",
+      "summary": "Official documentation for the policy that controls whether the Store service is offered in Open With.",
+      "supports": [
+        "path",
+        "behavior",
+        "default",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-icm-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft ICM.admx mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\ICM.admx",
+      "summary": "The local ADMX file shows NoUseStoreOpenWith with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes NoUseStoreOpenWith = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-store-open-with",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft policy files document the exact Open With Store policy surface, value semantics, and dialog behavior. The app writes the documented disable value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T21:12:39.1790212+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\ICM.admx",
+    "exact_quote_or_path": "<policy name=\"ShellNoUseStoreOpenWith_2\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"NoUseStoreOpenWith\">; ICM.adml: If you enable this policy setting, the \"Look for an app in the Store\" item in the Open With dialog is removed.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy removes the Store entry from the Open With dialog."
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.graphics-tdr-level",
+  "tweak_id": "system.graphics-tdr-level",
+  "record_status": "validated",
+  "summary": "Officially documented TDR recovery-level control. This app write restores TdrLevel to Microsoft's documented default of 3 (recover on timeout), but Microsoft warns that TDR keys are for driver testing and debugging rather than normal end-user tuning.",
+  "setting": {
+    "name": "Graphics TDR Level",
+    "category": "System",
+    "area": "Graphics Drivers / TDR",
+    "scope": "device",
+    "casual_explanation": "Windows can react to GPU timeouts in different ways, such as disabling detection or recovering on timeout. This setting controls that recovery mode.",
+    "why_people_change_it": "People usually touch it only when undoing manual GPU debugging changes or targeted driver-development experiments.",
+    "tradeoffs_overview": "Restoring the documented default is useful when cleaning up manual graphics experiments, but this is still an advanced debugging surface rather than a normal consumer tweak.",
+    "professional_notes": "Microsoft documents TdrLevel under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and lists the supported values 0 through 3. The documented default is 3, which means recover on timeout. Microsoft also warns that these registry keys are intended for testing or debugging during driver development only.",
+    "targets": [
+      {
+        "target_id": "tdr-level",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "value_name": "TdrLevel",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Detection disabled",
+            "meaning": "Timeout detection is disabled.",
+            "evidence_ids": [
+              "ms-tdr-registry-keys"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Bugcheck on timeout",
+            "meaning": "Windows bug-checks on a detected timeout instead of recovering.",
+            "evidence_ids": [
+              "ms-tdr-registry-keys"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Recover to VGA",
+            "meaning": "Recover to VGA; Microsoft notes this path is not implemented.",
+            "evidence_ids": [
+              "ms-tdr-registry-keys"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Recover on timeout",
+            "meaning": "Recover on timeout using the Microsoft-documented default TDR level.",
+            "evidence_ids": [
+              "ms-tdr-registry-keys",
+              "app-system-registry-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes TdrLevel = 3 on the documented GraphicsDrivers path.",
+    "writes": [
+      {
+        "target_id": "tdr-level",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "value_name": "TdrLevel",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 3
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented default",
+      "applies_to": "Systems restoring the documented TDR recovery baseline",
+      "states": [
+        {
+          "target_id": "tdr-level",
+          "state_kind": "value",
+          "value": 3,
+          "rationale": "Microsoft documents TdrLevel = 3 as the default recovery mode."
+        }
+      ],
+      "notes": "This record exists to document and restore the default TDR recovery level rather than to encourage normal user tuning.",
+      "evidence_ids": [
+        "ms-tdr-registry-keys"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "reset-to-microsoft-default",
+      "label": "Reset to Microsoft default",
+      "intended_for": [
+        "Undoing manual TDR edits",
+        "Driver debugging cleanup",
+        "Systems returning to the documented baseline"
+      ],
+      "avoid_for": [
+        "Casual optimization use",
+        "Speculative graphics tweaking"
+      ],
+      "states": [
+        {
+          "target_id": "tdr-level",
+          "state_kind": "value",
+          "value": 3,
+          "rationale": "Restore the documented default recovery mode."
+        }
+      ],
+      "good_when": "You are removing custom TDR edits and want the Microsoft baseline back.",
+      "bad_when": "You are treating TDR recovery levels as routine consumer tuning.",
+      "tradeoffs": [
+        "The documented Microsoft default is restored.",
+        "TDR level remains an advanced driver-debugging control rather than a casual tweak."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-tdr-registry-keys",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-tdr-registry-keys",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Testing and debugging TDR during driver development",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "summary": "Microsoft documents TdrLevel under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers, lists the supported values 0 through 3, and states that 3 is the default while warning that TDR keys are for targeted driver testing and debugging only.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "allowed-values",
+        "behavior",
+        "side-effects",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes TdrLevel = 3 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the exact path, allowed values, and default value, and the app writes that documented default as a reset-to-baseline action.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:12:30Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+    "exact_quote_or_path": "KeyPath : HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\GraphicsDrivers; KeyValue : TdrLevel; ValueType : REG_DWORD; TdrLevelOff (0) Detection disabled ... TdrLevelRecover (3) Recover on timeout (default value).",
+    "key_found_on_page": true,
+    "notes": "Microsoft's TDR registry keys page documents the exact GraphicsDrivers runtime path, the TdrLevel value name, the supported values 0 through 3, and the documented default of 3."
+  }
+}

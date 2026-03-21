@@ -1,0 +1,204 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.prefer-ipv4",
+  "tweak_id": "network.prefer-ipv4",
+  "record_status": "validated",
+  "summary": "Legacy validated record without machine-checkable validation proof. Sets DisabledComponents to 0x20, which tells Windows to prefer IPv4 over IPv6 without fully disabling the IPv6 stack. This is less disruptive than turning IPv6 off, but it is still an advanced network compatibility override.",
+  "setting": {
+    "name": "IPv4 Preference Override",
+    "category": "Network",
+    "area": "Registry Configuration",
+    "scope": "device",
+    "casual_explanation": "This keeps IPv6 available but tells Windows to prefer IPv4 when both protocols can work.",
+    "why_people_change_it": "People do this when they want to reduce odd dual-stack behavior without removing IPv6 entirely.",
+    "tradeoffs_overview": "Preferring IPv4 is safer than fully disabling IPv6, but it still moves the system away from the default Microsoft network baseline.",
+    "professional_notes": "Microsoft documents DisabledComponents = 0x20 as the value for preferring IPv4 over IPv6 in prefix policies while keeping IPv6 enabled.",
+    "targets": [
+      {
+        "target_id": "ipv6-disabled-components",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+        "value_name": "DisabledComponents",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows default",
+            "meaning": "Windows uses the normal IPv6 preference behavior.",
+            "evidence_ids": [
+              "ms-ipv6-config"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "No preference override",
+            "meaning": "IPv6 is enabled with the normal default preference behavior.",
+            "evidence_ids": [
+              "ms-ipv6-config"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 32,
+            "label": "Prefer IPv4",
+            "meaning": "Windows prefers IPv4 over IPv6 in prefix policies while leaving IPv6 enabled.",
+            "evidence_ids": [
+              "ms-ipv6-config"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 255,
+            "label": "Disable IPv6 except loopback",
+            "meaning": "This is a stronger override that disables IPv6 components instead of merely preferring IPv4.",
+            "evidence_ids": [
+              "ms-ipv6-config"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The current app writes DisabledComponents = 32, which matches the Microsoft-documented prefer-IPv4 state.",
+    "writes": [
+      {
+        "target_id": "ipv6-disabled-components",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+        "value_name": "DisabledComponents",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 32
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows IPv6 baseline",
+      "applies_to": "Supported Windows client and server releases covered by Microsoft guidance",
+      "states": [
+        {
+          "target_id": "ipv6-disabled-components",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Microsoft documents the default behavior when the override is absent."
+        }
+      ],
+      "evidence_ids": [
+        "ms-ipv6-config"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "Modern Windows networks"
+      ],
+      "avoid_for": [
+        "Cases where dual-stack preference needs explicit tuning"
+      ],
+      "states": [
+        {
+          "target_id": "ipv6-disabled-components",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the override absent to keep Microsoft's default preference behavior."
+        }
+      ],
+      "good_when": "You want the least surprising and most supported network baseline.",
+      "bad_when": "A specific network issue has already been traced to address family preference order.",
+      "tradeoffs": [
+        "Best compatibility with default Windows behavior.",
+        "Does not change how Windows prioritizes IPv4 versus IPv6."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-ipv6-config"
+      ]
+    },
+    {
+      "profile_id": "prefer-ipv4",
+      "label": "Prefer IPv4",
+      "intended_for": [
+        "Advanced troubleshooting",
+        "Environments that need IPv4 preference without fully disabling IPv6"
+      ],
+      "avoid_for": [
+        "General users who do not have a concrete network problem"
+      ],
+      "states": [
+        {
+          "target_id": "ipv6-disabled-components",
+          "state_kind": "value",
+          "value": 32,
+          "rationale": "This is the documented prefer-IPv4 setting."
+        }
+      ],
+      "good_when": "You want a lighter-touch compatibility change than fully disabling IPv6.",
+      "bad_when": "You do not actually know whether address-family preference is part of the problem.",
+      "tradeoffs": [
+        "IPv6 remains available.",
+        "The network stack still deviates from the Windows default."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-ipv6-config",
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-ipv6-config",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Configure IPv6 in Windows",
+      "location": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
+      "summary": "Microsoft documents DisabledComponents = 0x20 as the value for preferring IPv4 over IPv6 while leaving IPv6 enabled.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current network tweak provider",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The current app writes DisabledComponents = 32 for this tweak.",
+      "supports": [
+        "ui-mapping",
+        "value"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft directly documents the DisabledComponents registry value under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters, including 0x20 for preferring IPv4 over IPv6 while keeping IPv6 enabled. The app writes that exact documented value on the documented path.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T02:34:07.7304266+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
+    "exact_quote_or_path": "Location: `HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\` Name: DisabledComponents; `Prefer IPv4 over IPv6 Decimal 32 Hexadecimal 0x20`; `You can use the DisabledComponents registry value to modify the default prefix policy`.",
+    "key_found_on_page": true,
+    "notes": "Microsoft directly documents the DisabledComponents registry path and the decimal value 32 (0x20) for preferring IPv4 over IPv6. The app writes DisabledComponents = 32 on that exact documented path."
+  }
+}

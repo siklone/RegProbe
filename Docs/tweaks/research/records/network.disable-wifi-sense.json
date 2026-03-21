@@ -1,0 +1,208 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.disable-wifi-sense",
+  "tweak_id": "network.disable-wifi-sense",
+  "record_status": "validated",
+  "summary": "Turns off the old Windows Wi-Fi Sense style hotspot and shared-network suggestions through the official WLAN policy value. Microsoft directly documents the same policy path, value name, and 0/1 semantics that the app uses for this setting.",
+  "setting": {
+    "name": "Wi-Fi Sense Suggested Hotspot Policy",
+    "category": "Network",
+    "area": "Group Policy",
+    "scope": "device",
+    "casual_explanation": "This controls whether Windows can automatically connect to suggested open hotspots, contact-shared networks, and some paid hotspot discovery flows.",
+    "why_people_change_it": "People turn it off when they want more predictable network behavior and do not want Windows helping with suggested hotspot connections.",
+    "tradeoffs_overview": "Disabling it reduces automatic suggestion and sharing behavior, but most modern users will not lose any critical capability because this is not a core networking feature anymore.",
+    "professional_notes": "Microsoft documents AutoConnectAllowedOEM under HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config. The help text explicitly says disabled turns the features off and prevents users from enabling them, while enabled or not configured leaves the choice available.",
+    "targets": [
+      {
+        "target_id": "wifi-sense-policy",
+        "location_kind": "group-policy",
+        "path": "HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config",
+        "value_name": "AutoConnectAllowedOEM",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "User choice or Windows default",
+            "meaning": "The policy is not configured, so users can choose whether to enable these hotspot and sharing features.",
+            "evidence_ids": [
+              "ms-wifisense-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Disabled",
+            "meaning": "Suggested hotspot, shared-network, and paid service options are turned off and users cannot enable them.",
+            "evidence_ids": [
+              "ms-wifisense-admx",
+              "ms-wifisense-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Enabled or user-allowed",
+            "meaning": "The policy allows users to choose whether to use these features.",
+            "evidence_ids": [
+              "ms-wifisense-admx",
+              "ms-wifisense-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The current app writes AutoConnectAllowedOEM = 0, which matches the documented disabled state.",
+    "writes": [
+      {
+        "target_id": "wifi-sense-policy",
+        "path": "HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config",
+        "value_name": "AutoConnectAllowedOEM",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Policy not configured",
+      "applies_to": "Windows 10 client policy surface documented by Microsoft",
+      "states": [
+        {
+          "target_id": "wifi-sense-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Microsoft says users can choose whether to enable the features when the policy is not configured."
+        }
+      ],
+      "evidence_ids": [
+        "ms-wifisense-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "People who want Windows and local user choice to decide",
+        "Machines where hotspot suggestion behavior is not a concern"
+      ],
+      "avoid_for": [
+        "People who want the feature area explicitly turned off"
+      ],
+      "states": [
+        {
+          "target_id": "wifi-sense-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unconfigured to keep local choice available."
+        }
+      ],
+      "good_when": "You do not want to force an admin policy for this behavior.",
+      "bad_when": "You want a strict no-suggested-hotspots posture.",
+      "tradeoffs": [
+        "Windows and the user keep control.",
+        "Some automatic suggestion behavior can remain available."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-wifisense-adml"
+      ]
+    },
+    {
+      "profile_id": "disable-suggested-hotspots",
+      "label": "Disable suggested hotspots",
+      "intended_for": [
+        "Privacy-focused users",
+        "People who want predictable network connections"
+      ],
+      "avoid_for": [
+        "People who rely on Windows hotspot suggestion features"
+      ],
+      "states": [
+        {
+          "target_id": "wifi-sense-policy",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "This is the Microsoft-documented disabled policy state."
+        }
+      ],
+      "good_when": "You want Windows to stop offering and auto-enabling these legacy hotspot suggestion features.",
+      "bad_when": "You still want Windows to help surface suggested hotspots or contact-shared networks.",
+      "tradeoffs": [
+        "Behavior is more predictable.",
+        "Some convenience-oriented hotspot features are removed."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-wifisense-admx",
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-wifisense-admx",
+      "kind": "official-doc",
+      "title": "Microsoft administrative template for Wi-Fi Sense policy",
+      "location": "C:\\Windows\\PolicyDefinitions\\wlansvc.admx",
+      "summary": "The wlansvc administrative template documents AutoConnectAllowedOEM under HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config with enabled value 1 and disabled value 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-wifisense-adml",
+      "kind": "official-doc",
+      "title": "Microsoft help text for Wi-Fi Sense policy",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\wlansvc.adml",
+      "summary": "Microsoft explains that disabling the policy turns off the hotspot suggestion and sharing options and prevents users from enabling them, while enabled or not configured leaves choice available.",
+      "supports": [
+        "behavior",
+        "default",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current network tweak provider",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The current app writes AutoConnectAllowedOEM = 0 for this tweak.",
+      "supports": [
+        "ui-mapping",
+        "value"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft directly documents HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config -> AutoConnectAllowedOEM in wlansvc.admx, with enabledValue 1 and disabledValue 0. The companion help text in wlansvc.adml explains that disabled turns off suggested hotspot, contact-shared network, and paid-service options and prevents users from enabling them.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T03:37:00+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\wlansvc.admx",
+    "exact_quote_or_path": "<policy name=\"WiFiSense\" class=\"Machine\" ... key=\"Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\" valueName=\"AutoConnectAllowedOEM\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; wlansvc.adml: If this policy setting is disabled, both \"Connect to suggested open hotspots,\" \"Connect to networks shared by my contacts,\" and \"Enable paid services\" will be turned off and users on this device will be prevented from enabling them.",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft WLAN administrative template defines the exact path and value name used by the app, and the companion ADML help text explains the disabled behavior in plain language."
+  }
+}

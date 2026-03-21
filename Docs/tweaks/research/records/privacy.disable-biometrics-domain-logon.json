@@ -1,0 +1,208 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-biometrics-domain-logon",
+  "tweak_id": "privacy.disable-biometrics-domain-logon",
+  "record_status": "validated",
+  "summary": "Machine policy for biometric sign-in by domain accounts. Good for stricter domain authentication baselines, but it removes biometric sign-in for domain users.",
+  "setting": {
+    "name": "Biometric Sign-in for Domain Accounts",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can let domain users sign in with biometrics when the device and domain setup support it. This policy controls whether domain accounts are allowed to use that biometric sign-in path.",
+    "why_people_change_it": "Organizations disable it when they want domain sign-in to use other methods only or want a stricter enterprise authentication policy.",
+    "tradeoffs_overview": "Disabling it removes biometric convenience for domain users, but it enforces a stricter domain sign-in policy.",
+    "professional_notes": "Biometrics.admx maps this setting to SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Domain Accounts with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "biometric-domain-accounts",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider",
+        "value_name": "Domain Accounts",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The device does not force the domain-account biometric sign-in policy.",
+            "evidence_ids": [
+              "local-biometrics-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Domain biometric sign-in disabled",
+            "meaning": "Domain accounts cannot use biometric sign-in through this policy path.",
+            "evidence_ids": [
+              "local-biometrics-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Domain biometric sign-in enabled",
+            "meaning": "Domain accounts are allowed to use biometric sign-in through this policy path.",
+            "evidence_ids": [
+              "local-biometrics-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes Domain Accounts = 0 under the biometrics credential provider key, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "biometric-domain-accounts",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider",
+        "value_name": "Domain Accounts",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 7 and newer systems with biometric credential provider support",
+      "states": [
+        {
+          "target_id": "biometric-domain-accounts",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The device policy is not configured by default."
+        }
+      ],
+      "notes": "This policy baseline is separate from whether the domain and device actually support biometric sign-in.",
+      "evidence_ids": [
+        "local-biometrics-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Organizations that do not want to force a domain-biometrics policy"
+      ],
+      "avoid_for": [
+        "Environments with a strict no-biometrics rule for domain sign-in"
+      ],
+      "states": [
+        {
+          "target_id": "biometric-domain-accounts",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the domain-account policy unset."
+        }
+      ],
+      "good_when": "You want the environment to keep its ordinary domain biometric policy behavior.",
+      "bad_when": "You need to enforce that domain users cannot sign in with biometrics.",
+      "tradeoffs": [
+        "Domain biometric sign-in can remain available if the environment supports it.",
+        "No explicit enterprise restriction is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-biometrics-admx"
+      ]
+    },
+    {
+      "profile_id": "no-domain-biometric-sign-in",
+      "label": "No domain biometric sign-in",
+      "intended_for": [
+        "Enterprise security baselines",
+        "Organizations with stricter domain sign-in rules"
+      ],
+      "avoid_for": [
+        "Domain users who rely on biometric sign-in convenience"
+      ],
+      "states": [
+        {
+          "target_id": "biometric-domain-accounts",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable biometric sign-in for domain accounts."
+        }
+      ],
+      "good_when": "You want a stricter domain authentication posture.",
+      "bad_when": "You want domain users to keep using supported biometric sign-in.",
+      "tradeoffs": [
+        "Domain biometric sign-in is removed.",
+        "Enterprise sign-in policy becomes stricter."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-biometrics-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-biometrics-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Biometrics.admx mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\Biometrics.admx",
+      "summary": "The local ADMX file defines the domain account biometric policy and shows Domain Accounts with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes Domain Accounts = 0 under the biometrics credential provider policy key.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-biometrics-domain-logon",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft policy files document the exact domain-account policy surface, value semantics, and sign-in behavior. The app writes the documented disable value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:59:12.4633283+03:00",
+  "validation_proof": {
+    "source_url": "C:\\WINDOWS\\PolicyDefinitions\\Biometrics.admx",
+    "exact_quote_or_path": "<policy name=\"Biometrics_EnableDomainCredProv\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\" valueName=\"Domain Accounts\">; Biometrics.adml: If you disable this policy setting, Windows prevents domain users from logging on to a domain-joined computer using biometrics.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks biometric sign-in for domain users."
+  }
+}

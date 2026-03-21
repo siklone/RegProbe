@@ -1,0 +1,271 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.disable-netbios-resolution",
+  "tweak_id": "network.disable-netbios-resolution",
+  "record_status": "validated",
+  "summary": "Policy-backed control for DNS client NetBIOS name resolution behavior. The current app uses the strict disable value, and the local Microsoft DnsClient.admx file explicitly documents the same registry key, value name, and enum values.",
+  "setting": {
+    "name": "DNS Client NetBIOS Name Resolution",
+    "category": "Network",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can use NetBIOS-style name resolution through the DNS client policy layer. This policy lets you fully disable it, allow it, or choose more limited modes.",
+    "why_people_change_it": "People disable it when they want a more modern and predictable name-resolution posture. They keep broader modes when legacy discovery behavior still matters.",
+    "tradeoffs_overview": "Turning it fully off can reduce legacy name-resolution behavior, but some older network discovery flows may stop working. Unlike the separate NetBIOS over TCP/IP interface setting, this policy is a DNS client behavior control and supports more than one mode.",
+    "professional_notes": "DnsClient.admx defines DNS_Netbios as an enum-based policy writing EnableNetbios. The current app writes 0, which is the strict disable value. Other supported values are 1, 2, and 3.",
+    "targets": [
+      {
+        "target_id": "enable-netbios",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+        "value_name": "EnableNetbios",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force a DNS client NetBIOS policy mode.",
+            "evidence_ids": [
+              "ms-dnsclient-policy-csp",
+              "local-dnsclient-netbios-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Disable",
+            "meaning": "Disable NetBIOS name resolution for the DNS client policy.",
+            "evidence_ids": [
+              "local-dnsclient-netbios-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Allow",
+            "meaning": "Allow NetBIOS name resolution.",
+            "evidence_ids": [
+              "local-dnsclient-netbios-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Disable on public networks",
+            "meaning": "Disable NetBIOS name resolution on public networks only.",
+            "evidence_ids": [
+              "local-dnsclient-netbios-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Learning mode",
+            "meaning": "Use the learning mode defined by the DNS client policy.",
+            "evidence_ids": [
+              "local-dnsclient-netbios-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The current app writes EnableNetbios = 0, which matches the strict disable mode documented in the local ADMX enum.",
+    "writes": [
+      {
+        "target_id": "enable-netbios",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+        "value_name": "EnableNetbios",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows Vista and newer systems with the DNS client policy available",
+      "states": [
+        {
+          "target_id": "enable-netbios",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The policy is enum-backed and not configured by default."
+        }
+      ],
+      "notes": "This is a policy baseline. It is different from the separate per-interface NetBIOS over TCP/IP setting.",
+      "evidence_ids": [
+        "ms-dnsclient-policy-csp",
+        "local-dnsclient-netbios-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Environments where NetBIOS client policy behavior should stay untouched"
+      ],
+      "avoid_for": [
+        "Users who want explicit DNS client hardening"
+      ],
+      "states": [
+        {
+          "target_id": "enable-netbios",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You do not want to force a NetBIOS client policy mode.",
+      "bad_when": "You intentionally want to disable NetBIOS name resolution.",
+      "tradeoffs": [
+        "Windows keeps its normal behavior for this policy area.",
+        "No explicit hardening mode is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-dnsclient-netbios-admx"
+      ]
+    },
+    {
+      "profile_id": "strict-disable",
+      "label": "Strict disable",
+      "intended_for": [
+        "Modern networks",
+        "Users who want the most direct disable mode"
+      ],
+      "avoid_for": [
+        "Legacy discovery environments",
+        "Users who still need NetBIOS client fallback"
+      ],
+      "states": [
+        {
+          "target_id": "enable-netbios",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Use the explicit disable mode."
+        }
+      ],
+      "good_when": "You want to remove this legacy name-resolution path as much as possible.",
+      "bad_when": "Some network discovery path still relies on it.",
+      "tradeoffs": [
+        "Legacy behavior can stop working.",
+        "The app currently only exposes this strict mode, not the more nuanced enum choices."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-dnsclient-netbios-admx",
+        "app-network-provider"
+      ]
+    },
+    {
+      "profile_id": "public-only-disable",
+      "label": "Disable on public networks",
+      "intended_for": [
+        "Users who want a more nuanced policy than full disable"
+      ],
+      "avoid_for": [
+        "People who want a single simple hard-disable"
+      ],
+      "states": [
+        {
+          "target_id": "enable-netbios",
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Use the public-networks-only disable mode defined by the ADMX enum."
+        }
+      ],
+      "good_when": "You want to document the richer policy options even if the app does not expose them yet.",
+      "bad_when": "You expect the current app to support this mode directly today.",
+      "tradeoffs": [
+        "More nuanced than strict disable.",
+        "The current app does not expose this value as a preset yet."
+      ],
+      "apply_allowed": true,
+      "notes": "Documented for research completeness. Not currently exposed as a first-class preset in the app.",
+      "evidence_ids": [
+        "local-dnsclient-netbios-admx"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-dnsclient-policy-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft ADMX_DnsClient Policy CSP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient",
+      "summary": "Official documentation for ADMX-backed DNS client policies.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "local-dnsclient-netbios-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft DnsClient.admx NetBIOS enum mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\DnsClient.admx",
+      "summary": "The local ADMX file defines DNS_Netbios as an enum that writes EnableNetbios with values 0, 1, 2, and 3.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The provider writes EnableNetbios = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-netbios-resolution",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft DnsClient.admx file explicitly defines DNS_Netbios under Software\\Policies\\Microsoft\\Windows NT\\DNSClient with enum valueName EnableNetbios, and the app writes one of the documented enum values.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T08:24:00Z",
+  "validation_proof": {
+    "source_url": "C:\\WINDOWS\\PolicyDefinitions\\DnsClient.admx",
+    "exact_quote_or_path": "<policy name=\"DNS_Netbios\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\"> <enum id=\"DNS_Netbios_Box\" valueName=\"EnableNetbios\" required=\"true\"> <item displayName=\"$(string.DNS_Netbios_Disable)\"><value><decimal value=\"0\" /></value></item>",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same registry key and value name that the app writes, and it exposes the enum values 0, 1, 2, and 3."
+  }
+}

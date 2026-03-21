@@ -1,0 +1,155 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.graphics-tdr-ddi-delay",
+  "tweak_id": "system.graphics-tdr-ddi-delay",
+  "record_status": "validated",
+  "summary": "Officially documented TDR DDI timeout reset. This app write restores TdrDdiDelay to Microsoft's documented default of 5 seconds, but Microsoft warns that TDR keys are for driver testing and debugging rather than normal end-user tuning.",
+  "setting": {
+    "name": "Graphics TDR DDI Delay",
+    "category": "System",
+    "area": "Graphics Drivers / TDR",
+    "scope": "device",
+    "casual_explanation": "Windows gives graphics-driver threads a limited amount of time to leave the driver during TDR recovery. This setting controls that delay.",
+    "why_people_change_it": "People usually change it only when undoing manual TDR experiments or driver-debugging edits.",
+    "tradeoffs_overview": "Restoring the documented default is useful when cleaning up graphics-driver experiments, but this is still a driver-debugging control rather than a normal consumer tweak.",
+    "professional_notes": "Microsoft documents TdrDdiDelay under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 5 seconds. The same Microsoft page warns that TDR keys are intended for testing or debugging during driver development, not as routine end-user tuning.",
+    "targets": [
+      {
+        "target_id": "tdr-ddi-delay",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "value_name": "TdrDdiDelay",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 5,
+            "label": "Microsoft default DDI delay",
+            "meaning": "The TDR DDI timeout is set to Microsoft's documented default of 5 seconds.",
+            "evidence_ids": [
+              "ms-tdr-registry-keys",
+              "app-system-registry-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes TdrDdiDelay = 5 on the documented GraphicsDrivers path.",
+    "writes": [
+      {
+        "target_id": "tdr-ddi-delay",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "value_name": "TdrDdiDelay",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 5
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented default",
+      "applies_to": "Systems restoring the documented TDR DDI delay baseline",
+      "states": [
+        {
+          "target_id": "tdr-ddi-delay",
+          "state_kind": "value",
+          "value": 5,
+          "rationale": "Microsoft documents 5 seconds as the default TdrDdiDelay value."
+        }
+      ],
+      "notes": "This record is intended for resetting to the documented baseline rather than publishing a casual tweak.",
+      "evidence_ids": [
+        "ms-tdr-registry-keys"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "reset-to-microsoft-default",
+      "label": "Reset to Microsoft default",
+      "intended_for": [
+        "Undoing manual TDR edits",
+        "Driver debugging cleanup",
+        "Systems returning to the documented baseline"
+      ],
+      "avoid_for": [
+        "Casual optimization use",
+        "Speculative graphics tweaking"
+      ],
+      "states": [
+        {
+          "target_id": "tdr-ddi-delay",
+          "state_kind": "value",
+          "value": 5,
+          "rationale": "Restore the documented default DDI timeout."
+        }
+      ],
+      "good_when": "You are removing custom TDR edits and want the Microsoft baseline back.",
+      "bad_when": "You are treating TDR timing keys as routine optimization knobs.",
+      "tradeoffs": [
+        "The documented Microsoft default is restored.",
+        "The setting remains a driver-debugging surface, not a general-user recommendation."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-tdr-registry-keys",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-tdr-registry-keys",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Testing and debugging TDR during driver development",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "summary": "Microsoft documents TdrDdiDelay under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 5 seconds, while warning that TDR keys are for targeted driver testing and debugging only.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes TdrDdiDelay = 5 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the exact path and default value, and the app writes that documented default as a reset-to-baseline action.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:10:30Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+    "exact_quote_or_path": "KeyPath : HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\GraphicsDrivers; KeyValue : TdrDdiDelay; ValueType : REG_DWORD; ValueData : Number of seconds to leave the driver. The default value is 5 seconds.",
+    "key_found_on_page": true,
+    "notes": "Microsoft's TDR registry keys page documents the exact GraphicsDrivers runtime path, the TdrDdiDelay value name, and the documented default of 5 seconds."
+  }
+}

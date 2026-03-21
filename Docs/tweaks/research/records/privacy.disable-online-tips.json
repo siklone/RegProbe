@@ -1,0 +1,230 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-online-tips",
+  "tweak_id": "privacy.disable-online-tips",
+  "record_status": "validated",
+  "summary": "Machine policy for online tips and help in Settings. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.",
+  "setting": {
+    "name": "Online Tips in Settings",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "The Settings app can contact Microsoft to retrieve tips and help content. This policy decides whether those online tips are allowed.",
+    "why_people_change_it": "People disable online tips to reduce network-backed content, keep Settings quieter, or avoid Microsoft help and suggestion lookups from the device.",
+    "tradeoffs_overview": "Turning this off reduces online content in Settings, but it also removes helpful tips and guidance that some users rely on.",
+    "professional_notes": "The Settings Policy CSP documents AllowOnlineTips. ControlPanel.admx maps the machine policy to HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips as a boolean with 1 for allowed and 0 for not allowed.",
+    "targets": [
+      {
+        "target_id": "allow-online-tips",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "value_name": "AllowOnlineTips",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the online-tips policy.",
+            "evidence_ids": [
+              "ms-settings-csp-allow-online-tips",
+              "local-control-panel-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Online tips disabled",
+            "meaning": "The Settings app won't retrieve online tips and help content.",
+            "evidence_ids": [
+              "ms-settings-csp-allow-online-tips",
+              "local-control-panel-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Online tips allowed",
+            "meaning": "The Settings app is allowed to retrieve online tips and help content.",
+            "evidence_ids": [
+              "ms-settings-csp-allow-online-tips",
+              "local-control-panel-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes AllowOnlineTips = 0, which matches the documented not-allowed behavior.",
+    "writes": [
+      {
+        "target_id": "allow-online-tips",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "value_name": "AllowOnlineTips",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 10 version 1709 and newer supported systems",
+      "states": [
+        {
+          "target_id": "allow-online-tips",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The machine policy is not configured by default."
+        }
+      ],
+      "notes": "The Settings Policy CSP documents the default value as allowed, but the registry policy baseline remains not configured unless the policy is set.",
+      "evidence_ids": [
+        "ms-settings-csp-allow-online-tips",
+        "local-control-panel-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Users who want Microsoft help content in Settings"
+      ],
+      "avoid_for": [
+        "Minimal or privacy-focused configurations"
+      ],
+      "states": [
+        {
+          "target_id": "allow-online-tips",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want Settings to keep its ordinary access to online tips and help.",
+      "bad_when": "You want to prevent Settings from contacting Microsoft content services for tips.",
+      "tradeoffs": [
+        "Help and suggestion content can remain available in Settings.",
+        "No policy-based restriction is enforced for online tips."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-settings-csp-allow-online-tips"
+      ]
+    },
+    {
+      "profile_id": "offline-lean",
+      "label": "Offline lean",
+      "intended_for": [
+        "Privacy-focused systems",
+        "Managed devices"
+      ],
+      "avoid_for": [
+        "Users who want Microsoft help content inside Settings"
+      ],
+      "states": [
+        {
+          "target_id": "allow-online-tips",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Block Settings from retrieving online tips and help content."
+        }
+      ],
+      "good_when": "You want the Settings app to avoid Microsoft-hosted tips and help lookups.",
+      "bad_when": "You want more in-app guidance and help content.",
+      "tradeoffs": [
+        "Settings becomes quieter and less network-backed.",
+        "Helpful guidance and tips in Settings can be reduced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-settings-csp-allow-online-tips",
+        "local-control-panel-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-settings-csp-allow-online-tips",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: AllowOnlineTips",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips",
+      "summary": "Official documentation for the policy that controls whether the Settings app can retrieve online tips and help content.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-control-panel-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft ControlPanel.admx mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\ControlPanel.admx",
+      "summary": "The local ADMX file maps AllowOnlineTips under the Explorer policies path with trueValue 1 and falseValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes AllowOnlineTips = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-online-tips",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents AllowOnlineTips directly in the Settings Policy CSP and maps it to Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips with 1 as the default allowed state and 0 as not allowed. The app writes that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T14:33:43.3708461+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips",
+    "exact_quote_or_path": "Enables or disables the retrieval of online tips and help for the Settings app. If disabled, Settings won't contact Microsoft content services to retrieve tips and help content. Default Value 1. Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Name AllowOnlineTips ... Registry Key Name Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer.",
+    "key_found_on_page": true,
+    "notes": "The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips."
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.enable-sudo",
+  "tweak_id": "security.enable-sudo",
+  "record_status": "validated",
+  "summary": "Legacy validated record without machine-checkable validation proof. Official policy-backed control for Windows sudo behavior. The current app sets the maximum allowed sudo mode to Normal, which allows in-place use and also permits the stricter modes.",
+  "setting": {
+    "name": "Windows Sudo Mode Policy",
+    "category": "Security",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows sudo lets elevated commands run from the command line. This policy decides whether sudo is allowed and, if it is, which interaction mode is the most permissive one users can use.",
+    "why_people_change_it": "People change it when they want command-line elevation available in a controlled way. They leave it alone when they do not use sudo or want users to manage it themselves in Settings.",
+    "tradeoffs_overview": "Allowing sudo makes admin command workflows easier, but it also increases access to elevation paths on the machine.",
+    "professional_notes": "Sudo.admx documents the machine policy under HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo with value name Enabled. The local ADMX enum maps 0 to Disabled, 1 to Force new window, 2 to Disable input, and 3 to Normal. The local ADML help text says that if the policy is disabled or not configured, the user can run sudo normally after enabling it in Settings.",
+    "targets": [
+      {
+        "target_id": "sudo-enabled-mode",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo",
+        "value_name": "Enabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not enforce a policy maximum; the user can run sudo normally after enabling it in Settings.",
+            "evidence_ids": [
+              "local-sudo-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Sudo disabled",
+            "meaning": "sudo.exe is disabled on the machine.",
+            "evidence_ids": [
+              "local-sudo-admx",
+              "local-sudo-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Force new window",
+            "meaning": "sudo can run only by launching the elevated app in a new console window.",
+            "evidence_ids": [
+              "local-sudo-admx",
+              "local-sudo-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Disable input",
+            "meaning": "sudo can run in the current console without interactive input, and also allows the Force new window mode.",
+            "evidence_ids": [
+              "local-sudo-admx",
+              "local-sudo-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Normal",
+            "meaning": "sudo can run in the current console normally, and also allows the stricter Force new window and Disable input modes.",
+            "evidence_ids": [
+              "local-sudo-admx",
+              "local-sudo-adml",
+              "app-security-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The current app writes Enabled = 3, which matches the documented Normal mode in the official Sudo policy.",
+    "writes": [
+      {
+        "target_id": "sudo-enabled-mode",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo",
+        "value_name": "Enabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 3
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows 11 client editions supporting the Sudo policy",
+      "states": [
+        {
+          "target_id": "sudo-enabled-mode",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "notes": "Not configured does not force a sudo mode through policy.",
+      "evidence_ids": [
+        "local-sudo-admx",
+        "local-sudo-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "General users",
+        "Systems that do not need policy-enforced sudo behavior"
+      ],
+      "avoid_for": [
+        "Developer machines that want a fixed allowed sudo mode"
+      ],
+      "states": [
+        {
+          "target_id": "sudo-enabled-mode",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not force a sudo mode through policy."
+        }
+      ],
+      "good_when": "You want Settings and the normal Windows behavior to control sudo availability.",
+      "bad_when": "You want an explicit organization-wide maximum sudo mode.",
+      "tradeoffs": [
+        "No policy lock is applied.",
+        "Users can still manage sudo through the supported Windows surface."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-sudo-adml"
+      ]
+    },
+    {
+      "profile_id": "normal-sudo-mode",
+      "label": "Normal sudo mode",
+      "intended_for": [
+        "Developer workstations",
+        "Power users who need in-place sudo"
+      ],
+      "avoid_for": [
+        "Machines that should not expose sudo"
+      ],
+      "states": [
+        {
+          "target_id": "sudo-enabled-mode",
+          "state_kind": "value",
+          "value": 3,
+          "rationale": "Set the maximum allowed sudo mode to Normal."
+        }
+      ],
+      "good_when": "You want the broadest official sudo mode available through policy.",
+      "bad_when": "You want stricter elevation boundaries or no sudo at all.",
+      "tradeoffs": [
+        "sudo becomes available in the current console window.",
+        "Elevation workflows become easier for command-line users."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-sudo-admx",
+        "local-sudo-adml",
+        "app-security-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-sudo-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Sudo.admx mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\Sudo.admx",
+      "summary": "The local ADMX file maps the Sudo policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo\\Enabled and defines enum values 0, 1, 2, and 3.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-sudo-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft Sudo.adml help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\Sudo.adml",
+      "summary": "The local ADML help text explains the Disabled, Force new window, Disable input, and Normal modes, and says that disabled or not configured falls back to the normal supported Windows behavior after the user enables sudo in Settings.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The provider writes Enabled = 3 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft Sudo policy files explicitly define the policy path HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo, the value name Enabled, and enum values 0 through 3. The app writes the documented Normal mode value 3 on that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:36:45.0000000+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\Sudo.admx",
+    "exact_quote_or_path": "<policy name=\"EnableSudo\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Sudo\"> ... <enum id=\"SudoModes\" valueName=\"Enabled\"> ... <decimal value=\"0\" /> ... <decimal value=\"1\" /> ... <decimal value=\"2\" /> ... <decimal value=\"3\" />; Sudo.adml: \"Normal\": When sudo launches a command line application, it will launch the app in the current console window.",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, and enumerates modes 0 through 3. The paired ADML help text explains that value 3 is the Normal mode, matching the app's current write."
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.disable-smb1",
+  "tweak_id": "network.disable-smb1",
+  "record_status": "validated",
+  "summary": "Controls the SMBv1 server protocol value for LanmanServer. Microsoft directly documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for this setting.",
+  "setting": {
+    "name": "SMBv1 Server Protocol Support",
+    "category": "Network",
+    "area": "Registry Configuration",
+    "scope": "device",
+    "casual_explanation": "SMB is the file-sharing protocol Windows uses for network shares. SMBv1 is the old version. Modern systems should avoid it, but some very old devices still need it.",
+    "why_people_change_it": "People disable SMBv1 for security and to modernize the network stack. They only keep it enabled when they still have old devices or software that cannot speak SMBv2 or SMBv3.",
+    "tradeoffs_overview": "Disabling SMBv1 is usually safer, but any device that only understands SMBv1 may stop working. This record only documents the LanmanServer registry value and not every optional feature or client-side component that can also affect SMBv1 behavior.",
+    "professional_notes": "The documented app mapping covers HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\SMB1. SMBv1 availability can still depend on Windows version, optional feature state, and whether the server component is installed.",
+    "targets": [
+      {
+        "target_id": "lanmanserver-smb1",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+        "value_name": "SMB1",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows managed default",
+            "meaning": "Windows decides behavior based on version, installed features, and component defaults.",
+            "evidence_ids": [
+              "ms-smb-disable-enable",
+              "repo-provenance-smb1"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Disabled",
+            "meaning": "The SMBv1 server protocol is disabled for LanmanServer.",
+            "evidence_ids": [
+              "ms-smb-disable-enable"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Enabled",
+            "meaning": "The SMBv1 server protocol is enabled for LanmanServer.",
+            "evidence_ids": [
+              "ms-smb-disable-enable"
+            ]
+          }
+        ],
+        "notes": "This target does not by itself describe every SMBv1-related client or feature switch in Windows."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The current app writes SMB1 = 0 for the tweak, which matches the documented disable behavior for the LanmanServer registry value.",
+    "writes": [
+      {
+        "target_id": "lanmanserver-smb1",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+        "value_name": "SMB1",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Version-dependent Windows baseline",
+      "applies_to": "Windows 10, Windows 11, and Windows Server families",
+      "states": [
+        {
+          "target_id": "lanmanserver-smb1",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "SMBv1 defaults vary by Windows version and feature installation state."
+        }
+      ],
+      "notes": "This is intentionally not collapsed into a single number because Microsoft treats SMBv1 defaults differently across client and server generations.",
+      "evidence_ids": [
+        "ms-smb-disable-enable"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "People who want Microsoft defaults",
+        "Mixed environments where SMBv1 requirements are still unknown"
+      ],
+      "avoid_for": [
+        "Hardening baselines that explicitly ban SMBv1"
+      ],
+      "states": [
+        {
+          "target_id": "lanmanserver-smb1",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the explicit registry override absent and let Windows manage the baseline."
+        }
+      ],
+      "good_when": "You are still auditing old devices or do not want the app to force a server-side SMBv1 stance yet.",
+      "bad_when": "You already know your environment should not expose SMBv1.",
+      "tradeoffs": [
+        "Behavior may vary by Windows version and feature state.",
+        "This is less explicit than a hard disable."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smb-disable-enable"
+      ]
+    },
+    {
+      "profile_id": "secure-modern-network",
+      "label": "Secure modern network",
+      "intended_for": [
+        "Most home users with modern devices",
+        "Modern business networks",
+        "Hardened systems"
+      ],
+      "avoid_for": [
+        "Old NAS devices",
+        "Legacy scanners or printers",
+        "Software that only supports SMBv1"
+      ],
+      "states": [
+        {
+          "target_id": "lanmanserver-smb1",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Explicitly disables the SMBv1 server protocol."
+        }
+      ],
+      "good_when": "Everything on the network already supports SMBv2 or SMBv3.",
+      "bad_when": "You still rely on legacy file-sharing equipment.",
+      "tradeoffs": [
+        "Some old devices or shares may stop working.",
+        "Security posture is usually better on modern networks."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smb-disable-enable",
+        "app-network-provider"
+      ]
+    },
+    {
+      "profile_id": "legacy-compatibility",
+      "label": "Legacy compatibility",
+      "intended_for": [
+        "Temporary compatibility testing",
+        "Old devices that only speak SMBv1"
+      ],
+      "avoid_for": [
+        "Security-focused systems",
+        "General-purpose modern desktops"
+      ],
+      "states": [
+        {
+          "target_id": "lanmanserver-smb1",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Explicitly enables the SMBv1 server protocol for compatibility."
+        }
+      ],
+      "good_when": "You have confirmed that a required device or workflow still depends on SMBv1.",
+      "bad_when": "You are enabling it just in case and do not know whether you really need it.",
+      "tradeoffs": [
+        "Legacy compatibility improves.",
+        "Security exposure usually increases."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smb-disable-enable"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-smb-disable-enable",
+      "kind": "official-doc",
+      "title": "Microsoft SMBv1/v2/v3 detection and enable or disable guidance",
+      "location": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1",
+      "summary": "Official Microsoft guidance for detecting and enabling or disabling SMBv1, including the LanmanServer SMB1 registry value.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The provider writes SMB1 = 0 under LanmanServer for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-smb1",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "Current repo provenance already links this tweak to nohuto references such as win-config/network/desc.md and win-registry/records/LanmanServer.txt.",
+      "supports": [
+        "ui-mapping",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft directly documents HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters -> SMB1, including 0 for Disabled and 1 for Enabled. The app writes that same documented value on the documented server-side SMBv1 path.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T03:25:00+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1",
+    "exact_quote_or_path": "To enable or disable SMBv1 on an SMB server, open Registry Editor and go to HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters. Name: SMB1. Type: REG_DWORD. Data: 0 for Disabled and 1 for Enabled.",
+    "key_found_on_page": true,
+    "notes": "Microsoft documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for the server-side SMBv1 override."
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.smb-reject-unencrypted-access",
+  "tweak_id": "network.smb-reject-unencrypted-access",
+  "record_status": "validated",
+  "summary": "Controls the global SMB server RejectUnencryptedAccess value under LanmanServer. This is a strict hardening step that refuses clients not using SMB encryption, but it can break legacy clients and mixed environments.",
+  "setting": {
+    "name": "SMB Server Reject Unencrypted Access",
+    "category": "Network",
+    "area": "Registry Security Baseline",
+    "scope": "device",
+    "casual_explanation": "This setting makes the SMB server reject clients that try to access shares without encryption. It is stricter than simply preferring safer behavior because noncompliant clients are actively refused.",
+    "why_people_change_it": "People turn this on when they want a firm encrypted-only rule for SMB access. They leave it off when they still need compatibility with older or less capable clients.",
+    "tradeoffs_overview": "Rejecting unencrypted access can strengthen security, but any SMB client that cannot negotiate encryption may stop working.",
+    "professional_notes": "Microsoft documents RejectUnencryptedAccess under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters as part of SMB encryption behavior. This record documents the app's global registry write only.",
+    "targets": [
+      {
+        "target_id": "server-reject-unencrypted-access",
+        "location_kind": "registry",
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+        "value_name": "RejectUnencryptedAccess",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows managed baseline",
+            "meaning": "Windows keeps its SMB server baseline without an explicit local override for this behavior.",
+            "evidence_ids": [
+              "ms-smb-security-troubleshooting"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Do not reject unencrypted access",
+            "meaning": "The server does not force this global rejection rule through the registry override.",
+            "evidence_ids": [
+              "ms-smb-security-troubleshooting"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Reject unencrypted access",
+            "meaning": "The server rejects clients that do not use SMB encryption through this registry override.",
+            "evidence_ids": [
+              "ms-smb-security-troubleshooting"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The current app writes RejectUnencryptedAccess = 1, which matches the documented stricter SMB server behavior.",
+    "writes": [
+      {
+        "target_id": "server-reject-unencrypted-access",
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+        "value_name": "RejectUnencryptedAccess",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows SMB server baseline",
+      "applies_to": "Windows SMB server releases that expose the RejectUnencryptedAccess LanmanServer value",
+      "states": [
+        {
+          "target_id": "server-reject-unencrypted-access",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "The official source documents the control surface, but this record does not claim a single universal default across every Windows SMB server release."
+        }
+      ],
+      "notes": "This record validates the control and numeric meaning without flattening all Windows baselines into one number.",
+      "evidence_ids": [
+        "ms-smb-security-troubleshooting"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "Users who want the normal SMB server baseline",
+        "People who are still checking client compatibility"
+      ],
+      "avoid_for": [
+        "Strict encrypted-only SMB baselines"
+      ],
+      "states": [
+        {
+          "target_id": "server-reject-unencrypted-access",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the explicit override absent."
+        }
+      ],
+      "good_when": "You want Windows or other SMB management surfaces to keep their normal behavior.",
+      "bad_when": "You need a firm encrypted-only access policy.",
+      "tradeoffs": [
+        "You avoid forcing a strict rejection rule immediately.",
+        "Clients that do not use encryption are not explicitly blocked by this value."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smb-security-troubleshooting"
+      ]
+    },
+    {
+      "profile_id": "encrypted-only-access",
+      "label": "Encrypted-only access",
+      "intended_for": [
+        "Security-focused file servers",
+        "Modern managed environments",
+        "Users who want strict SMB encryption enforcement"
+      ],
+      "avoid_for": [
+        "Legacy SMB clients",
+        "Mixed compatibility environments"
+      ],
+      "states": [
+        {
+          "target_id": "server-reject-unencrypted-access",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Reject clients that do not use SMB encryption."
+        }
+      ],
+      "good_when": "You want a strict rule that blocks SMB clients which do not negotiate encryption.",
+      "bad_when": "You still depend on clients that cannot meet this requirement.",
+      "tradeoffs": [
+        "Security posture is stricter.",
+        "Older or incompatible clients can lose access."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smb-security-troubleshooting",
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-smb-security-troubleshooting",
+      "kind": "official-doc",
+      "title": "Microsoft SMB security enhancements troubleshooting",
+      "location": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing",
+      "summary": "Microsoft documents RejectUnencryptedAccess under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters as a registry control for SMB encryption behavior.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The provider writes RejectUnencryptedAccess = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the exact registry control used by the app for rejecting unencrypted SMB access, even though broader SMB encryption behavior can also be managed through other SMB surfaces.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:01:30Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/a64e55aa-1152-48e4-8206-edd96444e7f7",
+    "exact_quote_or_path": "Windows 8 operating system and later and Windows Server 2012 operating system and later by default, set RejectUnencryptedAccess to TRUE. If the registry value RejectUnencryptedAccess under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\ is set to zero, RejectUnencryptedAccess is set to FALSE.",
+    "key_found_on_page": true,
+    "notes": "Microsoft Open Specifications documents the exact LanmanServer registry path and the default TRUE behavior. The app writes the same documented runtime surface with value 1 to enforce rejection."
+  }
+}

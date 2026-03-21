@@ -1,0 +1,276 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-recall",
+  "tweak_id": "privacy.disable-recall",
+  "record_status": "validated",
+  "summary": "User policy for saving snapshots for Recall. The local Microsoft WindowsCopilot.admx file explicitly documents the same WindowsAI policy key, DisableAIDataAnalysis value name, and 1/0 mapping that the app uses.",
+  "setting": {
+    "name": "Recall Snapshot Saving",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "user",
+    "casual_explanation": "Recall can save snapshots of what you have seen on the screen so you can search and revisit it later. This policy decides whether those snapshots can be saved for the signed-in user.",
+    "why_people_change_it": "People turn it off when they do not want screenshot-like history saved for AI search or when they want a stricter managed-device privacy baseline.",
+    "tradeoffs_overview": "Turning it off stops snapshot saving for Recall and can remove previously saved snapshots. Allowing the policy does not force Recall on, but it lets the user choose to save snapshots when the feature is available.",
+    "professional_notes": "WindowsCopilot.admx and the WindowsAI Policy CSP map DisableAIDataAnalysis to SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\\DisableAIDataAnalysis with enabledValue 1 and disabledValue 0. For managed devices, Microsoft states that snapshots are not saved when the policy is not configured.",
+    "targets": [
+      {
+        "target_id": "disable-ai-data-analysis",
+        "location_kind": "registry",
+        "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "value_name": "DisableAIDataAnalysis",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "On managed devices, snapshots are not saved for Recall when this policy is not configured.",
+            "evidence_ids": [
+              "ms-windowsai-disable-ai-data-analysis",
+              "local-windowscopilot-adml-recall"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Recall snapshots turned off",
+            "meaning": "Snapshots are not saved for Recall, and previously saved snapshots are deleted when this policy is enabled.",
+            "evidence_ids": [
+              "ms-windowsai-disable-ai-data-analysis",
+              "local-windowscopilot-admx-recall",
+              "local-windowscopilot-adml-recall",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Users can choose to save Recall snapshots",
+            "meaning": "This policy does not block snapshot saving, so the user can choose whether to save snapshots for Recall when the feature is available.",
+            "evidence_ids": [
+              "ms-windowsai-disable-ai-data-analysis",
+              "local-windowscopilot-admx-recall",
+              "local-windowscopilot-adml-recall"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DisableAIDataAnalysis = 1 for the current user, which matches the documented turn-off state.",
+    "writes": [
+      {
+        "target_id": "disable-ai-data-analysis",
+        "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "value_name": "DisableAIDataAnalysis",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Managed-device user-policy default",
+      "applies_to": "Supported managed Windows 11 Enterprise, Education, Pro, and Sandbox systems exposing Recall policy controls",
+      "states": [
+        {
+          "target_id": "disable-ai-data-analysis",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Microsoft states that on managed devices, snapshots are not saved when the policy is not configured."
+        }
+      ],
+      "notes": "This default is feature and SKU dependent. The not-configured baseline already keeps snapshots off on managed devices.",
+      "evidence_ids": [
+        "ms-windowsai-disable-ai-data-analysis",
+        "local-windowscopilot-adml-recall"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Managed devices that want Microsoft's baseline behavior",
+        "Users who do not need to force a stricter Recall policy"
+      ],
+      "avoid_for": [
+        "People who want an explicit policy that blocks snapshot saving"
+      ],
+      "states": [
+        {
+          "target_id": "disable-ai-data-analysis",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset and keep the managed-device default."
+        }
+      ],
+      "good_when": "You want to keep Microsoft's documented managed-device baseline.",
+      "bad_when": "You want an explicit policy that turns snapshot saving off regardless of user choice.",
+      "tradeoffs": [
+        "Snapshots stay off by default on managed devices.",
+        "No explicit forced-off policy is written."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-windowsai-disable-ai-data-analysis"
+      ]
+    },
+    {
+      "profile_id": "no-recall-snapshots",
+      "label": "No Recall snapshots",
+      "intended_for": [
+        "Privacy-focused systems",
+        "Managed devices",
+        "People who do not want Recall snapshot history saved"
+      ],
+      "avoid_for": [
+        "Users who want Recall history available"
+      ],
+      "states": [
+        {
+          "target_id": "disable-ai-data-analysis",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Force snapshot saving off."
+        }
+      ],
+      "good_when": "You want an explicit policy that blocks Recall snapshot saving.",
+      "bad_when": "You want the user to be able to opt into Recall snapshots later.",
+      "tradeoffs": [
+        "Recall snapshots are not saved.",
+        "Previously saved snapshots can be deleted when the policy is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-windowsai-disable-ai-data-analysis",
+        "local-windowscopilot-adml-recall",
+        "app-privacy-provider"
+      ]
+    },
+    {
+      "profile_id": "user-choice-recall",
+      "label": "User choice",
+      "intended_for": [
+        "Managed devices that want Recall available but user-controlled"
+      ],
+      "avoid_for": [
+        "Privacy baselines that want snapshots clearly blocked"
+      ],
+      "states": [
+        {
+          "target_id": "disable-ai-data-analysis",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Do not block snapshot saving, so the user can choose whether to enable it."
+        }
+      ],
+      "good_when": "You want Recall available without forcing snapshots on.",
+      "bad_when": "You want a strict no-snapshots policy.",
+      "tradeoffs": [
+        "Users can choose to save Recall snapshots.",
+        "Snapshot history may exist if the user opts in."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-windowsai-disable-ai-data-analysis",
+        "local-windowscopilot-adml-recall"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-windowsai-disable-ai-data-analysis",
+      "kind": "policy-csp",
+      "title": "Microsoft WindowsAI Policy CSP: DisableAIDataAnalysis",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis",
+      "summary": "Official documentation for the policy that controls whether snapshots can be saved for Recall, including the managed-device default and the delete-existing-snapshots side effect when the policy is enabled.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-windowscopilot-admx-recall",
+      "kind": "official-doc",
+      "title": "Local Microsoft WindowsCopilot.admx Recall mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\WindowsCopilot.admx",
+      "summary": "The local ADMX file maps DisableAIDataAnalysis to SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\\DisableAIDataAnalysis with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-windowscopilot-adml-recall",
+      "kind": "official-doc",
+      "title": "Local Microsoft WindowsCopilot.adml Recall help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\WindowsCopilot.adml",
+      "summary": "The local ADML help text explains that not configuring the policy keeps snapshots off on managed devices, enabling it blocks snapshot saving and deletes saved snapshots, and disabling it lets users choose to save snapshots.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DisableAIDataAnalysis = 1 for the current user.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-recall",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft WindowsCopilot.admx file explicitly defines DisableAIDataAnalysis under SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI with enabledValue 1 and disabledValue 0, and the local ADML help text documents the managed-device default plus the delete-existing-snapshots side effect. The app writes that exact turn-off state under the current-user policy hive.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T19:36:19.8449566+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\WindowsCopilot.admx",
+    "exact_quote_or_path": "<policy name=\"DisableAIDataAnalysis\" class=\"Both\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" valueName=\"DisableAIDataAnalysis\">",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots."
+  }
+}

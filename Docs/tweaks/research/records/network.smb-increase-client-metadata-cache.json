@@ -1,0 +1,371 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.smb-increase-client-metadata-cache",
+  "tweak_id": "network.smb-increase-client-metadata-cache",
+  "record_status": "validated",
+  "summary": "Validated SMB client metadata-cache tuning bundle. Microsoft documents both the default values and a client tuning example for higher-latency SMB workloads, and the current app matches that published example exactly.",
+  "setting": {
+    "name": "SMB Client Metadata Cache Size Bundle",
+    "category": "Network",
+    "area": "Registry Optimization Bundle",
+    "scope": "device",
+    "casual_explanation": "These values control how much SMB client metadata Windows caches and how many outstanding SMB requests it allows.",
+    "why_people_change_it": "People change these only when tuning remote file workloads, especially over high-latency links or in benchmark-heavy environments.",
+    "tradeoffs_overview": "Microsoft documents these values and provides a client tuning example. The current app matches that published example exactly, but the bundle remains specialized for high-latency SMB workloads.",
+    "professional_notes": "Microsoft documents DirectoryCacheEntriesMax, FileInfoCacheEntriesMax, FileNotFoundCacheEntriesMax, and MaxCmds under HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters. The current app values match Microsoft's published client tuning example for higher-latency SMB workloads.",
+    "targets": [
+      {
+        "target_id": "smb-directory-cache-entries-max",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+        "value_name": "DirectoryCacheEntriesMax",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 16,
+            "label": "Windows default",
+            "meaning": "Microsoft documents 16 as the default value.",
+            "evidence_ids": [
+              "ms-smb-client-tuning"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 128,
+            "label": "Microsoft tuning example",
+            "meaning": "Microsoft shows 128 as the example value for higher-latency workloads.",
+            "evidence_ids": [
+              "ms-smb-client-tuning"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 4096,
+            "label": "Microsoft tuning example / current app value",
+            "meaning": "The current app matches Microsoft's published client tuning example.",
+            "evidence_ids": [
+              "app-network-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "smb-fileinfo-cache-entries-max",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+        "value_name": "FileInfoCacheEntriesMax",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 64,
+            "label": "Windows default",
+            "meaning": "Microsoft documents 64 as the default value.",
+            "evidence_ids": [
+              "ms-smb-client-tuning"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 128,
+            "label": "Microsoft tuning example",
+            "meaning": "Microsoft shows 128 as the example value for higher-latency workloads.",
+            "evidence_ids": [
+              "ms-smb-client-tuning"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 32768,
+            "label": "Microsoft tuning example / current app value",
+            "meaning": "The current app matches Microsoft's published client tuning example.",
+            "evidence_ids": [
+              "app-network-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "smb-filenotfound-cache-entries-max",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+        "value_name": "FileNotFoundCacheEntriesMax",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 128,
+            "label": "Windows default and Microsoft example",
+            "meaning": "Microsoft documents 128 as both the default and the example value.",
+            "evidence_ids": [
+              "ms-smb-client-tuning"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 32768,
+            "label": "Microsoft tuning example / current app value",
+            "meaning": "The current app matches Microsoft's published client tuning example.",
+            "evidence_ids": [
+              "app-network-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "smb-maxcmds",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+        "value_name": "MaxCmds",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 15,
+            "label": "Windows default",
+            "meaning": "Microsoft documents 15 as the default value.",
+            "evidence_ids": [
+              "ms-smb-client-tuning"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 64,
+            "label": "Microsoft tuning example",
+            "meaning": "Microsoft shows 64 as the example value for higher-latency workloads.",
+            "evidence_ids": [
+              "ms-smb-client-tuning"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 32768,
+            "label": "Microsoft tuning example / current app value",
+            "meaning": "The current app matches Microsoft's published client tuning example.",
+            "evidence_ids": [
+              "app-network-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The tweak targets real SMB tuning values and matches Microsoft's published client tuning example exactly.",
+    "writes": [
+      {
+        "target_id": "smb-directory-cache-entries-max",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+        "value_name": "DirectoryCacheEntriesMax",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 4096
+      },
+      {
+        "target_id": "smb-fileinfo-cache-entries-max",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+        "value_name": "FileInfoCacheEntriesMax",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 32768
+      },
+      {
+        "target_id": "smb-filenotfound-cache-entries-max",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+        "value_name": "FileNotFoundCacheEntriesMax",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 32768
+      },
+      {
+        "target_id": "smb-maxcmds",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+        "value_name": "MaxCmds",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 32768
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented defaults",
+      "applies_to": "Windows SMB client tuning surface documented by Microsoft",
+      "states": [
+        {
+          "target_id": "smb-directory-cache-entries-max",
+          "state_kind": "value",
+          "value": 16,
+          "rationale": "Microsoft documents 16 as the default."
+        },
+        {
+          "target_id": "smb-fileinfo-cache-entries-max",
+          "state_kind": "value",
+          "value": 64,
+          "rationale": "Microsoft documents 64 as the default."
+        },
+        {
+          "target_id": "smb-filenotfound-cache-entries-max",
+          "state_kind": "value",
+          "value": 128,
+          "rationale": "Microsoft documents 128 as the default."
+        },
+        {
+          "target_id": "smb-maxcmds",
+          "state_kind": "value",
+          "value": 15,
+          "rationale": "Microsoft documents 15 as the default."
+        }
+      ],
+      "evidence_ids": [
+        "ms-smb-client-tuning"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "Normal SMB client workloads"
+      ],
+      "avoid_for": [
+        "People running explicit SMB tuning experiments"
+      ],
+      "states": [
+        {
+          "target_id": "smb-directory-cache-entries-max",
+          "state_kind": "value",
+          "value": 16,
+          "rationale": "Microsoft default."
+        },
+        {
+          "target_id": "smb-fileinfo-cache-entries-max",
+          "state_kind": "value",
+          "value": 64,
+          "rationale": "Microsoft default."
+        },
+        {
+          "target_id": "smb-filenotfound-cache-entries-max",
+          "state_kind": "value",
+          "value": 128,
+          "rationale": "Microsoft default."
+        },
+        {
+          "target_id": "smb-maxcmds",
+          "state_kind": "value",
+          "value": 15,
+          "rationale": "Microsoft default."
+        }
+      ],
+      "good_when": "You want Microsoft's documented baseline.",
+      "bad_when": "You are following a deliberate WAN tuning experiment.",
+      "tradeoffs": [
+        "Stable documented baseline.",
+        "Not tuned for every specialized workload."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-smb-client-tuning"
+      ]
+    },
+    {
+      "profile_id": "microsoft-high-latency-example",
+      "label": "Microsoft high-latency example",
+      "intended_for": [
+        "Research comparison",
+        "Admins studying Microsoft's published SMB tuning example"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure for users who do not need deliberate SMB tuning"
+      ],
+      "states": [
+        {
+          "target_id": "smb-directory-cache-entries-max",
+          "state_kind": "value",
+          "value": 128,
+          "rationale": "Microsoft example."
+        },
+        {
+          "target_id": "smb-fileinfo-cache-entries-max",
+          "state_kind": "value",
+          "value": 128,
+          "rationale": "Microsoft example."
+        },
+        {
+          "target_id": "smb-filenotfound-cache-entries-max",
+          "state_kind": "value",
+          "value": 128,
+          "rationale": "Microsoft example."
+        },
+        {
+          "target_id": "smb-maxcmds",
+          "state_kind": "value",
+          "value": 64,
+          "rationale": "Microsoft example."
+        }
+      ],
+      "good_when": "You are comparing the app against Microsoft's documented SMB tuning example.",
+      "bad_when": "You want a general-purpose default rather than an explicit SMB tuning example.",
+      "tradeoffs": [
+        "Based on a real Microsoft tuning example.",
+        "Advanced tuning for high-latency SMB workloads."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smb-client-tuning"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-smb-client-tuning",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Performance tuning for SMB file servers",
+      "location": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/",
+      "summary": "Microsoft documents the default and example values for SMB client metadata cache sizes and MaxCmds.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current network tweak provider",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The current app writes metadata cache and MaxCmds values that match Microsoft's documented client tuning example.",
+      "supports": [
+        "ui-mapping",
+        "value"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft's SMB performance tuning page documents the exact LanmanWorkstation registry paths, the default values, and a client tuning example for DirectoryCacheEntriesMax, FileInfoCacheEntriesMax, FileNotFoundCacheEntriesMax, and MaxCmds. The current app matches that client tuning example exactly, so the record is validated.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-20T00:00:00+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/",
+    "exact_quote_or_path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileInfoCacheEntriesMax = 64; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DirectoryCacheEntriesMax = 16; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileNotFoundCacheEntriesMax = 128; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\MaxCmds = 15. Client tuning example: HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileInfoCacheEntriesMax = 32768; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DirectoryCacheEntriesMax = 4096; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\FileNotFoundCacheEntriesMax = 32768; HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\MaxCmds = 32768.",
+    "key_found_on_page": true,
+    "notes": "The official SMB tuning page explicitly lists the exact LanmanWorkstation registry paths, the defaults, and the client tuning example. The current app matches the client tuning example exactly."
+  }
+}

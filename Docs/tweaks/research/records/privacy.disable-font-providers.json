@@ -1,0 +1,226 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-font-providers",
+  "tweak_id": "privacy.disable-font-providers",
+  "record_status": "validated",
+  "summary": "Machine policy for online font providers. Good for privacy-sensitive or offline-lean systems, but it prevents Windows from downloading font catalog data and online font data when needed.",
+  "setting": {
+    "name": "Online Font Providers",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can contact an online font provider to download font catalog data and, when needed, font data for rendering text. This policy decides whether that online font path is allowed.",
+    "why_people_change_it": "People disable online font providers to keep Windows from contacting Microsoft's font service, reduce network-backed content, or force the device to rely only on locally installed fonts.",
+    "tradeoffs_overview": "Turning this off reduces online content lookups, but some text may lose access to downloadable fonts and Windows will only enumerate locally installed fonts.",
+    "professional_notes": "GroupPolicy.admx maps the machine policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableFontProviders with enabledValue 1 and disabledValue 0. The local ADML help text says disabled means Windows does not connect to an online font provider and only enumerates locally installed fonts.",
+    "targets": [
+      {
+        "target_id": "enable-font-providers",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "EnableFontProviders",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the online font provider policy.",
+            "evidence_ids": [
+              "local-grouppolicy-admx-fonts",
+              "local-grouppolicy-adml-fonts"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Online font providers disabled",
+            "meaning": "Windows does not connect to an online font provider and only enumerates locally installed fonts.",
+            "evidence_ids": [
+              "local-grouppolicy-admx-fonts",
+              "local-grouppolicy-adml-fonts"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Online font providers enabled",
+            "meaning": "Windows can query an online font provider for catalog and font data when needed.",
+            "evidence_ids": [
+              "local-grouppolicy-admx-fonts",
+              "local-grouppolicy-adml-fonts"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes EnableFontProviders = 0, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "enable-font-providers",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "EnableFontProviders",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 10 and newer systems supporting the Network Fonts policy",
+      "states": [
+        {
+          "target_id": "enable-font-providers",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The machine policy is not configured by default."
+        }
+      ],
+      "notes": "The local ADML help text says default behavior depends on the Windows edition when the policy is not configured.",
+      "evidence_ids": [
+        "local-grouppolicy-admx-fonts",
+        "local-grouppolicy-adml-fonts"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Devices that may need downloadable font support"
+      ],
+      "avoid_for": [
+        "Privacy-focused or offline-lean setups"
+      ],
+      "states": [
+        {
+          "target_id": "enable-font-providers",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the machine policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep its normal edition-dependent behavior for downloadable fonts.",
+      "bad_when": "You want to stop Windows from contacting an online font provider.",
+      "tradeoffs": [
+        "Windows can keep its ordinary font-provider behavior for the edition.",
+        "No policy-based restriction is enforced for online font lookups."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-grouppolicy-adml-fonts"
+      ]
+    },
+    {
+      "profile_id": "offline-lean",
+      "label": "Offline lean",
+      "intended_for": [
+        "Privacy-sensitive systems",
+        "Devices that should rely only on local fonts"
+      ],
+      "avoid_for": [
+        "Setups that depend on downloadable font support"
+      ],
+      "states": [
+        {
+          "target_id": "enable-font-providers",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable online font providers so Windows only enumerates locally installed fonts."
+        }
+      ],
+      "good_when": "You want Windows to avoid online font catalog and font downloads.",
+      "bad_when": "You want the best chance of rendering text with downloadable fonts when they are needed.",
+      "tradeoffs": [
+        "Online font lookups are removed.",
+        "Some text rendering scenarios may lose access to fonts that would otherwise be downloaded."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-grouppolicy-admx-fonts",
+        "local-grouppolicy-adml-fonts",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-grouppolicy-admx-fonts",
+      "kind": "official-doc",
+      "title": "Local Microsoft GroupPolicy.admx mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\GroupPolicy.admx",
+      "summary": "The local ADMX file shows EnableFontProviders with enabledValue 1 and disabledValue 0 under the Windows System policy key.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-grouppolicy-adml-fonts",
+      "kind": "official-doc",
+      "title": "Local Microsoft GroupPolicy.adml help text",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\en-US\\GroupPolicy.adml",
+      "summary": "The local ADML help text says disabling the policy prevents Windows from connecting to an online font provider and leaves it enumerating only locally installed fonts; not configured is edition-dependent.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes EnableFontProviders = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-font-providers",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft policy files document the exact font-provider policy surface, value semantics, and online-font behavior. The app writes the documented disable value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T21:06:31.7575056+03:00",
+  "validation_proof": {
+    "source_url": "C:\\WINDOWS\\PolicyDefinitions\\GroupPolicy.admx",
+    "exact_quote_or_path": "<policy name=\"EnableFontProviders\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"EnableFontProviders\">; GroupPolicy.adml: If you disable this policy setting, Windows does not connect to an online font provider and only enumerates locally-installed fonts.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts."
+  }
+}

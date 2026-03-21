@@ -1,0 +1,191 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.services.disable-print-spooler",
+  "tweak_id": "system.services.disable-print-spooler",
+  "record_status": "validated",
+  "summary": "Legacy validated record without machine-checkable validation proof. Official Windows service control for the Print Spooler service (Spooler). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.",
+  "setting": {
+    "name": "Print Spooler Service",
+    "category": "System",
+    "area": "Service Start Mode",
+    "scope": "device",
+    "casual_explanation": "Print Spooler handles print jobs and manages interaction with printers. Disabling it removes Windows printing support on the device.",
+    "why_people_change_it": "People disable it on systems that never print, on hardened systems, or when they want to remove the printing stack entirely.",
+    "tradeoffs_overview": "Disabling it removes the spooler service, but Windows printing stops working and printers may no longer appear in the normal Windows experience.",
+    "professional_notes": "Microsoft's Windows IoT Enterprise service guidance lists Print Spooler `(Spooler)` with a default start mode of `Automatic` and marks it `OK to disable`. Microsoft also notes that if the service is turned off, users cannot print or see their printers. The app uses a service start-mode tweak that disables `Spooler`.",
+    "targets": [
+      {
+        "target_id": "spooler-start-mode",
+        "location_kind": "service",
+        "path": "Spooler",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Automatic",
+            "label": "Windows default",
+            "meaning": "Print Spooler starts automatically with Microsoft's documented default mode.",
+            "evidence_ids": [
+              "ms-iot-services-spooler"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Disabled",
+            "label": "Printing disabled",
+            "meaning": "Windows no longer starts the Print Spooler service until its mode is restored.",
+            "evidence_ids": [
+              "ms-iot-services-spooler",
+              "app-system-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The app disables Spooler by setting its start mode to Disabled.",
+    "writes": [
+      {
+        "target_id": "spooler-start-mode",
+        "path": "Spooler",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "state_kind": "value",
+        "value": "Disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented default",
+      "applies_to": "Windows systems using the normal Print Spooler configuration",
+      "states": [
+        {
+          "target_id": "spooler-start-mode",
+          "state_kind": "value",
+          "value": "Automatic",
+          "rationale": "Microsoft lists Spooler with an Automatic default start mode."
+        }
+      ],
+      "notes": "This baseline preserves Windows printing behavior.",
+      "evidence_ids": [
+        "ms-iot-services-spooler"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Any system that prints"
+      ],
+      "avoid_for": [
+        "Systems that intentionally remove printing support"
+      ],
+      "states": [
+        {
+          "target_id": "spooler-start-mode",
+          "state_kind": "value",
+          "value": "Automatic",
+          "rationale": "Keep the documented default service mode."
+        }
+      ],
+      "good_when": "You want printers and print jobs to work normally.",
+      "bad_when": "You never print and intentionally want the spooler removed.",
+      "tradeoffs": [
+        "Printing remains available.",
+        "The spooler service continues to run with its documented default mode."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-iot-services-spooler"
+      ]
+    },
+    {
+      "profile_id": "no-printing",
+      "label": "No printing",
+      "intended_for": [
+        "Systems that never print",
+        "Minimal or hardened builds intentionally removing print support"
+      ],
+      "avoid_for": [
+        "General-purpose desktops and laptops",
+        "Any system that may need printers later"
+      ],
+      "states": [
+        {
+          "target_id": "spooler-start-mode",
+          "state_kind": "value",
+          "value": "Disabled",
+          "rationale": "Disable the documented Print Spooler service."
+        }
+      ],
+      "good_when": "You intentionally want to remove Windows printing support.",
+      "bad_when": "You need to print or manage printers from Windows.",
+      "tradeoffs": [
+        "Printing support is removed until the service is restored.",
+        "Users cannot print or see their printers."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-iot-services-spooler",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-iot-services-spooler",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Guidance on configuring system services - Print Spooler",
+      "location": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "summary": "Microsoft lists Print Spooler `(Spooler)` with start mode `Automatic` and marks it `OK to disable`, noting that users cannot print or see their printers if it is turned off.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider disables the `Spooler` service through the batch service start-mode tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the Spooler service name, its Automatic default start mode, the printing behavior it provides, and that it is OK to disable in the service guidance used here. The app's service-start-mode action matches that documented control surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:16:17Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+    "exact_quote_or_path": "Print Spooler (Spooler); Automatic; This service spools print jobs and handles interaction with the printer. If you turn off this service, you aren't able to print or see your printers.; OK to disable: This service provides functionality that is useful to some but not all enterprises, and security-focused enterprises that don't use it can safely disable it.",
+    "key_found_on_page": true,
+    "notes": "The Microsoft services guidance page explicitly lists the Spooler service, its Automatic baseline, the effect of turning it off, and that it is OK to disable."
+  }
+}

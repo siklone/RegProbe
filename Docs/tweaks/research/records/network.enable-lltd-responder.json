@@ -1,0 +1,210 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.enable-lltd-responder",
+  "tweak_id": "network.enable-lltd-responder",
+  "record_status": "validated",
+  "summary": "Turns on the LLTD Responder driver through the official Machine policy path. Microsoft directly documents the same policy key, value name, and 1/0 semantics that the app uses for this LLTD Responder setting.",
+  "setting": {
+    "name": "LLTD Responder Driver Policy",
+    "category": "Network",
+    "area": "Group Policy",
+    "scope": "device",
+    "casual_explanation": "The LLTD Responder lets other PCs discover this device on the local network during Windows network mapping and related discovery tasks.",
+    "why_people_change_it": "Admins change this when they need a PC to participate in old-style local network discovery or when they are troubleshooting why a device is not showing up in Windows network maps.",
+    "tradeoffs_overview": "This can help local discovery scenarios, but most people do not need to force it on and many modern home networks work fine without touching it.",
+    "professional_notes": "Microsoft documents EnableRspndr under HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD. As with the LLTDIO policy, a disabled or not configured state means default behavior applies rather than a published hard feature-off state.",
+    "targets": [
+      {
+        "target_id": "lltd-responder-policy",
+        "location_kind": "group-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+        "value_name": "EnableRspndr",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Default behavior",
+            "meaning": "Windows uses the default LLTD Responder behavior because the policy is not configured.",
+            "evidence_ids": [
+              "ms-lltd-responder-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Policy disabled",
+            "meaning": "The administrative template policy is disabled, which falls back to default LLTD Responder behavior.",
+            "evidence_ids": [
+              "ms-lltd-responder-admx",
+              "ms-lltd-responder-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Policy enabled",
+            "meaning": "The LLTD Responder is explicitly turned on by policy.",
+            "evidence_ids": [
+              "ms-lltd-responder-admx",
+              "ms-lltd-responder-adml"
+            ]
+          }
+        ],
+        "notes": "Additional allow and prohibit booleans exist when the policy is enabled."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The app writes EnableRspndr = 1, which matches the documented policy enable state.",
+    "writes": [
+      {
+        "target_id": "lltd-responder-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD",
+        "value_name": "EnableRspndr",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Policy not configured",
+      "applies_to": "Windows Vista and later",
+      "states": [
+        {
+          "target_id": "lltd-responder-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Microsoft says default Responder behavior applies when the policy is not configured."
+        }
+      ],
+      "notes": "Disabled policy also returns to default behavior.",
+      "evidence_ids": [
+        "ms-lltd-responder-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "Devices that do not need forced local discovery participation"
+      ],
+      "avoid_for": [
+        "Admins who intentionally want the responder forced on"
+      ],
+      "states": [
+        {
+          "target_id": "lltd-responder-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not force the policy unless you specifically need the responder on."
+        }
+      ],
+      "good_when": "You want normal Windows behavior.",
+      "bad_when": "You are trying to enforce local discovery participation.",
+      "tradeoffs": [
+        "No policy override is set.",
+        "Behavior follows Windows defaults."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-lltd-responder-adml"
+      ]
+    },
+    {
+      "profile_id": "force-enable-responder",
+      "label": "Force enable responder",
+      "intended_for": [
+        "Admins troubleshooting network discovery",
+        "Managed devices that should answer LLTD discovery requests"
+      ],
+      "avoid_for": [
+        "People expecting a generic speed tweak"
+      ],
+      "states": [
+        {
+          "target_id": "lltd-responder-policy",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "This is the Microsoft-documented policy enable state."
+        }
+      ],
+      "good_when": "You need the device to participate in LLTD discovery.",
+      "bad_when": "You do not have a concrete network discovery reason for changing it.",
+      "tradeoffs": [
+        "The device becomes easier to discover through LLTD-aware workflows.",
+        "This is a specialized discovery setting, not a universal optimization."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-lltd-responder-admx",
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-lltd-responder-admx",
+      "kind": "official-doc",
+      "title": "Microsoft administrative template for LLTD Responder",
+      "location": "C:\\Windows\\PolicyDefinitions\\LinkLayerTopologyDiscovery.admx",
+      "summary": "The LinkLayerTopologyDiscovery administrative template documents EnableRspndr at HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD with enabled value 1 and disabled value 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-lltd-responder-adml",
+      "kind": "official-doc",
+      "title": "Microsoft help text for LLTD Responder policy",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\LinkLayerTopologyDiscovery.adml",
+      "summary": "Microsoft explains that enabling the policy changes Responder behavior and that disabling or not configuring the policy leaves the default behavior in place.",
+      "supports": [
+        "behavior",
+        "default",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current network tweak provider",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The current app writes EnableRspndr = 1 for this tweak.",
+      "supports": [
+        "ui-mapping",
+        "value"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft directly documents HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD -> EnableRspndr in the LinkLayerTopologyDiscovery administrative template, with enabledValue 1 and disabledValue 0. The companion ADML help text explains that enabling the policy turns on Responder behavior and disabling or not configuring it leaves default behavior in place.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T03:43:00+03:00",
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\LinkLayerTopologyDiscovery.admx",
+    "exact_quote_or_path": "<policy name=\"LLTD_EnableRspndr\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LLTD\" valueName=\"EnableRspndr\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; LinkLayerTopologyDiscovery.adml: If you disable or do not configure this policy setting, the default behavior for the Responder will apply.",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft administrative template defines the exact LLTD responder policy path and value name used by the app, and the companion ADML help text documents the enable/default behavior."
+  }
+}

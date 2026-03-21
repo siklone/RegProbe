@@ -1,0 +1,246 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.ntfs-disable-8dot3",
+  "tweak_id": "system.ntfs-disable-8dot3",
+  "record_status": "validated",
+  "summary": "Officially documented control for NTFS 8.3 short-name creation. Good for systems that do not need DOS-style short names and want to avoid their overhead, but disabling them can break older software that still expects short names.",
+  "setting": {
+    "name": "NTFS 8.3 Short Name Creation",
+    "category": "System",
+    "area": "File System Runtime Setting",
+    "scope": "device",
+    "casual_explanation": "NTFS can create old-style short file names for compatibility. Disabling them can reduce some filesystem overhead, but some legacy software still expects those short names to exist.",
+    "why_people_change_it": "People disable 8.3 name creation when they want a cleaner modern NTFS behavior and do not need compatibility with older applications that rely on short names.",
+    "tradeoffs_overview": "Turning it off on all volumes can reduce compatibility with older software, while leaving the Windows default keeps a more flexible per-volume behavior.",
+    "professional_notes": "Microsoft documents NtfsDisable8dot3NameCreation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in fsutil 8dot3name guidance. Local FileSys.admx and FileSys.adml document the same numeric modes on the managed policy side: 0 enables short names on all volumes, 1 disables them on all volumes, 2 uses per-volume behavior and is the default item, and 3 disables them on all data volumes.",
+    "targets": [
+      {
+        "target_id": "ntfs-disable-8dot3-name-creation",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "NtfsDisable8dot3NameCreation",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Enable on all volumes",
+            "meaning": "NTFS creates 8.3 short names on all volumes.",
+            "evidence_ids": [
+              "ms-fsutil-8dot3name",
+              "local-filesys-admx-shortnames",
+              "local-filesys-adml-shortnames"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Disable on all volumes",
+            "meaning": "NTFS does not create 8.3 short names on any volume.",
+            "evidence_ids": [
+              "ms-fsutil-8dot3name",
+              "local-filesys-admx-shortnames",
+              "local-filesys-adml-shortnames",
+              "app-system-registry-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Per-volume behavior",
+            "meaning": "Short-name creation is controlled per volume and this is the documented default mode.",
+            "evidence_ids": [
+              "ms-fsutil-8dot3name",
+              "local-filesys-admx-shortnames",
+              "local-filesys-adml-shortnames"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Disable on all data volumes",
+            "meaning": "Short names are created only on the system volume and disabled on data volumes.",
+            "evidence_ids": [
+              "ms-fsutil-8dot3name",
+              "local-filesys-admx-shortnames",
+              "local-filesys-adml-shortnames"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes NtfsDisable8dot3NameCreation = 1, which matches the documented 'disable on all volumes' mode.",
+    "writes": [
+      {
+        "target_id": "ntfs-disable-8dot3-name-creation",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "NtfsDisable8dot3NameCreation",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows default",
+      "applies_to": "Windows systems using the normal 8.3 short-name baseline",
+      "states": [
+        {
+          "target_id": "ntfs-disable-8dot3-name-creation",
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Use the documented per-volume default mode."
+        }
+      ],
+      "notes": "Microsoft and the local policy files describe 2 as the default per-volume mode.",
+      "evidence_ids": [
+        "ms-fsutil-8dot3name",
+        "local-filesys-adml-shortnames"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that may still need some compatibility flexibility"
+      ],
+      "avoid_for": [
+        "Systems that intentionally want short names disabled everywhere"
+      ],
+      "states": [
+        {
+          "target_id": "ntfs-disable-8dot3-name-creation",
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Keep the documented per-volume default behavior."
+        }
+      ],
+      "good_when": "You want Windows to keep its normal 8.3 compatibility baseline.",
+      "bad_when": "You explicitly want short-name creation disabled on every volume.",
+      "tradeoffs": [
+        "Per-volume flexibility is preserved.",
+        "Some short-name overhead can remain depending on volume settings."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-fsutil-8dot3name",
+        "local-filesys-adml-shortnames"
+      ]
+    },
+    {
+      "profile_id": "no-short-names",
+      "label": "No short names",
+      "intended_for": [
+        "Modern-only workloads",
+        "Users who know they do not need legacy short-name compatibility"
+      ],
+      "avoid_for": [
+        "Older software",
+        "Compatibility-sensitive systems"
+      ],
+      "states": [
+        {
+          "target_id": "ntfs-disable-8dot3-name-creation",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Disable 8.3 short-name creation on all volumes."
+        }
+      ],
+      "good_when": "You want short names disabled everywhere and do not rely on older software that needs them.",
+      "bad_when": "You still run software or scripts that expect 8.3 paths.",
+      "tradeoffs": [
+        "8.3 short names stop being created on all volumes.",
+        "Older compatibility-sensitive software can break."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-fsutil-8dot3name",
+        "local-filesys-adml-shortnames",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-fsutil-8dot3name",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: fsutil 8dot3name",
+      "location": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name",
+      "summary": "Microsoft documents NtfsDisable8dot3NameCreation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem and describes the 0, 1, 2, and 3 modes, with 2 as the default per-volume mode.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-filesys-admx-shortnames",
+      "kind": "official-doc",
+      "title": "Local Microsoft FileSys.admx short-name mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\FileSys.admx",
+      "summary": "The local ADMX file exposes NtfsDisable8dot3NameCreation as an enum-backed short-name policy surface with the same 0 through 3 numeric modes.",
+      "supports": [
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-filesys-adml-shortnames",
+      "kind": "official-doc",
+      "title": "Local Microsoft FileSys.adml short-name help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\FileSys.adml",
+      "summary": "The local ADML help text explains the meanings of the 0, 1, 2, and 3 modes and shows the per-volume option as the default item.",
+      "supports": [
+        "allowed-values",
+        "default",
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes NtfsDisable8dot3NameCreation = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the exact runtime registry path, value name, and 0/1/2/3 mode meanings for NtfsDisable8dot3NameCreation. The app writes one of the documented modes directly.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T21:38:30.1171873+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name",
+    "exact_quote_or_path": "When defaultvalue is specified, the registry key, HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\NtfsDisable8dot3NameCreation, is set to the defaultvalue. The DefaultValue can have the following values: 0: Enables 8dot3 name creation for all volumes on the system. 1: Disables 8dot3 name creation for all volumes on the system. 2: Sets 8dot3 name creation on a per volume basis. 3: Disables 8dot3 name creation for all volumes except the system volume.",
+    "key_found_on_page": true,
+    "notes": "Microsoft Learn directly documents the runtime registry path, value name, and numeric mode table for NtfsDisable8dot3NameCreation."
+  }
+}

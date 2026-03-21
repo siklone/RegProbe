@@ -1,0 +1,187 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.deny-app-access.policy",
+  "tweak_id": "privacy.deny-app-access.policy",
+  "record_status": "validated",
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "summary": "Controls the official AppPrivacy capability-deny policy family only. The broader parent audit trail keeps the extra System policy write separate, while this child models the documented LetAppsAccess* ForceDeny values.",
+  "setting": {
+    "name": "App capability access policies",
+    "category": "Privacy",
+    "area": "AppPrivacy policy family",
+    "scope": "device",
+    "casual_explanation": "These policies stop Windows apps from accessing sensitive capabilities like camera, contacts, location, and background activity.",
+    "why_people_change_it": "People use this when they want a strict privacy posture for Windows apps.",
+    "tradeoffs_overview": "A broad deny policy can improve privacy, but it can also break normal app behavior and is more opinionated than targeted per-capability controls.",
+    "professional_notes": "AppPrivacy.admx documents many LetAppsAccess* policies with enum values including 0 for user control and 2 for force deny. This child record tracks the official AppPrivacy family only; the extra AllowUserInfoAccess System policy write remains in the deprecated parent audit trail.",
+    "targets": [
+      {
+        "target_id": "appprivacy-deny-bundle",
+        "location_kind": "group-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "BundleState",
+        "value_type": "COMPOSITE",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "windows-default",
+            "label": "Windows default",
+            "meaning": "Leave capability access policies at the normal Windows baseline.",
+            "evidence_ids": [
+              "ms-appprivacy-admx",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "current-app-profile",
+            "label": "Current broad deny bundle",
+            "meaning": "Apply the current broad set of ForceDeny values the app writes.",
+            "evidence_ids": [
+              "ms-appprivacy-admx",
+              "app-privacy-provider"
+            ]
+          }
+        ],
+        "notes": "This child record models only the AppPrivacy policy family, not the extra System policy write from the broader parent bundle."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The provider writes the official AppPrivacy ForceDeny bundle. The extra AllowUserInfoAccess System policy write is intentionally excluded from this child record and remains in the deprecated parent audit trail.",
+    "writes": [
+      {
+        "target_id": "appprivacy-deny-bundle",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "BundleState",
+        "value_type": "COMPOSITE",
+        "state_kind": "value",
+        "value": "current-app-profile"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows privacy-policy baseline",
+      "applies_to": "Windows 10 and later AppPrivacy policy surface",
+      "states": [
+        {
+          "target_id": "appprivacy-deny-bundle",
+          "state_kind": "value",
+          "value": "windows-default",
+          "rationale": "The broad bundle should not be treated as the baseline for general systems."
+        }
+      ],
+      "evidence_ids": [
+        "ms-appprivacy-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "People who want capability prompts and app access decisions to remain more granular"
+      ],
+      "avoid_for": [
+        "Strict privacy hardening experiments"
+      ],
+      "states": [
+        {
+          "target_id": "appprivacy-deny-bundle",
+          "state_kind": "value",
+          "value": "windows-default",
+          "rationale": "Do not expose a very broad deny bundle as a default recommendation."
+        }
+      ],
+      "good_when": "You want fewer surprise app breakages.",
+      "bad_when": "You are deliberately pursuing a strict deny-all posture.",
+      "tradeoffs": [
+        "More compatibility for Windows apps.",
+        "Less aggressive privacy hardening."
+      ],
+      "apply_allowed": false,
+      "recommended_for_general_users": false,
+      "evidence_ids": [
+        "ms-appprivacy-admx"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current broad deny bundle",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure"
+      ],
+      "states": [
+        {
+          "target_id": "appprivacy-deny-bundle",
+          "state_kind": "value",
+          "value": "current-app-profile",
+          "rationale": "Track the broad deny behavior currently implemented by the app."
+        }
+      ],
+      "good_when": "You are documenting the product's current privacy-hardening bundle.",
+      "bad_when": "You want a smaller, clearly explained per-capability policy strategy.",
+      "tradeoffs": [
+        "More aggressive privacy posture.",
+        "Higher chance of app regressions and user confusion."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-appprivacy-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-appprivacy-admx",
+      "kind": "official-doc",
+      "title": "Microsoft AppPrivacy administrative template",
+      "location": "C:\\Windows\\PolicyDefinitions\\AppPrivacy.admx",
+      "summary": "The local AppPrivacy administrative template documents many LetAppsAccess* policy values, including 2 for ForceDeny and 0 for user control.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current privacy provider broad deny bundle",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes a large AppPrivacy ForceDeny bundle. The extra System policy write remains in the deprecated parent audit trail.",
+      "supports": [
+        "ui-mapping",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "validation_proof": {
+    "source_url": "C:\\Windows\\PolicyDefinitions\\AppPrivacy.admx",
+    "exact_quote_or_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+    "key_found_on_page": true,
+    "notes": "The local AppPrivacy.admx template documents the LetAppsAccess* policy family and its ForceDeny value semantics. The parent audit trail keeps the extra System policy write separate from this child record."
+  },
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The AppPrivacy policy family is official and machine-checkable, but the broad deny posture remains too opinionated for general users.",
+    "blocking_issues": []
+  }
+}

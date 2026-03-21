@@ -1,0 +1,225 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.ntfs-disable-last-access",
+  "tweak_id": "system.ntfs-disable-last-access",
+  "record_status": "validated",
+  "summary": "Officially documented NTFS control for last-access timestamp updates. Good for reducing disk I/O and latency on large file trees, but some backup and archival tools rely on last-access data and can behave differently when it is disabled.",
+  "setting": {
+    "name": "NTFS Last Access Time Updates",
+    "category": "System",
+    "area": "File System Runtime Setting",
+    "scope": "device",
+    "casual_explanation": "Windows can update a file or directory's last-access timestamp when it is accessed. Disabling these updates can reduce some disk overhead, but software that depends on last-access data can lose that signal.",
+    "why_people_change_it": "People disable last-access updates on performance-focused systems, servers, or large file trees where they want less metadata churn and lower disk I/O.",
+    "tradeoffs_overview": "Turning it off can improve file-system efficiency, but software that depends on last-access timestamps can stop working as expected.",
+    "professional_notes": "Microsoft documents the fsutil behavior disablelastaccess parameter as the control for HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisableLastAccessUpdate. The current fsutil documentation defines 1 as disabling the updates and 0 as enabling them. Microsoft performance-tuning guidance also states that NtfsDisableLastAccessUpdate is set by default to 1 on clean modern Windows installations, and the AgeStore documentation says last-access data is disabled by default on Windows Vista and later unless explicitly enabled.",
+    "targets": [
+      {
+        "target_id": "ntfs-disable-last-access-update",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "NtfsDisableLastAccessUpdate",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Last-access updates enabled",
+            "meaning": "Windows records last-access timestamp updates on NTFS volumes.",
+            "evidence_ids": [
+              "ms-fsutil-behavior",
+              "ms-using-agestore"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Last-access updates disabled",
+            "meaning": "Windows does not update last-access timestamps on NTFS volumes.",
+            "evidence_ids": [
+              "ms-fsutil-behavior",
+              "ms-performance-tuning-web-servers",
+              "ms-using-agestore",
+              "app-system-registry-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes NtfsDisableLastAccessUpdate = 1, which matches the documented disabled state.",
+    "writes": [
+      {
+        "target_id": "ntfs-disable-last-access-update",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "NtfsDisableLastAccessUpdate",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Modern Windows default",
+      "applies_to": "Clean modern Windows installations using the default NTFS baseline",
+      "states": [
+        {
+          "target_id": "ntfs-disable-last-access-update",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Modern Windows uses the disabled state by default for this setting."
+        }
+      ],
+      "notes": "Microsoft notes that clean installations already use NtfsDisableLastAccessUpdate = 1 by default, while earlier or upgraded systems may differ.",
+      "evidence_ids": [
+        "ms-performance-tuning-web-servers",
+        "ms-using-agestore"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "modern-windows-default",
+      "label": "Modern Windows default",
+      "intended_for": [
+        "General users",
+        "Performance-focused systems",
+        "Large file trees and server-style workloads"
+      ],
+      "avoid_for": [
+        "Workloads that explicitly depend on last-access timestamps"
+      ],
+      "states": [
+        {
+          "target_id": "ntfs-disable-last-access-update",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Keep the modern Windows baseline that disables last-access updates."
+        }
+      ],
+      "good_when": "You want the lower-I/O modern Windows baseline for NTFS metadata.",
+      "bad_when": "You run backup, archival, or maintenance tooling that needs last-access timestamps.",
+      "tradeoffs": [
+        "Disk I/O and metadata churn are reduced.",
+        "Software that depends on last-access data can stop working as expected."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-fsutil-behavior",
+        "ms-performance-tuning-web-servers"
+      ]
+    },
+    {
+      "profile_id": "last-access-tracking-enabled",
+      "label": "Last-access tracking enabled",
+      "intended_for": [
+        "Compatibility-sensitive systems",
+        "Workloads that need last-access timestamps"
+      ],
+      "avoid_for": [
+        "Large file trees where metadata churn matters"
+      ],
+      "states": [
+        {
+          "target_id": "ntfs-disable-last-access-update",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Enable NTFS last-access timestamp updates."
+        }
+      ],
+      "good_when": "You need last-access timestamps for maintenance or compatibility reasons.",
+      "bad_when": "You want the lower-overhead modern Windows baseline.",
+      "tradeoffs": [
+        "Programs that rely on last-access data keep working with that signal.",
+        "NTFS metadata updates increase."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-fsutil-behavior",
+        "ms-using-agestore"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-fsutil-behavior",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: fsutil behavior",
+      "location": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
+      "summary": "Microsoft documents disablelastaccess as the control that updates HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisableLastAccessUpdate, where 1 disables updates and 0 enables them.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-performance-tuning-web-servers",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Performance Tuning Web Servers",
+      "location": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/",
+      "summary": "Microsoft documents NtfsDisableLastAccessUpdate under HKLM\\System\\CurrentControlSet\\Control\\FileSystem and says clean modern Windows installations set it to 1 by default.",
+      "supports": [
+        "path",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-using-agestore",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Using AgeStore",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore",
+      "summary": "Microsoft notes that last-access data is disabled by default on Windows Vista and later, and shows fsutil behavior set disablelastaccess 0 to enable and 1 to disable the data collection.",
+      "supports": [
+        "default",
+        "value",
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes NtfsDisableLastAccessUpdate = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the exact registry path, values, and default direction for modern Windows, and the app writes the documented disabled state.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:22:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/",
+    "exact_quote_or_path": "The system-global switch NtfsDisableLastAccessUpdate (REG_DWORD) 1 is located under HKLM\\System\\CurrentControlSet\\Control\\FileSystem and is set by default to 1.",
+    "key_found_on_page": true,
+    "notes": "Microsoft's web-server performance guidance provides the exact registry path and modern default of 1. The matching fsutil behavior documentation states that disablelastaccess {1|0} disables (1) or enables (0) updates to the Last Access Time stamp."
+  }
+}

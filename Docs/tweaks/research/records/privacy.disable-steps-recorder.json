@@ -1,0 +1,226 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-steps-recorder",
+  "tweak_id": "privacy.disable-steps-recorder",
+  "record_status": "validated",
+  "summary": "Policy-backed control for Steps Recorder. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.",
+  "setting": {
+    "name": "Steps Recorder",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Steps Recorder can capture user actions and screenshots to help explain a problem. This policy decides whether the feature is available.",
+    "why_people_change_it": "People disable it on privacy-focused or locked-down systems because it can capture sensitive on-screen actions and data.",
+    "tradeoffs_overview": "Turning it off removes an easy built-in troubleshooting recorder, but it also reduces the chance of user action recordings being created on the device.",
+    "professional_notes": "This setting maps to DisableUAR under Software\\Policies\\Microsoft\\Windows\\AppCompat. AppCompat.admx and the ADMX_AppCompat Policy CSP document that enabling the policy disables Steps Recorder.",
+    "targets": [
+      {
+        "target_id": "disable-uar",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableUAR",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Steps Recorder remains available because the policy is not forcing it off.",
+            "evidence_ids": [
+              "ms-appcompat-policy-csp",
+              "local-appcompat-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Steps Recorder allowed",
+            "meaning": "The policy is disabled and Steps Recorder stays enabled.",
+            "evidence_ids": [
+              "local-appcompat-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Steps Recorder disabled",
+            "meaning": "The policy is enabled and Steps Recorder is turned off.",
+            "evidence_ids": [
+              "ms-appcompat-policy-csp",
+              "local-appcompat-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DisableUAR = 1, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "disable-uar",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableUAR",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 7 and newer supported systems",
+      "states": [
+        {
+          "target_id": "disable-uar",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The device policy is not configured by default."
+        }
+      ],
+      "notes": "Not configured corresponds to Steps Recorder staying available.",
+      "evidence_ids": [
+        "ms-appcompat-policy-csp",
+        "local-appcompat-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Users who want the built-in troubleshooting tool available"
+      ],
+      "avoid_for": [
+        "Privacy-sensitive or tightly managed systems"
+      ],
+      "states": [
+        {
+          "target_id": "disable-uar",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the device policy unset."
+        }
+      ],
+      "good_when": "You want Steps Recorder available for support and troubleshooting.",
+      "bad_when": "You do not want user action recordings to be created.",
+      "tradeoffs": [
+        "Steps Recorder stays available.",
+        "No privacy lock-down is enforced for this feature."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-appcompat-policy-csp"
+      ]
+    },
+    {
+      "profile_id": "no-user-action-recording",
+      "label": "No user action recording",
+      "intended_for": [
+        "Privacy-focused systems",
+        "Managed devices",
+        "Compliance-sensitive environments"
+      ],
+      "avoid_for": [
+        "Help desk scenarios that rely on Steps Recorder"
+      ],
+      "states": [
+        {
+          "target_id": "disable-uar",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Disable Steps Recorder by policy."
+        }
+      ],
+      "good_when": "You want to prevent the feature from recording user actions and screenshots.",
+      "bad_when": "You want a built-in guided tool for capturing reproduction steps.",
+      "tradeoffs": [
+        "Steps Recorder is unavailable.",
+        "Support workflows may need another screen capture or reporting tool."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-appcompat-policy-csp",
+        "local-appcompat-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-appcompat-policy-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft ADMX_AppCompat Policy CSP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord",
+      "summary": "Official documentation for the policy that controls the Steps Recorder state.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-appcompat-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft AppCompat.admx mapping",
+      "location": "C:\\WINDOWS\\PolicyDefinitions\\AppCompat.admx",
+      "summary": "The local ADMX file shows DisableUAR with enabledValue 1 and disabledValue 0 under the AppCompat policy key.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DisableUAR = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-steps-recorder",
+      "kind": "repo-doc",
+      "title": "Existing tweak provenance record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents AppCompatTurnOffUserActionRecord directly in the ADMX_AppCompat Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableUAR. The same page describes that enabling the policy turns off Steps Recorder, and the app writes that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T15:11:19.1409952+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord",
+    "exact_quote_or_path": "Turn off Steps Recorder. This policy setting enables or disables Steps Recorder (Steps Recorder was called Problem Steps Recorder in Windows 7). If you enable this policy setting, Steps Recorder does not start when a user runs Psr.exe or clicks Start Record. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\AppCompat; Registry Value Name DisableUAR.",
+    "key_found_on_page": true,
+    "notes": "The ADMX_AppCompat Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior."
+  }
+}
