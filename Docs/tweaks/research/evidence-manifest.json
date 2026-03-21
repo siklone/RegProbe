@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T18:32:55.591856Z",
+  "generated_utc": "2026-03-21T18:34:09.748306Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -30332,15 +30332,29 @@
             "allowed-values"
           ],
           "origin": "Ghidra decompilation"
+        },
+        {
+          "evidence_id": "procmon-power-hide-lock-option",
+          "kind": "procmon-trace",
+          "title": "Win25H2Clean reversible probe - ShowLockOption 0/1 toggle",
+          "location": "H:\\Temp\\vm-tooling-staging\\power_hide_lock_option_probe.txt",
+          "summary": "The guest probe wrote ShowLockOption=0 and ShowLockOption=1, queried the live registry after each write, opened the Start menu surface twice, and restored the original state; no direct registry read lines were captured in Procmon in this capture.",
+          "strength": "low",
+          "supports": [
+            "runtime writes",
+            "rollback",
+            "trigger attempt"
+          ],
+          "origin": "VM Procmon trace"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\PolicyDefinitions\\WindowsExplorer.admx",
         "exact_quote_or_path": "<policy name=\"ShowLockOption\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"ShowLockOption\">; WindowsExplorer.adml: If you disable this policy setting, the lock option will never be shown in the User Tile menu.",
         "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx."
+        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. Win25H2Clean reversible probe at H:\\Temp\\vm-tooling-staging\\power_hide_lock_option_probe.txt confirmed writes for 0 and 1, live registry queries after each write, Start menu opening in both states, and restoration to the original state; no direct read lines were captured in Procmon."
       },
-      "validation_proof_sha256": "4a31f932c9fa2ce5fab2fda9c97d00fc5b971b503d4d6f9051039e49bfa664da",
+      "validation_proof_sha256": "cac67bd54c67255fb7bbd92e34790b14b07acbbfe0c5736954289301ac9f35bd",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -44051,8 +44065,8 @@
       "tweak_id": "privacy.disable-search-history",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-search-history.json",
-      "source_file_sha256": "df20e231694b6617d2036ff87269603dfd12c4b5ca6b997d3080941b5a626304",
-      "source_file_size_bytes": 10831,
+      "source_file_sha256": "4489b0ca6edacc05240289c84511215b311fc6701407fbf77d25858fe04b8384",
+      "source_file_size_bytes": 11847,
       "name": "Search History Storage and Display",
       "category": "Privacy",
       "area": "Registry Policy",

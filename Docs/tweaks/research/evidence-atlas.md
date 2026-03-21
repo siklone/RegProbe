@@ -6409,6 +6409,7 @@ Windows Internals references:
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showlockoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowLockOption policy | Docs/tweaks/_source-mirrors/win-config/power/desc.md | `high` | path, value, behavior, allowed-values |
+| `procmon-power-hide-lock-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | H:\Temp\vm-tooling-staging\power_hide_lock_option_probe.txt | `low` | runtime writes, rollback, trigger attempt |
 
 **Validation proof**
 
@@ -6417,7 +6418,7 @@ Windows Internals references:
 | Source URL | C:\Windows\PolicyDefinitions\WindowsExplorer.admx |
 | Exact quote / path | <policy name="ShowLockOption" class="Machine" ... key="Software\Policies\Microsoft\Windows\Explorer" valueName="ShowLockOption">; WindowsExplorer.adml: If you disable this policy setting, the lock option will never be shown in the User Tile menu. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. Win25H2Clean reversible probe at H:\Temp\vm-tooling-staging\power_hide_lock_option_probe.txt confirmed writes for 0 and 1, live registry queries after each write, Start menu opening in both states, and restoration to the original state; no direct read lines were captured in Procmon. |
 
 **Decision**
 
