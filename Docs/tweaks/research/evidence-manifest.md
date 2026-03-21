@@ -186,7 +186,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-phone-linking` | validated | `Docs/tweaks/research/records/privacy.disable-phone-linking.json` | `2fa1d757d7f9bd8b007b029245556843bdd3b030b001f805fd7bc8398c723a5e` | `75976cc906c66e2106f84d4de7fbc6b4f022c70f7211acbba2a757d61463a1ae` | 1 |
 | `privacy.disable-program-compatibility-assistant` | validated | `Docs/tweaks/research/records/privacy.disable-program-compatibility-assistant.review.json` | `1e2d3bd33c18e44a39ebbebf350cf2ec1248d96e99ca61f75dd27ff15ba472c5` | `44e0f5bfd3018d0f07f651cf907dcf7bcb13de73ab5c19f61b128b0f8ea4f2b5` | 1 |
 | `privacy.disable-recall` | validated | `Docs/tweaks/research/records/privacy.disable-recall.json` | `89ad22de4bed7c504943cea64a8d3b1a8bc0191c7757882bdaa849d6013dc7b7` | `5d82b8ec56397b6c2a7bba667874745516859db05637ce36a100bb7162ca5e7f` | 1 |
-| `privacy.disable-resume` | validated | `Docs/tweaks/research/records/privacy.disable-resume.json` | `36538de8f009954948f42b0c7c5c199766bdc26aa163a84e276497e1af137a23` | `875ebc4d18fc5c6b161f2f60b89cff66a86db4916743c9f88a0995e24b1d402e` | 1 |
+| `privacy.disable-resume` | validated | `Docs/tweaks/research/records/privacy.disable-resume.json` | `edea839d158aab3eca120589fd44f387bee5fed5463392481da76d79c13e882c` | `875ebc4d18fc5c6b161f2f60b89cff66a86db4916743c9f88a0995e24b1d402e` | 1 |
 | `privacy.disable-rsop-logging` | validated | `Docs/tweaks/research/records/privacy.disable-rsop-logging.json` | `e663e6d53c1c5cfe161fa777b90006fa0402b9eef5f606598dcaa011974270fe` | `5f3e900bb750e2a4c50deb90a0dbdd7f9e2a245eac042a0c1dfc0bcb76224b3b` | 1 |
 | `privacy.disable-search-box-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-search-box-suggestions.json` | `be1d7b0425f51c489a1c104bed89399ee760714ac491236a729f8814bc72266a` | `8d7117f57965931b4c390171bf05c48dc455218943845e17a5ef19c3d9d6f4ec` | 1 |
 | `privacy.disable-search-history` | validated | `Docs/tweaks/research/records/privacy.disable-search-history.json` | `cd9b3b7b921a9a8e93a2dc3a6ccd291f2407c48991746926e8ae6fd41c2369e6` | `404136e044cc31e728cc3a0e2582bca8e3f75278840b39356d5f64e7fd553ec8` | 1 |
@@ -267,7 +267,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.ntfs-enable-long-paths` | validated | `Docs/tweaks/research/records/system.ntfs-enable-long-paths.json` | `d101a6382cc22b8bd2dd60f2d8ff325ea4c7c712f05bfc72566c2f6a1742cdab` | `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179` | 1 |
 | `system.ntfs-reset-memory-usage` | validated | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
 | `system.ntfs-reset-mft-zone` | validated | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
-| `system.priority-control` | validated | `Docs/tweaks/research/records/system.priority-control.review.json` | `7b0d239b22d94b28a4014405068957d8e4546372ddc1ba47190dca3114dab3aa` | `3726ddb235d57ffbd77ad866a4e9c8b3dcc55ee63900ced4e044398ffbffe94f` | 1 |
+| `system.priority-control` | validated | `Docs/tweaks/research/records/system.priority-control.review.json` | `c29b7ccf828cd46687894abcdf4db54a44512a0b4c6ab000f0a8649637dc812f` | `3726ddb235d57ffbd77ad866a4e9c8b3dcc55ee63900ced4e044398ffbffe94f` | 1 |
 | `system.reduce-shutdown-timeouts` | validated | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
 | `system.services.disable-bluetooth-support` | validated | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `c41242b6b93a6c0726a408024b2d24f989f06a68dbd803a2976d1755cc320372` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
@@ -9055,7 +9055,7 @@ Nohuto lineage references:
 - Area: `Current-user Resume Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-resume.json`
-- Source SHA256: `36538de8f009954948f42b0c7c5c199766bdc26aa163a84e276497e1af137a23`
+- Source SHA256: `edea839d158aab3eca120589fd44f387bee5fed5463392481da76d79c13e882c`
 - Proof SHA256: `875ebc4d18fc5c6b161f2f60b89cff66a86db4916743c9f88a0995e24b1d402e`
 
 **Summary:** The current app writes the current-user Resume setting HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration\IsResumeAllowed = 0. Repo notes and local registry observations confirm that this runtime user setting is real and behaves as expected on this build.
@@ -13486,7 +13486,7 @@ Windows Internals references:
 - Area: `Scheduler / Priority Control`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.priority-control.review.json`
-- Source SHA256: `7b0d239b22d94b28a4014405068957d8e4546372ddc1ba47190dca3114dab3aa`
+- Source SHA256: `c29b7ccf828cd46687894abcdf4db54a44512a0b4c6ab000f0a8649637dc812f`
 - Proof SHA256: `3726ddb235d57ffbd77ad866a4e9c8b3dcc55ee63900ced4e044398ffbffe94f`
 
 **Summary:** Win25H2Clean reversible probe confirmed Win32PrioritySeparation=38 under PriorityControl and restored the baseline 2.

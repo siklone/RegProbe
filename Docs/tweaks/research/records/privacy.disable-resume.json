@@ -150,6 +150,19 @@
       "strength": "medium"
     },
     {
+      "evidence_id": "vm-resume-policymanager-probe",
+      "kind": "procmon-trace",
+      "title": "Guest Procmon and PolicyManager probe for CrossDeviceResume",
+      "location": "H:\\Temp\\vm-tooling-staging\\crossdevice_resume_probe.csv and H:\\Temp\\vm-tooling-staging\\resume-policymanager-probe.txt",
+      "summary": "Guest-side Procmon capture shows CrossDeviceResume.exe launching while PolicyManager DLL loads. The companion registry probe confirms the managed policy default branch at HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity\\DisableCrossDeviceResume with value 0 and no current-user PolicyManager Connectivity path on this build.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",

@@ -171,6 +171,19 @@
                          "strength":  "medium"
                      },
                      {
+                         "evidence_id":  "repo-system-decomp-prioritycontrol",
+                         "kind":  "decompilation",
+                         "title":  "Decompiled PriorityControl read/write path",
+                         "location":  "Docs/system/assets/lsc-cimwin32.c",
+                         "summary":  "Decompiled PriorityControl logic opens HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl, reads Win32PrioritySeparation, and writes it back after applying the ForegroundApplicationBoost bitfield.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "behavior"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
                          "evidence_id":  "app-system-registry-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
@@ -205,6 +218,6 @@
                              "source_url":  "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
                              "exact_quote_or_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: before=2, after_apply=38, after_restore=2",
                              "key_found_on_page":  true,
-                             "notes":  "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+                             "notes":  "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparation, and Docs/system/system.md documents the AABBCC bitmask interpretation."
                          }
 }

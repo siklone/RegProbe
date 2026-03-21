@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T13:39:23.995772Z",
+  "generated_utc": "2026-03-21T15:34:52.288790Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -42402,6 +42402,20 @@
           "origin": "VM registry observation"
         },
         {
+          "evidence_id": "vm-resume-policymanager-probe",
+          "kind": "procmon-trace",
+          "title": "Guest Procmon and PolicyManager probe for CrossDeviceResume",
+          "location": "H:\\Temp\\vm-tooling-staging\\crossdevice_resume_probe.csv and H:\\Temp\\vm-tooling-staging\\resume-policymanager-probe.txt",
+          "summary": "Guest-side Procmon capture shows CrossDeviceResume.exe launching while PolicyManager DLL loads. The companion registry probe confirms the managed policy default branch at HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity\\DisableCrossDeviceResume with value 0 and no current-user PolicyManager Connectivity path on this build.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
+        },
+        {
           "evidence_id": "app-privacy-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -63813,6 +63827,20 @@
           "origin": "Current repo docs"
         },
         {
+          "evidence_id": "repo-system-decomp-prioritycontrol",
+          "kind": "decompilation",
+          "title": "Decompiled PriorityControl read/write path",
+          "location": "Docs/system/assets/lsc-cimwin32.c",
+          "summary": "Decompiled PriorityControl logic opens HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl, reads Win32PrioritySeparation, and writes it back after applying the ForegroundApplicationBoost bitfield.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Ghidra decompilation"
+        },
+        {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -63831,7 +63859,7 @@
         "source_url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
         "exact_quote_or_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: before=2, after_apply=38, after_restore=2",
         "key_found_on_page": true,
-        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparation, and Docs/system/system.md documents the AABBCC bitmask interpretation."
       },
       "provenance": {
         "coverage_state": "repo-backed",

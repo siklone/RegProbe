@@ -105,6 +105,27 @@ Practical interpretation:
 
 Do not escalate to Ghidra just because a value is non-binary. If the ADMX already defines the enum list, that is the authoritative meaning source for the documented values.
 
+### Single-Value Validation Workflow
+
+Use this workflow when a registry key exposes only one value name or when the record gives you a single obvious value to validate.
+
+1. Confirm the exact path, value name, and baseline state from the strongest source available.
+2. Identify the closest safe alternate state to test. For binary values, use the opposite state. For raw or multi-bit values, choose the nearest documented alternative or the current observed baseline.
+3. Validate in the Win25H2Clean VM only.
+4. Prefer the lightest proof that can answer the question:
+   - Procmon or a UI/settings diff for user-facing toggle surfaces
+   - WPR or WPA for boot, logon, CPU, GPU, disk, or scheduler behavior
+   - Ghidra or decompiled pseudocode for undocumented or internal values
+5. Record the full reversible cycle:
+   - baseline
+   - apply
+   - verify
+   - restore
+6. Treat a key as validated only when the value meaning and the live read/write path are both captured well enough to explain the behavior without guesswork.
+7. Keep nohuto references limited to lineage and naming provenance unless a record explicitly says the value semantics also came from a mirror or dump.
+
+For a reusable capture template, see [notes/single-value-validation.md](./notes/single-value-validation.md).
+
 ### Procmon Requirement Tiers
 
 Use the following three-way split when deciding whether Procmon is needed:
