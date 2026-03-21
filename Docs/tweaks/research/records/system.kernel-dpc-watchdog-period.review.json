@@ -1,0 +1,223 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "system.kernel-dpc-watchdog-period",
+  "tweak_id": "system.kernel-dpc-watchdog-period",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+  "setting": {
+    "name": "DPC Watchdog Period",
+    "category": "System",
+    "area": "Kernel / DPC Watchdog",
+    "scope": "device",
+    "casual_explanation": "Windows has a watchdog that looks for deferred procedure calls that run too long and can trigger a system crash if the system stays stuck at high interrupt levels. This is a very low-level kernel safety mechanism, not a normal tweak.",
+    "why_people_change_it": "People would only change it when reproducing kernel experiments, undoing manual registry changes, or doing specialized driver debugging.",
+    "tradeoffs_overview": "Changing watchdog timing can affect how quickly Windows decides a DPC path has stalled badly enough to stop the system. Because this research pass did not capture a primary Microsoft source for the exact registry key, the safe choice is to keep it in review.",
+    "professional_notes": "Microsoft documents that Windows implements a DPC watchdog timer and that a DPC_WATCHDOG_VIOLATION (0x133) bug check occurs if a DPC routine or a series of DPC routines runs too long. Microsoft also provides driver guidance for avoiding DPC watchdog timeouts in storport miniports. However, this research pass did not capture a primary Microsoft page that documents the registry value DpcWatchdogPeriod itself. The repo research notes list DpcWatchdogPeriod = 120000 and associate it with KeDpcWatchdogPeriodMs, so this record keeps the feature area documented but blocks validated publication of the registry mapping.",
+    "targets": [
+      {
+        "target_id": "dpc-watchdog-period",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogPeriod",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Primary Microsoft registry mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft source for the exact DpcWatchdogPeriod registry semantics.",
+            "evidence_ids": [
+              "ms-dpc-watchdog-information",
+              "ms-avoid-dpc-watchdog-timeouts",
+              "repo-system-doc-kernel"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 120000,
+            "label": "Observed app profile",
+            "meaning": "The current app treats 120000 as the watchdog-period baseline, based on repo research rather than a captured primary Microsoft registry source.",
+            "evidence_ids": [
+              "repo-system-doc-kernel",
+              "app-system-registry-provider"
+            ]
+          }
+        ],
+        "notes": "Tracked as an observed kernel registry mapping only."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes DpcWatchdogPeriod = 120000, but this research pass has not yet captured a primary Microsoft source for the value itself.",
+    "writes": [
+      {
+        "target_id": "dpc-watchdog-period",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogPeriod",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 120000
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative baseline",
+      "applies_to": "Systems where this dataset has not yet validated DpcWatchdogPeriod from a primary Microsoft source",
+      "states": [
+        {
+          "target_id": "dpc-watchdog-period",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish a validated watchdog-period baseline until the exact registry mapping is backed by a primary Microsoft source."
+        }
+      ],
+      "notes": "This keeps the low-level watchdog setting out of published presets until it is properly sourced.",
+      "evidence_ids": [
+        "ms-dpc-watchdog-information",
+        "repo-system-doc-kernel"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Kernel and driver debugging notes"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "dpc-watchdog-period",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish or apply the value until a primary Microsoft source is captured."
+        }
+      ],
+      "good_when": "You want to document the watchdog setting without overstating confidence.",
+      "bad_when": "You need a primary-source Microsoft-backed watchdog-period control.",
+      "tradeoffs": [
+        "The DPC watchdog feature area is documented honestly.",
+        "The low-level registry value stays blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-dpc-watchdog-information",
+        "ms-avoid-dpc-watchdog-timeouts",
+        "repo-system-doc-kernel"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published validated presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "dpc-watchdog-period",
+          "state_kind": "value",
+          "value": 120000,
+          "rationale": "Observed app write used as the current watchdog-period profile."
+        }
+      ],
+      "good_when": "You are documenting what the app currently writes for DpcWatchdogPeriod.",
+      "bad_when": "You need a validated Microsoft registry mapping.",
+      "tradeoffs": [
+        "The current app behavior is captured.",
+        "The exact registry semantics remain based on repo provenance rather than a captured primary source."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until a primary Microsoft source for DpcWatchdogPeriod is captured.",
+      "evidence_ids": [
+        "repo-system-doc-kernel",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-dpc-watchdog-information",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: KeQueryDpcWatchdogInformation function",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kequerydpcwatchdoginformation",
+      "summary": "Microsoft documents that Windows implements a DPC watchdog timer and describes how the system detects prolonged DPC execution and can bug check with DPC_WATCHDOG_VIOLATION (0x133). The page confirms the feature area but does not publish the DpcWatchdogPeriod registry key.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-avoid-dpc-watchdog-timeouts",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports",
+      "location": "https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems",
+      "summary": "Microsoft documents the DPC watchdog feature from the driver-behavior side and explains that Windows can decide a prolonged high-IRQL routine has taken excessive time to finish. The page confirms the watchdog feature area but does not publish the registry key.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-system-doc-kernel",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for kernel registry values",
+      "location": "Docs/system/system.md",
+      "summary": "The repo documents DpcWatchdogPeriod = 120000 as personal research and ties it to KeDpcWatchdogPeriodMs.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes DpcWatchdogPeriod = 120000 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "Microsoft clearly documents the DPC watchdog feature, but this research pass did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself.",
+    "blocking_issues": [
+      "No primary Microsoft source for the DpcWatchdogPeriod registry value was captured in this research pass.",
+      "The current app mapping relies on repo provenance instead of a directly captured Microsoft source for the registry key."
+    ]
+  },
+  "open_questions": [
+    "Can a primary Microsoft source for DpcWatchdogPeriod be captured?",
+    "Should the app surface this only as an experimental kernel watchdog setting?"
+  ],
+  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+}

@@ -1,0 +1,210 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "system.kernel-default-dynamic-hetero-cpu-policy",
+  "tweak_id": "system.kernel-default-dynamic-hetero-cpu-policy",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DefaultDynamicHeteroCpuPolicy = 3, but this research pass did not capture a primary Microsoft source that maps the power-policy semantics onto the kernel registry key the app writes.",
+  "setting": {
+    "name": "Default Dynamic Heterogeneous CPU Policy",
+    "category": "System",
+    "area": "Kernel / Heterogeneous Scheduling",
+    "scope": "device",
+    "casual_explanation": "This appears to be a low-level policy for how Windows prefers performant versus efficient CPU cores on hybrid systems. It is not a normal consumer-facing tweak.",
+    "why_people_change_it": "People would only touch it when experimenting with hybrid-core scheduling behavior or undoing manual kernel registry changes from advanced tweak guides.",
+    "tradeoffs_overview": "Changing heterogeneous scheduling policy can affect where threads run on systems with different classes of CPU cores. Microsoft publishes official value meanings for related scheduling policies, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app uses.",
+    "professional_notes": "The repo research notes list DefaultDynamicHeteroCpuPolicy = 3 and describe the value range 0..7, including 3 = Small and 5 = Dynamic. Microsoft publishes official heterogeneous scheduling policy values for the power-policy SchedulingPolicy and ShortSchedulingPolicy settings, where 0..5 map to all processors, performant processors, prefer performant processors, efficient processors, prefer efficient processors, and automatic. That official material confirms the feature area and that 3 is a meaningful 'efficient processors' style preference, but this research pass did not capture a primary Microsoft source that maps those semantics onto the kernel registry key DefaultDynamicHeteroCpuPolicy.",
+    "targets": [
+      {
+        "target_id": "default-dynamic-hetero-cpu-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DefaultDynamicHeteroCpuPolicy",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Primary Microsoft kernel mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft source for the exact DefaultDynamicHeteroCpuPolicy registry semantics.",
+            "evidence_ids": [
+              "ms-scheduling-policy",
+              "repo-system-doc-kernel"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Observed app profile",
+            "meaning": "The current app treats 3 as the default dynamic hetero CPU policy, with repo notes describing it as a 'Small' preference. Official Microsoft power-policy docs describe 3 as an efficient-processors preference for related scheduling controls, but the exact kernel mapping is still unvalidated.",
+            "evidence_ids": [
+              "ms-scheduling-policy",
+              "repo-system-doc-kernel",
+              "app-system-registry-provider"
+            ]
+          }
+        ],
+        "notes": "Tracked as a partially matched heterogeneous-scheduling mapping only."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes DefaultDynamicHeteroCpuPolicy = 3. Microsoft publishes adjacent heterogeneous scheduling policy value meanings, but this research pass has not yet captured a primary Microsoft source for the exact kernel key.",
+    "writes": [
+      {
+        "target_id": "default-dynamic-hetero-cpu-policy",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DefaultDynamicHeteroCpuPolicy",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 3
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative baseline",
+      "applies_to": "Systems where this dataset has not yet validated DefaultDynamicHeteroCpuPolicy from a primary Microsoft kernel source",
+      "states": [
+        {
+          "target_id": "default-dynamic-hetero-cpu-policy",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish a validated heterogeneous-policy baseline until the exact kernel mapping is backed by a primary Microsoft source."
+        }
+      ],
+      "notes": "This keeps the low-level hybrid-scheduling registry key out of published presets until it is properly sourced.",
+      "evidence_ids": [
+        "ms-scheduling-policy",
+        "repo-system-doc-kernel"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Hybrid-core scheduling experiments"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "default-dynamic-hetero-cpu-policy",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish or apply the value until a primary Microsoft kernel source is captured."
+        }
+      ],
+      "good_when": "You want to document the hybrid scheduling setting without overstating confidence.",
+      "bad_when": "You need a primary-source Microsoft-backed kernel mapping for DefaultDynamicHeteroCpuPolicy.",
+      "tradeoffs": [
+        "The heterogeneous scheduling feature area is documented honestly.",
+        "The kernel registry value stays blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-scheduling-policy",
+        "repo-system-doc-kernel"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published validated presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "default-dynamic-hetero-cpu-policy",
+          "state_kind": "value",
+          "value": 3,
+          "rationale": "Observed app write used as the current dynamic hetero CPU profile."
+        }
+      ],
+      "good_when": "You are documenting what the app currently writes for DefaultDynamicHeteroCpuPolicy.",
+      "bad_when": "You need a validated Microsoft kernel registry mapping.",
+      "tradeoffs": [
+        "The current app behavior is captured.",
+        "The exact kernel mapping remains only partially aligned with official adjacent scheduling policy docs."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until a primary Microsoft source for the exact kernel registry key is captured.",
+      "evidence_ids": [
+        "ms-scheduling-policy",
+        "repo-system-doc-kernel",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-scheduling-policy",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: SchedulingPolicy",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy",
+      "summary": "Microsoft documents official heterogeneous scheduling policy values for the power-policy SchedulingPolicy setting, including 3 = efficient processors. This confirms the feature area and adjacent value semantics, but it does not publish the kernel registry key DefaultDynamicHeteroCpuPolicy.",
+      "supports": [
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-system-doc-kernel",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for kernel registry values",
+      "location": "Docs/system/system.md",
+      "summary": "The repo documents DefaultDynamicHeteroCpuPolicy = 3 as personal research and lists the local 0..7 value meanings for the kernel variable.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes DefaultDynamicHeteroCpuPolicy = 3 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app writes.",
+    "blocking_issues": [
+      "No primary Microsoft source for the DefaultDynamicHeteroCpuPolicy kernel registry key was captured in this research pass.",
+      "The current app mapping only partially aligns with official adjacent heterogeneous scheduling policy docs."
+    ]
+  },
+  "open_questions": [
+    "Can a primary Microsoft source for DefaultDynamicHeteroCpuPolicy be captured?",
+    "Should the app surface this only as an experimental hybrid-core scheduling setting?"
+  ],
+  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+}

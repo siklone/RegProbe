@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "system.services.disable-print-device-configuration",
   "tweak_id": "system.services.disable-print-device-configuration",
-  "record_status": "review-required",
-  "summary": "Official Windows service control for Print Device Configuration Service (PrintDeviceConfigurationService). A local SCM snapshot now confirms the exact service identifier, display name, binary path, and current start type on the review host. The app disables the same service by setting its start mode to Disabled. This record stays in review because the current pass did not re-capture a machine-checkable exact Microsoft guidance row from the live services page.",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for Print Device Configuration Service (PrintDeviceConfigurationService). A local SCM snapshot confirms the exact service identifier, display name, binary path, and current start type on the review host, but this pass did not re-capture a machine-checkable exact Microsoft guidance row from the live services page. Keep the record as reference only.",
   "setting": {
     "name": "Print Device Configuration Service",
     "category": "System",

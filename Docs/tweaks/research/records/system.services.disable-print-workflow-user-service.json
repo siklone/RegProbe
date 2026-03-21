@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "system.services.disable-print-workflow-user-service",
   "tweak_id": "system.services.disable-print-workflow-user-service",
-  "record_status": "review-required",
-  "summary": "Official Windows service-family control for Print Workflow User Service. Microsoft documents the base service family and default start mode, but marks it No guidance rather than OK to disable. The app disables instantiated per-user PrintWorkflowUserSvc services through a wildcard service pattern.",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for Print Workflow User Service. Microsoft documents the base service family and default start mode, but marks it No guidance rather than OK to disable. The app disables instantiated per-user PrintWorkflowUserSvc services through a wildcard service pattern, so the record is kept as reference only.",
   "setting": {
     "name": "Print Workflow User Service",
     "category": "System",

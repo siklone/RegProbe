@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "system.services.disable-wap-push-routing",
   "tweak_id": "system.services.disable-wap-push-routing",
-  "record_status": "review-required",
-  "summary": "The app uses the official WAP Push Message Routing service control surface, but Microsoft's Windows IoT Enterprise service guidance lists the service with `No guidance`. Because Microsoft does not classify it as safe to disable in that guidance, this record stays in review.",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for WAP Push Message Routing Service. Microsoft's Windows IoT Enterprise service guidance lists the service with `No guidance`, so the current disable action is kept as reference only.",
   "setting": {
     "name": "WAP Push Message Routing Service",
     "category": "System",
