@@ -206,7 +206,7 @@ Nohuto lineage references:
 | Source URL | C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices Data:0. |
 | Key found on page | `True` |
-| Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. |
+| Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
 
 **Decision**
 
@@ -296,7 +296,7 @@ Nohuto lineage references:
 | Source URL | C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices Data:0. |
 | Key found on page | `True` |
-| Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. |
+| Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
 
 **Decision**
 
@@ -14360,7 +14360,7 @@ Windows Internals references:
 | Source URL | https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings |
 | Exact quote / path | The registry keys are found under the key: `HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`. `ConsentPromptBehaviorAdmin` 0 = Elevate without prompting ... 5 (Default) = Prompt for consent for non-Windows binaries. `EnableLUA` 0 = Disabled, 1 (Default) = Enabled. `PromptOnSecureDesktop` 0 = Disabled, 1 (Default) = Enabled. |
 | Key found on page | `True` |
-| Notes | The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open. |
+| Notes | The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open. Normalized for the consolidated evidence report. |
 
 **Decision**
 
@@ -16515,7 +16515,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\gamemode_admin_probe.txt |
 | Exact quote / path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU\S-1-5-21-3538642439-2106388720-149684979-500\Software\Microsoft\GameBar\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU\S-1-5-21-3538642439-2106388720-149684979-500\Software\Microsoft\GameBar\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | Key found on page | `True` |
-| Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. |
+| Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report. |
 
 **Decision**
 
@@ -16614,7 +16614,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\hags_toggle_out.txt |
 | Exact quote / path | hags_toggle_out.txt: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING. |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. |
+| Notes | Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. Normalized for the consolidated evidence report. |
 
 **Decision**
 
@@ -22130,7 +22130,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/network.optimize-smb.review.json` |
 | Apply allowed | `False` |
 | Confidence | `high` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the SMB tuning bundle. The individual values are documented, but the current app uses a broad three-value preset that is not being published as a single normalized control surface.
 
@@ -22202,10 +22202,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/ |
-| Exact quote / path | Microsoft Learn: Performance tuning for SMB file servers: Microsoft documents the SMB client cache lifetime and bandwidth throttling values, including defaults and a tuning example for higher-latency scenarios. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\network\desc.md |
+| Exact quote / path | RegSetValue HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-smb-client-tuning (official-doc); deprecated audit trail. |
+| Notes | Mirror-backed SMB tuning bundle. This is a composite of documented SMB offload/RSS/VMQ surfaces, not a single supported toggle. |
 
 **Decision**
 
@@ -22215,7 +22215,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The setting family is officially documented, but the current app values do not line up with Microsoft's documented defaults or sample tuning values. |
 
 Blocking issues:
@@ -22236,7 +22236,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/power.disable-network-power-saving.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the mixed network power-saving bundle. The official TCP/IP offload and MMCSS values are split into a child record; the opaque NetworkThrottlingIndex value remains tracked only here.
 
@@ -22309,10 +22309,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service |
-| Exact quote / path | Microsoft Learn: Multimedia Class Scheduler Service: Microsoft documents SystemResponsiveness under the SystemProfile key and explains how the value is rounded and clamped. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\network\desc.md |
+| Exact quote / path | RegSetValue HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-mmcss (official-doc); deprecated audit trail. |
+| Notes | The bundle spans network adapter power and offload surfaces; this mirror line is the strongest source for the current write shape. |
 
 **Decision**
 
@@ -22322,7 +22322,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | This tweak mixes separate control surfaces and one of the written values still lacks a primary Microsoft source in this review, so the bundle should stay in review rather than in the validated set. |
 
 Blocking issues:
@@ -22342,7 +22342,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/power.optimize-performance.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the raw power-manager performance bundle. The current app bundles several low-level registry values into one preset, but the publishable control surface is not a single Microsoft-supported toggle.
 
@@ -22412,10 +22412,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/power/power.md |
-| Exact quote / path | Repo power notes: The repo tracks these low-level values as research notes and reverse-engineered observations, but this review did not find a primary Microsoft registry source for publishing the bundle as validated. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\power\desc.md |
+| Exact quote / path | "EnergySaverState" = 2; // 1 = override state (more power savings)? if != 1 no override? ... # Disable NIC Power Savings |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id repo-power-doc (repo-doc); deprecated audit trail. |
+| Notes | Raw power-manager performance bundle. The record is a composite preset, so the proof anchors the power-state and NIC power-saving pieces rather than claiming one supported Microsoft toggle. |
 
 **Decision**
 
@@ -22425,7 +22425,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | This is a broad raw power-manager registry bundle without a primary Microsoft-supported preset mapping in this review. |
 
 Blocking issues:
@@ -22446,7 +22446,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.deny-app-access.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the broad AppPrivacy deny bundle. The official AppPrivacy policy family is split into a child record; the extra System policy write and broader implementation details remain tracked only here.
 
@@ -22508,9 +22508,9 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Source URL | C:\Windows\PolicyDefinitions\AppPrivacy.admx |
-| Exact quote / path | Microsoft AppPrivacy administrative template: The local AppPrivacy administrative template documents many LetAppsAccess* policy values, including 2 for ForceDeny and 0 for user control. |
+| Exact quote / path | policy name="LetAppsAccessCamera" class="Machine" key="Software\Policies\Microsoft\Windows\AppPrivacy" valueName="LetAppsAccessCamera"; policy name="LetAppsAccessMicrophone" class="Machine" key="Software\Policies\Microsoft\Windows\AppPrivacy" valueName="LetAppsAccessMicrophone"; policy name="LetAppsAccessLocation" class="Machine" key="Software\Policies\Microsoft\Windows\AppPrivacy" valueName="LetAppsAccessLocation". |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-appprivacy-admx (official-doc); deprecated audit trail. |
+| Notes | Composite AppPrivacy deny bundle. The proof anchors the official AppPrivacy family and its per-capability policy names. |
 
 **Decision**
 
@@ -22520,7 +22520,7 @@ Nohuto lineage references:
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | Many underlying values are official, but the breadth and mixed-family nature of the bundle make it too opinionated for a simple validated toggle, and the policy surface should not be over-described as a complete Win32 privacy control. |
 
 Blocking issues:
@@ -22540,7 +22540,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-application-compatibility.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the old composite toggle. The AppCompat policy bundle and Application Experience task bundle are tracked separately in child records.
 
@@ -22600,10 +22600,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/tweaks/research/records/privacy.disable-application-compatibility.policy.review.json |
-| Exact quote / path | Existing AppCompat policy review record: The policy half of the composite is already documented as review-required. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Exact quote / path | Disables Windows Application Experience telemetry and compatibility components, Microsoft Compatibility Appraiser (including its daily task and CompatTelRunner.exe) and the Application Experience tasks. Currently includes all existing tasks in \\Microsoft\\Windows\\Application Experience\\ (LTSC IoT Enterprise 2024): MareBackup, Microsoft Compatibility Appraiser, Microsoft Compatibility Appraiser Exp, PcaPatchDbTask, SdbinstMergeDbTask, StartupAppTask. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id policy-subrecord (repo-doc); deprecated audit trail. |
+| Notes | Composite Application Experience audit trail. This proof anchors the task family and telemetry components from the upstream mirror. |
 
 **Decision**
 
@@ -22613,7 +22613,7 @@ Nohuto lineage references:
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The parent toggle is only as trustworthy as its least-settled child record, and both subparts are still under review. |
 
 Blocking issues:
@@ -22706,7 +22706,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the Application Experience task bundle. The current app disables a bundle of scheduled tasks, but the publishable control surface is tracked separately in the validated policy record.
 
@@ -22758,10 +22758,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Source URL | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Exact quote / path | Current privacy provider task bundle: The provider disables six scheduled tasks in the Application Experience folder as one bundle. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Exact quote / path | Currently includes all existing tasks in \\Microsoft\\Windows\\Application Experience\\ (LTSC IoT Enterprise 2024): MareBackup, Microsoft Compatibility Appraiser, Microsoft Compatibility Appraiser Exp, PcaPatchDbTask, SdbinstMergeDbTask, StartupAppTask. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| Notes | Task bundle subrecord. The proof captures the exact Application Experience task set described in the mirror. |
 
 **Decision**
 
@@ -22771,7 +22771,7 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The bundle is real and observable, but it is still an app-defined scheduled-task group rather than a clean official control surface. |
 
 Blocking issues:
@@ -22790,7 +22790,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-ceip.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the old CEIP composite bundle. The App-V, SQMClient, and Messenger values are still observable, but this parent record is no longer the primary research surface.
 
@@ -22848,10 +22848,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Exact quote / path | Current privacy provider CEIP bundle: The provider writes AppV CEIPEnable = 0, SQMClient CEIPEnable = 0, and Messenger CEIP = 2. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Exact quote / path | "ValueName": "CEIPEnable" ... "KeyPath": ["HKLM\\SOFTWARE\\Policies\\Microsoft\\AppV\\CEIP"] ... "DisplayName": "Turn off Windows Customer Experience Improvement Program" ... "KeyPath": ["HKLM\\Software\\Policies\\Microsoft\\SQMClient\\Windows"] ... "ValueName": "CEIPEnable". |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| Notes | Composite CEIP audit trail. The mirror shows CEIPEnable on both App-V and SQMClient policy surfaces. |
 
 **Decision**
 
@@ -22861,7 +22861,7 @@ Nohuto lineage references:
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The bundle is observable, but it crosses several policy families and still needs stronger provenance as a grouped toggle. |
 
 Blocking issues:
@@ -23161,7 +23161,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the old composite toggle. The validated Offline Files policy and the broader service, task, and binary subrecords are tracked separately.
 
@@ -23220,10 +23220,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json |
-| Exact quote / path | Existing Offline Files policy record: The core NetCache policy mapping is already validated and documents the official feature surface. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Exact quote / path | Offline Files (Client-Side Caching, CSC) lets Windows cache files from network shares locally ... If you enable this policy setting, Offline Files is enabled and users cannot disable it. If you disable this policy setting, Offline Files is disabled and users cannot enable it. ... Hides or displays reminder balloons ... Synchronize all offline files before logging off ... Synchronize all offline files when logging on ... Remove "Work offline" command. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id offline-policy-subrecord (repo-doc); deprecated audit trail. |
+| Notes | Composite Offline Files policy bundle. The proof cites the documented NetCache policy family and the related task and UI behavior. |
 
 **Decision**
 
@@ -23233,7 +23233,7 @@ Nohuto lineage references:
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The parent toggle is broader than the official policy surface and includes subrecords that still need review. |
 
 Blocking issues:
@@ -23252,7 +23252,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the Offline Files binary-rename subrecord. The app renames mobsync.exe as part of its broader Offline Files shutdown bundle, but the publishable control surface is tracked separately in the validated Offline Files policy record.
 
@@ -23304,10 +23304,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Source URL | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Exact quote / path | Current privacy provider file rename: The provider renames mobsync.exe to mobsync.exe.disabled for the current sub-tweak. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Exact quote / path | Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks, and renames mobsync.exe to block execution. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| Notes | Binary-rename subrecord. The proof anchors the mobsync.exe rename behavior inside the Offline Files composite bundle. |
 
 **Decision**
 
@@ -23317,7 +23317,7 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | This is a strong implementation-level file rename and should not be treated as the same thing as the official feature policy. |
 
 Blocking issues:
@@ -23582,7 +23582,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the old Sleep Study diagnostic-channel bundle. The underlying event channels remain observable, but the parent record is no longer the primary research surface.
 
@@ -23643,10 +23643,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Exact quote / path | Current privacy provider sleep-study diagnostics bundle: The provider writes Enabled = 0 under three WINEVT diagnostic channel keys related to sleep and power. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Exact quote / path | Sleep Study tracks modern sleep states to analyze energy usage and pinpoint battery drain. It disables Sleep Study by making ETL logs read-only, disabling related diagnostics, and turning off the scheduled task. wevtutil sl Microsoft-Windows-SleepStudy/Diagnostic /e:false ... SleepStudyDeviceAccountingLevel = 4; SleepStudyDisabled = 0. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| Notes | Sleep Study diagnostics bundle. The proof anchors the ETL channel, the related registry values, and the scheduled task behavior. |
 
 **Decision**
 
@@ -23656,7 +23656,7 @@ Nohuto lineage references:
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | This is a diagnostic-channel bundle that still needs stronger provenance and user-facing justification. |
 
 Blocking issues:
@@ -23871,7 +23871,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the old Windows Media Player preferences bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.
 
@@ -23931,10 +23931,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Exact quote / path | Current privacy provider Windows Media Player bundle: The provider writes a Windows Media Player preference bundle affecting metadata retrieval, usage tracking, and MRU behavior. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Exact quote / path | WMPlayer (Windows Media Player) sends player usage data by default ... This option turns off the Diagnostics and Feedback option ... Note: I gathered all registry values via the legacy WMPlayer. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| Notes | Windows Media Player telemetry bundle. The proof anchors the legacy WMPlayer-registry capture path and the usage-data behavior. |
 
 **Decision**
 
@@ -23944,7 +23944,7 @@ Nohuto lineage references:
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | This is a product-specific observed preference bundle and still needs stronger primary-source provenance. |
 
 Blocking issues:
@@ -23965,7 +23965,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/security.disable-vbs.json` |
 | Apply allowed | `False` |
 | Confidence | `high` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the legacy Device Guard VBS bundle. The record documents the three official policy values, but the bundle is too broad and runtime-sensitive to publish as a single normalized control surface.
 
@@ -24038,9 +24038,9 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source URL | C:\Windows\PolicyDefinitions\DeviceGuard.admx |
-| Exact quote / path | Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. |
-| Key found on page | `False` |
-| Notes | Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof. |
+| Exact quote / path | <policy name="VirtualizationBasedSecurity" key="SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard" valueName="EnableVirtualizationBasedSecurity"><enabledValue><decimal value="1" /></enabledValue><disabledValue><decimal value="0" /></disabledValue> |
+| Key found on page | `True` |
+| Notes | Official Device Guard policy mapping. The record is deprecated, but the proof is now machine-checkable against the local ADMX. |
 
 **Decision**
 
@@ -24050,7 +24050,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. The current app writes directly to the official Device Guard policy key and uses values that are explicitly documented in the local Microsoft policy files, but modern Windows 11 behavior, possible UEFI lock persistence, and Windows Hello dependencies mean registry proof alone is not enough to treat the bundle as a simple reversible disable switch. |
 
 Blocking issues:
@@ -24173,7 +24173,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/security.disable-wpbt.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail.
 
@@ -24241,10 +24241,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings |
-| Exact quote / path | Microsoft Learn DFCI WPBT setting reference: Microsoft documents WPBT as a UEFI or DFCI managed feature with Not configured, Enabled, and Disabled states. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\security\desc.md |
+| Exact quote / path | \Registry\Machine\SYSTEM\ControlSet001\Control\Session Manager : DisableWpbtExecution |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-dfci-wpbt (official-doc); deprecated audit trail. |
+| Notes | Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle. |
 
 **Decision**
 
@@ -24254,7 +24254,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The observed registry write is clear, but the Microsoft documentation captured in this dataset does not yet publish DisableWpbtExecution as the supported WPBT control surface. |
 
 Blocking issues:
@@ -24341,7 +24341,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the old scheduled-tasks bundle. The task paths remain documented, but the parent record is no longer the primary research surface.
 
@@ -24423,10 +24423,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page |
-| Exact quote / path | Microsoft Learn: Task Scheduler start page: Microsoft documents Task Scheduler as the Windows control surface for scheduled tasks. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Exact quote / path | Offline Files: \\Microsoft\\Windows\\Offline Files\\Background Synchronization; \\Microsoft\\Windows\\Offline Files\\Logon Synchronization. Sleep Study: \\Microsoft\\Windows\\Power Efficiency Diagnostics\\AnalyzeSystem. Time Sync: \\Microsoft\\Windows\\Time Synchronization\\ForceSynchronizeTime; SynchronizeTime. Miscellaneous: \\Microsoft\\Windows\\Registry\\RegIdleBackup. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-task-scheduler (official-doc); deprecated audit trail. |
+| Notes | Scheduled-tasks bundle. The proof anchors the exact task paths the bundle manipulates in the mirror. |
 
 **Decision**
 
@@ -24436,7 +24436,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The task paths and app mapping are real, but the bundle mixes several feature areas and includes version-dependent tasks, so it should be reviewed task-by-task before being published as a validated preset. |
 
 Blocking issues:
@@ -24624,7 +24624,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.dwm-disable-mpo.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for DWM Multiplane Overlay (MPO). The current app writes HKLM\SOFTWARE\Microsoft\Windows\Dwm\OverlayTestMode = 5 to disable MPO, but this research pass did not capture a primary Microsoft source that publishes OverlayTestMode as a supported MPO control.
 
@@ -24692,10 +24692,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values |
-| Exact quote / path | Microsoft Learn: DWM Registry Settings: Microsoft documents supported DWM registry overrides such as OverlayMinFPS on HKLM\SOFTWARE\Microsoft\Windows\Dwm. This research pass used that page as the nearest official DWM overlay surface, but did not find OverlayTestMode published there. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Exact quote / path | "OverlayTestMode" = 0; // 5 = MPO disabled, REG_DWORD. DwmDwordHelper = RegGetDwmDwordHelper(L"OverlayTestMode", &v11, 0LL). |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-dwm-registry-settings (official-doc); deprecated audit trail. |
+| Notes | DWM MPO audit trail. The mirror shows the exact OverlayTestMode path and the MPO-disabled sentinel value. |
 
 **Decision**
 
@@ -24705,7 +24705,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The app targets a real graphics troubleshooting area, but this research pass has not yet captured a primary Microsoft source for OverlayTestMode and its exact MPO semantics. |
 
 Blocking issues:
@@ -24725,7 +24725,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for GraphicsDrivers overlay-plane overrides. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\DisableOverlays = 1, but this research pass did not capture a primary Microsoft source that publishes DisableOverlays as a supported registry control.
 
@@ -24793,10 +24793,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys |
-| Exact quote / path | Microsoft Learn: TDR Registry Keys: Microsoft documents supported GraphicsDrivers debug keys such as TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime under HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers. This research pass used that page as the nearest official GraphicsDrivers override surface, but did not find DisableOverlays published there. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\dxgkrnl\-ReadConfig@DXGADAPTER@@AEAAXPEAU_DXGK_ADAPTER_CAPS@@@Z.c |
+| Exact quote / path | v123 = L"DisableOverlays"; ... ADAPTER_RENDER::DisableOverlays((ADAPTER_RENDER *)v9[366]); |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-tdr-registry-keys (official-doc); deprecated audit trail. |
+| Notes | Graphics overlay audit trail. The decompiled code shows the explicit DisableOverlays string and the runtime call path. |
 
 **Decision**
 
@@ -24806,7 +24806,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The app targets a real graphics troubleshooting area, but this research pass has not yet captured a primary Microsoft source for DisableOverlays and its exact semantics. |
 
 Blocking issues:
@@ -24826,7 +24826,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for GraphicsDrivers page-fault debug mode. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\PageFaultDebugMode = 1 as a low-level graphics setting, but this research pass did not capture a primary Microsoft source that documents PageFaultDebugMode and its semantics.
 
@@ -24894,10 +24894,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys |
-| Exact quote / path | Microsoft Learn: TDR Registry Keys: Microsoft documents supported GraphicsDrivers debug keys such as TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime. This research pass used the page as the nearest official GraphicsDrivers debug surface, but it does not publish PageFaultDebugMode. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\dxgmms2\-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c |
+| Exact quote / path | if ( !g_PageFaultDebugMode && !KdRefreshDebuggerNotPresent() ) ... "To disable debug breaks on page fault, run \"?? dxgmms2!g_PageFaultDebugMode=1\" command" ... &g_PageFaultDebugMode. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-tdr-registry-keys (official-doc); deprecated audit trail. |
+| Notes | Page-fault debug-mode audit trail. The decompiled code exposes the exact debug gate and its toggle semantics. |
 
 **Decision**
 
@@ -24907,7 +24907,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | This research pass did not capture a primary Microsoft source that documents PageFaultDebugMode and its supported values. |
 
 Blocking issues:
@@ -24927,7 +24927,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\AdjustDpcThreshold = 20, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -24995,10 +24995,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/system/system.md |
-| Exact quote / path | Repo system research notes for kernel registry values: The repo documents AdjustDpcThreshold = 20 as personal research and ties it to KiAdjustDpcThreshold. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Exact quote / path | "AdjustDpcThreshold" = 20; // KiAdjustDpcThreshold |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| Notes | Kernel DPC threshold audit trail. The mirror exposes the raw kernel variable and the corresponding registry value. |
 
 **Decision**
 
@@ -25008,7 +25008,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for AdjustDpcThreshold. |
 
 Blocking issues:
@@ -25028,7 +25028,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for CacheAwareScheduling. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\CacheAwareScheduling = 47, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -25096,10 +25096,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/system/system.md |
-| Exact quote / path | Repo system research notes for kernel registry values: The repo documents CacheAwareScheduling = 47 as personal research and ties it to KiCacheAwareScheduling. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Exact quote / path | "CacheAwareScheduling" = 47; // KiCacheAwareScheduling |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| Notes | Kernel cache-aware scheduling audit trail. The mirror exposes the kernel variable backing the setting. |
 
 **Decision**
 
@@ -25109,7 +25109,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for CacheAwareScheduling. |
 
 Blocking issues:
@@ -25233,7 +25233,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DisableLowQosTimerResolution = 1, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -25303,10 +25303,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod |
-| Exact quote / path | Microsoft Learn: timeBeginPeriod function: Microsoft documents the general timer-resolution tradeoff, noting that higher resolution can reduce overall system performance and power efficiency. The page confirms the feature area but does not publish the DisableLowQosTimerResolution registry key. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Exact quote / path | "DisableLowQosTimerResolution" = 1; // KeDisableLowQosTimerResolution |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-timebeginperiod (official-doc); deprecated audit trail. |
+| Notes | Timer-resolution audit trail. The mirror and kernel routine show the explicit low-QoS timer-resolution gate. |
 
 **Decision**
 
@@ -25316,7 +25316,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | Official Microsoft docs confirm the timer-resolution feature area and its tradeoffs, but this research pass did not capture a primary Microsoft source for the DisableLowQosTimerResolution kernel registry key. |
 
 Blocking issues:
@@ -25336,7 +25336,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcQueueDepth = 4, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -25404,10 +25404,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/system/system.md |
-| Exact quote / path | Repo system research notes for kernel registry values: The repo documents DpcQueueDepth = 4 as personal research and ties it to KiMaximumDpcQueueDepth. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
+| Exact quote / path | *(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate; |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| Notes | Kernel DPC queue-depth audit trail. The decompiled path shows the exact kernel values exported together. |
 
 **Decision**
 
@@ -25417,7 +25417,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for DpcQueueDepth. |
 
 Blocking issues:
@@ -25437,7 +25437,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -25507,10 +25507,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems |
-| Exact quote / path | Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports: Microsoft documents the DPC watchdog feature from the driver-behavior side and explains that Windows can decide a prolonged high-IRQL routine has taken excessive time to finish. The page confirms the watchdog feature area but does not publish the registry key. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\KeQueryDpcWatchdogConfiguration.c |
+| Exact quote / path | if ( KeDpcWatchdogPeriodMs ) ... DWORD2(Src) = KeDpcWatchdogPeriodMs; |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-avoid-dpc-watchdog-timeouts (official-doc); deprecated audit trail. |
+| Notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried. |
 
 **Decision**
 
@@ -25520,7 +25520,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | Microsoft clearly documents the DPC watchdog feature, but this research pass did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself. |
 
 Blocking issues:
@@ -25540,7 +25540,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for IdealDpcRate. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\IdealDpcRate = 20, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -25608,10 +25608,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/system/system.md |
-| Exact quote / path | Repo system research notes for kernel registry values: The repo documents IdealDpcRate = 20 as personal research and ties it to KiIdealDpcRate. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
+| Exact quote / path | *(_DWORD *)(a4 + 16) = KiIdealDpcRate; |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| Notes | Kernel ideal DPC rate audit trail. The decompiled path exposes the kernel variable directly. |
 
 **Decision**
 
@@ -25621,7 +25621,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for IdealDpcRate. |
 
 Blocking issues:
@@ -25641,7 +25641,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for MinimumDpcRate. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\MinimumDpcRate = 3, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -25709,10 +25709,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/system/system.md |
-| Exact quote / path | Repo system research notes for kernel registry values: The repo documents MinimumDpcRate = 3 as personal research and ties it to KiMinimumDpcRate. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
+| Exact quote / path | *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| Notes | Kernel minimum DPC rate audit trail. The decompiled path exposes the kernel variable directly. |
 
 **Decision**
 
@@ -25722,7 +25722,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for MinimumDpcRate. |
 
 Blocking issues:
@@ -25742,7 +25742,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\SerializeTimerExpiration = 1, but this research pass did not capture a primary Microsoft source for the exact registry setting.
 
@@ -25810,10 +25810,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | Docs/system/system.md |
-| Exact quote / path | Repo system research notes for kernel registry values: The repo documents SerializeTimerExpiration = 1 and explains the behavior as personal research tied to KiSerializeTimerExpiration, including notes about 0, 1, and other values. |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Exact quote / path | "SerializeTimerExpiration" = 1; // KiSerializeTimerExpiration ... Deleting the value, or keeping it as 0, allows the kernel to make the decision based on Modern Standby availability, and setting it to 1 permanently enables serialization even on non-Modern Standby systems. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| Notes | Timer serialization audit trail. The mirror includes both the kernel variable and the 0/1 behavior description. |
 
 **Decision**
 
@@ -25823,7 +25823,7 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 | Why | The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for SerializeTimerExpiration. |
 
 Blocking issues:

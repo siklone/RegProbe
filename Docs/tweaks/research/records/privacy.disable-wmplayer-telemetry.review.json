@@ -1,171 +1,171 @@
 {
-  "$schema": "../setting-research.schema.json",
-  "schema_version": "1.0",
-  "record_id": "privacy.disable-wmplayer-telemetry",
-  "tweak_id": "privacy.disable-wmplayer-telemetry",
-  "record_status": "deprecated",
-  "summary": "Deprecated audit trail for the old Windows Media Player preferences bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.",
-  "setting": {
-    "name": "Windows Media Player Preference Bundle",
-    "category": "Privacy",
-    "area": "Observed App Preference Bundle",
-    "scope": "user",
-    "casual_explanation": "This bundle changes Windows Media Player preferences to reduce tracking, online metadata lookups, and media history lists.",
-    "why_people_change_it": "People change it when they want Windows Media Player to be quieter and less network-connected.",
-    "tradeoffs_overview": "It can reduce tracking and online lookups, but it is a product-specific preference bundle rather than a clean official Windows policy surface.",
-    "professional_notes": "The provider writes several values under HKCU\\Software\\Microsoft\\MediaPlayer\\Preferences, including MetadataRetrieval = 0, UsageTracking = 0, and multiple DisableMRU* values = 1. This is tracked as an observed preference bundle.",
-    "targets": [
-      {
-        "target_id": "wmplayer-preferences-bundle",
-        "location_kind": "registry",
-        "path": "HKCU\\Software\\Microsoft\\MediaPlayer\\Preferences",
-        "value_name": "PreferenceBundleState",
-        "value_type": "COMPOSITE",
-        "allowed_values": [
-          {
-            "state_kind": "value",
-            "value": "windows-default",
-            "label": "Default preferences",
-            "meaning": "Keep Windows Media Player preferences at the normal baseline.",
-            "evidence_ids": [
-              "app-privacy-provider"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "current-app-profile",
-            "label": "Current privacy bundle",
-            "meaning": "Apply the current Windows Media Player preference bundle used by the app.",
-            "evidence_ids": [
-              "app-privacy-provider"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "app_current_implementation": {
-    "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The app writes a product-specific Windows Media Player preference bundle under the current user hive.",
-    "writes": [
-      {
-        "target_id": "wmplayer-preferences-bundle",
-        "path": "HKCU\\Software\\Microsoft\\MediaPlayer\\Preferences",
-        "value_name": "PreferenceBundleState",
-        "value_type": "COMPOSITE",
-        "state_kind": "value",
-        "value": "current-app-profile"
-      }
-    ]
-  },
-  "windows_defaults": [
-    {
-      "label": "Windows Media Player preference baseline",
-      "applies_to": "Current-user Windows Media Player preference state",
-      "states": [
-        {
-          "target_id": "wmplayer-preferences-bundle",
-          "state_kind": "value",
-          "value": "windows-default",
-          "rationale": "Treat the product-specific preference bundle as optional rather than as a validated Windows baseline."
-        }
-      ],
-      "evidence_ids": [
-        "app-privacy-provider"
-      ]
-    }
-  ],
-  "recommended_profiles": [
-    {
-      "profile_id": "windows-default",
-      "label": "Windows default",
-      "intended_for": [
-        "Most users"
-      ],
-      "avoid_for": [
-        "People explicitly reproducing the current media-player privacy bundle"
-      ],
-      "states": [
-        {
-          "target_id": "wmplayer-preferences-bundle",
-          "state_kind": "value",
-          "value": "windows-default",
-          "rationale": "Do not publish the product-specific preference bundle as a general validated Windows toggle."
-        }
-      ],
-      "good_when": "You want the least-assumptive baseline.",
-      "bad_when": "You want the current product bundle for research.",
-      "tradeoffs": [
-        "Lower provenance risk.",
-        "Windows Media Player may keep more default networked behavior."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "app-privacy-provider"
-      ]
-    },
-    {
-      "profile_id": "current-app-profile",
-      "label": "Current privacy bundle",
-      "intended_for": [
-        "Research comparison only"
-      ],
-      "avoid_for": [
-        "Normal Apply exposure"
-      ],
-      "states": [
-        {
-          "target_id": "wmplayer-preferences-bundle",
-          "state_kind": "value",
-          "value": "current-app-profile",
-          "rationale": "Track the preference bundle currently used by the app."
-        }
-      ],
-      "good_when": "You are documenting the current implementation.",
-      "bad_when": "You want a clean official policy-backed control.",
-      "tradeoffs": [
-        "Likely reduces WMP tracking and online metadata behavior.",
-        "Still a product-specific observed bundle."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "app-privacy-provider"
-      ]
-    }
-  ],
-  "evidence": [
-    {
-      "evidence_id": "app-privacy-provider",
-      "kind": "repo-code",
-      "title": "Current privacy provider Windows Media Player bundle",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes a Windows Media Player preference bundle affecting metadata retrieval, usage tracking, and MRU behavior.",
-      "supports": [
-        "path",
-        "value",
-        "ui-mapping"
-      ],
-      "strength": "high"
-    }
-  ],
-  "decision": {
-    "confidence": "low",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
-    "restore_default_supported": true,
-    "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "This is a product-specific observed preference bundle and still needs stronger primary-source provenance.",
-    "blocking_issues": [
-      "Windows Media Player preference bundle still lacks a clean official policy mapping."
-    ]
-  },
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
-  "validation_proof": {
-    "source_url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "exact_quote_or_path": "Current privacy provider Windows Media Player bundle: The provider writes a Windows Media Player preference bundle affecting metadata retrieval, usage tracking, and MRU behavior.",
-    "key_found_on_page": true,
-    "notes": "Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail."
-  }
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.0",
+    "record_id":  "privacy.disable-wmplayer-telemetry",
+    "tweak_id":  "privacy.disable-wmplayer-telemetry",
+    "record_status":  "deprecated",
+    "summary":  "Deprecated audit trail for the old Windows Media Player preferences bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.",
+    "setting":  {
+                    "name":  "Windows Media Player Preference Bundle",
+                    "category":  "Privacy",
+                    "area":  "Observed App Preference Bundle",
+                    "scope":  "user",
+                    "casual_explanation":  "This bundle changes Windows Media Player preferences to reduce tracking, online metadata lookups, and media history lists.",
+                    "why_people_change_it":  "People change it when they want Windows Media Player to be quieter and less network-connected.",
+                    "tradeoffs_overview":  "It can reduce tracking and online lookups, but it is a product-specific preference bundle rather than a clean official Windows policy surface.",
+                    "professional_notes":  "The provider writes several values under HKCU\\Software\\Microsoft\\MediaPlayer\\Preferences, including MetadataRetrieval = 0, UsageTracking = 0, and multiple DisableMRU* values = 1. This is tracked as an observed preference bundle.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "wmplayer-preferences-bundle",
+                                        "location_kind":  "registry",
+                                        "path":  "HKCU\\Software\\Microsoft\\MediaPlayer\\Preferences",
+                                        "value_name":  "PreferenceBundleState",
+                                        "value_type":  "COMPOSITE",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "windows-default",
+                                                                   "label":  "Default preferences",
+                                                                   "meaning":  "Keep Windows Media Player preferences at the normal baseline.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-privacy-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "current-app-profile",
+                                                                   "label":  "Current privacy bundle",
+                                                                   "meaning":  "Apply the current Windows Media Player preference bundle used by the app.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-privacy-provider"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "partially-matches",
+                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                                       "notes":  "The app writes a product-specific Windows Media Player preference bundle under the current user hive.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "wmplayer-preferences-bundle",
+                                                          "path":  "HKCU\\Software\\Microsoft\\MediaPlayer\\Preferences",
+                                                          "value_name":  "PreferenceBundleState",
+                                                          "value_type":  "COMPOSITE",
+                                                          "state_kind":  "value",
+                                                          "value":  "current-app-profile"
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Windows Media Player preference baseline",
+                                 "applies_to":  "Current-user Windows Media Player preference state",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "wmplayer-preferences-bundle",
+                                                    "state_kind":  "value",
+                                                    "value":  "windows-default",
+                                                    "rationale":  "Treat the product-specific preference bundle as optional rather than as a validated Windows baseline."
+                                                }
+                                            ],
+                                 "evidence_ids":  [
+                                                      "app-privacy-provider"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "windows-default",
+                                     "label":  "Windows default",
+                                     "intended_for":  [
+                                                          "Most users"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "People explicitly reproducing the current media-player privacy bundle"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "wmplayer-preferences-bundle",
+                                                        "state_kind":  "value",
+                                                        "value":  "windows-default",
+                                                        "rationale":  "Do not publish the product-specific preference bundle as a general validated Windows toggle."
+                                                    }
+                                                ],
+                                     "good_when":  "You want the least-assumptive baseline.",
+                                     "bad_when":  "You want the current product bundle for research.",
+                                     "tradeoffs":  [
+                                                       "Lower provenance risk.",
+                                                       "Windows Media Player may keep more default networked behavior."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "app-privacy-provider"
+                                                      ]
+                                 },
+                                 {
+                                     "profile_id":  "current-app-profile",
+                                     "label":  "Current privacy bundle",
+                                     "intended_for":  [
+                                                          "Research comparison only"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Normal Apply exposure"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "wmplayer-preferences-bundle",
+                                                        "state_kind":  "value",
+                                                        "value":  "current-app-profile",
+                                                        "rationale":  "Track the preference bundle currently used by the app."
+                                                    }
+                                                ],
+                                     "good_when":  "You are documenting the current implementation.",
+                                     "bad_when":  "You want a clean official policy-backed control.",
+                                     "tradeoffs":  [
+                                                       "Likely reduces WMP tracking and online metadata behavior.",
+                                                       "Still a product-specific observed bundle."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "app-privacy-provider"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "app-privacy-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current privacy provider Windows Media Player bundle",
+                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                         "summary":  "The provider writes a Windows Media Player preference bundle affecting metadata retrieval, usage tracking, and MRU behavior.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "ui-mapping"
+                                      ],
+                         "strength":  "high"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "low",
+                     "apply_allowed":  false,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  true,
+                     "restore_previous_supported":  true,
+                     "needs_vm_validation":  false,
+                     "why":  "This is a product-specific observed preference bundle and still needs stronger primary-source provenance.",
+                     "blocking_issues":  [
+                                             "Windows Media Player preference bundle still lacks a clean official policy mapping."
+                                         ]
+                 },
+    "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
+    "validation_proof":  {
+                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+                             "exact_quote_or_path":  "WMPlayer (Windows Media Player) sends player usage data by default ... This option turns off the Diagnostics and Feedback option ... Note: I gathered all registry values via the legacy WMPlayer.",
+                             "key_found_on_page":  true,
+                             "notes":  "Windows Media Player telemetry bundle. The proof anchors the legacy WMPlayer-registry capture path and the usage-data behavior."
+                         }
 }

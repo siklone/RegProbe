@@ -1,230 +1,230 @@
 {
-  "$schema": "../setting-research.schema.json",
-  "schema_version": "1.0",
-  "record_id": "system.kernel-disable-low-qos-timer-resolution",
-  "tweak_id": "system.kernel-disable-low-qos-timer-resolution",
-  "record_status": "deprecated",
-  "summary": "Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DisableLowQosTimerResolution = 1, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
-  "setting": {
-    "name": "Disable Low QoS Timer Resolution",
-    "category": "System",
-    "area": "Kernel / Timer Resolution Behavior",
-    "scope": "device",
-    "casual_explanation": "This appears to be a low-level kernel switch related to how Windows handles low-QoS timer resolution behavior. It is not a normal user setting.",
-    "why_people_change_it": "People would only touch it when reproducing timer-resolution experiments or undoing manual registry changes from advanced tweak guides.",
-    "tradeoffs_overview": "Timer-resolution behavior affects power usage, responsiveness, and how often the system wakes to service timers. Microsoft documents the general timer-resolution tradeoff, but this research pass did not capture a primary Microsoft source for the exact registry key the app writes.",
-    "professional_notes": "The repo research notes list DisableLowQosTimerResolution = 1 and associate it with KeDisableLowQosTimerResolution. Microsoft documents that increasing timer resolution can reduce overall system performance and power efficiency, and it publishes adjacent timer-resolution controls such as timeBeginPeriod and QosTimerResolution. However, this research pass did not capture a primary Microsoft page that documents the kernel registry value DisableLowQosTimerResolution itself. The record therefore treats the app write as observed repo provenance only.",
-    "targets": [
-      {
-        "target_id": "disable-low-qos-timer-resolution",
-        "location_kind": "registry",
-        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
-        "value_name": "DisableLowQosTimerResolution",
-        "value_type": "REG_DWORD",
-        "allowed_values": [
-          {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Primary Microsoft mapping not captured",
-            "meaning": "This research pass did not capture a primary Microsoft source for the exact DisableLowQosTimerResolution registry semantics.",
-            "evidence_ids": [
-              "ms-timebeginperiod",
-              "ms-timer-resolution",
-              "repo-system-doc-kernel"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": 1,
-            "label": "Observed app profile",
-            "meaning": "The current app treats 1 as the default low-QoS timer-resolution behavior, based on repo research rather than a captured primary Microsoft source.",
-            "evidence_ids": [
-              "repo-system-doc-kernel",
-              "app-system-registry-provider"
-            ]
-          }
-        ],
-        "notes": "Tracked as an observed kernel registry mapping only."
-      }
-    ]
-  },
-  "app_current_implementation": {
-    "status": "unknown",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes DisableLowQosTimerResolution = 1, but this research pass has not yet captured a primary Microsoft source for the value itself.",
-    "writes": [
-      {
-        "target_id": "disable-low-qos-timer-resolution",
-        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
-        "value_name": "DisableLowQosTimerResolution",
-        "value_type": "REG_DWORD",
-        "state_kind": "value",
-        "value": 1
-      }
-    ]
-  },
-  "windows_defaults": [
-    {
-      "label": "Conservative baseline",
-      "applies_to": "Systems where this dataset has not yet validated DisableLowQosTimerResolution from a primary Microsoft source",
-      "states": [
-        {
-          "target_id": "disable-low-qos-timer-resolution",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "Do not publish a validated timer-behavior baseline until the exact registry mapping is backed by a primary Microsoft source."
-        }
-      ],
-      "notes": "This keeps the low-level timer-behavior setting out of published presets until it is properly sourced.",
-      "evidence_ids": [
-        "ms-timebeginperiod",
-        "ms-timer-resolution",
-        "repo-system-doc-kernel"
-      ]
-    }
-  ],
-  "recommended_profiles": [
-    {
-      "profile_id": "hold-for-research",
-      "label": "Hold for research",
-      "intended_for": [
-        "Research tracking only",
-        "Timer-behavior experiments"
-      ],
-      "avoid_for": [
-        "Published presets",
-        "General users"
-      ],
-      "states": [
-        {
-          "target_id": "disable-low-qos-timer-resolution",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "Do not publish or apply the value until a primary Microsoft source is captured."
-        }
-      ],
-      "good_when": "You want to document the timer-behavior setting without overstating confidence.",
-      "bad_when": "You need a primary-source Microsoft-backed kernel mapping for low-QoS timer resolution behavior.",
-      "tradeoffs": [
-        "The timer-resolution feature area is documented honestly.",
-        "The kernel registry value stays blocked from validated publication."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "ms-timebeginperiod",
-        "ms-timer-resolution",
-        "repo-system-doc-kernel"
-      ]
-    },
-    {
-      "profile_id": "current-app-profile",
-      "label": "Current app profile",
-      "intended_for": [
-        "Research comparison only"
-      ],
-      "avoid_for": [
-        "Published validated presets",
-        "General users"
-      ],
-      "states": [
-        {
-          "target_id": "disable-low-qos-timer-resolution",
-          "state_kind": "value",
-          "value": 1,
-          "rationale": "Observed app write used as the current low-QoS timer-resolution profile."
-        }
-      ],
-      "good_when": "You are documenting what the app currently writes for DisableLowQosTimerResolution.",
-      "bad_when": "You need a validated Microsoft registry mapping.",
-      "tradeoffs": [
-        "The current app behavior is captured.",
-        "The exact registry semantics remain based on repo provenance rather than a captured primary source."
-      ],
-      "apply_allowed": false,
-      "notes": "Blocked until a primary Microsoft source for DisableLowQosTimerResolution is captured.",
-      "evidence_ids": [
-        "repo-system-doc-kernel",
-        "app-system-registry-provider"
-      ]
-    }
-  ],
-  "evidence": [
-    {
-      "evidence_id": "ms-timebeginperiod",
-      "kind": "official-doc",
-      "title": "Microsoft Learn: timeBeginPeriod function",
-      "location": "https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod",
-      "summary": "Microsoft documents the general timer-resolution tradeoff, noting that higher resolution can reduce overall system performance and power efficiency. The page confirms the feature area but does not publish the DisableLowQosTimerResolution registry key.",
-      "supports": [
-        "behavior",
-        "side-effects",
-        "version-scope"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "ms-timer-resolution",
-      "kind": "official-doc",
-      "title": "Microsoft Learn: Timer Resolution",
-      "location": "https://learn.microsoft.com/en-us/windows/win32/multimedia/timer-resolution",
-      "summary": "Microsoft documents timer resolution as a system behavior that affects timing precision and system cost, but the page does not publish the DisableLowQosTimerResolution registry key.",
-      "supports": [
-        "behavior",
-        "side-effects",
-        "version-scope"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "repo-system-doc-kernel",
-      "kind": "repo-doc",
-      "title": "Repo system research notes for kernel registry values",
-      "location": "Docs/system/system.md",
-      "summary": "The repo documents DisableLowQosTimerResolution = 1 as personal research and ties it to KeDisableLowQosTimerResolution.",
-      "supports": [
-        "path",
-        "value",
-        "ui-mapping",
-        "app-mismatch"
-      ],
-      "strength": "medium"
-    },
-    {
-      "evidence_id": "app-system-registry-provider",
-      "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes DisableLowQosTimerResolution = 1 for the current tweak.",
-      "supports": [
-        "path",
-        "value",
-        "ui-mapping"
-      ],
-      "strength": "high"
-    }
-  ],
-  "decision": {
-    "confidence": "low",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
-    "restore_default_supported": false,
-    "restore_previous_supported": false,
-    "needs_vm_validation": true,
-    "why": "Official Microsoft docs confirm the timer-resolution feature area and its tradeoffs, but this research pass did not capture a primary Microsoft source for the DisableLowQosTimerResolution kernel registry key.",
-    "blocking_issues": [
-      "No primary Microsoft source for DisableLowQosTimerResolution was captured in this research pass.",
-      "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
-    ]
-  },
-  "open_questions": [
-    "Can a primary Microsoft source for DisableLowQosTimerResolution be captured?",
-    "Should the app surface this only as an experimental kernel timer setting?"
-  ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
-  "validation_proof": {
-    "source_url": "https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod",
-    "exact_quote_or_path": "Microsoft Learn: timeBeginPeriod function: Microsoft documents the general timer-resolution tradeoff, noting that higher resolution can reduce overall system performance and power efficiency. The page confirms the feature area but does not publish the DisableLowQosTimerResolution registry key.",
-    "key_found_on_page": true,
-    "notes": "Backfilled from evidence_id ms-timebeginperiod (official-doc); deprecated audit trail."
-  }
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.0",
+    "record_id":  "system.kernel-disable-low-qos-timer-resolution",
+    "tweak_id":  "system.kernel-disable-low-qos-timer-resolution",
+    "record_status":  "deprecated",
+    "summary":  "Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DisableLowQosTimerResolution = 1, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+    "setting":  {
+                    "name":  "Disable Low QoS Timer Resolution",
+                    "category":  "System",
+                    "area":  "Kernel / Timer Resolution Behavior",
+                    "scope":  "device",
+                    "casual_explanation":  "This appears to be a low-level kernel switch related to how Windows handles low-QoS timer resolution behavior. It is not a normal user setting.",
+                    "why_people_change_it":  "People would only touch it when reproducing timer-resolution experiments or undoing manual registry changes from advanced tweak guides.",
+                    "tradeoffs_overview":  "Timer-resolution behavior affects power usage, responsiveness, and how often the system wakes to service timers. Microsoft documents the general timer-resolution tradeoff, but this research pass did not capture a primary Microsoft source for the exact registry key the app writes.",
+                    "professional_notes":  "The repo research notes list DisableLowQosTimerResolution = 1 and associate it with KeDisableLowQosTimerResolution. Microsoft documents that increasing timer resolution can reduce overall system performance and power efficiency, and it publishes adjacent timer-resolution controls such as timeBeginPeriod and QosTimerResolution. However, this research pass did not capture a primary Microsoft page that documents the kernel registry value DisableLowQosTimerResolution itself. The record therefore treats the app write as observed repo provenance only.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "disable-low-qos-timer-resolution",
+                                        "location_kind":  "registry",
+                                        "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                                        "value_name":  "DisableLowQosTimerResolution",
+                                        "value_type":  "REG_DWORD",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "unknown",
+                                                                   "value":  null,
+                                                                   "label":  "Primary Microsoft mapping not captured",
+                                                                   "meaning":  "This research pass did not capture a primary Microsoft source for the exact DisableLowQosTimerResolution registry semantics.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-timebeginperiod",
+                                                                                        "ms-timer-resolution",
+                                                                                        "repo-system-doc-kernel"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  1,
+                                                                   "label":  "Observed app profile",
+                                                                   "meaning":  "The current app treats 1 as the default low-QoS timer-resolution behavior, based on repo research rather than a captured primary Microsoft source.",
+                                                                   "evidence_ids":  [
+                                                                                        "repo-system-doc-kernel",
+                                                                                        "app-system-registry-provider"
+                                                                                    ]
+                                                               }
+                                                           ],
+                                        "notes":  "Tracked as an observed kernel registry mapping only."
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "unknown",
+                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                                       "notes":  "The current app writes DisableLowQosTimerResolution = 1, but this research pass has not yet captured a primary Microsoft source for the value itself.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "disable-low-qos-timer-resolution",
+                                                          "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                                                          "value_name":  "DisableLowQosTimerResolution",
+                                                          "value_type":  "REG_DWORD",
+                                                          "state_kind":  "value",
+                                                          "value":  1
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Conservative baseline",
+                                 "applies_to":  "Systems where this dataset has not yet validated DisableLowQosTimerResolution from a primary Microsoft source",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "disable-low-qos-timer-resolution",
+                                                    "state_kind":  "unknown",
+                                                    "value":  null,
+                                                    "rationale":  "Do not publish a validated timer-behavior baseline until the exact registry mapping is backed by a primary Microsoft source."
+                                                }
+                                            ],
+                                 "notes":  "This keeps the low-level timer-behavior setting out of published presets until it is properly sourced.",
+                                 "evidence_ids":  [
+                                                      "ms-timebeginperiod",
+                                                      "ms-timer-resolution",
+                                                      "repo-system-doc-kernel"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "hold-for-research",
+                                     "label":  "Hold for research",
+                                     "intended_for":  [
+                                                          "Research tracking only",
+                                                          "Timer-behavior experiments"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Published presets",
+                                                       "General users"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "disable-low-qos-timer-resolution",
+                                                        "state_kind":  "unknown",
+                                                        "value":  null,
+                                                        "rationale":  "Do not publish or apply the value until a primary Microsoft source is captured."
+                                                    }
+                                                ],
+                                     "good_when":  "You want to document the timer-behavior setting without overstating confidence.",
+                                     "bad_when":  "You need a primary-source Microsoft-backed kernel mapping for low-QoS timer resolution behavior.",
+                                     "tradeoffs":  [
+                                                       "The timer-resolution feature area is documented honestly.",
+                                                       "The kernel registry value stays blocked from validated publication."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "ms-timebeginperiod",
+                                                          "ms-timer-resolution",
+                                                          "repo-system-doc-kernel"
+                                                      ]
+                                 },
+                                 {
+                                     "profile_id":  "current-app-profile",
+                                     "label":  "Current app profile",
+                                     "intended_for":  [
+                                                          "Research comparison only"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Published validated presets",
+                                                       "General users"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "disable-low-qos-timer-resolution",
+                                                        "state_kind":  "value",
+                                                        "value":  1,
+                                                        "rationale":  "Observed app write used as the current low-QoS timer-resolution profile."
+                                                    }
+                                                ],
+                                     "good_when":  "You are documenting what the app currently writes for DisableLowQosTimerResolution.",
+                                     "bad_when":  "You need a validated Microsoft registry mapping.",
+                                     "tradeoffs":  [
+                                                       "The current app behavior is captured.",
+                                                       "The exact registry semantics remain based on repo provenance rather than a captured primary source."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "notes":  "Blocked until a primary Microsoft source for DisableLowQosTimerResolution is captured.",
+                                     "evidence_ids":  [
+                                                          "repo-system-doc-kernel",
+                                                          "app-system-registry-provider"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "ms-timebeginperiod",
+                         "kind":  "official-doc",
+                         "title":  "Microsoft Learn: timeBeginPeriod function",
+                         "location":  "https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod",
+                         "summary":  "Microsoft documents the general timer-resolution tradeoff, noting that higher resolution can reduce overall system performance and power efficiency. The page confirms the feature area but does not publish the DisableLowQosTimerResolution registry key.",
+                         "supports":  [
+                                          "behavior",
+                                          "side-effects",
+                                          "version-scope"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "ms-timer-resolution",
+                         "kind":  "official-doc",
+                         "title":  "Microsoft Learn: Timer Resolution",
+                         "location":  "https://learn.microsoft.com/en-us/windows/win32/multimedia/timer-resolution",
+                         "summary":  "Microsoft documents timer resolution as a system behavior that affects timing precision and system cost, but the page does not publish the DisableLowQosTimerResolution registry key.",
+                         "supports":  [
+                                          "behavior",
+                                          "side-effects",
+                                          "version-scope"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "repo-system-doc-kernel",
+                         "kind":  "repo-doc",
+                         "title":  "Repo system research notes for kernel registry values",
+                         "location":  "Docs/system/system.md",
+                         "summary":  "The repo documents DisableLowQosTimerResolution = 1 as personal research and ties it to KeDisableLowQosTimerResolution.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "ui-mapping",
+                                          "app-mismatch"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "app-system-registry-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current app implementation",
+                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                         "summary":  "The provider writes DisableLowQosTimerResolution = 1 for the current tweak.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "ui-mapping"
+                                      ],
+                         "strength":  "high"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "low",
+                     "apply_allowed":  false,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  false,
+                     "restore_previous_supported":  false,
+                     "needs_vm_validation":  false,
+                     "why":  "Official Microsoft docs confirm the timer-resolution feature area and its tradeoffs, but this research pass did not capture a primary Microsoft source for the DisableLowQosTimerResolution kernel registry key.",
+                     "blocking_issues":  [
+                                             "No primary Microsoft source for DisableLowQosTimerResolution was captured in this research pass.",
+                                             "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
+                                         ]
+                 },
+    "open_questions":  [
+                           "Can a primary Microsoft source for DisableLowQosTimerResolution be captured?",
+                           "Should the app surface this only as an experimental kernel timer setting?"
+                       ],
+    "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
+    "validation_proof":  {
+                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+                             "exact_quote_or_path":  "\"DisableLowQosTimerResolution\" = 1; // KeDisableLowQosTimerResolution",
+                             "key_found_on_page":  true,
+                             "notes":  "Timer-resolution audit trail. The mirror and kernel routine show the explicit low-QoS timer-resolution gate."
+                         }
 }

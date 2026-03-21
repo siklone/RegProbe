@@ -1,182 +1,182 @@
 {
-  "$schema": "../setting-research.schema.json",
-  "schema_version": "1.1",
-  "record_id": "security.disable-wpbt",
-  "tweak_id": "security.disable-wpbt",
-  "record_status": "deprecated",
-  "summary": "Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail.",
-  "setting": {
-    "name": "Disable WPBT Execution",
-    "category": "Security",
-    "area": "Observed Session Manager Registry Setting",
-    "scope": "device",
-    "casual_explanation": "WPBT lets vendors and OEMs run a program from firmware during Windows startup. This tweak currently relies on a Session Manager registry value that is widely cited in community hardening material, but this research pass did not capture a primary Microsoft document that publishes that exact registry mapping.",
-    "why_people_change_it": "People change it when they want to reduce OEM or firmware-driven startup execution paths and block unwanted vendor software from launching during boot.",
-    "tradeoffs_overview": "The hardening intent is understandable, but the exact registry contract is not published in the Microsoft sources captured so far. That means this should stay a research-only record rather than a validated preset.",
-    "professional_notes": "The current app writes HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\DisableWpbtExecution = 1. Repo notes and external community material tie that value to WPBT blocking behavior, but the Microsoft documentation captured in this dataset only publishes WPBT as a UEFI or DFCI managed setting with Not configured, Enabled, and Disabled states. Until a primary Microsoft source connects DisableWpbtExecution to WPBT, this record should track the registry write as an observed implementation only.",
-    "targets": [
-      {
-        "target_id": "disable-wpbt-execution",
-        "location_kind": "registry",
-        "path": "HKLM\\System\\CurrentControlSet\\Control\\Session Manager",
-        "value_name": "DisableWpbtExecution",
-        "value_type": "REG_DWORD",
-        "allowed_values": [
-          {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Default or unmanaged state",
-            "meaning": "This research pass did not capture a primary Microsoft document that defines the default behavior for this registry value.",
-            "evidence_ids": [
-              "repo-security-note",
-              "ms-dfci-wpbt"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": 1,
-            "label": "Observed app profile",
-            "meaning": "The app writes DisableWpbtExecution = 1 and community hardening references describe that as blocking WPBT execution, but this registry mapping is not yet backed by a primary Microsoft source in this dataset.",
-            "evidence_ids": [
-              "repo-security-note",
-              "app-security-provider"
-            ]
-          }
-        ],
-        "notes": "Official Microsoft documentation captured so far publishes WPBT as a UEFI or DFCI feature surface, not as this registry value."
-      }
-    ]
-  },
-  "app_current_implementation": {
-    "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
-    "notes": "The app writes DisableWpbtExecution = 1 under HKLM\\System\\CurrentControlSet\\Control\\Session Manager. This record intentionally documents that exact registry write as an observed implementation only.",
-    "writes": [
-      {
-        "target_id": "disable-wpbt-execution",
-        "path": "HKLM\\System\\CurrentControlSet\\Control\\Session Manager",
-        "value_name": "DisableWpbtExecution",
-        "value_type": "REG_DWORD",
-        "state_kind": "value",
-        "value": 1
-      }
-    ]
-  },
-  "windows_defaults": [
-    {
-      "label": "Conservative baseline",
-      "applies_to": "Systems where WPBT management should only be published from an official Microsoft surface",
-      "states": [
-        {
-          "target_id": "disable-wpbt-execution",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "Do not publish this registry path as the supported WPBT control until a primary Microsoft mapping is captured."
-        }
-      ],
-      "notes": "This record keeps the observed registry write separate from the official UEFI or DFCI feature surface.",
-      "evidence_ids": [
-        "ms-dfci-wpbt"
-      ]
-    }
-  ],
-  "recommended_profiles": [
-    {
-      "profile_id": "hold-for-research",
-      "label": "Hold for research",
-      "intended_for": [
-        "Research tracking only",
-        "Implementation review"
-      ],
-      "avoid_for": [
-        "Published presets",
-        "General users"
-      ],
-      "states": [
-        {
-          "target_id": "disable-wpbt-execution",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "Keep the public record conservative until the registry mapping is backed by a primary Microsoft source."
-        }
-      ],
-      "good_when": "You want to preserve the observed implementation without overstating confidence.",
-      "bad_when": "You need a validated and officially documented WPBT control today.",
-      "tradeoffs": [
-        "The observed registry write remains documented.",
-        "The record does not publish an unsupported registry path as a validated control."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "ms-dfci-wpbt",
-        "repo-security-note",
-        "app-security-provider"
-      ]
-    }
-  ],
-  "evidence": [
-    {
-      "evidence_id": "ms-dfci-wpbt",
-      "kind": "official-doc",
-      "title": "Microsoft Learn DFCI WPBT setting reference",
-      "location": "https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings",
-      "summary": "Microsoft documents WPBT as a UEFI or DFCI managed feature with Not configured, Enabled, and Disabled states.",
-      "supports": [
-        "behavior",
-        "allowed-values",
-        "default"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "repo-security-note",
-      "kind": "repo-doc",
-      "title": "Repo security notes for WPBT",
-      "location": "Docs/security/security.md",
-      "summary": "The repo security notes track DisableWpbtExecution under Session Manager as the current implementation surface and cite community hardening references for the mapping.",
-      "supports": [
-        "path",
-        "value",
-        "app-mismatch"
-      ],
-      "strength": "medium"
-    },
-    {
-      "evidence_id": "app-security-provider",
-      "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
-      "summary": "The provider writes HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\DisableWpbtExecution = 1 for the WPBT tweak.",
-      "supports": [
-        "path",
-        "value",
-        "ui-mapping"
-      ],
-      "strength": "high"
-    }
-  ],
-  "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
-    "restore_default_supported": false,
-    "restore_previous_supported": false,
-    "needs_vm_validation": true,
-    "why": "The observed registry write is clear, but the Microsoft documentation captured in this dataset does not yet publish DisableWpbtExecution as the supported WPBT control surface.",
-    "blocking_issues": [
-      "No primary Microsoft source in this dataset maps DisableWpbtExecution under Session Manager as the supported WPBT control surface.",
-      "The official Microsoft surface captured so far is UEFI or DFCI oriented rather than a desktop registry policy."
-    ]
-  },
-  "open_questions": [
-    "Does Microsoft publish DisableWpbtExecution in a Windows security, boot, or firmware reference outside the DFCI material captured so far?",
-    "If not, should this tweak remain docs-first permanently or be retired in favor of officially managed firmware controls?"
-  ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
-  "validation_proof": {
-    "source_url": "https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings",
-    "exact_quote_or_path": "Microsoft Learn DFCI WPBT setting reference: Microsoft documents WPBT as a UEFI or DFCI managed feature with Not configured, Enabled, and Disabled states.",
-    "key_found_on_page": true,
-    "notes": "Backfilled from evidence_id ms-dfci-wpbt (official-doc); deprecated audit trail."
-  }
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.1",
+    "record_id":  "security.disable-wpbt",
+    "tweak_id":  "security.disable-wpbt",
+    "record_status":  "deprecated",
+    "summary":  "Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail.",
+    "setting":  {
+                    "name":  "Disable WPBT Execution",
+                    "category":  "Security",
+                    "area":  "Observed Session Manager Registry Setting",
+                    "scope":  "device",
+                    "casual_explanation":  "WPBT lets vendors and OEMs run a program from firmware during Windows startup. This tweak currently relies on a Session Manager registry value that is widely cited in community hardening material, but this research pass did not capture a primary Microsoft document that publishes that exact registry mapping.",
+                    "why_people_change_it":  "People change it when they want to reduce OEM or firmware-driven startup execution paths and block unwanted vendor software from launching during boot.",
+                    "tradeoffs_overview":  "The hardening intent is understandable, but the exact registry contract is not published in the Microsoft sources captured so far. That means this should stay a research-only record rather than a validated preset.",
+                    "professional_notes":  "The current app writes HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\DisableWpbtExecution = 1. Repo notes and external community material tie that value to WPBT blocking behavior, but the Microsoft documentation captured in this dataset only publishes WPBT as a UEFI or DFCI managed setting with Not configured, Enabled, and Disabled states. Until a primary Microsoft source connects DisableWpbtExecution to WPBT, this record should track the registry write as an observed implementation only.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "disable-wpbt-execution",
+                                        "location_kind":  "registry",
+                                        "path":  "HKLM\\System\\CurrentControlSet\\Control\\Session Manager",
+                                        "value_name":  "DisableWpbtExecution",
+                                        "value_type":  "REG_DWORD",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "unknown",
+                                                                   "value":  null,
+                                                                   "label":  "Default or unmanaged state",
+                                                                   "meaning":  "This research pass did not capture a primary Microsoft document that defines the default behavior for this registry value.",
+                                                                   "evidence_ids":  [
+                                                                                        "repo-security-note",
+                                                                                        "ms-dfci-wpbt"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  1,
+                                                                   "label":  "Observed app profile",
+                                                                   "meaning":  "The app writes DisableWpbtExecution = 1 and community hardening references describe that as blocking WPBT execution, but this registry mapping is not yet backed by a primary Microsoft source in this dataset.",
+                                                                   "evidence_ids":  [
+                                                                                        "repo-security-note",
+                                                                                        "app-security-provider"
+                                                                                    ]
+                                                               }
+                                                           ],
+                                        "notes":  "Official Microsoft documentation captured so far publishes WPBT as a UEFI or DFCI feature surface, not as this registry value."
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "matches-research",
+                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+                                       "notes":  "The app writes DisableWpbtExecution = 1 under HKLM\\System\\CurrentControlSet\\Control\\Session Manager. This record intentionally documents that exact registry write as an observed implementation only.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "disable-wpbt-execution",
+                                                          "path":  "HKLM\\System\\CurrentControlSet\\Control\\Session Manager",
+                                                          "value_name":  "DisableWpbtExecution",
+                                                          "value_type":  "REG_DWORD",
+                                                          "state_kind":  "value",
+                                                          "value":  1
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Conservative baseline",
+                                 "applies_to":  "Systems where WPBT management should only be published from an official Microsoft surface",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "disable-wpbt-execution",
+                                                    "state_kind":  "unknown",
+                                                    "value":  null,
+                                                    "rationale":  "Do not publish this registry path as the supported WPBT control until a primary Microsoft mapping is captured."
+                                                }
+                                            ],
+                                 "notes":  "This record keeps the observed registry write separate from the official UEFI or DFCI feature surface.",
+                                 "evidence_ids":  [
+                                                      "ms-dfci-wpbt"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "hold-for-research",
+                                     "label":  "Hold for research",
+                                     "intended_for":  [
+                                                          "Research tracking only",
+                                                          "Implementation review"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Published presets",
+                                                       "General users"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "disable-wpbt-execution",
+                                                        "state_kind":  "unknown",
+                                                        "value":  null,
+                                                        "rationale":  "Keep the public record conservative until the registry mapping is backed by a primary Microsoft source."
+                                                    }
+                                                ],
+                                     "good_when":  "You want to preserve the observed implementation without overstating confidence.",
+                                     "bad_when":  "You need a validated and officially documented WPBT control today.",
+                                     "tradeoffs":  [
+                                                       "The observed registry write remains documented.",
+                                                       "The record does not publish an unsupported registry path as a validated control."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "ms-dfci-wpbt",
+                                                          "repo-security-note",
+                                                          "app-security-provider"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "ms-dfci-wpbt",
+                         "kind":  "official-doc",
+                         "title":  "Microsoft Learn DFCI WPBT setting reference",
+                         "location":  "https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings",
+                         "summary":  "Microsoft documents WPBT as a UEFI or DFCI managed feature with Not configured, Enabled, and Disabled states.",
+                         "supports":  [
+                                          "behavior",
+                                          "allowed-values",
+                                          "default"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "repo-security-note",
+                         "kind":  "repo-doc",
+                         "title":  "Repo security notes for WPBT",
+                         "location":  "Docs/security/security.md",
+                         "summary":  "The repo security notes track DisableWpbtExecution under Session Manager as the current implementation surface and cite community hardening references for the mapping.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "app-mismatch"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "app-security-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current app implementation",
+                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+                         "summary":  "The provider writes HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\DisableWpbtExecution = 1 for the WPBT tweak.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "ui-mapping"
+                                      ],
+                         "strength":  "high"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "medium",
+                     "apply_allowed":  false,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  false,
+                     "restore_previous_supported":  false,
+                     "needs_vm_validation":  false,
+                     "why":  "The observed registry write is clear, but the Microsoft documentation captured in this dataset does not yet publish DisableWpbtExecution as the supported WPBT control surface.",
+                     "blocking_issues":  [
+                                             "No primary Microsoft source in this dataset maps DisableWpbtExecution under Session Manager as the supported WPBT control surface.",
+                                             "The official Microsoft surface captured so far is UEFI or DFCI oriented rather than a desktop registry policy."
+                                         ]
+                 },
+    "open_questions":  [
+                           "Does Microsoft publish DisableWpbtExecution in a Windows security, boot, or firmware reference outside the DFCI material captured so far?",
+                           "If not, should this tweak remain docs-first permanently or be retired in favor of officially managed firmware controls?"
+                       ],
+    "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
+    "validation_proof":  {
+                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\security\\desc.md",
+                             "exact_quote_or_path":  "\\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager : DisableWpbtExecution",
+                             "key_found_on_page":  true,
+                             "notes":  "Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle."
+                         }
 }

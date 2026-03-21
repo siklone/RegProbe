@@ -1,171 +1,171 @@
 {
-  "$schema": "../setting-research.schema.json",
-  "schema_version": "1.0",
-  "record_id": "privacy.disable-ceip",
-  "tweak_id": "privacy.disable-ceip",
-  "record_status": "deprecated",
-  "summary": "Deprecated audit trail for the old CEIP composite bundle. The App-V, SQMClient, and Messenger values are still observable, but this parent record is no longer the primary research surface.",
-  "setting": {
-    "name": "CEIP Policy Bundle",
-    "category": "Privacy",
-    "area": "Registry Policy Bundle",
-    "scope": "device",
-    "casual_explanation": "CEIP is the old Customer Experience Improvement Program family. This tweak tries to opt out of several CEIP-style data collection surfaces together.",
-    "why_people_change_it": "People change these values when they want fewer telemetry-style opt-in programs enabled.",
-    "tradeoffs_overview": "The values are real, but this bundle crosses several product-specific policy families and should not be treated as one clean universal Windows privacy switch yet.",
-    "professional_notes": "The current app writes CEIPEnable = 0 under AppV and SQMClient policy paths and CEIP = 2 under the Messenger client policy path. This stays review-only as a mixed policy bundle.",
-    "targets": [
-      {
-        "target_id": "ceip-bundle",
-        "location_kind": "registry",
-        "path": "Composite: AppV CEIP + SQMClient Windows + Messenger Client",
-        "value_name": "BundleState",
-        "value_type": "COMPOSITE",
-        "allowed_values": [
-          {
-            "state_kind": "value",
-            "value": "windows-default",
-            "label": "Windows or product defaults",
-            "meaning": "Leave the mixed CEIP-related policy values at their normal baseline.",
-            "evidence_ids": [
-              "app-privacy-provider"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "current-app-profile",
-            "label": "Current CEIP-off bundle",
-            "meaning": "Apply the current mix of CEIP-related values the app writes.",
-            "evidence_ids": [
-              "app-privacy-provider"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "app_current_implementation": {
-    "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The provider writes three CEIP-related values across three different policy families.",
-    "writes": [
-      {
-        "target_id": "ceip-bundle",
-        "path": "Composite: AppV CEIP + SQMClient Windows + Messenger Client",
-        "value_name": "BundleState",
-        "value_type": "COMPOSITE",
-        "state_kind": "value",
-        "value": "current-app-profile"
-      }
-    ]
-  },
-  "windows_defaults": [
-    {
-      "label": "Mixed CEIP baseline",
-      "applies_to": "Windows systems where these product-specific policy paths exist",
-      "states": [
-        {
-          "target_id": "ceip-bundle",
-          "state_kind": "value",
-          "value": "windows-default",
-          "rationale": "Treat the bundle as mixed product policy state rather than one official Windows baseline."
-        }
-      ],
-      "evidence_ids": [
-        "app-privacy-provider"
-      ]
-    }
-  ],
-  "recommended_profiles": [
-    {
-      "profile_id": "windows-default",
-      "label": "Windows default",
-      "intended_for": [
-        "Most users"
-      ],
-      "avoid_for": [
-        "People intentionally documenting the app's CEIP bundle"
-      ],
-      "states": [
-        {
-          "target_id": "ceip-bundle",
-          "state_kind": "value",
-          "value": "windows-default",
-          "rationale": "Do not promote the mixed bundle as a clean validated toggle."
-        }
-      ],
-      "good_when": "You want the least-assumptive baseline.",
-      "bad_when": "You explicitly want the product's current opt-out bundle.",
-      "tradeoffs": [
-        "Less opinionated behavior.",
-        "Mixed CEIP-related programs may remain at default state."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "app-privacy-provider"
-      ]
-    },
-    {
-      "profile_id": "current-app-profile",
-      "label": "Current CEIP-off bundle",
-      "intended_for": [
-        "Research comparison only"
-      ],
-      "avoid_for": [
-        "Normal Apply exposure"
-      ],
-      "states": [
-        {
-          "target_id": "ceip-bundle",
-          "state_kind": "value",
-          "value": "current-app-profile",
-          "rationale": "Track the current mixed CEIP disable bundle."
-        }
-      ],
-      "good_when": "You are documenting the product's current policy bundle.",
-      "bad_when": "You want a narrowly scoped validated control.",
-      "tradeoffs": [
-        "Reduces several CEIP-related surfaces.",
-        "Mixed cross-product bundle is still harder to explain cleanly."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "app-privacy-provider"
-      ]
-    }
-  ],
-  "evidence": [
-    {
-      "evidence_id": "app-privacy-provider",
-      "kind": "repo-code",
-      "title": "Current privacy provider CEIP bundle",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider writes AppV CEIPEnable = 0, SQMClient CEIPEnable = 0, and Messenger CEIP = 2.",
-      "supports": [
-        "path",
-        "value",
-        "ui-mapping"
-      ],
-      "strength": "high"
-    }
-  ],
-  "decision": {
-    "confidence": "low",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
-    "restore_default_supported": true,
-    "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "The bundle is observable, but it crosses several policy families and still needs stronger provenance as a grouped toggle.",
-    "blocking_issues": [
-      "Mixed policy family bundle still needs stronger per-target sourcing."
-    ]
-  },
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
-  "validation_proof": {
-    "source_url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "exact_quote_or_path": "Current privacy provider CEIP bundle: The provider writes AppV CEIPEnable = 0, SQMClient CEIPEnable = 0, and Messenger CEIP = 2.",
-    "key_found_on_page": true,
-    "notes": "Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail."
-  }
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.0",
+    "record_id":  "privacy.disable-ceip",
+    "tweak_id":  "privacy.disable-ceip",
+    "record_status":  "deprecated",
+    "summary":  "Deprecated audit trail for the old CEIP composite bundle. The App-V, SQMClient, and Messenger values are still observable, but this parent record is no longer the primary research surface.",
+    "setting":  {
+                    "name":  "CEIP Policy Bundle",
+                    "category":  "Privacy",
+                    "area":  "Registry Policy Bundle",
+                    "scope":  "device",
+                    "casual_explanation":  "CEIP is the old Customer Experience Improvement Program family. This tweak tries to opt out of several CEIP-style data collection surfaces together.",
+                    "why_people_change_it":  "People change these values when they want fewer telemetry-style opt-in programs enabled.",
+                    "tradeoffs_overview":  "The values are real, but this bundle crosses several product-specific policy families and should not be treated as one clean universal Windows privacy switch yet.",
+                    "professional_notes":  "The current app writes CEIPEnable = 0 under AppV and SQMClient policy paths and CEIP = 2 under the Messenger client policy path. This stays review-only as a mixed policy bundle.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "ceip-bundle",
+                                        "location_kind":  "registry",
+                                        "path":  "Composite: AppV CEIP + SQMClient Windows + Messenger Client",
+                                        "value_name":  "BundleState",
+                                        "value_type":  "COMPOSITE",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "windows-default",
+                                                                   "label":  "Windows or product defaults",
+                                                                   "meaning":  "Leave the mixed CEIP-related policy values at their normal baseline.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-privacy-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "current-app-profile",
+                                                                   "label":  "Current CEIP-off bundle",
+                                                                   "meaning":  "Apply the current mix of CEIP-related values the app writes.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-privacy-provider"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "partially-matches",
+                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                                       "notes":  "The provider writes three CEIP-related values across three different policy families.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "ceip-bundle",
+                                                          "path":  "Composite: AppV CEIP + SQMClient Windows + Messenger Client",
+                                                          "value_name":  "BundleState",
+                                                          "value_type":  "COMPOSITE",
+                                                          "state_kind":  "value",
+                                                          "value":  "current-app-profile"
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Mixed CEIP baseline",
+                                 "applies_to":  "Windows systems where these product-specific policy paths exist",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "ceip-bundle",
+                                                    "state_kind":  "value",
+                                                    "value":  "windows-default",
+                                                    "rationale":  "Treat the bundle as mixed product policy state rather than one official Windows baseline."
+                                                }
+                                            ],
+                                 "evidence_ids":  [
+                                                      "app-privacy-provider"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "windows-default",
+                                     "label":  "Windows default",
+                                     "intended_for":  [
+                                                          "Most users"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "People intentionally documenting the app\u0027s CEIP bundle"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "ceip-bundle",
+                                                        "state_kind":  "value",
+                                                        "value":  "windows-default",
+                                                        "rationale":  "Do not promote the mixed bundle as a clean validated toggle."
+                                                    }
+                                                ],
+                                     "good_when":  "You want the least-assumptive baseline.",
+                                     "bad_when":  "You explicitly want the product\u0027s current opt-out bundle.",
+                                     "tradeoffs":  [
+                                                       "Less opinionated behavior.",
+                                                       "Mixed CEIP-related programs may remain at default state."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "app-privacy-provider"
+                                                      ]
+                                 },
+                                 {
+                                     "profile_id":  "current-app-profile",
+                                     "label":  "Current CEIP-off bundle",
+                                     "intended_for":  [
+                                                          "Research comparison only"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Normal Apply exposure"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "ceip-bundle",
+                                                        "state_kind":  "value",
+                                                        "value":  "current-app-profile",
+                                                        "rationale":  "Track the current mixed CEIP disable bundle."
+                                                    }
+                                                ],
+                                     "good_when":  "You are documenting the product\u0027s current policy bundle.",
+                                     "bad_when":  "You want a narrowly scoped validated control.",
+                                     "tradeoffs":  [
+                                                       "Reduces several CEIP-related surfaces.",
+                                                       "Mixed cross-product bundle is still harder to explain cleanly."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "app-privacy-provider"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "app-privacy-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current privacy provider CEIP bundle",
+                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                         "summary":  "The provider writes AppV CEIPEnable = 0, SQMClient CEIPEnable = 0, and Messenger CEIP = 2.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "ui-mapping"
+                                      ],
+                         "strength":  "high"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "low",
+                     "apply_allowed":  false,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  true,
+                     "restore_previous_supported":  true,
+                     "needs_vm_validation":  false,
+                     "why":  "The bundle is observable, but it crosses several policy families and still needs stronger provenance as a grouped toggle.",
+                     "blocking_issues":  [
+                                             "Mixed policy family bundle still needs stronger per-target sourcing."
+                                         ]
+                 },
+    "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
+    "validation_proof":  {
+                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+                             "exact_quote_or_path":  "\"ValueName\": \"CEIPEnable\" ... \"KeyPath\": [\"HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\AppV\\\\CEIP\"] ... \"DisplayName\": \"Turn off Windows Customer Experience Improvement Program\" ... \"KeyPath\": [\"HKLM\\\\Software\\\\Policies\\\\Microsoft\\\\SQMClient\\\\Windows\"] ... \"ValueName\": \"CEIPEnable\".",
+                             "key_found_on_page":  true,
+                             "notes":  "Composite CEIP audit trail. The mirror shows CEIPEnable on both App-V and SQMClient policy surfaces."
+                         }
 }

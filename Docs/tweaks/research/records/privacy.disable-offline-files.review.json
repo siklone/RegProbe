@@ -1,185 +1,185 @@
 {
-  "$schema": "../setting-research.schema.json",
-  "schema_version": "1.0",
-  "record_id": "privacy.disable-offline-files",
-  "tweak_id": "privacy.disable-offline-files",
-  "record_status": "deprecated",
-  "summary": "Deprecated audit trail for the old composite toggle. The validated Offline Files policy and the broader service, task, and binary subrecords are tracked separately.",
-  "setting": {
-    "name": "Offline Files Composite Toggle",
-    "category": "Privacy",
-    "area": "Composite",
-    "scope": "device",
-    "casual_explanation": "Offline Files keeps copies of network files for use while disconnected. This top-level toggle tries to shut down the feature more aggressively than the official policy alone.",
-    "why_people_change_it": "People do this when they want Offline Files fully out of the way, including its supporting services, tasks, and Sync Center entry points.",
-    "tradeoffs_overview": "The official policy part is strong and documented, but the rest of the bundle goes beyond that policy and changes more of the feature's plumbing.",
-    "professional_notes": "privacy.disable-offline-files wraps privacy.disable-offline-files.policy plus service, task, and file-rename sub-tweaks. The policy subrecord is validated. The other subrecords remain review-required, so the parent composite should also remain review-required.",
-    "targets": [
-      {
-        "target_id": "offline-files-composite",
-        "location_kind": "feature",
-        "path": "Composite: Offline Files policy + services + tasks + Sync Center binary",
-        "value_name": "CompositeState",
-        "value_type": "COMPOSITE",
-        "allowed_values": [
-          {
-            "state_kind": "value",
-            "value": "windows-default",
-            "label": "Windows default",
-            "meaning": "Use the normal Offline Files baseline or only the separately documented policy control.",
-            "evidence_ids": [
-              "offline-policy-subrecord"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "current-app-profile",
-            "label": "Current app bundle",
-            "meaning": "Apply the broader policy, service, task, and binary changes exposed by the app.",
-            "evidence_ids": [
-              "app-privacy-provider",
-              "offline-policy-subrecord"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "app_current_implementation": {
-    "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The app exposes a composite that includes one validated policy control plus several broader implementation-level sub-tweaks.",
-    "writes": [
-      {
-        "target_id": "offline-files-composite",
-        "path": "Composite: Offline Files policy + services + tasks + Sync Center binary",
-        "value_name": "CompositeState",
-        "value_type": "COMPOSITE",
-        "state_kind": "value",
-        "value": "current-app-profile"
-      }
-    ]
-  },
-  "windows_defaults": [
-    {
-      "label": "Offline Files baseline",
-      "applies_to": "Windows client and server systems with Offline Files support",
-      "states": [
-        {
-          "target_id": "offline-files-composite",
-          "state_kind": "value",
-          "value": "windows-default",
-          "rationale": "The parent bundle should not outrun the validated policy subrecord."
-        }
-      ],
-      "evidence_ids": [
-        "offline-policy-subrecord"
-      ]
-    }
-  ],
-  "recommended_profiles": [
-    {
-      "profile_id": "policy-only",
-      "label": "Policy-only baseline",
-      "intended_for": [
-        "Most users",
-        "Anyone who wants the official control first"
-      ],
-      "avoid_for": [
-        "People who specifically need the broader app bundle for research"
-      ],
-      "states": [
-        {
-          "target_id": "offline-files-composite",
-          "state_kind": "value",
-          "value": "windows-default",
-          "rationale": "Prefer the validated policy-only understanding until the broader bundle is settled."
-        }
-      ],
-      "good_when": "You want the official feature control without extra plumbing changes.",
-      "bad_when": "You are intentionally documenting or testing the broader app bundle.",
-      "tradeoffs": [
-        "Stays close to Microsoft's documented policy.",
-        "Does not aggressively strip services or UI entry points."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "offline-policy-subrecord"
-      ]
-    },
-    {
-      "profile_id": "current-app-profile",
-      "label": "Current app bundle",
-      "intended_for": [
-        "Research comparison only"
-      ],
-      "avoid_for": [
-        "Normal Apply exposure"
-      ],
-      "states": [
-        {
-          "target_id": "offline-files-composite",
-          "state_kind": "value",
-          "value": "current-app-profile",
-          "rationale": "Track the broader bundle the app exposes today."
-        }
-      ],
-      "good_when": "You need to document the full current product behavior.",
-      "bad_when": "You want only the official feature policy.",
-      "tradeoffs": [
-        "More aggressive shutdown of the feature area.",
-        "Less aligned with the single official policy control."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "app-privacy-provider",
-        "offline-policy-subrecord"
-      ]
-    }
-  ],
-  "evidence": [
-    {
-      "evidence_id": "offline-policy-subrecord",
-      "kind": "repo-doc",
-      "title": "Existing Offline Files policy record",
-      "location": "Docs/tweaks/research/records/privacy.disable-offline-files.policy.json",
-      "summary": "The core NetCache policy mapping is already validated and documents the official feature surface.",
-      "supports": [
-        "behavior",
-        "risk"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "app-privacy-provider",
-      "kind": "repo-code",
-      "title": "Current privacy provider composite",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider exposes privacy.disable-offline-files as a composite of the policy, service, task, and binary sub-tweaks.",
-      "supports": [
-        "ui-mapping",
-        "behavior"
-      ],
-      "strength": "high"
-    }
-  ],
-  "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
-    "restore_default_supported": true,
-    "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "The parent toggle is broader than the official policy surface and includes subrecords that still need review.",
-    "blocking_issues": [
-      "The composite includes service, task, and binary changes that are not part of the validated Offline Files policy surface."
-    ]
-  },
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
-  "validation_proof": {
-    "source_url": "Docs/tweaks/research/records/privacy.disable-offline-files.policy.json",
-    "exact_quote_or_path": "Existing Offline Files policy record: The core NetCache policy mapping is already validated and documents the official feature surface.",
-    "key_found_on_page": true,
-    "notes": "Backfilled from evidence_id offline-policy-subrecord (repo-doc); deprecated audit trail."
-  }
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.0",
+    "record_id":  "privacy.disable-offline-files",
+    "tweak_id":  "privacy.disable-offline-files",
+    "record_status":  "deprecated",
+    "summary":  "Deprecated audit trail for the old composite toggle. The validated Offline Files policy and the broader service, task, and binary subrecords are tracked separately.",
+    "setting":  {
+                    "name":  "Offline Files Composite Toggle",
+                    "category":  "Privacy",
+                    "area":  "Composite",
+                    "scope":  "device",
+                    "casual_explanation":  "Offline Files keeps copies of network files for use while disconnected. This top-level toggle tries to shut down the feature more aggressively than the official policy alone.",
+                    "why_people_change_it":  "People do this when they want Offline Files fully out of the way, including its supporting services, tasks, and Sync Center entry points.",
+                    "tradeoffs_overview":  "The official policy part is strong and documented, but the rest of the bundle goes beyond that policy and changes more of the feature\u0027s plumbing.",
+                    "professional_notes":  "privacy.disable-offline-files wraps privacy.disable-offline-files.policy plus service, task, and file-rename sub-tweaks. The policy subrecord is validated. The other subrecords remain review-required, so the parent composite should also remain review-required.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "offline-files-composite",
+                                        "location_kind":  "feature",
+                                        "path":  "Composite: Offline Files policy + services + tasks + Sync Center binary",
+                                        "value_name":  "CompositeState",
+                                        "value_type":  "COMPOSITE",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "windows-default",
+                                                                   "label":  "Windows default",
+                                                                   "meaning":  "Use the normal Offline Files baseline or only the separately documented policy control.",
+                                                                   "evidence_ids":  [
+                                                                                        "offline-policy-subrecord"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "current-app-profile",
+                                                                   "label":  "Current app bundle",
+                                                                   "meaning":  "Apply the broader policy, service, task, and binary changes exposed by the app.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-privacy-provider",
+                                                                                        "offline-policy-subrecord"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "partially-matches",
+                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                                       "notes":  "The app exposes a composite that includes one validated policy control plus several broader implementation-level sub-tweaks.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "offline-files-composite",
+                                                          "path":  "Composite: Offline Files policy + services + tasks + Sync Center binary",
+                                                          "value_name":  "CompositeState",
+                                                          "value_type":  "COMPOSITE",
+                                                          "state_kind":  "value",
+                                                          "value":  "current-app-profile"
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Offline Files baseline",
+                                 "applies_to":  "Windows client and server systems with Offline Files support",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "offline-files-composite",
+                                                    "state_kind":  "value",
+                                                    "value":  "windows-default",
+                                                    "rationale":  "The parent bundle should not outrun the validated policy subrecord."
+                                                }
+                                            ],
+                                 "evidence_ids":  [
+                                                      "offline-policy-subrecord"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "policy-only",
+                                     "label":  "Policy-only baseline",
+                                     "intended_for":  [
+                                                          "Most users",
+                                                          "Anyone who wants the official control first"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "People who specifically need the broader app bundle for research"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "offline-files-composite",
+                                                        "state_kind":  "value",
+                                                        "value":  "windows-default",
+                                                        "rationale":  "Prefer the validated policy-only understanding until the broader bundle is settled."
+                                                    }
+                                                ],
+                                     "good_when":  "You want the official feature control without extra plumbing changes.",
+                                     "bad_when":  "You are intentionally documenting or testing the broader app bundle.",
+                                     "tradeoffs":  [
+                                                       "Stays close to Microsoft\u0027s documented policy.",
+                                                       "Does not aggressively strip services or UI entry points."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "offline-policy-subrecord"
+                                                      ]
+                                 },
+                                 {
+                                     "profile_id":  "current-app-profile",
+                                     "label":  "Current app bundle",
+                                     "intended_for":  [
+                                                          "Research comparison only"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Normal Apply exposure"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "offline-files-composite",
+                                                        "state_kind":  "value",
+                                                        "value":  "current-app-profile",
+                                                        "rationale":  "Track the broader bundle the app exposes today."
+                                                    }
+                                                ],
+                                     "good_when":  "You need to document the full current product behavior.",
+                                     "bad_when":  "You want only the official feature policy.",
+                                     "tradeoffs":  [
+                                                       "More aggressive shutdown of the feature area.",
+                                                       "Less aligned with the single official policy control."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "app-privacy-provider",
+                                                          "offline-policy-subrecord"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "offline-policy-subrecord",
+                         "kind":  "repo-doc",
+                         "title":  "Existing Offline Files policy record",
+                         "location":  "Docs/tweaks/research/records/privacy.disable-offline-files.policy.json",
+                         "summary":  "The core NetCache policy mapping is already validated and documents the official feature surface.",
+                         "supports":  [
+                                          "behavior",
+                                          "risk"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "app-privacy-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current privacy provider composite",
+                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                         "summary":  "The provider exposes privacy.disable-offline-files as a composite of the policy, service, task, and binary sub-tweaks.",
+                         "supports":  [
+                                          "ui-mapping",
+                                          "behavior"
+                                      ],
+                         "strength":  "high"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "medium",
+                     "apply_allowed":  false,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  true,
+                     "restore_previous_supported":  true,
+                     "needs_vm_validation":  false,
+                     "why":  "The parent toggle is broader than the official policy surface and includes subrecords that still need review.",
+                     "blocking_issues":  [
+                                             "The composite includes service, task, and binary changes that are not part of the validated Offline Files policy surface."
+                                         ]
+                 },
+    "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
+    "validation_proof":  {
+                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+                             "exact_quote_or_path":  "Offline Files (Client-Side Caching, CSC) lets Windows cache files from network shares locally ... If you enable this policy setting, Offline Files is enabled and users cannot disable it. If you disable this policy setting, Offline Files is disabled and users cannot enable it. ... Hides or displays reminder balloons ... Synchronize all offline files before logging off ... Synchronize all offline files when logging on ... Remove \"Work offline\" command.",
+                             "key_found_on_page":  true,
+                             "notes":  "Composite Offline Files policy bundle. The proof cites the documented NetCache policy family and the related task and UI behavior."
+                         }
 }

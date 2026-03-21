@@ -1,172 +1,172 @@
 {
-  "$schema": "../setting-research.schema.json",
-  "schema_version": "1.0",
-  "record_id": "privacy.disable-offline-files.binary",
-  "tweak_id": "privacy.disable-offline-files.binary",
-  "record_status": "deprecated",
-  "summary": "Deprecated audit trail for the Offline Files binary-rename subrecord. The app renames mobsync.exe as part of its broader Offline Files shutdown bundle, but the publishable control surface is tracked separately in the validated Offline Files policy record.",
-  "setting": {
-    "name": "Offline Files Sync Center Binary Rename",
-    "category": "Privacy",
-    "area": "File Rename",
-    "scope": "device",
-    "casual_explanation": "This sub-tweak renames the Sync Center executable so the Offline Files user interface is harder to launch through that entry point.",
-    "why_people_change_it": "People do this when they want a hard shutdown of Sync Center behavior after already deciding to disable Offline Files.",
-    "tradeoffs_overview": "Renaming the binary can reduce access to the Sync Center entry point, but it is much more invasive than using only the documented feature policy.",
-    "professional_notes": "The provider renames C:\\Windows\\System32\\mobsync.exe to mobsync.exe.disabled. This is tracked as an observed implementation detail rather than an official Microsoft feature-control surface.",
-    "targets": [
-      {
-        "target_id": "mobsync-binary",
-        "location_kind": "file",
-        "path": "C:\\Windows\\System32\\mobsync.exe",
-        "value_name": "RenameState",
-        "value_type": "FILE_RENAME_STATE",
-        "allowed_values": [
-          {
-            "state_kind": "value",
-            "value": "present",
-            "label": "Default file state",
-            "meaning": "The Sync Center executable is present at its normal path.",
-            "evidence_ids": [
-              "app-privacy-provider"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "renamed-disabled",
-            "label": "Renamed by app bundle",
-            "meaning": "The current app renames the executable to a .disabled name.",
-            "evidence_ids": [
-              "app-privacy-provider"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "app_current_implementation": {
-    "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The app renames mobsync.exe to mobsync.exe.disabled as part of the Offline Files bundle.",
-    "writes": [
-      {
-        "target_id": "mobsync-binary",
-        "path": "C:\\Windows\\System32\\mobsync.exe",
-        "value_name": "RenameState",
-        "value_type": "FILE_RENAME_STATE",
-        "state_kind": "value",
-        "value": "renamed-disabled"
-      }
-    ]
-  },
-  "windows_defaults": [
-    {
-      "label": "Normal binary state",
-      "applies_to": "Windows systems that ship Sync Center",
-      "states": [
-        {
-          "target_id": "mobsync-binary",
-          "state_kind": "value",
-          "value": "present",
-          "rationale": "Treat the normal executable path as the baseline."
-        }
-      ],
-      "evidence_ids": [
-        "app-privacy-provider"
-      ]
-    }
-  ],
-  "recommended_profiles": [
-    {
-      "profile_id": "windows-default",
-      "label": "Windows default",
-      "intended_for": [
-        "Most users",
-        "Systems using policy-only Offline Files management"
-      ],
-      "avoid_for": [
-        "Research comparison of the current app bundle"
-      ],
-      "states": [
-        {
-          "target_id": "mobsync-binary",
-          "state_kind": "value",
-          "value": "present",
-          "rationale": "Keep the normal binary state unless there is a stronger reason to rename it."
-        }
-      ],
-      "good_when": "You want the least invasive baseline.",
-      "bad_when": "You are intentionally reproducing the product's broader shutdown bundle.",
-      "tradeoffs": [
-        "Lower implementation risk.",
-        "Does not remove this Sync Center entry point."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "app-privacy-provider"
-      ]
-    },
-    {
-      "profile_id": "current-app-profile",
-      "label": "Current app bundle",
-      "intended_for": [
-        "Research comparison only"
-      ],
-      "avoid_for": [
-        "Normal Apply exposure"
-      ],
-      "states": [
-        {
-          "target_id": "mobsync-binary",
-          "state_kind": "value",
-          "value": "renamed-disabled",
-          "rationale": "Track the file rename behavior the app currently applies."
-        }
-      ],
-      "good_when": "You are documenting the most aggressive current implementation path.",
-      "bad_when": "You want only the validated Offline Files policy control.",
-      "tradeoffs": [
-        "Harder shutdown of a Sync Center entry point.",
-        "Much more invasive than the feature policy alone."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "app-privacy-provider"
-      ]
-    }
-  ],
-  "evidence": [
-    {
-      "evidence_id": "app-privacy-provider",
-      "kind": "repo-code",
-      "title": "Current privacy provider file rename",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider renames mobsync.exe to mobsync.exe.disabled for the current sub-tweak.",
-      "supports": [
-        "ui-mapping",
-        "path",
-        "behavior"
-      ],
-      "strength": "high"
-    }
-  ],
-  "decision": {
-    "confidence": "low",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
-    "restore_default_supported": true,
-    "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "This is a strong implementation-level file rename and should not be treated as the same thing as the official feature policy.",
-    "blocking_issues": [
-      "Binary rename goes beyond the validated Offline Files policy surface."
-    ]
-  },
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
-  "validation_proof": {
-    "source_url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "exact_quote_or_path": "Current privacy provider file rename: The provider renames mobsync.exe to mobsync.exe.disabled for the current sub-tweak.",
-    "key_found_on_page": true,
-    "notes": "Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail."
-  }
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.0",
+    "record_id":  "privacy.disable-offline-files.binary",
+    "tweak_id":  "privacy.disable-offline-files.binary",
+    "record_status":  "deprecated",
+    "summary":  "Deprecated audit trail for the Offline Files binary-rename subrecord. The app renames mobsync.exe as part of its broader Offline Files shutdown bundle, but the publishable control surface is tracked separately in the validated Offline Files policy record.",
+    "setting":  {
+                    "name":  "Offline Files Sync Center Binary Rename",
+                    "category":  "Privacy",
+                    "area":  "File Rename",
+                    "scope":  "device",
+                    "casual_explanation":  "This sub-tweak renames the Sync Center executable so the Offline Files user interface is harder to launch through that entry point.",
+                    "why_people_change_it":  "People do this when they want a hard shutdown of Sync Center behavior after already deciding to disable Offline Files.",
+                    "tradeoffs_overview":  "Renaming the binary can reduce access to the Sync Center entry point, but it is much more invasive than using only the documented feature policy.",
+                    "professional_notes":  "The provider renames C:\\Windows\\System32\\mobsync.exe to mobsync.exe.disabled. This is tracked as an observed implementation detail rather than an official Microsoft feature-control surface.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "mobsync-binary",
+                                        "location_kind":  "file",
+                                        "path":  "C:\\Windows\\System32\\mobsync.exe",
+                                        "value_name":  "RenameState",
+                                        "value_type":  "FILE_RENAME_STATE",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "present",
+                                                                   "label":  "Default file state",
+                                                                   "meaning":  "The Sync Center executable is present at its normal path.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-privacy-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "renamed-disabled",
+                                                                   "label":  "Renamed by app bundle",
+                                                                   "meaning":  "The current app renames the executable to a .disabled name.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-privacy-provider"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "partially-matches",
+                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                                       "notes":  "The app renames mobsync.exe to mobsync.exe.disabled as part of the Offline Files bundle.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "mobsync-binary",
+                                                          "path":  "C:\\Windows\\System32\\mobsync.exe",
+                                                          "value_name":  "RenameState",
+                                                          "value_type":  "FILE_RENAME_STATE",
+                                                          "state_kind":  "value",
+                                                          "value":  "renamed-disabled"
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Normal binary state",
+                                 "applies_to":  "Windows systems that ship Sync Center",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "mobsync-binary",
+                                                    "state_kind":  "value",
+                                                    "value":  "present",
+                                                    "rationale":  "Treat the normal executable path as the baseline."
+                                                }
+                                            ],
+                                 "evidence_ids":  [
+                                                      "app-privacy-provider"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "windows-default",
+                                     "label":  "Windows default",
+                                     "intended_for":  [
+                                                          "Most users",
+                                                          "Systems using policy-only Offline Files management"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Research comparison of the current app bundle"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "mobsync-binary",
+                                                        "state_kind":  "value",
+                                                        "value":  "present",
+                                                        "rationale":  "Keep the normal binary state unless there is a stronger reason to rename it."
+                                                    }
+                                                ],
+                                     "good_when":  "You want the least invasive baseline.",
+                                     "bad_when":  "You are intentionally reproducing the product\u0027s broader shutdown bundle.",
+                                     "tradeoffs":  [
+                                                       "Lower implementation risk.",
+                                                       "Does not remove this Sync Center entry point."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "app-privacy-provider"
+                                                      ]
+                                 },
+                                 {
+                                     "profile_id":  "current-app-profile",
+                                     "label":  "Current app bundle",
+                                     "intended_for":  [
+                                                          "Research comparison only"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Normal Apply exposure"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "mobsync-binary",
+                                                        "state_kind":  "value",
+                                                        "value":  "renamed-disabled",
+                                                        "rationale":  "Track the file rename behavior the app currently applies."
+                                                    }
+                                                ],
+                                     "good_when":  "You are documenting the most aggressive current implementation path.",
+                                     "bad_when":  "You want only the validated Offline Files policy control.",
+                                     "tradeoffs":  [
+                                                       "Harder shutdown of a Sync Center entry point.",
+                                                       "Much more invasive than the feature policy alone."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "app-privacy-provider"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "app-privacy-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current privacy provider file rename",
+                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                         "summary":  "The provider renames mobsync.exe to mobsync.exe.disabled for the current sub-tweak.",
+                         "supports":  [
+                                          "ui-mapping",
+                                          "path",
+                                          "behavior"
+                                      ],
+                         "strength":  "high"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "low",
+                     "apply_allowed":  false,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  true,
+                     "restore_previous_supported":  true,
+                     "needs_vm_validation":  false,
+                     "why":  "This is a strong implementation-level file rename and should not be treated as the same thing as the official feature policy.",
+                     "blocking_issues":  [
+                                             "Binary rename goes beyond the validated Offline Files policy surface."
+                                         ]
+                 },
+    "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
+    "validation_proof":  {
+                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+                             "exact_quote_or_path":  "Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks, and renames mobsync.exe to block execution.",
+                             "key_found_on_page":  true,
+                             "notes":  "Binary-rename subrecord. The proof anchors the mobsync.exe rename behavior inside the Offline Files composite bundle."
+                         }
 }

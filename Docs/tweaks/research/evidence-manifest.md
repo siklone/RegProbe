@@ -28,45 +28,45 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `developer.vs-solution-load` | deprecated | `Docs/tweaks/research/records/developer.vs-solution-load.review.json` | `532f52029fd89d6fbcca903a2a119c48f03068221dc1d15b5ba1d0ce02d86ae7` | `f3d5094dc691664127f8b7cff7d1500ec045ea83e83fdfefa30d3569d90f06ae` | 1 |
 | `developer.vscode-git-autofetch` | deprecated | `Docs/tweaks/research/records/developer.vscode-git-autofetch.json` | `2dfbdf4481e9703aba1a03d90f091ab9336b95e75eb34fa64486ccd77f140373` | `e06716163838e4757577a19baa2082882403e415767e632da3bcaa89018fadce` | 2 |
 | `explorer.disable-taskbar-widgets` | deprecated | `Docs/tweaks/research/records/explorer.disable-taskbar-widgets.json` | `f89b4a4a9a01987090b432d2e87de9a2682701f8de4ddcc2f22fe8831eb775c3` | `c564531bb27c99c5c6d31c16fdc2cfef794fcda04ce5ca8598956cb5763f433a` | 1 |
-| `network.optimize-smb` | deprecated | `Docs/tweaks/research/records/network.optimize-smb.review.json` | `23aed43f47fe70bb8adff0f965bde2b6c66a53eeb91a7a45bc8f5141ebfc98e1` | `90c6cecd5950a98c6d1ee8293963b30e09b83709f7e904ecd500a7718f10bfdb` | 3 |
-| `power.disable-network-power-saving` | deprecated | `Docs/tweaks/research/records/power.disable-network-power-saving.review.json` | `58adce5438840fc592c7023919bc36c9b0ae77912780b7d4c3fac894b7b4e2c2` | `8f4c699a4b08096fd449c3527d94b214eae17d85bbc1002546736351ef6d7731` | 3 |
-| `power.optimize-performance` | deprecated | `Docs/tweaks/research/records/power.optimize-performance.review.json` | `0a5728c5aabb1bfd2fbf49ab126d585b7f895c805413a2b97dfcb1f53842deb9` | `bd00bfea4fd0a0d7ff7d3cc67b0220fdd7ecb04d2391dae562ba1318ba95846d` | 1 |
-| `privacy.deny-app-access` | deprecated | `Docs/tweaks/research/records/privacy.deny-app-access.review.json` | `12f66f634122af13535fa4a83b9c2e47fbd204fa7c33dd1fe213d4717d3be9d5` | `f112241e26e3b59e84a75a0f710dce9ae9e12db4ebb4d96fe5b4ed82ed667074` | 1 |
-| `privacy.disable-application-compatibility` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.review.json` | `5e3111002193ce5662ab1bce0dc38f690c165538fab253fd1f35a3c0fc6fdcb5` | `91af86cde38825aceb9579ee04d6d12c00e0d679d30d51f73a2cda63a6a61bd1` | 1 |
+| `network.optimize-smb` | deprecated | `Docs/tweaks/research/records/network.optimize-smb.review.json` | `f428f4197f8b38732a254d31a7bae77c1ece46ac72f6db950191556d15315a68` | `f20537679384da6d919b7646f4217435225bdad41c9462c7c48cad785a19e5eb` | 3 |
+| `power.disable-network-power-saving` | deprecated | `Docs/tweaks/research/records/power.disable-network-power-saving.review.json` | `a8a0ba2b003c31ef593996ad0600414abee42c4e738cf40a2d4564bf3b0afa9f` | `8a44b3c793b7747a5bef848a85808afb5dfc209af650712b4ebf8b03f19e4da9` | 3 |
+| `power.optimize-performance` | deprecated | `Docs/tweaks/research/records/power.optimize-performance.review.json` | `9a6099fdbda41141c13516f6bbba3f49bcf7db77d9baece2b2de08038c254020` | `58dc7326379a58002bfc8e69fc5bcc60b649ec53bb89088c2dbbf5d96c9dbdc2` | 1 |
+| `privacy.deny-app-access` | deprecated | `Docs/tweaks/research/records/privacy.deny-app-access.review.json` | `56e52c1cfe030b7599bad5a650f1becd2d3362b8112bf56bda2e1f7a45600512` | `4ae5728a5c387aaf0d21810f025314b52714ec69482975da463be70c18be5a3a` | 1 |
+| `privacy.disable-application-compatibility` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.review.json` | `22af6cee9dbb36853388f26d456c3a3d2b6fb3d5a08559c496a2862a1623bf26` | `bd45859c05009d40015767839d790f25d4748e596556c41939940d798a660bba` | 1 |
 | `privacy.disable-application-compatibility.policy` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.policy.review.json` | `af732b75650c01bd4c004ee069074067d5dac25614df3bf03a78746fc182bc8d` | `92200c73471bafab51b30d4397016d8ca189f25086c650af2258b5ebf096be76` | 1 |
-| `privacy.disable-application-compatibility.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json` | `710892d24d9d90795d807d876e43eebf6b1117e941510fd6b9270a2ee75f8687` | `301b881ab3cd7ca126a445cd56e937a13ec91d84134995b1c7d0f8a6653f0686` | 1 |
-| `privacy.disable-ceip` | deprecated | `Docs/tweaks/research/records/privacy.disable-ceip.review.json` | `11290bfaa52e11cfbcbc4e5c03fead6a1175434a9f959bc40e66bba3863d929f` | `ca46fd24299d88506c69a5854773336da7cead6db84106712899f2f19ed32c73` | 1 |
+| `privacy.disable-application-compatibility.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json` | `659c5215dc7d0938e359f4f9f75e3c6e24ad03816894a4092d0f304431339cf1` | `de8d0e5c3fe3bbc0133d9be1194edbaaec7bd4a0bc072339a635f2a925d56b81` | 1 |
+| `privacy.disable-ceip` | deprecated | `Docs/tweaks/research/records/privacy.disable-ceip.review.json` | `7c8a8db0c1d2e1c5e93be89e255cb4548c5931803519ca1b7379fc2259af3521` | `291f83fd458207687a77b2cff7de2b4b70856477f6e31fe23e129e9461db898c` | 1 |
 | `privacy.disable-cross-device-experiences` | deprecated | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json` | `995d19baf39eacc1caf9442fd1a1a79317d490c8f95df68aaf610bf735fd5628` | `8822b8f2cbf24318cad7f81a5d3fe461e79b510d4d2ffbe2544b8ea72bff29db` | 2 |
 | `privacy.disable-f1-help` | deprecated | `Docs/tweaks/research/records/privacy.disable-f1-help.review.json` | `4e3574d4caad562c3d178f89af47a4e38968788f8ea3bf25ca53e207943e1fed` | `e939be1becb0f019eb205401e305d66b05496b5a891020031caf988e94655f61` | 1 |
 | `privacy.disable-inking-typing-personalization` | deprecated | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5` | `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc` | 1 |
-| `privacy.disable-offline-files` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` | `e682490a6e163e64bc813cd8f8f5b1ae792f452931d9c810f8a912b0a56d61fe` | `d397d765b854547f45604265cef756754e5195943dbd68546546074ee4580651` | 1 |
-| `privacy.disable-offline-files.binary` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json` | `bbb2320232481fce303a047e17831649d2af4c8113ed51b334e2b2930af60634` | `99e21a607856b3165a178202c722d7920e2ee2fd6cccccd7b345d3a212d5ae10` | 1 |
+| `privacy.disable-offline-files` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` | `35163904745150c0117d1b7a744f07abab0cffc72392cf0a579c954fa5a7198c` | `8c538308e9e84828e4f6100b490500c5b6576341a93ebd7d377695dfa8786ab0` | 1 |
+| `privacy.disable-offline-files.binary` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json` | `11a14f68dfc381df5d1e626abd2cbe9bfc2b6a148d9acf16a33ef0208acf9b6b` | `0c9e074ea6e9e7fbe6a77b6bb4da1fd79573cd8be78db75080600a99343ffef6` | 1 |
 | `privacy.disable-offline-files.services` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json` | `3d3537e2a417fe62465d13906a3ed684918ed9072626aa05d902cbaf0d387f39` | `1d2a9461e246ba26660d27459057374991940a4b30a3ce0e897e4a2f56de0e69` | 1 |
 | `privacy.disable-offline-files.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.tasks.review.json` | `14375a69f2cb3b5099925cd2c9522aa270c3a7e495bcc8269409808c71cff751` | `77aaa2731fc6fe9471fd8124b323b976253ec517b6d337844a0b92af23289256` | 1 |
 | `privacy.disable-reserved-storage` | deprecated | `Docs/tweaks/research/records/privacy.disable-reserved-storage.review.json` | `235d67d91df3753bf2c87a213b1301a77a5a0ed4392c393eefc63890af6e1ce5` | `4ca83624364bff8e6efdcd5943a83b16fef25082855bf3a1fe1d029ddcaec7ff` | 1 |
-| `privacy.disable-sleep-study-diagnostics` | deprecated | `Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json` | `273dc94f06a3887fe041dd06ae2b3f1ca5d392e9016744f74ce821434e26d0bd` | `0cce457a091a16fa5d1b488db0382007b4fb893e129d91f45afe3a758dcbf8b0` | 1 |
+| `privacy.disable-sleep-study-diagnostics` | deprecated | `Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json` | `b424e46ca699e3f8b4731eb7f8a7e85f5f70c854d25ee7ade3ece78f47d63cf1` | `412364eb6a6dec3331f915bf7c0a0c51ea9534af70005eb89b059f7b269755d9` | 1 |
 | `privacy.disable-suggestions` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions.review.json` | `63518ee43394d2ed75a6da0604d982c4cd234ce1e4d3a694afb327fd39f274a7` | `bf916cbd28e9b091f2d0860e32e6799b9e57d617d0343e1d82dd50c947868d9c` | 1 |
 | `privacy.disable-suggestions-cdm` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json` | `5bc281cced83ddd4f6e98d54f4f59489ab533df19449aa3d73d9dc01292be7b4` | `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9` | 4 |
-| `privacy.disable-wmplayer-telemetry` | deprecated | `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json` | `00d2fee5568aced7a3174f207b2b1b126271e7b72b4f1515a1f645440b68f642` | `0ee737a75d10889c50be7e89c9a3c5d98fae4ec54afc4bce7825a2d61ac406a2` | 1 |
-| `security.disable-vbs` | deprecated | `Docs/tweaks/research/records/security.disable-vbs.json` | `41bfcc52f0d7832756c5b7446383f983eac7e9a5cb420453d0214d578693a75b` | `4d70ca029c77128de2ff086067dec0863968274249c4a057c3b80a15dc6b4ab8` | 3 |
+| `privacy.disable-wmplayer-telemetry` | deprecated | `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json` | `eb82b2f7b510ee7e01878070a8b8be8997c49a78e4ee57bad6eef4bd6b968f41` | `47b485383cfd24386e8b25266f61526788ae38ccc1e22f2e5643ab572cbc10e1` | 1 |
+| `security.disable-vbs` | deprecated | `Docs/tweaks/research/records/security.disable-vbs.json` | `a4998ad636204c82f6ae87c6cf5903d7575241c8d5cbb489949b7b9612134856` | `875362a1cc4fae3a9ee03d01d96ae6e825dd46f3a80c1fa0fb1885197dc650f6` | 3 |
 | `security.disable-windows-update` | deprecated | `Docs/tweaks/research/records/security.disable-windows-update.review.json` | `1bac61cff5ed58ceea12e8e6577962425b03c9da57518804f8e1e1eb4c123163` | `e39f151336b7dc9297dcff821b6d7da188f5a89cce214c2111a8979f3650a881` | 2 |
-| `security.disable-wpbt` | deprecated | `Docs/tweaks/research/records/security.disable-wpbt.review.json` | `ca83a32a287b8375129eb225dba8ac22b9e1a3bdee5c2d0ec3fbd95ceced4998` | `4927ff1c6913ae4cd5deba231dc995dd412907f73f0ed9c159fe0cfcfa9b91dd` | 1 |
+| `security.disable-wpbt` | deprecated | `Docs/tweaks/research/records/security.disable-wpbt.review.json` | `c04bfc77800ab0b9663338cf9f0297c2d33483523c36f2a93aafccb13c34340c` | `9340fb4ae045879f47ade1a08447c731fdae8aef759b7e34b637b51c36adb0d6` | 1 |
 | `system.disable-game-dvr` | deprecated | `Docs/tweaks/research/records/system.disable-game-dvr.json` | `d4cd43987979de1e1cbb09cc70fb2428928176fb26e7abf5cfaa1eeaeb304b6d` | `4598eb3a4a7a554a32beb57abe4def5b4df7dc2cc841aa9df298709c324a6795` | 0 |
-| `system.disable-scheduled-tasks` | deprecated | `Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json` | `9b505be7b53da581504617af52ec4285c0940c8fc7168579a56f28628ce50e3c` | `40322a292ce62ce678a14b690d64ed26015b085370acfd32302aa703c2412dbd` | 7 |
+| `system.disable-scheduled-tasks` | deprecated | `Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json` | `d4b01e85ca687ea57def840abfb5d85e4d259381f09ca8026847832c58b08385` | `14fdf96dc2d205ea9aecaa1d530e572e5f63a016031ec2c879b3605d5527a51e` | 7 |
 | `system.disable-search-highlights` | deprecated | `Docs/tweaks/research/records/system.disable-search-highlights.json` | `cbb37a1de1c09ae0e0fe5e377d3c8f591ef9e4c032aba829b18ed383e328ca30` | `2cebd2b8f3a1d2ecfae968fef5c0dda7bf435391ee0f1a7899d88b7023c6ca99` | 0 |
 | `system.disable-service-splitting` | deprecated | `Docs/tweaks/research/records/system.disable-service-splitting.review.json` | `4a54e4039e3c13bf4495ee6f40577d7d4075ed2552f81ca1839175bae9a8d2d6` | `f4de2df5d71667b2a6ccc8ec955f0583f37339e6077ea07ee101e043632e841e` | 1 |
-| `system.dwm-disable-mpo` | deprecated | `Docs/tweaks/research/records/system.dwm-disable-mpo.review.json` | `be65179b8782418c3fc931cde2f8de3de9862a767abc72cafec837c34e249c23` | `4e44184e6dc57a482865e5627e3e6613adb5d9d49cf8d39aa60fc426a15abccd` | 1 |
-| `system.graphics-disable-overlays` | deprecated | `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json` | `88adca28dc497c05a0e4db0c2fd1d8f86ddeb2d100f1c2568bc424a43087564e` | `c79fcdabc22d88b503005cf23a6d7beb062846e70008144b221066dc28658b2e` | 1 |
-| `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `276bbd2a4c2ce52a83c499be0f3a72f5ce77cd81fb94970e295bd98e8c213baa` | `d0e58abe267efb2fa6edd8b7c1d86788cf7416d32ab33d876d51464f7496aeb0` | 1 |
-| `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `a6dae46035b960252a4ada33a2caa5a9379c88650917a792252e361704543ca3` | `3028d51e35ee7ebffe78f4c69cec397847dc96a54a7d2ed9e31105d9b72758ee` | 1 |
-| `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `89753fb62188d47bb03bfac049f5a79959911897e840f34023b39bc64992fadc` | `c6a065d0d3b3139c695abc4ec89c3d0bd0399f78be5eae82bec3c0cbd937a36c` | 1 |
+| `system.dwm-disable-mpo` | deprecated | `Docs/tweaks/research/records/system.dwm-disable-mpo.review.json` | `86932e4673dd8c9e5db4cd9d0a7cc82d4cb3dd53c2150a5e079d983c3ff674dc` | `cff71e2f37ceccde58b2eafe48044a4ac42b5453b9676780d76aa89c5cafe309` | 1 |
+| `system.graphics-disable-overlays` | deprecated | `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json` | `6cf5e02e4ced0aa7b215752645b3239269b66d175b298283f93829863e01cf92` | `dbf1407cc708022946c9f7e61f339d401d97e7a859bb0e947f2824dbf29a803e` | 1 |
+| `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `98ef739d16ea86aabaedb34b97ce872b4f0fcd5fcb7d32ab364a8b863d489580` | `de461e3f29a05889c82ae0349ddf469cce6bcacc3a632e36c6bdcd1b029992df` | 1 |
+| `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `ef504ed9c183157c41fcb1d64f0b90fe16a8860e50cf35c0cf518e9bb2f4bcdf` | `2783841c143e66f525777e03f8af340643b6a6a136a78cd343969861c71eb348` | 1 |
+| `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `8e2fbbfcb328d9ccc42ba64843c5502477aba92c21fda2ec72b68db30898e3cd` | `c884ea4b4736b245520364697f45cbf14a2f63119fbc5b20763599056d3c5a04` | 1 |
 | `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `1d335b99485bc826b3884f1d11fb28d6597a40b9ba1736f5aa8aba80cd733d56` | `b510524d68142e1c56f5db50518288f2da73588b1d05824a2cebc6378ef57f66` | 1 |
-| `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `3cd332965fe34f0a7232c7e928c5b8796f881d12a631989cd5d687859c6a4b10` | `98c31b60eabc31dfda0d383d92c2948b1d5703d3224b0389fb7262238dc767c4` | 1 |
-| `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `d2b0e6450222247b0d3476725ebb0797a877371d303934f9f03b5b3adefab8f3` | `635f3a9c58962cc5967fbe0d66c8e9df3aeb0ec9c11c269d18f1bf6f35a5d413` | 1 |
-| `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `e78110b1b6cf518c9491ae40c910fee7742b5971f28c315d3c1beb2fad3a9993` | `59762eba3c15ce7a5714a73158eeb41bc86fae56ca8f1ae7f0934340d6546673` | 1 |
-| `system.kernel-ideal-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `086673f463f8dd856d153089a60bf70b6f8063c650210a266f03964e78495971` | `ccfb031524f42d0d3584d6259dc7e4cefa45e9979c0ae9cd0ea7dc5790204627` | 1 |
-| `system.kernel-minimum-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `75d456ca354bcb26986d5a9e857b246793dc0714563ba8b7254dc50c35b75e4e` | `960331f79bb1505073306b8b60feb5cd9fc4c719a2821dfead2a29d851787483` | 1 |
-| `system.kernel-serialize-timer-expiration` | deprecated | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` | `a26d6fe221b66fa0fc36e03b9dd5d2a716f747b22c7e53590656bf6c8e0076cc` | `b789c6c711ebcd33ba76dda800c2bd0c3cf6eae6a31869e7044fcf3c41f7eebd` | 1 |
+| `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `34c8f0c57f6189c472fad32f0efb66483af1814bbb15c2d037e9a1f03c91057e` | `20b23073bf938dad8354fd9353b673d93f200f5d2d987a93302fe20df0a61f0d` | 1 |
+| `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `58e130cb608027ee2908af5c820c7a9b6145e90f97720d99bd072aac62ed9401` | `a96b6aa6fec82dfb156805a23c0aad2bd2234ad31360b518328553c7b450750a` | 1 |
+| `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `6aa525e9f89470f7e88fff296c53f34018cef943a4804667123d1af9db6cf31d` | `9a8a79a362286c1eddb764cd2bb03d381f206a395c99c8eeaf22c4bab750f1be` | 1 |
+| `system.kernel-ideal-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `0df4c834a95038ad946861742a59b5d594c65badea7eee2d3943cbf5ad0f6eef` | `e0e9a3b89fd3402e74e01bd31bf48ac1739f3196098be2c69e2db1dbdf8405a9` | 1 |
+| `system.kernel-minimum-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `a5c750ab3bcb48f160e0f8ba00dbed347439b8de05051a6d3628cd11be8d6754` | `54e7383b0e9b75b22382bdc664680717a92458a4578662619d0edf85c4401f76` | 1 |
+| `system.kernel-serialize-timer-expiration` | deprecated | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` | `ae6efb38288c21a8fd3f1e0b822c18f9bf8b378a0b93e372ff4fdd0349d249c9` | `1b2367271cac17e6f54d907d0932fb99795e56a14487a023d3bc7b8e595193ba` | 1 |
 | `system.services.disable-print-device-configuration` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-device-configuration.json` | `3101fdf06a38bfbd1fb99a735145546b6f2bcf9439946b8840db2ec2136c6893` | `02fb442a6fc902af0a89043f68fb1c32cd90fc04bb17cad014b82bb78b2266ac` | 1 |
 | `system.services.disable-print-scan-broker` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-scan-broker.json` | `fb63ce1ae6ec3c78f95b271148dcdecbb4258908b06426c4fbe85efa7cee1e41` | `d96f33b3f944ebfba9155d20db5cfcb4d4596e130a3e1f07b831f24ad3fe112a` | 1 |
 | `system.services.disable-print-workflow-user-service` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-workflow-user-service.json` | `1b8b436ef97a5a02a86e8436a8eb8b79ef50d0f0118b1bac0bb53059c15ebeb6` | `94381b6c1d68589882ee162feab63d1d35964b621bf82a6e0b9188782d790055` | 1 |
@@ -74,8 +74,8 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.services.disable-wap-push-routing` | deprecated | `Docs/tweaks/research/records/system.services.disable-wap-push-routing.review.json` | `e97ccaa2298a6068f8c0ddfc9cbd17d1bcb07a8f1d6d2c60159afbaea3fdb677` | `2458c27ca10eeeb2d794bbd64ce5d2fd8c2c88ef8f854ad9c8ed425fc0894f28` | 1 |
 | `system.services.disable-windows-error-reporting` | deprecated | `Docs/tweaks/research/records/system.services.disable-windows-error-reporting.review.json` | `2d1d17ca9a3df5dac34d597126d30439408c364f975cc8e5284721bb3b25e337` | `1af4ce46fa6d4c619326da763939eb8969b2300b9eabd16fbb0e485987356791` | 1 |
 | `audio.disable-beep` | validated | `Docs/tweaks/research/records/audio.disable-beep.review.json` | `3efba036852ccfe1d739d4fe044a827c5869d7588470af089efd76924a5fc479` | `4d074ac9987be3f1f28b06277c747e6c49da4b27be38ff2380400b9cc1a6b4ef` | 1 |
-| `audio.show-disconnected-devices` | validated | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` | `fb77ec5f6d2975f5623ac5be10fcb9294f54aa94ce8fb9eb8bd2b91362ae71ac` | `2787838415398070d4fa42fa9be2a129552ec7168a3d80d840c067dde24b8725` | 1 |
-| `audio.show-hidden-devices` | validated | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `d270f7c190d9c6877e85c4cee64feb6013a0c180660e77127f2fafa2cc0966c7` | `b20c6cd1377978c30a74c06ba12034057fa29842124424947b081b8f9a10ead9` | 1 |
+| `audio.show-disconnected-devices` | validated | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` | `6ebe3325d9398956ed2e1c38645bc1605f1efb4404396b0e12faee5baff56373` | `8d67f764d7eaaf3719428c7c806dc6ec55bc227135dbb6daa493eaf8c390c9a1` | 1 |
+| `audio.show-hidden-devices` | validated | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `53977bf3d42a6320f03cd04c3e782abd1c8c91c3bede2f0a11ce060401eb8a53` | `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95` | 1 |
 | `cleanup.disable-reserved-storage` | validated | `Docs/tweaks/research/records/cleanup.disable-reserved-storage.review.json` | `d613803743ec930d75f7bb5a7dd770a6232bdd95d955a591812b92631ae2fd76` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 1 |
 | `developer.docker-performance` | validated | `Docs/tweaks/research/records/developer.docker-performance.review.json` | `e86fa037da24385991ffe94edbb1039cf5b2ee636654d27c3d4f0e7d4062473a` | `e4c2f1a09fcfe91db5161301b71b4ec7262c17dc97de49b390f65f9abcf9253d` | 1 |
 | `developer.dotnet-telemetry-disable` | validated | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` | `b78802cb5a3836c719b9463afbeb1f933f1f9011a591ade113264880303dc648` | `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c` | 1 |
@@ -225,7 +225,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `security.enable-sudo` | validated | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.powershell-unrestricted` | validated | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
 | `security.trusted-path-credential-prompting` | validated | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `8b0e09305cc1c955d9dbfe9d5267896ef3a8c2b0abf7f7c1e22bed7445a6ea32` | `46abb02e32d8ff5bbeeac6754e7b7a208fbd5fb52878e309097e1915130a284a` | 1 |
-| `security.uac-never-notify` | validated | `Docs/tweaks/research/records/security.uac-never-notify.json` | `5de1afe0d0b74cad2f71bc7fa16eb5d7bc0868ddef850c348b66791e478969c7` | `28928a8b489183e43cb6a5224a72732ea4946df56e4156a4fc3deff88d9ef3cd` | 3 |
+| `security.uac-never-notify` | validated | `Docs/tweaks/research/records/security.uac-never-notify.json` | `c39a26d1490d55dd6e56b7be9b2ed61dbfd99ddfa553e82be7ea68669011ec2b` | `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f` | 3 |
 | `system.aero-shake` | validated | `Docs/tweaks/research/records/system.aero-shake.json` | `8eec9814f9162d5fd8de64d4ce729d88bc1c815255ab25b10a71ee1b93e2073b` | `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b` | 1 |
 | `system.bsod-disable-auto-reboot` | validated | `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json` | `71ce59e9590a9c45f0132c3b72477d9fa8437f4e560eb9e9d6af8acfbf95e88b` | `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181` | 1 |
 | `system.bsod-display-parameters` | validated | `Docs/tweaks/research/records/system.bsod-display-parameters.review.json` | `e90d825e8244b7d4e7ebbe1dc881d969713133feee0c06d638d5a5253523d0ae` | `1eea0c9c620c9caae29215c18a6608b3d6f5eea2beb90bc41fc83ec26ef41b3f` | 1 |
@@ -247,8 +247,8 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.disable-storage-sense-temp-cleanup` | validated | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
 | `system.dwm-disable-overlay-min-fps` | validated | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
-| `system.enable-game-mode` | validated | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `d2ccd6b8a146d360797e06ea7aa6263dfa549d0e196ff6ae5286a11da1b430db` | `cff3cb7475f7ba12798a842befdb2af9ce4588496c2d47ab8a73de138d3ff63b` | 1 |
-| `system.enable-hags` | validated | `Docs/tweaks/research/records/system.enable-hags.review.json` | `67e611db82c00e0017d924c954f01272613619eb014f4a94f2a24435a3191ee6` | `d94bfba78ce6da3cc780808ea108503c63e9d3cd81e5c305c6972c630e04f46f` | 1 |
+| `system.enable-game-mode` | validated | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `91eca68105f1bf46cc3abfbe4dcedbbd5fedbc58cfd056ac3c2a6b69a58faa76` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
+| `system.enable-hags` | validated | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
 | `system.enable-indexing-encrypted-items` | validated | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `bdc09bee78c232ef1bcd5b9ab483aef478a9dd429315fa88206e603628efac84` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
 | `system.graphics-tdr-ddi-delay` | validated | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
 | `system.graphics-tdr-delay` | validated | `Docs/tweaks/research/records/system.graphics-tdr-delay.json` | `7f68171dcc72f3211cb65563724d88a3c847454998a0d6f2331522fb49fe0614` | `b6da5db4f695d7ba7a08d29bd3859c1c57b438bb3ba83564b9ec1fd0a74c4dbf` | 1 |
@@ -657,8 +657,8 @@ _No provenance block present._
 - Area: `Registry Optimization Bundle`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/network.optimize-smb.review.json`
-- Source SHA256: `23aed43f47fe70bb8adff0f965bde2b6c66a53eeb91a7a45bc8f5141ebfc98e1`
-- Proof SHA256: `90c6cecd5950a98c6d1ee8293963b30e09b83709f7e904ecd500a7718f10bfdb`
+- Source SHA256: `f428f4197f8b38732a254d31a7bae77c1ece46ac72f6db950191556d15315a68`
+- Proof SHA256: `f20537679384da6d919b7646f4217435225bdad41c9462c7c48cad785a19e5eb`
 
 **Summary:** Deprecated audit trail for the SMB tuning bundle. The individual values are documented, but the current app uses a broad three-value preset that is not being published as a single normalized control surface.
 
@@ -708,10 +708,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/ |
-| exact_quote_or_path | Microsoft Learn: Performance tuning for SMB file servers: Microsoft documents the SMB client cache lifetime and bandwidth throttling values, including defaults and a tuning example for higher-latency scenarios. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md |
+| exact_quote_or_path | RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-smb-client-tuning (official-doc); deprecated audit trail. |
+| notes | Mirror-backed SMB tuning bundle. This is a composite of documented SMB offload/RSS/VMQ surfaces, not a single supported toggle. |
 ### `power.disable-network-power-saving`
 
 - Status: `deprecated`
@@ -719,8 +719,8 @@ Windows Internals references:
 - Area: `Mixed Network and MMCSS Registry`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.disable-network-power-saving.review.json`
-- Source SHA256: `58adce5438840fc592c7023919bc36c9b0ae77912780b7d4c3fac894b7b4e2c2`
-- Proof SHA256: `8f4c699a4b08096fd449c3527d94b214eae17d85bbc1002546736351ef6d7731`
+- Source SHA256: `a8a0ba2b003c31ef593996ad0600414abee42c4e738cf40a2d4564bf3b0afa9f`
+- Proof SHA256: `8a44b3c793b7747a5bef848a85808afb5dfc209af650712b4ebf8b03f19e4da9`
 
 **Summary:** Deprecated audit trail for the mixed network power-saving bundle. The official TCP/IP offload and MMCSS values are split into a child record; the opaque NetworkThrottlingIndex value remains tracked only here.
 
@@ -768,10 +768,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service |
-| exact_quote_or_path | Microsoft Learn: Multimedia Class Scheduler Service: Microsoft documents SystemResponsiveness under the SystemProfile key and explains how the value is rounded and clamped. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md |
+| exact_quote_or_path | RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-mmcss (official-doc); deprecated audit trail. |
+| notes | The bundle spans network adapter power and offload surfaces; this mirror line is the strongest source for the current write shape. |
 ### `power.optimize-performance`
 
 - Status: `deprecated`
@@ -779,8 +779,8 @@ Windows Internals references:
 - Area: `Raw Power Manager Registry`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.optimize-performance.review.json`
-- Source SHA256: `0a5728c5aabb1bfd2fbf49ab126d585b7f895c805413a2b97dfcb1f53842deb9`
-- Proof SHA256: `bd00bfea4fd0a0d7ff7d3cc67b0220fdd7ecb04d2391dae562ba1318ba95846d`
+- Source SHA256: `9a6099fdbda41141c13516f6bbba3f49bcf7db77d9baece2b2de08038c254020`
+- Proof SHA256: `58dc7326379a58002bfc8e69fc5bcc60b649ec53bb89088c2dbbf5d96c9dbdc2`
 
 **Summary:** Deprecated audit trail for the raw power-manager performance bundle. The current app bundles several low-level registry values into one preset, but the publishable control surface is not a single Microsoft-supported toggle.
 
@@ -824,10 +824,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/power/power.md |
-| exact_quote_or_path | Repo power notes: The repo tracks these low-level values as research notes and reverse-engineered observations, but this review did not find a primary Microsoft registry source for publishing the bundle as validated. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\power\\desc.md |
+| exact_quote_or_path | "EnergySaverState" = 2; // 1 = override state (more power savings)? if != 1 no override? ... # Disable NIC Power Savings |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id repo-power-doc (repo-doc); deprecated audit trail. |
+| notes | Raw power-manager performance bundle. The record is a composite preset, so the proof anchors the power-state and NIC power-saving pieces rather than claiming one supported Microsoft toggle. |
 ### `privacy.deny-app-access`
 
 - Status: `deprecated`
@@ -835,8 +835,8 @@ Windows Internals references:
 - Area: `Registry Policy Bundle`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.deny-app-access.review.json`
-- Source SHA256: `12f66f634122af13535fa4a83b9c2e47fbd204fa7c33dd1fe213d4717d3be9d5`
-- Proof SHA256: `f112241e26e3b59e84a75a0f710dce9ae9e12db4ebb4d96fe5b4ed82ed667074`
+- Source SHA256: `56e52c1cfe030b7599bad5a650f1becd2d3362b8112bf56bda2e1f7a45600512`
+- Proof SHA256: `4ae5728a5c387aaf0d21810f025314b52714ec69482975da463be70c18be5a3a`
 
 **Summary:** Deprecated audit trail for the broad AppPrivacy deny bundle. The official AppPrivacy policy family is split into a child record; the extra System policy write and broader implementation details remain tracked only here.
 
@@ -875,9 +875,9 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | source_url | C:\\Windows\\PolicyDefinitions\\AppPrivacy.admx |
-| exact_quote_or_path | Microsoft AppPrivacy administrative template: The local AppPrivacy administrative template documents many LetAppsAccess* policy values, including 2 for ForceDeny and 0 for user control. |
+| exact_quote_or_path | policy name="LetAppsAccessCamera" class="Machine" key="Software\\Policies\\Microsoft\\Windows\\AppPrivacy" valueName="LetAppsAccessCamera"; policy name="LetAppsAccessMicrophone" class="Machine" key="Software\\Policies\\Microsoft\\Windows\\AppPrivacy" valueName="LetAppsAccessMicrophone"; policy name="LetAppsAccessLocation" class="Machine" key="Software\\Policies\\Microsoft\\Windows\\AppPrivacy" valueName="LetAppsAccessLocation". |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-appprivacy-admx (official-doc); deprecated audit trail. |
+| notes | Composite AppPrivacy deny bundle. The proof anchors the official AppPrivacy family and its per-capability policy names. |
 ### `privacy.disable-application-compatibility`
 
 - Status: `deprecated`
@@ -885,8 +885,8 @@ Nohuto lineage references:
 - Area: `Composite`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-application-compatibility.review.json`
-- Source SHA256: `5e3111002193ce5662ab1bce0dc38f690c165538fab253fd1f35a3c0fc6fdcb5`
-- Proof SHA256: `91af86cde38825aceb9579ee04d6d12c00e0d679d30d51f73a2cda63a6a61bd1`
+- Source SHA256: `22af6cee9dbb36853388f26d456c3a3d2b6fb3d5a08559c496a2862a1623bf26`
+- Proof SHA256: `bd45859c05009d40015767839d790f25d4748e596556c41939940d798a660bba`
 
 **Summary:** Deprecated audit trail for the old composite toggle. The AppCompat policy bundle and Application Experience task bundle are tracked separately in child records.
 
@@ -923,10 +923,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/tweaks/research/records/privacy.disable-application-compatibility.policy.review.json |
-| exact_quote_or_path | Existing AppCompat policy review record: The policy half of the composite is already documented as review-required. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| exact_quote_or_path | Disables Windows Application Experience telemetry and compatibility components, Microsoft Compatibility Appraiser (including its daily task and CompatTelRunner.exe) and the Application Experience tasks. Currently includes all existing tasks in \\\\Microsoft\\\\Windows\\\\Application Experience\\\\ (LTSC IoT Enterprise 2024): MareBackup, Microsoft Compatibility Appraiser, Microsoft Compatibility Appraiser Exp, PcaPatchDbTask, SdbinstMergeDbTask, StartupAppTask. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id policy-subrecord (repo-doc); deprecated audit trail. |
+| notes | Composite Application Experience audit trail. This proof anchors the task family and telemetry components from the upstream mirror. |
 ### `privacy.disable-application-compatibility.policy`
 
 - Status: `deprecated`
@@ -970,8 +970,8 @@ _No provenance block present._
 - Area: `Scheduled Task Bundle`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json`
-- Source SHA256: `710892d24d9d90795d807d876e43eebf6b1117e941510fd6b9270a2ee75f8687`
-- Proof SHA256: `301b881ab3cd7ca126a445cd56e937a13ec91d84134995b1c7d0f8a6653f0686`
+- Source SHA256: `659c5215dc7d0938e359f4f9f75e3c6e24ad03816894a4092d0f304431339cf1`
+- Proof SHA256: `de8d0e5c3fe3bbc0133d9be1194edbaaec7bd4a0bc072339a635f2a925d56b81`
 
 **Summary:** Deprecated audit trail for the Application Experience task bundle. The current app disables a bundle of scheduled tasks, but the publishable control surface is tracked separately in the validated policy record.
 
@@ -996,10 +996,10 @@ _No provenance block present._
 
 | Field | Value |
 | --- | --- |
-| source_url | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| exact_quote_or_path | Current privacy provider task bundle: The provider disables six scheduled tasks in the Application Experience folder as one bundle. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| exact_quote_or_path | Currently includes all existing tasks in \\\\Microsoft\\\\Windows\\\\Application Experience\\\\ (LTSC IoT Enterprise 2024): MareBackup, Microsoft Compatibility Appraiser, Microsoft Compatibility Appraiser Exp, PcaPatchDbTask, SdbinstMergeDbTask, StartupAppTask. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| notes | Task bundle subrecord. The proof captures the exact Application Experience task set described in the mirror. |
 ### `privacy.disable-ceip`
 
 - Status: `deprecated`
@@ -1007,8 +1007,8 @@ _No provenance block present._
 - Area: `Registry Policy Bundle`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-ceip.review.json`
-- Source SHA256: `11290bfaa52e11cfbcbc4e5c03fead6a1175434a9f959bc40e66bba3863d929f`
-- Proof SHA256: `ca46fd24299d88506c69a5854773336da7cead6db84106712899f2f19ed32c73`
+- Source SHA256: `7c8a8db0c1d2e1c5e93be89e255cb4548c5931803519ca1b7379fc2259af3521`
+- Proof SHA256: `291f83fd458207687a77b2cff7de2b4b70856477f6e31fe23e129e9461db898c`
 
 **Summary:** Deprecated audit trail for the old CEIP composite bundle. The App-V, SQMClient, and Messenger values are still observable, but this parent record is no longer the primary research surface.
 
@@ -1043,10 +1043,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| exact_quote_or_path | Current privacy provider CEIP bundle: The provider writes AppV CEIPEnable = 0, SQMClient CEIPEnable = 0, and Messenger CEIP = 2. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| exact_quote_or_path | "ValueName": "CEIPEnable" ... "KeyPath": ["HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\AppV\\\\CEIP"] ... "DisplayName": "Turn off Windows Customer Experience Improvement Program" ... "KeyPath": ["HKLM\\\\Software\\\\Policies\\\\Microsoft\\\\SQMClient\\\\Windows"] ... "ValueName": "CEIPEnable". |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| notes | Composite CEIP audit trail. The mirror shows CEIPEnable on both App-V and SQMClient policy surfaces. |
 ### `privacy.disable-cross-device-experiences`
 
 - Status: `deprecated`
@@ -1209,8 +1209,8 @@ Nohuto lineage references:
 - Area: `Composite`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-offline-files.review.json`
-- Source SHA256: `e682490a6e163e64bc813cd8f8f5b1ae792f452931d9c810f8a912b0a56d61fe`
-- Proof SHA256: `d397d765b854547f45604265cef756754e5195943dbd68546546074ee4580651`
+- Source SHA256: `35163904745150c0117d1b7a744f07abab0cffc72392cf0a579c954fa5a7198c`
+- Proof SHA256: `8c538308e9e84828e4f6100b490500c5b6576341a93ebd7d377695dfa8786ab0`
 
 **Summary:** Deprecated audit trail for the old composite toggle. The validated Offline Files policy and the broader service, task, and binary subrecords are tracked separately.
 
@@ -1246,10 +1246,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json |
-| exact_quote_or_path | Existing Offline Files policy record: The core NetCache policy mapping is already validated and documents the official feature surface. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| exact_quote_or_path | Offline Files (Client-Side Caching, CSC) lets Windows cache files from network shares locally ... If you enable this policy setting, Offline Files is enabled and users cannot disable it. If you disable this policy setting, Offline Files is disabled and users cannot enable it. ... Hides or displays reminder balloons ... Synchronize all offline files before logging off ... Synchronize all offline files when logging on ... Remove "Work offline" command. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id offline-policy-subrecord (repo-doc); deprecated audit trail. |
+| notes | Composite Offline Files policy bundle. The proof cites the documented NetCache policy family and the related task and UI behavior. |
 ### `privacy.disable-offline-files.binary`
 
 - Status: `deprecated`
@@ -1257,8 +1257,8 @@ Nohuto lineage references:
 - Area: `File Rename`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json`
-- Source SHA256: `bbb2320232481fce303a047e17831649d2af4c8113ed51b334e2b2930af60634`
-- Proof SHA256: `99e21a607856b3165a178202c722d7920e2ee2fd6cccccd7b345d3a212d5ae10`
+- Source SHA256: `11a14f68dfc381df5d1e626abd2cbe9bfc2b6a148d9acf16a33ef0208acf9b6b`
+- Proof SHA256: `0c9e074ea6e9e7fbe6a77b6bb4da1fd79573cd8be78db75080600a99343ffef6`
 
 **Summary:** Deprecated audit trail for the Offline Files binary-rename subrecord. The app renames mobsync.exe as part of its broader Offline Files shutdown bundle, but the publishable control surface is tracked separately in the validated Offline Files policy record.
 
@@ -1282,10 +1282,10 @@ _No provenance block present._
 
 | Field | Value |
 | --- | --- |
-| source_url | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| exact_quote_or_path | Current privacy provider file rename: The provider renames mobsync.exe to mobsync.exe.disabled for the current sub-tweak. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| exact_quote_or_path | Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks, and renames mobsync.exe to block execution. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| notes | Binary-rename subrecord. The proof anchors the mobsync.exe rename behavior inside the Offline Files composite bundle. |
 ### `privacy.disable-offline-files.services`
 
 - Status: `deprecated`
@@ -1405,8 +1405,8 @@ _No provenance block present._
 - Area: `Event Channel Bundle`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json`
-- Source SHA256: `273dc94f06a3887fe041dd06ae2b3f1ca5d392e9016744f74ce821434e26d0bd`
-- Proof SHA256: `0cce457a091a16fa5d1b488db0382007b4fb893e129d91f45afe3a758dcbf8b0`
+- Source SHA256: `b424e46ca699e3f8b4731eb7f8a7e85f5f70c854d25ee7ade3ece78f47d63cf1`
+- Proof SHA256: `412364eb6a6dec3331f915bf7c0a0c51ea9534af70005eb89b059f7b269755d9`
 
 **Summary:** Deprecated audit trail for the old Sleep Study diagnostic-channel bundle. The underlying event channels remain observable, but the parent record is no longer the primary research surface.
 
@@ -1444,10 +1444,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| exact_quote_or_path | Current privacy provider sleep-study diagnostics bundle: The provider writes Enabled = 0 under three WINEVT diagnostic channel keys related to sleep and power. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| exact_quote_or_path | Sleep Study tracks modern sleep states to analyze energy usage and pinpoint battery drain. It disables Sleep Study by making ETL logs read-only, disabling related diagnostics, and turning off the scheduled task. wevtutil sl Microsoft-Windows-SleepStudy/Diagnostic /e:false ... SleepStudyDeviceAccountingLevel = 4; SleepStudyDisabled = 0. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| notes | Sleep Study diagnostics bundle. The proof anchors the ETL channel, the related registry values, and the scheduled task behavior. |
 ### `privacy.disable-suggestions`
 
 - Status: `deprecated`
@@ -1572,8 +1572,8 @@ Nohuto lineage references:
 - Area: `Observed App Preference Bundle`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json`
-- Source SHA256: `00d2fee5568aced7a3174f207b2b1b126271e7b72b4f1515a1f645440b68f642`
-- Proof SHA256: `0ee737a75d10889c50be7e89c9a3c5d98fae4ec54afc4bce7825a2d61ac406a2`
+- Source SHA256: `eb82b2f7b510ee7e01878070a8b8be8997c49a78e4ee57bad6eef4bd6b968f41`
+- Proof SHA256: `47b485383cfd24386e8b25266f61526788ae38ccc1e22f2e5643ab572cbc10e1`
 
 **Summary:** Deprecated audit trail for the old Windows Media Player preferences bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.
 
@@ -1610,10 +1610,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs |
-| exact_quote_or_path | Current privacy provider Windows Media Player bundle: The provider writes a Windows Media Player preference bundle affecting metadata retrieval, usage tracking, and MRU behavior. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| exact_quote_or_path | WMPlayer (Windows Media Player) sends player usage data by default ... This option turns off the Diagnostics and Feedback option ... Note: I gathered all registry values via the legacy WMPlayer. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail. |
+| notes | Windows Media Player telemetry bundle. The proof anchors the legacy WMPlayer-registry capture path and the usage-data behavior. |
 ### `security.disable-vbs`
 
 - Status: `deprecated`
@@ -1621,8 +1621,8 @@ Nohuto lineage references:
 - Area: `Registry Policy Bundle`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.disable-vbs.json`
-- Source SHA256: `41bfcc52f0d7832756c5b7446383f983eac7e9a5cb420453d0214d578693a75b`
-- Proof SHA256: `4d70ca029c77128de2ff086067dec0863968274249c4a057c3b80a15dc6b4ab8`
+- Source SHA256: `a4998ad636204c82f6ae87c6cf5903d7575241c8d5cbb489949b7b9612134856`
+- Proof SHA256: `875362a1cc4fae3a9ee03d01d96ae6e825dd46f3a80c1fa0fb1885197dc650f6`
 
 **Summary:** Deprecated audit trail for the legacy Device Guard VBS bundle. The record documents the three official policy values, but the bundle is too broad and runtime-sensitive to publish as a single normalized control surface.
 
@@ -1678,9 +1678,9 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | source_url | C:\\Windows\\PolicyDefinitions\\DeviceGuard.admx |
-| exact_quote_or_path | Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation. |
-| key_found_on_page | False |
-| notes | Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof. |
+| exact_quote_or_path | <policy name="VirtualizationBasedSecurity" key="SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\DeviceGuard" valueName="EnableVirtualizationBasedSecurity"><enabledValue><decimal value="1" /></enabledValue><disabledValue><decimal value="0" /></disabledValue> |
+| key_found_on_page | True |
+| notes | Official Device Guard policy mapping. The record is deprecated, but the proof is now machine-checkable against the local ADMX. |
 ### `security.disable-windows-update`
 
 - Status: `deprecated`
@@ -1746,8 +1746,8 @@ Windows Internals references:
 - Area: `Observed Session Manager Registry Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.disable-wpbt.review.json`
-- Source SHA256: `ca83a32a287b8375129eb225dba8ac22b9e1a3bdee5c2d0ec3fbd95ceced4998`
-- Proof SHA256: `4927ff1c6913ae4cd5deba231dc995dd412907f73f0ed9c159fe0cfcfa9b91dd`
+- Source SHA256: `c04bfc77800ab0b9663338cf9f0297c2d33483523c36f2a93aafccb13c34340c`
+- Proof SHA256: `9340fb4ae045879f47ade1a08447c731fdae8aef759b7e34b637b51c36adb0d6`
 
 **Summary:** Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail.
 
@@ -1791,10 +1791,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings |
-| exact_quote_or_path | Microsoft Learn DFCI WPBT setting reference: Microsoft documents WPBT as a UEFI or DFCI managed feature with Not configured, Enabled, and Disabled states. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\security\\desc.md |
+| exact_quote_or_path | \\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager : DisableWpbtExecution |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-dfci-wpbt (official-doc); deprecated audit trail. |
+| notes | Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle. |
 ### `system.disable-game-dvr`
 
 - Status: `deprecated`
@@ -1835,8 +1835,8 @@ _No provenance block present._
 - Area: `Scheduled Tasks`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json`
-- Source SHA256: `9b505be7b53da581504617af52ec4285c0940c8fc7168579a56f28628ce50e3c`
-- Proof SHA256: `40322a292ce62ce678a14b690d64ed26015b085370acfd32302aa703c2412dbd`
+- Source SHA256: `d4b01e85ca687ea57def840abfb5d85e4d259381f09ca8026847832c58b08385`
+- Proof SHA256: `14fdf96dc2d205ea9aecaa1d530e572e5f63a016031ec2c879b3605d5527a51e`
 
 **Summary:** Deprecated audit trail for the old scheduled-tasks bundle. The task paths remain documented, but the parent record is no longer the primary research surface.
 
@@ -1898,10 +1898,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page |
-| exact_quote_or_path | Microsoft Learn: Task Scheduler start page: Microsoft documents Task Scheduler as the Windows control surface for scheduled tasks. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| exact_quote_or_path | Offline Files: \\\\Microsoft\\\\Windows\\\\Offline Files\\\\Background Synchronization; \\\\Microsoft\\\\Windows\\\\Offline Files\\\\Logon Synchronization. Sleep Study: \\\\Microsoft\\\\Windows\\\\Power Efficiency Diagnostics\\\\AnalyzeSystem. Time Sync: \\\\Microsoft\\\\Windows\\\\Time Synchronization\\\\ForceSynchronizeTime; SynchronizeTime. Miscellaneous: \\\\Microsoft\\\\Windows\\\\Registry\\\\RegIdleBackup. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-task-scheduler (official-doc); deprecated audit trail. |
+| notes | Scheduled-tasks bundle. The proof anchors the exact task paths the bundle manipulates in the mirror. |
 ### `system.disable-search-highlights`
 
 - Status: `deprecated`
@@ -1997,8 +1997,8 @@ Windows Internals references:
 - Area: `Desktop Window Manager / Overlay Overrides`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.dwm-disable-mpo.review.json`
-- Source SHA256: `be65179b8782418c3fc931cde2f8de3de9862a767abc72cafec837c34e249c23`
-- Proof SHA256: `4e44184e6dc57a482865e5627e3e6613adb5d9d49cf8d39aa60fc426a15abccd`
+- Source SHA256: `86932e4673dd8c9e5db4cd9d0a7cc82d4cb3dd53c2150a5e079d983c3ff674dc`
+- Proof SHA256: `cff71e2f37ceccde58b2eafe48044a4ac42b5453b9676780d76aa89c5cafe309`
 
 **Summary:** Deprecated audit trail for DWM Multiplane Overlay (MPO). The current app writes HKLM\SOFTWARE\Microsoft\Windows\Dwm\OverlayTestMode = 5 to disable MPO, but this research pass did not capture a primary Microsoft source that publishes OverlayTestMode as a supported MPO control.
 
@@ -2041,10 +2041,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values |
-| exact_quote_or_path | Microsoft Learn: DWM Registry Settings: Microsoft documents supported DWM registry overrides such as OverlayMinFPS on HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm. This research pass used that page as the nearest official DWM overlay surface, but did not find OverlayTestMode published there. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| exact_quote_or_path | "OverlayTestMode" = 0; // 5 = MPO disabled, REG_DWORD. DwmDwordHelper = RegGetDwmDwordHelper(L"OverlayTestMode", &v11, 0LL). |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-dwm-registry-settings (official-doc); deprecated audit trail. |
+| notes | DWM MPO audit trail. The mirror shows the exact OverlayTestMode path and the MPO-disabled sentinel value. |
 ### `system.graphics-disable-overlays`
 
 - Status: `deprecated`
@@ -2052,8 +2052,8 @@ Windows Internals references:
 - Area: `Graphics Drivers / Overlay Diagnostics`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json`
-- Source SHA256: `88adca28dc497c05a0e4db0c2fd1d8f86ddeb2d100f1c2568bc424a43087564e`
-- Proof SHA256: `c79fcdabc22d88b503005cf23a6d7beb062846e70008144b221066dc28658b2e`
+- Source SHA256: `6cf5e02e4ced0aa7b215752645b3239269b66d175b298283f93829863e01cf92`
+- Proof SHA256: `dbf1407cc708022946c9f7e61f339d401d97e7a859bb0e947f2824dbf29a803e`
 
 **Summary:** Deprecated audit trail for GraphicsDrivers overlay-plane overrides. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\DisableOverlays = 1, but this research pass did not capture a primary Microsoft source that publishes DisableOverlays as a supported registry control.
 
@@ -2096,10 +2096,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys |
-| exact_quote_or_path | Microsoft Learn: TDR Registry Keys: Microsoft documents supported GraphicsDrivers debug keys such as TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime under HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers. This research pass used that page as the nearest official GraphicsDrivers override surface, but did not find DisableOverlays published there. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgkrnl\\-ReadConfig@DXGADAPTER@@AEAAXPEAU_DXGK_ADAPTER_CAPS@@@Z.c |
+| exact_quote_or_path | v123 = L"DisableOverlays"; ... ADAPTER_RENDER::DisableOverlays((ADAPTER_RENDER *)v9[366]); |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-tdr-registry-keys (official-doc); deprecated audit trail. |
+| notes | Graphics overlay audit trail. The decompiled code shows the explicit DisableOverlays string and the runtime call path. |
 ### `system.graphics-page-fault-debug-mode`
 
 - Status: `deprecated`
@@ -2107,8 +2107,8 @@ Windows Internals references:
 - Area: `Graphics Drivers / Debug Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json`
-- Source SHA256: `276bbd2a4c2ce52a83c499be0f3a72f5ce77cd81fb94970e295bd98e8c213baa`
-- Proof SHA256: `d0e58abe267efb2fa6edd8b7c1d86788cf7416d32ab33d876d51464f7496aeb0`
+- Source SHA256: `98ef739d16ea86aabaedb34b97ce872b4f0fcd5fcb7d32ab364a8b863d489580`
+- Proof SHA256: `de461e3f29a05889c82ae0349ddf469cce6bcacc3a632e36c6bdcd1b029992df`
 
 **Summary:** Deprecated audit trail for GraphicsDrivers page-fault debug mode. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\PageFaultDebugMode = 1 as a low-level graphics setting, but this research pass did not capture a primary Microsoft source that documents PageFaultDebugMode and its semantics.
 
@@ -2151,10 +2151,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys |
-| exact_quote_or_path | Microsoft Learn: TDR Registry Keys: Microsoft documents supported GraphicsDrivers debug keys such as TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime. This research pass used the page as the nearest official GraphicsDrivers debug surface, but it does not publish PageFaultDebugMode. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgmms2\\-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c |
+| exact_quote_or_path | if ( !g_PageFaultDebugMode && !KdRefreshDebuggerNotPresent() ) ... "To disable debug breaks on page fault, run \\"?? dxgmms2!g_PageFaultDebugMode=1\\" command" ... &g_PageFaultDebugMode. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-tdr-registry-keys (official-doc); deprecated audit trail. |
+| notes | Page-fault debug-mode audit trail. The decompiled code exposes the exact debug gate and its toggle semantics. |
 ### `system.kernel-adjust-dpc-threshold`
 
 - Status: `deprecated`
@@ -2162,8 +2162,8 @@ Windows Internals references:
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json`
-- Source SHA256: `a6dae46035b960252a4ada33a2caa5a9379c88650917a792252e361704543ca3`
-- Proof SHA256: `3028d51e35ee7ebffe78f4c69cec397847dc96a54a7d2ed9e31105d9b72758ee`
+- Source SHA256: `ef504ed9c183157c41fcb1d64f0b90fe16a8860e50cf35c0cf518e9bb2f4bcdf`
+- Proof SHA256: `2783841c143e66f525777e03f8af340643b6a6a136a78cd343969861c71eb348`
 
 **Summary:** Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\AdjustDpcThreshold = 20, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -2206,10 +2206,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/system/system.md |
-| exact_quote_or_path | Repo system research notes for kernel registry values: The repo documents AdjustDpcThreshold = 20 as personal research and ties it to KiAdjustDpcThreshold. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| exact_quote_or_path | "AdjustDpcThreshold" = 20; // KiAdjustDpcThreshold |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| notes | Kernel DPC threshold audit trail. The mirror exposes the raw kernel variable and the corresponding registry value. |
 ### `system.kernel-cache-aware-scheduling`
 
 - Status: `deprecated`
@@ -2217,8 +2217,8 @@ Windows Internals references:
 - Area: `Kernel / Scheduler Topology`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json`
-- Source SHA256: `89753fb62188d47bb03bfac049f5a79959911897e840f34023b39bc64992fadc`
-- Proof SHA256: `c6a065d0d3b3139c695abc4ec89c3d0bd0399f78be5eae82bec3c0cbd937a36c`
+- Source SHA256: `8e2fbbfcb328d9ccc42ba64843c5502477aba92c21fda2ec72b68db30898e3cd`
+- Proof SHA256: `c884ea4b4736b245520364697f45cbf14a2f63119fbc5b20763599056d3c5a04`
 
 **Summary:** Deprecated audit trail for CacheAwareScheduling. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\CacheAwareScheduling = 47, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -2261,10 +2261,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/system/system.md |
-| exact_quote_or_path | Repo system research notes for kernel registry values: The repo documents CacheAwareScheduling = 47 as personal research and ties it to KiCacheAwareScheduling. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| exact_quote_or_path | "CacheAwareScheduling" = 47; // KiCacheAwareScheduling |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| notes | Kernel cache-aware scheduling audit trail. The mirror exposes the kernel variable backing the setting. |
 ### `system.kernel-default-dynamic-hetero-cpu-policy`
 
 - Status: `deprecated`
@@ -2330,8 +2330,8 @@ Windows Internals references:
 - Area: `Kernel / Timer Resolution Behavior`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json`
-- Source SHA256: `3cd332965fe34f0a7232c7e928c5b8796f881d12a631989cd5d687859c6a4b10`
-- Proof SHA256: `98c31b60eabc31dfda0d383d92c2948b1d5703d3224b0389fb7262238dc767c4`
+- Source SHA256: `34c8f0c57f6189c472fad32f0efb66483af1814bbb15c2d037e9a1f03c91057e`
+- Proof SHA256: `20b23073bf938dad8354fd9353b673d93f200f5d2d987a93302fe20df0a61f0d`
 
 **Summary:** Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DisableLowQosTimerResolution = 1, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -2376,10 +2376,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod |
-| exact_quote_or_path | Microsoft Learn: timeBeginPeriod function: Microsoft documents the general timer-resolution tradeoff, noting that higher resolution can reduce overall system performance and power efficiency. The page confirms the feature area but does not publish the DisableLowQosTimerResolution registry key. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| exact_quote_or_path | "DisableLowQosTimerResolution" = 1; // KeDisableLowQosTimerResolution |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-timebeginperiod (official-doc); deprecated audit trail. |
+| notes | Timer-resolution audit trail. The mirror and kernel routine show the explicit low-QoS timer-resolution gate. |
 ### `system.kernel-dpc-queue-depth`
 
 - Status: `deprecated`
@@ -2387,8 +2387,8 @@ Windows Internals references:
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json`
-- Source SHA256: `d2b0e6450222247b0d3476725ebb0797a877371d303934f9f03b5b3adefab8f3`
-- Proof SHA256: `635f3a9c58962cc5967fbe0d66c8e9df3aeb0ec9c11c269d18f1bf6f35a5d413`
+- Source SHA256: `58e130cb608027ee2908af5c820c7a9b6145e90f97720d99bd072aac62ed9401`
+- Proof SHA256: `a96b6aa6fec82dfb156805a23c0aad2bd2234ad31360b518328553c7b450750a`
 
 **Summary:** Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcQueueDepth = 4, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -2431,10 +2431,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/system/system.md |
-| exact_quote_or_path | Repo system research notes for kernel registry values: The repo documents DpcQueueDepth = 4 as personal research and ties it to KiMaximumDpcQueueDepth. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
+| exact_quote_or_path | *(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate; |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| notes | Kernel DPC queue-depth audit trail. The decompiled path shows the exact kernel values exported together. |
 ### `system.kernel-dpc-watchdog-period`
 
 - Status: `deprecated`
@@ -2442,8 +2442,8 @@ Windows Internals references:
 - Area: `Kernel / DPC Watchdog`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json`
-- Source SHA256: `e78110b1b6cf518c9491ae40c910fee7742b5971f28c315d3c1beb2fad3a9993`
-- Proof SHA256: `59762eba3c15ce7a5714a73158eeb41bc86fae56ca8f1ae7f0934340d6546673`
+- Source SHA256: `6aa525e9f89470f7e88fff296c53f34018cef943a4804667123d1af9db6cf31d`
+- Proof SHA256: `9a8a79a362286c1eddb764cd2bb03d381f206a395c99c8eeaf22c4bab750f1be`
 
 **Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -2488,10 +2488,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems |
-| exact_quote_or_path | Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports: Microsoft documents the DPC watchdog feature from the driver-behavior side and explains that Windows can decide a prolonged high-IRQL routine has taken excessive time to finish. The page confirms the watchdog feature area but does not publish the registry key. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\KeQueryDpcWatchdogConfiguration.c |
+| exact_quote_or_path | if ( KeDpcWatchdogPeriodMs ) ... DWORD2(Src) = KeDpcWatchdogPeriodMs; |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-avoid-dpc-watchdog-timeouts (official-doc); deprecated audit trail. |
+| notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried. |
 ### `system.kernel-ideal-dpc-rate`
 
 - Status: `deprecated`
@@ -2499,8 +2499,8 @@ Windows Internals references:
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json`
-- Source SHA256: `086673f463f8dd856d153089a60bf70b6f8063c650210a266f03964e78495971`
-- Proof SHA256: `ccfb031524f42d0d3584d6259dc7e4cefa45e9979c0ae9cd0ea7dc5790204627`
+- Source SHA256: `0df4c834a95038ad946861742a59b5d594c65badea7eee2d3943cbf5ad0f6eef`
+- Proof SHA256: `e0e9a3b89fd3402e74e01bd31bf48ac1739f3196098be2c69e2db1dbdf8405a9`
 
 **Summary:** Deprecated audit trail for IdealDpcRate. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\IdealDpcRate = 20, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -2543,10 +2543,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/system/system.md |
-| exact_quote_or_path | Repo system research notes for kernel registry values: The repo documents IdealDpcRate = 20 as personal research and ties it to KiIdealDpcRate. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
+| exact_quote_or_path | *(_DWORD *)(a4 + 16) = KiIdealDpcRate; |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| notes | Kernel ideal DPC rate audit trail. The decompiled path exposes the kernel variable directly. |
 ### `system.kernel-minimum-dpc-rate`
 
 - Status: `deprecated`
@@ -2554,8 +2554,8 @@ Windows Internals references:
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json`
-- Source SHA256: `75d456ca354bcb26986d5a9e857b246793dc0714563ba8b7254dc50c35b75e4e`
-- Proof SHA256: `960331f79bb1505073306b8b60feb5cd9fc4c719a2821dfead2a29d851787483`
+- Source SHA256: `a5c750ab3bcb48f160e0f8ba00dbed347439b8de05051a6d3628cd11be8d6754`
+- Proof SHA256: `54e7383b0e9b75b22382bdc664680717a92458a4578662619d0edf85c4401f76`
 
 **Summary:** Deprecated audit trail for MinimumDpcRate. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\MinimumDpcRate = 3, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
@@ -2598,10 +2598,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/system/system.md |
-| exact_quote_or_path | Repo system research notes for kernel registry values: The repo documents MinimumDpcRate = 3 as personal research and ties it to KiMinimumDpcRate. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
+| exact_quote_or_path | *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| notes | Kernel minimum DPC rate audit trail. The decompiled path exposes the kernel variable directly. |
 ### `system.kernel-serialize-timer-expiration`
 
 - Status: `deprecated`
@@ -2609,8 +2609,8 @@ Windows Internals references:
 - Area: `Kernel / Timer Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json`
-- Source SHA256: `a26d6fe221b66fa0fc36e03b9dd5d2a716f747b22c7e53590656bf6c8e0076cc`
-- Proof SHA256: `b789c6c711ebcd33ba76dda800c2bd0c3cf6eae6a31869e7044fcf3c41f7eebd`
+- Source SHA256: `ae6efb38288c21a8fd3f1e0b822c18f9bf8b378a0b93e372ff4fdd0349d249c9`
+- Proof SHA256: `1b2367271cac17e6f54d907d0932fb99795e56a14487a023d3bc7b8e595193ba`
 
 **Summary:** Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\SerializeTimerExpiration = 1, but this research pass did not capture a primary Microsoft source for the exact registry setting.
 
@@ -2653,10 +2653,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | Docs/system/system.md |
-| exact_quote_or_path | Repo system research notes for kernel registry values: The repo documents SerializeTimerExpiration = 1 and explains the behavior as personal research tied to KiSerializeTimerExpiration, including notes about 0, 1, and other values. |
+| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| exact_quote_or_path | "SerializeTimerExpiration" = 1; // KiSerializeTimerExpiration ... Deleting the value, or keeping it as 0, allows the kernel to make the decision based on Modern Standby availability, and setting it to 1 permanently enables serialization even on non-Modern Standby systems. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail. |
+| notes | Timer serialization audit trail. The mirror includes both the kernel variable and the 0/1 behavior description. |
 ### `system.services.disable-print-device-configuration`
 
 - Status: `deprecated`
@@ -3037,8 +3037,8 @@ Nohuto lineage references:
 - Area: `Sound Control Panel DeviceCpl Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json`
-- Source SHA256: `fb77ec5f6d2975f5623ac5be10fcb9294f54aa94ce8fb9eb8bd2b91362ae71ac`
-- Proof SHA256: `2787838415398070d4fa42fa9be2a129552ec7168a3d80d840c067dde24b8725`
+- Source SHA256: `6ebe3325d9398956ed2e1c38645bc1605f1efb4404396b0e12faee5baff56373`
+- Proof SHA256: `8d67f764d7eaaf3719428c7c806dc6ec55bc227135dbb6daa493eaf8c390c9a1`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
 
@@ -3081,7 +3081,7 @@ Nohuto lineage references:
 | source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml |
 | exact_quote_or_path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:0. |
 | key_found_on_page | True |
-| notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. |
+| notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
 ### `audio.show-hidden-devices`
 
 - Status: `validated`
@@ -3089,8 +3089,8 @@ Nohuto lineage references:
 - Area: `Sound Control Panel DeviceCpl Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/audio.show-hidden-devices.review.json`
-- Source SHA256: `d270f7c190d9c6877e85c4cee64feb6013a0c180660e77127f2fafa2cc0966c7`
-- Proof SHA256: `b20c6cd1377978c30a74c06ba12034057fa29842124424947b081b8f9a10ead9`
+- Source SHA256: `53977bf3d42a6320f03cd04c3e782abd1c8c91c3bede2f0a11ce060401eb8a53`
+- Proof SHA256: `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
 
@@ -3133,7 +3133,7 @@ Nohuto lineage references:
 | source_url | C:\\Users\\<USER>\\AppData\\Local\\Temp\\audio_devicecpl_query_20260314.pml |
 | exact_quote_or_path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:0. |
 | key_found_on_page | True |
-| notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. |
+| notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
 ### `cleanup.disable-reserved-storage`
 
 - Status: `validated`
@@ -11149,8 +11149,8 @@ Windows Internals references:
 - Area: `Registry Security Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.uac-never-notify.json`
-- Source SHA256: `5de1afe0d0b74cad2f71bc7fa16eb5d7bc0868ddef850c348b66791e478969c7`
-- Proof SHA256: `28928a8b489183e43cb6a5224a72732ea4946df56e4156a4fc3deff88d9ef3cd`
+- Source SHA256: `c39a26d1490d55dd6e56b7be9b2ed61dbfd99ddfa553e82be7ea68669011ec2b`
+- Proof SHA256: `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f`
 
 **Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
 
@@ -11206,7 +11206,7 @@ Windows Internals references:
 | source_url | https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings |
 | exact_quote_or_path | The registry keys are found under the key: `HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System`. `ConsentPromptBehaviorAdmin` 0 = Elevate without prompting ... 5 (Default) = Prompt for consent for non-Windows binaries. `EnableLUA` 0 = Disabled, 1 (Default) = Enabled. `PromptOnSecureDesktop` 0 = Disabled, 1 (Default) = Enabled. |
 | key_found_on_page | True |
-| notes | The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open. |
+| notes | The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open. Normalized for the consolidated evidence report. |
 ### `system.aero-shake`
 
 - Status: `validated`
@@ -12377,8 +12377,8 @@ Windows Internals references:
 - Area: `Gaming Feature / GameBar Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.enable-game-mode.review.json`
-- Source SHA256: `d2ccd6b8a146d360797e06ea7aa6263dfa549d0e196ff6ae5286a11da1b430db`
-- Proof SHA256: `cff3cb7475f7ba12798a842befdb2af9ce4588496c2d47ab8a73de138d3ff63b`
+- Source SHA256: `91eca68105f1bf46cc3abfbe4dcedbbd5fedbc58cfd056ac3c2a6b69a58faa76`
+- Proof SHA256: `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59`
 
 **Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
 
@@ -12425,7 +12425,7 @@ Windows Internals references:
 | source_url | H:\\Temp\\vm-tooling-staging\\gamemode_admin_probe.txt |
 | exact_quote_or_path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | key_found_on_page | True |
-| notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. |
+| notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report. |
 ### `system.enable-hags`
 
 - Status: `validated`
@@ -12433,8 +12433,8 @@ Windows Internals references:
 - Area: `Graphics Drivers / Scheduling Feature`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.enable-hags.review.json`
-- Source SHA256: `67e611db82c00e0017d924c954f01272613619eb014f4a94f2a24435a3191ee6`
-- Proof SHA256: `d94bfba78ce6da3cc780808ea108503c63e9d3cd81e5c305c6972c630e04f46f`
+- Source SHA256: `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312`
+- Proof SHA256: `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1`
 
 **Summary:** The current app writes HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\HwSchMode = 2 to enable Hardware-Accelerated GPU Scheduling (HAGS). A guest-side reversible probe on Win25H2Clean confirmed the guest baseline is missing and that HwSchMode transitions through 2 and 1 before restoring to missing, so the record is now runtime-validated even though the Microsoft feature documentation captured here does not publish the raw registry contract.
 
@@ -12482,7 +12482,7 @@ Windows Internals references:
 | source_url | H:\\Temp\\vm-tooling-staging\\hags_toggle_out.txt |
 | exact_quote_or_path | hags_toggle_out.txt: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING. |
 | key_found_on_page | True |
-| notes | Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. |
+| notes | Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. Normalized for the consolidated evidence report. |
 ### `system.enable-indexing-encrypted-items`
 
 - Status: `validated`

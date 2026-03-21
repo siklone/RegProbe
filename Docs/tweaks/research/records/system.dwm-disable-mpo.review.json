@@ -1,195 +1,195 @@
 {
-  "$schema": "../setting-research.schema.json",
-  "schema_version": "1.0",
-  "record_id": "system.dwm-disable-mpo",
-  "tweak_id": "system.dwm-disable-mpo",
-  "record_status": "deprecated",
-  "summary": "Deprecated audit trail for DWM Multiplane Overlay (MPO). The current app writes HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayTestMode = 5 to disable MPO, but this research pass did not capture a primary Microsoft source that publishes OverlayTestMode as a supported MPO control.",
-  "setting": {
-    "name": "Desktop Window Manager Multiplane Overlay (MPO)",
-    "category": "System",
-    "area": "Desktop Window Manager / Overlay Overrides",
-    "scope": "device",
-    "casual_explanation": "MPO is part of how Windows presents some content through the graphics stack. People usually touch it only when they are troubleshooting flicker, black screens, or odd presentation bugs.",
-    "why_people_change_it": "People disable MPO when they suspect overlay presentation is interacting badly with a graphics driver, specific game, browser, or display setup.",
-    "tradeoffs_overview": "Changing MPO behavior can help some graphics troubleshooting scenarios, but it can also change composition behavior in ways that are hard to predict. Because this research pass did not find a primary Microsoft publication for the exact OverlayTestMode mapping, the current app write stays blocked from validated publication.",
-    "professional_notes": "Microsoft's DWM registry documentation publishes some overlay-related override keys such as OverlayMinFPS under HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm. The current app writes OverlayTestMode = 5 on the same DWM path to disable MPO. This record treats that value as an observed app implementation only, because this research pass did not capture a primary Microsoft source that documents OverlayTestMode and its exact supported semantics.",
-    "targets": [
-      {
-        "target_id": "dwm-overlay-test-mode",
-        "location_kind": "registry",
-        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm",
-        "value_name": "OverlayTestMode",
-        "value_type": "REG_DWORD",
-        "allowed_values": [
-          {
-            "state_kind": "missing",
-            "value": null,
-            "label": "Normal DWM baseline",
-            "meaning": "No explicit MPO override is published by this record.",
-            "evidence_ids": [
-              "ms-dwm-registry-settings"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": 5,
-            "label": "Observed app MPO disable override",
-            "meaning": "The current app treats OverlayTestMode = 5 as an MPO disable setting, but this record has not validated that mapping from a primary Microsoft source.",
-            "evidence_ids": [
-              "app-system-registry-provider"
-            ]
-          }
-        ],
-        "notes": "Tracked as an observed registry override only."
-      }
-    ]
-  },
-  "app_current_implementation": {
-    "status": "unknown",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "The current app writes OverlayTestMode = 5 under HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm, but this research pass has not yet captured a primary Microsoft source that publishes the value as an official MPO control.",
-    "writes": [
-      {
-        "target_id": "dwm-overlay-test-mode",
-        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm",
-        "value_name": "OverlayTestMode",
-        "value_type": "REG_DWORD",
-        "state_kind": "value",
-        "value": 5
-      }
-    ]
-  },
-  "windows_defaults": [
-    {
-      "label": "Conservative baseline",
-      "applies_to": "Systems where this dataset has not yet validated OverlayTestMode as an official Microsoft control surface",
-      "states": [
-        {
-          "target_id": "dwm-overlay-test-mode",
-          "state_kind": "missing",
-          "value": null,
-          "rationale": "Do not publish a supported override until a primary Microsoft source is captured."
-        }
-      ],
-      "notes": "This baseline is conservative and keeps the unvalidated DWM override out of published presets.",
-      "evidence_ids": [
-        "ms-dwm-registry-settings"
-      ]
-    }
-  ],
-  "recommended_profiles": [
-    {
-      "profile_id": "hold-for-research",
-      "label": "Hold for research",
-      "intended_for": [
-        "Research tracking only",
-        "Users documenting MPO experiments"
-      ],
-      "avoid_for": [
-        "Published presets",
-        "General users"
-      ],
-      "states": [
-        {
-          "target_id": "dwm-overlay-test-mode",
-          "state_kind": "missing",
-          "value": null,
-          "rationale": "Do not publish or apply the override until the exact MPO mapping is sourced."
-        }
-      ],
-      "good_when": "You want to keep the area documented without overstating confidence.",
-      "bad_when": "You need a primary-source Microsoft-backed MPO registry control.",
-      "tradeoffs": [
-        "The app behavior is documented honestly.",
-        "The override stays blocked from validated publication."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "ms-dwm-registry-settings"
-      ]
-    },
-    {
-      "profile_id": "current-app-profile",
-      "label": "Current app profile",
-      "intended_for": [
-        "Research comparison only"
-      ],
-      "avoid_for": [
-        "Published validated presets",
-        "General users"
-      ],
-      "states": [
-        {
-          "target_id": "dwm-overlay-test-mode",
-          "state_kind": "value",
-          "value": 5,
-          "rationale": "Observed app write used as the current MPO-off implementation."
-        }
-      ],
-      "good_when": "You are documenting what the app currently writes for MPO.",
-      "bad_when": "You need a validated Microsoft registry mapping.",
-      "tradeoffs": [
-        "The current app behavior is captured.",
-        "The exact MPO control semantics are still unvalidated."
-      ],
-      "apply_allowed": false,
-      "notes": "Blocked until a primary Microsoft source for OverlayTestMode is captured.",
-      "evidence_ids": [
-        "app-system-registry-provider"
-      ]
-    }
-  ],
-  "evidence": [
-    {
-      "evidence_id": "ms-dwm-registry-settings",
-      "kind": "official-doc",
-      "title": "Microsoft Learn: DWM Registry Settings",
-      "location": "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
-      "summary": "Microsoft documents supported DWM registry overrides such as OverlayMinFPS on HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm. This research pass used that page as the nearest official DWM overlay surface, but did not find OverlayTestMode published there.",
-      "supports": [
-        "path",
-        "behavior",
-        "version-scope"
-      ],
-      "strength": "medium"
-    },
-    {
-      "evidence_id": "app-system-registry-provider",
-      "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-      "summary": "The provider writes HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayTestMode = 5 for the current tweak.",
-      "supports": [
-        "path",
-        "value",
-        "ui-mapping"
-      ],
-      "strength": "high"
-    }
-  ],
-  "decision": {
-    "confidence": "low",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
-    "restore_default_supported": false,
-    "restore_previous_supported": false,
-    "needs_vm_validation": true,
-    "why": "The app targets a real graphics troubleshooting area, but this research pass has not yet captured a primary Microsoft source for OverlayTestMode and its exact MPO semantics.",
-    "blocking_issues": [
-      "No primary Microsoft source for OverlayTestMode was captured in this research pass.",
-      "The current app write cannot be published as a validated MPO control until its value semantics are sourced."
-    ]
-  },
-  "open_questions": [
-    "Is OverlayTestMode documented in a Microsoft primary source outside the current DWM registry page?",
-    "Should the app present MPO changes as an experimental graphics troubleshooting action rather than a validated tweak?"
-  ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
-  "validation_proof": {
-    "source_url": "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
-    "exact_quote_or_path": "Microsoft Learn: DWM Registry Settings: Microsoft documents supported DWM registry overrides such as OverlayMinFPS on HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm. This research pass used that page as the nearest official DWM overlay surface, but did not find OverlayTestMode published there.",
-    "key_found_on_page": true,
-    "notes": "Backfilled from evidence_id ms-dwm-registry-settings (official-doc); deprecated audit trail."
-  }
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.0",
+    "record_id":  "system.dwm-disable-mpo",
+    "tweak_id":  "system.dwm-disable-mpo",
+    "record_status":  "deprecated",
+    "summary":  "Deprecated audit trail for DWM Multiplane Overlay (MPO). The current app writes HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayTestMode = 5 to disable MPO, but this research pass did not capture a primary Microsoft source that publishes OverlayTestMode as a supported MPO control.",
+    "setting":  {
+                    "name":  "Desktop Window Manager Multiplane Overlay (MPO)",
+                    "category":  "System",
+                    "area":  "Desktop Window Manager / Overlay Overrides",
+                    "scope":  "device",
+                    "casual_explanation":  "MPO is part of how Windows presents some content through the graphics stack. People usually touch it only when they are troubleshooting flicker, black screens, or odd presentation bugs.",
+                    "why_people_change_it":  "People disable MPO when they suspect overlay presentation is interacting badly with a graphics driver, specific game, browser, or display setup.",
+                    "tradeoffs_overview":  "Changing MPO behavior can help some graphics troubleshooting scenarios, but it can also change composition behavior in ways that are hard to predict. Because this research pass did not find a primary Microsoft publication for the exact OverlayTestMode mapping, the current app write stays blocked from validated publication.",
+                    "professional_notes":  "Microsoft\u0027s DWM registry documentation publishes some overlay-related override keys such as OverlayMinFPS under HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm. The current app writes OverlayTestMode = 5 on the same DWM path to disable MPO. This record treats that value as an observed app implementation only, because this research pass did not capture a primary Microsoft source that documents OverlayTestMode and its exact supported semantics.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "dwm-overlay-test-mode",
+                                        "location_kind":  "registry",
+                                        "path":  "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm",
+                                        "value_name":  "OverlayTestMode",
+                                        "value_type":  "REG_DWORD",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "missing",
+                                                                   "value":  null,
+                                                                   "label":  "Normal DWM baseline",
+                                                                   "meaning":  "No explicit MPO override is published by this record.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-dwm-registry-settings"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  5,
+                                                                   "label":  "Observed app MPO disable override",
+                                                                   "meaning":  "The current app treats OverlayTestMode = 5 as an MPO disable setting, but this record has not validated that mapping from a primary Microsoft source.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-system-registry-provider"
+                                                                                    ]
+                                                               }
+                                                           ],
+                                        "notes":  "Tracked as an observed registry override only."
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "unknown",
+                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                                       "notes":  "The current app writes OverlayTestMode = 5 under HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm, but this research pass has not yet captured a primary Microsoft source that publishes the value as an official MPO control.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "dwm-overlay-test-mode",
+                                                          "path":  "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm",
+                                                          "value_name":  "OverlayTestMode",
+                                                          "value_type":  "REG_DWORD",
+                                                          "state_kind":  "value",
+                                                          "value":  5
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Conservative baseline",
+                                 "applies_to":  "Systems where this dataset has not yet validated OverlayTestMode as an official Microsoft control surface",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "dwm-overlay-test-mode",
+                                                    "state_kind":  "missing",
+                                                    "value":  null,
+                                                    "rationale":  "Do not publish a supported override until a primary Microsoft source is captured."
+                                                }
+                                            ],
+                                 "notes":  "This baseline is conservative and keeps the unvalidated DWM override out of published presets.",
+                                 "evidence_ids":  [
+                                                      "ms-dwm-registry-settings"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "hold-for-research",
+                                     "label":  "Hold for research",
+                                     "intended_for":  [
+                                                          "Research tracking only",
+                                                          "Users documenting MPO experiments"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Published presets",
+                                                       "General users"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "dwm-overlay-test-mode",
+                                                        "state_kind":  "missing",
+                                                        "value":  null,
+                                                        "rationale":  "Do not publish or apply the override until the exact MPO mapping is sourced."
+                                                    }
+                                                ],
+                                     "good_when":  "You want to keep the area documented without overstating confidence.",
+                                     "bad_when":  "You need a primary-source Microsoft-backed MPO registry control.",
+                                     "tradeoffs":  [
+                                                       "The app behavior is documented honestly.",
+                                                       "The override stays blocked from validated publication."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "ms-dwm-registry-settings"
+                                                      ]
+                                 },
+                                 {
+                                     "profile_id":  "current-app-profile",
+                                     "label":  "Current app profile",
+                                     "intended_for":  [
+                                                          "Research comparison only"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Published validated presets",
+                                                       "General users"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "dwm-overlay-test-mode",
+                                                        "state_kind":  "value",
+                                                        "value":  5,
+                                                        "rationale":  "Observed app write used as the current MPO-off implementation."
+                                                    }
+                                                ],
+                                     "good_when":  "You are documenting what the app currently writes for MPO.",
+                                     "bad_when":  "You need a validated Microsoft registry mapping.",
+                                     "tradeoffs":  [
+                                                       "The current app behavior is captured.",
+                                                       "The exact MPO control semantics are still unvalidated."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "notes":  "Blocked until a primary Microsoft source for OverlayTestMode is captured.",
+                                     "evidence_ids":  [
+                                                          "app-system-registry-provider"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "ms-dwm-registry-settings",
+                         "kind":  "official-doc",
+                         "title":  "Microsoft Learn: DWM Registry Settings",
+                         "location":  "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
+                         "summary":  "Microsoft documents supported DWM registry overrides such as OverlayMinFPS on HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm. This research pass used that page as the nearest official DWM overlay surface, but did not find OverlayTestMode published there.",
+                         "supports":  [
+                                          "path",
+                                          "behavior",
+                                          "version-scope"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "app-system-registry-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current app implementation",
+                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                         "summary":  "The provider writes HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayTestMode = 5 for the current tweak.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "ui-mapping"
+                                      ],
+                         "strength":  "high"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "low",
+                     "apply_allowed":  false,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  false,
+                     "restore_previous_supported":  false,
+                     "needs_vm_validation":  false,
+                     "why":  "The app targets a real graphics troubleshooting area, but this research pass has not yet captured a primary Microsoft source for OverlayTestMode and its exact MPO semantics.",
+                     "blocking_issues":  [
+                                             "No primary Microsoft source for OverlayTestMode was captured in this research pass.",
+                                             "The current app write cannot be published as a validated MPO control until its value semantics are sourced."
+                                         ]
+                 },
+    "open_questions":  [
+                           "Is OverlayTestMode documented in a Microsoft primary source outside the current DWM registry page?",
+                           "Should the app present MPO changes as an experimental graphics troubleshooting action rather than a validated tweak?"
+                       ],
+    "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
+    "validation_proof":  {
+                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+                             "exact_quote_or_path":  "\"OverlayTestMode\" = 0; // 5 = MPO disabled, REG_DWORD. DwmDwordHelper = RegGetDwmDwordHelper(L\"OverlayTestMode\", \u0026v11, 0LL).",
+                             "key_found_on_page":  true,
+                             "notes":  "DWM MPO audit trail. The mirror shows the exact OverlayTestMode path and the MPO-disabled sentinel value."
+                         }
 }

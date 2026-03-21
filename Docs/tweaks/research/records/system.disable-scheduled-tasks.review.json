@@ -1,474 +1,474 @@
 {
-  "$schema": "../setting-research.schema.json",
-  "schema_version": "1.0",
-  "record_id": "system.disable-scheduled-tasks",
-  "tweak_id": "system.disable-scheduled-tasks",
-  "record_status": "deprecated",
-  "summary": "Deprecated audit trail for the old scheduled-tasks bundle. The task paths remain documented, but the parent record is no longer the primary research surface.",
-  "setting": {
-    "name": "Telemetry and Maintenance Scheduled Tasks Bundle",
-    "category": "System",
-    "area": "Scheduled Tasks",
-    "scope": "device",
-    "casual_explanation": "This tweak turns off several Windows scheduled tasks related to compatibility, telemetry, cleanup, feedback, and error-reporting areas.",
-    "why_people_change_it": "People disable these tasks when they want fewer background jobs or a more stripped-down Windows setup.",
-    "tradeoffs_overview": "Disabling the tasks can reduce background activity, but this bundle mixes several different Windows features and the side effects are not the same for every task.",
-    "professional_notes": "The app uses a scheduled-task batch tweak for seven task paths. Microsoft documents Task Scheduler as the control surface, and the task files exist as Windows system tasks, but the bundle mixes multiple feature areas and at least one task in the current list is version-dependent on the host used for review. This record keeps the bundle in review rather than publishing it as a validated preset.",
-    "targets": [
-      {
-        "target_id": "marebackup-task",
-        "location_kind": "scheduled-task",
-        "path": "\\Microsoft\\Windows\\Application Experience\\MareBackup",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "allowed_values": [
-          {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Build-dependent baseline",
-            "meaning": "This review record does not publish a Windows-wide default state for the task bundle.",
-            "evidence_ids": [
-              "ms-task-scheduler",
-              "vm-task-observation",
-              "app-system-provider"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "Disabled",
-            "label": "Task disabled by current app bundle",
-            "meaning": "The current app disables this scheduled task when the bundle is applied.",
-            "evidence_ids": [
-              "app-system-provider"
-            ]
-          }
-        ]
-      },
-      {
-        "target_id": "compat-appraiser-task",
-        "location_kind": "scheduled-task",
-        "path": "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "allowed_values": [
-          {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Build-dependent baseline",
-            "meaning": "This review record does not publish a Windows-wide default state for the task bundle.",
-            "evidence_ids": [
-              "ms-task-scheduler",
-              "vm-task-observation",
-              "app-system-provider"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "Disabled",
-            "label": "Task disabled by current app bundle",
-            "meaning": "The current app disables this scheduled task when the bundle is applied.",
-            "evidence_ids": [
-              "app-system-provider"
-            ]
-          }
-        ]
-      },
-      {
-        "target_id": "consolidator-task",
-        "location_kind": "scheduled-task",
-        "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "allowed_values": [
-          {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Build-dependent baseline",
-            "meaning": "This review record does not publish a Windows-wide default state for the task bundle.",
-            "evidence_ids": [
-              "ms-task-scheduler",
-              "vm-task-observation",
-              "app-system-provider"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "Disabled",
-            "label": "Task disabled by current app bundle",
-            "meaning": "The current app disables this scheduled task when the bundle is applied.",
-            "evidence_ids": [
-              "app-system-provider"
-            ]
-          }
-        ]
-      },
-      {
-        "target_id": "usbceip-task",
-        "location_kind": "scheduled-task",
-        "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "allowed_values": [
-          {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Build-dependent baseline",
-            "meaning": "This review record does not publish a Windows-wide default state for the task bundle.",
-            "evidence_ids": [
-              "ms-task-scheduler",
-              "vm-task-observation",
-              "app-system-provider"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "Disabled",
-            "label": "Task disabled by current app bundle",
-            "meaning": "The current app disables this scheduled task when the bundle is applied.",
-            "evidence_ids": [
-              "app-system-provider"
-            ]
-          }
-        ]
-      },
-      {
-        "target_id": "silentcleanup-task",
-        "location_kind": "scheduled-task",
-        "path": "\\Microsoft\\Windows\\DiskCleanup\\SilentCleanup",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "allowed_values": [
-          {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Build-dependent baseline",
-            "meaning": "This review record does not publish a Windows-wide default state for the task bundle.",
-            "evidence_ids": [
-              "ms-task-scheduler",
-              "vm-task-observation",
-              "app-system-provider"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "Disabled",
-            "label": "Task disabled by current app bundle",
-            "meaning": "The current app disables this scheduled task when the bundle is applied.",
-            "evidence_ids": [
-              "app-system-provider"
-            ]
-          }
-        ]
-      },
-      {
-        "target_id": "siuf-dmclient-task",
-        "location_kind": "scheduled-task",
-        "path": "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClient",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "allowed_values": [
-          {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Build-dependent baseline",
-            "meaning": "This review record does not publish a Windows-wide default state for the task bundle.",
-            "evidence_ids": [
-              "ms-task-scheduler",
-              "vm-task-observation",
-              "app-system-provider"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "Disabled",
-            "label": "Task disabled by current app bundle",
-            "meaning": "The current app disables this scheduled task when the bundle is applied.",
-            "evidence_ids": [
-              "app-system-provider"
-            ]
-          }
-        ]
-      },
-      {
-        "target_id": "queue-reporting-task",
-        "location_kind": "scheduled-task",
-        "path": "\\Microsoft\\Windows\\Windows Error Reporting\\QueueReporting",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "allowed_values": [
-          {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Build-dependent baseline",
-            "meaning": "This review record does not publish a Windows-wide default state for the task bundle.",
-            "evidence_ids": [
-              "ms-task-scheduler",
-              "vm-task-observation",
-              "app-system-provider"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "Disabled",
-            "label": "Task disabled by current app bundle",
-            "meaning": "The current app disables this scheduled task when the bundle is applied.",
-            "evidence_ids": [
-              "app-system-provider"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "app_current_implementation": {
-    "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
-    "notes": "The app uses a batch scheduled-task tweak to disable the listed task paths. This record keeps the bundle in review because the tasks span multiple Windows feature areas and one task is version-dependent on the current review machine.",
-    "writes": [
-      {
-        "target_id": "marebackup-task",
-        "path": "\\Microsoft\\Windows\\Application Experience\\MareBackup",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "state_kind": "value",
-        "value": "Disabled"
-      },
-      {
-        "target_id": "compat-appraiser-task",
-        "path": "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "state_kind": "value",
-        "value": "Disabled"
-      },
-      {
-        "target_id": "consolidator-task",
-        "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "state_kind": "value",
-        "value": "Disabled"
-      },
-      {
-        "target_id": "usbceip-task",
-        "path": "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "state_kind": "value",
-        "value": "Disabled"
-      },
-      {
-        "target_id": "silentcleanup-task",
-        "path": "\\Microsoft\\Windows\\DiskCleanup\\SilentCleanup",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "state_kind": "value",
-        "value": "Disabled"
-      },
-      {
-        "target_id": "siuf-dmclient-task",
-        "path": "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClient",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "state_kind": "value",
-        "value": "Disabled"
-      },
-      {
-        "target_id": "queue-reporting-task",
-        "path": "\\Microsoft\\Windows\\Windows Error Reporting\\QueueReporting",
-        "value_name": "Enabled",
-        "value_type": "TaskEnabledState",
-        "state_kind": "value",
-        "value": "Disabled"
-      }
-    ]
-  },
-  "windows_defaults": [
-    {
-      "label": "Windows task baseline varies by build",
-      "applies_to": "Windows systems where these task paths may exist with different defaults across versions and editions",
-      "states": [
-        {
-          "target_id": "marebackup-task",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
-        },
-        {
-          "target_id": "compat-appraiser-task",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "The current review host does not include this exact task path, showing version-dependent task presence."
-        },
-        {
-          "target_id": "consolidator-task",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
-        },
-        {
-          "target_id": "usbceip-task",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
-        },
-        {
-          "target_id": "silentcleanup-task",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
-        },
-        {
-          "target_id": "siuf-dmclient-task",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
-        },
-        {
-          "target_id": "queue-reporting-task",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
-        }
-      ],
-      "notes": "This is a review record for the current app bundle, not a published task-by-task default matrix.",
-      "evidence_ids": [
-        "ms-task-scheduler",
-        "vm-task-observation"
-      ]
-    }
-  ],
-  "recommended_profiles": [
-    {
-      "profile_id": "windows-default",
-      "label": "Windows default",
-      "intended_for": [
-        "General users",
-        "Systems that should keep the stock Windows scheduled-task mix"
-      ],
-      "avoid_for": [
-        "None until the bundle is split and reviewed task-by-task"
-      ],
-      "states": [
-        {
-          "target_id": "marebackup-task",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "Do not publish a blanket disable recommendation for this mixed task bundle."
-        }
-      ],
-      "good_when": "You want to stay close to the stock Windows scheduled-task baseline.",
-      "bad_when": "You want a fully reviewed task-by-task hardening profile right now.",
-      "tradeoffs": [
-        "Windows keeps control of the scheduled-task mix.",
-        "The current app bundle remains documented but not validated."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "ms-task-scheduler",
-        "vm-task-observation"
-      ]
-    },
-    {
-      "profile_id": "current-app-bundle",
-      "label": "Current app bundle",
-      "intended_for": [
-        "Research comparison only"
-      ],
-      "avoid_for": [
-        "Published safe presets",
-        "General users"
-      ],
-      "states": [
-        {
-          "target_id": "marebackup-task",
-          "state_kind": "value",
-          "value": "Disabled",
-          "rationale": "Document the current app bundle without validating it as safe."
-        }
-      ],
-      "good_when": "You are documenting the current product behavior for follow-up review.",
-      "bad_when": "You need a validated scheduled-task preset.",
-      "tradeoffs": [
-        "The current app bundle is captured honestly.",
-        "The bundle is too broad and version-dependent to publish as validated today."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "app-system-provider",
-        "repo-system-doc"
-      ]
-    }
-  ],
-  "evidence": [
-    {
-      "evidence_id": "ms-task-scheduler",
-      "kind": "official-doc",
-      "title": "Microsoft Learn: Task Scheduler start page",
-      "location": "https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page",
-      "summary": "Microsoft documents Task Scheduler as the Windows control surface for scheduled tasks.",
-      "supports": [
-        "behavior",
-        "version-scope"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "vm-task-observation",
-      "kind": "vm-test",
-      "title": "Local Windows task file observation",
-      "location": "C:\\Windows\\System32\\Tasks\\Microsoft\\Windows",
-      "summary": "The listed task paths were checked on the current Windows host. MareBackup, Consolidator, UsbCeip, SilentCleanup, DmClient, and QueueReporting were present; Microsoft Compatibility Appraiser was absent on this machine, confirming version-dependent task presence.",
-      "supports": [
-        "path",
-        "version-scope"
-      ],
-      "strength": "medium"
-    },
-    {
-      "evidence_id": "app-system-provider",
-      "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
-      "summary": "The provider disables the listed task paths through the batch scheduled-task tweak.",
-      "supports": [
-        "path",
-        "ui-mapping"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "repo-system-doc",
-      "kind": "repo-doc",
-      "title": "Repo notes for the scheduled-tasks bundle",
-      "location": "Docs/system/system.md",
-      "summary": "The repo documents the current scheduled-task bundle and notes that users should read through the list before switching it.",
-      "supports": [
-        "behavior",
-        "side-effects"
-      ],
-      "strength": "medium"
-    }
-  ],
-  "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
-    "restore_default_supported": true,
-    "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "The task paths and app mapping are real, but the bundle mixes several feature areas and includes version-dependent tasks, so it should be reviewed task-by-task before being published as a validated preset.",
-    "blocking_issues": [
-      "The bundle spans multiple Windows feature areas with different side effects.",
-      "At least one task path is version-dependent on the current review host.",
-      "The current record documents the bundle honestly but does not yet validate it as a safe preset."
-    ]
-  },
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
-  "validation_proof": {
-    "source_url": "https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page",
-    "exact_quote_or_path": "Microsoft Learn: Task Scheduler start page: Microsoft documents Task Scheduler as the Windows control surface for scheduled tasks.",
-    "key_found_on_page": true,
-    "notes": "Backfilled from evidence_id ms-task-scheduler (official-doc); deprecated audit trail."
-  }
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.0",
+    "record_id":  "system.disable-scheduled-tasks",
+    "tweak_id":  "system.disable-scheduled-tasks",
+    "record_status":  "deprecated",
+    "summary":  "Deprecated audit trail for the old scheduled-tasks bundle. The task paths remain documented, but the parent record is no longer the primary research surface.",
+    "setting":  {
+                    "name":  "Telemetry and Maintenance Scheduled Tasks Bundle",
+                    "category":  "System",
+                    "area":  "Scheduled Tasks",
+                    "scope":  "device",
+                    "casual_explanation":  "This tweak turns off several Windows scheduled tasks related to compatibility, telemetry, cleanup, feedback, and error-reporting areas.",
+                    "why_people_change_it":  "People disable these tasks when they want fewer background jobs or a more stripped-down Windows setup.",
+                    "tradeoffs_overview":  "Disabling the tasks can reduce background activity, but this bundle mixes several different Windows features and the side effects are not the same for every task.",
+                    "professional_notes":  "The app uses a scheduled-task batch tweak for seven task paths. Microsoft documents Task Scheduler as the control surface, and the task files exist as Windows system tasks, but the bundle mixes multiple feature areas and at least one task in the current list is version-dependent on the host used for review. This record keeps the bundle in review rather than publishing it as a validated preset.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "marebackup-task",
+                                        "location_kind":  "scheduled-task",
+                                        "path":  "\\Microsoft\\Windows\\Application Experience\\MareBackup",
+                                        "value_name":  "Enabled",
+                                        "value_type":  "TaskEnabledState",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "unknown",
+                                                                   "value":  null,
+                                                                   "label":  "Build-dependent baseline",
+                                                                   "meaning":  "This review record does not publish a Windows-wide default state for the task bundle.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-task-scheduler",
+                                                                                        "vm-task-observation",
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "Disabled",
+                                                                   "label":  "Task disabled by current app bundle",
+                                                                   "meaning":  "The current app disables this scheduled task when the bundle is applied.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    },
+                                    {
+                                        "target_id":  "compat-appraiser-task",
+                                        "location_kind":  "scheduled-task",
+                                        "path":  "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser",
+                                        "value_name":  "Enabled",
+                                        "value_type":  "TaskEnabledState",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "unknown",
+                                                                   "value":  null,
+                                                                   "label":  "Build-dependent baseline",
+                                                                   "meaning":  "This review record does not publish a Windows-wide default state for the task bundle.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-task-scheduler",
+                                                                                        "vm-task-observation",
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "Disabled",
+                                                                   "label":  "Task disabled by current app bundle",
+                                                                   "meaning":  "The current app disables this scheduled task when the bundle is applied.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    },
+                                    {
+                                        "target_id":  "consolidator-task",
+                                        "location_kind":  "scheduled-task",
+                                        "path":  "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator",
+                                        "value_name":  "Enabled",
+                                        "value_type":  "TaskEnabledState",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "unknown",
+                                                                   "value":  null,
+                                                                   "label":  "Build-dependent baseline",
+                                                                   "meaning":  "This review record does not publish a Windows-wide default state for the task bundle.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-task-scheduler",
+                                                                                        "vm-task-observation",
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "Disabled",
+                                                                   "label":  "Task disabled by current app bundle",
+                                                                   "meaning":  "The current app disables this scheduled task when the bundle is applied.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    },
+                                    {
+                                        "target_id":  "usbceip-task",
+                                        "location_kind":  "scheduled-task",
+                                        "path":  "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip",
+                                        "value_name":  "Enabled",
+                                        "value_type":  "TaskEnabledState",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "unknown",
+                                                                   "value":  null,
+                                                                   "label":  "Build-dependent baseline",
+                                                                   "meaning":  "This review record does not publish a Windows-wide default state for the task bundle.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-task-scheduler",
+                                                                                        "vm-task-observation",
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "Disabled",
+                                                                   "label":  "Task disabled by current app bundle",
+                                                                   "meaning":  "The current app disables this scheduled task when the bundle is applied.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    },
+                                    {
+                                        "target_id":  "silentcleanup-task",
+                                        "location_kind":  "scheduled-task",
+                                        "path":  "\\Microsoft\\Windows\\DiskCleanup\\SilentCleanup",
+                                        "value_name":  "Enabled",
+                                        "value_type":  "TaskEnabledState",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "unknown",
+                                                                   "value":  null,
+                                                                   "label":  "Build-dependent baseline",
+                                                                   "meaning":  "This review record does not publish a Windows-wide default state for the task bundle.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-task-scheduler",
+                                                                                        "vm-task-observation",
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "Disabled",
+                                                                   "label":  "Task disabled by current app bundle",
+                                                                   "meaning":  "The current app disables this scheduled task when the bundle is applied.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    },
+                                    {
+                                        "target_id":  "siuf-dmclient-task",
+                                        "location_kind":  "scheduled-task",
+                                        "path":  "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClient",
+                                        "value_name":  "Enabled",
+                                        "value_type":  "TaskEnabledState",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "unknown",
+                                                                   "value":  null,
+                                                                   "label":  "Build-dependent baseline",
+                                                                   "meaning":  "This review record does not publish a Windows-wide default state for the task bundle.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-task-scheduler",
+                                                                                        "vm-task-observation",
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "Disabled",
+                                                                   "label":  "Task disabled by current app bundle",
+                                                                   "meaning":  "The current app disables this scheduled task when the bundle is applied.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    },
+                                    {
+                                        "target_id":  "queue-reporting-task",
+                                        "location_kind":  "scheduled-task",
+                                        "path":  "\\Microsoft\\Windows\\Windows Error Reporting\\QueueReporting",
+                                        "value_name":  "Enabled",
+                                        "value_type":  "TaskEnabledState",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "unknown",
+                                                                   "value":  null,
+                                                                   "label":  "Build-dependent baseline",
+                                                                   "meaning":  "This review record does not publish a Windows-wide default state for the task bundle.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-task-scheduler",
+                                                                                        "vm-task-observation",
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "Disabled",
+                                                                   "label":  "Task disabled by current app bundle",
+                                                                   "meaning":  "The current app disables this scheduled task when the bundle is applied.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-system-provider"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "matches-research",
+                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+                                       "notes":  "The app uses a batch scheduled-task tweak to disable the listed task paths. This record keeps the bundle in review because the tasks span multiple Windows feature areas and one task is version-dependent on the current review machine.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "marebackup-task",
+                                                          "path":  "\\Microsoft\\Windows\\Application Experience\\MareBackup",
+                                                          "value_name":  "Enabled",
+                                                          "value_type":  "TaskEnabledState",
+                                                          "state_kind":  "value",
+                                                          "value":  "Disabled"
+                                                      },
+                                                      {
+                                                          "target_id":  "compat-appraiser-task",
+                                                          "path":  "\\Microsoft\\Windows\\Application Experience\\Microsoft Compatibility Appraiser",
+                                                          "value_name":  "Enabled",
+                                                          "value_type":  "TaskEnabledState",
+                                                          "state_kind":  "value",
+                                                          "value":  "Disabled"
+                                                      },
+                                                      {
+                                                          "target_id":  "consolidator-task",
+                                                          "path":  "\\Microsoft\\Windows\\Customer Experience Improvement Program\\Consolidator",
+                                                          "value_name":  "Enabled",
+                                                          "value_type":  "TaskEnabledState",
+                                                          "state_kind":  "value",
+                                                          "value":  "Disabled"
+                                                      },
+                                                      {
+                                                          "target_id":  "usbceip-task",
+                                                          "path":  "\\Microsoft\\Windows\\Customer Experience Improvement Program\\UsbCeip",
+                                                          "value_name":  "Enabled",
+                                                          "value_type":  "TaskEnabledState",
+                                                          "state_kind":  "value",
+                                                          "value":  "Disabled"
+                                                      },
+                                                      {
+                                                          "target_id":  "silentcleanup-task",
+                                                          "path":  "\\Microsoft\\Windows\\DiskCleanup\\SilentCleanup",
+                                                          "value_name":  "Enabled",
+                                                          "value_type":  "TaskEnabledState",
+                                                          "state_kind":  "value",
+                                                          "value":  "Disabled"
+                                                      },
+                                                      {
+                                                          "target_id":  "siuf-dmclient-task",
+                                                          "path":  "\\Microsoft\\Windows\\Feedback\\Siuf\\DmClient",
+                                                          "value_name":  "Enabled",
+                                                          "value_type":  "TaskEnabledState",
+                                                          "state_kind":  "value",
+                                                          "value":  "Disabled"
+                                                      },
+                                                      {
+                                                          "target_id":  "queue-reporting-task",
+                                                          "path":  "\\Microsoft\\Windows\\Windows Error Reporting\\QueueReporting",
+                                                          "value_name":  "Enabled",
+                                                          "value_type":  "TaskEnabledState",
+                                                          "state_kind":  "value",
+                                                          "value":  "Disabled"
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Windows task baseline varies by build",
+                                 "applies_to":  "Windows systems where these task paths may exist with different defaults across versions and editions",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "marebackup-task",
+                                                    "state_kind":  "unknown",
+                                                    "value":  null,
+                                                    "rationale":  "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
+                                                },
+                                                {
+                                                    "target_id":  "compat-appraiser-task",
+                                                    "state_kind":  "unknown",
+                                                    "value":  null,
+                                                    "rationale":  "The current review host does not include this exact task path, showing version-dependent task presence."
+                                                },
+                                                {
+                                                    "target_id":  "consolidator-task",
+                                                    "state_kind":  "unknown",
+                                                    "value":  null,
+                                                    "rationale":  "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
+                                                },
+                                                {
+                                                    "target_id":  "usbceip-task",
+                                                    "state_kind":  "unknown",
+                                                    "value":  null,
+                                                    "rationale":  "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
+                                                },
+                                                {
+                                                    "target_id":  "silentcleanup-task",
+                                                    "state_kind":  "unknown",
+                                                    "value":  null,
+                                                    "rationale":  "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
+                                                },
+                                                {
+                                                    "target_id":  "siuf-dmclient-task",
+                                                    "state_kind":  "unknown",
+                                                    "value":  null,
+                                                    "rationale":  "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
+                                                },
+                                                {
+                                                    "target_id":  "queue-reporting-task",
+                                                    "state_kind":  "unknown",
+                                                    "value":  null,
+                                                    "rationale":  "The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state."
+                                                }
+                                            ],
+                                 "notes":  "This is a review record for the current app bundle, not a published task-by-task default matrix.",
+                                 "evidence_ids":  [
+                                                      "ms-task-scheduler",
+                                                      "vm-task-observation"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "windows-default",
+                                     "label":  "Windows default",
+                                     "intended_for":  [
+                                                          "General users",
+                                                          "Systems that should keep the stock Windows scheduled-task mix"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "None until the bundle is split and reviewed task-by-task"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "marebackup-task",
+                                                        "state_kind":  "unknown",
+                                                        "value":  null,
+                                                        "rationale":  "Do not publish a blanket disable recommendation for this mixed task bundle."
+                                                    }
+                                                ],
+                                     "good_when":  "You want to stay close to the stock Windows scheduled-task baseline.",
+                                     "bad_when":  "You want a fully reviewed task-by-task hardening profile right now.",
+                                     "tradeoffs":  [
+                                                       "Windows keeps control of the scheduled-task mix.",
+                                                       "The current app bundle remains documented but not validated."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "ms-task-scheduler",
+                                                          "vm-task-observation"
+                                                      ]
+                                 },
+                                 {
+                                     "profile_id":  "current-app-bundle",
+                                     "label":  "Current app bundle",
+                                     "intended_for":  [
+                                                          "Research comparison only"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Published safe presets",
+                                                       "General users"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "marebackup-task",
+                                                        "state_kind":  "value",
+                                                        "value":  "Disabled",
+                                                        "rationale":  "Document the current app bundle without validating it as safe."
+                                                    }
+                                                ],
+                                     "good_when":  "You are documenting the current product behavior for follow-up review.",
+                                     "bad_when":  "You need a validated scheduled-task preset.",
+                                     "tradeoffs":  [
+                                                       "The current app bundle is captured honestly.",
+                                                       "The bundle is too broad and version-dependent to publish as validated today."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "app-system-provider",
+                                                          "repo-system-doc"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "ms-task-scheduler",
+                         "kind":  "official-doc",
+                         "title":  "Microsoft Learn: Task Scheduler start page",
+                         "location":  "https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page",
+                         "summary":  "Microsoft documents Task Scheduler as the Windows control surface for scheduled tasks.",
+                         "supports":  [
+                                          "behavior",
+                                          "version-scope"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "vm-task-observation",
+                         "kind":  "vm-test",
+                         "title":  "Local Windows task file observation",
+                         "location":  "C:\\Windows\\System32\\Tasks\\Microsoft\\Windows",
+                         "summary":  "The listed task paths were checked on the current Windows host. MareBackup, Consolidator, UsbCeip, SilentCleanup, DmClient, and QueueReporting were present; Microsoft Compatibility Appraiser was absent on this machine, confirming version-dependent task presence.",
+                         "supports":  [
+                                          "path",
+                                          "version-scope"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "app-system-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current app implementation",
+                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+                         "summary":  "The provider disables the listed task paths through the batch scheduled-task tweak.",
+                         "supports":  [
+                                          "path",
+                                          "ui-mapping"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "repo-system-doc",
+                         "kind":  "repo-doc",
+                         "title":  "Repo notes for the scheduled-tasks bundle",
+                         "location":  "Docs/system/system.md",
+                         "summary":  "The repo documents the current scheduled-task bundle and notes that users should read through the list before switching it.",
+                         "supports":  [
+                                          "behavior",
+                                          "side-effects"
+                                      ],
+                         "strength":  "medium"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "medium",
+                     "apply_allowed":  false,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  true,
+                     "restore_previous_supported":  true,
+                     "needs_vm_validation":  false,
+                     "why":  "The task paths and app mapping are real, but the bundle mixes several feature areas and includes version-dependent tasks, so it should be reviewed task-by-task before being published as a validated preset.",
+                     "blocking_issues":  [
+                                             "The bundle spans multiple Windows feature areas with different side effects.",
+                                             "At least one task path is version-dependent on the current review host.",
+                                             "The current record documents the bundle honestly but does not yet validate it as a safe preset."
+                                         ]
+                 },
+    "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
+    "validation_proof":  {
+                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+                             "exact_quote_or_path":  "Offline Files: \\\\Microsoft\\\\Windows\\\\Offline Files\\\\Background Synchronization; \\\\Microsoft\\\\Windows\\\\Offline Files\\\\Logon Synchronization. Sleep Study: \\\\Microsoft\\\\Windows\\\\Power Efficiency Diagnostics\\\\AnalyzeSystem. Time Sync: \\\\Microsoft\\\\Windows\\\\Time Synchronization\\\\ForceSynchronizeTime; SynchronizeTime. Miscellaneous: \\\\Microsoft\\\\Windows\\\\Registry\\\\RegIdleBackup.",
+                             "key_found_on_page":  true,
+                             "notes":  "Scheduled-tasks bundle. The proof anchors the exact task paths the bundle manipulates in the mirror."
+                         }
 }
