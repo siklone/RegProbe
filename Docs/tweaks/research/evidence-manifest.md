@@ -242,7 +242,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.disable-search-remote-queries` | validated | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `826137e3f60bb96c6dfffad1a9e760deead9141f0c4aa73c98ac238c80a242e3` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
 | `system.disable-search-web-results` | validated | `Docs/tweaks/research/records/system.disable-search-web-results.review.json` | `e795f098bea183761efafb0d3f87e77c09a48b74bf7e1277f122db8f73df0eae` | `bb1b1691889396c055ff9308c954c15fe921b1bf40045ac22449e871fd6c3a37` | 1 |
 | `system.disable-shortcut-arrow` | validated | `Docs/tweaks/research/records/system.disable-shortcut-arrow.json` | `e05e11b9584629849a78d1e94ab8022634dafb5ae4e4eba98ccdef122373c30f` | `4dc6f2003ee84572320f65a1acecf6c701fc68c055921e90ca666de432f9ebef` | 1 |
-| `system.disable-startup-delay` | validated | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `4010f90d42a9212f3ab0a6cd74ae6e9bdc7aab79c379c535a6d43a316038cc86` | `1b8c7b977f12e98ba3f8fabf4442213cb6a986a5a3dceed6205247a08d35f99e` | 1 |
+| `system.disable-startup-delay` | validated | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1` | `1b8c7b977f12e98ba3f8fabf4442213cb6a986a5a3dceed6205247a08d35f99e` | 1 |
 | `system.disable-storage-sense` | validated | `Docs/tweaks/research/records/system.disable-storage-sense.json` | `acec0c9c6e2760ad9a0892e7cc24768412bf3a7cc7c00933e64b83d3caf97f89` | `aab0b6531e384b0ec9cbb05bc4fd51a5f72f5fffb64825086125f5d372926ff1` | 1 |
 | `system.disable-storage-sense-temp-cleanup` | validated | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
@@ -11153,6 +11153,7 @@ Windows Internals references:
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | `high` |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `nohuto-enablesecurecredentialprompting-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableSecureCredentialPrompting policy | `high` |
+| `vm-batch-probe-20260320-trusted-path-credential-prompting` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Trusted path credential prompting | `medium` |
 
 **Provenance**
 
@@ -11497,6 +11498,7 @@ Windows Internals references:
 | `ms-automatic-maintenance-overview` | `official-doc` | `Microsoft official doc` | Microsoft Automatic Maintenance overview | `high` |
 | `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | `medium` |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Automatic maintenance override | `medium` |
 
 **Provenance**
 
@@ -11729,6 +11731,7 @@ Windows Internals references:
 | `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | `medium` |
 | `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | `medium` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | `medium` |
 
 **Provenance**
 
@@ -11822,6 +11825,7 @@ _No provenance block present._
 | --- | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | `medium` |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | `medium` |
 
 **Provenance**
 
@@ -12137,7 +12141,7 @@ Windows Internals references:
 - Area: `Explorer Startup Behavior`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.disable-startup-delay.review.json`
-- Source SHA256: `4010f90d42a9212f3ab0a6cd74ae6e9bdc7aab79c379c535a6d43a316038cc86`
+- Source SHA256: `fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1`
 - Proof SHA256: `1b8c7b977f12e98ba3f8fabf4442213cb6a986a5a3dceed6205247a08d35f99e`
 
 **Summary:** Win25H2Clean reversible probe confirmed StartupDelayInMSec=0 under Explorer\Serialize and restored the baseline.
@@ -12155,6 +12159,7 @@ Windows Internals references:
 | `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | `medium` |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | `medium` |
+| `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | `medium` |
 
 **Provenance**
 
@@ -13548,6 +13553,7 @@ Windows Internals references:
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | `medium` |
 | `repo-system-decomp-prioritycontrol` | `decompilation` | `Ghidra decompilation` | Decompiled PriorityControl read/write path | `high` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | `medium` |
 
 **Provenance**
 

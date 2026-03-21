@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T22:21:57.182595Z",
+  "generated_utc": "2026-03-21T22:25:02.153481Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -58477,13 +58477,28 @@
             "rollback"
           ],
           "origin": "VM runtime diff"
+        },
+        {
+          "evidence_id": "procmon-startup-delay-shell-restart",
+          "kind": "procmon-trace",
+          "title": "VM Procmon trace - Explorer shell restart reads StartupDelayInMSec",
+          "location": "H:\\Temp\\procmon-startup-delay.pml",
+          "summary": "Win25H2Clean Procmon capture during an Explorer restart while StartupDelayInMSec was toggled to 0 and restored. The trace backs the live shell startup-delay surface on this build.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "VM Procmon trace"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
         "exact_quote_or_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__",
         "key_found_on_page": true,
-        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record."
+        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart."
       },
       "provenance": {
         "coverage_state": "repo-backed",

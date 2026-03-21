@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T22:21:57.176435Z",
+  "generated_utc": "2026-03-21T22:25:02.115604Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -54138,6 +54138,21 @@
             "behavior"
           ],
           "origin": "Ghidra decompilation"
+        },
+        {
+          "evidence_id": "vm-batch-probe-20260320-trusted-path-credential-prompting",
+          "kind": "runtime-diff",
+          "title": "Win25H2Clean reversible probe - Trusted path credential prompting",
+          "location": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+          "summary": "Guest reversible probe toggled EnableSecureCredentialPrompting through 1 and back to missing on the CredUI policy path, confirming the current app write and rollback behavior on Win25H2Clean.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "rollback"
+          ],
+          "origin": "VM runtime diff"
         }
       ],
       "validation_proof": {
@@ -55844,6 +55859,21 @@
             "app-mismatch"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-batch-probe-20260320-disable-auto-maintenance",
+          "kind": "runtime-diff",
+          "title": "Win25H2Clean reversible probe - Automatic maintenance override",
+          "location": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+          "summary": "Guest reversible probe toggled MaintenanceDisabled through 1 and back to missing under the maintenance schedule policy path, matching the app behavior captured in the batch probe.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "rollback"
+          ],
+          "origin": "VM runtime diff"
         }
       ],
       "validation_proof": {
@@ -57086,6 +57116,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-batch-probe-20260320-disable-fullscreen-optimizations",
+          "kind": "runtime-diff",
+          "title": "Win25H2Clean reversible probe - Fullscreen optimizations override bundle",
+          "location": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+          "summary": "Guest reversible probe toggled the GameConfigStore fullscreen-optimization bundle values and restored the original missing state, confirming the current app write set on Win25H2Clean.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "rollback"
+          ],
+          "origin": "VM runtime diff"
         }
       ],
       "validation_proof": {
@@ -57544,6 +57589,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-batch-probe-20260320-disable-jpeg-reduction",
+          "kind": "runtime-diff",
+          "title": "Win25H2Clean reversible probe - Wallpaper JPEG import quality",
+          "location": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+          "summary": "Guest reversible probe toggled JPEGImportQuality to 100 and restored the missing baseline on HKCU\\Control Panel\\Desktop, confirming the current app write and rollback cycle.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "rollback"
+          ],
+          "origin": "VM runtime diff"
         }
       ],
       "validation_proof": {
@@ -58888,8 +58948,8 @@
       "tweak_id": "system.disable-startup-delay",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/system.disable-startup-delay.review.json",
-      "source_file_sha256": "4010f90d42a9212f3ab0a6cd74ae6e9bdc7aab79c379c535a6d43a316038cc86",
-      "source_file_size_bytes": 9502,
+      "source_file_sha256": "fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1",
+      "source_file_size_bytes": 10161,
       "name": "Startup Program Delay",
       "category": "System",
       "area": "Explorer Startup Behavior",
@@ -59070,6 +59130,21 @@
             "behavior"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-batch-probe-20260320-disable-startup-delay",
+          "kind": "runtime-diff",
+          "title": "Win25H2Clean reversible probe - Explorer startup delay",
+          "location": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+          "summary": "Guest reversible probe toggled StartupDelayInMSec to 0 and restored the missing baseline under Explorer\\Serialize, confirming the current app write and restore cycle.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "rollback"
+          ],
+          "origin": "VM runtime diff"
         }
       ],
       "validation_proof": {
@@ -65356,6 +65431,21 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-batch-probe-20260320-priority-control",
+          "kind": "runtime-diff",
+          "title": "Win25H2Clean reversible probe - Win32PrioritySeparation tuning",
+          "location": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+          "summary": "Guest reversible probe changed Win32PrioritySeparation from 2 to 38 and restored 2, confirming the tuning value transitions on the PriorityControl path.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "rollback"
+          ],
+          "origin": "VM runtime diff"
         }
       ],
       "validation_proof": {

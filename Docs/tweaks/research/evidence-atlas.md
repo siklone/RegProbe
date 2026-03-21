@@ -14289,6 +14289,7 @@ Windows Internals references:
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | C:\Windows\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-enablesecurecredentialprompting-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableSecureCredentialPrompting policy | Docs/tweaks/_source-mirrors/win-config/security/desc.md | `high` | path, value, behavior |
+| `vm-batch-probe-20260320-trusted-path-credential-prompting` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Trusted path credential prompting | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 
 **Validation proof**
 
@@ -14885,6 +14886,7 @@ Windows Internals references:
 | `ms-automatic-maintenance-overview` | `official-doc` | `Microsoft official doc` | Microsoft Automatic Maintenance overview | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance | `high` | behavior, default, version-scope |
 | `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable | `medium` | path, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Automatic maintenance override | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 
 **Validation proof**
 
@@ -15287,6 +15289,7 @@ Windows Internals references:
 | `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952 | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | Docs/system/system.md | `medium` | value, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 
 **Validation proof**
 
@@ -15468,6 +15471,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | Docs/system/system.md | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 
 **Validation proof**
 
@@ -16054,6 +16058,7 @@ Windows Internals references:
 | `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | H:\Temp\vm-tooling-staging\ghidra_explorer_serialize.txt | `medium` | path, string-reference, behavior |
+| `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 
 **Validation proof**
 
@@ -18505,6 +18510,7 @@ Windows Internals references:
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | Docs/system/system.md | `medium` | value, ui-mapping, app-mismatch |
 | `repo-system-decomp-prioritycontrol` | `decompilation` | `Ghidra decompilation` | Decompiled PriorityControl read/write path | Docs/system/assets/lsc-cimwin32.c | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 
 **Validation proof**
 
