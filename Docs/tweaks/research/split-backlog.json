@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:05:24Z",
+  "generated_utc": "2026-03-21T06:08:34Z",
   "backlog_type": "split-needed",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 24,
+  "entry_count": 23,
   "entries": [
     {
       "record_id": "audio.disable-system-sounds",
@@ -80,19 +80,6 @@
         "Microphone-specific handling",
         "User info access policy",
         "Per-capability UX copy and risk gating"
-      ]
-    },
-    {
-      "record_id": "privacy.disable-app-suggestions",
-      "current_state": "partially-matches | Policy vs Observed User Setting",
-      "notes": "Split into 2 parts: Official CloudContent policy path, Observed ContentDeliveryManager preference path. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json",
-      "estimated_split_parts": 2,
-      "suggested_splits": [
-        "Official CloudContent policy path",
-        "Observed ContentDeliveryManager preference path"
       ]
     },
     {

@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:05:24Z",
+  "generated_utc": "2026-03-21T06:08:34Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 57,
+  "source_record_count": 56,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -14,12 +14,12 @@
   "counts_by_label": {
     "implementation-mismatch": 0,
     "rename": 0,
-    "split-needed": 24,
+    "split-needed": 23,
     "docs-first": 33
   },
   "counts_by_method": {
     "heuristic": 4,
-    "manual-override": 47,
+    "manual-override": 46,
     "proof-gate": 6
   },
   "entries": [
@@ -853,26 +853,6 @@
       "blocking_issues": [
         "The bundle is very broad and mixes AppPrivacy policies with an extra System policy write.",
         "The LetAppsAccess* policy family should not be presented as if it fully governs classic Win32 desktop apps."
-      ]
-    },
-    {
-      "record_id": "privacy.disable-app-suggestions",
-      "tweak_id": "privacy.disable-app-suggestions",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "The current app does not use the official CloudContent policy path documented in this record.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "Privacy",
-      "technical_area": "Policy vs Observed User Setting",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json",
-      "summary": "Microsoft documents third-party app and content suggestions with the user policy HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions. The current app instead writes a per-user ContentDeliveryManager value, so this record stays in review until that user-side setting is sourced as an official equivalent.",
-      "decision_why": "The closest official CloudContent policy is clear, but the current app writes a different ContentDeliveryManager value that this record does not yet publish as equivalent.",
-      "blocking_issues": [
-        "The current app does not use the official CloudContent policy path documented in this record.",
-        "The SystemPaneSuggestionsEnabled value still needs formal sourcing or validation before it can be published as an official equivalent."
       ]
     },
     {

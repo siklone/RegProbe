@@ -1,0 +1,263 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "privacy.disable-app-suggestions",
+  "tweak_id": "privacy.disable-app-suggestions",
+  "record_status": "validated",
+  "summary": "Microsoft documents third-party app and content suggestions with the user policy HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions, and Microsoft Learn also documents the user-side ContentDeliveryManager value SystemPaneSuggestionsEnabled = 0. The current app writes the documented user-side value, so this record is now validated.",
+  "setting": {
+    "name": "App Suggestions in Start",
+    "category": "Privacy",
+    "area": "Policy vs Observed User Setting",
+    "scope": "user",
+    "casual_explanation": "Windows can suggest promoted apps and related content in places like the Start menu. People often turn this off when they want a cleaner Start experience.",
+    "why_people_change_it": "People disable app suggestions to reduce promotional content and make Start feel less noisy.",
+    "tradeoffs_overview": "Turning suggestions off can make Start quieter, but the current product issue is that the app writes a user-side ContentDeliveryManager value while the closest official Microsoft source in this record documents a different CloudContent policy.",
+    "professional_notes": "CloudContent.admx documents the official user policy at HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions with enabledValue 1 and disabledValue 0. Microsoft Learn's VDI optimization guidance also documents HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled = 0 as part of the supported user-side suggestion settings. The current app writes that same user-side value.",
+    "targets": [
+      {
+        "target_id": "disable-third-party-suggestions-policy",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "value_name": "DisableThirdPartySuggestions",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows Spotlight features may still suggest apps and content from third-party publishers.",
+            "evidence_ids": [
+              "local-cloudcontent-admx-thirdparty",
+              "local-cloudcontent-adml-thirdparty"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Third-party suggestions allowed",
+            "meaning": "The policy is disabled and Windows is not being told to block third-party suggestions.",
+            "evidence_ids": [
+              "local-cloudcontent-admx-thirdparty",
+              "local-cloudcontent-adml-thirdparty"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Third-party suggestions turned off",
+            "meaning": "Windows Spotlight features such as suggested apps in Start will no longer suggest apps and content from third-party publishers.",
+            "evidence_ids": [
+              "local-cloudcontent-admx-thirdparty",
+              "local-cloudcontent-adml-thirdparty"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "system-pane-suggestions-observed",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "value_name": "SystemPaneSuggestionsEnabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "No observed user value",
+            "meaning": "No explicit ContentDeliveryManager value is present in this record for Start suggestions.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Observed app off preference",
+            "meaning": "The current app writes 0 here, but this record does not yet publish that user path as the official Microsoft control.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          }
+        ],
+        "notes": "Tracked as an observed app write only."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app targets the same feature area, but it writes a user-side ContentDeliveryManager value instead of the official CloudContent policy documented in this record.",
+    "writes": [
+      {
+        "target_id": "system-pane-suggestions-observed",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "value_name": "SystemPaneSuggestionsEnabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows 10 and Windows 11 systems exposing the CloudContent third-party suggestions policy",
+      "states": [
+        {
+          "target_id": "disable-third-party-suggestions-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official user policy unset."
+        },
+        {
+          "target_id": "system-pane-suggestions-observed",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not treat the observed ContentDeliveryManager value as an official baseline."
+        }
+      ],
+      "notes": "If the official policy is not configured, Windows Spotlight features may still suggest third-party apps and content.",
+      "evidence_ids": [
+        "local-cloudcontent-admx-thirdparty",
+        "local-cloudcontent-adml-thirdparty"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems where Start suggestions are not centrally managed"
+      ],
+      "avoid_for": [
+        "People who want a strict policy-backed block"
+      ],
+      "states": [
+        {
+          "target_id": "disable-third-party-suggestions-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official user policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep its ordinary suggestions behavior.",
+      "bad_when": "You want third-party Start suggestions formally blocked by policy.",
+      "tradeoffs": [
+        "Start and related surfaces may still show promoted content.",
+        "The product avoids publishing an unsourced user-side mapping as official."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-cloudcontent-adml-thirdparty"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only",
+        "People documenting what the product currently writes"
+      ],
+      "avoid_for": [
+        "Anyone expecting a published official policy mapping"
+      ],
+      "states": [
+        {
+          "target_id": "system-pane-suggestions-observed",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Observed user-side off preference used by the current app."
+        }
+      ],
+      "good_when": "You are documenting current product behavior.",
+      "bad_when": "You want a different Start suggestions behavior.",
+      "tradeoffs": [
+        "The product targets the same experience users care about.",
+        "The current write is now documented by Microsoft Learn."
+      ],
+      "apply_allowed": true,
+      "notes": "The observed user-side setting is now formally sourced.",
+      "evidence_ids": [
+        "microsoft-learn-contentdeliverymanager",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "microsoft-learn-contentdeliverymanager",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: VDI optimization guidance - ContentDeliveryManager suggestion setting",
+      "location": "https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration",
+      "summary": "Microsoft Learn documents HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled = 0 in the VDI optimization guidance for suggested content in Settings.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-cloudcontent-admx-thirdparty",
+      "kind": "official-doc",
+      "title": "Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping",
+      "location": "C:\\Windows\\PolicyDefinitions\\CloudContent.admx",
+      "summary": "The local ADMX file maps DisableThirdPartySuggestions to HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-cloudcontent-adml-thirdparty",
+      "kind": "official-doc",
+      "title": "Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text",
+      "location": "C:\\Windows\\PolicyDefinitions\\en-US\\CloudContent.adml",
+      "summary": "The local ADML help text says enabling the policy stops Windows Spotlight features such as suggested apps in Start from suggesting apps and content from third-party publishers.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft Learn documents the ContentDeliveryManager value that the app writes, and the official CloudContent policy is already documented in the same record.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration",
+    "exact_quote_or_path": "HKLM\\Temp\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled /t REG_DWORD /d 0 /f",
+    "key_found_on_page": true,
+    "notes": "Validated against Microsoft Learn VDI optimization guidance that documents the same user-side ContentDeliveryManager suggestion value."
+  }
+}
