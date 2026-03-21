@@ -148,7 +148,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-activity-history` | validated | `Docs/tweaks/research/records/privacy.disable-activity-history.json` | `a60be8654b03150e6d893f3214fb289e942816507aa25ab339ab26d884aacfd6` | `bc005dd4397dc6efcde50924f04736c0579ff9a9b606f7d658f1f101fff2fec9` | 3 |
 | `privacy.disable-advertising-id` | validated | `Docs/tweaks/research/records/privacy.disable-advertising-id.json` | `edd49eae00cb8bed1842e762e7a061284191e8518ffd6ac4afa825502ca823e5` | `bd278720b6e772ec29f19dcd30d92794179e4793a6bb4971be7cf321212660f9` | 1 |
 | `privacy.disable-app-diagnostics` | validated | `Docs/tweaks/research/records/privacy.disable-app-diagnostics.json` | `f5faffbd240fb2850a3d1acd19d46f5d372f7bf30cc7e604065725a6d543d161` | `83541ebc2f0724779aa7677a49e2c42f136a2f80e094ec339c7a0bbaeee07b53` | 1 |
-| `privacy.disable-app-launch-tracking` | validated | `Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json` | `51d9448382ac6ec23c09bf648ae6e20b3b05d73b0f07d2b06d086dcc555524ed` | `40668284efe2873cc8a787874d042a23fff9931283951ea011bc9cd93a695f5c` | 1 |
+| `privacy.disable-app-launch-tracking` | validated | `Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json` | `d53e42b0dbccf792a65076936ca631aaf4e5e6bd23e13db00771a993091b64f5` | `40668284efe2873cc8a787874d042a23fff9931283951ea011bc9cd93a695f5c` | 1 |
 | `privacy.disable-app-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json` | `69445c0952c22962200284d83ceefa447e841b57fc36392fcc39c15e3b55b997` | `d95b58afe0b49b4ed2ed39c957ff8730864eb95cfcebe0eaa07c4708eb9e1e3a` | 2 |
 | `privacy.disable-appcompat-engine.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json` | `88a6c309a68d0b5c9d207c44d1884ae0f206b7edcfd0106e4ad25467172d0c78` | `4aa284a466ab23274289afd8984f112be82d7d68465fbe343f40ef70b10d440a` | 2 |
 | `privacy.disable-appdeviceinventory.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json` | `2d89783a4602f6689e5ae67d3244929d07277ec17848c537fde8f4aeb97a2250` | `4485a54cc0e04a3a5edf164953eb83b326f93a637f219da7533aa98574fd4347` | 4 |
@@ -162,42 +162,42 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-consumer-account-content` | validated | `Docs/tweaks/research/records/privacy.disable-consumer-account-content.json` | `c5e5af6aa8510de48023b0697e0fa003b8db07d26f03ab779f067ed6794e4083` | `802c43fd0393ee0e78c1e693355adf236c4b541b588b30c9b562dd4acffcb715` | 1 |
 | `privacy.disable-copilot` | validated | `Docs/tweaks/research/records/privacy.disable-copilot.json` | `c118fdaf3479c959c9c1dcd1886a0bfc864df07d3a238daa973eeb6f19c5b331` | `b1cd95056a7f94f371031db3f6de9b19002f4f490f784a91eddc21e6e7391ecc` | 1 |
 | `privacy.disable-cross-device-experiences.policy` | validated | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.policy.review.json` | `ec2ada610e78aa52d0bd8c323443004a75d133c2b175b93d5e01a28edb05a72c` | `cd57fd96f5a482926e20bdbff74771f88dcf8aed98c8528b62bdbdaa5e26d112` | 1 |
-| `privacy.disable-device-name-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-device-name-telemetry.json` | `32a599a262c08f0ea78d3e87079d9abdbe9ef0c94646c895904d9f2e2542e9e7` | `3e897ca021e47e65cb1e48c382ccb9892ee5068b0f6a3e900ceaabd6e36807b4` | 1 |
+| `privacy.disable-device-name-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-device-name-telemetry.json` | `28be3c8860b06016e30ab7c03b9919e4a9549b8a0af9e1ff22d0e002d5a4c14f` | `3e897ca021e47e65cb1e48c382ccb9892ee5068b0f6a3e900ceaabd6e36807b4` | 1 |
 | `privacy.disable-diagnostic-data-delete` | validated | `Docs/tweaks/research/records/privacy.disable-diagnostic-data-delete.json` | `0664e74cd1a50f51da1431bce9a0d886204460d2e166f068733a3f8101ea547f` | `5891504911c5f08d60193a8924be5928326e11a0e47f7e996703542b46610e9b` | 1 |
 | `privacy.disable-diagnostic-data-viewer` | validated | `Docs/tweaks/research/records/privacy.disable-diagnostic-data-viewer.json` | `7f874873c7967e29216c2a927c911688c34248f27a6360ab8b9679eb76fc66df` | `1e5a68e241c51b8fbb767c9157452e3ed5bcb6c9ce55eb50cb3a4548e7525b1c` | 1 |
 | `privacy.disable-edge-search-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-edge-search-suggestions.json` | `8f7ca88b8cfd391f02b29ab6ada5afd6dc48c64062f319498ec147447ab35893` | `308a5afd7fbc0a505de5fd5e6da9be0ff76205149f037ec2feaa93c192c8cb56` | 3 |
-| `privacy.disable-feedback-notifications` | validated | `Docs/tweaks/research/records/privacy.disable-feedback-notifications.json` | `4c288004cf6e66fb77e1097d4616e435c2f54ba5b4ed17604cd0e8feab6ac131` | `7bb3ba340bba5cb1f194c2a92456f622477fd9722f6fd10da11ef9777963e267` | 1 |
+| `privacy.disable-feedback-notifications` | validated | `Docs/tweaks/research/records/privacy.disable-feedback-notifications.json` | `9ef357caca2dd558ceb51079771e50598e12d6d549d77a2939239e919cb10a28` | `7bb3ba340bba5cb1f194c2a92456f622477fd9722f6fd10da11ef9777963e267` | 1 |
 | `privacy.disable-file-history` | validated | `Docs/tweaks/research/records/privacy.disable-file-history.json` | `e1e867ac34c8d47f9e813ae7a89e770f36a151bfe6915b8484a33dd87f7f2462` | `aa8d785480383b20c15d2bfeb0b8df5880a9dd17bde45e0b336c6d793462e2cb` | 1 |
 | `privacy.disable-find-my-device` | validated | `Docs/tweaks/research/records/privacy.disable-find-my-device.json` | `c8870610945cf729181b0927326195c2c8cbb03606ce1142a29dbe870219364b` | `87b5872f6958740891f43a2c779b22ed879146d0e2a7941319e90d93f47f5f77` | 1 |
-| `privacy.disable-font-providers` | validated | `Docs/tweaks/research/records/privacy.disable-font-providers.json` | `3103ecd3cc80e6ac2ced1c86f6d0951bc26cfa7c46f8bcb8c2d1bfd54f51dab6` | `12151dc2294ab2431c574adb62ae60c31a97fb5591023ba457835a24412c3522` | 1 |
-| `privacy.disable-kms-activation-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-kms-activation-telemetry.json` | `f7b7017efc2fbf591c50f25453a9789f359d97e8a85f7ddbb19047db38864529` | `cbe0a243027764b1abbfed3d81945cc2902a40769fd34ddf1f257cf8fbeacfbb` | 1 |
+| `privacy.disable-font-providers` | validated | `Docs/tweaks/research/records/privacy.disable-font-providers.json` | `3103ecd3cc80e6ac2ced1c86f6d0951bc26cfa7c46f8bcb8c2d1bfd54f51dab6` | `354730db32c467f7f05f9076e40ba6652a7ecbb40c0a30f29a72d69ce2db56c8` | 1 |
+| `privacy.disable-kms-activation-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-kms-activation-telemetry.json` | `f7b7017efc2fbf591c50f25453a9789f359d97e8a85f7ddbb19047db38864529` | `1e9e9894404d129fdfbb0bb7fe36462ff4f5028ceba1159bc4c5bc4106e139b6` | 1 |
 | `privacy.disable-language-list-access` | validated | `Docs/tweaks/research/records/privacy.disable-language-list-access.review.json` | `ef87f286bc1e28e2e82b2ba42cde3dddefc4a530e226e4d304980b3c0fc16859` | `c074b88f6c9a9ae61c5f95a9a4f41b990e2bf9843036eaf689f52637332f15aa` | 1 |
-| `privacy.disable-local-security-questions` | validated | `Docs/tweaks/research/records/privacy.disable-local-security-questions.json` | `0510aaff489d042f5092d37dd6bfa66c63f818c3bcfb4c0fcb6bd92bf9a6b170` | `a237eb58f48fddd3d71d25fa0ac105b40257f675468044125de6c3b24e511ee0` | 1 |
+| `privacy.disable-local-security-questions` | validated | `Docs/tweaks/research/records/privacy.disable-local-security-questions.json` | `0510aaff489d042f5092d37dd6bfa66c63f818c3bcfb4c0fcb6bd92bf9a6b170` | `d982c92d36455ed71e4e3b67770666d18ce19516b5834234fbe5857c78075c2a` | 1 |
 | `privacy.disable-location-consent` | validated | `Docs/tweaks/research/records/privacy.disable-location-consent.review.json` | `8d3fbb61dbf442c36526734f70021a0192574e679be09a3456a2948e66eade05` | `b83a34f2f928911486f15a32ea6c9b1f0cec24f813002f95b0035e5e1e15553c` | 2 |
 | `privacy.disable-location-consent-system` | validated | `Docs/tweaks/research/records/privacy.disable-location-consent-system.review.json` | `c7fd5c92098136a47f3fb245f275ca569dda95787a110329de65626e76cb3075` | `2d79f728476170491a58f6b6df1936c2669224fb46a5408be32263279ccab137` | 1 |
 | `privacy.disable-location-scripting` | validated | `Docs/tweaks/research/records/privacy.disable-location-scripting.json` | `625c68677b896079ecba8788ad61230808270368b0da87b8012aa88dfb9d8304` | `0d370d91cc59136db8005af00e3d57fb4c3f8606d0fb213ffbefc494041ee024` | 1 |
 | `privacy.disable-location-services` | validated | `Docs/tweaks/research/records/privacy.disable-location-services.json` | `02a2e5b01eaabc168a8c6413cfe788ad7ba628a890d8175c6e68299d3b1d3eb6` | `b63cb71c7f14cb3f1c8f97f32da8f3dd5b54d4a700ead5612765dc9a83d8b110` | 1 |
-| `privacy.disable-mdm-enrollment` | validated | `Docs/tweaks/research/records/privacy.disable-mdm-enrollment.json` | `1ad4b0bc6688ae1f1a5f643c93138c14af1ed0c6f83996a4bf75e73448ff6ea0` | `acb7c856a14499184fb268f771e25f40a2684e6b98e0366ffc0e9d1af9a1a27b` | 1 |
-| `privacy.disable-message-sync` | validated | `Docs/tweaks/research/records/privacy.disable-message-sync.json` | `141e59fb354ef13712d7c086e134c21e0eca83ca1fb81d495c1819cb4107eae2` | `99857452c6ed50b5a80e3a33b2c4f8b0d3bde5d9d36c800b1e54b94ee7629d69` | 1 |
+| `privacy.disable-mdm-enrollment` | validated | `Docs/tweaks/research/records/privacy.disable-mdm-enrollment.json` | `1ad4b0bc6688ae1f1a5f643c93138c14af1ed0c6f83996a4bf75e73448ff6ea0` | `e6f8a61361558a6b5553f8164f24f593e825c7e2a836515183f7b67e31364e08` | 1 |
+| `privacy.disable-message-sync` | validated | `Docs/tweaks/research/records/privacy.disable-message-sync.json` | `141e59fb354ef13712d7c086e134c21e0eca83ca1fb81d495c1819cb4107eae2` | `9ac7e52d8d1523fd2f662d4e33a210918cfd25f416a02fa88ced7077cf65c1cb` | 1 |
 | `privacy.disable-offline-files.policy` | validated | `Docs/tweaks/research/records/privacy.disable-offline-files.policy.json` | `0077b0a81625ba7eaf14678a918a3dab63f2ab92dd9579b785c0985560f5bde2` | `5f2c37486fce94be54a1f7aba31ff0ec2ffb424a30a22bc5decc1101e65f0b2d` | 1 |
-| `privacy.disable-onesettings-downloads` | validated | `Docs/tweaks/research/records/privacy.disable-onesettings-downloads.json` | `75ac04f346672b1c0acade2691c81ea301777b3e6ed0147dc754fc3e8c8cd401` | `bb401ff18dead17da03892c9d12ae804f35856ff58d5cafe46331877b0fba908` | 1 |
-| `privacy.disable-online-tips` | validated | `Docs/tweaks/research/records/privacy.disable-online-tips.json` | `8d225aeba1aa4730710ee5f2f2e8dba8bafdb00724db0242348badf9714bfe3c` | `8d36266f9dcac9d389327ae49d6127d077aeb7da9f22db6f9639bcc597e6082f` | 1 |
+| `privacy.disable-onesettings-downloads` | validated | `Docs/tweaks/research/records/privacy.disable-onesettings-downloads.json` | `75ac04f346672b1c0acade2691c81ea301777b3e6ed0147dc754fc3e8c8cd401` | `cca2f3310e87732b2639ebe0618ea5d41f71814401cf09e12a99a5d5637e7435` | 1 |
+| `privacy.disable-online-tips` | validated | `Docs/tweaks/research/records/privacy.disable-online-tips.json` | `8d225aeba1aa4730710ee5f2f2e8dba8bafdb00724db0242348badf9714bfe3c` | `5b4f9f5a365bc0021a8c40a8e54b3ea942db059ac2427124a3f2ecacff187654` | 1 |
 | `privacy.disable-pca-diagnostics.policy` | validated | `Docs/tweaks/research/records/privacy.disable-pca-diagnostics.policy.review.json` | `361914f2f1feb29b3636edcf815e1afd0af762ec539f66260d1bac51d42c2f9d` | `7bdb81d570e8ab0ad5ee8e5a8b3112f1606cb397e867b219ba9775c4ee981600` | 1 |
-| `privacy.disable-phone-linking` | validated | `Docs/tweaks/research/records/privacy.disable-phone-linking.json` | `1731d7b9214bfcf6934c71f567c60cf7b9606eba456890fdb4cea244fc0cc919` | `75976cc906c66e2106f84d4de7fbc6b4f022c70f7211acbba2a757d61463a1ae` | 1 |
+| `privacy.disable-phone-linking` | validated | `Docs/tweaks/research/records/privacy.disable-phone-linking.json` | `1731d7b9214bfcf6934c71f567c60cf7b9606eba456890fdb4cea244fc0cc919` | `1ac5d1461c6cb46560b096b50e2275a5337e2733cf934863b090dea12300a33e` | 1 |
 | `privacy.disable-program-compatibility-assistant` | validated | `Docs/tweaks/research/records/privacy.disable-program-compatibility-assistant.review.json` | `1e2d3bd33c18e44a39ebbebf350cf2ec1248d96e99ca61f75dd27ff15ba472c5` | `44e0f5bfd3018d0f07f651cf907dcf7bcb13de73ab5c19f61b128b0f8ea4f2b5` | 1 |
-| `privacy.disable-recall` | validated | `Docs/tweaks/research/records/privacy.disable-recall.json` | `a3dbe5a9847aa3811cc813babc86d285b8f40f25aeee1cfd08d0c86facdbd870` | `5d82b8ec56397b6c2a7bba667874745516859db05637ce36a100bb7162ca5e7f` | 1 |
+| `privacy.disable-recall` | validated | `Docs/tweaks/research/records/privacy.disable-recall.json` | `a3dbe5a9847aa3811cc813babc86d285b8f40f25aeee1cfd08d0c86facdbd870` | `9a1681fc411102114e54e8b3fcc31db5b490fedfdfa16084814efe601a8c63c6` | 1 |
 | `privacy.disable-resume` | validated | `Docs/tweaks/research/records/privacy.disable-resume.json` | `edea839d158aab3eca120589fd44f387bee5fed5463392481da76d79c13e882c` | `875ebc4d18fc5c6b161f2f60b89cff66a86db4916743c9f88a0995e24b1d402e` | 1 |
 | `privacy.disable-rsop-logging` | validated | `Docs/tweaks/research/records/privacy.disable-rsop-logging.json` | `e663e6d53c1c5cfe161fa777b90006fa0402b9eef5f606598dcaa011974270fe` | `5f3e900bb750e2a4c50deb90a0dbdd7f9e2a245eac042a0c1dfc0bcb76224b3b` | 1 |
-| `privacy.disable-search-box-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-search-box-suggestions.json` | `24a42941d3e2574654a4bff9f6add2a7145bc4873f6b34f4ca7bfb22268aa30f` | `8d7117f57965931b4c390171bf05c48dc455218943845e17a5ef19c3d9d6f4ec` | 1 |
-| `privacy.disable-search-history` | validated | `Docs/tweaks/research/records/privacy.disable-search-history.json` | `df20e231694b6617d2036ff87269603dfd12c4b5ca6b997d3080941b5a626304` | `404136e044cc31e728cc3a0e2582bca8e3f75278840b39356d5f64e7fd553ec8` | 1 |
-| `privacy.disable-sensors` | validated | `Docs/tweaks/research/records/privacy.disable-sensors.json` | `cccaf1838e5764b56275e3922448a433132c93f7310a2f5eab40a0b41fc35215` | `c9d989e80e0cb84b74bae2c4014c896dcb01eb9ba89492bfb540330887063000` | 1 |
+| `privacy.disable-search-box-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-search-box-suggestions.json` | `24a42941d3e2574654a4bff9f6add2a7145bc4873f6b34f4ca7bfb22268aa30f` | `eddc41ee198554d3fe83d0e6d0e2106783e18a845d2d7cb0e7cd6e74e9ecd7ec` | 1 |
+| `privacy.disable-search-history` | validated | `Docs/tweaks/research/records/privacy.disable-search-history.json` | `df20e231694b6617d2036ff87269603dfd12c4b5ca6b997d3080941b5a626304` | `932efde8f12aa6f98c0e98e26a100f4361639613f8fc81b2cae8c267d9a19951` | 1 |
+| `privacy.disable-sensors` | validated | `Docs/tweaks/research/records/privacy.disable-sensors.json` | `cccaf1838e5764b56275e3922448a433132c93f7310a2f5eab40a0b41fc35215` | `03b2103d23d85cca9c386b2625adb5bcdea664e37e93181285e939a421430be5` | 1 |
 | `privacy.disable-steps-recorder` | validated | `Docs/tweaks/research/records/privacy.disable-steps-recorder.json` | `c30ca6105b9e2cec0f671f6f27e4940f2efc14114323be321c1a4db8ea8c05d0` | `6b1c4965f1dd88907b6fe4153ee7caa5fa57810b0c676a4c6eb04c903a0c3915` | 1 |
 | `privacy.disable-suggestions.policy` | validated | `Docs/tweaks/research/records/privacy.disable-suggestions.policy.review.json` | `09dcee082106a1a85341f5d33d0ed89c6e266ae62a4ff37b4f4bbb95b9948904` | `f7289e1c044f4aed06c13b7cb312fc469ce3c649dc714b45f8210b084d491d23` | 3 |
 | `privacy.disable-switchback.policy` | validated | `Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json` | `7342d11984b2ee54d112c3889c24dad1a30a1baebcb0cfce8724933e2fa8ae62` | `e30ead337c2d32a4eaf143f8b112463cb25a2ed0f7c0fa445c95cc6d9f289a54` | 1 |
 | `privacy.disable-telemetry-change-notifications` | validated | `Docs/tweaks/research/records/privacy.disable-telemetry-change-notifications.json` | `91d6621e50dda7419d14d656552cd10b86b3c6dca556381d8fe62fe8d2cdf6d2` | `17c4989b5977afbfc6d978bfc504790de6b1a5cd9e418366ed65a4087ab94993` | 1 |
 | `privacy.disable-telemetry-optin-ui` | validated | `Docs/tweaks/research/records/privacy.disable-telemetry-optin-ui.json` | `49fdc4a927213c17b0917bdc2053bf996f662132e25aa5bfad8851ef5e92514d` | `c817eb3c49b0f967e5e129bc88bdac5a6f8cbfb11aa8fedce4e5ba2d2db70d5e` | 1 |
 | `privacy.disable-wer` | validated | `Docs/tweaks/research/records/privacy.disable-wer.json` | `e3cfbb17de947b0be50216890ce6641583b702e0b87538e9b58246458ad012b8` | `f76a986e44138251f15e259e1d0c6babb0919ff2b6693bced3034453f0baf573` | 1 |
-| `privacy.disable-windows-location-provider` | validated | `Docs/tweaks/research/records/privacy.disable-windows-location-provider.json` | `c9c00032b45e9041f8dde9b0d6d0806d28753f5b46f0f22165a7b74dacd07b89` | `1014838ef3490dfa9154e46a270b49f681a8e1421171244123463a83f1f9d9b5` | 1 |
+| `privacy.disable-windows-location-provider` | validated | `Docs/tweaks/research/records/privacy.disable-windows-location-provider.json` | `c9c00032b45e9041f8dde9b0d6d0806d28753f5b46f0f22165a7b74dacd07b89` | `e68060103c8ae9f54cafb0d4485ae51f868938c69e1064fe15bc3c9733fd4bbb` | 1 |
 | `privacy.disable-windows-tips` | validated | `Docs/tweaks/research/records/privacy.disable-windows-tips.review.json` | `9fd90d98b8d35fb338d0221c56c057f1cca86ecbdb24229ca83563c047cae3a8` | `968618706507e426f5afd1839e8cfad5d9ded5ff292655a59702411eb4e7486e` | 2 |
 | `privacy.hide-last-logged-in-user` | validated | `Docs/tweaks/research/records/privacy.hide-last-logged-in-user.json` | `d3696ac4aac8d076cada915d04b1bacc9c2f99adb13e14ff5c8cd7825cd04465` | `014429e6a6216c2cabbaababfda8591989e4a9a7c026c5c173c86fd9e5f18160` | 1 |
 | `privacy.hide-recommended-personalized-sites` | validated | `Docs/tweaks/research/records/privacy.hide-recommended-personalized-sites.json` | `357972f204388003309e8fbc1dff5ceef95cff22965dbf81190e6b03f6ed2016` | `0260e4a0514f36a331a7d8246132c4ab54466d561ef8e5ee4230adefdc45d3df` | 1 |
@@ -7091,7 +7091,7 @@ Nohuto lineage references:
 - Area: `Observed Registry Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json`
-- Source SHA256: `51d9448382ac6ec23c09bf648ae6e20b3b05d73b0f07d2b06d086dcc555524ed`
+- Source SHA256: `d53e42b0dbccf792a65076936ca631aaf4e5e6bd23e13db00771a993091b64f5`
 - Proof SHA256: `40668284efe2873cc8a787874d042a23fff9931283951ea011bc9cd93a695f5c`
 
 **Summary:** Microsoft privacy guidance documents the Start_TrackProgs registry value under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced and states that setting it to 0 turns off app launch tracking for Start and Search. The current app writes that exact documented value.
@@ -7823,7 +7823,7 @@ _No provenance block present._
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-device-name-telemetry.json`
-- Source SHA256: `32a599a262c08f0ea78d3e87079d9abdbe9ef0c94646c895904d9f2e2542e9e7`
+- Source SHA256: `28be3c8860b06016e30ab7c03b9919e4a9549b8a0af9e1ff22d0e002d5a4c14f`
 - Proof SHA256: `3e897ca021e47e65cb1e48c382ccb9892ee5068b0f6a3e900ceaabd6e36807b4`
 
 **Summary:** Machine policy for whether Windows diagnostic data may include the device name. Microsoft documents the same device policy path, default, and numeric meanings that the app writes.
@@ -8044,7 +8044,7 @@ Nohuto lineage references:
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-feedback-notifications.json`
-- Source SHA256: `4c288004cf6e66fb77e1097d4616e435c2f54ba5b4ed17604cd0e8feab6ac131`
+- Source SHA256: `9ef357caca2dd558ceb51079771e50598e12d6d549d77a2939239e919cb10a28`
 - Proof SHA256: `7bb3ba340bba5cb1f194c2a92456f622477fd9722f6fd10da11ef9777963e267`
 
 **Summary:** Machine policy for Microsoft feedback prompts. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -8205,7 +8205,7 @@ Nohuto lineage references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-font-providers.json`
 - Source SHA256: `3103ecd3cc80e6ac2ced1c86f6d0951bc26cfa7c46f8bcb8c2d1bfd54f51dab6`
-- Proof SHA256: `12151dc2294ab2431c574adb62ae60c31a97fb5591023ba457835a24412c3522`
+- Proof SHA256: `354730db32c467f7f05f9076e40ba6652a7ecbb40c0a30f29a72d69ce2db56c8`
 
 **Summary:** Machine policy for online font providers. Good for privacy-sensitive or offline-lean systems, but it prevents Windows from downloading font catalog data and online font data when needed.
 
@@ -8224,6 +8224,7 @@ Nohuto lineage references:
 | `local-grouppolicy-adml-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-font-providers` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-enablefontproviders-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableFontProviders policy | `high` |
 
 **Provenance**
 
@@ -8249,7 +8250,7 @@ Nohuto lineage references:
 | source_url | C:\\WINDOWS\\PolicyDefinitions\\GroupPolicy.admx |
 | exact_quote_or_path | <policy name="EnableFontProviders" class="Machine" ... key="Software\\Policies\\Microsoft\\Windows\\System" valueName="EnableFontProviders">; GroupPolicy.adml: If you disable this policy setting, Windows does not connect to an online font provider and only enumerates locally-installed fonts. |
 | key_found_on_page | True |
-| notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts. |
+| notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts. Added nohuto mirror corroboration via nohuto-enablefontproviders-admx. |
 ### `privacy.disable-kms-activation-telemetry`
 
 - Status: `validated`
@@ -8258,7 +8259,7 @@ Nohuto lineage references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-kms-activation-telemetry.json`
 - Source SHA256: `f7b7017efc2fbf591c50f25453a9789f359d97e8a85f7ddbb19047db38864529`
-- Proof SHA256: `cbe0a243027764b1abbfed3d81945cc2902a40769fd34ddf1f257cf8fbeacfbb`
+- Proof SHA256: `1e9e9894404d129fdfbb0bb7fe36462ff4f5028ceba1159bc4c5bc4106e139b6`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Machine policy for KMS client online AVS validation data. Good for privacy-sensitive or tightly controlled environments, but it opts the device out of automatically sending KMS activation-state data to Microsoft.
 
@@ -8278,6 +8279,7 @@ Nohuto lineage references:
 | `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx reference bundle | `medium` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-nogenticket-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - NoGenTicket policy | `high` |
 
 **Provenance**
 
@@ -8303,7 +8305,7 @@ Nohuto lineage references:
 | source_url | C:\\WINDOWS\\PolicyDefinitions\\AVSValidationGP.admx |
 | exact_quote_or_path | <policy name="NoAcquireGT" class="Machine" ... key="Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform" valueName="NoGenTicket"> <enabledValue><decimal value = "1" /></enabledValue> <disabledValue><decimal value = "0" /></disabledValue>; AVSValidationGP.adml: "Enabled (data will not be sent to Microsoft)". |
 | key_found_on_page | True |
-| notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy opts the device out of automatically sending KMS client activation data to Microsoft. |
+| notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy opts the device out of automatically sending KMS client activation data to Microsoft. Added nohuto mirror corroboration via nohuto-nogenticket-admx. |
 ### `privacy.disable-language-list-access`
 
 - Status: `validated`
@@ -8362,7 +8364,7 @@ Nohuto lineage references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-local-security-questions.json`
 - Source SHA256: `0510aaff489d042f5092d37dd6bfa66c63f818c3bcfb4c0fcb6bd92bf9a6b170`
-- Proof SHA256: `a237eb58f48fddd3d71d25fa0ac105b40257f675468044125de6c3b24e511ee0`
+- Proof SHA256: `d982c92d36455ed71e4e3b67770666d18ce19516b5834234fbe5857c78075c2a`
 
 **Summary:** Machine policy for security questions on local accounts. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the blocked behavior.
 
@@ -8382,6 +8384,7 @@ Nohuto lineage references:
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-local-security-questions` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-nolocalpasswordresetquestions-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - NoLocalPasswordResetQuestions policy | `high` |
 
 **Provenance**
 
@@ -8407,7 +8410,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions |
 | exact_quote_or_path | If you turn this policy setting on, local users won't be able to set up and use security questions to reset their passwords. ADMX mapping: Name NoLocalPasswordResetQuestions ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\System ... Registry Value Name NoLocalPasswordResetQuestions. |
 | key_found_on_page | True |
-| notes | The ADMX_CredUI Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the blocked behavior. |
+| notes | The ADMX_CredUI Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the blocked behavior. Added nohuto mirror corroboration via nohuto-nolocalpasswordresetquestions-admx. |
 ### `privacy.disable-location-consent`
 
 - Status: `validated`
@@ -8627,7 +8630,7 @@ Nohuto lineage references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-mdm-enrollment.json`
 - Source SHA256: `1ad4b0bc6688ae1f1a5f643c93138c14af1ed0c6f83996a4bf75e73448ff6ea0`
-- Proof SHA256: `acb7c856a14499184fb268f771e25f40a2684e6b98e0366ffc0e9d1af9a1a27b`
+- Proof SHA256: `e6f8a61361558a6b5553f8164f24f593e825c7e2a836515183f7b67e31364e08`
 
 **Summary:** Machine policy for MDM enrollment. Good for systems that should not be remotely managed through MDM, but it prevents new MDM enrollments for all users on the device.
 
@@ -8646,6 +8649,7 @@ Nohuto lineage references:
 | `local-mdm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.adml help text | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-mdm-enrollment` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-disableregistration-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableRegistration policy | `high` |
 
 **Provenance**
 
@@ -8671,7 +8675,7 @@ Nohuto lineage references:
 | source_url | C:\\WINDOWS\\PolicyDefinitions\\MDM.admx |
 | exact_quote_or_path | <policy name="MDM_MDM_DisplayName" class="Machine" ... key="Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM" valueName="DisableRegistration">; MDM.adml: If you enable this policy setting, MDM Enrollment will be disabled for all users. It will not unenroll existing MDM enrollments. |
 | key_found_on_page | True |
-| notes | Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. |
+| notes | Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. Added nohuto mirror corroboration via nohuto-disableregistration-admx. |
 ### `privacy.disable-message-sync`
 
 - Status: `validated`
@@ -8680,7 +8684,7 @@ Nohuto lineage references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-message-sync.json`
 - Source SHA256: `141e59fb354ef13712d7c086e134c21e0eca83ca1fb81d495c1819cb4107eae2`
-- Proof SHA256: `99857452c6ed50b5a80e3a33b2c4f8b0d3bde5d9d36c800b1e54b94ee7629d69`
+- Proof SHA256: `9ac7e52d8d1523fd2f662d4e33a210918cfd25f416a02fa88ced7077cf65c1cb`
 
 **Summary:** Machine policy for cellular message cloud sync. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
 
@@ -8699,6 +8703,7 @@ Nohuto lineage references:
 | `local-messaging-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft messaging.admx mapping | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-message-sync` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-allowmessagesync-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - AllowMessageSync policy | `high` |
 
 **Provenance**
 
@@ -8724,7 +8729,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync |
 | exact_quote_or_path | Default Value 1; Allowed values: 0 Message sync isn't allowed and can't be changed by the user. 1 (Default) Message sync is allowed. The user can change this setting. Group policy mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\Messaging; Registry Value Name AllowMessageSync. |
 | key_found_on_page | True |
-| notes | The Messaging Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. |
+| notes | The Messaging Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-allowmessagesync-admx. |
 ### `privacy.disable-offline-files.policy`
 
 - Status: `validated`
@@ -8773,7 +8778,7 @@ _No provenance block present._
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-onesettings-downloads.json`
 - Source SHA256: `75ac04f346672b1c0acade2691c81ea301777b3e6ed0147dc754fc3e8c8cd401`
-- Proof SHA256: `bb401ff18dead17da03892c9d12ae804f35856ff58d5cafe46331877b0fba908`
+- Proof SHA256: `cca2f3310e87732b2639ebe0618ea5d41f71814401cf09e12a99a5d5637e7435`
 
 **Summary:** Machine policy for whether Windows connects to the OneSettings service to download configuration settings. Microsoft documents the same device policy control and registry key path that the app writes, and the local ADMX confirms the value mapping.
 
@@ -8792,6 +8797,7 @@ _No provenance block present._
 | `local-datacollection-adml-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-onesettings-downloads` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-disableonesettingsdownloads-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableOneSettingsDownloads policy | `high` |
 
 **Provenance**
 
@@ -8817,7 +8823,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads |
 | exact_quote_or_path | This policy setting controls whether Windows attempts to connect with the OneSettings service. If you enable this policy, Windows won't attempt to connect with the OneSettings Service. ... Default Value 0. Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping: Name DisableOneSettingsDownloads ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection. |
 | key_found_on_page | True |
-| notes | The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is also DisableOneSettingsDownloads. |
+| notes | The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is also DisableOneSettingsDownloads. Added nohuto mirror corroboration via nohuto-disableonesettingsdownloads-admx. |
 ### `privacy.disable-online-tips`
 
 - Status: `validated`
@@ -8826,7 +8832,7 @@ Nohuto lineage references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-online-tips.json`
 - Source SHA256: `8d225aeba1aa4730710ee5f2f2e8dba8bafdb00724db0242348badf9714bfe3c`
-- Proof SHA256: `8d36266f9dcac9d389327ae49d6127d077aeb7da9f22db6f9639bcc597e6082f`
+- Proof SHA256: `5b4f9f5a365bc0021a8c40a8e54b3ea942db059ac2427124a3f2ecacff187654`
 
 **Summary:** Machine policy for online tips and help in Settings. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
 
@@ -8845,6 +8851,7 @@ Nohuto lineage references:
 | `local-control-panel-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx mapping | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-online-tips` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-allowonlinetips-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - AllowOnlineTips policy | `high` |
 
 **Provenance**
 
@@ -8870,7 +8877,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips |
 | exact_quote_or_path | Enables or disables the retrieval of online tips and help for the Settings app. If disabled, Settings won't contact Microsoft content services to retrieve tips and help content. Default Value 1. Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Name AllowOnlineTips ... Registry Key Name Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. |
 | key_found_on_page | True |
-| notes | The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips. |
+| notes | The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips. Added nohuto mirror corroboration via nohuto-allowonlinetips-admx. |
 ### `privacy.disable-pca-diagnostics.policy`
 
 - Status: `validated`
@@ -8920,7 +8927,7 @@ _No provenance block present._
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-phone-linking.json`
 - Source SHA256: `1731d7b9214bfcf6934c71f567c60cf7b9606eba456890fdb4cea244fc0cc919`
-- Proof SHA256: `75976cc906c66e2106f84d4de7fbc6b4f022c70f7211acbba2a757d61463a1ae`
+- Proof SHA256: `1ac5d1461c6cb46560b096b50e2275a5337e2733cf934863b090dea12300a33e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for Phone-PC linking and Continue on PC experiences. Good for reducing cross-device linkage, but it prevents the device from participating in those experiences.
 
@@ -8938,6 +8945,7 @@ _No provenance block present._
 | `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | `high` |
 | `local-grouppolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `nohuto-enablemmx-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableMmx policy | `high` |
 
 **Provenance**
 
@@ -8963,7 +8971,7 @@ Nohuto lineage references:
 | source_url | C:\\Windows\\PolicyDefinitions\\GroupPolicy.admx |
 | exact_quote_or_path | <policy name="EnableMMX" class="Machine" ... key="Software\\Policies\\Microsoft\\Windows\\System" valueName="EnableMmx"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; GroupPolicy.adml: "If you disable this policy setting, the Windows device is not allowed to be linked to Phones ... and cannot participate in Continue on PC experiences." |
 | key_found_on_page | True |
-| notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC experiences. |
+| notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC experiences. Added nohuto mirror corroboration via nohuto-enablemmx-admx. |
 ### `privacy.disable-program-compatibility-assistant`
 
 - Status: `validated`
@@ -9014,7 +9022,7 @@ _No provenance block present._
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-recall.json`
 - Source SHA256: `a3dbe5a9847aa3811cc813babc86d285b8f40f25aeee1cfd08d0c86facdbd870`
-- Proof SHA256: `5d82b8ec56397b6c2a7bba667874745516859db05637ce36a100bb7162ca5e7f`
+- Proof SHA256: `9a1681fc411102114e54e8b3fcc31db5b490fedfdfa16084814efe601a8c63c6`
 
 **Summary:** User policy for saving snapshots for Recall. The local Microsoft WindowsCopilot.admx file explicitly documents the same WindowsAI policy key, DisableAIDataAnalysis value name, and 1/0 mapping that the app uses.
 
@@ -9034,6 +9042,7 @@ _No provenance block present._
 | `local-windowscopilot-adml-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml Recall help text | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-recall` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-disableaidataanalysis-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableAIDataAnalysis policy | `high` |
 
 **Provenance**
 
@@ -9059,7 +9068,7 @@ Nohuto lineage references:
 | source_url | C:\\Windows\\PolicyDefinitions\\WindowsCopilot.admx |
 | exact_quote_or_path | <policy name="DisableAIDataAnalysis" class="Both" ... key="SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI" valueName="DisableAIDataAnalysis"> |
 | key_found_on_page | True |
-| notes | The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots. |
+| notes | The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots. Added nohuto mirror corroboration via nohuto-disableaidataanalysis-admx. |
 ### `privacy.disable-resume`
 
 - Status: `validated`
@@ -9176,7 +9185,7 @@ Nohuto lineage references:
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-search-box-suggestions.json`
 - Source SHA256: `24a42941d3e2574654a4bff9f6add2a7145bc4873f6b34f4ca7bfb22268aa30f`
-- Proof SHA256: `8d7117f57965931b4c390171bf05c48dc455218943845e17a5ef19c3d9d6f4ec`
+- Proof SHA256: `eddc41ee198554d3fe83d0e6d0e2106783e18a845d2d7cb0e7cd6e74e9ecd7ec`
 
 **Summary:** User policy for File Explorer search suggestions. Microsoft documents the same user policy path, value name, default, and behavior that the app writes.
 
@@ -9195,6 +9204,7 @@ Nohuto lineage references:
 | `local-windows-explorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-search-box-suggestions` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-disablesearchboxsuggestions-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSearchBoxSuggestions policy | `high` |
 
 **Provenance**
 
@@ -9220,7 +9230,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions |
 | exact_quote_or_path | Disables suggesting recent queries for the Search Box and prevents entries into the Search Box from being stored in the registry for future references. ... If you enable this policy, File Explorer won't show suggestion pop-ups as users type into the Search Box, and it won't store Search Box entries into the registry for future references. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\Explorer; Registry Value Name DisableSearchBoxSuggestions. |
 | key_found_on_page | True |
-| notes | The ADMX_WindowsExplorer Policy CSP page explicitly names the exact user policy path and value name the app writes, and its policy description matches the disabled behavior. |
+| notes | The ADMX_WindowsExplorer Policy CSP page explicitly names the exact user policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesearchboxsuggestions-admx. |
 ### `privacy.disable-search-history`
 
 - Status: `validated`
@@ -9229,7 +9239,7 @@ Nohuto lineage references:
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-search-history.json`
 - Source SHA256: `df20e231694b6617d2036ff87269603dfd12c4b5ca6b997d3080941b5a626304`
-- Proof SHA256: `404136e044cc31e728cc3a0e2582bca8e3f75278840b39356d5f64e7fd553ec8`
+- Proof SHA256: `932efde8f12aa6f98c0e98e26a100f4361639613f8fc81b2cae8c267d9a19951`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
 
@@ -9248,6 +9258,7 @@ Nohuto lineage references:
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-disablesearchhistory-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSearchHistory policy | `high` |
 
 **Provenance**
 
@@ -9273,7 +9284,7 @@ Nohuto lineage references:
 | source_url | C:\\WINDOWS\\PolicyDefinitions\\Search.admx |
 | exact_quote_or_path | Search.admx: <policy name="DisableSearchHistory" class="User" ... key="Software\\Policies\\Microsoft\\Windows\\Explorer" valueName="DisableSearchHistory"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; Search.adml: "If you enable this policy setting, search queries will not be stored in the registry and users cannot see or use previous searches in the Search pane." |
 | key_found_on_page | True |
-| notes | The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. |
+| notes | The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. Added nohuto mirror corroboration via nohuto-disablesearchhistory-admx. |
 ### `privacy.disable-sensors`
 
 - Status: `validated`
@@ -9282,7 +9293,7 @@ Nohuto lineage references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-sensors.json`
 - Source SHA256: `cccaf1838e5764b56275e3922448a433132c93f7310a2f5eab40a0b41fc35215`
-- Proof SHA256: `c9d989e80e0cb84b74bae2c4014c896dcb01eb9ba89492bfb540330887063000`
+- Proof SHA256: `03b2103d23d85cca9c386b2625adb5bcdea664e37e93181285e939a421430be5`
 
 **Summary:** Policy-backed control for Windows sensors. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
 
@@ -9301,6 +9312,7 @@ Nohuto lineage references:
 | `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-sensors` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-disablesensors-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSensors policy | `high` |
 
 **Provenance**
 
@@ -9326,7 +9338,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors |
 | exact_quote_or_path | If you enable this policy setting, all Windows Sensor features are disabled. ADMX mapping: Name DisableSensors ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\LocationAndSensors ... Registry Value Name DisableSensors. |
 | key_found_on_page | True |
-| notes | The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. |
+| notes | The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesensors-admx. |
 ### `privacy.disable-steps-recorder`
 
 - Status: `validated`
@@ -9647,7 +9659,7 @@ Nohuto lineage references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-windows-location-provider.json`
 - Source SHA256: `c9c00032b45e9041f8dde9b0d6d0806d28753f5b46f0f22165a7b74dacd07b89`
-- Proof SHA256: `1014838ef3490dfa9154e46a270b49f681a8e1421171244123463a83f1f9d9b5`
+- Proof SHA256: `e68060103c8ae9f54cafb0d4485ae51f868938c69e1064fe15bc3c9733fd4bbb`
 
 **Summary:** Machine policy for the Windows Location Provider. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
 
@@ -9666,6 +9678,7 @@ Nohuto lineage references:
 | `local-location-provider-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft LocationProviderAdm.admx mapping | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `repo-provenance-disable-windows-location-provider` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | `medium` |
+| `nohuto-disablewindowslocationprovider-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableWindowsLocationProvider policy | `high` |
 
 **Provenance**
 
@@ -9691,7 +9704,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider |
 | exact_quote_or_path | This policy setting turns off the Windows Location Provider feature for this computer. If you enable this policy setting, the Windows Location Provider feature will be turned off, and all programs on this computer won't be able to use the Windows Location Provider feature. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\LocationAndSensors; Registry Value Name DisableWindowsLocationProvider. |
 | key_found_on_page | True |
-| notes | The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. |
+| notes | The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablewindowslocationprovider-admx. |
 ### `privacy.disable-windows-tips`
 
 - Status: `validated`

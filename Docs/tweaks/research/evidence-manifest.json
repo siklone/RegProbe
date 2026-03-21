@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T16:43:29.357854Z",
+  "generated_utc": "2026-03-21T16:49:23.525901Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -32649,8 +32649,8 @@
       "tweak_id": "privacy.disable-app-launch-tracking",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json",
-      "source_file_sha256": "51d9448382ac6ec23c09bf648ae6e20b3b05d73b0f07d2b06d086dcc555524ed",
-      "source_file_size_bytes": 8736,
+      "source_file_sha256": "d53e42b0dbccf792a65076936ca631aaf4e5e6bd23e13db00771a993091b64f5",
+      "source_file_size_bytes": 10011,
       "name": "App Launch Tracking",
       "category": "Privacy",
       "area": "Observed Registry Setting",
@@ -36549,8 +36549,8 @@
       "tweak_id": "privacy.disable-device-name-telemetry",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-device-name-telemetry.json",
-      "source_file_sha256": "32a599a262c08f0ea78d3e87079d9abdbe9ef0c94646c895904d9f2e2542e9e7",
-      "source_file_size_bytes": 9526,
+      "source_file_sha256": "28be3c8860b06016e30ab7c03b9919e4a9549b8a0af9e1ff22d0e002d5a4c14f",
+      "source_file_size_bytes": 10703,
       "name": "Device Name in Diagnostic Data",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -37779,8 +37779,8 @@
       "tweak_id": "privacy.disable-feedback-notifications",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-feedback-notifications.json",
-      "source_file_sha256": "4c288004cf6e66fb77e1097d4616e435c2f54ba5b4ed17604cd0e8feab6ac131",
-      "source_file_size_bytes": 9478,
+      "source_file_sha256": "9ef357caca2dd558ceb51079771e50598e12d6d549d77a2939239e919cb10a28",
+      "source_file_size_bytes": 10637,
       "name": "Microsoft Feedback Notifications",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -38637,7 +38637,8 @@
               "meaning": "Windows does not force the online font provider policy.",
               "evidence_ids": [
                 "local-grouppolicy-admx-fonts",
-                "local-grouppolicy-adml-fonts"
+                "local-grouppolicy-adml-fonts",
+                "nohuto-enablefontproviders-admx"
               ]
             },
             {
@@ -38647,7 +38648,8 @@
               "meaning": "Windows does not connect to an online font provider and only enumerates locally installed fonts.",
               "evidence_ids": [
                 "local-grouppolicy-admx-fonts",
-                "local-grouppolicy-adml-fonts"
+                "local-grouppolicy-adml-fonts",
+                "nohuto-enablefontproviders-admx"
               ]
             },
             {
@@ -38657,7 +38659,8 @@
               "meaning": "Windows can query an online font provider for catalog and font data when needed.",
               "evidence_ids": [
                 "local-grouppolicy-admx-fonts",
-                "local-grouppolicy-adml-fonts"
+                "local-grouppolicy-adml-fonts",
+                "nohuto-enablefontproviders-admx"
               ]
             }
           ]
@@ -38677,7 +38680,8 @@
           ],
           "evidence_ids": [
             "local-grouppolicy-admx-fonts",
-            "local-grouppolicy-adml-fonts"
+            "local-grouppolicy-adml-fonts",
+            "nohuto-enablefontproviders-admx"
           ]
         }
       ],
@@ -38708,7 +38712,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "local-grouppolicy-adml-fonts"
+            "local-grouppolicy-adml-fonts",
+            "nohuto-enablefontproviders-admx"
           ]
         },
         {
@@ -38739,7 +38744,8 @@
           "evidence_ids": [
             "local-grouppolicy-admx-fonts",
             "local-grouppolicy-adml-fonts",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-enablefontproviders-admx"
           ]
         }
       ],
@@ -38799,15 +38805,30 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-enablefontproviders-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - EnableFontProviders policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "GroupPolicy.admx shows EnableFontProviders under HKLM\\Software\\Policies\\Microsoft\\Windows\\System. The mirrored ExplainText says enabling the policy lets Windows download fonts and font catalog data from an online provider, while disabling it keeps Windows on locally-installed fonts only. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\WINDOWS\\PolicyDefinitions\\GroupPolicy.admx",
         "exact_quote_or_path": "<policy name=\"EnableFontProviders\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"EnableFontProviders\">; GroupPolicy.adml: If you disable this policy setting, Windows does not connect to an online font provider and only enumerates locally-installed fonts.",
         "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts."
+        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts. Added nohuto mirror corroboration via nohuto-enablefontproviders-admx."
       },
-      "validation_proof_sha256": "12151dc2294ab2431c574adb62ae60c31a97fb5591023ba457835a24412c3522",
+      "validation_proof_sha256": "354730db32c467f7f05f9076e40ba6652a7ecbb40c0a30f29a72d69ce2db56c8",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -38896,7 +38917,8 @@
               "meaning": "KMS client activation data is automatically sent to Microsoft when the device activates, according to Microsoft's local policy help text.",
               "evidence_ids": [
                 "local-avs-validation-admx",
-                "local-avs-validation-adml"
+                "local-avs-validation-adml",
+                "nohuto-nogenticket-admx"
               ]
             },
             {
@@ -38906,7 +38928,8 @@
               "meaning": "The policy is disabled and KMS client activation data is automatically sent to Microsoft.",
               "evidence_ids": [
                 "local-avs-validation-admx",
-                "local-avs-validation-adml"
+                "local-avs-validation-adml",
+                "nohuto-nogenticket-admx"
               ]
             },
             {
@@ -38916,7 +38939,8 @@
               "meaning": "The policy is enabled and the computer opts out of automatically sending KMS client activation data to Microsoft.",
               "evidence_ids": [
                 "local-avs-validation-admx",
-                "local-avs-validation-adml"
+                "local-avs-validation-adml",
+                "nohuto-nogenticket-admx"
               ]
             }
           ]
@@ -38936,7 +38960,8 @@
           ],
           "evidence_ids": [
             "local-avs-validation-admx",
-            "local-avs-validation-adml"
+            "local-avs-validation-adml",
+            "nohuto-nogenticket-admx"
           ]
         }
       ],
@@ -38967,7 +38992,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "local-avs-validation-adml"
+            "local-avs-validation-adml",
+            "nohuto-nogenticket-admx"
           ]
         },
         {
@@ -38998,7 +39024,8 @@
           "evidence_ids": [
             "local-avs-validation-admx",
             "local-avs-validation-adml",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-nogenticket-admx"
           ]
         }
       ],
@@ -39071,15 +39098,30 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-nogenticket-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - NoGenTicket policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "Software Protection Platform policy metadata shows NoGenTicket under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform. The mirrored ExplainText says enabling the policy opts out of sending KMS client activation data to Microsoft, while disabling or not configuring it sends activation data automatically. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\WINDOWS\\PolicyDefinitions\\AVSValidationGP.admx",
         "exact_quote_or_path": "<policy name=\"NoAcquireGT\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform\" valueName=\"NoGenTicket\"> <enabledValue><decimal value = \"1\" /></enabledValue> <disabledValue><decimal value = \"0\" /></disabledValue>; AVSValidationGP.adml: \"Enabled (data will not be sent to Microsoft)\".",
         "key_found_on_page": true,
-        "notes": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy opts the device out of automatically sending KMS client activation data to Microsoft."
+        "notes": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy opts the device out of automatically sending KMS client activation data to Microsoft. Added nohuto mirror corroboration via nohuto-nogenticket-admx."
       },
-      "validation_proof_sha256": "cbe0a243027764b1abbfed3d81945cc2902a40769fd34ddf1f257cf8fbeacfbb",
+      "validation_proof_sha256": "1e9e9894404d129fdfbb0bb7fe36462ff4f5028ceba1159bc4c5bc4106e139b6",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -39392,7 +39434,8 @@
               "evidence_ids": [
                 "ms-credui-no-local-password-reset-questions",
                 "local-credui-admx",
-                "local-credui-adml"
+                "local-credui-adml",
+                "nohuto-nolocalpasswordresetquestions-admx"
               ]
             },
             {
@@ -39401,7 +39444,8 @@
               "label": "Security questions allowed",
               "meaning": "The policy is disabled and local users can use security questions if the feature is otherwise available.",
               "evidence_ids": [
-                "ms-credui-no-local-password-reset-questions"
+                "ms-credui-no-local-password-reset-questions",
+                "nohuto-nolocalpasswordresetquestions-admx"
               ]
             },
             {
@@ -39411,7 +39455,8 @@
               "meaning": "The policy is enabled and local users cannot set up or use security questions to reset their passwords.",
               "evidence_ids": [
                 "ms-credui-no-local-password-reset-questions",
-                "local-credui-adml"
+                "local-credui-adml",
+                "nohuto-nolocalpasswordresetquestions-admx"
               ]
             }
           ]
@@ -39432,7 +39477,8 @@
           "evidence_ids": [
             "ms-credui-no-local-password-reset-questions",
             "local-credui-admx",
-            "local-credui-adml"
+            "local-credui-adml",
+            "nohuto-nolocalpasswordresetquestions-admx"
           ]
         }
       ],
@@ -39463,7 +39509,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-credui-no-local-password-reset-questions"
+            "ms-credui-no-local-password-reset-questions",
+            "nohuto-nolocalpasswordresetquestions-admx"
           ]
         },
         {
@@ -39495,7 +39542,8 @@
           "evidence_ids": [
             "ms-credui-no-local-password-reset-questions",
             "local-credui-adml",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-nolocalpasswordresetquestions-admx"
           ]
         }
       ],
@@ -39570,15 +39618,29 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-nolocalpasswordresetquestions-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - NoLocalPasswordResetQuestions policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "CredUI.admx shows NoLocalPasswordResetQuestions under HKLM\\Software\\Policies\\Microsoft\\Windows\\System. The mirrored ExplainText says turning the policy on prevents local users from setting up and using security questions to reset their passwords. The policy is a simple on/off control for local account security questions.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions",
         "exact_quote_or_path": "If you turn this policy setting on, local users won't be able to set up and use security questions to reset their passwords. ADMX mapping: Name NoLocalPasswordResetQuestions ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\System ... Registry Value Name NoLocalPasswordResetQuestions.",
         "key_found_on_page": true,
-        "notes": "The ADMX_CredUI Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the blocked behavior."
+        "notes": "The ADMX_CredUI Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the blocked behavior. Added nohuto mirror corroboration via nohuto-nolocalpasswordresetquestions-admx."
       },
-      "validation_proof_sha256": "a237eb58f48fddd3d71d25fa0ac105b40257f675468044125de6c3b24e511ee0",
+      "validation_proof_sha256": "d982c92d36455ed71e4e3b67770666d18ce19516b5834234fbe5857c78075c2a",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -40704,7 +40766,8 @@
               "meaning": "MDM enrollment remains enabled because the machine policy is not forcing it off.",
               "evidence_ids": [
                 "local-mdm-admx",
-                "local-mdm-adml"
+                "local-mdm-adml",
+                "nohuto-disableregistration-admx"
               ]
             },
             {
@@ -40714,7 +40777,8 @@
               "meaning": "The policy is disabled and MDM enrollment is allowed for all users.",
               "evidence_ids": [
                 "local-mdm-admx",
-                "local-mdm-adml"
+                "local-mdm-adml",
+                "nohuto-disableregistration-admx"
               ]
             },
             {
@@ -40724,7 +40788,8 @@
               "meaning": "New MDM enrollment is disabled for all users on the device. Existing MDM enrollments aren't removed by this policy.",
               "evidence_ids": [
                 "local-mdm-admx",
-                "local-mdm-adml"
+                "local-mdm-adml",
+                "nohuto-disableregistration-admx"
               ]
             }
           ]
@@ -40744,7 +40809,8 @@
           ],
           "evidence_ids": [
             "local-mdm-admx",
-            "local-mdm-adml"
+            "local-mdm-adml",
+            "nohuto-disableregistration-admx"
           ]
         }
       ],
@@ -40775,7 +40841,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "local-mdm-adml"
+            "local-mdm-adml",
+            "nohuto-disableregistration-admx"
           ]
         },
         {
@@ -40806,7 +40873,8 @@
           "evidence_ids": [
             "local-mdm-admx",
             "local-mdm-adml",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-disableregistration-admx"
           ]
         }
       ],
@@ -40866,15 +40934,30 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-disableregistration-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableRegistration policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "MDM.admx shows DisableRegistration under HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM. The mirrored ExplainText says enabling the policy disables MDM enrollment for all users, does not unenroll existing enrollments, and disabling it leaves MDM enrollment enabled.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\WINDOWS\\PolicyDefinitions\\MDM.admx",
         "exact_quote_or_path": "<policy name=\"MDM_MDM_DisplayName\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\" valueName=\"DisableRegistration\">; MDM.adml: If you enable this policy setting, MDM Enrollment will be disabled for all users. It will not unenroll existing MDM enrollments.",
         "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices."
+        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. Added nohuto mirror corroboration via nohuto-disableregistration-admx."
       },
-      "validation_proof_sha256": "acb7c856a14499184fb268f771e25f40a2684e6b98e0366ffc0e9d1af9a1a27b",
+      "validation_proof_sha256": "e6f8a61361558a6b5553f8164f24f593e825c7e2a836515183f7b67e31364e08",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -40963,7 +41046,8 @@
               "meaning": "Windows does not force the message cloud-sync policy.",
               "evidence_ids": [
                 "ms-messaging-csp-allow-message-sync",
-                "local-messaging-admx"
+                "local-messaging-admx",
+                "nohuto-allowmessagesync-admx"
               ]
             },
             {
@@ -40973,7 +41057,8 @@
               "meaning": "Backup and restore of cellular text messages to Microsoft's cloud services is blocked by policy.",
               "evidence_ids": [
                 "ms-messaging-csp-allow-message-sync",
-                "local-messaging-admx"
+                "local-messaging-admx",
+                "nohuto-allowmessagesync-admx"
               ]
             },
             {
@@ -40983,7 +41068,8 @@
               "meaning": "The device is allowed to use Microsoft's cloud backup and restore path for cellular messages.",
               "evidence_ids": [
                 "ms-messaging-csp-allow-message-sync",
-                "local-messaging-admx"
+                "local-messaging-admx",
+                "nohuto-allowmessagesync-admx"
               ]
             }
           ]
@@ -41003,7 +41089,8 @@
           ],
           "evidence_ids": [
             "ms-messaging-csp-allow-message-sync",
-            "local-messaging-admx"
+            "local-messaging-admx",
+            "nohuto-allowmessagesync-admx"
           ]
         }
       ],
@@ -41034,7 +41121,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-messaging-csp-allow-message-sync"
+            "ms-messaging-csp-allow-message-sync",
+            "nohuto-allowmessagesync-admx"
           ]
         },
         {
@@ -41065,7 +41153,8 @@
           "evidence_ids": [
             "ms-messaging-csp-allow-message-sync",
             "local-messaging-admx",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-allowmessagesync-admx"
           ]
         }
       ],
@@ -41129,15 +41218,30 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-allowmessagesync-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - AllowMessageSync policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "Messaging policy metadata shows AllowMessageSync under HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging. The mirrored table and ExplainText say 0 forbids SMS/MMS cloud sync and user changes, while 1 allows sync and user control. The policy controls cloud backup and restore of cellular text messages.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync",
         "exact_quote_or_path": "Default Value 1; Allowed values: 0 Message sync isn't allowed and can't be changed by the user. 1 (Default) Message sync is allowed. The user can change this setting. Group policy mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\Messaging; Registry Value Name AllowMessageSync.",
         "key_found_on_page": true,
-        "notes": "The Messaging Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics."
+        "notes": "The Messaging Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-allowmessagesync-admx."
       },
-      "validation_proof_sha256": "99857452c6ed50b5a80e3a33b2c4f8b0d3bde5d9d36c800b1e54b94ee7629d69",
+      "validation_proof_sha256": "9ac7e52d8d1523fd2f662d4e33a210918cfd25f416a02fa88ced7077cf65c1cb",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -41458,7 +41562,8 @@
               "evidence_ids": [
                 "ms-system-disable-onesettings-downloads",
                 "local-datacollection-admx-onesettings",
-                "local-datacollection-adml-onesettings"
+                "local-datacollection-adml-onesettings",
+                "nohuto-disableonesettingsdownloads-admx"
               ]
             },
             {
@@ -41470,7 +41575,8 @@
                 "ms-system-disable-onesettings-downloads",
                 "local-datacollection-admx-onesettings",
                 "local-datacollection-adml-onesettings",
-                "app-privacy-provider"
+                "app-privacy-provider",
+                "nohuto-disableonesettingsdownloads-admx"
               ]
             }
           ]
@@ -41490,7 +41596,8 @@
           ],
           "evidence_ids": [
             "ms-system-disable-onesettings-downloads",
-            "local-datacollection-adml-onesettings"
+            "local-datacollection-adml-onesettings",
+            "nohuto-disableonesettingsdownloads-admx"
           ]
         }
       ],
@@ -41521,7 +41628,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-system-disable-onesettings-downloads"
+            "ms-system-disable-onesettings-downloads",
+            "nohuto-disableonesettingsdownloads-admx"
           ]
         },
         {
@@ -41551,7 +41659,8 @@
           "apply_allowed": true,
           "evidence_ids": [
             "ms-system-disable-onesettings-downloads",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-disableonesettingsdownloads-admx"
           ]
         }
       ],
@@ -41626,15 +41735,30 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-disableonesettingsdownloads-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableOneSettingsDownloads policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "DataCollection.admx shows DisableOneSettingsDownloads under HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection. The mirrored ExplainText says enabling the policy stops Windows from attempting to connect with the OneSettings service, while disabling or not configuring it allows periodic OneSettings downloads. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads",
         "exact_quote_or_path": "This policy setting controls whether Windows attempts to connect with the OneSettings service. If you enable this policy, Windows won't attempt to connect with the OneSettings Service. ... Default Value 0. Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping: Name DisableOneSettingsDownloads ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection.",
         "key_found_on_page": true,
-        "notes": "The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is also DisableOneSettingsDownloads."
+        "notes": "The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is also DisableOneSettingsDownloads. Added nohuto mirror corroboration via nohuto-disableonesettingsdownloads-admx."
       },
-      "validation_proof_sha256": "bb401ff18dead17da03892c9d12ae804f35856ff58d5cafe46331877b0fba908",
+      "validation_proof_sha256": "cca2f3310e87732b2639ebe0618ea5d41f71814401cf09e12a99a5d5637e7435",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -41724,7 +41848,8 @@
               "meaning": "Windows does not force the online-tips policy.",
               "evidence_ids": [
                 "ms-settings-csp-allow-online-tips",
-                "local-control-panel-admx"
+                "local-control-panel-admx",
+                "nohuto-allowonlinetips-admx"
               ]
             },
             {
@@ -41734,7 +41859,8 @@
               "meaning": "The Settings app won't retrieve online tips and help content.",
               "evidence_ids": [
                 "ms-settings-csp-allow-online-tips",
-                "local-control-panel-admx"
+                "local-control-panel-admx",
+                "nohuto-allowonlinetips-admx"
               ]
             },
             {
@@ -41744,7 +41870,8 @@
               "meaning": "The Settings app is allowed to retrieve online tips and help content.",
               "evidence_ids": [
                 "ms-settings-csp-allow-online-tips",
-                "local-control-panel-admx"
+                "local-control-panel-admx",
+                "nohuto-allowonlinetips-admx"
               ]
             }
           ]
@@ -41764,7 +41891,8 @@
           ],
           "evidence_ids": [
             "ms-settings-csp-allow-online-tips",
-            "local-control-panel-admx"
+            "local-control-panel-admx",
+            "nohuto-allowonlinetips-admx"
           ]
         }
       ],
@@ -41795,7 +41923,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-settings-csp-allow-online-tips"
+            "ms-settings-csp-allow-online-tips",
+            "nohuto-allowonlinetips-admx"
           ]
         },
         {
@@ -41826,7 +41955,8 @@
           "evidence_ids": [
             "ms-settings-csp-allow-online-tips",
             "local-control-panel-admx",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-allowonlinetips-admx"
           ]
         }
       ],
@@ -41890,15 +42020,29 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-allowonlinetips-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - AllowOnlineTips policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "ControlPanel.admx shows AllowOnlineTips under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. The mirrored ExplainText says the policy enables or disables retrieval of online tips and help for the Settings app; if disabled, Settings will not contact Microsoft content services for tips and help content.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips",
         "exact_quote_or_path": "Enables or disables the retrieval of online tips and help for the Settings app. If disabled, Settings won't contact Microsoft content services to retrieve tips and help content. Default Value 1. Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Name AllowOnlineTips ... Registry Key Name Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer.",
         "key_found_on_page": true,
-        "notes": "The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips."
+        "notes": "The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips. Added nohuto mirror corroboration via nohuto-allowonlinetips-admx."
       },
-      "validation_proof_sha256": "8d36266f9dcac9d389327ae49d6127d077aeb7da9f22db6f9639bcc597e6082f",
+      "validation_proof_sha256": "5b4f9f5a365bc0021a8c40a8e54b3ea942db059ac2427124a3f2ecacff187654",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -42210,7 +42354,8 @@
               "meaning": "Windows does not force Phone-PC linking behavior through this policy, and the default behavior depends on the Windows edition.",
               "evidence_ids": [
                 "local-grouppolicy-admx",
-                "local-grouppolicy-adml"
+                "local-grouppolicy-adml",
+                "nohuto-enablemmx-admx"
               ]
             },
             {
@@ -42221,7 +42366,8 @@
               "evidence_ids": [
                 "local-grouppolicy-admx",
                 "local-grouppolicy-adml",
-                "app-privacy-provider"
+                "app-privacy-provider",
+                "nohuto-enablemmx-admx"
               ]
             },
             {
@@ -42231,7 +42377,8 @@
               "meaning": "The device can enroll in Phone-PC linking functionality and participate in Continue on PC experiences.",
               "evidence_ids": [
                 "local-grouppolicy-admx",
-                "local-grouppolicy-adml"
+                "local-grouppolicy-adml",
+                "nohuto-enablemmx-admx"
               ]
             }
           ]
@@ -42251,7 +42398,8 @@
           ],
           "evidence_ids": [
             "local-grouppolicy-admx",
-            "local-grouppolicy-adml"
+            "local-grouppolicy-adml",
+            "nohuto-enablemmx-admx"
           ]
         }
       ],
@@ -42283,7 +42431,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "local-grouppolicy-adml"
+            "local-grouppolicy-adml",
+            "nohuto-enablemmx-admx"
           ]
         },
         {
@@ -42315,7 +42464,8 @@
           "evidence_ids": [
             "local-grouppolicy-admx",
             "local-grouppolicy-adml",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-enablemmx-admx"
           ]
         }
       ],
@@ -42362,15 +42512,30 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "nohuto-enablemmx-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - EnableMmx policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "GroupPolicy.admx shows EnableMmx under HKLM\\Software\\Policies\\Microsoft\\Windows\\System. The mirrored ExplainText says enabling the policy allows Phone-PC linking and Continue on PC experiences, while disabling it prevents the device from being linked to phones and removes it from linked phones. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\PolicyDefinitions\\GroupPolicy.admx",
         "exact_quote_or_path": "<policy name=\"EnableMMX\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"EnableMmx\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; GroupPolicy.adml: \"If you disable this policy setting, the Windows device is not allowed to be linked to Phones ... and cannot participate in Continue on PC experiences.\"",
         "key_found_on_page": true,
-        "notes": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC experiences."
+        "notes": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC experiences. Added nohuto mirror corroboration via nohuto-enablemmx-admx."
       },
-      "validation_proof_sha256": "75976cc906c66e2106f84d4de7fbc6b4f022c70f7211acbba2a757d61463a1ae",
+      "validation_proof_sha256": "1ac5d1461c6cb46560b096b50e2275a5337e2733cf934863b090dea12300a33e",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -42704,7 +42869,8 @@
               "meaning": "On managed devices, snapshots are not saved for Recall when this policy is not configured.",
               "evidence_ids": [
                 "ms-windowsai-disable-ai-data-analysis",
-                "local-windowscopilot-adml-recall"
+                "local-windowscopilot-adml-recall",
+                "nohuto-disableaidataanalysis-admx"
               ]
             },
             {
@@ -42716,7 +42882,8 @@
                 "ms-windowsai-disable-ai-data-analysis",
                 "local-windowscopilot-admx-recall",
                 "local-windowscopilot-adml-recall",
-                "app-privacy-provider"
+                "app-privacy-provider",
+                "nohuto-disableaidataanalysis-admx"
               ]
             },
             {
@@ -42727,7 +42894,8 @@
               "evidence_ids": [
                 "ms-windowsai-disable-ai-data-analysis",
                 "local-windowscopilot-admx-recall",
-                "local-windowscopilot-adml-recall"
+                "local-windowscopilot-adml-recall",
+                "nohuto-disableaidataanalysis-admx"
               ]
             }
           ]
@@ -42747,7 +42915,8 @@
           ],
           "evidence_ids": [
             "ms-windowsai-disable-ai-data-analysis",
-            "local-windowscopilot-adml-recall"
+            "local-windowscopilot-adml-recall",
+            "nohuto-disableaidataanalysis-admx"
           ]
         }
       ],
@@ -42778,7 +42947,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-windowsai-disable-ai-data-analysis"
+            "ms-windowsai-disable-ai-data-analysis",
+            "nohuto-disableaidataanalysis-admx"
           ]
         },
         {
@@ -42810,7 +42980,8 @@
           "evidence_ids": [
             "ms-windowsai-disable-ai-data-analysis",
             "local-windowscopilot-adml-recall",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-disableaidataanalysis-admx"
           ]
         },
         {
@@ -42839,7 +43010,8 @@
           "apply_allowed": true,
           "evidence_ids": [
             "ms-windowsai-disable-ai-data-analysis",
-            "local-windowscopilot-adml-recall"
+            "local-windowscopilot-adml-recall",
+            "nohuto-disableaidataanalysis-admx"
           ]
         }
       ],
@@ -42917,15 +43089,30 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-disableaidataanalysis-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableAIDataAnalysis policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "WindowsCopilot.admx shows DisableAIDataAnalysis under HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI. The mirrored ExplainText says enabling the policy stops Windows from saving snapshots and disables Recall timeline browsing, while disabling or not configuring it allows snapshots and Recall history access.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\PolicyDefinitions\\WindowsCopilot.admx",
         "exact_quote_or_path": "<policy name=\"DisableAIDataAnalysis\" class=\"Both\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" valueName=\"DisableAIDataAnalysis\">",
         "key_found_on_page": true,
-        "notes": "The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots."
+        "notes": "The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots. Added nohuto mirror corroboration via nohuto-disableaidataanalysis-admx."
       },
-      "validation_proof_sha256": "5d82b8ec56397b6c2a7bba667874745516859db05637ce36a100bb7162ca5e7f",
+      "validation_proof_sha256": "9a1681fc411102114e54e8b3fcc31db5b490fedfdfa16084814efe601a8c63c6",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -43523,7 +43710,8 @@
               "meaning": "Windows does not force the File Explorer search-suggestions policy.",
               "evidence_ids": [
                 "ms-windowsexplorer-csp-disable-search-box-suggestions",
-                "local-windows-explorer-admx"
+                "local-windows-explorer-admx",
+                "nohuto-disablesearchboxsuggestions-admx"
               ]
             },
             {
@@ -43533,7 +43721,8 @@
               "meaning": "The policy is disabled and File Explorer can show recent-query suggestions.",
               "evidence_ids": [
                 "ms-windowsexplorer-csp-disable-search-box-suggestions",
-                "local-windows-explorer-admx"
+                "local-windows-explorer-admx",
+                "nohuto-disablesearchboxsuggestions-admx"
               ]
             },
             {
@@ -43543,7 +43732,8 @@
               "meaning": "File Explorer won't show suggestion pop-ups or store search-box entries for future references.",
               "evidence_ids": [
                 "ms-windowsexplorer-csp-disable-search-box-suggestions",
-                "local-windows-explorer-admx"
+                "local-windows-explorer-admx",
+                "nohuto-disablesearchboxsuggestions-admx"
               ]
             }
           ]
@@ -43563,7 +43753,8 @@
           ],
           "evidence_ids": [
             "ms-windowsexplorer-csp-disable-search-box-suggestions",
-            "local-windows-explorer-admx"
+            "local-windows-explorer-admx",
+            "nohuto-disablesearchboxsuggestions-admx"
           ]
         }
       ],
@@ -43594,7 +43785,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-windowsexplorer-csp-disable-search-box-suggestions"
+            "ms-windowsexplorer-csp-disable-search-box-suggestions",
+            "nohuto-disablesearchboxsuggestions-admx"
           ]
         },
         {
@@ -43625,7 +43817,8 @@
           "evidence_ids": [
             "ms-windowsexplorer-csp-disable-search-box-suggestions",
             "local-windows-explorer-admx",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-disablesearchboxsuggestions-admx"
           ]
         }
       ],
@@ -43689,15 +43882,30 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-disablesearchboxsuggestions-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableSearchBoxSuggestions policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "WindowsExplorer.admx shows DisableSearchBoxSuggestions under HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer. The mirrored ExplainText says enabling the policy stops File Explorer from suggesting recent search queries and prevents search-box entries from being stored in the registry; disabling or not configuring it leaves suggestion pop-ups and storage enabled. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions",
         "exact_quote_or_path": "Disables suggesting recent queries for the Search Box and prevents entries into the Search Box from being stored in the registry for future references. ... If you enable this policy, File Explorer won't show suggestion pop-ups as users type into the Search Box, and it won't store Search Box entries into the registry for future references. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\Explorer; Registry Value Name DisableSearchBoxSuggestions.",
         "key_found_on_page": true,
-        "notes": "The ADMX_WindowsExplorer Policy CSP page explicitly names the exact user policy path and value name the app writes, and its policy description matches the disabled behavior."
+        "notes": "The ADMX_WindowsExplorer Policy CSP page explicitly names the exact user policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesearchboxsuggestions-admx."
       },
-      "validation_proof_sha256": "8d7117f57965931b4c390171bf05c48dc455218943845e17a5ef19c3d9d6f4ec",
+      "validation_proof_sha256": "eddc41ee198554d3fe83d0e6d0e2106783e18a845d2d7cb0e7cd6e74e9ecd7ec",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -43787,7 +43995,8 @@
               "meaning": "Windows does not force the search-history policy for the current user.",
               "evidence_ids": [
                 "local-search-admx",
-                "local-search-adml"
+                "local-search-adml",
+                "nohuto-disablesearchhistory-admx"
               ]
             },
             {
@@ -43797,7 +44006,8 @@
               "meaning": "Previous searches can be stored and used for later search suggestions.",
               "evidence_ids": [
                 "local-search-admx",
-                "local-search-adml"
+                "local-search-adml",
+                "nohuto-disablesearchhistory-admx"
               ]
             },
             {
@@ -43807,7 +44017,8 @@
               "meaning": "Search queries aren't stored in the registry and previous-search suggestions won't appear in the search pane.",
               "evidence_ids": [
                 "local-search-admx",
-                "local-search-adml"
+                "local-search-adml",
+                "nohuto-disablesearchhistory-admx"
               ]
             }
           ]
@@ -43827,7 +44038,8 @@
           ],
           "evidence_ids": [
             "local-search-admx",
-            "local-search-adml"
+            "local-search-adml",
+            "nohuto-disablesearchhistory-admx"
           ]
         }
       ],
@@ -43858,7 +44070,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "local-search-adml"
+            "local-search-adml",
+            "nohuto-disablesearchhistory-admx"
           ]
         },
         {
@@ -43889,7 +44102,8 @@
           "evidence_ids": [
             "local-search-admx",
             "local-search-adml",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-disablesearchhistory-admx"
           ]
         }
       ],
@@ -43949,15 +44163,30 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-disablesearchhistory-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableSearchHistory policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "Search policy metadata shows DisableSearchHistory under HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer. The mirrored ExplainText says enabling the policy prevents search queries from being stored in the registry and removes prior-search suggestions, while disabling or not configuring it keeps search history suggestions enabled.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\WINDOWS\\PolicyDefinitions\\Search.admx",
         "exact_quote_or_path": "Search.admx: <policy name=\"DisableSearchHistory\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"DisableSearchHistory\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; Search.adml: \"If you enable this policy setting, search queries will not be stored in the registry and users cannot see or use previous searches in the Search pane.\"",
         "key_found_on_page": true,
-        "notes": "The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions."
+        "notes": "The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. Added nohuto mirror corroboration via nohuto-disablesearchhistory-admx."
       },
-      "validation_proof_sha256": "404136e044cc31e728cc3a0e2582bca8e3f75278840b39356d5f64e7fd553ec8",
+      "validation_proof_sha256": "932efde8f12aa6f98c0e98e26a100f4361639613f8fc81b2cae8c267d9a19951",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -44047,7 +44276,8 @@
               "meaning": "Windows does not force the machine policy for sensors.",
               "evidence_ids": [
                 "ms-sensors-policy-csp-disable-sensors",
-                "local-sensors-admx"
+                "local-sensors-admx",
+                "nohuto-disablesensors-admx"
               ]
             },
             {
@@ -44057,7 +44287,8 @@
               "meaning": "The policy is disabled and sensors remain available.",
               "evidence_ids": [
                 "ms-sensors-policy-csp-disable-sensors",
-                "local-sensors-admx"
+                "local-sensors-admx",
+                "nohuto-disablesensors-admx"
               ]
             },
             {
@@ -44067,7 +44298,8 @@
               "meaning": "Sensors are blocked by policy.",
               "evidence_ids": [
                 "ms-sensors-policy-csp-disable-sensors",
-                "local-sensors-admx"
+                "local-sensors-admx",
+                "nohuto-disablesensors-admx"
               ]
             }
           ]
@@ -44087,7 +44319,8 @@
           ],
           "evidence_ids": [
             "ms-sensors-policy-csp-disable-sensors",
-            "local-sensors-admx"
+            "local-sensors-admx",
+            "nohuto-disablesensors-admx"
           ]
         }
       ],
@@ -44118,7 +44351,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-sensors-policy-csp-disable-sensors"
+            "ms-sensors-policy-csp-disable-sensors",
+            "nohuto-disablesensors-admx"
           ]
         },
         {
@@ -44149,7 +44383,8 @@
           "evidence_ids": [
             "ms-sensors-policy-csp-disable-sensors",
             "local-sensors-admx",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-disablesensors-admx"
           ]
         }
       ],
@@ -44213,15 +44448,30 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-disablesensors-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableSensors policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "Sensors.admx shows DisableSensors under HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors. The mirrored ExplainText says enabling the policy turns off the sensor feature and prevents all programs from using sensors, while disabling or not configuring it leaves sensors available. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors",
         "exact_quote_or_path": "If you enable this policy setting, all Windows Sensor features are disabled. ADMX mapping: Name DisableSensors ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\LocationAndSensors ... Registry Value Name DisableSensors.",
         "key_found_on_page": true,
-        "notes": "The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior."
+        "notes": "The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesensors-admx."
       },
-      "validation_proof_sha256": "c9d989e80e0cb84b74bae2c4014c896dcb01eb9ba89492bfb540330887063000",
+      "validation_proof_sha256": "03b2103d23d85cca9c386b2625adb5bcdea664e37e93181285e939a421430be5",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -46063,7 +46313,8 @@
               "meaning": "Windows does not force the machine policy for the Windows Location Provider.",
               "evidence_ids": [
                 "ms-location-provider-policy-csp",
-                "local-location-provider-admx"
+                "local-location-provider-admx",
+                "nohuto-disablewindowslocationprovider-admx"
               ]
             },
             {
@@ -46073,7 +46324,8 @@
               "meaning": "The policy is disabled and the provider remains available.",
               "evidence_ids": [
                 "ms-location-provider-policy-csp",
-                "local-location-provider-admx"
+                "local-location-provider-admx",
+                "nohuto-disablewindowslocationprovider-admx"
               ]
             },
             {
@@ -46083,7 +46335,8 @@
               "meaning": "The provider is blocked by policy.",
               "evidence_ids": [
                 "ms-location-provider-policy-csp",
-                "local-location-provider-admx"
+                "local-location-provider-admx",
+                "nohuto-disablewindowslocationprovider-admx"
               ]
             }
           ]
@@ -46103,7 +46356,8 @@
           ],
           "evidence_ids": [
             "ms-location-provider-policy-csp",
-            "local-location-provider-admx"
+            "local-location-provider-admx",
+            "nohuto-disablewindowslocationprovider-admx"
           ]
         }
       ],
@@ -46134,7 +46388,8 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
-            "ms-location-provider-policy-csp"
+            "ms-location-provider-policy-csp",
+            "nohuto-disablewindowslocationprovider-admx"
           ]
         },
         {
@@ -46165,7 +46420,8 @@
           "evidence_ids": [
             "ms-location-provider-policy-csp",
             "local-location-provider-admx",
-            "app-privacy-provider"
+            "app-privacy-provider",
+            "nohuto-disablewindowslocationprovider-admx"
           ]
         }
       ],
@@ -46229,15 +46485,30 @@
             "risk"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "nohuto-disablewindowslocationprovider-admx",
+          "kind": "decompilation",
+          "title": "nohuto win-config mirror - DisableWindowsLocationProvider policy",
+          "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+          "summary": "LocationProviderAdm.admx shows DisableWindowsLocationProvider under HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors. The mirrored ExplainText says enabling the policy turns off the Windows Location Provider feature for the computer, while disabling or not configuring it leaves the feature available to programs. EnabledValue=1 and DisabledValue=0 are explicit.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider",
         "exact_quote_or_path": "This policy setting turns off the Windows Location Provider feature for this computer. If you enable this policy setting, the Windows Location Provider feature will be turned off, and all programs on this computer won't be able to use the Windows Location Provider feature. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\LocationAndSensors; Registry Value Name DisableWindowsLocationProvider.",
         "key_found_on_page": true,
-        "notes": "The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior."
+        "notes": "The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablewindowslocationprovider-admx."
       },
-      "validation_proof_sha256": "1014838ef3490dfa9154e46a270b49f681a8e1421171244123463a83f1f9d9b5",
+      "validation_proof_sha256": "e68060103c8ae9f54cafb0d4485ae51f868938c69e1064fe15bc3c9733fd4bbb",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

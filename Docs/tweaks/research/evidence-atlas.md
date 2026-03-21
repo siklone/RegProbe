@@ -9172,6 +9172,7 @@ Nohuto lineage references:
 | `local-grouppolicy-adml-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-font-providers` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-enablefontproviders-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableFontProviders policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -9180,7 +9181,7 @@ Nohuto lineage references:
 | Source URL | C:\WINDOWS\PolicyDefinitions\GroupPolicy.admx |
 | Exact quote / path | <policy name="EnableFontProviders" class="Machine" ... key="Software\Policies\Microsoft\Windows\System" valueName="EnableFontProviders">; GroupPolicy.adml: If you disable this policy setting, Windows does not connect to an online font provider and only enumerates locally-installed fonts. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts. Added nohuto mirror corroboration via nohuto-enablefontproviders-admx. |
 
 **Decision**
 
@@ -9265,6 +9266,7 @@ Nohuto lineage references:
 | `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx reference bundle | C:\WINDOWS\PolicyDefinitions\ICM.admx | `medium` | path, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-nogenticket-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - NoGenTicket policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -9273,7 +9275,7 @@ Nohuto lineage references:
 | Source URL | C:\WINDOWS\PolicyDefinitions\AVSValidationGP.admx |
 | Exact quote / path | <policy name="NoAcquireGT" class="Machine" ... key="Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform" valueName="NoGenTicket"> <enabledValue><decimal value = "1" /></enabledValue> <disabledValue><decimal value = "0" /></disabledValue>; AVSValidationGP.adml: "Enabled (data will not be sent to Microsoft)". |
 | Key found on page | `True` |
-| Notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy opts the device out of automatically sending KMS client activation data to Microsoft. |
+| Notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy opts the device out of automatically sending KMS client activation data to Microsoft. Added nohuto mirror corroboration via nohuto-nogenticket-admx. |
 
 **Decision**
 
@@ -9448,6 +9450,7 @@ Nohuto lineage references:
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-local-security-questions` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-nolocalpasswordresetquestions-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - NoLocalPasswordResetQuestions policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -9456,7 +9459,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions |
 | Exact quote / path | If you turn this policy setting on, local users won't be able to set up and use security questions to reset their passwords. ADMX mapping: Name NoLocalPasswordResetQuestions ... Registry Key Name Software\Policies\Microsoft\Windows\System ... Registry Value Name NoLocalPasswordResetQuestions. |
 | Key found on page | `True` |
-| Notes | The ADMX_CredUI Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the blocked behavior. |
+| Notes | The ADMX_CredUI Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the blocked behavior. Added nohuto mirror corroboration via nohuto-nolocalpasswordresetquestions-admx. |
 
 **Decision**
 
@@ -9905,6 +9908,7 @@ Nohuto lineage references:
 | `local-mdm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\MDM.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-mdm-enrollment` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-disableregistration-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableRegistration policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -9913,7 +9917,7 @@ Nohuto lineage references:
 | Source URL | C:\WINDOWS\PolicyDefinitions\MDM.admx |
 | Exact quote / path | <policy name="MDM_MDM_DisplayName" class="Machine" ... key="Software\Policies\Microsoft\Windows\CurrentVersion\MDM" valueName="DisableRegistration">; MDM.adml: If you enable this policy setting, MDM Enrollment will be disabled for all users. It will not unenroll existing MDM enrollments. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. Added nohuto mirror corroboration via nohuto-disableregistration-admx. |
 
 **Decision**
 
@@ -9997,6 +10001,7 @@ Nohuto lineage references:
 | `local-messaging-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft messaging.admx mapping | C:\WINDOWS\PolicyDefinitions\messaging.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-message-sync` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-allowmessagesync-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - AllowMessageSync policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -10005,7 +10010,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync |
 | Exact quote / path | Default Value 1; Allowed values: 0 Message sync isn't allowed and can't be changed by the user. 1 (Default) Message sync is allowed. The user can change this setting. Group policy mapping: Registry Key Name Software\Policies\Microsoft\Windows\Messaging; Registry Value Name AllowMessageSync. |
 | Key found on page | `True` |
-| Notes | The Messaging Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. |
+| Notes | The Messaging Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-allowmessagesync-admx. |
 
 **Decision**
 
@@ -10174,6 +10179,7 @@ Nohuto lineage references:
 | `local-datacollection-adml-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-onesettings-downloads` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-disableonesettingsdownloads-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableOneSettingsDownloads policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -10182,7 +10188,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads |
 | Exact quote / path | This policy setting controls whether Windows attempts to connect with the OneSettings service. If you enable this policy, Windows won't attempt to connect with the OneSettings Service. ... Default Value 0. Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping: Name DisableOneSettingsDownloads ... Registry Key Name Software\Policies\Microsoft\Windows\DataCollection. |
 | Key found on page | `True` |
-| Notes | The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is also DisableOneSettingsDownloads. |
+| Notes | The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is also DisableOneSettingsDownloads. Added nohuto mirror corroboration via nohuto-disableonesettingsdownloads-admx. |
 
 **Decision**
 
@@ -10266,6 +10272,7 @@ Nohuto lineage references:
 | `local-control-panel-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx mapping | C:\WINDOWS\PolicyDefinitions\ControlPanel.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-online-tips` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-allowonlinetips-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - AllowOnlineTips policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -10274,7 +10281,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips |
 | Exact quote / path | Enables or disables the retrieval of online tips and help for the Settings app. If disabled, Settings won't contact Microsoft content services to retrieve tips and help content. Default Value 1. Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Name AllowOnlineTips ... Registry Key Name Software\Microsoft\Windows\CurrentVersion\Policies\Explorer. |
 | Key found on page | `True` |
-| Notes | The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips. |
+| Notes | The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips. Added nohuto mirror corroboration via nohuto-allowonlinetips-admx. |
 
 **Decision**
 
@@ -10435,6 +10442,7 @@ Nohuto lineage references:
 | `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `nohuto-enablemmx-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableMmx policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -10443,7 +10451,7 @@ Nohuto lineage references:
 | Source URL | C:\Windows\PolicyDefinitions\GroupPolicy.admx |
 | Exact quote / path | <policy name="EnableMMX" class="Machine" ... key="Software\Policies\Microsoft\Windows\System" valueName="EnableMmx"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; GroupPolicy.adml: "If you disable this policy setting, the Windows device is not allowed to be linked to Phones ... and cannot participate in Continue on PC experiences." |
 | Key found on page | `True` |
-| Notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC experiences. |
+| Notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC experiences. Added nohuto mirror corroboration via nohuto-enablemmx-admx. |
 
 **Decision**
 
@@ -10614,6 +10622,7 @@ Nohuto lineage references:
 | `local-windowscopilot-adml-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml Recall help text | C:\Windows\PolicyDefinitions\en-US\WindowsCopilot.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-recall` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-disableaidataanalysis-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableAIDataAnalysis policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -10622,7 +10631,7 @@ Nohuto lineage references:
 | Source URL | C:\Windows\PolicyDefinitions\WindowsCopilot.admx |
 | Exact quote / path | <policy name="DisableAIDataAnalysis" class="Both" ... key="SOFTWARE\Policies\Microsoft\Windows\WindowsAI" valueName="DisableAIDataAnalysis"> |
 | Key found on page | `True` |
-| Notes | The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots. |
+| Notes | The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots. Added nohuto mirror corroboration via nohuto-disableaidataanalysis-admx. |
 
 **Decision**
 
@@ -10890,6 +10899,7 @@ Nohuto lineage references:
 | `local-windows-explorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\WINDOWS\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-box-suggestions` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-disablesearchboxsuggestions-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSearchBoxSuggestions policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -10898,7 +10908,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions |
 | Exact quote / path | Disables suggesting recent queries for the Search Box and prevents entries into the Search Box from being stored in the registry for future references. ... If you enable this policy, File Explorer won't show suggestion pop-ups as users type into the Search Box, and it won't store Search Box entries into the registry for future references. ADMX mapping: Registry Key Name Software\Policies\Microsoft\Windows\Explorer; Registry Value Name DisableSearchBoxSuggestions. |
 | Key found on page | `True` |
-| Notes | The ADMX_WindowsExplorer Policy CSP page explicitly names the exact user policy path and value name the app writes, and its policy description matches the disabled behavior. |
+| Notes | The ADMX_WindowsExplorer Policy CSP page explicitly names the exact user policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesearchboxsuggestions-admx. |
 
 **Decision**
 
@@ -10982,6 +10992,7 @@ Nohuto lineage references:
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-disablesearchhistory-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSearchHistory policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -10990,7 +11001,7 @@ Nohuto lineage references:
 | Source URL | C:\WINDOWS\PolicyDefinitions\Search.admx |
 | Exact quote / path | Search.admx: <policy name="DisableSearchHistory" class="User" ... key="Software\Policies\Microsoft\Windows\Explorer" valueName="DisableSearchHistory"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; Search.adml: "If you enable this policy setting, search queries will not be stored in the registry and users cannot see or use previous searches in the Search pane." |
 | Key found on page | `True` |
-| Notes | The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. |
+| Notes | The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. Added nohuto mirror corroboration via nohuto-disablesearchhistory-admx. |
 
 **Decision**
 
@@ -11074,6 +11085,7 @@ Nohuto lineage references:
 | `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | C:\WINDOWS\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-sensors` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-disablesensors-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSensors policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -11082,7 +11094,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors |
 | Exact quote / path | If you enable this policy setting, all Windows Sensor features are disabled. ADMX mapping: Name DisableSensors ... Registry Key Name Software\Policies\Microsoft\Windows\LocationAndSensors ... Registry Value Name DisableSensors. |
 | Key found on page | `True` |
-| Notes | The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. |
+| Notes | The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesensors-admx. |
 
 **Decision**
 
@@ -11713,6 +11725,7 @@ Nohuto lineage references:
 | `local-location-provider-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft LocationProviderAdm.admx mapping | C:\WINDOWS\PolicyDefinitions\LocationProviderAdm.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-windows-location-provider` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-disablewindowslocationprovider-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableWindowsLocationProvider policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -11721,7 +11734,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider |
 | Exact quote / path | This policy setting turns off the Windows Location Provider feature for this computer. If you enable this policy setting, the Windows Location Provider feature will be turned off, and all programs on this computer won't be able to use the Windows Location Provider feature. ADMX mapping: Registry Key Name Software\Policies\Microsoft\Windows\LocationAndSensors; Registry Value Name DisableWindowsLocationProvider. |
 | Key found on page | `True` |
-| Notes | The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. |
+| Notes | The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablewindowslocationprovider-admx. |
 
 **Decision**
 

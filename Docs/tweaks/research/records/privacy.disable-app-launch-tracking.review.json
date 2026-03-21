@@ -28,7 +28,8 @@
             "label": "Windows managed UI state",
             "meaning": "The preference is not explicitly overridden in the registry and stays under the Windows UI toggle.",
             "evidence_ids": [
-              "ms-windows-privacy-track-app-launches"
+              "ms-windows-privacy-track-app-launches",
+              "nohuto-start-track-progs-trace"
             ]
           },
           {
@@ -38,7 +39,8 @@
             "meaning": "Turns off \"Let Windows track app launches to improve Start and search results.\"",
             "evidence_ids": [
               "ms-windows-privacy-track-app-launches",
-              "app-privacy-provider"
+              "app-privacy-provider",
+              "nohuto-start-track-progs-trace"
             ]
           }
         ],
@@ -75,7 +77,8 @@
       ],
       "notes": "The registry value is only needed when forcing the privacy toggle off.",
       "evidence_ids": [
-        "ms-windows-privacy-track-app-launches"
+        "ms-windows-privacy-track-app-launches",
+        "nohuto-start-track-progs-trace"
       ]
     }
   ],
@@ -105,7 +108,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-windows-privacy-track-app-launches"
+        "ms-windows-privacy-track-app-launches",
+        "nohuto-start-track-progs-trace"
       ]
     },
     {
@@ -135,7 +139,8 @@
       "apply_allowed": true,
       "evidence_ids": [
         "ms-windows-privacy-track-app-launches",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-start-track-progs-trace"
       ]
     }
   ],
@@ -179,6 +184,20 @@
         "app-mismatch"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-start-track-progs-trace",
+      "kind": "registry-observation",
+      "title": "nohuto win-config mirror - Start_TrackProgs trace",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+      "summary": "The mirror trace shows SystemSettings.exe writing HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs with Data 0, and the win-registry records list Start_TrackProgs under Explorer\\Advanced. This is the live search-history tracking toggle for the Start experience.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -196,6 +215,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
     "exact_quote_or_path": "Start_TrackProgs in HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced with value of 0 (zero).",
     "key_found_on_page": true,
-    "notes": "The Microsoft privacy guidance lists the exact registry path and value to turn off \"Let Windows track app launches to improve Start and search results.\""
+    "notes": "The Microsoft privacy guidance lists the exact registry path and value to turn off \"Let Windows track app launches to improve Start and search results.\" Added nohuto mirror corroboration via nohuto-start-track-progs-trace."
   }
 }

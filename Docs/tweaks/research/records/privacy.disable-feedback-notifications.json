@@ -29,7 +29,8 @@
             "meaning": "Windows does not force the feedback-notification policy.",
             "evidence_ids": [
               "ms-experience-csp-feedback-notifications",
-              "local-feedback-notifications-admx"
+              "local-feedback-notifications-admx",
+              "nohuto-donotshowfeedbacknotifications-admx"
             ]
           },
           {
@@ -39,7 +40,8 @@
             "meaning": "The policy is disabled and Windows feedback prompts may be shown.",
             "evidence_ids": [
               "ms-experience-csp-feedback-notifications",
-              "local-feedback-notifications-admx"
+              "local-feedback-notifications-admx",
+              "nohuto-donotshowfeedbacknotifications-admx"
             ]
           },
           {
@@ -49,7 +51,8 @@
             "meaning": "Windows feedback prompts are blocked by policy.",
             "evidence_ids": [
               "ms-experience-csp-feedback-notifications",
-              "local-feedback-notifications-admx"
+              "local-feedback-notifications-admx",
+              "nohuto-donotshowfeedbacknotifications-admx"
             ]
           }
         ]
@@ -86,7 +89,8 @@
       "notes": "This is the policy baseline and not a claim about every regional or edition-specific feedback experience.",
       "evidence_ids": [
         "ms-experience-csp-feedback-notifications",
-        "local-feedback-notifications-admx"
+        "local-feedback-notifications-admx",
+        "nohuto-donotshowfeedbacknotifications-admx"
       ]
     }
   ],
@@ -117,7 +121,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-experience-csp-feedback-notifications"
+        "ms-experience-csp-feedback-notifications",
+        "nohuto-donotshowfeedbacknotifications-admx"
       ]
     },
     {
@@ -148,7 +153,8 @@
       "evidence_ids": [
         "ms-experience-csp-feedback-notifications",
         "local-feedback-notifications-admx",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-donotshowfeedbacknotifications-admx"
       ]
     }
   ],
@@ -207,6 +213,19 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-donotshowfeedbacknotifications-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - DoNotShowFeedbackNotifications policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "The privacy mirror lists DoNotShowFeedbackNotifications under the DataCollection policy family with the exact PolicyName and ValueName. The policy name indicates Microsoft Feedback Notifications are suppressed; the mirrored metadata keeps the registry surface tied to the value name used by the app.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -224,6 +243,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications",
     "exact_quote_or_path": "Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled.",
     "key_found_on_page": true,
-    "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics."
+    "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx."
   }
 }
