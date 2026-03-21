@@ -16051,6 +16051,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | H:\Temp\vm-tooling-staging\ghidra_explorer_serialize.txt | `medium` | path, string-reference, behavior |
 
 **Validation proof**
 
@@ -16059,7 +16060,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json |
 | Exact quote / path | HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize\StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__ |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. |
 
 **Decision**
 

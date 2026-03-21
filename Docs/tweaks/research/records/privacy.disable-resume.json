@@ -176,6 +176,19 @@
       "strength": "high"
     },
     {
+      "evidence_id": "procmon-crossdevice-resume-probe",
+      "kind": "procmon-trace",
+      "title": "Guest Procmon probe for CrossDeviceResume resume toggle",
+      "location": "H:\\Temp\\vm-tooling-staging\\privacy_disable_resume_probe.txt and H:\\Temp\\vm-tooling-staging\\privacy_disable_resume_probe.csv",
+      "summary": "Guest-side reversible probe toggled IsResumeAllowed between 0 and 1 while opening the CrossDeviceResume settings surface. Procmon captured Explorer, ShellHost, SearchHost, and StartMenuExperienceHost activity around the toggle.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "ms-connectivity-disable-cross-device-resume",
       "kind": "policy-csp",
       "title": "Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume",
@@ -204,6 +217,6 @@
     "source_url": "Docs/privacy/privacy.md",
     "exact_quote_or_path": "Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on.",
     "key_found_on_page": true,
-    "notes": "This record now documents the current-user Resume setting that the app actually writes. The separate policy CSP remains related context, not the active control surface for this tweak."
+    "notes": "This record now documents the current-user Resume setting that the app actually writes. The companion guest Procmon probe captured CrossDeviceResume settings activity while IsResumeAllowed was toggled between 0 and 1 and then restored. The separate policy CSP remains related context, not the active control surface for this tweak."
   }
 }

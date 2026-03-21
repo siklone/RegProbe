@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T18:36:03.077157Z",
+  "generated_utc": "2026-03-21T19:21:36.962655Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -43272,8 +43272,8 @@
       "tweak_id": "privacy.disable-resume",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-resume.json",
-      "source_file_sha256": "edea839d158aab3eca120589fd44f387bee5fed5463392481da76d79c13e882c",
-      "source_file_size_bytes": 9288,
+      "source_file_sha256": "facf312c6bfa6d02b3b4200c1da07c785f21090fe9f16546eee415642428443d",
+      "source_file_size_bytes": 10126,
       "name": "Disable Resume for Current User",
       "category": "Privacy",
       "area": "Current-user Resume Setting",
@@ -59027,15 +59027,29 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "ghidra-explorer-serialize-search",
+          "kind": "ghidra-trace",
+          "title": "Ghidra headless search on explorer.exe for Serialize",
+          "location": "H:\\Temp\\vm-tooling-staging\\ghidra_explorer_serialize.txt",
+          "summary": "Headless Ghidra analysis of explorer.exe with SearchMemoryForStringsRegExArg.java 'Serialize' produced three matches, confirming the Explorer Serialize string path in the binary.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "string-reference",
+            "behavior"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
         "exact_quote_or_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__",
         "key_found_on_page": true,
-        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json."
+        "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record."
       },
-      "validation_proof_sha256": "5d6498489ad0bfb3b401f9d5d514e491e6b0fb6652bfed6de644a496ebef6bee",
+      "validation_proof_sha256": "1b8c7b977f12e98ba3f8fabf4442213cb6a986a5a3dceed6205247a08d35f99e",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
