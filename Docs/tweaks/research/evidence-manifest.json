@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T18:31:43.432183Z",
+  "generated_utc": "2026-03-21T18:32:55.591856Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -30115,8 +30115,8 @@
       "tweak_id": "power.hide-lock-option",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/power.hide-lock-option.json",
-      "source_file_sha256": "bb61e4c516c76622f6b0770dcd2d393305f2d8dde6d325fe882796e6eb752dda",
-      "source_file_size_bytes": 9585,
+      "source_file_sha256": "e92e39c74366ca830f7cc4f3399394f72c581a57638e888be211aa421bf05856",
+      "source_file_size_bytes": 10511,
       "name": "Show Lock Option",
       "category": "Power",
       "area": "Registry Policy",
@@ -38078,15 +38078,29 @@
             "behavior"
           ],
           "origin": "Ghidra decompilation"
+        },
+        {
+          "evidence_id": "procmon-feedback-notifications",
+          "kind": "procmon-trace",
+          "title": "Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle",
+          "location": "H:\\Temp\\vm-tooling-staging\\feedback_notifications_probe.txt",
+          "summary": "The guest probe wrote DoNotShowFeedbackNotifications=0 and DoNotShowFeedbackNotifications=1, queried the live registry after each write, opened the feedback settings surface in both states, and restored the original state.",
+          "strength": "medium",
+          "supports": [
+            "runtime writes",
+            "value semantics",
+            "rollback"
+          ],
+          "origin": "VM Procmon trace"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications",
         "exact_quote_or_path": "Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled.",
         "key_found_on_page": true,
-        "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx."
+        "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at H:\\Temp\\vm-tooling-staging\\feedback_notifications_probe.txt confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state."
       },
-      "validation_proof_sha256": "f1aaa3558cf099efc22328f2567acbec3a18b90e0f1edae7fe8ce5b535f1d2a4",
+      "validation_proof_sha256": "4fd4c3366b7f3c26314d395899a7537dd7ea9da8cb4ffcab10572845df1e5b6c",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

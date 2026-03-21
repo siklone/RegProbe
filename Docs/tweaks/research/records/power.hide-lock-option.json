@@ -213,6 +213,19 @@
         "allowed-values"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-power-hide-lock-option",
+      "kind": "procmon-trace",
+      "title": "Win25H2Clean reversible probe - ShowLockOption 0/1 toggle",
+      "location": "H:\\Temp\\vm-tooling-staging\\power_hide_lock_option_probe.txt",
+      "summary": "The guest probe wrote ShowLockOption=0 and ShowLockOption=1, queried the live registry after each write, opened the Start menu surface twice, and restored the original state; no direct registry read lines were captured in Procmon in this capture.",
+      "supports": [
+        "runtime writes",
+        "rollback",
+        "trigger attempt"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -230,6 +243,6 @@
     "source_url": "C:\\Windows\\PolicyDefinitions\\WindowsExplorer.admx",
     "exact_quote_or_path": "<policy name=\"ShowLockOption\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"ShowLockOption\">; WindowsExplorer.adml: If you disable this policy setting, the lock option will never be shown in the User Tile menu.",
     "key_found_on_page": true,
-    "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx."
+    "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. Win25H2Clean reversible probe at H:\\Temp\\vm-tooling-staging\\power_hide_lock_option_probe.txt confirmed writes for 0 and 1, live registry queries after each write, Start menu opening in both states, and restoration to the original state; no direct read lines were captured in Procmon."
   }
 }

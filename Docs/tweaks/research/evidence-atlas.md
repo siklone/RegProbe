@@ -8899,6 +8899,7 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DoNotShowFeedbackNotifications policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior |
+| `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | H:\Temp\vm-tooling-staging\feedback_notifications_probe.txt | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -8907,7 +8908,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications |
 | Exact quote / path | Registry Key Name Software\Policies\Microsoft\Windows\DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled. |
 | Key found on page | `True` |
-| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. |
+| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at H:\Temp\vm-tooling-staging\feedback_notifications_probe.txt confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state. |
 
 **Decision**
 
