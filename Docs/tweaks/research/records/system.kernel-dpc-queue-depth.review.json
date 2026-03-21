@@ -188,5 +188,11 @@
     "Can a primary Microsoft source for DpcQueueDepth be captured?",
     "Should the app surface this only as an experimental kernel setting?"
   ],
-  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "Docs/system/system.md",
+    "exact_quote_or_path": "Repo system research notes for kernel registry values: The repo documents DpcQueueDepth = 4 as personal research and ties it to KiMaximumDpcQueueDepth.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id repo-system-doc-kernel (repo-doc); deprecated audit trail."
+  }
 }

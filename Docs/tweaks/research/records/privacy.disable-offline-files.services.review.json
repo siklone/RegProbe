@@ -1,0 +1,183 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "privacy.disable-offline-files.services",
+  "tweak_id": "privacy.disable-offline-files.services",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the Offline Files service subrecord. The app disables CSC and CscService as part of the broader Offline Files bundle, but the validated publishable control surface is tracked separately in the policy record.",
+  "setting": {
+    "name": "Offline Files Service Bundle",
+    "category": "Privacy",
+    "area": "Service Start Mode",
+    "scope": "device",
+    "casual_explanation": "Offline Files depends on background services. This tweak disables those services directly instead of only using the documented feature policy.",
+    "why_people_change_it": "People do this when they want the feature disabled more aggressively than the policy alone.",
+    "tradeoffs_overview": "Disabling the services can make the feature harder to use or recover quickly, but it is also farther away from the single official policy control.",
+    "professional_notes": "The provider sets both CSC and CscService to disabled start mode. This record treats that as an observed implementation bundle rather than a separately validated Microsoft policy surface.",
+    "targets": [
+      {
+        "target_id": "offline-files-services",
+        "location_kind": "service",
+        "path": "CSC;CscService",
+        "value_name": "StartMode",
+        "value_type": "SERVICE_START_MODE",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "default",
+            "label": "Windows default",
+            "meaning": "Keep the normal Windows service start mode for the Offline Files services.",
+            "evidence_ids": [
+              "offline-policy-subrecord"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "disabled",
+            "label": "Disable services",
+            "meaning": "The current app disables the CSC and CscService services.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app disables CSC and CscService as part of the broader Offline Files bundle.",
+    "writes": [
+      {
+        "target_id": "offline-files-services",
+        "path": "CSC;CscService",
+        "value_name": "StartMode",
+        "value_type": "SERVICE_START_MODE",
+        "state_kind": "value",
+        "value": "disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Offline Files service baseline",
+      "applies_to": "Windows systems with the Offline Files feature components present",
+      "states": [
+        {
+          "target_id": "offline-files-services",
+          "state_kind": "value",
+          "value": "default",
+          "rationale": "Use the normal Windows service configuration unless there is a stronger reason to change it."
+        }
+      ],
+      "evidence_ids": [
+        "offline-policy-subrecord"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "Policy-only management of Offline Files"
+      ],
+      "avoid_for": [
+        "Research comparison of the current app bundle"
+      ],
+      "states": [
+        {
+          "target_id": "offline-files-services",
+          "state_kind": "value",
+          "value": "default",
+          "rationale": "Do not treat service-disable behavior as the normal feature baseline."
+        }
+      ],
+      "good_when": "You want the safest recoverable path.",
+      "bad_when": "You intentionally want the broader app bundle.",
+      "tradeoffs": [
+        "Keeps service plumbing closer to Windows defaults.",
+        "Does not aggressively suppress the feature."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "offline-policy-subrecord"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app bundle",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure"
+      ],
+      "states": [
+        {
+          "target_id": "offline-files-services",
+          "state_kind": "value",
+          "value": "disabled",
+          "rationale": "Track the service-level behavior the app currently applies."
+        }
+      ],
+      "good_when": "You are documenting the app's broader disable bundle.",
+      "bad_when": "You want only the official feature policy.",
+      "tradeoffs": [
+        "More aggressive than the policy alone.",
+        "Harder to justify as a general-user recommendation."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "offline-policy-subrecord",
+      "kind": "repo-doc",
+      "title": "Existing Offline Files policy record",
+      "location": "Docs/tweaks/research/records/privacy.disable-offline-files.policy.json",
+      "summary": "The core Offline Files feature policy is already documented separately.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current privacy provider service bundle",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider disables the CSC and CscService services for the current sub-tweak.",
+      "supports": [
+        "ui-mapping",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "This is an implementation-level hardening step layered on top of the official policy and needs separate review.",
+    "blocking_issues": [
+      "Service shutdown goes beyond the validated Offline Files policy surface."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "Docs/tweaks/research/records/privacy.disable-offline-files.policy.json",
+    "exact_quote_or_path": "Existing Offline Files policy record: The core Offline Files feature policy is already documented separately.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id offline-policy-subrecord (repo-doc); deprecated audit trail."
+  }
+}

@@ -185,5 +185,11 @@
     "Is PageFaultDebugMode documented in a Microsoft primary source outside the current GraphicsDrivers debug pages?",
     "Should this tweak be removed from user-facing presets unless its source and intent can be proven?"
   ],
-  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+    "exact_quote_or_path": "Microsoft Learn: TDR Registry Keys: Microsoft documents supported GraphicsDrivers debug keys such as TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime. This research pass used the page as the nearest official GraphicsDrivers debug surface, but it does not publish PageFaultDebugMode.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id ms-tdr-registry-keys (official-doc); deprecated audit trail."
+  }
 }

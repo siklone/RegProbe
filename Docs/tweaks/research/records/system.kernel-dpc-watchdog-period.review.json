@@ -219,5 +219,11 @@
     "Can a primary Microsoft source for DpcWatchdogPeriod be captured?",
     "Should the app surface this only as an experimental kernel watchdog setting?"
   ],
-  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems",
+    "exact_quote_or_path": "Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports: Microsoft documents the DPC watchdog feature from the driver-behavior side and explains that Windows can decide a prolonged high-IRQL routine has taken excessive time to finish. The page confirms the watchdog feature area but does not publish the registry key.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id ms-avoid-dpc-watchdog-timeouts (official-doc); deprecated audit trail."
+  }
 }

@@ -1,0 +1,173 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "privacy.disable-application-compatibility.tasks",
+  "tweak_id": "privacy.disable-application-compatibility.tasks",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the Application Experience task bundle. The current app disables a bundle of scheduled tasks, but the publishable control surface is tracked separately in the validated policy record.",
+  "setting": {
+    "name": "Application Experience Task Bundle",
+    "category": "Privacy",
+    "area": "Scheduled Task Bundle",
+    "scope": "device",
+    "casual_explanation": "Windows includes background tasks related to application compatibility and compatibility appraisals. This tweak disables several of those jobs together.",
+    "why_people_change_it": "People do this when they want fewer compatibility scans, fewer background compatibility jobs, or less compatibility-related telemetry.",
+    "tradeoffs_overview": "Disabling these tasks can reduce background activity, but it can also remove some of the automation Windows uses to assess apps and prepare compatibility data.",
+    "professional_notes": "The current app disables six tasks under \\Microsoft\\Windows\\Application Experience. The task paths are stable enough to document as observed behavior, but this bundle is broader than a single Microsoft policy switch and still needs product review as a grouped toggle.",
+    "targets": [
+      {
+        "target_id": "app-experience-task-bundle",
+        "location_kind": "scheduled-task",
+        "path": "\\Microsoft\\Windows\\Application Experience\\*",
+        "value_name": "EnabledState",
+        "value_type": "TASK_STATE",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "default",
+            "label": "Windows default task state",
+            "meaning": "The Application Experience tasks keep their normal Windows enabled or disabled baseline.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "disabled",
+            "label": "Disable task bundle",
+            "meaning": "The app disables the listed Application Experience scheduled tasks.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          }
+        ],
+        "notes": "This record is about the bundle as exposed by the app, not a single official policy knob."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The provider disables the listed Application Experience tasks as one batch.",
+    "writes": [
+      {
+        "target_id": "app-experience-task-bundle",
+        "path": "\\Microsoft\\Windows\\Application Experience\\*",
+        "value_name": "EnabledState",
+        "value_type": "TASK_STATE",
+        "state_kind": "value",
+        "value": "disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows scheduled-task baseline",
+      "applies_to": "Windows builds that ship the Application Experience task folder",
+      "states": [
+        {
+          "target_id": "app-experience-task-bundle",
+          "state_kind": "value",
+          "value": "default",
+          "rationale": "Do not treat the app's disable bundle as the documented Windows baseline."
+        }
+      ],
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "Systems that may still benefit from compatibility jobs"
+      ],
+      "avoid_for": [
+        "Research comparison of current app behavior"
+      ],
+      "states": [
+        {
+          "target_id": "app-experience-task-bundle",
+          "state_kind": "value",
+          "value": "default",
+          "rationale": "Keep the existing Windows task baseline until the task bundle is better scoped."
+        }
+      ],
+      "good_when": "You want the least opinionated baseline.",
+      "bad_when": "You are deliberately reducing compatibility-related background jobs.",
+      "tradeoffs": [
+        "Compatibility jobs remain available.",
+        "Background activity may stay higher."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    },
+    {
+      "profile_id": "current-app-bundle",
+      "label": "Current app bundle",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure"
+      ],
+      "states": [
+        {
+          "target_id": "app-experience-task-bundle",
+          "state_kind": "value",
+          "value": "disabled",
+          "rationale": "Track the current batch disable behavior."
+        }
+      ],
+      "good_when": "You need to document the product's current task bundle.",
+      "bad_when": "You want a narrow, policy-backed control.",
+      "tradeoffs": [
+        "Reduces task activity.",
+        "Bundle scope is still broader than a single validated Microsoft control."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current privacy provider task bundle",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider disables six scheduled tasks in the Application Experience folder as one bundle.",
+      "supports": [
+        "ui-mapping",
+        "path",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The bundle is real and observable, but it is still an app-defined scheduled-task group rather than a clean official control surface.",
+    "blocking_issues": [
+      "The task bundle is broader than a single official policy mapping."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "exact_quote_or_path": "Current privacy provider task bundle: The provider disables six scheduled tasks in the Application Experience folder as one bundle.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail."
+  }
+}

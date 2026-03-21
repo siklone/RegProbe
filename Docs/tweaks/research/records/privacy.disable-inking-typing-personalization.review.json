@@ -161,5 +161,11 @@
       "Mixed bundle semantics are not yet explained well enough for a validated toggle."
     ]
   },
-  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "exact_quote_or_path": "Current privacy provider typing and ink bundle: The provider writes AllowLinguisticDataCollection = 0 and two Windows Ink Workspace policy values set to 0.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail."
+  }
 }

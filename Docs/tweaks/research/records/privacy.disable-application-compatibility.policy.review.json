@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-application-compatibility.policy",
   "tweak_id": "privacy.disable-application-compatibility.policy",
   "record_status": "deprecated",
-  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
   "summary": "This record previously documented the full seven-value AppCompat policy bundle written by the app. It was split on 2026-03-13 into three focused child records and now exists only as an audit trail: privacy.disable-appcompat-engine.policy, privacy.disable-appdeviceinventory.policy, and privacy.disable-program-compatibility-assistant.",
   "setting": {
     "name": "Application Compatibility Policy Bundle (Deprecated Split Reference)",
@@ -114,5 +114,11 @@
     "why": "Deprecated after the mixed bundle was split into focused child records. This parent record remains only as an audit trail and should not drive research, validation, or publication decisions.",
     "blocking_issues": []
   },
-  "open_questions": []
+  "open_questions": [],
+  "validation_proof": {
+    "source_url": "Docs/tweaks/research/records/",
+    "exact_quote_or_path": "Split audit trail: The original mixed application-compatibility policy record was retired on 2026-03-13 and replaced with three focused child records: privacy.disable-appcompat-engine.policy, privacy.disable-appdeviceinventory.policy, and privacy.disable-program-compatibility-assistant.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id split-audit (repo-doc); deprecated audit trail."
+  }
 }

@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "security.disable-wpbt",
   "tweak_id": "security.disable-wpbt",
-  "record_status": "review-required",
-  "summary": "Observed implementation only. The app writes DisableWpbtExecution = 1 under HKLM\\System\\CurrentControlSet\\Control\\Session Manager. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, not as this registry path, so this record stays docs-first until the registry contract is proven or the feature is redesigned.",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail.",
   "setting": {
     "name": "Disable WPBT Execution",
     "category": "Security",
@@ -172,5 +172,11 @@
     "Does Microsoft publish DisableWpbtExecution in a Windows security, boot, or firmware reference outside the DFCI material captured so far?",
     "If not, should this tweak remain docs-first permanently or be retired in favor of officially managed firmware controls?"
   ],
-  "last_reviewed_utc": "2026-03-13T18:41:00+03:00"
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings",
+    "exact_quote_or_path": "Microsoft Learn DFCI WPBT setting reference: Microsoft documents WPBT as a UEFI or DFCI managed feature with Not configured, Enabled, and Disabled states.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id ms-dfci-wpbt (official-doc); deprecated audit trail."
+  }
 }

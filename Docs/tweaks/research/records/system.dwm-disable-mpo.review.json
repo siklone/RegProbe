@@ -185,5 +185,11 @@
     "Is OverlayTestMode documented in a Microsoft primary source outside the current DWM registry page?",
     "Should the app present MPO changes as an experimental graphics troubleshooting action rather than a validated tweak?"
   ],
-  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
+    "exact_quote_or_path": "Microsoft Learn: DWM Registry Settings: Microsoft documents supported DWM registry overrides such as OverlayMinFPS on HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm. This research pass used that page as the nearest official DWM overlay surface, but did not find OverlayTestMode published there.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id ms-dwm-registry-settings (official-doc); deprecated audit trail."
+  }
 }

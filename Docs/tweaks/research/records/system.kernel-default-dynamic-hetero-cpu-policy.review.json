@@ -206,5 +206,11 @@
     "Can a primary Microsoft source for DefaultDynamicHeteroCpuPolicy be captured?",
     "Should the app surface this only as an experimental hybrid-core scheduling setting?"
   ],
-  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy",
+    "exact_quote_or_path": "Microsoft Learn: SchedulingPolicy: Microsoft documents official heterogeneous scheduling policy values for the power-policy SchedulingPolicy setting, including 3 = efficient processors. This confirms the feature area and adjacent value semantics, but it does not publish the kernel registry key DefaultDynamicHeteroCpuPolicy.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail."
+  }
 }

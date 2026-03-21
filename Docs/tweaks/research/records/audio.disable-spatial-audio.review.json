@@ -1,0 +1,160 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "audio.disable-spatial-audio",
+  "tweak_id": "audio.disable-spatial-audio",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract.",
+  "setting": {
+    "name": "Spatial Audio on Low-Latency Devices",
+    "category": "Audio",
+    "area": "Audio Engine Flags",
+    "scope": "device",
+    "casual_explanation": "This appears to control whether spatial audio is disabled in a low-latency audio path. It is more of a specialist audio tweak than a normal user setting.",
+    "why_people_change_it": "People would change it when troubleshooting audio latency, compatibility, or specific device behavior in advanced setups.",
+    "tradeoffs_overview": "Changing spatial-audio behavior on low-latency devices can affect audio features and compatibility, but this research pass did not capture a primary Microsoft source for the exact registry value used by the app.",
+    "professional_notes": "The app writes DisableSpatialOnLowLatency = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio and the repo provenance marks the tweak as repo-backed. This pass did not capture a primary Microsoft source that publishes the value as the supported Windows audio control surface.",
+    "targets": [
+      {
+        "target_id": "audio-disable-spatial-on-low-latency",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio",
+        "value_name": "DisableSpatialOnLowLatency",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Primary Microsoft mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft source that publishes DisableSpatialOnLowLatency as a supported registry control.",
+            "evidence_ids": [
+              "repo-provenance-audio-disable-spatial-audio"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Observed app spatial-audio-off profile",
+            "meaning": "The current app writes 1 here to disable spatial audio on low-latency devices, but the value is tracked only as an observed implementation.",
+            "evidence_ids": [
+              "repo-provenance-audio-disable-spatial-audio",
+              "app-audio-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+    "notes": "The current app writes DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract.",
+    "writes": [
+      {
+        "target_id": "audio-disable-spatial-on-low-latency",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio",
+        "value_name": "DisableSpatialOnLowLatency",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative baseline",
+      "applies_to": "Windows systems where this dataset has not validated the spatial-audio registry contract",
+      "states": [
+        {
+          "target_id": "audio-disable-spatial-on-low-latency",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish the spatial-audio registry write as validated until a primary Microsoft source is captured."
+        }
+      ],
+      "notes": "This keeps the audio-engine tweak documented without overstating confidence in the registry path.",
+      "evidence_ids": [
+        "repo-provenance-audio-disable-spatial-audio"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Audio latency cleanup"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "audio-disable-spatial-on-low-latency",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the registry write blocked until a primary Microsoft source is captured."
+        }
+      ],
+      "good_when": "You want to document the current tweak without publishing it as a validated Windows control.",
+      "bad_when": "You need a fully sourced spatial-audio preset.",
+      "tradeoffs": [
+        "The app behavior is documented.",
+        "The registry mapping remains blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-provenance-audio-disable-spatial-audio"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-provenance-audio-disable-spatial-audio",
+      "kind": "repo-doc",
+      "title": "Repo provenance for audio.disable-spatial-audio",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo provenance links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-audio-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+      "summary": "The provider writes DisableSpatialOnLowLatency = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact spatial-audio registry contract.",
+    "blocking_issues": [
+      "No primary Microsoft source for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency was captured in this pass."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "Docs/tweaks/tweak-provenance.json",
+    "exact_quote_or_path": "Repo provenance for audio.disable-spatial-audio: The repo provenance links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail."
+  }
+}

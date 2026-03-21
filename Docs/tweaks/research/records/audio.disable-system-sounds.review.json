@@ -1,0 +1,161 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "audio.disable-system-sounds",
+  "tweak_id": "audio.disable-system-sounds",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the AppEvents sound-scheme bundle. The current app clears many HKCU\\AppEvents\\Schemes sound-event values, but the publishable control surface is tracked separately from this implementation bundle.",
+  "setting": {
+    "name": "System Sound Assignments",
+    "category": "Audio",
+    "area": "AppEvents Sound Scheme Entries",
+    "scope": "user",
+    "casual_explanation": "Windows maps many system events to sound files. This tweak clears those mappings so common Windows events stop making sound.",
+    "why_people_change_it": "People disable system sounds when they want a quieter desktop, fewer interruptions, or a cleaner workstation environment.",
+    "tradeoffs_overview": "Clearing system sounds can make Windows quieter, but it also removes audible feedback for notifications, prompts, and system events.",
+    "professional_notes": "The app clears a large set of HKCU\\AppEvents\\Schemes sound-event values by writing empty strings, and the repo provenance marks the tweak as repo-backed. This pass did not capture a primary Microsoft source that publishes the exact AppEvents registry-write bundle as the supported control surface for managing system sound assignments.",
+    "targets": [
+      {
+        "target_id": "appevents-sound-scheme-bundle",
+        "location_kind": "registry",
+        "path": "HKCU\\AppEvents\\Schemes\\...",
+        "value_name": "(multiple default values)",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Primary Microsoft mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft source that publishes the AppEvents bundle as a supported registry control for disabling system sounds.",
+            "evidence_ids": [
+              "repo-provenance-audio-disable-system-sounds"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "",
+            "label": "Observed app silent-scheme profile",
+            "meaning": "The current app writes empty strings to many AppEvents sound mappings so the associated Windows events no longer play sounds.",
+            "evidence_ids": [
+              "repo-provenance-audio-disable-system-sounds",
+              "app-audio-provider"
+            ]
+          }
+        ],
+        "notes": "Tracked as an observed multi-value AppEvents bundle only."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+    "notes": "The current app clears many AppEvents sound mappings, but this pass did not capture a primary Microsoft source for the exact AppEvents bundle contract.",
+    "writes": [
+      {
+        "target_id": "appevents-sound-scheme-bundle",
+        "path": "HKCU\\AppEvents\\Schemes\\...",
+        "value_name": "(multiple default values)",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": ""
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative baseline",
+      "applies_to": "Windows user profiles where this dataset has not validated the AppEvents bundle contract",
+      "states": [
+        {
+          "target_id": "appevents-sound-scheme-bundle",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish the AppEvents write bundle as validated until a primary Microsoft source is captured."
+        }
+      ],
+      "notes": "This keeps the sound-scheme tweak documented without overstating confidence in the registry contract.",
+      "evidence_ids": [
+        "repo-provenance-audio-disable-system-sounds"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Desktop sound cleanup"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "appevents-sound-scheme-bundle",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the AppEvents write bundle blocked until a primary Microsoft source is captured."
+        }
+      ],
+      "good_when": "You want to document the current tweak without publishing it as a validated Windows control.",
+      "bad_when": "You need a fully sourced silent sound-scheme preset.",
+      "tradeoffs": [
+        "The app behavior is documented.",
+        "The AppEvents mapping remains blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-provenance-audio-disable-system-sounds"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-provenance-audio-disable-system-sounds",
+      "kind": "repo-doc",
+      "title": "Repo provenance for audio.disable-system-sounds",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo provenance links the AppEvents sound-scheme bundle to upstream nohuto research and marks the tweak as repo-backed.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-audio-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+      "summary": "The provider writes empty strings to many HKCU\\AppEvents\\Schemes sound mappings.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact AppEvents bundle contract.",
+    "blocking_issues": [
+      "No primary Microsoft source for the exact HKCU\\AppEvents\\Schemes bundle written by the app was captured in this pass."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "Docs/tweaks/tweak-provenance.json",
+    "exact_quote_or_path": "Repo provenance for audio.disable-system-sounds: The repo provenance links the AppEvents sound-scheme bundle to upstream nohuto research and marks the tweak as repo-backed.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id repo-provenance-audio-disable-system-sounds (repo-doc); deprecated audit trail."
+  }
+}

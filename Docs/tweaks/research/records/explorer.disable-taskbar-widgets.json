@@ -113,5 +113,12 @@
     "why": "Deprecated after the duplicate Explorer tweak was removed. The app already has a validated official Widgets control under visibility.disable-widgets, so keeping a second taskbar-only tweak would duplicate behavior and preserve an undocumented legacy surface.",
     "blocking_issues": []
   },
-  "open_questions": []
+  "open_questions": [],
+  "validation_proof": {
+    "source_url": "Docs/tweaks/research/records/",
+    "exact_quote_or_path": "Widgets duplicate retirement audit trail: explorer.disable-taskbar-widgets was retired on 2026-03-13 because the app already ships visibility.disable-widgets for the official Widgets policy surface. The old TaskbarDa parent-key write was removed from VisibilityTweakProvider.cs and this record now remains only as an audit trail.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id duplicate-retirement-audit (repo-doc); deprecated audit trail."
+  },
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
 }

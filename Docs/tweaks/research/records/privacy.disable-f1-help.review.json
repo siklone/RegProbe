@@ -1,0 +1,171 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "privacy.disable-f1-help",
+  "tweak_id": "privacy.disable-f1-help",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the F1 Help binary rename. The app disables F1 Help by renaming HelpPane.exe, but this is not an official policy surface.",
+  "setting": {
+    "name": "HelpPane Binary Rename",
+    "category": "Privacy",
+    "area": "File Rename",
+    "scope": "device",
+    "casual_explanation": "Pressing F1 in some old Windows contexts can open HelpPane. This tweak blocks that by renaming the executable.",
+    "why_people_change_it": "People do this when they never use legacy F1 help and want to stop accidental help popups.",
+    "tradeoffs_overview": "It is effective as a blunt tool, but it is more invasive than a policy or preference change.",
+    "professional_notes": "The provider renames C:\\Windows\\System32\\HelpPane.exe to HelpPane.exe.disabled. That is tracked as an observed implementation detail rather than an official Microsoft management surface.",
+    "targets": [
+      {
+        "target_id": "helppane-binary",
+        "location_kind": "file",
+        "path": "C:\\Windows\\System32\\HelpPane.exe",
+        "value_name": "RenameState",
+        "value_type": "FILE_RENAME_STATE",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "present",
+            "label": "Default file state",
+            "meaning": "HelpPane.exe is present at its normal path.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "renamed-disabled",
+            "label": "Renamed by app",
+            "meaning": "The current app renames the file to a .disabled name.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app renames HelpPane.exe to HelpPane.exe.disabled.",
+    "writes": [
+      {
+        "target_id": "helppane-binary",
+        "path": "C:\\Windows\\System32\\HelpPane.exe",
+        "value_name": "RenameState",
+        "value_type": "FILE_RENAME_STATE",
+        "state_kind": "value",
+        "value": "renamed-disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Normal HelpPane state",
+      "applies_to": "Windows systems that ship HelpPane.exe",
+      "states": [
+        {
+          "target_id": "helppane-binary",
+          "state_kind": "value",
+          "value": "present",
+          "rationale": "Treat the normal file location as the baseline."
+        }
+      ],
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users"
+      ],
+      "avoid_for": [
+        "People intentionally reproducing the app's file-rename behavior"
+      ],
+      "states": [
+        {
+          "target_id": "helppane-binary",
+          "state_kind": "value",
+          "value": "present",
+          "rationale": "Keep the binary in place unless there is a strong reason to rename it."
+        }
+      ],
+      "good_when": "You want the least-invasive baseline.",
+      "bad_when": "You explicitly want to suppress legacy F1 Help by force.",
+      "tradeoffs": [
+        "Less invasive.",
+        "HelpPane can still be launched."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app file rename",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure"
+      ],
+      "states": [
+        {
+          "target_id": "helppane-binary",
+          "state_kind": "value",
+          "value": "renamed-disabled",
+          "rationale": "Track the file-rename behavior the product applies."
+        }
+      ],
+      "good_when": "You are documenting the current implementation.",
+      "bad_when": "You want a policy-backed or less invasive control surface.",
+      "tradeoffs": [
+        "Strongly suppresses HelpPane launches.",
+        "Binary rename is more invasive than most settings."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current privacy provider file rename",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider renames C:\\Windows\\System32\\HelpPane.exe to HelpPane.exe.disabled.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "This is a direct binary rename rather than an official settings surface.",
+    "blocking_issues": [
+      "Binary rename is more invasive than a validated policy or preference control."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "exact_quote_or_path": "Current privacy provider file rename: The provider renames C:\\Windows\\System32\\HelpPane.exe to HelpPane.exe.disabled.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id app-privacy-provider (repo-code); deprecated audit trail."
+  }
+}

@@ -185,5 +185,11 @@
     "Is DisableOverlays documented in a Microsoft primary source outside the current GraphicsDrivers debug pages?",
     "Should the app present overlay-plane changes as experimental graphics troubleshooting actions rather than validated tweaks?"
   ],
-  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+    "exact_quote_or_path": "Microsoft Learn: TDR Registry Keys: Microsoft documents supported GraphicsDrivers debug keys such as TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime under HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers. This research pass used that page as the nearest official GraphicsDrivers override surface, but did not find DisableOverlays published there.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id ms-tdr-registry-keys (official-doc); deprecated audit trail."
+  }
 }

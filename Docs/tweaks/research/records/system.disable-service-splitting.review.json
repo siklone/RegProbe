@@ -202,5 +202,11 @@
     "Can a primary Microsoft source for the exact no-splitting threshold override be captured?",
     "Should the app present this as an experimental service-host compatibility setting instead of a normal optimization?"
   ],
-  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring",
+    "exact_quote_or_path": "Microsoft Learn: Service host grouping in Windows 10: Microsoft documents svchost service refactoring, explains that service splitting depends on memory thresholds, and describes the general service-splitting behavior on modern Windows.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id ms-svchost-service-refactoring (official-doc); deprecated audit trail."
+  }
 }

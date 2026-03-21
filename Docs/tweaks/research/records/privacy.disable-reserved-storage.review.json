@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-reserved-storage",
   "tweak_id": "privacy.disable-reserved-storage",
   "record_status": "deprecated",
-  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
   "summary": "This record previously tracked a privacy-category duplicate that wrote HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ReserveManager\\DisableDeletes = 1 directly. It was retired on 2026-03-13 because the repo already contains the proper official command-backed tweak cleanup.disable-reserved-storage, which uses the documented DISM Reserved Storage surface. This record remains only as an audit trail from the retired privacy ID to the surviving cleanup tweak.",
   "setting": {
     "name": "Disable Reserved Storage (Deprecated Privacy Duplicate)",
@@ -114,5 +114,11 @@
     "why": "Deprecated after duplicate retirement. The privacy ID pointed to an internal registry side effect while the repo already had a proper official cleanup tweak for Reserved Storage. This record now exists only as an audit trail.",
     "blocking_issues": []
   },
-  "open_questions": []
+  "open_questions": [],
+  "validation_proof": {
+    "source_url": "Docs/tweaks/research/records/",
+    "exact_quote_or_path": "Reserved Storage duplicate retirement audit trail: The privacy.disable-reserved-storage duplicate was retired on 2026-03-13 because the repo already exposes the official DISM-backed cleanup.disable-reserved-storage tweak. The privacy duplicate had written ReserveManager\\DisableDeletes directly, while the surviving cleanup tweak uses the documented DISM detect/apply/rollback surface.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id duplicate-retirement-audit (repo-doc); deprecated audit trail."
+  }
 }
