@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:26:33Z",
+  "generated_utc": "2026-03-21T06:50:13Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -23,40 +23,6 @@
     {
       "sprint_number": 3,
       "priority_index": 1,
-      "record_id": "privacy.disable-application-compatibility",
-      "category": "split",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "The composite wraps subrecords that are not yet product-ready."
-      ],
-      "depends_on": [
-        "privacy.disable-application-compatibility.application-compatibility-policy-bundle",
-        "privacy.disable-application-compatibility.application-experience-scheduled-task-bundle"
-      ],
-      "current_state": "partially-matches | Composite",
-      "notes": "Split into 2 parts: Application compatibility policy bundle, Application Experience scheduled task bundle. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-application-compatibility.review.json"
-    },
-    {
-      "sprint_number": 3,
-      "priority_index": 2,
-      "record_id": "privacy.disable-inking-typing-personalization",
-      "category": "split",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "Mixed bundle semantics are not yet explained well enough for a validated toggle."
-      ],
-      "depends_on": [
-        "privacy.disable-inking-typing-personalization.typing-personalization-controls",
-        "privacy.disable-inking-typing-personalization.windows-ink-workspace-controls"
-      ],
-      "current_state": "partially-matches | Registry Bundle",
-      "notes": "Split into 2 parts: Typing personalization controls, Windows Ink Workspace controls. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json"
-    },
-    {
-      "sprint_number": 3,
-      "priority_index": 3,
       "record_id": "privacy.disable-offline-files.binary",
       "category": "split",
       "estimated_effort": "small",
@@ -73,7 +39,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 4,
+      "priority_index": 2,
       "record_id": "privacy.disable-offline-files.services",
       "category": "split",
       "estimated_effort": "small",
@@ -90,7 +56,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 5,
+      "priority_index": 3,
       "record_id": "privacy.disable-offline-files.tasks",
       "category": "split",
       "estimated_effort": "small",
@@ -107,7 +73,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 6,
+      "priority_index": 4,
       "record_id": "privacy.troubleshooter-dont-run",
       "category": "split",
       "estimated_effort": "small",
@@ -125,7 +91,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 7,
+      "priority_index": 5,
       "record_id": "security.disable-windows-update",
       "category": "split",
       "estimated_effort": "small",
@@ -143,7 +109,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 8,
+      "priority_index": 6,
       "record_id": "audio.disable-system-sounds",
       "category": "split",
       "estimated_effort": "medium",
@@ -161,7 +127,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 9,
+      "priority_index": 7,
       "record_id": "network.optimize-smb",
       "category": "split",
       "estimated_effort": "medium",
@@ -179,7 +145,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 10,
+      "priority_index": 8,
       "record_id": "power.disable-network-power-saving",
       "category": "split",
       "estimated_effort": "medium",
@@ -198,7 +164,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 11,
+      "priority_index": 9,
       "record_id": "privacy.disable-application-compatibility.tasks",
       "category": "split",
       "estimated_effort": "medium",
@@ -216,25 +182,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 12,
-      "record_id": "privacy.disable-ceip",
-      "category": "split",
-      "estimated_effort": "medium",
-      "blocking_issues": [
-        "Mixed policy family bundle still needs stronger per-target sourcing."
-      ],
-      "depends_on": [
-        "privacy.disable-ceip.sqmclient-controls",
-        "privacy.disable-ceip.app-v-ceip-controls",
-        "privacy.disable-ceip.messenger-or-legacy-product-telemetry-controls"
-      ],
-      "current_state": "partially-matches | Registry Policy Bundle",
-      "notes": "Split into 3 parts: SQMClient controls, App-V CEIP controls, Messenger or legacy product telemetry controls. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-ceip.review.json"
-    },
-    {
-      "sprint_number": 3,
-      "priority_index": 13,
+      "priority_index": 10,
       "record_id": "privacy.disable-cross-device-experiences",
       "category": "split",
       "estimated_effort": "medium",
@@ -253,7 +201,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 14,
+      "priority_index": 11,
       "record_id": "privacy.disable-sleep-study-diagnostics",
       "category": "split",
       "estimated_effort": "medium",
@@ -271,43 +219,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 15,
-      "record_id": "privacy.disable-suggestions",
-      "category": "split",
-      "estimated_effort": "medium",
-      "blocking_issues": [
-        "Opaque ContentDeliveryManager IDs are still observed implementation details rather than a clean official surface."
-      ],
-      "depends_on": [
-        "privacy.disable-suggestions.start-or-shell-suggestions",
-        "privacy.disable-suggestions.settings-or-tips-suggestions",
-        "privacy.disable-suggestions.opaque-contentdeliverymanager-identifiers"
-      ],
-      "current_state": "partially-matches | Observed User Preference Bundle",
-      "notes": "Split into 3 parts: Start or shell suggestions, Settings or tips suggestions, Opaque ContentDeliveryManager identifiers. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-suggestions.review.json"
-    },
-    {
-      "sprint_number": 3,
-      "priority_index": 16,
-      "record_id": "privacy.disable-wmplayer-telemetry",
-      "category": "split",
-      "estimated_effort": "medium",
-      "blocking_issues": [
-        "Windows Media Player preference bundle still lacks a clean official policy mapping."
-      ],
-      "depends_on": [
-        "privacy.disable-wmplayer-telemetry.metadata-retrieval-preferences",
-        "privacy.disable-wmplayer-telemetry.usage-or-recommendations-preferences",
-        "privacy.disable-wmplayer-telemetry.windows-media-player-product-specific-ux-copy"
-      ],
-      "current_state": "partially-matches | Observed App Preference Bundle",
-      "notes": "Split into 3 parts: Metadata retrieval preferences, Usage or recommendations preferences, Windows Media Player product-specific UX copy. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json"
-    },
-    {
-      "sprint_number": 3,
-      "priority_index": 17,
+      "priority_index": 12,
       "record_id": "power.optimize-performance",
       "category": "split",
       "estimated_effort": "medium",
@@ -326,7 +238,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 18,
+      "priority_index": 13,
       "record_id": "privacy.deny-app-access",
       "category": "split",
       "estimated_effort": "medium",
@@ -346,26 +258,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 19,
-      "record_id": "privacy.disable-offline-files",
-      "category": "split",
-      "estimated_effort": "medium",
-      "blocking_issues": [
-        "The composite includes service, task, and binary changes that are not part of the validated Offline Files policy surface."
-      ],
-      "depends_on": [
-        "privacy.disable-offline-files.official-offline-files-policy",
-        "privacy.disable-offline-files.offline-files-services",
-        "privacy.disable-offline-files.offline-files-scheduled-tasks",
-        "privacy.disable-offline-files.sync-center-binary-or-entry-point-changes"
-      ],
-      "current_state": "partially-matches | Composite",
-      "notes": "Split into 4 parts: Official Offline Files policy, Offline Files services, Offline Files scheduled tasks, Sync Center binary or entry-point changes. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-offline-files.review.json"
-    },
-    {
-      "sprint_number": 3,
-      "priority_index": 20,
+      "priority_index": 14,
       "record_id": "privacy.disable-suggestions-cdm",
       "category": "split",
       "estimated_effort": "medium",
@@ -385,7 +278,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 21,
+      "priority_index": 15,
       "record_id": "security.disable-vbs",
       "category": "split",
       "estimated_effort": "medium",
@@ -406,28 +299,7 @@
     },
     {
       "sprint_number": 3,
-      "priority_index": 22,
-      "record_id": "system.reduce-shutdown-timeouts",
-      "category": "split",
-      "estimated_effort": "medium",
-      "blocking_issues": [
-        "Only the service timeout path is directly published in primary Microsoft registry documentation captured in this dataset.",
-        "The current app writes WaitToKillAppTimeout, while repo notes indicate WaitToKillTimeout may be the more relevant modern concept.",
-        "This research pass did not capture a primary Microsoft source for AutoEndTasks as a supported current shutdown control."
-      ],
-      "depends_on": [
-        "system.reduce-shutdown-timeouts.waittokillservicetimeout",
-        "system.reduce-shutdown-timeouts.waittokillapptimeout-or-waittokilltimeout",
-        "system.reduce-shutdown-timeouts.hungapptimeout",
-        "system.reduce-shutdown-timeouts.autoendtasks"
-      ],
-      "current_state": "partially-matches | Shutdown and Logoff Timing",
-      "notes": "Split into 4 parts: WaitToKillServiceTimeout, WaitToKillAppTimeout or WaitToKillTimeout, HungAppTimeout, AutoEndTasks. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "source_file": "Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json"
-    },
-    {
-      "sprint_number": 3,
-      "priority_index": 23,
+      "priority_index": 16,
       "record_id": "system.disable-scheduled-tasks",
       "category": "split",
       "estimated_effort": "large",

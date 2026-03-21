@@ -1,0 +1,196 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "privacy.disable-application-compatibility",
+  "tweak_id": "privacy.disable-application-compatibility",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the old composite toggle. The AppCompat policy bundle and Application Experience task bundle are tracked separately in child records.",
+  "setting": {
+    "name": "Application Compatibility Composite Toggle",
+    "category": "Privacy",
+    "area": "Composite",
+    "scope": "device",
+    "casual_explanation": "Windows application compatibility features include policies, telemetry, and scheduled jobs that try to help old or unusual apps work correctly. This toggle tries to shut several of those pieces off at once.",
+    "why_people_change_it": "People use this when they want fewer compatibility prompts, less compatibility data collection, or a leaner background footprint.",
+    "tradeoffs_overview": "A single broad toggle is convenient, but it can hide the fact that different subparts have different risks, Windows version scopes, and evidence quality.",
+    "professional_notes": "The current product combines privacy.disable-application-compatibility.policy and privacy.disable-application-compatibility.tasks into one composite. The policy bundle is already review-required, and the task bundle also remains review-required, so this parent record should not be treated as a validated single-surface control.",
+    "targets": [
+      {
+        "target_id": "appcompat-composite",
+        "location_kind": "feature",
+        "path": "Composite: AppCompat policy bundle + Application Experience task bundle",
+        "value_name": "CompositeState",
+        "value_type": "COMPOSITE",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "windows-default",
+            "label": "Windows default",
+            "meaning": "Leave the AppCompat policy and task surfaces at their normal Windows baseline.",
+            "evidence_ids": [
+              "policy-subrecord",
+              "tasks-subrecord"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "current-app-profile",
+            "label": "Current app bundle",
+            "meaning": "Apply both the current policy bundle and the current task bundle used by the app.",
+            "evidence_ids": [
+              "app-privacy-provider",
+              "policy-subrecord",
+              "tasks-subrecord"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app intentionally exposes a composite toggle that wraps one reviewed policy bundle and one reviewed task bundle.",
+    "writes": [
+      {
+        "target_id": "appcompat-composite",
+        "path": "Composite: AppCompat policy bundle + Application Experience task bundle",
+        "value_name": "CompositeState",
+        "value_type": "COMPOSITE",
+        "state_kind": "value",
+        "value": "current-app-profile"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows baseline composite state",
+      "applies_to": "Windows systems using the normal AppCompat policy and task baseline",
+      "states": [
+        {
+          "target_id": "appcompat-composite",
+          "state_kind": "value",
+          "value": "windows-default",
+          "rationale": "Neither subrecord is validated as a product-ready one-click disable bundle."
+        }
+      ],
+      "evidence_ids": [
+        "policy-subrecord",
+        "tasks-subrecord"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "Systems that may still need compatibility help"
+      ],
+      "avoid_for": [
+        "People explicitly auditing AppCompat behavior"
+      ],
+      "states": [
+        {
+          "target_id": "appcompat-composite",
+          "state_kind": "value",
+          "value": "windows-default",
+          "rationale": "Keep the official Windows baseline until the subparts are individually settled."
+        }
+      ],
+      "good_when": "You want the safest documented position.",
+      "bad_when": "You are specifically researching compatibility telemetry and tasks.",
+      "tradeoffs": [
+        "Keeps the broad compatibility feature area intact.",
+        "Does not reduce compatibility-related background behavior."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "policy-subrecord",
+        "tasks-subrecord"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app bundle",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure"
+      ],
+      "states": [
+        {
+          "target_id": "appcompat-composite",
+          "state_kind": "value",
+          "value": "current-app-profile",
+          "rationale": "Track the exact composite behavior the app exposes today."
+        }
+      ],
+      "good_when": "You are documenting current product behavior.",
+      "bad_when": "You want a clean, validated one-click setting.",
+      "tradeoffs": [
+        "Convenient as a single toggle.",
+        "Too broad for publication while the subparts remain under review."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-privacy-provider",
+        "policy-subrecord",
+        "tasks-subrecord"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "policy-subrecord",
+      "kind": "repo-doc",
+      "title": "Existing AppCompat policy review record",
+      "location": "Docs/tweaks/research/records/privacy.disable-application-compatibility.policy.review.json",
+      "summary": "The policy half of the composite is already documented as review-required.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "tasks-subrecord",
+      "kind": "repo-doc",
+      "title": "Application Experience task review record",
+      "location": "Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json",
+      "summary": "The task half of the composite is tracked separately and also remains review-required.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current privacy provider composite",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider exposes privacy.disable-application-compatibility as a composite of the policy and task sub-tweaks.",
+      "supports": [
+        "ui-mapping",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The parent toggle is only as trustworthy as its least-settled child record, and both subparts are still under review.",
+    "blocking_issues": [
+      "The composite wraps subrecords that are not yet product-ready."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+}

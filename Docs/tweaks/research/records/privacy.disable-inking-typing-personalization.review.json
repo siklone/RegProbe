@@ -1,0 +1,165 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "privacy.disable-inking-typing-personalization",
+  "tweak_id": "privacy.disable-inking-typing-personalization",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the old inking and typing personalization bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.",
+  "setting": {
+    "name": "Inking and Typing Personalization Bundle",
+    "category": "Privacy",
+    "area": "Registry Bundle",
+    "scope": "device",
+    "casual_explanation": "This bundle aims to reduce handwriting, typing, and ink-related personalization features that can send or use learning data.",
+    "why_people_change_it": "People change it when they want less personalization and less data collection around typing and inking features.",
+    "tradeoffs_overview": "The privacy goal is understandable, but the bundle mixes different settings with different scopes and user-facing effects.",
+    "professional_notes": "The provider writes AllowLinguisticDataCollection = 0 under TextInput and also sets AllowSuggestedAppsInWindowsInkWorkspace = 0 and AllowWindowsInkWorkspace = 0. The bundle remains review-only until each piece is tied to a clearer official or product-level explanation.",
+    "targets": [
+      {
+        "target_id": "inking-typing-bundle",
+        "location_kind": "registry",
+        "path": "Composite: TextInput + WindowsInkWorkspace",
+        "value_name": "BundleState",
+        "value_type": "COMPOSITE",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "windows-default",
+            "label": "Windows default",
+            "meaning": "Leave the related typing and ink settings at their normal baseline.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "current-app-profile",
+            "label": "Current app bundle",
+            "meaning": "Apply the current inking and typing personalization bundle used by the app.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app exposes a three-value registry bundle spanning TextInput and Windows Ink Workspace paths.",
+    "writes": [
+      {
+        "target_id": "inking-typing-bundle",
+        "path": "Composite: TextInput + WindowsInkWorkspace",
+        "value_name": "BundleState",
+        "value_type": "COMPOSITE",
+        "state_kind": "value",
+        "value": "current-app-profile"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Typing and ink baseline",
+      "applies_to": "Windows systems with the relevant typing and ink components",
+      "states": [
+        {
+          "target_id": "inking-typing-bundle",
+          "state_kind": "value",
+          "value": "windows-default",
+          "rationale": "Do not treat the current mixed bundle as a validated baseline override."
+        }
+      ],
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users"
+      ],
+      "avoid_for": [
+        "People specifically studying the current privacy bundle"
+      ],
+      "states": [
+        {
+          "target_id": "inking-typing-bundle",
+          "state_kind": "value",
+          "value": "windows-default",
+          "rationale": "Keep the feature area closer to the Windows baseline."
+        }
+      ],
+      "good_when": "You want the least-assumptive baseline.",
+      "bad_when": "You intentionally want the app's current stricter bundle.",
+      "tradeoffs": [
+        "Less risk of unexpected feature loss.",
+        "Less aggressive privacy hardening."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app bundle",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure"
+      ],
+      "states": [
+        {
+          "target_id": "inking-typing-bundle",
+          "state_kind": "value",
+          "value": "current-app-profile",
+          "rationale": "Track the mixed registry bundle currently used by the app."
+        }
+      ],
+      "good_when": "You are documenting the product's current behavior.",
+      "bad_when": "You want a cleanly scoped validated control.",
+      "tradeoffs": [
+        "More aggressive personalization reduction.",
+        "Bundle semantics still need better source mapping."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current privacy provider typing and ink bundle",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes AllowLinguisticDataCollection = 0 and two Windows Ink Workspace policy values set to 0.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The bundle is real, but it still needs clearer per-target sourcing and user-facing explanation.",
+    "blocking_issues": [
+      "Mixed bundle semantics are not yet explained well enough for a validated toggle."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-12T00:00:00Z"
+}

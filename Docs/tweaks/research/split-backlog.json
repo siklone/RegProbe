@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:08:34Z",
+  "generated_utc": "2026-03-21T06:50:13Z",
   "backlog_type": "split-needed",
   "priority_order": [
     "rename",
@@ -8,7 +8,7 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 23,
+  "entry_count": 16,
   "entries": [
     {
       "record_id": "audio.disable-system-sounds",
@@ -83,19 +83,6 @@
       ]
     },
     {
-      "record_id": "privacy.disable-application-compatibility",
-      "current_state": "partially-matches | Composite",
-      "notes": "Split into 2 parts: Application compatibility policy bundle, Application Experience scheduled task bundle. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Composite",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-application-compatibility.review.json",
-      "estimated_split_parts": 2,
-      "suggested_splits": [
-        "Application compatibility policy bundle",
-        "Application Experience scheduled task bundle"
-      ]
-    },
-    {
       "record_id": "privacy.disable-application-compatibility.tasks",
       "current_state": "partially-matches | Scheduled Task Bundle",
       "notes": "Split into 3 parts: Application Experience telemetry tasks, Compatibility analysis tasks, Version-specific inventory tasks. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
@@ -110,20 +97,6 @@
       ]
     },
     {
-      "record_id": "privacy.disable-ceip",
-      "current_state": "partially-matches | Registry Policy Bundle",
-      "notes": "Split into 3 parts: SQMClient controls, App-V CEIP controls, Messenger or legacy product telemetry controls. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Registry Policy Bundle",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-ceip.review.json",
-      "estimated_split_parts": 3,
-      "suggested_splits": [
-        "SQMClient controls",
-        "App-V CEIP controls",
-        "Messenger or legacy product telemetry controls"
-      ]
-    },
-    {
       "record_id": "privacy.disable-cross-device-experiences",
       "current_state": "partially-matches | Mixed Registry Configuration",
       "notes": "Split into 3 parts: Official device-wide EnableCdp policy, Observed user-side CDP registry values, Preset UX or profile selection model. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
@@ -135,34 +108,6 @@
         "Official device-wide EnableCdp policy",
         "Observed user-side CDP registry values",
         "Preset UX or profile selection model"
-      ]
-    },
-    {
-      "record_id": "privacy.disable-inking-typing-personalization",
-      "current_state": "partially-matches | Registry Bundle",
-      "notes": "Split into 2 parts: Typing personalization controls, Windows Ink Workspace controls. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Registry Bundle",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json",
-      "estimated_split_parts": 2,
-      "suggested_splits": [
-        "Typing personalization controls",
-        "Windows Ink Workspace controls"
-      ]
-    },
-    {
-      "record_id": "privacy.disable-offline-files",
-      "current_state": "partially-matches | Composite",
-      "notes": "Split into 4 parts: Official Offline Files policy, Offline Files services, Offline Files scheduled tasks, Sync Center binary or entry-point changes. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Composite",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-offline-files.review.json",
-      "estimated_split_parts": 4,
-      "suggested_splits": [
-        "Official Offline Files policy",
-        "Offline Files services",
-        "Offline Files scheduled tasks",
-        "Sync Center binary or entry-point changes"
       ]
     },
     {
@@ -219,20 +164,6 @@
       ]
     },
     {
-      "record_id": "privacy.disable-suggestions",
-      "current_state": "partially-matches | Observed User Preference Bundle",
-      "notes": "Split into 3 parts: Start or shell suggestions, Settings or tips suggestions, Opaque ContentDeliveryManager identifiers. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Observed User Preference Bundle",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-suggestions.review.json",
-      "estimated_split_parts": 3,
-      "suggested_splits": [
-        "Start or shell suggestions",
-        "Settings or tips suggestions",
-        "Opaque ContentDeliveryManager identifiers"
-      ]
-    },
-    {
       "record_id": "privacy.disable-suggestions-cdm",
       "current_state": "partially-matches | Observed ContentDeliveryManager Values vs Named CloudContent Policies",
       "notes": "Split into 4 parts: Third-party suggestions mapping, Settings suggestions mapping, Welcome experience mapping, SubscribedContent identifier mapping. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
@@ -245,20 +176,6 @@
         "Settings suggestions mapping",
         "Welcome experience mapping",
         "SubscribedContent identifier mapping"
-      ]
-    },
-    {
-      "record_id": "privacy.disable-wmplayer-telemetry",
-      "current_state": "partially-matches | Observed App Preference Bundle",
-      "notes": "Split into 3 parts: Metadata retrieval preferences, Usage or recommendations preferences, Windows Media Player product-specific UX copy. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Observed App Preference Bundle",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json",
-      "estimated_split_parts": 3,
-      "suggested_splits": [
-        "Metadata retrieval preferences",
-        "Usage or recommendations preferences",
-        "Windows Media Player product-specific UX copy"
       ]
     },
     {
@@ -316,21 +233,6 @@
         "Cleanup tasks",
         "Feedback tasks",
         "Error-reporting tasks"
-      ]
-    },
-    {
-      "record_id": "system.reduce-shutdown-timeouts",
-      "current_state": "partially-matches | Shutdown and Logoff Timing",
-      "notes": "Split into 4 parts: WaitToKillServiceTimeout, WaitToKillAppTimeout or WaitToKillTimeout, HungAppTimeout, AutoEndTasks. Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "technical_area": "Shutdown and Logoff Timing",
-      "implementation_status": "partially-matches",
-      "source_file": "Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json",
-      "estimated_split_parts": 4,
-      "suggested_splits": [
-        "WaitToKillServiceTimeout",
-        "WaitToKillAppTimeout or WaitToKillTimeout",
-        "HungAppTimeout",
-        "AutoEndTasks"
       ]
     }
   ]

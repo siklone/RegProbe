@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:33:29Z",
+  "generated_utc": "2026-03-21T06:50:13Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 49,
+  "source_record_count": 43,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -14,12 +14,12 @@
   "counts_by_label": {
     "implementation-mismatch": 0,
     "rename": 0,
-    "split-needed": 22,
+    "split-needed": 16,
     "docs-first": 27
   },
   "counts_by_method": {
     "heuristic": 3,
-    "manual-override": 44,
+    "manual-override": 38,
     "proof-gate": 2
   },
   "entries": [
@@ -703,25 +703,6 @@
       ]
     },
     {
-      "record_id": "privacy.disable-application-compatibility",
-      "tweak_id": "privacy.disable-application-compatibility",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "The composite wraps subrecords that are not yet product-ready.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "Privacy",
-      "technical_area": "Composite",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-application-compatibility.review.json",
-      "summary": "This top-level toggle is a composite that combines the already reviewed AppCompat policy bundle with an Application Experience scheduled-task bundle. Because it mixes multiple control surfaces and some individual mappings are still in review, the parent toggle also stays in review.",
-      "decision_why": "The parent toggle is only as trustworthy as its least-settled child record, and both subparts are still under review.",
-      "blocking_issues": [
-        "The composite wraps subrecords that are not yet product-ready."
-      ]
-    },
-    {
       "record_id": "privacy.disable-application-compatibility.tasks",
       "tweak_id": "privacy.disable-application-compatibility.tasks",
       "source_record_status": "review-required",
@@ -738,25 +719,6 @@
       "decision_why": "The bundle is real and observable, but it is still an app-defined scheduled-task group rather than a clean official control surface.",
       "blocking_issues": [
         "The task bundle is broader than a single official policy mapping."
-      ]
-    },
-    {
-      "record_id": "privacy.disable-ceip",
-      "tweak_id": "privacy.disable-ceip",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "Mixed policy family bundle still needs stronger per-target sourcing.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "Privacy",
-      "technical_area": "Registry Policy Bundle",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-ceip.review.json",
-      "summary": "The app disables several CEIP-related policy values across different Microsoft product families. Because the bundle spans App-V, SQMClient, and Messenger policy areas, it remains review-required as a grouped toggle.",
-      "decision_why": "The bundle is observable, but it crosses several policy families and still needs stronger provenance as a grouped toggle.",
-      "blocking_issues": [
-        "Mixed policy family bundle still needs stronger per-target sourcing."
       ]
     },
     {
@@ -777,44 +739,6 @@
       "blocking_issues": [
         "The preset model mixes one official machine policy with undocumented user-side CDP values.",
         "The product should not present fully trusted preset semantics until those user values are sourced and validated."
-      ]
-    },
-    {
-      "record_id": "privacy.disable-inking-typing-personalization",
-      "tweak_id": "privacy.disable-inking-typing-personalization",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "Mixed bundle semantics are not yet explained well enough for a validated toggle.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "Privacy",
-      "technical_area": "Registry Bundle",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json",
-      "summary": "The app combines a TextInput policy-style value with Windows Ink Workspace policy values in one bundle aimed at reducing inking and typing personalization. Because the bundle crosses feature families, it remains review-required.",
-      "decision_why": "The bundle is real, but it still needs clearer per-target sourcing and user-facing explanation.",
-      "blocking_issues": [
-        "Mixed bundle semantics are not yet explained well enough for a validated toggle."
-      ]
-    },
-    {
-      "record_id": "privacy.disable-offline-files",
-      "tweak_id": "privacy.disable-offline-files",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "The composite includes service, task, and binary changes that are not part of the validated Offline Files policy surface.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "Privacy",
-      "technical_area": "Composite",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-offline-files.review.json",
-      "summary": "The core Offline Files policy is already validated, but the top-level tweak goes further by disabling services, tasks, and the Sync Center binary. Because that broader bundle is larger than the official policy surface, the parent toggle remains in review.",
-      "decision_why": "The parent toggle is broader than the official policy surface and includes subrecords that still need review.",
-      "blocking_issues": [
-        "The composite includes service, task, and binary changes that are not part of the validated Offline Files policy surface."
       ]
     },
     {
@@ -894,25 +818,6 @@
       ]
     },
     {
-      "record_id": "privacy.disable-suggestions",
-      "tweak_id": "privacy.disable-suggestions",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "Opaque ContentDeliveryManager IDs are still observed implementation details rather than a clean official surface.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "Privacy",
-      "technical_area": "Observed User Preference Bundle",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-suggestions.review.json",
-      "summary": "The app disables several ContentDeliveryManager suggestion IDs together as one current-user bundle. Because the numeric content IDs are still observed implementation details rather than cleanly published Windows policy controls, this record remains review-required.",
-      "decision_why": "The bundle is useful to track, but the numeric suggestion IDs still need stronger semantic provenance.",
-      "blocking_issues": [
-        "Opaque ContentDeliveryManager IDs are still observed implementation details rather than a clean official surface."
-      ]
-    },
-    {
       "record_id": "privacy.disable-suggestions-cdm",
       "tweak_id": "privacy.disable-suggestions-cdm",
       "source_record_status": "review-required",
@@ -930,25 +835,6 @@
       "blocking_issues": [
         "The current app does not use the named official CloudContent policies documented in this record.",
         "The SubscribedContent IDs still need explicit mapping before they can be published as official equivalents."
-      ]
-    },
-    {
-      "record_id": "privacy.disable-wmplayer-telemetry",
-      "tweak_id": "privacy.disable-wmplayer-telemetry",
-      "source_record_status": "review-required",
-      "label": "split-needed",
-      "classification_method": "manual-override",
-      "classification_reason": "Windows Media Player preference bundle still lacks a clean official policy mapping.",
-      "suggested_action": "Break the tweak into smaller records or controls before validation so each surface can be sourced and tested separately.",
-      "category": "Privacy",
-      "technical_area": "Observed App Preference Bundle",
-      "implementation_status": "partially-matches",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json",
-      "summary": "The app changes a Windows Media Player preferences bundle to reduce metadata retrieval and usage tracking. This is documented as an observed product-specific preference bundle and remains review-only.",
-      "decision_why": "This is a product-specific observed preference bundle and still needs stronger primary-source provenance.",
-      "blocking_issues": [
-        "Windows Media Player preference bundle still lacks a clean official policy mapping."
       ]
     },
     {
