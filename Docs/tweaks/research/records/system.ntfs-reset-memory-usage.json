@@ -1,0 +1,163 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.ntfs-reset-memory-usage",
+  "tweak_id": "system.ntfs-reset-memory-usage",
+  "record_status": "validated",
+  "summary": "Validated NTFS memory-usage control. Microsoft documents NtfsMemoryUsage as a two-state fsutil behavior surface: 1 is the default and 2 raises NTFS memory thresholds. The app now writes the documented default value 1, so the record matches research.",
+  "setting": {
+    "name": "NTFS Memory Usage",
+    "category": "System",
+    "area": "File System Runtime Setting",
+    "scope": "device",
+    "casual_explanation": "NTFS has an internal memory-usage tuning that affects its cache behavior. Most people should leave it at the default unless they have a proven file-server style workload.",
+    "why_people_change_it": "People change it only when they are tuning NTFS behavior on systems that open and close many files repeatedly.",
+    "tradeoffs_overview": "The official Microsoft control is a small two-state setting. The app now writes the documented default, so the record is publishable as a validated default-reset control.",
+    "professional_notes": "Microsoft documents fsutil behavior memoryusage as updating HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMemoryUsage. The supported values are 1 and 2. Microsoft states that 1 is the default and 2 increases NTFS lookaside lists and memory thresholds. The app now writes NtfsMemoryUsage = 1 under the same path, matching the documented default.",
+    "targets": [
+      {
+        "target_id": "ntfs-memory-usage",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "NtfsMemoryUsage",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Default NTFS memory usage",
+            "meaning": "NTFS uses the default amount of paged-pool memory.",
+            "evidence_ids": [
+              "ms-fsutil-behavior"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Raised NTFS memory usage",
+            "meaning": "NTFS increases its lookaside lists and memory thresholds.",
+            "evidence_ids": [
+              "ms-fsutil-behavior"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The provider writes NtfsMemoryUsage = 1, which matches the documented default for this control.",
+    "writes": [
+      {
+        "target_id": "ntfs-memory-usage",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "NtfsMemoryUsage",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1,
+        "notes": "Observed app value now matches the documented default."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows default",
+      "applies_to": "Windows systems using the documented NTFS memory-usage baseline",
+      "states": [
+        {
+          "target_id": "ntfs-memory-usage",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Microsoft documents 1 as the default."
+        }
+      ],
+      "notes": "This record does not publish the app's previous 0 value as a supported equivalent of the default.",
+      "evidence_ids": [
+        "ms-fsutil-behavior"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Typical desktops and laptops",
+        "Most servers"
+      ],
+      "avoid_for": [
+        "Research comparisons against the current app write"
+      ],
+      "states": [
+        {
+          "target_id": "ntfs-memory-usage",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Keep the documented default."
+        }
+      ],
+      "good_when": "You want the official default NTFS memory behavior.",
+      "bad_when": "You are trying to document the current app implementation as-is.",
+      "tradeoffs": [
+        "The Windows default remains intact.",
+        "The current app's unsupported 0 value is not published."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-fsutil-behavior"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-fsutil-behavior",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: fsutil behavior",
+      "location": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
+      "summary": "Microsoft documents memoryusage as updating HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMemoryUsage, with supported values 1 and 2 and a default of 1.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes NtfsMemoryUsage = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-matches"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents NtfsMemoryUsage as a two-state fsutil behavior control with 1 as the default and 2 as the raised-memory option. The provider now writes the documented default value 1, so the record matches research and can be published as a validated reset-to-default control.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
+    "exact_quote_or_path": "Set to 1 or 2. When set to 1 (the default), NTFS uses the default amount of paged-pool memory.",
+    "key_found_on_page": true,
+    "notes": "Microsoft documents fsutil behavior memoryusage as updating NtfsMemoryUsage, with 1 as the default and 2 as the raised-memory option."
+  }
+}

@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:08:34Z",
+  "generated_utc": "2026-03-21T06:15:55Z",
   "source_record_statuses": [
     "review-required"
   ],
-  "source_record_count": 56,
+  "source_record_count": 55,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -15,12 +15,12 @@
     "implementation-mismatch": 0,
     "rename": 0,
     "split-needed": 23,
-    "docs-first": 33
+    "docs-first": 32
   },
   "counts_by_method": {
     "heuristic": 4,
     "manual-override": 46,
-    "proof-gate": 6
+    "proof-gate": 5
   },
   "entries": [
     {
@@ -555,33 +555,6 @@
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys",
-        "exact_quote_or_path": "Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation.",
-        "key_found_on_page": false,
-        "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."
-      }
-    },
-    {
-      "record_id": "system.ntfs-reset-memory-usage",
-      "tweak_id": "system.ntfs-reset-memory-usage",
-      "source_record_status": "review-required",
-      "label": "docs-first",
-      "classification_method": "proof-gate",
-      "classification_reason": "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "category": "System",
-      "technical_area": "File System Runtime Setting",
-      "implementation_status": "mismatch-suspected",
-      "apply_allowed": false,
-      "source_file": "Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json",
-      "summary": "Legacy validated record without machine-checkable validation proof. This record now validates the official NTFS memory-usage surface: 1 is the default and 2 raises NTFS memory thresholds. The app's 0 value remains an implementation mismatch.",
-      "decision_why": "This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. The official NTFS memory-usage control is now validated in this record, and the remaining work is to stop treating 0 as a supported value.",
-      "blocking_issues": [
-        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-        "The app writes NtfsMemoryUsage = 0 even though Microsoft only documents values 1 and 2.",
-        "This record should not be published or applied until the 0 value is either sourced as a supported equivalent or the app is corrected."
-      ],
-      "validation_proof": {
-        "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
         "exact_quote_or_path": "Legacy 1.0 validated record did not capture an exact quote, key path, or literal page phrase for machine-checkable validation.",
         "key_found_on_page": false,
         "notes": "Automatically demoted during proof-gate migration because the record was validated without machine-checkable validation proof."

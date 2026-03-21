@@ -293,7 +293,7 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             @"SYSTEM\CurrentControlSet\Control\FileSystem",
             "NtfsMemoryUsage",
             RegistryValueKind.DWord,
-            0);
+            1);
 
         yield return CreateRegistryTweak(
             context,

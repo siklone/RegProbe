@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T06:08:34Z",
+  "generated_utc": "2026-03-21T06:15:55Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -542,22 +542,6 @@
     {
       "sprint_number": 4,
       "priority_index": 7,
-      "record_id": "system.ntfs-reset-memory-usage",
-      "category": "docs-first",
-      "estimated_effort": "small",
-      "blocking_issues": [
-        "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.",
-        "The app writes NtfsMemoryUsage = 0 even though Microsoft only documents values 1 and 2.",
-        "This record should not be published or applied until the 0 value is either sourced as a supported equivalent or the app is corrected."
-      ],
-      "depends_on": [],
-      "current_state": "mismatch-suspected | File System Runtime Setting",
-      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
-      "source_file": "Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json"
-    },
-    {
-      "sprint_number": 4,
-      "priority_index": 8,
       "record_id": "visibility.restore-classic-context-menu",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -571,7 +555,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 9,
+      "priority_index": 8,
       "record_id": "developer.terminal-dev-mode",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -586,7 +570,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 10,
+      "priority_index": 9,
       "record_id": "developer.vs-intellisense-cache",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -601,7 +585,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 11,
+      "priority_index": 10,
       "record_id": "developer.vs-solution-load",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -616,7 +600,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 12,
+      "priority_index": 11,
       "record_id": "system.dwm-disable-mpo",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -631,7 +615,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 13,
+      "priority_index": 12,
       "record_id": "system.graphics-disable-overlays",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -646,7 +630,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 14,
+      "priority_index": 13,
       "record_id": "system.graphics-page-fault-debug-mode",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -661,7 +645,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 15,
+      "priority_index": 14,
       "record_id": "system.kernel-adjust-dpc-threshold",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -676,7 +660,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 16,
+      "priority_index": 15,
       "record_id": "system.kernel-cache-aware-scheduling",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -691,7 +675,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 17,
+      "priority_index": 16,
       "record_id": "system.kernel-default-dynamic-hetero-cpu-policy",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -706,7 +690,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 18,
+      "priority_index": 17,
       "record_id": "system.kernel-disable-low-qos-timer-resolution",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -721,7 +705,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 19,
+      "priority_index": 18,
       "record_id": "system.kernel-dpc-queue-depth",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -736,7 +720,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 20,
+      "priority_index": 19,
       "record_id": "system.kernel-ideal-dpc-rate",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -751,7 +735,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 21,
+      "priority_index": 20,
       "record_id": "system.kernel-minimum-dpc-rate",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -766,7 +750,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 22,
+      "priority_index": 21,
       "record_id": "system.disable-service-splitting",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -781,7 +765,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 23,
+      "priority_index": 22,
       "record_id": "system.services.disable-print-device-configuration",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -796,7 +780,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 24,
+      "priority_index": 23,
       "record_id": "system.services.disable-print-scan-broker",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -811,7 +795,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 25,
+      "priority_index": 24,
       "record_id": "system.services.disable-print-workflow-user-service",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -825,7 +809,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 26,
+      "priority_index": 25,
       "record_id": "system.services.disable-sysmain",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -839,7 +823,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 27,
+      "priority_index": 26,
       "record_id": "system.services.disable-wap-push-routing",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -853,7 +837,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 28,
+      "priority_index": 27,
       "record_id": "system.services.disable-windows-error-reporting",
       "category": "docs-first",
       "estimated_effort": "small",
@@ -867,7 +851,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 29,
+      "priority_index": 28,
       "record_id": "audio.disable-spatial-audio",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -881,7 +865,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 30,
+      "priority_index": 29,
       "record_id": "developer.vscode-git-autofetch",
       "category": "docs-first",
       "estimated_effort": "medium",
@@ -896,7 +880,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 31,
+      "priority_index": 30,
       "record_id": "system.kernel-dpc-watchdog-period",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -911,7 +895,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 32,
+      "priority_index": 31,
       "record_id": "system.kernel-serialize-timer-expiration",
       "category": "docs-first",
       "estimated_effort": "large",
@@ -926,7 +910,7 @@
     },
     {
       "sprint_number": 4,
-      "priority_index": 33,
+      "priority_index": 32,
       "record_id": "system.memory-disable-paging-executive",
       "category": "docs-first",
       "estimated_effort": "large",
