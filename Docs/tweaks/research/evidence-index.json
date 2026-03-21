@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T16:49:23.540472Z",
+  "generated_utc": "2026-03-21T18:28:28.919893Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -30239,13 +30239,27 @@
             "allowed-values"
           ],
           "origin": "Ghidra decompilation"
+        },
+        {
+          "evidence_id": "procmon-power-hide-sleep-option",
+          "kind": "procmon-trace",
+          "title": "Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle",
+          "location": "H:\\Temp\\vm-tooling-staging\\power_hide_sleep_option_probe.txt",
+          "summary": "The guest probe wrote ShowSleepOption=0 and ShowSleepOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the original state.",
+          "strength": "medium",
+          "supports": [
+            "runtime writes",
+            "value semantics",
+            "rollback"
+          ],
+          "origin": "VM Procmon trace"
         }
       ],
       "validation_proof": {
         "source_url": "C:\\Windows\\PolicyDefinitions\\WindowsExplorer.admx",
         "exact_quote_or_path": "<policy name=\"ShowSleepOption\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"ShowSleepOption\">; WindowsExplorer.adml: If you disable this policy setting, the sleep option will never be shown in the Power Options menu.",
         "key_found_on_page": true,
-        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx."
+        "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at H:\\Temp\\vm-tooling-staging\\power_hide_sleep_option_probe.txt confirmed writes for 0 and 1, live registry queries after each write, Power Options opening in both states, and restoration to the original state."
       },
       "provenance": {
         "coverage_state": "repo-backed",

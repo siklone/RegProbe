@@ -30,6 +30,28 @@ Prefer the cheapest proof that still answers the question honestly:
 
 Do not jump to Ghidra if the registry meaning is already clear from docs or a policy mapping.
 
+## Runtime Queue
+
+When the record still needs runtime proof, process it one by one in the VM.
+Use the simplest reversible target first, then move to harder targets only after the current one is fully restored and written up.
+
+Queue selection rules:
+
+- start with a single value that has a clear UI trigger or service trigger
+- prefer binary values before enums or bitmasks
+- prefer values with a documented control surface before undocumented internals
+- if Procmon is noisy, fall back to a direct UI diff or WPR only when the behavior justifies it
+- never batch unrelated records in the same capture unless the trigger is the same and the restore path is identical
+
+Current working queue:
+
+1. `power.hide-lock-option`
+2. `power.hide-sleep-option`
+3. `power.hide-hibernate-option`
+4. `privacy.disable-app-launch-tracking`
+5. `privacy.disable-search-history`
+6. `privacy.disable-feedback-notifications`
+
 ## Required Test Cycle
 
 Every runtime-backed single-value validation should include a reversible cycle:

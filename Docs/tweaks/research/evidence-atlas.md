@@ -7249,6 +7249,7 @@ Nohuto lineage references:
 | `ms-windows-privacy-track-app-launches` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services | `high` | path, value, behavior, ui-mapping |
 | `ms-gppref-start-trackprogs` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5 | `high` | path, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `nohuto-start-track-progs-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - Start_TrackProgs trace | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `high` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -7257,7 +7258,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services |
 | Exact quote / path | Start_TrackProgs in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced with value of 0 (zero). |
 | Key found on page | `True` |
-| Notes | The Microsoft privacy guidance lists the exact registry path and value to turn off "Let Windows track app launches to improve Start and search results." |
+| Notes | The Microsoft privacy guidance lists the exact registry path and value to turn off "Let Windows track app launches to improve Start and search results." Added nohuto mirror corroboration via nohuto-start-track-progs-trace. |
 
 **Decision**
 
@@ -8521,6 +8522,7 @@ Nohuto lineage references:
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-device-name-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-allow-device-name-telemetry-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - AllowDeviceNameInTelemetry trace | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -8529,7 +8531,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata |
 | Exact quote / path | AllowDeviceNameInDiagnosticData ... Default Value 0 ... Allowed values: 0 (Default) Disabled. 1 Allowed. Group policy mapping ... Registry Key Name Software\Policies\Microsoft\Windows\DataCollection |
 | Key found on page | `True` |
-| Notes | The System Policy CSP page explicitly names the policy, gives the default and allowed values, and maps it to the same DataCollection machine policy key the app writes. |
+| Notes | The System Policy CSP page explicitly names the policy, gives the default and allowed values, and maps it to the same DataCollection machine policy key the app writes. Added nohuto mirror corroboration via nohuto-allow-device-name-telemetry-trace. |
 
 **Decision**
 
@@ -8894,6 +8896,7 @@ Nohuto lineage references:
 | `local-feedback-notifications-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FeedbackNotifications.admx mapping | C:\WINDOWS\PolicyDefinitions\FeedbackNotifications.admx | `high` | path, value, allowed-values, behavior |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DoNotShowFeedbackNotifications policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -8902,7 +8905,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications |
 | Exact quote / path | Registry Key Name Software\Policies\Microsoft\Windows\DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled. |
 | Key found on page | `True` |
-| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. |
+| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. |
 
 **Decision**
 
