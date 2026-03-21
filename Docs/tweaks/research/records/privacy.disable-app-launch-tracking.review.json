@@ -198,6 +198,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-start-track-progs-settings",
+      "kind": "procmon-trace",
+      "title": "VM Procmon trace - Start_TrackProgs settings page reads",
+      "location": "H:\\Temp\\procmon-start-track-progs-1.pml and H:\\Temp\\procmon-start-track-progs-0.pml",
+      "summary": "Win25H2Clean Procmon capture around ms-settings:privacy-general while toggling HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs between 1 and 0. The probe recorded a reversible 1-state run and a matching 0-state run, with the setting restored after each capture.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -215,6 +229,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
     "exact_quote_or_path": "Start_TrackProgs in HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced with value of 0 (zero).",
     "key_found_on_page": true,
-    "notes": "The Microsoft privacy guidance lists the exact registry path and value to turn off \"Let Windows track app launches to improve Start and search results.\" Added nohuto mirror corroboration via nohuto-start-track-progs-trace."
+    "notes": "The Microsoft privacy guidance lists the exact registry path and value to turn off \"Let Windows track app launches to improve Start and search results.\" Added nohuto mirror corroboration via nohuto-start-track-progs-trace and Win25H2Clean Procmon corroboration via procmon-start-track-progs-settings with reversible 1/0 probe files."
   }
 }

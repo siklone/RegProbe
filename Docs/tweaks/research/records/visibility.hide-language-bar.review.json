@@ -190,6 +190,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-language-bar-showstatus",
+      "kind": "procmon-trace",
+      "title": "VM Procmon trace - ShowStatus language bar restart read",
+      "location": "H:\\Temp\\procmon-hide-language-bar-3.pml",
+      "summary": "Win25H2Clean Procmon capture around a ctfmon.exe restart while ShowStatus was set to 3. The trace backs the live CTF language-bar preference surface for the hidden state on this build.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -207,6 +221,6 @@
     "source_url": "https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter",
     "exact_quote_or_path": "HKCU\\Software\\Microsoft\\CTF\\LangBar\\ShowStatus = DWORD 3",
     "key_found_on_page": true,
-    "notes": "Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state."
+    "notes": "Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state. Added Win25H2Clean Procmon corroboration via procmon-hide-language-bar-3.pml around a ctfmon.exe restart."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T19:21:36.964262Z",
+  "generated_utc": "2026-03-21T22:16:43.682734Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -32507,13 +32507,28 @@
             "ui-mapping"
           ],
           "origin": "VM registry observation"
+        },
+        {
+          "evidence_id": "procmon-start-track-progs-settings",
+          "kind": "procmon-trace",
+          "title": "VM Procmon trace - Start_TrackProgs settings page reads",
+          "location": "H:\\Temp\\procmon-start-track-progs-1.pml and H:\\Temp\\procmon-start-track-progs-0.pml",
+          "summary": "Win25H2Clean Procmon capture around ms-settings:privacy-general while toggling HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs between 1 and 0. The probe recorded a reversible 1-state run and a matching 0-state run, with the setting restored after each capture.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "VM Procmon trace"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
         "exact_quote_or_path": "Start_TrackProgs in HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced with value of 0 (zero).",
         "key_found_on_page": true,
-        "notes": "The Microsoft privacy guidance lists the exact registry path and value to turn off \"Let Windows track app launches to improve Start and search results.\" Added nohuto mirror corroboration via nohuto-start-track-progs-trace."
+        "notes": "The Microsoft privacy guidance lists the exact registry path and value to turn off \"Let Windows track app launches to improve Start and search results.\" Added nohuto mirror corroboration via nohuto-start-track-progs-trace and Win25H2Clean Procmon corroboration via procmon-start-track-progs-settings with reversible 1/0 probe files."
       },
       "provenance": {
         "coverage_state": "repo-backed",
@@ -72173,13 +72188,28 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "procmon-language-bar-showstatus",
+          "kind": "procmon-trace",
+          "title": "VM Procmon trace - ShowStatus language bar restart read",
+          "location": "H:\\Temp\\procmon-hide-language-bar-3.pml",
+          "summary": "Win25H2Clean Procmon capture around a ctfmon.exe restart while ShowStatus was set to 3. The trace backs the live CTF language-bar preference surface for the hidden state on this build.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "VM Procmon trace"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter",
         "exact_quote_or_path": "HKCU\\Software\\Microsoft\\CTF\\LangBar\\ShowStatus = DWORD 3",
         "key_found_on_page": true,
-        "notes": "Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state."
+        "notes": "Validated against a Microsoft Q&A thread that explicitly shows ShowStatus = 3 for the hidden language-bar state. Added Win25H2Clean Procmon corroboration via procmon-hide-language-bar-3.pml around a ctfmon.exe restart."
       },
       "provenance": {
         "coverage_state": "repo-backed",

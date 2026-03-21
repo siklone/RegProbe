@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T19:21:36.962655Z",
+  "generated_utc": "2026-03-21T22:16:43.676203Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -32691,8 +32691,8 @@
       "tweak_id": "privacy.disable-app-launch-tracking",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json",
-      "source_file_sha256": "d53e42b0dbccf792a65076936ca631aaf4e5e6bd23e13db00771a993091b64f5",
-      "source_file_size_bytes": 10011,
+      "source_file_sha256": "0fa189370b34081b7975544d70bbf6afc5fd2a225a35a8af5e962669b6d39d5f",
+      "source_file_size_bytes": 10838,
       "name": "App Launch Tracking",
       "category": "Privacy",
       "area": "Observed Registry Setting",
@@ -32893,15 +32893,30 @@
             "ui-mapping"
           ],
           "origin": "VM registry observation"
+        },
+        {
+          "evidence_id": "procmon-start-track-progs-settings",
+          "kind": "procmon-trace",
+          "title": "VM Procmon trace - Start_TrackProgs settings page reads",
+          "location": "H:\\Temp\\procmon-start-track-progs-1.pml and H:\\Temp\\procmon-start-track-progs-0.pml",
+          "summary": "Win25H2Clean Procmon capture around ms-settings:privacy-general while toggling HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs between 1 and 0. The probe recorded a reversible 1-state run and a matching 0-state run, with the setting restored after each capture.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "ui-mapping"
+          ],
+          "origin": "VM Procmon trace"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
         "exact_quote_or_path": "Start_TrackProgs in HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced with value of 0 (zero).",
         "key_found_on_page": true,
-        "notes": "The Microsoft privacy guidance lists the exact registry path and value to turn off \"Let Windows track app launches to improve Start and search results.\" Added nohuto mirror corroboration via nohuto-start-track-progs-trace."
+        "notes": "The Microsoft privacy guidance lists the exact registry path and value to turn off \"Let Windows track app launches to improve Start and search results.\" Added nohuto mirror corroboration via nohuto-start-track-progs-trace and Win25H2Clean Procmon corroboration via procmon-start-track-progs-settings with reversible 1/0 probe files."
       },
-      "validation_proof_sha256": "1a36c45733f24bdcf1a6e8c341949fe4688aa6e18fbebfc2abebd478e0502b44",
+      "validation_proof_sha256": "28728b4f09440c59e8c8dc5c80d7346daf6ab6388d81dd84e1ff5a71bed1cae0",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -43452,6 +43467,20 @@
           "origin": "Current repo code"
         },
         {
+          "evidence_id": "procmon-crossdevice-resume-probe",
+          "kind": "procmon-trace",
+          "title": "Guest Procmon probe for CrossDeviceResume resume toggle",
+          "location": "H:\\Temp\\vm-tooling-staging\\privacy_disable_resume_probe.txt and H:\\Temp\\vm-tooling-staging\\privacy_disable_resume_probe.csv",
+          "summary": "Guest-side reversible probe toggled IsResumeAllowed between 0 and 1 while opening the CrossDeviceResume settings surface. Procmon captured Explorer, ShellHost, SearchHost, and StartMenuExperienceHost activity around the toggle.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
+        },
+        {
           "evidence_id": "ms-connectivity-disable-cross-device-resume",
           "kind": "policy-csp",
           "title": "Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume",
@@ -43469,9 +43498,9 @@
         "source_url": "Docs/privacy/privacy.md",
         "exact_quote_or_path": "Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on.",
         "key_found_on_page": true,
-        "notes": "This record now documents the current-user Resume setting that the app actually writes. The separate policy CSP remains related context, not the active control surface for this tweak."
+        "notes": "This record now documents the current-user Resume setting that the app actually writes. The companion guest Procmon probe captured CrossDeviceResume settings activity while IsResumeAllowed was toggled between 0 and 1 and then restored. The separate policy CSP remains related context, not the active control surface for this tweak."
       },
-      "validation_proof_sha256": "875ebc4d18fc5c6b161f2f60b89cff66a86db4916743c9f88a0995e24b1d402e",
+      "validation_proof_sha256": "c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -72798,8 +72827,8 @@
       "tweak_id": "visibility.hide-language-bar",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/visibility.hide-language-bar.review.json",
-      "source_file_sha256": "1a30edfd041a4e483722703827e3a5801c2624d7528a8f83f079335a5098f9f3",
-      "source_file_size_bytes": 8216,
+      "source_file_sha256": "c9d9d7d08ce8e601a61709c16d43cbea6b95d1bc90d77b8f7a89bff4f44fb5d4",
+      "source_file_size_bytes": 8894,
       "name": "Language Bar Visibility",
       "category": "Visibility",
       "area": "User Preference",

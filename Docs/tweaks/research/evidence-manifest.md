@@ -148,7 +148,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-activity-history` | validated | `Docs/tweaks/research/records/privacy.disable-activity-history.json` | `a60be8654b03150e6d893f3214fb289e942816507aa25ab339ab26d884aacfd6` | `bc005dd4397dc6efcde50924f04736c0579ff9a9b606f7d658f1f101fff2fec9` | 3 |
 | `privacy.disable-advertising-id` | validated | `Docs/tweaks/research/records/privacy.disable-advertising-id.json` | `edd49eae00cb8bed1842e762e7a061284191e8518ffd6ac4afa825502ca823e5` | `bd278720b6e772ec29f19dcd30d92794179e4793a6bb4971be7cf321212660f9` | 1 |
 | `privacy.disable-app-diagnostics` | validated | `Docs/tweaks/research/records/privacy.disable-app-diagnostics.json` | `f5faffbd240fb2850a3d1acd19d46f5d372f7bf30cc7e604065725a6d543d161` | `83541ebc2f0724779aa7677a49e2c42f136a2f80e094ec339c7a0bbaeee07b53` | 1 |
-| `privacy.disable-app-launch-tracking` | validated | `Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json` | `d53e42b0dbccf792a65076936ca631aaf4e5e6bd23e13db00771a993091b64f5` | `1a36c45733f24bdcf1a6e8c341949fe4688aa6e18fbebfc2abebd478e0502b44` | 1 |
+| `privacy.disable-app-launch-tracking` | validated | `Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json` | `0fa189370b34081b7975544d70bbf6afc5fd2a225a35a8af5e962669b6d39d5f` | `28728b4f09440c59e8c8dc5c80d7346daf6ab6388d81dd84e1ff5a71bed1cae0` | 1 |
 | `privacy.disable-app-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json` | `69445c0952c22962200284d83ceefa447e841b57fc36392fcc39c15e3b55b997` | `d95b58afe0b49b4ed2ed39c957ff8730864eb95cfcebe0eaa07c4708eb9e1e3a` | 2 |
 | `privacy.disable-appcompat-engine.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json` | `88a6c309a68d0b5c9d207c44d1884ae0f206b7edcfd0106e4ad25467172d0c78` | `4aa284a466ab23274289afd8984f112be82d7d68465fbe343f40ef70b10d440a` | 2 |
 | `privacy.disable-appdeviceinventory.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json` | `2d89783a4602f6689e5ae67d3244929d07277ec17848c537fde8f4aeb97a2250` | `4485a54cc0e04a3a5edf164953eb83b326f93a637f219da7533aa98574fd4347` | 4 |
@@ -186,7 +186,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-phone-linking` | validated | `Docs/tweaks/research/records/privacy.disable-phone-linking.json` | `1731d7b9214bfcf6934c71f567c60cf7b9606eba456890fdb4cea244fc0cc919` | `1ac5d1461c6cb46560b096b50e2275a5337e2733cf934863b090dea12300a33e` | 1 |
 | `privacy.disable-program-compatibility-assistant` | validated | `Docs/tweaks/research/records/privacy.disable-program-compatibility-assistant.review.json` | `1e2d3bd33c18e44a39ebbebf350cf2ec1248d96e99ca61f75dd27ff15ba472c5` | `44e0f5bfd3018d0f07f651cf907dcf7bcb13de73ab5c19f61b128b0f8ea4f2b5` | 1 |
 | `privacy.disable-recall` | validated | `Docs/tweaks/research/records/privacy.disable-recall.json` | `a3dbe5a9847aa3811cc813babc86d285b8f40f25aeee1cfd08d0c86facdbd870` | `9a1681fc411102114e54e8b3fcc31db5b490fedfdfa16084814efe601a8c63c6` | 1 |
-| `privacy.disable-resume` | validated | `Docs/tweaks/research/records/privacy.disable-resume.json` | `facf312c6bfa6d02b3b4200c1da07c785f21090fe9f16546eee415642428443d` | `875ebc4d18fc5c6b161f2f60b89cff66a86db4916743c9f88a0995e24b1d402e` | 1 |
+| `privacy.disable-resume` | validated | `Docs/tweaks/research/records/privacy.disable-resume.json` | `facf312c6bfa6d02b3b4200c1da07c785f21090fe9f16546eee415642428443d` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 1 |
 | `privacy.disable-rsop-logging` | validated | `Docs/tweaks/research/records/privacy.disable-rsop-logging.json` | `e663e6d53c1c5cfe161fa777b90006fa0402b9eef5f606598dcaa011974270fe` | `5f3e900bb750e2a4c50deb90a0dbdd7f9e2a245eac042a0c1dfc0bcb76224b3b` | 1 |
 | `privacy.disable-search-box-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-search-box-suggestions.json` | `24a42941d3e2574654a4bff9f6add2a7145bc4873f6b34f4ca7bfb22268aa30f` | `eddc41ee198554d3fe83d0e6d0e2106783e18a845d2d7cb0e7cd6e74e9ecd7ec` | 1 |
 | `privacy.disable-search-history` | validated | `Docs/tweaks/research/records/privacy.disable-search-history.json` | `4489b0ca6edacc05240289c84511215b311fc6701407fbf77d25858fe04b8384` | `577e0f892a7550b2dbff71430b62e9ce4ae3ca7a8ab9ade7a96e9fe086ecd5ac` | 1 |
@@ -297,7 +297,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `visibility.disable-widgets` | validated | `Docs/tweaks/research/records/visibility.disable-widgets.json` | `13c038cc0ba351f32d2e3082667307aa1c28428b000e37f615a746afe2419404` | `51e5a1f879b109db9b774b9202bc9a647344f646d8b00ec3c13360674ab215bd` | 1 |
 | `visibility.disable-window-animations` | validated | `Docs/tweaks/research/records/visibility.disable-window-animations.json` | `05c681b441c2adb732c53a21f6c49c9ed0dac48e26aedb4551925c4ee61e6abc` | `571192ff25e0c81ae5dce332c8b0051a472bbf9841b730d58ca887806de5ea2f` | 1 |
 | `visibility.force-classic-control-panel` | validated | `Docs/tweaks/research/records/visibility.force-classic-control-panel.json` | `5f95ffcb6973992c6cc7c5dba884f054b5a7228568a12b04788a9588b0606090` | `8fc57213d5f2695c6314ee2e7b6b126656c9c3218f18a7c77133c4f5178cad20` | 1 |
-| `visibility.hide-language-bar` | validated | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` | `1a30edfd041a4e483722703827e3a5801c2624d7528a8f83f079335a5098f9f3` | `be3f3f41fc918adfc2c9f87589ddb59d1e609dbf59cb7e1191a728c217efc8ed` | 1 |
+| `visibility.hide-language-bar` | validated | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` | `c9d9d7d08ce8e601a61709c16d43cbea6b95d1bc90d77b8f7a89bff4f44fb5d4` | `be3f3f41fc918adfc2c9f87589ddb59d1e609dbf59cb7e1191a728c217efc8ed` | 1 |
 | `visibility.hide-most-used-apps` | validated | `Docs/tweaks/research/records/visibility.hide-most-used-apps.json` | `27c167bbdf4148602936b8099f51782296e65d2c67105e4947efb2c9244851f7` | `b66e6752f3c72b835115d0a715643e28a6be0061d9e0b1246115269dd8eb1f8e` | 1 |
 | `visibility.hide-people-bar` | validated | `Docs/tweaks/research/records/visibility.hide-people-bar.json` | `d4be4445fae869dcf55e6ca3c463089eb7ce7c4d3dc97f16b43c0e01b7e2f43a` | `ca25eca99b530fd221ccdc49679625c25e7e2ebb3e5fb21edaca6075a73732ad` | 1 |
 | `visibility.restore-classic-context-menu` | validated | `Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json` | `856c6d17aafde09565f4b68bd4381fc44f28a7e30ba9d5c5cb6a6c37cd0b7b4c` | `2be626add6056b666c3453999702cf52a7408132c80f6da39aa897ff0f90ecf2` | 1 |
@@ -7094,8 +7094,8 @@ Nohuto lineage references:
 - Area: `Observed Registry Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json`
-- Source SHA256: `d53e42b0dbccf792a65076936ca631aaf4e5e6bd23e13db00771a993091b64f5`
-- Proof SHA256: `1a36c45733f24bdcf1a6e8c341949fe4688aa6e18fbebfc2abebd478e0502b44`
+- Source SHA256: `0fa189370b34081b7975544d70bbf6afc5fd2a225a35a8af5e962669b6d39d5f`
+- Proof SHA256: `28728b4f09440c59e8c8dc5c80d7346daf6ab6388d81dd84e1ff5a71bed1cae0`
 
 **Summary:** Microsoft privacy guidance documents the Start_TrackProgs registry value under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced and states that setting it to 0 turns off app launch tracking for Start and Search. The current app writes that exact documented value.
 
@@ -7114,6 +7114,7 @@ Nohuto lineage references:
 | `ms-gppref-start-trackprogs` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | `high` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `nohuto-start-track-progs-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - Start_TrackProgs trace | `high` |
+| `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | `medium` |
 
 **Provenance**
 
@@ -7139,7 +7140,7 @@ Nohuto lineage references:
 | source_url | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services |
 | exact_quote_or_path | Start_TrackProgs in HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced with value of 0 (zero). |
 | key_found_on_page | True |
-| notes | The Microsoft privacy guidance lists the exact registry path and value to turn off "Let Windows track app launches to improve Start and search results." Added nohuto mirror corroboration via nohuto-start-track-progs-trace. |
+| notes | The Microsoft privacy guidance lists the exact registry path and value to turn off "Let Windows track app launches to improve Start and search results." Added nohuto mirror corroboration via nohuto-start-track-progs-trace and Win25H2Clean Procmon corroboration via procmon-start-track-progs-settings with reversible 1/0 probe files. |
 ### `privacy.disable-app-suggestions`
 
 - Status: `validated`
@@ -9084,7 +9085,7 @@ Nohuto lineage references:
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-resume.json`
 - Source SHA256: `facf312c6bfa6d02b3b4200c1da07c785f21090fe9f16546eee415642428443d`
-- Proof SHA256: `875ebc4d18fc5c6b161f2f60b89cff66a86db4916743c9f88a0995e24b1d402e`
+- Proof SHA256: `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f`
 
 **Summary:** The current app writes the current-user Resume setting HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration\IsResumeAllowed = 0. Repo notes and local registry observations confirm that this runtime user setting is real and behaves as expected on this build.
 
@@ -9104,6 +9105,7 @@ Nohuto lineage references:
 | `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | `medium` |
 | `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | `medium` |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | `medium` |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | `high` |
 
 **Provenance**
@@ -9130,7 +9132,7 @@ Nohuto lineage references:
 | source_url | Docs/privacy/privacy.md |
 | exact_quote_or_path | Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on. |
 | key_found_on_page | True |
-| notes | This record now documents the current-user Resume setting that the app actually writes. The separate policy CSP remains related context, not the active control surface for this tweak. |
+| notes | This record now documents the current-user Resume setting that the app actually writes. The companion guest Procmon probe captured CrossDeviceResume settings activity while IsResumeAllowed was toggled between 0 and 1 and then restored. The separate policy CSP remains related context, not the active control surface for this tweak. |
 ### `privacy.disable-rsop-logging`
 
 - Status: `validated`
@@ -15119,7 +15121,7 @@ Nohuto lineage references:
 - Area: `User Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/visibility.hide-language-bar.review.json`
-- Source SHA256: `1a30edfd041a4e483722703827e3a5801c2624d7528a8f83f079335a5098f9f3`
+- Source SHA256: `c9d9d7d08ce8e601a61709c16d43cbea6b95d1bc90d77b8f7a89bff4f44fb5d4`
 - Proof SHA256: `be3f3f41fc918adfc2c9f87589ddb59d1e609dbf59cb7e1191a728c217efc8ed`
 
 **Summary:** The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. A Microsoft Q&A thread now documents ShowStatus = 3 for the hidden state, so the record can be validated.

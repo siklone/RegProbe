@@ -7253,6 +7253,7 @@ Nohuto lineage references:
 | `ms-gppref-start-trackprogs` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5 | `high` | path, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-start-track-progs-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - Start_TrackProgs trace | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `high` | path, value, behavior, ui-mapping |
+| `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | H:\Temp\procmon-start-track-progs-1.pml and H:\Temp\procmon-start-track-progs-0.pml | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -7261,7 +7262,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services |
 | Exact quote / path | Start_TrackProgs in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced with value of 0 (zero). |
 | Key found on page | `True` |
-| Notes | The Microsoft privacy guidance lists the exact registry path and value to turn off "Let Windows track app launches to improve Start and search results." Added nohuto mirror corroboration via nohuto-start-track-progs-trace. |
+| Notes | The Microsoft privacy guidance lists the exact registry path and value to turn off "Let Windows track app launches to improve Start and search results." Added nohuto mirror corroboration via nohuto-start-track-progs-trace and Win25H2Clean Procmon corroboration via procmon-start-track-progs-settings with reversible 1/0 probe files. |
 
 **Decision**
 
@@ -10721,6 +10722,7 @@ Nohuto lineage references:
 | `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration | `medium` | path, value, version-scope |
 | `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | H:\Temp\vm-tooling-staging\crossdevice_resume_probe.csv and H:\Temp\vm-tooling-staging\resume-policymanager-probe.txt | `medium` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | H:\Temp\vm-tooling-staging\privacy_disable_resume_probe.txt and H:\Temp\vm-tooling-staging\privacy_disable_resume_probe.csv | `medium` | path, behavior, version-scope |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume | `high` | behavior, version-scope |
 
 **Validation proof**
@@ -10730,7 +10732,7 @@ Nohuto lineage references:
 | Source URL | Docs/privacy/privacy.md |
 | Exact quote / path | Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on. |
 | Key found on page | `True` |
-| Notes | This record now documents the current-user Resume setting that the app actually writes. The separate policy CSP remains related context, not the active control surface for this tweak. |
+| Notes | This record now documents the current-user Resume setting that the app actually writes. The companion guest Procmon probe captured CrossDeviceResume settings activity while IsResumeAllowed was toggled between 0 and 1 and then restored. The separate policy CSP remains related context, not the active control surface for this tweak. |
 
 **Decision**
 
