@@ -20,7 +20,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 | Record | Status | Source file | Source SHA256 | Proof SHA256 | Targets |
 | --- | --- | --- | --- | --- | --- |
-| `audio.disable-spatial-audio` | deprecated | `Docs/tweaks/research/records/audio.disable-spatial-audio.review.json` | `be4c2c421f023c7098adef0e3a43dd12ee5efc5a4f2e849dd30da0fef016141e` | `eb0810a429a5e39f6699f0015a68ce3ad7266811b6e9c898554df7649d8b9776` | 1 |
+| `audio.disable-spatial-audio` | deprecated | `Docs/tweaks/research/records/audio.disable-spatial-audio.review.json` | `be4c2c421f023c7098adef0e3a43dd12ee5efc5a4f2e849dd30da0fef016141e` | `4a593ea805014f217f681fc58618dd92a0ee319f834de3cb6b99d9b7340d5677` | 1 |
 | `audio.disable-system-sounds` | deprecated | `Docs/tweaks/research/records/audio.disable-system-sounds.review.json` | `3466da988a7ec485cac79e4a46a3598757530f7f7990c4ed902d6c246a7e5f2c` | `8c6baad92b01ec2a36a670ba00e7a7f372889f597cb30b1fc0ccc3d2e1d5a424` | 1 |
 | `developer.terminal-dev-mode` | deprecated | `Docs/tweaks/research/records/developer.terminal-dev-mode.review.json` | `9893430ee5f40c6f06d732b2583a151475bfded3989035674cd7662547ede627` | `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a` | 2 |
 | `developer.vs-intellisense-cache` | deprecated | `Docs/tweaks/research/records/developer.vs-intellisense-cache.review.json` | `6714aec3308f79f05d56e0192c6ebd0e3fa402cb61b1dfda5f4646d58b69342b` | `7594c93530c2f21078f1038412922a58ad2eb57b477f498e084adb3d66722225` | 1 |
@@ -35,7 +35,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `privacy.disable-application-compatibility.policy` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.policy.review.json` | `af732b75650c01bd4c004ee069074067d5dac25614df3bf03a78746fc182bc8d` | `92200c73471bafab51b30d4397016d8ca189f25086c650af2258b5ebf096be76` | 1 |
 | `privacy.disable-application-compatibility.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json` | `710892d24d9d90795d807d876e43eebf6b1117e941510fd6b9270a2ee75f8687` | `301b881ab3cd7ca126a445cd56e937a13ec91d84134995b1c7d0f8a6653f0686` | 1 |
 | `privacy.disable-ceip` | deprecated | `Docs/tweaks/research/records/privacy.disable-ceip.review.json` | `11290bfaa52e11cfbcbc4e5c03fead6a1175434a9f959bc40e66bba3863d929f` | `ca46fd24299d88506c69a5854773336da7cead6db84106712899f2f19ed32c73` | 1 |
-| `privacy.disable-cross-device-experiences` | deprecated | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json` | `a9e42c4d0875222175ac4382a026dd90e0a744306120724c6e066ab8cdcdf18e` | `8822b8f2cbf24318cad7f81a5d3fe461e79b510d4d2ffbe2544b8ea72bff29db` | 2 |
+| `privacy.disable-cross-device-experiences` | deprecated | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json` | `995d19baf39eacc1caf9442fd1a1a79317d490c8f95df68aaf610bf735fd5628` | `8822b8f2cbf24318cad7f81a5d3fe461e79b510d4d2ffbe2544b8ea72bff29db` | 2 |
 | `privacy.disable-f1-help` | deprecated | `Docs/tweaks/research/records/privacy.disable-f1-help.review.json` | `624557996b1de629d06b47e4d7234da2f4c35957e0dd1d126892688549d11671` | `257ccce633350676c52defc3bccbc34c2e43a320e908ca1ee5dce0b01993d27b` | 1 |
 | `privacy.disable-inking-typing-personalization` | deprecated | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `38a5d80ae427ed6e1ff9ec7a11f6a959cf38a73a1b390e7d09c0e69dde87e136` | `74634b8c91cc087b7635004ef4767f60209abed43efbf4a7a1618999e5cbed84` | 1 |
 | `privacy.disable-offline-files` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` | `e682490a6e163e64bc813cd8f8f5b1ae792f452931d9c810f8a912b0a56d61fe` | `d397d765b854547f45604265cef756754e5195943dbd68546546074ee4580651` | 1 |
@@ -310,9 +310,9 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/audio.disable-spatial-audio.review.json`
 - Source SHA256: `be4c2c421f023c7098adef0e3a43dd12ee5efc5a4f2e849dd30da0fef016141e`
-- Proof SHA256: `eb0810a429a5e39f6699f0015a68ce3ad7266811b6e9c898554df7649d8b9776`
+- Proof SHA256: `4a593ea805014f217f681fc58618dd92a0ee319f834de3cb6b99d9b7340d5677`
 
-**Summary:** Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract.
+**Summary:** Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract. A Win25H2Clean guest string scan of likely audio binaries did not surface the exact key name either.
 
 **Targets**
 
@@ -324,6 +324,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 - `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | Repo provenance for audio.disable-spatial-audio | `medium`
 - `app-audio-provider` | `repo-code` | Current app implementation | `high`
+- `guest-audio-string-scan` | `vm-test` | Guest string scan for spatial-audio registry contract | `low`
 
 **Validation proof**
 
@@ -332,7 +333,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | source_url | Docs/tweaks/tweak-provenance.json |
 | exact_quote_or_path | Repo provenance for audio.disable-spatial-audio: The repo provenance links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail. |
+| notes | Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail. Supplemental guest string-scan evidence is captured in evidence_id guest-audio-string-scan. |
 ### `audio.disable-system-sounds`
 
 - Status: `deprecated`
@@ -797,7 +798,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Mixed Registry Configuration`
 - Scope: `mixed`
 - Source file: `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json`
-- Source SHA256: `a9e42c4d0875222175ac4382a026dd90e0a744306120724c6e066ab8cdcdf18e`
+- Source SHA256: `995d19baf39eacc1caf9442fd1a1a79317d490c8f95df68aaf610bf735fd5628`
 - Proof SHA256: `8822b8f2cbf24318cad7f81a5d3fe461e79b510d4d2ffbe2544b8ea72bff29db`
 
 **Summary:** Deprecated audit trail for the mixed cross-device preset model. The documented EnableCdp machine policy is split into a child record; the user-side CDP preset values remain unresolved and are tracked only as implementation detail here.

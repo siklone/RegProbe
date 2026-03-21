@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:18:05.317070Z",
+  "generated_utc": "2026-03-21T10:29:22.119231Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 279,
@@ -26,15 +26,15 @@
       "category": "Audio",
       "area": "Audio Engine Flags",
       "scope": "device",
-      "summary": "Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract.",
+      "summary": "Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract. A Win25H2Clean guest string scan of likely audio binaries did not surface the exact key name either.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
         "recommended_for_general_users": false,
         "restore_default_supported": false,
         "restore_previous_supported": false,
-        "needs_vm_validation": true,
-        "why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact spatial-audio registry contract.",
+        "needs_vm_validation": false,
+        "why": "The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact spatial-audio registry contract. A Win25H2Clean guest string scan of likely audio binaries did not find the exact key string either, and the Ghidra headless attempt was not productive enough to turn this into a validated runtime contract. No additional VM validation path is currently yielding stronger proof for this deprecated audit trail.",
         "blocking_issues": [
           "No primary Microsoft source for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency was captured in this pass."
         ]
@@ -158,15 +158,27 @@
             "value",
             "ui-mapping"
           ]
+        },
+        {
+          "evidence_id": "guest-audio-string-scan",
+          "kind": "vm-test",
+          "title": "Guest string scan for spatial-audio registry contract",
+          "location": "H:\\Temp\\vm-tooling-staging\\spatial_audio_string_search.txt",
+          "summary": "Win25H2Clean guest string scan of audiodg.exe, AudioEng.dll, AudioSes.dll, mmdevapi.dll, audiosrv.dll, and AudioEndpointBuilder.dll did not find DisableSpatialOnLowLatency. A Ghidra headless attempt was started but did not produce a usable result in this session.",
+          "strength": "low",
+          "supports": [
+            "behavior",
+            "app-mismatch"
+          ]
         }
       ],
       "validation_proof": {
         "source_url": "Docs/tweaks/tweak-provenance.json",
         "exact_quote_or_path": "Repo provenance for audio.disable-spatial-audio: The repo provenance links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed.",
         "key_found_on_page": true,
-        "notes": "Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail."
+        "notes": "Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail. Supplemental guest string-scan evidence is captured in evidence_id guest-audio-string-scan."
       },
-      "validation_proof_sha256": "eb0810a429a5e39f6699f0015a68ce3ad7266811b6e9c898554df7649d8b9776"
+      "validation_proof_sha256": "4a593ea805014f217f681fc58618dd92a0ee319f834de3cb6b99d9b7340d5677"
     },
     {
       "record_id": "audio.disable-system-sounds",
@@ -2813,8 +2825,8 @@
       "tweak_id": "privacy.disable-cross-device-experiences",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json",
-      "source_file_sha256": "a9e42c4d0875222175ac4382a026dd90e0a744306120724c6e066ab8cdcdf18e",
-      "source_file_size_bytes": 12768,
+      "source_file_sha256": "995d19baf39eacc1caf9442fd1a1a79317d490c8f95df68aaf610bf735fd5628",
+      "source_file_size_bytes": 14062,
       "name": "Cross-Device Experiences",
       "category": "Privacy",
       "area": "Mixed Registry Configuration",

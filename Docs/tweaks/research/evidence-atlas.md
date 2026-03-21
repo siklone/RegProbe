@@ -16396,9 +16396,9 @@ Current write(s):
 | Source file | `Docs/tweaks/research/records/audio.disable-spatial-audio.review.json` |
 | Apply allowed | `False` |
 | Confidence | `low` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract.
+**Summary:** Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract. A Win25H2Clean guest string scan of likely audio binaries did not surface the exact key name either.
 
 **Current implementation**
 
@@ -16431,6 +16431,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | Repo provenance for audio.disable-spatial-audio | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 | `app-audio-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `guest-audio-string-scan` | `vm-test` | Guest string scan for spatial-audio registry contract | H:\Temp\vm-tooling-staging\spatial_audio_string_search.txt | `low` | behavior, app-mismatch |
 
 **Validation proof**
 
@@ -16439,7 +16440,7 @@ Current write(s):
 | Source URL | Docs/tweaks/tweak-provenance.json |
 | Exact quote / path | Repo provenance for audio.disable-spatial-audio: The repo provenance links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail. |
+| Notes | Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail. Supplemental guest string-scan evidence is captured in evidence_id guest-audio-string-scan. |
 
 **Decision**
 
@@ -16449,8 +16450,8 @@ Current write(s):
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
-| Why | The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact spatial-audio registry contract. |
+| Needs VM validation | `False` |
+| Why | The repo-backed implementation is clear, but this pass did not capture a primary Microsoft source for the exact spatial-audio registry contract. A Win25H2Clean guest string scan of likely audio binaries did not find the exact key string either, and the Ghidra headless attempt was not productive enough to turn this into a validated runtime contract. No additional VM validation path is currently yielding stronger proof for this deprecated audit trail. |
 
 Blocking issues:
 - No primary Microsoft source for HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio\DisableSpatialOnLowLatency was captured in this pass.

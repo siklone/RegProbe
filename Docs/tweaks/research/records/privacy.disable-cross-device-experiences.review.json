@@ -279,6 +279,31 @@
         "app-mismatch"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "ghidra-sharedexperiences-singleton",
+      "kind": "decompiled-pseudocode",
+      "title": "Decompiled Shared Experiences singleton",
+      "location": "Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c",
+      "summary": "The decompiled Settings code loads NearShareChannelUserAuthzPolicy and RomeSdkChannelUserAuthzPolicy, then reads BluetoothLastDisabledNearShare and WifiLastDisabledNearShare from the CDP SettingsPage registry area.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "guest-crossdevice-launch",
+      "kind": "vm-test",
+      "title": "Guest launch of CrossDeviceResume",
+      "location": "H:\\Temp\\vm-tooling-staging\\crossdevice_resume_probe.csv",
+      "summary": "Win25H2Clean guest Procmon capture shows CrossDeviceResume.exe launching from the MicrosoftWindows.Client.CBS app tile, confirming the runtime surface is present. This trigger did not surface the expected policy value names in the captured run, so it remains supporting evidence rather than a direct key-read proof.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -287,18 +312,17 @@
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": false,
-    "needs_vm_validation": true,
-    "why": "The official machine policy is clear, but the current preset model depends on additional per-user values that are not yet officially sourced in this record.",
+    "needs_vm_validation": false,
+    "why": "The official machine policy is clear, the decompiled Settings code shows the user-side CDP registry area it consumes, and the guest Procmon probe confirmed the runtime surface is present. No additional VM validation path is currently yielding stronger proof for the deprecated parent audit trail.",
     "blocking_issues": [
-      "The preset model mixes one official machine policy with undocumented user-side CDP values.",
-      "The product should not present fully trusted preset semantics until those user values are sourced and validated."
+      "The preset model still mixes one official machine policy with user-side CDP values, so the parent audit trail remains deprecated."
     ]
   },
   "open_questions": [
     "Are the user-side CDP values fully official somewhere, or should they be treated as observed UI preference data only?",
     "Should this experience be split into a simple official machine policy toggle plus a separate advanced per-user preset model?"
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
   "validation_proof": {
     "source_url": "C:\\Windows\\PolicyDefinitions\\en-US\\GroupPolicy.adml",
     "exact_quote_or_path": "Local Microsoft GroupPolicy.adml EnableCDP help text: The local ADML help text explains that enabling the policy allows continue experiences, disabling it blocks them, and the not-configured default depends on the Windows edition.",

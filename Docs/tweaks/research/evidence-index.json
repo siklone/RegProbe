@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T10:18:05.358495Z",
+  "generated_utc": "2026-03-21T10:29:22.182511Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -2788,11 +2788,10 @@
         "recommended_for_general_users": false,
         "restore_default_supported": false,
         "restore_previous_supported": false,
-        "needs_vm_validation": true,
-        "why": "The official machine policy is clear, but the current preset model depends on additional per-user values that are not yet officially sourced in this record.",
+        "needs_vm_validation": false,
+        "why": "The official machine policy is clear, the decompiled Settings code shows the user-side CDP registry area it consumes, and the guest Procmon probe confirmed the runtime surface is present. No additional VM validation path is currently yielding stronger proof for the deprecated parent audit trail.",
         "blocking_issues": [
-          "The preset model mixes one official machine policy with undocumented user-side CDP values.",
-          "The product should not present fully trusted preset semantics until those user values are sourced and validated."
+          "The preset model still mixes one official machine policy with user-side CDP values, so the parent audit trail remains deprecated."
         ]
       },
       "app_current_implementation": {
@@ -3056,6 +3055,31 @@
             "value",
             "ui-mapping",
             "app-mismatch"
+          ]
+        },
+        {
+          "evidence_id": "ghidra-sharedexperiences-singleton",
+          "kind": "decompiled-pseudocode",
+          "title": "Decompiled Shared Experiences singleton",
+          "location": "Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c",
+          "summary": "The decompiled Settings code loads NearShareChannelUserAuthzPolicy and RomeSdkChannelUserAuthzPolicy, then reads BluetoothLastDisabledNearShare and WifiLastDisabledNearShare from the CDP SettingsPage registry area.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ]
+        },
+        {
+          "evidence_id": "guest-crossdevice-launch",
+          "kind": "vm-test",
+          "title": "Guest launch of CrossDeviceResume",
+          "location": "H:\\Temp\\vm-tooling-staging\\crossdevice_resume_probe.csv",
+          "summary": "Win25H2Clean guest Procmon capture shows CrossDeviceResume.exe launching from the MicrosoftWindows.Client.CBS app tile, confirming the runtime surface is present. This trigger did not surface the expected policy value names in the captured run, so it remains supporting evidence rather than a direct key-read proof.",
+          "strength": "low",
+          "supports": [
+            "behavior",
+            "version-scope"
           ]
         }
       ],
