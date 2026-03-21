@@ -30,7 +30,8 @@
             "evidence_ids": [
               "ms-system-disable-onesettings-downloads",
               "local-datacollection-admx-onesettings",
-              "local-datacollection-adml-onesettings"
+              "local-datacollection-adml-onesettings",
+              "nohuto-disableonesettingsdownloads-admx"
             ]
           },
           {
@@ -42,7 +43,8 @@
               "ms-system-disable-onesettings-downloads",
               "local-datacollection-admx-onesettings",
               "local-datacollection-adml-onesettings",
-              "app-privacy-provider"
+              "app-privacy-provider",
+              "nohuto-disableonesettingsdownloads-admx"
             ]
           }
         ]
@@ -79,7 +81,8 @@
       "notes": "By default, Windows periodically attempts to connect to the OneSettings service.",
       "evidence_ids": [
         "ms-system-disable-onesettings-downloads",
-        "local-datacollection-adml-onesettings"
+        "local-datacollection-adml-onesettings",
+        "nohuto-disableonesettingsdownloads-admx"
       ]
     }
   ],
@@ -110,7 +113,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-system-disable-onesettings-downloads"
+        "ms-system-disable-onesettings-downloads",
+        "nohuto-disableonesettingsdownloads-admx"
       ]
     },
     {
@@ -140,7 +144,8 @@
       "apply_allowed": true,
       "evidence_ids": [
         "ms-system-disable-onesettings-downloads",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-disableonesettingsdownloads-admx"
       ]
     }
   ],
@@ -210,6 +215,20 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-disableonesettingsdownloads-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - DisableOneSettingsDownloads policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "DataCollection.admx shows DisableOneSettingsDownloads under HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection. The mirrored ExplainText says enabling the policy stops Windows from attempting to connect with the OneSettings service, while disabling or not configuring it allows periodic OneSettings downloads. EnabledValue=1 and DisabledValue=0 are explicit.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -227,6 +246,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads",
     "exact_quote_or_path": "This policy setting controls whether Windows attempts to connect with the OneSettings service. If you enable this policy, Windows won't attempt to connect with the OneSettings Service. ... Default Value 0. Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping: Name DisableOneSettingsDownloads ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection.",
     "key_found_on_page": true,
-    "notes": "The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is also DisableOneSettingsDownloads."
+    "notes": "The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is also DisableOneSettingsDownloads. Added nohuto mirror corroboration via nohuto-disableonesettingsdownloads-admx."
   }
 }

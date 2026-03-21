@@ -6308,6 +6308,7 @@ Windows Internals references:
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for hibernation support | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, behavior, dependency |
+| `nohuto-showhibernateoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowHibernateOption policy | Docs/tweaks/_source-mirrors/win-config/power/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -6316,7 +6317,7 @@ Windows Internals references:
 | Source URL | C:\Windows\PolicyDefinitions\WindowsExplorer.admx |
 | Exact quote / path | <policy name="ShowHibernateOption" class="Machine" ... key="Software\Policies\Microsoft\Windows\Explorer" valueName="ShowHibernateOption">; WindowsExplorer.adml: If you disable this policy setting, the hibernate option will never be shown in the Power Options menu. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. |
 
 **Decision**
 
@@ -6406,6 +6407,7 @@ Windows Internals references:
 | `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `nohuto-showlockoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowLockOption policy | Docs/tweaks/_source-mirrors/win-config/power/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -6414,7 +6416,7 @@ Windows Internals references:
 | Source URL | C:\Windows\PolicyDefinitions\WindowsExplorer.admx |
 | Exact quote / path | <policy name="ShowLockOption" class="Machine" ... key="Software\Policies\Microsoft\Windows\Explorer" valueName="ShowLockOption">; WindowsExplorer.adml: If you disable this policy setting, the lock option will never be shown in the User Tile menu. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. |
 
 **Decision**
 
@@ -6504,6 +6506,7 @@ Windows Internals references:
 | `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `nohuto-showsleepoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowSleepOption policy | Docs/tweaks/_source-mirrors/win-config/power/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -6512,7 +6515,7 @@ Windows Internals references:
 | Source URL | C:\Windows\PolicyDefinitions\WindowsExplorer.admx |
 | Exact quote / path | <policy name="ShowSleepOption" class="Machine" ... key="Software\Policies\Microsoft\Windows\Explorer" valueName="ShowSleepOption">; WindowsExplorer.adml: If you disable this policy setting, the sleep option will never be shown in the Power Options menu. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. |
 
 **Decision**
 
@@ -6796,6 +6799,7 @@ Nohuto lineage references:
 | `ms-localpoliciessecurityoptions-block-microsoft-accounts` | `policy-csp` | `Microsoft policy CSP` | Microsoft LocalPoliciesSecurityOptions CSP: Accounts_Block_Microsoft_accounts | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-block-microsoft-accounts` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-noconnecteduser-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - NoConnectedUser registry trace | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -6804,7 +6808,7 @@ Nohuto lineage references:
 | Source URL | C:\Windows\inf\sceregvl.inf |
 | Exact quote / path | MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\NoConnectedUser,4,%BlockConnectedUser%,3,0\|%PolicyDisabled%,1\|%BlockAdd%,3\|%BlockLogin% |
 | Key found on page | `True` |
-| Notes | The local official Microsoft security option metadata names the same registry path and value used by the app and exposes the documented 0, 1, and 3 states. |
+| Notes | The local official Microsoft security option metadata names the same registry path and value used by the app and exposes the documented 0, 1, and 3 states. Added nohuto mirror corroboration via nohuto-noconnecteduser-trace. |
 
 **Decision**
 
@@ -8424,6 +8428,7 @@ Current write(s):
 | `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `nohuto-enablecdp-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableCdp policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -8432,7 +8437,7 @@ Current write(s):
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp |
 | Exact quote / path | HKLM\Software\Policies\Microsoft\Windows\System\EnableCdp |
 | Key found on page | `True` |
-| Notes | Local GroupPolicy.admx also maps EnableCdp with enabledValue 1 and disabledValue 0. The deprecated parent audit trail keeps the mixed user-side CDP preset values separate from this child record. |
+| Notes | Local GroupPolicy.admx also maps EnableCdp with enabledValue 1 and disabledValue 0. The deprecated parent audit trail keeps the mixed user-side CDP preset values separate from this child record. Added nohuto mirror corroboration via nohuto-enablecdp-admx. |
 
 **Decision**
 
@@ -8608,6 +8613,7 @@ Nohuto lineage references:
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-datacollection-delete-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableDeviceDelete policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -8616,7 +8622,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete |
 | Exact quote / path | This policy setting controls whether the Delete diagnostic data button is enabled in Diagnostic & feedback Settings page. Default Value 0; Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping: Registry Key Name Software\Policies\Microsoft\Windows\DataCollection; Registry Value Name DisableDeviceDelete. |
 | Key found on page | `True` |
-| Notes | The System Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. |
+| Notes | The System Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-datacollection-delete-admx. |
 
 **Decision**
 
@@ -8700,6 +8706,7 @@ Nohuto lineage references:
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-datacollection-viewer-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableDiagnosticDataViewer policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -8708,7 +8715,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer |
 | Exact quote / path | DisableDiagnosticDataViewer ... Default Value 0 ... Allowed values: 0 (Default) Not disabled. 1 Disabled. Group policy mapping ... Name DisableDiagnosticDataViewer ... Registry Key Name Software\Policies\Microsoft\Windows\DataCollection |
 | Key found on page | `True` |
-| Notes | The System Policy CSP page explicitly names the policy control, gives the default and allowed values, and maps it to the same DataCollection machine policy key the app writes. |
+| Notes | The System Policy CSP page explicitly names the policy control, gives the default and allowed values, and maps it to the same DataCollection machine policy key the app writes. Added nohuto mirror corroboration via nohuto-datacollection-viewer-admx. |
 
 **Decision**
 
@@ -9072,6 +9079,7 @@ Nohuto lineage references:
 | `local-findmy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.adml help text | C:\Windows\PolicyDefinitions\en-US\FindMy.adml | `high` | behavior, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-find-my-device` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-findmydevice-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - Find My Device policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -9080,7 +9088,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice |
 | Exact quote / path | This policy turns on Find My Device. ... When Find My Device is off, the device and its location aren't registered and the Find My Device feature won't work. ... Default Value 1; Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Registry Key Name SOFTWARE\Policies\Microsoft\FindMyDevice; Registry Value Name AllowFindMyDevice. |
 | Key found on page | `True` |
-| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. |
+| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-findmydevice-admx. |
 
 **Decision**
 
@@ -10335,6 +10343,7 @@ Nohuto lineage references:
 | `local-pca-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.admx - DisablePcaUIPolicy | C:\Windows\PolicyDefinitions\pca.admx | `high` | path, value, allowed-values, version-scope |
 | `local-pca-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.adml - DisablePcaUIPolicy help text | C:\Windows\PolicyDefinitions\en-US\pca.adml | `high` | behavior, side-effects |
 | `admx-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_pca | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pca | `high` | path, behavior, version-scope |
+| `nohuto-pca-diagnostics-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisablePcaUI policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -10343,7 +10352,7 @@ Nohuto lineage references:
 | Source URL | C:\Windows\PolicyDefinitions\pca.admx |
 | Exact quote / path | pca.admx: `<policy name="DisablePcaUIPolicy" ... key="Software\Policies\Microsoft\Windows\AppCompat" valueName="DisablePcaUI">` with `<enabledValue><decimal value="1" /></enabledValue>` and `<disabledValue><decimal value="0" /></disabledValue>` and `supportedOn ref="windows:SUPPORTED_Windows8"`; pca.adml: `If you enable this policy setting, the PCA is configured to detect failures...` and `If you disable this policy setting, the PCA does not detect compatibility issues for applications and drivers.` |
 | Key found on page | `True` |
-| Notes | Local official pca.admx and pca.adml files document the exact DisablePcaUI policy surface and semantics. The Microsoft Learn ADMX_pca CSP page confirms the same device-scoped policy mapping. |
+| Notes | Local official pca.admx and pca.adml files document the exact DisablePcaUI policy surface and semantics. The Microsoft Learn ADMX_pca CSP page confirms the same device-scoped policy mapping. Added nohuto mirror corroboration via nohuto-pca-diagnostics-admx. |
 
 **Decision**
 
@@ -11164,6 +11173,7 @@ Other provenance references:
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | C:\WINDOWS\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-steps-recorder` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-uar-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableUAR policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -11172,7 +11182,7 @@ Other provenance references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord |
 | Exact quote / path | Turn off Steps Recorder. This policy setting enables or disables Steps Recorder (Steps Recorder was called Problem Steps Recorder in Windows 7). If you enable this policy setting, Steps Recorder does not start when a user runs Psr.exe or clicks Start Record. ADMX mapping: Registry Key Name Software\Policies\Microsoft\Windows\AppCompat; Registry Value Name DisableUAR. |
 | Key found on page | `True` |
-| Notes | The ADMX_AppCompat Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. |
+| Notes | The ADMX_AppCompat Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-uar-admx. |
 
 **Decision**
 
@@ -11516,6 +11526,7 @@ Nohuto lineage references:
 | `local-datacollection-adml-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-datacollection-optin-ui-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableTelemetryOptInSettingsUx policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -11524,7 +11535,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux |
 | Exact quote / path | This policy setting controls whether users can change the device diagnostic settings in settings. If you set this policy setting to Disable diagnostic data opt-in settings, the Settings app diagnostic data opt-in settings page is disabled. ... Default Value 0. Allowed values: 0 (Default) Enable diagnostic data opt-in settings. 1 Disable diagnostic data opt-in settings. Group policy mapping: Name ConfigureTelemetryOptInSettingsUx ... Registry Key Name Software\Policies\Microsoft\Windows\DataCollection. |
 | Key found on page | `True` |
-| Notes | The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInSettingsUx. |
+| Notes | The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInSettingsUx. Added nohuto mirror corroboration via nohuto-datacollection-optin-ui-admx. |
 
 **Decision**
 
@@ -12614,6 +12625,7 @@ Current write(s):
 | `local-datacollection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
 | `local-datacollection-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, version-scope, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `nohuto-allowtelemetry-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - AllowTelemetry policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
 
@@ -12622,7 +12634,7 @@ Current write(s):
 | Source URL | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry |
 | Exact quote / path | C:\Windows\PolicyDefinitions\DataCollection.admx (AllowTelemetry values 0, 1, and 3); C:\Windows\PolicyDefinitions\en-US\DataCollection.adml (value 0 is only supported on Enterprise, Education, and Server editions). |
 | Key found on page | `True` |
-| Notes | The app now uses the documented lowest supported diagnostic-data level wording instead of describing value 0 as a general disable switch. |
+| Notes | The app now uses the documented lowest supported diagnostic-data level wording instead of describing value 0 as a general disable switch. Added nohuto mirror corroboration via nohuto-allowtelemetry-admx. |
 
 **Decision**
 
@@ -14253,6 +14265,7 @@ Windows Internals references:
 | `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | C:\Windows\PolicyDefinitions\CredUI.admx | `high` | path, ui-mapping, version-scope |
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | C:\Windows\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `nohuto-enablesecurecredentialprompting-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableSecureCredentialPrompting policy | Docs/tweaks/_source-mirrors/win-config/security/desc.md | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -14261,7 +14274,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json |
 | Exact quote / path | HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\CredUI\EnableSecureCredentialPrompting: before=__MISSING__, after_apply=1, after_restore=__MISSING__ |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx. |
 
 **Decision**
 
@@ -21438,6 +21451,7 @@ Nohuto lineage references:
 | `ms-start-hide-people-bar` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP: HidePeopleBar | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start#hidepeoplebar | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-people-bar` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `nohuto-hidepeoplebar-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - HidePeopleBar policy | Docs/tweaks/_source-mirrors/win-config/visibility/desc.md | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -21446,7 +21460,7 @@ Nohuto lineage references:
 | Source URL | C:\Windows\PolicyDefinitions\StartMenu.admx |
 | Exact quote / path | <policy name="HidePeopleBar" class="User" ... key="Software\Policies\Microsoft\Windows\Explorer" valueName="HidePeopleBar">; StartMenu.adml: This policy allows you to remove the People Bar from the taskbar and disables the My People experience. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience. |
+| Notes | Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience. Added nohuto mirror corroboration via nohuto-hidepeoplebar-admx. |
 
 **Decision**
 

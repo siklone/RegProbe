@@ -30,7 +30,8 @@
             "evidence_ids": [
               "ms-credui-no-local-password-reset-questions",
               "local-credui-admx",
-              "local-credui-adml"
+              "local-credui-adml",
+              "nohuto-nolocalpasswordresetquestions-admx"
             ]
           },
           {
@@ -39,7 +40,8 @@
             "label": "Security questions allowed",
             "meaning": "The policy is disabled and local users can use security questions if the feature is otherwise available.",
             "evidence_ids": [
-              "ms-credui-no-local-password-reset-questions"
+              "ms-credui-no-local-password-reset-questions",
+              "nohuto-nolocalpasswordresetquestions-admx"
             ]
           },
           {
@@ -49,7 +51,8 @@
             "meaning": "The policy is enabled and local users cannot set up or use security questions to reset their passwords.",
             "evidence_ids": [
               "ms-credui-no-local-password-reset-questions",
-              "local-credui-adml"
+              "local-credui-adml",
+              "nohuto-nolocalpasswordresetquestions-admx"
             ]
           }
         ]
@@ -87,7 +90,8 @@
       "evidence_ids": [
         "ms-credui-no-local-password-reset-questions",
         "local-credui-admx",
-        "local-credui-adml"
+        "local-credui-adml",
+        "nohuto-nolocalpasswordresetquestions-admx"
       ]
     }
   ],
@@ -118,7 +122,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-credui-no-local-password-reset-questions"
+        "ms-credui-no-local-password-reset-questions",
+        "nohuto-nolocalpasswordresetquestions-admx"
       ]
     },
     {
@@ -150,7 +155,8 @@
       "evidence_ids": [
         "ms-credui-no-local-password-reset-questions",
         "local-credui-adml",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-nolocalpasswordresetquestions-admx"
       ]
     }
   ],
@@ -220,6 +226,19 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-nolocalpasswordresetquestions-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - NoLocalPasswordResetQuestions policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "CredUI.admx shows NoLocalPasswordResetQuestions under HKLM\\Software\\Policies\\Microsoft\\Windows\\System. The mirrored ExplainText says turning the policy on prevents local users from setting up and using security questions to reset their passwords. The policy is a simple on/off control for local account security questions.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -237,6 +256,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions",
     "exact_quote_or_path": "If you turn this policy setting on, local users won't be able to set up and use security questions to reset their passwords. ADMX mapping: Name NoLocalPasswordResetQuestions ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\System ... Registry Value Name NoLocalPasswordResetQuestions.",
     "key_found_on_page": true,
-    "notes": "The ADMX_CredUI Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the blocked behavior."
+    "notes": "The ADMX_CredUI Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the blocked behavior. Added nohuto mirror corroboration via nohuto-nolocalpasswordresetquestions-admx."
   }
 }

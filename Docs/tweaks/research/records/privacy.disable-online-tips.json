@@ -29,7 +29,8 @@
             "meaning": "Windows does not force the online-tips policy.",
             "evidence_ids": [
               "ms-settings-csp-allow-online-tips",
-              "local-control-panel-admx"
+              "local-control-panel-admx",
+              "nohuto-allowonlinetips-admx"
             ]
           },
           {
@@ -39,7 +40,8 @@
             "meaning": "The Settings app won't retrieve online tips and help content.",
             "evidence_ids": [
               "ms-settings-csp-allow-online-tips",
-              "local-control-panel-admx"
+              "local-control-panel-admx",
+              "nohuto-allowonlinetips-admx"
             ]
           },
           {
@@ -49,7 +51,8 @@
             "meaning": "The Settings app is allowed to retrieve online tips and help content.",
             "evidence_ids": [
               "ms-settings-csp-allow-online-tips",
-              "local-control-panel-admx"
+              "local-control-panel-admx",
+              "nohuto-allowonlinetips-admx"
             ]
           }
         ]
@@ -86,7 +89,8 @@
       "notes": "The Settings Policy CSP documents the default value as allowed, but the registry policy baseline remains not configured unless the policy is set.",
       "evidence_ids": [
         "ms-settings-csp-allow-online-tips",
-        "local-control-panel-admx"
+        "local-control-panel-admx",
+        "nohuto-allowonlinetips-admx"
       ]
     }
   ],
@@ -117,7 +121,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-settings-csp-allow-online-tips"
+        "ms-settings-csp-allow-online-tips",
+        "nohuto-allowonlinetips-admx"
       ]
     },
     {
@@ -148,7 +153,8 @@
       "evidence_ids": [
         "ms-settings-csp-allow-online-tips",
         "local-control-panel-admx",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-allowonlinetips-admx"
       ]
     }
   ],
@@ -208,6 +214,19 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-allowonlinetips-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - AllowOnlineTips policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "ControlPanel.admx shows AllowOnlineTips under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. The mirrored ExplainText says the policy enables or disables retrieval of online tips and help for the Settings app; if disabled, Settings will not contact Microsoft content services for tips and help content.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -225,6 +244,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips",
     "exact_quote_or_path": "Enables or disables the retrieval of online tips and help for the Settings app. If disabled, Settings won't contact Microsoft content services to retrieve tips and help content. Default Value 1. Allowed values: 0 Not allowed. 1 (Default) Allowed. Group policy mapping: Name AllowOnlineTips ... Registry Key Name Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer.",
     "key_found_on_page": true,
-    "notes": "The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips."
+    "notes": "The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips. Added nohuto mirror corroboration via nohuto-allowonlinetips-admx."
   }
 }

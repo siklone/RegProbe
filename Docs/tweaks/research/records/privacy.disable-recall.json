@@ -29,7 +29,8 @@
             "meaning": "On managed devices, snapshots are not saved for Recall when this policy is not configured.",
             "evidence_ids": [
               "ms-windowsai-disable-ai-data-analysis",
-              "local-windowscopilot-adml-recall"
+              "local-windowscopilot-adml-recall",
+              "nohuto-disableaidataanalysis-admx"
             ]
           },
           {
@@ -41,7 +42,8 @@
               "ms-windowsai-disable-ai-data-analysis",
               "local-windowscopilot-admx-recall",
               "local-windowscopilot-adml-recall",
-              "app-privacy-provider"
+              "app-privacy-provider",
+              "nohuto-disableaidataanalysis-admx"
             ]
           },
           {
@@ -52,7 +54,8 @@
             "evidence_ids": [
               "ms-windowsai-disable-ai-data-analysis",
               "local-windowscopilot-admx-recall",
-              "local-windowscopilot-adml-recall"
+              "local-windowscopilot-adml-recall",
+              "nohuto-disableaidataanalysis-admx"
             ]
           }
         ]
@@ -89,7 +92,8 @@
       "notes": "This default is feature and SKU dependent. The not-configured baseline already keeps snapshots off on managed devices.",
       "evidence_ids": [
         "ms-windowsai-disable-ai-data-analysis",
-        "local-windowscopilot-adml-recall"
+        "local-windowscopilot-adml-recall",
+        "nohuto-disableaidataanalysis-admx"
       ]
     }
   ],
@@ -120,7 +124,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-windowsai-disable-ai-data-analysis"
+        "ms-windowsai-disable-ai-data-analysis",
+        "nohuto-disableaidataanalysis-admx"
       ]
     },
     {
@@ -152,7 +157,8 @@
       "evidence_ids": [
         "ms-windowsai-disable-ai-data-analysis",
         "local-windowscopilot-adml-recall",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-disableaidataanalysis-admx"
       ]
     },
     {
@@ -181,7 +187,8 @@
       "apply_allowed": true,
       "evidence_ids": [
         "ms-windowsai-disable-ai-data-analysis",
-        "local-windowscopilot-adml-recall"
+        "local-windowscopilot-adml-recall",
+        "nohuto-disableaidataanalysis-admx"
       ]
     }
   ],
@@ -254,6 +261,20 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-disableaidataanalysis-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - DisableAIDataAnalysis policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "WindowsCopilot.admx shows DisableAIDataAnalysis under HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI. The mirrored ExplainText says enabling the policy stops Windows from saving snapshots and disables Recall timeline browsing, while disabling or not configuring it allows snapshots and Recall history access.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -271,6 +292,6 @@
     "source_url": "C:\\Windows\\PolicyDefinitions\\WindowsCopilot.admx",
     "exact_quote_or_path": "<policy name=\"DisableAIDataAnalysis\" class=\"Both\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" valueName=\"DisableAIDataAnalysis\">",
     "key_found_on_page": true,
-    "notes": "The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots."
+    "notes": "The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots. Added nohuto mirror corroboration via nohuto-disableaidataanalysis-admx."
   }
 }

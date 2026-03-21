@@ -29,7 +29,8 @@
             "meaning": "Windows does not force Phone-PC linking behavior through this policy, and the default behavior depends on the Windows edition.",
             "evidence_ids": [
               "local-grouppolicy-admx",
-              "local-grouppolicy-adml"
+              "local-grouppolicy-adml",
+              "nohuto-enablemmx-admx"
             ]
           },
           {
@@ -40,7 +41,8 @@
             "evidence_ids": [
               "local-grouppolicy-admx",
               "local-grouppolicy-adml",
-              "app-privacy-provider"
+              "app-privacy-provider",
+              "nohuto-enablemmx-admx"
             ]
           },
           {
@@ -50,7 +52,8 @@
             "meaning": "The device can enroll in Phone-PC linking functionality and participate in Continue on PC experiences.",
             "evidence_ids": [
               "local-grouppolicy-admx",
-              "local-grouppolicy-adml"
+              "local-grouppolicy-adml",
+              "nohuto-enablemmx-admx"
             ]
           }
         ]
@@ -87,7 +90,8 @@
       "notes": "The local ADML help text says default behavior depends on the Windows edition.",
       "evidence_ids": [
         "local-grouppolicy-admx",
-        "local-grouppolicy-adml"
+        "local-grouppolicy-adml",
+        "nohuto-enablemmx-admx"
       ]
     }
   ],
@@ -119,7 +123,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "local-grouppolicy-adml"
+        "local-grouppolicy-adml",
+        "nohuto-enablemmx-admx"
       ]
     },
     {
@@ -151,7 +156,8 @@
       "evidence_ids": [
         "local-grouppolicy-admx",
         "local-grouppolicy-adml",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-enablemmx-admx"
       ]
     }
   ],
@@ -195,6 +201,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-enablemmx-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - EnableMmx policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "GroupPolicy.admx shows EnableMmx under HKLM\\Software\\Policies\\Microsoft\\Windows\\System. The mirrored ExplainText says enabling the policy allows Phone-PC linking and Continue on PC experiences, while disabling it prevents the device from being linked to phones and removes it from linked phones. EnabledValue=1 and DisabledValue=0 are explicit.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -212,6 +232,6 @@
     "source_url": "C:\\Windows\\PolicyDefinitions\\GroupPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableMMX\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"EnableMmx\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; GroupPolicy.adml: \"If you disable this policy setting, the Windows device is not allowed to be linked to Phones ... and cannot participate in Continue on PC experiences.\"",
     "key_found_on_page": true,
-    "notes": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC experiences."
+    "notes": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC experiences. Added nohuto mirror corroboration via nohuto-enablemmx-admx."
   }
 }

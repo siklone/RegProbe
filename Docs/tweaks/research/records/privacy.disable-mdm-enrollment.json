@@ -29,7 +29,8 @@
             "meaning": "MDM enrollment remains enabled because the machine policy is not forcing it off.",
             "evidence_ids": [
               "local-mdm-admx",
-              "local-mdm-adml"
+              "local-mdm-adml",
+              "nohuto-disableregistration-admx"
             ]
           },
           {
@@ -39,7 +40,8 @@
             "meaning": "The policy is disabled and MDM enrollment is allowed for all users.",
             "evidence_ids": [
               "local-mdm-admx",
-              "local-mdm-adml"
+              "local-mdm-adml",
+              "nohuto-disableregistration-admx"
             ]
           },
           {
@@ -49,7 +51,8 @@
             "meaning": "New MDM enrollment is disabled for all users on the device. Existing MDM enrollments aren't removed by this policy.",
             "evidence_ids": [
               "local-mdm-admx",
-              "local-mdm-adml"
+              "local-mdm-adml",
+              "nohuto-disableregistration-admx"
             ]
           }
         ]
@@ -86,7 +89,8 @@
       "notes": "The local ADML help text says MDM enrollment is enabled when the policy is not configured.",
       "evidence_ids": [
         "local-mdm-admx",
-        "local-mdm-adml"
+        "local-mdm-adml",
+        "nohuto-disableregistration-admx"
       ]
     }
   ],
@@ -117,7 +121,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "local-mdm-adml"
+        "local-mdm-adml",
+        "nohuto-disableregistration-admx"
       ]
     },
     {
@@ -148,7 +153,8 @@
       "evidence_ids": [
         "local-mdm-admx",
         "local-mdm-adml",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-disableregistration-admx"
       ]
     }
   ],
@@ -204,6 +210,20 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-disableregistration-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - DisableRegistration policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "MDM.admx shows DisableRegistration under HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM. The mirrored ExplainText says enabling the policy disables MDM enrollment for all users, does not unenroll existing enrollments, and disabling it leaves MDM enrollment enabled.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -221,6 +241,6 @@
     "source_url": "C:\\WINDOWS\\PolicyDefinitions\\MDM.admx",
     "exact_quote_or_path": "<policy name=\"MDM_MDM_DisplayName\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\" valueName=\"DisableRegistration\">; MDM.adml: If you enable this policy setting, MDM Enrollment will be disabled for all users. It will not unenroll existing MDM enrollments.",
     "key_found_on_page": true,
-    "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices."
+    "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. Added nohuto mirror corroboration via nohuto-disableregistration-admx."
   }
 }

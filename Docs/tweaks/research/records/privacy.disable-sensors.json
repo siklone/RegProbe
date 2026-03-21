@@ -29,7 +29,8 @@
             "meaning": "Windows does not force the machine policy for sensors.",
             "evidence_ids": [
               "ms-sensors-policy-csp-disable-sensors",
-              "local-sensors-admx"
+              "local-sensors-admx",
+              "nohuto-disablesensors-admx"
             ]
           },
           {
@@ -39,7 +40,8 @@
             "meaning": "The policy is disabled and sensors remain available.",
             "evidence_ids": [
               "ms-sensors-policy-csp-disable-sensors",
-              "local-sensors-admx"
+              "local-sensors-admx",
+              "nohuto-disablesensors-admx"
             ]
           },
           {
@@ -49,7 +51,8 @@
             "meaning": "Sensors are blocked by policy.",
             "evidence_ids": [
               "ms-sensors-policy-csp-disable-sensors",
-              "local-sensors-admx"
+              "local-sensors-admx",
+              "nohuto-disablesensors-admx"
             ]
           }
         ]
@@ -86,7 +89,8 @@
       "notes": "Sensors.admx contains both user and machine mappings. This record validates the machine-side mapping used by the current app.",
       "evidence_ids": [
         "ms-sensors-policy-csp-disable-sensors",
-        "local-sensors-admx"
+        "local-sensors-admx",
+        "nohuto-disablesensors-admx"
       ]
     }
   ],
@@ -117,7 +121,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-sensors-policy-csp-disable-sensors"
+        "ms-sensors-policy-csp-disable-sensors",
+        "nohuto-disablesensors-admx"
       ]
     },
     {
@@ -148,7 +153,8 @@
       "evidence_ids": [
         "ms-sensors-policy-csp-disable-sensors",
         "local-sensors-admx",
-        "app-privacy-provider"
+        "app-privacy-provider",
+        "nohuto-disablesensors-admx"
       ]
     }
   ],
@@ -208,6 +214,20 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-disablesensors-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - DisableSensors policy",
+      "location": "Docs/tweaks/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "Sensors.admx shows DisableSensors under HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors. The mirrored ExplainText says enabling the policy turns off the sensor feature and prevents all programs from using sensors, while disabling or not configuring it leaves sensors available. EnabledValue=1 and DisabledValue=0 are explicit.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -225,6 +245,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors",
     "exact_quote_or_path": "If you enable this policy setting, all Windows Sensor features are disabled. ADMX mapping: Name DisableSensors ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\LocationAndSensors ... Registry Value Name DisableSensors.",
     "key_found_on_page": true,
-    "notes": "The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior."
+    "notes": "The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesensors-admx."
   }
 }
