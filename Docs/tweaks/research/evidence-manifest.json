@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T11:08:42.521463Z",
+  "generated_utc": "2026-03-21T11:10:03.075456Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 279,
@@ -7776,7 +7776,7 @@
         "restore_default_supported": false,
         "restore_previous_supported": false,
         "needs_vm_validation": true,
-        "why": "Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app writes.",
+        "why": "Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app writes. The separate EnableCpuQuota trace in Session Manager is adjacent but not a substitute for the missing kernel mapping.",
         "blocking_issues": [
           "No primary Microsoft source for the DefaultDynamicHeteroCpuPolicy kernel registry key was captured in this research pass.",
           "The current app mapping only partially aligns with official adjacent heterogeneous scheduling policy docs."
@@ -7941,6 +7941,19 @@
           ]
         },
         {
+          "evidence_id": "nohuto-session-manager-quota",
+          "kind": "registry-observation",
+          "title": "nohuto Session Manager quota-system trace",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt",
+          "summary": "Session-Manager.txt lists EnableCpuQuota under the Quota System block, separate from the kernel heterogeneous scheduling policy values.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "dependency",
+            "behavior"
+          ]
+        },
+        {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -7958,9 +7971,9 @@
         "source_url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy",
         "exact_quote_or_path": "Microsoft Learn: SchedulingPolicy: Microsoft documents official heterogeneous scheduling policy values for the power-policy SchedulingPolicy setting, including 3 = efficient processors. This confirms the feature area and adjacent value semantics, but it does not publish the kernel registry key DefaultDynamicHeteroCpuPolicy.",
         "key_found_on_page": true,
-        "notes": "Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail."
+        "notes": "Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail. See also the local Session-Manager trace for EnableCpuQuota as a separate Quota System value."
       },
-      "validation_proof_sha256": "082cba3eb78f655abf2be709a01b0594560dffb634a07c5e6ff605cd0cdeba7e"
+      "validation_proof_sha256": "b12c9b95e2a37e938faa6a266f87913a0f0ecbbe0d69ad35bdce41a966c0c1eb"
     },
     {
       "record_id": "system.kernel-disable-low-qos-timer-resolution",
@@ -23666,8 +23679,8 @@
       "tweak_id": "power.disable-cpu-idle-states",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/power.disable-cpu-idle-states.json",
-      "source_file_sha256": "bf7fca5032d4fb2fc2e82ffe078af4d38d51f4e376a8e492f5f7fee16aa08d7c",
-      "source_file_size_bytes": 7464,
+      "source_file_sha256": "077d1ad70f7c569f24bde535f525128e2f0bd7af6dccc2644b4cdf5b58507d07",
+      "source_file_size_bytes": 8056,
       "name": "CPU Idle States Bundle",
       "category": "Power",
       "area": "Processor Idle Behavior",
@@ -24055,8 +24068,8 @@
       "tweak_id": "power.disable-modern-standby",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/power.disable-modern-standby.json",
-      "source_file_sha256": "bc34a4b596f512119526b7899ded90da9463d780ee0d1a1ecf43fded68585d3a",
-      "source_file_size_bytes": 7540,
+      "source_file_sha256": "4735f00424ad14036f07e29a9a5327430e66c1de57f007d87934eaa80601127a",
+      "source_file_size_bytes": 8102,
       "name": "Modern Standby Power Model",
       "category": "Power",
       "area": "Sleep Model",

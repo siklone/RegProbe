@@ -13,7 +13,7 @@
     "casual_explanation": "CPU idle states let Windows save power when the processor has little to do. This tweak tries to reduce or bypass that behavior for latency-focused systems.",
     "why_people_change_it": "People change it when chasing minimum latency for gaming, audio work, or other timing-sensitive workloads.",
     "tradeoffs_overview": "Reducing idle-state behavior can increase responsiveness in some narrow cases, but it can also raise heat and power consumption. The current problem is that the app uses raw power-manager registry values instead of a clearly supported Microsoft control surface.",
-    "professional_notes": "The app writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. This review found Microsoft documentation for processor idle states as a feature area, but not a primary Microsoft registry mapping that validates this exact raw bundle as a supported configuration method.",
+    "professional_notes": "The app writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The local Power.txt trace also lists DisableIdleStatesAtBoot in the power-values block. This review found Microsoft documentation for processor idle states as a feature area, but not a primary Microsoft registry mapping that validates this exact raw bundle as a supported configuration method.",
     "targets": [
       {
         "target_id": "cpu-idle-states-registry-bundle",
@@ -130,6 +130,19 @@
         "app-mismatch"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-power-disable-idle-states-trace",
+      "kind": "registry-observation",
+      "title": "nohuto power trace for DisableIdleStatesAtBoot",
+      "location": "Docs/tweaks/_source-mirrors/win-registry/records/Power.txt",
+      "summary": "Power.txt lists DisableIdleStatesAtBoot in the power values block, matching the first element of the app's raw idle-states bundle.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
     },
     {
       "evidence_id": "repo-power-doc",

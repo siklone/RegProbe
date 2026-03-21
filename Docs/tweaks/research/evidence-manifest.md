@@ -59,7 +59,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `276bbd2a4c2ce52a83c499be0f3a72f5ce77cd81fb94970e295bd98e8c213baa` | `d0e58abe267efb2fa6edd8b7c1d86788cf7416d32ab33d876d51464f7496aeb0` | 1 |
 | `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `a6dae46035b960252a4ada33a2caa5a9379c88650917a792252e361704543ca3` | `3028d51e35ee7ebffe78f4c69cec397847dc96a54a7d2ed9e31105d9b72758ee` | 1 |
 | `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `89753fb62188d47bb03bfac049f5a79959911897e840f34023b39bc64992fadc` | `c6a065d0d3b3139c695abc4ec89c3d0bd0399f78be5eae82bec3c0cbd937a36c` | 1 |
-| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `c482b3b13274f296f4201106d32b6f81199bd1e95d84f27f0ef80655bc951101` | `082cba3eb78f655abf2be709a01b0594560dffb634a07c5e6ff605cd0cdeba7e` | 1 |
+| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `c482b3b13274f296f4201106d32b6f81199bd1e95d84f27f0ef80655bc951101` | `b12c9b95e2a37e938faa6a266f87913a0f0ecbbe0d69ad35bdce41a966c0c1eb` | 1 |
 | `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `3cd332965fe34f0a7232c7e928c5b8796f881d12a631989cd5d687859c6a4b10` | `98c31b60eabc31dfda0d383d92c2948b1d5703d3224b0389fb7262238dc767c4` | 1 |
 | `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `d2b0e6450222247b0d3476725ebb0797a877371d303934f9f03b5b3adefab8f3` | `635f3a9c58962cc5967fbe0d66c8e9df3aeb0ec9c11c269d18f1bf6f35a5d413` | 1 |
 | `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `e78110b1b6cf518c9491ae40c910fee7742b5971f28c315d3c1beb2fad3a9993` | `59762eba3c15ce7a5714a73158eeb41bc86fae56ca8f1ae7f0934340d6546673` | 1 |
@@ -131,9 +131,9 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | `peripheral.autoplay-take-no-action` | validated | `Docs/tweaks/research/records/peripheral.autoplay-take-no-action.review.json` | `e6569c930a05f27153e74cc69f99130870474475c3dd28bff5022f38cb1e183b` | `6bf8b90fe59d4cf3ca5ac2b3c86e0b15bfd409ad27e51f54856fd76cc726df1a` | 1 |
 | `peripheral.disable-autoplay` | validated | `Docs/tweaks/research/records/peripheral.disable-autoplay.review.json` | `c72a6200a630b6cb859c13580bcdfc8dcc7ad96add4e69dd2cdd969fd6a700e9` | `1cba6d9b41c50cccf15290ce6131cd5daea44bc48c26f0f8f6d351963cd1e8a1` | 2 |
 | `peripheral.disable-sticky-keys-prompt` | validated | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` | `6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837` | `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e` | 1 |
-| `power.disable-cpu-idle-states` | validated | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `bf7fca5032d4fb2fc2e82ffe078af4d38d51f4e376a8e492f5f7fee16aa08d7c` | `5bb8f021adc0fd46c8f2e4a4ac05aa30e50915bd05e77c48b85fb4db44e56697` | 1 |
+| `power.disable-cpu-idle-states` | validated | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `077d1ad70f7c569f24bde535f525128e2f0bd7af6dccc2644b4cdf5b58507d07` | `5bb8f021adc0fd46c8f2e4a4ac05aa30e50915bd05e77c48b85fb4db44e56697` | 1 |
 | `power.disable-fast-startup` | validated | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
-| `power.disable-modern-standby` | validated | `Docs/tweaks/research/records/power.disable-modern-standby.json` | `bc34a4b596f512119526b7899ded90da9463d780ee0d1a1ecf43fded68585d3a` | `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e` | 1 |
+| `power.disable-modern-standby` | validated | `Docs/tweaks/research/records/power.disable-modern-standby.json` | `4735f00424ad14036f07e29a9a5327430e66c1de57f007d87934eaa80601127a` | `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e` | 1 |
 | `power.disable-network-power-saving.policy` | validated | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
 | `power.disable-power-throttling` | validated | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `6bbb0293de661b8c2c09bf60e67517b09b78ba45f66065f5bbdc249c5f2dcffc` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
 | `power.disable-windows-search` | validated | `Docs/tweaks/research/records/power.disable-windows-search.json` | `a71dd4b0dd816fd6f1fcbdd000f7d60651cc22532c03ef49228899aba5b74ff4` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
@@ -1609,7 +1609,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json`
 - Source SHA256: `c482b3b13274f296f4201106d32b6f81199bd1e95d84f27f0ef80655bc951101`
-- Proof SHA256: `082cba3eb78f655abf2be709a01b0594560dffb634a07c5e6ff605cd0cdeba7e`
+- Proof SHA256: `b12c9b95e2a37e938faa6a266f87913a0f0ecbbe0d69ad35bdce41a966c0c1eb`
 
 **Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, but this research pass did not capture a primary Microsoft source that maps the power-policy semantics onto the kernel registry key the app writes.
 
@@ -1624,6 +1624,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 
 - `ms-scheduling-policy` | `official-doc` | Microsoft Learn: SchedulingPolicy | `high`
 - `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | `medium`
+- `nohuto-session-manager-quota` | `registry-observation` | nohuto Session Manager quota-system trace | `medium`
 - `app-system-registry-provider` | `repo-code` | Current app implementation | `high`
 
 **Validation proof**
@@ -1633,7 +1634,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 | source_url | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy |
 | exact_quote_or_path | Microsoft Learn: SchedulingPolicy: Microsoft documents official heterogeneous scheduling policy values for the power-policy SchedulingPolicy setting, including 3 = efficient processors. This confirms the feature area and adjacent value semantics, but it does not publish the kernel registry key DefaultDynamicHeteroCpuPolicy. |
 | key_found_on_page | True |
-| notes | Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail. |
+| notes | Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail. See also the local Session-Manager trace for EnableCpuQuota as a separate Quota System value. |
 ### `system.kernel-disable-low-qos-timer-resolution`
 
 - Status: `deprecated`
@@ -4080,7 +4081,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Processor Idle Behavior`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.disable-cpu-idle-states.json`
-- Source SHA256: `bf7fca5032d4fb2fc2e82ffe078af4d38d51f4e376a8e492f5f7fee16aa08d7c`
+- Source SHA256: `077d1ad70f7c569f24bde535f525128e2f0bd7af6dccc2644b4cdf5b58507d07`
 - Proof SHA256: `5bb8f021adc0fd46c8f2e4a4ac05aa30e50915bd05e77c48b85fb4db44e56697`
 
 **Summary:** Validated observed implementation only. This record now has machine-checkable VM proof for the raw CPU idle-state registry bundle, but Microsoft still does not publish it as a supported control surface.
@@ -4147,7 +4148,7 @@ Each record includes the raw source-file SHA256 and the exact validation proof b
 - Area: `Sleep Model`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.disable-modern-standby.json`
-- Source SHA256: `bc34a4b596f512119526b7899ded90da9463d780ee0d1a1ecf43fded68585d3a`
+- Source SHA256: `4735f00424ad14036f07e29a9a5327430e66c1de57f007d87934eaa80601127a`
 - Proof SHA256: `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. This record now validates Microsoft's guidance that switching between Modern Standby and S3 is not a supported Windows setting change. The current app's registry bundle remains documented as an implementation mismatch rather than a supported control.

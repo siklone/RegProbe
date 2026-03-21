@@ -19289,6 +19289,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `ms-scheduling-policy` | `official-doc` | Microsoft Learn: SchedulingPolicy | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy | `high` | value, behavior, version-scope |
 | `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
+| `nohuto-session-manager-quota` | `registry-observation` | nohuto Session Manager quota-system trace | Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt | `medium` | path, dependency, behavior |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -19298,7 +19299,7 @@ Current write(s):
 | Source URL | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy |
 | Exact quote / path | Microsoft Learn: SchedulingPolicy: Microsoft documents official heterogeneous scheduling policy values for the power-policy SchedulingPolicy setting, including 3 = efficient processors. This confirms the feature area and adjacent value semantics, but it does not publish the kernel registry key DefaultDynamicHeteroCpuPolicy. |
 | Key found on page | `True` |
-| Notes | Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail. |
+| Notes | Backfilled from evidence_id ms-scheduling-policy (official-doc); deprecated audit trail. See also the local Session-Manager trace for EnableCpuQuota as a separate Quota System value. |
 
 **Decision**
 
@@ -19309,7 +19310,7 @@ Current write(s):
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
 | Needs VM validation | `True` |
-| Why | Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app writes. |
+| Why | Official Microsoft docs confirm adjacent heterogeneous scheduling value meanings, but this research pass did not capture a primary Microsoft source for the exact kernel registry key the app writes. The separate EnableCpuQuota trace in Session Manager is adjacent but not a substitute for the missing kernel mapping. |
 
 Blocking issues:
 - No primary Microsoft source for the DefaultDynamicHeteroCpuPolicy kernel registry key was captured in this research pass.

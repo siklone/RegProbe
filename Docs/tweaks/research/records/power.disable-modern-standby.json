@@ -13,7 +13,7 @@
     "casual_explanation": "Modern Standby is the low-power idle sleep model used on many newer systems. This tweak tries to turn it off and push the system back toward traditional S3-style sleep behavior.",
     "why_people_change_it": "People try to disable Modern Standby when they want classic sleep behavior or when they suspect Modern Standby is involved in battery drain, wake, or sleep issues.",
     "tradeoffs_overview": "The feature is real, but Microsoft's guidance explicitly says switching power models is not supported by changing a setting in Windows. That makes this registry-based tweak too risky to validate.",
-    "professional_notes": "Microsoft's Modern Standby documentation states that switching between S3 and Modern Standby cannot be done by changing a setting and is not supported in Windows without a complete OS reinstall. The current app writes MSDisabled and ModernSleep\\EnabledActions registry values, but this review did not find a primary Microsoft registry mapping that blesses those writes as a supported transition path.",
+    "professional_notes": "Microsoft's Modern Standby documentation states that switching between S3 and Modern Standby cannot be done by changing a setting and is not supported in Windows without a complete OS reinstall. The current app writes MSDisabled and ModernSleep\\EnabledActions registry values, and the local Power.txt trace also shows MSDisabled in the power-value block, but this review did not find a primary Microsoft registry mapping that blesses those writes as a supported transition path.",
     "targets": [
       {
         "target_id": "modern-standby-registry-bundle",
@@ -128,6 +128,19 @@
         "app-mismatch"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-power-msdisabled-trace",
+      "kind": "registry-observation",
+      "title": "nohuto power trace for MSDisabled",
+      "location": "Docs/tweaks/_source-mirrors/win-registry/records/Power.txt",
+      "summary": "Power.txt lists MSDisabled in the power values block, showing the same local registry family used by the current app implementation.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
     },
     {
       "evidence_id": "repo-power-doc",

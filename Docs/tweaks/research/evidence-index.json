@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T11:08:42.526492Z",
+  "generated_utc": "2026-03-21T11:10:03.081511Z",
   "summary": {
     "total_records": 279,
     "validated": 227,
@@ -23473,6 +23473,19 @@
           ]
         },
         {
+          "evidence_id": "nohuto-power-disable-idle-states-trace",
+          "kind": "registry-observation",
+          "title": "nohuto power trace for DisableIdleStatesAtBoot",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/Power.txt",
+          "summary": "Power.txt lists DisableIdleStatesAtBoot in the power values block, matching the first element of the app's raw idle-states bundle.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ]
+        },
+        {
           "evidence_id": "repo-power-doc",
           "kind": "repo-doc",
           "title": "Repo power notes",
@@ -23851,6 +23864,19 @@
             "value",
             "ui-mapping",
             "app-mismatch"
+          ]
+        },
+        {
+          "evidence_id": "nohuto-power-msdisabled-trace",
+          "kind": "registry-observation",
+          "title": "nohuto power trace for MSDisabled",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/Power.txt",
+          "summary": "Power.txt lists MSDisabled in the power values block, showing the same local registry family used by the current app implementation.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
           ]
         },
         {
