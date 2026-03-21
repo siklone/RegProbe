@@ -138,7 +138,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `power.disable-network-power-saving.policy` | validated | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
 | `power.disable-power-throttling` | validated | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `6bbb0293de661b8c2c09bf60e67517b09b78ba45f66065f5bbdc249c5f2dcffc` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
 | `power.disable-windows-search` | validated | `Docs/tweaks/research/records/power.disable-windows-search.json` | `a71dd4b0dd816fd6f1fcbdd000f7d60651cc22532c03ef49228899aba5b74ff4` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
-| `power.hide-hibernate-option` | validated | `Docs/tweaks/research/records/power.hide-hibernate-option.json` | `a9cd2a784e62a1619ea7f920d71387fee650e2ce8357a9b584b28e8579fb9825` | `ee182636fa3cfcb7d8997ddc1f4c172cdc91e1e284a57b2e5fca01264bc58595` | 1 |
+| `power.hide-hibernate-option` | validated | `Docs/tweaks/research/records/power.hide-hibernate-option.json` | `a9cd2a784e62a1619ea7f920d71387fee650e2ce8357a9b584b28e8579fb9825` | `a2ccf9b1a2c922e3273812eea45986113d2b2eec94a801bbf7cff7ecf9cdb417` | 1 |
 | `power.hide-lock-option` | validated | `Docs/tweaks/research/records/power.hide-lock-option.json` | `bb61e4c516c76622f6b0770dcd2d393305f2d8dde6d325fe882796e6eb752dda` | `4a31f932c9fa2ce5fab2fda9c97d00fc5b971b503d4d6f9051039e49bfa664da` | 1 |
 | `power.hide-sleep-option` | validated | `Docs/tweaks/research/records/power.hide-sleep-option.json` | `c9235ea4a57b3e8d4a6b7ae241430e25c8f46af21ff3158eef586668644423f8` | `9fd4a690ec7f01c46a0a7268de36b05197e70fea5ded44632b11d705011ea0b8` | 1 |
 | `power.optimize-cpu-boost` | validated | `Docs/tweaks/research/records/power.optimize-cpu-boost.json` | `cf75017ab18baf416f2b8999dc4bc085f9c557e25bc0be505a6b6b570b996d81` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 1 |
@@ -166,7 +166,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-diagnostic-data-delete` | validated | `Docs/tweaks/research/records/privacy.disable-diagnostic-data-delete.json` | `0664e74cd1a50f51da1431bce9a0d886204460d2e166f068733a3f8101ea547f` | `5891504911c5f08d60193a8924be5928326e11a0e47f7e996703542b46610e9b` | 1 |
 | `privacy.disable-diagnostic-data-viewer` | validated | `Docs/tweaks/research/records/privacy.disable-diagnostic-data-viewer.json` | `7f874873c7967e29216c2a927c911688c34248f27a6360ab8b9679eb76fc66df` | `1e5a68e241c51b8fbb767c9157452e3ed5bcb6c9ce55eb50cb3a4548e7525b1c` | 1 |
 | `privacy.disable-edge-search-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-edge-search-suggestions.json` | `8f7ca88b8cfd391f02b29ab6ada5afd6dc48c64062f319498ec147447ab35893` | `308a5afd7fbc0a505de5fd5e6da9be0ff76205149f037ec2feaa93c192c8cb56` | 3 |
-| `privacy.disable-feedback-notifications` | validated | `Docs/tweaks/research/records/privacy.disable-feedback-notifications.json` | `9ef357caca2dd558ceb51079771e50598e12d6d549d77a2939239e919cb10a28` | `f1aaa3558cf099efc22328f2567acbec3a18b90e0f1edae7fe8ce5b535f1d2a4` | 1 |
+| `privacy.disable-feedback-notifications` | validated | `Docs/tweaks/research/records/privacy.disable-feedback-notifications.json` | `02f0fedae59e9a9d70c5e33de97cdca0f92f9fa91b789c840d9fdd994e791622` | `f1aaa3558cf099efc22328f2567acbec3a18b90e0f1edae7fe8ce5b535f1d2a4` | 1 |
 | `privacy.disable-file-history` | validated | `Docs/tweaks/research/records/privacy.disable-file-history.json` | `e1e867ac34c8d47f9e813ae7a89e770f36a151bfe6915b8484a33dd87f7f2462` | `aa8d785480383b20c15d2bfeb0b8df5880a9dd17bde45e0b336c6d793462e2cb` | 1 |
 | `privacy.disable-find-my-device` | validated | `Docs/tweaks/research/records/privacy.disable-find-my-device.json` | `c8870610945cf729181b0927326195c2c8cbb03606ce1142a29dbe870219364b` | `87b5872f6958740891f43a2c779b22ed879146d0e2a7941319e90d93f47f5f77` | 1 |
 | `privacy.disable-font-providers` | validated | `Docs/tweaks/research/records/privacy.disable-font-providers.json` | `3103ecd3cc80e6ac2ced1c86f6d0951bc26cfa7c46f8bcb8c2d1bfd54f51dab6` | `354730db32c467f7f05f9076e40ba6652a7ecbb40c0a30f29a72d69ce2db56c8` | 1 |
@@ -6545,7 +6545,7 @@ Windows Internals references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.hide-hibernate-option.json`
 - Source SHA256: `a9cd2a784e62a1619ea7f920d71387fee650e2ce8357a9b584b28e8579fb9825`
-- Proof SHA256: `ee182636fa3cfcb7d8997ddc1f4c172cdc91e1e284a57b2e5fca01264bc58595`
+- Proof SHA256: `a2ccf9b1a2c922e3273812eea45986113d2b2eec94a801bbf7cff7ecf9cdb417`
 
 **Summary:** Policy-backed control for whether the Hibernate option is shown in the power menu. Useful for managed or simplified menus, but it removes a visible path to hibernation.
 
@@ -6565,6 +6565,7 @@ Windows Internals references:
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for hibernation support | `medium` |
 | `nohuto-showhibernateoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowHibernateOption policy | `high` |
+| `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | `medium` |
 
 **Provenance**
 
@@ -6594,7 +6595,7 @@ Windows Internals references:
 | source_url | C:\\Windows\\PolicyDefinitions\\WindowsExplorer.admx |
 | exact_quote_or_path | <policy name="ShowHibernateOption" class="Machine" ... key="Software\\Policies\\Microsoft\\Windows\\Explorer" valueName="ShowHibernateOption">; WindowsExplorer.adml: If you disable this policy setting, the hibernate option will never be shown in the Power Options menu. |
 | key_found_on_page | True |
-| notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. |
+| notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. Win25H2Clean reversible probe at H:\\Temp\\vm-tooling-staging\\power_hide_hibernate_option_probe.txt confirmed writes for 0 and 1, live registry queries after each write, Power Options opening in both states, and restoration to the original state. |
 ### `power.hide-lock-option`
 
 - Status: `validated`
@@ -8047,7 +8048,7 @@ Nohuto lineage references:
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-feedback-notifications.json`
-- Source SHA256: `9ef357caca2dd558ceb51079771e50598e12d6d549d77a2939239e919cb10a28`
+- Source SHA256: `02f0fedae59e9a9d70c5e33de97cdca0f92f9fa91b789c840d9fdd994e791622`
 - Proof SHA256: `f1aaa3558cf099efc22328f2567acbec3a18b90e0f1edae7fe8ce5b535f1d2a4`
 
 **Summary:** Machine policy for Microsoft feedback prompts. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.

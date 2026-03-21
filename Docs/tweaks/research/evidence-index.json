@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-21T18:30:44.656776Z",
+  "generated_utc": "2026-03-21T18:31:43.428779Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -37638,13 +37638,27 @@
             "behavior"
           ],
           "origin": "Ghidra decompilation"
+        },
+        {
+          "evidence_id": "procmon-feedback-notifications",
+          "kind": "procmon-trace",
+          "title": "Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle",
+          "location": "H:\\Temp\\vm-tooling-staging\\feedback_notifications_probe.txt",
+          "summary": "The guest probe wrote DoNotShowFeedbackNotifications=0 and DoNotShowFeedbackNotifications=1, queried the live registry after each write, opened the feedback settings surface in both states, and restored the original state.",
+          "strength": "medium",
+          "supports": [
+            "runtime writes",
+            "value semantics",
+            "rollback"
+          ],
+          "origin": "VM Procmon trace"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications",
         "exact_quote_or_path": "Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled.",
         "key_found_on_page": true,
-        "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx."
+        "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at H:\\Temp\\vm-tooling-staging\\feedback_notifications_probe.txt confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state."
       },
       "provenance": {
         "coverage_state": "repo-backed",

@@ -6309,6 +6309,7 @@ Windows Internals references:
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for hibernation support | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, behavior, dependency |
 | `nohuto-showhibernateoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowHibernateOption policy | Docs/tweaks/_source-mirrors/win-config/power/desc.md | `high` | path, value, behavior, allowed-values |
+| `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | H:\Temp\vm-tooling-staging\power_hide_hibernate_option_probe.txt | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -6317,7 +6318,7 @@ Windows Internals references:
 | Source URL | C:\Windows\PolicyDefinitions\WindowsExplorer.admx |
 | Exact quote / path | <policy name="ShowHibernateOption" class="Machine" ... key="Software\Policies\Microsoft\Windows\Explorer" valueName="ShowHibernateOption">; WindowsExplorer.adml: If you disable this policy setting, the hibernate option will never be shown in the Power Options menu. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. Win25H2Clean reversible probe at H:\Temp\vm-tooling-staging\power_hide_hibernate_option_probe.txt confirmed writes for 0 and 1, live registry queries after each write, Power Options opening in both states, and restoration to the original state. |
 
 **Decision**
 
