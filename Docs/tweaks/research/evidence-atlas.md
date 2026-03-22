@@ -1914,6 +1914,7 @@ Windows Internals references:
 | `ms-ncsi-icm-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for NCSI active probing | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
 | `ms-ncsi-icm-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for NCSI active probing policy | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, risk, default |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value, path |
+| `nohuto-ncsi-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - NCSI NoActiveProbe registry evidence | Docs/tweaks/_source-mirrors/win-config/network/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, value, behavior |
 
 **Validation proof**
 
@@ -1922,7 +1923,7 @@ Windows Internals references:
 | Source URL | C:\Windows\PolicyDefinitions\ICM.admx |
 | Exact quote / path | <policy name="NoActiveProbe" class="Machine" ... key="Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" valueName="NoActiveProbe">; ICM.adml: This policy setting turns off the active tests performed by the Windows Network Connectivity Status Indicator (NCSI) to determine whether your computer is connected to the Internet or to a more limited network. |
 | Key found on page | `True` |
-| Notes | Local official ADMX and ADML files document the exact NoActiveProbe policy surface. The app now matches that documented machine-policy surface exactly. |
+| Notes | Local official ADMX and ADML files document the exact NoActiveProbe policy surface. The app now matches that documented machine-policy surface exactly. The local nohuto mirror independently corroborates the same policy name, value name, and registry path. |
 
 **Decision**
 
@@ -7346,6 +7347,7 @@ Nohuto lineage references:
 | `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
 | `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `nohuto-app-suggestions-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - app suggestions registry evidence | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/23H2.txt and Docs/tweaks/_source-mirrors/win-registry/records/24H2.txt | `medium` | path, value, behavior |
 
 **Validation proof**
 
@@ -7354,7 +7356,7 @@ Nohuto lineage references:
 | Source URL | https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration |
 | Exact quote / path | HKLM\Temp\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SystemPaneSuggestionsEnabled /t REG_DWORD /d 0 /f |
 | Key found on page | `True` |
-| Notes | Validated against Microsoft Learn VDI optimization guidance that documents the same user-side ContentDeliveryManager suggestion value. |
+| Notes | Validated against Microsoft Learn VDI optimization guidance that documents the same user-side ContentDeliveryManager suggestion value. The local nohuto mirror also captures the related CloudContent policy name and the observed registry setting in the source mirrors. |
 
 **Decision**
 
@@ -14887,6 +14889,7 @@ Windows Internals references:
 | `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable | `medium` | path, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Automatic maintenance override | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
+| `nohuto-maintenance-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - Automatic Maintenance registry evidence | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, value, behavior |
 
 **Validation proof**
 
@@ -14895,7 +14898,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json |
 | Exact quote / path | HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance\MaintenanceDisabled: before=__MISSING__, after_apply=1, after_restore=__MISSING__ |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. The local nohuto mirror also shows the same MaintenanceDisabled registry path. |
 
 **Decision**
 

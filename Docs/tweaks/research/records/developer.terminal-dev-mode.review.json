@@ -207,6 +207,31 @@
       "strength": "medium"
     },
     {
+      "evidence_id": "ghidra-terminalapp-memory-scan",
+      "kind": "ghidra-headless",
+      "title": "Ghidra headless raw-memory scan of TerminalApp.dll",
+      "location": "C:\\Tools\\WindowsTerminal\\terminal-1.24.10621.0\\TerminalApp.dll; C:\\Temp\\terminal-ghidra.txt; C:\\Temp\\terminal-ghidra-enabledebugtap.txt",
+      "summary": "Headless Ghidra raw-memory scans of TerminalApp.dll wrote NO_MATCH for DeveloperMode and EnableDebugTap, so the flags are not present as plain strings in the imported binary.",
+      "supports": [
+        "negative-evidence",
+        "binary-scan"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "wpr-terminal-launch-trace",
+      "kind": "wpr-trace",
+      "title": "WPR capture of Windows Terminal launch",
+      "location": "C:\\Temp\\terminal-launch.etl",
+      "summary": "GeneralProfile WPR capture of wt.exe launch captured the startup sequence for manual trace review. This is supporting runtime context, not registry-semantic proof.",
+      "supports": [
+        "behavior",
+        "process-tree",
+        "startup-context"
+      ],
+      "strength": "low"
+    },
+    {
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
@@ -226,11 +251,12 @@
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": false,
-    "needs_vm_validation": true,
-    "why": "This research pass did not capture a primary Windows Terminal source for the exact registry values written by the app.",
+    "needs_vm_validation": false,
+    "why": "VM corroboration was backfilled with Ghidra raw-memory scans and a WPR launch capture, but this research pass still did not capture a primary Windows Terminal source for the exact registry values written by the app.",
     "blocking_issues": [
       "No primary Windows Terminal source for DeveloperMode or EnableDebugTap was captured in this pass.",
-      "The public Windows Terminal documentation captured here focuses on settings.json rather than the registry flags written by the app."
+      "The public Windows Terminal documentation captured here focuses on settings.json rather than the registry flags written by the app.",
+      "The Ghidra scan only provides negative string evidence, not a documented registry contract."
     ]
   },
   "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
