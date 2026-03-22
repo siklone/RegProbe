@@ -25329,6 +25329,7 @@ Windows Internals references:
 | `nohuto-dynamic-hetero-policy-mirror` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | nohuto mirror: dynamic heterogeneous CPU policy notes and kernel pseudocode | Docs/tweaks/_source-mirrors/win-config/system/desc.md; Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c | `medium` | value, behavior, kernel-derivation, version-scope |
 | `nohuto-session-manager-quota` | `registry-observation` | `VM registry observation` | nohuto Session Manager quota-system trace | Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt | `medium` | path, dependency, behavior |
 | `regkit-default-dynamic-hetero-cpu-policy-trace` | `registry-observation` | `VM registry observation` | nohuto trace for DefaultDynamicHeteroCpuPolicy | Docs/tweaks/_source-mirrors/regkit/assets/traces/23H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/24H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/25H2.txt | `high` | path, value, behavior |
+| `vm-hetero-policy-sweep-20260322` | `runtime-benchmark` | `unspecified` | VM sweep of DefaultDynamicHeteroCpuPolicy values 0..7 | Docs/tweaks/research/notes/hetero-dynamic-policy-sweep-20260322.md; H:\Temp\vm-tooling-staging\hetero-sweep\hetero-sweep-summary.csv; H:\Temp\vm-tooling-staging\hetero-sweep\hetero-sweep-detail.json | `medium` | value, behavior, performance, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -25338,7 +25339,7 @@ Windows Internals references:
 | Source URL | Docs/tweaks/_source-mirrors/win-config/system/desc.md |
 | Exact quote / path | "DefaultDynamicHeteroCpuPolicy" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7). |
 | Key found on page | `True` |
-| Notes | Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. |
+| Notes | Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. A later Win25H2Clean VM sweep recorded requested values 0..7, but the observed registry value lagged one iteration behind the request; see Docs/tweaks/research/notes/hetero-dynamic-policy-sweep-20260322.md. |
 
 **Decision**
 
