@@ -4,7 +4,7 @@
     "record_id":  "system.kernel-dpc-watchdog-period",
     "tweak_id":  "system.kernel-dpc-watchdog-period",
     "record_status":  "deprecated",
-    "summary":  "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+    "summary":  "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, and the decompiled watchdog query path now shows the raw period value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
     "setting":  {
                     "name":  "DPC Watchdog Period",
                     "category":  "System",
@@ -13,7 +13,7 @@
                     "casual_explanation":  "Windows has a watchdog that looks for deferred procedure calls that run too long and can trigger a system crash if the system stays stuck at high interrupt levels. This is a very low-level kernel safety mechanism, not a normal tweak.",
                     "why_people_change_it":  "People would only change it when reproducing kernel experiments, undoing manual registry changes, or doing specialized driver debugging.",
                     "tradeoffs_overview":  "Changing watchdog timing can affect how quickly Windows decides a DPC path has stalled badly enough to stop the system. Because this research pass did not capture a primary Microsoft source for the exact registry key, the safe choice is to keep it in review.",
-                    "professional_notes":  "Microsoft documents that Windows implements a DPC watchdog timer and that a DPC_WATCHDOG_VIOLATION (0x133) bug check occurs if a DPC routine or a series of DPC routines runs too long. Microsoft also provides driver guidance for avoiding DPC watchdog timeouts in storport miniports. However, this research pass did not capture a primary Microsoft page that documents the registry value DpcWatchdogPeriod itself. The repo research notes list DpcWatchdogPeriod = 120000 and associate it with KeDpcWatchdogPeriodMs, so this record keeps the feature area documented but blocks validated publication of the registry mapping.",
+                    "professional_notes":  "Microsoft documents that Windows implements a DPC watchdog timer and that a DPC_WATCHDOG_VIOLATION (0x133) bug check occurs if a DPC routine or a series of DPC routines runs too long. Microsoft also provides driver guidance for avoiding DPC watchdog timeouts in storport miniports. The decompiled watchdog query path shows KeDpcWatchdogPeriodMs being read into the configuration block, but this research pass still did not capture a primary Microsoft page that documents the registry value DpcWatchdogPeriod itself. The repo research notes list DpcWatchdogPeriod = 120000 and associate it with KeDpcWatchdogPeriodMs, so this record keeps the feature area documented but blocks validated publication of the registry mapping.",
                     "targets":  [
                                     {
                                         "target_id":  "dpc-watchdog-period",
@@ -175,6 +175,20 @@
                          "strength":  "high"
                      },
                      {
+                         "evidence_id":  "ghidra-dpc-watchdog-period-reader",
+                         "kind":  "decompilation",
+                         "title":  "Decompiled DPC watchdog configuration reader",
+                         "location":  "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
+                         "summary":  "The decompiled watchdog configuration reader checks KeDpcWatchdogPeriodMs and copies it into the result block when present, proving the raw registry-backed period is consumed by kernel code.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "behavior",
+                                          "runtime-gate"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
                          "evidence_id":  "repo-system-doc-kernel",
                          "kind":  "repo-doc",
                          "title":  "Repo system research notes for kernel registry values",
@@ -200,6 +214,20 @@
                                           "ui-mapping"
                                       ],
                          "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "ghidra-dpc-watchdog-period-reader",
+                         "kind":  "decompilation",
+                         "title":  "Decompiled DPC watchdog configuration reader",
+                         "location":  "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
+                         "summary":  "The decompiled watchdog configuration reader checks KeDpcWatchdogPeriodMs and copies it into the result block when present, proving the raw watchdog period value is consumed by kernel code.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "behavior",
+                                          "runtime-gate"
+                                      ],
+                         "strength":  "high"
                      }
                  ],
     "decision":  {
@@ -222,8 +250,8 @@
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
                              "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\KeQueryDpcWatchdogConfiguration.c",
-                             "exact_quote_or_path":  "if ( KeDpcWatchdogPeriodMs ) ... DWORD2(Src) = KeDpcWatchdogPeriodMs;",
+                             "exact_quote_or_path":  "if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src | 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; }",
                              "key_found_on_page":  true,
-                             "notes":  "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried."
+                             "notes":  "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block."
                          }
 }

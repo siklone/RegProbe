@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T01:17:46.511615Z",
+  "generated_utc": "2026-03-22T01:22:22.386784Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -9493,7 +9493,7 @@
       "category": "System",
       "area": "Kernel / Timer Resolution Behavior",
       "scope": "device",
-      "summary": "Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DisableLowQosTimerResolution = 1, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+      "summary": "Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DisableLowQosTimerResolution = 1, and the mirror plus decompiled kernel path now show the explicit low-QoS timer-resolution gate even though this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -9668,6 +9668,21 @@
           "origin": "Microsoft official doc"
         },
         {
+          "evidence_id": "nohuto-low-qos-timer-resolution-ghidra",
+          "kind": "decompilation",
+          "title": "nohuto mirror: low-QoS timer resolution gate",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PspSetProcessTimerResolutionPolicy.c; Docs/tweaks/_source-mirrors/win-config/system/desc.md",
+          "summary": "The decompiled kernel routine checks KeDisableLowQosTimerResolution before toggling the process policy bit and calling ExpUpdateTimerResolution, and the mirror docs record the same DisableLowQosTimerResolution = 1 gate.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "runtime-gate"
+          ],
+          "origin": "Ghidra decompilation"
+        },
+        {
           "evidence_id": "repo-system-doc-kernel",
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
@@ -9698,12 +9713,12 @@
         }
       ],
       "validation_proof": {
-        "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
-        "exact_quote_or_path": "\"DisableLowQosTimerResolution\" = 1; // KeDisableLowQosTimerResolution",
+        "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\PspSetProcessTimerResolutionPolicy.c",
+        "exact_quote_or_path": "if ( KeDisableLowQosTimerResolution ) { ... if ( a2 ) { ... } else { ... } ... ExpUpdateTimerResolution(0, 0, 0LL); }",
         "key_found_on_page": true,
-        "notes": "Timer-resolution audit trail. The mirror and kernel routine show the explicit low-QoS timer-resolution gate."
+        "notes": "Timer-resolution audit trail. The mirror docs record DisableLowQosTimerResolution = 1, and the decompiled kernel routine shows the gate controlling the policy bit and timer-resolution refresh path."
       },
-      "validation_proof_sha256": "20b23073bf938dad8354fd9353b673d93f200f5d2d987a93302fe20df0a61f0d",
+      "validation_proof_sha256": "efcc02d642dacdff3f28dac8946c8878180d0ef83875ea5feff1ab89b5c9c126",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -10005,8 +10020,8 @@
       "tweak_id": "system.kernel-dpc-watchdog-period",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json",
-      "source_file_sha256": "6aa525e9f89470f7e88fff296c53f34018cef943a4804667123d1af9db6cf31d",
-      "source_file_size_bytes": 18300,
+      "source_file_sha256": "9c3a7bb597a2b8ab2fd4ad7563dad5cd4531df5615f1b57683dbe1c300bbe644",
+      "source_file_size_bytes": 20479,
       "name": "DPC Watchdog Period",
       "category": "System",
       "area": "Kernel / DPC Watchdog",

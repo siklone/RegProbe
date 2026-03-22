@@ -25367,7 +25367,7 @@ Blocking issues:
 | Confidence | `low` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DisableLowQosTimerResolution = 1, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DisableLowQosTimerResolution = 1, and the mirror plus decompiled kernel path now show the explicit low-QoS timer-resolution gate even though this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
 **Current implementation**
 
@@ -25428,6 +25428,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-timebeginperiod` | `official-doc` | `Microsoft official doc` | Microsoft Learn: timeBeginPeriod function | https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod | `high` | behavior, side-effects, version-scope |
 | `ms-timer-resolution` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Timer Resolution | https://learn.microsoft.com/en-us/windows/win32/multimedia/timer-resolution | `high` | behavior, side-effects, version-scope |
+| `nohuto-low-qos-timer-resolution-ghidra` | `decompilation` | `Ghidra decompilation` | nohuto mirror: low-QoS timer resolution gate | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PspSetProcessTimerResolutionPolicy.c; Docs/tweaks/_source-mirrors/win-config/system/desc.md | `high` | path, value, behavior, runtime-gate |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -25435,10 +25436,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
-| Exact quote / path | "DisableLowQosTimerResolution" = 1; // KeDisableLowQosTimerResolution |
+| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\PspSetProcessTimerResolutionPolicy.c |
+| Exact quote / path | if ( KeDisableLowQosTimerResolution ) { ... if ( a2 ) { ... } else { ... } ... ExpUpdateTimerResolution(0, 0, 0LL); } |
 | Key found on page | `True` |
-| Notes | Timer-resolution audit trail. The mirror and kernel routine show the explicit low-QoS timer-resolution gate. |
+| Notes | Timer-resolution audit trail. The mirror docs record DisableLowQosTimerResolution = 1, and the decompiled kernel routine shows the gate controlling the policy bit and timer-resolution refresh path. |
 
 **Decision**
 
