@@ -63,10 +63,10 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `1d335b99485bc826b3884f1d11fb28d6597a40b9ba1736f5aa8aba80cd733d56` | `b510524d68142e1c56f5db50518288f2da73588b1d05824a2cebc6378ef57f66` | 1 |
 | `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b` | `efcc02d642dacdff3f28dac8946c8878180d0ef83875ea5feff1ab89b5c9c126` | 1 |
 | `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `58e130cb608027ee2908af5c820c7a9b6145e90f97720d99bd072aac62ed9401` | `a96b6aa6fec82dfb156805a23c0aad2bd2234ad31360b518328553c7b450750a` | 1 |
-| `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `9c3a7bb597a2b8ab2fd4ad7563dad5cd4531df5615f1b57683dbe1c300bbe644` | `9a8a79a362286c1eddb764cd2bb03d381f206a395c99c8eeaf22c4bab750f1be` | 1 |
+| `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `9c3a7bb597a2b8ab2fd4ad7563dad5cd4531df5615f1b57683dbe1c300bbe644` | `232893d4d8fd8a293bd6b6288aacb1748be4ec1e0ab88c8bd9c8cc55dbd2d1b7` | 1 |
 | `system.kernel-ideal-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `0df4c834a95038ad946861742a59b5d594c65badea7eee2d3943cbf5ad0f6eef` | `e0e9a3b89fd3402e74e01bd31bf48ac1739f3196098be2c69e2db1dbdf8405a9` | 1 |
 | `system.kernel-minimum-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `a5c750ab3bcb48f160e0f8ba00dbed347439b8de05051a6d3628cd11be8d6754` | `54e7383b0e9b75b22382bdc664680717a92458a4578662619d0edf85c4401f76` | 1 |
-| `system.kernel-serialize-timer-expiration` | deprecated | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` | `ae6efb38288c21a8fd3f1e0b822c18f9bf8b378a0b93e372ff4fdd0349d249c9` | `1b2367271cac17e6f54d907d0932fb99795e56a14487a023d3bc7b8e595193ba` | 1 |
+| `system.kernel-serialize-timer-expiration` | deprecated | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` | `5e687fa484102bf47596f14af77de8fdde46c2b334e39fa6ef850a3cea94cc1e` | `1b2367271cac17e6f54d907d0932fb99795e56a14487a023d3bc7b8e595193ba` | 1 |
 | `system.services.disable-print-device-configuration` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-device-configuration.json` | `3101fdf06a38bfbd1fb99a735145546b6f2bcf9439946b8840db2ec2136c6893` | `02fb442a6fc902af0a89043f68fb1c32cd90fc04bb17cad014b82bb78b2266ac` | 1 |
 | `system.services.disable-print-scan-broker` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-scan-broker.json` | `fb63ce1ae6ec3c78f95b271148dcdecbb4258908b06426c4fbe85efa7cee1e41` | `d96f33b3f944ebfba9155d20db5cfcb4d4596e130a3e1f07b831f24ad3fe112a` | 1 |
 | `system.services.disable-print-workflow-user-service` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-workflow-user-service.json` | `1b8b436ef97a5a02a86e8436a8eb8b79ef50d0f0118b1bac0bb53059c15ebeb6` | `94381b6c1d68589882ee162feab63d1d35964b621bf82a6e0b9188782d790055` | 1 |
@@ -2447,9 +2447,9 @@ Windows Internals references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json`
 - Source SHA256: `9c3a7bb597a2b8ab2fd4ad7563dad5cd4531df5615f1b57683dbe1c300bbe644`
-- Proof SHA256: `9a8a79a362286c1eddb764cd2bb03d381f206a395c99c8eeaf22c4bab750f1be`
+- Proof SHA256: `232893d4d8fd8a293bd6b6288aacb1748be4ec1e0ab88c8bd9c8cc55dbd2d1b7`
 
-**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, and the decompiled watchdog query path now shows the raw period value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
 **Targets**
 
@@ -2464,8 +2464,10 @@ Windows Internals references:
 | --- | --- | --- | --- | --- |
 | `ms-dpc-watchdog-information` | `official-doc` | `Microsoft official doc` | Microsoft Learn: KeQueryDpcWatchdogInformation function | `high` |
 | `ms-avoid-dpc-watchdog-timeouts` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports | `high` |
+| `ghidra-dpc-watchdog-period-reader` | `decompilation` | `Ghidra decompilation` | Decompiled DPC watchdog configuration reader | `high` |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `ghidra-dpc-watchdog-period-reader` | `decompilation` | `Ghidra decompilation` | Decompiled DPC watchdog configuration reader | `high` |
 
 **Provenance**
 
@@ -2493,9 +2495,9 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\KeQueryDpcWatchdogConfiguration.c |
-| exact_quote_or_path | if ( KeDpcWatchdogPeriodMs ) ... DWORD2(Src) = KeDpcWatchdogPeriodMs; |
+| exact_quote_or_path | if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src \| 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; } |
 | key_found_on_page | True |
-| notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried. |
+| notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block. |
 ### `system.kernel-ideal-dpc-rate`
 
 - Status: `deprecated`
@@ -2613,7 +2615,7 @@ Windows Internals references:
 - Area: `Kernel / Timer Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json`
-- Source SHA256: `ae6efb38288c21a8fd3f1e0b822c18f9bf8b378a0b93e372ff4fdd0349d249c9`
+- Source SHA256: `5e687fa484102bf47596f14af77de8fdde46c2b334e39fa6ef850a3cea94cc1e`
 - Proof SHA256: `1b2367271cac17e6f54d907d0932fb99795e56a14487a023d3bc7b8e595193ba`
 
 **Summary:** Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\SerializeTimerExpiration = 1, but this research pass did not capture a primary Microsoft source for the exact registry setting.

@@ -25572,7 +25572,7 @@ Blocking issues:
 | Confidence | `low` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, and the decompiled watchdog query path now shows the raw period value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
 **Current implementation**
 
@@ -25633,17 +25633,19 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dpc-watchdog-information` | `official-doc` | `Microsoft official doc` | Microsoft Learn: KeQueryDpcWatchdogInformation function | https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kequerydpcwatchdoginformation | `high` | behavior, side-effects, version-scope |
 | `ms-avoid-dpc-watchdog-timeouts` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports | https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems | `high` | behavior, side-effects, risk |
+| `ghidra-dpc-watchdog-period-reader` | `decompilation` | `Ghidra decompilation` | Decompiled DPC watchdog configuration reader | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c | `high` | path, value, behavior, runtime-gate |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `ghidra-dpc-watchdog-period-reader` | `decompilation` | `Ghidra decompilation` | Decompiled DPC watchdog configuration reader | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c | `high` | path, value, behavior, runtime-gate |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
 | Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\KeQueryDpcWatchdogConfiguration.c |
-| Exact quote / path | if ( KeDpcWatchdogPeriodMs ) ... DWORD2(Src) = KeDpcWatchdogPeriodMs; |
+| Exact quote / path | if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src \| 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; } |
 | Key found on page | `True` |
-| Notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried. |
+| Notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block. |
 
 **Decision**
 

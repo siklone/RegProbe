@@ -4,7 +4,7 @@
     "record_id":  "system.kernel-serialize-timer-expiration",
     "tweak_id":  "system.kernel-serialize-timer-expiration",
     "record_status":  "deprecated",
-    "summary":  "Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\SerializeTimerExpiration = 1, but this research pass did not capture a primary Microsoft source for the exact registry setting.",
+    "summary":  "Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\SerializeTimerExpiration = 1, and the decompiled kernel timer-table initialization path now shows the raw gate and fallback behavior, but this research pass did not capture a primary Microsoft source for the exact registry setting.",
     "setting":  {
                     "name":  "Serialize Timer Expiration",
                     "category":  "System",
@@ -13,7 +13,7 @@
                     "casual_explanation":  "This appears to control whether Windows serializes some timer expiration work instead of spreading it across processors. It is a low-level kernel behavior, not a normal user setting.",
                     "why_people_change_it":  "People would only change this when comparing timer behavior on different systems or undoing manual kernel experiments.",
                     "tradeoffs_overview":  "Changing timer expiration behavior can affect how the kernel distributes timer work across CPUs. Because this research pass did not capture a primary Microsoft document for the exact key, the setting stays blocked from validated publication.",
-                    "professional_notes":  "The repo research notes say SerializeTimerExpiration maps to the kernel variable KiSerializeTimerExpiration and describe 0 as letting the kernel decide based on Modern Standby availability, 1 as forcing serialization, and values other than 0 or 1 as disabling serialization entirely. That provenance is useful, but this research pass did not capture a primary Microsoft source that publishes the registry key and its semantics directly.",
+                    "professional_notes":  "The repo research notes say SerializeTimerExpiration maps to the kernel variable KiSerializeTimerExpiration and describe 0 as letting the kernel decide based on Modern Standby availability, 1 as forcing serialization, and values other than 0 or 1 as disabling serialization entirely. The decompiled timer-table initialization path corroborates this by reading KiSerializeTimerExpiration, normalizing any non-1 cached value back to 0, and falling back to the registry callback when the kernel state is not yet initialized. That provenance is useful, but this research pass did not capture a primary Microsoft source that publishes the registry key and its semantics directly.",
                     "targets":  [
                                     {
                                         "target_id":  "serialize-timer-expiration",
@@ -170,6 +170,20 @@
                                           "ui-mapping"
                                       ],
                          "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "ghidra-serialize-timer-expiration-gate",
+                         "kind":  "decompilation",
+                         "title":  "Decompiled timer-serialization gate",
+                         "location":  "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c",
+                         "summary":  "The decompiled timer-table initializer checks KiSerializeTimerExpiration, coerces any non-1 cached value back to 0, and reads the registry-backed callback when the kernel state is uninitialized, proving the value controls timer serialization behavior.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "behavior",
+                                          "runtime-gate"
+                                      ],
+                         "strength":  "high"
                      }
                  ],
     "decision":  {
@@ -192,8 +206,8 @@
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
                              "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
-                             "exact_quote_or_path":  "\"SerializeTimerExpiration\" = 1; // KiSerializeTimerExpiration ... Deleting the value, or keeping it as 0, allows the kernel to make the decision based on Modern Standby availability, and setting it to 1 permanently enables serialization even on non-Modern Standby systems.",
+                             "exact_quote_or_path":  "if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0]() != 0; }",
                              "key_found_on_page":  true,
-                             "notes":  "Timer serialization audit trail. The mirror includes both the kernel variable and the 0/1 behavior description."
+                             "notes":  "Timer serialization audit trail. The mirror docs and the decompiled timer-table initializer together show the kernel variable, the 0/1 behavior, and the registry fallback path."
                          }
 }

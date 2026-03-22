@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T01:22:22.386784Z",
+  "generated_utc": "2026-03-22T01:23:03.398343Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -10026,7 +10026,7 @@
       "category": "System",
       "area": "Kernel / DPC Watchdog",
       "scope": "device",
-      "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+      "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, and the decompiled watchdog query path now shows the raw period value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -10200,6 +10200,21 @@
           "origin": "Microsoft official doc"
         },
         {
+          "evidence_id": "ghidra-dpc-watchdog-period-reader",
+          "kind": "decompilation",
+          "title": "Decompiled DPC watchdog configuration reader",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
+          "summary": "The decompiled watchdog configuration reader checks KeDpcWatchdogPeriodMs and copies it into the result block when present, proving the raw registry-backed period is consumed by kernel code.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "runtime-gate"
+          ],
+          "origin": "Ghidra decompilation"
+        },
+        {
           "evidence_id": "repo-system-doc-kernel",
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
@@ -10227,15 +10242,30 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "ghidra-dpc-watchdog-period-reader",
+          "kind": "decompilation",
+          "title": "Decompiled DPC watchdog configuration reader",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
+          "summary": "The decompiled watchdog configuration reader checks KeDpcWatchdogPeriodMs and copies it into the result block when present, proving the raw watchdog period value is consumed by kernel code.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "runtime-gate"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\KeQueryDpcWatchdogConfiguration.c",
-        "exact_quote_or_path": "if ( KeDpcWatchdogPeriodMs ) ... DWORD2(Src) = KeDpcWatchdogPeriodMs;",
+        "exact_quote_or_path": "if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src | 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; }",
         "key_found_on_page": true,
-        "notes": "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried."
+        "notes": "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block."
       },
-      "validation_proof_sha256": "9a8a79a362286c1eddb764cd2bb03d381f206a395c99c8eeaf22c4bab750f1be",
+      "validation_proof_sha256": "232893d4d8fd8a293bd6b6288aacb1748be4ec1e0ab88c8bd9c8cc55dbd2d1b7",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -10779,8 +10809,8 @@
       "tweak_id": "system.kernel-serialize-timer-expiration",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json",
-      "source_file_sha256": "ae6efb38288c21a8fd3f1e0b822c18f9bf8b378a0b93e372ff4fdd0349d249c9",
-      "source_file_size_bytes": 15750,
+      "source_file_sha256": "5e687fa484102bf47596f14af77de8fdde46c2b334e39fa6ef850a3cea94cc1e",
+      "source_file_size_bytes": 17095,
       "name": "Serialize Timer Expiration",
       "category": "System",
       "area": "Kernel / Timer Scheduling",
