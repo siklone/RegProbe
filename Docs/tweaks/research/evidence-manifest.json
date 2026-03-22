@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T01:23:03.398343Z",
+  "generated_utc": "2026-03-22T01:25:21.130539Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -6875,8 +6875,8 @@
       "tweak_id": "security.disable-wpbt",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/security.disable-wpbt.review.json",
-      "source_file_sha256": "c04bfc77800ab0b9663338cf9f0297c2d33483523c36f2a93aafccb13c34340c",
-      "source_file_size_bytes": 14691,
+      "source_file_sha256": "081fd53e38f7a7c927f7fd5e49443384edd9e53a10078c5219675a795dc9ec3f",
+      "source_file_size_bytes": 16034,
       "name": "Disable WPBT Execution",
       "category": "Security",
       "area": "Observed Session Manager Registry Setting",
@@ -10815,7 +10815,7 @@
       "category": "System",
       "area": "Kernel / Timer Scheduling",
       "scope": "device",
-      "summary": "Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\SerializeTimerExpiration = 1, but this research pass did not capture a primary Microsoft source for the exact registry setting.",
+      "summary": "Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\SerializeTimerExpiration = 1, and the decompiled kernel timer-table initialization path now shows the raw gate and fallback behavior, but this research pass did not capture a primary Microsoft source for the exact registry setting.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -10984,15 +10984,30 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "ghidra-serialize-timer-expiration-gate",
+          "kind": "decompilation",
+          "title": "Decompiled timer-serialization gate",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c",
+          "summary": "The decompiled timer-table initializer checks KiSerializeTimerExpiration, coerces any non-1 cached value back to 0, and reads the registry-backed callback when the kernel state is uninitialized, proving the value controls timer serialization behavior.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "runtime-gate"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
-        "exact_quote_or_path": "\"SerializeTimerExpiration\" = 1; // KiSerializeTimerExpiration ... Deleting the value, or keeping it as 0, allows the kernel to make the decision based on Modern Standby availability, and setting it to 1 permanently enables serialization even on non-Modern Standby systems.",
+        "exact_quote_or_path": "if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0]() != 0; }",
         "key_found_on_page": true,
-        "notes": "Timer serialization audit trail. The mirror includes both the kernel variable and the 0/1 behavior description."
+        "notes": "Timer serialization audit trail. The mirror docs and the decompiled timer-table initializer together show the kernel variable, the 0/1 behavior, and the registry fallback path."
       },
-      "validation_proof_sha256": "1b2367271cac17e6f54d907d0932fb99795e56a14487a023d3bc7b8e595193ba",
+      "validation_proof_sha256": "20588f7da590eb22af6ec02882f2208f12c9f2288dd4a2f68b463a29d902deed",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

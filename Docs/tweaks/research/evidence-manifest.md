@@ -50,7 +50,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-wmplayer-telemetry` | deprecated | `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json` | `eb82b2f7b510ee7e01878070a8b8be8997c49a78e4ee57bad6eef4bd6b968f41` | `47b485383cfd24386e8b25266f61526788ae38ccc1e22f2e5643ab572cbc10e1` | 1 |
 | `security.disable-vbs` | deprecated | `Docs/tweaks/research/records/security.disable-vbs.json` | `a4998ad636204c82f6ae87c6cf5903d7575241c8d5cbb489949b7b9612134856` | `875362a1cc4fae3a9ee03d01d96ae6e825dd46f3a80c1fa0fb1885197dc650f6` | 3 |
 | `security.disable-windows-update` | deprecated | `Docs/tweaks/research/records/security.disable-windows-update.review.json` | `1bac61cff5ed58ceea12e8e6577962425b03c9da57518804f8e1e1eb4c123163` | `e39f151336b7dc9297dcff821b6d7da188f5a89cce214c2111a8979f3650a881` | 2 |
-| `security.disable-wpbt` | deprecated | `Docs/tweaks/research/records/security.disable-wpbt.review.json` | `c04bfc77800ab0b9663338cf9f0297c2d33483523c36f2a93aafccb13c34340c` | `9340fb4ae045879f47ade1a08447c731fdae8aef759b7e34b637b51c36adb0d6` | 1 |
+| `security.disable-wpbt` | deprecated | `Docs/tweaks/research/records/security.disable-wpbt.review.json` | `081fd53e38f7a7c927f7fd5e49443384edd9e53a10078c5219675a795dc9ec3f` | `9340fb4ae045879f47ade1a08447c731fdae8aef759b7e34b637b51c36adb0d6` | 1 |
 | `system.disable-game-dvr` | deprecated | `Docs/tweaks/research/records/system.disable-game-dvr.json` | `d4cd43987979de1e1cbb09cc70fb2428928176fb26e7abf5cfaa1eeaeb304b6d` | `4598eb3a4a7a554a32beb57abe4def5b4df7dc2cc841aa9df298709c324a6795` | 0 |
 | `system.disable-scheduled-tasks` | deprecated | `Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json` | `d4b01e85ca687ea57def840abfb5d85e4d259381f09ca8026847832c58b08385` | `14fdf96dc2d205ea9aecaa1d530e572e5f63a016031ec2c879b3605d5527a51e` | 7 |
 | `system.disable-search-highlights` | deprecated | `Docs/tweaks/research/records/system.disable-search-highlights.json` | `cbb37a1de1c09ae0e0fe5e377d3c8f591ef9e4c032aba829b18ed383e328ca30` | `2cebd2b8f3a1d2ecfae968fef5c0dda7bf435391ee0f1a7899d88b7023c6ca99` | 0 |
@@ -66,7 +66,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `9c3a7bb597a2b8ab2fd4ad7563dad5cd4531df5615f1b57683dbe1c300bbe644` | `232893d4d8fd8a293bd6b6288aacb1748be4ec1e0ab88c8bd9c8cc55dbd2d1b7` | 1 |
 | `system.kernel-ideal-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `0df4c834a95038ad946861742a59b5d594c65badea7eee2d3943cbf5ad0f6eef` | `e0e9a3b89fd3402e74e01bd31bf48ac1739f3196098be2c69e2db1dbdf8405a9` | 1 |
 | `system.kernel-minimum-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `a5c750ab3bcb48f160e0f8ba00dbed347439b8de05051a6d3628cd11be8d6754` | `54e7383b0e9b75b22382bdc664680717a92458a4578662619d0edf85c4401f76` | 1 |
-| `system.kernel-serialize-timer-expiration` | deprecated | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` | `5e687fa484102bf47596f14af77de8fdde46c2b334e39fa6ef850a3cea94cc1e` | `1b2367271cac17e6f54d907d0932fb99795e56a14487a023d3bc7b8e595193ba` | 1 |
+| `system.kernel-serialize-timer-expiration` | deprecated | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` | `5e687fa484102bf47596f14af77de8fdde46c2b334e39fa6ef850a3cea94cc1e` | `20588f7da590eb22af6ec02882f2208f12c9f2288dd4a2f68b463a29d902deed` | 1 |
 | `system.services.disable-print-device-configuration` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-device-configuration.json` | `3101fdf06a38bfbd1fb99a735145546b6f2bcf9439946b8840db2ec2136c6893` | `02fb442a6fc902af0a89043f68fb1c32cd90fc04bb17cad014b82bb78b2266ac` | 1 |
 | `system.services.disable-print-scan-broker` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-scan-broker.json` | `fb63ce1ae6ec3c78f95b271148dcdecbb4258908b06426c4fbe85efa7cee1e41` | `d96f33b3f944ebfba9155d20db5cfcb4d4596e130a3e1f07b831f24ad3fe112a` | 1 |
 | `system.services.disable-print-workflow-user-service` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-workflow-user-service.json` | `1b8b436ef97a5a02a86e8436a8eb8b79ef50d0f0118b1bac0bb53059c15ebeb6` | `94381b6c1d68589882ee162feab63d1d35964b621bf82a6e0b9188782d790055` | 1 |
@@ -1749,7 +1749,7 @@ Windows Internals references:
 - Area: `Observed Session Manager Registry Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.disable-wpbt.review.json`
-- Source SHA256: `c04bfc77800ab0b9663338cf9f0297c2d33483523c36f2a93aafccb13c34340c`
+- Source SHA256: `081fd53e38f7a7c927f7fd5e49443384edd9e53a10078c5219675a795dc9ec3f`
 - Proof SHA256: `9340fb4ae045879f47ade1a08447c731fdae8aef759b7e34b637b51c36adb0d6`
 
 **Summary:** Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail.
@@ -2616,9 +2616,9 @@ Windows Internals references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json`
 - Source SHA256: `5e687fa484102bf47596f14af77de8fdde46c2b334e39fa6ef850a3cea94cc1e`
-- Proof SHA256: `1b2367271cac17e6f54d907d0932fb99795e56a14487a023d3bc7b8e595193ba`
+- Proof SHA256: `20588f7da590eb22af6ec02882f2208f12c9f2288dd4a2f68b463a29d902deed`
 
-**Summary:** Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\SerializeTimerExpiration = 1, but this research pass did not capture a primary Microsoft source for the exact registry setting.
+**Summary:** Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\SerializeTimerExpiration = 1, and the decompiled kernel timer-table initialization path now shows the raw gate and fallback behavior, but this research pass did not capture a primary Microsoft source for the exact registry setting.
 
 **Targets**
 
@@ -2633,6 +2633,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Ghidra decompilation` | Decompiled timer-serialization gate | `high` |
 
 **Provenance**
 
@@ -2660,9 +2661,9 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
-| exact_quote_or_path | "SerializeTimerExpiration" = 1; // KiSerializeTimerExpiration ... Deleting the value, or keeping it as 0, allows the kernel to make the decision based on Modern Standby availability, and setting it to 1 permanently enables serialization even on non-Modern Standby systems. |
+| exact_quote_or_path | if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0]() != 0; } |
 | key_found_on_page | True |
-| notes | Timer serialization audit trail. The mirror includes both the kernel variable and the 0/1 behavior description. |
+| notes | Timer serialization audit trail. The mirror docs and the decompiled timer-table initializer together show the kernel variable, the 0/1 behavior, and the registry fallback path. |
 ### `system.services.disable-print-device-configuration`
 
 - Status: `deprecated`
