@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T01:28:51.574022Z",
+  "generated_utc": "2026-03-22T07:17:22.742384Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -9225,13 +9225,13 @@
       "tweak_id": "system.kernel-default-dynamic-hetero-cpu-policy",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json",
-      "source_file_sha256": "1d335b99485bc826b3884f1d11fb28d6597a40b9ba1736f5aa8aba80cd733d56",
-      "source_file_size_bytes": 14322,
+      "source_file_sha256": "e7a3ae7852ac21b76116b7618e7778187aa65daa4c65b062e64d876c7371d143",
+      "source_file_size_bytes": 15180,
       "name": "Default Dynamic Heterogeneous CPU Policy",
       "category": "System",
       "area": "Kernel / Heterogeneous Scheduling",
       "scope": "device",
-      "summary": "Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.",
+      "summary": "Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror, raw ControlSet001 trace, plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": false,
@@ -9437,6 +9437,20 @@
           "origin": "VM registry observation"
         },
         {
+          "evidence_id": "regkit-default-dynamic-hetero-cpu-policy-trace",
+          "kind": "registry-observation",
+          "title": "nohuto trace for DefaultDynamicHeteroCpuPolicy",
+          "location": "Docs/tweaks/_source-mirrors/regkit/assets/traces/23H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/24H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/25H2.txt",
+          "summary": "The raw registry traces list \\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager\\Kernel : DefaultDynamicHeteroCpuPolicy across multiple builds, corroborating the exact kernel path and value name.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "VM registry observation"
+        },
+        {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -9455,9 +9469,9 @@
         "source_url": "Docs/tweaks/_source-mirrors/win-config/system/desc.md",
         "exact_quote_or_path": "\"DefaultDynamicHeteroCpuPolicy\" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7).",
         "key_found_on_page": true,
-        "notes": "Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, and Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family."
+        "notes": "Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family."
       },
-      "validation_proof_sha256": "b510524d68142e1c56f5db50518288f2da73588b1d05824a2cebc6378ef57f66",
+      "validation_proof_sha256": "9e8209ff0c1c868bc533c57755d3b2348ae892c4aa6d3ec8fc7dd30a2d218820",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -9814,7 +9828,7 @@
       "category": "System",
       "area": "Kernel / DPC Scheduling",
       "scope": "device",
-      "summary": "Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcQueueDepth = 4, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+      "summary": "Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcQueueDepth = 4, and the decompiled system-information paths now show the kernel queue depth being set and exported, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -9982,15 +9996,30 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "ghidra-dpc-queue-depth-system-info",
+          "kind": "decompilation",
+          "title": "Decompiled DPC queue-depth system-information handler",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c; Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c",
+          "summary": "The decompiled system-information setter populates KiMaximumDpcQueueDepth from the caller buffer, and the query path exports KiMaximumDpcQueueDepth back out, proving the kernel queue depth is consumed and reported by system code.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "runtime-gate"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
         "exact_quote_or_path": "*(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate;",
         "key_found_on_page": true,
-        "notes": "Kernel DPC queue-depth audit trail. The decompiled path shows the exact kernel values exported together."
+        "notes": "Kernel DPC queue-depth audit trail. The decompiled paths show the exact kernel values exported together and the setter side that loads KiMaximumDpcQueueDepth from the system-information buffer."
       },
-      "validation_proof_sha256": "a96b6aa6fec82dfb156805a23c0aad2bd2234ad31360b518328553c7b450750a",
+      "validation_proof_sha256": "944ee2c99bfde59a74d232317a9da57e812a0c844e8abb75862163045f3928db",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

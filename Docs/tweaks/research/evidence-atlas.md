@@ -25265,7 +25265,7 @@ Blocking issues:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.
+**Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror, raw ControlSet001 trace, plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.
 
 **Current implementation**
 
@@ -25328,6 +25328,7 @@ Windows Internals references:
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `nohuto-dynamic-hetero-policy-mirror` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | nohuto mirror: dynamic heterogeneous CPU policy notes and kernel pseudocode | Docs/tweaks/_source-mirrors/win-config/system/desc.md; Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c | `medium` | value, behavior, kernel-derivation, version-scope |
 | `nohuto-session-manager-quota` | `registry-observation` | `VM registry observation` | nohuto Session Manager quota-system trace | Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt | `medium` | path, dependency, behavior |
+| `regkit-default-dynamic-hetero-cpu-policy-trace` | `registry-observation` | `VM registry observation` | nohuto trace for DefaultDynamicHeteroCpuPolicy | Docs/tweaks/_source-mirrors/regkit/assets/traces/23H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/24H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/25H2.txt | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -25337,7 +25338,7 @@ Windows Internals references:
 | Source URL | Docs/tweaks/_source-mirrors/win-config/system/desc.md |
 | Exact quote / path | "DefaultDynamicHeteroCpuPolicy" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7). |
 | Key found on page | `True` |
-| Notes | Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, and Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. |
+| Notes | Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. |
 
 **Decision**
 
@@ -25473,7 +25474,7 @@ Blocking issues:
 | Confidence | `low` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcQueueDepth = 4, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcQueueDepth = 4, and the decompiled system-information paths now show the kernel queue depth being set and exported, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
 **Current implementation**
 
@@ -25534,6 +25535,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `ghidra-dpc-queue-depth-system-info` | `decompilation` | `Ghidra decompilation` | Decompiled DPC queue-depth system-information handler | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c; Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c | `high` | path, value, behavior, runtime-gate |
 
 **Validation proof**
 
@@ -25542,7 +25544,7 @@ Windows Internals references:
 | Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
 | Exact quote / path | *(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate; |
 | Key found on page | `True` |
-| Notes | Kernel DPC queue-depth audit trail. The decompiled path shows the exact kernel values exported together. |
+| Notes | Kernel DPC queue-depth audit trail. The decompiled paths show the exact kernel values exported together and the setter side that loads KiMaximumDpcQueueDepth from the system-information buffer. |
 
 **Decision**
 

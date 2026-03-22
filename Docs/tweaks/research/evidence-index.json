@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T01:28:51.550795Z",
+  "generated_utc": "2026-03-22T07:17:22.519849Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -9109,7 +9109,7 @@
       "category": "System",
       "area": "Kernel / Heterogeneous Scheduling",
       "scope": "device",
-      "summary": "Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.",
+      "summary": "Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror, raw ControlSet001 trace, plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": false,
@@ -9315,6 +9315,20 @@
           "origin": "VM registry observation"
         },
         {
+          "evidence_id": "regkit-default-dynamic-hetero-cpu-policy-trace",
+          "kind": "registry-observation",
+          "title": "nohuto trace for DefaultDynamicHeteroCpuPolicy",
+          "location": "Docs/tweaks/_source-mirrors/regkit/assets/traces/23H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/24H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/25H2.txt",
+          "summary": "The raw registry traces list \\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager\\Kernel : DefaultDynamicHeteroCpuPolicy across multiple builds, corroborating the exact kernel path and value name.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "VM registry observation"
+        },
+        {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -9333,7 +9347,7 @@
         "source_url": "Docs/tweaks/_source-mirrors/win-config/system/desc.md",
         "exact_quote_or_path": "\"DefaultDynamicHeteroCpuPolicy\" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7).",
         "key_found_on_page": true,
-        "notes": "Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, and Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family."
+        "notes": "Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family."
       },
       "provenance": {
         "coverage_state": "repo-backed",

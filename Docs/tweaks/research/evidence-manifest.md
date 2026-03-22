@@ -60,9 +60,9 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `98ef739d16ea86aabaedb34b97ce872b4f0fcd5fcb7d32ab364a8b863d489580` | `de461e3f29a05889c82ae0349ddf469cce6bcacc3a632e36c6bdcd1b029992df` | 1 |
 | `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc` | `84c3a10e4279611b07fb235549e264875a9a89304dfd3c10b30994d093f78c65` | 1 |
 | `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `8e2fbbfcb328d9ccc42ba64843c5502477aba92c21fda2ec72b68db30898e3cd` | `c884ea4b4736b245520364697f45cbf14a2f63119fbc5b20763599056d3c5a04` | 1 |
-| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `1d335b99485bc826b3884f1d11fb28d6597a40b9ba1736f5aa8aba80cd733d56` | `b510524d68142e1c56f5db50518288f2da73588b1d05824a2cebc6378ef57f66` | 1 |
+| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `e7a3ae7852ac21b76116b7618e7778187aa65daa4c65b062e64d876c7371d143` | `9e8209ff0c1c868bc533c57755d3b2348ae892c4aa6d3ec8fc7dd30a2d218820` | 1 |
 | `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b` | `efcc02d642dacdff3f28dac8946c8878180d0ef83875ea5feff1ab89b5c9c126` | 1 |
-| `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `2a1fbe9eb417cd8a472510c73b562d4c7ccbb39c7bf76a6a9ddd06dd983c47e3` | `a96b6aa6fec82dfb156805a23c0aad2bd2234ad31360b518328553c7b450750a` | 1 |
+| `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `2a1fbe9eb417cd8a472510c73b562d4c7ccbb39c7bf76a6a9ddd06dd983c47e3` | `944ee2c99bfde59a74d232317a9da57e812a0c844e8abb75862163045f3928db` | 1 |
 | `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `9c3a7bb597a2b8ab2fd4ad7563dad5cd4531df5615f1b57683dbe1c300bbe644` | `232893d4d8fd8a293bd6b6288aacb1748be4ec1e0ab88c8bd9c8cc55dbd2d1b7` | 1 |
 | `system.kernel-ideal-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `0df4c834a95038ad946861742a59b5d594c65badea7eee2d3943cbf5ad0f6eef` | `e0e9a3b89fd3402e74e01bd31bf48ac1739f3196098be2c69e2db1dbdf8405a9` | 1 |
 | `system.kernel-minimum-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `a5c750ab3bcb48f160e0f8ba00dbed347439b8de05051a6d3628cd11be8d6754` | `54e7383b0e9b75b22382bdc664680717a92458a4578662619d0edf85c4401f76` | 1 |
@@ -2277,10 +2277,10 @@ Windows Internals references:
 - Area: `Kernel / Heterogeneous Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json`
-- Source SHA256: `1d335b99485bc826b3884f1d11fb28d6597a40b9ba1736f5aa8aba80cd733d56`
-- Proof SHA256: `b510524d68142e1c56f5db50518288f2da73588b1d05824a2cebc6378ef57f66`
+- Source SHA256: `e7a3ae7852ac21b76116b7618e7778187aa65daa4c65b062e64d876c7371d143`
+- Proof SHA256: `9e8209ff0c1c868bc533c57755d3b2348ae892c4aa6d3ec8fc7dd30a2d218820`
 
-**Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.
+**Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror, raw ControlSet001 trace, plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.
 
 **Targets**
 
@@ -2297,6 +2297,7 @@ Windows Internals references:
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
 | `nohuto-dynamic-hetero-policy-mirror` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | nohuto mirror: dynamic heterogeneous CPU policy notes and kernel pseudocode | `medium` |
 | `nohuto-session-manager-quota` | `registry-observation` | `VM registry observation` | nohuto Session Manager quota-system trace | `medium` |
+| `regkit-default-dynamic-hetero-cpu-policy-trace` | `registry-observation` | `VM registry observation` | nohuto trace for DefaultDynamicHeteroCpuPolicy | `high` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
 **Provenance**
@@ -2327,7 +2328,7 @@ Windows Internals references:
 | source_url | Docs/tweaks/_source-mirrors/win-config/system/desc.md |
 | exact_quote_or_path | "DefaultDynamicHeteroCpuPolicy" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7). |
 | key_found_on_page | True |
-| notes | Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, and Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. |
+| notes | Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. |
 ### `system.kernel-disable-low-qos-timer-resolution`
 
 - Status: `deprecated`
@@ -2394,9 +2395,9 @@ Windows Internals references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json`
 - Source SHA256: `2a1fbe9eb417cd8a472510c73b562d4c7ccbb39c7bf76a6a9ddd06dd983c47e3`
-- Proof SHA256: `a96b6aa6fec82dfb156805a23c0aad2bd2234ad31360b518328553c7b450750a`
+- Proof SHA256: `944ee2c99bfde59a74d232317a9da57e812a0c844e8abb75862163045f3928db`
 
-**Summary:** Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcQueueDepth = 4, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcQueueDepth = 4, and the decompiled system-information paths now show the kernel queue depth being set and exported, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
 **Targets**
 
@@ -2411,6 +2412,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `ghidra-dpc-queue-depth-system-info` | `decompilation` | `Ghidra decompilation` | Decompiled DPC queue-depth system-information handler | `high` |
 
 **Provenance**
 
@@ -2440,7 +2442,7 @@ Windows Internals references:
 | source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
 | exact_quote_or_path | *(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate; |
 | key_found_on_page | True |
-| notes | Kernel DPC queue-depth audit trail. The decompiled path shows the exact kernel values exported together. |
+| notes | Kernel DPC queue-depth audit trail. The decompiled paths show the exact kernel values exported together and the setter side that loads KiMaximumDpcQueueDepth from the system-information buffer. |
 ### `system.kernel-dpc-watchdog-period`
 
 - Status: `deprecated`
