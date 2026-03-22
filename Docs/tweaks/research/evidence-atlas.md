@@ -21805,7 +21805,7 @@ Blocking issues:
 | Source file | `Docs/tweaks/research/records/developer.terminal-dev-mode.review.json` |
 | Apply allowed | `False` |
 | Confidence | `medium` |
-| Needs VM validation | `True` |
+| Needs VM validation | `False` |
 
 **Summary:** Deprecated audit trail for the Windows Terminal internal-flag bundle. The current app writes HKCU\Software\Microsoft\Windows Terminal\DeveloperMode and EnableDebugTap, but this research pass did not capture a published registry contract for either value.
 
@@ -21862,6 +21862,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup | `medium` | behavior, app-mismatch |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | C:\Tools\WindowsTerminal\terminal-1.24.10621.0\TerminalApp.dll; C:\Temp\terminal-ghidra.txt; C:\Temp\terminal-ghidra-enabledebugtap.txt | `medium` | negative-evidence, binary-scan |
+| `wpr-terminal-launch-trace` | `wpr-trace` | `unspecified` | WPR capture of Windows Terminal launch | C:\Temp\terminal-launch.etl | `low` | behavior, process-tree, startup-context |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -21881,12 +21883,13 @@ Nohuto lineage references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
-| Needs VM validation | `True` |
-| Why | This research pass did not capture a primary Windows Terminal source for the exact registry values written by the app. |
+| Needs VM validation | `False` |
+| Why | VM corroboration was backfilled with Ghidra raw-memory scans and a WPR launch capture, but this research pass still did not capture a primary Windows Terminal source for the exact registry values written by the app. |
 
 Blocking issues:
 - No primary Windows Terminal source for DeveloperMode or EnableDebugTap was captured in this pass.
 - The public Windows Terminal documentation captured here focuses on settings.json rather than the registry flags written by the app.
+- The Ghidra scan only provides negative string evidence, not a documented registry contract.
 
 ---
 

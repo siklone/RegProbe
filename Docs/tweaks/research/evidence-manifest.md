@@ -61,7 +61,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `ef504ed9c183157c41fcb1d64f0b90fe16a8860e50cf35c0cf518e9bb2f4bcdf` | `2783841c143e66f525777e03f8af340643b6a6a136a78cd343969861c71eb348` | 1 |
 | `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `8e2fbbfcb328d9ccc42ba64843c5502477aba92c21fda2ec72b68db30898e3cd` | `c884ea4b4736b245520364697f45cbf14a2f63119fbc5b20763599056d3c5a04` | 1 |
 | `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `1d335b99485bc826b3884f1d11fb28d6597a40b9ba1736f5aa8aba80cd733d56` | `b510524d68142e1c56f5db50518288f2da73588b1d05824a2cebc6378ef57f66` | 1 |
-| `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `34c8f0c57f6189c472fad32f0efb66483af1814bbb15c2d037e9a1f03c91057e` | `20b23073bf938dad8354fd9353b673d93f200f5d2d987a93302fe20df0a61f0d` | 1 |
+| `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b` | `20b23073bf938dad8354fd9353b673d93f200f5d2d987a93302fe20df0a61f0d` | 1 |
 | `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `58e130cb608027ee2908af5c820c7a9b6145e90f97720d99bd072aac62ed9401` | `a96b6aa6fec82dfb156805a23c0aad2bd2234ad31360b518328553c7b450750a` | 1 |
 | `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `6aa525e9f89470f7e88fff296c53f34018cef943a4804667123d1af9db6cf31d` | `9a8a79a362286c1eddb764cd2bb03d381f206a395c99c8eeaf22c4bab750f1be` | 1 |
 | `system.kernel-ideal-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `0df4c834a95038ad946861742a59b5d594c65badea7eee2d3943cbf5ad0f6eef` | `e0e9a3b89fd3402e74e01bd31bf48ac1739f3196098be2c69e2db1dbdf8405a9` | 1 |
@@ -434,6 +434,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | `medium` |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | `medium` |
+| `wpr-terminal-launch-trace` | `wpr-trace` | `unspecified` | WPR capture of Windows Terminal launch | `low` |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
 **Provenance**
@@ -2331,7 +2333,7 @@ Windows Internals references:
 - Area: `Kernel / Timer Resolution Behavior`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json`
-- Source SHA256: `34c8f0c57f6189c472fad32f0efb66483af1814bbb15c2d037e9a1f03c91057e`
+- Source SHA256: `5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b`
 - Proof SHA256: `20b23073bf938dad8354fd9353b673d93f200f5d2d987a93302fe20df0a61f0d`
 
 **Summary:** Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DisableLowQosTimerResolution = 1, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.

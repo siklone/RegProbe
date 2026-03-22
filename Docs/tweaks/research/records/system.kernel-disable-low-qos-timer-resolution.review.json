@@ -4,7 +4,7 @@
     "record_id":  "system.kernel-disable-low-qos-timer-resolution",
     "tweak_id":  "system.kernel-disable-low-qos-timer-resolution",
     "record_status":  "deprecated",
-    "summary":  "Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DisableLowQosTimerResolution = 1, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+    "summary":  "Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DisableLowQosTimerResolution = 1, and the mirror plus decompiled kernel path now show the explicit low-QoS timer-resolution gate even though this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
     "setting":  {
                     "name":  "Disable Low QoS Timer Resolution",
                     "category":  "System",
@@ -13,7 +13,7 @@
                     "casual_explanation":  "This appears to be a low-level kernel switch related to how Windows handles low-QoS timer resolution behavior. It is not a normal user setting.",
                     "why_people_change_it":  "People would only touch it when reproducing timer-resolution experiments or undoing manual registry changes from advanced tweak guides.",
                     "tradeoffs_overview":  "Timer-resolution behavior affects power usage, responsiveness, and how often the system wakes to service timers. Microsoft documents the general timer-resolution tradeoff, but this research pass did not capture a primary Microsoft source for the exact registry key the app writes.",
-                    "professional_notes":  "The repo research notes list DisableLowQosTimerResolution = 1 and associate it with KeDisableLowQosTimerResolution. Microsoft documents that increasing timer resolution can reduce overall system performance and power efficiency, and it publishes adjacent timer-resolution controls such as timeBeginPeriod and QosTimerResolution. However, this research pass did not capture a primary Microsoft page that documents the kernel registry value DisableLowQosTimerResolution itself. The record therefore treats the app write as observed repo provenance only.",
+                    "professional_notes":  "The repo research notes list DisableLowQosTimerResolution = 1 and associate it with KeDisableLowQosTimerResolution. Microsoft documents that increasing timer resolution can reduce overall system performance and power efficiency, and it publishes adjacent timer-resolution controls such as timeBeginPeriod and QosTimerResolution. The mirrored decompiled routine PspSetProcessTimerResolutionPolicy.c shows the kernel gate directly, but this research pass still did not capture a primary Microsoft page that documents the kernel registry value DisableLowQosTimerResolution itself. The record therefore treats the app write as observed repo provenance plus kernel pseudocode corroboration.",
                     "targets":  [
                                     {
                                         "target_id":  "disable-low-qos-timer-resolution",
@@ -172,6 +172,20 @@
                                           "behavior",
                                           "side-effects",
                                           "version-scope"
+                         ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "nohuto-low-qos-timer-resolution-ghidra",
+                         "kind":  "decompilation",
+                         "title":  "nohuto mirror: low-QoS timer resolution gate",
+                         "location":  "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PspSetProcessTimerResolutionPolicy.c; Docs/tweaks/_source-mirrors/win-config/system/desc.md",
+                         "summary":  "The decompiled kernel routine checks KeDisableLowQosTimerResolution before toggling the process policy bit and calling ExpUpdateTimerResolution, and the mirror docs record the same DisableLowQosTimerResolution = 1 gate.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "behavior",
+                                          "runtime-gate"
                                       ],
                          "strength":  "high"
                      },
@@ -222,9 +236,9 @@
                        ],
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
-                             "exact_quote_or_path":  "\"DisableLowQosTimerResolution\" = 1; // KeDisableLowQosTimerResolution",
+                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\PspSetProcessTimerResolutionPolicy.c",
+                             "exact_quote_or_path":  "if ( KeDisableLowQosTimerResolution ) { ... if ( a2 ) { ... } else { ... } ... ExpUpdateTimerResolution(0, 0, 0LL); }",
                              "key_found_on_page":  true,
-                             "notes":  "Timer-resolution audit trail. The mirror and kernel routine show the explicit low-QoS timer-resolution gate."
+                             "notes":  "Timer-resolution audit trail. The mirror docs record DisableLowQosTimerResolution = 1, and the decompiled kernel routine shows the gate controlling the policy bit and timer-resolution refresh path."
                          }
 }

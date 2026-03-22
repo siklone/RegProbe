@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T01:10:25.912486Z",
+  "generated_utc": "2026-03-22T01:17:46.564608Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -9368,7 +9368,7 @@
       "category": "System",
       "area": "Kernel / Timer Resolution Behavior",
       "scope": "device",
-      "summary": "Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DisableLowQosTimerResolution = 1, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+      "summary": "Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DisableLowQosTimerResolution = 1, and the mirror plus decompiled kernel path now show the explicit low-QoS timer-resolution gate even though this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -9543,6 +9543,21 @@
           "origin": "Microsoft official doc"
         },
         {
+          "evidence_id": "nohuto-low-qos-timer-resolution-ghidra",
+          "kind": "decompilation",
+          "title": "nohuto mirror: low-QoS timer resolution gate",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PspSetProcessTimerResolutionPolicy.c; Docs/tweaks/_source-mirrors/win-config/system/desc.md",
+          "summary": "The decompiled kernel routine checks KeDisableLowQosTimerResolution before toggling the process policy bit and calling ExpUpdateTimerResolution, and the mirror docs record the same DisableLowQosTimerResolution = 1 gate.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "runtime-gate"
+          ],
+          "origin": "Ghidra decompilation"
+        },
+        {
           "evidence_id": "repo-system-doc-kernel",
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
@@ -9573,10 +9588,10 @@
         }
       ],
       "validation_proof": {
-        "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
-        "exact_quote_or_path": "\"DisableLowQosTimerResolution\" = 1; // KeDisableLowQosTimerResolution",
+        "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\PspSetProcessTimerResolutionPolicy.c",
+        "exact_quote_or_path": "if ( KeDisableLowQosTimerResolution ) { ... if ( a2 ) { ... } else { ... } ... ExpUpdateTimerResolution(0, 0, 0LL); }",
         "key_found_on_page": true,
-        "notes": "Timer-resolution audit trail. The mirror and kernel routine show the explicit low-QoS timer-resolution gate."
+        "notes": "Timer-resolution audit trail. The mirror docs record DisableLowQosTimerResolution = 1, and the decompiled kernel routine shows the gate controlling the policy bit and timer-resolution refresh path."
       },
       "provenance": {
         "coverage_state": "repo-backed",

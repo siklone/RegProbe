@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T01:10:25.929156Z",
+  "generated_utc": "2026-03-22T01:17:46.511615Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -494,11 +494,12 @@
         "recommended_for_general_users": false,
         "restore_default_supported": false,
         "restore_previous_supported": false,
-        "needs_vm_validation": true,
-        "why": "This research pass did not capture a primary Windows Terminal source for the exact registry values written by the app.",
+        "needs_vm_validation": false,
+        "why": "VM corroboration was backfilled with Ghidra raw-memory scans and a WPR launch capture, but this research pass still did not capture a primary Windows Terminal source for the exact registry values written by the app.",
         "blocking_issues": [
           "No primary Windows Terminal source for DeveloperMode or EnableDebugTap was captured in this pass.",
-          "The public Windows Terminal documentation captured here focuses on settings.json rather than the registry flags written by the app."
+          "The public Windows Terminal documentation captured here focuses on settings.json rather than the registry flags written by the app.",
+          "The Ghidra scan only provides negative string evidence, not a documented registry contract."
         ]
       },
       "app_current_implementation": {
@@ -689,6 +690,33 @@
             "app-mismatch"
           ],
           "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "ghidra-terminalapp-memory-scan",
+          "kind": "ghidra-headless",
+          "title": "Ghidra headless raw-memory scan of TerminalApp.dll",
+          "location": "C:\\Tools\\WindowsTerminal\\terminal-1.24.10621.0\\TerminalApp.dll; C:\\Temp\\terminal-ghidra.txt; C:\\Temp\\terminal-ghidra-enabledebugtap.txt",
+          "summary": "Headless Ghidra raw-memory scans of TerminalApp.dll wrote NO_MATCH for DeveloperMode and EnableDebugTap, so the flags are not present as plain strings in the imported binary.",
+          "strength": "medium",
+          "supports": [
+            "negative-evidence",
+            "binary-scan"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "wpr-terminal-launch-trace",
+          "kind": "wpr-trace",
+          "title": "WPR capture of Windows Terminal launch",
+          "location": "C:\\Temp\\terminal-launch.etl",
+          "summary": "GeneralProfile WPR capture of wt.exe launch captured the startup sequence for manual trace review. This is supporting runtime context, not registry-semantic proof.",
+          "strength": "low",
+          "supports": [
+            "behavior",
+            "process-tree",
+            "startup-context"
+          ],
+          "origin": "unspecified"
         },
         {
           "evidence_id": "app-developer-provider",
@@ -9459,8 +9487,8 @@
       "tweak_id": "system.kernel-disable-low-qos-timer-resolution",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json",
-      "source_file_sha256": "34c8f0c57f6189c472fad32f0efb66483af1814bbb15c2d037e9a1f03c91057e",
-      "source_file_size_bytes": 18208,
+      "source_file_sha256": "5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b",
+      "source_file_size_bytes": 19643,
       "name": "Disable Low QoS Timer Resolution",
       "category": "System",
       "area": "Kernel / Timer Resolution Behavior",
