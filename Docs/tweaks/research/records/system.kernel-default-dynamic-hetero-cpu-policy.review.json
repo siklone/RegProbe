@@ -4,7 +4,7 @@
   "record_id": "system.kernel-default-dynamic-hetero-cpu-policy",
   "tweak_id": "system.kernel-default-dynamic-hetero-cpu-policy",
   "record_status": "deprecated",
-    "summary": "Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror, raw ControlSet001 trace, plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path.",
+  "summary": "Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror, raw ControlSet001 trace, plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path. A strict Win25H2Clean sweep later confirmed that requested values 0..7 matched after two reboot cycles per sample, but it did not reveal a monotonic performance trend.",
   "setting": {
     "name": "Default Dynamic Heterogeneous CPU Policy",
     "category": "System",
@@ -218,6 +218,20 @@
       "strength": "high"
     },
     {
+      "evidence_id": "vm-hetero-policy-strict-sweep-20260322",
+      "kind": "runtime-benchmark",
+      "title": "Strict VM sweep of DefaultDynamicHeteroCpuPolicy values 0..7",
+      "location": "Docs/tweaks/research/notes/hetero-dynamic-policy-strict-sweep-20260322.md; H:\\Temp\\vm-tooling-staging\\hetero-sweep-strict\\hetero-sweep-strict-summary.csv; H:\\Temp\\vm-tooling-staging\\hetero-sweep-strict\\hetero-sweep-strict-detail.json",
+      "summary": "The Win25H2Clean VM was swept through requested values 0..7 with two clean reboot cycles per sample. After each reboot the guest settled before a readback, and the benchmark value matched the requested value on boot 1, boot 2, and the benchmark pass for every sample. CPU timings stayed in a tight band and disk throughput varied without a monotonic trend across the requested values. The VM was restored to DefaultDynamicHeteroCpuPolicy = 3 after the sweep.",
+      "supports": [
+        "value",
+        "behavior",
+        "performance",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
@@ -248,12 +262,12 @@
     "Can a primary Microsoft source for DefaultDynamicHeteroCpuPolicy be captured?",
     "Should the app surface this only as an experimental hybrid-core scheduling setting?"
   ],
-  "last_reviewed_utc": "2026-03-22T10:39:12.8841164Z",
+  "last_reviewed_utc": "2026-03-22T11:19:19.559381Z",
   "validation_proof": {
     "source_url": "Docs/tweaks/_source-mirrors/win-config/system/desc.md",
     "exact_quote_or_path": "\"DefaultDynamicHeteroCpuPolicy\" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7).",
     "key_found_on_page": true,
-    "notes": "Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family."
+    "notes": "Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. A strict Win25H2Clean sweep later confirmed that requested values 0..7 matched after two reboot cycles per sample, but it did not reveal a monotonic performance trend."
   },
-  "professional_notes": "The repo research notes list DefaultDynamicHeteroCpuPolicy = 3 and describe the value range 0..7, including 3 = Small and 5 = Dynamic. Microsoft publishes official heterogeneous scheduling policy values for the power-policy SchedulingPolicy and ShortSchedulingPolicy settings, where 0..5 map to all processors, performant processors, prefer performant processors, efficient processors, prefer efficient processors, and automatic. That official material confirms the feature area and that 3 is a meaningful 'efficient processors' style preference, but this research pass did not capture a primary Microsoft source that maps those semantics onto the kernel registry key DefaultDynamicHeteroCpuPolicy. The nohuto mirror now also records the same family explicitly: Docs/tweaks/_source-mirrors/win-config/system/desc.md documents 'DefaultDynamicHeteroCpuPolicy = 3' and the 0..7 family, Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, and raw ControlSet001 traces corroborate the exact kernel path. The local Session-Manager trace also shows EnableCpuQuota in the Quota System block, which should not be conflated with DefaultDynamicHeteroCpuPolicy."
+  "professional_notes": "The repo research notes list DefaultDynamicHeteroCpuPolicy = 3 and describe the value range 0..7, including 3 = Small and 5 = Dynamic. Microsoft publishes official heterogeneous scheduling policy values for the power-policy SchedulingPolicy and ShortSchedulingPolicy settings, where 0..5 map to all processors, performant processors, prefer performant processors, efficient processors, prefer efficient processors, and automatic. That official material confirms the feature area and that 3 is a meaningful 'efficient processors' style preference, but this research pass did not capture a primary Microsoft source that maps those semantics onto the kernel registry key DefaultDynamicHeteroCpuPolicy. The nohuto mirror now also records the same family explicitly: Docs/tweaks/_source-mirrors/win-config/system/desc.md documents 'DefaultDynamicHeteroCpuPolicy = 3' and the 0..7 family, Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, and raw ControlSet001 traces corroborate the exact kernel path. The local Session-Manager trace also shows EnableCpuQuota in the Quota System block, which should not be conflated with DefaultDynamicHeteroCpuPolicy. A strict Win25H2Clean sweep later confirmed that the requested values 0..7 persisted across two reboot cycles per sample, but the measured CPU and disk timings did not show a monotonic trend."
 }
