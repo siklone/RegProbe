@@ -25062,7 +25062,7 @@ Blocking issues:
 | Confidence | `low` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\AdjustDpcThreshold = 20, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\AdjustDpcThreshold = 20, and the decompiled kernel set/query path now shows the raw value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
 **Current implementation**
 
@@ -25123,6 +25123,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `ghidra-adjust-dpc-threshold-system-info` | `decompilation` | `Ghidra decompilation` | Decompiled DPC threshold system-information handler | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c; Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c | `high` | path, value, behavior, runtime-gate |
 
 **Validation proof**
 
@@ -25131,7 +25132,7 @@ Windows Internals references:
 | Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
 | Exact quote / path | "AdjustDpcThreshold" = 20; // KiAdjustDpcThreshold |
 | Key found on page | `True` |
-| Notes | Kernel DPC threshold audit trail. The mirror exposes the raw kernel variable and the corresponding registry value. |
+| Notes | Kernel DPC threshold audit trail. The mirror exposes the raw kernel variable and the corresponding registry value, and the decompiled system-information paths corroborate the kernel consumption and query behavior. |
 
 **Decision**
 

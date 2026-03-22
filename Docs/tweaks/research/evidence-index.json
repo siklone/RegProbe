@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T01:28:04.476674Z",
+  "generated_utc": "2026-03-22T01:28:51.550795Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -9686,7 +9686,7 @@
       "category": "System",
       "area": "Kernel / DPC Scheduling",
       "scope": "device",
-      "summary": "Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcQueueDepth = 4, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+      "summary": "Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcQueueDepth = 4, and the decompiled system-information paths now show the kernel queue depth being set and exported, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -9854,13 +9854,28 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "ghidra-dpc-queue-depth-system-info",
+          "kind": "decompilation",
+          "title": "Decompiled DPC queue-depth system-information handler",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c; Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c",
+          "summary": "The decompiled system-information setter populates KiMaximumDpcQueueDepth from the caller buffer, and the query path exports KiMaximumDpcQueueDepth back out, proving the kernel queue depth is consumed and reported by system code.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "runtime-gate"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
         "exact_quote_or_path": "*(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate;",
         "key_found_on_page": true,
-        "notes": "Kernel DPC queue-depth audit trail. The decompiled path shows the exact kernel values exported together."
+        "notes": "Kernel DPC queue-depth audit trail. The decompiled paths show the exact kernel values exported together and the setter side that loads KiMaximumDpcQueueDepth from the system-information buffer."
       },
       "provenance": {
         "coverage_state": "repo-backed",

@@ -58,11 +58,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.dwm-disable-mpo` | deprecated | `Docs/tweaks/research/records/system.dwm-disable-mpo.review.json` | `86932e4673dd8c9e5db4cd9d0a7cc82d4cb3dd53c2150a5e079d983c3ff674dc` | `cff71e2f37ceccde58b2eafe48044a4ac42b5453b9676780d76aa89c5cafe309` | 1 |
 | `system.graphics-disable-overlays` | deprecated | `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json` | `6cf5e02e4ced0aa7b215752645b3239269b66d175b298283f93829863e01cf92` | `dbf1407cc708022946c9f7e61f339d401d97e7a859bb0e947f2824dbf29a803e` | 1 |
 | `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `98ef739d16ea86aabaedb34b97ce872b4f0fcd5fcb7d32ab364a8b863d489580` | `de461e3f29a05889c82ae0349ddf469cce6bcacc3a632e36c6bdcd1b029992df` | 1 |
-| `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc` | `2783841c143e66f525777e03f8af340643b6a6a136a78cd343969861c71eb348` | 1 |
+| `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc` | `84c3a10e4279611b07fb235549e264875a9a89304dfd3c10b30994d093f78c65` | 1 |
 | `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `8e2fbbfcb328d9ccc42ba64843c5502477aba92c21fda2ec72b68db30898e3cd` | `c884ea4b4736b245520364697f45cbf14a2f63119fbc5b20763599056d3c5a04` | 1 |
 | `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `1d335b99485bc826b3884f1d11fb28d6597a40b9ba1736f5aa8aba80cd733d56` | `b510524d68142e1c56f5db50518288f2da73588b1d05824a2cebc6378ef57f66` | 1 |
 | `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b` | `efcc02d642dacdff3f28dac8946c8878180d0ef83875ea5feff1ab89b5c9c126` | 1 |
-| `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `58e130cb608027ee2908af5c820c7a9b6145e90f97720d99bd072aac62ed9401` | `a96b6aa6fec82dfb156805a23c0aad2bd2234ad31360b518328553c7b450750a` | 1 |
+| `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `2a1fbe9eb417cd8a472510c73b562d4c7ccbb39c7bf76a6a9ddd06dd983c47e3` | `a96b6aa6fec82dfb156805a23c0aad2bd2234ad31360b518328553c7b450750a` | 1 |
 | `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `9c3a7bb597a2b8ab2fd4ad7563dad5cd4531df5615f1b57683dbe1c300bbe644` | `232893d4d8fd8a293bd6b6288aacb1748be4ec1e0ab88c8bd9c8cc55dbd2d1b7` | 1 |
 | `system.kernel-ideal-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `0df4c834a95038ad946861742a59b5d594c65badea7eee2d3943cbf5ad0f6eef` | `e0e9a3b89fd3402e74e01bd31bf48ac1739f3196098be2c69e2db1dbdf8405a9` | 1 |
 | `system.kernel-minimum-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `a5c750ab3bcb48f160e0f8ba00dbed347439b8de05051a6d3628cd11be8d6754` | `54e7383b0e9b75b22382bdc664680717a92458a4578662619d0edf85c4401f76` | 1 |
@@ -2167,9 +2167,9 @@ Windows Internals references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json`
 - Source SHA256: `04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc`
-- Proof SHA256: `2783841c143e66f525777e03f8af340643b6a6a136a78cd343969861c71eb348`
+- Proof SHA256: `84c3a10e4279611b07fb235549e264875a9a89304dfd3c10b30994d093f78c65`
 
-**Summary:** Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\AdjustDpcThreshold = 20, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\AdjustDpcThreshold = 20, and the decompiled kernel set/query path now shows the raw value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
 
 **Targets**
 
@@ -2184,6 +2184,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `ghidra-adjust-dpc-threshold-system-info` | `decompilation` | `Ghidra decompilation` | Decompiled DPC threshold system-information handler | `high` |
 
 **Provenance**
 
@@ -2213,7 +2214,7 @@ Windows Internals references:
 | source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
 | exact_quote_or_path | "AdjustDpcThreshold" = 20; // KiAdjustDpcThreshold |
 | key_found_on_page | True |
-| notes | Kernel DPC threshold audit trail. The mirror exposes the raw kernel variable and the corresponding registry value. |
+| notes | Kernel DPC threshold audit trail. The mirror exposes the raw kernel variable and the corresponding registry value, and the decompiled system-information paths corroborate the kernel consumption and query behavior. |
 ### `system.kernel-cache-aware-scheduling`
 
 - Status: `deprecated`
@@ -2392,7 +2393,7 @@ Windows Internals references:
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json`
-- Source SHA256: `58e130cb608027ee2908af5c820c7a9b6145e90f97720d99bd072aac62ed9401`
+- Source SHA256: `2a1fbe9eb417cd8a472510c73b562d4c7ccbb39c7bf76a6a9ddd06dd983c47e3`
 - Proof SHA256: `a96b6aa6fec82dfb156805a23c0aad2bd2234ad31360b518328553c7b450750a`
 
 **Summary:** Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcQueueDepth = 4, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
