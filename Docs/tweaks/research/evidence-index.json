@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T10:13:17.700979Z",
+  "generated_utc": "2026-03-22T10:25:08.007214Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -9329,36 +9329,6 @@
           "origin": "VM registry observation"
         },
         {
-          "evidence_id": "vm-hetero-policy-sweep-20260322",
-          "kind": "runtime-benchmark",
-          "title": "VM sweep of DefaultDynamicHeteroCpuPolicy values 0..7",
-          "location": "Docs/tweaks/research/notes/hetero-dynamic-policy-sweep-20260322.md; H:\\Temp\\vm-tooling-staging\\hetero-sweep\\hetero-sweep-summary.csv; H:\\Temp\\vm-tooling-staging\\hetero-sweep\\hetero-sweep-detail.json",
-          "summary": "The Win25H2Clean VM was swept through requested values 0..7 with a reboot between each sample. The benchmark captured CPU and disk timings after each reboot, and the observed registry value lagged one iteration behind the requested value. The VM was restored to DefaultDynamicHeteroCpuPolicy = 3 after the sweep.",
-          "strength": "medium",
-          "supports": [
-            "value",
-            "behavior",
-            "performance",
-            "version-scope"
-          ],
-          "origin": "unspecified"
-        },
-        {
-          "evidence_id": "vm-hetero-occt-wpr-20260322",
-          "kind": "runtime-benchmark",
-          "title": "OCCT CPU stress and WPR memory trace for DefaultDynamicHeteroCpuPolicy",
-          "location": "Docs/tweaks/research/notes/hetero-dynamic-policy-occt-wpr-20260322.md; H:\\Temp\\vm-tooling-staging\\occt-bench-click.txt; H:\\Temp\\vm-tooling-staging\\occt-bench-debug.txt; H:\\Temp\\vm-tooling-staging\\winsat-mem.etl; C:\\Temp\\vm-tooling-staging\\occt-wpr.etl",
-          "summary": "The Win25H2Clean guest ran OCCT CPU stress and benchmark views while WPR was active, and a separate WinSAT memory pass produced a usable WPR trace. OCCT text output recorded CPU-started/stopped messages and live CPU/memory figures while the VM remained on DefaultDynamicHeteroCpuPolicy = 3. A concurrent WinSAT disk attempt did not produce a reusable score because another WinSAT copy was already running, so no disk result is claimed from this pass.",
-          "strength": "medium",
-          "supports": [
-            "value",
-            "behavior",
-            "performance",
-            "version-scope"
-          ],
-          "origin": "unspecified"
-        },
-        {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -9377,7 +9347,7 @@
         "source_url": "Docs/tweaks/_source-mirrors/win-config/system/desc.md",
         "exact_quote_or_path": "\"DefaultDynamicHeteroCpuPolicy\" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7).",
         "key_found_on_page": true,
-        "notes": "Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. A later Win25H2Clean VM sweep recorded requested values 0..7, but the observed registry value lagged one iteration behind the request; see Docs/tweaks/research/notes/hetero-dynamic-policy-sweep-20260322.md. A later OCCT/WPR pass captured CPU stress and a WinSAT memory trace; see Docs/tweaks/research/notes/hetero-dynamic-policy-occt-wpr-20260322.md."
+        "notes": "Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family."
       },
       "provenance": {
         "coverage_state": "repo-backed",

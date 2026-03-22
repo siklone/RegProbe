@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T10:13:17.696171Z",
+  "generated_utc": "2026-03-22T10:25:08.250330Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -9225,8 +9225,8 @@
       "tweak_id": "system.kernel-default-dynamic-hetero-cpu-policy",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json",
-      "source_file_sha256": "286274e911f7e63827baaed38883315c05499136b198188c89a6a70da493b108",
-      "source_file_size_bytes": 17484,
+      "source_file_sha256": "fe57a11eb721577436d0f7d166b78341efa6817f8d8c23d58d1ee0336c106930",
+      "source_file_size_bytes": 15170,
       "name": "Default Dynamic Heterogeneous CPU Policy",
       "category": "System",
       "area": "Kernel / Heterogeneous Scheduling",
@@ -9451,21 +9451,6 @@
           "origin": "VM registry observation"
         },
         {
-          "evidence_id": "vm-hetero-policy-sweep-20260322",
-          "kind": "runtime-benchmark",
-          "title": "VM sweep of DefaultDynamicHeteroCpuPolicy values 0..7",
-          "location": "Docs/tweaks/research/notes/hetero-dynamic-policy-sweep-20260322.md; H:\\Temp\\vm-tooling-staging\\hetero-sweep\\hetero-sweep-summary.csv; H:\\Temp\\vm-tooling-staging\\hetero-sweep\\hetero-sweep-detail.json",
-          "summary": "The Win25H2Clean VM was swept through requested values 0..7 with a reboot between each sample. The benchmark captured CPU and disk timings after each reboot, and the observed registry value lagged one iteration behind the requested value. The VM was restored to DefaultDynamicHeteroCpuPolicy = 3 after the sweep.",
-          "strength": "medium",
-          "supports": [
-            "value",
-            "behavior",
-            "performance",
-            "version-scope"
-          ],
-          "origin": "unspecified"
-        },
-        {
           "evidence_id": "app-system-registry-provider",
           "kind": "repo-code",
           "title": "Current app implementation",
@@ -9484,9 +9469,9 @@
         "source_url": "Docs/tweaks/_source-mirrors/win-config/system/desc.md",
         "exact_quote_or_path": "\"DefaultDynamicHeteroCpuPolicy\" = 3; // (policy enum only) // Behavior of Dynamic hetero policy All (0) ... BiasedLarge (7).",
         "key_found_on_page": true,
-        "notes": "Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family. A later Win25H2Clean VM sweep recorded requested values 0..7, but the observed registry value lagged one iteration behind the request; see Docs/tweaks/research/notes/hetero-dynamic-policy-sweep-20260322.md."
+        "notes": "Backfilled from nohuto mirror evidence. Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c shows KiDefaultHeteroCpuPolicy being derived from KiDesiredHeteroCpuPolicy, Docs/tweaks/_source-mirrors/win-registry/README.md mirrors the same 3 mapping, and raw ControlSet001 traces corroborate the exact kernel path. This is mirror-backed provenance, not a Microsoft policy citation. The adjacent Microsoft SchedulingPolicy docs remain separate evidence for the value family."
       },
-      "validation_proof_sha256": "be1fbe2178e2c2831e61fae301852de56c6c5d57ea811b395fa81ec0076b19ce",
+      "validation_proof_sha256": "9e8209ff0c1c868bc533c57755d3b2348ae892c4aa6d3ec8fc7dd30a2d218820",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
