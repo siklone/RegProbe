@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T01:25:21.130539Z",
+  "generated_utc": "2026-03-22T01:28:04.461400Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -6881,7 +6881,7 @@
       "category": "Security",
       "area": "Observed Session Manager Registry Setting",
       "scope": "device",
-      "summary": "Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail.",
+      "summary": "Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail that is now corroborated by raw registry traces under ControlSet001.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": false,
@@ -6932,10 +6932,11 @@
               "state_kind": "value",
               "value": 1,
               "label": "Observed app profile",
-              "meaning": "The app writes DisableWpbtExecution = 1 and community hardening references describe that as blocking WPBT execution, but this registry mapping is not yet backed by a primary Microsoft source in this dataset.",
+              "meaning": "The app writes DisableWpbtExecution = 1 and community hardening references plus raw registry traces describe that as blocking WPBT execution, but this registry mapping is not yet backed by a primary Microsoft source in this dataset.",
               "evidence_ids": [
                 "repo-security-note",
-                "app-security-provider"
+                "app-security-provider",
+                "regkit-session-manager-trace"
               ]
             }
           ]
@@ -7034,15 +7035,29 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "regkit-session-manager-trace",
+          "kind": "registry-observation",
+          "title": "nohuto regkit trace for Session Manager",
+          "location": "Docs/tweaks/_source-mirrors/regkit/assets/traces/23H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/24H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/25H2.txt; Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt",
+          "summary": "The raw registry traces list \\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager : DisableWpbtExecution, corroborating the observed Session Manager path.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "VM registry observation"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\security\\desc.md",
         "exact_quote_or_path": "\\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager : DisableWpbtExecution",
         "key_found_on_page": true,
-        "notes": "Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle."
+        "notes": "Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle and is corroborated by raw registry traces in the nohuto mirror."
       },
-      "validation_proof_sha256": "9340fb4ae045879f47ade1a08447c731fdae8aef759b7e34b637b51c36adb0d6",
+      "validation_proof_sha256": "591a298fdd99779c99b3623d6c7514ca2e7c0ee404b59a75c972181a18a0d9ff",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,
@@ -8711,8 +8726,8 @@
       "tweak_id": "system.kernel-adjust-dpc-threshold",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json",
-      "source_file_sha256": "ef504ed9c183157c41fcb1d64f0b90fe16a8860e50cf35c0cf518e9bb2f4bcdf",
-      "source_file_size_bytes": 15133,
+      "source_file_sha256": "04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc",
+      "source_file_size_bytes": 16586,
       "name": "Adjust DPC Threshold",
       "category": "System",
       "area": "Kernel / DPC Scheduling",

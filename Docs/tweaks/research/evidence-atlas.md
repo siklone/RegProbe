@@ -24307,7 +24307,7 @@ Blocking issues:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail.
+**Summary:** Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail that is now corroborated by raw registry traces under ControlSet001.
 
 **Current implementation**
 
@@ -24368,6 +24368,7 @@ Windows Internals references:
 | `ms-dfci-wpbt` | `official-doc` | `Microsoft official doc` | Microsoft Learn DFCI WPBT setting reference | https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings | `high` | behavior, allowed-values, default |
 | `repo-security-note` | `repo-doc` | `Current repo docs` | Repo security notes for WPBT | Docs/security/security.md | `medium` | path, value, app-mismatch |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `regkit-session-manager-trace` | `registry-observation` | `VM registry observation` | nohuto regkit trace for Session Manager | Docs/tweaks/_source-mirrors/regkit/assets/traces/23H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/24H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/25H2.txt; Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -24376,7 +24377,7 @@ Windows Internals references:
 | Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\security\desc.md |
 | Exact quote / path | \Registry\Machine\SYSTEM\ControlSet001\Control\Session Manager : DisableWpbtExecution |
 | Key found on page | `True` |
-| Notes | Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle. |
+| Notes | Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle and is corroborated by raw registry traces in the nohuto mirror. |
 
 **Decision**
 

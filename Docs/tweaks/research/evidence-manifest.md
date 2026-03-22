@@ -50,7 +50,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `privacy.disable-wmplayer-telemetry` | deprecated | `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json` | `eb82b2f7b510ee7e01878070a8b8be8997c49a78e4ee57bad6eef4bd6b968f41` | `47b485383cfd24386e8b25266f61526788ae38ccc1e22f2e5643ab572cbc10e1` | 1 |
 | `security.disable-vbs` | deprecated | `Docs/tweaks/research/records/security.disable-vbs.json` | `a4998ad636204c82f6ae87c6cf5903d7575241c8d5cbb489949b7b9612134856` | `875362a1cc4fae3a9ee03d01d96ae6e825dd46f3a80c1fa0fb1885197dc650f6` | 3 |
 | `security.disable-windows-update` | deprecated | `Docs/tweaks/research/records/security.disable-windows-update.review.json` | `1bac61cff5ed58ceea12e8e6577962425b03c9da57518804f8e1e1eb4c123163` | `e39f151336b7dc9297dcff821b6d7da188f5a89cce214c2111a8979f3650a881` | 2 |
-| `security.disable-wpbt` | deprecated | `Docs/tweaks/research/records/security.disable-wpbt.review.json` | `081fd53e38f7a7c927f7fd5e49443384edd9e53a10078c5219675a795dc9ec3f` | `9340fb4ae045879f47ade1a08447c731fdae8aef759b7e34b637b51c36adb0d6` | 1 |
+| `security.disable-wpbt` | deprecated | `Docs/tweaks/research/records/security.disable-wpbt.review.json` | `081fd53e38f7a7c927f7fd5e49443384edd9e53a10078c5219675a795dc9ec3f` | `591a298fdd99779c99b3623d6c7514ca2e7c0ee404b59a75c972181a18a0d9ff` | 1 |
 | `system.disable-game-dvr` | deprecated | `Docs/tweaks/research/records/system.disable-game-dvr.json` | `d4cd43987979de1e1cbb09cc70fb2428928176fb26e7abf5cfaa1eeaeb304b6d` | `4598eb3a4a7a554a32beb57abe4def5b4df7dc2cc841aa9df298709c324a6795` | 0 |
 | `system.disable-scheduled-tasks` | deprecated | `Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json` | `d4b01e85ca687ea57def840abfb5d85e4d259381f09ca8026847832c58b08385` | `14fdf96dc2d205ea9aecaa1d530e572e5f63a016031ec2c879b3605d5527a51e` | 7 |
 | `system.disable-search-highlights` | deprecated | `Docs/tweaks/research/records/system.disable-search-highlights.json` | `cbb37a1de1c09ae0e0fe5e377d3c8f591ef9e4c032aba829b18ed383e328ca30` | `2cebd2b8f3a1d2ecfae968fef5c0dda7bf435391ee0f1a7899d88b7023c6ca99` | 0 |
@@ -58,7 +58,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.dwm-disable-mpo` | deprecated | `Docs/tweaks/research/records/system.dwm-disable-mpo.review.json` | `86932e4673dd8c9e5db4cd9d0a7cc82d4cb3dd53c2150a5e079d983c3ff674dc` | `cff71e2f37ceccde58b2eafe48044a4ac42b5453b9676780d76aa89c5cafe309` | 1 |
 | `system.graphics-disable-overlays` | deprecated | `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json` | `6cf5e02e4ced0aa7b215752645b3239269b66d175b298283f93829863e01cf92` | `dbf1407cc708022946c9f7e61f339d401d97e7a859bb0e947f2824dbf29a803e` | 1 |
 | `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `98ef739d16ea86aabaedb34b97ce872b4f0fcd5fcb7d32ab364a8b863d489580` | `de461e3f29a05889c82ae0349ddf469cce6bcacc3a632e36c6bdcd1b029992df` | 1 |
-| `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `ef504ed9c183157c41fcb1d64f0b90fe16a8860e50cf35c0cf518e9bb2f4bcdf` | `2783841c143e66f525777e03f8af340643b6a6a136a78cd343969861c71eb348` | 1 |
+| `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc` | `2783841c143e66f525777e03f8af340643b6a6a136a78cd343969861c71eb348` | 1 |
 | `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `8e2fbbfcb328d9ccc42ba64843c5502477aba92c21fda2ec72b68db30898e3cd` | `c884ea4b4736b245520364697f45cbf14a2f63119fbc5b20763599056d3c5a04` | 1 |
 | `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `1d335b99485bc826b3884f1d11fb28d6597a40b9ba1736f5aa8aba80cd733d56` | `b510524d68142e1c56f5db50518288f2da73588b1d05824a2cebc6378ef57f66` | 1 |
 | `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b` | `efcc02d642dacdff3f28dac8946c8878180d0ef83875ea5feff1ab89b5c9c126` | 1 |
@@ -1750,16 +1750,16 @@ Windows Internals references:
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.disable-wpbt.review.json`
 - Source SHA256: `081fd53e38f7a7c927f7fd5e49443384edd9e53a10078c5219675a795dc9ec3f`
-- Proof SHA256: `9340fb4ae045879f47ade1a08447c731fdae8aef759b7e34b637b51c36adb0d6`
+- Proof SHA256: `591a298fdd99779c99b3623d6c7514ca2e7c0ee404b59a75c972181a18a0d9ff`
 
-**Summary:** Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail.
+**Summary:** Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail that is now corroborated by raw registry traces under ControlSet001.
 
 **Targets**
 
 - `HKLM\\System\\CurrentControlSet\\Control\\Session Manager` / `DisableWpbtExecution` / `REG_DWORD`
   - Notes: Official Microsoft documentation captured so far publishes WPBT as a UEFI or DFCI feature surface, not as this registry value.
   - unknown | label=Default or unmanaged state | meaning=This research pass did not capture a primary Microsoft document that defines the default behavior for this registry value.
-  - value | value=1 | label=Observed app profile | meaning=The app writes DisableWpbtExecution = 1 and community hardening references describe that as blocking WPBT execution, but this registry mapping is not yet backed by a primary Microsoft source in this dataset.
+  - value | value=1 | label=Observed app profile | meaning=The app writes DisableWpbtExecution = 1 and community hardening references plus raw registry traces describe that as blocking WPBT execution, but this registry mapping is not yet backed by a primary Microsoft source in this dataset.
 
 **Evidence**
 
@@ -1768,6 +1768,7 @@ Windows Internals references:
 | `ms-dfci-wpbt` | `official-doc` | `Microsoft official doc` | Microsoft Learn DFCI WPBT setting reference | `high` |
 | `repo-security-note` | `repo-doc` | `Current repo docs` | Repo security notes for WPBT | `medium` |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `regkit-session-manager-trace` | `registry-observation` | `VM registry observation` | nohuto regkit trace for Session Manager | `high` |
 
 **Provenance**
 
@@ -1797,7 +1798,7 @@ Windows Internals references:
 | source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\security\\desc.md |
 | exact_quote_or_path | \\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager : DisableWpbtExecution |
 | key_found_on_page | True |
-| notes | Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle. |
+| notes | Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle and is corroborated by raw registry traces in the nohuto mirror. |
 ### `system.disable-game-dvr`
 
 - Status: `deprecated`
@@ -2165,7 +2166,7 @@ Windows Internals references:
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json`
-- Source SHA256: `ef504ed9c183157c41fcb1d64f0b90fe16a8860e50cf35c0cf518e9bb2f4bcdf`
+- Source SHA256: `04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc`
 - Proof SHA256: `2783841c143e66f525777e03f8af340643b6a6a136a78cd343969861c71eb348`
 
 **Summary:** Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\AdjustDpcThreshold = 20, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.

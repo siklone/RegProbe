@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-22T01:25:21.155696Z",
+  "generated_utc": "2026-03-22T01:28:04.476674Z",
   "summary": {
     "total_records": 280,
     "validated": 228,
@@ -8616,7 +8616,7 @@
       "category": "System",
       "area": "Kernel / DPC Scheduling",
       "scope": "device",
-      "summary": "Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\AdjustDpcThreshold = 20, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+      "summary": "Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\AdjustDpcThreshold = 20, and the decompiled kernel set/query path now shows the raw value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -8784,13 +8784,28 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "ghidra-adjust-dpc-threshold-system-info",
+          "kind": "decompilation",
+          "title": "Decompiled DPC threshold system-information handler",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c; Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c",
+          "summary": "The decompiled system-information setter populates KiAdjustDpcThreshold from the caller buffer, and the query path exports KiAdjustDpcThreshold back out, proving the kernel-side threshold is consumed and reported by system code.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "runtime-gate"
+          ],
+          "origin": "Ghidra decompilation"
         }
       ],
       "validation_proof": {
         "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
         "exact_quote_or_path": "\"AdjustDpcThreshold\" = 20; // KiAdjustDpcThreshold",
         "key_found_on_page": true,
-        "notes": "Kernel DPC threshold audit trail. The mirror exposes the raw kernel variable and the corresponding registry value."
+        "notes": "Kernel DPC threshold audit trail. The mirror exposes the raw kernel variable and the corresponding registry value, and the decompiled system-information paths corroborate the kernel consumption and query behavior."
       },
       "provenance": {
         "coverage_state": "repo-backed",
