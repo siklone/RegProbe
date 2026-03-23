@@ -55,7 +55,9 @@ $guestScriptsRoot = 'C:\Tools\Scripts'
 $guestPrepCmdPath = Join-Path $guestScriptsRoot 'codex-controller-prep.cmd'
 $guestLaunchCmdPath = Join-Path $guestScriptsRoot 'codex-controller-launch.cmd'
 $guestLastBootQueryPath = Join-Path $guestScriptsRoot 'codex-query-lastboot.ps1'
+$guestRestartHelperPath = Join-Path $guestScriptsRoot 'codex-request-restart.ps1'
 $guestLastBootOutputPath = Join-Path $guestTestDir 'guest-lastboot.txt'
+$localRestartHelperPath = Join-Path $PSScriptRoot 'request-guest-restart.ps1'
 
 function Invoke-Vmrun {
     param(
@@ -148,11 +150,13 @@ function Request-GuestRestart {
         '-gp', $GuestPassword,
         'runProgramInGuest',
         $VmPath,
-        'C:\Windows\System32\shutdown.exe',
-        '/r',
-        '/t',
-        '0',
-        '/f'
+        '-noWait',
+        'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',
+        '-NoProfile',
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        $guestRestartHelperPath
     ) | Out-Null
 }
 
@@ -274,6 +278,10 @@ $guestLastBootQueryHostPath = Join-Path $controllerRoot 'guest-query-lastboot.ps
     '(Get-CimInstance Win32_OperatingSystem).LastBootUpTime.ToString(''o'') | Set-Content -Path $out -Encoding ASCII'
 ) | Set-Content -Path $guestLastBootQueryHostPath -Encoding ASCII
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $guestLastBootQueryHostPath, $guestLastBootQueryPath) | Out-Null
+if (-not (Test-Path $localRestartHelperPath)) {
+    throw "Restart helper script not found at $localRestartHelperPath"
+}
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $localRestartHelperPath, $guestRestartHelperPath) | Out-Null
 
 $guestLaunchHostCmd = Join-Path $controllerRoot 'guest-launch.cmd'
 @(

@@ -203,13 +203,31 @@ function Wait-ForStableIdle {
     throw "Idle stabilization timed out after $TimeoutSeconds seconds."
 }
 
+function Resolve-RegistryProviderPath {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path
+    )
+
+    if ($Path -like 'Registry::*') {
+        return $Path
+    }
+
+    if ($Path -match '^(HKLM|HKEY_LOCAL_MACHINE|HKCU|HKEY_CURRENT_USER|HKCR|HKEY_CLASSES_ROOT|HKU|HKEY_USERS|HKCC|HKEY_CURRENT_CONFIG)(\\|$)') {
+        return "Registry::$Path"
+    }
+
+    return $Path
+}
+
 function Get-RegistryBaseline {
     param(
         [Parameter(Mandatory = $true)]
         [pscustomobject]$Config
     )
 
-    $existing = Get-ItemProperty -Path $Config.registry_path -Name $Config.value_name -ErrorAction SilentlyContinue
+    $registryPath = Resolve-RegistryProviderPath -Path $Config.registry_path
+    $existing = Get-ItemProperty -Path $registryPath -Name $Config.value_name -ErrorAction SilentlyContinue
     if ($null -eq $existing) {
         return [ordered]@{
             exists = $false
@@ -232,11 +250,13 @@ function Set-RegistryValue {
         [object]$Value
     )
 
-    if (-not (Test-Path $Config.registry_path)) {
-        New-Item -Path $Config.registry_path -Force | Out-Null
+    $registryPath = Resolve-RegistryProviderPath -Path $Config.registry_path
+
+    if (-not (Test-Path $registryPath)) {
+        New-Item -Path $registryPath -Force | Out-Null
     }
 
-    New-ItemProperty -Path $Config.registry_path -Name $Config.value_name -PropertyType $Config.value_type -Value $Value -Force | Out-Null
+    New-ItemProperty -Path $registryPath -Name $Config.value_name -PropertyType $Config.value_type -Value $Value -Force | Out-Null
 }
 
 function Restore-RegistryBaseline {
@@ -253,7 +273,8 @@ function Restore-RegistryBaseline {
         return
     }
 
-    Remove-ItemProperty -Path $Config.registry_path -Name $Config.value_name -ErrorAction SilentlyContinue
+    $registryPath = Resolve-RegistryProviderPath -Path $Config.registry_path
+    Remove-ItemProperty -Path $registryPath -Name $Config.value_name -ErrorAction SilentlyContinue
 }
 
 function Start-RebootAndExit {
