@@ -54,6 +54,8 @@ $guestArtifactsPath = Join-Path $guestTestDir 'artifacts'
 $guestScriptsRoot = 'C:\Tools\Scripts'
 $guestPrepCmdPath = Join-Path $guestScriptsRoot 'codex-controller-prep.cmd'
 $guestLaunchCmdPath = Join-Path $guestScriptsRoot 'codex-controller-launch.cmd'
+$guestLastBootQueryPath = Join-Path $guestScriptsRoot 'codex-query-lastboot.ps1'
+$guestLastBootOutputPath = Join-Path $guestTestDir 'guest-lastboot.txt'
 
 function Invoke-Vmrun {
     param(
@@ -61,7 +63,13 @@ function Invoke-Vmrun {
         [string[]]$Arguments
     )
 
-    & $VmrunPath @Arguments
+    $output = & $VmrunPath @Arguments 2>&1 | Out-String
+    $exitCode = $LASTEXITCODE
+    if ($exitCode -ne 0) {
+        throw "vmrun failed ($exitCode): $($output.Trim())"
+    }
+
+    return $output
 }
 
 function Write-ControllerFeedback {
@@ -108,6 +116,94 @@ function Sync-GuestArtifactsToHost {
         $hostFile = Join-Path $hostArtifactsPath $name
         Sync-GuestFileToHost -GuestPath $guestFile -HostPath $hostFile | Out-Null
     }
+}
+
+function Get-GuestLastBootUpTime {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$HostOutputPath
+    )
+
+    if (Test-Path $HostOutputPath) {
+        Remove-Item -Path $HostOutputPath -Force
+    }
+
+    if (-not (Sync-GuestFileToHost -GuestPath $guestLastBootOutputPath -HostPath $HostOutputPath)) {
+        return $null
+    }
+
+    $raw = (Get-Content -Path $HostOutputPath -Raw).Trim()
+    if (-not $raw) {
+        return $null
+    }
+
+    return [datetimeoffset]::Parse($raw)
+}
+
+function Request-GuestRestart {
+    Write-ControllerFeedback -Kind 'live' -Message 'Requesting guest OS restart.'
+    Invoke-Vmrun -Arguments @(
+        '-T', 'ws',
+        '-gu', $GuestUser,
+        '-gp', $GuestPassword,
+        'runProgramInGuest',
+        $VmPath,
+        'C:\Windows\System32\shutdown.exe',
+        '/r',
+        '/t',
+        '0',
+        '/f'
+    ) | Out-Null
+}
+
+function Wait-ForGuestReboot {
+    param(
+        [Parameter(Mandatory = $true)]
+        [datetimeoffset]$PreviousBootUpTime,
+
+        [int]$TimeoutMinutes = 10
+    )
+
+    $deadline = (Get-Date).AddMinutes($TimeoutMinutes)
+    $hostBootPath = Join-Path $controllerRoot 'guest-lastboot.txt'
+    $toolsWentAway = $false
+    $toolsCameBack = $false
+
+    while ((Get-Date) -lt $deadline) {
+        Start-Sleep -Seconds 5
+
+        try {
+            $toolsState = Invoke-Vmrun -Arguments @('-T', 'ws', 'checkToolsState', $VmPath)
+            $isUp = $toolsState -match 'running|installed'
+            if (-not $isUp) {
+                $toolsWentAway = $true
+                continue
+            }
+
+            if (-not $toolsWentAway) {
+                continue
+            }
+
+            $toolsCameBack = $true
+            $currentBoot = Get-GuestLastBootUpTime -HostOutputPath $hostBootPath
+            if ($null -ne $currentBoot -and $currentBoot -gt $PreviousBootUpTime) {
+                Write-ControllerFeedback -Kind 'live' -Message ("Confirmed guest reboot: {0} -> {1}" -f $PreviousBootUpTime.ToString('o'), $currentBoot.ToString('o'))
+                return $currentBoot
+            }
+        } catch {
+            $toolsWentAway = $true
+        }
+    }
+
+    if (-not $toolsWentAway) {
+        throw "Guest reboot was requested, but VMware Tools never went away within $TimeoutMinutes minutes."
+    }
+
+    if (-not $toolsCameBack) {
+        throw "Guest reboot was requested, but VMware Tools never came back within $TimeoutMinutes minutes."
+    }
+
+    throw "Guest reboot was requested, but LastBootUpTime did not advance within $TimeoutMinutes minutes."
 }
 
 function Start-GuestValidationAgent {
@@ -169,6 +265,15 @@ $guestPrepHostCmd = Join-Path $controllerRoot 'guest-prep.cmd'
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $guestPrepHostCmd, $guestPrepCmdPath) | Out-Null
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'runProgramInGuest', $VmPath, 'C:\Windows\System32\cmd.exe', '/c', $guestPrepCmdPath) | Out-Null
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $configPath, $guestConfigPath) | Out-Null
+$guestLastBootQueryHostPath = Join-Path $controllerRoot 'guest-query-lastboot.ps1'
+@(
+    '$ErrorActionPreference = ''Stop''',
+    ('$out = ''{0}''' -f $guestLastBootOutputPath),
+    '$dir = Split-Path -Parent $out',
+    'if ($dir -and -not (Test-Path $dir)) { New-Item -ItemType Directory -Force -Path $dir | Out-Null }',
+    '(Get-CimInstance Win32_OperatingSystem).LastBootUpTime.ToString(''o'') | Set-Content -Path $out -Encoding ASCII'
+) | Set-Content -Path $guestLastBootQueryHostPath -Encoding ASCII
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $guestLastBootQueryHostPath, $guestLastBootQueryPath) | Out-Null
 
 $guestLaunchHostCmd = Join-Path $controllerRoot 'guest-launch.cmd'
 @(
@@ -181,6 +286,7 @@ Start-GuestValidationAgent
 $phaseDeadline = (Get-Date).AddMinutes($PhaseTimeoutMinutes)
 $initialStatusDeadline = (Get-Date).AddSeconds(90)
 $lastPhase = ''
+$handledRestartPhase = ''
 $statusSeen = $false
 while ((Get-Date) -lt $phaseDeadline) {
     Start-Sleep -Seconds $PollSeconds
@@ -208,16 +314,20 @@ while ((Get-Date) -lt $phaseDeadline) {
             throw "Guest agent reported ERROR: $detail"
         }
 
-        if ($status.phase -like 'RESTART_*') {
-            Write-ControllerFeedback -Kind 'live' -Message 'Guest restart requested; waiting for the VM to come back.'
-            Invoke-Vmrun -Arguments @('-T', 'ws', 'rebootGuest', $VmPath) | Out-Null
-            $toolsBackDeadline = (Get-Date).AddMinutes(10)
-            do {
-                Start-Sleep -Seconds 5
-                $toolsState = Invoke-Vmrun -Arguments @('-T', 'ws', 'checkToolsState', $VmPath) | Out-String
-            } until ($toolsState -match 'running|installed' -or (Get-Date) -ge $toolsBackDeadline)
-            Write-ControllerFeedback -Kind 'live' -Message "Post-reboot Tools state: $($toolsState.Trim())"
+        if ($status.phase -like 'RESTART_*' -and $handledRestartPhase -ne $status.phase) {
+            $handledRestartPhase = $status.phase
+            $hostBootPath = Join-Path $controllerRoot 'guest-lastboot.txt'
+            Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'runProgramInGuest', $VmPath, 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $guestLastBootQueryPath) | Out-Null
+            $previousBoot = Get-GuestLastBootUpTime -HostOutputPath $hostBootPath
+            if ($null -eq $previousBoot) {
+                throw 'Failed to capture LastBootUpTime before guest restart.'
+            }
+
+            Request-GuestRestart
+            $null = Wait-ForGuestReboot -PreviousBootUpTime $previousBoot
             Start-GuestValidationAgent
+        } elseif ($status.phase -notlike 'RESTART_*') {
+            $handledRestartPhase = ''
         }
     } elseif (-not $statusSeen -and (Get-Date) -ge $initialStatusDeadline) {
         Write-ControllerFeedback -Kind 'blocked' -Message 'Guest agent did not produce an initial status within 90 seconds.'
