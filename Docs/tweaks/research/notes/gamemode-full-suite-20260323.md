@@ -61,6 +61,14 @@ Interpretation:
 
 ## Runtime Suite
 
+Important correction:
+
+- The runs below are valid as toggle, launch, trace, and restore evidence.
+- They are not valid OCCT score benchmarks yet.
+- The OCCT window still displayed the End User License Agreement during the captures.
+- [OCCT.config.json](/H:/Temp/occt_config.json) still reported `EulaVersion = 0` after the acceptance attempt.
+- Because of that, the OCCT portion must be treated as launch-and-trace evidence only.
+
 ### State 0
 
 ```text
@@ -89,6 +97,11 @@ Observed counters:
 - Average disk transfers/sec: `4.46`
 - Average disk latency: `0.003852`
 - Average committed memory: `2147.17 MB`
+
+OCCT state note:
+
+- The `START` button was found and invoked.
+- The visible text still included the EULA modal content, so this run must not be interpreted as a valid OCCT score export.
 
 ### State 1
 
@@ -119,20 +132,26 @@ Observed counters:
 - Average disk latency: `0.004682`
 - Average committed memory: `2106.64 MB`
 
+OCCT state note:
+
+- The `START` button was found and invoked.
+- The visible text still included the EULA modal content, so this run must not be interpreted as a valid OCCT score export.
+
 ## Interpretation
 
 What this suite proves:
 
 - `AutoGameModeEnabled` is a live registry-mapped setting read by `SystemSettings.exe`.
 - Both `0` and `1` can be exercised safely in the VM.
-- The OCCT benchmark UI can be launched and driven while WPR is recording.
+- The OCCT UI can be launched and driven while WPR is recording.
 - The value can be restored to the guest baseline after each run.
 
 What this suite does **not** prove:
 
 - It does not prove a strong performance winner between `0` and `1`.
+- It does not yet prove a valid OCCT benchmark score because the EULA modal remained active.
 - This pass used one short bounded observation run per state, not a repeated benchmark campaign.
-- The OCCT UI dump still includes static UI/EULA text, so the most reliable runtime artifacts here are the ETL traces and the sampled perf counters, not a polished OCCT score export.
+- The most reliable runtime artifacts here are the ETL traces, the perf samples, and the safe restore behavior, not an OCCT score export.
 
 ## Bottom Line
 
@@ -140,6 +159,6 @@ This record is now supported by three layers at once:
 
 1. Procmon semantics
 2. Code-side corroboration
-3. Short VM runtime suite with OCCT plus WPR
+3. Short VM runtime suite with OCCT launch traces plus WPR
 
-That is enough to say the Game Mode value is real, consumed, and safely traceable on this build. It is **not** enough to claim that `0` or `1` is measurably faster from this single short pass alone.
+That is enough to say the Game Mode value is real, consumed, and safely traceable on this build. It is **not** enough to claim that `0` or `1` is measurably faster, and it is **not** enough to claim a valid OCCT benchmark result until the OCCT EULA is genuinely accepted and stops appearing in the runtime captures.

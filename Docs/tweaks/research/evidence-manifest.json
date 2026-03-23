@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-23T19:24:11.390588Z",
+  "generated_utc": "2026-03-23T20:03:12.029852Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 280,
@@ -60494,13 +60494,13 @@
       "tweak_id": "system.enable-game-mode",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/system.enable-game-mode.review.json",
-      "source_file_sha256": "059dc5066283f756fa78b156314a0d50c279f39d5e42e2d0217d1bb150cea75d",
-      "source_file_size_bytes": 21134,
+      "source_file_sha256": "31b37f92d6be9c98019747e412acc213557871d95a1902abd006f109e4b2ff75",
+      "source_file_size_bytes": 21663,
       "name": "Game Mode",
       "category": "System",
       "area": "Gaming Feature / GameBar Preference",
       "scope": "user",
-      "summary": "The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.",
+      "summary": "The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched a short OCCT benchmark observation window, captured WPR ETLs for both states, and restored the guest baseline after each pass. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": true,
@@ -60508,7 +60508,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle.",
+        "why": "Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. A later bounded VM runtime suite exercised both states under OCCT plus WPR and restored the guest baseline after each pass, which strengthens confidence that the toggle can be observed safely even though the short run is not enough to claim a decisive performance gain.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -60686,6 +60686,20 @@
           "origin": "Ghidra decompilation"
         },
         {
+          "evidence_id": "vm-gamemode-occt-wpr-20260323",
+          "kind": "runtime-trace",
+          "title": "VM Game Mode OCCT plus WPR observation suite",
+          "location": "H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-0-v2.txt, H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-0-v2.perf.csv, H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-0-v2.etl, H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-1-v2.txt, H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-1-v2.perf.csv, H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-1-v2.etl",
+          "summary": "A bounded VM runtime suite toggled AutoGameModeEnabled through states 0 and 1, launched the OCCT benchmark UI, captured WPR ETLs for both runs, sampled CPU, memory, and disk counters for about 24.5 seconds, and restored the guest baseline value of 0 after each pass. The pass confirmed that both states can be exercised and traced safely in the VM, but a single short run per state did not produce a strong performance winner.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "side-effects",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "repo-system-doc-game-mode",
           "kind": "repo-doc",
           "title": "Repo system research notes for Game Mode",
@@ -60719,9 +60733,9 @@
         "source_url": "H:\\Temp\\vm-tooling-staging\\gamemode_admin_probe.txt",
         "exact_quote_or_path": "gamemode_admin_probe.txt: \"7:52:45.6879293 PM\",\"SystemSettings.exe\",\"5512\",\"RegQueryValue\",\"HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled\",\"SUCCESS\",\"Type: REG_DWORD, Length: 4, Data: 1\". gamemode_admin_zero_probe.txt: \"7:54:41.9130012 PM\",\"SystemSettings.exe\",\"5512\",\"RegQueryValue\",\"HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled\",\"SUCCESS\",\"Type: REG_DWORD, Length: 4, Data: 0\".",
         "key_found_on_page": true,
-        "notes": "The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report."
+        "notes": "The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT plus WPR traces for states 0 and 1 and restored the guest baseline after each pass. Normalized for the consolidated evidence report."
       },
-      "validation_proof_sha256": "4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59",
+      "validation_proof_sha256": "3e1243c7bd4c296eb559adae5adea2854502ca8dd8e5329fa247956363001030",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

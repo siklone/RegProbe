@@ -247,7 +247,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.disable-storage-sense-temp-cleanup` | validated | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
 | `system.dwm-disable-overlay-min-fps` | validated | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
-| `system.enable-game-mode` | validated | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `059dc5066283f756fa78b156314a0d50c279f39d5e42e2d0217d1bb150cea75d` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
+| `system.enable-game-mode` | validated | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `31b37f92d6be9c98019747e412acc213557871d95a1902abd006f109e4b2ff75` | `3e1243c7bd4c296eb559adae5adea2854502ca8dd8e5329fa247956363001030` | 1 |
 | `system.enable-hags` | validated | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
 | `system.enable-indexing-encrypted-items` | validated | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `bdc09bee78c232ef1bcd5b9ab483aef478a9dd429315fa88206e603628efac84` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
 | `system.graphics-tdr-ddi-delay` | validated | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
@@ -12438,10 +12438,10 @@ Windows Internals references:
 - Area: `Gaming Feature / GameBar Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.enable-game-mode.review.json`
-- Source SHA256: `059dc5066283f756fa78b156314a0d50c279f39d5e42e2d0217d1bb150cea75d`
-- Proof SHA256: `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59`
+- Source SHA256: `31b37f92d6be9c98019747e412acc213557871d95a1902abd006f109e4b2ff75`
+- Proof SHA256: `3e1243c7bd4c296eb559adae5adea2854502ca8dd8e5329fa247956363001030`
 
-**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
+**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched a short OCCT benchmark observation window, captured WPR ETLs for both states, and restored the guest baseline after each pass. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
 
 **Targets**
 
@@ -12456,6 +12456,7 @@ Windows Internals references:
 | `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | `high` |
 | `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | `high` |
 | `repo-system-decomp-game-mode` | `decompilation` | `Ghidra decompilation` | Decompiled Game Mode handler string reference | `medium` |
+| `vm-gamemode-occt-wpr-20260323` | `runtime-trace` | `unspecified` | VM Game Mode OCCT plus WPR observation suite | `medium` |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | `medium` |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
@@ -12487,7 +12488,7 @@ Windows Internals references:
 | source_url | H:\\Temp\\vm-tooling-staging\\gamemode_admin_probe.txt |
 | exact_quote_or_path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | key_found_on_page | True |
-| notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report. |
+| notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT plus WPR traces for states 0 and 1 and restored the guest baseline after each pass. Normalized for the consolidated evidence report. |
 ### `system.enable-hags`
 
 - Status: `validated`

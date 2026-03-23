@@ -16493,7 +16493,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
+**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched a short OCCT benchmark observation window, captured WPR ETLs for both states, and restored the guest baseline after each pass. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
 
 **Current implementation**
 
@@ -16555,6 +16555,7 @@ Windows Internals references:
 | `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc | `high` | behavior, side-effects, version-scope |
 | `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | H:\Temp\vm-tooling-staging\gamemode_admin_probe.txt and H:\Temp\vm-tooling-staging\gamemode_admin_zero_probe.txt | `high` | path, value, behavior, ui-mapping, version-scope |
 | `repo-system-decomp-game-mode` | `decompilation` | `Ghidra decompilation` | Decompiled Game Mode handler string reference | Docs/system/assets/gamemode-GamingHandlers.c | `medium` | path, value, behavior, ui-mapping |
+| `vm-gamemode-occt-wpr-20260323` | `runtime-trace` | `unspecified` | VM Game Mode OCCT plus WPR observation suite | H:\Temp\vm-tooling-staging\gamemode-occt-state-0-v2.txt, H:\Temp\vm-tooling-staging\gamemode-occt-state-0-v2.perf.csv, H:\Temp\vm-tooling-staging\gamemode-occt-state-0-v2.etl, H:\Temp\vm-tooling-staging\gamemode-occt-state-1-v2.txt, H:\Temp\vm-tooling-staging\gamemode-occt-state-1-v2.perf.csv, H:\Temp\vm-tooling-staging\gamemode-occt-state-1-v2.etl | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -16565,7 +16566,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\gamemode_admin_probe.txt |
 | Exact quote / path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU\S-1-5-21-3538642439-2106388720-149684979-500\Software\Microsoft\GameBar\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU\S-1-5-21-3538642439-2106388720-149684979-500\Software\Microsoft\GameBar\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | Key found on page | `True` |
-| Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report. |
+| Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT plus WPR traces for states 0 and 1 and restored the guest baseline after each pass. Normalized for the consolidated evidence report. |
 
 **Decision**
 
@@ -16576,7 +16577,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. |
+| Why | Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. A later bounded VM runtime suite exercised both states under OCCT plus WPR and restored the guest baseline after each pass, which strengthens confidence that the toggle can be observed safely even though the short run is not enough to claim a decisive performance gain. |
 
 ---
 
