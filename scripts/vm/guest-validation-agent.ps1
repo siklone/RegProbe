@@ -241,6 +241,23 @@ function Get-RegistryBaseline {
     }
 }
 
+function Resolve-RegistryValueType {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$ValueType
+    )
+
+    switch ($ValueType.ToUpperInvariant()) {
+        'REG_DWORD' { return 'DWord' }
+        'REG_QWORD' { return 'QWord' }
+        'REG_SZ' { return 'String' }
+        'REG_EXPAND_SZ' { return 'ExpandString' }
+        'REG_MULTI_SZ' { return 'MultiString' }
+        'REG_BINARY' { return 'Binary' }
+        default { return $ValueType }
+    }
+}
+
 function Set-RegistryValue {
     param(
         [Parameter(Mandatory = $true)]
@@ -251,12 +268,13 @@ function Set-RegistryValue {
     )
 
     $registryPath = Resolve-RegistryProviderPath -Path $Config.registry_path
+    $propertyType = Resolve-RegistryValueType -ValueType $Config.value_type
 
     if (-not (Test-Path $registryPath)) {
         New-Item -Path $registryPath -Force | Out-Null
     }
 
-    New-ItemProperty -Path $registryPath -Name $Config.value_name -PropertyType $Config.value_type -Value $Value -Force | Out-Null
+    New-ItemProperty -Path $registryPath -Name $Config.value_name -PropertyType $propertyType -Value $Value -Force | Out-Null
 }
 
 function Restore-RegistryBaseline {
