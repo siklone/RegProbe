@@ -97,9 +97,9 @@ function New-State {
         phase = 'BOOT_START'
         run_count = 0
         baseline = $null
-        benchmark_runs = @()
+        benchmark_runs = [System.Collections.ArrayList]::new()
         restore_complete = $false
-        errors = @()
+        errors = [System.Collections.ArrayList]::new()
         timings = [ordered]@{
             boot_started_at = (Get-Date).ToString('o')
             last_updated_at = (Get-Date).ToString('o')
@@ -107,10 +107,40 @@ function New-State {
     }
 }
 
+function Ensure-StateList {
+    param(
+        [Parameter(Mandatory = $true)]
+        [System.Collections.IDictionary]$State,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+
+    if (-not $State.Contains($Name) -or $null -eq $State[$Name]) {
+        $State[$Name] = [System.Collections.ArrayList]::new()
+        return
+    }
+
+    if ($State[$Name] -is [System.Collections.ArrayList]) {
+        return
+    }
+
+    $list = [System.Collections.ArrayList]::new()
+    if ($State[$Name] -is [System.Collections.IEnumerable] -and $State[$Name] -isnot [string]) {
+        foreach ($item in $State[$Name]) {
+            [void]$list.Add($item)
+        }
+    } else {
+        [void]$list.Add($State[$Name])
+    }
+
+    $State[$Name] = $list
+}
+
 function Update-StatePhase {
     param(
         [Parameter(Mandatory = $true)]
-        [hashtable]$State,
+        [System.Collections.IDictionary]$State,
 
         [Parameter(Mandatory = $true)]
         [string]$Phase,
@@ -229,7 +259,7 @@ function Restore-RegistryBaseline {
 function Start-RebootAndExit {
     param(
         [Parameter(Mandatory = $true)]
-        [hashtable]$State,
+        [System.Collections.IDictionary]$State,
 
         [Parameter(Mandatory = $true)]
         [string]$Phase
@@ -247,6 +277,7 @@ function Invoke-BenchmarkRun {
         [int]$RunIndex
     )
 
+    Write-AgentLog "BENCH_TRACE :: Invoke-BenchmarkRun start run=$RunIndex"
     $stdout = Join-Path $script:ArtifactsPath ("benchmark-run-{0:D2}.stdout.txt" -f $RunIndex)
     $stderr = Join-Path $script:ArtifactsPath ("benchmark-run-{0:D2}.stderr.txt" -f $RunIndex)
     $perfCsv = Join-Path $script:ArtifactsPath ("benchmark-run-{0:D2}.perf.csv" -f $RunIndex)
@@ -265,6 +296,7 @@ function Invoke-BenchmarkRun {
     $counterSamples = New-Object System.Collections.Generic.List[object]
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
     [void]$proc.Start()
+    Write-AgentLog "BENCH_TRACE :: Process started run=$RunIndex pid=$($proc.Id)"
 
     while (-not $proc.HasExited) {
         $cpu = (Get-Counter '\Processor(_Total)\% Processor Time').CounterSamples[0].CookedValue
@@ -291,11 +323,17 @@ function Invoke-BenchmarkRun {
     }
 
     $sw.Stop()
+    Write-AgentLog "BENCH_TRACE :: Process exited run=$RunIndex exit=$($proc.ExitCode)"
     $stdoutText = $proc.StandardOutput.ReadToEnd()
     $stderrText = $proc.StandardError.ReadToEnd()
     $stdoutText | Set-Content -Path $stdout -Encoding UTF8
     $stderrText | Set-Content -Path $stderr -Encoding UTF8
-    $counterSamples | Export-Csv -Path $perfCsv -NoTypeInformation -Encoding UTF8
+    Write-AgentLog "BENCH_TRACE :: Streams captured run=$RunIndex stdout=$($stdoutText.Length) stderr=$($stderrText.Length)"
+    $counterRows = foreach ($sample in $counterSamples) {
+        [pscustomobject]$sample
+    }
+    $counterRows | Export-Csv -Path $perfCsv -NoTypeInformation -Encoding UTF8
+    Write-AgentLog "BENCH_TRACE :: Perf CSV exported run=$RunIndex path=$perfCsv"
 
     return [ordered]@{
         run_index = $RunIndex
@@ -335,6 +373,8 @@ $state = ConvertTo-MutableState -InputObject $stateObject
 if ($null -eq $state) {
     $state = New-State -TestId $config.test_id
 }
+Ensure-StateList -State $state -Name 'benchmark_runs'
+Ensure-StateList -State $state -Name 'errors'
 
 try {
     if (-not $state.baseline) {
@@ -374,9 +414,25 @@ try {
             $kind = if ($i -le $warmupRuns) { 'warmup' } else { 'measured' }
             Update-StatePhase -State $state -Phase 'BENCH_START' -Detail "Run $i ($kind)"
             $runResult = Invoke-BenchmarkRun -Config $config -RunIndex $i
-            $runResult.kind = $kind
+            Write-AgentLog "BENCH_TRACE :: Invoke-BenchmarkRun returned run=$i null=$($null -eq $runResult)"
+            if ($null -eq $runResult) {
+                throw "Invoke-BenchmarkRun returned null for run $i."
+            }
+            if ($runResult -is [System.Collections.IDictionary]) {
+                $runResult['kind'] = $kind
+            } else {
+                Add-Member -InputObject $runResult -NotePropertyName 'kind' -NotePropertyValue $kind -Force
+            }
+            Write-AgentLog "BENCH_TRACE :: Kind attached run=$i type=$($runResult.GetType().FullName)"
             $state.run_count = $i
-            $state.benchmark_runs += $runResult
+            Ensure-StateList -State $state -Name 'benchmark_runs'
+            $benchmarkRuns = $state['benchmark_runs']
+            if ($null -eq $benchmarkRuns) {
+                throw 'benchmark_runs list is null after Ensure-StateList.'
+            }
+            Write-AgentLog "BENCH_TRACE :: benchmark_runs type=$($benchmarkRuns.GetType().FullName)"
+            [void]$benchmarkRuns.Add((ConvertTo-MutableState -InputObject $runResult))
+            Write-AgentLog "BENCH_TRACE :: Run appended run=$i count=$($benchmarkRuns.Count)"
             Update-StatePhase -State $state -Phase 'BENCH_DONE' -Detail "Run $i exit=$($runResult.exit_code)"
         }
 
@@ -406,14 +462,22 @@ try {
         baseline = $state.baseline
         restart_mode = $config.restart_mode
         idle_snapshot = $state.idle_snapshot
-        benchmark_runs = $state.benchmark_runs
+        benchmark_runs = $state['benchmark_runs']
         completed_at = (Get-Date).ToString('o')
     }
     Save-JsonFile -Path $script:ResultPath -InputObject $result
     Update-StatePhase -State $state -Phase 'COMPLETE' -Detail 'Validation run finished.'
 } catch {
     $message = $_.Exception.Message
-    $state.errors += $message
+    if ($_.InvocationInfo) {
+        $message = "$message @ $($_.InvocationInfo.PositionMessage)"
+    }
+    Ensure-StateList -State $state -Name 'errors'
+    $errorList = $state['errors']
+    if ($null -eq $errorList) {
+        throw 'errors list is null after Ensure-StateList.'
+    }
+    [void]$errorList.Add($message)
     Update-StatePhase -State $state -Phase 'ERROR' -Detail $message
     throw
 }
