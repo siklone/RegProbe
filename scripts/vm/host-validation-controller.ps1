@@ -34,7 +34,7 @@ param(
     [string]$GuestUser = 'codexvm',
     [string]$GuestPassword = 'CodexVm2026!',
     [string]$SharedHostRoot = 'H:\Temp\vm-tooling-staging',
-    [string]$SharedGuestRoot = '\\vmware-host\Shared Folders\vm-tooling-staging',
+    [string]$GuestWorkRoot = 'C:\Tools\ValidationController',
     [string]$SnapshotName
 )
 
@@ -43,6 +43,17 @@ $controllerRoot = Join-Path $SharedHostRoot 'controller\current'
 $configPath = Join-Path $controllerRoot 'config.json'
 $statusPath = Join-Path $controllerRoot 'status.json'
 $resultPath = Join-Path $controllerRoot 'result.json'
+$hostArtifactsPath = Join-Path $controllerRoot 'artifacts'
+
+$guestTestDir = Join-Path $GuestWorkRoot 'controller\current'
+$guestConfigPath = Join-Path $guestTestDir 'config.json'
+$guestStatusPath = Join-Path $guestTestDir 'status.json'
+$guestResultPath = Join-Path $guestTestDir 'result.json'
+$guestAgentLogPath = Join-Path $guestTestDir 'agent.log'
+$guestArtifactsPath = Join-Path $guestTestDir 'artifacts'
+$guestScriptsRoot = 'C:\Tools\Scripts'
+$guestPrepCmdPath = Join-Path $guestScriptsRoot 'codex-controller-prep.cmd'
+$guestLaunchCmdPath = Join-Path $guestScriptsRoot 'codex-controller-launch.cmd'
 
 function Invoke-Vmrun {
     param(
@@ -66,11 +77,49 @@ function Write-ControllerFeedback {
     Write-Host "[$timestamp] ${Kind}: $Message"
 }
 
+function Sync-GuestFileToHost {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$GuestPath,
+
+        [Parameter(Mandatory = $true)]
+        [string]$HostPath
+    )
+
+    try {
+        Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $GuestPath, $HostPath) | Out-Null
+        return $true
+    } catch {
+        return $false
+    }
+}
+
+function Sync-GuestArtifactsToHost {
+    try {
+        $listing = Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'listDirectoryInGuest', $VmPath, $guestArtifactsPath) | Out-String
+    } catch {
+        return
+    }
+
+    $items = $listing -split "`r?`n" | Select-Object -Skip 1 | Where-Object { $_.Trim() }
+    foreach ($item in $items) {
+        $name = $item.Trim()
+        $guestFile = Join-Path $guestArtifactsPath $name
+        $hostFile = Join-Path $hostArtifactsPath $name
+        Sync-GuestFileToHost -GuestPath $guestFile -HostPath $hostFile | Out-Null
+    }
+}
+
+function Start-GuestValidationAgent {
+    Write-ControllerFeedback -Kind 'live' -Message 'Starting guest validation agent.'
+    Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'runProgramInGuest', $VmPath, 'C:\Windows\System32\cmd.exe', '/c', $guestLaunchCmdPath) | Out-Null
+}
+
 if (Test-Path $controllerRoot) {
     Remove-Item -Path $controllerRoot -Recurse -Force
 }
 New-Item -ItemType Directory -Force -Path $controllerRoot | Out-Null
-New-Item -ItemType Directory -Force -Path (Join-Path $controllerRoot 'artifacts') | Out-Null
+New-Item -ItemType Directory -Force -Path $hostArtifactsPath | Out-Null
 
 $config = [ordered]@{
     test_id = $TestId
@@ -110,15 +159,38 @@ do {
 
 Write-ControllerFeedback -Kind 'live' -Message "VMware Tools state: $($state.Trim())"
 
-Write-ControllerFeedback -Kind 'live' -Message 'Starting guest validation agent.'
-Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'runProgramInGuest', $VmPath, 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', 'C:\Tools\Scripts\guest-validation-agent.ps1', '-SharedRoot', $SharedGuestRoot) | Out-Null
+Write-ControllerFeedback -Kind 'live' -Message 'Preparing guest-local controller workspace.'
+$guestPrepHostCmd = Join-Path $controllerRoot 'guest-prep.cmd'
+@(
+    '@echo off',
+    ('if exist "{0}" rmdir /s /q "{0}"' -f $guestTestDir),
+    ('mkdir "{0}"' -f $guestArtifactsPath)
+) | Set-Content -Path $guestPrepHostCmd -Encoding ASCII
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $guestPrepHostCmd, $guestPrepCmdPath) | Out-Null
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'runProgramInGuest', $VmPath, 'C:\Windows\System32\cmd.exe', '/c', $guestPrepCmdPath) | Out-Null
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $configPath, $guestConfigPath) | Out-Null
+
+$guestLaunchHostCmd = Join-Path $controllerRoot 'guest-launch.cmd'
+@(
+    '@echo off',
+    ('start "" /b "{0}" -NoProfile -ExecutionPolicy Bypass -File "{1}" -SharedRoot "{2}"' -f 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', 'C:\Tools\Scripts\guest-validation-agent.ps1', $GuestWorkRoot)
+) | Set-Content -Path $guestLaunchHostCmd -Encoding ASCII
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $guestLaunchHostCmd, $guestLaunchCmdPath) | Out-Null
+Start-GuestValidationAgent
 
 $phaseDeadline = (Get-Date).AddMinutes($PhaseTimeoutMinutes)
+$initialStatusDeadline = (Get-Date).AddSeconds(90)
 $lastPhase = ''
+$statusSeen = $false
 while ((Get-Date) -lt $phaseDeadline) {
     Start-Sleep -Seconds $PollSeconds
 
+    Sync-GuestFileToHost -GuestPath $guestStatusPath -HostPath $statusPath | Out-Null
+    Sync-GuestFileToHost -GuestPath $guestResultPath -HostPath $resultPath | Out-Null
+    Sync-GuestFileToHost -GuestPath $guestAgentLogPath -HostPath (Join-Path $controllerRoot 'agent.log') | Out-Null
+
     if (Test-Path $statusPath) {
+        $statusSeen = $true
         $status = Get-Content -Path $statusPath -Raw | ConvertFrom-Json
         if ($status.phase -ne $lastPhase) {
             $lastPhase = $status.phase
@@ -138,13 +210,18 @@ while ((Get-Date) -lt $phaseDeadline) {
 
         if ($status.phase -like 'RESTART_*') {
             Write-ControllerFeedback -Kind 'live' -Message 'Guest restart requested; waiting for the VM to come back.'
+            Invoke-Vmrun -Arguments @('-T', 'ws', 'rebootGuest', $VmPath) | Out-Null
             $toolsBackDeadline = (Get-Date).AddMinutes(10)
             do {
                 Start-Sleep -Seconds 5
                 $toolsState = Invoke-Vmrun -Arguments @('-T', 'ws', 'checkToolsState', $VmPath) | Out-String
             } until ($toolsState -match 'running|installed' -or (Get-Date) -ge $toolsBackDeadline)
             Write-ControllerFeedback -Kind 'live' -Message "Post-reboot Tools state: $($toolsState.Trim())"
+            Start-GuestValidationAgent
         }
+    } elseif (-not $statusSeen -and (Get-Date) -ge $initialStatusDeadline) {
+        Write-ControllerFeedback -Kind 'blocked' -Message 'Guest agent did not produce an initial status within 90 seconds.'
+        exit 1
     }
 }
 
@@ -152,6 +229,8 @@ if (-not (Test-Path $resultPath)) {
     Write-ControllerFeedback -Kind 'blocked' -Message 'Result file not produced yet.'
     exit 1
 }
+
+Sync-GuestArtifactsToHost
 
 $result = Get-Content -Path $resultPath -Raw | ConvertFrom-Json
 $measured = @($result.benchmark_runs | Where-Object { $_.kind -eq 'measured' })

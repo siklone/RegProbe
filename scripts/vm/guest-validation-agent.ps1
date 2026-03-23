@@ -49,6 +49,43 @@ function Load-JsonFile {
     return Get-Content -Path $Path -Raw | ConvertFrom-Json
 }
 
+function ConvertTo-MutableState {
+    param(
+        [AllowNull()]
+        [object]$InputObject
+    )
+
+    if ($null -eq $InputObject) {
+        return $null
+    }
+
+    if ($InputObject -is [System.Collections.IDictionary]) {
+        $map = [ordered]@{}
+        foreach ($key in $InputObject.Keys) {
+            $map[$key] = ConvertTo-MutableState -InputObject $InputObject[$key]
+        }
+        return $map
+    }
+
+    if ($InputObject -is [pscustomobject]) {
+        $map = [ordered]@{}
+        foreach ($prop in $InputObject.PSObject.Properties) {
+            $map[$prop.Name] = ConvertTo-MutableState -InputObject $prop.Value
+        }
+        return $map
+    }
+
+    if ($InputObject -is [System.Collections.IEnumerable] -and $InputObject -isnot [string]) {
+        $items = New-Object System.Collections.ArrayList
+        foreach ($item in $InputObject) {
+            [void]$items.Add((ConvertTo-MutableState -InputObject $item))
+        }
+        return $items
+    }
+
+    return $InputObject
+}
+
 function New-State {
     param(
         [Parameter(Mandatory = $true)]
@@ -81,8 +118,14 @@ function Update-StatePhase {
         [string]$Detail
     )
 
+    if (-not $State.Contains('timings') -or $null -eq $State.timings) {
+        $State.timings = [ordered]@{}
+    } elseif ($State.timings -isnot [System.Collections.IDictionary]) {
+        $State.timings = ConvertTo-MutableState -InputObject $State.timings
+    }
+
     $State.phase = $Phase
-    $State.timings.last_updated_at = (Get-Date).ToString('o')
+    $State.timings['last_updated_at'] = (Get-Date).ToString('o')
     if ($Detail) {
         $State.last_detail = $Detail
     }
@@ -193,7 +236,6 @@ function Start-RebootAndExit {
     )
 
     Update-StatePhase -State $State -Phase $Phase -Detail 'Guest restart requested.'
-    Restart-Computer -Force
     exit 0
 }
 
@@ -289,8 +331,10 @@ if ($null -eq $stateObject) {
     $stateObject = New-State -TestId $config.test_id
 }
 
-$state = @{}
-$stateObject.PSObject.Properties | ForEach-Object { $state[$_.Name] = $_.Value }
+$state = ConvertTo-MutableState -InputObject $stateObject
+if ($null -eq $state) {
+    $state = New-State -TestId $config.test_id
+}
 
 try {
     if (-not $state.baseline) {
