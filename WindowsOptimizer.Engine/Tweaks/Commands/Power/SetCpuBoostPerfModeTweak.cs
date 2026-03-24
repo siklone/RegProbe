@@ -117,7 +117,7 @@ public sealed class SetCpuBoostPerfModeTweak : CommandTweak
 
     private static bool TryParsePowerCfgOutput(string output, out PerfBoostSnapshot snapshot)
     {
-        snapshot = default;
+        snapshot = new PerfBoostSnapshot(0, 0);
 
         if (string.IsNullOrWhiteSpace(output))
         {
@@ -147,7 +147,7 @@ public sealed class SetCpuBoostPerfModeTweak : CommandTweak
 
     private static bool TryParseSnapshot(string detectedState, out PerfBoostSnapshot snapshot)
     {
-        snapshot = default;
+        snapshot = new PerfBoostSnapshot(0, 0);
 
         if (string.IsNullOrWhiteSpace(detectedState))
         {
@@ -156,8 +156,14 @@ public sealed class SetCpuBoostPerfModeTweak : CommandTweak
 
         try
         {
-            snapshot = JsonSerializer.Deserialize<PerfBoostSnapshot>(detectedState);
-            return snapshot is not null;
+            var parsed = JsonSerializer.Deserialize<PerfBoostSnapshot>(detectedState);
+            if (parsed is null)
+            {
+                return false;
+            }
+
+            snapshot = parsed;
+            return true;
         }
         catch (JsonException)
         {

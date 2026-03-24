@@ -121,7 +121,7 @@ public sealed class RollbackStateStore : IRollbackStateStore
     /// Gets all pending rollback entries (tweaks that were applied but not verified/rolled back).
     /// Call this on app startup to check for crash recovery scenarios.
     /// </summary>
-    public async Task<IReadOnlyList<RollbackEntry>> GetPendingRollbacksAsync(CancellationToken ct)
+    public Task<IReadOnlyList<RollbackEntry>> GetPendingRollbacksAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
@@ -130,19 +130,20 @@ public sealed class RollbackStateStore : IRollbackStateStore
             LoadIfNeeded();
 
             // Return entries that are still pending (not yet applied/verified)
-            return _cachedData.PendingRollbacks
+            IReadOnlyList<RollbackEntry> pending = _cachedData.PendingRollbacks
                 .Where(e => e.Status == RollbackStatus.Pending)
                 .ToList()
                 .AsReadOnly();
+            return Task.FromResult(pending);
         }
     }
 
     /// <summary>
     /// Gets the original value for a specific tweak if available.
     /// </summary>
-    public async Task<RollbackEntry?> GetOriginalStateAsync(string tweakId, CancellationToken ct)
+    public Task<RollbackEntry?> GetOriginalStateAsync(string tweakId, CancellationToken ct)
     {
-        if (string.IsNullOrWhiteSpace(tweakId)) return null;
+        if (string.IsNullOrWhiteSpace(tweakId)) return Task.FromResult<RollbackEntry?>(null);
 
         ct.ThrowIfCancellationRequested();
 
@@ -150,8 +151,9 @@ public sealed class RollbackStateStore : IRollbackStateStore
         {
             LoadIfNeeded();
 
-            return _cachedData.PendingRollbacks.FirstOrDefault(e =>
+            var entry = _cachedData.PendingRollbacks.FirstOrDefault(e =>
                 string.Equals(e.TweakId, tweakId, StringComparison.OrdinalIgnoreCase));
+            return Task.FromResult(entry);
         }
     }
 

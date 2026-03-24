@@ -39,7 +39,7 @@ public sealed class LocalRegistryAccessor : IRegistryAccessor
         return Task.FromResult(new RegistryValueReadResult(true, data));
     }
 
-    public async Task SetValueAsync(RegistryValueReference reference, RegistryValueData value, CancellationToken ct)
+    public Task SetValueAsync(RegistryValueReference reference, RegistryValueData value, CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
 
@@ -65,6 +65,8 @@ public sealed class LocalRegistryAccessor : IRegistryAccessor
                 key.SetValue(reference.ValueName, value.ToObject(), value.Kind);
             }
         }
+
+        return Task.CompletedTask;
     }
 
     public async Task DeleteValueAsync(RegistryValueReference reference, CancellationToken ct)
