@@ -7,11 +7,11 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 
 | Field | Value |
 | --- | --- |
-| Total records | 286 |
-| Validated | 234 |
+| Total records | 287 |
+| Validated | 235 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 286 |
+| Records with evidence | 287 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -23,7 +23,7 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Audio | 5 |
 | Cleanup | 1 |
 | Developer | 13 |
-| Explorer | 14 |
+| Explorer | 15 |
 | Network | 29 |
 | Notifications | 5 |
 | Performance | 3 |
@@ -2206,6 +2206,83 @@ Nohuto lineage references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference. |
+
+---
+
+### `explorer.show-type-overlay`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Category | `Explorer` |
+| Area | `Observed Explorer Runtime Setting` |
+| Scope | `user` |
+| Source file | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Observed Explorer runtime setting for ShowTypeOverlay. Microsoft Open Specifications maps displayIconThumb to HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTypeOverlay and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTypeOverlay with both Data: 0 and Data: 1 after Explorer restart.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `n/a` |
+| Notes | The app does not currently expose ShowTypeOverlay. |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- 25H2 default-user baseline (25H2 default profile)
+  - explorer-showtypeoverlay-flag: value `1` — HKCU25H2.reg sets ShowTypeOverlay = 1 in the 25H2 default-user hive.
+
+**Recommended profiles**
+
+- `show-file-icons-on-thumbnails`: Show file icons on thumbnails (apply_allowed=True)
+- `hide-file-icons-on-thumbnails`: Hide file icons on thumbnails (apply_allowed=True)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-displayiconthumb` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista displayIconThumb | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
+| `dump-25h2-explorer-advanced-showtypeoverlay` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowTypeOverlay | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg | `medium` | path, value, version-scope |
+| `procmon-showtypeoverlay-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | H:\Temp\vm-tooling-staging\showtypeoverlay-result.txt | `high` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\showtypeoverlay-result.txt |
+| Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTypeOverlay ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTypeOverlay ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=1 |
+| Key found on page | `True` |
+| Notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft Open Specifications documents the exact ShowTypeOverlay path and 0/1 semantics, the 25H2 dump/default hive corroborate the value family on current builds, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference. |
 
 ---
 

@@ -8,11 +8,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 
 | Field | Value |
 | --- | --- |
-| Total records | 287 |
-| Validated | 235 |
+| Total records | 288 |
+| Validated | 236 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 287 |
+| Records with evidence | 288 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -86,6 +86,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `developer.ssh-agent-autostart` | validated | `Docs/tweaks/research/records/developer.ssh-agent-autostart.review.json` | `b3236efe7c1bf586a427ddb9a748aa911b732effdd6e8e270a386e5bc25b7485` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 1 |
 | `developer.windows-dev-mode` | validated | `Docs/tweaks/research/records/developer.windows-dev-mode.json` | `3c3defe4768d22994c71d0a3c131d12ea7eac123190b4fe89a56b7a2113a324d` | `0ed25dffb4bdabc7eaa24c879e79ec54649fabca8d204b46a0e2f6434ae60841` | 1 |
 | `developer.wsl2-memory` | validated | `Docs/tweaks/research/records/developer.wsl2-memory.json` | `9cf81d553d079e19fcf84fae9b126bdf1b081f7c4137cba883434eb9fdaee1fe` | `8483aaddd7cffe7e57ba75d9b795a94c65285ad73a64c77020d7502864a7d988` | 1 |
+| `explorer.always-show-icons-never-thumbnails` | validated | `Docs/tweaks/research/records/explorer.always-show-icons-never-thumbnails.review.json` | `22d475e957eef9e078a8c4c3975e12abe89e1ba86c11cf44e627e8221483b1a0` | `b7ac9b5f0745fe76c95b7c8864517314a2c401bac224bb610acb66022a804fcb` | 1 |
 | `explorer.disable-low-disk-space-warning` | validated | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
 | `explorer.enable-explorer-compact-mode` | validated | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
@@ -3642,6 +3643,45 @@ _No provenance block present._
 | exact_quote_or_path | The .wslconfig file configures settings globally for all Linux distributions running with WSL 2.; [wsl2]; memory=4GB |
 | key_found_on_page | True |
 | notes | Microsoft documents WSL 2 memory limits in %UserProfile%\\.wslconfig under the [wsl2] section using the memory setting. The current app writes the same documented surface. |
+### `explorer.always-show-icons-never-thumbnails`
+
+- Status: `validated`
+- Category: `Explorer`
+- Area: `Observed Explorer Runtime Setting`
+- Scope: `user`
+- Source file: `Docs/tweaks/research/records/explorer.always-show-icons-never-thumbnails.review.json`
+- Source SHA256: `22d475e957eef9e078a8c4c3975e12abe89e1ba86c11cf44e627e8221483b1a0`
+- Proof SHA256: `b7ac9b5f0745fe76c95b7c8864517314a2c401bac224bb610acb66022a804fcb`
+
+**Summary:** Observed Explorer runtime setting for always showing icons instead of thumbnails. Microsoft Open Specifications maps alwaysShowIcons to HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\IconsOnly and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\IconsOnly with both Data: 0 and Data: 1 after Explorer restart.
+
+**Targets**
+
+- `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `IconsOnly` / `REG_DWORD`
+  - Notes: This record validates the documented 0/1 semantics against the live Explorer runtime surface on Win25H2Clean.
+  - value | value=0 | label=Allow thumbnails | meaning=Explorer allows thumbnail previews instead of forcing icons only. Microsoft documents 0 as the disabled state, the 25H2 default-user hive sets IconsOnly = 0, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.
+  - value | value=1 | label=Always show icons, never thumbnails | meaning=Explorer forces icons instead of thumbnails. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-alwaysshowicons` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista alwaysShowIcons | `high` |
+| `dump-25h2-explorer-advanced-iconsonly` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for IconsOnly | `medium` |
+| `procmon-iconsonly-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer IconsOnly runtime surface | `high` |
+
+**Provenance**
+
+_No provenance block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\iconsonly-result.txt |
+| exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=1 |
+| key_found_on_page | True |
+| notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe. |
 ### `explorer.disable-low-disk-space-warning`
 
 - Status: `validated`
