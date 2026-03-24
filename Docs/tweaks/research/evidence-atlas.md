@@ -26546,7 +26546,7 @@ Blocking issues:
 | Confidence | `low` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for MinimumDpcRate. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\MinimumDpcRate = 3, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for MinimumDpcRate. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\MinimumDpcRate = 3, and the mirror plus decompiled kernel query path now expose the backing KiMinimumDpcRate variable even though this research pass still did not capture a primary Microsoft source for the exact registry key and value semantics.
 
 **Current implementation**
 
@@ -26605,6 +26605,7 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
+| `nohuto-minimum-dpc-rate-ghidra` | `decompilation` | `Ghidra decompilation` | nohuto mirror: minimum DPC rate query path | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c; Docs/tweaks/_source-mirrors/win-config/system/desc.md | `high` | path, value, behavior |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -26615,7 +26616,7 @@ Windows Internals references:
 | Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
 | Exact quote / path | *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; |
 | Key found on page | `True` |
-| Notes | Kernel minimum DPC rate audit trail. The decompiled path exposes the kernel variable directly. |
+| Notes | Kernel minimum DPC rate audit trail. The mirrored docs record MinimumDpcRate = 3, and the decompiled path exposes the KiMinimumDpcRate kernel variable directly. |
 
 **Decision**
 
@@ -26626,7 +26627,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
 | Needs VM validation | `False` |
-| Why | The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for MinimumDpcRate. |
+| Why | The current semantics come from repo research notes plus mirrored kernel pseudocode that exposes KiMinimumDpcRate, but this research pass still did not capture a primary Microsoft source for MinimumDpcRate. |
 
 Blocking issues:
 - No primary Microsoft source for MinimumDpcRate was captured in this research pass.

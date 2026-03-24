@@ -4,7 +4,7 @@
     "record_id":  "system.kernel-cache-aware-scheduling",
     "tweak_id":  "system.kernel-cache-aware-scheduling",
     "record_status":  "deprecated",
-    "summary":  "Deprecated audit trail for CacheAwareScheduling. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\CacheAwareScheduling = 47, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+    "summary":  "Deprecated audit trail for CacheAwareScheduling. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\CacheAwareScheduling = 47, and the mirrored kernel value list now explicitly records the same KiCacheAwareScheduling label even though this research pass still did not capture a primary Microsoft source or a direct decompiled kernel path for the exact registry key and value semantics.",
     "setting":  {
                     "name":  "Cache-Aware Scheduling",
                     "category":  "System",
@@ -13,7 +13,7 @@
                     "casual_explanation":  "This appears to be a low-level scheduler setting related to how Windows considers CPU cache topology when placing work. It is not a normal user setting.",
                     "why_people_change_it":  "People would only touch it when reproducing advanced kernel tuning experiments or undoing manual registry changes from tweak guides.",
                     "tradeoffs_overview":  "Changing cache-aware scheduling behavior can influence how threads are placed relative to CPU cache hierarchy, which can affect performance in unpredictable ways. Without a primary Microsoft source for the exact registry key, the safe choice is to keep it in review.",
-                    "professional_notes":  "The repo research notes list CacheAwareScheduling = 47 and associate it with KiCacheAwareScheduling. However, this research pass did not capture a primary Microsoft page that documents the registry key, its supported values, or its current support status. The record therefore treats the value as observed repo provenance only.",
+                    "professional_notes":  "The repo research notes list CacheAwareScheduling = 47 and associate it with KiCacheAwareScheduling. The mirrored win-config list records the same mapping, which strengthens the provenance trail for the value name and current app profile. However, this research pass still did not capture a primary Microsoft page that documents the registry key, its supported values, or its current support status, and it also did not capture a direct decompiled kernel path for KiCacheAwareScheduling. The record therefore treats the value as observed repo provenance plus mirror corroboration only.",
                     "targets":  [
                                     {
                                         "target_id":  "cache-aware-scheduling",
@@ -28,6 +28,7 @@
                                                                    "label":  "Primary Microsoft mapping not captured",
                                                                    "meaning":  "This research pass did not capture a primary Microsoft source for the exact CacheAwareScheduling registry semantics.",
                                                                    "evidence_ids":  [
+                                                                                        "nohuto-cache-aware-scheduling-mirror",
                                                                                         "repo-system-doc-kernel"
                                                                                     ]
                                                                },
@@ -37,6 +38,7 @@
                                                                    "label":  "Observed app profile",
                                                                    "meaning":  "The current app treats 47 as the default cache-aware scheduling profile, based on repo research rather than a captured primary Microsoft source.",
                                                                    "evidence_ids":  [
+                                                                                        "nohuto-cache-aware-scheduling-mirror",
                                                                                         "repo-system-doc-kernel",
                                                                                         "app-system-registry-provider"
                                                                                     ]
@@ -144,6 +146,18 @@
                              ],
     "evidence":  [
                      {
+                         "evidence_id":  "nohuto-cache-aware-scheduling-mirror",
+                         "kind":  "repo-doc",
+                         "title":  "nohuto mirror: kernel cache-aware scheduling value list",
+                         "location":  "Docs/tweaks/_source-mirrors/win-config/system/desc.md",
+                         "summary":  "The mirrored kernel value list records \"CacheAwareScheduling\" = 47 and labels it with KiCacheAwareScheduling.",
+                         "supports":  [
+                                          "path",
+                                          "value"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
                          "evidence_id":  "repo-system-doc-kernel",
                          "kind":  "repo-doc",
                          "title":  "Repo system research notes for kernel registry values",
@@ -178,7 +192,7 @@
                      "restore_default_supported":  false,
                      "restore_previous_supported":  false,
                      "needs_vm_validation":  false,
-                     "why":  "The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for CacheAwareScheduling.",
+                     "why":  "The current semantics come from repo research notes plus a mirrored kernel value list that records the same KiCacheAwareScheduling label, but this research pass still did not capture a primary Microsoft source or a direct decompiled path for CacheAwareScheduling.",
                      "blocking_issues":  [
                                              "No primary Microsoft source for CacheAwareScheduling was captured in this research pass.",
                                              "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
@@ -186,6 +200,7 @@
                  },
     "open_questions":  [
                            "Can a primary Microsoft source for CacheAwareScheduling be captured?",
+                           "Can a direct decompiled kernel path for KiCacheAwareScheduling be captured?",
                            "Should the app surface this only as an experimental kernel setting?"
                        ],
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
@@ -193,6 +208,6 @@
                              "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
                              "exact_quote_or_path":  "\"CacheAwareScheduling\" = 47; // KiCacheAwareScheduling",
                              "key_found_on_page":  true,
-                             "notes":  "Kernel cache-aware scheduling audit trail. The mirror exposes the kernel variable backing the setting."
+                             "notes":  "Kernel cache-aware scheduling audit trail. The mirrored win-config list records CacheAwareScheduling = 47 with the KiCacheAwareScheduling label, but this research pass did not capture a direct decompiled kernel path for the variable."
                          }
 }

@@ -59,7 +59,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.graphics-disable-overlays` | deprecated | `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json` | `6cf5e02e4ced0aa7b215752645b3239269b66d175b298283f93829863e01cf92` | `dbf1407cc708022946c9f7e61f339d401d97e7a859bb0e947f2824dbf29a803e` | 1 |
 | `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `98ef739d16ea86aabaedb34b97ce872b4f0fcd5fcb7d32ab364a8b863d489580` | `de461e3f29a05889c82ae0349ddf469cce6bcacc3a632e36c6bdcd1b029992df` | 1 |
 | `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc` | `84c3a10e4279611b07fb235549e264875a9a89304dfd3c10b30994d093f78c65` | 1 |
-| `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `8e2fbbfcb328d9ccc42ba64843c5502477aba92c21fda2ec72b68db30898e3cd` | `c884ea4b4736b245520364697f45cbf14a2f63119fbc5b20763599056d3c5a04` | 1 |
+| `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `c71c786191fcbbda286b1f777121293a167deca0c559020752ae280665b02683` | `c3f8debabce5f85e918dd986eb331a900ffb0c11ea9c9409bc02e5d067799832` | 1 |
 | `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `2b7a318f39e4168d65dfc33011c490ad14c1b2eacec8781538e76ddd37cae801` | `bd6eb09cb779de67dbcbaaa293b39f58266085c2535cf005beab857de9d6cde2` | 1 |
 | `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b` | `efcc02d642dacdff3f28dac8946c8878180d0ef83875ea5feff1ab89b5c9c126` | 1 |
 | `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `2a1fbe9eb417cd8a472510c73b562d4c7ccbb39c7bf76a6a9ddd06dd983c47e3` | `944ee2c99bfde59a74d232317a9da57e812a0c844e8abb75862163045f3928db` | 1 |
@@ -2232,10 +2232,10 @@ Windows Internals references:
 - Area: `Kernel / Scheduler Topology`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json`
-- Source SHA256: `8e2fbbfcb328d9ccc42ba64843c5502477aba92c21fda2ec72b68db30898e3cd`
-- Proof SHA256: `c884ea4b4736b245520364697f45cbf14a2f63119fbc5b20763599056d3c5a04`
+- Source SHA256: `c71c786191fcbbda286b1f777121293a167deca0c559020752ae280665b02683`
+- Proof SHA256: `c3f8debabce5f85e918dd986eb331a900ffb0c11ea9c9409bc02e5d067799832`
 
-**Summary:** Deprecated audit trail for CacheAwareScheduling. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\CacheAwareScheduling = 47, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for CacheAwareScheduling. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\CacheAwareScheduling = 47, and the mirrored kernel value list now explicitly records the same KiCacheAwareScheduling label even though this research pass still did not capture a primary Microsoft source or a direct decompiled kernel path for the exact registry key and value semantics.
 
 **Targets**
 
@@ -2248,6 +2248,7 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
+| `nohuto-cache-aware-scheduling-mirror` | `repo-doc` | `Current repo docs` | nohuto mirror: kernel cache-aware scheduling value list | `medium` |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
@@ -2279,7 +2280,7 @@ Windows Internals references:
 | source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
 | exact_quote_or_path | "CacheAwareScheduling" = 47; // KiCacheAwareScheduling |
 | key_found_on_page | True |
-| notes | Kernel cache-aware scheduling audit trail. The mirror exposes the kernel variable backing the setting. |
+| notes | Kernel cache-aware scheduling audit trail. The mirrored win-config list records CacheAwareScheduling = 47 with the KiCacheAwareScheduling label, but this research pass did not capture a direct decompiled kernel path for the variable. |
 ### `system.kernel-default-dynamic-hetero-cpu-policy`
 
 - Status: `deprecated`
