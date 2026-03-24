@@ -1,12 +1,12 @@
 # Windows Optimizer Suite
 
-Windows Optimizer Suite is a WPF/.NET 8 desktop app for Windows 10/11 focused on **safe, reversible tweaks**, **hardware details**, and **traceable system research**.
+Windows Optimizer Suite is a WPF/.NET 8 desktop app for Windows 10/11 focused on **safe, reversible tweaks**, **hardware details**, and **documented system research**.
 
 It is built for people who want more than a random "FPS boost" script:
 
 - 🛡️ every SAFE tweak follows `Detect -> Apply -> Verify -> Rollback`
 - 🧠 the app understands the PC it is running on
-- 🔍 tweaks are increasingly backed by documented sources and local audit notes
+- 🔍 tweaks are backed by documented sources and local audit notes
 - ⚡ elevated actions run out-of-process through a dedicated host instead of forcing the whole app to run as admin
 
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
@@ -42,7 +42,7 @@ It is built for people who want more than a random "FPS boost" script:
 
 ### 📚 Research & Provenance
 - Local documentation and source mapping under `Docs/`
-- Upstream dump and pseudocode lineage integration (`win-config`, `win-registry`, related audits)
+- Uses Nohuto's research (`win-config`, `win-registry`), cross-referenced against live builds
 - Microsoft-backed and repo-backed coverage tests for tweak providers
 
 ## 🧪 VM Validation Environment
@@ -71,7 +71,7 @@ Windows Optimizer Suite aims for something better:
 - 🔁 **Reversible behavior** instead of blind mutation
 - 🪟 **Windows-native shell** instead of a web wrapper
 - 🛠️ **Real hardware context** instead of generic system labels
-- 🧾 **Source-aware documentation** instead of folklore-only tuning
+- 🧾 **Source-aware documentation** instead of forum folklore
 
 ## 🖥️ Current Surface Areas
 
@@ -120,7 +120,7 @@ scripts/                           Build, publish, cleanup, asset generation
 
 ## 🛡️ Safety Model
 
-All SAFE tweak work is expected to remain reversible and auditable.
+All SAFE tweak work is expected to remain reversible and logged.
 
 - ✅ `Detect -> Apply -> Verify -> Rollback`
 - ✅ no automatic system modification on startup
@@ -169,7 +169,7 @@ dotnet test WindowsOptimizer.Tests/WindowsOptimizer.Tests.csproj -v minimal
 
 ### Publish
 
-Use the repo script for deterministic output:
+Use the repo script:
 
 ```powershell
 pwsh -File scripts/publish_release.ps1
@@ -197,7 +197,7 @@ $env:WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH = "C:\path\to\WindowsOptimizer.Elevate
 
 ## 🧠 Optional Generated Assets
 
-Hardware coverage has two layers:
+Hardware coverage works on two levels:
 
 - built-in rule-based fallbacks
 - optional generated icon / hardware-db inputs for better matching
@@ -226,7 +226,7 @@ Good starting points:
 
 - WPF + MVVM shell architecture
 - Admin work goes through `ElevatedHost`
-- Prefer small, composable services
+- Prefer small, focused services
 - Add tests when changing engine contracts, registry routing, command-backed tweaks, or provider coverage
 - `main` is the intended remote branch
 
