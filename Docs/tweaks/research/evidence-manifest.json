@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T08:49:13.173949Z",
+  "generated_utc": "2026-03-24T09:32:00.273613Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 290,
@@ -64413,13 +64413,13 @@
       "tweak_id": "system.kernel-thread-dpc-enable",
       "record_status": "validated",
       "source_file": "Docs/tweaks/research/records/system.kernel-thread-dpc-enable.json",
-      "source_file_sha256": "4b0d46c04af42676c7aa3b1f19b489aabe590f990bd01995dfd03fb496e16a76",
-      "source_file_size_bytes": 8936,
+      "source_file_sha256": "39b9545f28226227c98927feb4de4623e86b7dc8b18df5d91b8b8cb079c3329a",
+      "source_file_size_bytes": 11169,
       "name": "Threaded DPCs",
       "category": "System",
       "area": "Kernel / Deferred Procedure Calls",
       "scope": "device",
-      "summary": "Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\\System\\CurrentControlSet\\Control\\SessionManager\\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset.",
+      "summary": "Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\\System\\CurrentControlSet\\Control\\SessionManager\\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset, and a bounded Win25H2Clean VM suite exercised the `0` state through real reboot, CPU and memory workloads, and restore back to the missing baseline.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": false,
@@ -64427,7 +64427,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "Microsoft documents the exact path, explicitly says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset.",
+        "why": "Microsoft documents the exact path, explicitly says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset, and bounded VM runs now show that the `0` state can be exercised and restored safely in Win25H2Clean.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -64458,7 +64458,8 @@
               "label": "Default threaded-DPC behavior",
               "meaning": "Windows keeps threaded DPCs enabled by default.",
               "evidence_ids": [
-                "ms-threaded-dpcs"
+                "ms-threaded-dpcs",
+                "vm-thread-dpc-enable-bounded-suite"
               ]
             },
             {
@@ -64467,7 +64468,8 @@
               "label": "Threaded DPCs disabled",
               "meaning": "Threaded DPCs run as ordinary DPCs instead.",
               "evidence_ids": [
-                "ms-threaded-dpcs"
+                "ms-threaded-dpcs",
+                "vm-thread-dpc-enable-bounded-suite"
               ]
             },
             {
@@ -64594,15 +64596,56 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-thread-dpc-enable-bounded-suite",
+          "kind": "vm-test",
+          "title": "Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0",
+          "location": "Docs/tweaks/research/notes/thread-dpc-enable-vm-suite-20260324.md",
+          "summary": "A bounded VM suite applied ThreadDpcEnable = 0 from a missing baseline, completed WinSAT CPU and memory runs with real apply and restore reboots, and returned the guest to the original missing baseline.",
+          "strength": "medium",
+          "supports": [
+            "value",
+            "default",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "etw-thread-dpc-enable-cpu3",
+          "kind": "etw-trace",
+          "title": "WPR trace for ThreadDpcEnable CPU bounded run",
+          "location": "H:\\Temp\\vm-tooling-staging\\thread-dpc-enable-0-cpu3.etl",
+          "summary": "ETW trace captured during the bounded WinSAT CPU run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "etw-thread-dpc-enable-mem2",
+          "kind": "etw-trace",
+          "title": "WPR trace for ThreadDpcEnable memory bounded run",
+          "location": "H:\\Temp\\vm-tooling-staging\\thread-dpc-enable-0-mem2.etl",
+          "summary": "ETW trace captured during the bounded WinSAT memory run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs",
         "exact_quote_or_path": "A threaded DPC is a DPC that the system executes at IRQL equal to PASSIVE_LEVEL. Threaded DPCs are enabled by default, but you can disable them by setting the HKLM\\System\\CCS\\Control\\SessionManager\\Kernel\\ThreadDpcEnable registry key to zero. When threaded DPCs are disabled, they execute as ordinary DPCs.",
         "key_found_on_page": true,
-        "notes": "The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface."
+        "notes": "The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface, and the bounded VM suite confirms the `0` disable state can be exercised and restored back to the missing baseline."
       },
-      "validation_proof_sha256": "3219619af07a7a9d2793d0462965c142b86b5df0576dcd47b588c59c405a6a34",
+      "validation_proof_sha256": "a15a06f3b91cf08536310bd098334ea2859c0ff7ad7d73e2594296a780a73f5e",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

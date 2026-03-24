@@ -25926,7 +25926,7 @@ Blocking issues:
 | Confidence | `low` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for CacheAwareScheduling. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\CacheAwareScheduling = 47, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for CacheAwareScheduling. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\CacheAwareScheduling = 47, and the mirrored kernel value list now explicitly records the same KiCacheAwareScheduling label even though this research pass still did not capture a primary Microsoft source or a direct decompiled kernel path for the exact registry key and value semantics.
 
 **Current implementation**
 
@@ -25985,6 +25985,7 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
+| `nohuto-cache-aware-scheduling-mirror` | `repo-doc` | `Current repo docs` | nohuto mirror: kernel cache-aware scheduling value list | Docs/tweaks/_source-mirrors/win-config/system/desc.md | `medium` | path, value |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -25995,7 +25996,7 @@ Windows Internals references:
 | Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
 | Exact quote / path | "CacheAwareScheduling" = 47; // KiCacheAwareScheduling |
 | Key found on page | `True` |
-| Notes | Kernel cache-aware scheduling audit trail. The mirror exposes the kernel variable backing the setting. |
+| Notes | Kernel cache-aware scheduling audit trail. The mirrored win-config list records CacheAwareScheduling = 47 with the KiCacheAwareScheduling label, but this research pass did not capture a direct decompiled kernel path for the variable. |
 
 **Decision**
 
@@ -26006,7 +26007,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
 | Needs VM validation | `False` |
-| Why | The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for CacheAwareScheduling. |
+| Why | The current semantics come from repo research notes plus a mirrored kernel value list that records the same KiCacheAwareScheduling label, but this research pass still did not capture a primary Microsoft source or a direct decompiled path for CacheAwareScheduling. |
 
 Blocking issues:
 - No primary Microsoft source for CacheAwareScheduling was captured in this research pass.

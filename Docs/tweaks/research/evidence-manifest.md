@@ -265,7 +265,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.graphics-tdr-level` | validated | `Docs/tweaks/research/records/system.graphics-tdr-level.json` | `e6e9fe55f500bf803e86104ddd0f0feb379588a35c7e98701df25914697ac8dc` | `e1d685fde018737579c002e14fe7e9bb9e301555449c7032ac537be1aefab8b1` | 1 |
 | `system.graphics-tdr-limit-count` | validated | `Docs/tweaks/research/records/system.graphics-tdr-limit-count.json` | `b6ffdcd76da8a573f8e4a8dd846275c0b3ea35de4dd0a4cdc57e40e08ef2dff2` | `98793161f5d92ef41a5dffb17fe726e653b8bea67bf5fcc00384abd0cf49fdde` | 1 |
 | `system.graphics-tdr-limit-time` | validated | `Docs/tweaks/research/records/system.graphics-tdr-limit-time.json` | `807439c6b71d03d552670f0291a9c28ce5eeb10ac7ee6258f8822e2e067a1bde` | `b8db6b0b24bd9b6d64dd8e0ff6088b7079e260f5a620d73e10950a74b6499361` | 1 |
-| `system.kernel-thread-dpc-enable` | validated | `Docs/tweaks/research/records/system.kernel-thread-dpc-enable.json` | `4b0d46c04af42676c7aa3b1f19b489aabe590f990bd01995dfd03fb496e16a76` | `3219619af07a7a9d2793d0462965c142b86b5df0576dcd47b588c59c405a6a34` | 1 |
+| `system.kernel-thread-dpc-enable` | validated | `Docs/tweaks/research/records/system.kernel-thread-dpc-enable.json` | `39b9545f28226227c98927feb4de4623e86b7dc8b18df5d91b8b8cb079c3329a` | `a15a06f3b91cf08536310bd098334ea2859c0ff7ad7d73e2594296a780a73f5e` | 1 |
 | `system.memory-clear-pagefile-at-shutdown` | validated | `Docs/tweaks/research/records/system.memory-clear-pagefile-at-shutdown.json` | `2717a4299cf44da2dc6cc6db5f9bf70fb81393c1dcfd168532dd03186402e04c` | `410daf2e1ff1285865db5d6768c6f4e852efd5e68d0b6f914845ca98b2dcc97b` | 1 |
 | `system.memory-disable-paging-executive` | validated | `Docs/tweaks/research/records/system.memory-disable-paging-executive.json` | `d142104b69db4091b2f36240824e3e551b6c7033e486a3fb7e0aceaa16e332b1` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 1 |
 | `system.memory-large-system-cache-client` | validated | `Docs/tweaks/research/records/system.memory-large-system-cache-client.review.json` | `96a2972b0ac49d65125668f25c55a812e180b1aae979c6e2daac7a0e6024c03a` | `0bb05d41e8e9be3cbc9320f5ab39e1261822a39f4b171f38e49f416bb54d05d5` | 1 |
@@ -13286,10 +13286,10 @@ Windows Internals references:
 - Area: `Kernel / Deferred Procedure Calls`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-thread-dpc-enable.json`
-- Source SHA256: `4b0d46c04af42676c7aa3b1f19b489aabe590f990bd01995dfd03fb496e16a76`
-- Proof SHA256: `3219619af07a7a9d2793d0462965c142b86b5df0576dcd47b588c59c405a6a34`
+- Source SHA256: `39b9545f28226227c98927feb4de4623e86b7dc8b18df5d91b8b8cb079c3329a`
+- Proof SHA256: `a15a06f3b91cf08536310bd098334ea2859c0ff7ad7d73e2594296a780a73f5e`
 
-**Summary:** Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\System\CurrentControlSet\Control\SessionManager\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset.
+**Summary:** Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\System\CurrentControlSet\Control\SessionManager\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset, and a bounded Win25H2Clean VM suite exercised the `0` state through real reboot, CPU and memory workloads, and restore back to the missing baseline.
 
 **Targets**
 
@@ -13304,6 +13304,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- |
 | `ms-threaded-dpcs` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to threaded DPCs | `high` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+| `vm-thread-dpc-enable-bounded-suite` | `vm-test` | `VM test / probe` | Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0 | `medium` |
+| `etw-thread-dpc-enable-cpu3` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable CPU bounded run | `medium` |
+| `etw-thread-dpc-enable-mem2` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable memory bounded run | `medium` |
 
 **Provenance**
 
@@ -13333,7 +13336,7 @@ Windows Internals references:
 | source_url | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs |
 | exact_quote_or_path | A threaded DPC is a DPC that the system executes at IRQL equal to PASSIVE_LEVEL. Threaded DPCs are enabled by default, but you can disable them by setting the HKLM\\System\\CCS\\Control\\SessionManager\\Kernel\\ThreadDpcEnable registry key to zero. When threaded DPCs are disabled, they execute as ordinary DPCs. |
 | key_found_on_page | True |
-| notes | The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface. |
+| notes | The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface, and the bounded VM suite confirms the `0` disable state can be exercised and restored back to the missing baseline. |
 ### `system.memory-clear-pagefile-at-shutdown`
 
 - Status: `validated`

@@ -4,7 +4,7 @@
   "record_id": "system.kernel-thread-dpc-enable",
   "tweak_id": "system.kernel-thread-dpc-enable",
   "record_status": "validated",
-  "summary": "Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\\System\\CurrentControlSet\\Control\\SessionManager\\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset.",
+  "summary": "Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\\System\\CurrentControlSet\\Control\\SessionManager\\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset, and a bounded Win25H2Clean VM suite exercised the `0` state through real reboot, CPU and memory workloads, and restore back to the missing baseline.",
   "setting": {
     "name": "Threaded DPCs",
     "category": "System",
@@ -13,7 +13,7 @@
     "casual_explanation": "Threaded DPCs let some kernel deferred work run in a way that can reduce system latency compared with ordinary DPCs. Most normal systems should leave this enabled.",
     "why_people_change_it": "People only change this when they are doing low-level driver or latency troubleshooting and want to force ordinary DPC behavior.",
     "tradeoffs_overview": "Leaving threaded DPCs enabled is the normal Microsoft baseline. Turning them off can increase system latency and hurt time-sensitive workloads like audio or video playback.",
-    "professional_notes": "Microsoft's threaded DPC documentation states that threaded DPCs are enabled by default and can be disabled by setting HKLM\\System\\CurrentControlSet\\Control\\SessionManager\\Kernel\\ThreadDpcEnable to 0. When disabled, threaded DPCs execute as ordinary DPCs. Microsoft also explains that ordinary DPCs increase system latency because they preempt thread execution, which can hurt time-sensitive applications such as audio or video playback.",
+    "professional_notes": "Microsoft's threaded DPC documentation states that threaded DPCs are enabled by default and can be disabled by setting HKLM\\System\\CurrentControlSet\\Control\\SessionManager\\Kernel\\ThreadDpcEnable to 0. When disabled, threaded DPCs execute as ordinary DPCs. Microsoft also explains that ordinary DPCs increase system latency because they preempt thread execution, which can hurt time-sensitive applications such as audio or video playback. A bounded Win25H2Clean VM suite on 2026-03-24 exercised the `0` state with real apply and restore reboots plus WinSAT CPU and memory workloads under WPR tracing; both runs completed and restored the original missing baseline.",
     "targets": [
       {
         "target_id": "thread-dpc-enable",
@@ -28,7 +28,8 @@
             "label": "Default threaded-DPC behavior",
             "meaning": "Windows keeps threaded DPCs enabled by default.",
             "evidence_ids": [
-              "ms-threaded-dpcs"
+              "ms-threaded-dpcs",
+              "vm-thread-dpc-enable-bounded-suite"
             ]
           },
           {
@@ -37,7 +38,8 @@
             "label": "Threaded DPCs disabled",
             "meaning": "Threaded DPCs run as ordinary DPCs instead.",
             "evidence_ids": [
-              "ms-threaded-dpcs"
+              "ms-threaded-dpcs",
+              "vm-thread-dpc-enable-bounded-suite"
             ]
           },
           {
@@ -179,6 +181,44 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-thread-dpc-enable-bounded-suite",
+      "kind": "vm-test",
+      "title": "Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0",
+      "location": "Docs/tweaks/research/notes/thread-dpc-enable-vm-suite-20260324.md",
+      "summary": "A bounded VM suite applied ThreadDpcEnable = 0 from a missing baseline, completed WinSAT CPU and memory runs with real apply and restore reboots, and returned the guest to the original missing baseline.",
+      "supports": [
+        "value",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "etw-thread-dpc-enable-cpu3",
+      "kind": "etw-trace",
+      "title": "WPR trace for ThreadDpcEnable CPU bounded run",
+      "location": "H:\\Temp\\vm-tooling-staging\\thread-dpc-enable-0-cpu3.etl",
+      "summary": "ETW trace captured during the bounded WinSAT CPU run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "etw-thread-dpc-enable-mem2",
+      "kind": "etw-trace",
+      "title": "WPR trace for ThreadDpcEnable memory bounded run",
+      "location": "H:\\Temp\\vm-tooling-staging\\thread-dpc-enable-0-mem2.etl",
+      "summary": "ETW trace captured during the bounded WinSAT memory run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -188,7 +228,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact path, explicitly says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset.",
+    "why": "Microsoft documents the exact path, explicitly says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset, and bounded VM runs now show that the `0` state can be exercised and restored safely in Win25H2Clean.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T00:53:08Z",
@@ -196,6 +236,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs",
     "exact_quote_or_path": "A threaded DPC is a DPC that the system executes at IRQL equal to PASSIVE_LEVEL. Threaded DPCs are enabled by default, but you can disable them by setting the HKLM\\System\\CCS\\Control\\SessionManager\\Kernel\\ThreadDpcEnable registry key to zero. When threaded DPCs are disabled, they execute as ordinary DPCs.",
     "key_found_on_page": true,
-    "notes": "The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface."
+    "notes": "The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface, and the bounded VM suite confirms the `0` disable state can be exercised and restored back to the missing baseline."
   }
 }
