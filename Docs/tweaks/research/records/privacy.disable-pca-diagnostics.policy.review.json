@@ -5,7 +5,7 @@
   "tweak_id": "privacy.disable-pca-diagnostics.policy",
   "record_status": "validated",
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
-  "summary": "Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 (detection active, explicit policy), disabledValue=0 (detection disabled). To disable diagnostics, the correct write value is 0 - the value name 'DisablePcaUI' is misleading. Note: if 'Turn off Program Compatibility Assistant' (DisablePCA=1) is active, this policy has no effect. This record was created on 2026-03-13 after DisablePcaUI was found to be the wrong key in the previous disable-program-compatibility-assistant record (which correctly targets DisablePCA).",
+  "summary": "Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 means detection stays active and disabledValue=0 turns detection off.",
   "setting": {
     "name": "Disable PCA Compatibility Diagnostics Detection",
     "category": "Privacy",
@@ -62,9 +62,19 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "notes": "The app does not currently write DisablePcaUI. Previously, PrivacyTweakProvider.cs wrote DisablePcaUI=1 intending to disable PCA - this was incorrect on two levels: wrong key (should be DisablePCA) and wrong value (1 means detection active, not disabled). That was corrected on 2026-03-13 to write DisablePCA=1. This record tracks DisablePcaUI as a standalone diagnostics policy with correct semantics. No app mapping currently exists for this policy.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app now writes DisablePcaUI = 0 on the documented policy path. That matches the disabledValue in pca.admx and keeps this diagnostics-only policy separate from the full DisablePCA switch.",
+    "writes": [
+      {
+        "target_id": "disable-pca-ui",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisablePcaUI",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
   },
   "windows_defaults": [
     {
@@ -216,8 +226,9 @@
   },
   "open_questions": [
     "Procmon capture could confirm DisablePcaUI=0 as a runtime write, but that is optional because the explicit ADMX mapping is already sufficient for this record class.",
-    "If the app ever adds this policy, PrivacyTweakProvider.cs would need a DisablePcaUI=0 write and app_current_implementation.status should be updated."
+    "DisablePCA still overrides this child policy when both are set."
   ],
+  "last_reviewed_utc": "2026-03-24T22:15:00Z",
   "validation_proof": {
     "source_url": "C:\\Windows\\PolicyDefinitions\\pca.admx",
     "exact_quote_or_path": "pca.admx: `<policy name=\"DisablePcaUIPolicy\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisablePcaUI\">` with `<enabledValue><decimal value=\"1\" /></enabledValue>` and `<disabledValue><decimal value=\"0\" /></disabledValue>` and `supportedOn ref=\"windows:SUPPORTED_Windows8\"`; pca.adml: `If you enable this policy setting, the PCA is configured to detect failures...` and `If you disable this policy setting, the PCA does not detect compatibility issues for applications and drivers.`",

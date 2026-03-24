@@ -442,6 +442,20 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
+        yield return CreateRegistryValueSetTweak(
+            context,
+            "system.reliability-timestamp-enabled",
+            "Enable Reliability Event Timestamping",
+            "Turns on the reliability timestamp gate and sets the companion policy interval to 24 hours.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"SOFTWARE\Policies\Microsoft\Windows NT\Reliability",
+            new[]
+            {
+                new RegistryValueSetEntry("TimeStampEnabled", RegistryValueKind.DWord, 1),
+                new RegistryValueSetEntry("TimeStampInterval", RegistryValueKind.DWord, 86400)
+            });
+
         yield return CreateRegistryTweak(
             context,
             "system.memory-large-system-cache-client",

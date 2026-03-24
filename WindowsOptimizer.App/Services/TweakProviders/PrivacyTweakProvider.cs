@@ -114,6 +114,18 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
+            "privacy.disable-pca-diagnostics.policy",
+            "Disable PCA Diagnostics Detection",
+            "Turns off Program Compatibility Assistant compatibility-issue detection through the documented policy.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows\AppCompat",
+            "DisablePcaUI",
+            RegistryValueKind.DWord,
+            0);
+
+        yield return CreateRegistryTweak(
+            context,
             "privacy.disable-wer",
             "Disable Windows Error Reporting",
             "Disables automatic generation and upload of error reports to Microsoft.",
@@ -336,6 +348,22 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
                 new RegistryValueSetEntry("SubscribedContent-338393Enabled", RegistryValueKind.DWord, 0),
                 new RegistryValueSetEntry("SubscribedContent-353694Enabled", RegistryValueKind.DWord, 0),
                 new RegistryValueSetEntry("SubscribedContent-353696Enabled", RegistryValueKind.DWord, 0)
+            },
+            requiresElevation: false);
+
+        yield return CreateRegistryValueSetTweak(
+            context,
+            "privacy.disable-suggestions.policy",
+            "Disable Suggestion Surfaces (Policy)",
+            "Turns off the documented CloudContent suggestion surfaces in Start, Settings, and the Windows Welcome experience.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Policies\Microsoft\Windows\CloudContent",
+            new[]
+            {
+                new RegistryValueSetEntry("DisableThirdPartySuggestions", RegistryValueKind.DWord, 1),
+                new RegistryValueSetEntry("DisableWindowsSpotlightOnSettings", RegistryValueKind.DWord, 1),
+                new RegistryValueSetEntry("DisableWindowsSpotlightWindowsWelcomeExperience", RegistryValueKind.DWord, 1)
             },
             requiresElevation: false);
 

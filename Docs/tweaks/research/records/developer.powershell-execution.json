@@ -4,7 +4,7 @@
   "record_id": "developer.powershell-execution",
   "tweak_id": "developer.powershell-execution",
   "record_status": "validated",
-  "summary": "Legacy validated record without machine-checkable validation proof. Official policy-backed PowerShell execution policy setting. The app writes RemoteSigned under the documented policy path, which allows local scripts while requiring remote scripts to be signed.",
+  "summary": "Official policy-backed PowerShell execution policy setting. The app writes RemoteSigned under the documented policy path, which allows local scripts while requiring remote scripts to be signed.",
   "setting": {
     "name": "PowerShell Script Execution Policy",
     "category": "Developer",
@@ -203,17 +203,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. The local Microsoft policy files clearly document the path and allowed values, and the app writes the documented RemoteSigned value.",
-    "blocking_issues": [
-      "This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1."
-    ]
+    "why": "The local Microsoft policy files clearly document the path and allowed values, and the app writes the documented RemoteSigned value.",
+    "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T03:04:00+03:00",
+  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
   "validation_proof": {
     "source_url": "C:\\Windows\\PolicyDefinitions\\PowerShellExecutionPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\"> <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: \"Turn on Script Execution\" and \"Allow local scripts and remote signed scripts\".",

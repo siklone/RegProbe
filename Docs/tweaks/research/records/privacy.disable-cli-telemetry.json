@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-cli-telemetry",
   "tweak_id": "privacy.disable-cli-telemetry",
   "record_status": "validated",
-  "summary": "Legacy validated record without machine-checkable validation proof. Officially documented user environment-variable bundle for opting PowerShell and the .NET CLI out of telemetry. Good for privacy-focused shell workflows, but it can reduce telemetry available for product improvement and support diagnostics.",
+  "summary": "Officially documented user environment-variable bundle for opting PowerShell and the .NET CLI out of telemetry. Good for privacy-focused shell workflows, but it can reduce telemetry available for product improvement and support diagnostics.",
   "setting": {
     "name": "PowerShell and .NET CLI Telemetry Opt-Out",
     "category": "Privacy",
@@ -292,7 +292,7 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
@@ -300,7 +300,7 @@
     "why": "Microsoft directly documents POWERSHELL_TELEMETRY_OPTOUT and DOTNET_CLI_TELEMETRY_OPTOUT as supported opt-out environment variables, and documents that persistent user environment variables are stored under HKEY_USERS\\<user>\\Environment, which corresponds to HKCU\\Environment for the current user. The app writes the documented opt-out value 1 for both variables on that exact user environment surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T02:39:33.7782624+03:00",
+  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5",
     "exact_quote_or_path": "PowerShell: `POWERSHELL_TELEMETRY_OPTOUT` and `To opt-out of telemetry, set the environment variable to true, yes, or 1.`; .NET CLI telemetry: `set the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to 1 or true`; Win32_Environment: `HKEY_USERS\\<user>\\Environment`.",

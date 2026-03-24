@@ -15,9 +15,9 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 160 |
-| Class B | 61 |
-| Class C | 9 |
+| Class A | 173 |
+| Class B | 55 |
+| Class C | 2 |
 | Class D | 8 |
 | Class E | 52 |
 
@@ -549,16 +549,16 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Developer` |
 | Area | `User Environment Variable` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Officially documented user environment variable for opting the .NET CLI out of telemetry. Good for privacy-focused or quiet developer workstations, but it removes default telemetry signals from the .NET SDK and CLI.
+**Summary:** Officially documented user environment variable for opting the .NET CLI out of telemetry. Good for privacy-focused or quiet developer workstations, but it removes default telemetry signals from the .NET SDK and CLI.
 
 **Current implementation**
 
@@ -578,10 +578,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -636,15 +636,12 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. Microsoft directly documents the opt-out environment variable and the app writes a supported opt-out value in the current user's persistent environment store. |
-
-Blocking issues:
-- This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.
+| Why | Microsoft directly documents the opt-out environment variable, and the app writes a supported opt-out value in the current user's persistent environment store. |
 
 ---
 
@@ -857,16 +854,16 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Developer` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/developer.powershell-execution.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Official policy-backed PowerShell execution policy setting. The app writes RemoteSigned under the documented policy path, which allows local scripts while requiring remote scripts to be signed.
+**Summary:** Official policy-backed PowerShell execution policy setting. The app writes RemoteSigned under the documented policy path, which allows local scripts while requiring remote scripts to be signed.
 
 **Current implementation**
 
@@ -886,10 +883,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -944,15 +941,12 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | This record was previously marked validated under schema 1.0 without machine-checkable validation proof and must be re-reviewed. The local Microsoft policy files clearly document the path and allowed values, and the app writes the documented RemoteSigned value. |
-
-Blocking issues:
-- This legacy validated record did not store machine-checkable validation_proof and must be re-reviewed under schema 1.1.
+| Why | The local Microsoft policy files clearly document the path and allowed values, and the app writes the documented RemoteSigned value. |
 
 ---
 
@@ -6063,7 +6057,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Notifications` |
 | Area | `Observed User Preference` |
 | Scope | `user` |
@@ -6078,9 +6072,9 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Status | `partially-matches` |
+| Status | `matches-research` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
-| Notes | The provider writes NumberOfSIUFInPeriod = 0 for the current user. |
+| Notes | The provider writes NumberOfSIUFInPeriod = 0 for the current user on the same documented SIUF path this record validates. |
 
 Current write(s):
 
@@ -6092,10 +6086,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -9932,16 +9926,16 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `User Environment Variables` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/privacy.disable-cli-telemetry.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Officially documented user environment-variable bundle for opting PowerShell and the .NET CLI out of telemetry. Good for privacy-focused shell workflows, but it can reduce telemetry available for product improvement and support diagnostics.
+**Summary:** Officially documented user environment-variable bundle for opting PowerShell and the .NET CLI out of telemetry. Good for privacy-focused shell workflows, but it can reduce telemetry available for product improvement and support diagnostics.
 
 **Current implementation**
 
@@ -9962,10 +9956,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -10022,7 +10016,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
@@ -11161,16 +11155,16 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/privacy.disable-kms-activation-telemetry.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Machine policy for KMS client online AVS validation data. Good for privacy-sensitive or tightly controlled environments, but it opts the device out of automatically sending KMS activation-state data to Microsoft.
+**Summary:** Machine policy for KMS client online AVS validation data. Good for privacy-sensitive or tightly controlled environments, but it opts the device out of automatically sending KMS activation-state data to Microsoft.
 
 **Current implementation**
 
@@ -11190,10 +11184,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -11251,7 +11245,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
@@ -12381,7 +12375,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Application Compatibility` |
 | Scope | `device` |
@@ -12390,24 +12384,30 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\Software\Policies\Microsoft\Windows\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 (detection active, explicit policy), disabledValue=0 (detection disabled). To disable diagnostics, the correct write value is 0 - the value name 'DisablePcaUI' is misleading. Note: if 'Turn off Program Compatibility Assistant' (DisablePCA=1) is active, this policy has no effect. This record was created on 2026-03-13 after DisablePcaUI was found to be the wrong key in the previous disable-program-compatibility-assistant record (which correctly targets DisablePCA).
+**Summary:** Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\Software\Policies\Microsoft\Windows\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 means detection stays active and disabledValue=0 turns detection off.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | `` |
-| Notes | The app does not currently write DisablePcaUI. Previously, PrivacyTweakProvider.cs wrote DisablePcaUI=1 intending to disable PCA - this was incorrect on two levels: wrong key (should be DisablePCA) and wrong value (1 means detection active, not disabled). That was corrected on 2026-03-13 to write DisablePCA=1. This record tracks DisablePcaUI as a standalone diagnostics policy with correct semantics. No app mapping currently exists for this policy. |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Notes | The app now writes DisablePcaUI = 0 on the documented policy path. That matches the disabledValue in pca.admx and keeps this diagnostics-only policy separate from the full DisablePCA switch. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `disable-pca-ui` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisablePcaUI` | `0` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -12469,16 +12469,16 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/privacy.disable-phone-linking.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for Phone-PC linking and Continue on PC experiences. Good for reducing cross-device linkage, but it prevents the device from participating in those experiences.
+**Summary:** Policy-backed control for Phone-PC linking and Continue on PC experiences. Good for reducing cross-device linkage, but it prevents the device from participating in those experiences.
 
 **Current implementation**
 
@@ -12498,10 +12498,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -12557,7 +12557,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
@@ -13079,16 +13079,16 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/privacy.disable-search-history.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Legacy validated record without machine-checkable validation proof. User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
+**Summary:** User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
 
 **Current implementation**
 
@@ -13108,10 +13108,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -13169,7 +13169,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
@@ -13396,7 +13396,7 @@ Other source references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `CloudContent policy trio` |
 | Scope | `user` |
@@ -13405,24 +13405,32 @@ Other source references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Controls the official CloudContent suggestion policies for third-party suggestions, Settings suggestions, and the Windows Welcome experience. The broader parent record remains an audit trail for the opaque ContentDeliveryManager IDs the app writes, while this child tracks only the named Microsoft policies.
+**Summary:** Controls the official CloudContent suggestion policies for third-party suggestions, Settings suggestions, and the Windows Welcome experience. The broader parent record remains an audit trail for the opaque ContentDeliveryManager IDs, while this child tracks the named Microsoft policies the app can write directly.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
+| Status | `matches-research` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
-| Notes | The current app writes opaque ContentDeliveryManager SubscribedContent values in the parent audit trail. This child record intentionally models only the official named CloudContent policies. |
+| Notes | The app now writes the three documented CloudContent policy values under HKCU\Software\Policies\Microsoft\Windows\CloudContent. The opaque ContentDeliveryManager IDs remain separate in the parent audit trail. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `disable-third-party-suggestions-policy` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableThirdPartySuggestions` | `1` | `value` |  |
+| `disable-spotlight-on-settings-policy` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableWindowsSpotlightOnSettings` | `1` | `value` |  |
+| `disable-welcome-experience-policy` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableWindowsSpotlightWindowsWelcomeExperience` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -15531,16 +15539,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/security.disable-password-reveal.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for the password reveal button in Windows credential entry surfaces. Turning it off slightly reduces shoulder-surfing convenience risks, but users lose the built-in way to briefly reveal what they typed.
+**Summary:** Policy-backed control for the password reveal button in Windows credential entry surfaces. Turning it off slightly reduces shoulder-surfing convenience risks, but users lose the built-in way to briefly reveal what they typed.
 
 **Current implementation**
 
@@ -15560,10 +15568,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -15624,7 +15632,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
@@ -15638,16 +15646,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/security.disable-picture-password.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for picture password sign-in for domain users. Turning it off removes one sign-in option for domain accounts, but it can simplify credential policy and support expectations.
+**Summary:** Policy-backed control for picture password sign-in for domain users. Turning it off removes one sign-in option for domain accounts, but it can simplify credential policy and support expectations.
 
 **Current implementation**
 
@@ -15667,10 +15675,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -15731,7 +15739,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
@@ -16387,39 +16395,39 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated record for the official Dynamic Lock policy under Passport for Work. The current app still writes a different current-user value under Winlogon, so the implementation remains mismatched even though the policy surface itself is now proven.
+**Summary:** Validated record for the official Dynamic Lock policy under Passport for Work. The app now writes the documented machine policy value instead of the older Winlogon preference path.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `partially-matches` |
+| Status | `matches-research` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
-| Notes | The current app writes EnableGoodbye = 1 under the current-user Winlogon path, not the official Dynamic Lock policy path documented by Passport.admx. |
+| Notes | The app now writes DynamicLock = 1 on the official Passport for Work policy path. |
 
 Current write(s):
 
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `dynamic-lock-policy` | `HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon` | `EnableGoodbye` | `1` | `value` |  |
+| `dynamic-lock-policy` | `HKLM\SOFTWARE\Policies\Microsoft\PassportForWork\DynamicLock` | `DynamicLock` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -16456,7 +16464,8 @@ Windows Internals references:
 
 **Recommended profiles**
 
-- `windows-managed-default`: Windows managed default (apply_allowed=False)
+- `windows-managed-default`: Windows managed default (apply_allowed=True)
+- `enable-dynamic-lock`: Enable Dynamic Lock (apply_allowed=True)
 
 **Evidence**
 
@@ -16464,7 +16473,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-passport-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.admx mapping | C:\Windows\PolicyDefinitions\Passport.admx | `high` | path, value, allowed-values, version-scope |
 | `local-passport-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.adml help text | C:\Windows\PolicyDefinitions\en-US\Passport.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, ui-mapping |
 
 **Validation proof**
 
@@ -16479,15 +16488,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
-| Restore default supported | `False` |
-| Restore previous supported | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The official Dynamic Lock policy surface is now validated in this record, and the current-user Winlogon path remains a separate implementation mismatch. |
-
-Blocking issues:
-- The current app writes EnableGoodbye under HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon instead of the official policy path under HKLM\SOFTWARE\Policies\Microsoft\PassportForWork\DynamicLock.
+| Why | The official Dynamic Lock policy surface is validated in this record, and the app now writes the same documented policy path and value. |
 
 ---
 
@@ -18340,16 +18346,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for whether remote clients can query this computer's Windows Search index. Good for reducing remote index exposure, but it also removes indexed-search convenience for network shares hosted on the machine.
+**Summary:** Policy-backed control for whether remote clients can query this computer's Windows Search index. Good for reducing remote index exposure, but it also removes indexed-search convenience for network shares hosted on the machine.
 
 **Current implementation**
 
@@ -18369,10 +18375,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -18434,7 +18440,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
@@ -20281,7 +20287,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Memory Management` |
 | Scope | `device` |
@@ -20310,10 +20316,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
+| Label | `Class B` |
+| Title | Strong but Partial |
 | Action state | `research-gated` |
-| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Sources**
 
@@ -20381,11 +20387,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact path and values, but the same primary source explicitly states that systems with Windows 8 and higher do not need this registry change. That makes the key a documented legacy tracing surface rather than a meaningful Windows 11 tweak. |
-
-Blocking issues:
-- Microsoft explicitly states that systems with Windows 8 and higher do not need this registry change.
-- The key exists and is writable, but it should not be exposed as an effective Windows 11 tweak.
+| Why | Microsoft documents the exact path and values, but the same primary source also says Windows 8 and higher do not need this registry change. Keep it as a documented legacy tracing surface, not as a normal Windows 11 tuning recommendation. |
 
 ---
 

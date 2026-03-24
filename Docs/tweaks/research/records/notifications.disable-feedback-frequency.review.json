@@ -47,9 +47,9 @@
     ]
   },
   "app_current_implementation": {
-    "status": "partially-matches",
+    "status": "matches-research",
     "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The provider writes NumberOfSIUFInPeriod = 0 for the current user.",
+    "notes": "The provider writes NumberOfSIUFInPeriod = 0 for the current user on the same documented SIUF path this record validates.",
     "writes": [
       {
         "target_id": "siuf-feedback-frequency",
@@ -178,7 +178,7 @@
     "why": "Microsoft documents the exact current-user SIUF path, the NumberOfSIUFInPeriod value name, and the numeric mapping where 0 means Never. The app writes that same documented value on the same documented surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T01:02:35Z",
+  "last_reviewed_utc": "2026-03-24T22:15:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
     "exact_quote_or_path": "HKEY_CURRENT_USER\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod; Automatically = 1; Never = 0; Once a day = 1; Once a week = 1",

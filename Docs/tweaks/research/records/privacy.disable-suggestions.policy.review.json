@@ -5,7 +5,7 @@
   "tweak_id": "privacy.disable-suggestions.policy",
   "record_status": "validated",
   "last_reviewed_utc": "2026-03-21T00:00:00Z",
-  "summary": "Controls the official CloudContent suggestion policies for third-party suggestions, Settings suggestions, and the Windows Welcome experience. The broader parent record remains an audit trail for the opaque ContentDeliveryManager IDs the app writes, while this child tracks only the named Microsoft policies.",
+  "summary": "Controls the official CloudContent suggestion policies for third-party suggestions, Settings suggestions, and the Windows Welcome experience. The broader parent record remains an audit trail for the opaque ContentDeliveryManager IDs, while this child tracks the named Microsoft policies the app can write directly.",
   "setting": {
     "name": "Windows Suggestion Surfaces Policy Group",
     "category": "Privacy",
@@ -136,10 +136,35 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
+    "status": "matches-research",
     "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The current app writes opaque ContentDeliveryManager SubscribedContent values in the parent audit trail. This child record intentionally models only the official named CloudContent policies.",
-    "writes": []
+    "notes": "The app now writes the three documented CloudContent policy values under HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent. The opaque ContentDeliveryManager IDs remain separate in the parent audit trail.",
+    "writes": [
+      {
+        "target_id": "disable-third-party-suggestions-policy",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "value_name": "DisableThirdPartySuggestions",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "disable-spotlight-on-settings-policy",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "value_name": "DisableWindowsSpotlightOnSettings",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "disable-welcome-experience-policy",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "value_name": "DisableWindowsSpotlightWindowsWelcomeExperience",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
   },
   "windows_defaults": [
     {
@@ -365,7 +390,6 @@
     "blocking_issues": []
   },
   "open_questions": [
-    "Which Windows experience does each SubscribedContent ID map to exactly?",
-    "Should the parent audit trail be retired once the official CloudContent policies are the only publishable surface?"
+    "Which Windows experience does each SubscribedContent ID map to exactly?"
   ]
 }

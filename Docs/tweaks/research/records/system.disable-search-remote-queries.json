@@ -4,7 +4,7 @@
   "record_id": "system.disable-search-remote-queries",
   "tweak_id": "system.disable-search-remote-queries",
   "record_status": "validated",
-  "summary": "Legacy validated record without machine-checkable validation proof. Policy-backed control for whether remote clients can query this computer's Windows Search index. Good for reducing remote index exposure, but it also removes indexed-search convenience for network shares hosted on the machine.",
+  "summary": "Policy-backed control for whether remote clients can query this computer's Windows Search index. Good for reducing remote index exposure, but it also removes indexed-search convenience for network shares hosted on the machine.",
   "setting": {
     "name": "Remote Windows Search Queries",
     "category": "System",
@@ -198,7 +198,7 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
@@ -206,7 +206,7 @@
     "why": "The local Microsoft Search policy files explicitly define the machine policy path HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search, the value name PreventRemoteQueries, and the enabled/disabled mapping. The app writes the documented enabled-state value 1 that blocks remote clients from querying the local search index.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T02:38:03.2762354+03:00",
+  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
   "validation_proof": {
     "source_url": "C:\\Windows\\PolicyDefinitions\\Search.admx",
     "exact_quote_or_path": "<policy name=\"PreventRemoteQueries\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" valueName=\"PreventRemoteQueries\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; Search.adml: \"If enabled, clients will be unable to query this computer's index remotely ... If disabled, client search requests will use this computer's index. Default is disabled.\"",

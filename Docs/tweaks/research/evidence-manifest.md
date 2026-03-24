@@ -16,9 +16,9 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 160 |
-| B count | 61 |
-| C count | 9 |
+| A count | 173 |
+| B count | 55 |
+| C count | 2 |
 | D count | 8 |
 | E count | 52 |
 
@@ -83,10 +83,10 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `audio.show-hidden-devices` | validated | Class B | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `53977bf3d42a6320f03cd04c3e782abd1c8c91c3bede2f0a11ce060401eb8a53` | `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95` | 1 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `Docs/tweaks/research/records/cleanup.disable-reserved-storage.review.json` | `d613803743ec930d75f7bb5a7dd770a6232bdd95d955a591812b92631ae2fd76` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 1 |
 | `developer.docker-performance` | validated | Class A | `Docs/tweaks/research/records/developer.docker-performance.review.json` | `e86fa037da24385991ffe94edbb1039cf5b2ee636654d27c3d4f0e7d4062473a` | `e4c2f1a09fcfe91db5161301b71b4ec7262c17dc97de49b390f65f9abcf9253d` | 1 |
-| `developer.dotnet-telemetry-disable` | validated | Class C | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` | `b78802cb5a3836c719b9463afbeb1f933f1f9011a591ade113264880303dc648` | `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c` | 1 |
+| `developer.dotnet-telemetry-disable` | validated | Class A | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` | `0e893fbee7bb7405331425f61f4aba01593f3fddfe8656f6eff1e33c8f968807` | `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c` | 1 |
 | `developer.enable-windows-long-paths` | validated | Class A | `Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json` | `78a0923a9944c8088657298210a233e5c5793924cb928f32ba853b18589c2a8c` | `2b390bcd3f0082f4558b386b1c876aebc02ae85fa482efb6be28b8696e197f29` | 1 |
 | `developer.nodejs-performance` | validated | Class B | `Docs/tweaks/research/records/developer.nodejs-performance.json` | `8a3f6554915352ce00f5f05973e420d3529b6310cbb1d3ff30970a1f3fc6c61a` | `afeb8b18277d7825b304d849b0406a81c8dc155974f74e40933534c301df9ad1` | 1 |
-| `developer.powershell-execution` | validated | Class C | `Docs/tweaks/research/records/developer.powershell-execution.json` | `ba780b14478019a7e9cd1947efbf71470b8ea01b6f6851e668ef40d460bd0784` | `3a25fe7ca941325c96591236522cf807d8b269ff223bcc737bd5b073718cd047` | 1 |
+| `developer.powershell-execution` | validated | Class A | `Docs/tweaks/research/records/developer.powershell-execution.json` | `ce4b6c46f7909d38aa65ad6b1cb2e6c9404d12cf14371fe0106c8df544581ef5` | `3a25fe7ca941325c96591236522cf807d8b269ff223bcc737bd5b073718cd047` | 1 |
 | `developer.python-path-fix` | validated | Class A | `Docs/tweaks/research/records/developer.python-path-fix.review.json` | `ce8f62b9295a1c477129e2e6aee7b1b55fb9f9764bfe6984328029bd2ee70ddc` | `ca039878abcb9e81f07fc1719a12c9dcefc1f2c42c36aba4c56ec7f80cc80e2a` | 1 |
 | `developer.ssh-agent-autostart` | validated | Class A | `Docs/tweaks/research/records/developer.ssh-agent-autostart.review.json` | `b3236efe7c1bf586a427ddb9a748aa911b732effdd6e8e270a386e5bc25b7485` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 1 |
 | `developer.windows-dev-mode` | validated | Class A | `Docs/tweaks/research/records/developer.windows-dev-mode.json` | `3c3defe4768d22994c71d0a3c131d12ea7eac123190b4fe89a56b7a2113a324d` | `0ed25dffb4bdabc7eaa24c879e79ec54649fabca8d204b46a0e2f6434ae60841` | 1 |
@@ -136,7 +136,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `network.smb-require-signing-client` | validated | Class A | `Docs/tweaks/research/records/network.smb-require-signing-client.json` | `8b5811e2e985a3f6998bd43a04b0e325e2b5e73d36eb6c963228512a1be3e27e` | `8a2de1b18d6d22bedd02d87a6a1be917c17893f304664a7a2853d1d9f4e9508a` | 2 |
 | `network.smb-require-signing-server` | validated | Class A | `Docs/tweaks/research/records/network.smb-require-signing-server.json` | `3a3dc5bd3e9b64e6fe9f1452f20fa3b65d1d1b530ea1ed43036ef31743881eb5` | `522e008e12d4f73124b4eae979f4b06b1a88d207496b94d21cf8b84f8f1a22d8` | 2 |
 | `network.smb-set-cipher-suite-order` | validated | Class A | `Docs/tweaks/research/records/network.smb-set-cipher-suite-order.review.json` | `4e5f5aa3c778df39fa6e4e0b7f80db942b7fc30235a1070add5bc27e542f5f33` | `9cbac8865b3477691362fe283e460e02c3465cf68416e194d8ce4842d3223688` | 2 |
-| `notifications.disable-feedback-frequency` | validated | Class C | `Docs/tweaks/research/records/notifications.disable-feedback-frequency.review.json` | `27da435a9a26b977bfa1af84d4b988c9cd6810434af8b4f3d6c29d245461fb4c` | `7855f743095f7383bff4654511252ffac274da378def6336a873a7fc5204a00d` | 1 |
+| `notifications.disable-feedback-frequency` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-feedback-frequency.review.json` | `c3395623a996181cdceef64e32f95aa4f34f6f9a1938ad7531ef7da2c65361e5` | `7855f743095f7383bff4654511252ffac274da378def6336a873a7fc5204a00d` | 1 |
 | `notifications.disable-lock-screen` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-lock-screen.json` | `cb4ccca568e32a10a1023d92c340ff39ef154647c70a19c37aa169af781c3c9e` | `8b8bff69c430ecb0fd211d395dc19774a97b607d0af6ec8d605cb0542af5028a` | 1 |
 | `notifications.disable-mirroring` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-mirroring.json` | `12048a71562be16820123e75c0d715331bba471370286cfa56f8aa4e2dea5d48` | `e839a3b288ca983fd2356198ef6177a12f17692a8e9242e5c03faff485ee8267` | 1 |
 | `notifications.disable-tile` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-tile.json` | `f0dc5dce3c141a010807410d08462ae0ae5054eb67236a25e1f4b3d2222f5201` | `4eadf1fc0c0e7cb833e44cb784acfe7224407c3eed9c58f213a233b80a379700` | 1 |
@@ -173,7 +173,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `privacy.disable-biometrics-domain-logon` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-biometrics-domain-logon.json` | `45134dde8be962815b08bb56c104538067ad3cf174cfa8011e249e79ef49c14c` | `cb63aa659031ceed53be982df01e1f9e6831ad0aaa5a89688ad601f4aaf52942` | 1 |
 | `privacy.disable-biometrics-logon` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-biometrics-logon.json` | `120fc4e8e96c8b800f04b5c727c9dc53ac404938767a72bf9bc8625c7f8a5596` | `e877e0087f68acb4ee49fe3cb1e7a70c8440c8e055202f306070b0b40c6a5fcc` | 1 |
 | `privacy.disable-camera` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-camera.json` | `df883c03e15fc20477f060b279acfaca60925050bd5aeb284aae74d65f029a78` | `ed1c25600e7c9bf71b51abec244fcb3d70f9969db29e19606a32c0fc2686a822` | 1 |
-| `privacy.disable-cli-telemetry` | validated | Class B | `Docs/tweaks/research/records/privacy.disable-cli-telemetry.json` | `3b25a760d05afb16afce7a68a8768a2cabf41c82199c45d6f83b5a01589b87e5` | `c01ca3ce36e8a237623af81403fe1e460d5ab64f427a31f30bd913a7d0630382` | 2 |
+| `privacy.disable-cli-telemetry` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-cli-telemetry.json` | `abc0f9370eecfe0d25968117ddbc5b5a0d1189279473a0799578dba579f957cf` | `c01ca3ce36e8a237623af81403fe1e460d5ab64f427a31f30bd913a7d0630382` | 2 |
 | `privacy.disable-consumer-account-content` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-consumer-account-content.json` | `466d21f5269400af5b965e26f24390489bb949bac86e81e43f3a1ae716866c21` | `802c43fd0393ee0e78c1e693355adf236c4b541b588b30c9b562dd4acffcb715` | 1 |
 | `privacy.disable-copilot` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-copilot.json` | `6f4e4cb0d0fa5b7343ed80ca5921a2d0cce8b2c5b450463c2b21ae10adb0d7fd` | `b1cd95056a7f94f371031db3f6de9b19002f4f490f784a91eddc21e6e7391ecc` | 1 |
 | `privacy.disable-cross-device-experiences.policy` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.policy.review.json` | `ec2ada610e78aa52d0bd8c323443004a75d133c2b175b93d5e01a28edb05a72c` | `cd57fd96f5a482926e20bdbff74771f88dcf8aed98c8528b62bdbdaa5e26d112` | 1 |
@@ -185,7 +185,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `privacy.disable-file-history` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-file-history.json` | `6b022a8e4cae53a4744e29a8d3fb81653d7365c14956ee108b33ca2c6cb58b91` | `aa8d785480383b20c15d2bfeb0b8df5880a9dd17bde45e0b336c6d793462e2cb` | 1 |
 | `privacy.disable-find-my-device` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-find-my-device.json` | `19e2153d4cbeba5c6a8783966e6d91e9eeb6016aa20f49d242234046baa86852` | `87b5872f6958740891f43a2c779b22ed879146d0e2a7941319e90d93f47f5f77` | 1 |
 | `privacy.disable-font-providers` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-font-providers.json` | `619122e516fb987803287c52491b72d3c3fee98bca6f34a6763f9437cacbefae` | `354730db32c467f7f05f9076e40ba6652a7ecbb40c0a30f29a72d69ce2db56c8` | 1 |
-| `privacy.disable-kms-activation-telemetry` | validated | Class B | `Docs/tweaks/research/records/privacy.disable-kms-activation-telemetry.json` | `b70cd0ec6fcd1834454f8b1c1d8e4ce9873ae6e856cbb695ca566941149349ee` | `1e9e9894404d129fdfbb0bb7fe36462ff4f5028ceba1159bc4c5bc4106e139b6` | 1 |
+| `privacy.disable-kms-activation-telemetry` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-kms-activation-telemetry.json` | `bc1f69a1b710859e94613ae8d4b93db3ef84c606373df7fe8c5cfc439dd95656` | `1e9e9894404d129fdfbb0bb7fe36462ff4f5028ceba1159bc4c5bc4106e139b6` | 1 |
 | `privacy.disable-language-list-access` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-language-list-access.review.json` | `ef87f286bc1e28e2e82b2ba42cde3dddefc4a530e226e4d304980b3c0fc16859` | `c074b88f6c9a9ae61c5f95a9a4f41b990e2bf9843036eaf689f52637332f15aa` | 1 |
 | `privacy.disable-local-security-questions` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-local-security-questions.json` | `83e5d971921d73ad1cbd9298dad5b59cc3c4cf0049daa29a0449e46e1cd1b8a2` | `d982c92d36455ed71e4e3b67770666d18ce19516b5834234fbe5857c78075c2a` | 1 |
 | `privacy.disable-location-consent` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-location-consent.review.json` | `8d3fbb61dbf442c36526734f70021a0192574e679be09a3456a2948e66eade05` | `b83a34f2f928911486f15a32ea6c9b1f0cec24f813002f95b0035e5e1e15553c` | 2 |
@@ -197,17 +197,17 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `privacy.disable-offline-files.policy` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-offline-files.policy.json` | `0077b0a81625ba7eaf14678a918a3dab63f2ab92dd9579b785c0985560f5bde2` | `5f2c37486fce94be54a1f7aba31ff0ec2ffb424a30a22bc5decc1101e65f0b2d` | 1 |
 | `privacy.disable-onesettings-downloads` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-onesettings-downloads.json` | `1e59ae3db7fd77a5586ad780bd91d62a40450684d4e2ee89915d99f6cdc4f975` | `cca2f3310e87732b2639ebe0618ea5d41f71814401cf09e12a99a5d5637e7435` | 1 |
 | `privacy.disable-online-tips` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-online-tips.json` | `86fcb199514f63bfea285bd92bd9cd18b333c201f80e00b649357ed6a50ec228` | `5b4f9f5a365bc0021a8c40a8e54b3ea942db059ac2427124a3f2ecacff187654` | 1 |
-| `privacy.disable-pca-diagnostics.policy` | validated | Class C | `Docs/tweaks/research/records/privacy.disable-pca-diagnostics.policy.review.json` | `361914f2f1feb29b3636edcf815e1afd0af762ec539f66260d1bac51d42c2f9d` | `7bdb81d570e8ab0ad5ee8e5a8b3112f1606cb397e867b219ba9775c4ee981600` | 1 |
-| `privacy.disable-phone-linking` | validated | Class B | `Docs/tweaks/research/records/privacy.disable-phone-linking.json` | `1731d7b9214bfcf6934c71f567c60cf7b9606eba456890fdb4cea244fc0cc919` | `1ac5d1461c6cb46560b096b50e2275a5337e2733cf934863b090dea12300a33e` | 1 |
+| `privacy.disable-pca-diagnostics.policy` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-pca-diagnostics.policy.review.json` | `20a6bcda7daec20cbb583dc290548f779d0cab5ef6ad31ddbc58e77c0c9c537c` | `7bdb81d570e8ab0ad5ee8e5a8b3112f1606cb397e867b219ba9775c4ee981600` | 1 |
+| `privacy.disable-phone-linking` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-phone-linking.json` | `0b44762f1a547c67d10e7f070199786c9dd5e28e9711f3f82e612892fcb729f1` | `1ac5d1461c6cb46560b096b50e2275a5337e2733cf934863b090dea12300a33e` | 1 |
 | `privacy.disable-program-compatibility-assistant` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-program-compatibility-assistant.review.json` | `1e2d3bd33c18e44a39ebbebf350cf2ec1248d96e99ca61f75dd27ff15ba472c5` | `44e0f5bfd3018d0f07f651cf907dcf7bcb13de73ab5c19f61b128b0f8ea4f2b5` | 1 |
 | `privacy.disable-recall` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-recall.json` | `1ad33fcd1f7999bd96f025adc6ac3b50b1190d3cc646f28137424e45d2f3ee88` | `9a1681fc411102114e54e8b3fcc31db5b490fedfdfa16084814efe601a8c63c6` | 1 |
 | `privacy.disable-resume` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-resume.json` | `facf312c6bfa6d02b3b4200c1da07c785f21090fe9f16546eee415642428443d` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 1 |
 | `privacy.disable-rsop-logging` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-rsop-logging.json` | `e663e6d53c1c5cfe161fa777b90006fa0402b9eef5f606598dcaa011974270fe` | `5f3e900bb750e2a4c50deb90a0dbdd7f9e2a245eac042a0c1dfc0bcb76224b3b` | 1 |
 | `privacy.disable-search-box-suggestions` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-search-box-suggestions.json` | `acc0049c9b6290a8164fe99aef76cc114a431d4c5ecd13eec277ff53c83f95e7` | `eddc41ee198554d3fe83d0e6d0e2106783e18a845d2d7cb0e7cd6e74e9ecd7ec` | 1 |
-| `privacy.disable-search-history` | validated | Class B | `Docs/tweaks/research/records/privacy.disable-search-history.json` | `e5db6076168be462bedb7ebd65b7ca76392a89ac17ff98b2bb3a63eab4fbea6b` | `577e0f892a7550b2dbff71430b62e9ce4ae3ca7a8ab9ade7a96e9fe086ecd5ac` | 1 |
+| `privacy.disable-search-history` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-search-history.json` | `ba6fea68c8d7b3813a453fef14ad7503d5163e59b518ef0f4ba7ecf3280660b7` | `577e0f892a7550b2dbff71430b62e9ce4ae3ca7a8ab9ade7a96e9fe086ecd5ac` | 1 |
 | `privacy.disable-sensors` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-sensors.json` | `c8014538cf3b46972f1dab717cca5ab87b8c7f81f9bec37bf3709275d774b582` | `03b2103d23d85cca9c386b2625adb5bcdea664e37e93181285e939a421430be5` | 1 |
 | `privacy.disable-steps-recorder` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-steps-recorder.json` | `f315f3fb98c510fb611d7e7860be1e609d7ce3d7b448bee9edd2ae55d061e8bb` | `6b1c4965f1dd88907b6fe4153ee7caa5fa57810b0c676a4c6eb04c903a0c3915` | 1 |
-| `privacy.disable-suggestions.policy` | validated | Class C | `Docs/tweaks/research/records/privacy.disable-suggestions.policy.review.json` | `09dcee082106a1a85341f5d33d0ed89c6e266ae62a4ff37b4f4bbb95b9948904` | `f7289e1c044f4aed06c13b7cb312fc469ce3c649dc714b45f8210b084d491d23` | 3 |
+| `privacy.disable-suggestions.policy` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-suggestions.policy.review.json` | `98881e91f242c696d1aec4931aa8f480396ec406d5eb7f9b1f970928ea74c0ea` | `f7289e1c044f4aed06c13b7cb312fc469ce3c649dc714b45f8210b084d491d23` | 3 |
 | `privacy.disable-switchback.policy` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json` | `7342d11984b2ee54d112c3889c24dad1a30a1baebcb0cfce8724933e2fa8ae62` | `e30ead337c2d32a4eaf143f8b112463cb25a2ed0f7c0fa445c95cc6d9f289a54` | 1 |
 | `privacy.disable-telemetry-change-notifications` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-telemetry-change-notifications.json` | `ef9ca247576921ed9d49bf12730ad42fcb936faca01cffa1d4e2d1b72a3de32a` | `17c4989b5977afbfc6d978bfc504790de6b1a5cd9e418366ed65a4087ab94993` | 1 |
 | `privacy.disable-telemetry-optin-ui` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-telemetry-optin-ui.json` | `b0765bb48885da4bc5109e12538ba83acd1af40a667200f77e2d57a696ca09cd` | `c817eb3c49b0f967e5e129bc88bdac5a6f8cbfb11aa8fedce4e5ba2d2db70d5e` | 1 |
@@ -228,15 +228,15 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.disable-downloads-blocking` | validated | Class A | `Docs/tweaks/research/records/security.disable-downloads-blocking.json` | `f9574461ea84e7f9a84ed029d6469a4ea7020dd5399a7cdcc0201a3106f99d1c` | `37f0c6998110ae0723af795d2c3f93b894ac85bf013d9877cbdc60c381f3f2eb` | 1 |
 | `security.disable-ntfs-encryption` | validated | Class B | `Docs/tweaks/research/records/security.disable-ntfs-encryption.json` | `b75f5abb843f5b452720a76ecf7b696cfc9544a8f8d34971eab365d6fdf8dfd3` | `a85e3450b7be35f290e9b7a8083815b660f2edd6afcb9d8151d04d4a677e9a0d` | 1 |
 | `security.disable-p2p-updates` | validated | Class A | `Docs/tweaks/research/records/security.disable-p2p-updates.review.json` | `a5915f3c7a416dcdd379f1e53e984222435ee2d5b91469252e8e3b2f4620a15f` | `e30fdfd201f0bf77b2b6fa51c308d5dd3e3f64adb81b8c6caa7a689101591a0a` | 1 |
-| `security.disable-password-reveal` | validated | Class B | `Docs/tweaks/research/records/security.disable-password-reveal.json` | `d95a11e1be92c925bdd91a42a0e5579a95d24547aa94847ab4741637b8f13fbe` | `50d97e420c30cbf63a70c9a209094c3baa6f45450925e287d51ea8a22288f57e` | 1 |
-| `security.disable-picture-password` | validated | Class B | `Docs/tweaks/research/records/security.disable-picture-password.json` | `10040b85aedadd33870b42f5e98da3c43d004e2e9ecfec0cbc2d3e250eb54021` | `80f0769f7386003a4f61a10b36d71703ac5b9498fd3fc92551eb78738cf99d72` | 1 |
+| `security.disable-password-reveal` | validated | Class A | `Docs/tweaks/research/records/security.disable-password-reveal.json` | `49cb1dede082e74036b4af6d4cdbc27ea3f85f9514ffe15dc9c5765c0ad91db5` | `50d97e420c30cbf63a70c9a209094c3baa6f45450925e287d51ea8a22288f57e` | 1 |
+| `security.disable-picture-password` | validated | Class A | `Docs/tweaks/research/records/security.disable-picture-password.json` | `ab7cf2d608574ae1270411ab0dcb3b20582a5dec45d5e1259b8243cb4e6b1a9f` | `80f0769f7386003a4f61a10b36d71703ac5b9498fd3fc92551eb78738cf99d72` | 1 |
 | `security.disable-remote-assistance` | validated | Class A | `Docs/tweaks/research/records/security.disable-remote-assistance.json` | `2499bcd10d72da908b3a0e71cb705f58a2e9f06c61b04b2ec9cf203c0bafa31c` | `3576aeaa16a5aab4964bc681df989398a5552a9c7b6fdceb9b722424a42f1ad8` | 1 |
 | `security.disable-system-mitigations` | validated | Class B | `Docs/tweaks/research/records/security.disable-system-mitigations.review.json` | `a5e434bfee576dafa6f310e05b9da536224a1a15bdf43a3c0215682f87ba0af7` | `f64931b89268443eb36db4ce8bf33b4a879a0c7daf28c87f36e7a1fdb33326e7` | 1 |
 | `security.disable-system-restore` | validated | Class B | `Docs/tweaks/research/records/security.disable-system-restore.review.json` | `c87e2639f9f1c023786a05f6970fbe16bdeff9ba1af71799ac96a8fe1e7c13b3` | `a0b7ed13e93915c4f77f085945159c09a292f2c3cc2e4cd140ce0ea7a98c8df1` | 1 |
 | `security.disable-windows-firewall` | validated | Class B | `Docs/tweaks/research/records/security.disable-windows-firewall.review.json` | `4669ad9f2652dc128d4cdd6123ce6652542887e95801c4e8183dbe93704b52bc` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 2 |
 | `security.disable-windows-update.policy` | validated | Class B | `Docs/tweaks/research/records/security.disable-windows-update.policy.review.json` | `d348a89d3dd278084d0cdc9fbf56c168e99433d42d157b9ebf9cda001e3b21df` | `b1697a5c3feaa9da12b61d23e66a337b9339e4fffeeb2e37d8395d5f461ed060` | 2 |
 | `security.disable-wu-driver-updates` | validated | Class B | `Docs/tweaks/research/records/security.disable-wu-driver-updates.json` | `488a5f5680947b908ba0ba69742a588b0d33a7654cf4d2a1975afac13fa061b8` | `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa` | 3 |
-| `security.enable-dynamic-lock` | validated | Class C | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `76033ac24f3d75f777cc0e8b05f9c33a7588a645fc1177c898c3ec045219dc61` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
+| `security.enable-dynamic-lock` | validated | Class A | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `ed4ac310ae9d2b5e6e3d53e642cbcd4ab7700097aa1981b8ede4089a23f9854e` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
 | `security.enable-sudo` | validated | Class B | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
 | `security.trusted-path-credential-prompting` | validated | Class B | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
@@ -254,7 +254,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.disable-jpeg-reduction` | validated | Class D | `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json` | `70fadacc3893dd7f424c7f1d8c3e958b136c2d219104fc3612c754a29e48365f` | `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377` | 1 |
 | `system.disable-restartable-apps` | validated | Class A | `Docs/tweaks/research/records/system.disable-restartable-apps.review.json` | `e609c09c45ebe3606b78558be0406b22803031299aa951e220fe09f008c71312` | `b4d567ea9ec033d06c9f6d2ff60f9ada14f4b5e8b50bb5318c2536ed22cff6c8` | 1 |
 | `system.disable-search-highlights-policy` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-highlights-policy.json` | `54e01656d9388fc57b31de631b46887097d0f16520e0139513dbbb5749844241` | `ae49b38ee6eec7f08e188c053143d1d430695aec6cb5b90db93af2281cc1b807` | 1 |
-| `system.disable-search-remote-queries` | validated | Class B | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `826137e3f60bb96c6dfffad1a9e760deead9141f0c4aa73c98ac238c80a242e3` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
+| `system.disable-search-remote-queries` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `baefa2b5a3f28eb1f73a8f09b93506f2eda0fa23dfdcc4b9209c251abe608389` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
 | `system.disable-search-web-results` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-web-results.review.json` | `e795f098bea183761efafb0d3f87e77c09a48b74bf7e1277f122db8f73df0eae` | `bb1b1691889396c055ff9308c954c15fe921b1bf40045ac22449e871fd6c3a37` | 1 |
 | `system.disable-shortcut-arrow` | validated | Class B | `Docs/tweaks/research/records/system.disable-shortcut-arrow.json` | `e05e11b9584629849a78d1e94ab8022634dafb5ae4e4eba98ccdef122373c30f` | `4dc6f2003ee84572320f65a1acecf6c701fc68c055921e90ca666de432f9ebef` | 1 |
 | `system.disable-startup-delay` | validated | Class D | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1` | `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7` | 1 |
@@ -272,7 +272,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.graphics-tdr-limit-time` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-limit-time.json` | `807439c6b71d03d552670f0291a9c28ce5eeb10ac7ee6258f8822e2e067a1bde` | `b8db6b0b24bd9b6d64dd8e0ff6088b7079e260f5a620d73e10950a74b6499361` | 1 |
 | `system.kernel-thread-dpc-enable` | validated | Class B | `Docs/tweaks/research/records/system.kernel-thread-dpc-enable.json` | `39b9545f28226227c98927feb4de4623e86b7dc8b18df5d91b8b8cb079c3329a` | `a15a06f3b91cf08536310bd098334ea2859c0ff7ad7d73e2594296a780a73f5e` | 1 |
 | `system.memory-clear-pagefile-at-shutdown` | validated | Class B | `Docs/tweaks/research/records/system.memory-clear-pagefile-at-shutdown.json` | `2717a4299cf44da2dc6cc6db5f9bf70fb81393c1dcfd168532dd03186402e04c` | `410daf2e1ff1285865db5d6768c6f4e852efd5e68d0b6f914845ca98b2dcc97b` | 1 |
-| `system.memory-disable-paging-executive` | validated | Class C | `Docs/tweaks/research/records/system.memory-disable-paging-executive.json` | `d142104b69db4091b2f36240824e3e551b6c7033e486a3fb7e0aceaa16e332b1` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 1 |
+| `system.memory-disable-paging-executive` | validated | Class B | `Docs/tweaks/research/records/system.memory-disable-paging-executive.json` | `b256f188e0f4912f2aea7227bf89b0ab16c25021de1838466e445c1956b35eea` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 1 |
 | `system.memory-large-system-cache-client` | validated | Class B | `Docs/tweaks/research/records/system.memory-large-system-cache-client.review.json` | `96a2972b0ac49d65125668f25c55a812e180b1aae979c6e2daac7a0e6024c03a` | `0bb05d41e8e9be3cbc9320f5ab39e1261822a39f4b171f38e49f416bb54d05d5` | 1 |
 | `system.memory-nonpaged-pool-dynamic` | validated | Class B | `Docs/tweaks/research/records/system.memory-nonpaged-pool-dynamic.json` | `e3ab3a175bcb3ee0b1f8c1e64d24a28cfcff7f470045d3393ba189357b979b8d` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 1 |
 | `system.memory-paged-pool-dynamic` | validated | Class B | `Docs/tweaks/research/records/system.memory-paged-pool-dynamic.json` | `2b237b2f02bee35264c954a94acec5f48f8115255420bb31dcdbce2ed0f810e6` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 1 |
@@ -284,7 +284,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
 | `system.priority-control` | validated | Class D | `Docs/tweaks/research/records/system.priority-control.review.json` | `9e1f07a3b5d85840b5e49a1cc316e512d46529a339c1de92b66af7ddb1e18fb2` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
 | `system.reduce-shutdown-timeouts` | validated | Class D | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
-| `system.reliability-timestamp-enabled` | validated | Class C | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `721519b9c72c153fd891292cee7d8ceb28902ef780f964c43c1abae849b21b3e` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
+| `system.reliability-timestamp-enabled` | validated | Class C | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
 | `system.services.disable-bluetooth-support` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `c41242b6b93a6c0726a408024b2d24f989f06a68dbd803a2976d1755cc320372` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
 | `system.services.disable-bluetooth-user-service` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` | `0dbc2e23199be2975ec038e31ccb35313500be6a9c1284230346332a7617adcd` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 1 |
@@ -3829,24 +3829,24 @@ _No source block present._
 ### `developer.dotnet-telemetry-disable`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Developer`
 - Area: `User Environment Variable`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json`
-- Source SHA256: `b78802cb5a3836c719b9463afbeb1f933f1f9011a591ade113264880303dc648`
+- Source SHA256: `0e893fbee7bb7405331425f61f4aba01593f3fddfe8656f6eff1e33c8f968807`
 - Proof SHA256: `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c`
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Officially documented user environment variable for opting the .NET CLI out of telemetry. Good for privacy-focused or quiet developer workstations, but it removes default telemetry signals from the .NET SDK and CLI.
+**Summary:** Officially documented user environment variable for opting the .NET CLI out of telemetry. Good for privacy-focused or quiet developer workstations, but it removes default telemetry signals from the .NET SDK and CLI.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4015,24 +4015,24 @@ Nohuto lineage references:
 ### `developer.powershell-execution`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Developer`
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/developer.powershell-execution.json`
-- Source SHA256: `ba780b14478019a7e9cd1947efbf71470b8ea01b6f6851e668ef40d460bd0784`
+- Source SHA256: `ce4b6c46f7909d38aa65ad6b1cb2e6c9404d12cf14371fe0106c8df544581ef5`
 - Proof SHA256: `3a25fe7ca941325c96591236522cf807d8b269ff223bcc737bd5b073718cd047`
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Official policy-backed PowerShell execution policy setting. The app writes RemoteSigned under the documented policy path, which allows local scripts while requiring remote scripts to be signed.
+**Summary:** Official policy-backed PowerShell execution policy setting. The app writes RemoteSigned under the documented policy path, which allows local scripts while requiring remote scripts to be signed.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7231,12 +7231,12 @@ Windows Internals references:
 ### `notifications.disable-feedback-frequency`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Notifications`
 - Area: `Observed User Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/notifications.disable-feedback-frequency.review.json`
-- Source SHA256: `27da435a9a26b977bfa1af84d4b988c9cd6810434af8b4f3d6c29d245461fb4c`
+- Source SHA256: `c3395623a996181cdceef64e32f95aa4f34f6f9a1938ad7531ef7da2c65361e5`
 - Proof SHA256: `7855f743095f7383bff4654511252ffac274da378def6336a873a7fc5204a00d`
 
 **Summary:** Officially documented feedback-request frequency setting. Microsoft documents NumberOfSIUFInPeriod under the current-user SIUF rules key and maps 0 to Never, which matches the app's suppression value.
@@ -7245,10 +7245,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9610,24 +9610,24 @@ Nohuto lineage references:
 ### `privacy.disable-cli-telemetry`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `User Environment Variables`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-cli-telemetry.json`
-- Source SHA256: `3b25a760d05afb16afce7a68a8768a2cabf41c82199c45d6f83b5a01589b87e5`
+- Source SHA256: `abc0f9370eecfe0d25968117ddbc5b5a0d1189279473a0799578dba579f957cf`
 - Proof SHA256: `c01ca3ce36e8a237623af81403fe1e460d5ab64f427a31f30bd913a7d0630382`
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Officially documented user environment-variable bundle for opting PowerShell and the .NET CLI out of telemetry. Good for privacy-focused shell workflows, but it can reduce telemetry available for product improvement and support diagnostics.
+**Summary:** Officially documented user environment-variable bundle for opting PowerShell and the .NET CLI out of telemetry. Good for privacy-focused shell workflows, but it can reduce telemetry available for product improvement and support diagnostics.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10374,24 +10374,24 @@ Nohuto lineage references:
 ### `privacy.disable-kms-activation-telemetry`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-kms-activation-telemetry.json`
-- Source SHA256: `b70cd0ec6fcd1834454f8b1c1d8e4ce9873ae6e856cbb695ca566941149349ee`
+- Source SHA256: `bc1f69a1b710859e94613ae8d4b93db3ef84c606373df7fe8c5cfc439dd95656`
 - Proof SHA256: `1e9e9894404d129fdfbb0bb7fe36462ff4f5028ceba1159bc4c5bc4106e139b6`
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Machine policy for KMS client online AVS validation data. Good for privacy-sensitive or tightly controlled environments, but it opts the device out of automatically sending KMS activation-state data to Microsoft.
+**Summary:** Machine policy for KMS client online AVS validation data. Good for privacy-sensitive or tightly controlled environments, but it opts the device out of automatically sending KMS activation-state data to Microsoft.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -11121,24 +11121,24 @@ Nohuto lineage references:
 ### `privacy.disable-pca-diagnostics.policy`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Application Compatibility`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-pca-diagnostics.policy.review.json`
-- Source SHA256: `361914f2f1feb29b3636edcf815e1afd0af762ec539f66260d1bac51d42c2f9d`
+- Source SHA256: `20a6bcda7daec20cbb583dc290548f779d0cab5ef6ad31ddbc58e77c0c9c537c`
 - Proof SHA256: `7bdb81d570e8ab0ad5ee8e5a8b3112f1606cb397e867b219ba9775c4ee981600`
 
-**Summary:** Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\Software\Policies\Microsoft\Windows\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 (detection active, explicit policy), disabledValue=0 (detection disabled). To disable diagnostics, the correct write value is 0 - the value name 'DisablePcaUI' is misleading. Note: if 'Turn off Program Compatibility Assistant' (DisablePCA=1) is active, this policy has no effect. This record was created on 2026-03-13 after DisablePcaUI was found to be the wrong key in the previous disable-program-compatibility-assistant record (which correctly targets DisablePCA).
+**Summary:** Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\Software\Policies\Microsoft\Windows\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 means detection stays active and disabledValue=0 turns detection off.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -11172,24 +11172,24 @@ _No source block present._
 ### `privacy.disable-phone-linking`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/privacy.disable-phone-linking.json`
-- Source SHA256: `1731d7b9214bfcf6934c71f567c60cf7b9606eba456890fdb4cea244fc0cc919`
+- Source SHA256: `0b44762f1a547c67d10e7f070199786c9dd5e28e9711f3f82e612892fcb729f1`
 - Proof SHA256: `1ac5d1461c6cb46560b096b50e2275a5337e2733cf934863b090dea12300a33e`
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for Phone-PC linking and Continue on PC experiences. Good for reducing cross-device linkage, but it prevents the device from participating in those experiences.
+**Summary:** Policy-backed control for Phone-PC linking and Continue on PC experiences. Good for reducing cross-device linkage, but it prevents the device from participating in those experiences.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -11545,24 +11545,24 @@ Nohuto lineage references:
 ### `privacy.disable-search-history`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-search-history.json`
-- Source SHA256: `e5db6076168be462bedb7ebd65b7ca76392a89ac17ff98b2bb3a63eab4fbea6b`
+- Source SHA256: `ba6fea68c8d7b3813a453fef14ad7503d5163e59b518ef0f4ba7ecf3280660b7`
 - Proof SHA256: `577e0f892a7550b2dbff71430b62e9ce4ae3ca7a8ab9ade7a96e9fe086ecd5ac`
 
-**Summary:** Legacy validated record without machine-checkable validation proof. User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
+**Summary:** User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -11742,24 +11742,24 @@ Other source references:
 ### `privacy.disable-suggestions.policy`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `CloudContent policy trio`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/privacy.disable-suggestions.policy.review.json`
-- Source SHA256: `09dcee082106a1a85341f5d33d0ed89c6e266ae62a4ff37b4f4bbb95b9948904`
+- Source SHA256: `98881e91f242c696d1aec4931aa8f480396ec406d5eb7f9b1f970928ea74c0ea`
 - Proof SHA256: `f7289e1c044f4aed06c13b7cb312fc469ce3c649dc714b45f8210b084d491d23`
 
-**Summary:** Controls the official CloudContent suggestion policies for third-party suggestions, Settings suggestions, and the Windows Welcome experience. The broader parent record remains an audit trail for the opaque ContentDeliveryManager IDs the app writes, while this child tracks only the named Microsoft policies.
+**Summary:** Controls the official CloudContent suggestion policies for third-party suggestions, Settings suggestions, and the Windows Welcome experience. The broader parent record remains an audit trail for the opaque ContentDeliveryManager IDs, while this child tracks the named Microsoft policies the app can write directly.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -13056,24 +13056,24 @@ Windows Internals references:
 ### `security.disable-password-reveal`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.disable-password-reveal.json`
-- Source SHA256: `d95a11e1be92c925bdd91a42a0e5579a95d24547aa94847ab4741637b8f13fbe`
+- Source SHA256: `49cb1dede082e74036b4af6d4cdbc27ea3f85f9514ffe15dc9c5765c0ad91db5`
 - Proof SHA256: `50d97e420c30cbf63a70c9a209094c3baa6f45450925e287d51ea8a22288f57e`
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for the password reveal button in Windows credential entry surfaces. Turning it off slightly reduces shoulder-surfing convenience risks, but users lose the built-in way to briefly reveal what they typed.
+**Summary:** Policy-backed control for the password reveal button in Windows credential entry surfaces. Turning it off slightly reduces shoulder-surfing convenience risks, but users lose the built-in way to briefly reveal what they typed.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -13121,24 +13121,24 @@ Windows Internals references:
 ### `security.disable-picture-password`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.disable-picture-password.json`
-- Source SHA256: `10040b85aedadd33870b42f5e98da3c43d004e2e9ecfec0cbc2d3e250eb54021`
+- Source SHA256: `ab7cf2d608574ae1270411ab0dcb3b20582a5dec45d5e1259b8243cb4e6b1a9f`
 - Proof SHA256: `80f0769f7386003a4f61a10b36d71703ac5b9498fd3fc92551eb78738cf99d72`
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for picture password sign-in for domain users. Turning it off removes one sign-in option for domain accounts, but it can simplify credential policy and support expectations.
+**Summary:** Policy-backed control for picture password sign-in for domain users. Turning it off removes one sign-in option for domain accounts, but it can simplify credential policy and support expectations.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -13582,24 +13582,24 @@ Windows Internals references:
 ### `security.enable-dynamic-lock`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.enable-dynamic-lock.json`
-- Source SHA256: `76033ac24f3d75f777cc0e8b05f9c33a7588a645fc1177c898c3ec045219dc61`
+- Source SHA256: `ed4ac310ae9d2b5e6e3d53e642cbcd4ab7700097aa1981b8ede4089a23f9854e`
 - Proof SHA256: `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189`
 
-**Summary:** Validated record for the official Dynamic Lock policy under Passport for Work. The current app still writes a different current-user value under Winlogon, so the implementation remains mismatched even though the policy surface itself is now proven.
+**Summary:** Validated record for the official Dynamic Lock policy under Passport for Work. The app now writes the documented machine policy value instead of the older Winlogon preference path.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14776,24 +14776,24 @@ Windows Internals references:
 ### `system.disable-search-remote-queries`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.disable-search-remote-queries.json`
-- Source SHA256: `826137e3f60bb96c6dfffad1a9e760deead9141f0c4aa73c98ac238c80a242e3`
+- Source SHA256: `baefa2b5a3f28eb1f73a8f09b93506f2eda0fa23dfdcc4b9209c251abe608389`
 - Proof SHA256: `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07`
 
-**Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for whether remote clients can query this computer's Windows Search index. Good for reducing remote index exposure, but it also removes indexed-search convenience for network shares hosted on the machine.
+**Summary:** Policy-backed control for whether remote clients can query this computer's Windows Search index. Good for reducing remote index exposure, but it also removes indexed-search convenience for network shares hosted on the machine.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15955,12 +15955,12 @@ Windows Internals references:
 ### `system.memory-disable-paging-executive`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Memory Management`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.memory-disable-paging-executive.json`
-- Source SHA256: `d142104b69db4091b2f36240824e3e551b6c7033e486a3fb7e0aceaa16e332b1`
+- Source SHA256: `b256f188e0f4912f2aea7227bf89b0ab16c25021de1838466e445c1956b35eea`
 - Proof SHA256: `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4`
 
 **Summary:** Officially documented Memory Management control for DisablePagingExecutive, but Microsoft explicitly states that systems with Windows 8 and higher do not need this registry change. The key exists and is writable, but it should not be treated as an effective Windows 11 tweak.
@@ -15969,10 +15969,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
+| Class | Class B |
+| Title | Strong but Partial |
 | Action state | research-gated |
-| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -16769,7 +16769,7 @@ Windows Internals references:
 - Area: `Reliability / Event Timestamps`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json`
-- Source SHA256: `721519b9c72c153fd891292cee7d8ceb28902ef780f964c43c1abae849b21b3e`
+- Source SHA256: `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1`
 - Proof SHA256: `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af`
 
 **Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping, and TimeStampInterval is the companion cadence value capped at 24h.

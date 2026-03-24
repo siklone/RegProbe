@@ -86,9 +86,27 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "notes": "The app does not currently expose this Reliability timestamp setting.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The app now writes the documented policy gate plus the companion 24-hour interval cap used by this record.",
+    "writes": [
+      {
+        "target_id": "reliability-timestamp-enabled",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+        "value_name": "TimeStampEnabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "reliability-timestamp-interval",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+        "value_name": "TimeStampInterval",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 86400
+      }
+    ]
   },
   "windows_defaults": [
     {
@@ -181,9 +199,9 @@
   },
   "open_questions": [
     "Should the companion TimeStampInterval cadence be split into its own record?",
-    "Should the app ever surface this reliability timestamp gate, or keep it as research-only?"
+    "Should the app ever let users change the companion interval instead of keeping the 24-hour cap fixed?"
   ],
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "last_reviewed_utc": "2026-03-24T22:15:00Z",
   "validation_proof": {
     "source_url": "Docs/system/assets/timestamp-OsEventsTimestampInterval.c",
     "exact_quote_or_path": "RegOpenKeyExW(HKEY_LOCAL_MACHINE, L\"Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability\", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L\"TimeStampEnabled\", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L\"TimeStampInterval\", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180",

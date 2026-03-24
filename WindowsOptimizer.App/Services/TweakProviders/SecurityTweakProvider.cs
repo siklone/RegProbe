@@ -83,14 +83,13 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             context,
             "security.enable-dynamic-lock",
             "Enable Dynamic Lock",
-            "Automatically locks the device when the paired Bluetooth device is away.",
+            "Enables the documented Dynamic Lock policy so Windows can evaluate user-absence signal rules and lock the device.",
             TweakRiskLevel.Safe,
-            RegistryHive.CurrentUser,
-            @"Software\Microsoft\Windows NT\CurrentVersion\Winlogon",
-            "EnableGoodbye",
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\PassportForWork\DynamicLock",
+            "DynamicLock",
             RegistryValueKind.DWord,
-            1,
-            requiresElevation: false);
+            1);
 
         // System Defense
         // Windows Firewall Configuration
