@@ -1,0 +1,136 @@
+# Defender Validation Queue - 2026-03-24
+
+This queue starts from a clean `Win25H2Clean` baseline and the new snapshot-first dump lane.
+
+Snapshot used for this lane:
+
+- `baseline-20260324-high-risk-lane`
+
+## Clean 25H2 baseline
+
+The clean VM does not currently have these policy subkeys:
+
+- `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting`
+- `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet`
+
+Artifacts:
+
+- `H:\Temp\vm-tooling-staging\registry-dumps\defender-reporting-20260324-211238\defender-reporting.txt`
+- `H:\Temp\vm-tooling-staging\registry-dumps\defender-spynet-20260324-211238\defender-spynet.txt`
+
+That gives us a clean absent baseline for the first ADMX-backed candidates.
+
+## Tier 1 - start here
+
+These have the best mix of documented semantics and low blast radius.
+
+### DisableEnhancedNotifications
+
+- Path: `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting`
+- Value: `DisableEnhancedNotifications`
+- Type: `REG_DWORD`
+- Documented meaning:
+  - `0 = notifications enabled`
+  - `1 = notifications disabled`
+- Source:
+  - `Docs/system/system.md` lines `1404-1417`
+- Clean 25H2 baseline:
+  - subkey absent
+- Why first:
+  - notification-only
+  - direct ADMX semantics already captured
+
+### SpyNetReporting
+
+- Path: `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet`
+- Value: `SpyNetReporting`
+- Type: `REG_DWORD`
+- Reported meaning in current repo notes:
+  - `0 = MAPS disabled`
+  - `1 = Basic membership`
+  - `2 = Advanced membership`
+- Source:
+  - `Docs/tweaks/research/notes/windows-11-settings-and-privacy-leads.md` lines `258-264`
+- Clean 25H2 baseline:
+  - subkey absent
+- Why first:
+  - narrow policy
+  - low risk compared with protection or service toggles
+
+### SubmitSamplesConsent
+
+- Path: `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet`
+- Value: `SubmitSamplesConsent`
+- Type: `REG_DWORD`
+- Reported meaning in current repo notes:
+  - `0 = Always prompt`
+  - `2 = Never send`
+  - `3 = Send all automatically`
+- Source:
+  - `Docs/tweaks/research/notes/windows-11-settings-and-privacy-leads.md` lines `266-273`
+- Clean 25H2 baseline:
+  - subkey absent
+- Why first:
+  - narrow data-sharing policy
+  - reversible
+  - safer than toggling real-time scanning
+
+## Tier 2 - dump-visible, semantics still need work
+
+### ThreatFileHashLogging
+
+- Path from dump:
+  - `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender`
+- Source:
+  - `Docs/security/assets/Windows-Defender.txt`
+- What we know:
+  - the value exists in upstream dump/mirror material
+  - the name strongly suggests a logging-only setting
+- What is still missing:
+  - a primary Microsoft source or a clean code path
+  - live runtime proof in the VM
+
+### HideExclusionsFromLocalAdmins
+
+- Paths from dump:
+  - `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender`
+  - `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager`
+- Source:
+  - `Docs/security/assets/Windows-Defender.txt`
+- What we know:
+  - the value exists in both root and `Policy Manager` dump surfaces
+  - the name suggests UI or access scoping, not scanning behavior
+- What is still missing:
+  - which path is the supported control surface on current builds
+  - official semantics
+  - live runtime proof in the VM
+
+## Not first-pass candidates
+
+Do not start with these:
+
+- `DisableAntiSpyware`
+- `DisableAntiVirus`
+- service state values like `IsServiceRunning`
+- timestamps and tenant IDs like `InstallTime`, `OOBEInstallTime`, `OrgID`, `PartnerGUID`
+- proxy cache/runtime values like `CachedProxy*`, `LastKnownGoodProxy`
+
+These are either overridden on modern builds, state-like, tenant-specific, or too risky for the first pass.
+
+## Next validation steps
+
+1. `DisableEnhancedNotifications`
+   - dump baseline already done
+   - verify path/value with current repo docs
+   - set `1`
+   - reboot if needed
+   - capture Procmon around Windows Security UI
+   - restore snapshot
+2. `SpyNetReporting`
+   - same pattern
+3. `SubmitSamplesConsent`
+   - same pattern
+4. `ThreatFileHashLogging`
+   - docs/code first
+5. `HideExclusionsFromLocalAdmins`
+   - path disambiguation first
