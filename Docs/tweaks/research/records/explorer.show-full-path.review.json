@@ -4,7 +4,7 @@
   "record_id": "explorer.show-full-path",
   "tweak_id": "explorer.show-full-path",
   "record_status": "validated",
-  "summary": "Explorer can show the full path in the title bar. The current app writes the exact documented FullPath user preference under Explorer\\CabinetState.",
+  "summary": "Explorer can show the full path in the title bar. Microsoft Open Specifications documents the exact FullPath user preference under Explorer\\CabinetState, and the 25H2 default hive exports the same value as 0. The current app writes the documented enabled state under that same Explorer preference surface.",
   "setting": {
     "name": "Show Full Path in Explorer",
     "category": "Explorer",
@@ -13,7 +13,7 @@
     "casual_explanation": "Explorer can show the full folder path instead of a shorter title. Some advanced users prefer that when they navigate deep directories.",
     "why_people_change_it": "People turn it on when they want more exact path context while browsing folders.",
     "tradeoffs_overview": "Showing the full path can be more informative for deep folder navigation, but it also makes the title bar busier.",
-    "professional_notes": "Microsoft Open Specifications documents FullPath under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState and states that 1 enables showing the full path in Explorer title bars while 0 disables it.",
+    "professional_notes": "Microsoft Open Specifications documents FullPath under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState and states that 1 enables showing the full path in Explorer title bars while 0 disables it. The 25H2 default hive exports FullPath = 0 in the Explorer\\CabinetState block, which corroborates the current default preference state on that snapshot.",
     "targets": [
       {
         "target_id": "explorer-fullpath-flag",
@@ -28,7 +28,8 @@
             "label": "Explorer default behavior",
             "meaning": "Explorer keeps its current baseline because no explicit FullPath preference is set by this record.",
             "evidence_ids": [
-              "ms-gppref-global-folder-options"
+              "ms-gppref-global-folder-options",
+              "dump-hkcu25h2-explorer-cabinetstate-fullpath"
             ]
           },
           {
@@ -47,6 +48,7 @@
             "meaning": "Explorer displays the full path in the title bar.",
             "evidence_ids": [
               "ms-gppref-global-folder-options",
+              "dump-hkcu25h2-explorer-cabinetstate-fullpath",
               "app-visibility-provider"
             ]
           }
@@ -71,19 +73,19 @@
   },
   "windows_defaults": [
     {
-      "label": "Explorer baseline",
-      "applies_to": "Explorer user profiles that do not explicitly set the FullPath preference",
+      "label": "25H2 default Explorer preference",
+      "applies_to": "Current-user Explorer CabinetState settings on the 25H2 default hive snapshot",
       "states": [
         {
           "target_id": "explorer-fullpath-flag",
-          "state_kind": "missing",
-          "value": null,
-          "rationale": "Leave the explicit FullPath preference unset."
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "HKCU25H2.reg exports FullPath = 0 in the default Explorer\\CabinetState block."
         }
       ],
-      "notes": "This record documents the exact Explorer user-preference surface and the app's current write separately from the baseline unset state.",
+      "notes": "This is current 25H2 default-hive corroboration rather than a guarantee for every historical build.",
       "evidence_ids": [
-        "ms-gppref-global-folder-options"
+        "dump-hkcu25h2-explorer-cabinetstate-fullpath"
       ]
     }
   ],
@@ -101,9 +103,9 @@
       "states": [
         {
           "target_id": "explorer-fullpath-flag",
-          "state_kind": "missing",
-          "value": null,
-          "rationale": "Leave the FullPath preference unset."
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "This matches the documented disabled state and the 25H2 default-hive export."
         }
       ],
       "good_when": "You prefer the standard Explorer title bar behavior.",
@@ -114,7 +116,8 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
-        "ms-gppref-global-folder-options"
+        "ms-gppref-global-folder-options",
+        "dump-hkcu25h2-explorer-cabinetstate-fullpath"
       ]
     },
     {
@@ -144,6 +147,7 @@
       "apply_allowed": true,
       "evidence_ids": [
         "ms-gppref-global-folder-options",
+        "dump-hkcu25h2-explorer-cabinetstate-fullpath",
         "app-visibility-provider"
       ]
     }
@@ -162,6 +166,19 @@
         "behavior"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "dump-hkcu25h2-explorer-cabinetstate-fullpath",
+      "kind": "raw-registry-dump",
+      "title": "25H2 default hive corroboration for FullPath",
+      "location": "Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg",
+      "summary": "The 25H2 default hive exports FullPath = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
     },
     {
       "evidence_id": "repo-provenance-explorer-show-full-path",
@@ -197,7 +214,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft Open Specifications documents the exact FullPath Explorer preference under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState and states that 1 enables showing the full path while 0 disables it. The app writes the documented enabled state.",
+    "why": "Microsoft Open Specifications documents the exact FullPath Explorer preference under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState and states that 1 enables showing the full path while 0 disables it. The 25H2 default hive corroborates the current disabled default state, and the app writes the documented enabled state.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T03:00:31+03:00",
