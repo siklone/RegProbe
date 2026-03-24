@@ -8,16 +8,16 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 
 | Field | Value |
 | --- | --- |
-| Total records | 291 |
-| Validated | 239 |
+| Total records | 293 |
+| Validated | 241 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 291 |
+| Records with evidence | 293 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | A count | 174 |
-| B count | 57 |
+| B count | 59 |
 | D count | 8 |
 | E count | 52 |
 
@@ -224,6 +224,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class B | `Docs/tweaks/research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | `b847c8b83a9ff3caed416297dc72f4bf75f582338a6c3e641c3e240a03a98de3` | `e05403394ebd8329e2d2001f0b186efecf6a6108029c50fdbd9b20c6384cc033` | 1 |
 | `privacy.troubleshooter-dont-run` | validated | Class A | `Docs/tweaks/research/records/privacy.troubleshooter-dont-run.review.json` | `0d7c80add69e4226a6eeefa2436330be4eb3d6c256266c19172fd70ca09917a4` | `7dcc7ddffc4e900be0639a531fe65c9f9e91f3571e105777966de2c6b82f3f86` | 1 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | `cd5527ef4c788ca56752769b9f884d367106f6d2e67fa8958bc7c272b5fa8ec6` | `cbf61febc21858b0337754ddc719d778a0a6c0f8f34b535b029e120bcecea03e` | 3 |
+| `security.disable-defender-sample-submission` | validated | Class B | `Docs/tweaks/research/records/security.disable-defender-sample-submission.review.json` | `287a05adaf4d7e97c5176afc826b8902835318f9cddc64b42707d031b1f2751a` | `d82de4112b943a9ec6ef6d2e25aff47a14c3f9958e1352a827ae5241fc5ecba7` | 1 |
 | `security.disable-downloads-blocking` | validated | Class A | `Docs/tweaks/research/records/security.disable-downloads-blocking.json` | `f9574461ea84e7f9a84ed029d6469a4ea7020dd5399a7cdcc0201a3106f99d1c` | `37f0c6998110ae0723af795d2c3f93b894ac85bf013d9877cbdc60c381f3f2eb` | 1 |
 | `security.disable-enhanced-defender-notifications` | validated | Class B | `Docs/tweaks/research/records/security.disable-enhanced-defender-notifications.review.json` | `423998f5cf355f1d27c890da884dec5ccf5571fb463bcf1439dde92ffcdaf78b` | `a12e468c1b7df394776f91ac6de7601b047c298f81aa8bbae8df1441ecb28c2b` | 1 |
 | `security.disable-ntfs-encryption` | validated | Class B | `Docs/tweaks/research/records/security.disable-ntfs-encryption.json` | `b75f5abb843f5b452720a76ecf7b696cfc9544a8f8d34971eab365d6fdf8dfd3` | `a85e3450b7be35f290e9b7a8083815b660f2edd6afcb9d8151d04d4a677e9a0d` | 1 |
@@ -236,6 +237,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.disable-windows-firewall` | validated | Class B | `Docs/tweaks/research/records/security.disable-windows-firewall.review.json` | `4669ad9f2652dc128d4cdd6123ce6652542887e95801c4e8183dbe93704b52bc` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 2 |
 | `security.disable-windows-update.policy` | validated | Class B | `Docs/tweaks/research/records/security.disable-windows-update.policy.review.json` | `d348a89d3dd278084d0cdc9fbf56c168e99433d42d157b9ebf9cda001e3b21df` | `b1697a5c3feaa9da12b61d23e66a337b9339e4fffeeb2e37d8395d5f461ed060` | 2 |
 | `security.disable-wu-driver-updates` | validated | Class B | `Docs/tweaks/research/records/security.disable-wu-driver-updates.json` | `488a5f5680947b908ba0ba69742a588b0d33a7654cf4d2a1975afac13fa061b8` | `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa` | 3 |
+| `security.enable-defender-maps-advanced-membership` | validated | Class B | `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json` | `09647ad8584f7b7829d1431fcac330a07204b0a27cd719d2b510e8aa891ee1da` | `42cc4c40a3161dc76cf3730b1397c4402aa66ae5e625a4ff85962df616ee1324` | 1 |
 | `security.enable-dynamic-lock` | validated | Class A | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `ed4ac310ae9d2b5e6e3d53e642cbcd4ab7700097aa1981b8ede4089a23f9854e` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
 | `security.enable-sudo` | validated | Class B | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
@@ -12854,6 +12856,62 @@ _No source block present._
 | exact_quote_or_path | SettingSync.admx: DisableSettingSyncUserOverride trueValue=0, falseValue=1. |
 | key_found_on_page | True |
 | notes | Local SettingSync.admx and SettingSync.adml confirm that the UserOverride values allow syncing to be turned back on, so the current label now matches the documented behavior. |
+### `security.disable-defender-sample-submission`
+
+- Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
+- Category: `Security`
+- Area: `Microsoft Defender MAPS sample submission`
+- Scope: `device`
+- Source file: `Docs/tweaks/research/records/security.disable-defender-sample-submission.review.json`
+- Source SHA256: `287a05adaf4d7e97c5176afc826b8902835318f9cddc64b42707d031b1f2751a`
+- Proof SHA256: `d82de4112b943a9ec6ef6d2e25aff47a14c3f9958e1352a827ae5241fc5ecba7`
+
+**Summary:** Microsoft documents SubmitSamplesConsent on the Defender Spynet policy path. In Win25H2Clean, SecurityHealthService.exe read SubmitSamplesConsent = 2 directly from the policy path after the write.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
+**Targets**
+
+- `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet` / `SubmitSamplesConsent` / `REG_DWORD`
+  - Notes: The runtime proof is strong for value 2. This record stays gated because that value weakens Defender cloud protection instead of just changing UI behavior.
+  - missing | label=Not configured | meaning=Leave the sample-submission policy unset and let Defender use its managed baseline.
+  - value | value=0 | label=Always prompt | meaning=Defender prompts before sending samples for cloud analysis.
+  - value | value=1 | label=Send safe samples automatically | meaning=Defender sends safe samples automatically and keeps the documented default behavior.
+  - value | value=2 | label=Never send | meaning=Defender does not send samples automatically. Microsoft notes this disables Block at First Sight.
+  - value | value=3 | label=Send all samples automatically | meaning=Defender sends all samples automatically for cloud analysis.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-defender-submit-samples-consent` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Defender Policy CSP SubmitSamplesConsent | `high` |
+| `ms-defender-block-at-first-sight-dependency` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Block at First Sight dependency on sample submission | `high` |
+| `repo-defender-submit-samples-lead` | `repo-doc` | `Current repo docs` | Local Defender sample-submission lead note | `medium` |
+| `repo-defender-submit-samples-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes SubmitSamplesConsent | `medium` |
+| `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | `medium` |
+| `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | `high` |
+| `app-security-provider-disable-defender-sample-submission` | `repo-code` | `Current repo code` | Current security provider sample-submission write | `high` |
+
+**Sources**
+
+_No source block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\submitsamples-ui-state2.txt |
+| exact_quote_or_path | SecurityHealthService.exe \| RegQueryValue \| HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 2 |
+| key_found_on_page | True |
+| notes | The same clean-snapshot Defender Spynet probe line also showed the sibling SpyNetReporting value as NAME NOT FOUND when SubmitSamplesConsent = 2 was the only policy value on the branch. |
 ### `security.disable-downloads-blocking`
 
 - Status: `validated`
@@ -13632,6 +13690,59 @@ Windows Internals references:
 | exact_quote_or_path | DeviceSetup.admx: <policy name="DriverSearchPlaces_SearchOrderConfiguration" ... key="Software\\Policies\\Microsoft\\Windows\\DriverSearching"> ... <enum ... valueName="SearchOrderConfig"> ... <decimal value="0"/>; ICM.admx: key="Software\\Policies\\Microsoft\\Windows\\DriverSearching" valueName="DontSearchWindowsUpdate"; WindowsUpdate.admx: key="Software\\Policies\\Microsoft\\Windows\\WindowsUpdate" valueName="ExcludeWUDriversInQualityUpdate"> <enabledValue><decimal value="1" /></enabledValue>. |
 | key_found_on_page | True |
 | notes | The local official Microsoft policy files define the exact DriverSearching and WindowsUpdate policy paths used by the app. SearchOrderConfig = 0 means do not search Windows Update, DontSearchWindowsUpdate = 1 blocks Windows Update device-driver searching, and ExcludeWUDriversInQualityUpdate = 1 excludes driver-classified updates from Windows quality updates. |
+### `security.enable-defender-maps-advanced-membership`
+
+- Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
+- Category: `Security`
+- Area: `Microsoft Defender cloud protection`
+- Scope: `device`
+- Source file: `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json`
+- Source SHA256: `09647ad8584f7b7829d1431fcac330a07204b0a27cd719d2b510e8aa891ee1da`
+- Proof SHA256: `42cc4c40a3161dc76cf3730b1397c4402aa66ae5e625a4ff85962df616ee1324`
+
+**Summary:** Microsoft documents SpyNetReporting on the Defender Spynet policy path. In a clean Win25H2Clean trace, SecurityHealthService.exe first saw the policy path as absent, then read SpyNetReporting = 2 directly from the policy path after the write.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
+**Targets**
+
+- `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet` / `SpyNetReporting` / `REG_DWORD`
+  - Notes: The runtime proof is strongest for value 2. This record stays gated because the modern 1-versus-2 split is still not clean enough to treat as app-ready.
+  - missing | label=Not configured | meaning=Leave the MAPS membership policy unset and let Defender use its current managed baseline.
+  - value | value=0 | label=MAPS disabled | meaning=Turns off the documented Defender MAPS policy surface.
+  - value | value=1 | label=Documented membership value 1 | meaning=Microsoft documents this as the lower MAPS membership value, but newer builds can collapse 1 and 2 into the same advanced behavior.
+  - value | value=2 | label=Advanced membership | meaning=Uses the documented advanced membership value that SecurityHealthService.exe read directly in the 25H2 VM.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-defender-spynet-reporting` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting | `high` |
+| `repo-defender-spynet-lead` | `repo-doc` | `Current repo docs` | Local Defender MAPS lead note | `medium` |
+| `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | `high` |
+| `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | `high` |
+| `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | `Current repo code` | Current security provider MAPS membership write | `high` |
+
+**Sources**
+
+_No source block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\spynet-ui-state2.txt |
+| exact_quote_or_path | SecurityHealthService.exe \| RegQueryValue \| HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 2 |
+| key_found_on_page | True |
+| notes | The clean baseline first showed the Defender Spynet policy branch as absent and the non-policy live store reading SpyNetReporting = 2. After the policy write, SecurityHealthService.exe read the same value directly from the policy path. |
 ### `security.enable-dynamic-lock`
 
 - Status: `validated`

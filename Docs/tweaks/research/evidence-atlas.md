@@ -7,16 +7,16 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 
 | Field | Value |
 | --- | --- |
-| Total records | 291 |
-| Validated | 239 |
+| Total records | 293 |
+| Validated | 241 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 291 |
+| Records with evidence | 293 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 174 |
-| Class B | 57 |
+| Class B | 59 |
 | Class D | 8 |
 | Class E | 52 |
 
@@ -34,7 +34,7 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Peripheral | 3 |
 | Power | 13 |
 | Privacy | 84 |
-| Security | 20 |
+| Security | 22 |
 | System | 74 |
 | Visibility | 23 |
 
@@ -15219,6 +15219,103 @@ Current write(s):
 
 ### Security
 
+### `security.disable-defender-sample-submission`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `Security` |
+| Area | `Microsoft Defender MAPS sample submission` |
+| Scope | `device` |
+| Source file | `Docs/tweaks/research/records/security.disable-defender-sample-submission.review.json` |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Microsoft documents SubmitSamplesConsent on the Defender Spynet policy path. In Win25H2Clean, SecurityHealthService.exe read SubmitSamplesConsent = 2 directly from the policy path after the write.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Notes | The app writes SubmitSamplesConsent = 2 on the documented Defender Spynet policy path. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `defender-submit-samples-consent` | `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet` | `SubmitSamplesConsent` | `2` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- Policy unset baseline (Systems where the Defender sample-submission policy is not configured on the local policy path)
+  - defender-submit-samples-consent: missing — — Leave the Defender Spynet sample-submission policy unset.
+
+**Recommended profiles**
+
+- `windows-default`: Windows default (apply_allowed=False)
+- `never-send-samples`: Never send samples (apply_allowed=False)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-defender-submit-samples-consent` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Defender Policy CSP SubmitSamplesConsent | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-defender | `high` | path, value, allowed-values, behavior |
+| `ms-defender-block-at-first-sight-dependency` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Block at First Sight dependency on sample submission | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus | `high` | behavior, tradeoff |
+| `repo-defender-submit-samples-lead` | `repo-doc` | `Current repo docs` | Local Defender sample-submission lead note | Docs/tweaks/research/notes/windows-11-settings-and-privacy-leads.md | `medium` | path, value, allowed-values |
+| `repo-defender-submit-samples-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes SubmitSamplesConsent | Docs/security/assets/Windows-Defender.txt | `medium` | path |
+| `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | H:\Temp\vm-tooling-staging\spynet-ui-state2.txt | `medium` | path, runtime-read, default |
+| `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | H:\Temp\vm-tooling-staging\submitsamples-ui-state2.txt | `high` | path, value, runtime-read, behavior |
+| `app-security-provider-disable-defender-sample-submission` | `repo-code` | `Current repo code` | Current security provider sample-submission write | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\submitsamples-ui-state2.txt |
+| Exact quote / path | SecurityHealthService.exe \| RegQueryValue \| HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet\SubmitSamplesConsent \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 2 |
+| Key found on page | `True` |
+| Notes | The same clean-snapshot Defender Spynet probe line also showed the sibling SpyNetReporting value as NAME NOT FOUND when SubmitSamplesConsent = 2 was the only policy value on the branch. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft documents the exact Defender Spynet path and the 0/1/2/3 value model for SubmitSamplesConsent, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SubmitSamplesConsent = 2 from that path. The record stays gated because value 2 lowers Defender cloud protection and Microsoft documents that Block at First Sight will not function with it. |
+
+---
+
 ### `security.disable-downloads-blocking`
 
 | Field | Value |
@@ -16488,6 +16585,101 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | The local Microsoft DeviceSetup, ICM, and WindowsUpdate policy files explicitly define SearchOrderConfig, DontSearchWindowsUpdate, and ExcludeWUDriversInQualityUpdate on the exact policy paths used by the app. The app writes the documented values that keep Windows Update out of driver sourcing and quality-update driver delivery. |
+
+---
+
+### `security.enable-defender-maps-advanced-membership`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `Security` |
+| Area | `Microsoft Defender cloud protection` |
+| Scope | `device` |
+| Source file | `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json` |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Microsoft documents SpyNetReporting on the Defender Spynet policy path. In a clean Win25H2Clean trace, SecurityHealthService.exe first saw the policy path as absent, then read SpyNetReporting = 2 directly from the policy path after the write.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Notes | The app writes SpyNetReporting = 2 on the documented Defender Spynet policy path. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `defender-spynet-reporting` | `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet` | `SpyNetReporting` | `2` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- Policy unset baseline (Systems where the Defender MAPS policy is not configured on the local policy path)
+  - defender-spynet-reporting: missing — — Leave the Defender Spynet policy branch unset.
+
+**Recommended profiles**
+
+- `windows-default`: Windows default (apply_allowed=False)
+- `advanced-maps-membership`: Advanced MAPS membership (apply_allowed=False)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-defender-spynet-reporting` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus | `high` | path, value, allowed-values, behavior |
+| `repo-defender-spynet-lead` | `repo-doc` | `Current repo docs` | Local Defender MAPS lead note | Docs/tweaks/research/notes/windows-11-settings-and-privacy-leads.md | `medium` | path, value, allowed-values |
+| `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | H:\Temp\vm-tooling-staging\spynet-ui-baseline.txt | `high` | path, runtime-read, default |
+| `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | H:\Temp\vm-tooling-staging\spynet-ui-state2.txt | `high` | path, value, runtime-read, behavior |
+| `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | `Current repo code` | Current security provider MAPS membership write | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\spynet-ui-state2.txt |
+| Exact quote / path | SecurityHealthService.exe \| RegQueryValue \| HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet\SpyNetReporting \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 2 |
+| Key found on page | `True` |
+| Notes | The clean baseline first showed the Defender Spynet policy branch as absent and the non-policy live store reading SpyNetReporting = 2. After the policy write, SecurityHealthService.exe read the same value directly from the policy path. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft documents the exact Spynet policy path and the advanced membership value 2, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SpyNetReporting = 2 from that path. The record stays gated because the modern 1-versus-2 behavior is still not clean enough to expose as an app-ready one-click choice. |
 
 ---
 

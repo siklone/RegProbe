@@ -103,6 +103,30 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
+        yield return CreateRegistryTweak(
+            context,
+            "security.enable-defender-maps-advanced-membership",
+            "Join Microsoft MAPS (Advanced)",
+            "Sets the documented Defender MAPS policy value to the advanced membership state.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows Defender\Spynet",
+            "SpyNetReporting",
+            RegistryValueKind.DWord,
+            2);
+
+        yield return CreateRegistryTweak(
+            context,
+            "security.disable-defender-sample-submission",
+            "Never Send Defender Samples",
+            "Sets the documented Defender sample-submission policy to Never send.",
+            TweakRiskLevel.Risky,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows Defender\Spynet",
+            "SubmitSamplesConsent",
+            RegistryValueKind.DWord,
+            2);
+
         // System Defense
         // Windows Firewall Configuration
         // Source: Microsoft Defender Firewall Documentation

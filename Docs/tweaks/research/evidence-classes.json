@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T18:58:35.838667Z",
+  "generated_utc": "2026-03-24T20:08:21.133898Z",
   "summary": {
-    "total_records": 291,
+    "total_records": 293,
     "class_counts": {
       "A": 174,
-      "B": 57,
+      "B": 59,
       "C": 0,
       "D": 8,
       "E": 52
@@ -13,7 +13,7 @@
     "action_state_counts": {
       "actionable": 174,
       "archived": 52,
-      "research-gated": 65
+      "research-gated": 67
     }
   },
   "classes": {
@@ -12615,6 +12615,73 @@
       }
     },
     {
+      "record_id": "security.disable-defender-sample-submission",
+      "tweak_id": "security.disable-defender-sample-submission",
+      "record_status": "validated",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Partial",
+      "class_description": "Key and primary values are known, but the record is still gated from one-click apply or has incomplete edge semantics.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "Primary values are understood, but this record is still intentionally gated from one-click apply.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The same clean-snapshot Defender Spynet probe line also showed the sibling SpyNetReporting value as NAME NOT FOUND when SubmitSamplesConsent = 2 was the only policy value on the branch.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "H:\\Temp\\vm-tooling-staging\\submitsamples-ui-state2.txt",
+            "kind": "validation-proof",
+            "summary": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent | SUCCESS | Type: REG_DWORD, Length: 4, Data: 2"
+          },
+          {
+            "title": "Microsoft Learn: Defender Policy CSP SubmitSamplesConsent",
+            "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-defender",
+            "kind": "official-doc",
+            "summary": "Microsoft maps SubmitSamplesConsent to HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and documents 0 = Always prompt, 1 = Send safe samples automatically, 2 = Never s..."
+          },
+          {
+            "title": "Microsoft Learn: Block at First Sight dependency on sample submission",
+            "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus",
+            "kind": "official-doc",
+            "summary": "Microsoft states that if the sample-submission setting is 2 (Never send), the Block at First Sight feature will not function."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "In the clean high-risk snapshot run where only SpyNetReporting = 2 was written on the same Defender Spynet policy branch, SecurityHealthService.exe queried SubmitSamplesConsent and got NAME NOT FOUND.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean absent-value check for Defender sample submission",
+            "url": "H:\\Temp\\vm-tooling-staging\\spynet-ui-state2.txt",
+            "kind": "procmon-trace",
+            "summary": "In the clean high-risk snapshot run where only SpyNetReporting = 2 was written on the same Defender Spynet policy branch, SecurityHealthService.exe queried SubmitSamplesConsent..."
+          },
+          {
+            "title": "Win25H2Clean Procmon read for SubmitSamplesConsent = 2",
+            "url": "H:\\Temp\\vm-tooling-staging\\submitsamples-ui-state2.txt",
+            "kind": "procmon-trace",
+            "summary": "After writing SubmitSamplesConsent = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
       "record_id": "security.disable-downloads-blocking",
       "tweak_id": "security.disable-downloads-blocking",
       "record_status": "validated",
@@ -13712,6 +13779,73 @@
             "summary": "Matched 2 audit token(s) in win-config."
           }
         ]
+      }
+    },
+    {
+      "record_id": "security.enable-defender-maps-advanced-membership",
+      "tweak_id": "security.enable-defender-maps-advanced-membership",
+      "record_status": "validated",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Partial",
+      "class_description": "Key and primary values are known, but the record is still gated from one-click apply or has incomplete edge semantics.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "Primary values are understood, but this record is still intentionally gated from one-click apply.",
+      "confidence": "medium",
+      "app_mapping_status": "matches-research",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The clean baseline first showed the Defender Spynet policy branch as absent and the non-policy live store reading SpyNetReporting = 2. After the policy write, SecurityHealthService.exe read the same value directly from the policy path.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "H:\\Temp\\vm-tooling-staging\\spynet-ui-state2.txt",
+            "kind": "validation-proof",
+            "summary": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting | SUCCESS | Type: REG_DWORD, Length: 4, Data: 2"
+          },
+          {
+            "title": "Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting",
+            "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus",
+            "kind": "official-doc",
+            "summary": "Microsoft maps SpyNetReporting to HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and documents 0 = disabled, 1 = basic membership, and 2 = advanced membership. The pag..."
+          },
+          {
+            "title": "Local Defender MAPS lead note",
+            "url": "Docs/tweaks/research/notes/windows-11-settings-and-privacy-leads.md",
+            "kind": "repo-doc",
+            "summary": "The local lead note tracks SpyNetReporting on HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet with 0, 1, and 2 as the documented values."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "On the clean high-risk snapshot, SecurityHealthService.exe opened HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and got NAME NOT FOUND, then fell back to HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting and read Data: 2.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean Procmon baseline for Defender MAPS policy path",
+            "url": "H:\\Temp\\vm-tooling-staging\\spynet-ui-baseline.txt",
+            "kind": "procmon-trace",
+            "summary": "On the clean high-risk snapshot, SecurityHealthService.exe opened HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and got NAME NOT FOUND, then fell back to HKLM\\SOFTWAR..."
+          },
+          {
+            "title": "Win25H2Clean Procmon read for SpyNetReporting = 2",
+            "url": "H:\\Temp\\vm-tooling-staging\\spynet-ui-state2.txt",
+            "kind": "procmon-trace",
+            "summary": "After writing SpyNetReporting = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {
