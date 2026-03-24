@@ -8,11 +8,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 
 | Field | Value |
 | --- | --- |
-| Total records | 282 |
-| Validated | 230 |
+| Total records | 283 |
+| Validated | 231 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 282 |
+| Records with evidence | 283 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -89,6 +89,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.disable-low-disk-space-warning` | validated | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `0a8d6ff0ef5c5251f4eb5dd99e44b4ab4dc53c21860f2eee72804da13e5e8ea5` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
 | `explorer.enable-explorer-compact-mode` | validated | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `fb13c872096fce4f3c769c009e924794eba3e1a02573460e41f0a89ade4ac12a` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
+| `explorer.show-compressed-and-encrypted-files-in-color` | validated | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `b976a2e2767ddc7d57d5b0ff72916467281618730287197d707a754e08ea123d` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
 | `explorer.show-file-extensions` | validated | `Docs/tweaks/research/records/explorer.show-file-extensions.review.json` | `af12322b18d3e6ca874953ddaafd59a99d83ffe71b13b83629180227fb179f3e` | `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d` | 1 |
 | `explorer.show-full-path` | validated | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `2297227b86ebf53f96763e33277fea21ea1a58e722300a8706509c75251b6bf5` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
 | `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `66c25954d7b0e7cee6cee01c818c2cc5097b205f991c5a7ba81496753d4910fd` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
@@ -3794,6 +3795,45 @@ Nohuto lineage references:
 | exact_quote_or_path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:0. |
 | key_found_on_page | True |
 | notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |
+### `explorer.show-compressed-and-encrypted-files-in-color`
+
+- Status: `validated`
+- Category: `Explorer`
+- Area: `Observed Explorer Runtime Setting`
+- Scope: `user`
+- Source file: `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json`
+- Source SHA256: `b976a2e2767ddc7d57d5b0ff72916467281618730287197d707a754e08ea123d`
+- Proof SHA256: `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453`
+
+**Summary:** Observed Explorer runtime setting for colored display of compressed and encrypted NTFS files. Microsoft Open Specifications documents ShowCompColor under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowCompColor with both Data:0 and Data:1 after Explorer restart.
+
+**Targets**
+
+- `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowCompColor` / `REG_DWORD`
+  - Notes: This record validates the documented 0/1 semantics against the live Explorer runtime surface on Win25H2Clean.
+  - value | value=0 | label=Do not color compressed and encrypted files | meaning=Explorer does not use the special color cue for compressed and encrypted NTFS files. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.
+  - value | value=1 | label=Color compressed and encrypted files | meaning=Explorer uses the special color cue for compressed and encrypted NTFS files. Microsoft documents 1 as the enabled state, the 25H2 default hive exports ShowCompColor = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-showcompcolor` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showCompColor | `high` |
+| `dump-hkcu25h2-explorer-advanced-showcompcolor` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowCompColor | `medium` |
+| `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | `high` |
+
+**Provenance**
+
+_No provenance block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | C:\\Tools\\Perf\\Procmon\\showcompcolor-result.txt |
+| exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor ... Data: 1; RESTORED_VALUE=1 |
+| key_found_on_page | True |
+| notes | The guest-local result file was also copied to a host scratch location during validation for review. |
 ### `explorer.show-file-extensions`
 
 - Status: `validated`

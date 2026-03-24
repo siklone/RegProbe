@@ -7,11 +7,11 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 
 | Field | Value |
 | --- | --- |
-| Total records | 281 |
-| Validated | 229 |
+| Total records | 282 |
+| Validated | 230 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 281 |
+| Records with evidence | 282 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -23,7 +23,7 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Audio | 5 |
 | Cleanup | 1 |
 | Developer | 13 |
-| Explorer | 9 |
+| Explorer | 10 |
 | Network | 29 |
 | Notifications | 5 |
 | Performance | 3 |
@@ -1744,6 +1744,83 @@ Nohuto lineage references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the Hidden semantics used by Explorer: 1 shows hidden items and 2 hides them. The app writes the runtime show-hidden state. This is a low-risk user-scope Explorer preference, but it is best suited to advanced users. |
+
+---
+
+### `explorer.show-info-tips`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Category | `Explorer` |
+| Area | `Observed Explorer Runtime Setting` |
+| Scope | `user` |
+| Source file | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Observed Explorer runtime setting for folder and desktop item info tips. Microsoft Open Specifications documents ShowInfoTip under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowInfoTip with both Data:0 and Data:1 after Explorer restart.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `n/a` |
+| Notes | The app does not currently expose ShowInfoTip. |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
+  - explorer-showinfotip-flag: value `1` — HKCU25H2.reg exports ShowInfoTip = 1 in the default Explorer\Advanced block.
+
+**Recommended profiles**
+
+- `show-explorer-info-tips`: Show Explorer info tips (apply_allowed=True)
+- `hide-explorer-info-tips`: Hide Explorer info tips (apply_allowed=True)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-showinfotip` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showInfoTip | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
+| `dump-hkcu25h2-explorer-advanced-showinfotip` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowInfoTip | Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg | `medium` | path, value, version-scope |
+| `procmon-showinfotip-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowInfoTip runtime surface | H:\Temp\vm-tooling-staging\showinfotip-result.txt | `high` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\showinfotip-result.txt |
+| Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowInfoTip ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowInfoTip ... Data: 1; RESTORED_VALUE=1 |
+| Key found on page | `True` |
+| Notes | Raw hit exports were also copied to H:\Temp\vm-tooling-staging\showinfotip-0-hits.csv and H:\Temp\vm-tooling-staging\showinfotip-1-hits.csv. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft documents the 0/1 semantics, the 25H2 default hive corroborates the current default state, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference. |
 
 ---
 

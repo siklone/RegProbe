@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T04:36:36.532180Z",
+  "generated_utc": "2026-03-24T04:44:43.465916Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
-    "total_records": 282,
-    "validated": 230,
+    "total_records": 283,
+    "validated": 231,
     "deprecated": 52,
     "review_required": 0,
-    "records_with_evidence": 282,
+    "records_with_evidence": 283,
     "records_without_evidence": 0,
     "records_missing_validation_proof": 0,
     "deprecated_missing_validation_proof": 0,
-    "records_with_source_hashes": 282,
+    "records_with_source_hashes": 283,
     "records_without_source_hashes": 0
   },
   "records": [
@@ -16227,6 +16227,199 @@
         "windows_internals_references": [],
         "other_references": []
       }
+    },
+    {
+      "record_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "record_status": "validated",
+      "source_file": "Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json",
+      "source_file_sha256": "b976a2e2767ddc7d57d5b0ff72916467281618730287197d707a754e08ea123d",
+      "source_file_size_bytes": 9941,
+      "name": "Show Compressed and Encrypted Files in Color",
+      "category": "Explorer",
+      "area": "Observed Explorer Runtime Setting",
+      "scope": "user",
+      "summary": "Observed Explorer runtime setting for colored display of compressed and encrypted NTFS files. Microsoft Open Specifications documents ShowCompColor under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor with both Data:0 and Data:1 after Explorer restart.",
+      "decision": {
+        "confidence": "high",
+        "apply_allowed": true,
+        "recommended_for_general_users": true,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "Microsoft documents the 0/1 semantics, the 25H2 default hive corroborates the current default state, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference.",
+        "blocking_issues": []
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "n/a",
+        "notes": "The app does not currently expose ShowCompColor.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "explorer-showcompcolor-flag",
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "ShowCompColor",
+          "value_type": "REG_DWORD",
+          "notes": "This record validates the documented 0/1 semantics against the live Explorer runtime surface on Win25H2Clean.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "Do not color compressed and encrypted files",
+              "meaning": "Explorer does not use the special color cue for compressed and encrypted NTFS files. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "evidence_ids": [
+                "ms-gppref-global-folder-options-vista-showcompcolor",
+                "procmon-showcompcolor-runtime"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 1,
+              "label": "Color compressed and encrypted files",
+              "meaning": "Explorer uses the special color cue for compressed and encrypted NTFS files. Microsoft documents 1 as the enabled state, the 25H2 default hive exports ShowCompColor = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "evidence_ids": [
+                "ms-gppref-global-folder-options-vista-showcompcolor",
+                "dump-hkcu25h2-explorer-advanced-showcompcolor",
+                "procmon-showcompcolor-runtime"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "25H2 default Explorer preference",
+          "applies_to": "Current-user Explorer Advanced settings on the 25H2 default hive snapshot",
+          "states": [
+            {
+              "target_id": "explorer-showcompcolor-flag",
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "HKCU25H2.reg exports ShowCompColor = 1 in the default Explorer\\Advanced block."
+            }
+          ],
+          "evidence_ids": [
+            "dump-hkcu25h2-explorer-advanced-showcompcolor"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "color-compressed-and-encrypted-files",
+          "label": "Color compressed and encrypted files",
+          "intended_for": [
+            "Users who want compressed or encrypted NTFS items to stand out"
+          ],
+          "avoid_for": [
+            "Users who prefer a uniform Explorer UI"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-showcompcolor-flag",
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "This matches the documented enabled state and the 25H2 default-hive export."
+            }
+          ],
+          "good_when": "You want visual color cues for compressed or encrypted NTFS items.",
+          "bad_when": "You prefer a flatter Explorer presentation without special filename colors.",
+          "tradeoffs": [
+            "Adds visual cues for compressed and encrypted NTFS items.",
+            "Can make filename colors less uniform."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-gppref-global-folder-options-vista-showcompcolor",
+            "dump-hkcu25h2-explorer-advanced-showcompcolor",
+            "procmon-showcompcolor-runtime"
+          ]
+        },
+        {
+          "profile_id": "do-not-color-compressed-and-encrypted-files",
+          "label": "Do not color compressed and encrypted files",
+          "intended_for": [
+            "Users who prefer a uniform Explorer UI"
+          ],
+          "avoid_for": [
+            "Users who rely on color cues for NTFS item state"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-showcompcolor-flag",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "This matches the documented disabled state and the runtime-observed Explorer read."
+            }
+          ],
+          "good_when": "You want Explorer filenames to stay visually uniform.",
+          "bad_when": "You use color cues to spot compressed or encrypted NTFS items.",
+          "tradeoffs": [
+            "Removes the special filename color cue.",
+            "Keeps Explorer visually simpler."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-gppref-global-folder-options-vista-showcompcolor",
+            "procmon-showcompcolor-runtime"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ms-gppref-global-folder-options-vista-showcompcolor",
+          "kind": "official-doc",
+          "title": "Microsoft Open Specifications: GlobalFolderOptionsVista showCompColor",
+          "location": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+          "summary": "Microsoft maps showCompColor to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor and states that it MUST be 1 to enable or 0 to disable. The description says the option displays compressed and encrypted NTFS files in color.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "dump-hkcu25h2-explorer-advanced-showcompcolor",
+          "kind": "raw-registry-dump",
+          "title": "25H2 default hive corroboration for ShowCompColor",
+          "location": "Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg",
+          "summary": "The 25H2 default hive exports ShowCompColor = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "procmon-showcompcolor-runtime",
+          "kind": "procmon-trace",
+          "title": "Procmon capture - Explorer ShowCompColor runtime surface",
+          "location": "C:\\Tools\\Perf\\Procmon\\showcompcolor-result.txt",
+          "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowCompColor = 0 and ShowCompColor = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor with matching Data: 0 and Data: 1 values.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
+        }
+      ],
+      "validation_proof": {
+        "source_url": "C:\\Tools\\Perf\\Procmon\\showcompcolor-result.txt",
+        "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor ... Data: 1; RESTORED_VALUE=1",
+        "key_found_on_page": true,
+        "notes": "The guest-local result file was also copied to a host scratch location during validation for review."
+      },
+      "validation_proof_sha256": "436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453",
+      "provenance": null
     },
     {
       "record_id": "explorer.show-file-extensions",
