@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T04:51:37.843243Z",
+  "generated_utc": "2026-03-24T05:02:31.089596Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
-    "total_records": 284,
-    "validated": 232,
+    "total_records": 285,
+    "validated": 233,
     "deprecated": 52,
     "review_required": 0,
-    "records_with_evidence": 284,
+    "records_with_evidence": 285,
     "records_without_evidence": 0,
     "records_missing_validation_proof": 0,
     "deprecated_missing_validation_proof": 0,
-    "records_with_source_hashes": 284,
+    "records_with_source_hashes": 285,
     "records_without_source_hashes": 0
   },
   "records": [
@@ -16614,6 +16614,184 @@
         "notes": "The guest-local result file was also copied to a host scratch location during validation for review."
       },
       "validation_proof_sha256": "436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453",
+      "provenance": null
+    },
+    {
+      "record_id": "explorer.show-drive-letters-first",
+      "tweak_id": "explorer.show-drive-letters-first",
+      "record_status": "validated",
+      "source_file": "Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json",
+      "source_file_sha256": "8bfa52fedcb995cc8db11a3c4235f7f2a205442dfad8c0c2d799703d755d28a9",
+      "source_file_size_bytes": 9612,
+      "name": "Show Drive Letters First",
+      "category": "Explorer",
+      "area": "Observed Explorer Runtime Setting",
+      "scope": "user",
+      "summary": "Observed Explorer runtime setting for showing drive letters first. Microsoft Open Specifications documents showDriveLetter under Explorer\\ShowDriveLettersFirst with 1 = enable and 0 = disable, the 25H2 raw registry dump lists the same value under both machine and default-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst with both Data:0 and Data:1 after Explorer restart.",
+      "decision": {
+        "confidence": "high",
+        "apply_allowed": true,
+        "recommended_for_general_users": true,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "Microsoft documents the 0/1 semantics, the 25H2 raw registry dump corroborates the value family on current builds, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference.",
+        "blocking_issues": []
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "n/a",
+        "notes": "The app does not currently expose ShowDriveLettersFirst.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "explorer-showdrivelettersfirst-flag",
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+          "value_name": "ShowDriveLettersFirst",
+          "value_type": "REG_DWORD",
+          "notes": "This record validates the documented 0/1 semantics against the live Explorer runtime surface on Win25H2Clean.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "Do not show drive letters first",
+              "meaning": "Explorer does not enable the drive-letter-first presentation. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "evidence_ids": [
+                "ms-gppref-global-folder-options-vista-showdriveletter",
+                "dump-25h2-explorer-showdrivelettersfirst",
+                "procmon-showdrivelettersfirst-runtime"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 1,
+              "label": "Show drive letters first",
+              "meaning": "Explorer enables the drive-letter-first presentation. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "evidence_ids": [
+                "ms-gppref-global-folder-options-vista-showdriveletter",
+                "dump-25h2-explorer-showdrivelettersfirst",
+                "procmon-showdrivelettersfirst-runtime"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [],
+      "recommended_profiles": [
+        {
+          "profile_id": "show-drive-letters-first",
+          "label": "Show drive letters first",
+          "intended_for": [
+            "Users who want drive letters shown more prominently in Explorer"
+          ],
+          "avoid_for": [
+            "Users who prefer the simpler default presentation"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-showdrivelettersfirst-flag",
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "This matches the documented enabled state and the runtime-observed Explorer read."
+            }
+          ],
+          "good_when": "You want Explorer to show drive letters more prominently.",
+          "bad_when": "You prefer not to emphasize drive letters in the Explorer UI.",
+          "tradeoffs": [
+            "Makes drive letters more visible in Explorer.",
+            "Changes the default drive presentation style."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-gppref-global-folder-options-vista-showdriveletter",
+            "dump-25h2-explorer-showdrivelettersfirst",
+            "procmon-showdrivelettersfirst-runtime"
+          ]
+        },
+        {
+          "profile_id": "do-not-show-drive-letters-first",
+          "label": "Do not show drive letters first",
+          "intended_for": [
+            "Users who prefer the simpler Explorer presentation"
+          ],
+          "avoid_for": [
+            "Users who want drive letters emphasized"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-showdrivelettersfirst-flag",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "This matches the documented disabled state and the runtime-observed Explorer read."
+            }
+          ],
+          "good_when": "You want Explorer to avoid the drive-letter-first presentation.",
+          "bad_when": "You rely on prominently visible drive letters.",
+          "tradeoffs": [
+            "Keeps Explorer on the non-drive-letter-first presentation.",
+            "Makes drive letters less prominent."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-gppref-global-folder-options-vista-showdriveletter",
+            "dump-25h2-explorer-showdrivelettersfirst",
+            "procmon-showdrivelettersfirst-runtime"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ms-gppref-global-folder-options-vista-showdriveletter",
+          "kind": "official-doc",
+          "title": "Microsoft Open Specifications: GlobalFolderOptionsVista showDriveLetter",
+          "location": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+          "summary": "Microsoft maps showDriveLetter to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst and states that it MUST be 1 to enable or 0 to disable. The description says the option displays drive letters.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "dump-25h2-explorer-showdrivelettersfirst",
+          "kind": "raw-registry-dump",
+          "title": "25H2 raw registry corroboration for ShowDriveLettersFirst",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+          "summary": "The 25H2 raw registry dump lists ShowDriveLettersFirst under the machine Explorer branch and under the default-user Explorer branch, corroborating that the value family is still present on current builds.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "procmon-showdrivelettersfirst-runtime",
+          "kind": "procmon-trace",
+          "title": "Procmon capture - Explorer ShowDriveLettersFirst runtime surface",
+          "location": "H:\\Temp\\vm-tooling-staging\\showdrivelettersfirst-result.txt",
+          "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowDriveLettersFirst = 0 and ShowDriveLettersFirst = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst with matching Data: 0 and Data: 1 values.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
+        }
+      ],
+      "validation_proof": {
+        "source_url": "H:\\Temp\\vm-tooling-staging\\showdrivelettersfirst-result.txt",
+        "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst ... Data: 1; RESTORED_EXISTS=False",
+        "key_found_on_page": true,
+        "notes": "The guest-local result file was copied back to the host scratch area during validation. Baseline absence was restored after the probe."
+      },
+      "validation_proof_sha256": "3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10",
       "provenance": null
     },
     {

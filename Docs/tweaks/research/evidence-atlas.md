@@ -7,11 +7,11 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 
 | Field | Value |
 | --- | --- |
-| Total records | 283 |
-| Validated | 231 |
+| Total records | 284 |
+| Validated | 232 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 283 |
+| Records with evidence | 284 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -23,7 +23,7 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Audio | 5 |
 | Cleanup | 1 |
 | Developer | 13 |
-| Explorer | 11 |
+| Explorer | 12 |
 | Network | 29 |
 | Notifications | 5 |
 | Performance | 3 |
@@ -1471,6 +1471,83 @@ Nohuto lineage references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | UseCompactMode is now validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build. The remaining limitation is documentation quality: this is runtime-observed rather than Microsoft-documented. |
+
+---
+
+### `explorer.launch-folder-windows-in-a-separate-process`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Category | `Explorer` |
+| Area | `Observed Explorer Runtime Setting` |
+| Scope | `user` |
+| Source file | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Observed Explorer runtime setting for launching folder windows in a separate process. Microsoft Open Specifications documents SeparateProcess under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 0, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\SeparateProcess with both Data:0 and Data:1 after Explorer restart.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `n/a` |
+| Notes | The app does not currently expose SeparateProcess. |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
+  - explorer-separateprocess-flag: value `0` — HKCU25H2.reg exports SeparateProcess = 0 in the default Explorer\Advanced block.
+
+**Recommended profiles**
+
+- `default-shared-explorer-process`: Default shared Explorer process model (apply_allowed=True)
+- `separate-explorer-processes`: Separate Explorer processes (apply_allowed=True)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-separateprocess` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista separateProcess | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
+| `dump-hkcu25h2-explorer-advanced-separateprocess` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for SeparateProcess | Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg | `medium` | path, value, version-scope |
+| `procmon-separateprocess-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer SeparateProcess runtime surface | H:\Temp\vm-tooling-staging\separateprocess-result.txt | `high` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\separateprocess-result.txt |
+| Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\SeparateProcess ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\SeparateProcess ... Data: 1; RESTORED_VALUE=0 |
+| Key found on page | `True` |
+| Notes | The result file was copied back to the host workspace during validation. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft documents the 0/1 semantics, the 25H2 default hive corroborates the current default state, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference, but it is more of an advanced stability/troubleshooting toggle than a general-user tweak. |
 
 ---
 

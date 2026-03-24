@@ -8,11 +8,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 
 | Field | Value |
 | --- | --- |
-| Total records | 284 |
-| Validated | 232 |
+| Total records | 285 |
+| Validated | 233 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 284 |
+| Records with evidence | 285 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -91,6 +91,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.enable-explorer-compact-mode` | validated | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `fb13c872096fce4f3c769c009e924794eba3e1a02573460e41f0a89ade4ac12a` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
 | `explorer.launch-folder-windows-in-a-separate-process` | validated | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `0b9f99f5eae8811b2493069bc7f36bfd4ff3f4ae8c118e33ff8782d051ba1e59` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
 | `explorer.show-compressed-and-encrypted-files-in-color` | validated | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `b976a2e2767ddc7d57d5b0ff72916467281618730287197d707a754e08ea123d` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
+| `explorer.show-drive-letters-first` | validated | `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json` | `8bfa52fedcb995cc8db11a3c4235f7f2a205442dfad8c0c2d799703d755d28a9` | `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10` | 1 |
 | `explorer.show-file-extensions` | validated | `Docs/tweaks/research/records/explorer.show-file-extensions.review.json` | `af12322b18d3e6ca874953ddaafd59a99d83ffe71b13b83629180227fb179f3e` | `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d` | 1 |
 | `explorer.show-full-path` | validated | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `2297227b86ebf53f96763e33277fea21ea1a58e722300a8706509c75251b6bf5` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
 | `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `66c25954d7b0e7cee6cee01c818c2cc5097b205f991c5a7ba81496753d4910fd` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
@@ -3874,6 +3875,45 @@ _No provenance block present._
 | exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor ... Data: 1; RESTORED_VALUE=1 |
 | key_found_on_page | True |
 | notes | The guest-local result file was also copied to a host scratch location during validation for review. |
+### `explorer.show-drive-letters-first`
+
+- Status: `validated`
+- Category: `Explorer`
+- Area: `Observed Explorer Runtime Setting`
+- Scope: `user`
+- Source file: `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json`
+- Source SHA256: `8bfa52fedcb995cc8db11a3c4235f7f2a205442dfad8c0c2d799703d755d28a9`
+- Proof SHA256: `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10`
+
+**Summary:** Observed Explorer runtime setting for showing drive letters first. Microsoft Open Specifications documents showDriveLetter under Explorer\ShowDriveLettersFirst with 1 = enable and 0 = disable, the 25H2 raw registry dump lists the same value under both machine and default-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowDriveLettersFirst with both Data:0 and Data:1 after Explorer restart.
+
+**Targets**
+
+- `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer` / `ShowDriveLettersFirst` / `REG_DWORD`
+  - Notes: This record validates the documented 0/1 semantics against the live Explorer runtime surface on Win25H2Clean.
+  - value | value=0 | label=Do not show drive letters first | meaning=Explorer does not enable the drive-letter-first presentation. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.
+  - value | value=1 | label=Show drive letters first | meaning=Explorer enables the drive-letter-first presentation. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-showdriveletter` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showDriveLetter | `high` |
+| `dump-25h2-explorer-showdrivelettersfirst` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowDriveLettersFirst | `medium` |
+| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | `high` |
+
+**Provenance**
+
+_No provenance block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\showdrivelettersfirst-result.txt |
+| exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst ... Data: 1; RESTORED_EXISTS=False |
+| key_found_on_page | True |
+| notes | The guest-local result file was copied back to the host scratch area during validation. Baseline absence was restored after the probe. |
 ### `explorer.show-file-extensions`
 
 - Status: `validated`
