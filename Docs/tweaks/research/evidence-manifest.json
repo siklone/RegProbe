@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T06:30:08.496397Z",
+  "generated_utc": "2026-03-24T08:46:28.827696Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 290,
@@ -10399,13 +10399,13 @@
       "tweak_id": "system.kernel-ideal-dpc-rate",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json",
-      "source_file_sha256": "0df4c834a95038ad946861742a59b5d594c65badea7eee2d3943cbf5ad0f6eef",
-      "source_file_size_bytes": 14917,
+      "source_file_sha256": "347e1247d53b76d238429f3c7f8708b2a6375173bb8b1a6788cbd185d2820b11",
+      "source_file_size_bytes": 16494,
       "name": "Ideal DPC Rate",
       "category": "System",
       "area": "Kernel / DPC Scheduling",
       "scope": "device",
-      "summary": "Deprecated audit trail for IdealDpcRate. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\IdealDpcRate = 20, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+      "summary": "Deprecated audit trail for IdealDpcRate. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\IdealDpcRate = 20, and the mirror plus decompiled kernel query path now expose the backing KiIdealDpcRate variable even though this research pass still did not capture a primary Microsoft source for the exact registry key and value semantics.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -10413,7 +10413,7 @@
         "restore_default_supported": false,
         "restore_previous_supported": false,
         "needs_vm_validation": false,
-        "why": "The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for IdealDpcRate.",
+        "why": "The current semantics come from repo research notes plus mirrored kernel pseudocode that exposes KiIdealDpcRate, but this research pass still did not capture a primary Microsoft source for IdealDpcRate.",
         "blocking_issues": [
           "No primary Microsoft source for IdealDpcRate was captured in this research pass.",
           "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
@@ -10448,6 +10448,7 @@
               "label": "Primary Microsoft mapping not captured",
               "meaning": "This research pass did not capture a primary Microsoft source for the exact IdealDpcRate registry semantics.",
               "evidence_ids": [
+                "nohuto-ideal-dpc-rate-ghidra",
                 "repo-system-doc-kernel"
               ]
             },
@@ -10457,6 +10458,7 @@
               "label": "Observed app profile",
               "meaning": "The current app treats 20 as the default DPC rate target, based on repo research rather than a captured primary Microsoft source.",
               "evidence_ids": [
+                "nohuto-ideal-dpc-rate-ghidra",
                 "repo-system-doc-kernel",
                 "app-system-registry-provider"
               ]
@@ -10546,6 +10548,20 @@
       ],
       "evidence": [
         {
+          "evidence_id": "nohuto-ideal-dpc-rate-ghidra",
+          "kind": "decompilation",
+          "title": "nohuto mirror: ideal DPC rate query path",
+          "location": "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c; Docs/tweaks/_source-mirrors/win-config/system/desc.md",
+          "summary": "The decompiled kernel query path copies KiIdealDpcRate into the system-information buffer, and the mirror docs record the matching IdealDpcRate = 20 mapping.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Ghidra decompilation"
+        },
+        {
           "evidence_id": "repo-system-doc-kernel",
           "kind": "repo-doc",
           "title": "Repo system research notes for kernel registry values",
@@ -10579,9 +10595,9 @@
         "source_url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
         "exact_quote_or_path": "*(_DWORD *)(a4 + 16) = KiIdealDpcRate;",
         "key_found_on_page": true,
-        "notes": "Kernel ideal DPC rate audit trail. The decompiled path exposes the kernel variable directly."
+        "notes": "Kernel ideal DPC rate audit trail. The mirrored docs record IdealDpcRate = 20, and the decompiled path exposes the KiIdealDpcRate kernel variable directly."
       },
-      "validation_proof_sha256": "e0e9a3b89fd3402e74e01bd31bf48ac1739f3196098be2c69e2db1dbdf8405a9",
+      "validation_proof_sha256": "4cb385e6c43a5d3b92e6c1d9fbfd5fafd56e6c40cc1c9d59099d180c3a091f8c",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

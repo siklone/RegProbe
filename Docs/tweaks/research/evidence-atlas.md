@@ -7,11 +7,11 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 
 | Field | Value |
 | --- | --- |
-| Total records | 289 |
-| Validated | 237 |
+| Total records | 290 |
+| Validated | 238 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 289 |
+| Records with evidence | 290 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -23,7 +23,7 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Audio | 5 |
 | Cleanup | 1 |
 | Developer | 13 |
-| Explorer | 17 |
+| Explorer | 18 |
 | Network | 29 |
 | Notifications | 5 |
 | Performance | 3 |
@@ -1550,6 +1550,78 @@ Nohuto lineage references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | UseCompactMode is now validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build, and the 25H2 raw registry dump corroborates that the value family is still present on current builds. The remaining limitation is documentation quality: this is runtime-observed rather than Microsoft-documented. |
+
+---
+
+### `explorer.hide-empty-drives`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Category | `Explorer` |
+| Area | `Observed Explorer Runtime Setting` |
+| Scope | `user` |
+| Source file | `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json` |
+| Apply allowed | `True` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\Advanced branch, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `n/a` |
+| Notes | The app does not currently expose HideDrivesWithNoMedia. |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Recommended profiles**
+
+- `hide-empty-drives`: Hide empty drives (apply_allowed=True)
+- `show-empty-drives`: Show empty drives (apply_allowed=True)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `medium` | behavior, version-scope |
+| `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
+| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | H:\Temp\vm-tooling-staging\hideemptydrives-result.txt | `high` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\hideemptydrives-result.txt |
+| Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideDrivesWithNoMedia ... Data: 1; RESTORED_EXISTS=False |
+| Key found on page | `True` |
+| Notes | The guest-local result file was copied back to the host scratch area during validation. The baseline value was absent and was restored to the absent state after the probe. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The 25H2 dump corroborates the HideDrivesWithNoMedia value family, Microsoft Learn describes the feature, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference, but the direct first-party registry contract is weaker than ADMX-grade settings. |
 
 ---
 
