@@ -50,6 +50,9 @@
 
             <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
             <converters:WindowHeightConverter x:Key="WindowHeightConverter"/>
+            <Style TargetType="Image">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </Style>
 
             <Style x:Key="HardwareDetailShellCardStyle"
                    TargetType="Border"

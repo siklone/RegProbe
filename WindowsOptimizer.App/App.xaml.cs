@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using WindowsOptimizer.App.Diagnostics;
-using WindowsOptimizer.App.HardwareDb;
 using WindowsOptimizer.App.Services;
 using WindowsOptimizer.App.Services.Hardware;
 using WindowsOptimizer.App.Services.OsDetection;
@@ -127,35 +126,21 @@ public partial class App : Application
     {
         var preloader = new PreloadManager(progress);
         RegisterCorePreloadTasks(preloader);
-        preloader.RegisterTask("Load hardware knowledge", async ct =>
-        {
-            await HardwareDbLoader.LoadAllAsync(ct);
-        }, isCritical: true, priority: 90);
         return preloader;
     }
 
     private static PreloadManager CreateDeferredPreloader()
     {
         var preloader = new PreloadManager(new Progress<PreloadProgress>(_ => { }));
-        preloader.RegisterTask("Hardware database", async ct =>
+        preloader.RegisterTask("Warm hardware details store", async ct =>
         {
             await HardwareDatabase.InitializeAsync(ct);
-            if (HardwareDatabase.TryGetInstance(out var database) && database != null)
-            {
-                await database.CheckForUpdatesAsync(ct);
-            }
         }, isCritical: false, priority: 90);
 
         preloader.RegisterTask("Start hardware metric cache", async ct =>
         {
             await HardwarePreloadService.Instance.PreloadAsync(ct);
         }, isCritical: false, priority: 70);
-
-        preloader.RegisterTask("Warm hardware icon cache", _ =>
-        {
-            HardwareIconResolver.PreloadIcons();
-            return Task.CompletedTask;
-        }, isCritical: false, priority: 69);
 
         preloader.RegisterTask("Parallel hardware preloader", async ct =>
         {

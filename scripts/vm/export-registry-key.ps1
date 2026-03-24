@@ -112,7 +112,7 @@ function Wait-GuestReady {
 function Ensure-VmRunning {
     $running = Invoke-Vmrun -Arguments @('-T', 'ws', 'list')
     if ($running -notmatch [regex]::Escape($VmPath)) {
-        Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath, 'nogui') | Out-Null
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath) | Out-Null
     }
 }
 

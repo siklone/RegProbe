@@ -197,20 +197,12 @@ Admin-required operations are delegated to `WindowsOptimizer.ElevatedHost`, whic
 $env:WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH = "C:\path\to\WindowsOptimizer.ElevatedHost.exe"
 ```
 
-## Optional Generated Assets
-
-Hardware coverage works on two levels:
-
-- built-in rule-based fallbacks
-- optional generated icon / hardware-db inputs for better matching
+## Utility Scripts
 
 Useful scripts:
 
-- `scripts/build_and_download_icon_db.ps1`
 - `scripts/publish_release.ps1`
 - `scripts/clean_build_outputs.ps1`
-
-Files like `HardwareIconDownloadReport.json` are local artifacts, not core source files.
 
 ## Documentation
 

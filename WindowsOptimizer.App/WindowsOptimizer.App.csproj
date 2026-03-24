@@ -33,11 +33,8 @@
 
   <ItemGroup>
     <Resource Include="Resources\Icons\**\*.png" />
-    <Resource Include="Assets\Icons\**\*.png" />
     <Resource Include="Resources\Fonts\*.ttf" />
-    <!-- Hardware DB JSONs are large generated artifacts. They are copied only when present; prefer rule-based matching in source.
-         These files are allowed to be removed during cleanup. -->
-    <Content Include="Assets\HardwareDb\*.json">
+    <Content Include="Assets\HardwareDb\hardware_db_*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Fonts\*-OFL.txt">

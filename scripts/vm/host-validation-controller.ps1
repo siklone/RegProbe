@@ -258,13 +258,13 @@ Write-ControllerFeedback -Kind 'started' -Message "Prepared test '$TestId'."
 
 if ($SnapshotName) {
     Write-ControllerFeedback -Kind 'live' -Message "Reverting snapshot '$SnapshotName'."
-    Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $VmPath, $SnapshotName, 'nogui') | Out-Null
+    Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $VmPath, $SnapshotName) | Out-Null
 }
 
 $running = Invoke-Vmrun -Arguments @('-T', 'ws', 'list') | Out-String
 if ($running -notmatch [regex]::Escape($VmPath)) {
     Write-ControllerFeedback -Kind 'live' -Message 'Starting VM.'
-    Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath, 'nogui') | Out-Null
+    Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath) | Out-Null
 }
 
 $toolsDeadline = (Get-Date).AddMinutes(5)

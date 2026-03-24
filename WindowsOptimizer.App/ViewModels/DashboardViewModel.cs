@@ -799,7 +799,6 @@ public sealed class DashboardViewModel : ViewModelBase
         HardwareDetailSnapshot? snapshot = null;
         try
         {
-            await HardwareDbLoader.LoadAllAsync(CancellationToken.None);
             await HardwarePreloadService.Instance.PreloadAsync(CancellationToken.None);
             snapshot = HardwarePreloadService.Instance.GetSnapshot();
 

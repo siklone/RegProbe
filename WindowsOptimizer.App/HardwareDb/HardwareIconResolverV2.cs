@@ -148,16 +148,37 @@ public static class HardwareIconResolverV2
 
     private static ImageSource CreateImage(string fileKey)
     {
-        var uriText = BuildCandidateUris(fileKey).FirstOrDefault(ResourceExists)
-            ?? P($"Assets/Icons/{ResolveExistingFileKey(fileKey, "cpu_default")}.png");
-        var uri = new Uri(uriText, UriKind.Absolute);
-        var image = new BitmapImage();
-        image.BeginInit();
-        image.UriSource = uri;
-        image.CacheOption = BitmapCacheOption.OnLoad;
-        image.EndInit();
-        image.Freeze();
-        return image;
+        var uriText = BuildCandidateUris(fileKey).FirstOrDefault(ResourceExists);
+        if (string.IsNullOrWhiteSpace(uriText))
+        {
+            return CreateFallbackImage();
+        }
+
+        try
+        {
+            var uri = new Uri(uriText, UriKind.Absolute);
+            var image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = uri;
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.EndInit();
+            image.Freeze();
+            return image;
+        }
+        catch
+        {
+            return CreateFallbackImage();
+        }
+    }
+
+    private static ImageSource CreateFallbackImage()
+    {
+        var fallback = new DrawingImage(new GeometryDrawing(
+            Brushes.Transparent,
+            null,
+            Geometry.Empty));
+        fallback.Freeze();
+        return fallback;
     }
 
     private static string ResolveExistingFileKey(string? iconKey, string fallbackKey)
