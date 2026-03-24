@@ -8,16 +8,16 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 
 | Field | Value |
 | --- | --- |
-| Total records | 293 |
-| Validated | 241 |
+| Total records | 294 |
+| Validated | 242 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 293 |
+| Records with evidence | 294 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | A count | 174 |
-| B count | 59 |
+| B count | 60 |
 | D count | 8 |
 | E count | 52 |
 
@@ -240,6 +240,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.enable-defender-maps-advanced-membership` | validated | Class B | `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json` | `09647ad8584f7b7829d1431fcac330a07204b0a27cd719d2b510e8aa891ee1da` | `42cc4c40a3161dc76cf3730b1397c4402aa66ae5e625a4ff85962df616ee1324` | 1 |
 | `security.enable-dynamic-lock` | validated | Class A | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `ed4ac310ae9d2b5e6e3d53e642cbcd4ab7700097aa1981b8ede4089a23f9854e` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
 | `security.enable-sudo` | validated | Class B | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
+| `security.hide-defender-exclusions-from-local-admins` | validated | Class B | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `161b076ebd71e3b0361651f60a86766c4f07bbab4813b137508de5e55de26cfe` | `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891` | 1 |
 | `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
 | `security.trusted-path-credential-prompting` | validated | Class B | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
 | `security.uac-never-notify` | validated | Class B | `Docs/tweaks/research/records/security.uac-never-notify.json` | `c39a26d1490d55dd6e56b7be9b2ed61dbfd99ddfa553e82be7ea68669011ec2b` | `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f` | 3 |
@@ -13874,6 +13875,61 @@ Windows Internals references:
 | exact_quote_or_path | <policy name="EnableSudo" class="Machine" ... key="Software\\Policies\\Microsoft\\Windows\\Sudo"> ... <enum id="SudoModes" valueName="Enabled"> ... <decimal value="0" /> ... <decimal value="1" /> ... <decimal value="2" /> ... <decimal value="3" />; Sudo.adml: "Normal": When sudo launches a command line application, it will launch the app in the current console window. |
 | key_found_on_page | True |
 | notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, and enumerates modes 0 through 3. The paired ADML help text explains that value 3 is the Normal mode, matching the app's current write. |
+### `security.hide-defender-exclusions-from-local-admins`
+
+- Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
+- Category: `Security`
+- Area: `Microsoft Defender exclusions visibility`
+- Scope: `device`
+- Source file: `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json`
+- Source SHA256: `161b076ebd71e3b0361651f60a86766c4f07bbab4813b137508de5e55de26cfe`
+- Proof SHA256: `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891`
+
+**Summary:** Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when either the root policy path or the Policy Manager alias was set to 1.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
+**Targets**
+
+- `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender` / `HideExclusionsFromLocalAdmins` / `REG_DWORD`
+  - Notes: The official path is the root Defender policy key. Win25H2Clean also honored a Policy Manager alias with the same value name, so this record stays gated until that dual-surface behavior is modeled more cleanly.
+  - missing | label=Not configured | meaning=Leave the policy unset so local admins can view managed exclusions.
+  - value | value=0 | label=Exclusions visible to local admins | meaning=The policy is disabled and local admins can inspect managed exclusions through the usual Defender surfaces.
+  - value | value=1 | label=Hide managed exclusions from local admins | meaning=Managed exclusions stay on the policy exclusions branch, but Get-MpPreference hides them from local admin views.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-defender-hide-exclusions-from-local-admins` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Defender CSP HideExclusionsFromLocalAdmins | `high` |
+| `ms-defender-exclusions-visibility-note` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure exclusions in Defender Antivirus | `high` |
+| `repo-defender-hide-exclusions-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins | `medium` |
+| `vm-defender-hide-exclusions-baseline-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean baseline visibility with managed exclusion present | `high` |
+| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | `high` |
+| `vm-defender-hide-exclusions-root-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | `high` |
+| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | `high` |
+| `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | `Current repo code` | Current security provider HideExclusionsFromLocalAdmins write | `high` |
+
+**Sources**
+
+_No source block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\hideexclusions-admins-root-1-20260325-002348\\hideexclusions-admins-root-1.txt |
+| exact_quote_or_path | wmiprvse.exe \| RegQueryValue \| HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
+| key_found_on_page | True |
+| notes | The baseline visibility JSON showed the managed exclusion path in Get-MpPreference while both policy values were unset. The root-path state-1 run then hid that exclusion from Get-MpPreference, and a separate Policy Manager run produced the same behavior after reading the alias path instead. |
 ### `security.powershell-unrestricted`
 
 - Status: `validated`

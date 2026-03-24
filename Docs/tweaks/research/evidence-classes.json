@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T20:08:21.133898Z",
+  "generated_utc": "2026-03-24T21:33:26.310053Z",
   "summary": {
-    "total_records": 293,
+    "total_records": 294,
     "class_counts": {
       "A": 174,
-      "B": 59,
+      "B": 60,
       "C": 0,
       "D": 8,
       "E": 52
@@ -13,7 +13,7 @@
     "action_state_counts": {
       "actionable": 174,
       "archived": 52,
-      "research-gated": 67
+      "research-gated": 68
     }
   },
   "classes": {
@@ -13996,6 +13996,79 @@
             "summary": "Matched 2 audit token(s) in win-config."
           }
         ]
+      }
+    },
+    {
+      "record_id": "security.hide-defender-exclusions-from-local-admins",
+      "tweak_id": "security.hide-defender-exclusions-from-local-admins",
+      "record_status": "validated",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Partial",
+      "class_description": "Key and primary values are known, but the record is still gated from one-click apply or has incomplete edge semantics.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "Primary values are understood, but this record is still intentionally gated from one-click apply.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The baseline visibility JSON showed the managed exclusion path in Get-MpPreference while both policy values were unset. The root-path state-1 run then hid that exclusion from Get-MpPreference, and a separate Policy Manager run produced the same behavior aft...",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "H:\\Temp\\vm-tooling-staging\\hideexclusions-admins-root-1-20260325-002348\\hideexclusions-admins-root-1.txt",
+            "kind": "validation-proof",
+            "summary": "wmiprvse.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1"
+          },
+          {
+            "title": "Microsoft Learn: Defender CSP HideExclusionsFromLocalAdmins",
+            "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/defender-csp",
+            "kind": "official-doc",
+            "summary": "Microsoft documents HideExclusionsFromLocalAdmins with 0 or not configured meaning exclusions stay visible to local admins and 1 meaning local admins can no longer view exclusions."
+          },
+          {
+            "title": "Microsoft Learn: Configure exclusions in Defender Antivirus",
+            "url": "https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus",
+            "kind": "official-doc",
+            "summary": "Microsoft notes that HideExclusionsFromLocalAdmins affects whether local admins can view exclusions and that the setting does not remove exclusions from policy storage."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "With both HideExclusionsFromLocalAdmins surfaces unset, a managed exclusion under the policy exclusions branch still appeared in Get-MpPreference and remained present in the managed policy hive.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean baseline visibility with managed exclusion present",
+            "url": "H:\\Temp\\vm-tooling-staging\\hideexclusions-admins-baseline-1-20260325-001524\\hideexclusions-admins-baseline-visibility.json",
+            "kind": "vm-test",
+            "summary": "With both HideExclusionsFromLocalAdmins surfaces unset, a managed exclusion under the policy exclusions branch still appeared in Get-MpPreference and remained present in the man..."
+          },
+          {
+            "title": "Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1",
+            "url": "H:\\Temp\\vm-tooling-staging\\hideexclusions-admins-root-1-20260325-002348\\hideexclusions-admins-root-1.txt",
+            "kind": "procmon-trace",
+            "summary": "After writing HideExclusionsFromLocalAdmins = 1 on the root Defender policy path, wmiprvse.exe and powershell.exe both queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\..."
+          },
+          {
+            "title": "Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1",
+            "url": "H:\\Temp\\vm-tooling-staging\\hideexclusions-admins-root-1-20260325-002348\\hideexclusions-admins-root-1-visibility.json",
+            "kind": "vm-test",
+            "summary": "With the root policy path set to 1, the managed exclusion still existed on the policy exclusions branch, but Get-MpPreference returned 'N/A: Administrators are not allowed to vi..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {

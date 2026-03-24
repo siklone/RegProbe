@@ -105,6 +105,24 @@ These have the best mix of documented semantics and low blast radius.
   - official semantics
   - live runtime proof in the VM
 
+## Completed in this lane
+
+### HideExclusionsFromLocalAdmins
+
+- Official behavior now comes from Microsoft Defender docs.
+- Live 25H2 VM proof now exists for:
+  - root path `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender`
+  - Policy Manager alias `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager`
+- Result:
+  - both paths hide managed exclusions from `Get-MpPreference`
+  - the managed exclusions branch stays populated
+- Current classification:
+  - `Class B`
+  - app-mapped
+  - research-gated
+- Record:
+  - `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json`
+
 ## Not first-pass candidates
 
 Do not start with these:

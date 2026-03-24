@@ -127,6 +127,18 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             2);
 
+        yield return CreateRegistryTweak(
+            context,
+            "security.hide-defender-exclusions-from-local-admins",
+            "Hide Defender Exclusions From Local Admins",
+            "Keeps managed Defender exclusions applied but hides them from local admins in PowerShell and Windows Security.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows Defender",
+            "HideExclusionsFromLocalAdmins",
+            RegistryValueKind.DWord,
+            1);
+
         // System Defense
         // Windows Firewall Configuration
         // Source: Microsoft Defender Firewall Documentation

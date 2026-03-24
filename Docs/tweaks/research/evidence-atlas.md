@@ -7,16 +7,16 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 
 | Field | Value |
 | --- | --- |
-| Total records | 293 |
-| Validated | 241 |
+| Total records | 294 |
+| Validated | 242 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 293 |
+| Records with evidence | 294 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 174 |
-| Class B | 59 |
+| Class B | 60 |
 | Class D | 8 |
 | Class E | 52 |
 
@@ -34,7 +34,7 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Peripheral | 3 |
 | Power | 13 |
 | Privacy | 84 |
-| Security | 22 |
+| Security | 23 |
 | System | 74 |
 | Visibility | 23 |
 
@@ -16894,6 +16894,104 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | The local Microsoft Sudo policy files explicitly define the policy path HKLM\Software\Policies\Microsoft\Windows\Sudo, the value name Enabled, and enum values 0 through 3. The app writes the documented Normal mode value 3 on that exact machine policy surface. |
+
+---
+
+### `security.hide-defender-exclusions-from-local-admins`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `Security` |
+| Area | `Microsoft Defender exclusions visibility` |
+| Scope | `device` |
+| Source file | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when either the root policy path or the Policy Manager alias was set to 1.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Notes | The app writes HideExclusionsFromLocalAdmins = 1 on the documented root Defender policy path. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `defender-hide-exclusions-from-local-admins` | `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender` | `HideExclusionsFromLocalAdmins` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- Policy unset baseline (Systems where the Defender exclusion-visibility policy is not configured)
+  - defender-hide-exclusions-from-local-admins: missing — — Leave the policy unset so local admins can see managed exclusions.
+
+**Recommended profiles**
+
+- `windows-default`: Windows default (apply_allowed=False)
+- `hide-managed-defender-exclusions`: Hide managed exclusions from local admins (apply_allowed=False)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-defender-hide-exclusions-from-local-admins` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Defender CSP HideExclusionsFromLocalAdmins | https://learn.microsoft.com/en-us/windows/client-management/mdm/defender-csp | `high` | value, allowed-values, behavior |
+| `ms-defender-exclusions-visibility-note` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure exclusions in Defender Antivirus | https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus | `high` | behavior, tradeoff |
+| `repo-defender-hide-exclusions-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins | Docs/security/assets/Windows-Defender.txt | `medium` | path |
+| `vm-defender-hide-exclusions-baseline-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean baseline visibility with managed exclusion present | H:\Temp\vm-tooling-staging\hideexclusions-admins-baseline-1-20260325-001524\hideexclusions-admins-baseline-visibility.json | `high` | default, behavior |
+| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | H:\Temp\vm-tooling-staging\hideexclusions-admins-root-1-20260325-002348\hideexclusions-admins-root-1.txt | `high` | path, value, runtime-read, behavior |
+| `vm-defender-hide-exclusions-root-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | H:\Temp\vm-tooling-staging\hideexclusions-admins-root-1-20260325-002348\hideexclusions-admins-root-1-visibility.json | `high` | value, behavior |
+| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | H:\Temp\vm-tooling-staging\hideexclusions-admins-policymanager-1-20260325-002004\hideexclusions-admins-policymanager-1.txt | `high` | path, value, runtime-read, behavior |
+| `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | `Current repo code` | Current security provider HideExclusionsFromLocalAdmins write | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\hideexclusions-admins-root-1-20260325-002348\hideexclusions-admins-root-1.txt |
+| Exact quote / path | wmiprvse.exe \| RegQueryValue \| HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\HideExclusionsFromLocalAdmins \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
+| Key found on page | `True` |
+| Notes | The baseline visibility JSON showed the managed exclusion path in Get-MpPreference while both policy values were unset. The root-path state-1 run then hid that exclusion from Get-MpPreference, and a separate Policy Manager run produced the same behavior after reading the alias path instead. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft documents the value model clearly, and the Win25H2Clean VM shows both the official root policy path and a Policy Manager alias hiding managed exclusions from Get-MpPreference while the managed exclusions branch stays populated. The record stays gated because current 25H2 builds honor two registry surfaces for the same behavior. |
 
 ---
 
