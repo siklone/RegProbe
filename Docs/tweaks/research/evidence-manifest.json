@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-23T20:03:12.029852Z",
+  "generated_utc": "2026-03-24T04:30:59.609824Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
-    "total_records": 280,
-    "validated": 228,
+    "total_records": 281,
+    "validated": 229,
     "deprecated": 52,
     "review_required": 0,
-    "records_with_evidence": 280,
+    "records_with_evidence": 281,
     "records_without_evidence": 0,
     "records_missing_validation_proof": 0,
     "deprecated_missing_validation_proof": 0,
-    "records_with_source_hashes": 280,
+    "records_with_source_hashes": 281,
     "records_without_source_hashes": 0
   },
   "records": [
@@ -16942,6 +16942,202 @@
         "windows_internals_references": [],
         "other_references": []
       }
+    },
+    {
+      "record_id": "explorer.show-protected-operating-system-files",
+      "tweak_id": "explorer.show-protected-operating-system-files",
+      "record_status": "validated",
+      "source_file": "Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json",
+      "source_file_sha256": "187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9",
+      "source_file_size_bytes": 10796,
+      "name": "Show Protected Operating System Files",
+      "category": "Explorer",
+      "area": "Observed Explorer Runtime Setting",
+      "scope": "user",
+      "summary": "Observed Explorer runtime setting for protected operating system file visibility. Microsoft Open Specifications documents ShowSuperHidden under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 dump/default hive shows the same value on current builds, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden with both Data:0 and Data:1 after Explorer restart.",
+      "decision": {
+        "confidence": "high",
+        "apply_allowed": true,
+        "recommended_for_general_users": false,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "Microsoft documents the numeric semantics, the 25H2 dump corroborates the current surface and default value, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both 0 and 1 on this build. The setting is still best reserved for advanced users because it exposes protected operating system files.",
+        "blocking_issues": []
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "n/a",
+        "notes": "The app does not currently expose ShowSuperHidden.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "explorer-showsuperhidden-flag",
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "ShowSuperHidden",
+          "value_type": "REG_DWORD",
+          "notes": "This record validates the documented numeric semantics with current 25H2 dump corroboration and a live Explorer runtime trace.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "Hide protected operating system files",
+              "meaning": "Protected operating system files stay hidden. Microsoft documents 0 as the disabled state, the 25H2 default hive exports ShowSuperHidden = 0, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "evidence_ids": [
+                "ms-gppref-global-folder-options-vista-showsuperhidden",
+                "dump-hkcu25h2-explorer-advanced-showsuperhidden",
+                "procmon-showsuperhidden-runtime"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 1,
+              "label": "Show protected operating system files",
+              "meaning": "Protected operating system files become visible. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "evidence_ids": [
+                "ms-gppref-global-folder-options-vista-showsuperhidden",
+                "procmon-showsuperhidden-runtime"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "25H2 default Explorer preference",
+          "applies_to": "Current-user Explorer Advanced settings on the 25H2 default hive snapshot",
+          "states": [
+            {
+              "target_id": "explorer-showsuperhidden-flag",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "HKCU25H2.reg exports ShowSuperHidden = 0 in the default Explorer\\Advanced block."
+            }
+          ],
+          "evidence_ids": [
+            "dump-hkcu25h2-explorer-advanced-showsuperhidden"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "hide-protected-operating-system-files",
+          "label": "Hide protected operating system files",
+          "intended_for": [
+            "General users",
+            "Systems that should keep Explorer on the safer default"
+          ],
+          "avoid_for": [
+            "Advanced troubleshooting sessions that require direct system-file visibility"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-showsuperhidden-flag",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "This matches the documented disabled state and the 25H2 default-hive export."
+            }
+          ],
+          "good_when": "You want Explorer to keep protected operating system files hidden.",
+          "bad_when": "You need to inspect protected operating system files directly.",
+          "tradeoffs": [
+            "Keeps the safer Explorer presentation.",
+            "Reduces the chance of accidental edits to protected files."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-gppref-global-folder-options-vista-showsuperhidden",
+            "dump-hkcu25h2-explorer-advanced-showsuperhidden",
+            "procmon-showsuperhidden-runtime"
+          ]
+        },
+        {
+          "profile_id": "show-protected-operating-system-files",
+          "label": "Show protected operating system files",
+          "intended_for": [
+            "Advanced troubleshooting",
+            "Reverse engineering and shell research"
+          ],
+          "avoid_for": [
+            "General users",
+            "Anyone likely to browse system folders casually"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-showsuperhidden-flag",
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "This matches the documented enabled state and the runtime-observed Explorer read."
+            }
+          ],
+          "good_when": "You intentionally need Explorer to reveal protected operating system files.",
+          "bad_when": "You want the safer default Explorer presentation.",
+          "tradeoffs": [
+            "Exposes protected operating system files in Explorer.",
+            "Helps advanced inspection but makes accidental edits easier."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-gppref-global-folder-options-vista-showsuperhidden",
+            "procmon-showsuperhidden-runtime"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ms-gppref-global-folder-options-vista-showsuperhidden",
+          "kind": "official-doc",
+          "title": "Microsoft Open Specifications: GlobalFolderOptionsVista showSuperHidden",
+          "location": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+          "summary": "Microsoft maps showSuperHidden to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden and states that it MUST be 1 to enable or 0 to disable. The description says the option displays protected operating system files.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "dump-25h2-explorer-advanced-showsuperhidden",
+          "kind": "raw-registry-dump",
+          "title": "25H2 dump and default hive corroboration for ShowSuperHidden",
+          "location": "Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg",
+          "summary": "The 25H2 default hive exports ShowSuperHidden = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced, and the raw 25H2 registry traces also list the same value name under the current-user Explorer\\Advanced branch.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "procmon-showsuperhidden-runtime",
+          "kind": "procmon-trace",
+          "title": "Procmon capture - Explorer ShowSuperHidden runtime surface",
+          "location": "H:\\Temp\\vm-tooling-staging\\showsuperhidden-result.txt",
+          "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowSuperHidden = 0 and ShowSuperHidden = 1 with Hidden held at 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden with matching Data: 0 and Data: 1 values.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
+        }
+      ],
+      "validation_proof": {
+        "source_url": "H:\\Temp\\vm-tooling-staging\\showsuperhidden-result.txt",
+        "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1",
+        "key_found_on_page": true,
+        "notes": "Raw hit exports were also copied to H:\\Temp\\vm-tooling-staging\\showsuperhidden-0-hits.csv and H:\\Temp\\vm-tooling-staging\\showsuperhidden-1-hits.csv."
+      },
+      "validation_proof_sha256": "e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b",
+      "provenance": null
     },
     {
       "record_id": "explorer.taskbar-alignment-left",
@@ -60500,7 +60696,7 @@
       "category": "System",
       "area": "Gaming Feature / GameBar Preference",
       "scope": "user",
-      "summary": "The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched a short OCCT benchmark observation window, captured WPR ETLs for both states, and restored the guest baseline after each pass. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.",
+      "summary": "The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched OCCT, captured WPR ETLs and perf samples for both states, and restored the guest baseline after each pass. However, the OCCT UI still displayed its EULA modal and `OCCT.config.json` still reported `EulaVersion = 0`, so the OCCT portion must be treated as launch-and-trace evidence rather than a valid benchmark result. That still validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": true,
@@ -60508,7 +60704,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. A later bounded VM runtime suite exercised both states under OCCT plus WPR and restored the guest baseline after each pass, which strengthens confidence that the toggle can be observed safely even though the short run is not enough to claim a decisive performance gain.",
+        "why": "Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. A later bounded VM runtime suite exercised both states with OCCT launch traces plus WPR and restored the guest baseline after each pass, which strengthens confidence that the toggle can be observed safely. The OCCT EULA remained unaccepted (`EulaVersion = 0`), so the OCCT portion should not be read as a valid benchmark score comparison.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -60690,7 +60886,7 @@
           "kind": "runtime-trace",
           "title": "VM Game Mode OCCT plus WPR observation suite",
           "location": "H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-0-v2.txt, H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-0-v2.perf.csv, H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-0-v2.etl, H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-1-v2.txt, H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-1-v2.perf.csv, H:\\Temp\\vm-tooling-staging\\gamemode-occt-state-1-v2.etl",
-          "summary": "A bounded VM runtime suite toggled AutoGameModeEnabled through states 0 and 1, launched the OCCT benchmark UI, captured WPR ETLs for both runs, sampled CPU, memory, and disk counters for about 24.5 seconds, and restored the guest baseline value of 0 after each pass. The pass confirmed that both states can be exercised and traced safely in the VM, but a single short run per state did not produce a strong performance winner.",
+          "summary": "A bounded VM runtime suite toggled AutoGameModeEnabled through states 0 and 1, launched OCCT, captured WPR ETLs for both runs, sampled CPU, memory, and disk counters for about 24.5 seconds, and restored the guest baseline value of 0 after each pass. The pass confirmed that both states can be exercised and traced safely in the VM. However, the OCCT UI still showed its EULA modal and `OCCT.config.json` still reported `EulaVersion = 0`, so these artifacts should be read as launch-and-trace evidence, not as valid OCCT benchmark scores.",
           "strength": "medium",
           "supports": [
             "behavior",
@@ -60733,9 +60929,9 @@
         "source_url": "H:\\Temp\\vm-tooling-staging\\gamemode_admin_probe.txt",
         "exact_quote_or_path": "gamemode_admin_probe.txt: \"7:52:45.6879293 PM\",\"SystemSettings.exe\",\"5512\",\"RegQueryValue\",\"HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled\",\"SUCCESS\",\"Type: REG_DWORD, Length: 4, Data: 1\". gamemode_admin_zero_probe.txt: \"7:54:41.9130012 PM\",\"SystemSettings.exe\",\"5512\",\"RegQueryValue\",\"HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled\",\"SUCCESS\",\"Type: REG_DWORD, Length: 4, Data: 0\".",
         "key_found_on_page": true,
-        "notes": "The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT plus WPR traces for states 0 and 1 and restored the guest baseline after each pass. Normalized for the consolidated evidence report."
+        "notes": "The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT launch traces plus WPR captures for states 0 and 1 and restored the guest baseline after each pass, but OCCT still showed its EULA modal and kept `EulaVersion = 0`, so those runs must not be interpreted as valid OCCT score benchmarks. Normalized for the consolidated evidence report."
       },
-      "validation_proof_sha256": "3e1243c7bd4c296eb559adae5adea2854502ca8dd8e5329fa247956363001030",
+      "validation_proof_sha256": "002fb0a540e672a6fba9bea881db8af3ede628d5bb7b874b6788f3e988c80641",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

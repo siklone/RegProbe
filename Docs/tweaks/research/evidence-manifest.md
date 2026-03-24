@@ -8,11 +8,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 
 | Field | Value |
 | --- | --- |
-| Total records | 280 |
-| Validated | 228 |
+| Total records | 281 |
+| Validated | 229 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 280 |
+| Records with evidence | 281 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -92,6 +92,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.show-file-extensions` | validated | `Docs/tweaks/research/records/explorer.show-file-extensions.review.json` | `af12322b18d3e6ca874953ddaafd59a99d83ffe71b13b83629180227fb179f3e` | `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d` | 1 |
 | `explorer.show-full-path` | validated | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `2297227b86ebf53f96763e33277fea21ea1a58e722300a8706509c75251b6bf5` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
 | `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `66c25954d7b0e7cee6cee01c818c2cc5097b205f991c5a7ba81496753d4910fd` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
+| `explorer.show-protected-operating-system-files` | validated | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
 | `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `463db3fd6484af4bb255887b5b5c86178b2eb767cdc7df8598b26d77557b671b` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
 | `network.disable-active-probing` | validated | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0` | 1 |
 | `network.disable-default-shares` | validated | `Docs/tweaks/research/records/network.disable-default-shares.json` | `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
@@ -247,7 +248,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.disable-storage-sense-temp-cleanup` | validated | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
 | `system.dwm-disable-overlay-min-fps` | validated | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
-| `system.enable-game-mode` | validated | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `31b37f92d6be9c98019747e412acc213557871d95a1902abd006f109e4b2ff75` | `3e1243c7bd4c296eb559adae5adea2854502ca8dd8e5329fa247956363001030` | 1 |
+| `system.enable-game-mode` | validated | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `31b37f92d6be9c98019747e412acc213557871d95a1902abd006f109e4b2ff75` | `002fb0a540e672a6fba9bea881db8af3ede628d5bb7b874b6788f3e988c80641` | 1 |
 | `system.enable-hags` | validated | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
 | `system.enable-indexing-encrypted-items` | validated | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `bdc09bee78c232ef1bcd5b9ab483aef478a9dd429315fa88206e603628efac84` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
 | `system.graphics-tdr-ddi-delay` | validated | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
@@ -3948,6 +3949,45 @@ Nohuto lineage references:
 | exact_quote_or_path | powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2 |
 | key_found_on_page | True |
 | notes | In the same reversible runtime session, the Explorer UI listed ghost.txt and visible.txt when Hidden = 1, but only visible.txt when Hidden = 2. That resolved the live Explorer semantics for this host. |
+### `explorer.show-protected-operating-system-files`
+
+- Status: `validated`
+- Category: `Explorer`
+- Area: `Observed Explorer Runtime Setting`
+- Scope: `user`
+- Source file: `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json`
+- Source SHA256: `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9`
+- Proof SHA256: `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b`
+
+**Summary:** Observed Explorer runtime setting for protected operating system file visibility. Microsoft Open Specifications documents ShowSuperHidden under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 dump/default hive shows the same value on current builds, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowSuperHidden with both Data:0 and Data:1 after Explorer restart.
+
+**Targets**
+
+- `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowSuperHidden` / `REG_DWORD`
+  - Notes: This record validates the documented numeric semantics with current 25H2 dump corroboration and a live Explorer runtime trace.
+  - value | value=0 | label=Hide protected operating system files | meaning=Protected operating system files stay hidden. Microsoft documents 0 as the disabled state, the 25H2 default hive exports ShowSuperHidden = 0, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.
+  - value | value=1 | label=Show protected operating system files | meaning=Protected operating system files become visible. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-showsuperhidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showSuperHidden | `high` |
+| `dump-25h2-explorer-advanced-showsuperhidden` | `raw-registry-dump` | `unspecified` | 25H2 dump and default hive corroboration for ShowSuperHidden | `medium` |
+| `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | `high` |
+
+**Provenance**
+
+_No provenance block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\showsuperhidden-result.txt |
+| exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1 |
+| key_found_on_page | True |
+| notes | Raw hit exports were also copied to H:\\Temp\\vm-tooling-staging\\showsuperhidden-0-hits.csv and H:\\Temp\\vm-tooling-staging\\showsuperhidden-1-hits.csv. |
 ### `explorer.taskbar-alignment-left`
 
 - Status: `validated`
@@ -12439,9 +12479,9 @@ Windows Internals references:
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.enable-game-mode.review.json`
 - Source SHA256: `31b37f92d6be9c98019747e412acc213557871d95a1902abd006f109e4b2ff75`
-- Proof SHA256: `3e1243c7bd4c296eb559adae5adea2854502ca8dd8e5329fa247956363001030`
+- Proof SHA256: `002fb0a540e672a6fba9bea881db8af3ede628d5bb7b874b6788f3e988c80641`
 
-**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched a short OCCT benchmark observation window, captured WPR ETLs for both states, and restored the guest baseline after each pass. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
+**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched OCCT, captured WPR ETLs and perf samples for both states, and restored the guest baseline after each pass. However, the OCCT UI still displayed its EULA modal and `OCCT.config.json` still reported `EulaVersion = 0`, so the OCCT portion must be treated as launch-and-trace evidence rather than a valid benchmark result. That still validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
 
 **Targets**
 
@@ -12488,7 +12528,7 @@ Windows Internals references:
 | source_url | H:\\Temp\\vm-tooling-staging\\gamemode_admin_probe.txt |
 | exact_quote_or_path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | key_found_on_page | True |
-| notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT plus WPR traces for states 0 and 1 and restored the guest baseline after each pass. Normalized for the consolidated evidence report. |
+| notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT launch traces plus WPR captures for states 0 and 1 and restored the guest baseline after each pass, but OCCT still showed its EULA modal and kept `EulaVersion = 0`, so those runs must not be interpreted as valid OCCT score benchmarks. Normalized for the consolidated evidence report. |
 ### `system.enable-hags`
 
 - Status: `validated`

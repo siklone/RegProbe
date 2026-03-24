@@ -7,11 +7,11 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 
 | Field | Value |
 | --- | --- |
-| Total records | 280 |
-| Validated | 228 |
+| Total records | 281 |
+| Validated | 229 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 280 |
+| Records with evidence | 281 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -23,7 +23,7 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Audio | 5 |
 | Cleanup | 1 |
 | Developer | 13 |
-| Explorer | 8 |
+| Explorer | 9 |
 | Network | 29 |
 | Notifications | 5 |
 | Performance | 3 |
@@ -1744,6 +1744,83 @@ Nohuto lineage references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the Hidden semantics used by Explorer: 1 shows hidden items and 2 hides them. The app writes the runtime show-hidden state. This is a low-risk user-scope Explorer preference, but it is best suited to advanced users. |
+
+---
+
+### `explorer.show-protected-operating-system-files`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Category | `Explorer` |
+| Area | `Observed Explorer Runtime Setting` |
+| Scope | `user` |
+| Source file | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Observed Explorer runtime setting for protected operating system file visibility. Microsoft Open Specifications documents ShowSuperHidden under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 dump/default hive shows the same value on current builds, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowSuperHidden with both Data:0 and Data:1 after Explorer restart.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `n/a` |
+| Notes | The app does not currently expose ShowSuperHidden. |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
+  - explorer-showsuperhidden-flag: value `0` — HKCU25H2.reg exports ShowSuperHidden = 0 in the default Explorer\Advanced block.
+
+**Recommended profiles**
+
+- `hide-protected-operating-system-files`: Hide protected operating system files (apply_allowed=True)
+- `show-protected-operating-system-files`: Show protected operating system files (apply_allowed=True)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-showsuperhidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showSuperHidden | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
+| `dump-25h2-explorer-advanced-showsuperhidden` | `raw-registry-dump` | `unspecified` | 25H2 dump and default hive corroboration for ShowSuperHidden | Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg | `medium` | path, value, version-scope |
+| `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | H:\Temp\vm-tooling-staging\showsuperhidden-result.txt | `high` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\showsuperhidden-result.txt |
+| Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1 |
+| Key found on page | `True` |
+| Notes | Raw hit exports were also copied to H:\Temp\vm-tooling-staging\showsuperhidden-0-hits.csv and H:\Temp\vm-tooling-staging\showsuperhidden-1-hits.csv. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft documents the numeric semantics, the 25H2 dump corroborates the current surface and default value, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both 0 and 1 on this build. The setting is still best reserved for advanced users because it exposes protected operating system files. |
 
 ---
 
@@ -16493,7 +16570,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched a short OCCT benchmark observation window, captured WPR ETLs for both states, and restored the guest baseline after each pass. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
+**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched OCCT, captured WPR ETLs and perf samples for both states, and restored the guest baseline after each pass. However, the OCCT UI still displayed its EULA modal and `OCCT.config.json` still reported `EulaVersion = 0`, so the OCCT portion must be treated as launch-and-trace evidence rather than a valid benchmark result. That still validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
 
 **Current implementation**
 
@@ -16566,7 +16643,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\gamemode_admin_probe.txt |
 | Exact quote / path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU\S-1-5-21-3538642439-2106388720-149684979-500\Software\Microsoft\GameBar\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU\S-1-5-21-3538642439-2106388720-149684979-500\Software\Microsoft\GameBar\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | Key found on page | `True` |
-| Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT plus WPR traces for states 0 and 1 and restored the guest baseline after each pass. Normalized for the consolidated evidence report. |
+| Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT launch traces plus WPR captures for states 0 and 1 and restored the guest baseline after each pass, but OCCT still showed its EULA modal and kept `EulaVersion = 0`, so those runs must not be interpreted as valid OCCT score benchmarks. Normalized for the consolidated evidence report. |
 
 **Decision**
 
@@ -16577,7 +16654,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. A later bounded VM runtime suite exercised both states under OCCT plus WPR and restored the guest baseline after each pass, which strengthens confidence that the toggle can be observed safely even though the short run is not enough to claim a decisive performance gain. |
+| Why | Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. A later bounded VM runtime suite exercised both states with OCCT launch traces plus WPR and restored the guest baseline after each pass, which strengthens confidence that the toggle can be observed safely. The OCCT EULA remained unaccepted (`EulaVersion = 0`), so the OCCT portion should not be read as a valid benchmark score comparison. |
 
 ---
 
