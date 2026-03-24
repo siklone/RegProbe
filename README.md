@@ -1,6 +1,6 @@
 # Windows Optimizer Suite
 
-Windows Optimizer Suite is a WPF/.NET 8 desktop app for Windows 10/11 focused on **safe, reversible tweaks**, **hardware-aware diagnostics**, and **traceable system research**.
+Windows Optimizer Suite is a WPF/.NET 8 desktop app for Windows 10/11 focused on **safe, reversible tweaks**, **hardware details**, and **traceable system research**.
 
 It is built for people who want more than a random "FPS boost" script:
 
@@ -42,7 +42,7 @@ It is built for people who want more than a random "FPS boost" script:
 
 ### 📚 Research & Provenance
 - Local documentation and source mapping under `Docs/`
-- Nohuto-oriented research integration (`win-config`, `win-registry`, related audits)
+- Upstream dump and pseudocode lineage integration (`win-config`, `win-registry`, related audits)
 - Microsoft-backed and repo-backed coverage tests for tweak providers
 
 ## 🧪 VM Validation Environment
@@ -244,7 +244,7 @@ Before opening a PR or pushing a larger change:
 - [nohuto/win-config](https://github.com/nohuto/win-config)
 - [nohuto/win-registry](https://github.com/nohuto/win-registry)
 - Microsoft Learn / Windows documentation
-- LibreHardwareMonitor
+- AIDA64 manual cross-check workflow
 
 ## ⚠️ Disclaimer
 

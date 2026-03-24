@@ -36,6 +36,16 @@ public sealed class TweakItemViewModel : ViewModelBase
     private static readonly SolidColorBrush MixedStatusBackgroundBrush = CreateFrozenBrush("#2AD08770");
     private static readonly SolidColorBrush ErrorStatusBackgroundBrush = CreateFrozenBrush("#2ABF616A");
     private static readonly SolidColorBrush UnknownStatusBackgroundBrush = CreateFrozenBrush("#2A88C0D0");
+    private static readonly SolidColorBrush ClassABrush = CreateFrozenBrush("#A3BE8C");
+    private static readonly SolidColorBrush ClassABackgroundBrush = CreateFrozenBrush("#2AA3BE8C");
+    private static readonly SolidColorBrush ClassBBrush = CreateFrozenBrush("#88C0D0");
+    private static readonly SolidColorBrush ClassBBackgroundBrush = CreateFrozenBrush("#2A88C0D0");
+    private static readonly SolidColorBrush ClassCBrush = CreateFrozenBrush("#EBCB8B");
+    private static readonly SolidColorBrush ClassCBackgroundBrush = CreateFrozenBrush("#2AEBCB8B");
+    private static readonly SolidColorBrush ClassDBrush = CreateFrozenBrush("#D08770");
+    private static readonly SolidColorBrush ClassDBackgroundBrush = CreateFrozenBrush("#2AD08770");
+    private static readonly SolidColorBrush ClassEBrush = CreateFrozenBrush("#4C566A");
+    private static readonly SolidColorBrush ClassEBackgroundBrush = CreateFrozenBrush("#2A4C566A");
     private static readonly TweakInsightFormatter InsightFormatter = new();
 
     private readonly ITweak _tweak;
@@ -86,6 +96,20 @@ public sealed class TweakItemViewModel : ViewModelBase
     private bool _hasWindowsInternalsContext;
     private bool _needsSourceReview;
     private string _provenanceSummary = string.Empty;
+    private string _evidenceClassId = "D";
+    private string _evidenceClassLabel = "Class D";
+    private string _evidenceClassTitle = "Key Known, Value Semantics Unknown";
+    private string _evidenceClassDescription = "The key exists, but value semantics are not trusted enough yet for an app-ready surface.";
+    private string _evidenceClassActionState = "research-gated";
+    private string _evidenceClassGatingReason = "No derived evidence class is loaded for this tweak yet.";
+    private bool _isEvidenceClassActionable;
+    private bool _showInApp = true;
+    private string _validatedSemanticsSummary = string.Empty;
+    private string _validatedSemanticsSource = string.Empty;
+    private string _runtimeProofSummary = string.Empty;
+    private string _runtimeProofSource = string.Empty;
+    private string _upstreamLineageSummary = string.Empty;
+    private string _upstreamLineageSource = string.Empty;
     private readonly RelayCommand _toggleFavoriteCommand;
     private readonly ObservableCollection<string> _batchDetails = new();
     private string _batchDetailsTitle = "Details";
@@ -119,16 +143,16 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         ResetSteps();
 
-        _detectCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Detect, CancellationToken.None), _ => CanRun());
-        _previewCommand = new RelayCommand(_ => _ = RunAsync(true, CancellationToken.None), _ => CanRun());
-        _applyCommand = new RelayCommand(_ => _ = RunAsync(false, CancellationToken.None), _ => CanRun());
-        _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify, CancellationToken.None), _ => CanRun());
-        _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback, CancellationToken.None), _ => CanRun());
+        _detectCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Detect, CancellationToken.None), _ => CanInspect());
+        _previewCommand = new RelayCommand(_ => _ = RunAsync(true, CancellationToken.None), _ => CanInspect());
+        _applyCommand = new RelayCommand(_ => _ = RunAsync(false, CancellationToken.None), _ => CanMutate());
+        _verifyCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Verify, CancellationToken.None), _ => CanInspect());
+        _rollbackCommand = new RelayCommand(_ => _ = RunSingleStepAsync(TweakAction.Rollback, CancellationToken.None), _ => CanMutate());
         _restoreDefaultCommand = new RelayCommand(_ => _ = RestoreDefaultAsync(), _ => CanRestoreDefault());
         _cancelCommand = new RelayCommand(_ => CancelRun(), _ => CanCancel());
         _copyIdCommand = new RelayCommand(_ => CopyId());
         _toggleCommand = new RelayCommand(_ => _ = ToggleAsync(), _ => CanToggle());
-        _customActionCommand = new RelayCommand(_ => _ = RunCustomActionAsync(), _ => CanRun());
+        _customActionCommand = new RelayCommand(_ => _ = RunCustomActionAsync(), _ => CanMutate());
         _copyRegistryPathCommand = new RelayCommand(_ => CopyRegistryPath(), _ => !string.IsNullOrEmpty(RegistryPath));
         _openReferenceLinkCommand = new RelayCommand(OpenReferenceLink, parameter => parameter is string url && !string.IsNullOrWhiteSpace(url));
         _toggleFavoriteCommand = new RelayCommand(_ => ToggleFavorite());
@@ -478,6 +502,11 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         get
         {
+            if (!IsEvidenceClassActionable)
+            {
+                return EvidenceClassGatingReason;
+            }
+
             if (_tweak is not IChoiceTweak choiceTweak || string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceLabel))
             {
                 return "Restore the product's default option.";
@@ -619,8 +648,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     /// <summary>
     /// Whether there's a meaningful state change to show.
     /// </summary>
-    public bool HasStateChange => 
-        !string.IsNullOrWhiteSpace(CurrentValue) && 
+    public bool HasStateChange =>
+        !string.IsNullOrWhiteSpace(CurrentValue) &&
         !string.IsNullOrWhiteSpace(TargetValue) &&
         CurrentValue != "Unknown" &&
         !CurrentValue.Equals(TargetValue, StringComparison.OrdinalIgnoreCase);
@@ -628,7 +657,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     /// <summary>
     /// Formatted comparison text for UI display.
     /// </summary>
-    public string ComparisonText => HasStateChange 
+    public string ComparisonText => HasStateChange
         ? $"Before: {BeforeState} → After: {AfterState}"
         : "No changes detected";
 
@@ -739,6 +768,80 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool HasDiff => !string.IsNullOrEmpty(RegistryPath) && CurrentValue != "Unknown";
 
+    public string EvidenceClassId => _evidenceClassId;
+
+    public string EvidenceClassLabel => _evidenceClassLabel;
+
+    public string EvidenceClassTitle => _evidenceClassTitle;
+
+    public string EvidenceClassDescription => _evidenceClassDescription;
+
+    public string EvidenceClassBadgeText => EvidenceClassLabel;
+
+    public string EvidenceClassActionState => _evidenceClassActionState;
+
+    public string EvidenceClassTooltip => $"{EvidenceClassTitle}. {EvidenceClassDescription}";
+
+    public string EvidenceClassGatingReason => _evidenceClassGatingReason;
+
+    public bool IsEvidenceClassActionable => _isEvidenceClassActionable;
+
+    public bool ShowInApp => _showInApp;
+
+    public bool IsResearchGated => ShowInApp && !IsEvidenceClassActionable;
+
+    public bool HasEvidenceClass => !string.IsNullOrWhiteSpace(_evidenceClassId);
+
+    public Brush EvidenceClassBrush => EvidenceClassId switch
+    {
+        "A" => ClassABrush,
+        "B" => ClassBBrush,
+        "C" => ClassCBrush,
+        "D" => ClassDBrush,
+        _ => ClassEBrush
+    };
+
+    public Brush EvidenceClassBackgroundBrush => EvidenceClassId switch
+    {
+        "A" => ClassABackgroundBrush,
+        "B" => ClassBBackgroundBrush,
+        "C" => ClassCBackgroundBrush,
+        "D" => ClassDBackgroundBrush,
+        _ => ClassEBackgroundBrush
+    };
+
+    public string PrimaryActionTooltip => IsEvidenceClassActionable
+        ? "Apply this setting without opening details."
+        : EvidenceClassGatingReason;
+
+    public string RollbackActionTooltip => IsEvidenceClassActionable
+        ? "Restore the previous value captured before Apply."
+        : EvidenceClassGatingReason;
+
+    public string ResearchGateMessage => IsEvidenceClassActionable ? string.Empty : EvidenceClassGatingReason;
+
+    public bool HasResearchGateMessage => !string.IsNullOrWhiteSpace(ResearchGateMessage);
+
+    public string ValidatedSemanticsSummary => _validatedSemanticsSummary;
+
+    public string ValidatedSemanticsSource => _validatedSemanticsSource;
+
+    public bool HasValidatedSemantics => !string.IsNullOrWhiteSpace(ValidatedSemanticsSummary);
+
+    public string RuntimeProofSummary => _runtimeProofSummary;
+
+    public string RuntimeProofSource => _runtimeProofSource;
+
+    public bool HasRuntimeProof => !string.IsNullOrWhiteSpace(RuntimeProofSummary);
+
+    public string UpstreamLineageSummary => _upstreamLineageSummary;
+
+    public string UpstreamLineageSource => _upstreamLineageSource;
+
+    public bool HasUpstreamLineage => !string.IsNullOrWhiteSpace(UpstreamLineageSummary);
+
+    public bool HasEvidenceProofBoxes => HasValidatedSemantics || HasRuntimeProof || HasUpstreamLineage;
+
     public bool HasNohutoEvidence
     {
         get => _hasNohutoEvidence;
@@ -802,12 +905,12 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             if (HasNohutoEvidence && HasWindowsInternalsContext)
             {
-                return "Nohuto + Internals";
+                return "Upstream lineage + Internals";
             }
 
             if (HasNohutoEvidence)
             {
-                return "Nohuto-backed";
+                return "Upstream lineage";
             }
 
             if (HasWindowsInternalsContext)
@@ -817,6 +920,66 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             return NeedsSourceReview ? "Needs review" : "No provenance";
         }
+    }
+
+    public void ApplyEvidenceClassification(TweakEvidenceClassEntry? entry)
+    {
+        entry ??= TweakEvidenceClassEntry.CreateFallback(Id);
+
+        _evidenceClassId = string.IsNullOrWhiteSpace(entry.EvidenceClass) ? "D" : entry.EvidenceClass;
+        _evidenceClassLabel = string.IsNullOrWhiteSpace(entry.ClassLabel) ? "Class D" : entry.ClassLabel;
+        _evidenceClassTitle = string.IsNullOrWhiteSpace(entry.ClassTitle) ? "Key Known, Value Semantics Unknown" : entry.ClassTitle;
+        _evidenceClassDescription = string.IsNullOrWhiteSpace(entry.ClassDescription)
+            ? "The key exists, but value semantics are not trusted enough yet for an app-ready surface."
+            : entry.ClassDescription;
+        _evidenceClassActionState = string.IsNullOrWhiteSpace(entry.ActionState) ? "research-gated" : entry.ActionState;
+        _evidenceClassGatingReason = string.IsNullOrWhiteSpace(entry.GatingReason)
+            ? "No derived evidence class is loaded for this tweak yet."
+            : entry.GatingReason;
+        _isEvidenceClassActionable = entry.IsActionable;
+        _showInApp = entry.ShowInApp;
+        _validatedSemanticsSummary = entry.ValidatedSemantics?.Summary?.Trim() ?? string.Empty;
+        _validatedSemanticsSource = entry.ValidatedSemantics?.PrimarySourceText?.Trim() ?? string.Empty;
+        _runtimeProofSummary = entry.RuntimeProof?.Summary?.Trim() ?? string.Empty;
+        _runtimeProofSource = entry.RuntimeProof?.PrimarySourceText?.Trim() ?? string.Empty;
+        _upstreamLineageSummary = entry.UpstreamLineage?.Summary?.Trim() ?? string.Empty;
+        _upstreamLineageSource = entry.UpstreamLineage?.PrimarySourceText?.Trim() ?? string.Empty;
+
+        RaiseEvidenceClassificationChanged();
+    }
+
+    private void RaiseEvidenceClassificationChanged()
+    {
+        OnPropertyChanged(nameof(EvidenceClassId));
+        OnPropertyChanged(nameof(EvidenceClassLabel));
+        OnPropertyChanged(nameof(EvidenceClassTitle));
+        OnPropertyChanged(nameof(EvidenceClassDescription));
+        OnPropertyChanged(nameof(EvidenceClassBadgeText));
+        OnPropertyChanged(nameof(EvidenceClassActionState));
+        OnPropertyChanged(nameof(EvidenceClassTooltip));
+        OnPropertyChanged(nameof(EvidenceClassGatingReason));
+        OnPropertyChanged(nameof(IsEvidenceClassActionable));
+        OnPropertyChanged(nameof(ShowInApp));
+        OnPropertyChanged(nameof(IsResearchGated));
+        OnPropertyChanged(nameof(HasEvidenceClass));
+        OnPropertyChanged(nameof(EvidenceClassBrush));
+        OnPropertyChanged(nameof(EvidenceClassBackgroundBrush));
+        OnPropertyChanged(nameof(PrimaryActionTooltip));
+        OnPropertyChanged(nameof(RollbackActionTooltip));
+        OnPropertyChanged(nameof(ResearchGateMessage));
+        OnPropertyChanged(nameof(HasResearchGateMessage));
+        OnPropertyChanged(nameof(ValidatedSemanticsSummary));
+        OnPropertyChanged(nameof(ValidatedSemanticsSource));
+        OnPropertyChanged(nameof(HasValidatedSemantics));
+        OnPropertyChanged(nameof(RuntimeProofSummary));
+        OnPropertyChanged(nameof(RuntimeProofSource));
+        OnPropertyChanged(nameof(HasRuntimeProof));
+        OnPropertyChanged(nameof(UpstreamLineageSummary));
+        OnPropertyChanged(nameof(UpstreamLineageSource));
+        OnPropertyChanged(nameof(HasUpstreamLineage));
+        OnPropertyChanged(nameof(HasEvidenceProofBoxes));
+        OnPropertyChanged(nameof(RestoreDefaultTooltip));
+        UpdateCommandStates();
     }
 
     public ObservableCollection<string> BatchDetails => _batchDetails;
@@ -1120,15 +1283,15 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    public Task RunPreviewAsync(CancellationToken ct) => RunAsync(true, ct);
+    public Task RunPreviewAsync(CancellationToken ct) => CanInspect() ? RunAsync(true, ct) : Task.CompletedTask;
 
-    public Task RunApplyAsync(CancellationToken ct) => RunAsync(false, ct);
+    public Task RunApplyAsync(CancellationToken ct) => CanMutate() ? RunAsync(false, ct) : Task.CompletedTask;
 
-    public Task RunDetectAsync(CancellationToken ct) => RunSingleStepAsync(TweakAction.Detect, ct);
+    public Task RunDetectAsync(CancellationToken ct) => CanInspect() ? RunSingleStepAsync(TweakAction.Detect, ct) : Task.CompletedTask;
 
-    public Task RunVerifyAsync(CancellationToken ct) => RunSingleStepAsync(TweakAction.Verify, ct);
+    public Task RunVerifyAsync(CancellationToken ct) => CanInspect() ? RunSingleStepAsync(TweakAction.Verify, ct) : Task.CompletedTask;
 
-    public Task RunRollbackAsync(CancellationToken ct) => RunSingleStepAsync(TweakAction.Rollback, ct);
+    public Task RunRollbackAsync(CancellationToken ct) => CanMutate() ? RunSingleStepAsync(TweakAction.Rollback, ct) : Task.CompletedTask;
 
     private async Task RunAsync(bool dryRun, CancellationToken ct)
     {
@@ -1461,9 +1624,14 @@ public sealed class TweakItemViewModel : ViewModelBase
         StatusMessage = $"Copy failed: {error}";
     }
 
-    private bool CanRun()
+    private bool CanInspect()
     {
         return !IsRunning && !IsBulkLocked;
+    }
+
+    private bool CanMutate()
+    {
+        return !IsRunning && !IsBulkLocked && IsEvidenceClassActionable;
     }
 
     private bool CanCancel()
@@ -1481,17 +1649,17 @@ public sealed class TweakItemViewModel : ViewModelBase
         _restoreDefaultCommand.RaiseCanExecuteChanged();
         _cancelCommand.RaiseCanExecuteChanged();
         _toggleCommand.RaiseCanExecuteChanged();
+        _customActionCommand.RaiseCanExecuteChanged();
     }
 
     private bool CanToggle()
     {
-        return !IsRunning && !IsBulkLocked && AppliedStatus != TweakAppliedStatus.Unknown;
+        return CanMutate() && AppliedStatus != TweakAppliedStatus.Unknown;
     }
 
     private bool CanRestoreDefault()
     {
-        return !IsRunning
-            && !IsBulkLocked
+        return CanMutate()
             && _tweak is IChoiceTweak choiceTweak
             && !string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceKey);
     }
@@ -2541,7 +2709,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         var tooltip = Description;
         var implications = GenerateImplications();
-        
+
         if (!string.IsNullOrEmpty(implications))
         {
             tooltip += $"\n\n{implications}";

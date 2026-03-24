@@ -87,9 +87,9 @@
                             <Border Background="{DynamicResource AccentBrightCyanBrush}" CornerRadius="8" Padding="8" Margin="0,0,12,0">
                                 <TextBlock Text="&#xE71D;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource BackgroundDarkestBrush}"/>
                             </Border>
-                            <TextBlock Text="Core Features" 
-                                       FontSize="18" 
-                                       FontWeight="SemiBold" 
+                            <TextBlock Text="Core Features"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
@@ -104,7 +104,7 @@
                                     <TextBlock Text="Modify Windows registry safely" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Border>
-                            
+
                             <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="8,0,8,0">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
@@ -114,7 +114,7 @@
                                     <TextBlock Text="Review services with descriptions and safe start-mode changes" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,4,0,0" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Border>
-                            
+
                             <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="8,0,8,0">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
@@ -124,7 +124,7 @@
                                     <TextBlock Text="Secure command allowlist" Foreground="{DynamicResource AccentBrightCyanBrush}" FontSize="11" Margin="0,4,0,0"/>
                                 </StackPanel>
                             </Border>
-                            
+
                             <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="14" Margin="8,0,0,0">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
@@ -145,9 +145,9 @@
                             <Border Background="{DynamicResource SuccessBrush}" CornerRadius="8" Padding="8" Margin="0,0,12,0">
                                 <TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource BackgroundDarkestBrush}"/>
                             </Border>
-                            <TextBlock Text="Safety &amp; Reliability" 
-                                       FontSize="18" 
-                                       FontWeight="SemiBold" 
+                            <TextBlock Text="Safety &amp; Reliability"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
                                        Foreground="{DynamicResource ForegroundBrightestBrush}"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
@@ -178,27 +178,27 @@
                             <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,12,0"/>
                             <TextBlock Text="Research Credits" FontWeight="SemiBold" FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                         </StackPanel>
-                        
+
                         <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="12">
                             <StackPanel>
-                                <TextBlock Text="Windows Registry Research" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                <TextBlock Text="Reverse engineering and documentation by nohuto" 
+                                <TextBlock Text="Upstream Research Lineage" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="Dump and pseudocode lineage from nohuto repositories; value semantics are validated separately in local research."
                                            Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,4,0,8"/>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="win-config" 
+                                    <Button Content="win-config"
                                             Command="{Binding OpenUrlCommand}"
                                             CommandParameter="https://github.com/nohuto/win-config"
                                             Background="Transparent" BorderThickness="0"
                                             Foreground="{DynamicResource AccentBrightCyanBrush}"
                                             Padding="0" Margin="0,0,16,0" Cursor="Hand"/>
-                                    <Button Content="win-registry" 
+                                    <Button Content="win-registry"
                                             Command="{Binding OpenUrlCommand}"
                                             CommandParameter="https://github.com/nohuto/win-registry"
                                             Background="Transparent" BorderThickness="0"
                                             Foreground="{DynamicResource AccentBrightCyanBrush}"
                                             Padding="0" Cursor="Hand"/>
                                 </StackPanel>
-                                <TextBlock Text="Methods: IDA Pro, WinDbg, WPR, Procmon" 
+                                <TextBlock Text="Linked workflow: Procmon, WPR/WPA, Ghidra headless, and local validation notes"
                                            FontSize="10" Foreground="{DynamicResource MutedForegroundBrush}" Margin="0,8,0,0"/>
                             </StackPanel>
                         </Border>
@@ -226,10 +226,10 @@
                 </Border>
 
                 <!-- Warning -->
-                <Border Background="{DynamicResource BackgroundDarkBrush}" 
-                        BorderBrush="{DynamicResource CautionBrush}" 
+                <Border Background="{DynamicResource BackgroundDarkBrush}"
+                        BorderBrush="{DynamicResource CautionBrush}"
                         BorderThickness="1"
-                        CornerRadius="8" 
+                        CornerRadius="8"
                         Padding="16"
                         Margin="0,20,0,0">
                     <StackPanel Orientation="Horizontal">

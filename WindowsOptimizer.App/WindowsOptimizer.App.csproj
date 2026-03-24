@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -7,7 +7,7 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    
+
     <!-- Quantum Optimizations -->
     <!-- NOTE: ReadyToRun publish can fail on duplicate simple-name inputs (e.g., Dia2Lib.dll). -->
     <PublishReadyToRun>false</PublishReadyToRun>
@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.4" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
@@ -55,6 +54,102 @@
     <ProjectReference Include="..\\WindowsOptimizer.Infrastructure\\WindowsOptimizer.Infrastructure.csproj" />
     <ProjectReference Include="..\\WindowsOptimizer.ElevatedHost\\WindowsOptimizer.ElevatedHost.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\\WindowsOptimizer.Plugins.DevTools\\WindowsOptimizer.Plugins.DevTools.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweaks.md">
+      <RelativeDestination>tweaks\tweaks.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-catalog.csv">
+      <RelativeDestination>tweaks\tweak-catalog.csv</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-catalog.html">
+      <RelativeDestination>tweaks\tweak-catalog.html</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-catalog.md">
+      <RelativeDestination>tweaks\tweak-catalog.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-details.html">
+      <RelativeDestination>tweaks\tweak-details.html</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-provenance.json">
+      <RelativeDestination>tweaks\tweak-provenance.json</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-provenance.md">
+      <RelativeDestination>tweaks\tweak-provenance.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-docs-missing-priority.html">
+      <RelativeDestination>tweaks\tweak-docs-missing-priority.html</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-docs-missing-priority.md">
+      <RelativeDestination>tweaks\tweak-docs-missing-priority.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-docs-missing-priority.csv">
+      <RelativeDestination>tweaks\tweak-docs-missing-priority.csv</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-docs-missing.html">
+      <RelativeDestination>tweaks\tweak-docs-missing.html</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-docs-missing.md">
+      <RelativeDestination>tweaks\tweak-docs-missing.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\tweak-docs-missing.csv">
+      <RelativeDestination>tweaks\tweak-docs-missing.csv</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\win-config\batch-01.md">
+      <RelativeDestination>tweaks\win-config\batch-01.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\tweaks\research\evidence-classes.json">
+      <RelativeDestination>tweaks\research\evidence-classes.json</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\privacy\privacy.md">
+      <RelativeDestination>privacy\privacy.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\privacy\privacy-verified.md">
+      <RelativeDestination>privacy\privacy-verified.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\security\security.md">
+      <RelativeDestination>security\security.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\security\security-verified.md">
+      <RelativeDestination>security\security-verified.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\security\use-case-guide.md">
+      <RelativeDestination>security\use-case-guide.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\network\network.md">
+      <RelativeDestination>network\network.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\power\power.md">
+      <RelativeDestination>power\power.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\system\system.md">
+      <RelativeDestination>system\system.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\visibility\visibility.md">
+      <RelativeDestination>visibility\visibility.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\peripheral\peripheral.md">
+      <RelativeDestination>peripheral\peripheral.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\misc\misc.md">
+      <RelativeDestination>misc\misc.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\cleanup\cleanup.md">
+      <RelativeDestination>cleanup\cleanup.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\notifications\notifications.md">
+      <RelativeDestination>notifications\notifications.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\performance\performance.md">
+      <RelativeDestination>performance\performance.md</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\affinities\assets\E7-P2.pdf">
+      <RelativeDestination>affinities\assets\E7-P2.pdf</RelativeDestination>
+    </AppRuntimeDoc>
+    <AppRuntimeDoc Include="$(MSBuildProjectDirectory)\..\Docs\system\assets\Win32PrioritySeparation.pdf">
+      <RelativeDestination>system\assets\Win32PrioritySeparation.pdf</RelativeDestination>
+    </AppRuntimeDoc>
   </ItemGroup>
 
   <Target Name="CopyElevatedHostAfterBuild" AfterTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">
@@ -95,24 +190,20 @@
 
   <Target Name="CopyDocsAfterBuild" AfterTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">
     <PropertyGroup>
-      <DocsSourceDir>$(MSBuildProjectDirectory)\\..\\Docs\\</DocsSourceDir>
       <DocsDestinationDir>$(TargetDir)Docs\\</DocsDestinationDir>
     </PropertyGroup>
-    <ItemGroup Condition="Exists('$(DocsSourceDir)')">
-      <DocsFilesAfterBuild Include="$(DocsSourceDir)**\\*.*" />
-    </ItemGroup>
-    <Copy Condition="Exists('$(DocsSourceDir)')" SourceFiles="@(DocsFilesAfterBuild)" DestinationFiles="@(DocsFilesAfterBuild->'$(DocsDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(AppRuntimeDoc)"
+          DestinationFiles="@(AppRuntimeDoc->'$(DocsDestinationDir)%(RelativeDestination)')"
+          SkipUnchangedFiles="true" />
   </Target>
 
   <Target Name="CopyDocsAfterPublish" AfterTargets="Publish" Condition="'$(DesignTimeBuild)' != 'true'">
     <PropertyGroup>
-      <DocsSourceDir>$(MSBuildProjectDirectory)\\..\\Docs\\</DocsSourceDir>
       <DocsDestinationDir>$(PublishDir)Docs\\</DocsDestinationDir>
     </PropertyGroup>
-    <ItemGroup Condition="Exists('$(DocsSourceDir)')">
-      <DocsFilesAfterPublish Include="$(DocsSourceDir)**\\*.*" />
-    </ItemGroup>
-    <Copy Condition="Exists('$(DocsSourceDir)')" SourceFiles="@(DocsFilesAfterPublish)" DestinationFiles="@(DocsFilesAfterPublish->'$(DocsDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(AppRuntimeDoc)"
+          DestinationFiles="@(AppRuntimeDoc->'$(DocsDestinationDir)%(RelativeDestination)')"
+          SkipUnchangedFiles="true" />
   </Target>
 
   <Target Name="CopyBundledPluginsAfterPublish" AfterTargets="Publish" Condition="'$(DesignTimeBuild)' != 'true'">

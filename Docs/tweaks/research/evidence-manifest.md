@@ -16,307 +16,313 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
+| A count | 152 |
+| B count | 61 |
+| C count | 17 |
+| D count | 8 |
+| E count | 52 |
 
 ## Record Index
 
-| Record | Status | Source file | Source SHA256 | Proof SHA256 | Targets |
-| --- | --- | --- | --- | --- | --- |
-| `audio.disable-spatial-audio` | deprecated | `Docs/tweaks/research/records/audio.disable-spatial-audio.review.json` | `be4c2c421f023c7098adef0e3a43dd12ee5efc5a4f2e849dd30da0fef016141e` | `4a593ea805014f217f681fc58618dd92a0ee319f834de3cb6b99d9b7340d5677` | 1 |
-| `audio.disable-system-sounds` | deprecated | `Docs/tweaks/research/records/audio.disable-system-sounds.review.json` | `3466da988a7ec485cac79e4a46a3598757530f7f7990c4ed902d6c246a7e5f2c` | `8c6baad92b01ec2a36a670ba00e7a7f372889f597cb30b1fc0ccc3d2e1d5a424` | 1 |
-| `developer.terminal-dev-mode` | deprecated | `Docs/tweaks/research/records/developer.terminal-dev-mode.review.json` | `9c5fc8ead0212ca4afde1786041601931a0c56bd366522f9b288b4ce3d42c4eb` | `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a` | 2 |
-| `developer.vs-intellisense-cache` | deprecated | `Docs/tweaks/research/records/developer.vs-intellisense-cache.review.json` | `6714aec3308f79f05d56e0192c6ebd0e3fa402cb61b1dfda5f4646d58b69342b` | `7594c93530c2f21078f1038412922a58ad2eb57b477f498e084adb3d66722225` | 1 |
-| `developer.vs-solution-load` | deprecated | `Docs/tweaks/research/records/developer.vs-solution-load.review.json` | `532f52029fd89d6fbcca903a2a119c48f03068221dc1d15b5ba1d0ce02d86ae7` | `f3d5094dc691664127f8b7cff7d1500ec045ea83e83fdfefa30d3569d90f06ae` | 1 |
-| `developer.vscode-git-autofetch` | deprecated | `Docs/tweaks/research/records/developer.vscode-git-autofetch.json` | `2dfbdf4481e9703aba1a03d90f091ab9336b95e75eb34fa64486ccd77f140373` | `e06716163838e4757577a19baa2082882403e415767e632da3bcaa89018fadce` | 2 |
-| `explorer.disable-taskbar-widgets` | deprecated | `Docs/tweaks/research/records/explorer.disable-taskbar-widgets.json` | `f89b4a4a9a01987090b432d2e87de9a2682701f8de4ddcc2f22fe8831eb775c3` | `c564531bb27c99c5c6d31c16fdc2cfef794fcda04ce5ca8598956cb5763f433a` | 1 |
-| `network.optimize-smb` | deprecated | `Docs/tweaks/research/records/network.optimize-smb.review.json` | `f428f4197f8b38732a254d31a7bae77c1ece46ac72f6db950191556d15315a68` | `f20537679384da6d919b7646f4217435225bdad41c9462c7c48cad785a19e5eb` | 3 |
-| `power.disable-network-power-saving` | deprecated | `Docs/tweaks/research/records/power.disable-network-power-saving.review.json` | `a8a0ba2b003c31ef593996ad0600414abee42c4e738cf40a2d4564bf3b0afa9f` | `8a44b3c793b7747a5bef848a85808afb5dfc209af650712b4ebf8b03f19e4da9` | 3 |
-| `power.optimize-performance` | deprecated | `Docs/tweaks/research/records/power.optimize-performance.review.json` | `9a6099fdbda41141c13516f6bbba3f49bcf7db77d9baece2b2de08038c254020` | `58dc7326379a58002bfc8e69fc5bcc60b649ec53bb89088c2dbbf5d96c9dbdc2` | 1 |
-| `privacy.deny-app-access` | deprecated | `Docs/tweaks/research/records/privacy.deny-app-access.review.json` | `56e52c1cfe030b7599bad5a650f1becd2d3362b8112bf56bda2e1f7a45600512` | `4ae5728a5c387aaf0d21810f025314b52714ec69482975da463be70c18be5a3a` | 1 |
-| `privacy.disable-application-compatibility` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.review.json` | `22af6cee9dbb36853388f26d456c3a3d2b6fb3d5a08559c496a2862a1623bf26` | `bd45859c05009d40015767839d790f25d4748e596556c41939940d798a660bba` | 1 |
-| `privacy.disable-application-compatibility.policy` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.policy.review.json` | `af732b75650c01bd4c004ee069074067d5dac25614df3bf03a78746fc182bc8d` | `92200c73471bafab51b30d4397016d8ca189f25086c650af2258b5ebf096be76` | 1 |
-| `privacy.disable-application-compatibility.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json` | `659c5215dc7d0938e359f4f9f75e3c6e24ad03816894a4092d0f304431339cf1` | `de8d0e5c3fe3bbc0133d9be1194edbaaec7bd4a0bc072339a635f2a925d56b81` | 1 |
-| `privacy.disable-ceip` | deprecated | `Docs/tweaks/research/records/privacy.disable-ceip.review.json` | `7c8a8db0c1d2e1c5e93be89e255cb4548c5931803519ca1b7379fc2259af3521` | `291f83fd458207687a77b2cff7de2b4b70856477f6e31fe23e129e9461db898c` | 1 |
-| `privacy.disable-cross-device-experiences` | deprecated | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json` | `995d19baf39eacc1caf9442fd1a1a79317d490c8f95df68aaf610bf735fd5628` | `8822b8f2cbf24318cad7f81a5d3fe461e79b510d4d2ffbe2544b8ea72bff29db` | 2 |
-| `privacy.disable-f1-help` | deprecated | `Docs/tweaks/research/records/privacy.disable-f1-help.review.json` | `4e3574d4caad562c3d178f89af47a4e38968788f8ea3bf25ca53e207943e1fed` | `e939be1becb0f019eb205401e305d66b05496b5a891020031caf988e94655f61` | 1 |
-| `privacy.disable-inking-typing-personalization` | deprecated | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5` | `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc` | 1 |
-| `privacy.disable-offline-files` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` | `35163904745150c0117d1b7a744f07abab0cffc72392cf0a579c954fa5a7198c` | `8c538308e9e84828e4f6100b490500c5b6576341a93ebd7d377695dfa8786ab0` | 1 |
-| `privacy.disable-offline-files.binary` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json` | `11a14f68dfc381df5d1e626abd2cbe9bfc2b6a148d9acf16a33ef0208acf9b6b` | `0c9e074ea6e9e7fbe6a77b6bb4da1fd79573cd8be78db75080600a99343ffef6` | 1 |
-| `privacy.disable-offline-files.services` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json` | `3d3537e2a417fe62465d13906a3ed684918ed9072626aa05d902cbaf0d387f39` | `1d2a9461e246ba26660d27459057374991940a4b30a3ce0e897e4a2f56de0e69` | 1 |
-| `privacy.disable-offline-files.tasks` | deprecated | `Docs/tweaks/research/records/privacy.disable-offline-files.tasks.review.json` | `14375a69f2cb3b5099925cd2c9522aa270c3a7e495bcc8269409808c71cff751` | `77aaa2731fc6fe9471fd8124b323b976253ec517b6d337844a0b92af23289256` | 1 |
-| `privacy.disable-reserved-storage` | deprecated | `Docs/tweaks/research/records/privacy.disable-reserved-storage.review.json` | `235d67d91df3753bf2c87a213b1301a77a5a0ed4392c393eefc63890af6e1ce5` | `4ca83624364bff8e6efdcd5943a83b16fef25082855bf3a1fe1d029ddcaec7ff` | 1 |
-| `privacy.disable-sleep-study-diagnostics` | deprecated | `Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json` | `b424e46ca699e3f8b4731eb7f8a7e85f5f70c854d25ee7ade3ece78f47d63cf1` | `412364eb6a6dec3331f915bf7c0a0c51ea9534af70005eb89b059f7b269755d9` | 1 |
-| `privacy.disable-suggestions` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions.review.json` | `63518ee43394d2ed75a6da0604d982c4cd234ce1e4d3a694afb327fd39f274a7` | `bf916cbd28e9b091f2d0860e32e6799b9e57d617d0343e1d82dd50c947868d9c` | 1 |
-| `privacy.disable-suggestions-cdm` | deprecated | `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json` | `5bc281cced83ddd4f6e98d54f4f59489ab533df19449aa3d73d9dc01292be7b4` | `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9` | 4 |
-| `privacy.disable-wmplayer-telemetry` | deprecated | `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json` | `eb82b2f7b510ee7e01878070a8b8be8997c49a78e4ee57bad6eef4bd6b968f41` | `47b485383cfd24386e8b25266f61526788ae38ccc1e22f2e5643ab572cbc10e1` | 1 |
-| `security.disable-vbs` | deprecated | `Docs/tweaks/research/records/security.disable-vbs.json` | `a4998ad636204c82f6ae87c6cf5903d7575241c8d5cbb489949b7b9612134856` | `875362a1cc4fae3a9ee03d01d96ae6e825dd46f3a80c1fa0fb1885197dc650f6` | 3 |
-| `security.disable-windows-update` | deprecated | `Docs/tweaks/research/records/security.disable-windows-update.review.json` | `1bac61cff5ed58ceea12e8e6577962425b03c9da57518804f8e1e1eb4c123163` | `e39f151336b7dc9297dcff821b6d7da188f5a89cce214c2111a8979f3650a881` | 2 |
-| `security.disable-wpbt` | deprecated | `Docs/tweaks/research/records/security.disable-wpbt.review.json` | `081fd53e38f7a7c927f7fd5e49443384edd9e53a10078c5219675a795dc9ec3f` | `591a298fdd99779c99b3623d6c7514ca2e7c0ee404b59a75c972181a18a0d9ff` | 1 |
-| `system.disable-game-dvr` | deprecated | `Docs/tweaks/research/records/system.disable-game-dvr.json` | `d4cd43987979de1e1cbb09cc70fb2428928176fb26e7abf5cfaa1eeaeb304b6d` | `4598eb3a4a7a554a32beb57abe4def5b4df7dc2cc841aa9df298709c324a6795` | 0 |
-| `system.disable-scheduled-tasks` | deprecated | `Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json` | `d4b01e85ca687ea57def840abfb5d85e4d259381f09ca8026847832c58b08385` | `14fdf96dc2d205ea9aecaa1d530e572e5f63a016031ec2c879b3605d5527a51e` | 7 |
-| `system.disable-search-highlights` | deprecated | `Docs/tweaks/research/records/system.disable-search-highlights.json` | `cbb37a1de1c09ae0e0fe5e377d3c8f591ef9e4c032aba829b18ed383e328ca30` | `2cebd2b8f3a1d2ecfae968fef5c0dda7bf435391ee0f1a7899d88b7023c6ca99` | 0 |
-| `system.disable-service-splitting` | deprecated | `Docs/tweaks/research/records/system.disable-service-splitting.review.json` | `4a54e4039e3c13bf4495ee6f40577d7d4075ed2552f81ca1839175bae9a8d2d6` | `f4de2df5d71667b2a6ccc8ec955f0583f37339e6077ea07ee101e043632e841e` | 1 |
-| `system.dwm-disable-mpo` | deprecated | `Docs/tweaks/research/records/system.dwm-disable-mpo.review.json` | `86932e4673dd8c9e5db4cd9d0a7cc82d4cb3dd53c2150a5e079d983c3ff674dc` | `cff71e2f37ceccde58b2eafe48044a4ac42b5453b9676780d76aa89c5cafe309` | 1 |
-| `system.graphics-disable-overlays` | deprecated | `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json` | `6cf5e02e4ced0aa7b215752645b3239269b66d175b298283f93829863e01cf92` | `dbf1407cc708022946c9f7e61f339d401d97e7a859bb0e947f2824dbf29a803e` | 1 |
-| `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `98ef739d16ea86aabaedb34b97ce872b4f0fcd5fcb7d32ab364a8b863d489580` | `de461e3f29a05889c82ae0349ddf469cce6bcacc3a632e36c6bdcd1b029992df` | 1 |
-| `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `b98430d6c64c7c0159d8dd8edc8978682c51c2e62b3fdd3eee4983aef9822af4` | `84c3a10e4279611b07fb235549e264875a9a89304dfd3c10b30994d093f78c65` | 1 |
-| `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `c71c786191fcbbda286b1f777121293a167deca0c559020752ae280665b02683` | `c3f8debabce5f85e918dd986eb331a900ffb0c11ea9c9409bc02e5d067799832` | 1 |
-| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `2b7a318f39e4168d65dfc33011c490ad14c1b2eacec8781538e76ddd37cae801` | `bd6eb09cb779de67dbcbaaa293b39f58266085c2535cf005beab857de9d6cde2` | 1 |
-| `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b` | `efcc02d642dacdff3f28dac8946c8878180d0ef83875ea5feff1ab89b5c9c126` | 1 |
-| `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `2a1fbe9eb417cd8a472510c73b562d4c7ccbb39c7bf76a6a9ddd06dd983c47e3` | `944ee2c99bfde59a74d232317a9da57e812a0c844e8abb75862163045f3928db` | 1 |
-| `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `9c3a7bb597a2b8ab2fd4ad7563dad5cd4531df5615f1b57683dbe1c300bbe644` | `232893d4d8fd8a293bd6b6288aacb1748be4ec1e0ab88c8bd9c8cc55dbd2d1b7` | 1 |
-| `system.kernel-ideal-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `347e1247d53b76d238429f3c7f8708b2a6375173bb8b1a6788cbd185d2820b11` | `4cb385e6c43a5d3b92e6c1d9fbfd5fafd56e6c40cc1c9d59099d180c3a091f8c` | 1 |
-| `system.kernel-minimum-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `0b7c3064afe58a4383a6559f08e5fd5131b8cba66cb0bd66a50858624843ceb1` | `e8aff541bfbec81d2ba53fad66a8cb2cfaab889a5de285e620c483b9393313d2` | 1 |
-| `system.kernel-serialize-timer-expiration` | deprecated | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` | `5e687fa484102bf47596f14af77de8fdde46c2b334e39fa6ef850a3cea94cc1e` | `20588f7da590eb22af6ec02882f2208f12c9f2288dd4a2f68b463a29d902deed` | 1 |
-| `system.services.disable-print-device-configuration` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-device-configuration.json` | `3101fdf06a38bfbd1fb99a735145546b6f2bcf9439946b8840db2ec2136c6893` | `02fb442a6fc902af0a89043f68fb1c32cd90fc04bb17cad014b82bb78b2266ac` | 1 |
-| `system.services.disable-print-scan-broker` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-scan-broker.json` | `fb63ce1ae6ec3c78f95b271148dcdecbb4258908b06426c4fbe85efa7cee1e41` | `d96f33b3f944ebfba9155d20db5cfcb4d4596e130a3e1f07b831f24ad3fe112a` | 1 |
-| `system.services.disable-print-workflow-user-service` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-workflow-user-service.json` | `1b8b436ef97a5a02a86e8436a8eb8b79ef50d0f0118b1bac0bb53059c15ebeb6` | `94381b6c1d68589882ee162feab63d1d35964b621bf82a6e0b9188782d790055` | 1 |
-| `system.services.disable-sysmain` | deprecated | `Docs/tweaks/research/records/system.services.disable-sysmain.review.json` | `5a253e90f9746baa54a0b10cbccfd8fcc772394706bb36811463ba88e4a5ffab` | `b35bdd6393aed8354406a6fc24300475550877e24ebde527e780bcfff41b1ee2` | 1 |
-| `system.services.disable-wap-push-routing` | deprecated | `Docs/tweaks/research/records/system.services.disable-wap-push-routing.review.json` | `e97ccaa2298a6068f8c0ddfc9cbd17d1bcb07a8f1d6d2c60159afbaea3fdb677` | `2458c27ca10eeeb2d794bbd64ce5d2fd8c2c88ef8f854ad9c8ed425fc0894f28` | 1 |
-| `system.services.disable-windows-error-reporting` | deprecated | `Docs/tweaks/research/records/system.services.disable-windows-error-reporting.review.json` | `2d1d17ca9a3df5dac34d597126d30439408c364f975cc8e5284721bb3b25e337` | `1af4ce46fa6d4c619326da763939eb8969b2300b9eabd16fbb0e485987356791` | 1 |
-| `audio.disable-beep` | validated | `Docs/tweaks/research/records/audio.disable-beep.review.json` | `3efba036852ccfe1d739d4fe044a827c5869d7588470af089efd76924a5fc479` | `4d074ac9987be3f1f28b06277c747e6c49da4b27be38ff2380400b9cc1a6b4ef` | 1 |
-| `audio.show-disconnected-devices` | validated | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` | `6ebe3325d9398956ed2e1c38645bc1605f1efb4404396b0e12faee5baff56373` | `8d67f764d7eaaf3719428c7c806dc6ec55bc227135dbb6daa493eaf8c390c9a1` | 1 |
-| `audio.show-hidden-devices` | validated | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `53977bf3d42a6320f03cd04c3e782abd1c8c91c3bede2f0a11ce060401eb8a53` | `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95` | 1 |
-| `cleanup.disable-reserved-storage` | validated | `Docs/tweaks/research/records/cleanup.disable-reserved-storage.review.json` | `d613803743ec930d75f7bb5a7dd770a6232bdd95d955a591812b92631ae2fd76` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 1 |
-| `developer.docker-performance` | validated | `Docs/tweaks/research/records/developer.docker-performance.review.json` | `e86fa037da24385991ffe94edbb1039cf5b2ee636654d27c3d4f0e7d4062473a` | `e4c2f1a09fcfe91db5161301b71b4ec7262c17dc97de49b390f65f9abcf9253d` | 1 |
-| `developer.dotnet-telemetry-disable` | validated | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` | `b78802cb5a3836c719b9463afbeb1f933f1f9011a591ade113264880303dc648` | `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c` | 1 |
-| `developer.enable-windows-long-paths` | validated | `Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json` | `78a0923a9944c8088657298210a233e5c5793924cb928f32ba853b18589c2a8c` | `2b390bcd3f0082f4558b386b1c876aebc02ae85fa482efb6be28b8696e197f29` | 1 |
-| `developer.nodejs-performance` | validated | `Docs/tweaks/research/records/developer.nodejs-performance.json` | `8a3f6554915352ce00f5f05973e420d3529b6310cbb1d3ff30970a1f3fc6c61a` | `afeb8b18277d7825b304d849b0406a81c8dc155974f74e40933534c301df9ad1` | 1 |
-| `developer.powershell-execution` | validated | `Docs/tweaks/research/records/developer.powershell-execution.json` | `ba780b14478019a7e9cd1947efbf71470b8ea01b6f6851e668ef40d460bd0784` | `3a25fe7ca941325c96591236522cf807d8b269ff223bcc737bd5b073718cd047` | 1 |
-| `developer.python-path-fix` | validated | `Docs/tweaks/research/records/developer.python-path-fix.review.json` | `ce8f62b9295a1c477129e2e6aee7b1b55fb9f9764bfe6984328029bd2ee70ddc` | `ca039878abcb9e81f07fc1719a12c9dcefc1f2c42c36aba4c56ec7f80cc80e2a` | 1 |
-| `developer.ssh-agent-autostart` | validated | `Docs/tweaks/research/records/developer.ssh-agent-autostart.review.json` | `b3236efe7c1bf586a427ddb9a748aa911b732effdd6e8e270a386e5bc25b7485` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 1 |
-| `developer.windows-dev-mode` | validated | `Docs/tweaks/research/records/developer.windows-dev-mode.json` | `3c3defe4768d22994c71d0a3c131d12ea7eac123190b4fe89a56b7a2113a324d` | `0ed25dffb4bdabc7eaa24c879e79ec54649fabca8d204b46a0e2f6434ae60841` | 1 |
-| `developer.wsl2-memory` | validated | `Docs/tweaks/research/records/developer.wsl2-memory.json` | `9cf81d553d079e19fcf84fae9b126bdf1b081f7c4137cba883434eb9fdaee1fe` | `8483aaddd7cffe7e57ba75d9b795a94c65285ad73a64c77020d7502864a7d988` | 1 |
-| `explorer.always-show-icons-never-thumbnails` | validated | `Docs/tweaks/research/records/explorer.always-show-icons-never-thumbnails.review.json` | `22d475e957eef9e078a8c4c3975e12abe89e1ba86c11cf44e627e8221483b1a0` | `b7ac9b5f0745fe76c95b7c8864517314a2c401bac224bb610acb66022a804fcb` | 1 |
-| `explorer.disable-low-disk-space-warning` | validated | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
-| `explorer.disable-taskbar-chat` | validated | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
-| `explorer.enable-explorer-compact-mode` | validated | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
-| `explorer.hide-empty-drives` | validated | `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json` | `a3d15c07579a659260f9ff891c3e0545a369c0b8d3b14e8c099a4e9b9a5e7d77` | `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765` | 1 |
-| `explorer.launch-folder-windows-in-a-separate-process` | validated | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `0b9f99f5eae8811b2493069bc7f36bfd4ff3f4ae8c118e33ff8782d051ba1e59` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
-| `explorer.show-compressed-and-encrypted-files-in-color` | validated | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `b976a2e2767ddc7d57d5b0ff72916467281618730287197d707a754e08ea123d` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
-| `explorer.show-drive-letters-first` | validated | `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json` | `8bfa52fedcb995cc8db11a3c4235f7f2a205442dfad8c0c2d799703d755d28a9` | `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10` | 1 |
-| `explorer.show-file-extensions` | validated | `Docs/tweaks/research/records/explorer.show-file-extensions.review.json` | `fd29b08e9516a84fb812c47948e77c6099d1de026716ebc83bfa121b641954d8` | `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d` | 1 |
-| `explorer.show-full-path` | validated | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `04d7c7e028991d2417cfcf30b38620aafc8b340c00e65c40a7b0255a983f7d1d` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
-| `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
-| `explorer.show-info-tips` | validated | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `ac3bf40732016c93efa19809e2dfcd75429737d70ffc3eae56a5abe8e401ac13` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
-| `explorer.show-protected-operating-system-files` | validated | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
-| `explorer.show-recent-items` | validated | `Docs/tweaks/research/records/explorer.show-recent-items.review.json` | `e0415d1d6becffa6d1baa236a2bcf7f345f7d693bdb86a20206eabcbe9d7fc92` | `924f0e48d17cbcb71c2c3c57e56be18b825d3a32f3d12fd6cb5d582529e1a34a` | 1 |
-| `explorer.show-status-bar` | validated | `Docs/tweaks/research/records/explorer.show-status-bar.review.json` | `86d5fc4618cbdda09962a72633d1d50f678d6cc0f7bbad8c242d833f696af759` | `9cbc0e1f749f45ec8df99669200d92db5614fefdbc6a3ecfa98e06ddb01383be` | 1 |
-| `explorer.show-type-overlay` | validated | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` | `eb3965321c9a2981e5f8cd538ed32e8932aa64a69d9e434076e5eb0b270a1db7` | `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2` | 1 |
-| `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
-| `network.disable-active-probing` | validated | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0` | 1 |
-| `network.disable-default-shares` | validated | `Docs/tweaks/research/records/network.disable-default-shares.json` | `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
-| `network.disable-ipv6` | validated | `Docs/tweaks/research/records/network.disable-ipv6.json` | `024c6f3d596e053e312ee3444561fa5647441f688703fabb36829995c58b1597` | `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa` | 1 |
-| `network.disable-llmnr` | validated | `Docs/tweaks/research/records/network.disable-llmnr.json` | `64bfbd33307d83a488f3f5e0b66cb44c38e70e3556487950f6d310bb9aa8b558` | `eed09962b64570b68d966d4d13cb149e60d9ac1b4b65b1159d77e3994570e5ff` | 1 |
-| `network.disable-lltd` | validated | `Docs/tweaks/research/records/network.disable-lltd.review.json` | `147a50cc0134ab85f1f14d21691d23fce788b4c5799540cea3c6d6b0023144b9` | `95621d902169844295e40dc7f4043671933f41cfbbad706d915315fae84b8121` | 2 |
-| `network.disable-mdns` | validated | `Docs/tweaks/research/records/network.disable-mdns.review.json` | `167200f5eba4f465072285304aa655b20f3f338461e6cfc7e2945cdfcf78a71c` | `1fb961716d805445b8df34459ecd163bc84ff8d7bce259e6c394a31111426da2` | 1 |
-| `network.disable-netbios` | validated | `Docs/tweaks/research/records/network.disable-netbios.review.json` | `dd74faac26d495f020d8dd912489fc04c1740aac0500c11d76745f30723342e3` | `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69` | 1 |
-| `network.disable-netbios-resolution` | validated | `Docs/tweaks/research/records/network.disable-netbios-resolution.json` | `c400232eebb9249b9f97ce2ab71e3e119d9558d1c81dceb1c68c5fb442d0d38f` | `f44db12dce1b3f260c63e54a291c94ec312618bb1474862e3f87c5e350be8c5f` | 1 |
-| `network.disable-plaintext-smb-passwords` | validated | `Docs/tweaks/research/records/network.disable-plaintext-smb-passwords.json` | `99a2ad71755aaccc92f74d4e32bce7e0396dab5fa6f44e87845af2dc0f2e7d6c` | `1d023fbb6142f048795944b419f76a22cfda8a6c9207ed5691fc76f97d4dcf76` | 1 |
-| `network.disable-smart-name-resolution` | validated | `Docs/tweaks/research/records/network.disable-smart-name-resolution.json` | `9103f458193028b2ecfc210f4834075572b0c7b17552cf442a38b93ed81dd56d` | `a2b58aef6e298524a81810782c78ba8b1e2d4290537187ade868ea7010dd410c` | 1 |
-| `network.disable-smb1` | validated | `Docs/tweaks/research/records/network.disable-smb1.json` | `70a57880ff85a796e61f3f4da3feb437572aaac8ebdc00a8e8e064716ecea63e` | `a836aa20c016b0cb82751ac7f7371e55f771b09bc107cf0fddf0fc780d7f3fe0` | 1 |
-| `network.disable-smb2` | validated | `Docs/tweaks/research/records/network.disable-smb2.json` | `e8bef9077bfc1589aae174d0d8a73d7a34b282eba9ca45caf43ea15daf365b22` | `5339bb81b3dce3550a6cde64fab48e846da914d79dd4c7a5cc7b894b2ce66c50` | 1 |
-| `network.disable-wifi-sense` | validated | `Docs/tweaks/research/records/network.disable-wifi-sense.json` | `276c2ed05cf51928b61461d2dcb9fa6e5c4bd1db0e46463fa052251f80566c8b` | `15f8edf75fa5fe82787894099f7d3bf62989d73555893644d4b7e781b4f39920` | 1 |
-| `network.enable-lltd-responder` | validated | `Docs/tweaks/research/records/network.enable-lltd-responder.json` | `5073f39f47458dfbdf89041d84e467c441d923a347872b89448204d14654555d` | `151af74ca167733c59c777a58bfda35539d644963bba56da30e75f231ee24db3` | 1 |
-| `network.enable-lltdio` | validated | `Docs/tweaks/research/records/network.enable-lltdio.json` | `46535b799055f878ebc3dea4ff11b0a29df6bdadc1568bb95431bcc1f66039f0` | `cf1759fcbe2f5d1d8d8ae6c2157572de4b0443ddb558424efe605bef379879be` | 1 |
-| `network.prefer-ipv4` | validated | `Docs/tweaks/research/records/network.prefer-ipv4.json` | `12a1b9daf05ca7291c64063af013fc697144c19d47ea05ba1e0d7edc770d796f` | `716ad6ac1200efc085880de052a42a79f81af9ad24329f1c6cc07c9553f71644` | 1 |
-| `network.require-ntlm-ssp-client-session-security` | validated | `Docs/tweaks/research/records/network.require-ntlm-ssp-client-session-security.review.json` | `f84c709a4d4bbfc0c04575fecb75182b36647c25f9e2088093586042366098c5` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 1 |
-| `network.smb-disable-leasing` | validated | `Docs/tweaks/research/records/network.smb-disable-leasing.review.json` | `660ff172621f5edbfac2bf1c5b3bf575351ebad1e1ed46db5f08a0ca4b34d80e` | `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9` | 1 |
-| `network.smb-enable-large-mtu` | validated | `Docs/tweaks/research/records/network.smb-enable-large-mtu.json` | `d0272947e2ae119ae84e0335ac1b7b66eb91c74cc74d155fdbf05f44aaba5d56` | `baeecfe02b08e4e38fdadcbbc3a8c6134c0bc27de55bfaa8f016ff7d7fd5a45f` | 1 |
-| `network.smb-enable-multichannel` | validated | `Docs/tweaks/research/records/network.smb-enable-multichannel.review.json` | `e0891e1fd368a2dbcb47cb32680ee9ce6d183d41cfb1883b8e8979893cc535dc` | `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22` | 2 |
-| `network.smb-enable-quic` | validated | `Docs/tweaks/research/records/network.smb-enable-quic.review.json` | `5cb5d022813f5e90d000006517ecd4bb50b6161af54039679655277702db87a4` | `d0812e9f4c65a1bd0f53b117419613631b049fef49b82b3e12ed594295440e19` | 2 |
-| `network.smb-encrypt-data` | validated | `Docs/tweaks/research/records/network.smb-encrypt-data.json` | `3c1bf644733e2ab70c664da9d11a98d89063178a2b1a6d047e8ffb83ab16cc66` | `aaa4f8307120426c917f6f2d3db3bcdec1303fb61195bee5e9e7506e3c568544` | 1 |
-| `network.smb-increase-client-metadata-cache` | validated | `Docs/tweaks/research/records/network.smb-increase-client-metadata-cache.json` | `e114a501dfb91469fb5ccf01348a9ec652b1b629936c94db467d7938a90e9064` | `aee591cca7f7728315ca264021f9d19637863e7b4e736813a1179ea1a9d33d63` | 4 |
-| `network.smb-reject-unencrypted-access` | validated | `Docs/tweaks/research/records/network.smb-reject-unencrypted-access.json` | `a1f2e32caac439033bdd96251dfd76d4729a8be8eeae03ecad10873f7fd30988` | `a89ad3a32fda0229a84030b9e9cecf137b14e200f5033f27ac62f70afd2d067e` | 1 |
-| `network.smb-require-dialect-3_1_1` | validated | `Docs/tweaks/research/records/network.smb-require-dialect-3_1_1.review.json` | `0a65d1f64ae541a2e073148da2c4b9a647e93af69daad19041467fcb56878e4e` | `a68251e184cabd33a60dcbd50a6ceb3d7ad09af039b1a7952a5a5cb85f2c9b49` | 4 |
-| `network.smb-require-signing-client` | validated | `Docs/tweaks/research/records/network.smb-require-signing-client.json` | `8b5811e2e985a3f6998bd43a04b0e325e2b5e73d36eb6c963228512a1be3e27e` | `8a2de1b18d6d22bedd02d87a6a1be917c17893f304664a7a2853d1d9f4e9508a` | 2 |
-| `network.smb-require-signing-server` | validated | `Docs/tweaks/research/records/network.smb-require-signing-server.json` | `b8924ffd3d2588a784054d6781c0a32318faaadae134f6ad8425d1cda6f56706` | `522e008e12d4f73124b4eae979f4b06b1a88d207496b94d21cf8b84f8f1a22d8` | 2 |
-| `network.smb-set-cipher-suite-order` | validated | `Docs/tweaks/research/records/network.smb-set-cipher-suite-order.review.json` | `4e5f5aa3c778df39fa6e4e0b7f80db942b7fc30235a1070add5bc27e542f5f33` | `9cbac8865b3477691362fe283e460e02c3465cf68416e194d8ce4842d3223688` | 2 |
-| `notifications.disable-feedback-frequency` | validated | `Docs/tweaks/research/records/notifications.disable-feedback-frequency.review.json` | `27da435a9a26b977bfa1af84d4b988c9cd6810434af8b4f3d6c29d245461fb4c` | `7855f743095f7383bff4654511252ffac274da378def6336a873a7fc5204a00d` | 1 |
-| `notifications.disable-lock-screen` | validated | `Docs/tweaks/research/records/notifications.disable-lock-screen.json` | `cb4ccca568e32a10a1023d92c340ff39ef154647c70a19c37aa169af781c3c9e` | `8b8bff69c430ecb0fd211d395dc19774a97b607d0af6ec8d605cb0542af5028a` | 1 |
-| `notifications.disable-mirroring` | validated | `Docs/tweaks/research/records/notifications.disable-mirroring.json` | `12048a71562be16820123e75c0d715331bba471370286cfa56f8aa4e2dea5d48` | `e839a3b288ca983fd2356198ef6177a12f17692a8e9242e5c03faff485ee8267` | 1 |
-| `notifications.disable-tile` | validated | `Docs/tweaks/research/records/notifications.disable-tile.json` | `f0dc5dce3c141a010807410d08462ae0ae5054eb67236a25e1f4b3d2222f5201` | `4eadf1fc0c0e7cb833e44cb784acfe7224407c3eed9c58f213a233b80a379700` | 1 |
-| `notifications.disable-toast` | validated | `Docs/tweaks/research/records/notifications.disable-toast.json` | `f34932c9eefe4f9474bc39b38dfabefca69ccc07ca11033d4a77395f228e8844` | `c838efd9cac161fc6219e64cce19d02953984124d758641d844f84d13fb6b96a` | 1 |
-| `performance.disable-animations` | validated | `Docs/tweaks/research/records/performance.disable-animations.review.json` | `066c630d5f833dce8fc641418136f15ca0e53613c4ca4d973467aed16239bf97` | `b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2` | 1 |
-| `performance.disable-menu-show-delay` | validated | `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json` | `af6766e751f23939a57100cf1bce63e6f9f2a512620348f23ffb46adcae36930` | `2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3` | 1 |
-| `performance.disable-taskbar-animations` | validated | `Docs/tweaks/research/records/performance.disable-taskbar-animations.review.json` | `67ac8083ab3c5c6fe6932db8dcf4c4bbaf3d757a95c8c15f549e764b6563943d` | `21ca137e119b7e2de180779158da4ac8b7b45cb6af8baf96444e4281eb6d6ddd` | 1 |
-| `peripheral.autoplay-take-no-action` | validated | `Docs/tweaks/research/records/peripheral.autoplay-take-no-action.review.json` | `e6569c930a05f27153e74cc69f99130870474475c3dd28bff5022f38cb1e183b` | `6bf8b90fe59d4cf3ca5ac2b3c86e0b15bfd409ad27e51f54856fd76cc726df1a` | 1 |
-| `peripheral.disable-autoplay` | validated | `Docs/tweaks/research/records/peripheral.disable-autoplay.review.json` | `c72a6200a630b6cb859c13580bcdfc8dcc7ad96add4e69dd2cdd969fd6a700e9` | `1cba6d9b41c50cccf15290ce6131cd5daea44bc48c26f0f8f6d351963cd1e8a1` | 2 |
-| `peripheral.disable-sticky-keys-prompt` | validated | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` | `6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837` | `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e` | 1 |
-| `power.disable-cpu-idle-states` | validated | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `077d1ad70f7c569f24bde535f525128e2f0bd7af6dccc2644b4cdf5b58507d07` | `5bb8f021adc0fd46c8f2e4a4ac05aa30e50915bd05e77c48b85fb4db44e56697` | 1 |
-| `power.disable-fast-startup` | validated | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
-| `power.disable-modern-standby` | validated | `Docs/tweaks/research/records/power.disable-modern-standby.json` | `4735f00424ad14036f07e29a9a5327430e66c1de57f007d87934eaa80601127a` | `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e` | 1 |
-| `power.disable-network-power-saving.policy` | validated | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
-| `power.disable-power-throttling` | validated | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `6bbb0293de661b8c2c09bf60e67517b09b78ba45f66065f5bbdc249c5f2dcffc` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
-| `power.disable-windows-search` | validated | `Docs/tweaks/research/records/power.disable-windows-search.json` | `a71dd4b0dd816fd6f1fcbdd000f7d60651cc22532c03ef49228899aba5b74ff4` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
-| `power.hide-hibernate-option` | validated | `Docs/tweaks/research/records/power.hide-hibernate-option.json` | `a9cd2a784e62a1619ea7f920d71387fee650e2ce8357a9b584b28e8579fb9825` | `a2ccf9b1a2c922e3273812eea45986113d2b2eec94a801bbf7cff7ecf9cdb417` | 1 |
-| `power.hide-lock-option` | validated | `Docs/tweaks/research/records/power.hide-lock-option.json` | `e92e39c74366ca830f7cc4f3399394f72c581a57638e888be211aa421bf05856` | `cac67bd54c67255fb7bbd92e34790b14b07acbbfe0c5736954289301ac9f35bd` | 1 |
-| `power.hide-sleep-option` | validated | `Docs/tweaks/research/records/power.hide-sleep-option.json` | `c9235ea4a57b3e8d4a6b7ae241430e25c8f46af21ff3158eef586668644423f8` | `9fd4a690ec7f01c46a0a7268de36b05197e70fea5ded44632b11d705011ea0b8` | 1 |
-| `power.optimize-cpu-boost` | validated | `Docs/tweaks/research/records/power.optimize-cpu-boost.json` | `cf75017ab18baf416f2b8999dc4bc085f9c557e25bc0be505a6b6b570b996d81` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 1 |
-| `power.optimize-gaming-network` | validated | `Docs/tweaks/research/records/power.optimize-gaming-network.json` | `79e7719a7772df3cf7ef8515b4b2d1f377993f835b90c5697de4cf789fe89b70` | `f21ead2862871a3b24aa2e310685dcce0808f29e5fde1307fc47f4c92477ba2b` | 5 |
-| `privacy.block-microsoft-accounts` | validated | `Docs/tweaks/research/records/privacy.block-microsoft-accounts.json` | `d44a370be73827a005595b0e5fa53b300eae3d558eaeedb76704704cd5e46ede` | `aadd043705a8dd7c0253c9959e72b05bdffcd4b3681169958fa169b7abf70d45` | 1 |
-| `privacy.deny-app-access.policy` | validated | `Docs/tweaks/research/records/privacy.deny-app-access.policy.review.json` | `3f92db45e192018ab405a500de812ae96fa2c52db982c10bbb1af4a16eefa78e` | `b1d082da5839ba837ab9aee8d2b0bd41c45882cd5b7400de0a78b8117dfcc660` | 1 |
-| `privacy.disable-activity-history` | validated | `Docs/tweaks/research/records/privacy.disable-activity-history.json` | `a60be8654b03150e6d893f3214fb289e942816507aa25ab339ab26d884aacfd6` | `bc005dd4397dc6efcde50924f04736c0579ff9a9b606f7d658f1f101fff2fec9` | 3 |
-| `privacy.disable-advertising-id` | validated | `Docs/tweaks/research/records/privacy.disable-advertising-id.json` | `edd49eae00cb8bed1842e762e7a061284191e8518ffd6ac4afa825502ca823e5` | `bd278720b6e772ec29f19dcd30d92794179e4793a6bb4971be7cf321212660f9` | 1 |
-| `privacy.disable-app-diagnostics` | validated | `Docs/tweaks/research/records/privacy.disable-app-diagnostics.json` | `f5faffbd240fb2850a3d1acd19d46f5d372f7bf30cc7e604065725a6d543d161` | `83541ebc2f0724779aa7677a49e2c42f136a2f80e094ec339c7a0bbaeee07b53` | 1 |
-| `privacy.disable-app-launch-tracking` | validated | `Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json` | `0fa189370b34081b7975544d70bbf6afc5fd2a225a35a8af5e962669b6d39d5f` | `28728b4f09440c59e8c8dc5c80d7346daf6ab6388d81dd84e1ff5a71bed1cae0` | 1 |
-| `privacy.disable-app-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json` | `32fdf673c98ded073a2f0a47920dc042cfacb15b2d48144401fb045532d40f30` | `7fa321f823790c2215c2c96543c04e9cf2f883b6886df0761ab7270272d49d89` | 2 |
-| `privacy.disable-appcompat-engine.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json` | `88a6c309a68d0b5c9d207c44d1884ae0f206b7edcfd0106e4ad25467172d0c78` | `4aa284a466ab23274289afd8984f112be82d7d68465fbe343f40ef70b10d440a` | 2 |
-| `privacy.disable-appdeviceinventory.policy` | validated | `Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json` | `2d89783a4602f6689e5ae67d3244929d07277ec17848c537fde8f4aeb97a2250` | `4485a54cc0e04a3a5edf164953eb83b326f93a637f219da7533aa98574fd4347` | 4 |
-| `privacy.disable-application-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-application-telemetry.json` | `67e8bd36fa534079200de42f85ee86b72e358addfd2af66853bb00673b524f17` | `a968b51a0de4ed20b602bb28e37277b16294b8a2e3956a3d3b351f6cf8d071e9` | 1 |
-| `privacy.disable-background-apps` | validated | `Docs/tweaks/research/records/privacy.disable-background-apps.json` | `87f25eba44934a34cac1d1be07251d472926340620437f51f45d1e058bd842ed` | `bf3477ff8a0483d037ed07264ec9a1f37e93628b8515b4d92bcd052d59c38480` | 1 |
-| `privacy.disable-biometrics` | validated | `Docs/tweaks/research/records/privacy.disable-biometrics.json` | `382e974742bf17a273e1ad3c94f86a97f1ab69995da4a19947121a085421e6c7` | `aca211803f04fb1fc14cb757852759a28fcc4c6fc1b8966b0fe26de035e64638` | 1 |
-| `privacy.disable-biometrics-domain-logon` | validated | `Docs/tweaks/research/records/privacy.disable-biometrics-domain-logon.json` | `e3897566bfbeed85ec42fc8b10526cb44774efddaa4c5cca60753b3f32804119` | `cb63aa659031ceed53be982df01e1f9e6831ad0aaa5a89688ad601f4aaf52942` | 1 |
-| `privacy.disable-biometrics-logon` | validated | `Docs/tweaks/research/records/privacy.disable-biometrics-logon.json` | `59b3f016923db303d8ece30e59c420a86d41b271a883cfb7431cc96811e4fcc4` | `e877e0087f68acb4ee49fe3cb1e7a70c8440c8e055202f306070b0b40c6a5fcc` | 1 |
-| `privacy.disable-camera` | validated | `Docs/tweaks/research/records/privacy.disable-camera.json` | `a10de2148caa579be126fb4d1e4906fe2e5da45e5228a18d1fd10eab08f48e0b` | `ed1c25600e7c9bf71b51abec244fcb3d70f9969db29e19606a32c0fc2686a822` | 1 |
-| `privacy.disable-cli-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-cli-telemetry.json` | `3b25a760d05afb16afce7a68a8768a2cabf41c82199c45d6f83b5a01589b87e5` | `c01ca3ce36e8a237623af81403fe1e460d5ab64f427a31f30bd913a7d0630382` | 2 |
-| `privacy.disable-consumer-account-content` | validated | `Docs/tweaks/research/records/privacy.disable-consumer-account-content.json` | `c5e5af6aa8510de48023b0697e0fa003b8db07d26f03ab779f067ed6794e4083` | `802c43fd0393ee0e78c1e693355adf236c4b541b588b30c9b562dd4acffcb715` | 1 |
-| `privacy.disable-copilot` | validated | `Docs/tweaks/research/records/privacy.disable-copilot.json` | `c118fdaf3479c959c9c1dcd1886a0bfc864df07d3a238daa973eeb6f19c5b331` | `b1cd95056a7f94f371031db3f6de9b19002f4f490f784a91eddc21e6e7391ecc` | 1 |
-| `privacy.disable-cross-device-experiences.policy` | validated | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.policy.review.json` | `ec2ada610e78aa52d0bd8c323443004a75d133c2b175b93d5e01a28edb05a72c` | `cd57fd96f5a482926e20bdbff74771f88dcf8aed98c8528b62bdbdaa5e26d112` | 1 |
-| `privacy.disable-device-name-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-device-name-telemetry.json` | `28be3c8860b06016e30ab7c03b9919e4a9549b8a0af9e1ff22d0e002d5a4c14f` | `cdbf62da7c9c0eb896f953c23c3e486f5850845e6fddd640cd9ec9238437f471` | 1 |
-| `privacy.disable-diagnostic-data-delete` | validated | `Docs/tweaks/research/records/privacy.disable-diagnostic-data-delete.json` | `0664e74cd1a50f51da1431bce9a0d886204460d2e166f068733a3f8101ea547f` | `5891504911c5f08d60193a8924be5928326e11a0e47f7e996703542b46610e9b` | 1 |
-| `privacy.disable-diagnostic-data-viewer` | validated | `Docs/tweaks/research/records/privacy.disable-diagnostic-data-viewer.json` | `7f874873c7967e29216c2a927c911688c34248f27a6360ab8b9679eb76fc66df` | `1e5a68e241c51b8fbb767c9157452e3ed5bcb6c9ce55eb50cb3a4548e7525b1c` | 1 |
-| `privacy.disable-edge-search-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-edge-search-suggestions.json` | `8f7ca88b8cfd391f02b29ab6ada5afd6dc48c64062f319498ec147447ab35893` | `308a5afd7fbc0a505de5fd5e6da9be0ff76205149f037ec2feaa93c192c8cb56` | 3 |
-| `privacy.disable-feedback-notifications` | validated | `Docs/tweaks/research/records/privacy.disable-feedback-notifications.json` | `02f0fedae59e9a9d70c5e33de97cdca0f92f9fa91b789c840d9fdd994e791622` | `4fd4c3366b7f3c26314d395899a7537dd7ea9da8cb4ffcab10572845df1e5b6c` | 1 |
-| `privacy.disable-file-history` | validated | `Docs/tweaks/research/records/privacy.disable-file-history.json` | `e1e867ac34c8d47f9e813ae7a89e770f36a151bfe6915b8484a33dd87f7f2462` | `aa8d785480383b20c15d2bfeb0b8df5880a9dd17bde45e0b336c6d793462e2cb` | 1 |
-| `privacy.disable-find-my-device` | validated | `Docs/tweaks/research/records/privacy.disable-find-my-device.json` | `c8870610945cf729181b0927326195c2c8cbb03606ce1142a29dbe870219364b` | `87b5872f6958740891f43a2c779b22ed879146d0e2a7941319e90d93f47f5f77` | 1 |
-| `privacy.disable-font-providers` | validated | `Docs/tweaks/research/records/privacy.disable-font-providers.json` | `3103ecd3cc80e6ac2ced1c86f6d0951bc26cfa7c46f8bcb8c2d1bfd54f51dab6` | `354730db32c467f7f05f9076e40ba6652a7ecbb40c0a30f29a72d69ce2db56c8` | 1 |
-| `privacy.disable-kms-activation-telemetry` | validated | `Docs/tweaks/research/records/privacy.disable-kms-activation-telemetry.json` | `f7b7017efc2fbf591c50f25453a9789f359d97e8a85f7ddbb19047db38864529` | `1e9e9894404d129fdfbb0bb7fe36462ff4f5028ceba1159bc4c5bc4106e139b6` | 1 |
-| `privacy.disable-language-list-access` | validated | `Docs/tweaks/research/records/privacy.disable-language-list-access.review.json` | `ef87f286bc1e28e2e82b2ba42cde3dddefc4a530e226e4d304980b3c0fc16859` | `c074b88f6c9a9ae61c5f95a9a4f41b990e2bf9843036eaf689f52637332f15aa` | 1 |
-| `privacy.disable-local-security-questions` | validated | `Docs/tweaks/research/records/privacy.disable-local-security-questions.json` | `0510aaff489d042f5092d37dd6bfa66c63f818c3bcfb4c0fcb6bd92bf9a6b170` | `d982c92d36455ed71e4e3b67770666d18ce19516b5834234fbe5857c78075c2a` | 1 |
-| `privacy.disable-location-consent` | validated | `Docs/tweaks/research/records/privacy.disable-location-consent.review.json` | `8d3fbb61dbf442c36526734f70021a0192574e679be09a3456a2948e66eade05` | `b83a34f2f928911486f15a32ea6c9b1f0cec24f813002f95b0035e5e1e15553c` | 2 |
-| `privacy.disable-location-consent-system` | validated | `Docs/tweaks/research/records/privacy.disable-location-consent-system.review.json` | `c7fd5c92098136a47f3fb245f275ca569dda95787a110329de65626e76cb3075` | `2d79f728476170491a58f6b6df1936c2669224fb46a5408be32263279ccab137` | 1 |
-| `privacy.disable-location-scripting` | validated | `Docs/tweaks/research/records/privacy.disable-location-scripting.json` | `625c68677b896079ecba8788ad61230808270368b0da87b8012aa88dfb9d8304` | `0d370d91cc59136db8005af00e3d57fb4c3f8606d0fb213ffbefc494041ee024` | 1 |
-| `privacy.disable-location-services` | validated | `Docs/tweaks/research/records/privacy.disable-location-services.json` | `02a2e5b01eaabc168a8c6413cfe788ad7ba628a890d8175c6e68299d3b1d3eb6` | `b63cb71c7f14cb3f1c8f97f32da8f3dd5b54d4a700ead5612765dc9a83d8b110` | 1 |
-| `privacy.disable-mdm-enrollment` | validated | `Docs/tweaks/research/records/privacy.disable-mdm-enrollment.json` | `1ad4b0bc6688ae1f1a5f643c93138c14af1ed0c6f83996a4bf75e73448ff6ea0` | `e6f8a61361558a6b5553f8164f24f593e825c7e2a836515183f7b67e31364e08` | 1 |
-| `privacy.disable-message-sync` | validated | `Docs/tweaks/research/records/privacy.disable-message-sync.json` | `141e59fb354ef13712d7c086e134c21e0eca83ca1fb81d495c1819cb4107eae2` | `9ac7e52d8d1523fd2f662d4e33a210918cfd25f416a02fa88ced7077cf65c1cb` | 1 |
-| `privacy.disable-offline-files.policy` | validated | `Docs/tweaks/research/records/privacy.disable-offline-files.policy.json` | `0077b0a81625ba7eaf14678a918a3dab63f2ab92dd9579b785c0985560f5bde2` | `5f2c37486fce94be54a1f7aba31ff0ec2ffb424a30a22bc5decc1101e65f0b2d` | 1 |
-| `privacy.disable-onesettings-downloads` | validated | `Docs/tweaks/research/records/privacy.disable-onesettings-downloads.json` | `75ac04f346672b1c0acade2691c81ea301777b3e6ed0147dc754fc3e8c8cd401` | `cca2f3310e87732b2639ebe0618ea5d41f71814401cf09e12a99a5d5637e7435` | 1 |
-| `privacy.disable-online-tips` | validated | `Docs/tweaks/research/records/privacy.disable-online-tips.json` | `8d225aeba1aa4730710ee5f2f2e8dba8bafdb00724db0242348badf9714bfe3c` | `5b4f9f5a365bc0021a8c40a8e54b3ea942db059ac2427124a3f2ecacff187654` | 1 |
-| `privacy.disable-pca-diagnostics.policy` | validated | `Docs/tweaks/research/records/privacy.disable-pca-diagnostics.policy.review.json` | `361914f2f1feb29b3636edcf815e1afd0af762ec539f66260d1bac51d42c2f9d` | `7bdb81d570e8ab0ad5ee8e5a8b3112f1606cb397e867b219ba9775c4ee981600` | 1 |
-| `privacy.disable-phone-linking` | validated | `Docs/tweaks/research/records/privacy.disable-phone-linking.json` | `1731d7b9214bfcf6934c71f567c60cf7b9606eba456890fdb4cea244fc0cc919` | `1ac5d1461c6cb46560b096b50e2275a5337e2733cf934863b090dea12300a33e` | 1 |
-| `privacy.disable-program-compatibility-assistant` | validated | `Docs/tweaks/research/records/privacy.disable-program-compatibility-assistant.review.json` | `1e2d3bd33c18e44a39ebbebf350cf2ec1248d96e99ca61f75dd27ff15ba472c5` | `44e0f5bfd3018d0f07f651cf907dcf7bcb13de73ab5c19f61b128b0f8ea4f2b5` | 1 |
-| `privacy.disable-recall` | validated | `Docs/tweaks/research/records/privacy.disable-recall.json` | `a3dbe5a9847aa3811cc813babc86d285b8f40f25aeee1cfd08d0c86facdbd870` | `9a1681fc411102114e54e8b3fcc31db5b490fedfdfa16084814efe601a8c63c6` | 1 |
-| `privacy.disable-resume` | validated | `Docs/tweaks/research/records/privacy.disable-resume.json` | `facf312c6bfa6d02b3b4200c1da07c785f21090fe9f16546eee415642428443d` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 1 |
-| `privacy.disable-rsop-logging` | validated | `Docs/tweaks/research/records/privacy.disable-rsop-logging.json` | `e663e6d53c1c5cfe161fa777b90006fa0402b9eef5f606598dcaa011974270fe` | `5f3e900bb750e2a4c50deb90a0dbdd7f9e2a245eac042a0c1dfc0bcb76224b3b` | 1 |
-| `privacy.disable-search-box-suggestions` | validated | `Docs/tweaks/research/records/privacy.disable-search-box-suggestions.json` | `24a42941d3e2574654a4bff9f6add2a7145bc4873f6b34f4ca7bfb22268aa30f` | `eddc41ee198554d3fe83d0e6d0e2106783e18a845d2d7cb0e7cd6e74e9ecd7ec` | 1 |
-| `privacy.disable-search-history` | validated | `Docs/tweaks/research/records/privacy.disable-search-history.json` | `4489b0ca6edacc05240289c84511215b311fc6701407fbf77d25858fe04b8384` | `577e0f892a7550b2dbff71430b62e9ce4ae3ca7a8ab9ade7a96e9fe086ecd5ac` | 1 |
-| `privacy.disable-sensors` | validated | `Docs/tweaks/research/records/privacy.disable-sensors.json` | `cccaf1838e5764b56275e3922448a433132c93f7310a2f5eab40a0b41fc35215` | `03b2103d23d85cca9c386b2625adb5bcdea664e37e93181285e939a421430be5` | 1 |
-| `privacy.disable-steps-recorder` | validated | `Docs/tweaks/research/records/privacy.disable-steps-recorder.json` | `c30ca6105b9e2cec0f671f6f27e4940f2efc14114323be321c1a4db8ea8c05d0` | `6b1c4965f1dd88907b6fe4153ee7caa5fa57810b0c676a4c6eb04c903a0c3915` | 1 |
-| `privacy.disable-suggestions.policy` | validated | `Docs/tweaks/research/records/privacy.disable-suggestions.policy.review.json` | `09dcee082106a1a85341f5d33d0ed89c6e266ae62a4ff37b4f4bbb95b9948904` | `f7289e1c044f4aed06c13b7cb312fc469ce3c649dc714b45f8210b084d491d23` | 3 |
-| `privacy.disable-switchback.policy` | validated | `Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json` | `7342d11984b2ee54d112c3889c24dad1a30a1baebcb0cfce8724933e2fa8ae62` | `e30ead337c2d32a4eaf143f8b112463cb25a2ed0f7c0fa445c95cc6d9f289a54` | 1 |
-| `privacy.disable-telemetry-change-notifications` | validated | `Docs/tweaks/research/records/privacy.disable-telemetry-change-notifications.json` | `91d6621e50dda7419d14d656552cd10b86b3c6dca556381d8fe62fe8d2cdf6d2` | `17c4989b5977afbfc6d978bfc504790de6b1a5cd9e418366ed65a4087ab94993` | 1 |
-| `privacy.disable-telemetry-optin-ui` | validated | `Docs/tweaks/research/records/privacy.disable-telemetry-optin-ui.json` | `49fdc4a927213c17b0917bdc2053bf996f662132e25aa5bfad8851ef5e92514d` | `c817eb3c49b0f967e5e129bc88bdac5a6f8cbfb11aa8fedce4e5ba2d2db70d5e` | 1 |
-| `privacy.disable-wer` | validated | `Docs/tweaks/research/records/privacy.disable-wer.json` | `e3cfbb17de947b0be50216890ce6641583b702e0b87538e9b58246458ad012b8` | `f76a986e44138251f15e259e1d0c6babb0919ff2b6693bced3034453f0baf573` | 1 |
-| `privacy.disable-windows-location-provider` | validated | `Docs/tweaks/research/records/privacy.disable-windows-location-provider.json` | `c9c00032b45e9041f8dde9b0d6d0806d28753f5b46f0f22165a7b74dacd07b89` | `e68060103c8ae9f54cafb0d4485ae51f868938c69e1064fe15bc3c9733fd4bbb` | 1 |
-| `privacy.disable-windows-tips` | validated | `Docs/tweaks/research/records/privacy.disable-windows-tips.review.json` | `9fd90d98b8d35fb338d0221c56c057f1cca86ecbdb24229ca83563c047cae3a8` | `968618706507e426f5afd1839e8cfad5d9ded5ff292655a59702411eb4e7486e` | 2 |
-| `privacy.hide-last-logged-in-user` | validated | `Docs/tweaks/research/records/privacy.hide-last-logged-in-user.json` | `d3696ac4aac8d076cada915d04b1bacc9c2f99adb13e14ff5c8cd7825cd04465` | `014429e6a6216c2cabbaababfda8591989e4a9a7c026c5c173c86fd9e5f18160` | 1 |
-| `privacy.hide-recommended-personalized-sites` | validated | `Docs/tweaks/research/records/privacy.hide-recommended-personalized-sites.json` | `357972f204388003309e8fbc1dff5ceef95cff22965dbf81190e6b03f6ed2016` | `0260e4a0514f36a331a7d8246132c4ab54466d561ef8e5ee4230adefdc45d3df` | 1 |
-| `privacy.hide-recommended-personalized-sites-user` | validated | `Docs/tweaks/research/records/privacy.hide-recommended-personalized-sites-user.json` | `3a8e3e9ab92bb53c45a694de7525737d354287b01b267a5f0bf9d3cd30f1ecfe` | `e2e76932cc845400f8f53e5212bbd722953a03e756b7bc227a36ee26dd1373d8` | 1 |
-| `privacy.hide-recommended-section` | validated | `Docs/tweaks/research/records/privacy.hide-recommended-section.json` | `1e8eb339ad60b335f7e8ac4ce8e225527f66f545c011655cf36f1e73d4cd973c` | `4caace1b6f880a67e42cc408219cf7c68b0f7ead41991e81b4d59987387d165d` | 1 |
-| `privacy.hide-recommended-section-user` | validated | `Docs/tweaks/research/records/privacy.hide-recommended-section-user.json` | `a1fe3fa2dc7ff5da45634181080761a86162f16da17b767ed090b82070325c6e` | `497b81057fe283d7500aada3abdadf2c0e3dd9e4173e2537b70dc036e47f1436` | 1 |
-| `privacy.hide-username-at-signin` | validated | `Docs/tweaks/research/records/privacy.hide-username-at-signin.json` | `9c9cf39d539c33bb101ffb7886bdffa71618b4027dbb2dc30986d507713753a2` | `df9ac43701488dec143b457dfc5b9ddab403b78c3a76b87746a2ae2b44727a10` | 1 |
-| `privacy.limit-diagnostic-log-collection` | validated | `Docs/tweaks/research/records/privacy.limit-diagnostic-log-collection.json` | `d65f05c931176bcdee7d5171384631f89691f0f5f7963caa13172b39bdcdcbe3` | `2948ab88d6f0fff70ef6cd9e9a6e42917333afc393c67ed2db0d84a67b8c6486` | 1 |
-| `privacy.limit-dump-collection` | validated | `Docs/tweaks/research/records/privacy.limit-dump-collection.json` | `621a160dd612a0c838aca609a12ae94fa51e766643a2e08bc798a51d942ee4e3` | `f42f7cdd980b244401be19285659a44a707ebec53e298763035c87dab8b0f2fc` | 1 |
-| `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | `Docs/tweaks/research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | `b847c8b83a9ff3caed416297dc72f4bf75f582338a6c3e641c3e240a03a98de3` | `e05403394ebd8329e2d2001f0b186efecf6a6108029c50fdbd9b20c6384cc033` | 1 |
-| `privacy.troubleshooter-dont-run` | validated | `Docs/tweaks/research/records/privacy.troubleshooter-dont-run.review.json` | `0d7c80add69e4226a6eeefa2436330be4eb3d6c256266c19172fd70ca09917a4` | `7dcc7ddffc4e900be0639a531fe65c9f9e91f3571e105777966de2c6b82f3f86` | 1 |
-| `privacy.turn-off-sync-by-default-allow-user-override` | validated | `Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | `cd5527ef4c788ca56752769b9f884d367106f6d2e67fa8958bc7c272b5fa8ec6` | `cbf61febc21858b0337754ddc719d778a0a6c0f8f34b535b029e120bcecea03e` | 3 |
-| `security.disable-downloads-blocking` | validated | `Docs/tweaks/research/records/security.disable-downloads-blocking.json` | `f9574461ea84e7f9a84ed029d6469a4ea7020dd5399a7cdcc0201a3106f99d1c` | `37f0c6998110ae0723af795d2c3f93b894ac85bf013d9877cbdc60c381f3f2eb` | 1 |
-| `security.disable-ntfs-encryption` | validated | `Docs/tweaks/research/records/security.disable-ntfs-encryption.json` | `b75f5abb843f5b452720a76ecf7b696cfc9544a8f8d34971eab365d6fdf8dfd3` | `a85e3450b7be35f290e9b7a8083815b660f2edd6afcb9d8151d04d4a677e9a0d` | 1 |
-| `security.disable-p2p-updates` | validated | `Docs/tweaks/research/records/security.disable-p2p-updates.review.json` | `a5915f3c7a416dcdd379f1e53e984222435ee2d5b91469252e8e3b2f4620a15f` | `e30fdfd201f0bf77b2b6fa51c308d5dd3e3f64adb81b8c6caa7a689101591a0a` | 1 |
-| `security.disable-password-reveal` | validated | `Docs/tweaks/research/records/security.disable-password-reveal.json` | `d95a11e1be92c925bdd91a42a0e5579a95d24547aa94847ab4741637b8f13fbe` | `50d97e420c30cbf63a70c9a209094c3baa6f45450925e287d51ea8a22288f57e` | 1 |
-| `security.disable-picture-password` | validated | `Docs/tweaks/research/records/security.disable-picture-password.json` | `10040b85aedadd33870b42f5e98da3c43d004e2e9ecfec0cbc2d3e250eb54021` | `80f0769f7386003a4f61a10b36d71703ac5b9498fd3fc92551eb78738cf99d72` | 1 |
-| `security.disable-remote-assistance` | validated | `Docs/tweaks/research/records/security.disable-remote-assistance.json` | `2499bcd10d72da908b3a0e71cb705f58a2e9f06c61b04b2ec9cf203c0bafa31c` | `3576aeaa16a5aab4964bc681df989398a5552a9c7b6fdceb9b722424a42f1ad8` | 1 |
-| `security.disable-system-mitigations` | validated | `Docs/tweaks/research/records/security.disable-system-mitigations.review.json` | `a5e434bfee576dafa6f310e05b9da536224a1a15bdf43a3c0215682f87ba0af7` | `f64931b89268443eb36db4ce8bf33b4a879a0c7daf28c87f36e7a1fdb33326e7` | 1 |
-| `security.disable-system-restore` | validated | `Docs/tweaks/research/records/security.disable-system-restore.review.json` | `c87e2639f9f1c023786a05f6970fbe16bdeff9ba1af71799ac96a8fe1e7c13b3` | `a0b7ed13e93915c4f77f085945159c09a292f2c3cc2e4cd140ce0ea7a98c8df1` | 1 |
-| `security.disable-windows-firewall` | validated | `Docs/tweaks/research/records/security.disable-windows-firewall.review.json` | `4669ad9f2652dc128d4cdd6123ce6652542887e95801c4e8183dbe93704b52bc` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 2 |
-| `security.disable-windows-update.policy` | validated | `Docs/tweaks/research/records/security.disable-windows-update.policy.review.json` | `d348a89d3dd278084d0cdc9fbf56c168e99433d42d157b9ebf9cda001e3b21df` | `b1697a5c3feaa9da12b61d23e66a337b9339e4fffeeb2e37d8395d5f461ed060` | 2 |
-| `security.disable-wu-driver-updates` | validated | `Docs/tweaks/research/records/security.disable-wu-driver-updates.json` | `488a5f5680947b908ba0ba69742a588b0d33a7654cf4d2a1975afac13fa061b8` | `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa` | 3 |
-| `security.enable-dynamic-lock` | validated | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `76033ac24f3d75f777cc0e8b05f9c33a7588a645fc1177c898c3ec045219dc61` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
-| `security.enable-sudo` | validated | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
-| `security.powershell-unrestricted` | validated | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
-| `security.trusted-path-credential-prompting` | validated | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
-| `security.uac-never-notify` | validated | `Docs/tweaks/research/records/security.uac-never-notify.json` | `c39a26d1490d55dd6e56b7be9b2ed61dbfd99ddfa553e82be7ea68669011ec2b` | `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f` | 3 |
-| `system.aero-shake` | validated | `Docs/tweaks/research/records/system.aero-shake.json` | `8eec9814f9162d5fd8de64d4ce729d88bc1c815255ab25b10a71ee1b93e2073b` | `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b` | 1 |
-| `system.bsod-disable-auto-reboot` | validated | `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json` | `71ce59e9590a9c45f0132c3b72477d9fa8437f4e560eb9e9d6af8acfbf95e88b` | `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181` | 1 |
-| `system.bsod-display-parameters` | validated | `Docs/tweaks/research/records/system.bsod-display-parameters.review.json` | `e90d825e8244b7d4e7ebbe1dc881d969713133feee0c06d638d5a5253523d0ae` | `1eea0c9c620c9caae29215c18a6608b3d6f5eea2beb90bc41fc83ec26ef41b3f` | 1 |
-| `system.disable-app-archiving` | validated | `Docs/tweaks/research/records/system.disable-app-archiving.json` | `b3c6bd1bd22f6745b52d3339cc337fbebef422300f30232dfc86cbad2ac01e75` | `d67f5f4b6c441bd7dea3dbb512898a32c4b4661c1c0db83b86bbdde063bdf630` | 1 |
-| `system.disable-auto-maintenance` | validated | `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json` | `70f2b46aef4c94a5986fe41c6d528bc4d40f77e2a337057fb6358e743242a439` | `9da0a6c6d8df99a060e122cfb988f132a9b125c369ff383d020cbb3657ac012c` | 1 |
-| `system.disable-background-gp-updates` | validated | `Docs/tweaks/research/records/system.disable-background-gp-updates.json` | `6c59ea8cc07f64420609a9b49dfd691f3bd53ff49b5f1c7ab56d5ee69f00a181` | `f405c9914ca39ee00ae820afba4f149eb84081715df8e3a7bcb2a26ab3742038` | 1 |
-| `system.disable-clipboard-history` | validated | `Docs/tweaks/research/records/system.disable-clipboard-history.json` | `9e8131cc869f26cc23d0fd9a3232dd821cdab8ed70d53220accdd372d164c516` | `6f1d55e33a45d3258dd257c8c34c0185d96ee07b14bf1427fbdbae1e18b728a0` | 2 |
-| `system.disable-clipboard-redirection` | validated | `Docs/tweaks/research/records/system.disable-clipboard-redirection.json` | `5cb8ad836f2d87a8de6e42bacc351d0908a2dc6fd0fd204c3f68469550be2053` | `bd7bbb0f1b1b0b7f114a02aa53890195d47f454c172025d9cfba62d70b973e8b` | 1 |
-| `system.disable-fullscreen-optimizations` | validated | `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json` | `f5cf6fa1e16180f13c4e3e6a3405152a23647e078bbf1e86ca5a4171f76963f9` | `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee` | 1 |
-| `system.disable-game-recording-broadcasting` | validated | `Docs/tweaks/research/records/system.disable-game-recording-broadcasting.json` | `5f934446faf47bd7cc617fa7233b69de7416e051e06b8e465f29cc846f390592` | `f00125e489190967e2738bd103050e96d50f5df6456d05b81cc1b82c63da5bfe` | 1 |
-| `system.disable-jpeg-reduction` | validated | `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json` | `70fadacc3893dd7f424c7f1d8c3e958b136c2d219104fc3612c754a29e48365f` | `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377` | 1 |
-| `system.disable-restartable-apps` | validated | `Docs/tweaks/research/records/system.disable-restartable-apps.review.json` | `e609c09c45ebe3606b78558be0406b22803031299aa951e220fe09f008c71312` | `b4d567ea9ec033d06c9f6d2ff60f9ada14f4b5e8b50bb5318c2536ed22cff6c8` | 1 |
-| `system.disable-search-highlights-policy` | validated | `Docs/tweaks/research/records/system.disable-search-highlights-policy.json` | `42d8f1b01301696cf24408906b804403b17658ca55db1e5137b9e89dac384707` | `ae49b38ee6eec7f08e188c053143d1d430695aec6cb5b90db93af2281cc1b807` | 1 |
-| `system.disable-search-remote-queries` | validated | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `826137e3f60bb96c6dfffad1a9e760deead9141f0c4aa73c98ac238c80a242e3` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
-| `system.disable-search-web-results` | validated | `Docs/tweaks/research/records/system.disable-search-web-results.review.json` | `e795f098bea183761efafb0d3f87e77c09a48b74bf7e1277f122db8f73df0eae` | `bb1b1691889396c055ff9308c954c15fe921b1bf40045ac22449e871fd6c3a37` | 1 |
-| `system.disable-shortcut-arrow` | validated | `Docs/tweaks/research/records/system.disable-shortcut-arrow.json` | `e05e11b9584629849a78d1e94ab8022634dafb5ae4e4eba98ccdef122373c30f` | `4dc6f2003ee84572320f65a1acecf6c701fc68c055921e90ca666de432f9ebef` | 1 |
-| `system.disable-startup-delay` | validated | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1` | `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7` | 1 |
-| `system.disable-storage-sense` | validated | `Docs/tweaks/research/records/system.disable-storage-sense.json` | `acec0c9c6e2760ad9a0892e7cc24768412bf3a7cc7c00933e64b83d3caf97f89` | `aab0b6531e384b0ec9cbb05bc4fd51a5f72f5fffb64825086125f5d372926ff1` | 1 |
-| `system.disable-storage-sense-temp-cleanup` | validated | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
-| `system.disable-store-open-with` | validated | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
-| `system.dwm-disable-overlay-min-fps` | validated | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
-| `system.enable-game-mode` | validated | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `31b37f92d6be9c98019747e412acc213557871d95a1902abd006f109e4b2ff75` | `002fb0a540e672a6fba9bea881db8af3ede628d5bb7b874b6788f3e988c80641` | 1 |
-| `system.enable-hags` | validated | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
-| `system.enable-indexing-encrypted-items` | validated | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `bdc09bee78c232ef1bcd5b9ab483aef478a9dd429315fa88206e603628efac84` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
-| `system.graphics-tdr-ddi-delay` | validated | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
-| `system.graphics-tdr-delay` | validated | `Docs/tweaks/research/records/system.graphics-tdr-delay.json` | `7f68171dcc72f3211cb65563724d88a3c847454998a0d6f2331522fb49fe0614` | `b6da5db4f695d7ba7a08d29bd3859c1c57b438bb3ba83564b9ec1fd0a74c4dbf` | 1 |
-| `system.graphics-tdr-level` | validated | `Docs/tweaks/research/records/system.graphics-tdr-level.json` | `e6e9fe55f500bf803e86104ddd0f0feb379588a35c7e98701df25914697ac8dc` | `e1d685fde018737579c002e14fe7e9bb9e301555449c7032ac537be1aefab8b1` | 1 |
-| `system.graphics-tdr-limit-count` | validated | `Docs/tweaks/research/records/system.graphics-tdr-limit-count.json` | `b6ffdcd76da8a573f8e4a8dd846275c0b3ea35de4dd0a4cdc57e40e08ef2dff2` | `98793161f5d92ef41a5dffb17fe726e653b8bea67bf5fcc00384abd0cf49fdde` | 1 |
-| `system.graphics-tdr-limit-time` | validated | `Docs/tweaks/research/records/system.graphics-tdr-limit-time.json` | `807439c6b71d03d552670f0291a9c28ce5eeb10ac7ee6258f8822e2e067a1bde` | `b8db6b0b24bd9b6d64dd8e0ff6088b7079e260f5a620d73e10950a74b6499361` | 1 |
-| `system.kernel-thread-dpc-enable` | validated | `Docs/tweaks/research/records/system.kernel-thread-dpc-enable.json` | `39b9545f28226227c98927feb4de4623e86b7dc8b18df5d91b8b8cb079c3329a` | `a15a06f3b91cf08536310bd098334ea2859c0ff7ad7d73e2594296a780a73f5e` | 1 |
-| `system.memory-clear-pagefile-at-shutdown` | validated | `Docs/tweaks/research/records/system.memory-clear-pagefile-at-shutdown.json` | `2717a4299cf44da2dc6cc6db5f9bf70fb81393c1dcfd168532dd03186402e04c` | `410daf2e1ff1285865db5d6768c6f4e852efd5e68d0b6f914845ca98b2dcc97b` | 1 |
-| `system.memory-disable-paging-executive` | validated | `Docs/tweaks/research/records/system.memory-disable-paging-executive.json` | `d142104b69db4091b2f36240824e3e551b6c7033e486a3fb7e0aceaa16e332b1` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 1 |
-| `system.memory-large-system-cache-client` | validated | `Docs/tweaks/research/records/system.memory-large-system-cache-client.review.json` | `96a2972b0ac49d65125668f25c55a812e180b1aae979c6e2daac7a0e6024c03a` | `0bb05d41e8e9be3cbc9320f5ab39e1261822a39f4b171f38e49f416bb54d05d5` | 1 |
-| `system.memory-nonpaged-pool-dynamic` | validated | `Docs/tweaks/research/records/system.memory-nonpaged-pool-dynamic.json` | `e3ab3a175bcb3ee0b1f8c1e64d24a28cfcff7f470045d3393ba189357b979b8d` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 1 |
-| `system.memory-paged-pool-dynamic` | validated | `Docs/tweaks/research/records/system.memory-paged-pool-dynamic.json` | `2b237b2f02bee35264c954a94acec5f48f8115255420bb31dcdbce2ed0f810e6` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 1 |
-| `system.memory-registry-quota-default` | validated | `Docs/tweaks/research/records/system.memory-registry-quota-default.review.json` | `64c409ac03712e75ba66f605acbc94e7cf392a3cf7514ae1289dba78a99eee33` | `25c9afb706f3f644f188ca40e87d0e9a88dacfb4e738d93d292e3aed0a14f1a5` | 1 |
-| `system.ntfs-disable-8dot3` | validated | `Docs/tweaks/research/records/system.ntfs-disable-8dot3.json` | `62f3205495b3a91231e2df74f34aa1452f203bf4e0090ec755f70e6b1f5cc4d2` | `ea929eeaf7bdd90e1cdacf69338485fefd38aca588e8af28bd4cf78a76b3cdc1` | 1 |
-| `system.ntfs-disable-last-access` | validated | `Docs/tweaks/research/records/system.ntfs-disable-last-access.json` | `c7bf54d47ec0ca55d1c93beba623e73597451932ced624955d8490f7712777e3` | `999857adb93ea648e8ead434d9a350d2d2009985c6240ddd98032fc4b736d627` | 1 |
-| `system.ntfs-enable-long-paths` | validated | `Docs/tweaks/research/records/system.ntfs-enable-long-paths.json` | `d101a6382cc22b8bd2dd60f2d8ff325ea4c7c712f05bfc72566c2f6a1742cdab` | `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179` | 1 |
-| `system.ntfs-reset-memory-usage` | validated | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
-| `system.ntfs-reset-mft-zone` | validated | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
-| `system.priority-control` | validated | `Docs/tweaks/research/records/system.priority-control.review.json` | `0384e02c10c9b9840925aeeaa7aafe9cbda97e864a0927bc7d1f46279ae7ab5d` | `c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b` | 1 |
-| `system.reduce-shutdown-timeouts` | validated | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
-| `system.reliability-timestamp-enabled` | validated | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `721519b9c72c153fd891292cee7d8ceb28902ef780f964c43c1abae849b21b3e` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
-| `system.services.disable-bluetooth-audio-gateway` | validated | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
-| `system.services.disable-bluetooth-support` | validated | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `c41242b6b93a6c0726a408024b2d24f989f06a68dbd803a2976d1755cc320372` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
-| `system.services.disable-bluetooth-user-service` | validated | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` | `0dbc2e23199be2975ec038e31ccb35313500be6a9c1284230346332a7617adcd` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 1 |
-| `system.services.disable-connected-user-experiences` | validated | `Docs/tweaks/research/records/system.services.disable-connected-user-experiences.json` | `432df30061542fae8312ae99ee7a4dbc4b0ac0bddbeb63c1d35b97a0517eafea` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 1 |
-| `system.services.disable-print-notifications` | validated | `Docs/tweaks/research/records/system.services.disable-print-notifications.json` | `341f0c561d3693787f3a35309441f261e6f76c986e61a507ab7b835846a1e6ee` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 1 |
-| `system.services.disable-print-spooler` | validated | `Docs/tweaks/research/records/system.services.disable-print-spooler.json` | `d244f10b272a038623ae642806ea9e2c0f8c7171857f5c3655cc3af754d8505f` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 1 |
-| `system.services.disable-windows-search` | validated | `Docs/tweaks/research/records/system.services.disable-windows-search.json` | `0a7a7b83cdb693c869b6fbc38dc856ad4ca756793379bbf7db2b3ff1cb69d3fc` | `7a939516d8b00a24b308632a8c4618acc5fd292fab45e9544a98c56f98788b37` | 1 |
-| `system.verbose-status-messages` | validated | `Docs/tweaks/research/records/system.verbose-status-messages.json` | `df5150e4d4169785692e05301bd746f655ecd44ad77aebeb9b85483287f1d6df` | `95d2e2d70159d0ddc6500d9a88c2420cc76d133e09b5ee7920891d07a3cc92ef` | 1 |
-| `visibility.default-account-picture` | validated | `Docs/tweaks/research/records/visibility.default-account-picture.json` | `6e84d377b9c2cacbf2a215a337713809e6511ab5a3b1c8efa6003c37e5e111f6` | `ad18cf84978748d2e98ae9ba591d975b8b94780caa755d468c578aa640b06c45` | 1 |
-| `visibility.disable-acrylic-logon` | validated | `Docs/tweaks/research/records/visibility.disable-acrylic-logon.json` | `c16c3fcb7ba090273c25c36825d1b4fdf06144f4e2cfa39c76663507cf608722` | `b8f40fdcfee835f4f10a9f9dcbe34876f7fa4889dbcf838ac809f972d48eb972` | 1 |
-| `visibility.disable-common-control-animations` | validated | `Docs/tweaks/research/records/visibility.disable-common-control-animations.json` | `b5cb20aca72ec5081c06d8dda3a06b44c7960637b50c9c3126c6f694b81f30ba` | `adfa8da46fa1d6eeb719bc15c967c593bd41eb9e52552f834d45437a25adbc73` | 1 |
-| `visibility.disable-first-signin-animation` | validated | `Docs/tweaks/research/records/visibility.disable-first-signin-animation.json` | `370dbbd92d120e1950ec37ee727bdfdd23956b45e9c3560141e679fd0a43c432` | `2cd2ab91efa1fa7176d3f144c0d7e00677f16d9110e67fec6f2a8f1fa748315d` | 1 |
-| `visibility.disable-lock-screen` | validated | `Docs/tweaks/research/records/visibility.disable-lock-screen.json` | `af6e021cd929a788c37b9188502cf5cb2486009db1d72579e046f35cd3619837` | `aedb1831e8c41ed80e97327e2dc02ddba24d7b785b83c3ce35b75047d8face34` | 1 |
-| `visibility.disable-lock-screen-camera` | validated | `Docs/tweaks/research/records/visibility.disable-lock-screen-camera.json` | `12e1f7bf9af77dee08772aa1665b82c233ed89f95d82b22fdcf6ad785153624d` | `a6eb4fbd91b5179a2e4173d4fefe8a5eaf3c0dedc8b1ea8f37ec0203cfcc89d7` | 1 |
-| `visibility.disable-lock-screen-changes` | validated | `Docs/tweaks/research/records/visibility.disable-lock-screen-changes.json` | `f8b7afb46352170046f35a7297378bd577998c3c50c285e457d3fbdffbe2d6fa` | `b1e91965ccdb51d5fb5b6ec2f109bdb429110c87eaada0faf47627bec6a47096` | 1 |
-| `visibility.disable-lock-screen-motion` | validated | `Docs/tweaks/research/records/visibility.disable-lock-screen-motion.json` | `d577c07609f3a295503227fd2e7cfe06dd78152217bacb4a209d65958fe4dfbc` | `11fd20bce4d0b3145996804a738a130f4d4a79391e28b67cd0058d0e1f75c224` | 1 |
-| `visibility.disable-lock-screen-slideshow` | validated | `Docs/tweaks/research/records/visibility.disable-lock-screen-slideshow.json` | `e138614e287f6002a7640687bac4f3621051501ad0511d1203390fc03876dd7c` | `8969c5237c4151cc3cffb1e3170590ec783d572dcd20adcd2c4e7a4658b1ec14` | 1 |
-| `visibility.disable-spotlight-action-center` | validated | `Docs/tweaks/research/records/visibility.disable-spotlight-action-center.json` | `e00e86b226adfd620e49c4f0a9b29f34a96abf502550e6d32366c588b7688684` | `3d58e1593aebbeea5ceefc7971820b41d3489715fc2ecd3f53e1d9e95232572b` | 1 |
-| `visibility.disable-spotlight-desktop-collection` | validated | `Docs/tweaks/research/records/visibility.disable-spotlight-desktop-collection.json` | `04f887d008f111e70282b92f0044c7986feda20d2bf6a7f8ed071d70f9453b61` | `e910069ca9d3f650eaedc02a3e880fce52db9e04818c7f08d0be150dcaf5bb4a` | 1 |
-| `visibility.disable-spotlight-features` | validated | `Docs/tweaks/research/records/visibility.disable-spotlight-features.json` | `f1d8384160bea521ac43a49874a008aa214e522adf091ff1ac7f3f0814f5f4a8` | `98c62d8b495d56b02d16422872ff18ec0528a34ae447c6b73b5c0e7c99b67d23` | 1 |
-| `visibility.disable-spotlight-settings` | validated | `Docs/tweaks/research/records/visibility.disable-spotlight-settings.json` | `b152736e66590fe3cea1551865bf77a41aacb9bbdb1d6e9af49fe1213d0297f8` | `8ec75d4adae9a3c4f45a6ec6db68871c4567e1bc0b1497193518a404399fe697` | 1 |
-| `visibility.disable-spotlight-third-party` | validated | `Docs/tweaks/research/records/visibility.disable-spotlight-third-party.json` | `6db725bb7266d1c1d13caa8900bb6e69a14ca673769fa063f66a48c30349068a` | `90a4369f43b7e72d685c87ce12f285e61dc065a5b8bb0d3de18aa3f8082e227d` | 1 |
-| `visibility.disable-spotlight-welcome` | validated | `Docs/tweaks/research/records/visibility.disable-spotlight-welcome.json` | `597f7490734c8572b186295c4fa318ac2b1734e26e781fa013b052085988135f` | `41dd7f4619d74c0b0c31cde4b4641ee5cf7fb7a35d9af633569a4ba746fa3f0c` | 1 |
-| `visibility.disable-wcn-wizards` | validated | `Docs/tweaks/research/records/visibility.disable-wcn-wizards.json` | `4c4d405be8e79fe7fcac27aa3484df888bd67a366e58caf2ce4131cb3bd6698e` | `b764973c8d3adec8c9bc8f29b53e6207bcfe8815718323fadb18a7b81e9ebfeb` | 1 |
-| `visibility.disable-widgets` | validated | `Docs/tweaks/research/records/visibility.disable-widgets.json` | `13c038cc0ba351f32d2e3082667307aa1c28428b000e37f615a746afe2419404` | `51e5a1f879b109db9b774b9202bc9a647344f646d8b00ec3c13360674ab215bd` | 1 |
-| `visibility.disable-window-animations` | validated | `Docs/tweaks/research/records/visibility.disable-window-animations.json` | `05c681b441c2adb732c53a21f6c49c9ed0dac48e26aedb4551925c4ee61e6abc` | `571192ff25e0c81ae5dce332c8b0051a472bbf9841b730d58ca887806de5ea2f` | 1 |
-| `visibility.force-classic-control-panel` | validated | `Docs/tweaks/research/records/visibility.force-classic-control-panel.json` | `5f95ffcb6973992c6cc7c5dba884f054b5a7228568a12b04788a9588b0606090` | `8fc57213d5f2695c6314ee2e7b6b126656c9c3218f18a7c77133c4f5178cad20` | 1 |
-| `visibility.hide-language-bar` | validated | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` | `c9d9d7d08ce8e601a61709c16d43cbea6b95d1bc90d77b8f7a89bff4f44fb5d4` | `3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc` | 1 |
-| `visibility.hide-most-used-apps` | validated | `Docs/tweaks/research/records/visibility.hide-most-used-apps.json` | `27c167bbdf4148602936b8099f51782296e65d2c67105e4947efb2c9244851f7` | `b66e6752f3c72b835115d0a715643e28a6be0061d9e0b1246115269dd8eb1f8e` | 1 |
-| `visibility.hide-people-bar` | validated | `Docs/tweaks/research/records/visibility.hide-people-bar.json` | `d4be4445fae869dcf55e6ca3c463089eb7ce7c4d3dc97f16b43c0e01b7e2f43a` | `ca25eca99b530fd221ccdc49679625c25e7e2ebb3e5fb21edaca6075a73732ad` | 1 |
-| `visibility.restore-classic-context-menu` | validated | `Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json` | `856c6d17aafde09565f4b68bd4381fc44f28a7e30ba9d5c5cb6a6c37cd0b7b4c` | `2be626add6056b666c3453999702cf52a7408132c80f6da39aa897ff0f90ecf2` | 1 |
+| Record | Status | Class | Source file | Source SHA256 | Proof SHA256 | Targets |
+| --- | --- | --- | --- | --- | --- | --- |
+| `audio.disable-spatial-audio` | deprecated | Class E | `Docs/tweaks/research/records/audio.disable-spatial-audio.review.json` | `be4c2c421f023c7098adef0e3a43dd12ee5efc5a4f2e849dd30da0fef016141e` | `4a593ea805014f217f681fc58618dd92a0ee319f834de3cb6b99d9b7340d5677` | 1 |
+| `audio.disable-system-sounds` | deprecated | Class E | `Docs/tweaks/research/records/audio.disable-system-sounds.review.json` | `3466da988a7ec485cac79e4a46a3598757530f7f7990c4ed902d6c246a7e5f2c` | `8c6baad92b01ec2a36a670ba00e7a7f372889f597cb30b1fc0ccc3d2e1d5a424` | 1 |
+| `developer.terminal-dev-mode` | deprecated | Class E | `Docs/tweaks/research/records/developer.terminal-dev-mode.review.json` | `9c5fc8ead0212ca4afde1786041601931a0c56bd366522f9b288b4ce3d42c4eb` | `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a` | 2 |
+| `developer.vs-intellisense-cache` | deprecated | Class E | `Docs/tweaks/research/records/developer.vs-intellisense-cache.review.json` | `6714aec3308f79f05d56e0192c6ebd0e3fa402cb61b1dfda5f4646d58b69342b` | `7594c93530c2f21078f1038412922a58ad2eb57b477f498e084adb3d66722225` | 1 |
+| `developer.vs-solution-load` | deprecated | Class E | `Docs/tweaks/research/records/developer.vs-solution-load.review.json` | `532f52029fd89d6fbcca903a2a119c48f03068221dc1d15b5ba1d0ce02d86ae7` | `f3d5094dc691664127f8b7cff7d1500ec045ea83e83fdfefa30d3569d90f06ae` | 1 |
+| `developer.vscode-git-autofetch` | deprecated | Class E | `Docs/tweaks/research/records/developer.vscode-git-autofetch.json` | `2dfbdf4481e9703aba1a03d90f091ab9336b95e75eb34fa64486ccd77f140373` | `e06716163838e4757577a19baa2082882403e415767e632da3bcaa89018fadce` | 2 |
+| `explorer.disable-taskbar-widgets` | deprecated | Class E | `Docs/tweaks/research/records/explorer.disable-taskbar-widgets.json` | `f89b4a4a9a01987090b432d2e87de9a2682701f8de4ddcc2f22fe8831eb775c3` | `c564531bb27c99c5c6d31c16fdc2cfef794fcda04ce5ca8598956cb5763f433a` | 1 |
+| `network.optimize-smb` | deprecated | Class E | `Docs/tweaks/research/records/network.optimize-smb.review.json` | `f428f4197f8b38732a254d31a7bae77c1ece46ac72f6db950191556d15315a68` | `f20537679384da6d919b7646f4217435225bdad41c9462c7c48cad785a19e5eb` | 3 |
+| `power.disable-network-power-saving` | deprecated | Class E | `Docs/tweaks/research/records/power.disable-network-power-saving.review.json` | `a8a0ba2b003c31ef593996ad0600414abee42c4e738cf40a2d4564bf3b0afa9f` | `8a44b3c793b7747a5bef848a85808afb5dfc209af650712b4ebf8b03f19e4da9` | 3 |
+| `power.optimize-performance` | deprecated | Class E | `Docs/tweaks/research/records/power.optimize-performance.review.json` | `9a6099fdbda41141c13516f6bbba3f49bcf7db77d9baece2b2de08038c254020` | `58dc7326379a58002bfc8e69fc5bcc60b649ec53bb89088c2dbbf5d96c9dbdc2` | 1 |
+| `privacy.deny-app-access` | deprecated | Class E | `Docs/tweaks/research/records/privacy.deny-app-access.review.json` | `56e52c1cfe030b7599bad5a650f1becd2d3362b8112bf56bda2e1f7a45600512` | `4ae5728a5c387aaf0d21810f025314b52714ec69482975da463be70c18be5a3a` | 1 |
+| `privacy.disable-application-compatibility` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-application-compatibility.review.json` | `22af6cee9dbb36853388f26d456c3a3d2b6fb3d5a08559c496a2862a1623bf26` | `bd45859c05009d40015767839d790f25d4748e596556c41939940d798a660bba` | 1 |
+| `privacy.disable-application-compatibility.policy` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-application-compatibility.policy.review.json` | `af732b75650c01bd4c004ee069074067d5dac25614df3bf03a78746fc182bc8d` | `92200c73471bafab51b30d4397016d8ca189f25086c650af2258b5ebf096be76` | 1 |
+| `privacy.disable-application-compatibility.tasks` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json` | `659c5215dc7d0938e359f4f9f75e3c6e24ad03816894a4092d0f304431339cf1` | `de8d0e5c3fe3bbc0133d9be1194edbaaec7bd4a0bc072339a635f2a925d56b81` | 1 |
+| `privacy.disable-ceip` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-ceip.review.json` | `7c8a8db0c1d2e1c5e93be89e255cb4548c5931803519ca1b7379fc2259af3521` | `291f83fd458207687a77b2cff7de2b4b70856477f6e31fe23e129e9461db898c` | 1 |
+| `privacy.disable-cross-device-experiences` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.review.json` | `995d19baf39eacc1caf9442fd1a1a79317d490c8f95df68aaf610bf735fd5628` | `8822b8f2cbf24318cad7f81a5d3fe461e79b510d4d2ffbe2544b8ea72bff29db` | 2 |
+| `privacy.disable-f1-help` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-f1-help.review.json` | `4e3574d4caad562c3d178f89af47a4e38968788f8ea3bf25ca53e207943e1fed` | `e939be1becb0f019eb205401e305d66b05496b5a891020031caf988e94655f61` | 1 |
+| `privacy.disable-inking-typing-personalization` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-inking-typing-personalization.review.json` | `c44d049f69c369079bc323b531a89ccc3ff04d6e0d16c58c39083edd648a35a5` | `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc` | 1 |
+| `privacy.disable-offline-files` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-offline-files.review.json` | `35163904745150c0117d1b7a744f07abab0cffc72392cf0a579c954fa5a7198c` | `8c538308e9e84828e4f6100b490500c5b6576341a93ebd7d377695dfa8786ab0` | 1 |
+| `privacy.disable-offline-files.binary` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-offline-files.binary.review.json` | `11a14f68dfc381df5d1e626abd2cbe9bfc2b6a148d9acf16a33ef0208acf9b6b` | `0c9e074ea6e9e7fbe6a77b6bb4da1fd79573cd8be78db75080600a99343ffef6` | 1 |
+| `privacy.disable-offline-files.services` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-offline-files.services.review.json` | `3d3537e2a417fe62465d13906a3ed684918ed9072626aa05d902cbaf0d387f39` | `1d2a9461e246ba26660d27459057374991940a4b30a3ce0e897e4a2f56de0e69` | 1 |
+| `privacy.disable-offline-files.tasks` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-offline-files.tasks.review.json` | `14375a69f2cb3b5099925cd2c9522aa270c3a7e495bcc8269409808c71cff751` | `77aaa2731fc6fe9471fd8124b323b976253ec517b6d337844a0b92af23289256` | 1 |
+| `privacy.disable-reserved-storage` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-reserved-storage.review.json` | `235d67d91df3753bf2c87a213b1301a77a5a0ed4392c393eefc63890af6e1ce5` | `4ca83624364bff8e6efdcd5943a83b16fef25082855bf3a1fe1d029ddcaec7ff` | 1 |
+| `privacy.disable-sleep-study-diagnostics` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-sleep-study-diagnostics.review.json` | `b424e46ca699e3f8b4731eb7f8a7e85f5f70c854d25ee7ade3ece78f47d63cf1` | `412364eb6a6dec3331f915bf7c0a0c51ea9534af70005eb89b059f7b269755d9` | 1 |
+| `privacy.disable-suggestions` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-suggestions.review.json` | `63518ee43394d2ed75a6da0604d982c4cd234ce1e4d3a694afb327fd39f274a7` | `bf916cbd28e9b091f2d0860e32e6799b9e57d617d0343e1d82dd50c947868d9c` | 1 |
+| `privacy.disable-suggestions-cdm` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-suggestions-cdm.review.json` | `5bc281cced83ddd4f6e98d54f4f59489ab533df19449aa3d73d9dc01292be7b4` | `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9` | 4 |
+| `privacy.disable-wmplayer-telemetry` | deprecated | Class E | `Docs/tweaks/research/records/privacy.disable-wmplayer-telemetry.review.json` | `eb82b2f7b510ee7e01878070a8b8be8997c49a78e4ee57bad6eef4bd6b968f41` | `47b485383cfd24386e8b25266f61526788ae38ccc1e22f2e5643ab572cbc10e1` | 1 |
+| `security.disable-vbs` | deprecated | Class E | `Docs/tweaks/research/records/security.disable-vbs.json` | `a4998ad636204c82f6ae87c6cf5903d7575241c8d5cbb489949b7b9612134856` | `875362a1cc4fae3a9ee03d01d96ae6e825dd46f3a80c1fa0fb1885197dc650f6` | 3 |
+| `security.disable-windows-update` | deprecated | Class E | `Docs/tweaks/research/records/security.disable-windows-update.review.json` | `1bac61cff5ed58ceea12e8e6577962425b03c9da57518804f8e1e1eb4c123163` | `e39f151336b7dc9297dcff821b6d7da188f5a89cce214c2111a8979f3650a881` | 2 |
+| `security.disable-wpbt` | deprecated | Class E | `Docs/tweaks/research/records/security.disable-wpbt.review.json` | `081fd53e38f7a7c927f7fd5e49443384edd9e53a10078c5219675a795dc9ec3f` | `591a298fdd99779c99b3623d6c7514ca2e7c0ee404b59a75c972181a18a0d9ff` | 1 |
+| `system.disable-game-dvr` | deprecated | Class E | `Docs/tweaks/research/records/system.disable-game-dvr.json` | `d4cd43987979de1e1cbb09cc70fb2428928176fb26e7abf5cfaa1eeaeb304b6d` | `4598eb3a4a7a554a32beb57abe4def5b4df7dc2cc841aa9df298709c324a6795` | 0 |
+| `system.disable-scheduled-tasks` | deprecated | Class E | `Docs/tweaks/research/records/system.disable-scheduled-tasks.review.json` | `d4b01e85ca687ea57def840abfb5d85e4d259381f09ca8026847832c58b08385` | `14fdf96dc2d205ea9aecaa1d530e572e5f63a016031ec2c879b3605d5527a51e` | 7 |
+| `system.disable-search-highlights` | deprecated | Class E | `Docs/tweaks/research/records/system.disable-search-highlights.json` | `cbb37a1de1c09ae0e0fe5e377d3c8f591ef9e4c032aba829b18ed383e328ca30` | `2cebd2b8f3a1d2ecfae968fef5c0dda7bf435391ee0f1a7899d88b7023c6ca99` | 0 |
+| `system.disable-service-splitting` | deprecated | Class E | `Docs/tweaks/research/records/system.disable-service-splitting.review.json` | `4a54e4039e3c13bf4495ee6f40577d7d4075ed2552f81ca1839175bae9a8d2d6` | `f4de2df5d71667b2a6ccc8ec955f0583f37339e6077ea07ee101e043632e841e` | 1 |
+| `system.dwm-disable-mpo` | deprecated | Class E | `Docs/tweaks/research/records/system.dwm-disable-mpo.review.json` | `86932e4673dd8c9e5db4cd9d0a7cc82d4cb3dd53c2150a5e079d983c3ff674dc` | `cff71e2f37ceccde58b2eafe48044a4ac42b5453b9676780d76aa89c5cafe309` | 1 |
+| `system.graphics-disable-overlays` | deprecated | Class E | `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json` | `6cf5e02e4ced0aa7b215752645b3239269b66d175b298283f93829863e01cf92` | `dbf1407cc708022946c9f7e61f339d401d97e7a859bb0e947f2824dbf29a803e` | 1 |
+| `system.graphics-page-fault-debug-mode` | deprecated | Class E | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `98ef739d16ea86aabaedb34b97ce872b4f0fcd5fcb7d32ab364a8b863d489580` | `de461e3f29a05889c82ae0349ddf469cce6bcacc3a632e36c6bdcd1b029992df` | 1 |
+| `system.kernel-adjust-dpc-threshold` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `b98430d6c64c7c0159d8dd8edc8978682c51c2e62b3fdd3eee4983aef9822af4` | `84c3a10e4279611b07fb235549e264875a9a89304dfd3c10b30994d093f78c65` | 1 |
+| `system.kernel-cache-aware-scheduling` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `c71c786191fcbbda286b1f777121293a167deca0c559020752ae280665b02683` | `c3f8debabce5f85e918dd986eb331a900ffb0c11ea9c9409bc02e5d067799832` | 1 |
+| `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `2b7a318f39e4168d65dfc33011c490ad14c1b2eacec8781538e76ddd37cae801` | `bd6eb09cb779de67dbcbaaa293b39f58266085c2535cf005beab857de9d6cde2` | 1 |
+| `system.kernel-disable-low-qos-timer-resolution` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b` | `efcc02d642dacdff3f28dac8946c8878180d0ef83875ea5feff1ab89b5c9c126` | 1 |
+| `system.kernel-dpc-queue-depth` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `2a1fbe9eb417cd8a472510c73b562d4c7ccbb39c7bf76a6a9ddd06dd983c47e3` | `944ee2c99bfde59a74d232317a9da57e812a0c844e8abb75862163045f3928db` | 1 |
+| `system.kernel-dpc-watchdog-period` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `9c3a7bb597a2b8ab2fd4ad7563dad5cd4531df5615f1b57683dbe1c300bbe644` | `232893d4d8fd8a293bd6b6288aacb1748be4ec1e0ab88c8bd9c8cc55dbd2d1b7` | 1 |
+| `system.kernel-ideal-dpc-rate` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `347e1247d53b76d238429f3c7f8708b2a6375173bb8b1a6788cbd185d2820b11` | `4cb385e6c43a5d3b92e6c1d9fbfd5fafd56e6c40cc1c9d59099d180c3a091f8c` | 1 |
+| `system.kernel-minimum-dpc-rate` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `0b7c3064afe58a4383a6559f08e5fd5131b8cba66cb0bd66a50858624843ceb1` | `e8aff541bfbec81d2ba53fad66a8cb2cfaab889a5de285e620c483b9393313d2` | 1 |
+| `system.kernel-serialize-timer-expiration` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` | `5e687fa484102bf47596f14af77de8fdde46c2b334e39fa6ef850a3cea94cc1e` | `20588f7da590eb22af6ec02882f2208f12c9f2288dd4a2f68b463a29d902deed` | 1 |
+| `system.services.disable-print-device-configuration` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-print-device-configuration.json` | `3101fdf06a38bfbd1fb99a735145546b6f2bcf9439946b8840db2ec2136c6893` | `02fb442a6fc902af0a89043f68fb1c32cd90fc04bb17cad014b82bb78b2266ac` | 1 |
+| `system.services.disable-print-scan-broker` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-print-scan-broker.json` | `fb63ce1ae6ec3c78f95b271148dcdecbb4258908b06426c4fbe85efa7cee1e41` | `d96f33b3f944ebfba9155d20db5cfcb4d4596e130a3e1f07b831f24ad3fe112a` | 1 |
+| `system.services.disable-print-workflow-user-service` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-print-workflow-user-service.json` | `1b8b436ef97a5a02a86e8436a8eb8b79ef50d0f0118b1bac0bb53059c15ebeb6` | `94381b6c1d68589882ee162feab63d1d35964b621bf82a6e0b9188782d790055` | 1 |
+| `system.services.disable-sysmain` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-sysmain.review.json` | `5a253e90f9746baa54a0b10cbccfd8fcc772394706bb36811463ba88e4a5ffab` | `b35bdd6393aed8354406a6fc24300475550877e24ebde527e780bcfff41b1ee2` | 1 |
+| `system.services.disable-wap-push-routing` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-wap-push-routing.review.json` | `e97ccaa2298a6068f8c0ddfc9cbd17d1bcb07a8f1d6d2c60159afbaea3fdb677` | `2458c27ca10eeeb2d794bbd64ce5d2fd8c2c88ef8f854ad9c8ed425fc0894f28` | 1 |
+| `system.services.disable-windows-error-reporting` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-windows-error-reporting.review.json` | `2d1d17ca9a3df5dac34d597126d30439408c364f975cc8e5284721bb3b25e337` | `1af4ce46fa6d4c619326da763939eb8969b2300b9eabd16fbb0e485987356791` | 1 |
+| `audio.disable-beep` | validated | Class A | `Docs/tweaks/research/records/audio.disable-beep.review.json` | `3efba036852ccfe1d739d4fe044a827c5869d7588470af089efd76924a5fc479` | `4d074ac9987be3f1f28b06277c747e6c49da4b27be38ff2380400b9cc1a6b4ef` | 1 |
+| `audio.show-disconnected-devices` | validated | Class B | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` | `6ebe3325d9398956ed2e1c38645bc1605f1efb4404396b0e12faee5baff56373` | `8d67f764d7eaaf3719428c7c806dc6ec55bc227135dbb6daa493eaf8c390c9a1` | 1 |
+| `audio.show-hidden-devices` | validated | Class B | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `53977bf3d42a6320f03cd04c3e782abd1c8c91c3bede2f0a11ce060401eb8a53` | `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95` | 1 |
+| `cleanup.disable-reserved-storage` | validated | Class A | `Docs/tweaks/research/records/cleanup.disable-reserved-storage.review.json` | `d613803743ec930d75f7bb5a7dd770a6232bdd95d955a591812b92631ae2fd76` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 1 |
+| `developer.docker-performance` | validated | Class A | `Docs/tweaks/research/records/developer.docker-performance.review.json` | `e86fa037da24385991ffe94edbb1039cf5b2ee636654d27c3d4f0e7d4062473a` | `e4c2f1a09fcfe91db5161301b71b4ec7262c17dc97de49b390f65f9abcf9253d` | 1 |
+| `developer.dotnet-telemetry-disable` | validated | Class C | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` | `b78802cb5a3836c719b9463afbeb1f933f1f9011a591ade113264880303dc648` | `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c` | 1 |
+| `developer.enable-windows-long-paths` | validated | Class A | `Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json` | `78a0923a9944c8088657298210a233e5c5793924cb928f32ba853b18589c2a8c` | `2b390bcd3f0082f4558b386b1c876aebc02ae85fa482efb6be28b8696e197f29` | 1 |
+| `developer.nodejs-performance` | validated | Class B | `Docs/tweaks/research/records/developer.nodejs-performance.json` | `8a3f6554915352ce00f5f05973e420d3529b6310cbb1d3ff30970a1f3fc6c61a` | `afeb8b18277d7825b304d849b0406a81c8dc155974f74e40933534c301df9ad1` | 1 |
+| `developer.powershell-execution` | validated | Class C | `Docs/tweaks/research/records/developer.powershell-execution.json` | `ba780b14478019a7e9cd1947efbf71470b8ea01b6f6851e668ef40d460bd0784` | `3a25fe7ca941325c96591236522cf807d8b269ff223bcc737bd5b073718cd047` | 1 |
+| `developer.python-path-fix` | validated | Class A | `Docs/tweaks/research/records/developer.python-path-fix.review.json` | `ce8f62b9295a1c477129e2e6aee7b1b55fb9f9764bfe6984328029bd2ee70ddc` | `ca039878abcb9e81f07fc1719a12c9dcefc1f2c42c36aba4c56ec7f80cc80e2a` | 1 |
+| `developer.ssh-agent-autostart` | validated | Class A | `Docs/tweaks/research/records/developer.ssh-agent-autostart.review.json` | `b3236efe7c1bf586a427ddb9a748aa911b732effdd6e8e270a386e5bc25b7485` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 1 |
+| `developer.windows-dev-mode` | validated | Class A | `Docs/tweaks/research/records/developer.windows-dev-mode.json` | `3c3defe4768d22994c71d0a3c131d12ea7eac123190b4fe89a56b7a2113a324d` | `0ed25dffb4bdabc7eaa24c879e79ec54649fabca8d204b46a0e2f6434ae60841` | 1 |
+| `developer.wsl2-memory` | validated | Class A | `Docs/tweaks/research/records/developer.wsl2-memory.json` | `9cf81d553d079e19fcf84fae9b126bdf1b081f7c4137cba883434eb9fdaee1fe` | `8483aaddd7cffe7e57ba75d9b795a94c65285ad73a64c77020d7502864a7d988` | 1 |
+| `explorer.always-show-icons-never-thumbnails` | validated | Class C | `Docs/tweaks/research/records/explorer.always-show-icons-never-thumbnails.review.json` | `22d475e957eef9e078a8c4c3975e12abe89e1ba86c11cf44e627e8221483b1a0` | `b7ac9b5f0745fe76c95b7c8864517314a2c401bac224bb610acb66022a804fcb` | 1 |
+| `explorer.disable-low-disk-space-warning` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
+| `explorer.disable-taskbar-chat` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
+| `explorer.enable-explorer-compact-mode` | validated | Class B | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
+| `explorer.hide-empty-drives` | validated | Class C | `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json` | `a3d15c07579a659260f9ff891c3e0545a369c0b8d3b14e8c099a4e9b9a5e7d77` | `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765` | 1 |
+| `explorer.launch-folder-windows-in-a-separate-process` | validated | Class C | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `0b9f99f5eae8811b2493069bc7f36bfd4ff3f4ae8c118e33ff8782d051ba1e59` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
+| `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class C | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `b976a2e2767ddc7d57d5b0ff72916467281618730287197d707a754e08ea123d` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
+| `explorer.show-drive-letters-first` | validated | Class C | `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json` | `8bfa52fedcb995cc8db11a3c4235f7f2a205442dfad8c0c2d799703d755d28a9` | `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10` | 1 |
+| `explorer.show-file-extensions` | validated | Class A | `Docs/tweaks/research/records/explorer.show-file-extensions.review.json` | `fd29b08e9516a84fb812c47948e77c6099d1de026716ebc83bfa121b641954d8` | `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d` | 1 |
+| `explorer.show-full-path` | validated | Class A | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `04d7c7e028991d2417cfcf30b38620aafc8b340c00e65c40a7b0255a983f7d1d` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
+| `explorer.show-hidden-files` | validated | Class A | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
+| `explorer.show-info-tips` | validated | Class C | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `ac3bf40732016c93efa19809e2dfcd75429737d70ffc3eae56a5abe8e401ac13` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
+| `explorer.show-protected-operating-system-files` | validated | Class C | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
+| `explorer.show-recent-items` | validated | Class C | `Docs/tweaks/research/records/explorer.show-recent-items.review.json` | `e0415d1d6becffa6d1baa236a2bcf7f345f7d693bdb86a20206eabcbe9d7fc92` | `924f0e48d17cbcb71c2c3c57e56be18b825d3a32f3d12fd6cb5d582529e1a34a` | 1 |
+| `explorer.show-status-bar` | validated | Class A | `Docs/tweaks/research/records/explorer.show-status-bar.review.json` | `835171bfebdc3b5fedb726ce8bd538b92e6f129869db6768dc7523f295ca81fd` | `9cbc0e1f749f45ec8df99669200d92db5614fefdbc6a3ecfa98e06ddb01383be` | 1 |
+| `explorer.show-type-overlay` | validated | Class C | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` | `eb3965321c9a2981e5f8cd538ed32e8932aa64a69d9e434076e5eb0b270a1db7` | `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2` | 1 |
+| `explorer.taskbar-alignment-left` | validated | Class A | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
+| `network.disable-active-probing` | validated | Class A | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0` | 1 |
+| `network.disable-default-shares` | validated | Class B | `Docs/tweaks/research/records/network.disable-default-shares.json` | `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
+| `network.disable-ipv6` | validated | Class B | `Docs/tweaks/research/records/network.disable-ipv6.json` | `024c6f3d596e053e312ee3444561fa5647441f688703fabb36829995c58b1597` | `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa` | 1 |
+| `network.disable-llmnr` | validated | Class A | `Docs/tweaks/research/records/network.disable-llmnr.json` | `64bfbd33307d83a488f3f5e0b66cb44c38e70e3556487950f6d310bb9aa8b558` | `eed09962b64570b68d966d4d13cb149e60d9ac1b4b65b1159d77e3994570e5ff` | 1 |
+| `network.disable-lltd` | validated | Class A | `Docs/tweaks/research/records/network.disable-lltd.review.json` | `147a50cc0134ab85f1f14d21691d23fce788b4c5799540cea3c6d6b0023144b9` | `95621d902169844295e40dc7f4043671933f41cfbbad706d915315fae84b8121` | 2 |
+| `network.disable-mdns` | validated | Class A | `Docs/tweaks/research/records/network.disable-mdns.review.json` | `167200f5eba4f465072285304aa655b20f3f338461e6cfc7e2945cdfcf78a71c` | `1fb961716d805445b8df34459ecd163bc84ff8d7bce259e6c394a31111426da2` | 1 |
+| `network.disable-netbios` | validated | Class A | `Docs/tweaks/research/records/network.disable-netbios.review.json` | `dd74faac26d495f020d8dd912489fc04c1740aac0500c11d76745f30723342e3` | `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69` | 1 |
+| `network.disable-netbios-resolution` | validated | Class A | `Docs/tweaks/research/records/network.disable-netbios-resolution.json` | `c400232eebb9249b9f97ce2ab71e3e119d9558d1c81dceb1c68c5fb442d0d38f` | `f44db12dce1b3f260c63e54a291c94ec312618bb1474862e3f87c5e350be8c5f` | 1 |
+| `network.disable-plaintext-smb-passwords` | validated | Class A | `Docs/tweaks/research/records/network.disable-plaintext-smb-passwords.json` | `99a2ad71755aaccc92f74d4e32bce7e0396dab5fa6f44e87845af2dc0f2e7d6c` | `1d023fbb6142f048795944b419f76a22cfda8a6c9207ed5691fc76f97d4dcf76` | 1 |
+| `network.disable-smart-name-resolution` | validated | Class A | `Docs/tweaks/research/records/network.disable-smart-name-resolution.json` | `9103f458193028b2ecfc210f4834075572b0c7b17552cf442a38b93ed81dd56d` | `a2b58aef6e298524a81810782c78ba8b1e2d4290537187ade868ea7010dd410c` | 1 |
+| `network.disable-smb1` | validated | Class A | `Docs/tweaks/research/records/network.disable-smb1.json` | `70a57880ff85a796e61f3f4da3feb437572aaac8ebdc00a8e8e064716ecea63e` | `a836aa20c016b0cb82751ac7f7371e55f771b09bc107cf0fddf0fc780d7f3fe0` | 1 |
+| `network.disable-smb2` | validated | Class A | `Docs/tweaks/research/records/network.disable-smb2.json` | `e8bef9077bfc1589aae174d0d8a73d7a34b282eba9ca45caf43ea15daf365b22` | `5339bb81b3dce3550a6cde64fab48e846da914d79dd4c7a5cc7b894b2ce66c50` | 1 |
+| `network.disable-wifi-sense` | validated | Class A | `Docs/tweaks/research/records/network.disable-wifi-sense.json` | `276c2ed05cf51928b61461d2dcb9fa6e5c4bd1db0e46463fa052251f80566c8b` | `15f8edf75fa5fe82787894099f7d3bf62989d73555893644d4b7e781b4f39920` | 1 |
+| `network.enable-lltd-responder` | validated | Class A | `Docs/tweaks/research/records/network.enable-lltd-responder.json` | `5073f39f47458dfbdf89041d84e467c441d923a347872b89448204d14654555d` | `151af74ca167733c59c777a58bfda35539d644963bba56da30e75f231ee24db3` | 1 |
+| `network.enable-lltdio` | validated | Class A | `Docs/tweaks/research/records/network.enable-lltdio.json` | `46535b799055f878ebc3dea4ff11b0a29df6bdadc1568bb95431bcc1f66039f0` | `cf1759fcbe2f5d1d8d8ae6c2157572de4b0443ddb558424efe605bef379879be` | 1 |
+| `network.prefer-ipv4` | validated | Class B | `Docs/tweaks/research/records/network.prefer-ipv4.json` | `12a1b9daf05ca7291c64063af013fc697144c19d47ea05ba1e0d7edc770d796f` | `716ad6ac1200efc085880de052a42a79f81af9ad24329f1c6cc07c9553f71644` | 1 |
+| `network.require-ntlm-ssp-client-session-security` | validated | Class A | `Docs/tweaks/research/records/network.require-ntlm-ssp-client-session-security.review.json` | `f84c709a4d4bbfc0c04575fecb75182b36647c25f9e2088093586042366098c5` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 1 |
+| `network.smb-disable-leasing` | validated | Class A | `Docs/tweaks/research/records/network.smb-disable-leasing.review.json` | `660ff172621f5edbfac2bf1c5b3bf575351ebad1e1ed46db5f08a0ca4b34d80e` | `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9` | 1 |
+| `network.smb-enable-large-mtu` | validated | Class B | `Docs/tweaks/research/records/network.smb-enable-large-mtu.json` | `d0272947e2ae119ae84e0335ac1b7b66eb91c74cc74d155fdbf05f44aaba5d56` | `baeecfe02b08e4e38fdadcbbc3a8c6134c0bc27de55bfaa8f016ff7d7fd5a45f` | 1 |
+| `network.smb-enable-multichannel` | validated | Class A | `Docs/tweaks/research/records/network.smb-enable-multichannel.review.json` | `e0891e1fd368a2dbcb47cb32680ee9ce6d183d41cfb1883b8e8979893cc535dc` | `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22` | 2 |
+| `network.smb-enable-quic` | validated | Class A | `Docs/tweaks/research/records/network.smb-enable-quic.review.json` | `5cb5d022813f5e90d000006517ecd4bb50b6161af54039679655277702db87a4` | `d0812e9f4c65a1bd0f53b117419613631b049fef49b82b3e12ed594295440e19` | 2 |
+| `network.smb-encrypt-data` | validated | Class B | `Docs/tweaks/research/records/network.smb-encrypt-data.json` | `3c1bf644733e2ab70c664da9d11a98d89063178a2b1a6d047e8ffb83ab16cc66` | `aaa4f8307120426c917f6f2d3db3bcdec1303fb61195bee5e9e7506e3c568544` | 1 |
+| `network.smb-increase-client-metadata-cache` | validated | Class A | `Docs/tweaks/research/records/network.smb-increase-client-metadata-cache.json` | `e114a501dfb91469fb5ccf01348a9ec652b1b629936c94db467d7938a90e9064` | `aee591cca7f7728315ca264021f9d19637863e7b4e736813a1179ea1a9d33d63` | 4 |
+| `network.smb-reject-unencrypted-access` | validated | Class B | `Docs/tweaks/research/records/network.smb-reject-unencrypted-access.json` | `a1f2e32caac439033bdd96251dfd76d4729a8be8eeae03ecad10873f7fd30988` | `a89ad3a32fda0229a84030b9e9cecf137b14e200f5033f27ac62f70afd2d067e` | 1 |
+| `network.smb-require-dialect-3_1_1` | validated | Class A | `Docs/tweaks/research/records/network.smb-require-dialect-3_1_1.review.json` | `0a65d1f64ae541a2e073148da2c4b9a647e93af69daad19041467fcb56878e4e` | `a68251e184cabd33a60dcbd50a6ceb3d7ad09af039b1a7952a5a5cb85f2c9b49` | 4 |
+| `network.smb-require-signing-client` | validated | Class A | `Docs/tweaks/research/records/network.smb-require-signing-client.json` | `8b5811e2e985a3f6998bd43a04b0e325e2b5e73d36eb6c963228512a1be3e27e` | `8a2de1b18d6d22bedd02d87a6a1be917c17893f304664a7a2853d1d9f4e9508a` | 2 |
+| `network.smb-require-signing-server` | validated | Class A | `Docs/tweaks/research/records/network.smb-require-signing-server.json` | `b8924ffd3d2588a784054d6781c0a32318faaadae134f6ad8425d1cda6f56706` | `522e008e12d4f73124b4eae979f4b06b1a88d207496b94d21cf8b84f8f1a22d8` | 2 |
+| `network.smb-set-cipher-suite-order` | validated | Class A | `Docs/tweaks/research/records/network.smb-set-cipher-suite-order.review.json` | `4e5f5aa3c778df39fa6e4e0b7f80db942b7fc30235a1070add5bc27e542f5f33` | `9cbac8865b3477691362fe283e460e02c3465cf68416e194d8ce4842d3223688` | 2 |
+| `notifications.disable-feedback-frequency` | validated | Class C | `Docs/tweaks/research/records/notifications.disable-feedback-frequency.review.json` | `27da435a9a26b977bfa1af84d4b988c9cd6810434af8b4f3d6c29d245461fb4c` | `7855f743095f7383bff4654511252ffac274da378def6336a873a7fc5204a00d` | 1 |
+| `notifications.disable-lock-screen` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-lock-screen.json` | `cb4ccca568e32a10a1023d92c340ff39ef154647c70a19c37aa169af781c3c9e` | `8b8bff69c430ecb0fd211d395dc19774a97b607d0af6ec8d605cb0542af5028a` | 1 |
+| `notifications.disable-mirroring` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-mirroring.json` | `12048a71562be16820123e75c0d715331bba471370286cfa56f8aa4e2dea5d48` | `e839a3b288ca983fd2356198ef6177a12f17692a8e9242e5c03faff485ee8267` | 1 |
+| `notifications.disable-tile` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-tile.json` | `f0dc5dce3c141a010807410d08462ae0ae5054eb67236a25e1f4b3d2222f5201` | `4eadf1fc0c0e7cb833e44cb784acfe7224407c3eed9c58f213a233b80a379700` | 1 |
+| `notifications.disable-toast` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-toast.json` | `f34932c9eefe4f9474bc39b38dfabefca69ccc07ca11033d4a77395f228e8844` | `c838efd9cac161fc6219e64cce19d02953984124d758641d844f84d13fb6b96a` | 1 |
+| `performance.disable-animations` | validated | Class B | `Docs/tweaks/research/records/performance.disable-animations.review.json` | `066c630d5f833dce8fc641418136f15ca0e53613c4ca4d973467aed16239bf97` | `b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2` | 1 |
+| `performance.disable-menu-show-delay` | validated | Class B | `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json` | `af6766e751f23939a57100cf1bce63e6f9f2a512620348f23ffb46adcae36930` | `2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3` | 1 |
+| `performance.disable-taskbar-animations` | validated | Class A | `Docs/tweaks/research/records/performance.disable-taskbar-animations.review.json` | `67ac8083ab3c5c6fe6932db8dcf4c4bbaf3d757a95c8c15f549e764b6563943d` | `21ca137e119b7e2de180779158da4ac8b7b45cb6af8baf96444e4281eb6d6ddd` | 1 |
+| `peripheral.autoplay-take-no-action` | validated | Class A | `Docs/tweaks/research/records/peripheral.autoplay-take-no-action.review.json` | `e6569c930a05f27153e74cc69f99130870474475c3dd28bff5022f38cb1e183b` | `6bf8b90fe59d4cf3ca5ac2b3c86e0b15bfd409ad27e51f54856fd76cc726df1a` | 1 |
+| `peripheral.disable-autoplay` | validated | Class A | `Docs/tweaks/research/records/peripheral.disable-autoplay.review.json` | `c72a6200a630b6cb859c13580bcdfc8dcc7ad96add4e69dd2cdd969fd6a700e9` | `1cba6d9b41c50cccf15290ce6131cd5daea44bc48c26f0f8f6d351963cd1e8a1` | 2 |
+| `peripheral.disable-sticky-keys-prompt` | validated | Class B | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` | `6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837` | `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e` | 1 |
+| `power.disable-cpu-idle-states` | validated | Class D | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `077d1ad70f7c569f24bde535f525128e2f0bd7af6dccc2644b4cdf5b58507d07` | `5bb8f021adc0fd46c8f2e4a4ac05aa30e50915bd05e77c48b85fb4db44e56697` | 1 |
+| `power.disable-fast-startup` | validated | Class A | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
+| `power.disable-modern-standby` | validated | Class D | `Docs/tweaks/research/records/power.disable-modern-standby.json` | `4735f00424ad14036f07e29a9a5327430e66c1de57f007d87934eaa80601127a` | `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e` | 1 |
+| `power.disable-network-power-saving.policy` | validated | Class A | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
+| `power.disable-power-throttling` | validated | Class B | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `6bbb0293de661b8c2c09bf60e67517b09b78ba45f66065f5bbdc249c5f2dcffc` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
+| `power.disable-windows-search` | validated | Class B | `Docs/tweaks/research/records/power.disable-windows-search.json` | `a71dd4b0dd816fd6f1fcbdd000f7d60651cc22532c03ef49228899aba5b74ff4` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
+| `power.hide-hibernate-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-hibernate-option.json` | `a9cd2a784e62a1619ea7f920d71387fee650e2ce8357a9b584b28e8579fb9825` | `a2ccf9b1a2c922e3273812eea45986113d2b2eec94a801bbf7cff7ecf9cdb417` | 1 |
+| `power.hide-lock-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-lock-option.json` | `e92e39c74366ca830f7cc4f3399394f72c581a57638e888be211aa421bf05856` | `cac67bd54c67255fb7bbd92e34790b14b07acbbfe0c5736954289301ac9f35bd` | 1 |
+| `power.hide-sleep-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-sleep-option.json` | `c9235ea4a57b3e8d4a6b7ae241430e25c8f46af21ff3158eef586668644423f8` | `9fd4a690ec7f01c46a0a7268de36b05197e70fea5ded44632b11d705011ea0b8` | 1 |
+| `power.optimize-cpu-boost` | validated | Class A | `Docs/tweaks/research/records/power.optimize-cpu-boost.json` | `cf75017ab18baf416f2b8999dc4bc085f9c557e25bc0be505a6b6b570b996d81` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 1 |
+| `power.optimize-gaming-network` | validated | Class D | `Docs/tweaks/research/records/power.optimize-gaming-network.json` | `79e7719a7772df3cf7ef8515b4b2d1f377993f835b90c5697de4cf789fe89b70` | `f21ead2862871a3b24aa2e310685dcce0808f29e5fde1307fc47f4c92477ba2b` | 5 |
+| `privacy.block-microsoft-accounts` | validated | Class A | `Docs/tweaks/research/records/privacy.block-microsoft-accounts.json` | `d44a370be73827a005595b0e5fa53b300eae3d558eaeedb76704704cd5e46ede` | `aadd043705a8dd7c0253c9959e72b05bdffcd4b3681169958fa169b7abf70d45` | 1 |
+| `privacy.deny-app-access.policy` | validated | Class B | `Docs/tweaks/research/records/privacy.deny-app-access.policy.review.json` | `3f92db45e192018ab405a500de812ae96fa2c52db982c10bbb1af4a16eefa78e` | `b1d082da5839ba837ab9aee8d2b0bd41c45882cd5b7400de0a78b8117dfcc660` | 1 |
+| `privacy.disable-activity-history` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-activity-history.json` | `a60be8654b03150e6d893f3214fb289e942816507aa25ab339ab26d884aacfd6` | `bc005dd4397dc6efcde50924f04736c0579ff9a9b606f7d658f1f101fff2fec9` | 3 |
+| `privacy.disable-advertising-id` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-advertising-id.json` | `edd49eae00cb8bed1842e762e7a061284191e8518ffd6ac4afa825502ca823e5` | `bd278720b6e772ec29f19dcd30d92794179e4793a6bb4971be7cf321212660f9` | 1 |
+| `privacy.disable-app-diagnostics` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-app-diagnostics.json` | `f5faffbd240fb2850a3d1acd19d46f5d372f7bf30cc7e604065725a6d543d161` | `83541ebc2f0724779aa7677a49e2c42f136a2f80e094ec339c7a0bbaeee07b53` | 1 |
+| `privacy.disable-app-launch-tracking` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-app-launch-tracking.review.json` | `0fa189370b34081b7975544d70bbf6afc5fd2a225a35a8af5e962669b6d39d5f` | `28728b4f09440c59e8c8dc5c80d7346daf6ab6388d81dd84e1ff5a71bed1cae0` | 1 |
+| `privacy.disable-app-suggestions` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-app-suggestions.review.json` | `32fdf673c98ded073a2f0a47920dc042cfacb15b2d48144401fb045532d40f30` | `7fa321f823790c2215c2c96543c04e9cf2f883b6886df0761ab7270272d49d89` | 2 |
+| `privacy.disable-appcompat-engine.policy` | validated | Class B | `Docs/tweaks/research/records/privacy.disable-appcompat-engine.policy.review.json` | `88a6c309a68d0b5c9d207c44d1884ae0f206b7edcfd0106e4ad25467172d0c78` | `4aa284a466ab23274289afd8984f112be82d7d68465fbe343f40ef70b10d440a` | 2 |
+| `privacy.disable-appdeviceinventory.policy` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-appdeviceinventory.policy.review.json` | `2d89783a4602f6689e5ae67d3244929d07277ec17848c537fde8f4aeb97a2250` | `4485a54cc0e04a3a5edf164953eb83b326f93a637f219da7533aa98574fd4347` | 4 |
+| `privacy.disable-application-telemetry` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-application-telemetry.json` | `67e8bd36fa534079200de42f85ee86b72e358addfd2af66853bb00673b524f17` | `a968b51a0de4ed20b602bb28e37277b16294b8a2e3956a3d3b351f6cf8d071e9` | 1 |
+| `privacy.disable-background-apps` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-background-apps.json` | `87f25eba44934a34cac1d1be07251d472926340620437f51f45d1e058bd842ed` | `bf3477ff8a0483d037ed07264ec9a1f37e93628b8515b4d92bcd052d59c38480` | 1 |
+| `privacy.disable-biometrics` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-biometrics.json` | `382e974742bf17a273e1ad3c94f86a97f1ab69995da4a19947121a085421e6c7` | `aca211803f04fb1fc14cb757852759a28fcc4c6fc1b8966b0fe26de035e64638` | 1 |
+| `privacy.disable-biometrics-domain-logon` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-biometrics-domain-logon.json` | `e3897566bfbeed85ec42fc8b10526cb44774efddaa4c5cca60753b3f32804119` | `cb63aa659031ceed53be982df01e1f9e6831ad0aaa5a89688ad601f4aaf52942` | 1 |
+| `privacy.disable-biometrics-logon` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-biometrics-logon.json` | `59b3f016923db303d8ece30e59c420a86d41b271a883cfb7431cc96811e4fcc4` | `e877e0087f68acb4ee49fe3cb1e7a70c8440c8e055202f306070b0b40c6a5fcc` | 1 |
+| `privacy.disable-camera` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-camera.json` | `a10de2148caa579be126fb4d1e4906fe2e5da45e5228a18d1fd10eab08f48e0b` | `ed1c25600e7c9bf71b51abec244fcb3d70f9969db29e19606a32c0fc2686a822` | 1 |
+| `privacy.disable-cli-telemetry` | validated | Class B | `Docs/tweaks/research/records/privacy.disable-cli-telemetry.json` | `3b25a760d05afb16afce7a68a8768a2cabf41c82199c45d6f83b5a01589b87e5` | `c01ca3ce36e8a237623af81403fe1e460d5ab64f427a31f30bd913a7d0630382` | 2 |
+| `privacy.disable-consumer-account-content` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-consumer-account-content.json` | `c5e5af6aa8510de48023b0697e0fa003b8db07d26f03ab779f067ed6794e4083` | `802c43fd0393ee0e78c1e693355adf236c4b541b588b30c9b562dd4acffcb715` | 1 |
+| `privacy.disable-copilot` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-copilot.json` | `c118fdaf3479c959c9c1dcd1886a0bfc864df07d3a238daa973eeb6f19c5b331` | `b1cd95056a7f94f371031db3f6de9b19002f4f490f784a91eddc21e6e7391ecc` | 1 |
+| `privacy.disable-cross-device-experiences.policy` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-cross-device-experiences.policy.review.json` | `ec2ada610e78aa52d0bd8c323443004a75d133c2b175b93d5e01a28edb05a72c` | `cd57fd96f5a482926e20bdbff74771f88dcf8aed98c8528b62bdbdaa5e26d112` | 1 |
+| `privacy.disable-device-name-telemetry` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-device-name-telemetry.json` | `28be3c8860b06016e30ab7c03b9919e4a9549b8a0af9e1ff22d0e002d5a4c14f` | `cdbf62da7c9c0eb896f953c23c3e486f5850845e6fddd640cd9ec9238437f471` | 1 |
+| `privacy.disable-diagnostic-data-delete` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-diagnostic-data-delete.json` | `0664e74cd1a50f51da1431bce9a0d886204460d2e166f068733a3f8101ea547f` | `5891504911c5f08d60193a8924be5928326e11a0e47f7e996703542b46610e9b` | 1 |
+| `privacy.disable-diagnostic-data-viewer` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-diagnostic-data-viewer.json` | `7f874873c7967e29216c2a927c911688c34248f27a6360ab8b9679eb76fc66df` | `1e5a68e241c51b8fbb767c9157452e3ed5bcb6c9ce55eb50cb3a4548e7525b1c` | 1 |
+| `privacy.disable-edge-search-suggestions` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-edge-search-suggestions.json` | `8f7ca88b8cfd391f02b29ab6ada5afd6dc48c64062f319498ec147447ab35893` | `308a5afd7fbc0a505de5fd5e6da9be0ff76205149f037ec2feaa93c192c8cb56` | 3 |
+| `privacy.disable-feedback-notifications` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-feedback-notifications.json` | `02f0fedae59e9a9d70c5e33de97cdca0f92f9fa91b789c840d9fdd994e791622` | `4fd4c3366b7f3c26314d395899a7537dd7ea9da8cb4ffcab10572845df1e5b6c` | 1 |
+| `privacy.disable-file-history` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-file-history.json` | `e1e867ac34c8d47f9e813ae7a89e770f36a151bfe6915b8484a33dd87f7f2462` | `aa8d785480383b20c15d2bfeb0b8df5880a9dd17bde45e0b336c6d793462e2cb` | 1 |
+| `privacy.disable-find-my-device` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-find-my-device.json` | `c8870610945cf729181b0927326195c2c8cbb03606ce1142a29dbe870219364b` | `87b5872f6958740891f43a2c779b22ed879146d0e2a7941319e90d93f47f5f77` | 1 |
+| `privacy.disable-font-providers` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-font-providers.json` | `3103ecd3cc80e6ac2ced1c86f6d0951bc26cfa7c46f8bcb8c2d1bfd54f51dab6` | `354730db32c467f7f05f9076e40ba6652a7ecbb40c0a30f29a72d69ce2db56c8` | 1 |
+| `privacy.disable-kms-activation-telemetry` | validated | Class B | `Docs/tweaks/research/records/privacy.disable-kms-activation-telemetry.json` | `f7b7017efc2fbf591c50f25453a9789f359d97e8a85f7ddbb19047db38864529` | `1e9e9894404d129fdfbb0bb7fe36462ff4f5028ceba1159bc4c5bc4106e139b6` | 1 |
+| `privacy.disable-language-list-access` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-language-list-access.review.json` | `ef87f286bc1e28e2e82b2ba42cde3dddefc4a530e226e4d304980b3c0fc16859` | `c074b88f6c9a9ae61c5f95a9a4f41b990e2bf9843036eaf689f52637332f15aa` | 1 |
+| `privacy.disable-local-security-questions` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-local-security-questions.json` | `0510aaff489d042f5092d37dd6bfa66c63f818c3bcfb4c0fcb6bd92bf9a6b170` | `d982c92d36455ed71e4e3b67770666d18ce19516b5834234fbe5857c78075c2a` | 1 |
+| `privacy.disable-location-consent` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-location-consent.review.json` | `8d3fbb61dbf442c36526734f70021a0192574e679be09a3456a2948e66eade05` | `b83a34f2f928911486f15a32ea6c9b1f0cec24f813002f95b0035e5e1e15553c` | 2 |
+| `privacy.disable-location-consent-system` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-location-consent-system.review.json` | `c7fd5c92098136a47f3fb245f275ca569dda95787a110329de65626e76cb3075` | `2d79f728476170491a58f6b6df1936c2669224fb46a5408be32263279ccab137` | 1 |
+| `privacy.disable-location-scripting` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-location-scripting.json` | `625c68677b896079ecba8788ad61230808270368b0da87b8012aa88dfb9d8304` | `0d370d91cc59136db8005af00e3d57fb4c3f8606d0fb213ffbefc494041ee024` | 1 |
+| `privacy.disable-location-services` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-location-services.json` | `02a2e5b01eaabc168a8c6413cfe788ad7ba628a890d8175c6e68299d3b1d3eb6` | `b63cb71c7f14cb3f1c8f97f32da8f3dd5b54d4a700ead5612765dc9a83d8b110` | 1 |
+| `privacy.disable-mdm-enrollment` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-mdm-enrollment.json` | `1ad4b0bc6688ae1f1a5f643c93138c14af1ed0c6f83996a4bf75e73448ff6ea0` | `e6f8a61361558a6b5553f8164f24f593e825c7e2a836515183f7b67e31364e08` | 1 |
+| `privacy.disable-message-sync` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-message-sync.json` | `141e59fb354ef13712d7c086e134c21e0eca83ca1fb81d495c1819cb4107eae2` | `9ac7e52d8d1523fd2f662d4e33a210918cfd25f416a02fa88ced7077cf65c1cb` | 1 |
+| `privacy.disable-offline-files.policy` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-offline-files.policy.json` | `0077b0a81625ba7eaf14678a918a3dab63f2ab92dd9579b785c0985560f5bde2` | `5f2c37486fce94be54a1f7aba31ff0ec2ffb424a30a22bc5decc1101e65f0b2d` | 1 |
+| `privacy.disable-onesettings-downloads` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-onesettings-downloads.json` | `75ac04f346672b1c0acade2691c81ea301777b3e6ed0147dc754fc3e8c8cd401` | `cca2f3310e87732b2639ebe0618ea5d41f71814401cf09e12a99a5d5637e7435` | 1 |
+| `privacy.disable-online-tips` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-online-tips.json` | `8d225aeba1aa4730710ee5f2f2e8dba8bafdb00724db0242348badf9714bfe3c` | `5b4f9f5a365bc0021a8c40a8e54b3ea942db059ac2427124a3f2ecacff187654` | 1 |
+| `privacy.disable-pca-diagnostics.policy` | validated | Class C | `Docs/tweaks/research/records/privacy.disable-pca-diagnostics.policy.review.json` | `361914f2f1feb29b3636edcf815e1afd0af762ec539f66260d1bac51d42c2f9d` | `7bdb81d570e8ab0ad5ee8e5a8b3112f1606cb397e867b219ba9775c4ee981600` | 1 |
+| `privacy.disable-phone-linking` | validated | Class B | `Docs/tweaks/research/records/privacy.disable-phone-linking.json` | `1731d7b9214bfcf6934c71f567c60cf7b9606eba456890fdb4cea244fc0cc919` | `1ac5d1461c6cb46560b096b50e2275a5337e2733cf934863b090dea12300a33e` | 1 |
+| `privacy.disable-program-compatibility-assistant` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-program-compatibility-assistant.review.json` | `1e2d3bd33c18e44a39ebbebf350cf2ec1248d96e99ca61f75dd27ff15ba472c5` | `44e0f5bfd3018d0f07f651cf907dcf7bcb13de73ab5c19f61b128b0f8ea4f2b5` | 1 |
+| `privacy.disable-recall` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-recall.json` | `a3dbe5a9847aa3811cc813babc86d285b8f40f25aeee1cfd08d0c86facdbd870` | `9a1681fc411102114e54e8b3fcc31db5b490fedfdfa16084814efe601a8c63c6` | 1 |
+| `privacy.disable-resume` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-resume.json` | `facf312c6bfa6d02b3b4200c1da07c785f21090fe9f16546eee415642428443d` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 1 |
+| `privacy.disable-rsop-logging` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-rsop-logging.json` | `e663e6d53c1c5cfe161fa777b90006fa0402b9eef5f606598dcaa011974270fe` | `5f3e900bb750e2a4c50deb90a0dbdd7f9e2a245eac042a0c1dfc0bcb76224b3b` | 1 |
+| `privacy.disable-search-box-suggestions` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-search-box-suggestions.json` | `24a42941d3e2574654a4bff9f6add2a7145bc4873f6b34f4ca7bfb22268aa30f` | `eddc41ee198554d3fe83d0e6d0e2106783e18a845d2d7cb0e7cd6e74e9ecd7ec` | 1 |
+| `privacy.disable-search-history` | validated | Class B | `Docs/tweaks/research/records/privacy.disable-search-history.json` | `4489b0ca6edacc05240289c84511215b311fc6701407fbf77d25858fe04b8384` | `577e0f892a7550b2dbff71430b62e9ce4ae3ca7a8ab9ade7a96e9fe086ecd5ac` | 1 |
+| `privacy.disable-sensors` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-sensors.json` | `cccaf1838e5764b56275e3922448a433132c93f7310a2f5eab40a0b41fc35215` | `03b2103d23d85cca9c386b2625adb5bcdea664e37e93181285e939a421430be5` | 1 |
+| `privacy.disable-steps-recorder` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-steps-recorder.json` | `c30ca6105b9e2cec0f671f6f27e4940f2efc14114323be321c1a4db8ea8c05d0` | `6b1c4965f1dd88907b6fe4153ee7caa5fa57810b0c676a4c6eb04c903a0c3915` | 1 |
+| `privacy.disable-suggestions.policy` | validated | Class C | `Docs/tweaks/research/records/privacy.disable-suggestions.policy.review.json` | `09dcee082106a1a85341f5d33d0ed89c6e266ae62a4ff37b4f4bbb95b9948904` | `f7289e1c044f4aed06c13b7cb312fc469ce3c649dc714b45f8210b084d491d23` | 3 |
+| `privacy.disable-switchback.policy` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-switchback.policy.review.json` | `7342d11984b2ee54d112c3889c24dad1a30a1baebcb0cfce8724933e2fa8ae62` | `e30ead337c2d32a4eaf143f8b112463cb25a2ed0f7c0fa445c95cc6d9f289a54` | 1 |
+| `privacy.disable-telemetry-change-notifications` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-telemetry-change-notifications.json` | `91d6621e50dda7419d14d656552cd10b86b3c6dca556381d8fe62fe8d2cdf6d2` | `17c4989b5977afbfc6d978bfc504790de6b1a5cd9e418366ed65a4087ab94993` | 1 |
+| `privacy.disable-telemetry-optin-ui` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-telemetry-optin-ui.json` | `49fdc4a927213c17b0917bdc2053bf996f662132e25aa5bfad8851ef5e92514d` | `c817eb3c49b0f967e5e129bc88bdac5a6f8cbfb11aa8fedce4e5ba2d2db70d5e` | 1 |
+| `privacy.disable-wer` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-wer.json` | `e3cfbb17de947b0be50216890ce6641583b702e0b87538e9b58246458ad012b8` | `f76a986e44138251f15e259e1d0c6babb0919ff2b6693bced3034453f0baf573` | 1 |
+| `privacy.disable-windows-location-provider` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-windows-location-provider.json` | `c9c00032b45e9041f8dde9b0d6d0806d28753f5b46f0f22165a7b74dacd07b89` | `e68060103c8ae9f54cafb0d4485ae51f868938c69e1064fe15bc3c9733fd4bbb` | 1 |
+| `privacy.disable-windows-tips` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-windows-tips.review.json` | `9fd90d98b8d35fb338d0221c56c057f1cca86ecbdb24229ca83563c047cae3a8` | `968618706507e426f5afd1839e8cfad5d9ded5ff292655a59702411eb4e7486e` | 2 |
+| `privacy.hide-last-logged-in-user` | validated | Class A | `Docs/tweaks/research/records/privacy.hide-last-logged-in-user.json` | `d3696ac4aac8d076cada915d04b1bacc9c2f99adb13e14ff5c8cd7825cd04465` | `014429e6a6216c2cabbaababfda8591989e4a9a7c026c5c173c86fd9e5f18160` | 1 |
+| `privacy.hide-recommended-personalized-sites` | validated | Class A | `Docs/tweaks/research/records/privacy.hide-recommended-personalized-sites.json` | `357972f204388003309e8fbc1dff5ceef95cff22965dbf81190e6b03f6ed2016` | `0260e4a0514f36a331a7d8246132c4ab54466d561ef8e5ee4230adefdc45d3df` | 1 |
+| `privacy.hide-recommended-personalized-sites-user` | validated | Class A | `Docs/tweaks/research/records/privacy.hide-recommended-personalized-sites-user.json` | `3a8e3e9ab92bb53c45a694de7525737d354287b01b267a5f0bf9d3cd30f1ecfe` | `e2e76932cc845400f8f53e5212bbd722953a03e756b7bc227a36ee26dd1373d8` | 1 |
+| `privacy.hide-recommended-section` | validated | Class A | `Docs/tweaks/research/records/privacy.hide-recommended-section.json` | `1e8eb339ad60b335f7e8ac4ce8e225527f66f545c011655cf36f1e73d4cd973c` | `4caace1b6f880a67e42cc408219cf7c68b0f7ead41991e81b4d59987387d165d` | 1 |
+| `privacy.hide-recommended-section-user` | validated | Class A | `Docs/tweaks/research/records/privacy.hide-recommended-section-user.json` | `a1fe3fa2dc7ff5da45634181080761a86162f16da17b767ed090b82070325c6e` | `497b81057fe283d7500aada3abdadf2c0e3dd9e4173e2537b70dc036e47f1436` | 1 |
+| `privacy.hide-username-at-signin` | validated | Class A | `Docs/tweaks/research/records/privacy.hide-username-at-signin.json` | `9c9cf39d539c33bb101ffb7886bdffa71618b4027dbb2dc30986d507713753a2` | `df9ac43701488dec143b457dfc5b9ddab403b78c3a76b87746a2ae2b44727a10` | 1 |
+| `privacy.limit-diagnostic-log-collection` | validated | Class A | `Docs/tweaks/research/records/privacy.limit-diagnostic-log-collection.json` | `d65f05c931176bcdee7d5171384631f89691f0f5f7963caa13172b39bdcdcbe3` | `2948ab88d6f0fff70ef6cd9e9a6e42917333afc393c67ed2db0d84a67b8c6486` | 1 |
+| `privacy.limit-dump-collection` | validated | Class A | `Docs/tweaks/research/records/privacy.limit-dump-collection.json` | `621a160dd612a0c838aca609a12ae94fa51e766643a2e08bc798a51d942ee4e3` | `f42f7cdd980b244401be19285659a44a707ebec53e298763035c87dab8b0f2fc` | 1 |
+| `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class B | `Docs/tweaks/research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | `b847c8b83a9ff3caed416297dc72f4bf75f582338a6c3e641c3e240a03a98de3` | `e05403394ebd8329e2d2001f0b186efecf6a6108029c50fdbd9b20c6384cc033` | 1 |
+| `privacy.troubleshooter-dont-run` | validated | Class A | `Docs/tweaks/research/records/privacy.troubleshooter-dont-run.review.json` | `0d7c80add69e4226a6eeefa2436330be4eb3d6c256266c19172fd70ca09917a4` | `7dcc7ddffc4e900be0639a531fe65c9f9e91f3571e105777966de2c6b82f3f86` | 1 |
+| `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | `cd5527ef4c788ca56752769b9f884d367106f6d2e67fa8958bc7c272b5fa8ec6` | `cbf61febc21858b0337754ddc719d778a0a6c0f8f34b535b029e120bcecea03e` | 3 |
+| `security.disable-downloads-blocking` | validated | Class A | `Docs/tweaks/research/records/security.disable-downloads-blocking.json` | `f9574461ea84e7f9a84ed029d6469a4ea7020dd5399a7cdcc0201a3106f99d1c` | `37f0c6998110ae0723af795d2c3f93b894ac85bf013d9877cbdc60c381f3f2eb` | 1 |
+| `security.disable-ntfs-encryption` | validated | Class B | `Docs/tweaks/research/records/security.disable-ntfs-encryption.json` | `b75f5abb843f5b452720a76ecf7b696cfc9544a8f8d34971eab365d6fdf8dfd3` | `a85e3450b7be35f290e9b7a8083815b660f2edd6afcb9d8151d04d4a677e9a0d` | 1 |
+| `security.disable-p2p-updates` | validated | Class A | `Docs/tweaks/research/records/security.disable-p2p-updates.review.json` | `a5915f3c7a416dcdd379f1e53e984222435ee2d5b91469252e8e3b2f4620a15f` | `e30fdfd201f0bf77b2b6fa51c308d5dd3e3f64adb81b8c6caa7a689101591a0a` | 1 |
+| `security.disable-password-reveal` | validated | Class B | `Docs/tweaks/research/records/security.disable-password-reveal.json` | `d95a11e1be92c925bdd91a42a0e5579a95d24547aa94847ab4741637b8f13fbe` | `50d97e420c30cbf63a70c9a209094c3baa6f45450925e287d51ea8a22288f57e` | 1 |
+| `security.disable-picture-password` | validated | Class B | `Docs/tweaks/research/records/security.disable-picture-password.json` | `10040b85aedadd33870b42f5e98da3c43d004e2e9ecfec0cbc2d3e250eb54021` | `80f0769f7386003a4f61a10b36d71703ac5b9498fd3fc92551eb78738cf99d72` | 1 |
+| `security.disable-remote-assistance` | validated | Class A | `Docs/tweaks/research/records/security.disable-remote-assistance.json` | `2499bcd10d72da908b3a0e71cb705f58a2e9f06c61b04b2ec9cf203c0bafa31c` | `3576aeaa16a5aab4964bc681df989398a5552a9c7b6fdceb9b722424a42f1ad8` | 1 |
+| `security.disable-system-mitigations` | validated | Class B | `Docs/tweaks/research/records/security.disable-system-mitigations.review.json` | `a5e434bfee576dafa6f310e05b9da536224a1a15bdf43a3c0215682f87ba0af7` | `f64931b89268443eb36db4ce8bf33b4a879a0c7daf28c87f36e7a1fdb33326e7` | 1 |
+| `security.disable-system-restore` | validated | Class B | `Docs/tweaks/research/records/security.disable-system-restore.review.json` | `c87e2639f9f1c023786a05f6970fbe16bdeff9ba1af71799ac96a8fe1e7c13b3` | `a0b7ed13e93915c4f77f085945159c09a292f2c3cc2e4cd140ce0ea7a98c8df1` | 1 |
+| `security.disable-windows-firewall` | validated | Class B | `Docs/tweaks/research/records/security.disable-windows-firewall.review.json` | `4669ad9f2652dc128d4cdd6123ce6652542887e95801c4e8183dbe93704b52bc` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 2 |
+| `security.disable-windows-update.policy` | validated | Class B | `Docs/tweaks/research/records/security.disable-windows-update.policy.review.json` | `d348a89d3dd278084d0cdc9fbf56c168e99433d42d157b9ebf9cda001e3b21df` | `b1697a5c3feaa9da12b61d23e66a337b9339e4fffeeb2e37d8395d5f461ed060` | 2 |
+| `security.disable-wu-driver-updates` | validated | Class B | `Docs/tweaks/research/records/security.disable-wu-driver-updates.json` | `488a5f5680947b908ba0ba69742a588b0d33a7654cf4d2a1975afac13fa061b8` | `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa` | 3 |
+| `security.enable-dynamic-lock` | validated | Class C | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `76033ac24f3d75f777cc0e8b05f9c33a7588a645fc1177c898c3ec045219dc61` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
+| `security.enable-sudo` | validated | Class B | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
+| `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
+| `security.trusted-path-credential-prompting` | validated | Class B | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
+| `security.uac-never-notify` | validated | Class B | `Docs/tweaks/research/records/security.uac-never-notify.json` | `c39a26d1490d55dd6e56b7be9b2ed61dbfd99ddfa553e82be7ea68669011ec2b` | `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f` | 3 |
+| `system.aero-shake` | validated | Class A | `Docs/tweaks/research/records/system.aero-shake.json` | `8eec9814f9162d5fd8de64d4ce729d88bc1c815255ab25b10a71ee1b93e2073b` | `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b` | 1 |
+| `system.bsod-disable-auto-reboot` | validated | Class A | `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json` | `71ce59e9590a9c45f0132c3b72477d9fa8437f4e560eb9e9d6af8acfbf95e88b` | `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181` | 1 |
+| `system.bsod-display-parameters` | validated | Class A | `Docs/tweaks/research/records/system.bsod-display-parameters.review.json` | `e90d825e8244b7d4e7ebbe1dc881d969713133feee0c06d638d5a5253523d0ae` | `1eea0c9c620c9caae29215c18a6608b3d6f5eea2beb90bc41fc83ec26ef41b3f` | 1 |
+| `system.disable-app-archiving` | validated | Class A | `Docs/tweaks/research/records/system.disable-app-archiving.json` | `b3c6bd1bd22f6745b52d3339cc337fbebef422300f30232dfc86cbad2ac01e75` | `d67f5f4b6c441bd7dea3dbb512898a32c4b4661c1c0db83b86bbdde063bdf630` | 1 |
+| `system.disable-auto-maintenance` | validated | Class B | `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json` | `70f2b46aef4c94a5986fe41c6d528bc4d40f77e2a337057fb6358e743242a439` | `9da0a6c6d8df99a060e122cfb988f132a9b125c369ff383d020cbb3657ac012c` | 1 |
+| `system.disable-background-gp-updates` | validated | Class A | `Docs/tweaks/research/records/system.disable-background-gp-updates.json` | `6c59ea8cc07f64420609a9b49dfd691f3bd53ff49b5f1c7ab56d5ee69f00a181` | `f405c9914ca39ee00ae820afba4f149eb84081715df8e3a7bcb2a26ab3742038` | 1 |
+| `system.disable-clipboard-history` | validated | Class A | `Docs/tweaks/research/records/system.disable-clipboard-history.json` | `9e8131cc869f26cc23d0fd9a3232dd821cdab8ed70d53220accdd372d164c516` | `6f1d55e33a45d3258dd257c8c34c0185d96ee07b14bf1427fbdbae1e18b728a0` | 2 |
+| `system.disable-clipboard-redirection` | validated | Class A | `Docs/tweaks/research/records/system.disable-clipboard-redirection.json` | `5cb8ad836f2d87a8de6e42bacc351d0908a2dc6fd0fd204c3f68469550be2053` | `bd7bbb0f1b1b0b7f114a02aa53890195d47f454c172025d9cfba62d70b973e8b` | 1 |
+| `system.disable-fullscreen-optimizations` | validated | Class D | `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json` | `f5cf6fa1e16180f13c4e3e6a3405152a23647e078bbf1e86ca5a4171f76963f9` | `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee` | 1 |
+| `system.disable-game-recording-broadcasting` | validated | Class A | `Docs/tweaks/research/records/system.disable-game-recording-broadcasting.json` | `5f934446faf47bd7cc617fa7233b69de7416e051e06b8e465f29cc846f390592` | `f00125e489190967e2738bd103050e96d50f5df6456d05b81cc1b82c63da5bfe` | 1 |
+| `system.disable-jpeg-reduction` | validated | Class D | `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json` | `70fadacc3893dd7f424c7f1d8c3e958b136c2d219104fc3612c754a29e48365f` | `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377` | 1 |
+| `system.disable-restartable-apps` | validated | Class A | `Docs/tweaks/research/records/system.disable-restartable-apps.review.json` | `e609c09c45ebe3606b78558be0406b22803031299aa951e220fe09f008c71312` | `b4d567ea9ec033d06c9f6d2ff60f9ada14f4b5e8b50bb5318c2536ed22cff6c8` | 1 |
+| `system.disable-search-highlights-policy` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-highlights-policy.json` | `42d8f1b01301696cf24408906b804403b17658ca55db1e5137b9e89dac384707` | `ae49b38ee6eec7f08e188c053143d1d430695aec6cb5b90db93af2281cc1b807` | 1 |
+| `system.disable-search-remote-queries` | validated | Class B | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `826137e3f60bb96c6dfffad1a9e760deead9141f0c4aa73c98ac238c80a242e3` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
+| `system.disable-search-web-results` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-web-results.review.json` | `e795f098bea183761efafb0d3f87e77c09a48b74bf7e1277f122db8f73df0eae` | `bb1b1691889396c055ff9308c954c15fe921b1bf40045ac22449e871fd6c3a37` | 1 |
+| `system.disable-shortcut-arrow` | validated | Class B | `Docs/tweaks/research/records/system.disable-shortcut-arrow.json` | `e05e11b9584629849a78d1e94ab8022634dafb5ae4e4eba98ccdef122373c30f` | `4dc6f2003ee84572320f65a1acecf6c701fc68c055921e90ca666de432f9ebef` | 1 |
+| `system.disable-startup-delay` | validated | Class D | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1` | `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7` | 1 |
+| `system.disable-storage-sense` | validated | Class A | `Docs/tweaks/research/records/system.disable-storage-sense.json` | `acec0c9c6e2760ad9a0892e7cc24768412bf3a7cc7c00933e64b83d3caf97f89` | `aab0b6531e384b0ec9cbb05bc4fd51a5f72f5fffb64825086125f5d372926ff1` | 1 |
+| `system.disable-storage-sense-temp-cleanup` | validated | Class A | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
+| `system.disable-store-open-with` | validated | Class A | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
+| `system.dwm-disable-overlay-min-fps` | validated | Class B | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
+| `system.enable-game-mode` | validated | Class B | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `e4811dbd9f28e07fdba6f7fb91ae38898a2f2a55fe61b1395c4772561dafcf9a` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
+| `system.enable-hags` | validated | Class A | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
+| `system.enable-indexing-encrypted-items` | validated | Class B | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `bdc09bee78c232ef1bcd5b9ab483aef478a9dd429315fa88206e603628efac84` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
+| `system.graphics-tdr-ddi-delay` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
+| `system.graphics-tdr-delay` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-delay.json` | `7f68171dcc72f3211cb65563724d88a3c847454998a0d6f2331522fb49fe0614` | `b6da5db4f695d7ba7a08d29bd3859c1c57b438bb3ba83564b9ec1fd0a74c4dbf` | 1 |
+| `system.graphics-tdr-level` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-level.json` | `e6e9fe55f500bf803e86104ddd0f0feb379588a35c7e98701df25914697ac8dc` | `e1d685fde018737579c002e14fe7e9bb9e301555449c7032ac537be1aefab8b1` | 1 |
+| `system.graphics-tdr-limit-count` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-limit-count.json` | `b6ffdcd76da8a573f8e4a8dd846275c0b3ea35de4dd0a4cdc57e40e08ef2dff2` | `98793161f5d92ef41a5dffb17fe726e653b8bea67bf5fcc00384abd0cf49fdde` | 1 |
+| `system.graphics-tdr-limit-time` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-limit-time.json` | `807439c6b71d03d552670f0291a9c28ce5eeb10ac7ee6258f8822e2e067a1bde` | `b8db6b0b24bd9b6d64dd8e0ff6088b7079e260f5a620d73e10950a74b6499361` | 1 |
+| `system.kernel-thread-dpc-enable` | validated | Class B | `Docs/tweaks/research/records/system.kernel-thread-dpc-enable.json` | `39b9545f28226227c98927feb4de4623e86b7dc8b18df5d91b8b8cb079c3329a` | `a15a06f3b91cf08536310bd098334ea2859c0ff7ad7d73e2594296a780a73f5e` | 1 |
+| `system.memory-clear-pagefile-at-shutdown` | validated | Class B | `Docs/tweaks/research/records/system.memory-clear-pagefile-at-shutdown.json` | `2717a4299cf44da2dc6cc6db5f9bf70fb81393c1dcfd168532dd03186402e04c` | `410daf2e1ff1285865db5d6768c6f4e852efd5e68d0b6f914845ca98b2dcc97b` | 1 |
+| `system.memory-disable-paging-executive` | validated | Class C | `Docs/tweaks/research/records/system.memory-disable-paging-executive.json` | `d142104b69db4091b2f36240824e3e551b6c7033e486a3fb7e0aceaa16e332b1` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 1 |
+| `system.memory-large-system-cache-client` | validated | Class B | `Docs/tweaks/research/records/system.memory-large-system-cache-client.review.json` | `96a2972b0ac49d65125668f25c55a812e180b1aae979c6e2daac7a0e6024c03a` | `0bb05d41e8e9be3cbc9320f5ab39e1261822a39f4b171f38e49f416bb54d05d5` | 1 |
+| `system.memory-nonpaged-pool-dynamic` | validated | Class B | `Docs/tweaks/research/records/system.memory-nonpaged-pool-dynamic.json` | `e3ab3a175bcb3ee0b1f8c1e64d24a28cfcff7f470045d3393ba189357b979b8d` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 1 |
+| `system.memory-paged-pool-dynamic` | validated | Class B | `Docs/tweaks/research/records/system.memory-paged-pool-dynamic.json` | `2b237b2f02bee35264c954a94acec5f48f8115255420bb31dcdbce2ed0f810e6` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 1 |
+| `system.memory-registry-quota-default` | validated | Class A | `Docs/tweaks/research/records/system.memory-registry-quota-default.review.json` | `64c409ac03712e75ba66f605acbc94e7cf392a3cf7514ae1289dba78a99eee33` | `25c9afb706f3f644f188ca40e87d0e9a88dacfb4e738d93d292e3aed0a14f1a5` | 1 |
+| `system.ntfs-disable-8dot3` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-disable-8dot3.json` | `62f3205495b3a91231e2df74f34aa1452f203bf4e0090ec755f70e6b1f5cc4d2` | `ea929eeaf7bdd90e1cdacf69338485fefd38aca588e8af28bd4cf78a76b3cdc1` | 1 |
+| `system.ntfs-disable-last-access` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-disable-last-access.json` | `c7bf54d47ec0ca55d1c93beba623e73597451932ced624955d8490f7712777e3` | `999857adb93ea648e8ead434d9a350d2d2009985c6240ddd98032fc4b736d627` | 1 |
+| `system.ntfs-enable-long-paths` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-enable-long-paths.json` | `d101a6382cc22b8bd2dd60f2d8ff325ea4c7c712f05bfc72566c2f6a1742cdab` | `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179` | 1 |
+| `system.ntfs-reset-memory-usage` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
+| `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
+| `system.priority-control` | validated | Class D | `Docs/tweaks/research/records/system.priority-control.review.json` | `0384e02c10c9b9840925aeeaa7aafe9cbda97e864a0927bc7d1f46279ae7ab5d` | `c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b` | 1 |
+| `system.reduce-shutdown-timeouts` | validated | Class D | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
+| `system.reliability-timestamp-enabled` | validated | Class C | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `721519b9c72c153fd891292cee7d8ceb28902ef780f964c43c1abae849b21b3e` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
+| `system.services.disable-bluetooth-audio-gateway` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
+| `system.services.disable-bluetooth-support` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `c41242b6b93a6c0726a408024b2d24f989f06a68dbd803a2976d1755cc320372` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
+| `system.services.disable-bluetooth-user-service` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` | `0dbc2e23199be2975ec038e31ccb35313500be6a9c1284230346332a7617adcd` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 1 |
+| `system.services.disable-connected-user-experiences` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-connected-user-experiences.json` | `432df30061542fae8312ae99ee7a4dbc4b0ac0bddbeb63c1d35b97a0517eafea` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 1 |
+| `system.services.disable-print-notifications` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-notifications.json` | `341f0c561d3693787f3a35309441f261e6f76c986e61a507ab7b835846a1e6ee` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 1 |
+| `system.services.disable-print-spooler` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-spooler.json` | `d244f10b272a038623ae642806ea9e2c0f8c7171857f5c3655cc3af754d8505f` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 1 |
+| `system.services.disable-windows-search` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-windows-search.json` | `0a7a7b83cdb693c869b6fbc38dc856ad4ca756793379bbf7db2b3ff1cb69d3fc` | `7a939516d8b00a24b308632a8c4618acc5fd292fab45e9544a98c56f98788b37` | 1 |
+| `system.verbose-status-messages` | validated | Class A | `Docs/tweaks/research/records/system.verbose-status-messages.json` | `df5150e4d4169785692e05301bd746f655ecd44ad77aebeb9b85483287f1d6df` | `95d2e2d70159d0ddc6500d9a88c2420cc76d133e09b5ee7920891d07a3cc92ef` | 1 |
+| `visibility.default-account-picture` | validated | Class A | `Docs/tweaks/research/records/visibility.default-account-picture.json` | `6e84d377b9c2cacbf2a215a337713809e6511ab5a3b1c8efa6003c37e5e111f6` | `ad18cf84978748d2e98ae9ba591d975b8b94780caa755d468c578aa640b06c45` | 1 |
+| `visibility.disable-acrylic-logon` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-acrylic-logon.json` | `c16c3fcb7ba090273c25c36825d1b4fdf06144f4e2cfa39c76663507cf608722` | `b8f40fdcfee835f4f10a9f9dcbe34876f7fa4889dbcf838ac809f972d48eb972` | 1 |
+| `visibility.disable-common-control-animations` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-common-control-animations.json` | `b5cb20aca72ec5081c06d8dda3a06b44c7960637b50c9c3126c6f694b81f30ba` | `adfa8da46fa1d6eeb719bc15c967c593bd41eb9e52552f834d45437a25adbc73` | 1 |
+| `visibility.disable-first-signin-animation` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-first-signin-animation.json` | `370dbbd92d120e1950ec37ee727bdfdd23956b45e9c3560141e679fd0a43c432` | `2cd2ab91efa1fa7176d3f144c0d7e00677f16d9110e67fec6f2a8f1fa748315d` | 1 |
+| `visibility.disable-lock-screen` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-lock-screen.json` | `af6e021cd929a788c37b9188502cf5cb2486009db1d72579e046f35cd3619837` | `aedb1831e8c41ed80e97327e2dc02ddba24d7b785b83c3ce35b75047d8face34` | 1 |
+| `visibility.disable-lock-screen-camera` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-lock-screen-camera.json` | `12e1f7bf9af77dee08772aa1665b82c233ed89f95d82b22fdcf6ad785153624d` | `a6eb4fbd91b5179a2e4173d4fefe8a5eaf3c0dedc8b1ea8f37ec0203cfcc89d7` | 1 |
+| `visibility.disable-lock-screen-changes` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-lock-screen-changes.json` | `f8b7afb46352170046f35a7297378bd577998c3c50c285e457d3fbdffbe2d6fa` | `b1e91965ccdb51d5fb5b6ec2f109bdb429110c87eaada0faf47627bec6a47096` | 1 |
+| `visibility.disable-lock-screen-motion` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-lock-screen-motion.json` | `d577c07609f3a295503227fd2e7cfe06dd78152217bacb4a209d65958fe4dfbc` | `11fd20bce4d0b3145996804a738a130f4d4a79391e28b67cd0058d0e1f75c224` | 1 |
+| `visibility.disable-lock-screen-slideshow` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-lock-screen-slideshow.json` | `e138614e287f6002a7640687bac4f3621051501ad0511d1203390fc03876dd7c` | `8969c5237c4151cc3cffb1e3170590ec783d572dcd20adcd2c4e7a4658b1ec14` | 1 |
+| `visibility.disable-spotlight-action-center` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-spotlight-action-center.json` | `e00e86b226adfd620e49c4f0a9b29f34a96abf502550e6d32366c588b7688684` | `3d58e1593aebbeea5ceefc7971820b41d3489715fc2ecd3f53e1d9e95232572b` | 1 |
+| `visibility.disable-spotlight-desktop-collection` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-spotlight-desktop-collection.json` | `04f887d008f111e70282b92f0044c7986feda20d2bf6a7f8ed071d70f9453b61` | `e910069ca9d3f650eaedc02a3e880fce52db9e04818c7f08d0be150dcaf5bb4a` | 1 |
+| `visibility.disable-spotlight-features` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-spotlight-features.json` | `f1d8384160bea521ac43a49874a008aa214e522adf091ff1ac7f3f0814f5f4a8` | `98c62d8b495d56b02d16422872ff18ec0528a34ae447c6b73b5c0e7c99b67d23` | 1 |
+| `visibility.disable-spotlight-settings` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-spotlight-settings.json` | `b152736e66590fe3cea1551865bf77a41aacb9bbdb1d6e9af49fe1213d0297f8` | `8ec75d4adae9a3c4f45a6ec6db68871c4567e1bc0b1497193518a404399fe697` | 1 |
+| `visibility.disable-spotlight-third-party` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-spotlight-third-party.json` | `6db725bb7266d1c1d13caa8900bb6e69a14ca673769fa063f66a48c30349068a` | `90a4369f43b7e72d685c87ce12f285e61dc065a5b8bb0d3de18aa3f8082e227d` | 1 |
+| `visibility.disable-spotlight-welcome` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-spotlight-welcome.json` | `597f7490734c8572b186295c4fa318ac2b1734e26e781fa013b052085988135f` | `41dd7f4619d74c0b0c31cde4b4641ee5cf7fb7a35d9af633569a4ba746fa3f0c` | 1 |
+| `visibility.disable-wcn-wizards` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-wcn-wizards.json` | `4c4d405be8e79fe7fcac27aa3484df888bd67a366e58caf2ce4131cb3bd6698e` | `b764973c8d3adec8c9bc8f29b53e6207bcfe8815718323fadb18a7b81e9ebfeb` | 1 |
+| `visibility.disable-widgets` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-widgets.json` | `13c038cc0ba351f32d2e3082667307aa1c28428b000e37f615a746afe2419404` | `51e5a1f879b109db9b774b9202bc9a647344f646d8b00ec3c13360674ab215bd` | 1 |
+| `visibility.disable-window-animations` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-window-animations.json` | `05c681b441c2adb732c53a21f6c49c9ed0dac48e26aedb4551925c4ee61e6abc` | `571192ff25e0c81ae5dce332c8b0051a472bbf9841b730d58ca887806de5ea2f` | 1 |
+| `visibility.force-classic-control-panel` | validated | Class A | `Docs/tweaks/research/records/visibility.force-classic-control-panel.json` | `5f95ffcb6973992c6cc7c5dba884f054b5a7228568a12b04788a9588b0606090` | `8fc57213d5f2695c6314ee2e7b6b126656c9c3218f18a7c77133c4f5178cad20` | 1 |
+| `visibility.hide-language-bar` | validated | Class B | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` | `c9d9d7d08ce8e601a61709c16d43cbea6b95d1bc90d77b8f7a89bff4f44fb5d4` | `3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc` | 1 |
+| `visibility.hide-most-used-apps` | validated | Class A | `Docs/tweaks/research/records/visibility.hide-most-used-apps.json` | `27c167bbdf4148602936b8099f51782296e65d2c67105e4947efb2c9244851f7` | `b66e6752f3c72b835115d0a715643e28a6be0061d9e0b1246115269dd8eb1f8e` | 1 |
+| `visibility.hide-people-bar` | validated | Class A | `Docs/tweaks/research/records/visibility.hide-people-bar.json` | `d4be4445fae869dcf55e6ca3c463089eb7ce7c4d3dc97f16b43c0e01b7e2f43a` | `ca25eca99b530fd221ccdc49679625c25e7e2ebb3e5fb21edaca6075a73732ad` | 1 |
+| `visibility.restore-classic-context-menu` | validated | Class B | `Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json` | `856c6d17aafde09565f4b68bd4381fc44f28a7e30ba9d5c5cb6a6c37cd0b7b4c` | `2be626add6056b666c3453999702cf52a7408132c80f6da39aa897ff0f90ecf2` | 1 |
 
 ## Per-Record Details
 
 ### `audio.disable-spatial-audio`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Audio`
 - Area: `Audio Engine Flags`
 - Scope: `device`
@@ -325,6 +331,15 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 - Proof SHA256: `4a593ea805014f217f681fc58618dd92a0ee319f834de3cb6b99d9b7340d5677`
 
 **Summary:** Deprecated audit trail for the spatial-audio registry observation. The current app writes HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio\DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract. A Win25H2Clean guest string scan of likely audio binaries did not surface the exact key name either.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -369,6 +384,7 @@ Nohuto lineage references:
 ### `audio.disable-system-sounds`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Audio`
 - Area: `AppEvents Sound Scheme Entries`
 - Scope: `user`
@@ -377,6 +393,15 @@ Nohuto lineage references:
 - Proof SHA256: `8c6baad92b01ec2a36a670ba00e7a7f372889f597cb30b1fc0ccc3d2e1d5a424`
 
 **Summary:** Deprecated audit trail for the AppEvents sound-scheme bundle. The current app clears many HKCU\AppEvents\Schemes sound-event values, but the publishable control surface is tracked separately from this implementation bundle.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -421,6 +446,7 @@ Nohuto lineage references:
 ### `developer.terminal-dev-mode`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Developer`
 - Area: `Windows Terminal Internal Flags`
 - Scope: `user`
@@ -429,6 +455,15 @@ Nohuto lineage references:
 - Proof SHA256: `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a`
 
 **Summary:** Deprecated audit trail for the Windows Terminal internal-flag bundle. The current app writes HKCU\Software\Microsoft\Windows Terminal\DeveloperMode and EnableDebugTap, but this research pass did not capture a published registry contract for either value.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -476,6 +511,7 @@ Nohuto lineage references:
 ### `developer.vs-intellisense-cache`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Developer`
 - Area: `Visual Studio IntelliSense`
 - Scope: `user`
@@ -484,6 +520,15 @@ Nohuto lineage references:
 - Proof SHA256: `7594c93530c2f21078f1038412922a58ad2eb57b477f498e084adb3d66722225`
 
 **Summary:** Deprecated audit trail for the Visual Studio IntelliSense cache tweak. Microsoft documents IntelliSense performance broadly, but this research pass did not capture a primary Microsoft registry contract for DisableAutoUpdating.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -525,6 +570,7 @@ Nohuto lineage references:
 ### `developer.vs-solution-load`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Developer`
 - Area: `Visual Studio Solution Loading`
 - Scope: `user`
@@ -533,6 +579,15 @@ Nohuto lineage references:
 - Proof SHA256: `f3d5094dc691664127f8b7cff7d1500ec045ea83e83fdfefa30d3569d90f06ae`
 
 **Summary:** Deprecated audit trail for the Visual Studio solution-loading tweak. Microsoft documents solution-loading behavior broadly, but this research pass did not capture a primary Microsoft registry contract for BackgroundAnalysis.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -574,6 +629,7 @@ Nohuto lineage references:
 ### `developer.vscode-git-autofetch`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Developer`
 - Area: `VS Code Setting vs Registry Observation`
 - Scope: `user`
@@ -582,6 +638,15 @@ Nohuto lineage references:
 - Proof SHA256: `e06716163838e4757577a19baa2082882403e415767e632da3bcaa89018fadce`
 
 **Summary:** Deprecated audit trail for the VS Code Git autofetch implementation observation. Visual Studio Code documents the git.autofetch setting, but this registry path is not a published Microsoft control surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -630,6 +695,7 @@ Nohuto lineage references:
 ### `explorer.disable-taskbar-widgets`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Explorer`
 - Area: `Widgets`
 - Scope: `device`
@@ -638,6 +704,15 @@ Nohuto lineage references:
 - Proof SHA256: `c564531bb27c99c5c6d31c16fdc2cfef794fcda04ce5ca8598956cb5763f433a`
 
 **Summary:** This legacy tweak ID previously pointed at a per-user Explorer TaskbarDa write for the Widgets taskbar button. It was retired on 2026-03-13 because the app already ships a validated official machine-policy Widgets control under visibility.disable-widgets. Keep this record only as an audit trail from the old duplicate taskbar-only tweak name to the supported Widgets policy record.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -666,6 +741,7 @@ _No provenance block present._
 ### `network.optimize-smb`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Network`
 - Area: `Registry Optimization Bundle`
 - Scope: `device`
@@ -674,6 +750,15 @@ _No provenance block present._
 - Proof SHA256: `f20537679384da6d919b7646f4217435225bdad41c9462c7c48cad785a19e5eb`
 
 **Summary:** Deprecated audit trail for the SMB tuning bundle. The individual values are documented, but the current app uses a broad three-value preset that is not being published as a single normalized control surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -728,6 +813,7 @@ Windows Internals references:
 ### `power.disable-network-power-saving`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Power`
 - Area: `Mixed Network and MMCSS Registry`
 - Scope: `device`
@@ -736,6 +822,15 @@ Windows Internals references:
 - Proof SHA256: `8a44b3c793b7747a5bef848a85808afb5dfc209af650712b4ebf8b03f19e4da9`
 
 **Summary:** Deprecated audit trail for the mixed network power-saving bundle. The official TCP/IP offload and MMCSS values are split into a child record; the opaque NetworkThrottlingIndex value remains tracked only here.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -788,6 +883,7 @@ Windows Internals references:
 ### `power.optimize-performance`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Power`
 - Area: `Raw Power Manager Registry`
 - Scope: `device`
@@ -796,6 +892,15 @@ Windows Internals references:
 - Proof SHA256: `58dc7326379a58002bfc8e69fc5bcc60b649ec53bb89088c2dbbf5d96c9dbdc2`
 
 **Summary:** Deprecated audit trail for the raw power-manager performance bundle. The current app bundles several low-level registry values into one preset, but the publishable control surface is not a single Microsoft-supported toggle.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -844,6 +949,7 @@ Windows Internals references:
 ### `privacy.deny-app-access`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Registry Policy Bundle`
 - Scope: `device`
@@ -852,6 +958,15 @@ Windows Internals references:
 - Proof SHA256: `4ae5728a5c387aaf0d21810f025314b52714ec69482975da463be70c18be5a3a`
 
 **Summary:** Deprecated audit trail for the broad AppPrivacy deny bundle. The official AppPrivacy policy family is split into a child record; the extra System policy write and broader implementation details remain tracked only here.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -894,6 +1009,7 @@ Nohuto lineage references:
 ### `privacy.disable-application-compatibility`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Composite`
 - Scope: `device`
@@ -902,6 +1018,15 @@ Nohuto lineage references:
 - Proof SHA256: `bd45859c05009d40015767839d790f25d4748e596556c41939940d798a660bba`
 
 **Summary:** Deprecated audit trail for the old composite toggle. The AppCompat policy bundle and Application Experience task bundle are tracked separately in child records.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -943,6 +1068,7 @@ Nohuto lineage references:
 ### `privacy.disable-application-compatibility.policy`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Application Compatibility`
 - Scope: `device`
@@ -951,6 +1077,15 @@ Nohuto lineage references:
 - Proof SHA256: `92200c73471bafab51b30d4397016d8ca189f25086c650af2258b5ebf096be76`
 
 **Summary:** This record previously documented the full seven-value AppCompat policy bundle written by the app. It was split on 2026-03-13 into three focused child records and now exists only as an audit trail: privacy.disable-appcompat-engine.policy, privacy.disable-appdeviceinventory.policy, and privacy.disable-program-compatibility-assistant.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -979,6 +1114,7 @@ _No provenance block present._
 ### `privacy.disable-application-compatibility.tasks`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Scheduled Task Bundle`
 - Scope: `device`
@@ -987,6 +1123,15 @@ _No provenance block present._
 - Proof SHA256: `de8d0e5c3fe3bbc0133d9be1194edbaaec7bd4a0bc072339a635f2a925d56b81`
 
 **Summary:** Deprecated audit trail for the Application Experience task bundle. The current app disables a bundle of scheduled tasks, but the publishable control surface is tracked separately in the validated policy record.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1016,6 +1161,7 @@ _No provenance block present._
 ### `privacy.disable-ceip`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Registry Policy Bundle`
 - Scope: `device`
@@ -1024,6 +1170,15 @@ _No provenance block present._
 - Proof SHA256: `291f83fd458207687a77b2cff7de2b4b70856477f6e31fe23e129e9461db898c`
 
 **Summary:** Deprecated audit trail for the old CEIP composite bundle. The App-V, SQMClient, and Messenger values are still observable, but this parent record is no longer the primary research surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1063,6 +1218,7 @@ Nohuto lineage references:
 ### `privacy.disable-cross-device-experiences`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Mixed Registry Configuration`
 - Scope: `mixed`
@@ -1071,6 +1227,15 @@ Nohuto lineage references:
 - Proof SHA256: `8822b8f2cbf24318cad7f81a5d3fe461e79b510d4d2ffbe2544b8ea72bff29db`
 
 **Summary:** Deprecated audit trail for the mixed cross-device preset model. The documented EnableCdp machine policy is split into a child record; the user-side CDP preset values remain unresolved and are tracked only as implementation detail here.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1108,7 +1273,7 @@ Nohuto lineage references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 
 **Validation proof**
 
@@ -1121,6 +1286,7 @@ Nohuto lineage references:
 ### `privacy.disable-f1-help`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `File Rename`
 - Scope: `device`
@@ -1129,6 +1295,15 @@ Nohuto lineage references:
 - Proof SHA256: `e939be1becb0f019eb205401e305d66b05496b5a891020031caf988e94655f61`
 
 **Summary:** Deprecated audit trail for the F1 Help binary rename. The app disables F1 Help by renaming HelpPane.exe, but this is not an official policy surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1168,6 +1343,7 @@ Nohuto lineage references:
 ### `privacy.disable-inking-typing-personalization`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Registry Bundle`
 - Scope: `device`
@@ -1176,6 +1352,15 @@ Nohuto lineage references:
 - Proof SHA256: `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc`
 
 **Summary:** Deprecated audit trail for the old inking and typing personalization bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1218,6 +1403,7 @@ Nohuto lineage references:
 ### `privacy.disable-offline-files`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Composite`
 - Scope: `device`
@@ -1226,6 +1412,15 @@ Nohuto lineage references:
 - Proof SHA256: `8c538308e9e84828e4f6100b490500c5b6576341a93ebd7d377695dfa8786ab0`
 
 **Summary:** Deprecated audit trail for the old composite toggle. The validated Offline Files policy and the broader service, task, and binary subrecords are tracked separately.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1266,6 +1461,7 @@ Nohuto lineage references:
 ### `privacy.disable-offline-files.binary`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `File Rename`
 - Scope: `device`
@@ -1274,6 +1470,15 @@ Nohuto lineage references:
 - Proof SHA256: `0c9e074ea6e9e7fbe6a77b6bb4da1fd79573cd8be78db75080600a99343ffef6`
 
 **Summary:** Deprecated audit trail for the Offline Files binary-rename subrecord. The app renames mobsync.exe as part of its broader Offline Files shutdown bundle, but the publishable control surface is tracked separately in the validated Offline Files policy record.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1302,6 +1507,7 @@ _No provenance block present._
 ### `privacy.disable-offline-files.services`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -1310,6 +1516,15 @@ _No provenance block present._
 - Proof SHA256: `1d2a9461e246ba26660d27459057374991940a4b30a3ce0e897e4a2f56de0e69`
 
 **Summary:** Deprecated audit trail for the Offline Files service subrecord. The app disables CSC and CscService as part of the broader Offline Files bundle, but the validated publishable control surface is tracked separately in the policy record.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1340,6 +1555,7 @@ _No provenance block present._
 ### `privacy.disable-offline-files.tasks`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Scheduled Task Bundle`
 - Scope: `device`
@@ -1348,6 +1564,15 @@ _No provenance block present._
 - Proof SHA256: `77aaa2731fc6fe9471fd8124b323b976253ec517b6d337844a0b92af23289256`
 
 **Summary:** Deprecated audit trail for the Offline Files task subrecord. The app disables the Offline Files background and logon synchronization tasks, but the publishable control surface is tracked separately in the policy record.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1378,6 +1603,7 @@ _No provenance block present._
 ### `privacy.disable-reserved-storage`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Deprecated Duplicate Audit Trail`
 - Scope: `device`
@@ -1386,6 +1612,15 @@ _No provenance block present._
 - Proof SHA256: `4ca83624364bff8e6efdcd5943a83b16fef25082855bf3a1fe1d029ddcaec7ff`
 
 **Summary:** This record previously tracked a privacy-category duplicate that wrote HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager\DisableDeletes = 1 directly. It was retired on 2026-03-13 because the repo already contains the proper official command-backed tweak cleanup.disable-reserved-storage, which uses the documented DISM Reserved Storage surface. This record remains only as an audit trail from the retired privacy ID to the surviving cleanup tweak.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1414,6 +1649,7 @@ _No provenance block present._
 ### `privacy.disable-sleep-study-diagnostics`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Event Channel Bundle`
 - Scope: `device`
@@ -1422,6 +1658,15 @@ _No provenance block present._
 - Proof SHA256: `412364eb6a6dec3331f915bf7c0a0c51ea9534af70005eb89b059f7b269755d9`
 
 **Summary:** Deprecated audit trail for the old Sleep Study diagnostic-channel bundle. The underlying event channels remain observable, but the parent record is no longer the primary research surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1464,6 +1709,7 @@ Nohuto lineage references:
 ### `privacy.disable-suggestions`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Observed User Preference Bundle`
 - Scope: `user`
@@ -1472,6 +1718,15 @@ Nohuto lineage references:
 - Proof SHA256: `bf916cbd28e9b091f2d0860e32e6799b9e57d617d0343e1d82dd50c947868d9c`
 
 **Summary:** Deprecated audit trail for the old suggestions bundle. The ContentDeliveryManager IDs are still observed, but the parent record is no longer the primary research surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1513,6 +1768,7 @@ Nohuto lineage references:
 ### `privacy.disable-suggestions-cdm`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Observed ContentDeliveryManager Values vs Named CloudContent Policies`
 - Scope: `user`
@@ -1521,6 +1777,15 @@ Nohuto lineage references:
 - Proof SHA256: `4ff5f1494743e9413070672553328f8d78c7c7a92fb34f24a32e4a14b74d32c9`
 
 **Summary:** Deprecated audit trail for the opaque ContentDeliveryManager suggestion bundle. The official CloudContent policy trio is split into a child record; the user-side SubscribedContent IDs remain unresolved and are tracked only as implementation detail here.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1581,6 +1846,7 @@ Nohuto lineage references:
 ### `privacy.disable-wmplayer-telemetry`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Privacy`
 - Area: `Observed App Preference Bundle`
 - Scope: `user`
@@ -1589,6 +1855,15 @@ Nohuto lineage references:
 - Proof SHA256: `47b485383cfd24386e8b25266f61526788ae38ccc1e22f2e5643ab572cbc10e1`
 
 **Summary:** Deprecated audit trail for the old Windows Media Player preferences bundle. The underlying values remain observable, but the parent record is no longer the primary research surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1630,6 +1905,7 @@ Nohuto lineage references:
 ### `security.disable-vbs`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Security`
 - Area: `Registry Policy Bundle`
 - Scope: `device`
@@ -1638,6 +1914,15 @@ Nohuto lineage references:
 - Proof SHA256: `875362a1cc4fae3a9ee03d01d96ae6e825dd46f3a80c1fa0fb1885197dc650f6`
 
 **Summary:** Deprecated audit trail for the legacy Device Guard VBS bundle. The record documents the three official policy values, but the bundle is too broad and runtime-sensitive to publish as a single normalized control surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1697,6 +1982,7 @@ Windows Internals references:
 ### `security.disable-windows-update`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Security`
 - Area: `Registry Policy Bundle`
 - Scope: `device`
@@ -1705,6 +1991,15 @@ Windows Internals references:
 - Proof SHA256: `e39f151336b7dc9297dcff821b6d7da188f5a89cce214c2111a8979f3650a881`
 
 **Summary:** Deprecated audit trail for the old Windows Update composite bundle. The official policy controls now live in a separate child record, while the pause timestamp writes remain documented here as historical behavior.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1755,6 +2050,7 @@ Windows Internals references:
 ### `security.disable-wpbt`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `Security`
 - Area: `Observed Session Manager Registry Setting`
 - Scope: `device`
@@ -1763,6 +2059,15 @@ Windows Internals references:
 - Proof SHA256: `591a298fdd99779c99b3623d6c7514ca2e7c0ee404b59a75c972181a18a0d9ff`
 
 **Summary:** Deprecated audit trail for the observed WPBT registry write. Microsoft documentation captured in this dataset publishes WPBT as a UEFI or DFCI managed feature, while the Session Manager registry path remains a community-sourced implementation detail that is now corroborated by raw registry traces under ControlSet001.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1812,6 +2117,7 @@ Windows Internals references:
 ### `system.disable-game-dvr`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Deprecated Duplicate`
 - Scope: `mixed`
@@ -1820,6 +2126,15 @@ Windows Internals references:
 - Proof SHA256: `4598eb3a4a7a554a32beb57abe4def5b4df7dc2cc841aa9df298709c324a6795`
 
 **Summary:** This record previously tracked a user-side GameConfigStore write for Game DVR. It has been retired in favor of the official validated policy-backed record system.disable-game-recording-broadcasting, which uses HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR\AllowGameDVR. Do not use this record for publication or apply decisions.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1845,6 +2160,7 @@ _No provenance block present._
 ### `system.disable-scheduled-tasks`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Scheduled Tasks`
 - Scope: `device`
@@ -1853,6 +2169,15 @@ _No provenance block present._
 - Proof SHA256: `14fdf96dc2d205ea9aecaa1d530e572e5f63a016031ec2c879b3605d5527a51e`
 
 **Summary:** Deprecated audit trail for the old scheduled-tasks bundle. The task paths remain documented, but the parent record is no longer the primary research surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1919,6 +2244,7 @@ Windows Internals references:
 ### `system.disable-search-highlights`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Deprecated Duplicate`
 - Scope: `mixed`
@@ -1927,6 +2253,15 @@ Windows Internals references:
 - Proof SHA256: `2cebd2b8f3a1d2ecfae968fef5c0dda7bf435391ee0f1a7899d88b7023c6ca99`
 
 **Summary:** This record previously tracked a user-side SearchSettings write for Search Highlights. It has been retired in favor of the official validated policy-backed record system.disable-search-highlights-policy, which uses HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search\EnableDynamicContentInWSB. Do not use this record for publication or apply decisions.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -1952,6 +2287,7 @@ _No provenance block present._
 ### `system.disable-service-splitting`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `svchost Process Model`
 - Scope: `device`
@@ -1960,6 +2296,15 @@ _No provenance block present._
 - Proof SHA256: `f4de2df5d71667b2a6ccc8ec955f0583f37339e6077ea07ee101e043632e841e`
 
 **Summary:** Deprecated audit trail for svchost service splitting. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\SvcHostSplitThresholdInKB = 0xFFFFFFFF to keep svchost service splitting from triggering on normal systems, but this research pass did not capture a primary Microsoft source that publishes 0xFFFFFFFF as the supported disable-splitting preset.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2007,6 +2352,7 @@ Windows Internals references:
 ### `system.dwm-disable-mpo`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Desktop Window Manager / Overlay Overrides`
 - Scope: `device`
@@ -2015,6 +2361,15 @@ Windows Internals references:
 - Proof SHA256: `cff71e2f37ceccde58b2eafe48044a4ac42b5453b9676780d76aa89c5cafe309`
 
 **Summary:** Deprecated audit trail for DWM Multiplane Overlay (MPO). The current app writes HKLM\SOFTWARE\Microsoft\Windows\Dwm\OverlayTestMode = 5 to disable MPO, but this research pass did not capture a primary Microsoft source that publishes OverlayTestMode as a supported MPO control.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2062,6 +2417,7 @@ Windows Internals references:
 ### `system.graphics-disable-overlays`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Graphics Drivers / Overlay Diagnostics`
 - Scope: `device`
@@ -2070,6 +2426,15 @@ Windows Internals references:
 - Proof SHA256: `dbf1407cc708022946c9f7e61f339d401d97e7a859bb0e947f2824dbf29a803e`
 
 **Summary:** Deprecated audit trail for GraphicsDrivers overlay-plane overrides. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\DisableOverlays = 1, but this research pass did not capture a primary Microsoft source that publishes DisableOverlays as a supported registry control.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2117,6 +2482,7 @@ Windows Internals references:
 ### `system.graphics-page-fault-debug-mode`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Graphics Drivers / Debug Setting`
 - Scope: `device`
@@ -2125,6 +2491,15 @@ Windows Internals references:
 - Proof SHA256: `de461e3f29a05889c82ae0349ddf469cce6bcacc3a632e36c6bdcd1b029992df`
 
 **Summary:** Deprecated audit trail for GraphicsDrivers page-fault debug mode. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\PageFaultDebugMode = 1 as a low-level graphics setting, but this research pass did not capture a primary Microsoft source that documents PageFaultDebugMode and its semantics.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2172,6 +2547,7 @@ Windows Internals references:
 ### `system.kernel-adjust-dpc-threshold`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
@@ -2180,6 +2556,15 @@ Windows Internals references:
 - Proof SHA256: `84c3a10e4279611b07fb235549e264875a9a89304dfd3c10b30994d093f78c65`
 
 **Summary:** Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\AdjustDpcThreshold = 20, and the decompiled kernel set/query path now shows the raw value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2228,6 +2613,7 @@ Windows Internals references:
 ### `system.kernel-cache-aware-scheduling`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Kernel / Scheduler Topology`
 - Scope: `device`
@@ -2236,6 +2622,15 @@ Windows Internals references:
 - Proof SHA256: `c3f8debabce5f85e918dd986eb331a900ffb0c11ea9c9409bc02e5d067799832`
 
 **Summary:** Deprecated audit trail for CacheAwareScheduling. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\CacheAwareScheduling = 47, and the mirrored kernel value list now explicitly records the same KiCacheAwareScheduling label even though this research pass still did not capture a primary Microsoft source or a direct decompiled kernel path for the exact registry key and value semantics.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2284,6 +2679,7 @@ Windows Internals references:
 ### `system.kernel-default-dynamic-hetero-cpu-policy`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Kernel / Heterogeneous Scheduling`
 - Scope: `device`
@@ -2292,6 +2688,15 @@ Windows Internals references:
 - Proof SHA256: `bd6eb09cb779de67dbcbaaa293b39f58266085c2535cf005beab857de9d6cde2`
 
 **Summary:** Deprecated audit trail for DefaultDynamicHeteroCpuPolicy. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DefaultDynamicHeteroCpuPolicy = 3, and the nohuto mirror, raw ControlSet001 trace, plus decompiled kernel pseudocode now document the same 3 mapping and kernel derivation path. A strict Win25H2Clean sweep later confirmed that requested values 0..7 matched after two reboot cycles per sample, but it did not reveal a monotonic performance trend.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2344,6 +2749,7 @@ Windows Internals references:
 ### `system.kernel-disable-low-qos-timer-resolution`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Kernel / Timer Resolution Behavior`
 - Scope: `device`
@@ -2352,6 +2758,15 @@ Windows Internals references:
 - Proof SHA256: `efcc02d642dacdff3f28dac8946c8878180d0ef83875ea5feff1ab89b5c9c126`
 
 **Summary:** Deprecated audit trail for DisableLowQosTimerResolution. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DisableLowQosTimerResolution = 1, and the mirror plus decompiled kernel path now show the explicit low-QoS timer-resolution gate even though this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2402,6 +2817,7 @@ Windows Internals references:
 ### `system.kernel-dpc-queue-depth`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
@@ -2410,6 +2826,15 @@ Windows Internals references:
 - Proof SHA256: `944ee2c99bfde59a74d232317a9da57e812a0c844e8abb75862163045f3928db`
 
 **Summary:** Deprecated audit trail for DpcQueueDepth. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcQueueDepth = 4, and the decompiled system-information paths now show the kernel queue depth being set and exported, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2458,6 +2883,7 @@ Windows Internals references:
 ### `system.kernel-dpc-watchdog-period`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Kernel / DPC Watchdog`
 - Scope: `device`
@@ -2466,6 +2892,15 @@ Windows Internals references:
 - Proof SHA256: `232893d4d8fd8a293bd6b6288aacb1748be4ec1e0ab88c8bd9c8cc55dbd2d1b7`
 
 **Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, and the decompiled watchdog query path now shows the raw period value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2517,6 +2952,7 @@ Windows Internals references:
 ### `system.kernel-ideal-dpc-rate`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
@@ -2525,6 +2961,15 @@ Windows Internals references:
 - Proof SHA256: `4cb385e6c43a5d3b92e6c1d9fbfd5fafd56e6c40cc1c9d59099d180c3a091f8c`
 
 **Summary:** Deprecated audit trail for IdealDpcRate. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\IdealDpcRate = 20, and the mirror plus decompiled kernel query path now expose the backing KiIdealDpcRate variable even though this research pass still did not capture a primary Microsoft source for the exact registry key and value semantics.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2573,6 +3018,7 @@ Windows Internals references:
 ### `system.kernel-minimum-dpc-rate`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
@@ -2581,6 +3027,15 @@ Windows Internals references:
 - Proof SHA256: `e8aff541bfbec81d2ba53fad66a8cb2cfaab889a5de285e620c483b9393313d2`
 
 **Summary:** Deprecated audit trail for MinimumDpcRate. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\MinimumDpcRate = 3, and the mirror plus decompiled kernel query path now expose the backing KiMinimumDpcRate variable even though this research pass still did not capture a primary Microsoft source for the exact registry key and value semantics.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2629,6 +3084,7 @@ Windows Internals references:
 ### `system.kernel-serialize-timer-expiration`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Kernel / Timer Scheduling`
 - Scope: `device`
@@ -2637,6 +3093,15 @@ Windows Internals references:
 - Proof SHA256: `20588f7da590eb22af6ec02882f2208f12c9f2288dd4a2f68b463a29d902deed`
 
 **Summary:** Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\SerializeTimerExpiration = 1, and the decompiled kernel timer-table initialization path now shows the raw gate and fallback behavior, but this research pass did not capture a primary Microsoft source for the exact registry setting.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2685,6 +3150,7 @@ Windows Internals references:
 ### `system.services.disable-print-device-configuration`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -2693,6 +3159,15 @@ Windows Internals references:
 - Proof SHA256: `02fb442a6fc902af0a89043f68fb1c32cd90fc04bb17cad014b82bb78b2266ac`
 
 **Summary:** Deprecated audit trail for Print Device Configuration Service (PrintDeviceConfigurationService). A local SCM snapshot confirms the exact service identifier, display name, binary path, and current start type on the review host, but this pass did not re-capture a machine-checkable exact Microsoft guidance row from the live services page. Keep the record as reference only.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2721,7 +3196,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -2738,6 +3213,7 @@ Windows Internals references:
 ### `system.services.disable-print-scan-broker`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -2746,6 +3222,15 @@ Windows Internals references:
 - Proof SHA256: `d96f33b3f944ebfba9155d20db5cfcb4d4596e130a3e1f07b831f24ad3fe112a`
 
 **Summary:** Deprecated audit trail for Print Scan Broker Service (PrintScanBrokerService). A local SCM snapshot confirms the exact service identifier, display name, binary path, and current start type on the review host, but this pass did not re-capture a machine-checkable exact Microsoft guidance row from the live services page. Keep the record as reference only.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2774,7 +3259,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -2791,6 +3276,7 @@ Windows Internals references:
 ### `system.services.disable-print-workflow-user-service`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `user-session`
@@ -2799,6 +3285,15 @@ Windows Internals references:
 - Proof SHA256: `94381b6c1d68589882ee162feab63d1d35964b621bf82a6e0b9188782d790055`
 
 **Summary:** Deprecated audit trail for Print Workflow User Service. Microsoft documents the base service family and default start mode, but marks it No guidance rather than OK to disable. The app disables instantiated per-user PrintWorkflowUserSvc services through a wildcard service pattern, so the record is kept as reference only.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2828,7 +3323,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -2845,6 +3340,7 @@ Windows Internals references:
 ### `system.services.disable-sysmain`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -2853,6 +3349,15 @@ Windows Internals references:
 - Proof SHA256: `b35bdd6393aed8354406a6fc24300475550877e24ebde527e780bcfff41b1ee2`
 
 **Summary:** Deprecated audit trail for SysMain. Microsoft's Windows IoT Enterprise service guidance explicitly marks SysMain as `Don't disable`, so the current app's disable action is kept as reference only.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2881,7 +3386,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -2898,6 +3403,7 @@ Windows Internals references:
 ### `system.services.disable-wap-push-routing`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -2906,6 +3412,15 @@ Windows Internals references:
 - Proof SHA256: `2458c27ca10eeeb2d794bbd64ce5d2fd8c2c88ef8f854ad9c8ed425fc0894f28`
 
 **Summary:** Deprecated audit trail for WAP Push Message Routing Service. Microsoft's Windows IoT Enterprise service guidance lists the service with `No guidance`, so the current disable action is kept as reference only.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2934,7 +3449,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -2951,6 +3466,7 @@ Windows Internals references:
 ### `system.services.disable-windows-error-reporting`
 
 - Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -2959,6 +3475,15 @@ Windows Internals references:
 - Proof SHA256: `1af4ce46fa6d4c619326da763939eb8969b2300b9eabd16fbb0e485987356791`
 
 **Summary:** Deprecated audit trail for Windows Error Reporting Service. Microsoft's Windows IoT Enterprise service guidance explicitly marks the service as `Don't disable`, so the current disable action is kept as reference only.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Targets**
 
@@ -2987,7 +3512,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -3004,6 +3529,7 @@ Windows Internals references:
 ### `audio.disable-beep`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Audio`
 - Area: `Driver Start Mode`
 - Scope: `device`
@@ -3012,6 +3538,15 @@ Windows Internals references:
 - Proof SHA256: `4d074ac9987be3f1f28b06277c747e6c49da4b27be38ff2380400b9cc1a6b4ef`
 
 **Summary:** Guest-side reversible probe on Win25H2Clean confirmed that HKLM\SYSTEM\CurrentControlSet\Services\Beep\Start = 4 disables the Beep driver on this build. Microsoft service registry documentation defines Start = 4 as Disabled, so the app's write now has a machine-checkable contract.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3058,6 +3593,7 @@ Nohuto lineage references:
 ### `audio.show-disconnected-devices`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Audio`
 - Area: `Sound Control Panel DeviceCpl Flags`
 - Scope: `user`
@@ -3066,6 +3602,15 @@ Nohuto lineage references:
 - Proof SHA256: `8d67f764d7eaaf3719428c7c806dc6ec55bc227135dbb6daa493eaf8c390c9a1`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 
@@ -3110,6 +3655,7 @@ Nohuto lineage references:
 ### `audio.show-hidden-devices`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Audio`
 - Area: `Sound Control Panel DeviceCpl Flags`
 - Scope: `user`
@@ -3118,6 +3664,15 @@ Nohuto lineage references:
 - Proof SHA256: `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 
@@ -3162,6 +3717,7 @@ Nohuto lineage references:
 ### `cleanup.disable-reserved-storage`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Cleanup`
 - Area: `DISM Command`
 - Scope: `device`
@@ -3170,6 +3726,15 @@ Nohuto lineage references:
 - Proof SHA256: `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc`
 
 **Summary:** Official command-backed tweak for disabling Windows Reserved Storage. Microsoft documents reserved storage through DISM command and API surfaces, and the repo already implements that exact model in cleanup.disable-reserved-storage via /Get-ReservedStorageState for detection and /Set-ReservedStorageState /State:Disabled for apply. A local DISM detect run on Windows 11 Pro 10.0.26200.8037 returned 'Reserved storage is disabled.' The internal ReserveManager registry write observed elsewhere is treated as an implementation detail of the documented DISM surface, not the public control surface itself.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3214,6 +3779,7 @@ Nohuto lineage references:
 ### `developer.docker-performance`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Developer`
 - Area: `Docker Desktop / WSL Integration`
 - Scope: `user`
@@ -3222,6 +3788,15 @@ Nohuto lineage references:
 - Proof SHA256: `e4c2f1a09fcfe91db5161301b71b4ec7262c17dc97de49b390f65f9abcf9253d`
 
 **Summary:** Docker officially documents the WSL engine setting for Docker Desktop on Windows in settings-store.json / admin-settings.json as wslEngineEnabled. The app now writes that documented settings-file surface instead of the old UseWSL2 registry value.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3254,6 +3829,7 @@ _No provenance block present._
 ### `developer.dotnet-telemetry-disable`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Developer`
 - Area: `User Environment Variable`
 - Scope: `user`
@@ -3262,6 +3838,15 @@ _No provenance block present._
 - Proof SHA256: `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Officially documented user environment variable for opting the .NET CLI out of telemetry. Good for privacy-focused or quiet developer workstations, but it removes default telemetry signals from the .NET SDK and CLI.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
 
 **Targets**
 
@@ -3306,6 +3891,7 @@ Nohuto lineage references:
 ### `developer.enable-windows-long-paths`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Developer`
 - Area: `Windows Path Handling vs Git Configuration`
 - Scope: `device`
@@ -3314,6 +3900,15 @@ Nohuto lineage references:
 - Proof SHA256: `2b390bcd3f0082f4558b386b1c876aebc02ae85fa482efb6be28b8696e197f29`
 
 **Summary:** Microsoft officially documents LongPathsEnabled as the Windows long-path switch, and the app writes that documented value. The tweak is now modeled honestly as enabling the Windows long-path prerequisite for compatible applications rather than as a Git-specific configuration change.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3357,6 +3952,7 @@ Nohuto lineage references:
 ### `developer.nodejs-performance`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Developer`
 - Area: `System Environment Variable`
 - Scope: `device`
@@ -3365,6 +3961,15 @@ Nohuto lineage references:
 - Proof SHA256: `afeb8b18277d7825b304d849b0406a81c8dc155974f74e40933534c301df9ad1`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Officially documented environment-variable based Node.js launch override. The app sets NODE_OPTIONS to use a larger V8 old-space heap size globally, which can help large builds but also increases memory usage for Node.js processes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -3410,6 +4015,7 @@ Nohuto lineage references:
 ### `developer.powershell-execution`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Developer`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -3418,6 +4024,15 @@ Nohuto lineage references:
 - Proof SHA256: `3a25fe7ca941325c96591236522cf807d8b269ff223bcc737bd5b073718cd047`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official policy-backed PowerShell execution policy setting. The app writes RemoteSigned under the documented policy path, which allows local scripts while requiring remote scripts to be signed.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
 
 **Targets**
 
@@ -3463,6 +4078,7 @@ Nohuto lineage references:
 ### `developer.python-path-fix`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Developer`
 - Area: `Python / Windows Path Handling`
 - Scope: `device`
@@ -3471,6 +4087,15 @@ Nohuto lineage references:
 - Proof SHA256: `ca039878abcb9e81f07fc1719a12c9dcefc1f2c42c36aba4c56ec7f80cc80e2a`
 
 **Summary:** Official Python guidance for Windows path-length issues points developers to enabling Windows long paths. The relevant control is LongPathsEnabled under HKLM\SYSTEM\CurrentControlSet\Control\FileSystem, and the app now writes that exact documented value.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3518,6 +4143,7 @@ Nohuto lineage references:
 ### `developer.ssh-agent-autostart`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Developer`
 - Area: `OpenSSH Agent Startup`
 - Scope: `user`
@@ -3526,6 +4152,15 @@ Nohuto lineage references:
 - Proof SHA256: `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352`
 
 **Summary:** Microsoft's Run and RunOnce registry documentation confirms that the Run key is a supported autostart surface when a user logs on. The current app writes ssh-agent.exe into HKCU\Software\Microsoft\Windows\CurrentVersion\Run, so this record now has a documented Windows autostart contract.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3565,6 +4200,7 @@ Nohuto lineage references:
 ### `developer.windows-dev-mode`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Developer`
 - Area: `Registry Enablement`
 - Scope: `device`
@@ -3573,6 +4209,15 @@ Nohuto lineage references:
 - Proof SHA256: `0ed25dffb4bdabc7eaa24c879e79ec54649fabca8d204b46a0e2f6434ae60841`
 
 **Summary:** Microsoft directly documents the AppModelUnlock registry method for enabling Windows Developer Mode, and the current app writes that same documented value. This record is now validated with machine-checkable proof.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3614,6 +4259,7 @@ Nohuto lineage references:
 ### `developer.wsl2-memory`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Developer`
 - Area: `WSL Configuration`
 - Scope: `user`
@@ -3622,6 +4268,15 @@ Nohuto lineage references:
 - Proof SHA256: `8483aaddd7cffe7e57ba75d9b795a94c65285ad73a64c77020d7502864a7d988`
 
 **Summary:** Controls the WSL 2 memory limit through %UserProfile%\.wslconfig. The app now writes the documented [wsl2] memory setting instead of a registry surrogate.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3651,6 +4306,7 @@ _No provenance block present._
 ### `explorer.always-show-icons-never-thumbnails`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -3659,6 +4315,15 @@ _No provenance block present._
 - Proof SHA256: `b7ac9b5f0745fe76c95b7c8864517314a2c401bac224bb610acb66022a804fcb`
 
 **Summary:** Observed Explorer runtime setting for always showing icons instead of thumbnails. Microsoft Open Specifications maps alwaysShowIcons to HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\IconsOnly and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\IconsOnly with both Data: 0 and Data: 1 after Explorer restart.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -3690,6 +4355,7 @@ _No provenance block present._
 ### `explorer.disable-low-disk-space-warning`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -3698,6 +4364,15 @@ _No provenance block present._
 - Proof SHA256: `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4`
 
 **Summary:** Microsoft documents disabling low disk space checks through the NoLowDiskSpaceChecks registry value under HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer. The 25H2 raw registry dump lists the same value name under the machine Explorer policy branch, and the app implementation was aligned to that documented machine-policy path on 2026-03-13. This record therefore validates the official control surface rather than the previously mismatched HKCU variant.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3742,6 +4417,7 @@ Nohuto lineage references:
 ### `explorer.disable-taskbar-chat`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -3750,6 +4426,15 @@ Nohuto lineage references:
 - Proof SHA256: `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd`
 
 **Summary:** Microsoft documents the Chat icon through the device policy ConfigureChatIcon under HKLM\Software\Policies\Microsoft\Windows\Windows Chat. The app implementation was aligned to that official policy surface on 2026-03-13 and now uses ChatIcon=2, the documented Hide state that removes the Chat icon from the taskbar by default while still allowing users to show or hide it in Settings.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3797,6 +4482,7 @@ Nohuto lineage references:
 ### `explorer.enable-explorer-compact-mode`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Explorer`
 - Area: `Explorer Advanced Flags`
 - Scope: `user`
@@ -3805,6 +4491,15 @@ Nohuto lineage references:
 - Proof SHA256: `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\UseCompactMode = 1, the 25H2 raw registry dump lists the same value name under both the machine and current-user Explorer\Advanced branches, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 
@@ -3849,6 +4544,7 @@ Nohuto lineage references:
 ### `explorer.hide-empty-drives`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -3857,6 +4553,15 @@ Nohuto lineage references:
 - Proof SHA256: `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765`
 
 **Summary:** Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\Advanced branch, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -3888,6 +4593,7 @@ _No provenance block present._
 ### `explorer.launch-folder-windows-in-a-separate-process`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -3896,6 +4602,15 @@ _No provenance block present._
 - Proof SHA256: `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0`
 
 **Summary:** Observed Explorer runtime setting for launching folder windows in a separate process. Microsoft Open Specifications documents SeparateProcess under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 0, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\SeparateProcess with both Data:0 and Data:1 after Explorer restart.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -3927,6 +4642,7 @@ _No provenance block present._
 ### `explorer.show-compressed-and-encrypted-files-in-color`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -3935,6 +4651,15 @@ _No provenance block present._
 - Proof SHA256: `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453`
 
 **Summary:** Observed Explorer runtime setting for colored display of compressed and encrypted NTFS files. Microsoft Open Specifications documents ShowCompColor under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowCompColor with both Data:0 and Data:1 after Explorer restart.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -3966,6 +4691,7 @@ _No provenance block present._
 ### `explorer.show-drive-letters-first`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -3974,6 +4700,15 @@ _No provenance block present._
 - Proof SHA256: `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10`
 
 **Summary:** Observed Explorer runtime setting for showing drive letters first. Microsoft Open Specifications documents showDriveLetter under Explorer\ShowDriveLettersFirst with 1 = enable and 0 = disable, the 25H2 raw registry dump lists the same value under both machine and default-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowDriveLettersFirst with both Data:0 and Data:1 after Explorer restart.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -4005,6 +4740,7 @@ _No provenance block present._
 ### `explorer.show-file-extensions`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -4013,6 +4749,15 @@ _No provenance block present._
 - Proof SHA256: `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d`
 
 **Summary:** Observed Explorer runtime setting for file-extension visibility. Microsoft Open Specifications documents HideFileExt under Explorer\Advanced, the 25H2 default hive exports the same value as 1, the 25H2 raw registry dump lists the same value name under the current-user Explorer\Advanced branch, and a reversible Procmon and shell-runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideFileExt as REG_DWORD with 0 = show file extensions and 1 = hide them. The app writes that same runtime surface directly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4058,6 +4803,7 @@ Nohuto lineage references:
 ### `explorer.show-full-path`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Explorer Cabinet State`
 - Scope: `user`
@@ -4066,6 +4812,15 @@ Nohuto lineage references:
 - Proof SHA256: `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d`
 
 **Summary:** Explorer can show the full path in the title bar. Microsoft Open Specifications documents the exact FullPath user preference under Explorer\CabinetState, and the 25H2 default hive exports the same value as 0. The current app writes the documented enabled state under that same Explorer preference surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4111,6 +4866,7 @@ Nohuto lineage references:
 ### `explorer.show-hidden-files`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -4119,6 +4875,15 @@ Nohuto lineage references:
 - Proof SHA256: `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d`
 
 **Summary:** Observed Explorer runtime setting for hidden-file visibility. Microsoft Open Specifications documents Hidden under Explorer\Advanced with symbolic SHOW and HIDE semantics, the 25H2 default hive exports the same value as 2, the 25H2 raw registry dump lists the same value name under the current-user Explorer\Advanced branch, and a reversible Procmon and Explorer UI runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Hidden as REG_DWORD with 1 = show hidden items and 2 = hide them. The app writes that same runtime surface directly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4164,6 +4929,7 @@ Nohuto lineage references:
 ### `explorer.show-info-tips`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -4172,6 +4938,15 @@ Nohuto lineage references:
 - Proof SHA256: `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48`
 
 **Summary:** Observed Explorer runtime setting for folder and desktop item info tips. Microsoft Open Specifications documents ShowInfoTip under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowInfoTip with both Data:0 and Data:1 after Explorer restart.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -4203,6 +4978,7 @@ _No provenance block present._
 ### `explorer.show-protected-operating-system-files`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -4211,6 +4987,15 @@ _No provenance block present._
 - Proof SHA256: `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b`
 
 **Summary:** Observed Explorer runtime setting for protected operating system file visibility. Microsoft Open Specifications documents ShowSuperHidden under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 dump/default hive shows the same value on current builds, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowSuperHidden with both Data:0 and Data:1 after Explorer restart.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -4242,6 +5027,7 @@ _No provenance block present._
 ### `explorer.show-recent-items`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -4250,6 +5036,15 @@ _No provenance block present._
 - Proof SHA256: `924f0e48d17cbcb71c2c3c57e56be18b825d3a32f3d12fd6cb5d582529e1a34a`
 
 **Summary:** Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -4281,14 +5076,24 @@ _No provenance block present._
 ### `explorer.show-status-bar`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.show-status-bar.review.json`
-- Source SHA256: `86d5fc4618cbdda09962a72633d1d50f678d6cc0f7bbad8c242d833f696af759`
+- Source SHA256: `835171bfebdc3b5fedb726ce8bd538b92e6f129869db6768dc7523f295ca81fd`
 - Proof SHA256: `9cbc0e1f749f45ec8df99669200d92db5614fefdbc6a3ecfa98e06ddb01383be`
 
-**Summary:** Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.
+**Summary:** Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4304,10 +5109,25 @@ _No provenance block present._
 | `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | `medium` |
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | `medium` |
 | `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowStatusBar | `high` |
 
 **Provenance**
 
-_No provenance block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / USBHUB3 | `https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3` | USB hub pseudocode relevant to USB and peripheral registry behavior.
 
 **Validation proof**
 
@@ -4320,6 +5140,7 @@ _No provenance block present._
 ### `explorer.show-type-overlay`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -4328,6 +5149,15 @@ _No provenance block present._
 - Proof SHA256: `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2`
 
 **Summary:** Observed Explorer runtime setting for ShowTypeOverlay. Microsoft Open Specifications maps displayIconThumb to HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTypeOverlay and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTypeOverlay with both Data: 0 and Data: 1 after Explorer restart.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -4359,6 +5189,7 @@ _No provenance block present._
 ### `explorer.taskbar-alignment-left`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
@@ -4367,6 +5198,15 @@ _No provenance block present._
 - Proof SHA256: `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390`
 
 **Summary:** Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, the 25H2 raw registry dump lists the same value name under the current-user Explorer\Advanced branch, and a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4412,6 +5252,7 @@ Nohuto lineage references:
 ### `network.disable-active-probing`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Group Policy`
 - Scope: `device`
@@ -4420,6 +5261,15 @@ Nohuto lineage references:
 - Proof SHA256: `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0`
 
 **Summary:** Microsoft documents NoActiveProbe = 1 as the policy state that turns off NCSI active tests. The app now writes only that official machine-policy value.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4468,6 +5318,7 @@ Windows Internals references:
 ### `network.disable-default-shares`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Network`
 - Area: `Registry Configuration`
 - Scope: `device`
@@ -4476,6 +5327,15 @@ Windows Internals references:
 - Proof SHA256: `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Controls the AutoShareServer and AutoShareWks values under LanmanServer. Disabling automatic administrative shares can reduce remote administration exposure, but it can also break workflows and tools that expect the built-in shares to exist.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -4529,6 +5389,7 @@ Windows Internals references:
 ### `network.disable-ipv6`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Network`
 - Area: `Registry Configuration`
 - Scope: `device`
@@ -4537,6 +5398,15 @@ Windows Internals references:
 - Proof SHA256: `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Sets the official DisabledComponents value to 0xFF, which tells Windows to disable all IPv6 components except the loopback interface. Microsoft warns that disabling IPv6 can break parts of Windows and should be done only when there is a very specific reason.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -4584,6 +5454,7 @@ Windows Internals references:
 ### `network.disable-llmnr`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -4592,6 +5463,15 @@ Windows Internals references:
 - Proof SHA256: `eed09962b64570b68d966d4d13cb149e60d9ac1b4b65b1159d77e3994570e5ff`
 
 **Summary:** Policy-backed control for Link-Local Multicast Name Resolution (LLMNR). Good for hardened or modern networks, but it can remove a fallback name-resolution path on local subnets.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4640,6 +5520,7 @@ Windows Internals references:
 ### `network.disable-lltd`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `LLTD Policy Semantics`
 - Scope: `device`
@@ -4648,6 +5529,15 @@ Windows Internals references:
 - Proof SHA256: `95621d902169844295e40dc7f4043671933f41cfbbad706d915315fae84b8121`
 
 **Summary:** The app writes the official LLTD policy values EnableLLTDIO = 0 and EnableRspndr = 0 under HKLM\Software\Policies\Microsoft\Windows\LLTD. Microsoft documents those disabled or not configured states as returning to default behavior rather than guaranteeing a hard LLTD-off state. The record is now modeled honestly as setting LLTD policies back to default behavior rather than as a direct LLTD hard-disable.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4703,6 +5593,7 @@ Windows Internals references:
 ### `network.disable-mdns`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `mDNS Policy Semantics`
 - Scope: `device`
@@ -4711,6 +5602,15 @@ Windows Internals references:
 - Proof SHA256: `1fb961716d805445b8df34459ecd163bc84ff8d7bce259e6c394a31111426da2`
 
 **Summary:** The app writes the official EnableMDNS = 0 policy surface under HKLM\Software\Policies\Microsoft\Windows NT\DNSClient. Microsoft documents that disabled or not configured returns the DNS client to locally configured settings rather than guaranteeing a hard mDNS-off state. The record is now modeled honestly as setting the mDNS policy back to local-settings behavior rather than as a direct mDNS hard-disable.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4758,6 +5658,7 @@ Windows Internals references:
 ### `network.disable-netbios`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Per-interface Registry Configuration`
 - Scope: `per-interface`
@@ -4766,6 +5667,15 @@ Windows Internals references:
 - Proof SHA256: `cc8c5a428021d60ec05f678e603006e793d8afec18027f640850d94f23555c69`
 
 **Summary:** Disables NetBIOS over TCP/IP through the documented per-interface Windows control surface. Official Microsoft documentation exposes NetbiosOptions per adapter with values 0 = DHCP setting, 1 = enabled, 2 = disabled, and also documents the Win32_NetworkAdapterConfiguration.SetTcpipNetbios method for applying that state. The app now uses a command-backed per-interface implementation that sets NetbiosOptions = 2 on all IP-enabled adapters and can restore the previously detected per-adapter state.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4817,6 +5727,7 @@ Windows Internals references:
 ### `network.disable-netbios-resolution`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -4825,6 +5736,15 @@ Windows Internals references:
 - Proof SHA256: `f44db12dce1b3f260c63e54a291c94ec312618bb1474862e3f87c5e350be8c5f`
 
 **Summary:** Policy-backed control for DNS client NetBIOS name resolution behavior. The current app uses the strict disable value, and the local Microsoft DnsClient.admx file explicitly documents the same registry key, value name, and enum values.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4875,6 +5795,7 @@ Windows Internals references:
 ### `network.disable-plaintext-smb-passwords`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Security Baseline`
 - Scope: `device`
@@ -4883,6 +5804,15 @@ Windows Internals references:
 - Proof SHA256: `1d023fbb6142f048795944b419f76a22cfda8a6c9207ed5691fc76f97d4dcf76`
 
 **Summary:** Controls EnablePlainTextPassword under LanmanWorkstation. Disabling plaintext SMB passwords is a normal hardening step on modern systems, but very old third-party SMB servers can still depend on it.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4931,6 +5861,7 @@ Windows Internals references:
 ### `network.disable-smart-name-resolution`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -4939,6 +5870,15 @@ Windows Internals references:
 - Proof SHA256: `a2b58aef6e298524a81810782c78ba8b1e2d4290537187ade868ea7010dd410c`
 
 **Summary:** Policy-backed control for Smart Multi-Homed Name Resolution. The local Microsoft DnsClient.admx file explicitly documents the same registry key, value name, and enabled/disabled values that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4987,6 +5927,7 @@ Windows Internals references:
 ### `network.disable-smb1`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Configuration`
 - Scope: `device`
@@ -4995,6 +5936,15 @@ Windows Internals references:
 - Proof SHA256: `a836aa20c016b0cb82751ac7f7371e55f771b09bc107cf0fddf0fc780d7f3fe0`
 
 **Summary:** Controls the SMBv1 server protocol value for LanmanServer. Microsoft directly documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for this setting.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5043,6 +5993,7 @@ Windows Internals references:
 ### `network.disable-smb2`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Configuration`
 - Scope: `device`
@@ -5051,6 +6002,15 @@ Windows Internals references:
 - Proof SHA256: `5339bb81b3dce3550a6cde64fab48e846da914d79dd4c7a5cc7b894b2ce66c50`
 
 **Summary:** Controls the SMB2 value for LanmanServer. Microsoft directly documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for disabling the SMBv2 and SMBv3 server protocols.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5097,6 +6057,7 @@ Windows Internals references:
 ### `network.disable-wifi-sense`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Group Policy`
 - Scope: `device`
@@ -5105,6 +6066,15 @@ Windows Internals references:
 - Proof SHA256: `15f8edf75fa5fe82787894099f7d3bf62989d73555893644d4b7e781b4f39920`
 
 **Summary:** Turns off the old Windows Wi-Fi Sense style hotspot and shared-network suggestions through the official WLAN policy value. Microsoft directly documents the same policy path, value name, and 0/1 semantics that the app uses for this setting.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5152,6 +6122,7 @@ Windows Internals references:
 ### `network.enable-lltd-responder`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Group Policy`
 - Scope: `device`
@@ -5160,6 +6131,15 @@ Windows Internals references:
 - Proof SHA256: `151af74ca167733c59c777a58bfda35539d644963bba56da30e75f231ee24db3`
 
 **Summary:** Turns on the LLTD Responder driver through the official Machine policy path. Microsoft directly documents the same policy key, value name, and 1/0 semantics that the app uses for this LLTD Responder setting.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5208,6 +6188,7 @@ Windows Internals references:
 ### `network.enable-lltdio`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Group Policy`
 - Scope: `device`
@@ -5216,6 +6197,15 @@ Windows Internals references:
 - Proof SHA256: `cf1759fcbe2f5d1d8d8ae6c2157572de4b0443ddb558424efe605bef379879be`
 
 **Summary:** Turns on the LLTD Mapper I/O driver through the official Machine policy path. Microsoft directly documents the same policy key, value name, and 1/0 semantics that the app uses for this LLTD Mapper I/O setting.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5264,6 +6254,7 @@ Windows Internals references:
 ### `network.prefer-ipv4`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Network`
 - Area: `Registry Configuration`
 - Scope: `device`
@@ -5272,6 +6263,15 @@ Windows Internals references:
 - Proof SHA256: `716ad6ac1200efc085880de052a42a79f81af9ad24329f1c6cc07c9553f71644`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Sets DisabledComponents to 0x20, which tells Windows to prefer IPv4 over IPv6 without fully disabling the IPv6 stack. This is less disruptive than turning IPv6 off, but it is still an advanced network compatibility override.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -5319,6 +6319,7 @@ Windows Internals references:
 ### `network.require-ntlm-ssp-client-session-security`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Security Option`
 - Scope: `device`
@@ -5327,6 +6328,15 @@ Windows Internals references:
 - Proof SHA256: `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e`
 
 **Summary:** The app writes the exact Microsoft-documented NTLMMinClientSec combination for NTLM SSP based clients: NTLMv2 session security plus 128-bit encryption. The tweak is now modeled with the official NTLM SSP client scope instead of the previous SMB-only wording.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5375,6 +6385,7 @@ Windows Internals references:
 ### `network.smb-disable-leasing`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `SMB Server Configuration`
 - Scope: `device`
@@ -5383,6 +6394,15 @@ Windows Internals references:
 - Proof SHA256: `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9`
 
 **Summary:** Disables SMB server leasing through the documented SMB server configuration surface. Microsoft documents EnableLeasing as a boolean property of MSFT_SmbServerConfiguration and shows Set-SmbServerConfiguration -EnableLeasing $false as the supported way to disable leasing. The app previously wrote DisableLeasing = 1 under the LanmanServer service parameter path; it now uses a command-backed implementation that applies the documented EnableLeasing = false surface and can restore the previously detected boolean state.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5414,7 +6434,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 
 Windows Internals references:
 - Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
@@ -5431,6 +6451,7 @@ Windows Internals references:
 ### `network.smb-enable-large-mtu`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Network`
 - Area: `Registry Configuration`
 - Scope: `device`
@@ -5439,6 +6460,15 @@ Windows Internals references:
 - Proof SHA256: `baeecfe02b08e4e38fdadcbbc3a8c6134c0bc27de55bfaa8f016ff7d7fd5a45f`
 
 **Summary:** Controls the SMB client DisableLargeMtu value under LanmanWorkstation. Large MTU usually improves throughput on modern networks, but some troubleshooting cases temporarily disable it when old network gear or filtering devices behave badly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -5486,6 +6516,7 @@ Windows Internals references:
 ### `network.smb-enable-multichannel`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `SMB Client and Server Configuration`
 - Scope: `mixed`
@@ -5494,6 +6525,15 @@ Windows Internals references:
 - Proof SHA256: `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22`
 
 **Summary:** Enables SMB Multichannel through the documented SMB client and SMB server configuration surfaces. Microsoft documents EnableMultiChannel on both MSFT_SmbClientConfiguration and MSFT_SmbServerConfiguration, and Microsoft states that SMB Multichannel is enabled by default. The app previously wrote DisableMultiChannel = 0 under the LanmanWorkstation service path; it now uses a command-backed implementation that applies EnableMultiChannel = true on both client and server surfaces and can restore the previously detected boolean states.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5528,7 +6568,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / network/desc.md | `https://github.com/nohuto/win-config/blob/main/network/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 
 Windows Internals references:
 - Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
@@ -5545,6 +6585,7 @@ Windows Internals references:
 ### `network.smb-enable-quic`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Policy vs Observed Service Setting`
 - Scope: `mixed`
@@ -5553,6 +6594,15 @@ Windows Internals references:
 - Proof SHA256: `d0812e9f4c65a1bd0f53b117419613631b049fef49b82b3e12ed594295440e19`
 
 **Summary:** Enables SMB over QUIC by writing EnableSMBQUIC = 1 under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define the same value name with enabledValue 1 and disabledValue 0. The app previously wrote the same value name under service parameter paths; it now targets the official policy surface directly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5607,6 +6657,7 @@ Windows Internals references:
 ### `network.smb-encrypt-data`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Network`
 - Area: `Registry Security Baseline`
 - Scope: `device`
@@ -5615,6 +6666,15 @@ Windows Internals references:
 - Proof SHA256: `aaa4f8307120426c917f6f2d3db3bcdec1303fb61195bee5e9e7506e3c568544`
 
 **Summary:** Legacy validated record now backed by a machine-checkable guest reversible probe. Controls the global SMB server EncryptData value under LanmanServer. Requiring encryption is a strong hardening step for hosted shares, but older SMB clients and some environments can lose compatibility or pay a performance cost.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -5663,6 +6723,7 @@ Windows Internals references:
 ### `network.smb-increase-client-metadata-cache`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Optimization Bundle`
 - Scope: `device`
@@ -5671,6 +6732,15 @@ Windows Internals references:
 - Proof SHA256: `aee591cca7f7728315ca264021f9d19637863e7b4e736813a1179ea1a9d33d63`
 
 **Summary:** Validated SMB client metadata-cache tuning bundle. Microsoft documents both the default values and a client tuning example for higher-latency SMB workloads, and the current app matches that published example exactly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5712,6 +6782,7 @@ _No provenance block present._
 ### `network.smb-reject-unencrypted-access`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Network`
 - Area: `Registry Security Baseline`
 - Scope: `device`
@@ -5720,6 +6791,15 @@ _No provenance block present._
 - Proof SHA256: `a89ad3a32fda0229a84030b9e9cecf137b14e200f5033f27ac62f70afd2d067e`
 
 **Summary:** Controls the global SMB server RejectUnencryptedAccess value under LanmanServer. This is a strict hardening step that refuses clients not using SMB encryption, but it can break legacy clients and mixed environments.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -5767,6 +6847,7 @@ Windows Internals references:
 ### `network.smb-require-dialect-3_1_1`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Policy vs Observed Service Setting`
 - Scope: `mixed`
@@ -5775,6 +6856,15 @@ Windows Internals references:
 - Proof SHA256: `a68251e184cabd33a60dcbd50a6ceb3d7ad09af039b1a7952a5a5cb85f2c9b49`
 
 **Summary:** Restricts SMB client and server dialect negotiation to exactly SMB 3.1.1 by writing MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define the official enum values for both MinSmb2Dialect and MaxSmb2Dialect, where 785 corresponds to SMB 3.1.1. The app previously wrote service-path values and used an undocumented MaxSmb2Dialect value of 65536; it now targets the official policy surface directly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5849,6 +6939,7 @@ Windows Internals references:
 ### `network.smb-require-signing-client`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Security Baseline`
 - Scope: `device`
@@ -5857,6 +6948,15 @@ Windows Internals references:
 - Proof SHA256: `8a2de1b18d6d22bedd02d87a6a1be917c17893f304664a7a2853d1d9f4e9508a`
 
 **Summary:** Requires SMB signing for outbound client connections by setting both RequireSecuritySignature and EnableSecuritySignature under LanmanWorkstation. Microsoft directly documents the same registry key, value names, and 0/1 semantics that the app uses for this SMB client signing posture.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5909,6 +7009,7 @@ Windows Internals references:
 ### `network.smb-require-signing-server`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Security Baseline`
 - Scope: `device`
@@ -5917,6 +7018,15 @@ Windows Internals references:
 - Proof SHA256: `522e008e12d4f73124b4eae979f4b06b1a88d207496b94d21cf8b84f8f1a22d8`
 
 **Summary:** Requires SMB signing for inbound server connections by setting both RequireSecuritySignature and EnableSecuritySignature under LanmanServer. Microsoft directly documents the same registry key, value names, and 0/1 semantics that the app uses for this SMB server signing posture.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5969,6 +7079,7 @@ Windows Internals references:
 ### `network.smb-set-cipher-suite-order`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Policy vs Observed Service Setting`
 - Scope: `mixed`
@@ -5977,6 +7088,15 @@ Windows Internals references:
 - Proof SHA256: `9cbac8865b3477691362fe283e460e02c3465cf68416e194d8ce4842d3223688`
 
 **Summary:** Sets SMB cipher suite order by writing CipherSuiteOrder under the documented LanmanWorkstation and LanmanServer policy keys. Local Microsoft LanmanWorkstation.admx and LanmanServer.admx define CipherSuiteOrder as a multi-text policy value. The app previously wrote the same list under service parameter paths; it now targets the official policy surface directly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -6031,6 +7151,7 @@ Windows Internals references:
 ### `notifications.disable-feedback-frequency`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Notifications`
 - Area: `Observed User Preference`
 - Scope: `user`
@@ -6039,6 +7160,15 @@ Windows Internals references:
 - Proof SHA256: `7855f743095f7383bff4654511252ffac274da378def6336a873a7fc5204a00d`
 
 **Summary:** Officially documented feedback-request frequency setting. Microsoft documents NumberOfSIUFInPeriod under the current-user SIUF rules key and maps 0 to Never, which matches the app's suppression value.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -6081,6 +7211,7 @@ Nohuto lineage references:
 ### `notifications.disable-lock-screen`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Notifications`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -6089,6 +7220,15 @@ Nohuto lineage references:
 - Proof SHA256: `8b8bff69c430ecb0fd211d395dc19774a97b607d0af6ec8d605cb0542af5028a`
 
 **Summary:** Policy-backed control for lock-screen toast notifications. The local Microsoft WPN.admx file explicitly documents the same user policy key, value name, and enabled/disabled values that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -6134,6 +7274,7 @@ Nohuto lineage references:
 ### `notifications.disable-mirroring`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Notifications`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -6142,6 +7283,15 @@ Nohuto lineage references:
 - Proof SHA256: `e839a3b288ca983fd2356198ef6177a12f17692a8e9242e5c03faff485ee8267`
 
 **Summary:** Policy-backed control for notification mirroring across devices. The local Microsoft WPN.admx file explicitly documents the same user policy key, value name, and enabled/disabled values that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -6187,6 +7337,7 @@ Nohuto lineage references:
 ### `notifications.disable-tile`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Notifications`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -6195,6 +7346,15 @@ Nohuto lineage references:
 - Proof SHA256: `4eadf1fc0c0e7cb833e44cb784acfe7224407c3eed9c58f213a233b80a379700`
 
 **Summary:** Policy-backed control for tile notifications. The local Microsoft WPN.admx file explicitly documents the same user policy key, value name, and enabled/disabled values that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -6240,6 +7400,7 @@ Nohuto lineage references:
 ### `notifications.disable-toast`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Notifications`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -6248,6 +7409,15 @@ Nohuto lineage references:
 - Proof SHA256: `c838efd9cac161fc6219e64cce19d02953984124d758641d844f84d13fb6b96a`
 
 **Summary:** Policy-backed control for app toast notifications. The local Microsoft WPN.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -6293,6 +7463,7 @@ Nohuto lineage references:
 ### `performance.disable-animations`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Performance`
 - Area: `Win32 Animation Effects`
 - Scope: `user`
@@ -6301,6 +7472,15 @@ Nohuto lineage references:
 - Proof SHA256: `b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2`
 
 **Summary:** Microsoft documents window animation behavior through SystemParametersInfo(SPI_GETANIMATION / SPI_SETANIMATION) and ANIMATIONINFO.iMinAnimate. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETANIMATION with animations enabled persisted HKCU\Control Panel\Desktop\WindowMetrics\MinAnimate = "1", while calling SPI_SETANIMATION with animations disabled persisted MinAnimate = "0". The current app write of MinAnimate = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 
@@ -6350,6 +7530,7 @@ Windows Internals references:
 ### `performance.disable-menu-show-delay`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Performance`
 - Area: `Win32 Menu Timing`
 - Scope: `user`
@@ -6358,6 +7539,15 @@ Windows Internals references:
 - Proof SHA256: `2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3`
 
 **Summary:** Microsoft documents menu show delay through SystemParametersInfo with SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETMENUSHOWDELAY with 400 persisted HKCU\Control Panel\Desktop\MenuShowDelay = "400", while calling SPI_SETMENUSHOWDELAY with 0 persisted MenuShowDelay = "0". The current app write of MenuShowDelay = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 
@@ -6406,6 +7596,7 @@ Windows Internals references:
 ### `performance.disable-taskbar-animations`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Performance`
 - Area: `Explorer Taskbar Animation Flags`
 - Scope: `user`
@@ -6414,6 +7605,15 @@ Windows Internals references:
 - Proof SHA256: `21ca137e119b7e2de180779158da4ac8b7b45cb6af8baf96444e4281eb6d6ddd`
 
 **Summary:** A guest-side reversible probe on Win25H2Clean confirmed that HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAnimations = 0 disables taskbar animations and = 1 enables them on this build. The app's current write now matches the observed disabled state.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -6462,6 +7662,7 @@ Windows Internals references:
 ### `peripheral.autoplay-take-no-action`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Peripheral`
 - Area: `Observed User Preference`
 - Scope: `user`
@@ -6470,6 +7671,15 @@ Windows Internals references:
 - Proof SHA256: `6bf8b90fe59d4cf3ca5ac2b3c86e0b15bfd409ad27e51f54856fd76cc726df1a`
 
 **Summary:** The current app sets several AutoPlay event handlers to MSTakeNoAction under Explorer AutoplayHandlers. Microsoft Learn now documents the exact AutoplayHandlers registry values and the MSTakeNoAction mapping, so this record can be validated.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -6518,6 +7728,7 @@ Windows Internals references:
 ### `peripheral.disable-autoplay`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Peripheral`
 - Area: `User Policy`
 - Scope: `user`
@@ -6526,6 +7737,15 @@ Windows Internals references:
 - Proof SHA256: `1cba6d9b41c50cccf15290ce6131cd5daea44bc48c26f0f8f6d351963cd1e8a1`
 
 **Summary:** Official user policy surfaces for disabling AutoPlay. Microsoft documents TurnOffAutoPlay through NoDriveTypeAutoRun under HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer and documents DisallowAutoplayForNonVolumeDevices through HKCU\Software\Policies\Microsoft\Windows\Explorer\NoAutoplayfornonVolume. The app now writes both documented user-scope policy values directly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -6582,6 +7802,7 @@ Windows Internals references:
 ### `peripheral.disable-sticky-keys-prompt`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Peripheral`
 - Area: `Accessibility Sticky Keys Flags`
 - Scope: `user`
@@ -6590,6 +7811,15 @@ Windows Internals references:
 - Proof SHA256: `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e`
 
 **Summary:** Win32 officially documents Sticky Keys through SystemParametersInfo and the STICKYKEYS flag structure. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETSTICKYKEYS with flags 510 persisted HKCU\Control Panel\Accessibility\StickyKeys\Flags = "510", while calling SPI_SETSTICKYKEYS with flags 506 persisted Flags = "506". The current app write of Flags = "506" therefore matches the observed persisted backend for the documented Sticky Keys feature surface on this build, and the difference between 510 and 506 is the SKF_HOTKEYACTIVE bit.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 
@@ -6639,6 +7869,7 @@ Windows Internals references:
 ### `power.disable-cpu-idle-states`
 
 - Status: `validated`
+- Evidence class: `Class D` - Key Known, Value Semantics Unknown
 - Category: `Power`
 - Area: `Processor Idle Behavior`
 - Scope: `device`
@@ -6647,6 +7878,15 @@ Windows Internals references:
 - Proof SHA256: `5bb8f021adc0fd46c8f2e4a4ac05aa30e50915bd05e77c48b85fb4db44e56697`
 
 **Summary:** Validated observed implementation only. This record now has machine-checkable VM proof for the raw CPU idle-state registry bundle, but Microsoft still does not publish it as a supported control surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class D |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | research-gated |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Targets**
 
@@ -6694,6 +7934,7 @@ Windows Internals references:
 ### `power.disable-fast-startup`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Power`
 - Area: `Registry Configuration`
 - Scope: `device`
@@ -6702,6 +7943,15 @@ Windows Internals references:
 - Proof SHA256: `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382`
 
 **Summary:** Disables the local Fast Startup setting by writing HiberbootEnabled under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power. This is the documented local on/off surface for Fast Startup. A separate policy value, HKLM\Software\Policies\Microsoft\Windows\System\HiberbootEnabled, only forces Fast Startup on and does not provide a symmetric disable path. The app previously wrote HKLM\SYSTEM\CurrentControlSet\Control\Power\HiberbootEnabled, which is not the authoritative local Fast Startup toggle; both app surfaces now align to the Session Manager path.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -6753,6 +8003,7 @@ Windows Internals references:
 ### `power.disable-modern-standby`
 
 - Status: `validated`
+- Evidence class: `Class D` - Key Known, Value Semantics Unknown
 - Category: `Power`
 - Area: `Sleep Model`
 - Scope: `device`
@@ -6761,6 +8012,15 @@ Windows Internals references:
 - Proof SHA256: `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. This record now validates Microsoft's guidance that switching between Modern Standby and S3 is not a supported Windows setting change. The current app's registry bundle remains documented as an implementation mismatch rather than a supported control.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class D |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | research-gated |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Targets**
 
@@ -6808,6 +8068,7 @@ Windows Internals references:
 ### `power.disable-network-power-saving.policy`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Power`
 - Area: `TCP/IP offload + MMCSS policy`
 - Scope: `device`
@@ -6816,6 +8077,15 @@ Windows Internals references:
 - Proof SHA256: `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1`
 
 **Summary:** Controls the official TCP/IP offload and MMCSS responsiveness values only. The opaque NetworkThrottlingIndex value remains in the deprecated parent audit trail.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -6848,6 +8118,7 @@ _No provenance block present._
 ### `power.disable-power-throttling`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Power`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -6856,6 +8127,15 @@ _No provenance block present._
 - Proof SHA256: `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b`
 
 **Summary:** Policy-backed control for Windows Power Throttling. Good for machines that prioritize background responsiveness, but it can increase power use and reduce battery-life optimizations.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -6906,6 +8186,7 @@ Windows Internals references:
 ### `power.disable-windows-search`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Power`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -6914,6 +8195,15 @@ Windows Internals references:
 - Proof SHA256: `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, start-mode baseline, feature behavior, and says it is OK to disable in the service guidance used here. The app disables the service by setting its start mode to Disabled.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -6961,6 +8251,7 @@ Windows Internals references:
 ### `power.hide-hibernate-option`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Power`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -6969,6 +8260,15 @@ Windows Internals references:
 - Proof SHA256: `a2ccf9b1a2c922e3273812eea45986113d2b2eec94a801bbf7cff7ecf9cdb417`
 
 **Summary:** Policy-backed control for whether the Hibernate option is shown in the power menu. Useful for managed or simplified menus, but it removes a visible path to hibernation.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7020,6 +8320,7 @@ Windows Internals references:
 ### `power.hide-lock-option`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Power`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -7028,6 +8329,15 @@ Windows Internals references:
 - Proof SHA256: `cac67bd54c67255fb7bbd92e34790b14b07acbbfe0c5736954289301ac9f35bd`
 
 **Summary:** Policy-backed control for whether the Lock option is shown in the user tile menu. Useful for locked-down or simplified menus, but it removes one quick route to locking the session.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7078,6 +8388,7 @@ Windows Internals references:
 ### `power.hide-sleep-option`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Power`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -7086,6 +8397,15 @@ Windows Internals references:
 - Proof SHA256: `9fd4a690ec7f01c46a0a7268de36b05197e70fea5ded44632b11d705011ea0b8`
 
 **Summary:** Policy-backed control for whether the Sleep option is shown in the power menu. Useful for managed or simplified menus, but it removes a common quick-sleep shortcut.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7136,6 +8456,7 @@ Windows Internals references:
 ### `power.optimize-cpu-boost`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Power`
 - Area: `PowerCfg PERFBOOSTMODE`
 - Scope: `device`
@@ -7144,6 +8465,15 @@ Windows Internals references:
 - Proof SHA256: `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e`
 
 **Summary:** Command-backed CPU boost tweak that uses the documented PERFBOOSTMODE power setting instead of the old raw registry bundle. Microsoft publishes PERFBOOSTMODE as a supported powercfg surface, and the guest reversible probe on Win25H2Clean confirmed the active scheme can be read, moved to 1 and 2, and restored back to the original state.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7194,6 +8524,7 @@ Windows Internals references:
 ### `power.optimize-gaming-network`
 
 - Status: `validated`
+- Evidence class: `Class D` - Key Known, Value Semantics Unknown
 - Category: `Power`
 - Area: `Multimedia Class Scheduler Service`
 - Scope: `device`
@@ -7202,6 +8533,15 @@ Windows Internals references:
 - Proof SHA256: `f21ead2862871a3b24aa2e310685dcce0808f29e5fde1307fc47f4c92477ba2b`
 
 **Summary:** Official MMCSS task-profile registry surface for the built-in Games task. The app writes a custom high-priority Games profile using documented MMCSS keys and allowed values, while leaving the stock Games-task baseline explicitly build-dependent.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class D |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | research-gated |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Targets**
 
@@ -7256,6 +8596,7 @@ Windows Internals references:
 ### `privacy.block-microsoft-accounts`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Security Option Policy`
 - Scope: `device`
@@ -7264,6 +8605,15 @@ Windows Internals references:
 - Proof SHA256: `aadd043705a8dd7c0253c9959e72b05bdffcd4b3681169958fa169b7abf70d45`
 
 **Summary:** Security policy for Microsoft account usage on the device. The local Microsoft security option metadata explicitly documents the same registry path, value name, and allowed values that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7309,6 +8659,7 @@ Nohuto lineage references:
 ### `privacy.deny-app-access.policy`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Privacy`
 - Area: `AppPrivacy policy family`
 - Scope: `device`
@@ -7317,6 +8668,15 @@ Nohuto lineage references:
 - Proof SHA256: `b1d082da5839ba837ab9aee8d2b0bd41c45882cd5b7400de0a78b8117dfcc660`
 
 **Summary:** Controls the official AppPrivacy capability-deny policy family only. The broader parent audit trail keeps the extra System policy write separate, while this child models the documented LetAppsAccess* ForceDeny values.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -7347,6 +8707,7 @@ _No provenance block present._
 ### `privacy.disable-activity-history`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -7355,6 +8716,15 @@ _No provenance block present._
 - Proof SHA256: `bc005dd4397dc6efcde50924f04736c0579ff9a9b606f7d658f1f101fff2fec9`
 
 **Summary:** Device policies for Windows Activity History. The local Microsoft OSPolicy.admx file explicitly documents the same policy key, value names, and enabled/disabled values that the app uses for the full activity-history bundle.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7408,6 +8778,7 @@ Nohuto lineage references:
 ### `privacy.disable-advertising-id`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Machine Policy`
 - Scope: `device`
@@ -7416,6 +8787,15 @@ Nohuto lineage references:
 - Proof SHA256: `bd278720b6e772ec29f19dcd30d92794179e4793a6bb4971be7cf321212660f9`
 
 **Summary:** Official machine policy for turning off the Windows advertising ID. Microsoft documents HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo\DisabledByGroupPolicy with enabledValue = 1 and disabledValue = 0. The app now writes that same policy surface directly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7460,6 +8840,7 @@ Nohuto lineage references:
 ### `privacy.disable-app-diagnostics`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -7468,6 +8849,15 @@ Nohuto lineage references:
 - Proof SHA256: `83541ebc2f0724779aa7677a49e2c42f136a2f80e094ec339c7a0bbaeee07b53`
 
 **Summary:** Machine policy for whether Windows apps can access diagnostic information about other apps. The local Microsoft AppPrivacy.admx file documents the same AppPrivacy policy key and LetAppsGetDiagnosticInfo enum value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7498,7 +8888,7 @@ Nohuto lineage references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 
 **Validation proof**
 
@@ -7511,6 +8901,7 @@ Nohuto lineage references:
 ### `privacy.disable-app-launch-tracking`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Observed Registry Setting`
 - Scope: `user`
@@ -7519,6 +8910,15 @@ Nohuto lineage references:
 - Proof SHA256: `28728b4f09440c59e8c8dc5c80d7346daf6ab6388d81dd84e1ff5a71bed1cae0`
 
 **Summary:** Microsoft privacy guidance documents the Start_TrackProgs registry value under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced and states that setting it to 0 turns off app launch tracking for Start and Search. The current app writes that exact documented value.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7565,6 +8965,7 @@ Nohuto lineage references:
 ### `privacy.disable-app-suggestions`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Policy vs Observed User Setting`
 - Scope: `user`
@@ -7573,6 +8974,15 @@ Nohuto lineage references:
 - Proof SHA256: `7fa321f823790c2215c2c96543c04e9cf2f883b6886df0761ab7270272d49d89`
 
 **Summary:** Microsoft documents third-party app and content suggestions with the user policy HKCU\Software\Policies\Microsoft\Windows\CloudContent\DisableThirdPartySuggestions, and Microsoft Learn also documents the user-side ContentDeliveryManager value SystemPaneSuggestionsEnabled = 0. The current app writes the documented user-side value, so this record is now validated.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7622,6 +9032,7 @@ Nohuto lineage references:
 ### `privacy.disable-appcompat-engine.policy`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Privacy`
 - Area: `Application Compatibility`
 - Scope: `device`
@@ -7630,6 +9041,15 @@ Nohuto lineage references:
 - Proof SHA256: `4aa284a466ab23274289afd8984f112be82d7d68465fbe343f40ef70b10d440a`
 
 **Summary:** Two AppCompat.admx policy values written by the app under HKLM\Software\Policies\Microsoft\Windows\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -7668,6 +9088,7 @@ _No provenance block present._
 ### `privacy.disable-appdeviceinventory.policy`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Application Compatibility`
 - Scope: `device`
@@ -7676,6 +9097,15 @@ _No provenance block present._
 - Proof SHA256: `4485a54cc0e04a3a5edf164953eb83b326f93a637f219da7533aa98574fd4347`
 
 **Summary:** Four AppDeviceInventory policy values written by the app under HKLM\Software\Policies\Microsoft\Windows\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes all four values under HKLM\Software\Policies\Microsoft\Windows\AppCompat on Windows 11 Pro 10.0.26200.8037. Derived from the former mixed application-compatibility policy record on 2026-03-13.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7724,6 +9154,7 @@ _No provenance block present._
 ### `privacy.disable-application-telemetry`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -7732,6 +9163,15 @@ _No provenance block present._
 - Proof SHA256: `a968b51a0de4ed20b602bb28e37277b16294b8a2e3956a3d3b351f6cf8d071e9`
 
 **Summary:** Machine policy for the Application Telemetry engine used by application compatibility tracking. The local Microsoft AppCompat.admx file explicitly documents the same policy key, value name, and unusual 0/1 mapping that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7778,6 +9218,7 @@ Nohuto lineage references:
 ### `privacy.disable-background-apps`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -7786,6 +9227,15 @@ Nohuto lineage references:
 - Proof SHA256: `bf3477ff8a0483d037ed07264ec9a1f37e93628b8515b4d92bcd052d59c38480`
 
 **Summary:** Machine policy for whether Windows apps can run in the background. The local Microsoft AppPrivacy.admx file documents the same AppPrivacy policy key and LetAppsRunInBackground enum value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7831,6 +9281,7 @@ Nohuto lineage references:
 ### `privacy.disable-biometrics`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -7839,6 +9290,15 @@ Nohuto lineage references:
 - Proof SHA256: `aca211803f04fb1fc14cb757852759a28fcc4c6fc1b8966b0fe26de035e64638`
 
 **Summary:** Machine policy for Windows biometrics as a whole. Good for strict privacy or security baselines, but it disables Windows biometric features such as fingerprint and face sign-in on the device.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7883,6 +9343,7 @@ Nohuto lineage references:
 ### `privacy.disable-biometrics-domain-logon`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -7891,6 +9352,15 @@ Nohuto lineage references:
 - Proof SHA256: `cb63aa659031ceed53be982df01e1f9e6831ad0aaa5a89688ad601f4aaf52942`
 
 **Summary:** Machine policy for biometric sign-in by domain accounts. Good for stricter domain authentication baselines, but it removes biometric sign-in for domain users.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7935,6 +9405,7 @@ Nohuto lineage references:
 ### `privacy.disable-biometrics-logon`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -7943,6 +9414,15 @@ Nohuto lineage references:
 - Proof SHA256: `e877e0087f68acb4ee49fe3cb1e7a70c8440c8e055202f306070b0b40c6a5fcc`
 
 **Summary:** Machine policy for biometric sign-in through the credential provider. Good for strict sign-in policies, but it removes fingerprint or face sign-in for local sign-in scenarios.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7987,6 +9467,7 @@ Nohuto lineage references:
 ### `privacy.disable-camera`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -7995,6 +9476,15 @@ Nohuto lineage references:
 - Proof SHA256: `ed1c25600e7c9bf71b51abec244fcb3d70f9969db29e19606a32c0fc2686a822`
 
 **Summary:** Machine policy for camera device use. The local Microsoft Camera.admx file documents the same Camera policy key and AllowCamera value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8040,6 +9530,7 @@ Nohuto lineage references:
 ### `privacy.disable-cli-telemetry`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Privacy`
 - Area: `User Environment Variables`
 - Scope: `user`
@@ -8048,6 +9539,15 @@ Nohuto lineage references:
 - Proof SHA256: `c01ca3ce36e8a237623af81403fe1e460d5ab64f427a31f30bd913a7d0630382`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Officially documented user environment-variable bundle for opting PowerShell and the .NET CLI out of telemetry. Good for privacy-focused shell workflows, but it can reduce telemetry available for product improvement and support diagnostics.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -8100,6 +9600,7 @@ Nohuto lineage references:
 ### `privacy.disable-consumer-account-content`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8108,6 +9609,15 @@ Nohuto lineage references:
 - Proof SHA256: `802c43fd0393ee0e78c1e693355adf236c4b541b588b30c9b562dd4acffcb715`
 
 **Summary:** Policy-backed control for cloud consumer account state content in Windows experiences. The local Microsoft CloudContent.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8138,7 +9648,7 @@ Nohuto lineage references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 
 **Validation proof**
 
@@ -8151,6 +9661,7 @@ Nohuto lineage references:
 ### `privacy.disable-copilot`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -8159,6 +9670,15 @@ Nohuto lineage references:
 - Proof SHA256: `b1cd95056a7f94f371031db3f6de9b19002f4f490f784a91eddc21e6e7391ecc`
 
 **Summary:** User policy for legacy Windows Copilot. Microsoft documents the same user policy path and value name that the app writes, but the policy is deprecated and does not apply to the newer Copilot experience rolling out on some newer Windows builds.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8205,6 +9725,7 @@ Nohuto lineage references:
 ### `privacy.disable-cross-device-experiences.policy`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Machine Policy`
 - Scope: `device`
@@ -8213,6 +9734,15 @@ Nohuto lineage references:
 - Proof SHA256: `cd57fd96f5a482926e20bdbff74771f88dcf8aed98c8528b62bdbdaa5e26d112`
 
 **Summary:** Controls the official machine policy for Cross-Device Experiences. The current app writes EnableCdp = 0 as part of the broader bundle, but this child record tracks only the documented machine policy while the user-side CDP preset values remain in the deprecated parent audit trail.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8246,6 +9776,7 @@ _No provenance block present._
 ### `privacy.disable-device-name-telemetry`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8254,6 +9785,15 @@ _No provenance block present._
 - Proof SHA256: `cdbf62da7c9c0eb896f953c23c3e486f5850845e6fddd640cd9ec9238437f471`
 
 **Summary:** Machine policy for whether Windows diagnostic data may include the device name. Microsoft documents the same device policy path, default, and numeric meanings that the app writes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8300,6 +9840,7 @@ Nohuto lineage references:
 ### `privacy.disable-diagnostic-data-delete`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8308,6 +9849,15 @@ Nohuto lineage references:
 - Proof SHA256: `5891504911c5f08d60193a8924be5928326e11a0e47f7e996703542b46610e9b`
 
 **Summary:** Machine policy for whether users can delete diagnostic data from Settings. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8354,6 +9904,7 @@ Nohuto lineage references:
 ### `privacy.disable-diagnostic-data-viewer`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8362,6 +9913,15 @@ Nohuto lineage references:
 - Proof SHA256: `1e5a68e241c51b8fbb767c9157452e3ed5bcb6c9ce55eb50cb3a4548e7525b1c`
 
 **Summary:** Machine policy for the Diagnostic Data Viewer experience in Settings. Microsoft documents the same device policy control, registry key path, default, and `0/1` meanings that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8408,6 +9968,7 @@ Nohuto lineage references:
 ### `privacy.disable-edge-search-suggestions`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy Bundle`
 - Scope: `device`
@@ -8416,6 +9977,15 @@ Nohuto lineage references:
 - Proof SHA256: `308a5afd7fbc0a505de5fd5e6da9be0ff76205149f037ec2feaa93c192c8cb56`
 
 **Summary:** Officially documented bundle for reducing suggestion sources in the Edge address bar. Microsoft documents the same modern Edge policy paths and the local legacy Edge ADMX confirms the older MicrosoftEdge policy surface that the app writes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8455,7 +10025,7 @@ Nohuto lineage references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 
 **Validation proof**
 
@@ -8468,6 +10038,7 @@ Nohuto lineage references:
 ### `privacy.disable-feedback-notifications`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8476,6 +10047,15 @@ Nohuto lineage references:
 - Proof SHA256: `4fd4c3366b7f3c26314d395899a7537dd7ea9da8cb4ffcab10572845df1e5b6c`
 
 **Summary:** Machine policy for Microsoft feedback prompts. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8523,6 +10103,7 @@ Nohuto lineage references:
 ### `privacy.disable-file-history`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8531,6 +10112,15 @@ Nohuto lineage references:
 - Proof SHA256: `aa8d785480383b20c15d2bfeb0b8df5880a9dd17bde45e0b336c6d793462e2cb`
 
 **Summary:** Machine policy for File History. Good for privacy-sensitive or storage-constrained setups, but it prevents regular automatic File History backups from being activated.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8576,6 +10166,7 @@ Nohuto lineage references:
 ### `privacy.disable-find-my-device`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8584,6 +10175,15 @@ Nohuto lineage references:
 - Proof SHA256: `87b5872f6958740891f43a2c779b22ed879146d0e2a7941319e90d93f47f5f77`
 
 **Summary:** Machine policy for Find My Device. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8630,6 +10230,7 @@ Nohuto lineage references:
 ### `privacy.disable-font-providers`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8638,6 +10239,15 @@ Nohuto lineage references:
 - Proof SHA256: `354730db32c467f7f05f9076e40ba6652a7ecbb40c0a30f29a72d69ce2db56c8`
 
 **Summary:** Machine policy for online font providers. Good for privacy-sensitive or offline-lean systems, but it prevents Windows from downloading font catalog data and online font data when needed.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8684,6 +10294,7 @@ Nohuto lineage references:
 ### `privacy.disable-kms-activation-telemetry`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8692,6 +10303,15 @@ Nohuto lineage references:
 - Proof SHA256: `1e9e9894404d129fdfbb0bb7fe36462ff4f5028ceba1159bc4c5bc4106e139b6`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Machine policy for KMS client online AVS validation data. Good for privacy-sensitive or tightly controlled environments, but it opts the device out of automatically sending KMS activation-state data to Microsoft.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -8739,6 +10359,7 @@ Nohuto lineage references:
 ### `privacy.disable-language-list-access`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Observed User Preference`
 - Scope: `user`
@@ -8747,6 +10368,15 @@ Nohuto lineage references:
 - Proof SHA256: `c074b88f6c9a9ae61c5f95a9a4f41b990e2bf9843036eaf689f52637332f15aa`
 
 **Summary:** Windows exposes a privacy setting for whether websites can access the user's language list. Microsoft documents the exact HttpAcceptLanguageOptOut registry value under the user's International profile, and the current app writes that same control surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8789,6 +10419,7 @@ Nohuto lineage references:
 ### `privacy.disable-local-security-questions`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8797,6 +10428,15 @@ Nohuto lineage references:
 - Proof SHA256: `d982c92d36455ed71e4e3b67770666d18ce19516b5834234fbe5857c78075c2a`
 
 **Summary:** Machine policy for security questions on local accounts. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the blocked behavior.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8844,6 +10484,7 @@ Nohuto lineage references:
 ### `privacy.disable-location-consent`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Runtime Consent Store`
 - Scope: `user`
@@ -8852,6 +10493,15 @@ Nohuto lineage references:
 - Proof SHA256: `b83a34f2f928911486f15a32ea6c9b1f0cec24f813002f95b0035e5e1e15553c`
 
 **Summary:** Official current-user runtime consent-store surface for denying location access. Microsoft documents both HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location\Value and the NonPackaged companion path as REG_SZ values that can be set per user. The app now writes Deny to those same two paths only.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8899,6 +10549,7 @@ Nohuto lineage references:
 ### `privacy.disable-location-consent-system`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Observed Runtime Consent`
 - Scope: `device`
@@ -8907,6 +10558,15 @@ Nohuto lineage references:
 - Proof SHA256: `2d79f728476170491a58f6b6df1936c2669224fb46a5408be32263279ccab137`
 
 **Summary:** Windows documents the machine-level CapabilityAccessManager location consent-store value as an exact runtime control surface. The app writes that same HKLM path with Value = Deny.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8950,6 +10610,7 @@ Nohuto lineage references:
 ### `privacy.disable-location-scripting`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8958,6 +10619,15 @@ Nohuto lineage references:
 - Proof SHA256: `0d370d91cc59136db8005af00e3d57fb4c3f8606d0fb213ffbefc494041ee024`
 
 **Summary:** Policy-backed control for location scripting access. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9003,6 +10673,7 @@ Nohuto lineage references:
 ### `privacy.disable-location-services`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9011,6 +10682,15 @@ Nohuto lineage references:
 - Proof SHA256: `b63cb71c7f14cb3f1c8f97f32da8f3dd5b54d4a700ead5612765dc9a83d8b110`
 
 **Summary:** Machine policy for the Windows location feature. Good for strict privacy or locked-down environments, but it blocks programs on the computer from using location information from the location feature.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9055,6 +10735,7 @@ Nohuto lineage references:
 ### `privacy.disable-mdm-enrollment`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9063,6 +10744,15 @@ Nohuto lineage references:
 - Proof SHA256: `e6f8a61361558a6b5553f8164f24f593e825c7e2a836515183f7b67e31364e08`
 
 **Summary:** Machine policy for MDM enrollment. Good for systems that should not be remotely managed through MDM, but it prevents new MDM enrollments for all users on the device.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9109,6 +10799,7 @@ Nohuto lineage references:
 ### `privacy.disable-message-sync`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9117,6 +10808,15 @@ Nohuto lineage references:
 - Proof SHA256: `9ac7e52d8d1523fd2f662d4e33a210918cfd25f416a02fa88ced7077cf65c1cb`
 
 **Summary:** Machine policy for cellular message cloud sync. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9163,6 +10863,7 @@ Nohuto lineage references:
 ### `privacy.disable-offline-files.policy`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9171,6 +10872,15 @@ Nohuto lineage references:
 - Proof SHA256: `5f2c37486fce94be54a1f7aba31ff0ec2ffb424a30a22bc5decc1101e65f0b2d`
 
 **Summary:** Policy-backed control for the core Offline Files feature. The local Microsoft OfflineFiles.admx file explicitly documents the same NetCache policy key, Enabled value name, and 1/0 mapping that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9203,6 +10913,7 @@ _No provenance block present._
 ### `privacy.disable-onesettings-downloads`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9211,6 +10922,15 @@ _No provenance block present._
 - Proof SHA256: `cca2f3310e87732b2639ebe0618ea5d41f71814401cf09e12a99a5d5637e7435`
 
 **Summary:** Machine policy for whether Windows connects to the OneSettings service to download configuration settings. Microsoft documents the same device policy control and registry key path that the app writes, and the local ADMX confirms the value mapping.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9257,6 +10977,7 @@ Nohuto lineage references:
 ### `privacy.disable-online-tips`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9265,6 +10986,15 @@ Nohuto lineage references:
 - Proof SHA256: `5b4f9f5a365bc0021a8c40a8e54b3ea942db059ac2427124a3f2ecacff187654`
 
 **Summary:** Machine policy for online tips and help in Settings. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9311,6 +11041,7 @@ Nohuto lineage references:
 ### `privacy.disable-pca-diagnostics.policy`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Privacy`
 - Area: `Application Compatibility`
 - Scope: `device`
@@ -9319,6 +11050,15 @@ Nohuto lineage references:
 - Proof SHA256: `7bdb81d570e8ab0ad5ee8e5a8b3112f1606cb397e867b219ba9775c4ee981600`
 
 **Summary:** Controls whether Windows Program Compatibility Assistant (PCA) detects compatibility issues for applications and drivers. Value name: DisablePcaUI under HKLM\Software\Policies\Microsoft\Windows\AppCompat. Policy family: pca.admx (DisablePcaUIPolicy). Supported on Windows 8+. enabledValue=1 (detection active, explicit policy), disabledValue=0 (detection disabled). To disable diagnostics, the correct write value is 0 - the value name 'DisablePcaUI' is misleading. Note: if 'Turn off Program Compatibility Assistant' (DisablePCA=1) is active, this policy has no effect. This record was created on 2026-03-13 after DisablePcaUI was found to be the wrong key in the previous disable-program-compatibility-assistant record (which correctly targets DisablePCA).
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -9352,6 +11092,7 @@ _No provenance block present._
 ### `privacy.disable-phone-linking`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9360,6 +11101,15 @@ _No provenance block present._
 - Proof SHA256: `1ac5d1461c6cb46560b096b50e2275a5337e2733cf934863b090dea12300a33e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for Phone-PC linking and Continue on PC experiences. Good for reducing cross-device linkage, but it prevents the device from participating in those experiences.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -9405,6 +11155,7 @@ Nohuto lineage references:
 ### `privacy.disable-program-compatibility-assistant`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Application Compatibility`
 - Scope: `device`
@@ -9413,6 +11164,15 @@ Nohuto lineage references:
 - Proof SHA256: `44e0f5bfd3018d0f07f651cf907dcf7bcb13de73ab5c19f61b128b0f8ea4f2b5`
 
 **Summary:** Device policy for turning Program Compatibility Assistant (PCA) off. The correct registry value is DisablePCA under HKLM\Software\Policies\Microsoft\Windows\AppCompat, documented by Microsoft Learn ADMX_AppCompat and local AppCompat.admx. The app implementation was corrected on 2026-03-13 to use DisablePCA=1 instead of the previously mismatched DisablePcaUI diagnostics policy, and Procmon confirmed the runtime write.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9447,6 +11207,7 @@ _No provenance block present._
 ### `privacy.disable-recall`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -9455,6 +11216,15 @@ _No provenance block present._
 - Proof SHA256: `9a1681fc411102114e54e8b3fcc31db5b490fedfdfa16084814efe601a8c63c6`
 
 **Summary:** User policy for saving snapshots for Recall. The local Microsoft WindowsCopilot.admx file explicitly documents the same WindowsAI policy key, DisableAIDataAnalysis value name, and 1/0 mapping that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9502,6 +11272,7 @@ Nohuto lineage references:
 ### `privacy.disable-resume`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Current-user Resume Setting`
 - Scope: `user`
@@ -9510,6 +11281,15 @@ Nohuto lineage references:
 - Proof SHA256: `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f`
 
 **Summary:** The current app writes the current-user Resume setting HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration\IsResumeAllowed = 0. Repo notes and local registry observations confirm that this runtime user setting is real and behaves as expected on this build.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9558,6 +11338,7 @@ Nohuto lineage references:
 ### `privacy.disable-rsop-logging`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Group Policy`
 - Scope: `device`
@@ -9566,6 +11347,15 @@ Nohuto lineage references:
 - Proof SHA256: `5f3e900bb750e2a4c50deb90a0dbdd7f9e2a245eac042a0c1dfc0bcb76224b3b`
 
 **Summary:** This record validates the official Group Policy surface for RSoP logging. GroupPolicy.admx maps HKLM\Software\Policies\Microsoft\Windows\System\RSoPLogging with enabledValue 0 and disabledValue 1, and the app now writes only that documented machine-policy value.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9611,6 +11401,7 @@ Nohuto lineage references:
 ### `privacy.disable-search-box-suggestions`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -9619,6 +11410,15 @@ Nohuto lineage references:
 - Proof SHA256: `eddc41ee198554d3fe83d0e6d0e2106783e18a845d2d7cb0e7cd6e74e9ecd7ec`
 
 **Summary:** User policy for File Explorer search suggestions. Microsoft documents the same user policy path, value name, default, and behavior that the app writes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9665,6 +11465,7 @@ Nohuto lineage references:
 ### `privacy.disable-search-history`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -9673,6 +11474,15 @@ Nohuto lineage references:
 - Proof SHA256: `577e0f892a7550b2dbff71430b62e9ce4ae3ca7a8ab9ade7a96e9fe086ecd5ac`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -9720,6 +11530,7 @@ Nohuto lineage references:
 ### `privacy.disable-sensors`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9728,6 +11539,15 @@ Nohuto lineage references:
 - Proof SHA256: `03b2103d23d85cca9c386b2625adb5bcdea664e37e93181285e939a421430be5`
 
 **Summary:** Policy-backed control for Windows sensors. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9774,6 +11594,7 @@ Nohuto lineage references:
 ### `privacy.disable-steps-recorder`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9782,6 +11603,15 @@ Nohuto lineage references:
 - Proof SHA256: `6b1c4965f1dd88907b6fe4153ee7caa5fa57810b0c676a4c6eb04c903a0c3915`
 
 **Summary:** Policy-backed control for Steps Recorder. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9832,6 +11662,7 @@ Other provenance references:
 ### `privacy.disable-suggestions.policy`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Privacy`
 - Area: `CloudContent policy trio`
 - Scope: `user`
@@ -9840,6 +11671,15 @@ Other provenance references:
 - Proof SHA256: `f7289e1c044f4aed06c13b7cb312fc469ce3c649dc714b45f8210b084d491d23`
 
 **Summary:** Controls the official CloudContent suggestion policies for third-party suggestions, Settings suggestions, and the Windows Welcome experience. The broader parent record remains an audit trail for the opaque ContentDeliveryManager IDs the app writes, while this child tracks only the named Microsoft policies.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -9882,6 +11722,7 @@ _No provenance block present._
 ### `privacy.disable-switchback.policy`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Application Compatibility`
 - Scope: `device`
@@ -9890,6 +11731,15 @@ _No provenance block present._
 - Proof SHA256: `e30ead337c2d32a4eaf143f8b112463cb25a2ed0f7c0fa445c95cc6d9f289a54`
 
 **Summary:** Controls the SwitchBack policy under HKLM\Software\Policies\Microsoft\Windows\AppCompat. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. SbEnable=0 disables this behavior. Extracted from privacy.disable-appcompat-engine.policy on 2026-03-13 because SbEnable is individually proven and does not carry the Microsoft-documented BSOD risk tied to DisableEngine in the parent bundle. AppCompat.admx has explicit enabledValue=0 and disabledValue=1 for SbEnable, the Microsoft Learn CSP page confirms the policy exists, and Procmon confirmed svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 during gpupdate /force on Windows 11 Pro 10.0.26200.8037.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9924,6 +11774,7 @@ _No provenance block present._
 ### `privacy.disable-telemetry-change-notifications`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9932,6 +11783,15 @@ _No provenance block present._
 - Proof SHA256: `17c4989b5977afbfc6d978bfc504790de6b1a5cd9e418366ed65a4087ab94993`
 
 **Summary:** Machine policy for the notification shown when diagnostic-data consent settings change. Microsoft documents the same device policy path, default, and numeric meanings that the app writes, and the local ADMX confirms the exact value name.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -9977,6 +11837,7 @@ Nohuto lineage references:
 ### `privacy.disable-telemetry-optin-ui`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -9985,6 +11846,15 @@ Nohuto lineage references:
 - Proof SHA256: `c817eb3c49b0f967e5e129bc88bdac5a6f8cbfb11aa8fedce4e5ba2d2db70d5e`
 
 **Summary:** Machine policy for whether users can change diagnostic data opt-in settings in Settings. Microsoft documents the same device policy path, default, and numeric meanings that the app writes, and the local ADMX confirms the exact value name.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10031,6 +11901,7 @@ Nohuto lineage references:
 ### `privacy.disable-wer`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10039,6 +11910,15 @@ Nohuto lineage references:
 - Proof SHA256: `f76a986e44138251f15e259e1d0c6babb0919ff2b6693bced3034453f0baf573`
 
 **Summary:** Machine policy for Windows Error Reporting. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10086,6 +11966,7 @@ Nohuto lineage references:
 ### `privacy.disable-windows-location-provider`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10094,6 +11975,15 @@ Nohuto lineage references:
 - Proof SHA256: `e68060103c8ae9f54cafb0d4485ae51f868938c69e1064fe15bc3c9733fd4bbb`
 
 **Summary:** Machine policy for the Windows Location Provider. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10140,6 +12030,7 @@ Nohuto lineage references:
 ### `privacy.disable-windows-tips`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `CloudContent Policy`
 - Scope: `device`
@@ -10148,6 +12039,15 @@ Nohuto lineage references:
 - Proof SHA256: `968618706507e426f5afd1839e8cfad5d9ded5ff292655a59702411eb4e7486e`
 
 **Summary:** Microsoft documents Windows tips with the machine policy HKLM\Software\Policies\Microsoft\Windows\CloudContent\DisableSoftLanding. The current app now writes that documented machine policy directly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10197,6 +12097,7 @@ Nohuto lineage references:
 ### `privacy.hide-last-logged-in-user`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Security Option`
 - Scope: `device`
@@ -10205,6 +12106,15 @@ Nohuto lineage references:
 - Proof SHA256: `014429e6a6216c2cabbaababfda8591989e4a9a7c026c5c173c86fd9e5f18160`
 
 **Summary:** Security option for whether the last signed-in username is shown at sign-in. Local Windows security metadata documents the same Policies\System\DontDisplayLastUserName value that the app writes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10250,6 +12160,7 @@ Nohuto lineage references:
 ### `privacy.hide-recommended-personalized-sites`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10258,6 +12169,15 @@ Nohuto lineage references:
 - Proof SHA256: `0260e4a0514f36a331a7d8246132c4ab54466d561ef8e5ee4230adefdc45d3df`
 
 **Summary:** Machine policy for hiding personalized website recommendations from Start. The local Microsoft StartMenu.admx file documents the same Explorer policy key and HideRecommendedPersonalizedSites value name used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10288,7 +12208,7 @@ Nohuto lineage references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 
 **Validation proof**
 
@@ -10301,6 +12221,7 @@ Nohuto lineage references:
 ### `privacy.hide-recommended-personalized-sites-user`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -10309,6 +12230,15 @@ Nohuto lineage references:
 - Proof SHA256: `e2e76932cc845400f8f53e5212bbd722953a03e756b7bc227a36ee26dd1373d8`
 
 **Summary:** User policy for hiding personalized website recommendations from Start. The local Microsoft StartMenu.admx file documents the same Explorer policy key and HideRecommendedPersonalizedSites value name used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10354,6 +12284,7 @@ Nohuto lineage references:
 ### `privacy.hide-recommended-section`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10362,6 +12293,15 @@ Nohuto lineage references:
 - Proof SHA256: `4caace1b6f880a67e42cc408219cf7c68b0f7ead41991e81b4d59987387d165d`
 
 **Summary:** Machine policy for the Recommended section in the Windows 11 Start menu. The official Start Policy CSP and local StartMenu.admx file document the same Explorer policy key and HideRecommendedSection value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10392,7 +12332,7 @@ Nohuto lineage references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 
 **Validation proof**
 
@@ -10405,6 +12345,7 @@ Nohuto lineage references:
 ### `privacy.hide-recommended-section-user`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -10413,6 +12354,15 @@ Nohuto lineage references:
 - Proof SHA256: `497b81057fe283d7500aada3abdadf2c0e3dd9e4173e2537b70dc036e47f1436`
 
 **Summary:** User policy for the Recommended section in the Windows 11 Start menu. The local Microsoft StartMenu.admx file explicitly documents the same Explorer policy key, HideRecommendedSection value name, and Both-scope surface that the app uses for the current user.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10458,6 +12408,7 @@ Nohuto lineage references:
 ### `privacy.hide-username-at-signin`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Security Option`
 - Scope: `device`
@@ -10466,6 +12417,15 @@ Nohuto lineage references:
 - Proof SHA256: `df9ac43701488dec143b457dfc5b9ddab403b78c3a76b87746a2ae2b44727a10`
 
 **Summary:** Research record for hiding username information during sign-in. The app writes DontDisplayUserName, and the local Windows security metadata in sceregvl.inf confirms that exact registry surface for the documented security option.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10511,6 +12471,7 @@ Nohuto lineage references:
 ### `privacy.limit-diagnostic-log-collection`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10519,6 +12480,15 @@ Nohuto lineage references:
 - Proof SHA256: `2948ab88d6f0fff70ef6cd9e9a6e42917333afc393c67ed2db0d84a67b8c6486`
 
 **Summary:** Machine policy for limiting advanced diagnostic log collection. The local Microsoft DataCollection.admx file explicitly documents the same DataCollection policy key and LimitDiagnosticLogCollection value name that the app uses, and the ADML help text explains the effect.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10564,6 +12534,7 @@ Nohuto lineage references:
 ### `privacy.limit-dump-collection`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10572,6 +12543,15 @@ Nohuto lineage references:
 - Proof SHA256: `f42f7cdd980b244401be19285659a44a707ebec53e298763035c87dab8b0f2fc`
 
 **Summary:** Machine policy for limiting diagnostic dump collection. The local Microsoft DataCollection.admx file explicitly documents the same DataCollection policy key and LimitDumpCollection value name that the app uses, and the ADML help text explains the effect.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10618,6 +12598,7 @@ Nohuto lineage references:
 ### `privacy.set-diagnostic-data-to-minimum-supported-level`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10626,6 +12607,15 @@ Nohuto lineage references:
 - Proof SHA256: `e05403394ebd8329e2d2001f0b186efecf6a6108029c50fdbd9b20c6384cc033`
 
 **Summary:** The app writes AllowTelemetry = 0 and now labels it as setting diagnostic data to the minimum supported level. Microsoft documents that value 0 is only supported on Enterprise, Education, and Server editions, so the renamed UX is edition-aware instead of implying a general-purpose off switch.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -10660,6 +12650,7 @@ _No provenance block present._
 ### `privacy.troubleshooter-dont-run`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10668,6 +12659,15 @@ _No provenance block present._
 - Proof SHA256: `7dcc7ddffc4e900be0639a531fe65c9f9e91f3571e105777966de2c6b82f3f86`
 
 **Summary:** Official Microsoft policy for recommended troubleshooting. The app now writes only the documented TroubleshootingAllowRecommendations=0 policy value and no longer carries the extra WindowsMitigation companion write.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10717,6 +12717,7 @@ Nohuto lineage references:
 ### `privacy.turn-off-sync-by-default-allow-user-override`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Privacy`
 - Area: `Registry Policy Bundle`
 - Scope: `device`
@@ -10725,6 +12726,15 @@ Nohuto lineage references:
 - Proof SHA256: `cbf61febc21858b0337754ddc719d778a0a6c0f8f34b535b029e120bcecea03e`
 
 **Summary:** The app writes the official SettingSync policy family and intentionally sets every *UserOverride value to 0, so the current tweak is accurately described as sync off by default with user override allowed.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10767,6 +12777,7 @@ _No provenance block present._
 ### `security.disable-downloads-blocking`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -10775,6 +12786,15 @@ _No provenance block present._
 - Proof SHA256: `37f0c6998110ae0723af795d2c3f93b894ac85bf013d9877cbdc60c381f3f2eb`
 
 **Summary:** Official Attachment Manager policy for stopping Windows from preserving zone-of-origin metadata on downloaded files. The local Microsoft AttachmentManager.admx file explicitly documents the same Attachments policy key, SaveZoneInformation value name, and enabled/disabled values that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10822,6 +12842,7 @@ Windows Internals references:
 ### `security.disable-ntfs-encryption`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10830,6 +12851,15 @@ Windows Internals references:
 - Proof SHA256: `a85e3450b7be35f290e9b7a8083815b660f2edd6afcb9d8151d04d4a677e9a0d`
 
 **Summary:** Validated record with machine-checkable proof for the official NTFS encryption policy surface. The app now writes only the documented policy path.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -10877,6 +12907,7 @@ Windows Internals references:
 ### `security.disable-p2p-updates`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10885,6 +12916,15 @@ Windows Internals references:
 - Proof SHA256: `e30fdfd201f0bf77b2b6fa51c308d5dd3e3f64adb81b8c6caa7a689101591a0a`
 
 **Summary:** Disables Delivery Optimization peer-to-peer update sharing by writing DODownloadMode = 0 under HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization. The local Microsoft DeliveryOptimization ADMX and ADML files define value 0 as HTTP only with no peering. The app previously wrote the same value under HKLM\SOFTWARE\Microsoft\PolicyManager\default\DeliveryOptimization; it now uses the documented policy path.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -10936,6 +12976,7 @@ Windows Internals references:
 ### `security.disable-password-reveal`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10944,6 +12985,15 @@ Windows Internals references:
 - Proof SHA256: `50d97e420c30cbf63a70c9a209094c3baa6f45450925e287d51ea8a22288f57e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for the password reveal button in Windows credential entry surfaces. Turning it off slightly reduces shoulder-surfing convenience risks, but users lose the built-in way to briefly reveal what they typed.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -10991,6 +13041,7 @@ Windows Internals references:
 ### `security.disable-picture-password`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -10999,6 +13050,15 @@ Windows Internals references:
 - Proof SHA256: `80f0769f7386003a4f61a10b36d71703ac5b9498fd3fc92551eb78738cf99d72`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for picture password sign-in for domain users. Turning it off removes one sign-in option for domain accounts, but it can simplify credential policy and support expectations.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -11046,6 +13106,7 @@ Windows Internals references:
 ### `security.disable-remote-assistance`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -11054,6 +13115,15 @@ Windows Internals references:
 - Proof SHA256: `3576aeaa16a5aab4964bc681df989398a5552a9c7b6fdceb9b722424a42f1ad8`
 
 **Summary:** Policy-backed control for Solicited Remote Assistance. The local Microsoft RemoteAssistance.admx file explicitly documents the same Terminal Services policy key and fAllowToGetHelp value name that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -11102,6 +13172,7 @@ Windows Internals references:
 ### `security.disable-system-mitigations`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Exploit Protection`
 - Scope: `device`
@@ -11110,6 +13181,15 @@ Windows Internals references:
 - Proof SHA256: `f64931b89268443eb36db4ce8bf33b4a879a0c7daf28c87f36e7a1fdb33326e7`
 
 **Summary:** Microsoft documents exploit protection system mitigations through the Windows Security app, the ProcessMitigation PowerShell cmdlets, and an Exploit Guard policy that points to an XML configuration file. The app now imports the documented XML policy surface instead of writing raw MitigationOptions and MitigationAuditOptions blobs directly under the kernel registry path.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -11155,6 +13235,7 @@ Windows Internals references:
 ### `security.disable-system-restore`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `System Restore Policy`
 - Scope: `device`
@@ -11163,6 +13244,15 @@ Windows Internals references:
 - Proof SHA256: `a0b7ed13e93915c4f77f085945159c09a292f2c3cc2e4cd140ce0ea7a98c8df1`
 
 **Summary:** Official System Restore policy control. The app now uses DisableSR under HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore, which is the documented machine policy for turning System Restore off.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -11211,6 +13301,7 @@ Windows Internals references:
 ### `security.disable-windows-firewall`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -11219,6 +13310,15 @@ Windows Internals references:
 - Proof SHA256: `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21`
 
 **Summary:** The official Windows Defender Firewall policy surface is documented in Firewall CSP under HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall, while the app now writes EnableFirewall = 0 under that policy path for DomainProfile and StandardProfile. The runtime SharedAccess paths remain real troubleshooting surfaces, but the app no longer uses them.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -11272,6 +13372,7 @@ Windows Internals references:
 ### `security.disable-windows-update.policy`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -11280,6 +13381,15 @@ Windows Internals references:
 - Proof SHA256: `b1697a5c3feaa9da12b61d23e66a337b9339e4fffeeb2e37d8395d5f461ed060`
 
 **Summary:** Policy-backed Windows Update disable control. The app writes the documented DisableWindowsUpdateAccess and NoAutoUpdate policy values; the older pause-timestamp behavior remains in the deprecated parent audit trail.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -11314,6 +13424,7 @@ _No provenance block present._
 ### `security.disable-wu-driver-updates`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -11322,6 +13433,15 @@ _No provenance block present._
 - Proof SHA256: `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for stopping Windows Update from being used as a device-driver source and for excluding driver-classified updates from Windows quality updates. This can reduce unexpected driver changes, but it can also block useful driver delivery when no local or vendor-provided driver is available.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -11382,6 +13502,7 @@ Windows Internals references:
 ### `security.enable-dynamic-lock`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -11390,6 +13511,15 @@ Windows Internals references:
 - Proof SHA256: `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189`
 
 **Summary:** Validated record for the official Dynamic Lock policy under Passport for Work. The current app still writes a different current-user value under Winlogon, so the implementation remains mismatched even though the policy surface itself is now proven.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -11436,6 +13566,7 @@ Windows Internals references:
 ### `security.enable-sudo`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -11444,6 +13575,15 @@ Windows Internals references:
 - Proof SHA256: `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official policy-backed control for Windows sudo behavior. The current app sets the maximum allowed sudo mode to Normal, which allows in-place use and also permits the stricter modes.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -11493,6 +13633,7 @@ Windows Internals references:
 ### `security.powershell-unrestricted`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -11501,6 +13642,15 @@ Windows Internals references:
 - Proof SHA256: `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983`
 
 **Summary:** Sets the official Windows PowerShell Group Policy execution surface to allow all scripts by writing EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\Software\Policies\Microsoft\Windows\PowerShell. The app previously wrote only the legacy shell preference value under HKLM\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell; it now writes the documented Group Policy path instead.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -11552,6 +13702,7 @@ Windows Internals references:
 ### `security.trusted-path-credential-prompting`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -11560,6 +13711,15 @@ Windows Internals references:
 - Proof SHA256: `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02`
 
 **Summary:** Win25H2Clean reversible probe confirmed EnableSecureCredentialPrompting=1 on the documented CredUI path and restored the baseline.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 
@@ -11608,6 +13768,7 @@ Windows Internals references:
 ### `security.uac-never-notify`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Registry Security Setting`
 - Scope: `device`
@@ -11616,6 +13777,15 @@ Windows Internals references:
 - Proof SHA256: `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f`
 
 **Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -11673,6 +13843,7 @@ Windows Internals references:
 ### `system.aero-shake`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -11681,6 +13852,15 @@ Windows Internals references:
 - Proof SHA256: `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b`
 
 **Summary:** User policy for the Aero Shake gesture. The local Microsoft Desktop.admx file explicitly documents the same Explorer policy key, NoWindowMinimizingShortcuts value name, and 1/0 mapping that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -11730,6 +13910,7 @@ Windows Internals references:
 ### `system.bsod-disable-auto-reboot`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Crash Recovery`
 - Scope: `device`
@@ -11738,6 +13919,15 @@ Windows Internals references:
 - Proof SHA256: `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181`
 
 **Summary:** Officially documented crash-recovery control for automatic restart after a system failure. Microsoft documents the same CrashControl path and AutoReboot value used by the app, including the default enabled state and the 0 = disabled troubleshooting state.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -11786,6 +13976,7 @@ Windows Internals references:
 ### `system.bsod-display-parameters`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Crash Recovery / Bug Check Display`
 - Scope: `device`
@@ -11794,6 +13985,15 @@ Windows Internals references:
 - Proof SHA256: `1eea0c9c620c9caae29215c18a6608b3d6f5eea2beb90bc41fc83ec26ef41b3f`
 
 **Summary:** Validated record with machine-checkable proof for the CrashControl DisplayParameters setting. The app writes the documented value and Microsoft Support documents the 0/1 semantics.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -11840,6 +14040,7 @@ Windows Internals references:
 ### `system.disable-app-archiving`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -11848,6 +14049,15 @@ Windows Internals references:
 - Proof SHA256: `d67f5f4b6c441bd7dea3dbb512898a32c4b4661c1c0db83b86bbdde063bdf630`
 
 **Summary:** Machine policy for automatic app archiving. The local Microsoft AppxPackageManager.admx file explicitly documents the same Appx policy key, AllowAutomaticAppArchiving value name, and app-archiving behavior that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -11897,6 +14107,7 @@ Windows Internals references:
 ### `system.disable-auto-maintenance`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Observed Registry Setting`
 - Scope: `device`
@@ -11905,6 +14116,15 @@ Windows Internals references:
 - Proof SHA256: `9da0a6c6d8df99a060e122cfb988f132a9b125c369ff383d020cbb3657ac012c`
 
 **Summary:** Win25H2Clean reversible probe confirmed MaintenanceDisabled=1 under Schedule\Maintenance and restored the baseline.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 
@@ -11955,6 +14175,7 @@ Windows Internals references:
 ### `system.disable-background-gp-updates`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -11963,6 +14184,15 @@ Windows Internals references:
 - Proof SHA256: `f405c9914ca39ee00ae820afba4f149eb84081715df8e3a7bcb2a26ab3742038`
 
 **Summary:** Policy-backed control for background Group Policy refresh. The local Microsoft GroupPolicy.admx file explicitly documents the same policy key and DisableBkGndGroupPolicy value name that the app uses, and the ADML help text explains the behavior.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12012,6 +14242,7 @@ Windows Internals references:
 ### `system.disable-clipboard-history`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -12020,6 +14251,15 @@ Windows Internals references:
 - Proof SHA256: `6f1d55e33a45d3258dd257c8c34c0185d96ee07b14bf1427fbdbae1e18b728a0`
 
 **Summary:** Device policies for Clipboard History and cross-device clipboard sync. The local Microsoft OSPolicy.admx file explicitly documents the same policy key, value names, and enabled/disabled values that the app uses for this bundle.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12074,6 +14314,7 @@ Windows Internals references:
 ### `system.disable-clipboard-redirection`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -12082,6 +14323,15 @@ Windows Internals references:
 - Proof SHA256: `bd7bbb0f1b1b0b7f114a02aa53890195d47f454c172025d9cfba62d70b973e8b`
 
 **Summary:** Device policy for RDP clipboard redirection. The local Microsoft TerminalServer.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12131,6 +14381,7 @@ Windows Internals references:
 ### `system.disable-fullscreen-optimizations`
 
 - Status: `validated`
+- Evidence class: `Class D` - Key Known, Value Semantics Unknown
 - Category: `System`
 - Area: `GameConfigStore / Compatibility Preference`
 - Scope: `user`
@@ -12139,6 +14390,15 @@ Windows Internals references:
 - Proof SHA256: `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee`
 
 **Summary:** Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple and restored the baseline.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class D |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | research-gated |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Targets**
 
@@ -12187,6 +14447,7 @@ Windows Internals references:
 ### `system.disable-game-recording-broadcasting`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -12195,6 +14456,15 @@ Windows Internals references:
 - Proof SHA256: `f00125e489190967e2738bd103050e96d50f5df6456d05b81cc1b82c63da5bfe`
 
 **Summary:** Official policy control for Windows Game Recording and Broadcasting. The local Microsoft GameDVR.admx file explicitly documents the same GameDVR policy key, AllowGameDVR value name, and disable behavior that the app uses.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12227,6 +14497,7 @@ _No provenance block present._
 ### `system.disable-jpeg-reduction`
 
 - Status: `validated`
+- Evidence class: `Class D` - Key Known, Value Semantics Unknown
 - Category: `System`
 - Area: `Desktop Wallpaper Import Behavior`
 - Scope: `user`
@@ -12235,6 +14506,15 @@ _No provenance block present._
 - Proof SHA256: `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377`
 
 **Summary:** Win25H2Clean reversible probe confirmed JPEGImportQuality=100 under Control Panel\\Desktop and restored the baseline.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class D |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | research-gated |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Targets**
 
@@ -12282,6 +14562,7 @@ Windows Internals references:
 ### `system.disable-restartable-apps`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Feature Setting vs Observed Registry Setting`
 - Scope: `user`
@@ -12290,6 +14571,15 @@ Windows Internals references:
 - Proof SHA256: `b4d567ea9ec033d06c9f6d2ff60f9ada14f4b5e8b50bb5318c2536ed22cff6c8`
 
 **Summary:** Microsoft documents the Restart apps sign-in feature, and a guest-side reversible probe on Win25H2Clean confirmed the raw RestartApps registry mapping under HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon. The current app writes 0 there, which the probe confirmed disables automatic app restart after sign-in on this build.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12339,6 +14629,7 @@ Windows Internals references:
 ### `system.disable-search-highlights-policy`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -12347,6 +14638,15 @@ Windows Internals references:
 - Proof SHA256: `ae49b38ee6eec7f08e188c053143d1d430695aec6cb5b90db93af2281cc1b807`
 
 **Summary:** Policy-backed control for Search Highlights. Good for quieter and more static search UX, but it removes dynamic content from search home and taskbar or Start search surfaces.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12396,6 +14696,7 @@ Windows Internals references:
 ### `system.disable-search-remote-queries`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -12404,6 +14705,15 @@ Windows Internals references:
 - Proof SHA256: `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for whether remote clients can query this computer's Windows Search index. Good for reducing remote index exposure, but it also removes indexed-search convenience for network shares hosted on the machine.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -12452,6 +14762,7 @@ Windows Internals references:
 ### `system.disable-search-web-results`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -12460,6 +14771,15 @@ Windows Internals references:
 - Proof SHA256: `bb1b1691889396c055ff9308c954c15fe921b1bf40045ac22449e871fd6c3a37`
 
 **Summary:** Microsoft documents the policy by name as DoNotUseWebResults, but the official registry value name in Search.admx is ConnectedSearchUseWeb with enabledValue 0 and disabledValue 1. The app now writes that documented registry value and disable state exactly.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12489,7 +14809,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -12506,6 +14826,7 @@ Windows Internals references:
 ### `system.disable-shortcut-arrow`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Explorer Overlay`
 - Scope: `device`
@@ -12514,6 +14835,15 @@ Windows Internals references:
 - Proof SHA256: `4dc6f2003ee84572320f65a1acecf6c701fc68c055921e90ca666de432f9ebef`
 
 **Summary:** Documented Shell Icons registry mapping for the shortcut-arrow overlay. Microsoft guidance shows that Shell Icons value `29` can be pointed at `%windir%\System32\shell32.dll,-50` to remove shortcut arrows, and removing the custom Shell Icons value restores the default overlay behavior. The app writes that exact value.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -12560,6 +14890,7 @@ Windows Internals references:
 ### `system.disable-startup-delay`
 
 - Status: `validated`
+- Evidence class: `Class D` - Key Known, Value Semantics Unknown
 - Category: `System`
 - Area: `Explorer Startup Behavior`
 - Scope: `user`
@@ -12568,6 +14899,15 @@ Windows Internals references:
 - Proof SHA256: `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7`
 
 **Summary:** Win25H2Clean reversible probe confirmed StartupDelayInMSec=0 under Explorer\Serialize and restored the baseline.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class D |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | research-gated |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Targets**
 
@@ -12617,6 +14957,7 @@ Windows Internals references:
 ### `system.disable-storage-sense`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -12625,6 +14966,15 @@ Windows Internals references:
 - Proof SHA256: `aab0b6531e384b0ec9cbb05bc4fd51a5f72f5fffb64825086125f5d372926ff1`
 
 **Summary:** Policy-backed control for Storage Sense automatic cleanup. Useful when users want manual control over disk cleanup, but it removes an automatic housekeeping feature that helps many casual users.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12674,6 +15024,7 @@ Windows Internals references:
 ### `system.disable-storage-sense-temp-cleanup`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -12682,6 +15033,15 @@ Windows Internals references:
 - Proof SHA256: `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc`
 
 **Summary:** Policy-backed control for whether Storage Sense can clean temporary files. Useful for users who want to keep temporary data until they clean manually, but it reduces how effective Storage Sense is at freeing space automatically.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12732,6 +15092,7 @@ Windows Internals references:
 ### `system.disable-store-open-with`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -12740,6 +15101,15 @@ Windows Internals references:
 - Proof SHA256: `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c`
 
 **Summary:** Policy-backed control for the Store option in the Open With dialog. Good for managed or offline-first systems, but it removes a fallback path for finding an app when a file type is unknown.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12789,6 +15159,7 @@ Windows Internals references:
 ### `system.dwm-disable-overlay-min-fps`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Desktop Window Manager / Overlay Diagnostics`
 - Scope: `device`
@@ -12797,6 +15168,15 @@ Windows Internals references:
 - Proof SHA256: `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087`
 
 **Summary:** Microsoft documents the DWM registry override OverlayMinFPS and says setting it to 0 disables the minimum-FPS check used for overlay assignment. The app writes that exact documented value, but this is a troubleshooting-style graphics override rather than a normal consumer optimization.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -12843,14 +15223,24 @@ Windows Internals references:
 ### `system.enable-game-mode`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Gaming Feature / GameBar Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.enable-game-mode.review.json`
-- Source SHA256: `31b37f92d6be9c98019747e412acc213557871d95a1902abd006f109e4b2ff75`
-- Proof SHA256: `002fb0a540e672a6fba9bea881db8af3ede628d5bb7b874b6788f3e988c80641`
+- Source SHA256: `e4811dbd9f28e07fdba6f7fb91ae38898a2f2a55fe61b1395c4772561dafcf9a`
+- Proof SHA256: `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59`
 
-**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched OCCT, captured WPR ETLs and perf samples for both states, and restored the guest baseline after each pass. However, the OCCT UI still displayed its EULA modal and `OCCT.config.json` still reported `EulaVersion = 0`, so the OCCT portion must be treated as launch-and-trace evidence rather than a valid benchmark result. That still validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
+**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 
@@ -12865,7 +15255,6 @@ Windows Internals references:
 | `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | `high` |
 | `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | `high` |
 | `repo-system-decomp-game-mode` | `decompilation` | `Ghidra decompilation` | Decompiled Game Mode handler string reference | `medium` |
-| `vm-gamemode-occt-wpr-20260323` | `runtime-trace` | `unspecified` | VM Game Mode OCCT plus WPR observation suite | `medium` |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | `medium` |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
@@ -12897,10 +15286,11 @@ Windows Internals references:
 | source_url | H:\\Temp\\vm-tooling-staging\\gamemode_admin_probe.txt |
 | exact_quote_or_path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | key_found_on_page | True |
-| notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT launch traces plus WPR captures for states 0 and 1 and restored the guest baseline after each pass, but OCCT still showed its EULA modal and kept `EulaVersion = 0`, so those runs must not be interpreted as valid OCCT score benchmarks. Normalized for the consolidated evidence report. |
+| notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report. |
 ### `system.enable-hags`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Graphics Drivers / Scheduling Feature`
 - Scope: `device`
@@ -12909,6 +15299,15 @@ Windows Internals references:
 - Proof SHA256: `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1`
 
 **Summary:** The current app writes HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\HwSchMode = 2 to enable Hardware-Accelerated GPU Scheduling (HAGS). A guest-side reversible probe on Win25H2Clean confirmed the guest baseline is missing and that HwSchMode transitions through 2 and 1 before restoring to missing, so the record is now runtime-validated even though the Microsoft feature documentation captured here does not publish the raw registry contract.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -12958,6 +15357,7 @@ Windows Internals references:
 ### `system.enable-indexing-encrypted-items`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -12966,6 +15366,15 @@ Windows Internals references:
 - Proof SHA256: `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33`
 
 **Summary:** Policy-backed control for whether Windows Search indexes encrypted files. Useful for people who need fast search inside encrypted content, but it carries security caveats and rebuilds the index when changed.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13014,6 +15423,7 @@ Windows Internals references:
 ### `system.graphics-tdr-ddi-delay`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Graphics Drivers / TDR`
 - Scope: `device`
@@ -13022,6 +15432,15 @@ Windows Internals references:
 - Proof SHA256: `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970`
 
 **Summary:** Officially documented TDR DDI timeout reset. This app write restores TdrDdiDelay to Microsoft's documented default of 5 seconds, but Microsoft warns that TDR keys are for driver testing and debugging rather than normal end-user tuning.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13067,6 +15486,7 @@ Windows Internals references:
 ### `system.graphics-tdr-delay`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Graphics Drivers / TDR`
 - Scope: `device`
@@ -13075,6 +15495,15 @@ Windows Internals references:
 - Proof SHA256: `b6da5db4f695d7ba7a08d29bd3859c1c57b438bb3ba83564b9ec1fd0a74c4dbf`
 
 **Summary:** Officially documented TDR timeout threshold reset. This app write restores TdrDelay to Microsoft's documented default of 2 seconds, but Microsoft says TDR keys are for targeted driver testing and debugging rather than normal end-user tuning.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13120,6 +15549,7 @@ Windows Internals references:
 ### `system.graphics-tdr-level`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Graphics Drivers / TDR`
 - Scope: `device`
@@ -13128,6 +15558,15 @@ Windows Internals references:
 - Proof SHA256: `e1d685fde018737579c002e14fe7e9bb9e301555449c7032ac537be1aefab8b1`
 
 **Summary:** Officially documented TDR recovery-level control. This app write restores TdrLevel to Microsoft's documented default of 3 (recover on timeout), but Microsoft warns that TDR keys are for driver testing and debugging rather than normal end-user tuning.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13176,6 +15615,7 @@ Windows Internals references:
 ### `system.graphics-tdr-limit-count`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Graphics Drivers / TDR`
 - Scope: `device`
@@ -13184,6 +15624,15 @@ Windows Internals references:
 - Proof SHA256: `98793161f5d92ef41a5dffb17fe726e653b8bea67bf5fcc00384abd0cf49fdde`
 
 **Summary:** Officially documented TDR hang-count reset. This app write restores TdrLimitCount to Microsoft's documented default of 5, but Microsoft warns that TDR keys are intended for driver testing and debugging rather than normal end-user tuning.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13229,6 +15678,7 @@ Windows Internals references:
 ### `system.graphics-tdr-limit-time`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Graphics Drivers / TDR`
 - Scope: `device`
@@ -13237,6 +15687,15 @@ Windows Internals references:
 - Proof SHA256: `b8db6b0b24bd9b6d64dd8e0ff6088b7079e260f5a620d73e10950a74b6499361`
 
 **Summary:** Officially documented TDR time-window reset. This app write restores TdrLimitTime to Microsoft's documented default of 60 seconds, but Microsoft warns that TDR keys are intended for driver testing and debugging rather than normal end-user tuning.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13282,6 +15741,7 @@ Windows Internals references:
 ### `system.kernel-thread-dpc-enable`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Kernel / Deferred Procedure Calls`
 - Scope: `device`
@@ -13290,6 +15750,15 @@ Windows Internals references:
 - Proof SHA256: `a15a06f3b91cf08536310bd098334ea2859c0ff7ad7d73e2594296a780a73f5e`
 
 **Summary:** Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\System\CurrentControlSet\Control\SessionManager\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset, and a bounded Win25H2Clean VM suite exercised the `0` state through real reboot, CPU and memory workloads, and restore back to the missing baseline.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13340,6 +15809,7 @@ Windows Internals references:
 ### `system.memory-clear-pagefile-at-shutdown`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Security Option / Memory Management`
 - Scope: `device`
@@ -13348,6 +15818,15 @@ Windows Internals references:
 - Proof SHA256: `410daf2e1ff1285865db5d6768c6f4e852efd5e68d0b6f914845ca98b2dcc97b`
 
 **Summary:** Official security option for clearing the virtual memory page file at shutdown. Good for privacy-sensitive systems, but it can make shutdown noticeably slower.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13396,6 +15875,7 @@ Windows Internals references:
 ### `system.memory-disable-paging-executive`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `System`
 - Area: `Memory Management`
 - Scope: `device`
@@ -13404,6 +15884,15 @@ Windows Internals references:
 - Proof SHA256: `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4`
 
 **Summary:** Officially documented Memory Management control for DisablePagingExecutive, but Microsoft explicitly states that systems with Windows 8 and higher do not need this registry change. The key exists and is writable, but it should not be treated as an effective Windows 11 tweak.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
 
 **Targets**
 
@@ -13452,6 +15941,7 @@ Windows Internals references:
 ### `system.memory-large-system-cache-client`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Memory Management / Cache Mode`
 - Scope: `device`
@@ -13460,6 +15950,15 @@ Windows Internals references:
 - Proof SHA256: `0bb05d41e8e9be3cbc9320f5ab39e1261822a39f4b171f38e49f416bb54d05d5`
 
 **Summary:** Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13507,6 +16006,7 @@ Windows Internals references:
 ### `system.memory-nonpaged-pool-dynamic`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Memory Management / Legacy Pool Tuning`
 - Scope: `device`
@@ -13515,6 +16015,15 @@ Windows Internals references:
 - Proof SHA256: `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc`
 
 **Summary:** Validated legacy nonpaged-pool size control. Microsoft Q&A captures NonPagedPoolSize = 0 as the default value, and the app writes that same reset value.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13562,6 +16071,7 @@ Windows Internals references:
 ### `system.memory-paged-pool-dynamic`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Memory Management / Legacy Pool Tuning`
 - Scope: `device`
@@ -13570,6 +16080,15 @@ Windows Internals references:
 - Proof SHA256: `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9`
 
 **Summary:** Validated legacy paged-pool size control. Microsoft Q&A captures PagedPoolSize = 0 as the default value, and the app writes that same reset value.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13618,6 +16137,7 @@ Windows Internals references:
 ### `system.memory-registry-quota-default`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Storage Space`
 - Scope: `device`
@@ -13626,6 +16146,15 @@ Windows Internals references:
 - Proof SHA256: `25c9afb706f3f644f188ca40e87d0e9a88dacfb4e738d93d292e3aed0a14f1a5`
 
 **Summary:** Resets the legacy registry-size limit control to the documented automatic-sizing state by writing RegistrySizeLimit = 0 under HKLM\System\CurrentControlSet\Control. Microsoft documents RegistrySizeLimit as the published registry-size control surface and recommends deleting the value or setting it to 0 so Windows automatically sizes the registry as needed. The app previously wrote RegistryQuota under Session Manager\Memory Management; the implementation now matches the documented RegistrySizeLimit surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -13657,7 +16186,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -13674,6 +16203,7 @@ Windows Internals references:
 ### `system.ntfs-disable-8dot3`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `File System Runtime Setting`
 - Scope: `device`
@@ -13682,6 +16212,15 @@ Windows Internals references:
 - Proof SHA256: `ea929eeaf7bdd90e1cdacf69338485fefd38aca588e8af28bd4cf78a76b3cdc1`
 
 **Summary:** Officially documented control for NTFS 8.3 short-name creation. Good for systems that do not need DOS-style short names and want to avoid their overhead, but disabling them can break older software that still expects short names.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -13732,6 +16271,7 @@ Windows Internals references:
 ### `system.ntfs-disable-last-access`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `File System Runtime Setting`
 - Scope: `device`
@@ -13740,6 +16280,15 @@ Windows Internals references:
 - Proof SHA256: `999857adb93ea648e8ead434d9a350d2d2009985c6240ddd98032fc4b736d627`
 
 **Summary:** Officially documented NTFS control for last-access timestamp updates. Good for reducing disk I/O and latency on large file trees, but some backup and archival tools rely on last-access data and can behave differently when it is disabled.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13788,6 +16337,7 @@ Windows Internals references:
 ### `system.ntfs-enable-long-paths`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `File System Registry Setting`
 - Scope: `device`
@@ -13796,6 +16346,15 @@ Windows Internals references:
 - Proof SHA256: `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179`
 
 **Summary:** Officially documented control for Win32 long paths. Good for development and tooling workflows that hit the 260-character path limit, but it only helps applications that opt in to long-path support.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -13845,6 +16404,7 @@ Windows Internals references:
 ### `system.ntfs-reset-memory-usage`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `File System Runtime Setting`
 - Scope: `device`
@@ -13853,6 +16413,15 @@ Windows Internals references:
 - Proof SHA256: `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035`
 
 **Summary:** Validated NTFS memory-usage control. Microsoft documents NtfsMemoryUsage as a two-state fsutil behavior surface: 1 is the default and 2 raises NTFS memory thresholds. The app now writes the documented default value 1, so the record matches research.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -13899,6 +16468,7 @@ Windows Internals references:
 ### `system.ntfs-reset-mft-zone`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `File System Runtime Setting`
 - Scope: `device`
@@ -13907,6 +16477,15 @@ Windows Internals references:
 - Proof SHA256: `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6`
 
 **Summary:** Officially documented NTFS control for master file table reservation size. Good as a reset-to-default setting, but changing it is mainly for specialized file-server workloads and is usually unnecessary on typical systems.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -13957,6 +16536,7 @@ Windows Internals references:
 ### `system.priority-control`
 
 - Status: `validated`
+- Evidence class: `Class D` - Key Known, Value Semantics Unknown
 - Category: `System`
 - Area: `Scheduler / Priority Control`
 - Scope: `device`
@@ -13965,6 +16545,15 @@ Windows Internals references:
 - Proof SHA256: `c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b`
 
 **Summary:** Win25H2Clean reversible probe confirmed Win32PrioritySeparation=38 under PriorityControl and restored the baseline 2.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class D |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | research-gated |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Targets**
 
@@ -14015,6 +16604,7 @@ Windows Internals references:
 ### `system.reduce-shutdown-timeouts`
 
 - Status: `validated`
+- Evidence class: `Class D` - Key Known, Value Semantics Unknown
 - Category: `System`
 - Area: `Shutdown and Logoff Timing`
 - Scope: `mixed`
@@ -14023,6 +16613,15 @@ Windows Internals references:
 - Proof SHA256: `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763`
 
 **Summary:** The current app applies a mixed shutdown-timeout bundle: HKLM\SYSTEM\CurrentControlSet\Control\WaitToKillServiceTimeout = 2500, HKCU\Control Panel\Desktop\WaitToKillAppTimeout = 2500, HKCU\Control Panel\Desktop\HungAppTimeout = 1500, and HKCU\Control Panel\Desktop\AutoEndTasks = 1. Microsoft documents the shutdown-timeout concepts and the supporting Microsoft Q&A threads now show the user-side registry values, so the bundle can be validated as observed implementation rather than left as an open research gap.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class D |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | research-gated |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Targets**
 
@@ -14084,6 +16683,7 @@ Windows Internals references:
 ### `system.reliability-timestamp-enabled`
 
 - Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
 - Category: `System`
 - Area: `Reliability / Event Timestamps`
 - Scope: `device`
@@ -14092,6 +16692,15 @@ Windows Internals references:
 - Proof SHA256: `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af`
 
 **Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping, and TimeStampInterval is the companion cadence value capped at 24h.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Targets**
 
@@ -14127,6 +16736,7 @@ _No provenance block present._
 ### `system.services.disable-bluetooth-audio-gateway`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -14135,6 +16745,15 @@ _No provenance block present._
 - Proof SHA256: `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Bluetooth Audio Gateway Service (BTAGService). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -14162,7 +16781,7 @@ _No provenance block present._
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -14179,6 +16798,7 @@ Windows Internals references:
 ### `system.services.disable-bluetooth-support`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -14187,6 +16807,15 @@ Windows Internals references:
 - Proof SHA256: `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Bluetooth Support Service (bthserv). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -14214,7 +16843,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -14231,6 +16860,7 @@ Windows Internals references:
 ### `system.services.disable-bluetooth-user-service`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `user-session`
@@ -14239,6 +16869,15 @@ Windows Internals references:
 - Proof SHA256: `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64`
 
 **Summary:** Official Windows service-family control for Bluetooth User Support Service. Microsoft documents the base service family, default start mode, and says it is OK to disable. The app disables instantiated per-user BluetoothUserService services through a wildcard service pattern.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -14267,7 +16906,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -14284,6 +16923,7 @@ Windows Internals references:
 ### `system.services.disable-connected-user-experiences`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -14292,6 +16932,15 @@ Windows Internals references:
 - Proof SHA256: `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Connected User Experiences and Telemetry (DiagTrack). Microsoft documents the service name, default start mode, and says it is OK to disable on Windows IoT Enterprise. The app disables the service by setting its start mode to Disabled.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -14319,7 +16968,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -14336,6 +16985,7 @@ Windows Internals references:
 ### `system.services.disable-print-notifications`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -14344,6 +16994,15 @@ Windows Internals references:
 - Proof SHA256: `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for the PrintNotify service. Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -14371,7 +17030,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -14388,6 +17047,7 @@ Windows Internals references:
 ### `system.services.disable-print-spooler`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -14396,6 +17056,15 @@ Windows Internals references:
 - Proof SHA256: `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for the Print Spooler service (Spooler). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -14423,7 +17092,7 @@ Windows Internals references:
 | Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.
 - decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
 
 Windows Internals references:
@@ -14440,6 +17109,7 @@ Windows Internals references:
 ### `system.services.disable-windows-search`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -14448,6 +17118,15 @@ Windows Internals references:
 - Proof SHA256: `7a939516d8b00a24b308632a8c4618acc5fd292fab45e9544a98c56f98788b37`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, default start mode, and says it is OK to disable on Windows IoT Enterprise. The app disables the service by setting its start mode to Disabled.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
@@ -14494,6 +17173,7 @@ Windows Internals references:
 ### `system.verbose-status-messages`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -14502,6 +17182,15 @@ Windows Internals references:
 - Proof SHA256: `95d2e2d70159d0ddc6500d9a88c2420cc76d133e09b5ee7920891d07a3cc92ef`
 
 **Summary:** Machine policy for verbose startup and shutdown status text. Good for troubleshooting or understanding system progress, but it makes boot, sign-in, and shutdown screens more technical.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14549,6 +17238,7 @@ Windows Internals references:
 ### `visibility.default-account-picture`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -14557,6 +17247,15 @@ Windows Internals references:
 - Proof SHA256: `ad18cf84978748d2e98ae9ba591d975b8b94780caa755d468c578aa640b06c45`
 
 **Summary:** Machine policy for forcing the default account picture for all users. The local Microsoft Cpls.admx file documents the same Explorer policy key and UseDefaultTile value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14600,6 +17299,7 @@ Nohuto lineage references:
 ### `visibility.disable-acrylic-logon`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -14608,6 +17308,15 @@ Nohuto lineage references:
 - Proof SHA256: `b8f40fdcfee835f4f10a9f9dcbe34876f7fa4889dbcf838ac809f972d48eb972`
 
 **Summary:** Machine policy for the acrylic blur effect on the logon background. The local Microsoft Logon.admx file documents the same System policy key and DisableAcrylicBackgroundOnLogon value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14653,6 +17362,7 @@ Nohuto lineage references:
 ### `visibility.disable-common-control-animations`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -14661,6 +17371,15 @@ Nohuto lineage references:
 - Proof SHA256: `adfa8da46fa1d6eeb719bc15c967c593bd41eb9e52552f834d45437a25adbc73`
 
 **Summary:** User policy for common control and window animations. Good for reduced motion, accessibility, and some battery-sensitive scenarios, but it removes animated UI feedback for the current user.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14706,6 +17425,7 @@ Nohuto lineage references:
 ### `visibility.disable-first-signin-animation`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -14714,6 +17434,15 @@ Nohuto lineage references:
 - Proof SHA256: `2cd2ab91efa1fa7176d3f144c0d7e00677f16d9110e67fec6f2a8f1fa748315d`
 
 **Summary:** Machine policy for the first sign-in animation and Microsoft account service opt-in prompt. The local Microsoft Logon.admx file documents the same Policies\System\EnableFirstLogonAnimation value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14759,6 +17488,7 @@ Nohuto lineage references:
 ### `visibility.disable-lock-screen`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -14767,6 +17497,15 @@ Nohuto lineage references:
 - Proof SHA256: `aedb1831e8c41ed80e97327e2dc02ddba24d7b785b83c3ce35b75047d8face34`
 
 **Summary:** Machine policy for bypassing the lock screen. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreen value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14810,6 +17549,7 @@ Nohuto lineage references:
 ### `visibility.disable-lock-screen-camera`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -14818,6 +17558,15 @@ Nohuto lineage references:
 - Proof SHA256: `a6eb4fbd91b5179a2e4173d4fefe8a5eaf3c0dedc8b1ea8f37ec0203cfcc89d7`
 
 **Summary:** Machine policy for lock-screen camera access. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreenCamera value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14862,6 +17611,7 @@ Nohuto lineage references:
 ### `visibility.disable-lock-screen-changes`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -14870,6 +17620,15 @@ Nohuto lineage references:
 - Proof SHA256: `b1e91965ccdb51d5fb5b6ec2f109bdb429110c87eaada0faf47627bec6a47096`
 
 **Summary:** Machine policy for whether users can change the lock-screen and logon image. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoChangingLockScreen value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14915,6 +17674,7 @@ Nohuto lineage references:
 ### `visibility.disable-lock-screen-motion`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -14923,6 +17683,15 @@ Nohuto lineage references:
 - Proof SHA256: `11fd20bce4d0b3145996804a738a130f4d4a79391e28b67cd0058d0e1f75c224`
 
 **Summary:** Machine policy for lock-screen background motion. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and AnimateLockScreenBackground value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14968,6 +17737,7 @@ Nohuto lineage references:
 ### `visibility.disable-lock-screen-slideshow`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -14976,6 +17746,15 @@ Nohuto lineage references:
 - Proof SHA256: `8969c5237c4151cc3cffb1e3170590ec783d572dcd20adcd2c4e7a4658b1ec14`
 
 **Summary:** Machine policy for lock screen slideshow behavior. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreenSlideshow value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15021,6 +17800,7 @@ Nohuto lineage references:
 ### `visibility.disable-spotlight-action-center`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -15029,6 +17809,15 @@ Nohuto lineage references:
 - Proof SHA256: `3d58e1593aebbeea5ceefc7971820b41d3489715fc2ecd3f53e1d9e95232572b`
 
 **Summary:** User policy for Windows Spotlight in Action Center or notification surfaces. Good for a quieter notification area, but it removes Spotlight suggestions and prompts in that space.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15074,6 +17863,7 @@ Nohuto lineage references:
 ### `visibility.disable-spotlight-desktop-collection`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -15082,6 +17872,15 @@ Nohuto lineage references:
 - Proof SHA256: `e910069ca9d3f650eaedc02a3e880fce52db9e04818c7f08d0be150dcaf5bb4a`
 
 **Summary:** User policy for the Spotlight collection option on the desktop background. Good for a more static personalization setup, but it removes a Microsoft-curated dynamic wallpaper option.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15127,6 +17926,7 @@ Nohuto lineage references:
 ### `visibility.disable-spotlight-features`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -15135,6 +17935,15 @@ Nohuto lineage references:
 - Proof SHA256: `98c62d8b495d56b02d16422872ff18ec0528a34ae447c6b73b5c0e7c99b67d23`
 
 **Summary:** User policy for Windows Spotlight features as a whole. Good for a quieter, less promotional Windows experience, but it removes Spotlight-based suggestions and related Microsoft content surfaces.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15180,6 +17989,7 @@ Nohuto lineage references:
 ### `visibility.disable-spotlight-settings`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -15188,6 +17998,15 @@ Nohuto lineage references:
 - Proof SHA256: `8ec75d4adae9a3c4f45a6ec6db68871c4567e1bc0b1497193518a404399fe697`
 
 **Summary:** User policy for Windows Spotlight content in the Settings app. Good for a cleaner Settings experience, but it removes Spotlight suggestions that can point to Microsoft features or settings guidance.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15233,6 +18052,7 @@ Nohuto lineage references:
 ### `visibility.disable-spotlight-third-party`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -15241,6 +18061,15 @@ Nohuto lineage references:
 - Proof SHA256: `90a4369f43b7e72d685c87ce12f285e61dc065a5b8bb0d3de18aa3f8082e227d`
 
 **Summary:** User policy for third-party suggestions in Windows Spotlight. Good for a less promotional experience, but it removes recommendation surfaces that can point to third-party content or apps.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15286,6 +18115,7 @@ Nohuto lineage references:
 ### `visibility.disable-spotlight-welcome`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -15294,6 +18124,15 @@ Nohuto lineage references:
 - Proof SHA256: `41dd7f4619d74c0b0c31cde4b4641ee5cf7fb7a35d9af633569a4ba746fa3f0c`
 
 **Summary:** User policy for the Windows Spotlight welcome experience. Good for a quieter onboarding flow, but it removes one of the post-update or first-run introduction surfaces in Windows.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15339,6 +18178,7 @@ Nohuto lineage references:
 ### `visibility.disable-wcn-wizards`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -15347,6 +18187,15 @@ Nohuto lineage references:
 - Proof SHA256: `b764973c8d3adec8c9bc8f29b53e6207bcfe8815718323fadb18a7b81e9ebfeb`
 
 **Summary:** Machine policy for Windows Connect Now wizards. The local Microsoft WindowsConnectNow.admx file documents the same WCN UI policy key and DisableWcnUi value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15392,6 +18241,7 @@ Nohuto lineage references:
 ### `visibility.disable-widgets`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -15400,6 +18250,15 @@ Nohuto lineage references:
 - Proof SHA256: `51e5a1f879b109db9b774b9202bc9a647344f646d8b00ec3c13360674ab215bd`
 
 **Summary:** Machine policy for the Widgets feature. Good for a quieter desktop with fewer Microsoft content surfaces, but it removes the Widgets board and its taskbar entry point.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15446,6 +18305,7 @@ Nohuto lineage references:
 ### `visibility.disable-window-animations`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -15454,6 +18314,15 @@ Nohuto lineage references:
 - Proof SHA256: `571192ff25e0c81ae5dce332c8b0051a472bbf9841b730d58ca887806de5ea2f`
 
 **Summary:** Machine policy for desktop window animations. The local Microsoft DWM.admx file documents the same DWM policy key and DisallowAnimations value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15499,6 +18368,7 @@ Nohuto lineage references:
 ### `visibility.force-classic-control-panel`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -15507,6 +18377,15 @@ Nohuto lineage references:
 - Proof SHA256: `8fc57213d5f2695c6314ee2e7b6b126656c9c3218f18a7c77133c4f5178cad20`
 
 **Summary:** User policy for the default Control Panel view. Good for people who prefer the classic icon view, but it removes the category view as the default when Control Panel opens.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15551,6 +18430,7 @@ Nohuto lineage references:
 ### `visibility.hide-language-bar`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Visibility`
 - Area: `User Preference`
 - Scope: `user`
@@ -15559,6 +18439,15 @@ Nohuto lineage references:
 - Proof SHA256: `3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc`
 
 **Summary:** The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. A Microsoft Q&A thread now documents ShowStatus = 3 for the hidden state, so the record can be validated.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 
@@ -15602,6 +18491,7 @@ Nohuto lineage references:
 ### `visibility.hide-most-used-apps`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -15610,6 +18500,15 @@ Nohuto lineage references:
 - Proof SHA256: `b66e6752f3c72b835115d0a715643e28a6be0061d9e0b1246115269dd8eb1f8e`
 
 **Summary:** Policy for the Start menu Most used list. The local Microsoft StartMenu.admx file documents the same Explorer policy key and ShowOrHideMostUsedApps enum value used by the app.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15656,6 +18555,7 @@ Nohuto lineage references:
 ### `visibility.hide-people-bar`
 
 - Status: `validated`
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Registry Policy`
 - Scope: `user`
@@ -15664,6 +18564,15 @@ Nohuto lineage references:
 - Proof SHA256: `ca25eca99b530fd221ccdc49679625c25e7e2ebb3e5fb21edaca6075a73732ad`
 
 **Summary:** User policy for the People Bar taskbar feature. Good for a cleaner taskbar, but it removes the My People experience and related pinning UI.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15708,6 +18617,7 @@ Nohuto lineage references:
 ### `visibility.restore-classic-context-menu`
 
 - Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Visibility`
 - Area: `Explorer Context Menu`
 - Scope: `user`
@@ -15716,6 +18626,15 @@ Nohuto lineage references:
 - Proof SHA256: `2be626add6056b666c3453999702cf52a7408132c80f6da39aa897ff0f90ecf2`
 
 **Summary:** The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 with an empty default value. Microsoft Q&A now documents the same registry workaround, so the record is validated.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Targets**
 

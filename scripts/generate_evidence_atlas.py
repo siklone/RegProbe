@@ -80,6 +80,7 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
     lines.append("")
     meta_rows = [
         ["Status", md_code(record.get("record_status"))],
+        ["Evidence class", md_code((record.get("evidence_class") or {}).get("class_label"))],
         ["Category", md_code(record.get("category"))],
         ["Area", md_code(record.get("area"))],
         ["Scope", md_code(record.get("scope"))],
@@ -121,6 +122,18 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
         lines.append("")
 
     provenance = record.get("provenance") or {}
+    evidence_class = record.get("evidence_class") or {}
+    lines.append("**Evidence class**")
+    lines.append("")
+    class_rows = [
+        ["Label", md_code(evidence_class.get("class_label"))],
+        ["Title", md_escape(evidence_class.get("class_title"))],
+        ["Action state", md_code(evidence_class.get("action_state"))],
+        ["Gating reason", md_escape(evidence_class.get("gating_reason"))],
+    ]
+    lines.extend(render_table(["Field", "Value"], class_rows))
+    lines.append("")
+
     lines.append("**Provenance**")
     lines.append("")
     provenance_rows = [
@@ -310,6 +323,10 @@ def main() -> int:
         ["Records missing validation proof", str(summary.get("records_missing_validation_proof", 0))],
         ["Deprecated missing validation proof", str(summary.get("deprecated_missing_validation_proof", 0))],
     ]
+    class_counts = summary.get("class_counts") or {}
+    for class_id in ["A", "B", "C", "D", "E"]:
+        if class_id in class_counts:
+            summary_rows.append([f"Class {class_id}", str(class_counts[class_id])])
     lines.extend(render_table(["Field", "Value"], summary_rows))
     lines.append("")
     lines.append("## Category Coverage")

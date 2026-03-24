@@ -24,7 +24,7 @@
         <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibility" />
         <converters:NestedMarginConverter x:Key="NestedMarginConverter" />
         <converters:StringEmptyToVisibilityConverter x:Key="StringToVisibility" />
-        
+
         <!-- Status Color Converter -->
         <SolidColorBrush x:Key="AppliedBrush" Color="{DynamicResource Nord14}"/>
         <SolidColorBrush x:Key="NotAppliedBrush" Color="{DynamicResource Nord3}"/>
@@ -184,13 +184,13 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="CheckBox">
                         <Grid Width="50" Height="26" Cursor="Hand">
-                            <Border x:Name="Track" 
-                                    Background="{DynamicResource BackgroundMediumBrush}" 
+                            <Border x:Name="Track"
+                                    Background="{DynamicResource BackgroundMediumBrush}"
                                     CornerRadius="13"
                                     BorderBrush="{DynamicResource GlassBorderBrush}"
                                     BorderThickness="1"/>
-	                            <Border x:Name="Thumb" 
-	                                    Width="20" Height="20" 
+	                            <Border x:Name="Thumb"
+	                                    Width="20" Height="20"
 	                                    CornerRadius="10"
 	                                    Background="{DynamicResource ForegroundLightBrush}"
 	                                    HorizontalAlignment="Left"
@@ -597,6 +597,46 @@
                                     <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
                                     <Setter Property="FontWeight" Value="SemiBold"/>
                                 </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                        <Condition Binding="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" Value="ClassA"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="Pill" Property="Background" Value="{DynamicResource SuccessSurfaceBrush}"/>
+                                    <Setter TargetName="Pill" Property="BorderBrush" Value="{DynamicResource SuccessBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                        <Condition Binding="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" Value="ClassB"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="Pill" Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
+                                    <Setter TargetName="Pill" Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                        <Condition Binding="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" Value="ClassC"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="Pill" Property="Background" Value="{DynamicResource CautionSurfaceBrush}"/>
+                                    <Setter TargetName="Pill" Property="BorderBrush" Value="{DynamicResource WarningBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                </MultiDataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                        <Condition Binding="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" Value="ClassD"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter TargetName="Pill" Property="Background" Value="{DynamicResource DangerSurfaceBrush}"/>
+                                    <Setter TargetName="Pill" Property="BorderBrush" Value="{DynamicResource DangerBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                </MultiDataTrigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
@@ -765,8 +805,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
-                        <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter ContentSource="Content"
@@ -836,38 +876,38 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
-                        <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="4">
                             <Grid>
-                                <ToggleButton Name="ToggleButton" 
-                                              Background="Transparent" 
+                                <ToggleButton Name="ToggleButton"
+                                              Background="Transparent"
                                               BorderThickness="0"
                                               IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                <ContentPresenter Name="ContentSite" 
-                                                  IsHitTestVisible="False" 
+                                <ContentPresenter Name="ContentSite"
+                                                  IsHitTestVisible="False"
                                                   Content="{TemplateBinding SelectionBoxItem}"
                                                   ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                                   ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                                   Margin="5,3,23,3"
                                                   VerticalAlignment="Center"/>
-                                <Path Name="Arrow" 
-                                      Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 Z" 
-                                      Fill="{DynamicResource AccentDarkBlueBrush}" 
-                                      HorizontalAlignment="Right" 
-                                      VerticalAlignment="Center" 
+                                <Path Name="Arrow"
+                                      Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 Z"
+                                      Fill="{DynamicResource AccentDarkBlueBrush}"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Center"
                                       Margin="0,0,8,0"/>
-                                <Popup Name="Popup" 
-                                       Placement="Bottom" 
-                                       IsOpen="{TemplateBinding IsDropDownOpen}" 
-                                       AllowsTransparency="True" 
-                                       Focusable="False" 
+                                <Popup Name="Popup"
+                                       Placement="Bottom"
+                                       IsOpen="{TemplateBinding IsDropDownOpen}"
+                                       AllowsTransparency="True"
+                                       Focusable="False"
                                        PopupAnimation="Slide">
-                                    <Border Name="DropDownBorder" 
-                                            Background="{DynamicResource BackgroundDarkBrush}" 
+                                    <Border Name="DropDownBorder"
+                                            Background="{DynamicResource BackgroundDarkBrush}"
                                             BorderBrush="{DynamicResource GlassBorderBrush}"
-                                            BorderThickness="1" 
+                                            BorderThickness="1"
                                             CornerRadius="4">
                                         <ScrollViewer SnapsToDevicePixels="True">
                                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
@@ -1004,7 +1044,7 @@
             </Setter>
         </Style>
 
-        
+
 
         <!-- Recursive Category Template -->
 
@@ -1028,7 +1068,7 @@
                                 <Trigger.EnterActions>
 	                                    <BeginStoryboard>
 	                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="IconRotate" 
+                                            <DoubleAnimation Storyboard.TargetName="IconRotate"
                                                            Storyboard.TargetProperty="Angle"
                                                            To="90" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
@@ -1041,7 +1081,7 @@
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="IconRotate" 
+                                            <DoubleAnimation Storyboard.TargetName="IconRotate"
                                                            Storyboard.TargetProperty="Angle"
                                                            To="0" Duration="0:0:0.2">
                                                 <DoubleAnimation.EasingFunction>
@@ -1110,7 +1150,7 @@
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
-                
+
                 <StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -1146,17 +1186,31 @@
                                                FontWeight="SemiBold"
                                                VerticalAlignment="Center"/>
                                 </Border>
-                                <Border Background="{DynamicResource SuccessBrush}" 
-                                        CornerRadius="10" 
-                                        Padding="8,2" 
+                                <Border Background="{DynamicResource SuccessBrush}"
+                                        CornerRadius="10"
+                                        Padding="8,2"
                                         Margin="8,0,0,0"
                                         Visibility="{Binding IsRecommended, Converter={StaticResource BoolToVisibility}}"
                                         ToolTip="{Binding RecommendationReason}">
-                                    <TextBlock Text="REC" 
-                                               Foreground="{DynamicResource ForegroundOnLightAccentBrush}" 
+                                    <TextBlock Text="REC"
+                                               Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
                                                    FontFamily="{DynamicResource FontFamilyMono}"
-                                               FontSize="10" 
-                                               FontWeight="Bold" 
+                                               FontSize="10"
+                                               FontWeight="Bold"
+                                               VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Background="{Binding EvidenceClassBackgroundBrush}"
+                                        BorderBrush="{Binding EvidenceClassBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="10"
+                                        Padding="8,2"
+                                        Margin="8,0,0,0"
+                                        ToolTip="{Binding EvidenceClassTooltip}">
+                                    <TextBlock Text="{Binding EvidenceClassBadgeText}"
+                                               Foreground="{Binding EvidenceClassBrush}"
+                                               FontFamily="{DynamicResource FontFamilyMono}"
+                                               FontSize="10"
+                                               FontWeight="SemiBold"
                                                VerticalAlignment="Center"/>
                                 </Border>
                             </StackPanel>
@@ -1199,7 +1253,7 @@
                                      Padding="10,4"
                                      MinWidth="74"
                                      Margin="0,0,6,0"
-                                     ToolTip="Restore the previous value captured before Apply."/>
+                                     ToolTip="{Binding RollbackActionTooltip}"/>
                              <Button Content="{Binding RestoreDefaultButtonText}"
                                      Command="{Binding RestoreDefaultCommand}"
                                      Style="{StaticResource TweakActionButtonStyle}"
@@ -1214,7 +1268,7 @@
                                      Padding="10,4"
                                      MinWidth="68"
                                      Margin="0,0,6,0"
-                                     ToolTip="Apply this setting without opening details."/>
+                                     ToolTip="{Binding PrimaryActionTooltip}"/>
                              <Button Command="{Binding ToggleFavoriteCommand}"
                                      Background="Transparent"
                                      BorderThickness="0"
@@ -1253,7 +1307,7 @@
                                            Margin="8,0,0,0"/>
                         </StackPanel>
                     </Grid>
-                    
+
                     <!-- Expanded Details Area -->
                     <Border Margin="0,8,0,0"
                             Background="Transparent"
@@ -1505,6 +1559,63 @@
                                  </Border>
                              </UniformGrid>
 
+                             <StackPanel Visibility="{Binding HasResearchGateMessage, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,10">
+                                 <TextBlock Text="Why this is not one-click yet"
+                                            FontSize="12"
+                                            FontWeight="Bold"
+                                            Foreground="{DynamicResource AccentBlueBrush}"
+                                            Margin="0,0,0,4"/>
+                                 <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                         BorderBrush="{Binding EvidenceClassBrush}"
+                                         BorderThickness="1"
+                                         CornerRadius="4"
+                                         Padding="10">
+                                     <TextBlock Text="{Binding ResearchGateMessage}"
+                                                Foreground="{DynamicResource ForegroundLightBrush}"
+                                                FontSize="11"
+                                                TextWrapping="Wrap"/>
+                                 </Border>
+                             </StackPanel>
+
+                             <StackPanel Visibility="{Binding HasEvidenceProofBoxes, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,10">
+                                 <TextBlock Text="Evidence Snapshot" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4"/>
+                                 <UniformGrid Columns="3">
+                                     <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                             CornerRadius="4"
+                                             Padding="10"
+                                             Margin="0,0,6,0"
+                                             Visibility="{Binding HasValidatedSemantics, Converter={StaticResource BoolToVisibility}}">
+                                         <StackPanel>
+                                             <TextBlock Text="Validated semantics" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                             <TextBlock Text="{Binding ValidatedSemanticsSummary}" Margin="0,6,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                             <TextBlock Text="{Binding ValidatedSemanticsSource}" Margin="0,6,0,0" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10" TextWrapping="Wrap"/>
+                                         </StackPanel>
+                                     </Border>
+                                     <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                             CornerRadius="4"
+                                             Padding="10"
+                                             Margin="6,0"
+                                             Visibility="{Binding HasRuntimeProof, Converter={StaticResource BoolToVisibility}}">
+                                         <StackPanel>
+                                             <TextBlock Text="Runtime proof" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                             <TextBlock Text="{Binding RuntimeProofSummary}" Margin="0,6,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                             <TextBlock Text="{Binding RuntimeProofSource}" Margin="0,6,0,0" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10" TextWrapping="Wrap"/>
+                                         </StackPanel>
+                                     </Border>
+                                     <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                             CornerRadius="4"
+                                             Padding="10"
+                                             Margin="6,0,0,0"
+                                             Visibility="{Binding HasUpstreamLineage, Converter={StaticResource BoolToVisibility}}">
+                                         <StackPanel>
+                                             <TextBlock Text="Upstream dump / pseudocode provenance" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                             <TextBlock Text="{Binding UpstreamLineageSummary}" Margin="0,6,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
+                                             <TextBlock Text="{Binding UpstreamLineageSource}" Margin="0,6,0,0" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10" TextWrapping="Wrap"/>
+                                         </StackPanel>
+                                     </Border>
+                                 </UniformGrid>
+                             </StackPanel>
+
                              <!-- Registry Info -->
                              <StackPanel Visibility="{Binding HasRegistryPath, Converter={StaticResource BoolToVisibility}}" Margin="0,0,0,10">
                                  <TextBlock Text="Registry Location" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBlueBrush}" Margin="0,0,0,4"/>
@@ -1637,7 +1748,7 @@
 	                                             Command="{Binding RollbackCommand}"
 	                                             Style="{StaticResource TweakActionButtonStyle}"
 	                                             Margin="0,0,6,0"
-	                                             ToolTip="Restore the previous value captured before Apply."/>
+	                                             ToolTip="{Binding RollbackActionTooltip}"/>
 	                                     <Button Content="{Binding RestoreDefaultButtonText}"
 	                                             Command="{Binding RestoreDefaultCommand}"
 	                                             Style="{StaticResource TweakActionButtonStyle}"
@@ -1647,7 +1758,7 @@
 	                                     <Button Content="{Binding ActionButtonText}"
 	                                             Command="{Binding ApplyCommand}"
 	                                             Style="{StaticResource TweakPrimaryActionButtonStyle}"
-	                                             ToolTip="Apply: Detect -> Apply -> Verify (Rollback on failure)."/>
+	                                             ToolTip="{Binding PrimaryActionTooltip}"/>
 	                                     <Button Content="?"
 	                                             Style="{StaticResource TweakActionButtonStyle}"
 	                                             Margin="6,0,0,0"
@@ -1841,7 +1952,7 @@
         <DataTemplate x:Key="CategoryTemplate" DataType="{x:Type viewModels:CategoryGroupViewModel}">
             <StackPanel Margin="{Binding IsNested, Converter={StaticResource NestedMarginConverter}}">
                 <!-- Category Header -->
-                <Border CornerRadius="8" 
+                <Border CornerRadius="8"
                         Margin="0,0,0,6"
                         Padding="10,8">
                     <Border.Style>
@@ -1866,7 +1977,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DisplayName, TargetNullValue='Unknown Category', FallbackValue='Category Name'}" FontSize="13" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}" VerticalAlignment="Center"/>
-                        
+
                         <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
                             <Border Background="{DynamicResource BackgroundLightBrush}" CornerRadius="10" Padding="6,1" Margin="0,0,10,0">
                                 <TextBlock Text="{Binding CountBadge}" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="10" FontWeight="Bold"/>
@@ -1934,7 +2045,7 @@
                     <StackPanel>
                         <!-- SubGroups Recursive Call -->
                         <ItemsControl ItemsSource="{Binding SubGroups}" ItemTemplate="{DynamicResource CategoryTemplate}"/>
-                        
+
                         <!-- Tweaks In This Group (uses VisibleTweaks for lazy loading) -->
                         <ItemsControl ItemsSource="{Binding VisibleTweaks}" ItemTemplate="{StaticResource TweakItemTemplate}"
                                       VirtualizingPanel.IsVirtualizing="True"
@@ -1965,7 +2076,7 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    
+
     <Grid ClipToBounds="False">
         <Grid Margin="16,8,16,12"
               HorizontalAlignment="Stretch"
@@ -2159,6 +2270,18 @@
                                                    FontWeight="SemiBold"
                                                    Foreground="{DynamicResource MutedForegroundBrush}"/>
                                     </StackPanel>
+                                </CheckBox>
+                                <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                    <TextBlock Text="Class A"/>
+                                </CheckBox>
+                                <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                    <TextBlock Text="Class B"/>
+                                </CheckBox>
+                                <CheckBox Tag="ClassC" IsChecked="{Binding ShowClassC}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                    <TextBlock Text="Class C"/>
+                                </CheckBox>
+                                <CheckBox Tag="ClassD" IsChecked="{Binding ShowClassD}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                    <TextBlock Text="Class D"/>
                                 </CheckBox>
                                 <Button Content="Reset"
                                         Command="{Binding ResetFiltersCommand}"
@@ -2356,7 +2479,7 @@
                                            Foreground="{DynamicResource MutedForegroundBrush}"
                                            Margin="0,3,0,0"
                                            Visibility="Collapsed"/>
-                                           
+
                                 <!-- DNS Configuration Panel - Compact single-line design -->
                                 <Border Background="{DynamicResource BackgroundDarkBrush}"
                                         BorderBrush="{DynamicResource GlassBorderBrush}"
@@ -2373,7 +2496,7 @@
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        
+
                                         <!-- Icon + Title -->
                                         <TextBlock Text="{DynamicResource IconNetwork}"
                                                    FontFamily="{DynamicResource IconFontFamily}"
@@ -2385,10 +2508,10 @@
                                             <TextBlock Text="DNS" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                             <TextBlock Text="{Binding CurrentDnsInfo}" FontSize="10" Foreground="{DynamicResource AccentBrightCyanBrush}" MaxWidth="180" TextTrimming="CharacterEllipsis"/>
                                         </StackPanel>
-                                        
+
                                         <!-- Provider Selector -->
-                                        <ComboBox Grid.Column="2" 
-                                                  ItemsSource="{Binding DnsProviders}" 
+                                        <ComboBox Grid.Column="2"
+                                                  ItemsSource="{Binding DnsProviders}"
                                                   SelectedItem="{Binding SelectedDnsProvider, Mode=TwoWay}"
                                                   Style="{StaticResource RoundedComboBox}"
                                                   Height="26"
@@ -2403,7 +2526,7 @@
                                                 </DataTemplate>
                                             </ComboBox.ItemTemplate>
                                         </ComboBox>
-                                        
+
                                         <!-- Apply Button -->
                                         <Button Grid.Column="3"
                                                 Content="Apply"
@@ -2412,7 +2535,7 @@
                                                 Margin="0,0,6,0"
                                                 Padding="10,4"
                                                 FontSize="11"/>
-                                        
+
                                         <!-- Flush Button -->
                                         <Button Grid.Column="4"
                                                 Content="Flush"

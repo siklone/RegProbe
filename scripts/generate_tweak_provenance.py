@@ -464,7 +464,7 @@ def fallback_reference(tweak: TweakEntry, repo_documents: dict[str, list[RepoDoc
                 "repo": "win-config",
                 "title": document.title,
                 "url": document.url,
-                "summary": "Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match.",
+                "summary": "Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics.",
                 "score": 5,
                 "matched_tokens": [],
             }
@@ -619,15 +619,15 @@ def build_entry(tweak: TweakEntry, repo_documents: dict[str, list[RepoDocument]]
     if coverage_state == "repo-backed":
         summary = (
             f"Matched {len(matched_tokens)} audit token(s) across "
-            f"{', '.join(source_repositories)}. Ready to use as documented upstream-backed evidence."
+            f"{', '.join(source_repositories)}. Treat this as upstream lineage and naming provenance; value semantics still come from the research record."
         )
     elif coverage_state == "category-fallback":
         summary = (
-            "Linked to the closest nohuto win-config category docs, but this tweak still needs "
+            "Linked to the closest upstream win-config category docs, but this tweak still needs "
             "a stronger tweak-specific upstream match before being considered fully curated."
         )
     elif has_windows_internals_context:
-        summary = "Only Windows Internals context is linked right now. A nohuto repo-backed match is still missing."
+        summary = "Only Windows Internals context is linked right now. Upstream dump or pseudocode lineage is still missing."
     else:
         summary = "No upstream provenance match found yet. Keep this tweak in review-only state."
 
@@ -672,7 +672,7 @@ def apply_manual_overrides(entry: dict, tweak: TweakEntry, manual_overrides: lis
         if override.get("DropCategoryFallback"):
             references = [
                 reference for reference in references
-                if "Category-level nohuto win-config documentation fallback." not in reference.get("Summary", "")
+                if "Category-level upstream win-config lineage fallback." not in reference.get("Summary", "")
             ]
 
         for repo_id in override.get("SourceRepositories", []):
@@ -892,7 +892,7 @@ def main() -> int:
 
     payload = {
         "GeneratedAtUtc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "Summary": f"{repo_backed}/{total} tweaks have nohuto evidence, {internals_backed} have Windows Internals context, {review_needed} still need review.",
+        "Summary": f"{repo_backed}/{total} tweaks have upstream dump or pseudocode lineage, {internals_backed} have Windows Internals context, {review_needed} still need review.",
         "TotalTweaks": total,
         "RepoBackedTweaks": repo_backed,
         "InternalsBackedTweaks": internals_backed,

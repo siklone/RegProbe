@@ -67,6 +67,19 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             1,
             requiresElevation: false);
 
+        yield return CreateRegistryTweak(
+            context,
+            "explorer.show-status-bar",
+            "Show Explorer Status Bar",
+            "Shows the File Explorer status bar at the bottom of Explorer windows.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
+            "ShowStatusBar",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
         // Taskbar & Start
         yield return CreateRegistryTweak(
             context,
@@ -381,7 +394,7 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             RegistryValueKind.String,
             "",
             requiresElevation: false);
-            
+
         yield return CreateRegistryTweak(
             context,
             "visibility.force-classic-control-panel",

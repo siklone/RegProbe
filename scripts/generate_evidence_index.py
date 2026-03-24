@@ -7,6 +7,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from evidence_class_lib import build_class_entry, load_provenance_map as load_provenance_entries
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RECORDS_DIR = REPO_ROOT / "Docs" / "tweaks" / "research" / "records"
 PROVENANCE_PATH = REPO_ROOT / "Docs" / "tweaks" / "tweak-provenance.json"
@@ -152,19 +154,6 @@ def evidence_origin(kind: Any) -> str:
     return mapping.get(str(kind), "unspecified")
 
 
-def load_provenance_map() -> dict[str, dict[str, Any]]:
-    if not PROVENANCE_PATH.exists():
-        return {}
-    with PROVENANCE_PATH.open("r", encoding="utf-8") as handle:
-        data = json.load(handle)
-    result: dict[str, dict[str, Any]] = {}
-    for entry in data.get("Entries", []) or []:
-        entry_id = entry.get("Id")
-        if entry_id:
-            result[str(entry_id)] = entry
-    return result
-
-
 def compact_reference(item: dict[str, Any]) -> dict[str, Any]:
     return pick(item, ["Kind", "Title", "Url", "Summary"])
 
@@ -245,7 +234,8 @@ def main() -> int:
     evidence_counts: Counter[str] = Counter()
     validation_proof_missing = 0
     deprecated_without_validation_proof = 0
-    provenance_map = load_provenance_map()
+    provenance_map = load_provenance_entries(PROVENANCE_PATH)
+    class_counts: Counter[str] = Counter()
 
     for path in sorted(RECORDS_DIR.glob("*.json")):
         with path.open("r", encoding="utf-8") as handle:
@@ -266,6 +256,12 @@ def main() -> int:
             if status == "deprecated":
                 deprecated_without_validation_proof += 1
 
+        class_entry = build_class_entry(
+            record,
+            provenance_entry=provenance_map.get(str(record.get("record_id") or record.get("tweak_id") or "")),
+        )
+        class_counts[class_entry["evidence_class"]] += 1
+
         records.append(
             {
                 "record_id": record.get("record_id"),
@@ -277,6 +273,7 @@ def main() -> int:
                 "area": record.get("setting", {}).get("area"),
                 "scope": record.get("setting", {}).get("scope"),
                 "summary": record.get("summary"),
+                "evidence_class": class_entry,
                 "decision": compact_decision(record),
                 "app_current_implementation": compact_app_impl(record),
                 "targets": compact_targets(record),
@@ -300,6 +297,7 @@ def main() -> int:
             "records_without_evidence": evidence_counts.get("missing", 0),
             "records_missing_validation_proof": validation_proof_missing,
             "deprecated_missing_validation_proof": deprecated_without_validation_proof,
+            "class_counts": dict(class_counts),
         },
         "records": sorted(records, key=lambda item: (item["record_status"], item["record_id"] or "")),
     }

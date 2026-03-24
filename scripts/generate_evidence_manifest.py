@@ -59,6 +59,7 @@ def normalize_record(index_record: dict[str, Any]) -> dict[str, Any]:
         "record_id": index_record.get("record_id"),
         "tweak_id": index_record.get("tweak_id"),
         "record_status": index_record.get("record_status"),
+        "evidence_class": index_record.get("evidence_class"),
         "source_file": index_record.get("source_file"),
         "source_file_sha256": source_hash,
         "source_file_size_bytes": source_size,
@@ -115,11 +116,15 @@ def render_md(manifest: dict[str, Any]) -> str:
     lines.append(f"| Records without evidence | {summary['records_without_evidence']} |")
     lines.append(f"| Records missing validation proof | {summary['records_missing_validation_proof']} |")
     lines.append(f"| Deprecated missing validation proof | {summary['deprecated_missing_validation_proof']} |")
+    class_counts = summary.get("class_counts") or {}
+    for class_id in ["A", "B", "C", "D", "E"]:
+        if class_id in class_counts:
+            lines.append(f"| {class_id} count | {class_counts[class_id]} |")
     lines.append("")
     lines.append("## Record Index")
     lines.append("")
-    lines.append("| Record | Status | Source file | Source SHA256 | Proof SHA256 | Targets |")
-    lines.append("| --- | --- | --- | --- | --- | --- |")
+    lines.append("| Record | Status | Class | Source file | Source SHA256 | Proof SHA256 | Targets |")
+    lines.append("| --- | --- | --- | --- | --- | --- | --- |")
     total_records = len(manifest["records"])
     for index, record in enumerate(manifest["records"]):
         lines.append(
@@ -128,6 +133,7 @@ def render_md(manifest: dict[str, Any]) -> str:
                 [
                     f"`{escape_md_cell(record.get('record_id'))}`",
                     escape_md_cell(record.get("record_status", "")),
+                    escape_md_cell((record.get("evidence_class") or {}).get("class_label", "")),
                     f"`{escape_md_cell(record.get('source_file'))}`",
                     f"`{escape_md_cell(record.get('source_file_sha256'))}`" if record.get("source_file_sha256") else "",
                     f"`{escape_md_cell(record.get('validation_proof_sha256'))}`" if record.get("validation_proof_sha256") else "",
@@ -143,6 +149,8 @@ def render_md(manifest: dict[str, Any]) -> str:
         lines.append(f"### `{record.get('record_id')}`")
         lines.append("")
         lines.append(f"- Status: `{record.get('record_status')}`")
+        evidence_class = record.get("evidence_class") or {}
+        lines.append(f"- Evidence class: `{escape_md_cell(evidence_class.get('class_label'))}` - {escape_md_cell(evidence_class.get('class_title'))}")
         lines.append(f"- Category: `{escape_md_cell(record.get('category'))}`")
         lines.append(f"- Area: `{escape_md_cell(record.get('area'))}`")
         lines.append(f"- Scope: `{escape_md_cell(record.get('scope'))}`")
@@ -153,6 +161,17 @@ def render_md(manifest: dict[str, Any]) -> str:
         summary_text = record.get("summary")
         if summary_text:
             lines.append(f"**Summary:** {summary_text}")
+            lines.append("")
+        if evidence_class:
+            lines.append("**Evidence class**")
+            lines.append("")
+            class_rows = [
+                ["Class", escape_md_cell(evidence_class.get("class_label"))],
+                ["Title", escape_md_cell(evidence_class.get("class_title"))],
+                ["Action state", escape_md_cell(evidence_class.get("action_state"))],
+                ["Gating reason", escape_md_cell(evidence_class.get("gating_reason"))],
+            ]
+            lines.extend(render_table(["Field", "Value"], class_rows))
             lines.append("")
         lines.append("**Targets**")
         lines.append("")

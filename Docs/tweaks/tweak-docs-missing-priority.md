@@ -1,6 +1,6 @@
 # Tweak Docs Missing Priority Report (Generated)
 
-Total tweaks: 291
+Total tweaks: 292
 Missing entries: 0
 
 Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog.html)

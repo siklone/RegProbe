@@ -83,13 +83,13 @@ public interface ITweakProvider
 **MVVM Pattern**:
 - `MainViewModel`: Navigation and top-level state
 - `TweaksViewModel`: Tweak management (4200+ lines)
-- `DashboardViewModel`: Overview and health score
+- `DashboardViewModel`: Overview and hardware summary
 
 **Key Features**:
 - ObservableCollection-based data binding
 - INotifyPropertyChanged via ViewModelBase
 - RelayCommand for button actions
-- Health score is derived from *detected* tweak states (run Detect to populate current/applied status)
+- Dashboard summaries are derived from detected tweak states and hardware snapshots (run Detect to populate current/applied status)
 
 **WPF Stability Notes**:
 - Avoid animating Freezables created in templates/resources (`DropShadowEffect`, `SolidColorBrush`, etc.) because they can be frozen/shared.
@@ -235,7 +235,7 @@ public class MyCustomTweak : ITweak
 - ObservableCollections bounded to reasonable sizes (60 points for history)
 - Sliding window pattern (remove oldest, add newest)
 - Dispose pattern for PerformanceCounters
-- LibreHardwareMonitor cleanup on exit
+- Hardware snapshot resources are disposed when the app shuts down
 
 ### CPU
 - 1-second timer interval (balance between real-time and performance)

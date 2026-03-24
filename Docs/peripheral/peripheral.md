@@ -1,4 +1,4 @@
-﻿# Mouse Values
+# Mouse Values
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
 > **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
@@ -783,5 +783,5 @@ Do not edit manually.
 | <a id="peripheral.keyboard-disable-language-hotkey"></a> `peripheral.keyboard-disable-language-hotkey` | Disable Language Switch Hotkey | Disables Ctrl+Shift and Alt+Shift language switching hotkeys to prevent accidental language changes during gaming or typing. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L52` |
 | <a id="peripheral.keyboard-optimize-repeat"></a> `peripheral.keyboard-optimize-repeat` | Optimize Keyboard Repeat Rate | Sets keyboard to minimum repeat delay and maximum repeat rate for faster typing. Also slows cursor blink rate to 900ms. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L27` |
 | <a id="peripheral.mouse-disable-acceleration"></a> `peripheral.mouse-disable-acceleration` | Disable Enhanced Pointer Precision (Mouse Acceleration) | Disables mouse acceleration for 1:1 mouse movement. Preferred by gamers and precision users. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\MouseTweaks.cs#L55` |
-| <a id="peripheral.mouse-disable-throttle"></a> `peripheral.mouse-disable-throttle` | Disable Mouse Throttling for Background Windows | Disables raw mouse input throttling for background windows, improving mouse responsiveness. Useful for monitoring tools like MouseTester. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\MouseTweaks.cs#L27` |
+| <a id="peripheral.mouse-disable-throttle"></a> `peripheral.mouse-disable-throttle` | Disable Mouse Throttling for Background Windows | Disables raw mouse input throttling for background windows, improving mouse responsiveness. Useful when checking raw-input behavior with... | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\MouseTweaks.cs#L27` |
 <!-- TWEAK INDEX END -->

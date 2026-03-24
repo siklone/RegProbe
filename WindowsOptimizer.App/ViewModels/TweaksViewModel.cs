@@ -106,6 +106,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private bool _showAdvanced = true;
     private bool _showRisky = true;
     private bool _showFavoritesOnly = false;
+    private bool _showClassA = true;
+    private bool _showClassB = true;
+    private bool _showClassC = true;
+    private bool _showClassD = true;
     private bool _showDiskChecksOnly = false;
     private string _selectedCategoryName = string.Empty;
     private ConfigurationWorkspaceKind _selectedWorkspace = ConfigurationWorkspaceKind.Settings;
@@ -151,6 +155,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly IRollbackStateStore _rollbackStore;
     private readonly TweakDocumentationLinker _documentationLinker = new();
     private readonly TweakProvenanceCatalogService _provenanceCatalogService = new();
+    private readonly TweakEvidenceClassCatalogService _evidenceClassCatalogService = new();
     private readonly ConfigurationWorkspaceClassifier _workspaceClassifier = new();
     private readonly IAppLogger _appLogger;
     private readonly IBusyService _busyService;
@@ -212,7 +217,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             }
         }
     }
-    
+
     public RelayCommand SetTabCommand { get; }
 
     public int SelectedMainTabIndex
@@ -236,7 +241,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     }
 
     public TweaksViewModel(
-        IEnumerable<ITweakProvider>? providers, 
+        IEnumerable<ITweakProvider>? providers,
         IBusyService busyService,
         BloatwareViewModel bloatware,
         StartupViewModel startup)
@@ -298,25 +303,25 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         DiskHealthTweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
-        _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Preview", (item, token) => item.RunPreviewAsync(token)), _ => CanRunBulk());
-        _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Apply", (item, token) => item.RunApplyAsync(token)), _ => CanRunBulk());
-        _verifyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Verify", (item, token) => item.RunVerifyAsync(token)), _ => CanRunBulk());
-        _rollbackAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Rollback", (item, token) => item.RunRollbackAsync(token)), _ => CanRunBulk());
+        _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Preview", GetAllFilteredTweaks, (item, token) => item.RunPreviewAsync(token)), _ => CanRunBulkInspectable(GetAllFilteredTweaks));
+        _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Apply", GetAllActionableFilteredTweaks, (item, token) => item.RunApplyAsync(token)), _ => CanRunBulkMutating(GetAllActionableFilteredTweaks));
+        _verifyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Verify", GetAllFilteredTweaks, (item, token) => item.RunVerifyAsync(token)), _ => CanRunBulkInspectable(GetAllFilteredTweaks));
+        _rollbackAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Rollback", GetAllActionableFilteredTweaks, (item, token) => item.RunRollbackAsync(token)), _ => CanRunBulkMutating(GetAllActionableFilteredTweaks));
         _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
         _selectAllCommand = new RelayCommand(_ => SelectAll());
         _deselectAllCommand = new RelayCommand(_ => DeselectAll());
         _detectSelectedCommand = new RelayCommand(
             _ => _ = RunBulkAsync("Detect Selected", GetSelectedTweaks, (item, token) => item.RunDetectAsync(token)),
-            _ => CanRunBulkOnSelected());
+            _ => CanRunBulkInspectable(GetSelectedTweaks));
         _applySelectedCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Apply Selected", GetSelectedTweaks, (item, token) => item.RunApplyAsync(token)),
-            _ => CanRunBulkOnSelected());
+            _ => _ = RunBulkAsync("Apply Selected", GetSelectedActionableTweaks, (item, token) => item.RunApplyAsync(token)),
+            _ => CanRunBulkMutating(GetSelectedActionableTweaks));
         _verifySelectedCommand = new RelayCommand(
             _ => _ = RunBulkAsync("Verify Selected", GetSelectedTweaks, (item, token) => item.RunVerifyAsync(token)),
-            _ => CanRunBulkOnSelected());
+            _ => CanRunBulkInspectable(GetSelectedTweaks));
         _rollbackSelectedCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Rollback Selected", GetSelectedTweaks, (item, token) => item.RunRollbackAsync(token)),
-            _ => CanRunBulkOnSelected());
+            _ => _ = RunBulkAsync("Rollback Selected", GetSelectedActionableTweaks, (item, token) => item.RunRollbackAsync(token)),
+            _ => CanRunBulkMutating(GetSelectedActionableTweaks));
         _loadPresetCommand = new RelayCommand(async parameter => await LoadPresetAsync(parameter));
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _clearCategorySelectionCommand = new RelayCommand(_ => SelectedCategoryName = string.Empty);
@@ -333,7 +338,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ExportPresetCommand = new RelayCommand(async _ => await ExportPresetsAsync());
         ImportPresetCommand = new RelayCommand(async _ => await ImportPresetsAsync());
         CreateSnapshotCommand = new RelayCommand(_ => CreateSnapshot());
-        SetTabCommand = new RelayCommand(param => 
+        SetTabCommand = new RelayCommand(param =>
         {
             if (param is string tabName)
                 CurrentTab = tabName;
@@ -345,6 +350,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         LoadCachedInventoryState();
         _documentationLinker.Apply(Tweaks);
         _provenanceCatalogService.Apply(Tweaks);
+        _evidenceClassCatalogService.Apply(Tweaks);
         WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
         PolicyReference = new PolicyReferencePanelViewModel(OpenPolicyReferenceEntry);
         ServiceManagement = new ServiceManagementPanelViewModel(_elevatedServiceManager, _isElevatedHostAvailable, _appLogger);
@@ -612,9 +618,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         private set => SetProperty(ref _totalTweaksAvailable, value);
     }
 
-    public int SettingsWorkspaceCount => Tweaks.Count(t => GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Settings && !IsDiskCheckTweak(t));
+    public int SettingsWorkspaceCount => Tweaks.Count(t => t.ShowInApp && GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Settings && !IsDiskCheckTweak(t));
 
-    public int MaintenanceWorkspaceCount => Tweaks.Count(t => GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Maintenance);
+    public int MaintenanceWorkspaceCount => Tweaks.Count(t => t.ShowInApp && GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Maintenance);
 
     public int DiskHealthCount => Tweaks.Count(IsDiskCheckTweak);
 
@@ -1060,6 +1066,58 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
+    public bool ShowClassA
+    {
+        get => _showClassA;
+        set
+        {
+            if (SetProperty(ref _showClassA, value))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public bool ShowClassB
+    {
+        get => _showClassB;
+        set
+        {
+            if (SetProperty(ref _showClassB, value))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public bool ShowClassC
+    {
+        get => _showClassC;
+        set
+        {
+            if (SetProperty(ref _showClassC, value))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
+    public bool ShowClassD
+    {
+        get => _showClassD;
+        set
+        {
+            if (SetProperty(ref _showClassD, value))
+            {
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+            }
+        }
+    }
+
     public bool ShowDiskChecksOnly
     {
         get => _showDiskChecksOnly;
@@ -1151,23 +1209,26 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
-    private bool CanRunBulk()
+    private bool CanRunBulkInspectable(Func<List<TweakItemViewModel>> getTweaks)
     {
         if (IsBulkRunning || Tweaks.Any(item => item.IsRunning))
         {
             return false;
         }
 
-        return TweaksView.Cast<object>().Any();
+        return getTweaks().Count > 0;
     }
 
-    // Existing signature - delegates to new overload
-    private async Task RunBulkAsync(string label, Func<TweakItemViewModel, CancellationToken, Task> runner)
+    private bool CanRunBulkMutating(Func<List<TweakItemViewModel>> getTweaks)
     {
-        await RunBulkAsync(label, GetAllFilteredTweaks, runner);
+        if (IsBulkRunning || Tweaks.Any(item => item.IsRunning))
+        {
+            return false;
+        }
+
+        return getTweaks().Any(item => item.IsEvidenceClassActionable);
     }
 
-    // New overload - supports custom tweak collections
     private async Task RunBulkAsync(
         string label,
         Func<List<TweakItemViewModel>> getTweaks,
@@ -1194,7 +1255,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
             BulkProgressTotal = items.Count;
             BulkProgressCurrent = 0;
-            BulkStatusMessage = $"{label} in progress ({items.Count} items)..."; 
+            BulkStatusMessage = $"{label} in progress ({items.Count} items)...";
             using var busy = _busyService.Busy(BulkStatusMessage);
 
             OnPropertyChanged(nameof(BulkProgressText));
@@ -1236,9 +1297,23 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         return TweaksView.Cast<TweakItemViewModel>().ToList();
     }
 
+    private List<TweakItemViewModel> GetAllActionableFilteredTweaks()
+    {
+        return TweaksView.Cast<TweakItemViewModel>()
+            .Where(item => item.IsEvidenceClassActionable)
+            .ToList();
+    }
+
     private List<TweakItemViewModel> GetSelectedTweaks()
     {
         return Tweaks.Where(t => t.IsSelected).ToList();
+    }
+
+    private List<TweakItemViewModel> GetSelectedActionableTweaks()
+    {
+        return Tweaks
+            .Where(t => t.IsSelected && t.IsEvidenceClassActionable)
+            .ToList();
     }
 
     private void SelectAll()
@@ -1365,11 +1440,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         SelectedCount = Tweaks.Count(t => t.IsSelected);
     }
 
-    private bool CanRunBulkOnSelected()
-    {
-        return !IsBulkRunning && SelectedCount > 0 && !Tweaks.Any(item => item.IsRunning);
-    }
-
     private void CancelBulk()
     {
         if (!IsBulkRunning || _bulkCts is null)
@@ -1406,6 +1476,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private bool FilterTweaksInternal(TweakItemViewModel item, bool includeCategoryFilter)
     {
         if (IsDiskCheckTweak(item))
+        {
+            return false;
+        }
+
+        if (!item.ShowInApp)
         {
             return false;
         }
@@ -1453,6 +1528,26 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
 
         if (item.Risk == TweakRiskLevel.Risky && !_showRisky)
+        {
+            return false;
+        }
+
+        if (item.EvidenceClassId == "A" && !_showClassA)
+        {
+            return false;
+        }
+
+        if (item.EvidenceClassId == "B" && !_showClassB)
+        {
+            return false;
+        }
+
+        if (item.EvidenceClassId == "C" && !_showClassC)
+        {
+            return false;
+        }
+
+        if (item.EvidenceClassId == "D" && !_showClassD)
         {
             return false;
         }
@@ -1557,7 +1652,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                               !string.Equals(tweak.Category, "Other", StringComparison.OrdinalIgnoreCase)
                 ? tweak.Category
                 : FormatGroupName(parts[0], "Other");
-            
+
             if (!rootGroups.TryGetValue(rootCatName, out var currentGroup))
             {
                 currentGroup = new CategoryGroupViewModel(rootCatName, tweak.CategoryIcon)
@@ -1624,6 +1719,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private bool CurrentWorkspaceContainsCategory(string categoryName)
         => Tweaks.Any(t =>
+            t.ShowInApp &&
             GetWorkspaceKind(t) == SelectedWorkspace &&
             !IsDiskCheckTweak(t) &&
             string.Equals(t.Category, categoryName, StringComparison.OrdinalIgnoreCase));
@@ -1724,16 +1820,20 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+        ShowClassA = true;
+        ShowClassB = true;
+        ShowClassC = true;
+        ShowClassD = true;
         ShowDiskChecksOnly = false;
         SelectedCategoryName = string.Empty;
     }
 
     private void RefreshSummaryStats()
     {
-        TotalTweaksAvailable = Tweaks.Count(t => !IsDiskCheckTweak(t));
+        TotalTweaksAvailable = Tweaks.Count(t => t.ShowInApp && !IsDiskCheckTweak(t));
         RaiseWorkspacePropertiesChanged();
-        TweaksApplied = Tweaks.Count(t => !IsDiskCheckTweak(t) && t.IsApplied);
-        TweaksRolledBack = Tweaks.Count(t => !IsDiskCheckTweak(t) && t.WasRolledBack);
+        TweaksApplied = Tweaks.Count(t => t.ShowInApp && !IsDiskCheckTweak(t) && t.IsApplied);
+        TweaksRolledBack = Tweaks.Count(t => t.ShowInApp && !IsDiskCheckTweak(t) && t.WasRolledBack);
         RefreshLogFileSize();
         UpdateInventoryStatusMessage();
     }
@@ -2322,7 +2422,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             }
 
             _appLogger.Log(LogLevel.Info, $"Plugin discovery: pluginsPath='{pluginsPath}'");
-             
+
             var plugins = _pluginLoader.LoadPlugins(pluginsPath);
 
             var pluginList = plugins.ToList();
@@ -2331,7 +2431,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             foreach (var plugin in pluginList)
             {
                 _appLogger.Log(LogLevel.Info, $"Plugin loaded: name='{plugin.PluginName}' version='{plugin.Version}'");
-                 
+
                 var pluginTweaks = plugin.GetTweaks();
                 var pluginTweaksList = pluginTweaks?.ToList() ?? new List<ITweak>();
                 _appLogger.Log(LogLevel.Info, $"Plugin tweaks: plugin='{plugin.PluginName}' count={pluginTweaksList.Count}");
@@ -2356,7 +2456,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public void ApplyRecommendations(IEnumerable<TweakRecommendation> recommendations)
     {
         if (recommendations == null) return;
-        
+
         foreach (var recommendation in recommendations)
         {
             var tweak = Tweaks.FirstOrDefault(t => t.Id == recommendation.TweakId);

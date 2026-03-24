@@ -1,4 +1,4 @@
-﻿# Tweak Implementation Guide
+# Tweak Implementation Guide
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
 ## Overview

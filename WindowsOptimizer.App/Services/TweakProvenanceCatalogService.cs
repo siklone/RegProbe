@@ -102,7 +102,7 @@ public sealed class TweakProvenanceCatalogService
                 tweak.HasNohutoEvidence = false;
                 tweak.HasWindowsInternalsContext = false;
                 tweak.NeedsSourceReview = true;
-                tweak.ProvenanceSummary = "No nohuto-backed provenance linked yet. Review before shipping as a curated one-click tweak.";
+                tweak.ProvenanceSummary = "No upstream dump or pseudocode lineage is linked yet. Keep this tweak in review until the validation proof and app mapping are strong enough.";
                 continue;
             }
 
@@ -224,12 +224,12 @@ public sealed class TweakProvenanceCatalogService
     {
         if (entry.HasNohutoEvidence && entry.HasWindowsInternalsContext)
         {
-            return "Backed by nohuto research and Windows Internals context.";
+            return "Linked to upstream dump / pseudocode lineage and Windows Internals context. Value semantics are validated separately in the research record.";
         }
 
         if (entry.HasNohutoEvidence)
         {
-            return "Backed by nohuto research artifacts.";
+            return "Linked to upstream dump / pseudocode lineage. Treat that lineage as provenance, not as the value-semantics proof.";
         }
 
         if (entry.HasWindowsInternalsContext)

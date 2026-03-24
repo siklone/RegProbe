@@ -15,6 +15,11 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
+| Class A | 152 |
+| Class B | 61 |
+| Class C | 17 |
+| Class D | 8 |
+| Class E | 52 |
 
 ## Category Coverage
 
@@ -43,6 +48,7 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Audio` |
 | Area | `Driver Start Mode` |
 | Scope | `device` |
@@ -66,6 +72,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `beep-start-mode` | `HKLM\SYSTEM\CurrentControlSet\Services\Beep` | `Start` | `4` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -136,6 +151,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Audio` |
 | Area | `Sound Control Panel DeviceCpl Flags` |
 | Scope | `user` |
@@ -159,6 +175,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `audio-devicecpl-show-disconnected` | `HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl` | `ShowDisconnectedDevices` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -226,6 +251,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Audio` |
 | Area | `Sound Control Panel DeviceCpl Flags` |
 | Scope | `user` |
@@ -249,6 +275,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `audio-devicecpl-show-hidden` | `HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl` | `ShowHiddenDevices` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -318,6 +353,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Cleanup` |
 | Area | `DISM Command` |
 | Scope | `device` |
@@ -341,6 +377,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `reserved-storage-state-command` | `DISM.exe /Online /Set-ReservedStorageState` | `State` | `Disabled` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -411,6 +456,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Developer` |
 | Area | `Docker Desktop / WSL Integration` |
 | Scope | `user` |
@@ -434,6 +480,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `docker-desktop-wsl2-backend` | `%APPDATA%\Docker\settings-store.json` | `linuxVM.wslEngineEnabled.value` | true | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -494,6 +549,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Developer` |
 | Area | `User Environment Variable` |
 | Scope | `user` |
@@ -517,6 +573,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `dotnet-cli-telemetry-optout` | `HKCU\Environment` | `DOTNET_CLI_TELEMETRY_OPTOUT` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
 
 **Provenance**
 
@@ -588,6 +653,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Developer` |
 | Area | `Windows Path Handling vs Git Configuration` |
 | Scope | `device` |
@@ -611,6 +677,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `windows-long-paths` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `LongPathsEnabled` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -679,6 +754,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Developer` |
 | Area | `System Environment Variable` |
 | Scope | `device` |
@@ -702,6 +778,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `node-options` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment` | `NODE_OPTIONS` | `--max-old-space-size=8192` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -772,6 +857,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Developer` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -795,6 +881,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `powershell-execution-policy` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell` | `ExecutionPolicy` | `RemoteSigned` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
 
 **Provenance**
 
@@ -866,6 +961,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Developer` |
 | Area | `Python / Windows Path Handling` |
 | Scope | `device` |
@@ -889,6 +985,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `windows-long-paths` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `LongPathsEnabled` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -959,6 +1064,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Developer` |
 | Area | `OpenSSH Agent Startup` |
 | Scope | `user` |
@@ -982,6 +1088,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ssh-agent-run-key` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` | `SSH Agent` | `C:\Windows\System32\OpenSSH\ssh-agent.exe` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -1041,6 +1156,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Developer` |
 | Area | `Registry Enablement` |
 | Scope | `device` |
@@ -1064,6 +1180,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-development-without-dev-license` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock` | `AllowDevelopmentWithoutDevLicense` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -1126,6 +1251,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Developer` |
 | Area | `WSL Configuration` |
 | Scope | `user` |
@@ -1149,6 +1275,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `wsl2-memory-setting` | `%UserProfile%\.wslconfig` | `[wsl2].memory` | `4GB` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -1208,6 +1343,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -1225,6 +1361,15 @@ Current write(s):
 | Status | `not-mapped` |
 | Provider source | `n/a` |
 | Notes | The app does not currently expose IconsOnly. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -1285,6 +1430,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -1308,6 +1454,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-low-disk-space-checks` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `NoLowDiskSpaceChecks` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -1376,6 +1531,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -1399,6 +1555,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `configure-chat-icon-policy` | `HKLM\Software\Policies\Microsoft\Windows\Windows Chat` | `ChatIcon` | `2` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -1468,6 +1633,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Explorer` |
 | Area | `Explorer Advanced Flags` |
 | Scope | `user` |
@@ -1491,6 +1657,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `explorer-usecompactmode-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `UseCompactMode` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -1558,6 +1733,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -1575,6 +1751,15 @@ Nohuto lineage references:
 | Status | `not-mapped` |
 | Provider source | `n/a` |
 | Notes | The app does not currently expose HideDrivesWithNoMedia. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -1630,6 +1815,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -1647,6 +1833,15 @@ Nohuto lineage references:
 | Status | `not-mapped` |
 | Provider source | `n/a` |
 | Notes | The app does not currently expose SeparateProcess. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -1707,6 +1902,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -1724,6 +1920,15 @@ Nohuto lineage references:
 | Status | `not-mapped` |
 | Provider source | `n/a` |
 | Notes | The app does not currently expose ShowCompColor. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -1784,6 +1989,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -1801,6 +2007,15 @@ Nohuto lineage references:
 | Status | `not-mapped` |
 | Provider source | `n/a` |
 | Notes | The app does not currently expose ShowDriveLettersFirst. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -1856,6 +2071,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -1879,6 +2095,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `explorer-hidefileext-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `HideFileExt` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -1948,6 +2173,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Explorer Cabinet State` |
 | Scope | `user` |
@@ -1971,6 +2197,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `explorer-fullpath-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState` | `FullPath` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -2040,6 +2275,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -2063,6 +2299,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `explorer-hidden-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `Hidden` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -2132,6 +2377,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -2149,6 +2395,15 @@ Nohuto lineage references:
 | Status | `not-mapped` |
 | Provider source | `n/a` |
 | Notes | The app does not currently expose ShowInfoTip. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -2209,6 +2464,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -2226,6 +2482,15 @@ Nohuto lineage references:
 | Status | `not-mapped` |
 | Provider source | `n/a` |
 | Notes | The app does not currently expose ShowSuperHidden. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -2286,6 +2551,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -2303,6 +2569,15 @@ Nohuto lineage references:
 | Status | `not-mapped` |
 | Provider source | `n/a` |
 | Notes | The app does not currently expose ShowRecent. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -2358,35 +2633,60 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/explorer.show-status-bar.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.
+**Summary:** Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | `n/a` |
-| Notes | The app does not currently expose ShowStatusBar. |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Notes | The app now exposes ShowStatusBar through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `explorer-showstatusbar-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `ShowStatusBar` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `` |
-| Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
-| Needs review | `` |
-| Source repositories |  |
-| Matched tokens |  |
-| Lineage note |  |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 2 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3 | USB hub pseudocode relevant to USB and peripheral registry behavior. |
 
 **Targets**
 
@@ -2407,6 +2707,7 @@ Nohuto lineage references:
 | `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg | `medium` | path, value, version-scope |
 | `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | H:\Temp\vm-tooling-staging\showstatusbar-result.txt | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowStatusBar | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2426,7 +2727,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference. |
+| Why | The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping. |
 
 ---
 
@@ -2435,6 +2736,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -2452,6 +2754,15 @@ Nohuto lineage references:
 | Status | `not-mapped` |
 | Provider source | `n/a` |
 | Notes | The app does not currently expose ShowTypeOverlay. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -2512,6 +2823,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -2535,6 +2847,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `taskbar-alignment` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `TaskbarAl` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -2606,6 +2927,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Group Policy` |
 | Scope | `device` |
@@ -2629,6 +2951,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ncsi-noactiveprobe-policy` | `HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator` | `NoActiveProbe` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -2704,6 +3035,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Network` |
 | Area | `Registry Configuration` |
 | Scope | `device` |
@@ -2728,6 +3060,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `auto-share-server` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `AutoShareServer` | `0` | `value` |  |
 | `auto-share-workstation` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `AutoShareWks` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -2805,6 +3146,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Network` |
 | Area | `Registry Configuration` |
 | Scope | `device` |
@@ -2828,6 +3170,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ipv6-disabled-components` | `HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters` | `DisabledComponents` | `255` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -2901,6 +3252,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -2924,6 +3276,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `enable-multicast` | `HKLM\Software\Policies\Microsoft\Windows NT\DNSClient` | `EnableMulticast` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -2999,6 +3360,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `LLTD Policy Semantics` |
 | Scope | `device` |
@@ -3023,6 +3385,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `lltdio-policy` | `HKLM\Software\Policies\Microsoft\Windows\LLTD` | `EnableLLTDIO` | `0` | `value` |  |
 | `lltd-responder-policy` | `HKLM\Software\Policies\Microsoft\Windows\LLTD` | `EnableRspndr` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -3102,6 +3473,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `mDNS Policy Semantics` |
 | Scope | `device` |
@@ -3125,6 +3497,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `dnsclient-enable-mdns` | `HKLM\Software\Policies\Microsoft\Windows NT\DNSClient` | `EnableMDNS` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -3199,6 +3580,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Per-interface Registry Configuration` |
 | Scope | `per-interface` |
@@ -3222,6 +3604,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `netbios-options` | `HKLM\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_*` | `NetbiosOptions` | `2` | `per-interface` | Applied per IP-enabled adapter via Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2). |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -3300,6 +3691,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -3323,6 +3715,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `enable-netbios` | `HKLM\Software\Policies\Microsoft\Windows NT\DNSClient` | `EnableNetbios` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -3399,6 +3800,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
@@ -3422,6 +3824,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `enable-plaintext-password` | `HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `EnablePlainTextPassword` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -3498,6 +3909,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -3521,6 +3933,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-smart-name-resolution` | `HKLM\Software\Policies\Microsoft\Windows NT\DNSClient` | `DisableSmartNameResolution` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -3596,6 +4017,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Configuration` |
 | Scope | `device` |
@@ -3619,6 +4041,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `lanmanserver-smb1` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters` | `SMB1` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -3694,6 +4125,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Configuration` |
 | Scope | `device` |
@@ -3717,6 +4149,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `lanmanserver-smb2` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters` | `SMB2` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -3790,6 +4231,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Group Policy` |
 | Scope | `device` |
@@ -3813,6 +4255,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `wifi-sense-policy` | `HKLM\Software\Microsoft\wcmsvc\wifinetworkmanager\config` | `AutoConnectAllowedOEM` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -3887,6 +4338,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Group Policy` |
 | Scope | `device` |
@@ -3910,6 +4362,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `lltd-responder-policy` | `HKLM\Software\Policies\Microsoft\Windows\LLTD` | `EnableRspndr` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -3984,6 +4445,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Group Policy` |
 | Scope | `device` |
@@ -4007,6 +4469,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `lltdio-policy` | `HKLM\Software\Policies\Microsoft\Windows\LLTD` | `EnableLLTDIO` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -4081,6 +4552,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Network` |
 | Area | `Registry Configuration` |
 | Scope | `device` |
@@ -4104,6 +4576,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ipv6-disabled-components` | `HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters` | `DisabledComponents` | `32` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -4177,6 +4658,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Security Option` |
 | Scope | `device` |
@@ -4200,6 +4682,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ntlm-min-client-sec` | `HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0` | `NTLMMinClientSec` | `537395200` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -4273,6 +4764,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `SMB Server Configuration` |
 | Scope | `device` |
@@ -4297,6 +4789,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `server-enable-leasing` | `Root\Microsoft\Windows\Smb\MSFT_SmbServerConfiguration` | `EnableLeasing` | false | `value` | Applied through Set-SmbServerConfiguration -EnableLeasing $false and restored to the previously detected boolean state during rollback. |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
+
 **Provenance**
 
 | Field | Value |
@@ -4313,7 +4814,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 
 Windows Internals references:
 
@@ -4371,6 +4872,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Network` |
 | Area | `Registry Configuration` |
 | Scope | `device` |
@@ -4394,6 +4896,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-large-mtu` | `HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `DisableLargeMtu` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -4469,6 +4980,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `SMB Client and Server Configuration` |
 | Scope | `mixed` |
@@ -4494,6 +5006,15 @@ Current write(s):
 | `client-enable-multichannel` | `Root\Microsoft\Windows\Smb\MSFT_SmbClientConfiguration` | `EnableMultiChannel` | true | `value` | Applied through Set-SmbClientConfiguration -EnableMultiChannel $true and restored to the previously detected boolean state during rollback. |
 | `server-enable-multichannel` | `Root\Microsoft\Windows\Smb\MSFT_SmbServerConfiguration` | `EnableMultiChannel` | true | `value` | Applied through Set-SmbServerConfiguration -EnableMultiChannel $true and restored to the previously detected boolean state during rollback. |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
+
 **Provenance**
 
 | Field | Value |
@@ -4510,7 +5031,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / network/desc.md | https://github.com/nohuto/win-config/blob/main/network/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 
 Windows Internals references:
 
@@ -4570,6 +5091,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Policy vs Observed Service Setting` |
 | Scope | `mixed` |
@@ -4594,6 +5116,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `client-smb-quic-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanWorkstation` | `EnableSMBQUIC` | `1` | `value` |  |
 | `server-smb-quic-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanServer` | `EnableSMBQUIC` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -4672,6 +5203,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Network` |
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
@@ -4695,6 +5227,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `server-encrypt-data` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `EncryptData` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -4769,6 +5310,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Optimization Bundle` |
 | Scope | `device` |
@@ -4795,6 +5337,15 @@ Current write(s):
 | `smb-fileinfo-cache-entries-max` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `FileInfoCacheEntriesMax` | `32768` | `value` |  |
 | `smb-filenotfound-cache-entries-max` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `FileNotFoundCacheEntriesMax` | `32768` | `value` |  |
 | `smb-maxcmds` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `MaxCmds` | `32768` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -4857,6 +5408,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Network` |
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
@@ -4880,6 +5432,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `server-reject-unencrypted-access` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `RejectUnencryptedAccess` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -4954,6 +5515,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Policy vs Observed Service Setting` |
 | Scope | `mixed` |
@@ -4980,6 +5542,15 @@ Current write(s):
 | `client-max-smb2-dialect-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanWorkstation` | `MaxSmb2Dialect` | `785` | `value` |  |
 | `server-min-smb2-dialect-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanServer` | `MinSmb2Dialect` | `785` | `value` |  |
 | `server-max-smb2-dialect-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanServer` | `MaxSmb2Dialect` | `785` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -5060,6 +5631,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
@@ -5084,6 +5656,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `client-require-security-signature` | `HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `RequireSecuritySignature` | `1` | `value` |  |
 | `client-enable-security-signature` | `HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `EnableSecuritySignature` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -5160,6 +5741,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
@@ -5184,6 +5766,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `server-require-security-signature` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `RequireSecuritySignature` | `1` | `value` |  |
 | `server-enable-security-signature` | `HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters` | `EnableSecuritySignature` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -5260,6 +5851,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Policy vs Observed Service Setting` |
 | Scope | `mixed` |
@@ -5284,6 +5876,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `client-cipher-suite-order-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanWorkstation` | `CipherSuiteOrder` | `AES_256_GCM|AES_256_CCM` | `value` |  |
 | `server-cipher-suite-order-policy` | `HKLM\Software\Policies\Microsoft\Windows\LanmanServer` | `CipherSuiteOrder` | `AES_256_GCM|AES_256_CCM` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -5364,6 +5965,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Notifications` |
 | Area | `Observed User Preference` |
 | Scope | `user` |
@@ -5387,6 +5989,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `siuf-feedback-frequency` | `HKCU\Software\Microsoft\Siuf\Rules` | `NumberOfSIUFInPeriod` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -5454,6 +6065,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Notifications` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -5477,6 +6089,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-toast-application-notification-on-lock-screen` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications` | `NoToastApplicationNotificationOnLockScreen` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -5546,6 +6167,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Notifications` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -5569,6 +6191,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disallow-notification-mirroring` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications` | `DisallowNotificationMirroring` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -5638,6 +6269,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Notifications` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -5661,6 +6293,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-tile-application-notification` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications` | `NoTileApplicationNotification` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -5730,6 +6371,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Notifications` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -5753,6 +6395,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-toast-application-notification` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications` | `NoToastApplicationNotification` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -5824,6 +6475,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Performance` |
 | Area | `Win32 Animation Effects` |
 | Scope | `user` |
@@ -5847,6 +6499,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `minanimate-registry` | `HKCU\Control Panel\Desktop\WindowMetrics` | `MinAnimate` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -5922,6 +6583,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Performance` |
 | Area | `Win32 Menu Timing` |
 | Scope | `user` |
@@ -5945,6 +6607,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `menu-show-delay-registry` | `HKCU\Control Panel\Desktop` | `MenuShowDelay` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -6019,6 +6690,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Performance` |
 | Area | `Explorer Taskbar Animation Flags` |
 | Scope | `user` |
@@ -6042,6 +6714,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `taskbar-animations-registry` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `TaskbarAnimations` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -6118,6 +6799,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Peripheral` |
 | Area | `Observed User Preference` |
 | Scope | `user` |
@@ -6142,6 +6824,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\UserChosenExecuteHandlers\StorageOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
 | `autoplay-event-default-handler` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers\EventHandlersDefaultSelection\StorageOnArrival` | `(Default)` | `MSTakeNoAction` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -6217,6 +6908,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Peripheral` |
 | Area | `User Policy` |
 | Scope | `user` |
@@ -6241,6 +6933,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `turn-off-autoplay-policy` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `NoDriveTypeAutoRun` | `255` | `value` |  |
 | `no-autoplay-for-non-volume-policy` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `NoAutoplayfornonVolume` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -6321,6 +7022,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Peripheral` |
 | Area | `Accessibility Sticky Keys Flags` |
 | Scope | `user` |
@@ -6344,6 +7046,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `stickykeys-flags-registry` | `HKCU\Control Panel\Accessibility\StickyKeys` | `Flags` | `506` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -6421,6 +7132,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class D` |
 | Category | `Power` |
 | Area | `Processor Idle Behavior` |
 | Scope | `device` |
@@ -6444,6 +7156,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `cpu-idle-states-registry-bundle` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled` | `DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Provenance**
 
@@ -6519,6 +7240,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Registry Configuration` |
 | Scope | `device` |
@@ -6542,6 +7264,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `hiberboot-enabled` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power` | `HiberbootEnabled` | `0` | `value` | Current implementation path. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -6619,6 +7350,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class D` |
 | Category | `Power` |
 | Area | `Sleep Model` |
 | Scope | `device` |
@@ -6642,6 +7374,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `modern-standby-registry-bundle` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `MSDisabled + ModernSleep\EnabledActions` | `MSDisabled=1;EnabledActions=0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Provenance**
 
@@ -6717,6 +7458,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `TCP/IP offload + MMCSS policy` |
 | Scope | `device` |
@@ -6741,6 +7483,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-task-offload` | `HKLM\System\CurrentControlSet\Services\TCPIP\Parameters` | `DisableTaskOffload` | `0` | `value` |  |
 | `system-responsiveness` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `SystemResponsiveness` | `10` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -6801,6 +7552,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Power` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -6824,6 +7576,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `power-throttling-off` | `HKLM\System\CurrentControlSet\Control\Power\PowerThrottling` | `PowerThrottlingOff` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -6901,6 +7662,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Power` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -6924,6 +7686,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `wsearch-start-mode` | `WSearch` | `StartMode` | `Disabled` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -6999,6 +7770,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -7022,6 +7794,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `show-hibernate-option` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `ShowHibernateOption` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -7100,6 +7881,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -7123,6 +7905,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `show-lock-option` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `ShowLockOption` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -7200,6 +7991,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -7223,6 +8015,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `show-sleep-option` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `ShowSleepOption` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -7300,6 +8101,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `PowerCfg PERFBOOSTMODE` |
 | Scope | `device` |
@@ -7323,6 +8125,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `cpu-boost-perfmode-command` | `powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2 /setactive SCHEME_CURRENT` | `PERFBOOSTMODE` | `2` | `value` | Detected state is serialized as the previous AC/DC indices and restored on rollback. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -7397,6 +8208,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class D` |
 | Category | `Power` |
 | Area | `Multimedia Class Scheduler Service` |
 | Scope | `device` |
@@ -7424,6 +8236,15 @@ Current write(s):
 | `games-sfio-priority` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games` | `SFIO Priority` | `High` | `value` |  |
 | `games-gpu-priority` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games` | `GPU Priority` | `8` | `value` |  |
 | `games-affinity` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games` | `Affinity` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Provenance**
 
@@ -7500,6 +8321,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Security Option Policy` |
 | Scope | `device` |
@@ -7523,6 +8345,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-connected-user` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `NoConnectedUser` | `3` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -7593,6 +8424,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Privacy` |
 | Area | `AppPrivacy policy family` |
 | Scope | `device` |
@@ -7616,6 +8448,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `appprivacy-deny-bundle` | `HKLM\Software\Policies\Microsoft\Windows\AppPrivacy` | `BundleState` | `current-app-profile` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -7675,6 +8516,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -7700,6 +8542,15 @@ Current write(s):
 | `enable-activity-feed` | `HKLM\Software\Policies\Microsoft\Windows\System` | `EnableActivityFeed` | `0` | `value` |  |
 | `publish-user-activities` | `HKLM\Software\Policies\Microsoft\Windows\System` | `PublishUserActivities` | `0` | `value` |  |
 | `upload-user-activities` | `HKLM\Software\Policies\Microsoft\Windows\System` | `UploadUserActivities` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -7771,6 +8622,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Machine Policy` |
 | Scope | `device` |
@@ -7794,6 +8646,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `advertising-id-policy` | `HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo` | `DisabledByGroupPolicy` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -7862,6 +8723,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -7886,6 +8748,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `let-apps-get-diagnostic-info` | `HKLM\Software\Policies\Microsoft\Windows\AppPrivacy` | `LetAppsGetDiagnosticInfo` | `2` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
+
 **Provenance**
 
 | Field | Value |
@@ -7902,7 +8773,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 
 **Targets**
 
@@ -7951,6 +8822,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Observed Registry Setting` |
 | Scope | `user` |
@@ -7974,6 +8846,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `start-trackprogs-observed` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `Start_TrackProgs` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -8044,6 +8925,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Policy vs Observed User Setting` |
 | Scope | `user` |
@@ -8067,6 +8949,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `system-pane-suggestions-observed` | `HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager` | `SystemPaneSuggestionsEnabled` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -8137,6 +9028,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Privacy` |
 | Area | `Application Compatibility` |
 | Scope | `device` |
@@ -8161,6 +9053,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `sb-enable` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `SbEnable` | `0` | `value` |  |
 | `disable-engine` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisableEngine` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -8224,6 +9125,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Application Compatibility` |
 | Scope | `device` |
@@ -8250,6 +9152,15 @@ Current write(s):
 | `disable-application-footprint` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisableApplicationFootprint` | `1` | `value` |  |
 | `disable-install-tracing` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisableInstallTracing` | `1` | `value` |  |
 | `disable-win32-app-backup` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisableWin32AppBackup` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -8314,6 +9225,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -8337,6 +9249,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `appcompat-ait-enable` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `AITEnable` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -8407,6 +9328,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -8430,6 +9352,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `let-apps-run-in-background` | `HKLM\Software\Policies\Microsoft\Windows\AppPrivacy` | `LetAppsRunInBackground` | `2` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -8498,6 +9429,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -8521,6 +9453,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `biometrics-enabled` | `HKLM\SOFTWARE\Policies\Microsoft\Biometrics` | `Enabled` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -8589,6 +9530,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -8612,6 +9554,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `biometric-domain-accounts` | `HKLM\SOFTWARE\Policies\Microsoft\Biometrics\Credential Provider` | `Domain Accounts` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -8680,6 +9631,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -8703,6 +9655,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `biometric-logon-enabled` | `HKLM\SOFTWARE\Policies\Microsoft\Biometrics\Credential Provider` | `Enabled` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -8771,6 +9732,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -8794,6 +9756,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-camera` | `HKLM\Software\Policies\Microsoft\Camera` | `AllowCamera` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -8863,6 +9834,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Privacy` |
 | Area | `User Environment Variables` |
 | Scope | `user` |
@@ -8887,6 +9859,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `powershell-telemetry-optout` | `HKCU\Environment` | `POWERSHELL_TELEMETRY_OPTOUT` | `1` | `value` |  |
 | `dotnet-cli-telemetry-optout` | `HKCU\Environment` | `DOTNET_CLI_TELEMETRY_OPTOUT` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -8957,6 +9938,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -8981,6 +9963,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-consumer-account-state-content` | `HKLM\Software\Policies\Microsoft\Windows\CloudContent` | `DisableConsumerAccountStateContent` | `1` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
+
 **Provenance**
 
 | Field | Value |
@@ -8997,7 +9988,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 
 **Targets**
 
@@ -9047,6 +10038,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -9070,6 +10062,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `turn-off-windows-copilot` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot` | `TurnOffWindowsCopilot` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -9140,6 +10141,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Machine Policy` |
 | Scope | `device` |
@@ -9163,6 +10165,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `enable-cdp-policy` | `HKLM\Software\Policies\Microsoft\Windows\System` | `EnableCdp` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -9225,6 +10236,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -9248,6 +10260,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-device-name-in-telemetry` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `AllowDeviceNameInTelemetry` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -9318,6 +10339,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -9341,6 +10363,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-device-delete` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DisableDeviceDelete` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -9411,6 +10442,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -9434,6 +10466,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-diagnostic-data-viewer` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DisableDiagnosticDataViewer` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -9504,6 +10545,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
@@ -9530,6 +10572,15 @@ Current write(s):
 | `local-providers-enabled` | `HKLM\SOFTWARE\Policies\Microsoft\Edge` | `LocalProvidersEnabled` | `0` | `value` |  |
 | `show-search-suggestions-global` | `HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\SearchScopes` | `ShowSearchSuggestionsGlobal` | `0` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
+
 **Provenance**
 
 | Field | Value |
@@ -9546,7 +10597,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 
 **Targets**
 
@@ -9599,6 +10650,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -9622,6 +10674,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `do-not-show-feedback-notifications` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DoNotShowFeedbackNotifications` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -9693,6 +10754,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -9716,6 +10778,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-file-history` | `HKLM\Software\Policies\Microsoft\Windows\FileHistory` | `Disabled` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -9785,6 +10856,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -9808,6 +10880,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-find-my-device` | `HKLM\SOFTWARE\Policies\Microsoft\FindMyDevice` | `AllowFindMyDevice` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -9879,6 +10960,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -9902,6 +10984,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `enable-font-providers` | `HKLM\Software\Policies\Microsoft\Windows\System` | `EnableFontProviders` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -9972,6 +11063,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -9995,6 +11087,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-gen-ticket` | `HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform` | `NoGenTicket` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -10066,6 +11167,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Observed User Preference` |
 | Scope | `user` |
@@ -10089,6 +11191,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `http-accept-language-opt-out` | `HKCU\Control Panel\International\User Profile` | `HttpAcceptLanguageOptOut` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -10156,6 +11267,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -10179,6 +11291,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-local-password-reset-questions` | `HKLM\Software\Policies\Microsoft\Windows\System` | `NoLocalPasswordResetQuestions` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -10250,6 +11371,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Runtime Consent Store` |
 | Scope | `user` |
@@ -10274,6 +11396,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `user-location-consent` | `HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location` | `Value` | `Deny` | `value` |  |
 | `user-location-consent-nonpackaged` | `HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location\NonPackaged` | `Value` | `Deny` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -10342,6 +11473,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Observed Runtime Consent` |
 | Scope | `device` |
@@ -10365,6 +11497,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `system-location-consent` | `HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location` | `Value` | `Deny` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -10432,6 +11573,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -10455,6 +11597,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-location-scripting` | `HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors` | `DisableLocationScripting` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -10524,6 +11675,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -10547,6 +11699,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-location` | `HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors` | `DisableLocation` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -10615,6 +11776,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -10638,6 +11800,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-registration` | `HKLM\Software\Policies\Microsoft\Windows\CurrentVersion\MDM` | `DisableRegistration` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -10708,6 +11879,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -10731,6 +11903,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-message-sync` | `HKLM\Software\Policies\Microsoft\Windows\Messaging` | `AllowMessageSync` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -10801,6 +11982,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -10824,6 +12006,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `offline-files-enabled` | `HKLM\Software\Policies\Microsoft\Windows\NetCache` | `Enabled` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -10885,6 +12076,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -10908,6 +12100,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-onesettings-downloads` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DisableOneSettingsDownloads` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -10979,6 +12180,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -11002,6 +12204,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-online-tips` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `AllowOnlineTips` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -11072,6 +12283,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Privacy` |
 | Area | `Application Compatibility` |
 | Scope | `device` |
@@ -11089,6 +12301,15 @@ Nohuto lineage references:
 | Status | `not-mapped` |
 | Provider source | `` |
 | Notes | The app does not currently write DisablePcaUI. Previously, PrivacyTweakProvider.cs wrote DisablePcaUI=1 intending to disable PCA - this was incorrect on two levels: wrong key (should be DisablePCA) and wrong value (1 means detection active, not disabled). That was corrected on 2026-03-13 to write DisablePCA=1. This record tracks DisablePcaUI as a standalone diagnostics policy with correct semantics. No app mapping currently exists for this policy. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -11150,6 +12371,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -11173,6 +12395,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `enable-mmx` | `HKLM\Software\Policies\Microsoft\Windows\System` | `EnableMmx` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -11242,6 +12473,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Application Compatibility` |
 | Scope | `device` |
@@ -11265,6 +12497,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-pca` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisablePCA` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -11327,6 +12568,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -11350,6 +12592,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-ai-data-analysis` | `HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI` | `DisableAIDataAnalysis` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -11422,6 +12673,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Current-user Resume Setting` |
 | Scope | `user` |
@@ -11445,6 +12697,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `resume-user-setting` | `HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration` | `IsResumeAllowed` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -11515,6 +12776,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Group Policy` |
 | Scope | `device` |
@@ -11538,6 +12800,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `rsop-logging-policy` | `HKLM\Software\Policies\Microsoft\Windows\System` | `RSoPLogging` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -11607,6 +12878,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -11630,6 +12902,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-search-box-suggestions` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `DisableSearchBoxSuggestions` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -11700,6 +12981,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -11723,6 +13005,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-search-history` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `DisableSearchHistory` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -11794,6 +13085,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -11817,6 +13109,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-sensors` | `HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors` | `DisableSensors` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -11887,6 +13188,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -11910,6 +13212,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-uar` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `DisableUAR` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -11987,6 +13298,7 @@ Other provenance references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Privacy` |
 | Area | `CloudContent policy trio` |
 | Scope | `user` |
@@ -12004,6 +13316,15 @@ Other provenance references:
 | Status | `not-mapped` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes opaque ContentDeliveryManager SubscribedContent values in the parent audit trail. This child record intentionally models only the official named CloudContent policies. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -12069,6 +13390,7 @@ Other provenance references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Application Compatibility` |
 | Scope | `device` |
@@ -12092,6 +13414,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `sb-enable` | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` | `SbEnable` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -12154,6 +13485,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -12177,6 +13509,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-telemetry-opt-in-change-notification` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DisableTelemetryOptInChangeNotification` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -12246,6 +13587,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -12269,6 +13611,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-telemetry-optin-settings-ux` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `DisableTelemetryOptInSettingsUx` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -12340,6 +13691,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -12363,6 +13715,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `wer-disabled` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting` | `Disabled` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -12434,6 +13795,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -12457,6 +13819,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-location-provider` | `HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors` | `DisableWindowsLocationProvider` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -12527,6 +13898,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `CloudContent Policy` |
 | Scope | `device` |
@@ -12550,6 +13922,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-soft-landing-policy` | `HKLM\Software\Policies\Microsoft\Windows\CloudContent` | `DisableSoftLanding` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -12620,6 +14001,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Security Option` |
 | Scope | `device` |
@@ -12643,6 +14025,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `dont-display-last-user-name` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System` | `DontDisplayLastUserName` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -12713,6 +14104,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -12737,6 +14129,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `hide-recommended-personalized-sites` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `HideRecommendedPersonalizedSites` | `1` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
+
 **Provenance**
 
 | Field | Value |
@@ -12753,7 +14154,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 
 **Targets**
 
@@ -12803,6 +14204,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -12826,6 +14228,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `hide-recommended-personalized-sites` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `HideRecommendedPersonalizedSites` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -12895,6 +14306,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -12919,6 +14331,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `hide-recommended-section` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `HideRecommendedSection` | `1` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
+
 **Provenance**
 
 | Field | Value |
@@ -12935,7 +14356,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 
 **Targets**
 
@@ -12985,6 +14406,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -13008,6 +14430,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `hide-recommended-section` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `HideRecommendedSection` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -13077,6 +14508,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Security Option` |
 | Scope | `device` |
@@ -13100,6 +14532,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `dont-display-user-name` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System` | `DontDisplayUserName` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -13170,6 +14611,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -13193,6 +14635,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `limit-diagnostic-log-collection` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `LimitDiagnosticLogCollection` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -13262,6 +14713,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -13285,6 +14737,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `limit-dump-collection` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `LimitDumpCollection` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -13355,6 +14816,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -13378,6 +14840,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-telemetry` | `HKLM\Software\Policies\Microsoft\Windows\DataCollection` | `AllowTelemetry` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -13440,6 +14911,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -13463,6 +14935,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `troubleshooting-allow-recommendations` | `HKLM\Software\Policies\Microsoft\Windows\Troubleshooting\AllowRecommendations` | `TroubleshootingAllowRecommendations` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -13532,6 +15013,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
@@ -13557,6 +15039,15 @@ Current write(s):
 | `setting-sync-policy-family` | `HKLM\Software\Policies\Microsoft\Windows\SettingSync` | `DisableSettingSync / DisableAppSyncSettingSync / DisableApplicationSettingSync / DisableCredentialsSettingSync / DisablePersonalizationSettingSync / DisableDesktopThemeSettingSync / DisableStartLayoutSettingSync / DisableWebBrowserSettingSync / DisableWindowsSettingSync` | `2` | `value` |  |
 | `setting-sync-useroverride-family` | `HKLM\Software\Policies\Microsoft\Windows\SettingSync` | `DisableSettingSyncUserOverride / DisableAppSyncSettingSyncUserOverride / DisableApplicationSettingSyncUserOverride / DisableCredentialsSettingSyncUserOverride / DisablePersonalizationSettingSyncUserOverride / DisableDesktopThemeSettingSyncUserOverride / DisableStartLayoutSettingSyncUserOverride / DisableWebBrowserSettingSyncUserOverride / DisableWindowsSettingSyncUserOverride` | `0` | `value` |  |
 | `disable-sync-on-paid-network` | `HKLM\Software\Policies\Microsoft\Windows\SettingSync` | `DisableSyncOnPaidNetwork` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -13622,6 +15113,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -13645,6 +15137,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `save-zone-information` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments` | `SaveZoneInformation` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -13719,6 +15220,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -13742,6 +15244,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ntfs-disable-encryption-policy` | `HKLM\System\CurrentControlSet\Policies` | `NtfsDisableEncryption` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -13815,6 +15326,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -13838,6 +15350,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `do-download-mode-policy` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization` | `DODownloadMode` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -13912,6 +15433,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -13935,6 +15457,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-password-reveal` | `HKLM\Software\Policies\Microsoft\Windows\CredUI` | `DisablePasswordReveal` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -14009,6 +15540,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -14032,6 +15564,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `block-domain-picture-password` | `HKLM\Software\Policies\Microsoft\Windows\System` | `BlockDomainPicturePassword` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -14106,6 +15647,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -14129,6 +15671,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `fallowtogethelp` | `HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services` | `fAllowToGetHelp` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -14204,6 +15755,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Exploit Protection` |
 | Scope | `device` |
@@ -14227,6 +15779,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `exploit-protection-policy` | `%TEMP%\WindowsOptimizer\ExploitProtection\security-disable-system-mitigations.xml` | `Set-ProcessMitigation -PolicyFilePath` | `ExploitProtection XML baseline` | `value` | The app stages the checked-in XML resource to a temp file and imports it through the documented ProcessMitigation surface. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -14300,6 +15861,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `System Restore Policy` |
 | Scope | `device` |
@@ -14323,6 +15885,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-system-restore-policy` | `HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore` | `DisableSR` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -14397,6 +15968,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -14421,6 +15993,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `domain-firewall-policy` | `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile` | `EnableFirewall` | `0` | `value` |  |
 | `standard-firewall-policy` | `HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile` | `EnableFirewall` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -14498,6 +16079,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -14522,6 +16104,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-update-access` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate` | `DisableWindowsUpdateAccess` | `1` | `value` |  |
 | `no-auto-update` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU` | `NoAutoUpdate` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -14583,6 +16174,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -14608,6 +16200,15 @@ Current write(s):
 | `search-order-config` | `HKLM\Software\Policies\Microsoft\Windows\DriverSearching` | `SearchOrderConfig` | `0` | `value` |  |
 | `dont-search-windows-update` | `HKLM\Software\Policies\Microsoft\Windows\DriverSearching` | `DontSearchWindowsUpdate` | `1` | `value` |  |
 | `exclude-wu-drivers-in-quality-update` | `HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate` | `ExcludeWUDriversInQualityUpdate` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -14688,6 +16289,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -14711,6 +16313,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `dynamic-lock-policy` | `HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon` | `EnableGoodbye` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -14787,6 +16398,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -14810,6 +16422,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `sudo-enabled-mode` | `HKLM\Software\Policies\Microsoft\Windows\Sudo` | `Enabled` | `3` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -14884,6 +16505,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -14908,6 +16530,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `enable-scripts-policy` | `HKLM\Software\Policies\Microsoft\Windows\PowerShell` | `EnableScripts` | `1` | `value` |  |
 | `execution-policy-string` | `HKLM\Software\Policies\Microsoft\Windows\PowerShell` | `ExecutionPolicy` | `Unrestricted` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -14982,6 +16613,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -15005,6 +16637,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `enable-secure-credential-prompting` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\CredUI` | `EnableSecureCredentialPrompting` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -15081,6 +16722,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Registry Security Setting` |
 | Scope | `device` |
@@ -15106,6 +16748,15 @@ Current write(s):
 | `enable-lua` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `EnableLUA` | `1` | `value` |  |
 | `consent-prompt-admin` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `ConsentPromptBehaviorAdmin` | `0` | `value` |  |
 | `prompt-secure-desktop` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `PromptOnSecureDesktop` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -15185,6 +16836,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -15208,6 +16860,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-window-minimizing-shortcuts` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `NoWindowMinimizingShortcuts` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -15284,6 +16945,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Crash Recovery` |
 | Scope | `device` |
@@ -15307,6 +16969,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `auto-reboot` | `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` | `AutoReboot` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -15383,6 +17054,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Crash Recovery / Bug Check Display` |
 | Scope | `device` |
@@ -15406,6 +17078,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `display-parameters` | `HKLM\SYSTEM\CurrentControlSet\Control\CrashControl` | `DisplayParameters` | `1` | `value` | Observed app value under review. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -15480,6 +17161,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -15503,6 +17185,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-automatic-app-archiving` | `HKLM\Software\Policies\Microsoft\Windows\Appx` | `AllowAutomaticAppArchiving` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -15579,6 +17270,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Observed Registry Setting` |
 | Scope | `device` |
@@ -15602,6 +17294,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `maintenance-disabled-observed` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance` | `MaintenanceDisabled` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -15679,6 +17380,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -15702,6 +17404,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-background-group-policy` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System` | `DisableBkGndGroupPolicy` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -15778,6 +17489,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -15802,6 +17514,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `allow-clipboard-history` | `HKLM\Software\Policies\Microsoft\Windows\System` | `AllowClipboardHistory` | `0` | `value` |  |
 | `allow-cross-device-clipboard` | `HKLM\Software\Policies\Microsoft\Windows\System` | `AllowCrossDeviceClipboard` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -15881,6 +17602,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -15904,6 +17626,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-clipboard-redirection` | `HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services` | `fDisableClip` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -15981,6 +17712,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class D` |
 | Category | `System` |
 | Area | `GameConfigStore / Compatibility Preference` |
 | Scope | `user` |
@@ -16007,6 +17739,15 @@ Current write(s):
 | `gameconfigstore-fso-values` | `HKCU\System\GameConfigStore` | `GameDVR_FSEBehaviorMode` | `2` | `value` |  |
 | `gameconfigstore-fso-values` | `HKCU\System\GameConfigStore` | `GameDVR_HonorUserFSEBehaviorMode` | `1` | `value` |  |
 | `gameconfigstore-fso-values` | `HKCU\System\GameConfigStore` | `GameDVR_DXGIHonorFSEWindowsCompatible` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Provenance**
 
@@ -16082,6 +17823,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -16105,6 +17847,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-game-dvr` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR` | `AllowGameDVR` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -16166,6 +17917,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class D` |
 | Category | `System` |
 | Area | `Desktop Wallpaper Import Behavior` |
 | Scope | `user` |
@@ -16189,6 +17941,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `jpeg-import-quality` | `HKCU\Control Panel\Desktop` | `JPEGImportQuality` | `100` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Provenance**
 
@@ -16264,6 +18025,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Feature Setting vs Observed Registry Setting` |
 | Scope | `user` |
@@ -16287,6 +18049,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `restart-apps-registry-observed` | `HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon` | `RestartApps` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -16362,6 +18133,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -16385,6 +18157,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `enable-dynamic-content-in-wsb` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search` | `EnableDynamicContentInWSB` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -16461,6 +18242,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -16484,6 +18266,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `prevent-remote-queries` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search` | `PreventRemoteQueries` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -16559,6 +18350,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -16583,6 +18375,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `connected-search-use-web` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search` | `ConnectedSearchUseWeb` | `0` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
+
 **Provenance**
 
 | Field | Value |
@@ -16599,7 +18400,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -16655,6 +18456,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Explorer Overlay` |
 | Scope | `device` |
@@ -16678,6 +18480,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `shell-icons-29` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons` | `29` | `%windir%\System32\shell32.dll,-50` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -16752,6 +18563,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class D` |
 | Category | `System` |
 | Area | `Explorer Startup Behavior` |
 | Scope | `user` |
@@ -16775,6 +18587,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `startup-delay-in-msec` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize` | `StartupDelayInMSec` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Provenance**
 
@@ -16852,6 +18673,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -16875,6 +18697,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-storage-sense-global` | `HKLM\Software\Policies\Microsoft\Windows\StorageSense` | `AllowStorageSenseGlobal` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -16951,6 +18782,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -16974,6 +18806,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-storage-sense-temporary-files-cleanup` | `HKLM\Software\Policies\Microsoft\Windows\StorageSense` | `AllowStorageSenseTemporaryFilesCleanup` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -17050,6 +18891,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -17073,6 +18915,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-use-store-open-with` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `NoUseStoreOpenWith` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -17149,6 +19000,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Desktop Window Manager / Overlay Diagnostics` |
 | Scope | `device` |
@@ -17172,6 +19024,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `overlay-min-fps` | `HKLM\SOFTWARE\Microsoft\Windows\Dwm` | `OverlayMinFPS` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -17246,6 +19107,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Gaming Feature / GameBar Preference` |
 | Scope | `user` |
@@ -17254,7 +19116,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. On 2026-03-23 a bounded VM runtime suite also toggled the value through states 0 and 1, launched OCCT, captured WPR ETLs and perf samples for both states, and restored the guest baseline after each pass. However, the OCCT UI still displayed its EULA modal and `OCCT.config.json` still reported `EulaVersion = 0`, so the OCCT portion must be treated as launch-and-trace evidence rather than a valid benchmark result. That still validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
+**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
 
 **Current implementation**
 
@@ -17269,6 +19131,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `auto-game-mode-enabled` | `HKCU\Software\Microsoft\GameBar` | `AutoGameModeEnabled` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -17316,7 +19187,6 @@ Windows Internals references:
 | `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc | `high` | behavior, side-effects, version-scope |
 | `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | H:\Temp\vm-tooling-staging\gamemode_admin_probe.txt and H:\Temp\vm-tooling-staging\gamemode_admin_zero_probe.txt | `high` | path, value, behavior, ui-mapping, version-scope |
 | `repo-system-decomp-game-mode` | `decompilation` | `Ghidra decompilation` | Decompiled Game Mode handler string reference | Docs/system/assets/gamemode-GamingHandlers.c | `medium` | path, value, behavior, ui-mapping |
-| `vm-gamemode-occt-wpr-20260323` | `runtime-trace` | `unspecified` | VM Game Mode OCCT plus WPR observation suite | H:\Temp\vm-tooling-staging\gamemode-occt-state-0-v2.txt, H:\Temp\vm-tooling-staging\gamemode-occt-state-0-v2.perf.csv, H:\Temp\vm-tooling-staging\gamemode-occt-state-0-v2.etl, H:\Temp\vm-tooling-staging\gamemode-occt-state-1-v2.txt, H:\Temp\vm-tooling-staging\gamemode-occt-state-1-v2.perf.csv, H:\Temp\vm-tooling-staging\gamemode-occt-state-1-v2.etl | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -17327,7 +19197,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\gamemode_admin_probe.txt |
 | Exact quote / path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU\S-1-5-21-3538642439-2106388720-149684979-500\Software\Microsoft\GameBar\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU\S-1-5-21-3538642439-2106388720-149684979-500\Software\Microsoft\GameBar\AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | Key found on page | `True` |
-| Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. A later bounded VM runtime suite on 2026-03-23 also produced short OCCT launch traces plus WPR captures for states 0 and 1 and restored the guest baseline after each pass, but OCCT still showed its EULA modal and kept `EulaVersion = 0`, so those runs must not be interpreted as valid OCCT score benchmarks. Normalized for the consolidated evidence report. |
+| Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report. |
 
 **Decision**
 
@@ -17338,7 +19208,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. A later bounded VM runtime suite exercised both states with OCCT launch traces plus WPR and restored the guest baseline after each pass, which strengthens confidence that the toggle can be observed safely. The OCCT EULA remained unaccepted (`EulaVersion = 0`), so the OCCT portion should not be read as a valid benchmark score comparison. |
+| Why | Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. |
 
 ---
 
@@ -17347,6 +19217,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Graphics Drivers / Scheduling Feature` |
 | Scope | `device` |
@@ -17370,6 +19241,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `hw-sch-mode` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `HwSchMode` | `2` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -17446,6 +19326,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -17469,6 +19350,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-indexing-encrypted-stores-or-items` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search` | `AllowIndexingEncryptedStoresOrItems` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -17544,6 +19434,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
@@ -17567,6 +19458,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `tdr-ddi-delay` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrDdiDelay` | `5` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -17640,6 +19540,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
@@ -17663,6 +19564,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `tdr-delay` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrDelay` | `2` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -17736,6 +19646,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
@@ -17759,6 +19670,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `tdr-level` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrLevel` | `3` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -17832,6 +19752,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
@@ -17855,6 +19776,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `tdr-limit-count` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrLimitCount` | `5` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -17928,6 +19858,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
@@ -17951,6 +19882,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `tdr-limit-time` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `TdrLimitTime` | `60` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -18024,6 +19964,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Kernel / Deferred Procedure Calls` |
 | Scope | `device` |
@@ -18047,6 +19988,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `thread-dpc-enable` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `ThreadDpcEnable` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -18124,6 +20074,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Security Option / Memory Management` |
 | Scope | `device` |
@@ -18147,6 +20098,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `clear-pagefile-at-shutdown` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `ClearPageFileAtShutdown` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -18223,6 +20183,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `System` |
 | Area | `Memory Management` |
 | Scope | `device` |
@@ -18246,6 +20207,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-paging-executive` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `DisablePagingExecutive` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
 
 **Provenance**
 
@@ -18326,6 +20296,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Memory Management / Cache Mode` |
 | Scope | `device` |
@@ -18349,6 +20320,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `large-system-cache` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `LargeSystemCache` | `0` | `value` | Observed app value under review. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -18424,6 +20404,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Memory Management / Legacy Pool Tuning` |
 | Scope | `device` |
@@ -18447,6 +20428,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `nonpaged-pool-size` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `NonPagedPoolSize` | `0` | `value` | Observed app value now matches the documented default. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -18522,6 +20512,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Memory Management / Legacy Pool Tuning` |
 | Scope | `device` |
@@ -18545,6 +20536,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `paged-pool-size` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management` | `PagedPoolSize` | `0` | `value` | Observed app value now matches the documented default. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -18620,6 +20620,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Storage Space` |
 | Scope | `device` |
@@ -18644,6 +20645,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `registry-size-limit` | `HKLM\System\CurrentControlSet\Control` | `RegistrySizeLimit` | `0` | `value` | Current implementation path. |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
+
 **Provenance**
 
 | Field | Value |
@@ -18660,7 +20670,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -18717,6 +20727,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
@@ -18740,6 +20751,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ntfs-disable-8dot3-name-creation` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `NtfsDisable8dot3NameCreation` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -18816,6 +20836,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
@@ -18839,6 +20860,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ntfs-disable-last-access-update` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `NtfsDisableLastAccessUpdate` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -18915,6 +20945,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `File System Registry Setting` |
 | Scope | `device` |
@@ -18938,6 +20969,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `long-paths-enabled` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `LongPathsEnabled` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -19014,6 +21054,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
@@ -19037,6 +21078,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ntfs-memory-usage` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `NtfsMemoryUsage` | `1` | `value` | Observed app value now matches the documented default. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -19110,6 +21160,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
@@ -19133,6 +21184,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ntfs-mft-zone-reservation` | `HKLM\SYSTEM\CurrentControlSet\Control\FileSystem` | `NtfsMftZoneReservation` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -19208,6 +21268,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class D` |
 | Category | `System` |
 | Area | `Scheduler / Priority Control` |
 | Scope | `device` |
@@ -19231,6 +21292,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `win32-priority-separation` | `HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl` | `Win32PrioritySeparation` | `38` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Provenance**
 
@@ -19308,6 +21378,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class D` |
 | Category | `System` |
 | Area | `Shutdown and Logoff Timing` |
 | Scope | `mixed` |
@@ -19334,6 +21405,15 @@ Current write(s):
 | `wait-to-kill-app-timeout` | `HKCU\Control Panel\Desktop` | `WaitToKillAppTimeout` | `2500` | `value` |  |
 | `hung-app-timeout` | `HKCU\Control Panel\Desktop` | `HungAppTimeout` | `1500` | `value` |  |
 | `auto-end-tasks` | `HKCU\Control Panel\Desktop` | `AutoEndTasks` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
 **Provenance**
 
@@ -19414,6 +21494,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class C` |
 | Category | `System` |
 | Area | `Reliability / Event Timestamps` |
 | Scope | `device` |
@@ -19431,6 +21512,15 @@ Windows Internals references:
 | Status | `not-mapped` |
 | Provider source | `` |
 | Notes | The app does not currently expose this Reliability timestamp setting. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
 **Provenance**
 
@@ -19489,6 +21579,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -19513,6 +21604,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `btagservice-start-mode` | `BTAGService` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
 **Provenance**
 
 | Field | Value |
@@ -19529,7 +21629,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -19584,6 +21684,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -19608,6 +21709,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `bthserv-start-mode` | `bthserv` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
 **Provenance**
 
 | Field | Value |
@@ -19624,7 +21734,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -19679,6 +21789,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `user-session` |
@@ -19703,6 +21814,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `bluetoothuserservice-start-mode` | `BluetoothUserService_*` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
 **Provenance**
 
 | Field | Value |
@@ -19719,7 +21839,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -19774,6 +21894,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -19798,6 +21919,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `diagtrack-start-mode` | `DiagTrack` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
 **Provenance**
 
 | Field | Value |
@@ -19814,7 +21944,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -19869,6 +21999,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -19893,6 +22024,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `printnotify-start-mode` | `PrintNotify` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
 **Provenance**
 
 | Field | Value |
@@ -19909,7 +22049,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -19964,6 +22104,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -19988,6 +22129,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `spooler-start-mode` | `Spooler` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
 **Provenance**
 
 | Field | Value |
@@ -20004,7 +22154,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -20059,6 +22209,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -20082,6 +22233,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `wsearch-start-mode` | `WSearch` | `StartMode` | `Disabled` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Provenance**
 
@@ -20156,6 +22316,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -20179,6 +22340,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `verbose-status` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` | `VerboseStatus` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -20256,6 +22426,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -20279,6 +22450,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `use-default-tile` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `UseDefaultTile` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -20347,6 +22527,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -20370,6 +22551,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-acrylic-background-on-logon` | `HKLM\Software\Policies\Microsoft\Windows\System` | `DisableAcrylicBackgroundOnLogon` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -20440,6 +22630,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -20463,6 +22654,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `turn-off-spi-animations` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `TurnOffSPIAnimations` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -20532,6 +22732,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -20555,6 +22756,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `enable-first-logon-animation` | `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System` | `EnableFirstLogonAnimation` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -20624,6 +22834,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -20647,6 +22858,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-lock-screen` | `HKLM\Software\Policies\Microsoft\Windows\Personalization` | `NoLockScreen` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -20715,6 +22935,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -20738,6 +22959,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-lock-screen-camera` | `HKLM\Software\Policies\Microsoft\Windows\Personalization` | `NoLockScreenCamera` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -20807,6 +23037,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -20830,6 +23061,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-changing-lock-screen` | `HKLM\Software\Policies\Microsoft\Windows\Personalization` | `NoChangingLockScreen` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -20900,6 +23140,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -20923,6 +23164,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `animate-lock-screen-background` | `HKLM\Software\Policies\Microsoft\Windows\Personalization` | `AnimateLockScreenBackground` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -20993,6 +23243,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -21016,6 +23267,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `no-lock-screen-slideshow` | `HKLM\Software\Policies\Microsoft\Windows\Personalization` | `NoLockScreenSlideshow` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -21086,6 +23346,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -21109,6 +23370,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-spotlight-on-action-center` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableWindowsSpotlightOnActionCenter` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -21178,6 +23448,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -21201,6 +23472,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-spotlight-collection-on-desktop` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableSpotlightCollectionOnDesktop` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -21270,6 +23550,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -21293,6 +23574,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-spotlight-features` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableWindowsSpotlightFeatures` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -21362,6 +23652,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -21385,6 +23676,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-spotlight-on-settings` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableWindowsSpotlightOnSettings` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -21454,6 +23754,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -21477,6 +23778,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-third-party-suggestions` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableThirdPartySuggestions` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -21546,6 +23856,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -21569,6 +23880,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-spotlight-welcome` | `HKCU\Software\Policies\Microsoft\Windows\CloudContent` | `DisableWindowsSpotlightWindowsWelcomeExperience` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -21638,6 +23958,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -21661,6 +23982,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-wcn-ui` | `HKLM\Software\Policies\Microsoft\Windows\WCN\UI` | `DisableWcnUi` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -21730,6 +24060,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -21753,6 +24084,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `allow-news-and-interests` | `HKLM\SOFTWARE\Policies\Microsoft\Dsh` | `AllowNewsAndInterests` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -21823,6 +24163,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -21846,6 +24187,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disallow-animations` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\DWM` | `DisallowAnimations` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -21915,6 +24265,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -21938,6 +24289,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `force-classic-control-panel` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer` | `ForceClassicControlPanel` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -22006,6 +24366,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Visibility` |
 | Area | `User Preference` |
 | Scope | `user` |
@@ -22029,6 +24390,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ctf-langbar-showstatus` | `HKCU\Software\Microsoft\CTF\LangBar` | `ShowStatus` | `3` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -22096,6 +24466,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `device` |
@@ -22119,6 +24490,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `show-or-hide-most-used-apps` | `HKLM\Software\Policies\Microsoft\Windows\Explorer` | `ShowOrHideMostUsedApps` | `2` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -22188,6 +24568,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Registry Policy` |
 | Scope | `user` |
@@ -22211,6 +24592,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `hide-people-bar` | `HKCU\Software\Policies\Microsoft\Windows\Explorer` | `HidePeopleBar` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
@@ -22280,6 +24670,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
+| Evidence class | `Class B` |
 | Category | `Visibility` |
 | Area | `Explorer Context Menu` |
 | Scope | `user` |
@@ -22303,6 +24694,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `classic-context-menu-clsid` | `HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32` | `` | `` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
 **Provenance**
 
@@ -22375,6 +24775,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Audio` |
 | Area | `Audio Engine Flags` |
 | Scope | `device` |
@@ -22398,6 +24799,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `audio-disable-spatial-on-low-latency` | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Audio` | `DisableSpatialOnLowLatency` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -22469,6 +24879,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Audio` |
 | Area | `AppEvents Sound Scheme Entries` |
 | Scope | `user` |
@@ -22492,6 +24903,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `appevents-sound-scheme-bundle` | `HKCU\AppEvents\Schemes\...` | `(multiple default values)` | `` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -22564,6 +24984,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Developer` |
 | Area | `Windows Terminal Internal Flags` |
 | Scope | `user` |
@@ -22588,6 +25009,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `terminal-developer-mode` | `HKCU\Software\Microsoft\Windows Terminal` | `DeveloperMode` | `1` | `value` |  |
 | `terminal-enable-debug-tap` | `HKCU\Software\Microsoft\Windows Terminal` | `EnableDebugTap` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -22663,6 +25093,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Developer` |
 | Area | `Visual Studio IntelliSense` |
 | Scope | `user` |
@@ -22686,6 +25117,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `vs-intellisense-disable-auto-updating` | `HKCU\Software\Microsoft\VisualStudio\IntelliSense` | `DisableAutoUpdating` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -22755,6 +25195,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Developer` |
 | Area | `Visual Studio Solution Loading` |
 | Scope | `user` |
@@ -22778,6 +25219,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `vs-solution-loading-background-analysis` | `HKCU\Software\Microsoft\VisualStudio\SolutionLoading` | `BackgroundAnalysis` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -22847,6 +25297,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Developer` |
 | Area | `VS Code Setting vs Registry Observation` |
 | Scope | `user` |
@@ -22870,6 +25321,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `app-disable-git-autofetch-registry` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `DisableGitAutofetch` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -22945,6 +25405,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Explorer` |
 | Area | `Widgets` |
 | Scope | `device` |
@@ -22962,6 +25423,15 @@ Blocking issues:
 | Status | `not-mapped` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The duplicate explorer.disable-taskbar-widgets provider entry was removed on 2026-03-13. The supported Widgets implementation remains visibility.disable-widgets, which writes the official machine policy AllowNewsAndInterests = 0. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -23021,6 +25491,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Network` |
 | Area | `Registry Optimization Bundle` |
 | Scope | `device` |
@@ -23046,6 +25517,15 @@ Current write(s):
 | `smb-disable-bandwidth-throttling` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `DisableBandwidthThrottling` | `1` | `value` |  |
 | `smb-fileinfo-cache-lifetime` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `FileInfoCacheLifetime` | `30` | `value` |  |
 | `smb-directory-cache-lifetime` | `HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters` | `DirectoryCacheLifetime` | `30` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -23127,6 +25607,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Power` |
 | Area | `Mixed Network and MMCSS Registry` |
 | Scope | `device` |
@@ -23152,6 +25633,15 @@ Current write(s):
 | `disable-task-offload` | `HKLM\System\CurrentControlSet\Services\TCPIP\Parameters` | `DisableTaskOffload` | `0` | `value` |  |
 | `network-throttling-index` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `NetworkThrottlingIndex` | `4294967295` | `value` |  |
 | `system-responsiveness` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `SystemResponsiveness` | `10` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -23233,6 +25723,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
@@ -23256,6 +25747,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `power-performance-registry-bundle` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `CoalescingTimerInterval + DeepIoCoalescingEnabled + EventProcessorEnabled + LatencyToleranceParked + LatencyToleranceSoftParked + EnergyEstimationEnabled` | `CoalescingTimerInterval=0;DeepIoCoalescingEnabled=0;EventProcessorEnabled=1;LatencyToleranceParked=0;LatencyToleranceSoftParked=0;EnergyEstimationEnabled=0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -23337,6 +25837,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
@@ -23360,6 +25861,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `appprivacy-deny-bundle` | `Composite: HKLM\Software\Policies\Microsoft\Windows\AppPrivacy + HKLM\Software\Policies\Microsoft\Windows\System` | `BundleState` | `current-app-profile` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -23431,6 +25941,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Composite` |
 | Scope | `device` |
@@ -23454,6 +25965,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `appcompat-composite` | `Composite: AppCompat policy bundle + Application Experience task bundle` | `CompositeState` | `current-app-profile` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -23523,6 +26043,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Application Compatibility` |
 | Scope | `device` |
@@ -23540,6 +26061,15 @@ Blocking issues:
 | Status | `unknown` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | App implementation unchanged. See child records for current implementation details and evidence mapping. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -23597,6 +26127,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Scheduled Task Bundle` |
 | Scope | `device` |
@@ -23620,6 +26151,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `app-experience-task-bundle` | `\Microsoft\Windows\Application Experience\*` | `EnabledState` | `disabled` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -23681,6 +26221,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
@@ -23704,6 +26245,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ceip-bundle` | `Composite: AppV CEIP + SQMClient Windows + Messenger Client` | `BundleState` | `current-app-profile` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -23771,6 +26321,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Mixed Registry Configuration` |
 | Scope | `mixed` |
@@ -23798,6 +26349,15 @@ Current write(s):
 | `cdp-user-channel-policy` | `HKCU\Software\Microsoft\Windows\CurrentVersion\CDP` | `CdpSessionUserAuthzPolicy` | `0` | `value` |  |
 | `cdp-user-channel-policy` | `HKCU\Software\Microsoft\Windows\CurrentVersion\CDP\SettingsPage` | `RomeSdkChannelUserAuthzPolicy` | `0` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
+
 **Provenance**
 
 | Field | Value |
@@ -23814,7 +26374,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / privacy/desc.md | https://github.com/nohuto/win-config/blob/main/privacy/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 
 **Targets**
 
@@ -23869,6 +26429,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `File Rename` |
 | Scope | `device` |
@@ -23892,6 +26453,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `helppane-binary` | `C:\Windows\System32\HelpPane.exe` | `RenameState` | `renamed-disabled` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -23959,6 +26529,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Registry Bundle` |
 | Scope | `device` |
@@ -23982,6 +26553,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `inking-typing-bundle` | `Composite: TextInput + WindowsInkWorkspace` | `BundleState` | `current-app-profile` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24052,6 +26632,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Composite` |
 | Scope | `device` |
@@ -24075,6 +26656,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `offline-files-composite` | `Composite: Offline Files policy + services + tasks + Sync Center binary` | `CompositeState` | `current-app-profile` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24143,6 +26733,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `File Rename` |
 | Scope | `device` |
@@ -24166,6 +26757,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `mobsync-binary` | `C:\Windows\System32\mobsync.exe` | `RenameState` | `renamed-disabled` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24227,6 +26827,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -24250,6 +26851,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `offline-files-services` | `CSC;CscService` | `StartMode` | `disabled` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24313,6 +26923,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Scheduled Task Bundle` |
 | Scope | `device` |
@@ -24336,6 +26947,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `offline-files-task-bundle` | `\Microsoft\Windows\Offline Files\*` | `EnabledState` | `disabled` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24399,6 +27019,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Deprecated Duplicate Audit Trail` |
 | Scope | `device` |
@@ -24416,6 +27037,15 @@ Blocking issues:
 | Status | `not-mapped` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The retired privacy duplicate has been removed from the provider. The supported implementation now lives only at cleanup.disable-reserved-storage in WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24473,6 +27103,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Event Channel Bundle` |
 | Scope | `device` |
@@ -24496,6 +27127,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `sleepstudy-diagnostic-bundle` | `Composite: WINEVT power and sleep diagnostic channels` | `BundleState` | `current-app-profile` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24566,6 +27206,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Observed User Preference Bundle` |
 | Scope | `user` |
@@ -24589,6 +27230,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `cdm-suggestions-bundle` | `HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager` | `SubscribedContent-* bundle` | `current-app-profile` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24658,6 +27308,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Observed ContentDeliveryManager Values vs Named CloudContent Policies` |
 | Scope | `user` |
@@ -24684,6 +27335,15 @@ Current write(s):
 | `content-delivery-manager-suggestions-observed` | `HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager` | `SubscribedContent-338393Enabled` | `0` | `value` |  |
 | `content-delivery-manager-suggestions-observed` | `HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager` | `SubscribedContent-353694Enabled` | `0` | `value` |  |
 | `content-delivery-manager-suggestions-observed` | `HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager` | `SubscribedContent-353696Enabled` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24762,6 +27422,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Privacy` |
 | Area | `Observed App Preference Bundle` |
 | Scope | `user` |
@@ -24785,6 +27446,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `wmplayer-preferences-bundle` | `HKCU\Software\Microsoft\MediaPlayer\Preferences` | `PreferenceBundleState` | `current-app-profile` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24856,6 +27526,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Security` |
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
@@ -24881,6 +27552,15 @@ Current write(s):
 | `enable-vbs` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard` | `EnableVirtualizationBasedSecurity` | `0` | `value` |  |
 | `hvci-mode` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard` | `HypervisorEnforcedCodeIntegrity` | `0` | `value` |  |
 | `credential-guard-mode` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard` | `LsaCfgFlags` | `0` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -24962,6 +27642,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Security` |
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
@@ -24986,6 +27667,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `disable-windows-update-access` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate` | `DisableWindowsUpdateAccess` | `1` | `value` |  |
 | `no-auto-update` | `HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU` | `NoAutoUpdate` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -25064,6 +27754,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `Security` |
 | Area | `Observed Session Manager Registry Setting` |
 | Scope | `device` |
@@ -25087,6 +27778,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-wpbt-execution` | `HKLM\System\CurrentControlSet\Control\Session Manager` | `DisableWpbtExecution` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -25168,6 +27868,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Deprecated Duplicate` |
 | Scope | `mixed` |
@@ -25185,6 +27886,15 @@ Blocking issues:
 | Status | `unknown` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-game-recording-broadcasting. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -25233,6 +27943,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Scheduled Tasks` |
 | Scope | `device` |
@@ -25262,6 +27973,15 @@ Current write(s):
 | `silentcleanup-task` | `\Microsoft\Windows\DiskCleanup\SilentCleanup` | `Enabled` | `Disabled` | `value` |  |
 | `siuf-dmclient-task` | `\Microsoft\Windows\Feedback\Siuf\DmClient` | `Enabled` | `Disabled` | `value` |  |
 | `queue-reporting-task` | `\Microsoft\Windows\Windows Error Reporting\QueueReporting` | `Enabled` | `Disabled` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -25349,6 +28069,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Deprecated Duplicate` |
 | Scope | `mixed` |
@@ -25366,6 +28087,15 @@ Blocking issues:
 | Status | `unknown` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-search-highlights-policy. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -25414,6 +28144,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `svchost Process Model` |
 | Scope | `device` |
@@ -25437,6 +28168,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `svchost-split-threshold` | `HKLM\SYSTEM\CurrentControlSet\Control` | `SvcHostSplitThresholdInKB` | `4294967295` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -25516,6 +28256,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Desktop Window Manager / Overlay Overrides` |
 | Scope | `device` |
@@ -25539,6 +28280,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `dwm-overlay-test-mode` | `HKLM\SOFTWARE\Microsoft\Windows\Dwm` | `OverlayTestMode` | `5` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -25617,6 +28367,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Graphics Drivers / Overlay Diagnostics` |
 | Scope | `device` |
@@ -25640,6 +28391,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-overlays` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `DisableOverlays` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -25718,6 +28478,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Graphics Drivers / Debug Setting` |
 | Scope | `device` |
@@ -25741,6 +28502,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `page-fault-debug-mode` | `HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers` | `PageFaultDebugMode` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -25819,6 +28589,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
@@ -25842,6 +28613,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `adjust-dpc-threshold` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `AdjustDpcThreshold` | `20` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -25908,7 +28688,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
 | Needs VM validation | `False` |
-| Why | The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for AdjustDpcThreshold. |
+| Why | The current semantics come from repo research notes plus decompiled system-information handlers that expose KiAdjustDpcThreshold, but this research pass still did not capture a primary Microsoft source for AdjustDpcThreshold. |
 
 Blocking issues:
 - No primary Microsoft source for AdjustDpcThreshold was captured in this research pass.
@@ -25921,6 +28701,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Kernel / Scheduler Topology` |
 | Scope | `device` |
@@ -25944,6 +28725,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `cache-aware-scheduling` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `CacheAwareScheduling` | `47` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -26023,6 +28813,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Kernel / Heterogeneous Scheduling` |
 | Scope | `device` |
@@ -26046,6 +28837,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `default-dynamic-hetero-cpu-policy` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `DefaultDynamicHeteroCpuPolicy` | `3` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -26129,6 +28929,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Kernel / Timer Resolution Behavior` |
 | Scope | `device` |
@@ -26152,6 +28953,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `disable-low-qos-timer-resolution` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `DisableLowQosTimerResolution` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -26233,6 +29043,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
@@ -26256,6 +29067,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `dpc-queue-depth` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `DpcQueueDepth` | `4` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -26335,6 +29155,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Kernel / DPC Watchdog` |
 | Scope | `device` |
@@ -26358,6 +29179,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `dpc-watchdog-period` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `DpcWatchdogPeriod` | `120000` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -26440,6 +29270,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
@@ -26463,6 +29294,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `ideal-dpc-rate` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `IdealDpcRate` | `20` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -26542,6 +29382,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
@@ -26565,6 +29406,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `minimum-dpc-rate` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `MinimumDpcRate` | `3` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -26644,6 +29494,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Kernel / Timer Scheduling` |
 | Scope | `device` |
@@ -26667,6 +29518,15 @@ Current write(s):
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
 | `serialize-timer-expiration` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` | `SerializeTimerExpiration` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Provenance**
 
@@ -26746,6 +29606,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -26770,6 +29631,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `printdeviceconfigurationservice-start-mode` | `PrintDeviceConfigurationService` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
+
 **Provenance**
 
 | Field | Value |
@@ -26786,7 +29656,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -26846,6 +29716,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -26870,6 +29741,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `printscanbrokerservice-start-mode` | `PrintScanBrokerService` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
+
 **Provenance**
 
 | Field | Value |
@@ -26886,7 +29766,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -26946,6 +29826,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `user-session` |
@@ -26970,6 +29851,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `printworkflowusersvc-start-mode` | `PrintWorkflowUserSvc_*` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
+
 **Provenance**
 
 | Field | Value |
@@ -26986,7 +29876,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -27045,6 +29935,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -27069,6 +29960,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `sysmain-start-mode` | `SysMain` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
+
 **Provenance**
 
 | Field | Value |
@@ -27085,7 +29985,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -27144,6 +30044,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -27168,6 +30069,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `dmwappushservice-start-mode` | `dmwappushservice` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
+
 **Provenance**
 
 | Field | Value |
@@ -27184,7 +30094,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -27243,6 +30153,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `device` |
@@ -27267,6 +30178,15 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- |
 | `wersvc-start-mode` | `WerSvc` | `StartMode` | `Disabled` | `value` |  |
 
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
+
 **Provenance**
 
 | Field | Value |
@@ -27283,7 +30203,7 @@ Nohuto lineage references:
 
 | Title | URL | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level nohuto win-config documentation fallback. Still needs a stronger tweak-specific match. |
+| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:

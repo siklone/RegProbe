@@ -1,4 +1,4 @@
-﻿# VM Workflow
+# VM Workflow
 
 This repository is validated in the `Win25H2Clean` VMware VM.
 
@@ -18,6 +18,9 @@ This repository is validated in the `Win25H2Clean` VMware VM.
 - WPR
 - WPA
 - xperf
+- WinSAT
+- DiskSpd
+- AIDA64 Extreme (manual visible cross-check)
 
 ### Process / File Tracing
 - Procmon
@@ -37,6 +40,8 @@ This repository is validated in the `Win25H2Clean` VMware VM.
 - `C:\Tools\Scripts\wpr.cmd`
 - `C:\Tools\Scripts\xperf.cmd`
 - `C:\Tools\Scripts\ghidra-headless.cmd`
+- `C:\Tools\Perf\diskspd.exe`
+- `C:\Tools\AIDA64Extreme\aida64.exe`
 - `C:\Tools\Java\jdk-21.0.10+7`
 - `C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC`
 
@@ -81,6 +86,29 @@ Example:
 ```cmd
 C:\Tools\Scripts\ghidra-headless.cmd C:\Tools\GhidraProjects\WindowsOptimizer analysis -import C:\Path\To\Binary.exe
 ```
+
+## Validation Smokes
+
+Tool-health smoke:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File C:\Tools\Scripts\tool-health-smoke.ps1
+```
+
+Published app launch smoke:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File C:\Tools\Scripts\app-launch-smoke.ps1 -PublishZipPath C:\Tools\Inbound\app-publish.zip
+```
+
+The active benchmark lane is:
+
+- `WinSAT CPU + WPR`
+- `WinSAT mem + WPR`
+- `DiskSpd + WPR`
+- `AIDA64` for manual visible cross-check
+
+The active suite avoids EULA-gated third-party stress tools.
 
 ## Bootstrapping Notes
 

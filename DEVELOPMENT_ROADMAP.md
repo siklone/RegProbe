@@ -1,5 +1,7 @@
 # Development Roadmap v2.1
 
+> Archived note (2026-03-24): this roadmap contains historical design work for a telemetry-heavy surface that is no longer part of the shipped app. Keep it as background only; the current product direction is tweak workflow, hardware details, and evidence-backed validation.
+
 **Project:** Windows Optimizer
 **Created:** January 19, 2026
 **Status:** APPROVED - Ready for Implementation
@@ -1140,7 +1142,7 @@ public class HardwareDatabase
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│  Source 1: LibreHardwareMonitor (Primary)                       │
+│  Source 1: Legacy hardware telemetry provider (historical)     │
 │  ├─ CPU: Temps, Voltage, Power, Clocks                          │
 │  ├─ GPU: Temps, Voltage, Power, Clocks, Memory                  │
 │  ├─ Storage: Temps, SMART data                                  │
@@ -1329,7 +1331,7 @@ public class CpuDataProvider
     public CpuDataProvider(ILogger<CpuDataProvider> logger)
     {
         _provider = new FallbackDataProvider<CpuMetrics>(logger)
-            .AddSource("LibreHardwareMonitor", GetFromLhm, priority: 100, timeout: TimeSpan.FromSeconds(3))
+            .AddSource("LegacyTelemetryProvider", GetFromLhm, priority: 100, timeout: TimeSpan.FromSeconds(3))
             .AddSource("WMI_PerfCounter", GetFromWmiPerf, priority: 80, timeout: TimeSpan.FromSeconds(2))
             .AddSource("WMI_Win32", GetFromWmi, priority: 60, timeout: TimeSpan.FromSeconds(2))
             .AddSource("PerformanceCounter", GetFromPerfCounter, priority: 40, timeout: TimeSpan.FromSeconds(1))
@@ -1338,7 +1340,7 @@ public class CpuDataProvider
 
     private async Task<CpuMetrics?> GetFromLhm(CancellationToken ct)
     {
-        // LibreHardwareMonitor implementation
+        // Historical hardware telemetry implementation
         var computer = new Computer { IsCpuEnabled = true };
         computer.Open();
         // ... extract metrics
