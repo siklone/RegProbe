@@ -8,11 +8,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 
 | Field | Value |
 | --- | --- |
-| Total records | 288 |
-| Validated | 236 |
+| Total records | 289 |
+| Validated | 237 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 288 |
+| Records with evidence | 289 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -98,6 +98,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
 | `explorer.show-info-tips` | validated | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `ac3bf40732016c93efa19809e2dfcd75429737d70ffc3eae56a5abe8e401ac13` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
 | `explorer.show-protected-operating-system-files` | validated | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
+| `explorer.show-recent-items` | validated | `Docs/tweaks/research/records/explorer.show-recent-items.review.json` | `e0415d1d6becffa6d1baa236a2bcf7f345f7d693bdb86a20206eabcbe9d7fc92` | `924f0e48d17cbcb71c2c3c57e56be18b825d3a32f3d12fd6cb5d582529e1a34a` | 1 |
 | `explorer.show-status-bar` | validated | `Docs/tweaks/research/records/explorer.show-status-bar.review.json` | `86d5fc4618cbdda09962a72633d1d50f678d6cc0f7bbad8c242d833f696af759` | `9cbc0e1f749f45ec8df99669200d92db5614fefdbc6a3ecfa98e06ddb01383be` | 1 |
 | `explorer.show-type-overlay` | validated | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` | `eb3965321c9a2981e5f8cd538ed32e8932aa64a69d9e434076e5eb0b270a1db7` | `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2` | 1 |
 | `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
@@ -4195,6 +4196,45 @@ _No provenance block present._
 | exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1 |
 | key_found_on_page | True |
 | notes | Raw hit exports were also copied to H:\\Temp\\vm-tooling-staging\\showsuperhidden-0-hits.csv and H:\\Temp\\vm-tooling-staging\\showsuperhidden-1-hits.csv. |
+### `explorer.show-recent-items`
+
+- Status: `validated`
+- Category: `Explorer`
+- Area: `Observed Explorer Runtime Setting`
+- Scope: `user`
+- Source file: `Docs/tweaks/research/records/explorer.show-recent-items.review.json`
+- Source SHA256: `e0415d1d6becffa6d1baa236a2bcf7f345f7d693bdb86a20206eabcbe9d7fc92`
+- Proof SHA256: `924f0e48d17cbcb71c2c3c57e56be18b825d3a32f3d12fd6cb5d582529e1a34a`
+
+**Summary:** Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.
+
+**Targets**
+
+- `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer` / `ShowRecent` / `REG_DWORD`
+  - Notes: The Microsoft settings reference describes the feature, while the 25H2 dump and Procmon probe corroborate the direct registry value and live Explorer read path.
+  - value | value=0 | label=Do not show recent items | meaning=Explorer does not show recently used files in Home. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.
+  - value | value=1 | label=Show recent items | meaning=Explorer shows recently used files in Home. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer general settings | `medium` |
+| `dump-25h2-explorer-showrecent` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowRecent | `medium` |
+| `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | `high` |
+
+**Provenance**
+
+_No provenance block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\showrecent-result.txt |
+| exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0 |
+| key_found_on_page | True |
+| notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe. |
 ### `explorer.show-status-bar`
 
 - Status: `validated`
