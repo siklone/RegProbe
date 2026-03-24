@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T04:30:59.609824Z",
+  "generated_utc": "2026-03-24T04:36:36.532180Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
-    "total_records": 281,
-    "validated": 229,
+    "total_records": 282,
+    "validated": 230,
     "deprecated": 52,
     "review_required": 0,
-    "records_with_evidence": 281,
+    "records_with_evidence": 282,
     "records_without_evidence": 0,
     "records_missing_validation_proof": 0,
     "deprecated_missing_validation_proof": 0,
-    "records_with_source_hashes": 281,
+    "records_with_source_hashes": 282,
     "records_without_source_hashes": 0
   },
   "records": [
@@ -16942,6 +16942,200 @@
         "windows_internals_references": [],
         "other_references": []
       }
+    },
+    {
+      "record_id": "explorer.show-info-tips",
+      "tweak_id": "explorer.show-info-tips",
+      "record_status": "validated",
+      "source_file": "Docs/tweaks/research/records/explorer.show-info-tips.review.json",
+      "source_file_sha256": "ac3bf40732016c93efa19809e2dfcd75429737d70ffc3eae56a5abe8e401ac13",
+      "source_file_size_bytes": 9712,
+      "name": "Show Explorer Info Tips",
+      "category": "Explorer",
+      "area": "Observed Explorer Runtime Setting",
+      "scope": "user",
+      "summary": "Observed Explorer runtime setting for folder and desktop item info tips. Microsoft Open Specifications documents ShowInfoTip under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip with both Data:0 and Data:1 after Explorer restart.",
+      "decision": {
+        "confidence": "high",
+        "apply_allowed": true,
+        "recommended_for_general_users": true,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "Microsoft documents the 0/1 semantics, the 25H2 default hive corroborates the current default state, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference.",
+        "blocking_issues": []
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "n/a",
+        "notes": "The app does not currently expose ShowInfoTip.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "explorer-showinfotip-flag",
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "ShowInfoTip",
+          "value_type": "REG_DWORD",
+          "notes": "This record validates the documented 0/1 semantics against the live Explorer runtime surface on Win25H2Clean.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "Hide Explorer info tips",
+              "meaning": "Explorer info-tip pop-ups are disabled. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "evidence_ids": [
+                "ms-gppref-global-folder-options-vista-showinfotip",
+                "procmon-showinfotip-runtime"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 1,
+              "label": "Show Explorer info tips",
+              "meaning": "Explorer info-tip pop-ups are enabled. Microsoft documents 1 as the enabled state, the 25H2 default hive exports ShowInfoTip = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "evidence_ids": [
+                "ms-gppref-global-folder-options-vista-showinfotip",
+                "dump-hkcu25h2-explorer-advanced-showinfotip",
+                "procmon-showinfotip-runtime"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "25H2 default Explorer preference",
+          "applies_to": "Current-user Explorer Advanced settings on the 25H2 default hive snapshot",
+          "states": [
+            {
+              "target_id": "explorer-showinfotip-flag",
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "HKCU25H2.reg exports ShowInfoTip = 1 in the default Explorer\\Advanced block."
+            }
+          ],
+          "evidence_ids": [
+            "dump-hkcu25h2-explorer-advanced-showinfotip"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "show-explorer-info-tips",
+          "label": "Show Explorer info tips",
+          "intended_for": [
+            "Users who want more hover context in Explorer",
+            "Users who rely on folder and desktop item descriptions"
+          ],
+          "avoid_for": [
+            "Users who prefer a quieter Explorer UI"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-showinfotip-flag",
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "This matches the documented enabled state and the 25H2 default-hive export."
+            }
+          ],
+          "good_when": "You want Explorer to show item info tips on hover.",
+          "bad_when": "You want to reduce hover pop-ups and visual noise.",
+          "tradeoffs": [
+            "Adds item descriptions in Explorer hover pop-ups.",
+            "Can make the UI feel busier."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-gppref-global-folder-options-vista-showinfotip",
+            "dump-hkcu25h2-explorer-advanced-showinfotip",
+            "procmon-showinfotip-runtime"
+          ]
+        },
+        {
+          "profile_id": "hide-explorer-info-tips",
+          "label": "Hide Explorer info tips",
+          "intended_for": [
+            "Users who prefer a quieter Explorer UI"
+          ],
+          "avoid_for": [
+            "Users who depend on hover descriptions"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-showinfotip-flag",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "This matches the documented disabled state and the runtime-observed Explorer read."
+            }
+          ],
+          "good_when": "You want Explorer to suppress info-tip pop-ups.",
+          "bad_when": "You rely on the extra hover descriptions while browsing files.",
+          "tradeoffs": [
+            "Reduces hover noise in Explorer.",
+            "Removes item descriptions from the hover UI."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-gppref-global-folder-options-vista-showinfotip",
+            "procmon-showinfotip-runtime"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ms-gppref-global-folder-options-vista-showinfotip",
+          "kind": "official-doc",
+          "title": "Microsoft Open Specifications: GlobalFolderOptionsVista showInfoTip",
+          "location": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+          "summary": "Microsoft maps showInfoTip to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip and states that it MUST be 1 to enable or 0 to disable. The description says the option shows pop-up descriptions for folder and desktop items.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "dump-hkcu25h2-explorer-advanced-showinfotip",
+          "kind": "raw-registry-dump",
+          "title": "25H2 default hive corroboration for ShowInfoTip",
+          "location": "Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg",
+          "summary": "The 25H2 default hive exports ShowInfoTip = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "procmon-showinfotip-runtime",
+          "kind": "procmon-trace",
+          "title": "Procmon capture - Explorer ShowInfoTip runtime surface",
+          "location": "H:\\Temp\\vm-tooling-staging\\showinfotip-result.txt",
+          "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowInfoTip = 0 and ShowInfoTip = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip with matching Data: 0 and Data: 1 values.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
+        }
+      ],
+      "validation_proof": {
+        "source_url": "H:\\Temp\\vm-tooling-staging\\showinfotip-result.txt",
+        "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip ... Data: 1; RESTORED_VALUE=1",
+        "key_found_on_page": true,
+        "notes": "Raw hit exports were also copied to H:\\Temp\\vm-tooling-staging\\showinfotip-0-hits.csv and H:\\Temp\\vm-tooling-staging\\showinfotip-1-hits.csv."
+      },
+      "validation_proof_sha256": "fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48",
+      "provenance": null
     },
     {
       "record_id": "explorer.show-protected-operating-system-files",
