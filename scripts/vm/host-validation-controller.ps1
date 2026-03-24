@@ -105,18 +105,34 @@ function Sync-GuestFileToHost {
 }
 
 function Sync-GuestArtifactsToHost {
-    try {
-        $listing = Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'listDirectoryInGuest', $VmPath, $guestArtifactsPath) | Out-String
-    } catch {
-        return
-    }
+    param(
+        [int]$Attempts = 3,
+        [int]$DelaySeconds = 3
+    )
 
-    $items = $listing -split "`r?`n" | Select-Object -Skip 1 | Where-Object { $_.Trim() }
-    foreach ($item in $items) {
-        $name = $item.Trim()
-        $guestFile = Join-Path $guestArtifactsPath $name
-        $hostFile = Join-Path $hostArtifactsPath $name
-        Sync-GuestFileToHost -GuestPath $guestFile -HostPath $hostFile | Out-Null
+    for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
+        try {
+            $listing = Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'listDirectoryInGuest', $VmPath, $guestArtifactsPath) | Out-String
+        } catch {
+            if ($attempt -eq $Attempts) {
+                return
+            }
+
+            Start-Sleep -Seconds $DelaySeconds
+            continue
+        }
+
+        $items = $listing -split "`r?`n" | Select-Object -Skip 1 | Where-Object { $_.Trim() }
+        foreach ($item in $items) {
+            $name = $item.Trim()
+            $guestFile = Join-Path $guestArtifactsPath $name
+            $hostFile = Join-Path $hostArtifactsPath $name
+            Sync-GuestFileToHost -GuestPath $guestFile -HostPath $hostFile | Out-Null
+        }
+
+        if ($attempt -lt $Attempts) {
+            Start-Sleep -Seconds $DelaySeconds
+        }
     }
 }
 

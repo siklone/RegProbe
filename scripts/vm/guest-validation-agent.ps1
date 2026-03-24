@@ -163,6 +163,22 @@ function Update-StatePhase {
     Write-AgentLog "$Phase :: $Detail"
 }
 
+function Get-CounterValueOrDefault {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+
+        [double]$Default = 0
+    )
+
+    try {
+        return [double](Get-Counter $Path).CounterSamples[0].CookedValue
+    } catch {
+        Write-AgentLog "COUNTER_WARN :: $Path :: $($_.Exception.Message)"
+        return $Default
+    }
+}
+
 function Wait-ForStableIdle {
     param(
         [int]$TimeoutSeconds = 180,
@@ -175,13 +191,8 @@ function Wait-ForStableIdle {
     $stableSeconds = 0
 
     while ((Get-Date) -lt $deadline) {
-        $cpu = (Get-Counter '\Processor(_Total)\% Processor Time').CounterSamples[0].CookedValue
-        $disk = 0
-        try {
-            $disk = (Get-Counter '\PhysicalDisk(_Total)\% Disk Time').CounterSamples[0].CookedValue
-        } catch {
-            $disk = 0
-        }
+        $cpu = Get-CounterValueOrDefault -Path '\Processor(_Total)\% Processor Time'
+        $disk = Get-CounterValueOrDefault -Path '\PhysicalDisk(_Total)\% Disk Time'
 
         if ($cpu -le $CpuThreshold -and $disk -le $DiskThreshold) {
             $stableSeconds += 5
@@ -338,17 +349,10 @@ function Invoke-BenchmarkRun {
     Write-AgentLog "BENCH_TRACE :: Process started run=$RunIndex pid=$($proc.Id)"
 
     while (-not $proc.HasExited) {
-        $cpu = (Get-Counter '\Processor(_Total)\% Processor Time').CounterSamples[0].CookedValue
-        $commit = (Get-Counter '\Memory\Committed Bytes').CounterSamples[0].CookedValue
-        $diskLatency = 0
-        $diskTransfers = 0
-        try {
-            $diskLatency = (Get-Counter '\PhysicalDisk(_Total)\Avg. Disk sec/Transfer').CounterSamples[0].CookedValue
-            $diskTransfers = (Get-Counter '\PhysicalDisk(_Total)\Disk Transfers/sec').CounterSamples[0].CookedValue
-        } catch {
-            $diskLatency = 0
-            $diskTransfers = 0
-        }
+        $cpu = Get-CounterValueOrDefault -Path '\Processor(_Total)\% Processor Time'
+        $commit = Get-CounterValueOrDefault -Path '\Memory\Committed Bytes'
+        $diskLatency = Get-CounterValueOrDefault -Path '\PhysicalDisk(_Total)\Avg. Disk sec/Transfer'
+        $diskTransfers = Get-CounterValueOrDefault -Path '\PhysicalDisk(_Total)\Disk Transfers/sec'
 
         $counterSamples.Add([ordered]@{
             timestamp = (Get-Date).ToString('o')
