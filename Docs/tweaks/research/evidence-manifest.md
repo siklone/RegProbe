@@ -8,11 +8,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 
 | Field | Value |
 | --- | --- |
-| Total records | 286 |
-| Validated | 234 |
+| Total records | 287 |
+| Validated | 235 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 286 |
+| Records with evidence | 287 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -98,6 +98,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.show-info-tips` | validated | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `ac3bf40732016c93efa19809e2dfcd75429737d70ffc3eae56a5abe8e401ac13` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
 | `explorer.show-protected-operating-system-files` | validated | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
 | `explorer.show-status-bar` | validated | `Docs/tweaks/research/records/explorer.show-status-bar.review.json` | `86d5fc4618cbdda09962a72633d1d50f678d6cc0f7bbad8c242d833f696af759` | `9cbc0e1f749f45ec8df99669200d92db5614fefdbc6a3ecfa98e06ddb01383be` | 1 |
+| `explorer.show-type-overlay` | validated | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` | `eb3965321c9a2981e5f8cd538ed32e8932aa64a69d9e434076e5eb0b270a1db7` | `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2` | 1 |
 | `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
 | `network.disable-active-probing` | validated | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0` | 1 |
 | `network.disable-default-shares` | validated | `Docs/tweaks/research/records/network.disable-default-shares.json` | `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
@@ -4193,6 +4194,45 @@ _No provenance block present._
 | exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0 |
 | key_found_on_page | True |
 | notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe. |
+### `explorer.show-type-overlay`
+
+- Status: `validated`
+- Category: `Explorer`
+- Area: `Observed Explorer Runtime Setting`
+- Scope: `user`
+- Source file: `Docs/tweaks/research/records/explorer.show-type-overlay.review.json`
+- Source SHA256: `eb3965321c9a2981e5f8cd538ed32e8932aa64a69d9e434076e5eb0b270a1db7`
+- Proof SHA256: `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2`
+
+**Summary:** Observed Explorer runtime setting for ShowTypeOverlay. Microsoft Open Specifications maps displayIconThumb to HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTypeOverlay and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTypeOverlay with both Data: 0 and Data: 1 after Explorer restart.
+
+**Targets**
+
+- `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowTypeOverlay` / `REG_DWORD`
+  - Notes: This record validates the documented 0/1 semantics against the live Explorer runtime surface on Win25H2Clean.
+  - value | value=0 | label=Do not show file icons on thumbnails | meaning=Explorer does not show file icons on top of thumbnails. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.
+  - value | value=1 | label=Show file icons on thumbnails | meaning=Explorer shows file icons on top of thumbnails. Microsoft documents 1 as the enabled state, the 25H2 default-user hive sets ShowTypeOverlay = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-displayiconthumb` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista displayIconThumb | `high` |
+| `dump-25h2-explorer-advanced-showtypeoverlay` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowTypeOverlay | `medium` |
+| `procmon-showtypeoverlay-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | `high` |
+
+**Provenance**
+
+_No provenance block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\showtypeoverlay-result.txt |
+| exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=1 |
+| key_found_on_page | True |
+| notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe. |
 ### `explorer.taskbar-alignment-left`
 
 - Status: `validated`
