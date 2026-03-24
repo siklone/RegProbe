@@ -1,6 +1,6 @@
 # Tweak Docs Report (Generated)
 
-Total tweaks: 292
+Total tweaks: 295
 Missing docs files: 0
 Missing docs anchors: 0
 Missing details anchors: 0
@@ -45,13 +45,16 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `developer.vs-solution-load` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
 | `developer.vscode-git-autofetch` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
 | `developer.windows-dev-mode` | `Docs\tweaks\tweaks.md` | yes | yes | yes | yes |
+| `explorer.always-show-icons-never-thumbnails` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.disable-low-disk-space-warning` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.disable-taskbar-chat` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.enable-explorer-compact-mode` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-file-extensions` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-full-path` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-hidden-files` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
+| `explorer.show-info-tips` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-status-bar` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
+| `explorer.show-type-overlay` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.taskbar-alignment-left` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `misc.disable-edge-features` | `Docs\misc\misc.md` | yes | yes | yes | yes |
 | `misc.disable-office-telemetry` | `Docs\misc\misc.md` | yes | yes | yes | yes |

@@ -16,9 +16,9 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 152 |
+| A count | 155 |
 | B count | 61 |
-| C count | 17 |
+| C count | 14 |
 | D count | 8 |
 | E count | 52 |
 
@@ -91,7 +91,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `developer.ssh-agent-autostart` | validated | Class A | `Docs/tweaks/research/records/developer.ssh-agent-autostart.review.json` | `b3236efe7c1bf586a427ddb9a748aa911b732effdd6e8e270a386e5bc25b7485` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 1 |
 | `developer.windows-dev-mode` | validated | Class A | `Docs/tweaks/research/records/developer.windows-dev-mode.json` | `3c3defe4768d22994c71d0a3c131d12ea7eac123190b4fe89a56b7a2113a324d` | `0ed25dffb4bdabc7eaa24c879e79ec54649fabca8d204b46a0e2f6434ae60841` | 1 |
 | `developer.wsl2-memory` | validated | Class A | `Docs/tweaks/research/records/developer.wsl2-memory.json` | `9cf81d553d079e19fcf84fae9b126bdf1b081f7c4137cba883434eb9fdaee1fe` | `8483aaddd7cffe7e57ba75d9b795a94c65285ad73a64c77020d7502864a7d988` | 1 |
-| `explorer.always-show-icons-never-thumbnails` | validated | Class C | `Docs/tweaks/research/records/explorer.always-show-icons-never-thumbnails.review.json` | `22d475e957eef9e078a8c4c3975e12abe89e1ba86c11cf44e627e8221483b1a0` | `b7ac9b5f0745fe76c95b7c8864517314a2c401bac224bb610acb66022a804fcb` | 1 |
+| `explorer.always-show-icons-never-thumbnails` | validated | Class A | `Docs/tweaks/research/records/explorer.always-show-icons-never-thumbnails.review.json` | `00511c1e8e9105e173b3a322b4f5039e4cc130744424405f1bcb0c4dc2bb748f` | `b7ac9b5f0745fe76c95b7c8864517314a2c401bac224bb610acb66022a804fcb` | 1 |
 | `explorer.disable-low-disk-space-warning` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
 | `explorer.enable-explorer-compact-mode` | validated | Class B | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
@@ -102,11 +102,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.show-file-extensions` | validated | Class A | `Docs/tweaks/research/records/explorer.show-file-extensions.review.json` | `fd29b08e9516a84fb812c47948e77c6099d1de026716ebc83bfa121b641954d8` | `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d` | 1 |
 | `explorer.show-full-path` | validated | Class A | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `04d7c7e028991d2417cfcf30b38620aafc8b340c00e65c40a7b0255a983f7d1d` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
 | `explorer.show-hidden-files` | validated | Class A | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
-| `explorer.show-info-tips` | validated | Class C | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `ac3bf40732016c93efa19809e2dfcd75429737d70ffc3eae56a5abe8e401ac13` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
+| `explorer.show-info-tips` | validated | Class A | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `047d7773743e44c33fff8bb55ac9c3223ac3d6819d534dcbc4a0ffd985368216` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
 | `explorer.show-protected-operating-system-files` | validated | Class C | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
 | `explorer.show-recent-items` | validated | Class C | `Docs/tweaks/research/records/explorer.show-recent-items.review.json` | `e0415d1d6becffa6d1baa236a2bcf7f345f7d693bdb86a20206eabcbe9d7fc92` | `924f0e48d17cbcb71c2c3c57e56be18b825d3a32f3d12fd6cb5d582529e1a34a` | 1 |
 | `explorer.show-status-bar` | validated | Class A | `Docs/tweaks/research/records/explorer.show-status-bar.review.json` | `835171bfebdc3b5fedb726ce8bd538b92e6f129869db6768dc7523f295ca81fd` | `9cbc0e1f749f45ec8df99669200d92db5614fefdbc6a3ecfa98e06ddb01383be` | 1 |
-| `explorer.show-type-overlay` | validated | Class C | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` | `eb3965321c9a2981e5f8cd538ed32e8932aa64a69d9e434076e5eb0b270a1db7` | `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2` | 1 |
+| `explorer.show-type-overlay` | validated | Class A | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` | `cfc0557b84bf4e97fe2aba9cc09ad19a8861d3a1c7e112ec25ac05e45367df7a` | `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2` | 1 |
 | `explorer.taskbar-alignment-left` | validated | Class A | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
 | `network.disable-active-probing` | validated | Class A | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0` | 1 |
 | `network.disable-default-shares` | validated | Class B | `Docs/tweaks/research/records/network.disable-default-shares.json` | `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
@@ -262,7 +262,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `49ae33165e91d6cd6ac8591810ea9e20966fe380f15a39cc6bb2a3d5b4e23bf5` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | Class A | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `4529c030bb8d4d838876d695ad31e203ec173cd6eefad045eaaf97a8d3323c55` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class B | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
-| `system.enable-game-mode` | validated | Class B | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `e4811dbd9f28e07fdba6f7fb91ae38898a2f2a55fe61b1395c4772561dafcf9a` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
+| `system.enable-game-mode` | validated | Class B | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `07cf7817028e19e3a09f2b9e0b758df709cee21547ffec6cd6b19959bf6dda56` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
 | `system.enable-hags` | validated | Class A | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
 | `system.enable-indexing-encrypted-items` | validated | Class B | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `bdc09bee78c232ef1bcd5b9ab483aef478a9dd429315fa88206e603628efac84` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
 | `system.graphics-tdr-ddi-delay` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
@@ -4306,12 +4306,12 @@ _No provenance block present._
 ### `explorer.always-show-icons-never-thumbnails`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.always-show-icons-never-thumbnails.review.json`
-- Source SHA256: `22d475e957eef9e078a8c4c3975e12abe89e1ba86c11cf44e627e8221483b1a0`
+- Source SHA256: `00511c1e8e9105e173b3a322b4f5039e4cc130744424405f1bcb0c4dc2bb748f`
 - Proof SHA256: `b7ac9b5f0745fe76c95b7c8864517314a2c401bac224bb610acb66022a804fcb`
 
 **Summary:** Observed Explorer runtime setting for always showing icons instead of thumbnails. Microsoft Open Specifications maps alwaysShowIcons to HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\IconsOnly and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\IconsOnly with both Data: 0 and Data: 1 after Explorer restart.
@@ -4320,10 +4320,10 @@ _No provenance block present._
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4342,7 +4342,20 @@ _No provenance block present._
 
 **Provenance**
 
-_No provenance block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4929,12 +4942,12 @@ Nohuto lineage references:
 ### `explorer.show-info-tips`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.show-info-tips.review.json`
-- Source SHA256: `ac3bf40732016c93efa19809e2dfcd75429737d70ffc3eae56a5abe8e401ac13`
+- Source SHA256: `047d7773743e44c33fff8bb55ac9c3223ac3d6819d534dcbc4a0ffd985368216`
 - Proof SHA256: `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48`
 
 **Summary:** Observed Explorer runtime setting for folder and desktop item info tips. Microsoft Open Specifications documents ShowInfoTip under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowInfoTip with both Data:0 and Data:1 after Explorer restart.
@@ -4943,10 +4956,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4965,7 +4978,20 @@ Nohuto lineage references:
 
 **Provenance**
 
-_No provenance block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5140,12 +5166,12 @@ Nohuto lineage references:
 ### `explorer.show-type-overlay`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.show-type-overlay.review.json`
-- Source SHA256: `eb3965321c9a2981e5f8cd538ed32e8932aa64a69d9e434076e5eb0b270a1db7`
+- Source SHA256: `cfc0557b84bf4e97fe2aba9cc09ad19a8861d3a1c7e112ec25ac05e45367df7a`
 - Proof SHA256: `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2`
 
 **Summary:** Observed Explorer runtime setting for ShowTypeOverlay. Microsoft Open Specifications maps displayIconThumb to HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTypeOverlay and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTypeOverlay with both Data: 0 and Data: 1 after Explorer restart.
@@ -5154,10 +5180,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5176,7 +5202,20 @@ Nohuto lineage references:
 
 **Provenance**
 
-_No provenance block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -15228,7 +15267,7 @@ Windows Internals references:
 - Area: `Gaming Feature / GameBar Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.enable-game-mode.review.json`
-- Source SHA256: `e4811dbd9f28e07fdba6f7fb91ae38898a2f2a55fe61b1395c4772561dafcf9a`
+- Source SHA256: `07cf7817028e19e3a09f2b9e0b758df709cee21547ffec6cd6b19959bf6dda56`
 - Proof SHA256: `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59`
 
 **Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.

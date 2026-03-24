@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T11:24:12.782471Z",
+  "generated_utc": "2026-03-24T12:32:53.222817Z",
   "summary": {
     "total_records": 290,
     "class_counts": {
-      "A": 152,
+      "A": 155,
       "B": 61,
-      "C": 17,
+      "C": 14,
       "D": 8,
       "E": 52
     },
     "action_state_counts": {
-      "actionable": 152,
+      "actionable": 155,
       "archived": 52,
-      "research-gated": 86
+      "research-gated": 83
     }
   },
   "classes": {
@@ -1394,17 +1394,17 @@
       "record_id": "explorer.always-show-icons-never-thumbnails",
       "tweak_id": "explorer.always-show-icons-never-thumbnails",
       "record_status": "validated",
-      "evidence_class": "C",
-      "class_label": "Class C",
-      "class_title": "Key Known, Value Model Partial",
-      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "App Ready",
+      "class_description": "Key exists, app-exposed values have trusted meanings, validation proof is present, the app mapping matches research, and the restore/default story is known.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "action_state": "actionable",
+      "gating_reason": "This record is app-ready and can stay one-click actionable.",
       "confidence": "high",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
         "summary": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe.",
@@ -1439,10 +1439,31 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto lineage is linked for this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode lineage is linked for this record. These links provide discovery and naming provenance only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / peripheral/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / power/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {
@@ -2184,17 +2205,17 @@
       "record_id": "explorer.show-info-tips",
       "tweak_id": "explorer.show-info-tips",
       "record_status": "validated",
-      "evidence_class": "C",
-      "class_label": "Class C",
-      "class_title": "Key Known, Value Model Partial",
-      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "App Ready",
+      "class_description": "Key exists, app-exposed values have trusted meanings, validation proof is present, the app mapping matches research, and the restore/default story is known.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "action_state": "actionable",
+      "gating_reason": "This record is app-ready and can stay one-click actionable.",
       "confidence": "high",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
         "summary": "Raw hit exports were also copied to H:\\Temp\\vm-tooling-staging\\showinfotip-0-hits.csv and H:\\Temp\\vm-tooling-staging\\showinfotip-1-hits.csv.",
@@ -2229,10 +2250,31 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto lineage is linked for this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode lineage is linked for this record. These links provide discovery and naming provenance only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / peripheral/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / power/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {
@@ -2432,17 +2474,17 @@
       "record_id": "explorer.show-type-overlay",
       "tweak_id": "explorer.show-type-overlay",
       "record_status": "validated",
-      "evidence_class": "C",
-      "class_label": "Class C",
-      "class_title": "Key Known, Value Model Partial",
-      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "App Ready",
+      "class_description": "Key exists, app-exposed values have trusted meanings, validation proof is present, the app mapping matches research, and the restore/default story is known.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "action_state": "actionable",
+      "gating_reason": "This record is app-ready and can stay one-click actionable.",
       "confidence": "high",
-      "app_mapping_status": "not-mapped",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
         "summary": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe.",
@@ -2477,10 +2519,31 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto lineage is linked for this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode lineage is linked for this record. These links provide discovery and naming provenance only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / peripheral/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / power/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {

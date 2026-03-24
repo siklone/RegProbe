@@ -80,6 +80,45 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             1,
             requiresElevation: false);
 
+        yield return CreateRegistryTweak(
+            context,
+            "explorer.show-info-tips",
+            "Show Explorer Info Tips",
+            "Shows pop-up descriptions for folders and desktop items in File Explorer.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
+            "ShowInfoTip",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
+        yield return CreateRegistryTweak(
+            context,
+            "explorer.show-type-overlay",
+            "Display File Icons on Thumbnails",
+            "Shows the file-type icon overlay on thumbnail previews in File Explorer.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
+            "ShowTypeOverlay",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
+        yield return CreateRegistryTweak(
+            context,
+            "explorer.always-show-icons-never-thumbnails",
+            "Always Show Icons, Never Thumbnails",
+            "Uses file icons instead of thumbnail previews in File Explorer.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
+            "IconsOnly",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
         // Taskbar & Start
         yield return CreateRegistryTweak(
             context,
