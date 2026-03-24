@@ -15,9 +15,9 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 158 |
+| Class A | 160 |
 | Class B | 61 |
-| Class C | 11 |
+| Class C | 9 |
 | Class D | 8 |
 | Class E | 52 |
 
@@ -1747,33 +1747,39 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\Advanced branch, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.
+**Summary:** Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\Advanced branch, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | `n/a` |
-| Notes | The app does not currently expose HideDrivesWithNoMedia. |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Notes | The app now exposes HideDrivesWithNoMedia through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `explorer-hidedriveswithnomedia-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `HideDrivesWithNoMedia` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -1801,6 +1807,7 @@ Nohuto lineage references:
 | `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
 | `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | H:\Temp\vm-tooling-staging\hideemptydrives-result.txt | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for HideDrivesWithNoMedia | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1817,10 +1824,10 @@ Nohuto lineage references:
 | --- | --- |
 | Apply allowed | `True` |
 | Recommended for general users | `True` |
-| Restore default supported | `False` |
+| Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The 25H2 dump corroborates the HideDrivesWithNoMedia value family, Microsoft Learn describes the feature, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference, but the direct first-party registry contract is weaker than ADMX-grade settings. |
+| Why | Microsoft documents the feature, the 25H2 dump corroborates the HideDrivesWithNoMedia value family, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from current-build corroboration to runtime behavior to shipped app mapping. |
 
 ---
 
@@ -2621,33 +2628,39 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/explorer.show-recent-items.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.
+**Summary:** Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | `n/a` |
-| Notes | The app does not currently expose ShowRecent. |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Notes | The app now exposes ShowRecent through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `explorer-showrecent-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer` | `ShowRecent` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -2675,6 +2688,7 @@ Nohuto lineage references:
 | `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer general settings | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowRecent | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
 | `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | H:\Temp\vm-tooling-staging\showrecent-result.txt | `high` | path, value, behavior, version-scope |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowRecent | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2691,10 +2705,10 @@ Nohuto lineage references:
 | --- | --- |
 | Apply allowed | `True` |
 | Recommended for general users | `True` |
-| Restore default supported | `False` |
+| Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The 25H2 dump corroborates the ShowRecent value family, Microsoft Learn describes the feature, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference, but the direct first-party registry contract is weaker than ADMX-grade settings. |
+| Why | Microsoft documents the feature, the 25H2 dump corroborates the ShowRecent value family, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from current-build corroboration to runtime behavior to shipped app mapping. |
 
 ---
 

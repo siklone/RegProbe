@@ -158,6 +158,32 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             1,
             requiresElevation: false);
 
+        yield return CreateRegistryTweak(
+            context,
+            "explorer.hide-empty-drives",
+            "Hide Empty Drives",
+            "Hides drives with no media present from File Explorer views such as This PC.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
+            "HideDrivesWithNoMedia",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
+        yield return CreateRegistryTweak(
+            context,
+            "explorer.show-recent-items",
+            "Show Recent Items In Home",
+            "Shows recently used files in the Home section of File Explorer.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer",
+            "ShowRecent",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
         // Taskbar & Start
         yield return CreateRegistryTweak(
             context,

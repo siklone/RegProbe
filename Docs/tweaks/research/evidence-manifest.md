@@ -16,9 +16,9 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 158 |
+| A count | 160 |
 | B count | 61 |
-| C count | 11 |
+| C count | 9 |
 | D count | 8 |
 | E count | 52 |
 
@@ -95,7 +95,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `explorer.disable-low-disk-space-warning` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
 | `explorer.enable-explorer-compact-mode` | validated | Class B | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
-| `explorer.hide-empty-drives` | validated | Class C | `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json` | `a3d15c07579a659260f9ff891c3e0545a369c0b8d3b14e8c099a4e9b9a5e7d77` | `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765` | 1 |
+| `explorer.hide-empty-drives` | validated | Class A | `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json` | `839640a80755f3e00c17e65cf64369cd4bce9aa2b0b581aeb4b6b266de56b931` | `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765` | 1 |
 | `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `edabe26e1582cc0da37a8a735e36887c98925be802207f7b43a187908fba30a5` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
 | `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `547d12c8e8f70c4decdcd1e14dfe3dd2108e75c7a556a7286f1860ed887df046` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
 | `explorer.show-drive-letters-first` | validated | Class A | `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json` | `3359c519cf3f3ed7cec6e936b21024c3326b99d4ba1c3c06a0d9c6efdea5603a` | `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10` | 1 |
@@ -104,7 +104,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `explorer.show-hidden-files` | validated | Class A | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
 | `explorer.show-info-tips` | validated | Class A | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `047d7773743e44c33fff8bb55ac9c3223ac3d6819d534dcbc4a0ffd985368216` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
 | `explorer.show-protected-operating-system-files` | validated | Class C | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
-| `explorer.show-recent-items` | validated | Class C | `Docs/tweaks/research/records/explorer.show-recent-items.review.json` | `e0415d1d6becffa6d1baa236a2bcf7f345f7d693bdb86a20206eabcbe9d7fc92` | `924f0e48d17cbcb71c2c3c57e56be18b825d3a32f3d12fd6cb5d582529e1a34a` | 1 |
+| `explorer.show-recent-items` | validated | Class A | `Docs/tweaks/research/records/explorer.show-recent-items.review.json` | `4169d3ea73fd3b2167179fe54685880d8f62b7ea8354d57fdab07641ecf4b973` | `924f0e48d17cbcb71c2c3c57e56be18b825d3a32f3d12fd6cb5d582529e1a34a` | 1 |
 | `explorer.show-status-bar` | validated | Class A | `Docs/tweaks/research/records/explorer.show-status-bar.review.json` | `835171bfebdc3b5fedb726ce8bd538b92e6f129869db6768dc7523f295ca81fd` | `9cbc0e1f749f45ec8df99669200d92db5614fefdbc6a3ecfa98e06ddb01383be` | 1 |
 | `explorer.show-type-overlay` | validated | Class A | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` | `cfc0557b84bf4e97fe2aba9cc09ad19a8861d3a1c7e112ec25ac05e45367df7a` | `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2` | 1 |
 | `explorer.taskbar-alignment-left` | validated | Class A | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
@@ -4557,24 +4557,24 @@ Nohuto lineage references:
 ### `explorer.hide-empty-drives`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json`
-- Source SHA256: `a3d15c07579a659260f9ff891c3e0545a369c0b8d3b14e8c099a4e9b9a5e7d77`
+- Source SHA256: `839640a80755f3e00c17e65cf64369cd4bce9aa2b0b581aeb4b6b266de56b931`
 - Proof SHA256: `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765`
 
-**Summary:** Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\Advanced branch, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.
+**Summary:** Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\Advanced branch, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4590,6 +4590,7 @@ Nohuto lineage references:
 | `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | `medium` |
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | `medium` |
 | `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for HideDrivesWithNoMedia | `high` |
 
 **Sources**
 
@@ -5092,24 +5093,24 @@ _No source block present._
 ### `explorer.show-recent-items`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.show-recent-items.review.json`
-- Source SHA256: `e0415d1d6becffa6d1baa236a2bcf7f345f7d693bdb86a20206eabcbe9d7fc92`
+- Source SHA256: `4169d3ea73fd3b2167179fe54685880d8f62b7ea8354d57fdab07641ecf4b973`
 - Proof SHA256: `924f0e48d17cbcb71c2c3c57e56be18b825d3a32f3d12fd6cb5d582529e1a34a`
 
-**Summary:** Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.
+**Summary:** Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -5125,6 +5126,7 @@ _No source block present._
 | `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer general settings | `medium` |
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowRecent | `medium` |
 | `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | `high` |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowRecent | `high` |
 
 **Sources**
 

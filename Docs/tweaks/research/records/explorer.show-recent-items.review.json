@@ -4,7 +4,7 @@
   "record_id": "explorer.show-recent-items",
   "tweak_id": "explorer.show-recent-items",
   "record_status": "validated",
-  "summary": "Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.",
+  "summary": "Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.",
   "setting": {
     "name": "Show Recent Items In Home",
     "category": "Explorer",
@@ -13,7 +13,7 @@
     "casual_explanation": "Explorer Home can show or hide recently used files.",
     "why_people_change_it": "People disable this when they want less activity history shown in Explorer Home, or enable it when they want quick access to recent files.",
     "tradeoffs_overview": "This is a low-risk Explorer preference. Enabling it exposes more recent-file history in Explorer Home, while disabling it reduces that history surface.",
-    "professional_notes": "Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting. The 25H2 raw registry dump lists ShowRecent under both the machine Explorer branch and the current-user Explorer branch, corroborating that the value family still exists on current builds. A reversible Win25H2Clean Procmon probe on 2026-03-24 then confirmed live Explorer consumption: after writing ShowRecent = 0 and restarting Explorer, Explorer.EXE queried the value with Data: 0; after writing ShowRecent = 1 and restarting Explorer, Explorer.EXE queried the same value with Data: 1.",
+    "professional_notes": "Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting. The 25H2 raw registry dump lists ShowRecent under both the machine Explorer branch and the current-user Explorer branch, corroborating that the value family still exists on current builds. A reversible Win25H2Clean Procmon probe on 2026-03-24 then confirmed live Explorer consumption: after writing ShowRecent = 0 and restarting Explorer, Explorer.EXE queried the value with Data: 0; after writing ShowRecent = 1 and restarting Explorer, Explorer.EXE queried the same value with Data: 1. The app now maps the same path and value through VisibilityTweakProvider, so the shipped apply surface matches the validated runtime preference.",
     "targets": [
       {
         "target_id": "explorer-showrecent-flag",
@@ -50,10 +50,19 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "n/a",
-    "notes": "The app does not currently expose ShowRecent.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The app now exposes ShowRecent through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated.",
+    "writes": [
+      {
+        "target_id": "explorer-showrecent-flag",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        "value_name": "ShowRecent",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
   },
   "windows_defaults": [],
   "recommended_profiles": [
@@ -84,7 +93,8 @@
       "evidence_ids": [
         "ms-settings-common-fileexplorer-showrecentlyusedfiles",
         "dump-25h2-explorer-showrecent",
-        "procmon-showrecent-runtime"
+        "procmon-showrecent-runtime",
+        "app-visibility-provider"
       ]
     },
     {
@@ -156,21 +166,32 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation for ShowRecent",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "VisibilityTweakProvider now exposes explorer.show-recent-items and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 for the current user.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": true,
     "recommended_for_general_users": true,
-    "restore_default_supported": false,
+    "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The 25H2 dump corroborates the ShowRecent value family, Microsoft Learn describes the feature, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference, but the direct first-party registry contract is weaker than ADMX-grade settings.",
+    "why": "Microsoft documents the feature, the 25H2 dump corroborates the ShowRecent value family, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from current-build corroboration to runtime behavior to shipped app mapping.",
     "blocking_issues": []
   },
-  "open_questions": [
-    "Should the app expose ShowRecent as an Explorer Home privacy preference?"
-  ],
+  "open_questions": [],
   "last_reviewed_utc": "2026-03-24T09:27:00+03:00",
   "validation_proof": {
     "source_url": "H:\\Temp\\vm-tooling-staging\\showrecent-result.txt",

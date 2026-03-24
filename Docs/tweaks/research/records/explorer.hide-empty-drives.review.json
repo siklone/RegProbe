@@ -4,7 +4,7 @@
   "record_id": "explorer.hide-empty-drives",
   "tweak_id": "explorer.hide-empty-drives",
   "record_status": "validated",
-  "summary": "Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\\Advanced branch, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.",
+  "summary": "Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\\Advanced branch, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.",
   "setting": {
     "name": "Hide Empty Drives",
     "category": "Explorer",
@@ -13,7 +13,7 @@
     "casual_explanation": "Explorer can hide or show drives that do not currently have media present.",
     "why_people_change_it": "People enable this when they want Explorer to look cleaner by hiding empty removable-drive slots, or disable it when they want every drive slot visible.",
     "tradeoffs_overview": "This is a low-risk Explorer preference. Enabling it hides empty drives from Explorer views, while disabling it keeps all drive slots visible.",
-    "professional_notes": "Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting. The 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\\Advanced branch, corroborating that the value family is still present on current builds. A reversible Win25H2Clean Procmon probe on 2026-03-24 then confirmed live Explorer consumption: after writing HideDrivesWithNoMedia = 0 and restarting Explorer into This PC, Explorer.EXE queried the value with Data: 0; after writing HideDrivesWithNoMedia = 1 and restarting Explorer into This PC, Explorer.EXE queried the same value with Data: 1.",
+    "professional_notes": "Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting. The 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\\Advanced branch, corroborating that the value family is still present on current builds. A reversible Win25H2Clean Procmon probe on 2026-03-24 then confirmed live Explorer consumption: after writing HideDrivesWithNoMedia = 0 and restarting Explorer into This PC, Explorer.EXE queried the value with Data: 0; after writing HideDrivesWithNoMedia = 1 and restarting Explorer into This PC, Explorer.EXE queried the same value with Data: 1. The app now maps the same path and value through VisibilityTweakProvider, so the shipped apply surface matches the validated runtime preference.",
     "targets": [
       {
         "target_id": "explorer-hidedriveswithnomedia-flag",
@@ -50,10 +50,19 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "n/a",
-    "notes": "The app does not currently expose HideDrivesWithNoMedia.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The app now exposes HideDrivesWithNoMedia through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+    "writes": [
+      {
+        "target_id": "explorer-hidedriveswithnomedia-flag",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "value_name": "HideDrivesWithNoMedia",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
   },
   "windows_defaults": [],
   "recommended_profiles": [
@@ -84,7 +93,8 @@
       "evidence_ids": [
         "ms-settings-common-fileexplorer-hide-empty-drives",
         "dump-25h2-explorer-advanced-hidedriveswithnomedia",
-        "procmon-hidedriveswithnomedia-runtime"
+        "procmon-hidedriveswithnomedia-runtime",
+        "app-visibility-provider"
       ]
     },
     {
@@ -156,21 +166,32 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation for HideDrivesWithNoMedia",
+      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "VisibilityTweakProvider now exposes explorer.hide-empty-drives and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia = 1 for the current user.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": true,
     "recommended_for_general_users": true,
-    "restore_default_supported": false,
+    "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The 25H2 dump corroborates the HideDrivesWithNoMedia value family, Microsoft Learn describes the feature, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference, but the direct first-party registry contract is weaker than ADMX-grade settings.",
+    "why": "Microsoft documents the feature, the 25H2 dump corroborates the HideDrivesWithNoMedia value family, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the current app implementation now writes the same validated value. This closes the loop from current-build corroboration to runtime behavior to shipped app mapping.",
     "blocking_issues": []
   },
-  "open_questions": [
-    "Should the app expose HideDrivesWithNoMedia as a general Explorer preference?"
-  ],
+  "open_questions": [],
   "last_reviewed_utc": "2026-03-24T09:28:00+03:00",
   "validation_proof": {
     "source_url": "H:\\Temp\\vm-tooling-staging\\hideemptydrives-result.txt",
