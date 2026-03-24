@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T17:45:45.063421Z",
+  "generated_utc": "2026-03-24T18:58:35.838667Z",
   "summary": {
-    "total_records": 290,
+    "total_records": 291,
     "class_counts": {
       "A": 174,
-      "B": 56,
+      "B": 57,
       "C": 0,
       "D": 8,
       "E": 52
@@ -13,7 +13,7 @@
     "action_state_counts": {
       "actionable": 174,
       "archived": 52,
-      "research-gated": 64
+      "research-gated": 65
     }
   },
   "classes": {
@@ -12687,6 +12687,79 @@
             "summary": "Matched 1 audit token(s) in win-config."
           }
         ]
+      }
+    },
+    {
+      "record_id": "security.disable-enhanced-defender-notifications",
+      "tweak_id": "security.disable-enhanced-defender-notifications",
+      "record_status": "validated",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Partial",
+      "class_description": "Key and primary values are known, but the record is still gated from one-click apply or has incomplete edge semantics.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "Primary values are understood, but this record is still intentionally gated from one-click apply.",
+      "confidence": "medium",
+      "app_mapping_status": "matches-research",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The base...",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "H:\\Temp\\vm-tooling-staging\\defender-enhanced-notifications-securitycenter-1-20260324-213118\\defender-disable-enhanced-securitycenter-1.txt",
+            "kind": "validation-proof",
+            "summary": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications | SUCCESS | Type: REG_DW..."
+          },
+          {
+            "title": "WindowsDefenderSecurityCenter.admx enhanced notifications policy",
+            "url": "Docs/system/system.md",
+            "kind": "official-doc",
+            "summary": "Local ADMX notes show Notifications_DisableEnhancedNotifications under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications with enabled value 1 and d..."
+          },
+          {
+            "title": "WindowsDefender.admx reporting enhanced notifications policy",
+            "url": "Docs/system/system.md",
+            "kind": "official-doc",
+            "summary": "Local ADMX notes also show Reporting_DisableEnhancedNotifications under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting with enabled value 1 and disabled value 0."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "On a clean snapshot, SecurityHealthService.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications and got NAME NOT FOUND. The same capture showed DisableNotifications = 1 already present on t...",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean Procmon baseline for Security Center notifications policy",
+            "url": "H:\\Temp\\vm-tooling-staging\\defender-enhanced-notifications-baseline-1-20260324-214343\\defender-disable-enhanced-baseline-1.txt",
+            "kind": "procmon-trace",
+            "summary": "On a clean snapshot, SecurityHealthService.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications and got NAME..."
+          },
+          {
+            "title": "Win25H2Clean Procmon enabled-state read for Security Center notifications policy",
+            "url": "H:\\Temp\\vm-tooling-staging\\defender-enhanced-notifications-securitycenter-1-20260324-213118\\defender-disable-enhanced-securitycenter-1.txt",
+            "kind": "procmon-trace",
+            "summary": "After writing DisableEnhancedNotifications = 1 on the Security Center Notifications policy path, SecurityHealthService.exe queried the same path and read Data: 1."
+          },
+          {
+            "title": "Win25H2Clean Procmon reporting-path alias check",
+            "url": "H:\\Temp\\vm-tooling-staging\\defender-enhanced-notifications-reporting-1-20260324-213700\\defender-disable-enhanced-reporting-1.txt",
+            "kind": "procmon-trace",
+            "summary": "When only HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting\\DisableEnhancedNotifications was set to 1, the Windows Security launch probe still showed SecurityHealthSer..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {

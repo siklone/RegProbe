@@ -91,6 +91,18 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
+        yield return CreateRegistryTweak(
+            context,
+            "security.disable-enhanced-defender-notifications",
+            "Hide Non-Critical Windows Security Notifications",
+            "Shows only critical Windows Security notifications by setting the documented enhanced-notifications policy.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.LocalMachine,
+            @"Software\Policies\Microsoft\Windows Defender Security Center\Notifications",
+            "DisableEnhancedNotifications",
+            RegistryValueKind.DWord,
+            1);
+
         // System Defense
         // Windows Firewall Configuration
         // Source: Microsoft Defender Firewall Documentation

@@ -1,11 +1,11 @@
-# Tweak Provenance Missing / Review Report
+# Tweak Source Missing / Review Report
 
 - Missing or review-needed entries: 26
 
 | ID | Coverage | Repos | Notes |
 | --- | --- | --- | --- |
-| `developer.ssh-agent-autostart` | unmapped | `-` | No upstream provenance match found yet. Keep this tweak in review-only state. |
-| `developer.windows-dev-mode` | unmapped | `-` | No upstream provenance match found yet. Keep this tweak in review-only state. |
+| `developer.ssh-agent-autostart` | unmapped | `-` | No upstream source match found yet. Keep this tweak in review-only state. |
+| `developer.windows-dev-mode` | unmapped | `-` | No upstream source match found yet. Keep this tweak in review-only state. |
 | `network.reset-winsock` | category-fallback | `win-config` | Official Microsoft netsh winsock documentation is linked, but this tweak stays review-only until a nohuto repo documents it directly. |
 | `network.smb-disable-leasing` | category-fallback | `win-config` | Linked to the closest upstream win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |
 | `network.smb-enable-multichannel` | category-fallback | `win-config` | Linked to the closest upstream win-config category docs, but this tweak still needs a stronger tweak-specific upstream match before being considered fully curated. |

@@ -8,16 +8,16 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 
 | Field | Value |
 | --- | --- |
-| Total records | 290 |
-| Validated | 238 |
+| Total records | 291 |
+| Validated | 239 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 290 |
+| Records with evidence | 291 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | A count | 174 |
-| B count | 56 |
+| B count | 57 |
 | D count | 8 |
 | E count | 52 |
 
@@ -225,6 +225,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `privacy.troubleshooter-dont-run` | validated | Class A | `Docs/tweaks/research/records/privacy.troubleshooter-dont-run.review.json` | `0d7c80add69e4226a6eeefa2436330be4eb3d6c256266c19172fd70ca09917a4` | `7dcc7ddffc4e900be0639a531fe65c9f9e91f3571e105777966de2c6b82f3f86` | 1 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | `cd5527ef4c788ca56752769b9f884d367106f6d2e67fa8958bc7c272b5fa8ec6` | `cbf61febc21858b0337754ddc719d778a0a6c0f8f34b535b029e120bcecea03e` | 3 |
 | `security.disable-downloads-blocking` | validated | Class A | `Docs/tweaks/research/records/security.disable-downloads-blocking.json` | `f9574461ea84e7f9a84ed029d6469a4ea7020dd5399a7cdcc0201a3106f99d1c` | `37f0c6998110ae0723af795d2c3f93b894ac85bf013d9877cbdc60c381f3f2eb` | 1 |
+| `security.disable-enhanced-defender-notifications` | validated | Class B | `Docs/tweaks/research/records/security.disable-enhanced-defender-notifications.review.json` | `423998f5cf355f1d27c890da884dec5ccf5571fb463bcf1439dde92ffcdaf78b` | `a12e468c1b7df394776f91ac6de7601b047c298f81aa8bbae8df1441ecb28c2b` | 1 |
 | `security.disable-ntfs-encryption` | validated | Class B | `Docs/tweaks/research/records/security.disable-ntfs-encryption.json` | `b75f5abb843f5b452720a76ecf7b696cfc9544a8f8d34971eab365d6fdf8dfd3` | `a85e3450b7be35f290e9b7a8083815b660f2edd6afcb9d8151d04d4a677e9a0d` | 1 |
 | `security.disable-p2p-updates` | validated | Class A | `Docs/tweaks/research/records/security.disable-p2p-updates.review.json` | `a5915f3c7a416dcdd379f1e53e984222435ee2d5b91469252e8e3b2f4620a15f` | `e30fdfd201f0bf77b2b6fa51c308d5dd3e3f64adb81b8c6caa7a689101591a0a` | 1 |
 | `security.disable-password-reveal` | validated | Class A | `Docs/tweaks/research/records/security.disable-password-reveal.json` | `49cb1dede082e74036b4af6d4cdbc27ea3f85f9514ffe15dc9c5765c0ad91db5` | `50d97e420c30cbf63a70c9a209094c3baa6f45450925e287d51ea8a22288f57e` | 1 |
@@ -12918,6 +12919,59 @@ Windows Internals references:
 | exact_quote_or_path | <policy name="AM_MarkZoneOnSavedAtttachments" class="User" ... key="Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments" valueName="SaveZoneInformation"> ... <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="2" /></disabledValue> |
 | key_found_on_page | True |
 | notes | The local official Microsoft ADMX file names the same Attachments policy key and SaveZoneInformation value used by the app, and it confirms the 1/2 mapping. The paired ADML help text states that enabling the policy stops Windows from marking attachments with zone information. |
+### `security.disable-enhanced-defender-notifications`
+
+- Status: `validated`
+- Evidence class: `Class B` - Strong but Partial
+- Category: `Security`
+- Area: `Windows Security notifications`
+- Scope: `device`
+- Source file: `Docs/tweaks/research/records/security.disable-enhanced-defender-notifications.review.json`
+- Source SHA256: `423998f5cf355f1d27c890da884dec5ccf5571fb463bcf1439dde92ffcdaf78b`
+- Proof SHA256: `a12e468c1b7df394776f91ac6de7601b047c298f81aa8bbae8df1441ecb28c2b`
+
+**Summary:** Microsoft documents DisableEnhancedNotifications on two Defender policy paths. In a clean Win25H2Clean trace, SecurityHealthService.exe read the Security Center Notifications path and consumed DisableEnhancedNotifications = 1.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class B |
+| Title | Strong but Partial |
+| Action state | research-gated |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
+**Targets**
+
+- `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications` / `DisableEnhancedNotifications` / `REG_DWORD`
+  - Notes: This record uses the Security Center Notifications path because the 25H2 VM trace showed SecurityHealthService.exe reading that path directly during a Windows Security launch.
+  - missing | label=Not configured | meaning=Windows Security uses its normal notification behavior for this policy surface.
+  - value | value=0 | label=Enhanced notifications allowed | meaning=The policy is disabled and Windows Security can continue showing non-critical notifications.
+  - value | value=1 | label=Hide non-critical notifications | meaning=Windows Security only shows critical notifications on the documented Security Center policy surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-defender-security-center-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefenderSecurityCenter.admx enhanced notifications policy | `high` |
+| `ms-defender-reporting-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefender.admx reporting enhanced notifications policy | `medium` |
+| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | `high` |
+| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | `high` |
+| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | `medium` |
+| `app-security-provider-disable-enhanced-notifications` | `repo-code` | `Current repo code` | Current security provider enhanced notifications write | `high` |
+
+**Sources**
+
+_No source block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\defender-enhanced-notifications-securitycenter-1-20260324-213118\\defender-disable-enhanced-securitycenter-1.txt |
+| exact_quote_or_path | SecurityHealthService.exe \| RegQueryValue \| HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write. |
+| key_found_on_page | True |
+| notes | The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, which is why this record stays gated. |
 ### `security.disable-ntfs-encryption`
 
 - Status: `validated`

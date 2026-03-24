@@ -7,16 +7,16 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 
 | Field | Value |
 | --- | --- |
-| Total records | 290 |
-| Validated | 238 |
+| Total records | 291 |
+| Validated | 239 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 290 |
+| Records with evidence | 291 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 174 |
-| Class B | 56 |
+| Class B | 57 |
 | Class D | 8 |
 | Class E | 52 |
 
@@ -34,7 +34,7 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Peripheral | 3 |
 | Power | 13 |
 | Privacy | 84 |
-| Security | 19 |
+| Security | 20 |
 | System | 74 |
 | Visibility | 23 |
 
@@ -15323,6 +15323,102 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | The local Microsoft AttachmentManager.admx file explicitly defines SaveZoneInformation under Software\Microsoft\Windows\CurrentVersion\Policies\Attachments with enabledValue 1 and disabledValue 2, and the paired ADML help text states that enabling the policy stops Windows from marking attachments with zone information while disabled or not configured keeps marking enabled. The app writes that documented enabled-policy state. |
+
+---
+
+### `security.disable-enhanced-defender-notifications`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `Security` |
+| Area | `Windows Security notifications` |
+| Scope | `device` |
+| Source file | `Docs/tweaks/research/records/security.disable-enhanced-defender-notifications.review.json` |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Microsoft documents DisableEnhancedNotifications on two Defender policy paths. In a clean Win25H2Clean trace, SecurityHealthService.exe read the Security Center Notifications path and consumed DisableEnhancedNotifications = 1.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Notes | The app writes DisableEnhancedNotifications = 1 on the Security Center Notifications policy path that the Win25H2Clean Procmon capture showed SecurityHealthService.exe reading. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `defender-security-center-disable-enhanced-notifications` | `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications` | `DisableEnhancedNotifications` | `1` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Partial |
+| Action state | `research-gated` |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- Windows managed default (Windows Security systems where the enhanced-notifications policy is not configured)
+  - defender-security-center-disable-enhanced-notifications: missing — — Leave the Security Center enhanced-notifications policy unset.
+
+**Recommended profiles**
+
+- `windows-default`: Windows default (apply_allowed=False)
+- `hide-noncritical-windows-security-notifications`: Hide non-critical Windows Security notifications (apply_allowed=False)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-defender-security-center-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefenderSecurityCenter.admx enhanced notifications policy | Docs/system/system.md | `high` | path, value, allowed-values, behavior |
+| `ms-defender-reporting-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefender.admx reporting enhanced notifications policy | Docs/system/system.md | `medium` | path, value, allowed-values |
+| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | H:\Temp\vm-tooling-staging\defender-enhanced-notifications-baseline-1-20260324-214343\defender-disable-enhanced-baseline-1.txt | `high` | path, runtime-read, default |
+| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | H:\Temp\vm-tooling-staging\defender-enhanced-notifications-securitycenter-1-20260324-213118\defender-disable-enhanced-securitycenter-1.txt | `high` | path, value, runtime-read, behavior |
+| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | H:\Temp\vm-tooling-staging\defender-enhanced-notifications-reporting-1-20260324-213700\defender-disable-enhanced-reporting-1.txt | `medium` | path, runtime-read |
+| `app-security-provider-disable-enhanced-notifications` | `repo-code` | `Current repo code` | Current security provider enhanced notifications write | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | ui-mapping, path, value |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\defender-enhanced-notifications-securitycenter-1-20260324-213118\defender-disable-enhanced-securitycenter-1.txt |
+| Exact quote / path | SecurityHealthService.exe \| RegQueryValue \| HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications\DisableEnhancedNotifications \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write. |
+| Key found on page | `True` |
+| Notes | The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, which is why this record stays gated. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft documents the exact Security Center Notifications value semantics, and the VM Procmon trace shows SecurityHealthService.exe reading DisableEnhancedNotifications from that path. The record stays gated because Microsoft also documents a Reporting alias for the same value name, and the clean VM already had the broader DisableNotifications policy set on the same Security Center branch. |
 
 ---
 
