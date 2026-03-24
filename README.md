@@ -1,13 +1,13 @@
 # Windows Optimizer Suite
 
-Windows Optimizer Suite is a WPF/.NET 8 desktop app for Windows 10/11 focused on **safe, reversible tweaks**, **hardware details**, and **documented system research**.
+Windows Optimizer Suite is a WPF/.NET 8 desktop app for Windows 10/11. It focuses on safe, reversible tweaks, hardware details, and documented system research.
 
-It is built for people who want more than a random "FPS boost" script:
+The project is for people who want more than a random "FPS boost" script:
 
-- 🛡️ every SAFE tweak follows `Detect -> Apply -> Verify -> Rollback`
-- 🧠 the app understands the PC it is running on
-- 🔍 tweaks are backed by documented sources and local audit notes
-- ⚡ elevated actions run out-of-process through a dedicated host instead of forcing the whole app to run as admin
+- every SAFE tweak follows `Detect -> Apply -> Verify -> Rollback`
+- the app reads the PC it is running on
+- tweaks are tied to source notes and local validation
+- elevated work runs through a separate host instead of forcing the whole app to run as admin
 
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4)
@@ -15,44 +15,43 @@ It is built for people who want more than a random "FPS boost" script:
 ![Status](https://img.shields.io/badge/status-active%20development-ff5a5f)
 ![License](https://img.shields.io/badge/license-TBD-yellow)
 
-## ✨ What It Does
+## What It Does
 
-### 🧩 Configuration Workspace
-- Browse tweak categories with search, filters, live status, and batch selection
-- Apply single tweaks directly from the row or queue multiple tweaks for bulk actions
-- Use richer policy-aware and registry-aware entries instead of opaque one-line scripts
-- Explore dedicated sections for:
-  - `Configuration`
-  - `Policy Reference`
-  - `Services`
-  - `Bloatware`
-  - `Startup`
+### Configuration workspace
 
-### Dashboard & Hardware Details
-- Hardware-first dashboard for OS, motherboard, CPU, GPU, memory, storage, displays, network, USB, and audio
-- Hardware detail sheets with charts, adapter details, and hardware-specific summaries
-- Device detail windows with cleaner specs, insights, and grouped metadata
+- browse tweak categories with search, filters, live status, and batch selection
+- apply one tweak from the row or queue several for batch work
+- use policy-aware and registry-aware entries instead of opaque one-line scripts
+- work in dedicated sections for `Configuration`, `Policy Reference`, `Services`, `Bloatware`, and `Startup`
 
-### 🧪 Tweak Engine
+### Dashboard and hardware details
+
+- hardware-first dashboard for OS, motherboard, CPU, GPU, memory, storage, displays, network, USB, and audio
+- hardware detail sheets with charts, adapter details, and grouped summaries
+- device detail windows with cleaner specs and grouped metadata
+
+### Tweak engine
+
 - SAFE pipeline: `Detect -> Apply -> Verify -> Rollback`
-- Risk levels: `Safe`, `Advanced`, `Risky`
-- Local logging and exportable tweak history
-- Support for preset-backed tweaks and registry-backed multi-value actions
-- Elevated registry and command execution via `WindowsOptimizer.ElevatedHost`
+- risk levels: `Safe`, `Advanced`, `Risky`
+- local logging and exportable tweak history
+- preset-backed tweaks and registry-backed multi-value actions
+- elevated registry and command execution through `WindowsOptimizer.ElevatedHost`
 
-### 📚 Research & Provenance
-- Local documentation and source mapping under `Docs/`
-- Uses Nohuto's research (`win-config`, `win-registry`), cross-referenced against live builds
+### Research and sources
+
+- local documentation and source mapping under `Docs/`
+- uses Nohuto's research (`win-config`, `win-registry`) and cross-checks it against live builds
 - Microsoft-backed and repo-backed coverage tests for tweak providers
 
-## 🧪 VM Validation Environment
+## VM Validation Environment
 
-Runtime validation for this project happens in a dedicated VMware VM, not on the host machine.
+Runtime validation happens in a VMware VM, not on the host machine.
 
-- Supported VM: `Win25H2Clean`
-- Use the VM for live app runs, registry experiments, performance testing, Procmon captures, WPR/WPA traces, and Ghidra headless analysis
-- Host usage is for source editing and offline preparation only
-- Tooling and wrapper paths are documented in [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
+- supported VM: `Win25H2Clean`
+- use the VM for live app runs, registry experiments, performance testing, Procmon captures, WPR/WPA traces, and Ghidra headless analysis
+- use the host only for source editing and offline prep
+- tooling and wrapper paths are in [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
 
 Available in the VM:
 
@@ -61,48 +60,52 @@ Available in the VM:
 - Ghidra headless
 - Java 21 for Ghidra
 
-## 🚀 Why This Project Feels Different
+## Why It Exists
 
 Most Windows tweak tools stop at "click button, hope for the best."
 
-Windows Optimizer Suite aims for something better:
+This project does not.
 
-- 🧭 **Readable UI** instead of script-dump UX
-- 🔁 **Reversible behavior** instead of blind mutation
-- 🪟 **Windows-native shell** instead of a web wrapper
-- 🛠️ **Real hardware context** instead of generic system labels
-- 🧾 **Source-aware documentation** instead of forum folklore
+- the UI is readable instead of a script dump
+- the behavior is reversible instead of blind mutation
+- the shell is Windows-native instead of a web wrapper
+- the hardware view shows real device context instead of generic labels
+- the docs point back to sources instead of forum folklore
 
-## 🖥️ Current Surface Areas
+## Current Sections
 
 ### Dashboard
-- System hero card
-- Quick actions
-- Hardware grid
-- Drivers & recommended installs
+
+- system hero card
+- quick actions
+- hardware grid
+- drivers and recommended installs
 
 ### Configuration
-- Searchable tweak workspace
-- Category rail
-- Inline apply actions
-- Batch queue / batch actions
-- Policy browser
-- Services browser
-- Bloatware remover
-- Startup manager
+
+- searchable tweak workspace
+- category rail
+- inline apply actions
+- batch queue / batch actions
+- policy browser
+- services browser
+- bloatware remover
+- startup manager
 
 ### Hardware Details
-- Detail sheets
-- Trend charts
-- Adapter / disk / GPU breakdowns
-- Hardware summary cards
+
+- detail sheets
+- trend charts
+- adapter / disk / GPU breakdowns
+- hardware summary cards
 
 ### Settings
-- Theme and behavior preferences
-- Startup scan behavior
-- Preview hints and shell preferences
 
-## 🧱 Solution Layout
+- theme and behavior preferences
+- startup scan behavior
+- preview hints and shell preferences
+
+## Solution Layout
 
 ```text
 WindowsOptimizer.App/              WPF UI, view models, startup, assets, views
@@ -118,26 +121,27 @@ Tools/                             One-off developer utilities
 scripts/                           Build, publish, cleanup, asset generation
 ```
 
-## 🛡️ Safety Model
+## Safety Model
 
-All SAFE tweak work is expected to remain reversible and logged.
+SAFE tweak work is expected to stay reversible and logged.
 
-- ✅ `Detect -> Apply -> Verify -> Rollback`
-- ✅ no automatic system modification on startup
-- ✅ elevated work is isolated from the main app process
-- ✅ tweak activity is logged
-- ✅ preview-first workflow is preserved
+- `Detect -> Apply -> Verify -> Rollback`
+- no automatic system changes on startup
+- elevated work stays out of the main app process
+- tweak activity is logged
+- the workflow stays preview-first
 
-Things this project intentionally avoids under SAFE:
+Things this project does not do under SAFE:
 
-- ❌ disable Defender
-- ❌ disable Firewall
-- ❌ disable SmartScreen
-- ❌ irreversible "trust me bro" system mutations
+- disable Defender
+- disable Firewall
+- disable SmartScreen
+- ship irreversible "trust me bro" system mutations
 
-## 🏁 Getting Started
+## Getting Started
 
 ### Prerequisites
+
 - Windows 10 or Windows 11
 - .NET 8 SDK
 - PowerShell 7+ recommended
@@ -169,8 +173,6 @@ dotnet test WindowsOptimizer.Tests/WindowsOptimizer.Tests.csproj -v minimal
 
 ### Publish
 
-Use the repo script:
-
 ```powershell
 pwsh -File scripts/publish_release.ps1
 ```
@@ -181,9 +183,9 @@ pwsh -File scripts/publish_release.ps1
 pwsh -File scripts/clean_build_outputs.ps1 -WhatIfMode:$false
 ```
 
-## 🔐 Elevated Host Notes
+## Elevated Host Notes
 
-The app is **not** always-admin.
+The app is not always-admin.
 
 Admin-required operations are delegated to `WindowsOptimizer.ElevatedHost`, which is resolved by:
 
@@ -195,7 +197,7 @@ Admin-required operations are delegated to `WindowsOptimizer.ElevatedHost`, whic
 $env:WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH = "C:\path\to\WindowsOptimizer.ElevatedHost.exe"
 ```
 
-## 🧠 Optional Generated Assets
+## Optional Generated Assets
 
 Hardware coverage works on two levels:
 
@@ -208,9 +210,9 @@ Useful scripts:
 - `scripts/publish_release.ps1`
 - `scripts/clean_build_outputs.ps1`
 
-Generation reports such as `HardwareIconDownloadReport.json` are local artifacts, not core source files.
+Files like `HardwareIconDownloadReport.json` are local artifacts, not core source files.
 
-## 📖 Documentation
+## Documentation
 
 Good starting points:
 
@@ -218,40 +220,3 @@ Good starting points:
 - [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
 - [Docs/RESEARCH_CREDITS.md](Docs/RESEARCH_CREDITS.md)
 - [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)
-- [Docs/NOHUTO_CONFIGURATION_AUDIT_2026-03-09.md](Docs/NOHUTO_CONFIGURATION_AUDIT_2026-03-09.md)
-- [Docs/NOHUTO_TRANCHE_EVALUATION_2026-03-09.md](Docs/NOHUTO_TRANCHE_EVALUATION_2026-03-09.md)
-- [ARCHITECTURE.md](ARCHITECTURE.md)
-
-## 🧪 Development Notes
-
-- WPF + MVVM shell architecture
-- Admin work goes through `ElevatedHost`
-- Prefer small, focused services
-- Add tests when changing engine contracts, registry routing, command-backed tweaks, or provider coverage
-- `main` is the intended remote branch
-
-## 🤝 Contributing
-
-Before opening a PR or pushing a larger change:
-
-1. Build the solution
-2. Run tests
-3. Keep docs in sync with tweak/source changes
-4. Do not commit temp outputs, scratch folders, or generated junk
-
-## 🙏 Acknowledgments
-
-- [nohuto/win-config](https://github.com/nohuto/win-config)
-- [nohuto/win-registry](https://github.com/nohuto/win-registry)
-- Microsoft Learn / Windows documentation
-- AIDA64 manual cross-check workflow
-
-## ⚠️ Disclaimer
-
-This app can modify Windows settings.
-
-Use it carefully, review what a tweak changes, and create a restore point before doing broad system changes.
-
-## 📄 License
-
-`LICENSE` has not been committed yet, so the project is currently **license TBD**.

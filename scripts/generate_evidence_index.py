@@ -177,7 +177,7 @@ def compact_provenance(record: dict[str, Any], provenance_map: dict[str, dict[st
             "source_repositories": entry.get("SourceRepositories"),
             "matched_tokens": entry.get("MatchedTokens"),
             "lineage_note": (
-                "Nohuto references are upstream lineage / naming provenance only. "
+                "Nohuto references only show upstream dump or naming links. "
                 "Value semantics are validated separately in the record's evidence and validation_proof blocks."
             ),
             "nohuto_references": nohuto_references,

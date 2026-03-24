@@ -30,7 +30,7 @@
                                Margin="0,3,0,0"
                                Style="{StaticResource AppHeroTitleTextStyle}"/>
                     <TextBlock Margin="0,4,0,0"
-                               Text="Modern, safe, and reversible Windows optimization tool"
+                               Text="Safe Windows tweak tool with logs and rollback"
                                Style="{StaticResource AppHeroSubtitleTextStyle}"/>
                 </StackPanel>
 
@@ -171,18 +171,18 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Research Credits -->
+                <!-- Research Sources -->
                 <Border Background="{DynamicResource BackgroundMediumBrush}" CornerRadius="8" Padding="16">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
                             <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource ForegroundBrightestBrush}" Margin="0,0,12,0"/>
-                            <TextBlock Text="Research Credits" FontWeight="SemiBold" FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                            <TextBlock Text="Research Sources" FontWeight="SemiBold" FontSize="14" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                         </StackPanel>
 
                         <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="6" Padding="12">
                             <StackPanel>
-                                <TextBlock Text="Upstream Research Lineage" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                <TextBlock Text="Dump and pseudocode lineage from nohuto repositories; value semantics are validated separately in local research."
+                                <TextBlock Text="Upstream Sources" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                <TextBlock Text="Dump and pseudocode links from nohuto repositories. Value semantics are validated separately in local research."
                                            Foreground="{DynamicResource AccentBrightCyanBrush}" Margin="0,4,0,8"/>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="win-config"

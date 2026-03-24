@@ -1,4 +1,4 @@
-﻿# Research Credits
+# Research Sources
 
 ## Primary Source
 
@@ -12,7 +12,7 @@
 
 ## Official Documentation
 
-Microsoft Learn used for cross-verification where available.
+Microsoft Learn used for cross-checks where available.
 
 ---
 

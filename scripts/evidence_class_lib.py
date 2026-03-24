@@ -256,11 +256,11 @@ def build_upstream_lineage_block(record: dict[str, Any], provenance_entry: dict[
     source_repositories = provenance.get("SourceRepositories") or provenance.get("source_repositories") or []
 
     if nohuto_refs:
-        summary = "Upstream dump / pseudocode lineage is linked for this record. These links provide discovery and naming provenance only, not value semantics."
+        summary = "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics."
     elif source_repositories:
-        summary = "Repo-level source lineage is linked, but no explicit nohuto reference block was attached to this record."
+        summary = "Repo-level source links are attached, but there is no explicit nohuto reference block on this record."
     else:
-        summary = "No upstream nohuto lineage is linked for this record."
+        summary = "No upstream nohuto source link is attached to this record."
 
     return sanitize_value(
         {

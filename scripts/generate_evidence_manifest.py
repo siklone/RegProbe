@@ -101,8 +101,8 @@ def render_md(manifest: dict[str, Any]) -> str:
     lines.append("# Evidence Manifest")
     lines.append("")
     lines.append("This manifest is the forensic companion to the evidence atlas.")
-    lines.append("Each record includes the raw source-file SHA256, the exact validation proof block, and provenance.")
-    lines.append("Nohuto references are lineage / naming provenance only; value semantics remain sourced from the record evidence and validation proof.")
+    lines.append("Each record includes the raw source-file SHA256, the exact validation proof block, and source links.")
+    lines.append("Nohuto references only show upstream dump or naming links. Value semantics still come from the record evidence and validation proof.")
     lines.append("")
     lines.append("## Summary")
     lines.append("")
@@ -202,13 +202,13 @@ def render_md(manifest: dict[str, Any]) -> str:
         lines.append("")
 
         provenance = record.get("provenance")
-        lines.append("**Provenance**")
+        lines.append("**Sources**")
         lines.append("")
         if isinstance(provenance, dict):
             provenance_rows = [
                 ["Coverage state", escape_md_cell(provenance.get("coverage_state"))],
                 ["Has nohuto evidence", escape_md_cell(provenance.get("has_nohuto_evidence"))],
-                ["Has Windows Internals context", escape_md_cell(provenance.get("has_windows_internals_context"))],
+                ["Has Windows Internals notes", escape_md_cell(provenance.get("has_windows_internals_context"))],
                 ["Needs review", escape_md_cell(provenance.get("needs_review"))],
                 ["Source repositories", escape_md_cell(", ".join(provenance.get("source_repositories", []) or []))],
                 ["Matched tokens", escape_md_cell(", ".join(provenance.get("matched_tokens", []) or []))],
@@ -234,14 +234,14 @@ def render_md(manifest: dict[str, Any]) -> str:
                 lines.append("")
 
             if provenance.get("other_references"):
-                lines.append("Other provenance references:")
+                lines.append("Other source references:")
                 for ref in provenance.get("other_references", []):
                     lines.append(
                         f"- {escape_md_cell(ref.get('Kind'))}: {escape_md_cell(ref.get('Title'))} | `{escape_md_cell(ref.get('Url'))}` | {escape_md_cell(ref.get('Summary'))}"
                     )
                 lines.append("")
         else:
-            lines.append("_No provenance block present._")
+            lines.append("_No source block present._")
             lines.append("")
 
         proof = record.get("validation_proof")

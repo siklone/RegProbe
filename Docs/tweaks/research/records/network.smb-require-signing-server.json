@@ -136,7 +136,7 @@
           "rationale": "Microsoft changes SMB signing defaults across Windows releases and scenarios."
         }
       ],
-      "notes": "This record intentionally avoids collapsing all Windows SMB server defaults into one static numeric baseline.",
+      "notes": "This record does not collapse all Windows SMB server defaults into one static numeric baseline.",
       "evidence_ids": [
         "ms-smb-signing-overview"
       ]

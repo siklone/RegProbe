@@ -413,7 +413,7 @@ public sealed class NohutoRepoScanService : IDisposable
         builder.AppendLine("## Product Integration Notes");
         builder.AppendLine();
         builder.AppendLine("- `win-config`: seed user-facing option cards, detection rules, and curated one-click actions.");
-        builder.AppendLine("- `win-registry`: back each option with defaults, observed registry activity, and provenance notes.");
+        builder.AppendLine("- `win-registry`: back each option with defaults, observed registry activity, and source notes.");
         builder.AppendLine("- `decompiled-pseudocode`: use as internals evidence only; do not expose raw pseudocode as a direct tweak source.");
         builder.AppendLine("- `regkit`: deep-link inspection, trace/default validation, and advanced troubleshooting workflow.");
         builder.AppendLine();

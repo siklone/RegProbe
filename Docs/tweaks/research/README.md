@@ -20,8 +20,8 @@ Every record should make the following questions easy to answer:
 ## Core Principles
 
 - Documentation first. A setting can be useful even when it is not yet safe to apply.
-- Provenance is mandatory. We do not ship anonymous values.
-- Nohuto may be used for naming lineage and upstream context, but not as the source of value semantics. If a record cites nohuto, say exactly which upstream file or path provided the lineage and make it clear that the value meanings still come from Microsoft docs, VM/runtime proof, or other record evidence.
+- Sources are required. We do not ship anonymous values.
+- Nohuto may be used for naming lineage and upstream context, but not as the source of value semantics. If a record cites nohuto, say exactly which upstream file or path it came from and make it clear that the value meanings still come from Microsoft docs, VM/runtime proof, or other record evidence.
 - English only. Names, notes, evidence summaries, and labels stay consistent.
 - Reverse engineering is evidence, not a final recommendation by itself.
 - AI inference alone never unlocks Apply.
@@ -122,7 +122,7 @@ Use this workflow when a registry key exposes only one value name or when the re
    - verify
    - restore
 6. Treat a key as validated only when the value meaning and the live read/write path are both captured well enough to explain the behavior without guesswork.
-7. Keep nohuto references limited to lineage and naming provenance unless a record explicitly says the value semantics also came from a mirror or dump.
+7. Keep nohuto references limited to lineage and naming unless a record explicitly says the value semantics also came from a mirror or dump.
 
 For a reusable capture template, see [notes/single-value-validation.md](./notes/single-value-validation.md).
 
@@ -389,7 +389,7 @@ If there is a path mismatch, unclear value meaning, or version ambiguity that ch
 
 - `draft`: Started, incomplete, not ready for product decisions
 - `review-required`: Significant contradiction, missing mapping, or insufficient confidence
-- `validated`: Good enough for product and UX planning, with clear provenance
+- `validated`: Good enough for product and UX planning, with clear source links
 - `published`: Stable and ready for wider documentation reuse
 - `deprecated`: Kept for history, no longer recommended
 

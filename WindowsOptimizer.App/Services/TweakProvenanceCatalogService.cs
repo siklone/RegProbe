@@ -102,7 +102,7 @@ public sealed class TweakProvenanceCatalogService
                 tweak.HasNohutoEvidence = false;
                 tweak.HasWindowsInternalsContext = false;
                 tweak.NeedsSourceReview = true;
-                tweak.ProvenanceSummary = "No upstream dump or pseudocode lineage is linked yet. Keep this tweak in review until the validation proof and app mapping are strong enough.";
+                tweak.ProvenanceSummary = "No upstream dump or pseudocode source is linked yet. Keep this tweak in review until the validation proof and app mapping are strong enough.";
                 continue;
             }
 
@@ -224,17 +224,17 @@ public sealed class TweakProvenanceCatalogService
     {
         if (entry.HasNohutoEvidence && entry.HasWindowsInternalsContext)
         {
-            return "Linked to upstream dump / pseudocode lineage and Windows Internals context. Value semantics are validated separately in the research record.";
+            return "Linked to upstream dump / pseudocode sources and Windows Internals notes. Value semantics are still validated in the research record.";
         }
 
         if (entry.HasNohutoEvidence)
         {
-            return "Linked to upstream dump / pseudocode lineage. Treat that lineage as provenance, not as the value-semantics proof.";
+            return "Linked to upstream dump / pseudocode sources. These links show where the setting came from, not what each value means.";
         }
 
         if (entry.HasWindowsInternalsContext)
         {
-            return "Has Windows Internals context but still needs stronger repo-level evidence.";
+            return "Has Windows Internals notes but still needs stronger repo evidence.";
         }
 
         return "Source review still needed.";

@@ -1,7 +1,7 @@
 # Evidence Atlas
 
 This report consolidates every tweak record into a single human-readable atlas of key/value mappings, allowed values, evidence, and validation proof.
-Nohuto references are lineage / naming provenance only; value semantics are validated separately in the record evidence and validation proof.
+Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.
 
 ## Summary
 
@@ -82,17 +82,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | beep, start |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -122,7 +122,7 @@ Nohuto lineage references:
 | `ms-services-registry-tree` | `official-doc` | `Microsoft official doc` | HKLM\SYSTEM\CurrentControlSet\Services Registry Tree | https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree | `high` | path, value, allowed-values, version-scope |
 | `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | H:\Temp\vm-tooling-staging\beep_start_toggle_out.txt | `high` | value, behavior, version-scope |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-audio-disable-beep` | `repo-doc` | `Current repo docs` | Repo provenance for audio.disable-beep | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
+| `repo-provenance-audio-disable-beep` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-beep | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -185,17 +185,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | multimedia, audio, devicecpl, showdisconnecteddevices |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -285,17 +285,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | multimedia, audio, devicecpl, showhiddendevices |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -387,17 +387,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | disable reserved storage |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -490,13 +490,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -583,17 +583,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | environment |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -687,17 +687,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | filesystem, longpathsenabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -788,17 +788,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, environment |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -891,17 +891,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, powershell, executionpolicy |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -995,17 +995,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | filesystem, longpathsenabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -1098,17 +1098,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `unmapped` |
 | Has nohuto evidence | `False` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `True` |
 | Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 **Targets**
 
@@ -1190,17 +1190,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `unmapped` |
 | Has nohuto evidence | `False` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `True` |
 | Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 **Targets**
 
@@ -1285,13 +1285,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -1377,17 +1377,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -1478,17 +1478,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-registry, win-config |
 | Matched tokens | policies, explorer, nolowdiskspacechecks |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -1579,17 +1579,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, chat |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -1681,17 +1681,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-registry, win-config |
 | Matched tokens | explorer, advanced, usecompactmode |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -1775,13 +1775,13 @@ Nohuto lineage references:
 | Action state | `research-gated` |
 | Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -1863,17 +1863,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -1964,17 +1964,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -2065,17 +2065,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -2161,17 +2161,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -2263,17 +2263,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, cabinetstate |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -2301,7 +2301,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptions | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a | `high` | path, value, allowed-values, behavior |
 | `dump-hkcu25h2-explorer-cabinetstate-fullpath` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for FullPath | Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg | `medium` | path, value, version-scope |
-| `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo provenance for explorer.show-full-path | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
+| `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo source note for explorer.show-full-path | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -2365,17 +2365,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, advanced, hidden |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -2467,17 +2467,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -2562,13 +2562,13 @@ Nohuto lineage references:
 | Action state | `research-gated` |
 | Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -2649,13 +2649,13 @@ Nohuto lineage references:
 | Action state | `research-gated` |
 | Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -2737,17 +2737,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -2840,17 +2840,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -2941,17 +2941,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, advanced, taskbaral |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -3045,17 +3045,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, networkconnectivitystatusindicator, noactiveprobe |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -3154,17 +3154,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | lanmanserver, autoshareserver, autosharewks |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -3264,17 +3264,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | disabledcomponents, tcpip6 |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -3370,17 +3370,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, dnsclient, enablemulticast |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -3415,7 +3415,7 @@ Windows Internals references:
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `high` | path, behavior, default, ui-mapping |
 | `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-llmnr` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-llmnr` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -3479,17 +3479,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, lltd |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -3591,17 +3591,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, dnsclient, enablemdns |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -3698,17 +3698,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | disable, netbios, over, disables, enabled, adapters, using, interface, surface, documented |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -3746,7 +3746,7 @@ Windows Internals references:
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
 | `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed NetBIOS implementation | WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs | `high` | path, value, behavior, ui-mapping |
 | `local-netbios-cim-detect` | `vm-test` | `VM test / probe` | Local read-only CIM detect run for NetBIOS over TCP/IP | Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
-| `repo-provenance-netbios` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | risk, version-scope |
+| `repo-provenance-netbios` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | risk, version-scope |
 
 **Validation proof**
 
@@ -3809,17 +3809,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, dnsclient, enablenetbios |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -3855,7 +3855,7 @@ Windows Internals references:
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `medium` | path, behavior, ui-mapping |
 | `local-dnsclient-netbios-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values, behavior |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-netbios-resolution` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-netbios-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -3918,17 +3918,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | lanmanworkstation, enableplaintextpassword |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -4027,17 +4027,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, dnsclient, disablesmartnameresolution |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -4072,7 +4072,7 @@ Windows Internals references:
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `high` | path, behavior, default, ui-mapping |
 | `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-smart-name-resolution` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-smart-name-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -4135,17 +4135,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | lanmanserver, smb1 |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -4180,7 +4180,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-disable-enable` | `official-doc` | `Microsoft official doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1 | `high` | path, value, allowed-values, behavior, version-scope, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-smb1` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk, version-scope |
+| `repo-provenance-smb1` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk, version-scope |
 
 **Validation proof**
 
@@ -4243,17 +4243,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | lanmanserver, smb2 |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -4349,17 +4349,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | wcmsvc, wifinetworkmanager, config, autoconnectallowedoem |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -4456,17 +4456,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, lltd, enablerspndr |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -4563,17 +4563,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, lltd, enablelltdio |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -4670,17 +4670,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | disabledcomponents, tcpip6 |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -4776,17 +4776,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | ntlmminclientsec |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -4882,17 +4882,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -4990,17 +4990,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | lanmanworkstation, disablelargemtu |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -5099,17 +5099,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -5210,17 +5210,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, lanmanworkstation, enablesmbquic, lanmanserver |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -5321,17 +5321,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | lanmanserver, encryptdata |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -5431,13 +5431,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -5526,17 +5526,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | lanmanserver, rejectunencryptedaccess |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -5636,17 +5636,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, lanmanworkstation, minsmb2dialect, maxsmb2dialect, lanmanserver |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -5750,17 +5750,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | lanmanworkstation |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -5860,17 +5860,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | lanmanserver |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -5970,17 +5970,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, lanmanworkstation, ciphersuiteorder, lanmanserver |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -6083,17 +6083,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | siuf, numberofsiufinperiod, rules |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -6183,17 +6183,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, pushnotifications, notoastapplicationnotificationonlockscreen |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -6285,17 +6285,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, pushnotifications, disallownotificationmirroring |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -6387,17 +6387,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, pushnotifications, notileapplicationnotification |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -6489,17 +6489,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, pushnotifications, notoastapplicationnotification |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -6593,17 +6593,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | panel, desktop, windowmetrics, minanimate |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -6701,17 +6701,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | panel, desktop, menushowdelay |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -6808,17 +6808,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -6852,7 +6852,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | H:\Temp\vm-tooling-staging\taskbar_animations_probe_out.txt | `high` | value, behavior, version-scope |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo provenance for performance.disable-taskbar-animations | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
+| `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo source note for performance.disable-taskbar-animations | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6918,17 +6918,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | explorer, autoplayhandlers, userchosenexecutehandlers, storageonarrival, mstakenoaction, eventhandlersdefaultselection, cameraalternate, showpicturesonarrival, playdvdmovieonarrival, playenhanceddvdonarrival, handledvdburningonarrival, playdvdaudioonarrival, playblurayonarrival, handlebdburningonarrival, playcdaudioonarrival, playenhancedcdonarrival, handlecdburningonarrival, playvideocdmovieonarrival, playsupervideocdmovieonarrival, autoruninflegacyarrival |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -7027,17 +7027,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, explorer |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -7140,17 +7140,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-registry, win-config, decompiled-pseudocode |
 | Matched tokens | panel, accessibility, stickykeys, flags |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -7250,17 +7250,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | power, disableidlestatesatboot, idlestatetimeout, exitlatencycheckenabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -7358,17 +7358,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, power, hiberbootenabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -7468,17 +7468,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | power, msdisabled, modernsleep, enabledactions |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -7577,13 +7577,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -7670,17 +7670,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | power, powerthrottling, powerthrottlingoff, power throttling |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -7780,17 +7780,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | wsearch |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -7888,17 +7888,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, explorer, showhibernateoption |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -7999,17 +7999,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, explorer, showlockoption |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -8109,17 +8109,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, explorer, showsleepoption |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -8219,17 +8219,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode, win-registry |
 | Matched tokens | perfboostatguaranteed, highperfdurationboot, latencytolerancedefault, perfcalculateactualutilization |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -8330,17 +8330,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | multimedia, systemprofile, tasks, games, priority, scheduling category, high, sfio priority, gpu priority, affinity |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -8439,17 +8439,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, noconnecteduser |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -8478,7 +8478,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-localpoliciessecurityoptions-block-microsoft-accounts` | `policy-csp` | `Microsoft policy CSP` | Microsoft LocalPoliciesSecurityOptions CSP: Accounts_Block_Microsoft_accounts | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-block-microsoft-accounts` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-block-microsoft-accounts` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-noconnecteduser-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - NoConnectedUser registry trace | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -8542,13 +8542,13 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -8636,17 +8636,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -8677,7 +8677,7 @@ Nohuto lineage references:
 | `ms-privacy-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Privacy Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy | `high` | path, value, allowed-values, default, behavior |
 | `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\OSPolicy.admx | `high` | path, value, allowed-values |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-activity-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-activity-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -8740,17 +8740,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -8841,17 +8841,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `True` |
 | Source repositories | win-config |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -8940,17 +8940,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -9043,17 +9043,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | contentdeliverymanager |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -9147,13 +9147,13 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -9246,13 +9246,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -9343,17 +9343,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, appcompat, aitenable |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -9383,7 +9383,7 @@ Nohuto lineage references:
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values, version-scope |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects, default |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-application-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-application-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9446,17 +9446,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, appprivacy, letappsruninbackground |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -9547,17 +9547,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, biometrics, enabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -9585,7 +9585,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-biometrics` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-biometrics` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9648,17 +9648,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, biometrics, credential, provider, domain accounts |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -9686,7 +9686,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-biometrics-domain-logon` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-biometrics-domain-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9749,17 +9749,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, biometrics, credential, provider, enabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -9787,7 +9787,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-biometrics-logon` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-biometrics-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9850,17 +9850,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, camera, allowcamera |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -9889,7 +9889,7 @@ Nohuto lineage references:
 | `local-camera-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.admx mapping | C:\WINDOWS\PolicyDefinitions\Camera.admx | `high` | path, value, allowed-values, version-scope |
 | `local-camera-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Camera.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-camera` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-camera` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -9953,17 +9953,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | environment |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -10056,17 +10056,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `True` |
 | Source repositories | win-config |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -10093,7 +10093,7 @@ Nohuto lineage references:
 | `ms-experience-csp-disable-consumer-account-state-content` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableConsumerAccountStateContent | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#disableconsumeraccountstatecontent | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx-consumer` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-consumer-account-content` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-consumer-account-content` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -10156,17 +10156,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, windowscopilot, turnoffwindowscopilot |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -10196,7 +10196,7 @@ Nohuto lineage references:
 | `local-windowscopilot-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx mapping | C:\Windows\PolicyDefinitions\WindowsCopilot.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowscopilot-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsCopilot.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-copilot` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-copilot` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -10259,13 +10259,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -10354,17 +10354,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, datacollection, allowdevicenameintelemetry |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -10393,7 +10393,7 @@ Nohuto lineage references:
 | `ms-system-policy-csp-device-name` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowDeviceNameInDiagnosticData | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-device-name-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-device-name-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-allow-device-name-telemetry-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - AllowDeviceNameInTelemetry trace | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `high` | path, value, behavior |
 
 **Validation proof**
@@ -10457,17 +10457,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, datacollection, disabledevicedelete |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -10496,7 +10496,7 @@ Nohuto lineage references:
 | `ms-system-policy-csp-device-delete` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDeviceDelete | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-delete-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableDeviceDelete policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -10560,17 +10560,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, datacollection, disablediagnosticdataviewer |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -10599,7 +10599,7 @@ Nohuto lineage references:
 | `ms-system-policy-csp-ddv` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDiagnosticDataViewer | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-viewer-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableDiagnosticDataViewer policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -10665,17 +10665,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `True` |
 | Source repositories | win-config |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -10768,17 +10768,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, datacollection, donotshowfeedbacknotifications |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -10807,7 +10807,7 @@ Nohuto lineage references:
 | `ms-experience-csp-feedback-notifications` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DoNotShowFeedbackNotifications | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-feedback-notifications-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FeedbackNotifications.admx mapping | C:\WINDOWS\PolicyDefinitions\FeedbackNotifications.admx | `high` | path, value, allowed-values, behavior |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DoNotShowFeedbackNotifications policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior |
 | `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | H:\Temp\vm-tooling-staging\feedback_notifications_probe.txt | `medium` | runtime writes, value semantics, rollback |
 
@@ -10872,17 +10872,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, filehistory, disabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -10911,7 +10911,7 @@ Nohuto lineage references:
 | `local-filehistory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.admx mapping | C:\WINDOWS\PolicyDefinitions\FileHistory.admx | `high` | path, value, allowed-values, version-scope |
 | `local-filehistory-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\FileHistory.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-file-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-file-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -10974,17 +10974,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, findmydevice, allowfindmydevice |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -11014,7 +11014,7 @@ Nohuto lineage references:
 | `local-findmy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.admx mapping | C:\Windows\PolicyDefinitions\FindMy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-findmy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.adml help text | C:\Windows\PolicyDefinitions\en-US\FindMy.adml | `high` | behavior, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-find-my-device` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-find-my-device` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-findmydevice-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - Find My Device policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -11078,17 +11078,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, enablefontproviders |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -11117,7 +11117,7 @@ Nohuto lineage references:
 | `local-grouppolicy-admx-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-font-providers` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-font-providers` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-enablefontproviders-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableFontProviders policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -11181,17 +11181,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, protection, platform, nogenticket |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -11221,7 +11221,7 @@ Nohuto lineage references:
 | `local-avs-validation-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\AVSValidationGP.adml | `high` | behavior, default, side-effects |
 | `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx reference bundle | C:\WINDOWS\PolicyDefinitions\ICM.admx | `medium` | path, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-nogenticket-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - NoGenTicket policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -11285,17 +11285,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | panel, international, user, profile, httpacceptlanguageoptout |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -11385,17 +11385,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, nolocalpasswordresetquestions |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -11425,7 +11425,7 @@ Nohuto lineage references:
 | `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | C:\WINDOWS\PolicyDefinitions\CredUI.admx | `high` | path, ui-mapping, version-scope |
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-local-security-questions` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-local-security-questions` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-nolocalpasswordresetquestions-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - NoLocalPasswordResetQuestions policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior |
 
 **Validation proof**
@@ -11490,17 +11490,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | capabilityaccessmanager, consentstore, location, value, deny, nonpackaged |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -11591,17 +11591,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | capabilityaccessmanager, consentstore, location, value |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -11691,17 +11691,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, locationandsensors, disablelocationscripting |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -11730,7 +11730,7 @@ Nohuto lineage references:
 | `ms-sensors-policy-csp-disable-location-scripting` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableLocationScripting | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | C:\WINDOWS\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-location-scripting` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-location-scripting` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -11793,17 +11793,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, locationandsensors, disablelocation |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -11894,17 +11894,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, disableregistration |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -11933,7 +11933,7 @@ Nohuto lineage references:
 | `local-mdm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.admx mapping | C:\WINDOWS\PolicyDefinitions\MDM.admx | `high` | path, value, allowed-values, version-scope |
 | `local-mdm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\MDM.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-mdm-enrollment` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-mdm-enrollment` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disableregistration-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableRegistration policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -11997,17 +11997,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, messaging, allowmessagesync |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -12036,7 +12036,7 @@ Nohuto lineage references:
 | `ms-messaging-csp-allow-message-sync` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Messaging / AllowMessageSync | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-messaging-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft messaging.admx mapping | C:\WINDOWS\PolicyDefinitions\messaging.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-message-sync` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-message-sync` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-allowmessagesync-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - AllowMessageSync policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -12100,13 +12100,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -12194,17 +12194,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, datacollection, disableonesettingsdownloads |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -12234,7 +12234,7 @@ Nohuto lineage references:
 | `local-datacollection-admx-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
 | `local-datacollection-adml-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-onesettings-downloads` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-onesettings-downloads` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disableonesettingsdownloads-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableOneSettingsDownloads policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -12298,17 +12298,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, explorer, allowonlinetips |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -12337,7 +12337,7 @@ Nohuto lineage references:
 | `ms-settings-csp-allow-online-tips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowOnlineTips | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-control-panel-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx mapping | C:\WINDOWS\PolicyDefinitions\ControlPanel.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-online-tips` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-online-tips` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-allowonlinetips-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - AllowOnlineTips policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior |
 
 **Validation proof**
@@ -12395,13 +12395,13 @@ Nohuto lineage references:
 | Action state | `research-gated` |
 | Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -12489,17 +12489,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, enablemmx |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -12591,13 +12591,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -12686,17 +12686,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, windowsai, disableaidataanalysis |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -12727,7 +12727,7 @@ Nohuto lineage references:
 | `local-windowscopilot-admx-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx Recall mapping | C:\Windows\PolicyDefinitions\WindowsCopilot.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowscopilot-adml-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml Recall help text | C:\Windows\PolicyDefinitions\en-US\WindowsCopilot.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-recall` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-recall` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disableaidataanalysis-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableAIDataAnalysis policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -12791,17 +12791,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | crossdeviceresume, configuration, isresumeallowed |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -12894,17 +12894,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, rsoplogging |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -12996,17 +12996,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, explorer, disablesearchboxsuggestions |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -13035,7 +13035,7 @@ Nohuto lineage references:
 | `ms-windowsexplorer-csp-disable-search-box-suggestions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSearchBoxSuggestions | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-windows-explorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\WINDOWS\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-search-box-suggestions` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-search-box-suggestions` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchboxsuggestions-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSearchBoxSuggestions policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -13099,17 +13099,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, explorer, disablesearchhistory |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -13138,7 +13138,7 @@ Nohuto lineage references:
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\WINDOWS\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSearchHistory policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 | `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | H:\Temp\vm-tooling-staging\search_history_probe.txt | `low` | runtime writes, rollback, trigger attempt |
 
@@ -13203,17 +13203,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, locationandsensors, disablesensors |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -13242,7 +13242,7 @@ Nohuto lineage references:
 | `ms-sensors-policy-csp-disable-sensors` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSensors | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | C:\WINDOWS\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-sensors` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-sensors` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disablesensors-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSensors policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -13306,17 +13306,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, appcompat, disableuar, steps recorder, psr.exe |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -13327,7 +13327,7 @@ Nohuto lineage references:
 | win-config / privacy/assets/locationaccess-LocationApi.c | https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c | Matched 1 audit token(s) in win-config. |
 | win-config / privacy/desc.md#disable-psr | https://github.com/nohuto/win-config/blob/main/privacy/desc.md#disable-psr | Documents PSR deprecation, the DisableUAR policy, and renaming psr.exe. |
 
-Other provenance references:
+Other source references:
 
 | Kind | Title | URL | Summary |
 | --- | --- | --- | --- |
@@ -13352,7 +13352,7 @@ Other provenance references:
 | `ms-appcompat-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord | `high` | path, value, allowed-values, default, behavior |
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | C:\WINDOWS\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-steps-recorder` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-steps-recorder` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-uar-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableUAR policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -13410,13 +13410,13 @@ Other provenance references:
 | Action state | `research-gated` |
 | Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -13508,13 +13508,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -13603,17 +13603,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, datacollection, disabletelemetryoptinchangenotification |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -13642,7 +13642,7 @@ Nohuto lineage references:
 | `ms-system-policy-csp-telemetry-change-notification` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ConfigureTelemetryOptInChangeNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-telemetry-change-notifications` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-telemetry-change-notifications` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -13705,17 +13705,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, datacollection, disabletelemetryoptinsettingsux |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -13745,7 +13745,7 @@ Nohuto lineage references:
 | `local-datacollection-admx-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
 | `local-datacollection-adml-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-optin-ui-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableTelemetryOptInSettingsUx policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -13809,17 +13809,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, error, reporting, disabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -13850,7 +13850,7 @@ Nohuto lineage references:
 | `local-errorreporting-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.adml help text | C:\Windows\PolicyDefinitions\en-US\ErrorReporting.adml | `high` | behavior, side-effects, default |
 | `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, default, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-wer` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-wer` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -13913,17 +13913,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, locationandsensors, disablewindowslocationprovider |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -13952,7 +13952,7 @@ Nohuto lineage references:
 | `ms-location-provider-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableWindowsLocationProvider | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-location-provider-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft LocationProviderAdm.admx mapping | C:\WINDOWS\PolicyDefinitions\LocationProviderAdm.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-windows-location-provider` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-windows-location-provider` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disablewindowslocationprovider-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableWindowsLocationProvider policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -14016,17 +14016,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, cloudcontent |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -14119,17 +14119,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, dontdisplaylastusername |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -14159,7 +14159,7 @@ Nohuto lineage references:
 | `local-security-registry-last-user` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, ui-mapping |
 | `local-security-defaults-last-user` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | C:\Windows\inf\defltbase.inf | `high` | default, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-last-logged-in-user` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-hide-last-logged-in-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14222,17 +14222,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `True` |
 | Source repositories | win-config |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -14259,7 +14259,7 @@ Nohuto lineage references:
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-recommended-personalized-sites` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-hide-recommended-personalized-sites` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14322,17 +14322,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, explorer, hiderecommendedpersonalizedsites |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -14361,7 +14361,7 @@ Nohuto lineage references:
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-recommended-personalized-sites-user` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-hide-recommended-personalized-sites-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14424,17 +14424,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `True` |
 | Source repositories | win-config |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -14461,7 +14461,7 @@ Nohuto lineage references:
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-recommended-section` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-hide-recommended-section` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14524,17 +14524,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, explorer, hiderecommendedsection |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -14563,7 +14563,7 @@ Nohuto lineage references:
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-recommended-section-user` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-hide-recommended-section-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14626,17 +14626,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, dontdisplayusername |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -14666,7 +14666,7 @@ Nohuto lineage references:
 | `local-security-registry-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, ui-mapping |
 | `local-security-defaults-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | C:\Windows\inf\defltbase.inf | `high` | default, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-username-at-signin` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-hide-username-at-signin` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14729,17 +14729,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, datacollection, limitdiagnosticlogcollection |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -14768,7 +14768,7 @@ Nohuto lineage references:
 | `ms-system-policy-csp-limit-diagnostic-log-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDiagnosticLogCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-limit-diagnostic-log-collection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-limit-diagnostic-log-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -14831,17 +14831,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, datacollection, limitdumpcollection |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -14870,7 +14870,7 @@ Nohuto lineage references:
 | `ms-system-policy-csp-limit-dump-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDumpCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-limit-dump-collection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-limit-dump-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-crashdump-gate` | `decompilation` | `Ghidra decompilation` | nohuto crash-dump gate trace | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c; Docs/privacy/assets/crashdmp.c | `medium` | path, behavior, dependency |
 
 **Validation proof**
@@ -14934,13 +14934,13 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -15029,17 +15029,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, troubleshooting, allowrecommendations, troubleshootingallowrecommendations |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -15133,13 +15133,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -15231,17 +15231,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, attachments, savezoneinformation |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -15338,17 +15338,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, ntfsdisableencryption |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -15444,17 +15444,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, deliveryoptimization, dodownloadmode |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -15551,17 +15551,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, credui, disablepasswordreveal |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -15658,17 +15658,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | policies, blockdomainpicturepassword |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -15765,17 +15765,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, terminal, fallowtogethelp |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -15873,17 +15873,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | disable system mitigations |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -15979,17 +15979,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, systemrestore |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -16087,17 +16087,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, windowsfirewall, domainprofile, enablefirewall, standardprofile |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -16198,13 +16198,13 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -16294,17 +16294,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, windowsupdate, excludewudriversinqualityupdate, driversearching, searchorderconfig, dontsearchwindowsupdate |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -16407,17 +16407,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | winlogon, enablegoodbye |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -16516,17 +16516,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, sudo, enabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -16624,17 +16624,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, powershell, enablescripts, executionpolicy, unrestricted |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -16731,17 +16731,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, credui, enablesecurecredentialprompting |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -16842,17 +16842,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -16954,17 +16954,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, explorer, nowindowminimizingshortcuts |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -17000,7 +17000,7 @@ Windows Internals references:
 | `ms-admx-desktop-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Desktop Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-desktop | `high` | path, behavior, default, ui-mapping |
 | `local-desktop-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Desktop.admx mapping | C:\WINDOWS\PolicyDefinitions\Desktop.admx | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-aero-shake` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-aero-shake` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -17063,17 +17063,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | autoreboot, crashcontrol |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -17172,17 +17172,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | crashcontrol |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -17279,17 +17279,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, appx, allowautomaticapparchiving |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -17388,17 +17388,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | schedule, maintenance, maintenancedisabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -17498,17 +17498,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, disablebkgndgrouppolicy |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -17544,7 +17544,7 @@ Windows Internals references:
 | `ms-grouppolicy-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#disablebackgroundpolicy | `high` | path, default, behavior, ui-mapping |
 | `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\GroupPolicy.admx | `high` | path, ui-mapping, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-background-gp-updates` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-background-gp-updates` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -17608,17 +17608,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -17657,7 +17657,7 @@ Windows Internals references:
 | `ms-cross-device-clipboard-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowCrossDeviceClipboard | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowcrossdeviceclipboard | `high` | path, value, allowed-values, default, behavior |
 | `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\OSPolicy.admx | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-clipboard-history` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-clipboard-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -17720,17 +17720,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, terminal, fdisableclip |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -17767,7 +17767,7 @@ Windows Internals references:
 | `ms-terminalserver-clipboard-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP ADMX TerminalServer: Disable clipboard redirection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-terminalserver#ts_disableclipboardredirection | `high` | path, value, allowed-values, default, behavior |
 | `local-terminalserver-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft TerminalServer.admx mapping | C:\Windows\PolicyDefinitions\TerminalServer.admx | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-clipboard-redirection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-clipboard-redirection` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -17833,17 +17833,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | gameconfigstore |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -17941,13 +17941,13 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -18035,17 +18035,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | panel, desktop, jpegimportquality |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -18143,17 +18143,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | winlogon, restartapps |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -18251,17 +18251,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, search, enabledynamiccontentinwsb |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -18297,7 +18297,7 @@ Windows Internals references:
 | `ms-search-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Search Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#allowsearchhighlights | `high` | path, value, allowed-values, default, behavior |
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\WINDOWS\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-search-highlights` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-search-highlights` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -18360,17 +18360,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, search, preventremotequeries |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -18468,17 +18468,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -18574,17 +18574,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | explorer, shell, icons, 29 |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -18681,17 +18681,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | explorer, serialize |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -18791,17 +18791,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, storagesense, allowstoragesenseglobal |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -18837,7 +18837,7 @@ Windows Internals references:
 | `ms-storage-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Storage Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage | `high` | path, value, allowed-values, default, behavior |
 | `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | C:\WINDOWS\PolicyDefinitions\StorageSense.admx | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-storage-sense` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-storage-sense` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -18900,17 +18900,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, storagesense, allowstoragesensetemporaryfilescleanup |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -18946,7 +18946,7 @@ Windows Internals references:
 | `ms-storage-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Storage Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage#allowstoragesensetemporaryfilescleanup | `high` | path, value, allowed-values, default, behavior |
 | `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | C:\WINDOWS\PolicyDefinitions\StorageSense.admx | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-storage-sense-temp-cleanup` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-storage-sense-temp-cleanup` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -19009,17 +19009,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, explorer, nousestoreopenwith |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -19055,7 +19055,7 @@ Windows Internals references:
 | `ms-icm-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ICM Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-icm#shellnousestoreopenwith_2 | `high` | path, behavior, default, ui-mapping |
 | `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping | C:\WINDOWS\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-store-open-with` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-store-open-with` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -19118,17 +19118,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | overlayminfps |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -19225,17 +19225,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | gamebar, autogamemodeenabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -19335,17 +19335,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | graphicsdrivers, hwschmode |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -19444,17 +19444,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, search, allowindexingencryptedstoresoritems |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -19552,17 +19552,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | graphicsdrivers, tdrddidelay |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -19658,17 +19658,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | graphicsdrivers, tdrdelay |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -19764,17 +19764,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | graphicsdrivers, tdrlevel |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -19870,17 +19870,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | graphicsdrivers, tdrlimitcount |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -19976,17 +19976,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | graphicsdrivers, tdrlimittime |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -20082,17 +20082,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, threaddpcenable |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -20192,17 +20192,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, memory, management |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -20301,17 +20301,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, memory, management, disablepagingexecutive |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -20414,17 +20414,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, memory, management |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -20522,17 +20522,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, memory, management |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -20630,17 +20630,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, memory, management |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -20738,17 +20738,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -20845,17 +20845,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | filesystem, ntfsdisable8dot3namecreation |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -20954,17 +20954,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | filesystem, ntfsdisablelastaccessupdate |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -21063,17 +21063,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | filesystem, longpathsenabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -21172,17 +21172,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | filesystem, ntfsmemoryusage |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -21278,17 +21278,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | filesystem, ntfsmftzonereservation |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -21386,17 +21386,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | prioritycontrol, win32priorityseparation |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -21499,17 +21499,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | waittokillservicetimeout, 2500, panel, desktop, waittokillapptimeout, hungapptimeout, 1500, autoendtasks, 1 |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -21606,13 +21606,13 @@ Windows Internals references:
 | Action state | `research-gated` |
 | Gating reason | The key is understood, but the app mapping is still partial or indirect. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -21697,17 +21697,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -21802,17 +21802,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -21907,17 +21907,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22012,17 +22012,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22117,17 +22117,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22222,17 +22222,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22327,17 +22327,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | disable windows search service |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22434,17 +22434,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | policies, verbosestatus |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22479,7 +22479,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-logon-verbose-status` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Logon Policy CSP: VerboseStatus | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon | `high` | path, behavior, default, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-verbose-status-messages` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-verbose-status-messages` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -22544,17 +22544,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | policies, explorer, usedefaulttile |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22582,7 +22582,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-cpls-use-default-tile` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Cpls Policy CSP: UseDefaultTile | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-cpls#usedefaulttile | `high` | path, behavior, default, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-default-account-picture` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-default-account-picture` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -22645,17 +22645,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | policies, disableacrylicbackgroundonlogon |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22685,7 +22685,7 @@ Nohuto lineage references:
 | `local-logon-admx-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | C:\Windows\PolicyDefinitions\Logon.admx | `high` | path, ui-mapping, version-scope |
 | `local-logon-adml-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | C:\Windows\PolicyDefinitions\en-US\Logon.adml | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-acrylic-logon` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-acrylic-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -22748,17 +22748,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | policies, explorer, turnoffspianimations |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22787,7 +22787,7 @@ Nohuto lineage references:
 | `local-explorer-admx-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.admx mapping | C:\Windows\PolicyDefinitions\Explorer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-explorer-adml-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.adml help text | C:\Windows\PolicyDefinitions\en-US\Explorer.adml | `high` | behavior, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-common-control-animations` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-common-control-animations` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -22850,17 +22850,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, enablefirstlogonanimation |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22889,7 +22889,7 @@ Nohuto lineage references:
 | `local-logon-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | C:\WINDOWS\PolicyDefinitions\Logon.admx | `high` | path, value, allowed-values, version-scope |
 | `local-logon-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Logon.adml | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-first-signin-animation` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-first-signin-animation` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -22952,17 +22952,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, personalization, nolockscreen |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -22990,7 +22990,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-controlpaneldisplay-no-lock-screen` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP: NoLockScreen | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-lock-screen` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-lock-screen` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -23053,17 +23053,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, personalization, nolockscreencamera |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -23092,7 +23092,7 @@ Nohuto lineage references:
 | `local-controlpaneldisplay-admx-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
 | `local-controlpaneldisplay-adml-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-lock-screen-camera` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-lock-screen-camera` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -23155,17 +23155,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, personalization, nochanginglockscreen |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -23195,7 +23195,7 @@ Nohuto lineage references:
 | `local-controlpaneldisplay-admx-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
 | `local-controlpaneldisplay-adml-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-lock-screen-changes` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-lock-screen-changes` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -23258,17 +23258,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, personalization, animatelockscreenbackground |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -23298,7 +23298,7 @@ Nohuto lineage references:
 | `local-controlpaneldisplay-admx-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
 | `local-controlpaneldisplay-adml-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-lock-screen-motion` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-lock-screen-motion` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -23361,17 +23361,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, personalization, nolockscreenslideshow |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -23401,7 +23401,7 @@ Nohuto lineage references:
 | `local-controlpaneldisplay-admx-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
 | `local-controlpaneldisplay-adml-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-lock-screen-slideshow` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-lock-screen-slideshow` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -23464,17 +23464,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, cloudcontent, disablewindowsspotlightonactioncenter |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -23503,7 +23503,7 @@ Nohuto lineage references:
 | `ms-experience-csp-allow-spotlight-action-center` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightOnActionCenter | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonactioncenter | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-action-center` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-spotlight-action-center` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -23566,17 +23566,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, cloudcontent, disablespotlightcollectionondesktop |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -23605,7 +23605,7 @@ Nohuto lineage references:
 | `ms-experience-csp-allow-spotlight-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowSpotlightCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowspotlightcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-desktop-collection` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-spotlight-desktop-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -23668,17 +23668,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, cloudcontent, disablewindowsspotlightfeatures |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -23707,7 +23707,7 @@ Nohuto lineage references:
 | `ms-experience-csp-allow-windows-spotlight` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlight | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlight | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-features` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-spotlight-features` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -23770,17 +23770,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, cloudcontent, disablewindowsspotlightonsettings |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -23809,7 +23809,7 @@ Nohuto lineage references:
 | `ms-experience-csp-allow-spotlight-settings` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightOnSettings | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonsettings | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-settings` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-spotlight-settings` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -23872,17 +23872,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, cloudcontent, disablethirdpartysuggestions |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -23911,7 +23911,7 @@ Nohuto lineage references:
 | `ms-experience-csp-allow-third-party-spotlight` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowThirdPartySuggestionsInWindowsSpotlight | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-third-party` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-spotlight-third-party` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -23974,17 +23974,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, cloudcontent, disablewindowsspotlightwindowswelcomeexperience |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -24013,7 +24013,7 @@ Nohuto lineage references:
 | `ms-experience-csp-allow-spotlight-welcome` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightWindowsWelcomeExperience | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightwindowswelcomeexperience | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-spotlight-welcome` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-spotlight-welcome` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -24076,17 +24076,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, disablewcnui |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -24115,7 +24115,7 @@ Nohuto lineage references:
 | `local-wcn-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.admx mapping | C:\WINDOWS\PolicyDefinitions\WindowsConnectNow.admx | `high` | path, value, allowed-values, version-scope |
 | `local-wcn-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\WindowsConnectNow.adml | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-wcn-wizards` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-wcn-wizards` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -24178,17 +24178,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, allownewsandinterests |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -24218,7 +24218,7 @@ Nohuto lineage references:
 | `local-news-and-interests-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.admx mapping | C:\WINDOWS\PolicyDefinitions\NewsAndInterests.admx | `high` | path, value, allowed-values, version-scope |
 | `local-news-and-interests-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\NewsAndInterests.adml | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-widgets` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-widgets` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -24281,17 +24281,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | policies, disallowanimations |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -24320,7 +24320,7 @@ Nohuto lineage references:
 | `local-dwm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.admx mapping | C:\WINDOWS\PolicyDefinitions\DWM.admx | `high` | path, value, allowed-values, version-scope |
 | `local-dwm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\DWM.adml | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-disable-window-animations` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-disable-window-animations` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -24383,17 +24383,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, explorer, forceclassiccontrolpanel |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -24484,17 +24484,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | langbar, showstatus |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -24584,17 +24584,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, explorer, showorhidemostusedapps |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -24623,7 +24623,7 @@ Nohuto lineage references:
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, value, allowed-values, version-scope |
 | `local-startmenu-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\StartMenu.adml | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-most-used-apps` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-hide-most-used-apps` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
 
@@ -24686,17 +24686,17 @@ Current write(s):
 | Action state | `actionable` |
 | Gating reason | This record is app-ready and can stay one-click actionable. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, explorer, hidepeoplebar |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -24724,7 +24724,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-hide-people-bar` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP: HidePeopleBar | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start#hidepeoplebar | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `repo-provenance-hide-people-bar` | `repo-doc` | `Current repo docs` | Existing tweak provenance record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
+| `repo-provenance-hide-people-bar` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-hidepeoplebar-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - HidePeopleBar policy | Docs/tweaks/_source-mirrors/win-config/visibility/desc.md | `high` | path, value, behavior |
 
 **Validation proof**
@@ -24788,17 +24788,17 @@ Current write(s):
 | Action state | `research-gated` |
 | Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | classes, clsid, inprocserver32 |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -24893,17 +24893,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | audio, disablespatialonlowlatency |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -24929,7 +24929,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | `Current repo docs` | Repo provenance for audio.disable-spatial-audio | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
+| `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-spatial-audio | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 | `guest-audio-string-scan` | `vm-test` | `VM test / probe` | Guest string scan for spatial-audio registry contract | H:\Temp\vm-tooling-staging\spatial_audio_string_search.txt | `low` | behavior, app-mismatch |
 
@@ -24938,7 +24938,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Source URL | Docs/tweaks/tweak-provenance.json |
-| Exact quote / path | Repo provenance for audio.disable-spatial-audio: The repo provenance links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed. |
+| Exact quote / path | Repo source note for audio.disable-spatial-audio: The repo source note links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed. |
 | Key found on page | `True` |
 | Notes | Backfilled from evidence_id repo-provenance-audio-disable-spatial-audio (repo-doc); deprecated audit trail. Supplemental guest string-scan evidence is captured in evidence_id guest-audio-string-scan. |
 
@@ -24997,17 +24997,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | appevents, schemes, apps, systemasterisk, current, notification, reminder, close, criticalbatteryalarm, systemhand, mailbeep, deviceconnect, devicedisconnect, devicefail, systemexclamation, lowbatteryalarm, maximize, menucommand, menupopup, messagenudge, minimize, faxbeep, mail, proximity, proximityconnection, open, printcomplete, appgpfault, systemquestion, restoredown, restoreup, ccselect, showband, systemnotification, changetheme, windowsuac, explorer, blockedpopup, activatingdocument, emptyrecyclebin, feeddiscovered, movemenuitem, securityband, navigating, sapisvr, disnumberssound, panelsound, misrecosound, huboffsound, hubonsound, hubsleepsound |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -25033,7 +25033,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `repo-provenance-audio-disable-system-sounds` | `repo-doc` | `Current repo docs` | Repo provenance for audio.disable-system-sounds | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
+| `repo-provenance-audio-disable-system-sounds` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-system-sounds | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -25041,7 +25041,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Source URL | Docs/tweaks/tweak-provenance.json |
-| Exact quote / path | Repo provenance for audio.disable-system-sounds: The repo provenance links the AppEvents sound-scheme bundle to upstream nohuto research and marks the tweak as repo-backed. |
+| Exact quote / path | Repo source note for audio.disable-system-sounds: The repo source note links the AppEvents sound-scheme bundle to upstream nohuto research and marks the tweak as repo-backed. |
 | Key found on page | `True` |
 | Notes | Backfilled from evidence_id repo-provenance-audio-disable-system-sounds (repo-doc); deprecated audit trail. |
 
@@ -25103,17 +25103,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | terminal |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -25211,17 +25211,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | visualstudio |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -25313,17 +25313,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | visualstudio |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -25415,17 +25415,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -25517,13 +25517,13 @@ Blocking issues:
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -25611,17 +25611,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | lanmanworkstation |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -25727,17 +25727,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | tcpip, multimedia, systemprofile, networkthrottlingindex, systemresponsiveness |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -25841,17 +25841,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | power, coalescingtimerinterval, deepiocoalescingenabled, eventprocessorenabled, latencytoleranceparked, latencytolerancesoftparked, energyestimationenabled |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -25955,17 +25955,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, allowuserinfoaccess, appprivacy, letappsaccessaccountinfo, letappsaccesscalendar, letappsaccesscallhistory, letappsaccesscamera, letappsaccesscontacts, letappsaccessemail, letappsaccessgraphicscaptureprogrammatic, letappsaccessgraphicscapturewithoutborder, letappsaccesshumanpresence, letappsaccesslocation, letappsaccessmessaging, letappsaccessmicrophone, letappsaccessmotion, letappsaccessnotifications, letappsaccessphone, letappsaccessradios, letappssyncwithdevices, letappsaccesstasks, letappsaccesstrusteddevices, letappsruninbackground, letappsgetdiagnosticinfo, letappsaccessgazeinput, letappsactivatewithvoice, letappsactivatewithvoiceabovelock, letappsaccessbackgroundspatialperception |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -26059,17 +26059,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | disable application compatibility |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -26155,13 +26155,13 @@ Blocking issues:
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -26245,13 +26245,13 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -26339,17 +26339,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | disable ceip |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -26442,17 +26442,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `True` |
 | Source repositories | win-config |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -26547,17 +26547,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | disable f1 help |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -26647,17 +26647,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry |
 | Matched tokens | policies, textinput, allowlinguisticdatacollection, windowsinkworkspace, allowsuggestedappsinwindowsinkworkspace, allowwindowsinkworkspace |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -26750,17 +26750,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | disable offline files |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -26851,13 +26851,13 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -26945,13 +26945,13 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -27041,13 +27041,13 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -27131,13 +27131,13 @@ Blocking issues:
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -27221,17 +27221,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | winevt, channels, sleepstudy, diagnostic, enabled, kernel, processor, power, usermodepowerservice |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -27324,17 +27324,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | contentdeliverymanager |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -27429,17 +27429,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | contentdeliverymanager |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -27540,17 +27540,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `False` |
+| Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config, regkit |
 | Matched tokens | mediaplayer, preferences |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -27596,7 +27596,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | This is a product-specific observed preference bundle and still needs stronger primary-source provenance. |
+| Why | This is a product-specific observed preference bundle and still needs better primary-source links. |
 
 Blocking issues:
 - Windows Media Player preference bundle still lacks a clean official policy mapping.
@@ -27646,17 +27646,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | policies, deviceguard |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -27761,17 +27761,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config |
 | Matched tokens | windowsupdate, settings, pausefeatureupdatesendtime, 2030-01-01t00:00:00z, pausequalityupdatesendtime, pauseupdatesexpirytime, policies, disablewindowsupdateaccess, noautoupdate |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -27872,17 +27872,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, disablewpbtexecution |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -27980,13 +27980,13 @@ Blocking issues:
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -28067,17 +28067,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | application, experience, marebackup, compatibility, appraiser, customer, improvement, program, consolidator, usbceip, diskcleanup, silentcleanup, feedback, siuf, dmclient, error, reporting, queuereporting |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -28181,13 +28181,13 @@ Blocking issues:
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `` |
 | Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
+| Has Windows Internals notes | `` |
 | Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
@@ -28262,17 +28262,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | svchostsplitthresholdinkb |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -28374,17 +28374,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | overlaytestmode |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -28485,17 +28485,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | graphicsdrivers, disableoverlays |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -28596,17 +28596,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | graphicsdrivers, pagefaultdebugmode |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -28707,17 +28707,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, adjustdpcthreshold |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -28819,17 +28819,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, cacheawarescheduling |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -28931,17 +28931,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, defaultdynamicheterocpupolicy |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -29047,17 +29047,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, disablelowqostimerresolution |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -29161,17 +29161,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, dpcqueuedepth |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -29273,17 +29273,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, dpcwatchdogperiod |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -29388,17 +29388,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, idealdpcrate |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -29500,17 +29500,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, minimumdpcrate |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -29612,17 +29612,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `repo-backed` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, win-registry, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, serializetimerexpiration |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -29724,17 +29724,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -29834,17 +29834,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -29944,17 +29944,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -30053,17 +30053,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -30162,17 +30162,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 
@@ -30271,17 +30271,17 @@ Current write(s):
 | Action state | `archived` |
 | Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
-**Provenance**
+**Sources**
 
 | Field | Value |
 | --- | --- |
 | Coverage state | `category-fallback` |
 | Has nohuto evidence | `True` |
-| Has Windows Internals context | `True` |
+| Has Windows Internals notes | `True` |
 | Needs review | `True` |
 | Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens |  |
-| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
 

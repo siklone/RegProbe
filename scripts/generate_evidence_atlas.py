@@ -134,12 +134,12 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
     lines.extend(render_table(["Field", "Value"], class_rows))
     lines.append("")
 
-    lines.append("**Provenance**")
+    lines.append("**Sources**")
     lines.append("")
     provenance_rows = [
         ["Coverage state", md_code(provenance.get("coverage_state"))],
         ["Has nohuto evidence", md_code(provenance.get("has_nohuto_evidence"))],
-        ["Has Windows Internals context", md_code(provenance.get("has_windows_internals_context"))],
+        ["Has Windows Internals notes", md_code(provenance.get("has_windows_internals_context"))],
         ["Needs review", md_code(provenance.get("needs_review"))],
         ["Source repositories", md_escape(", ".join(provenance.get("source_repositories", []) or []))],
         ["Matched tokens", md_escape(", ".join(provenance.get("matched_tokens", []) or []))],
@@ -172,7 +172,7 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
         lines.extend(render_table(["Title", "URL", "Summary"], internals_rows))
         lines.append("")
     if provenance.get("other_references"):
-        lines.append("Other provenance references:")
+        lines.append("Other source references:")
         lines.append("")
         other_rows = []
         for ref in provenance.get("other_references", []) or []:
@@ -309,7 +309,7 @@ def main() -> int:
     lines.append("# Evidence Atlas")
     lines.append("")
     lines.append("This report consolidates every tweak record into a single human-readable atlas of key/value mappings, allowed values, evidence, and validation proof.")
-    lines.append("Nohuto references are lineage / naming provenance only; value semantics are validated separately in the record evidence and validation proof.")
+    lines.append("Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.")
     lines.append("")
     lines.append("## Summary")
     lines.append("")

@@ -2,7 +2,7 @@
 
 Date: 2026-03-09
 
-This note summarizes the current gap between the app's configuration surface and the upstream nohuto research repos that we treat as the primary configuration source layer.
+This note summarizes the current gap between the app's configuration surface and the upstream nohuto research repos that we use as the main source set.
 
 ## Verified Current State
 
@@ -162,7 +162,7 @@ Recommended handling:
 ## What Looks Correct Today
 
 - the shipped configuration surface is already strongly backed by nohuto sources
-- the provenance pipeline is doing its job as an internal trust layer
+- the source pipeline is doing its job
 - the biggest quality gap is product modeling, not lack of upstream research
 - one remaining review-only operation (`network.reset-winsock`) is correctly being held back
 
@@ -196,7 +196,7 @@ Recommended handling:
 Keep:
 
 - repo-backed privacy, power, network, system, peripheral, and visibility settings
-- current provenance pipeline in the background
+- current source pipeline in the background
 - conservative SAFE gating
 
 Do not promote yet:

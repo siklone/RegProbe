@@ -2,7 +2,7 @@
 ## Use-case based settings (English)
 
 This guide maps common visibility and personalization preferences to registry-backed settings.
-It is a companion to the main docs and is intentionally separated to preserve source provenance.
+It is a companion to the main docs and stays separate so the source trail stays clear.
 
 Related docs:
 - [Visibility tweaks](visibility.md)

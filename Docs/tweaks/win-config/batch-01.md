@@ -1,6 +1,6 @@
 ﻿# Win-Config Batch 01 - Registry Mapping
 
-Source: nohuto/win-config (with Microsoft references). This file adds per-tweak anchors for the Win-Config batch and links back to the main Docs tree (do not edit the main docs to keep provenance clean).
+Source: nohuto/win-config (with Microsoft references). This file adds per-tweak anchors for the Win-Config batch and links back to the main Docs tree (do not edit the main docs to keep the source trail clear).
 
 Notes:
 - Tweak IDs match the app IDs so links can jump directly to these sections.

@@ -905,20 +905,20 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             if (HasNohutoEvidence && HasWindowsInternalsContext)
             {
-                return "Upstream lineage + Internals";
+                return "Dump source + Internals";
             }
 
             if (HasNohutoEvidence)
             {
-                return "Upstream lineage";
+                return "Dump source";
             }
 
             if (HasWindowsInternalsContext)
             {
-                return "Internals context";
+                return "Internals";
             }
 
-            return NeedsSourceReview ? "Needs review" : "No provenance";
+            return NeedsSourceReview ? "Needs review" : "No source links";
         }
     }
 
@@ -2882,4 +2882,3 @@ public enum TweakAppliedStatus
     NotApplied,
     Error
 }
-

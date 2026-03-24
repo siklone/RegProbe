@@ -1608,7 +1608,7 @@
                                              Margin="6,0,0,0"
                                              Visibility="{Binding HasUpstreamLineage, Converter={StaticResource BoolToVisibility}}">
                                          <StackPanel>
-                                             <TextBlock Text="Upstream dump / pseudocode provenance" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
+                                             <TextBlock Text="Upstream dump / pseudocode sources" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource AccentBrightCyanBrush}"/>
                                              <TextBlock Text="{Binding UpstreamLineageSummary}" Margin="0,6,0,0" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" TextWrapping="Wrap"/>
                                              <TextBlock Text="{Binding UpstreamLineageSource}" Margin="0,6,0,0" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10" TextWrapping="Wrap"/>
                                          </StackPanel>
@@ -3335,5 +3335,4 @@
         </Grid>
     </Grid>
 </UserControl>
-
 

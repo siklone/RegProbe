@@ -6,7 +6,7 @@ using WindowsOptimizer.App.Models;
 namespace WindowsOptimizer.App.Services;
 
 /// <summary>
-/// Service for managing UWP/AppX packages using PowerShell with comprehensive safety checks.
+/// Service for managing UWP/AppX packages with PowerShell and safety checks.
 /// </summary>
 public class BloatwareService
 {

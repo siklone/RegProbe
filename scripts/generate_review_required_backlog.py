@@ -155,7 +155,7 @@ DOCS_FIRST_KEYWORDS = (
     "observed implementation only",
     "not an official policy surface",
     "runtime consent-store",
-    "needs stronger provenance",
+    "needs better source links",
     "did not capture a primary microsoft source",
     "did not capture a primary",
     "no primary microsoft source",

@@ -1,12 +1,12 @@
 ﻿# Nohuto Configuration Sources
 
-This document defines how the app should use the four nohuto repositories that now form the configuration intelligence layer.
+This document says how the app should use the four nohuto repositories that now feed the configuration work.
 
 ## Source Roles
 
 - `win-config`: primary option catalog. Use it to discover user-facing configuration candidates, group them by category, and inherit its strict "all required values must match" detection mindset.
-- `win-registry`: provenance and evidence layer. Use it to understand which keys are read on boot, which values exist by default, and how Windows components actually consume them.
-- `decompiled-pseudocode`: internals verification layer. Use it to confirm semantics and bounds, not as a direct end-user tweak source.
+- `win-registry`: source and evidence layer. Use it to understand which keys are read on boot, which values exist by default, and how Windows components actually consume them.
+- `decompiled-pseudocode`: internals check. Use it to confirm semantics and bounds, not as a direct end-user tweak source.
 - `regkit`: inspection and troubleshooting companion. Use it for trace/default workflows, registry exploration, and deep-linking advanced users into supporting context.
 
 ## Safe Productization Rules
@@ -47,7 +47,7 @@ Product work that should come from it:
 
 - detection probes
 - defaults/reference panels
-- provenance/evidence links beside options
+- source/evidence links beside options
 - "why this knob exists" explanations
 
 ### decompiled-pseudocode
@@ -125,4 +125,4 @@ Product work that should come from it:
 - auto-import every repo script and expose it as a SAFE action
 - treat reverse-engineered notes as sufficient validation on their own
 - collapse research, defaults, and actions into a single unreviewed toggle
-- hide provenance from the user once we start shipping repo-derived options
+- hide source details from the user once we start shipping repo-derived options

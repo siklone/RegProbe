@@ -147,7 +147,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private string _docsCoverageSummary = "Docs report unavailable.";
     private string _docsCoverageReportPath = string.Empty;
     private int _provenanceReviewCount;
-    private string _provenanceCoverageSummary = "Source provenance unavailable.";
+    private string _provenanceCoverageSummary = "Source links unavailable.";
     private string _provenanceReportPath = string.Empty;
     private readonly IProfileManager _profileManager;
     private readonly TweakExecutionPipeline _pipeline;
@@ -2120,21 +2120,21 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             if (catalog.TotalTweaks <= 0)
             {
                 ProvenanceReviewCount = 0;
-                ProvenanceCoverageSummary = "Source provenance unavailable.";
+                ProvenanceCoverageSummary = "Source links unavailable.";
                 return;
             }
 
             ProvenanceReviewCount = catalog.ReviewNeededTweaks;
             ProvenanceCoverageSummary =
-                $"{catalog.RepoBackedTweaks}/{catalog.TotalTweaks} repo-backed · " +
-                $"{catalog.InternalsBackedTweaks} internals refs · " +
+                $"{catalog.RepoBackedTweaks}/{catalog.TotalTweaks} repo-linked | " +
+                $"{catalog.InternalsBackedTweaks} internals refs | " +
                 $"{catalog.ReviewNeededTweaks} review";
         }
         catch
         {
             ProvenanceReportPath = string.Empty;
             ProvenanceReviewCount = 0;
-            ProvenanceCoverageSummary = "Source provenance unavailable.";
+            ProvenanceCoverageSummary = "Source links unavailable.";
         }
     }
 

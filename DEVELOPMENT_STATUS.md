@@ -45,7 +45,7 @@
 ---
 
 ### 0.1 Sprint 2: Fallback Data Provider + Hardware Identification (Commit: pending)
-**Improvement:** Added robust data fetching with multiple sources and hardware identification.
+**Improvement:** Added data fetching from multiple sources and hardware identification.
 
 **New Files:**
 - `WindowsOptimizer.Infrastructure/Data/FallbackDataProvider.cs` - Priority-based fallback with retry + circuit breaker
@@ -168,7 +168,7 @@ var result = await preloader.RunAllAsync(ct);
 **Features:**
 - **Crash Prevention:** Replaced dangerous `async void` patterns with `AsyncRelayCommand` that handles exceptions safely.
 - **UI Responsiveness:** Verified `VirtualizingStackPanel` and Recycling mode in `TweaksView` to handle large lists efficiently.
-- **Safe Fire-and-Forget:** Added robust error logging for background tasks.
+- **Safe Fire-and-Forget:** Added error logging for background tasks.
 
 **Status:** ✅ **OPTIMIZED** - Stability improved
 
@@ -397,7 +397,7 @@ var result = await preloader.RunAllAsync(ct);
 - Added **platform detection** to `ElevatedHostClient` and `LocalRegistryAccessor`
 - Immediately throws `PlatformNotSupportedException` on non-Windows platforms
 - `StartupConnectTimeout` remains **30 seconds on Windows** (allows time for UAC + host startup)
-- Added comprehensive logging to `ElevatedHostClient` for debugging
+- Added logging to `ElevatedHostClient` for debugging
 - Total time on non-Windows reduced to near-immediate failure (no connection attempts)
 
 **Files Changed:**
@@ -1258,7 +1258,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 ## 📝 Todo & Roadmap
 
-> **Note:** A comprehensive development roadmap (v2.1) has been approved and documented in [DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md). The roadmap covers major architectural improvements including Single Instance enforcement, Multi-threaded architecture, Hardware Database, Monitor View redesign, and Process Management enhancements.
+> **Note:** The development roadmap (v2.1) is documented in [DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md). It covers Single Instance enforcement, multi-threading, the hardware database, the old Monitor View redesign, and process management changes.
 
 ### High Priority (Critical for Stability)
 

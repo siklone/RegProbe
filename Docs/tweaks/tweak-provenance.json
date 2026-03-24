@@ -1,6 +1,6 @@
 {
   "GeneratedAtUtc": "2026-03-24T12:46:06Z",
-  "Summary": "296/298 tweaks have upstream dump or pseudocode lineage, 147 have Windows Internals context, 26 still need review.",
+  "Summary": "296/298 tweaks have upstream dump or pseudocode links, 147 have Windows Internals notes, 26 still need review.",
   "TotalTweaks": 298,
   "RepoBackedTweaks": 296,
   "InternalsBackedTweaks": 147,
@@ -38,7 +38,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -84,7 +84,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -131,7 +131,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 51 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 51 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -227,7 +227,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -275,7 +275,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -441,7 +441,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -585,7 +585,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Mapped to nohuto cleanup guidance for prefetch files, with Windows Internals context for SysMain and prefetch behavior.",
+      "Summary": "Mapped to nohuto cleanup guidance for prefetch files, with Windows Internals notes for SysMain and prefetch behavior.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -900,7 +900,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -938,7 +938,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -978,7 +978,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -1025,7 +1025,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1065,7 +1065,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -1105,7 +1105,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": true,
       "CoverageState": "unmapped",
-      "Summary": "No upstream provenance match found yet. Keep this tweak in review-only state.",
+      "Summary": "No upstream source match found yet. Keep this tweak in review-only state.",
       "SourceRepositories": [],
       "MatchedTokens": [],
       "References": []
@@ -1120,7 +1120,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1158,7 +1158,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1184,7 +1184,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1210,7 +1210,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1249,7 +1249,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": true,
       "CoverageState": "unmapped",
-      "Summary": "No upstream provenance match found yet. Keep this tweak in review-only state.",
+      "Summary": "No upstream source match found yet. Keep this tweak in review-only state.",
       "SourceRepositories": [],
       "MatchedTokens": [],
       "References": []
@@ -1264,7 +1264,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1303,7 +1303,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-registry, win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-registry, win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-registry",
         "win-config"
@@ -1344,7 +1344,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1383,7 +1383,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-registry, win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-registry, win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-registry",
         "win-config"
@@ -1424,7 +1424,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1463,7 +1463,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1502,7 +1502,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1540,7 +1540,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1579,7 +1579,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1618,7 +1618,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1658,7 +1658,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1697,7 +1697,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -1743,7 +1743,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1782,7 +1782,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1822,7 +1822,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 13 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 13 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1906,7 +1906,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -1990,7 +1990,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2036,7 +2036,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2088,7 +2088,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2133,7 +2133,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2179,7 +2179,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2224,7 +2224,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2270,7 +2270,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 10 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 10 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -2324,7 +2324,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2370,7 +2370,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2421,7 +2421,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2467,7 +2467,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -2513,7 +2513,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2558,7 +2558,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2605,7 +2605,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2651,7 +2651,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2737,7 +2737,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2787,7 +2787,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -2832,7 +2832,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -2943,7 +2943,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3030,7 +3030,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3083,7 +3083,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -3135,7 +3135,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -3187,7 +3187,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 5 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 5 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3241,7 +3241,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3291,7 +3291,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3341,7 +3341,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3394,7 +3394,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3434,7 +3434,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3474,7 +3474,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3514,7 +3514,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3554,7 +3554,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -3594,7 +3594,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -3649,7 +3649,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -3703,7 +3703,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -3795,7 +3795,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -3834,7 +3834,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 20 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 20 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -3904,7 +3904,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -3956,7 +3956,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-registry, win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-registry, win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-registry",
         "win-config",
@@ -4011,7 +4011,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -4177,7 +4177,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -4281,7 +4281,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -4336,7 +4336,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -4375,7 +4375,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -4430,7 +4430,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 5 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 5 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -4553,7 +4553,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Mapped to the exact nohuto SysMain section, with Windows Internals context for Superfetch and prefetch behavior.",
+      "Summary": "Mapped to the exact nohuto SysMain section, with Windows Internals notes for Superfetch and prefetch behavior.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -4594,7 +4594,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -4645,7 +4645,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -4698,7 +4698,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -4751,7 +4751,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -4853,7 +4853,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 10 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 10 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -4990,7 +4990,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5029,7 +5029,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 28 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 28 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5094,7 +5094,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5132,7 +5132,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5194,7 +5194,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5233,7 +5233,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5265,7 +5265,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5291,7 +5291,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5331,7 +5331,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5371,7 +5371,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5411,7 +5411,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 5 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 5 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5453,7 +5453,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 5 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 5 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5495,7 +5495,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5535,7 +5535,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5561,7 +5561,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5623,7 +5623,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5687,7 +5687,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5727,7 +5727,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5767,7 +5767,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5807,7 +5807,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5871,7 +5871,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5897,7 +5897,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5937,7 +5937,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -5977,7 +5977,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6017,7 +6017,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6056,7 +6056,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 6 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 6 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -6100,7 +6100,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6141,7 +6141,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 5 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 5 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6183,7 +6183,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6222,7 +6222,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 6 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 6 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6265,7 +6265,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6306,7 +6306,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6346,7 +6346,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6386,7 +6386,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6425,7 +6425,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6465,7 +6465,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6491,7 +6491,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6531,7 +6531,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6571,7 +6571,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6610,7 +6610,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6650,7 +6650,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6690,7 +6690,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6729,7 +6729,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6769,7 +6769,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6809,7 +6809,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6849,7 +6849,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 9 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 9 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -6957,7 +6957,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -6989,7 +6989,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7021,7 +7021,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7060,7 +7060,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7100,7 +7100,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7140,7 +7140,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7181,7 +7181,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7221,7 +7221,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7260,7 +7260,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, regkit. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, regkit. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "regkit"
@@ -7300,7 +7300,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7363,7 +7363,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7427,7 +7427,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7467,7 +7467,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7506,7 +7506,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7546,7 +7546,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7586,7 +7586,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7627,7 +7627,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7673,7 +7673,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7718,7 +7718,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7764,7 +7764,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7810,7 +7810,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -7856,7 +7856,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7902,7 +7902,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -7934,7 +7934,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -8009,7 +8009,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -8054,7 +8054,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 5 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 5 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -8102,7 +8102,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 9 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 9 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -8154,7 +8154,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -8208,7 +8208,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 6 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 6 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -8257,7 +8257,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -8302,7 +8302,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -8348,7 +8348,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 5 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 5 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -8396,7 +8396,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -8442,7 +8442,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -8520,7 +8520,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -8573,7 +8573,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -8626,7 +8626,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -8678,7 +8678,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -8731,7 +8731,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -8784,7 +8784,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -8836,7 +8836,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -8887,7 +8887,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -8940,7 +8940,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -8985,7 +8985,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9038,7 +9038,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9090,7 +9090,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 18 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 18 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9158,7 +9158,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9211,7 +9211,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9301,7 +9301,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9346,7 +9346,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9400,7 +9400,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -9453,7 +9453,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9506,7 +9506,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9559,7 +9559,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9612,7 +9612,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -9664,7 +9664,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -9716,7 +9716,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9768,7 +9768,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -9821,7 +9821,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -9874,7 +9874,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -9927,7 +9927,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -9980,7 +9980,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10033,7 +10033,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10086,7 +10086,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10139,7 +10139,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10192,7 +10192,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10245,7 +10245,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10300,7 +10300,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10355,7 +10355,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10410,7 +10410,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10465,7 +10465,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10520,7 +10520,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10575,7 +10575,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10630,7 +10630,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10685,7 +10685,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10740,7 +10740,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10795,7 +10795,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -10849,7 +10849,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 5 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 5 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -10905,7 +10905,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -10959,7 +10959,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -11013,7 +11013,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 4 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -11104,7 +11104,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -11156,7 +11156,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -11208,7 +11208,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -11261,7 +11261,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -11314,7 +11314,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -11367,7 +11367,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -11419,7 +11419,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 9 audit token(s) across win-config, win-registry, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 9 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -11923,7 +11923,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 1 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -11962,7 +11962,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "decompiled-pseudocode"
@@ -12014,7 +12014,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -12055,7 +12055,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -12095,7 +12095,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -12136,7 +12136,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12175,7 +12175,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12215,7 +12215,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12255,7 +12255,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12295,7 +12295,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12335,7 +12335,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12375,7 +12375,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12415,7 +12415,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12455,7 +12455,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12495,7 +12495,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12535,7 +12535,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12575,7 +12575,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12615,7 +12615,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12654,7 +12654,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12693,7 +12693,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
@@ -12733,7 +12733,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12773,7 +12773,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 2 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12800,7 +12800,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12840,7 +12840,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config"
       ],
@@ -12880,7 +12880,7 @@
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 3 audit token(s) across win-config, win-registry. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "Summary": "Matched 3 audit token(s) across win-config, win-registry. These links show where the name came from. Value semantics still come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry"
