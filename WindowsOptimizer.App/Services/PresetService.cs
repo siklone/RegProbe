@@ -283,7 +283,27 @@ public class PresetService
     {
         try
         {
-            return OsDetectionResolver.Resolve(includeWmiCrossCheck: false).NormalizedName;
+            var resolverType = Type.GetType("WindowsOptimizer.App.Services.OsDetectionResolver, WindowsOptimizer.App");
+            if (resolverType != null)
+            {
+                var resolveMethod = resolverType.GetMethod("Resolve", new[] { typeof(bool) });
+                if (resolveMethod != null)
+                {
+                    var result = resolveMethod.Invoke(null, new object[] { false });
+                    var normalizedNameProperty = result?.GetType().GetProperty("NormalizedName");
+                    if (normalizedNameProperty != null)
+                    {
+                        var normalizedName = normalizedNameProperty.GetValue(result) as string;
+                        if (!string.IsNullOrEmpty(normalizedName))
+                        {
+                            return normalizedName;
+                        }
+                    }
+                }
+            }
+
+            var osVersion = Environment.OSVersion;
+            return $"{osVersion.Version.Major}.{osVersion.Version.Minor}.{osVersion.Version.Build}";
         }
         catch
         {

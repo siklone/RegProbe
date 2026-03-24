@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  checks: write
   statuses: write
 
 jobs:
@@ -36,4 +37,21 @@ jobs:
               state: 'success',
               context: 'dynamic / submit-nuget (dynamic)',
               description: 'NuGet publishing is not used in this repository.'
+            });
+
+      - name: Publish legacy required check run
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.checks.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: 'dynamic / submit-nuget (dynamic)',
+              head_sha: context.sha,
+              status: 'completed',
+              conclusion: 'success',
+              output: {
+                title: 'NuGet publishing is not used in this repository.',
+                summary: 'This repository does not publish a NuGet package from CI.'
+              }
             });
