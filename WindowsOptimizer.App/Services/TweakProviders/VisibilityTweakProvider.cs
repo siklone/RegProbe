@@ -30,6 +30,19 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
 
         yield return CreateRegistryTweak(
             context,
+            "explorer.show-protected-operating-system-files",
+            "Show Protected Operating System Files",
+            "Shows protected operating system files in File Explorer. Best kept for advanced troubleshooting.",
+            TweakRiskLevel.Advanced,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
+            "ShowSuperHidden",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
+        yield return CreateRegistryTweak(
+            context,
             "explorer.show-file-extensions",
             "Show File Extensions",
             "Shows the file extension (e.g., .txt, .exe) for all known file types in File Explorer.",

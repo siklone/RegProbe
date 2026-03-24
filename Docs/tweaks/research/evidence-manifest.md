@@ -16,9 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 173 |
-| B count | 55 |
-| C count | 2 |
+| A count | 174 |
+| B count | 56 |
 | D count | 8 |
 | E count | 52 |
 
@@ -103,7 +102,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `explorer.show-full-path` | validated | Class A | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `f99217b7a39a274a015bd67611bf700ad1c7c468c07879551cc45c62082bd757` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
 | `explorer.show-hidden-files` | validated | Class A | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
 | `explorer.show-info-tips` | validated | Class A | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `047d7773743e44c33fff8bb55ac9c3223ac3d6819d534dcbc4a0ffd985368216` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
-| `explorer.show-protected-operating-system-files` | validated | Class C | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
+| `explorer.show-protected-operating-system-files` | validated | Class A | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `a753c6343a0874d29c56fb02c92dc68f392753c1ce9a01c8d68858e3e8f96773` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
 | `explorer.show-recent-items` | validated | Class A | `Docs/tweaks/research/records/explorer.show-recent-items.review.json` | `4169d3ea73fd3b2167179fe54685880d8f62b7ea8354d57fdab07641ecf4b973` | `924f0e48d17cbcb71c2c3c57e56be18b825d3a32f3d12fd6cb5d582529e1a34a` | 1 |
 | `explorer.show-status-bar` | validated | Class A | `Docs/tweaks/research/records/explorer.show-status-bar.review.json` | `835171bfebdc3b5fedb726ce8bd538b92e6f129869db6768dc7523f295ca81fd` | `9cbc0e1f749f45ec8df99669200d92db5614fefdbc6a3ecfa98e06ddb01383be` | 1 |
 | `explorer.show-type-overlay` | validated | Class A | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` | `cfc0557b84bf4e97fe2aba9cc09ad19a8861d3a1c7e112ec25ac05e45367df7a` | `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2` | 1 |
@@ -284,7 +283,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
 | `system.priority-control` | validated | Class D | `Docs/tweaks/research/records/system.priority-control.review.json` | `9e1f07a3b5d85840b5e49a1cc316e512d46529a339c1de92b66af7ddb1e18fb2` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
 | `system.reduce-shutdown-timeouts` | validated | Class D | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
-| `system.reliability-timestamp-enabled` | validated | Class C | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
+| `system.reliability-timestamp-enabled` | validated | Class B | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
 | `system.services.disable-bluetooth-support` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `c41242b6b93a6c0726a408024b2d24f989f06a68dbd803a2976d1755cc320372` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
 | `system.services.disable-bluetooth-user-service` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` | `0dbc2e23199be2975ec038e31ccb35313500be6a9c1284230346332a7617adcd` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 1 |
@@ -5044,12 +5043,12 @@ Nohuto lineage references:
 ### `explorer.show-protected-operating-system-files`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json`
-- Source SHA256: `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9`
+- Source SHA256: `a753c6343a0874d29c56fb02c92dc68f392753c1ce9a01c8d68858e3e8f96773`
 - Proof SHA256: `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b`
 
 **Summary:** Observed Explorer runtime setting for protected operating system file visibility. Microsoft Open Specifications documents ShowSuperHidden under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 dump/default hive shows the same value on current builds, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowSuperHidden with both Data:0 and Data:1 after Explorer restart.
@@ -5058,10 +5057,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -16764,7 +16763,7 @@ Windows Internals references:
 ### `system.reliability-timestamp-enabled`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Reliability / Event Timestamps`
 - Scope: `device`
@@ -16778,10 +16777,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
+| Class | Class B |
+| Title | Strong but Partial |
 | Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 

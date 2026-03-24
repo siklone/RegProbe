@@ -15,9 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 173 |
-| Class B | 55 |
-| Class C | 2 |
+| Class A | 174 |
+| Class B | 56 |
 | Class D | 8 |
 | Class E | 52 |
 
@@ -2535,7 +2534,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -2550,18 +2549,24 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | `n/a` |
-| Notes | The app does not currently expose ShowSuperHidden. |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Notes | The app now writes ShowSuperHidden = 1 on the same current-user Explorer path validated by the Microsoft spec and the Win25H2Clean Procmon capture. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `explorer-showsuperhidden-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `ShowSuperHidden` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -21595,7 +21600,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Reliability / Event Timestamps` |
 | Scope | `device` |
@@ -21610,18 +21615,25 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | `` |
-| Notes | The app does not currently expose this Reliability timestamp setting. |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Notes | The app now writes the documented policy gate plus the companion 24-hour interval cap used by this record. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `reliability-timestamp-enabled` | `HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability` | `TimeStampEnabled` | `1` | `value` |  |
+| `reliability-timestamp-interval` | `HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability` | `TimeStampInterval` | `86400` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
+| Label | `Class B` |
+| Title | Strong but Partial |
 | Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Sources**
 
