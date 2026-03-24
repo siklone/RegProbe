@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T04:44:43.465916Z",
+  "generated_utc": "2026-03-24T04:51:37.843243Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
-    "total_records": 283,
-    "validated": 231,
+    "total_records": 284,
+    "validated": 232,
     "deprecated": 52,
     "review_required": 0,
-    "records_with_evidence": 283,
+    "records_with_evidence": 284,
     "records_without_evidence": 0,
     "records_missing_validation_proof": 0,
     "deprecated_missing_validation_proof": 0,
-    "records_with_source_hashes": 283,
+    "records_with_source_hashes": 284,
     "records_without_source_hashes": 0
   },
   "records": [
@@ -16227,6 +16227,201 @@
         "windows_internals_references": [],
         "other_references": []
       }
+    },
+    {
+      "record_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "record_status": "validated",
+      "source_file": "Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json",
+      "source_file_sha256": "0b9f99f5eae8811b2493069bc7f36bfd4ff3f4ae8c118e33ff8782d051ba1e59",
+      "source_file_size_bytes": 10345,
+      "name": "Launch Folder Windows in a Separate Process",
+      "category": "Explorer",
+      "area": "Observed Explorer Runtime Setting",
+      "scope": "user",
+      "summary": "Observed Explorer runtime setting for launching folder windows in a separate process. Microsoft Open Specifications documents SeparateProcess under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 0, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess with both Data:0 and Data:1 after Explorer restart.",
+      "decision": {
+        "confidence": "high",
+        "apply_allowed": true,
+        "recommended_for_general_users": false,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "Microsoft documents the 0/1 semantics, the 25H2 default hive corroborates the current default state, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference, but it is more of an advanced stability/troubleshooting toggle than a general-user tweak.",
+        "blocking_issues": []
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "n/a",
+        "notes": "The app does not currently expose SeparateProcess.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "explorer-separateprocess-flag",
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "SeparateProcess",
+          "value_type": "REG_DWORD",
+          "notes": "This record validates the documented 0/1 semantics against the live Explorer runtime surface on Win25H2Clean.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "Use the default shared Explorer process model",
+              "meaning": "Folder windows are not forced into separate Explorer processes. Microsoft documents 0 as the disabled state, the 25H2 default hive exports SeparateProcess = 0, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+              "evidence_ids": [
+                "ms-gppref-global-folder-options-vista-separateprocess",
+                "dump-hkcu25h2-explorer-advanced-separateprocess",
+                "procmon-separateprocess-runtime"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 1,
+              "label": "Launch folder windows in a separate process",
+              "meaning": "Explorer uses the separate-process mode for folder windows. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+              "evidence_ids": [
+                "ms-gppref-global-folder-options-vista-separateprocess",
+                "procmon-separateprocess-runtime"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "25H2 default Explorer preference",
+          "applies_to": "Current-user Explorer Advanced settings on the 25H2 default hive snapshot",
+          "states": [
+            {
+              "target_id": "explorer-separateprocess-flag",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "HKCU25H2.reg exports SeparateProcess = 0 in the default Explorer\\Advanced block."
+            }
+          ],
+          "evidence_ids": [
+            "dump-hkcu25h2-explorer-advanced-separateprocess"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "default-shared-explorer-process",
+          "label": "Default shared Explorer process model",
+          "intended_for": [
+            "General users",
+            "Systems that prefer the default lighter Explorer behavior"
+          ],
+          "avoid_for": [
+            "Troubleshooting sessions that want folder-window process isolation"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-separateprocess-flag",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "This matches the documented disabled state and the 25H2 default-hive export."
+            }
+          ],
+          "good_when": "You want the default lighter Explorer process model.",
+          "bad_when": "You intentionally want folder windows isolated in separate processes.",
+          "tradeoffs": [
+            "Keeps Explorer on the default shared-process path.",
+            "Uses fewer Explorer processes."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-gppref-global-folder-options-vista-separateprocess",
+            "dump-hkcu25h2-explorer-advanced-separateprocess",
+            "procmon-separateprocess-runtime"
+          ]
+        },
+        {
+          "profile_id": "separate-explorer-processes",
+          "label": "Separate Explorer processes",
+          "intended_for": [
+            "Troubleshooting",
+            "Users who want folder-window process isolation"
+          ],
+          "avoid_for": [
+            "Users who prefer the default lighter Explorer process model"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-separateprocess-flag",
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "This matches the documented enabled state and the runtime-observed Explorer read."
+            }
+          ],
+          "good_when": "You want folder windows launched in a separate Explorer process.",
+          "bad_when": "You do not want the extra Explorer process overhead.",
+          "tradeoffs": [
+            "Can isolate folder-window failures more cleanly.",
+            "May use more memory than the default shared-process model."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-gppref-global-folder-options-vista-separateprocess",
+            "procmon-separateprocess-runtime"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ms-gppref-global-folder-options-vista-separateprocess",
+          "kind": "official-doc",
+          "title": "Microsoft Open Specifications: GlobalFolderOptionsVista separateProcess",
+          "location": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+          "summary": "Microsoft maps separateProcess to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess and states that it MUST be 1 to enable or 0 to disable. The description says the option launches folder dialogs in separate processes.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "dump-hkcu25h2-explorer-advanced-separateprocess",
+          "kind": "raw-registry-dump",
+          "title": "25H2 default hive corroboration for SeparateProcess",
+          "location": "Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg",
+          "summary": "The 25H2 default hive exports SeparateProcess = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced, and the raw 25H2 dump lists the same value name under the current-user Explorer\\Advanced branch.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "procmon-separateprocess-runtime",
+          "kind": "procmon-trace",
+          "title": "Procmon capture - Explorer SeparateProcess runtime surface",
+          "location": "H:\\Temp\\vm-tooling-staging\\separateprocess-result.txt",
+          "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote SeparateProcess = 0 and SeparateProcess = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess with matching Data: 0 and Data: 1 values.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
+        }
+      ],
+      "validation_proof": {
+        "source_url": "H:\\Temp\\vm-tooling-staging\\separateprocess-result.txt",
+        "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess ... Data: 1; RESTORED_VALUE=0",
+        "key_found_on_page": true,
+        "notes": "The result file was copied back to the host workspace during validation."
+      },
+      "validation_proof_sha256": "8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0",
+      "provenance": null
     },
     {
       "record_id": "explorer.show-compressed-and-encrypted-files-in-color",

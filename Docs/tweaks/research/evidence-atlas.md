@@ -7,11 +7,11 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 
 | Field | Value |
 | --- | --- |
-| Total records | 282 |
-| Validated | 230 |
+| Total records | 283 |
+| Validated | 231 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 282 |
+| Records with evidence | 283 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -23,7 +23,7 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Audio | 5 |
 | Cleanup | 1 |
 | Developer | 13 |
-| Explorer | 10 |
+| Explorer | 11 |
 | Network | 29 |
 | Notifications | 5 |
 | Performance | 3 |
@@ -1471,6 +1471,83 @@ Nohuto lineage references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | UseCompactMode is now validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build. The remaining limitation is documentation quality: this is runtime-observed rather than Microsoft-documented. |
+
+---
+
+### `explorer.show-compressed-and-encrypted-files-in-color`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Category | `Explorer` |
+| Area | `Observed Explorer Runtime Setting` |
+| Scope | `user` |
+| Source file | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Observed Explorer runtime setting for colored display of compressed and encrypted NTFS files. Microsoft Open Specifications documents ShowCompColor under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowCompColor with both Data:0 and Data:1 after Explorer restart.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `n/a` |
+| Notes | The app does not currently expose ShowCompColor. |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
+  - explorer-showcompcolor-flag: value `1` — HKCU25H2.reg exports ShowCompColor = 1 in the default Explorer\Advanced block.
+
+**Recommended profiles**
+
+- `color-compressed-and-encrypted-files`: Color compressed and encrypted files (apply_allowed=True)
+- `do-not-color-compressed-and-encrypted-files`: Do not color compressed and encrypted files (apply_allowed=True)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-showcompcolor` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showCompColor | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
+| `dump-hkcu25h2-explorer-advanced-showcompcolor` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowCompColor | Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg | `medium` | path, value, version-scope |
+| `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | C:\Tools\Perf\Procmon\showcompcolor-result.txt | `high` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | C:\Tools\Perf\Procmon\showcompcolor-result.txt |
+| Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowCompColor ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowCompColor ... Data: 1; RESTORED_VALUE=1 |
+| Key found on page | `True` |
+| Notes | The guest-local result file was also copied to a host scratch location during validation for review. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft documents the 0/1 semantics, the 25H2 default hive corroborates the current default state, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference. |
 
 ---
 
