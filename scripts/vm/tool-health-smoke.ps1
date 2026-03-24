@@ -135,18 +135,21 @@ $result.smokes['ghidra'] = Invoke-Step {
     $stdout = Join-Path $OutputRoot 'ghidra-import.txt'
     $stderr = $stdout + '.stderr.txt'
     $projectRoot = 'C:\Tools\GhidraProjects'
+    $smokeBinary = 'C:\Windows\System32\choice.exe'
     New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
 
     $proc = Start-Process -FilePath $analyzeHeadless.FullName `
-        -ArgumentList @($projectRoot, 'ToolHealthProject', '-import', 'C:\Windows\System32\notepad.exe', '-deleteProject') `
+        -ArgumentList @($projectRoot, 'ToolHealthProject', '-import', $smokeBinary, '-noanalysis', '-deleteProject') `
         -PassThru -Wait -WindowStyle Hidden `
         -RedirectStandardOutput $stdout `
         -RedirectStandardError $stderr
 
+    $stdoutText = if (Test-Path $stdout) { Get-Content -Path $stdout -Raw } else { '' }
     [ordered]@{
-        success = ($proc.ExitCode -eq 0) -and [bool](Test-Path $stdout)
+        success = ($proc.ExitCode -eq 0) -and [bool](Test-Path $stdout) -and ($stdoutText -match 'Import succeeded')
         output = $stdout
         exit_code = $proc.ExitCode
+        target = $smokeBinary
     }
 }
 
