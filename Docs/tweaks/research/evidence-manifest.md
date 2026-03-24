@@ -94,7 +94,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.show-drive-letters-first` | validated | `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json` | `8bfa52fedcb995cc8db11a3c4235f7f2a205442dfad8c0c2d799703d755d28a9` | `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10` | 1 |
 | `explorer.show-file-extensions` | validated | `Docs/tweaks/research/records/explorer.show-file-extensions.review.json` | `fd29b08e9516a84fb812c47948e77c6099d1de026716ebc83bfa121b641954d8` | `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d` | 1 |
 | `explorer.show-full-path` | validated | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `2297227b86ebf53f96763e33277fea21ea1a58e722300a8706509c75251b6bf5` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
-| `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `66c25954d7b0e7cee6cee01c818c2cc5097b205f991c5a7ba81496753d4910fd` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
+| `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
 | `explorer.show-info-tips` | validated | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `ac3bf40732016c93efa19809e2dfcd75429737d70ffc3eae56a5abe8e401ac13` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
 | `explorer.show-protected-operating-system-files` | validated | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
 | `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `463db3fd6484af4bb255887b5b5c86178b2eb767cdc7df8598b26d77557b671b` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
@@ -3924,7 +3924,7 @@ _No provenance block present._
 - Source SHA256: `fd29b08e9516a84fb812c47948e77c6099d1de026716ebc83bfa121b641954d8`
 - Proof SHA256: `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d`
 
-**Summary:** Observed Explorer runtime setting for file-extension visibility. Microsoft Open Specifications documents HideFileExt under Explorer\Advanced, while a reversible Procmon and shell-runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideFileExt as REG_DWORD with 0 = show file extensions and 1 = hide them. The app writes that same runtime surface directly.
+**Summary:** Observed Explorer runtime setting for file-extension visibility. Microsoft Open Specifications documents HideFileExt under Explorer\Advanced, the 25H2 default hive exports the same value as 1, the 25H2 raw registry dump lists the same value name under the current-user Explorer\Advanced branch, and a reversible Procmon and shell-runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideFileExt as REG_DWORD with 0 = show file extensions and 1 = hide them. The app writes that same runtime surface directly.
 
 **Targets**
 
@@ -3938,6 +3938,7 @@ _No provenance block present._
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | `high` |
+| `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for HideFileExt | `medium` |
 | `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | `high` |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
@@ -4025,7 +4026,7 @@ Nohuto lineage references:
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.show-hidden-files.review.json`
-- Source SHA256: `66c25954d7b0e7cee6cee01c818c2cc5097b205f991c5a7ba81496753d4910fd`
+- Source SHA256: `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2`
 - Proof SHA256: `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d`
 
 **Summary:** Observed Explorer runtime setting for hidden-file visibility. Microsoft Open Specifications documents Hidden under Explorer\Advanced with symbolic SHOW and HIDE semantics, while a reversible Procmon and Explorer UI runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Hidden as REG_DWORD with 1 = show hidden items and 2 = hide them. The app writes that same runtime surface directly.

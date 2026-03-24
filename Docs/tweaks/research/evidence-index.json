@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T05:35:36.644683Z",
+  "generated_utc": "2026-03-24T05:38:38.244754Z",
   "summary": {
     "total_records": 285,
     "validated": 233,
@@ -17074,7 +17074,7 @@
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
       "scope": "user",
-      "summary": "Observed Explorer runtime setting for hidden-file visibility. Microsoft Open Specifications documents Hidden under Explorer\\Advanced with symbolic SHOW and HIDE semantics, while a reversible Procmon and Explorer UI runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden as REG_DWORD with 1 = show hidden items and 2 = hide them. The app writes that same runtime surface directly.",
+      "summary": "Observed Explorer runtime setting for hidden-file visibility. Microsoft Open Specifications documents Hidden under Explorer\\Advanced with symbolic SHOW and HIDE semantics, the 25H2 default hive exports the same value as 2, the 25H2 raw registry dump lists the same value name under the current-user Explorer\\Advanced branch, and a reversible Procmon and Explorer UI runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden as REG_DWORD with 1 = show hidden items and 2 = hide them. The app writes that same runtime surface directly.",
       "decision": {
         "confidence": "high",
         "apply_allowed": true,
@@ -17082,7 +17082,7 @@
         "restore_default_supported": false,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the Hidden semantics used by Explorer: 1 shows hidden items and 2 hides them. The app writes the runtime show-hidden state. This is a low-risk user-scope Explorer preference, but it is best suited to advanced users.",
+        "why": "A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the Hidden semantics used by Explorer: 1 shows hidden items and 2 hides them. The 25H2 default hive corroborates the current hidden-by-default state, the raw 25H2 dump confirms the value family on current builds, and the app writes the runtime show-hidden state. This remains a low-risk user-scope Explorer preference, but it is best suited to advanced users.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -17125,6 +17125,7 @@
               "label": "Hide hidden files and folders",
               "meaning": "Explorer hides items marked with the hidden attribute. In the runtime capture, Explorer consumed Hidden = 2 after restart and the Explorer UI listed only visible.txt.",
               "evidence_ids": [
+                "dump-hkcu25h2-explorer-advanced-hidden",
                 "procmon-hidden-runtime"
               ]
             }
@@ -17133,19 +17134,18 @@
       ],
       "windows_defaults": [
         {
-          "label": "Windows-managed hidden-item default",
-          "applies_to": "Explorer user profiles",
+          "label": "25H2 default Explorer preference",
+          "applies_to": "Current-user Explorer Advanced settings on the 25H2 default hive snapshot",
           "states": [
             {
               "target_id": "explorer-hidden-flag",
-              "state_kind": "unknown",
-              "value": null,
-              "rationale": "This record validates the explicit runtime values 1 and 2. It does not publish a machine-checked missing-value default."
+              "state_kind": "value",
+              "value": 2,
+              "rationale": "HKCU25H2.reg exports Hidden = 2 in the default Explorer\\Advanced block."
             }
           ],
           "evidence_ids": [
-            "ms-gppref-global-folder-options-vista-hidden",
-            "procmon-hidden-runtime"
+            "dump-hkcu25h2-explorer-advanced-hidden"
           ]
         }
       ],
@@ -17206,6 +17206,7 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
+            "dump-hkcu25h2-explorer-advanced-hidden",
             "procmon-hidden-runtime"
           ]
         }
@@ -17224,6 +17225,20 @@
             "behavior"
           ],
           "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "dump-hkcu25h2-explorer-advanced-hidden",
+          "kind": "raw-registry-dump",
+          "title": "25H2 default hive and raw dump corroboration for Hidden",
+          "location": "Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg; Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+          "summary": "The 25H2 default hive exports Hidden = 2 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced, and the raw 25H2 dump lists the same value name under the current-user Explorer\\Advanced branch.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         },
         {
           "evidence_id": "procmon-hidden-runtime",
