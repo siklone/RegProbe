@@ -97,7 +97,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
 | `explorer.show-info-tips` | validated | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `ac3bf40732016c93efa19809e2dfcd75429737d70ffc3eae56a5abe8e401ac13` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
 | `explorer.show-protected-operating-system-files` | validated | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
-| `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `463db3fd6484af4bb255887b5b5c86178b2eb767cdc7df8598b26d77557b671b` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
+| `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
 | `network.disable-active-probing` | validated | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0` | 1 |
 | `network.disable-default-shares` | validated | `Docs/tweaks/research/records/network.disable-default-shares.json` | `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
 | `network.disable-ipv6` | validated | `Docs/tweaks/research/records/network.disable-ipv6.json` | `024c6f3d596e053e312ee3444561fa5647441f688703fabb36829995c58b1597` | `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa` | 1 |
@@ -4029,7 +4029,7 @@ Nohuto lineage references:
 - Source SHA256: `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2`
 - Proof SHA256: `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d`
 
-**Summary:** Observed Explorer runtime setting for hidden-file visibility. Microsoft Open Specifications documents Hidden under Explorer\Advanced with symbolic SHOW and HIDE semantics, while a reversible Procmon and Explorer UI runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Hidden as REG_DWORD with 1 = show hidden items and 2 = hide them. The app writes that same runtime surface directly.
+**Summary:** Observed Explorer runtime setting for hidden-file visibility. Microsoft Open Specifications documents Hidden under Explorer\Advanced with symbolic SHOW and HIDE semantics, the 25H2 default hive exports the same value as 2, the 25H2 raw registry dump lists the same value name under the current-user Explorer\Advanced branch, and a reversible Procmon and Explorer UI runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Hidden as REG_DWORD with 1 = show hidden items and 2 = hide them. The app writes that same runtime surface directly.
 
 **Targets**
 
@@ -4043,6 +4043,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | `high` |
+| `dump-hkcu25h2-explorer-advanced-hidden` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for Hidden | `medium` |
 | `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | `high` |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
@@ -4156,7 +4157,7 @@ _No provenance block present._
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json`
-- Source SHA256: `463db3fd6484af4bb255887b5b5c86178b2eb767cdc7df8598b26d77557b671b`
+- Source SHA256: `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0`
 - Proof SHA256: `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390`
 
 **Summary:** Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, while a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.

@@ -4,7 +4,7 @@
   "record_id": "explorer.taskbar-alignment-left",
   "tweak_id": "explorer.taskbar-alignment-left",
   "record_status": "validated",
-  "summary": "Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, while a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.",
+  "summary": "Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, the 25H2 raw registry dump lists the same value name under the current-user Explorer\\Advanced branch, and a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.",
   "setting": {
     "name": "Taskbar Alignment",
     "category": "Explorer",
@@ -13,7 +13,7 @@
     "casual_explanation": "Windows 11 can keep the taskbar icons centered or move them to the left. Some people prefer the older left-aligned layout.",
     "why_people_change_it": "People move the taskbar left when they want a layout that feels closer to older Windows versions or want the Start button and pinned apps closer to the screen edge.",
     "tradeoffs_overview": "This is a low-risk shell preference change. It affects taskbar layout only and does not disable a Windows feature.",
-    "professional_notes": "Microsoft's Windows 11 settings reference describes the DesktopTaskbarAl setting family and its 0/1 left-versus-center semantics. A Procmon capture on 2026-03-13 showed the live Explorer persistence surface on this host: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced -> TaskbarAl as REG_DWORD. During two Explorer restarts, reg.exe wrote TaskbarAl = 0 and TaskbarAl = 1, and Explorer.EXE immediately queried the same parent-key value both times. The documented TaskbarAl subkey with REG_SZ value name SystemSettings_DesktopTaskbar_Al was not observed in this runtime capture, so this record publishes the actual Explorer runtime surface that the app writes.",
+    "professional_notes": "Microsoft's Windows 11 settings reference describes the DesktopTaskbarAl setting family and its 0/1 left-versus-center semantics. The 25H2 raw registry dump lists TaskbarAl under the current-user Explorer\\Advanced branch and under a siloed current-user Explorer\\Advanced branch, which corroborates that the value family is still present on current builds. A Procmon capture on 2026-03-13 showed the live Explorer persistence surface on this host: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced -> TaskbarAl as REG_DWORD. During two Explorer restarts, reg.exe wrote TaskbarAl = 0 and TaskbarAl = 1, and Explorer.EXE immediately queried the same parent-key value both times. The documented TaskbarAl subkey with REG_SZ value name SystemSettings_DesktopTaskbar_Al was not observed in this runtime capture, so this record publishes the actual Explorer runtime surface that the app writes.",
     "targets": [
       {
         "target_id": "taskbar-alignment",
@@ -28,6 +28,7 @@
             "label": "Left aligned",
             "meaning": "Taskbar icons and the Start button are aligned to the left. Procmon confirmed Explorer.EXE queries TaskbarAl = 0 after the value is written and Explorer restarts.",
             "evidence_ids": [
+              "dump-25h2-explorer-advanced-taskbaral",
               "procmon-taskbar-alignment",
               "app-visibility-provider"
             ]
@@ -38,6 +39,7 @@
             "label": "Center aligned",
             "meaning": "Taskbar icons are centered. Procmon confirmed Explorer.EXE queries TaskbarAl = 1 after the value is written and Explorer restarts.",
             "evidence_ids": [
+              "dump-25h2-explorer-advanced-taskbaral",
               "procmon-taskbar-alignment"
             ]
           }
@@ -107,6 +109,7 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
+        "dump-25h2-explorer-advanced-taskbaral",
         "procmon-taskbar-alignment",
         "app-visibility-provider"
       ]
@@ -134,6 +137,7 @@
       ],
       "apply_allowed": true,
       "evidence_ids": [
+        "dump-25h2-explorer-advanced-taskbaral",
         "procmon-taskbar-alignment"
       ]
     }
@@ -150,6 +154,18 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "dump-25h2-explorer-advanced-taskbaral",
+      "kind": "raw-registry-dump",
+      "title": "25H2 raw registry corroboration for TaskbarAl",
+      "location": "Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+      "summary": "The 25H2 raw registry dump lists TaskbarAl under the current-user Explorer\\Advanced branch and under a siloed current-user Explorer\\Advanced branch, corroborating that the value family is still present on current builds.",
+      "supports": [
+        "path",
+        "version-scope"
+      ],
+      "strength": "medium"
     },
     {
       "evidence_id": "procmon-taskbar-alignment",
@@ -186,7 +202,7 @@
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Procmon on Windows 11 Pro 10.0.26200.8037 confirmed that Explorer consumes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as a REG_DWORD runtime setting with 0 = left and 1 = center. The app writes that same surface directly. The official settings reference remains useful feature-level context, but the runtime trace is the decisive proof for the persisted shell value.",
+    "why": "Procmon on Windows 11 Pro 10.0.26200.8037 confirmed that Explorer consumes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as a REG_DWORD runtime setting with 0 = left and 1 = center. The 25H2 raw registry dump corroborates that the value family is still present on current builds. The app writes that same surface directly. The official settings reference remains useful feature-level context, but the runtime trace is the decisive proof for the persisted shell value.",
     "blocking_issues": []
   },
   "open_questions": [],
