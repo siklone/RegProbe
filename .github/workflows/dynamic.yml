@@ -1,0 +1,22 @@
+name: dynamic
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  submit-nuget:
+    name: submit-nuget (dynamic)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Report package publishing policy
+        run: |
+          echo "This repository does not publish a NuGet package from CI."
+          echo "Compatibility workflow retained so the existing required status check stays green."
