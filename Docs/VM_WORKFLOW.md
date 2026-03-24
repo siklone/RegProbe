@@ -116,6 +116,38 @@ powershell -ExecutionPolicy Bypass -File scripts\vm\run-manual-value-benchmark.p
 
 The active suite avoids EULA-gated third-party stress tools.
 
+## Snapshot Rule For High-Risk Lanes
+
+Before testing high-risk families, create or revert a clean VM snapshot.
+
+Use this for lanes like:
+
+- Defender policy keys
+- `stornvme`
+- `USBHUB3`
+- `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows`
+
+Example:
+
+```powershell
+& "C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe" snapshot H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx baseline-20260324-high-risk-lane
+```
+
+Dump collection for these lanes can use:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\export-high-risk-dumps.ps1
+```
+
+That script exports:
+
+- Defender policy root
+- Defender `Policy Manager`
+- `Control\Power`
+- `stornvme`
+- `USBHUB3`
+- `CurrentVersion\Windows`
+
 ## Bootstrapping Notes
 
 - The tooling is staged through the VM shared folder during setup.
