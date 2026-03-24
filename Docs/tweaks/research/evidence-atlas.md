@@ -7,11 +7,11 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 
 | Field | Value |
 | --- | --- |
-| Total records | 284 |
-| Validated | 232 |
+| Total records | 285 |
+| Validated | 233 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 284 |
+| Records with evidence | 285 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -23,7 +23,7 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Audio | 5 |
 | Cleanup | 1 |
 | Developer | 13 |
-| Explorer | 12 |
+| Explorer | 13 |
 | Network | 29 |
 | Notifications | 5 |
 | Performance | 3 |
@@ -1628,6 +1628,78 @@ Nohuto lineage references:
 
 ---
 
+### `explorer.show-drive-letters-first`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Category | `Explorer` |
+| Area | `Observed Explorer Runtime Setting` |
+| Scope | `user` |
+| Source file | `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json` |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Observed Explorer runtime setting for showing drive letters first. Microsoft Open Specifications documents showDriveLetter under Explorer\ShowDriveLettersFirst with 1 = enable and 0 = disable, the 25H2 raw registry dump lists the same value under both machine and default-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowDriveLettersFirst with both Data:0 and Data:1 after Explorer restart.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `n/a` |
+| Notes | The app does not currently expose ShowDriveLettersFirst. |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Recommended profiles**
+
+- `show-drive-letters-first`: Show drive letters first (apply_allowed=True)
+- `do-not-show-drive-letters-first`: Do not show drive letters first (apply_allowed=True)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-gppref-global-folder-options-vista-showdriveletter` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showDriveLetter | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
+| `dump-25h2-explorer-showdrivelettersfirst` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowDriveLettersFirst | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
+| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | H:\Temp\vm-tooling-staging\showdrivelettersfirst-result.txt | `high` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\showdrivelettersfirst-result.txt |
+| Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowDriveLettersFirst ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowDriveLettersFirst ... Data: 1; RESTORED_EXISTS=False |
+| Key found on page | `True` |
+| Notes | The guest-local result file was copied back to the host scratch area during validation. Baseline absence was restored after the probe. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft documents the 0/1 semantics, the 25H2 raw registry dump corroborates the value family on current builds, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference. |
+
+---
+
 ### `explorer.show-file-extensions`
 
 | Field | Value |
@@ -1641,7 +1713,7 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Observed Explorer runtime setting for file-extension visibility. Microsoft Open Specifications documents HideFileExt under Explorer\Advanced, while a reversible Procmon and shell-runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideFileExt as REG_DWORD with 0 = show file extensions and 1 = hide them. The app writes that same runtime surface directly.
+**Summary:** Observed Explorer runtime setting for file-extension visibility. Microsoft Open Specifications documents HideFileExt under Explorer\Advanced, the 25H2 default hive exports the same value as 1, the 25H2 raw registry dump lists the same value name under the current-user Explorer\Advanced branch, and a reversible Procmon and shell-runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideFileExt as REG_DWORD with 0 = show file extensions and 1 = hide them. The app writes that same runtime surface directly.
 
 **Current implementation**
 
@@ -1681,8 +1753,8 @@ Nohuto lineage references:
 
 **Windows defaults**
 
-- Windows-managed extension visibility default (Explorer user profiles)
-  - explorer-hidefileext-flag: unknown — — This record validates the explicit runtime values 0 and 1. It does not publish a machine-checked missing-value default.
+- 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
+  - explorer-hidefileext-flag: value `1` — HKCU25H2.reg exports HideFileExt = 1 in the default Explorer\Advanced block.
 
 **Recommended profiles**
 
@@ -1694,6 +1766,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
+| `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for HideFileExt | Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg; Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, value, version-scope |
 | `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | C:\Users\<USER>\AppData\Local\Temp\hidefileext_capture_20260313.pml | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -1715,7 +1788,7 @@ Nohuto lineage references:
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the HideFileExt semantics used by Explorer: 0 shows file extensions and 1 hides them. The app writes the runtime show-extensions state, and the change is a low-risk, user-scope Explorer preference. |
+| Why | A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the HideFileExt semantics used by Explorer: 0 shows file extensions and 1 hides them. The 25H2 default hive corroborates the current hidden-by-default state, the raw 25H2 dump confirms the value family on current builds, and the app writes the runtime show-extensions state. This remains a low-risk, user-scope Explorer preference. |
 
 ---
 

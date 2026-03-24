@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T05:02:17.315624Z",
+  "generated_utc": "2026-03-24T05:35:36.644683Z",
   "summary": {
     "total_records": 285,
     "validated": 233,
@@ -16587,7 +16587,7 @@
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
       "scope": "user",
-      "summary": "Observed Explorer runtime setting for file-extension visibility. Microsoft Open Specifications documents HideFileExt under Explorer\\Advanced, while a reversible Procmon and shell-runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt as REG_DWORD with 0 = show file extensions and 1 = hide them. The app writes that same runtime surface directly.",
+      "summary": "Observed Explorer runtime setting for file-extension visibility. Microsoft Open Specifications documents HideFileExt under Explorer\\Advanced, the 25H2 default hive exports the same value as 1, the 25H2 raw registry dump lists the same value name under the current-user Explorer\\Advanced branch, and a reversible Procmon and shell-runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt as REG_DWORD with 0 = show file extensions and 1 = hide them. The app writes that same runtime surface directly.",
       "decision": {
         "confidence": "high",
         "apply_allowed": true,
@@ -16595,7 +16595,7 @@
         "restore_default_supported": false,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the HideFileExt semantics used by Explorer: 0 shows file extensions and 1 hides them. The app writes the runtime show-extensions state, and the change is a low-risk, user-scope Explorer preference.",
+        "why": "A reversible runtime capture on Windows 11 Pro 10.0.26200.8037 directly resolved the HideFileExt semantics used by Explorer: 0 shows file extensions and 1 hides them. The 25H2 default hive corroborates the current hidden-by-default state, the raw 25H2 dump confirms the value family on current builds, and the app writes the runtime show-extensions state. This remains a low-risk, user-scope Explorer preference.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -16638,6 +16638,7 @@
               "label": "Hide file extensions",
               "meaning": "Explorer hides known file extensions. In the runtime capture, Explorer consumed HideFileExt = 1 after restart and Shell.Application rendered the test file as alpha.",
               "evidence_ids": [
+                "dump-hkcu25h2-explorer-advanced-hidefileext",
                 "procmon-hidefileext-runtime"
               ]
             }
@@ -16646,19 +16647,18 @@
       ],
       "windows_defaults": [
         {
-          "label": "Windows-managed extension visibility default",
-          "applies_to": "Explorer user profiles",
+          "label": "25H2 default Explorer preference",
+          "applies_to": "Current-user Explorer Advanced settings on the 25H2 default hive snapshot",
           "states": [
             {
               "target_id": "explorer-hidefileext-flag",
-              "state_kind": "unknown",
-              "value": null,
-              "rationale": "This record validates the explicit runtime values 0 and 1. It does not publish a machine-checked missing-value default."
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "HKCU25H2.reg exports HideFileExt = 1 in the default Explorer\\Advanced block."
             }
           ],
           "evidence_ids": [
-            "ms-gppref-global-folder-options-vista",
-            "procmon-hidefileext-runtime"
+            "dump-hkcu25h2-explorer-advanced-hidefileext"
           ]
         }
       ],
@@ -16719,6 +16719,7 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
+            "dump-hkcu25h2-explorer-advanced-hidefileext",
             "procmon-hidefileext-runtime"
           ]
         }
@@ -16737,6 +16738,20 @@
             "behavior"
           ],
           "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "dump-hkcu25h2-explorer-advanced-hidefileext",
+          "kind": "raw-registry-dump",
+          "title": "25H2 default hive and raw dump corroboration for HideFileExt",
+          "location": "Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg; Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+          "summary": "The 25H2 default hive exports HideFileExt = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced, and the raw 25H2 dump lists the same value name under the current-user Explorer\\Advanced branch.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         },
         {
           "evidence_id": "procmon-hidefileext-runtime",
