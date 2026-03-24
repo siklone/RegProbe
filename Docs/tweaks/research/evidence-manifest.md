@@ -65,7 +65,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.kernel-dpc-queue-depth` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-queue-depth.review.json` | `2a1fbe9eb417cd8a472510c73b562d4c7ccbb39c7bf76a6a9ddd06dd983c47e3` | `944ee2c99bfde59a74d232317a9da57e812a0c844e8abb75862163045f3928db` | 1 |
 | `system.kernel-dpc-watchdog-period` | deprecated | `Docs/tweaks/research/records/system.kernel-dpc-watchdog-period.review.json` | `9c3a7bb597a2b8ab2fd4ad7563dad5cd4531df5615f1b57683dbe1c300bbe644` | `232893d4d8fd8a293bd6b6288aacb1748be4ec1e0ab88c8bd9c8cc55dbd2d1b7` | 1 |
 | `system.kernel-ideal-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `347e1247d53b76d238429f3c7f8708b2a6375173bb8b1a6788cbd185d2820b11` | `4cb385e6c43a5d3b92e6c1d9fbfd5fafd56e6c40cc1c9d59099d180c3a091f8c` | 1 |
-| `system.kernel-minimum-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `a5c750ab3bcb48f160e0f8ba00dbed347439b8de05051a6d3628cd11be8d6754` | `54e7383b0e9b75b22382bdc664680717a92458a4578662619d0edf85c4401f76` | 1 |
+| `system.kernel-minimum-dpc-rate` | deprecated | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `0b7c3064afe58a4383a6559f08e5fd5131b8cba66cb0bd66a50858624843ceb1` | `e8aff541bfbec81d2ba53fad66a8cb2cfaab889a5de285e620c483b9393313d2` | 1 |
 | `system.kernel-serialize-timer-expiration` | deprecated | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` | `5e687fa484102bf47596f14af77de8fdde46c2b334e39fa6ef850a3cea94cc1e` | `20588f7da590eb22af6ec02882f2208f12c9f2288dd4a2f68b463a29d902deed` | 1 |
 | `system.services.disable-print-device-configuration` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-device-configuration.json` | `3101fdf06a38bfbd1fb99a735145546b6f2bcf9439946b8840db2ec2136c6893` | `02fb442a6fc902af0a89043f68fb1c32cd90fc04bb17cad014b82bb78b2266ac` | 1 |
 | `system.services.disable-print-scan-broker` | deprecated | `Docs/tweaks/research/records/system.services.disable-print-scan-broker.json` | `fb63ce1ae6ec3c78f95b271148dcdecbb4258908b06426c4fbe85efa7cee1e41` | `d96f33b3f944ebfba9155d20db5cfcb4d4596e130a3e1f07b831f24ad3fe112a` | 1 |
@@ -2576,10 +2576,10 @@ Windows Internals references:
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json`
-- Source SHA256: `a5c750ab3bcb48f160e0f8ba00dbed347439b8de05051a6d3628cd11be8d6754`
-- Proof SHA256: `54e7383b0e9b75b22382bdc664680717a92458a4578662619d0edf85c4401f76`
+- Source SHA256: `0b7c3064afe58a4383a6559f08e5fd5131b8cba66cb0bd66a50858624843ceb1`
+- Proof SHA256: `e8aff541bfbec81d2ba53fad66a8cb2cfaab889a5de285e620c483b9393313d2`
 
-**Summary:** Deprecated audit trail for MinimumDpcRate. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\MinimumDpcRate = 3, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for MinimumDpcRate. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\MinimumDpcRate = 3, and the mirror plus decompiled kernel query path now expose the backing KiMinimumDpcRate variable even though this research pass still did not capture a primary Microsoft source for the exact registry key and value semantics.
 
 **Targets**
 
@@ -2592,6 +2592,7 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
+| `nohuto-minimum-dpc-rate-ghidra` | `decompilation` | `Ghidra decompilation` | nohuto mirror: minimum DPC rate query path | `high` |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | `medium` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
@@ -2623,7 +2624,7 @@ Windows Internals references:
 | source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
 | exact_quote_or_path | *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; |
 | key_found_on_page | True |
-| notes | Kernel minimum DPC rate audit trail. The decompiled path exposes the kernel variable directly. |
+| notes | Kernel minimum DPC rate audit trail. The mirrored docs record MinimumDpcRate = 3, and the decompiled path exposes the KiMinimumDpcRate kernel variable directly. |
 ### `system.kernel-serialize-timer-expiration`
 
 - Status: `deprecated`

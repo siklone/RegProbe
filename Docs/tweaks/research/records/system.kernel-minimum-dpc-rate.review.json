@@ -4,7 +4,7 @@
     "record_id":  "system.kernel-minimum-dpc-rate",
     "tweak_id":  "system.kernel-minimum-dpc-rate",
     "record_status":  "deprecated",
-    "summary":  "Deprecated audit trail for MinimumDpcRate. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\MinimumDpcRate = 3, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+    "summary":  "Deprecated audit trail for MinimumDpcRate. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\MinimumDpcRate = 3, and the mirror plus decompiled kernel query path now expose the backing KiMinimumDpcRate variable even though this research pass still did not capture a primary Microsoft source for the exact registry key and value semantics.",
     "setting":  {
                     "name":  "Minimum DPC Rate",
                     "category":  "System",
@@ -13,7 +13,7 @@
                     "casual_explanation":  "This appears to be a low-level kernel threshold related to deferred procedure call scheduling. It is not a normal consumer-facing Windows setting.",
                     "why_people_change_it":  "People would only touch it when reproducing advanced kernel tuning experiments or undoing manual registry changes from tweak guides.",
                     "tradeoffs_overview":  "Changing minimum DPC scheduling thresholds can affect latency-sensitive kernel behavior in ways that are hard to predict. Without a primary Microsoft source for the exact registry key, the safe choice is to keep it in review.",
-                    "professional_notes":  "The repo research notes list MinimumDpcRate = 3 and associate it with KiMinimumDpcRate. However, this research pass did not capture a primary Microsoft page that documents the registry key, its supported values, or its current support status. The record therefore treats the value as observed repo provenance only.",
+                    "professional_notes":  "The repo research notes list MinimumDpcRate = 3 and associate it with KiMinimumDpcRate. The mirrored win-config list records the same mapping, and the decompiled ExpQuerySystemInformation path copies KiMinimumDpcRate into the queried system-information buffer. However, this research pass still did not capture a primary Microsoft page that documents the registry key, its supported values, or its current support status. The record therefore treats the value as observed repo provenance plus kernel pseudocode corroboration only.",
                     "targets":  [
                                     {
                                         "target_id":  "minimum-dpc-rate",
@@ -28,6 +28,7 @@
                                                                    "label":  "Primary Microsoft mapping not captured",
                                                                    "meaning":  "This research pass did not capture a primary Microsoft source for the exact MinimumDpcRate registry semantics.",
                                                                    "evidence_ids":  [
+                                                                                        "nohuto-minimum-dpc-rate-ghidra",
                                                                                         "repo-system-doc-kernel"
                                                                                     ]
                                                                },
@@ -37,6 +38,7 @@
                                                                    "label":  "Observed app profile",
                                                                    "meaning":  "The current app treats 3 as the default minimum DPC rate, based on repo research rather than a captured primary Microsoft source.",
                                                                    "evidence_ids":  [
+                                                                                        "nohuto-minimum-dpc-rate-ghidra",
                                                                                         "repo-system-doc-kernel",
                                                                                         "app-system-registry-provider"
                                                                                     ]
@@ -144,6 +146,19 @@
                              ],
     "evidence":  [
                      {
+                         "evidence_id":  "nohuto-minimum-dpc-rate-ghidra",
+                         "kind":  "decompilation",
+                         "title":  "nohuto mirror: minimum DPC rate query path",
+                         "location":  "Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c; Docs/tweaks/_source-mirrors/win-config/system/desc.md",
+                         "summary":  "The decompiled kernel query path copies KiMinimumDpcRate into the system-information buffer, and the mirror docs record the matching MinimumDpcRate = 3 mapping.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "behavior"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
                          "evidence_id":  "repo-system-doc-kernel",
                          "kind":  "repo-doc",
                          "title":  "Repo system research notes for kernel registry values",
@@ -178,7 +193,7 @@
                      "restore_default_supported":  false,
                      "restore_previous_supported":  false,
                      "needs_vm_validation":  false,
-                     "why":  "The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for MinimumDpcRate.",
+                     "why":  "The current semantics come from repo research notes plus mirrored kernel pseudocode that exposes KiMinimumDpcRate, but this research pass still did not capture a primary Microsoft source for MinimumDpcRate.",
                      "blocking_issues":  [
                                              "No primary Microsoft source for MinimumDpcRate was captured in this research pass.",
                                              "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
@@ -193,6 +208,6 @@
                              "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
                              "exact_quote_or_path":  "*(_DWORD *)(a4 + 8) = KiMinimumDpcRate;",
                              "key_found_on_page":  true,
-                             "notes":  "Kernel minimum DPC rate audit trail. The decompiled path exposes the kernel variable directly."
+                             "notes":  "Kernel minimum DPC rate audit trail. The mirrored docs record MinimumDpcRate = 3, and the decompiled path exposes the KiMinimumDpcRate kernel variable directly."
                          }
 }
