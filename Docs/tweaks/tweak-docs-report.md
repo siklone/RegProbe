@@ -1,6 +1,6 @@
 # Tweak Docs Report (Generated)
 
-Total tweaks: 295
+Total tweaks: 298
 Missing docs files: 0
 Missing docs anchors: 0
 Missing details anchors: 0
@@ -49,6 +49,9 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `explorer.disable-low-disk-space-warning` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.disable-taskbar-chat` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.enable-explorer-compact-mode` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
+| `explorer.launch-folder-windows-in-a-separate-process` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
+| `explorer.show-compressed-and-encrypted-files-in-color` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
+| `explorer.show-drive-letters-first` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-file-extensions` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-full-path` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-hidden-files` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |

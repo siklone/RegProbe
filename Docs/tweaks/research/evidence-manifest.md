@@ -16,9 +16,9 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 155 |
+| A count | 158 |
 | B count | 61 |
-| C count | 14 |
+| C count | 11 |
 | D count | 8 |
 | E count | 52 |
 
@@ -96,9 +96,9 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.disable-taskbar-chat` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
 | `explorer.enable-explorer-compact-mode` | validated | Class B | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
 | `explorer.hide-empty-drives` | validated | Class C | `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json` | `a3d15c07579a659260f9ff891c3e0545a369c0b8d3b14e8c099a4e9b9a5e7d77` | `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765` | 1 |
-| `explorer.launch-folder-windows-in-a-separate-process` | validated | Class C | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `0b9f99f5eae8811b2493069bc7f36bfd4ff3f4ae8c118e33ff8782d051ba1e59` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
-| `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class C | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `b976a2e2767ddc7d57d5b0ff72916467281618730287197d707a754e08ea123d` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
-| `explorer.show-drive-letters-first` | validated | Class C | `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json` | `8bfa52fedcb995cc8db11a3c4235f7f2a205442dfad8c0c2d799703d755d28a9` | `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10` | 1 |
+| `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `edabe26e1582cc0da37a8a735e36887c98925be802207f7b43a187908fba30a5` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
+| `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `547d12c8e8f70c4decdcd1e14dfe3dd2108e75c7a556a7286f1860ed887df046` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
+| `explorer.show-drive-letters-first` | validated | Class A | `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json` | `3359c519cf3f3ed7cec6e936b21024c3326b99d4ba1c3c06a0d9c6efdea5603a` | `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10` | 1 |
 | `explorer.show-file-extensions` | validated | Class A | `Docs/tweaks/research/records/explorer.show-file-extensions.review.json` | `fd29b08e9516a84fb812c47948e77c6099d1de026716ebc83bfa121b641954d8` | `65148054e96ba5d79211f912885a9f041ca47fb9b576bafb0fc4c06d4221401d` | 1 |
 | `explorer.show-full-path` | validated | Class A | `Docs/tweaks/research/records/explorer.show-full-path.review.json` | `04d7c7e028991d2417cfcf30b38620aafc8b340c00e65c40a7b0255a983f7d1d` | `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d` | 1 |
 | `explorer.show-hidden-files` | validated | Class A | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
@@ -4606,12 +4606,12 @@ _No provenance block present._
 ### `explorer.launch-folder-windows-in-a-separate-process`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json`
-- Source SHA256: `0b9f99f5eae8811b2493069bc7f36bfd4ff3f4ae8c118e33ff8782d051ba1e59`
+- Source SHA256: `edabe26e1582cc0da37a8a735e36887c98925be802207f7b43a187908fba30a5`
 - Proof SHA256: `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0`
 
 **Summary:** Observed Explorer runtime setting for launching folder windows in a separate process. Microsoft Open Specifications documents SeparateProcess under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 0, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\SeparateProcess with both Data:0 and Data:1 after Explorer restart.
@@ -4620,10 +4620,10 @@ _No provenance block present._
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4642,7 +4642,20 @@ _No provenance block present._
 
 **Provenance**
 
-_No provenance block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4655,12 +4668,12 @@ _No provenance block present._
 ### `explorer.show-compressed-and-encrypted-files-in-color`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json`
-- Source SHA256: `b976a2e2767ddc7d57d5b0ff72916467281618730287197d707a754e08ea123d`
+- Source SHA256: `547d12c8e8f70c4decdcd1e14dfe3dd2108e75c7a556a7286f1860ed887df046`
 - Proof SHA256: `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453`
 
 **Summary:** Observed Explorer runtime setting for colored display of compressed and encrypted NTFS files. Microsoft Open Specifications documents ShowCompColor under Explorer\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowCompColor with both Data:0 and Data:1 after Explorer restart.
@@ -4669,10 +4682,10 @@ _No provenance block present._
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4691,7 +4704,20 @@ _No provenance block present._
 
 **Provenance**
 
-_No provenance block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -4704,12 +4730,12 @@ _No provenance block present._
 ### `explorer.show-drive-letters-first`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Observed Explorer Runtime Setting`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json`
-- Source SHA256: `8bfa52fedcb995cc8db11a3c4235f7f2a205442dfad8c0c2d799703d755d28a9`
+- Source SHA256: `3359c519cf3f3ed7cec6e936b21024c3326b99d4ba1c3c06a0d9c6efdea5603a`
 - Proof SHA256: `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10`
 
 **Summary:** Observed Explorer runtime setting for showing drive letters first. Microsoft Open Specifications documents showDriveLetter under Explorer\ShowDriveLettersFirst with 1 = enable and 0 = disable, the 25H2 raw registry dump lists the same value under both machine and default-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowDriveLettersFirst with both Data:0 and Data:1 after Explorer restart.
@@ -4718,10 +4744,10 @@ _No provenance block present._
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
-| Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -4740,7 +4766,20 @@ _No provenance block present._
 
 **Provenance**
 
-_No provenance block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals context | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 

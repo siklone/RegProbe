@@ -49,10 +49,19 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "n/a",
-    "notes": "The app does not currently expose ShowCompColor.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The app now exposes ShowCompColor through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+    "writes": [
+      {
+        "target_id": "explorer-showcompcolor-flag",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "value_name": "ShowCompColor",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
   },
   "windows_defaults": [
     {
@@ -185,9 +194,7 @@
     "why": "Microsoft documents the 0/1 semantics, the 25H2 default hive corroborates the current default state, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference.",
     "blocking_issues": []
   },
-  "open_questions": [
-    "Should the app expose ShowCompColor as a general Explorer preference?"
-  ],
+  "open_questions": [],
   "last_reviewed_utc": "2026-03-24T07:39:12+03:00",
   "validation_proof": {
     "source_url": "C:\\Tools\\Perf\\Procmon\\showcompcolor-result.txt",

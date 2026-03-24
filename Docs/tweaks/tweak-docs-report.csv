@@ -35,16 +35,19 @@ developer.vs-solution-load,Speed Up Visual Studio Solution Load,Docs\tweaks\twea
 developer.vscode-git-autofetch,Disable VS Code Git Autofetch,Docs\tweaks\tweaks.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L100
 developer.windows-dev-mode,Enable Windows Developer Mode,Docs\tweaks\tweaks.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L128
 explorer.always-show-icons-never-thumbnails,"Always Show Icons, Never Thumbnails",Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L109
-explorer.disable-low-disk-space-warning,Disable Low Disk Space Warning,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L148
-explorer.disable-taskbar-chat,Hide Taskbar Chat Icon,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L136
+explorer.disable-low-disk-space-warning,Disable Low Disk Space Warning,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L187
+explorer.disable-taskbar-chat,Hide Taskbar Chat Icon,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L175
 explorer.enable-explorer-compact-mode,Enable Compact View,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L57
+explorer.launch-folder-windows-in-a-separate-process,Launch Folder Windows in a Separate Process,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L148
+explorer.show-compressed-and-encrypted-files-in-color,Show Compressed and Encrypted Files in Color,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L122
+explorer.show-drive-letters-first,Show Drive Letters First,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L135
 explorer.show-file-extensions,Show File Extensions,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L31
 explorer.show-full-path,Show Full Path in Title Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L44
 explorer.show-hidden-files,Show Hidden Files and Folders,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L18
 explorer.show-info-tips,Show Explorer Info Tips,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L83
 explorer.show-status-bar,Show Explorer Status Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L70
 explorer.show-type-overlay,Display File Icons on Thumbnails,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L96
-explorer.taskbar-alignment-left,Align Taskbar to Left,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L123
+explorer.taskbar-alignment-left,Align Taskbar to Left,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L162
 misc.disable-edge-features,Disable Microsoft Edge Features,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\DisableEdgeFeaturesTweaks.cs#L88
 misc.disable-office-telemetry,Disable Microsoft Office Telemetry,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\DisableOfficeTelemetryTweak.cs#L51
 misc.disable-onedrive,Disable OneDrive,Docs\misc\misc.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Misc\DisableOneDriveTweaks.cs#L36
@@ -271,26 +274,26 @@ system.services.disable-wap-push-routing,Disable WAP Push Routing Service,Docs\s
 system.services.disable-windows-error-reporting,Disable Windows Error Reporting Service,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L128
 system.services.disable-windows-search,Disable Windows Search Service,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L122
 system.verbose-status-messages,Enable Verbose Status Messages,Docs\system\system.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L61
-visibility.default-account-picture,Use Default Account Picture,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L186
-visibility.disable-acrylic-logon,Disable Acrylic Logon Background,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L412
-visibility.disable-common-control-animations,Disable Common Control Animations,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L161
-visibility.disable-first-signin-animation,Disable First Sign-In Animation,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L210
-visibility.disable-lock-screen,Disable Lock Screen,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L352
-visibility.disable-lock-screen-camera,Disable Lock Screen Camera,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L364
-visibility.disable-lock-screen-changes,Prevent Changing Lock Screen,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L400
-visibility.disable-lock-screen-motion,Disable Lock Screen Background Motion,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L388
-visibility.disable-lock-screen-slideshow,Disable Lock Screen Slideshow,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L376
-visibility.disable-spotlight-action-center,Disable Windows Spotlight on Action Center,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L299
-visibility.disable-spotlight-desktop-collection,Disable Spotlight Collection on Desktop,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L325
-visibility.disable-spotlight-features,Disable Windows Spotlight Features,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L273
-visibility.disable-spotlight-settings,Disable Windows Spotlight on Settings,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L312
-visibility.disable-spotlight-third-party,Disable Spotlight Third-Party Suggestions,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L338
-visibility.disable-spotlight-welcome,Disable Windows Spotlight Welcome Experience,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L286
-visibility.disable-wcn-wizards,Disable Windows Connect Now Wizards,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L198
-visibility.disable-widgets,Disable Widgets (Policy),Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L235
-visibility.disable-window-animations,Disable Window Animations,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L174
-visibility.force-classic-control-panel,Force Classic Control Panel View,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L437
-visibility.hide-language-bar,Hide Language Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L222
-visibility.hide-most-used-apps,Hide Most Used Apps,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L247
-visibility.hide-people-bar,Hide People Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L259
-visibility.restore-classic-context-menu,Restore Classic Context Menu,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L424
+visibility.default-account-picture,Use Default Account Picture,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L225
+visibility.disable-acrylic-logon,Disable Acrylic Logon Background,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L451
+visibility.disable-common-control-animations,Disable Common Control Animations,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L200
+visibility.disable-first-signin-animation,Disable First Sign-In Animation,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L249
+visibility.disable-lock-screen,Disable Lock Screen,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L391
+visibility.disable-lock-screen-camera,Disable Lock Screen Camera,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L403
+visibility.disable-lock-screen-changes,Prevent Changing Lock Screen,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L439
+visibility.disable-lock-screen-motion,Disable Lock Screen Background Motion,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L427
+visibility.disable-lock-screen-slideshow,Disable Lock Screen Slideshow,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L415
+visibility.disable-spotlight-action-center,Disable Windows Spotlight on Action Center,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L338
+visibility.disable-spotlight-desktop-collection,Disable Spotlight Collection on Desktop,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L364
+visibility.disable-spotlight-features,Disable Windows Spotlight Features,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L312
+visibility.disable-spotlight-settings,Disable Windows Spotlight on Settings,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L351
+visibility.disable-spotlight-third-party,Disable Spotlight Third-Party Suggestions,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L377
+visibility.disable-spotlight-welcome,Disable Windows Spotlight Welcome Experience,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L325
+visibility.disable-wcn-wizards,Disable Windows Connect Now Wizards,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L237
+visibility.disable-widgets,Disable Widgets (Policy),Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L274
+visibility.disable-window-animations,Disable Window Animations,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L213
+visibility.force-classic-control-panel,Force Classic Control Panel View,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L476
+visibility.hide-language-bar,Hide Language Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L261
+visibility.hide-most-used-apps,Hide Most Used Apps,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L286
+visibility.hide-people-bar,Hide People Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L298
+visibility.restore-classic-context-menu,Restore Classic Context Menu,Docs\visibility\visibility.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\VisibilityTweakProvider.cs#L463

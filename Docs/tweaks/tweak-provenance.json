@@ -1,8 +1,8 @@
 {
-  "GeneratedAtUtc": "2026-03-24T12:32:52Z",
-  "Summary": "293/295 tweaks have upstream dump or pseudocode lineage, 147 have Windows Internals context, 26 still need review.",
-  "TotalTweaks": 295,
-  "RepoBackedTweaks": 293,
+  "GeneratedAtUtc": "2026-03-24T12:46:06Z",
+  "Summary": "296/298 tweaks have upstream dump or pseudocode lineage, 147 have Windows Internals context, 26 still need review.",
+  "TotalTweaks": 298,
+  "RepoBackedTweaks": 296,
   "InternalsBackedTweaks": 147,
   "ReviewNeededTweaks": 26,
   "Sources": [
@@ -1298,7 +1298,7 @@
       "Name": "Disable Low Disk Space Warning",
       "Category": "Explorer",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L148",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L187",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -1339,7 +1339,7 @@
       "Name": "Hide Taskbar Chat Icon",
       "Category": "Explorer",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L136",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L175",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -1411,6 +1411,122 @@
           "Title": "win-config / peripheral/desc.md",
           "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
           "Summary": "Matched 2 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "explorer.launch-folder-windows-in-a-separate-process",
+      "Name": "Launch Folder Windows in a Separate Process",
+      "Category": "Explorer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L148",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "explorer",
+        "advanced"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / cleanup/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / peripheral/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / power/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "Name": "Show Compressed and Encrypted Files in Color",
+      "Category": "Explorer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L122",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 2 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "explorer",
+        "advanced"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / cleanup/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / peripheral/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / power/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+          "Summary": "Matched 2 audit token(s) in win-config."
+        }
+      ]
+    },
+    {
+      "Id": "explorer.show-drive-letters-first",
+      "Name": "Show Drive Letters First",
+      "Category": "Explorer",
+      "Risk": "Safe",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L135",
+      "HasNohutoEvidence": true,
+      "HasWindowsInternalsContext": false,
+      "NeedsReview": false,
+      "CoverageState": "repo-backed",
+      "Summary": "Matched 1 audit token(s) across win-config. Treat this as upstream lineage and naming provenance; value semantics still come from the research record.",
+      "SourceRepositories": [
+        "win-config"
+      ],
+      "MatchedTokens": [
+        "explorer"
+      ],
+      "References": [
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / cleanup/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / misc/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
+        },
+        {
+          "Kind": "nohuto",
+          "Title": "win-config / peripheral/desc.md",
+          "Url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+          "Summary": "Matched 1 audit token(s) in win-config."
         }
       ]
     },
@@ -1661,7 +1777,7 @@
       "Name": "Align Taskbar to Left",
       "Category": "Explorer",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L123",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L162",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11893,7 +12009,7 @@
       "Name": "Use Default Account Picture",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L186",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L225",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11934,7 +12050,7 @@
       "Name": "Disable Acrylic Logon Background",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L412",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L451",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -11974,7 +12090,7 @@
       "Name": "Disable Common Control Animations",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L161",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L200",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12015,7 +12131,7 @@
       "Name": "Disable First Sign-In Animation",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L210",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L249",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12054,7 +12170,7 @@
       "Name": "Disable Lock Screen",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L352",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L391",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12094,7 +12210,7 @@
       "Name": "Disable Lock Screen Camera",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L364",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L403",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12134,7 +12250,7 @@
       "Name": "Prevent Changing Lock Screen",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L400",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L439",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12174,7 +12290,7 @@
       "Name": "Disable Lock Screen Background Motion",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L388",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L427",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12214,7 +12330,7 @@
       "Name": "Disable Lock Screen Slideshow",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L376",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L415",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12254,7 +12370,7 @@
       "Name": "Disable Windows Spotlight on Action Center",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L299",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L338",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12294,7 +12410,7 @@
       "Name": "Disable Spotlight Collection on Desktop",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L325",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L364",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12334,7 +12450,7 @@
       "Name": "Disable Windows Spotlight Features",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L273",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L312",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12374,7 +12490,7 @@
       "Name": "Disable Windows Spotlight on Settings",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L312",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L351",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12414,7 +12530,7 @@
       "Name": "Disable Spotlight Third-Party Suggestions",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L338",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L377",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12454,7 +12570,7 @@
       "Name": "Disable Windows Spotlight Welcome Experience",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L286",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L325",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12494,7 +12610,7 @@
       "Name": "Disable Windows Connect Now Wizards",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L198",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L237",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12533,7 +12649,7 @@
       "Name": "Disable Widgets (Policy)",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L235",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L274",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12572,7 +12688,7 @@
       "Name": "Disable Window Animations",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L174",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L213",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12612,7 +12728,7 @@
       "Name": "Force Classic Control Panel View",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L437",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L476",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12652,7 +12768,7 @@
       "Name": "Hide Language Bar",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L222",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L261",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12679,7 +12795,7 @@
       "Name": "Hide Most Used Apps",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L247",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L286",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12719,7 +12835,7 @@
       "Name": "Hide People Bar",
       "Category": "Visibility",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L259",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L298",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,
@@ -12759,7 +12875,7 @@
       "Name": "Restore Classic Context Menu",
       "Category": "Visibility",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L424",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\VisibilityTweakProvider.cs#L463",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": false,
       "NeedsReview": false,

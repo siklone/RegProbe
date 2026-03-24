@@ -119,6 +119,45 @@ public sealed class VisibilityTweakProvider : BaseTweakProvider
             1,
             requiresElevation: false);
 
+        yield return CreateRegistryTweak(
+            context,
+            "explorer.show-compressed-and-encrypted-files-in-color",
+            "Show Compressed and Encrypted Files in Color",
+            "Uses special filename colors for compressed and encrypted NTFS files in File Explorer.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
+            "ShowCompColor",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
+        yield return CreateRegistryTweak(
+            context,
+            "explorer.show-drive-letters-first",
+            "Show Drive Letters First",
+            "Shows drive letters more prominently in File Explorer drive labels.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer",
+            "ShowDriveLettersFirst",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
+        yield return CreateRegistryTweak(
+            context,
+            "explorer.launch-folder-windows-in-a-separate-process",
+            "Launch Folder Windows in a Separate Process",
+            "Runs File Explorer folder windows in a separate process for isolation and troubleshooting.",
+            TweakRiskLevel.Safe,
+            RegistryHive.CurrentUser,
+            @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced",
+            "SeparateProcess",
+            RegistryValueKind.DWord,
+            1,
+            requiresElevation: false);
+
         // Taskbar & Start
         yield return CreateRegistryTweak(
             context,

@@ -15,9 +15,9 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 155 |
+| Class A | 158 |
 | Class B | 61 |
-| Class C | 14 |
+| Class C | 11 |
 | Class D | 8 |
 | Class E | 52 |
 
@@ -1829,7 +1829,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -1844,30 +1844,44 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | `n/a` |
-| Notes | The app does not currently expose SeparateProcess. |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Notes | The app now exposes SeparateProcess through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `explorer-separateprocess-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `SeparateProcess` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `` |
-| Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
-| Needs review | `` |
-| Source repositories |  |
-| Matched tokens |  |
-| Lineage note |  |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 2 audit token(s) in win-config. |
 
 **Targets**
 
@@ -1916,7 +1930,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -1931,30 +1945,44 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | `n/a` |
-| Notes | The app does not currently expose ShowCompColor. |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Notes | The app now exposes ShowCompColor through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `explorer-showcompcolor-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced` | `ShowCompColor` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `` |
-| Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
-| Needs review | `` |
-| Source repositories |  |
-| Matched tokens |  |
-| Lineage note |  |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 2 audit token(s) in win-config. |
+| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 2 audit token(s) in win-config. |
 
 **Targets**
 
@@ -2003,7 +2031,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
@@ -2018,30 +2046,44 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | `n/a` |
-| Notes | The app does not currently expose ShowDriveLettersFirst. |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Notes | The app now exposes ShowDriveLettersFirst through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `explorer-showdrivelettersfirst-flag` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer` | `ShowDriveLettersFirst` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
-| Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Provenance**
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `` |
-| Has nohuto evidence | `` |
-| Has Windows Internals context | `` |
-| Needs review | `` |
-| Source repositories |  |
-| Matched tokens |  |
-| Lineage note |  |
+| Coverage state | `repo-backed` |
+| Has nohuto evidence | `True` |
+| Has Windows Internals context | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | explorer |
+| Lineage note | Nohuto references are upstream lineage / naming provenance only. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+
+| Title | URL | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | https://github.com/nohuto/win-config/blob/main/cleanup/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / misc/desc.md | https://github.com/nohuto/win-config/blob/main/misc/desc.md | Matched 1 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | https://github.com/nohuto/win-config/blob/main/peripheral/desc.md | Matched 1 audit token(s) in win-config. |
 
 **Targets**
 
