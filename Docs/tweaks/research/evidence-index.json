@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T06:28:31.039841Z",
+  "generated_utc": "2026-03-24T06:29:59.250513Z",
   "summary": {
-    "total_records": 289,
-    "validated": 237,
+    "total_records": 290,
+    "validated": 238,
     "deprecated": 52,
     "review_required": 0,
-    "records_with_evidence": 289,
+    "records_with_evidence": 290,
     "records_without_evidence": 0,
     "records_missing_validation_proof": 0,
     "deprecated_missing_validation_proof": 0
@@ -16243,6 +16243,180 @@
         "windows_internals_references": [],
         "other_references": []
       }
+    },
+    {
+      "record_id": "explorer.hide-empty-drives",
+      "tweak_id": "explorer.hide-empty-drives",
+      "record_status": "validated",
+      "source_file": "Docs/tweaks/research/records/explorer.hide-empty-drives.review.json",
+      "name": "Hide Empty Drives",
+      "category": "Explorer",
+      "area": "Observed Explorer Runtime Setting",
+      "scope": "user",
+      "summary": "Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\\Advanced branch, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.",
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": true,
+        "recommended_for_general_users": true,
+        "restore_default_supported": false,
+        "restore_previous_supported": true,
+        "needs_vm_validation": false,
+        "why": "The 25H2 dump corroborates the HideDrivesWithNoMedia value family, Microsoft Learn describes the feature, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference, but the direct first-party registry contract is weaker than ADMX-grade settings.",
+        "blocking_issues": []
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "n/a",
+        "notes": "The app does not currently expose HideDrivesWithNoMedia.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "explorer-hidedriveswithnomedia-flag",
+          "location_kind": "registry",
+          "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+          "value_name": "HideDrivesWithNoMedia",
+          "value_type": "REG_DWORD",
+          "notes": "The Microsoft settings reference describes the feature, while the 25H2 dump and Procmon probe corroborate the direct registry value and live Explorer read path.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "Show empty drives",
+              "meaning": "Explorer keeps drives with no media visible. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart into This PC.",
+              "evidence_ids": [
+                "ms-settings-common-fileexplorer-hide-empty-drives",
+                "dump-25h2-explorer-advanced-hidedriveswithnomedia",
+                "procmon-hidedriveswithnomedia-runtime"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 1,
+              "label": "Hide empty drives",
+              "meaning": "Explorer hides drives with no media present. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart into This PC.",
+              "evidence_ids": [
+                "ms-settings-common-fileexplorer-hide-empty-drives",
+                "dump-25h2-explorer-advanced-hidedriveswithnomedia",
+                "procmon-hidedriveswithnomedia-runtime"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [],
+      "recommended_profiles": [
+        {
+          "profile_id": "hide-empty-drives",
+          "label": "Hide empty drives",
+          "intended_for": [
+            "Users who want Explorer to look cleaner"
+          ],
+          "avoid_for": [
+            "Users who want all drive slots visible"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-hidedriveswithnomedia-flag",
+              "state_kind": "value",
+              "value": 1,
+              "rationale": "This matches the runtime-observed Explorer read for the hidden state."
+            }
+          ],
+          "good_when": "You want Explorer to hide empty removable-drive slots.",
+          "bad_when": "You want to see all drive slots even when they are empty.",
+          "tradeoffs": [
+            "Cleans up Explorer views by hiding empty drives.",
+            "Removes visibility of empty drive slots."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-settings-common-fileexplorer-hide-empty-drives",
+            "dump-25h2-explorer-advanced-hidedriveswithnomedia",
+            "procmon-hidedriveswithnomedia-runtime"
+          ]
+        },
+        {
+          "profile_id": "show-empty-drives",
+          "label": "Show empty drives",
+          "intended_for": [
+            "Users who want all drive slots visible"
+          ],
+          "avoid_for": [
+            "Users who prefer a cleaner This PC view"
+          ],
+          "states": [
+            {
+              "target_id": "explorer-hidedriveswithnomedia-flag",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "This matches the runtime-observed Explorer read for the visible state."
+            }
+          ],
+          "good_when": "You want Explorer to show all drive slots, even when empty.",
+          "bad_when": "You want empty drives hidden from view.",
+          "tradeoffs": [
+            "Keeps empty drive slots visible in Explorer.",
+            "Makes This PC a little busier."
+          ],
+          "apply_allowed": true,
+          "evidence_ids": [
+            "ms-settings-common-fileexplorer-hide-empty-drives",
+            "dump-25h2-explorer-advanced-hidedriveswithnomedia",
+            "procmon-hidedriveswithnomedia-runtime"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ms-settings-common-fileexplorer-hide-empty-drives",
+          "kind": "official-doc",
+          "title": "Microsoft Learn: settings-common File Explorer Classic advanced settings",
+          "location": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common",
+          "summary": "Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting and says it indicates whether Explorer should hide drives with no media present.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "dump-25h2-explorer-advanced-hidedriveswithnomedia",
+          "kind": "raw-registry-dump",
+          "title": "25H2 raw registry corroboration for HideDrivesWithNoMedia",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+          "summary": "The 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\\Advanced branch, corroborating that the value family is still present on current builds.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "procmon-hidedriveswithnomedia-runtime",
+          "kind": "procmon-trace",
+          "title": "Procmon capture - Explorer HideDrivesWithNoMedia runtime surface",
+          "location": "H:\\Temp\\vm-tooling-staging\\hideemptydrives-result.txt",
+          "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote HideDrivesWithNoMedia = 0 and HideDrivesWithNoMedia = 1, restarted Explorer into This PC after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia with matching Data: 0 and Data: 1 values.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
+        }
+      ],
+      "validation_proof": {
+        "source_url": "H:\\Temp\\vm-tooling-staging\\hideemptydrives-result.txt",
+        "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 1; RESTORED_EXISTS=False",
+        "key_found_on_page": true,
+        "notes": "The guest-local result file was copied back to the host scratch area during validation. The baseline value was absent and was restored to the absent state after the probe."
+      },
+      "provenance": null
     },
     {
       "record_id": "explorer.launch-folder-windows-in-a-separate-process",

@@ -8,11 +8,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 
 | Field | Value |
 | --- | --- |
-| Total records | 289 |
-| Validated | 237 |
+| Total records | 290 |
+| Validated | 238 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 289 |
+| Records with evidence | 290 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -90,6 +90,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.disable-low-disk-space-warning` | validated | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
 | `explorer.enable-explorer-compact-mode` | validated | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
+| `explorer.hide-empty-drives` | validated | `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json` | `a3d15c07579a659260f9ff891c3e0545a369c0b8d3b14e8c099a4e9b9a5e7d77` | `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765` | 1 |
 | `explorer.launch-folder-windows-in-a-separate-process` | validated | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `0b9f99f5eae8811b2493069bc7f36bfd4ff3f4ae8c118e33ff8782d051ba1e59` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
 | `explorer.show-compressed-and-encrypted-files-in-color` | validated | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `b976a2e2767ddc7d57d5b0ff72916467281618730287197d707a754e08ea123d` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
 | `explorer.show-drive-letters-first` | validated | `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json` | `8bfa52fedcb995cc8db11a3c4235f7f2a205442dfad8c0c2d799703d755d28a9` | `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10` | 1 |
@@ -3842,6 +3843,45 @@ Nohuto lineage references:
 | exact_quote_or_path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:0. |
 | key_found_on_page | True |
 | notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |
+### `explorer.hide-empty-drives`
+
+- Status: `validated`
+- Category: `Explorer`
+- Area: `Observed Explorer Runtime Setting`
+- Scope: `user`
+- Source file: `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json`
+- Source SHA256: `a3d15c07579a659260f9ff891c3e0545a369c0b8d3b14e8c099a4e9b9a5e7d77`
+- Proof SHA256: `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765`
+
+**Summary:** Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\Advanced branch, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.
+
+**Targets**
+
+- `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `HideDrivesWithNoMedia` / `REG_DWORD`
+  - Notes: The Microsoft settings reference describes the feature, while the 25H2 dump and Procmon probe corroborate the direct registry value and live Explorer read path.
+  - value | value=0 | label=Show empty drives | meaning=Explorer keeps drives with no media visible. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart into This PC.
+  - value | value=1 | label=Hide empty drives | meaning=Explorer hides drives with no media present. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart into This PC.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | `medium` |
+| `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | `medium` |
+| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | `high` |
+
+**Provenance**
+
+_No provenance block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\hideemptydrives-result.txt |
+| exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 1; RESTORED_EXISTS=False |
+| key_found_on_page | True |
+| notes | The guest-local result file was copied back to the host scratch area during validation. The baseline value was absent and was restored to the absent state after the probe. |
 ### `explorer.launch-folder-windows-in-a-separate-process`
 
 - Status: `validated`

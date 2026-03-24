@@ -7,11 +7,11 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 
 | Field | Value |
 | --- | --- |
-| Total records | 288 |
-| Validated | 236 |
+| Total records | 289 |
+| Validated | 237 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 288 |
+| Records with evidence | 289 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -23,7 +23,7 @@ Nohuto references are lineage / naming provenance only; value semantics are vali
 | Audio | 5 |
 | Cleanup | 1 |
 | Developer | 13 |
-| Explorer | 16 |
+| Explorer | 17 |
 | Network | 29 |
 | Notifications | 5 |
 | Performance | 3 |
@@ -2206,6 +2206,78 @@ Nohuto lineage references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | Microsoft documents the numeric semantics, the 25H2 dump corroborates the current surface and default value, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both 0 and 1 on this build. The setting is still best reserved for advanced users because it exposes protected operating system files. |
+
+---
+
+### `explorer.show-recent-items`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Category | `Explorer` |
+| Area | `Observed Explorer Runtime Setting` |
+| Scope | `user` |
+| Source file | `Docs/tweaks/research/records/explorer.show-recent-items.review.json` |
+| Apply allowed | `True` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `n/a` |
+| Notes | The app does not currently expose ShowRecent. |
+
+**Provenance**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals context | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Recommended profiles**
+
+- `show-recent-items`: Show recent items (apply_allowed=True)
+- `hide-recent-items`: Hide recent items (apply_allowed=True)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer general settings | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `medium` | behavior, version-scope |
+| `dump-25h2-explorer-showrecent` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowRecent | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
+| `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | H:\Temp\vm-tooling-staging\showrecent-result.txt | `high` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\showrecent-result.txt |
+| Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowRecent ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ShowRecent ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0 |
+| Key found on page | `True` |
+| Notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The 25H2 dump corroborates the ShowRecent value family, Microsoft Learn describes the feature, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference, but the direct first-party registry contract is weaker than ADMX-grade settings. |
 
 ---
 
