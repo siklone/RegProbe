@@ -8,11 +8,11 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 
 | Field | Value |
 | --- | --- |
-| Total records | 285 |
-| Validated | 233 |
+| Total records | 286 |
+| Validated | 234 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 285 |
+| Records with evidence | 286 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
@@ -97,6 +97,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `explorer.show-hidden-files` | validated | `Docs/tweaks/research/records/explorer.show-hidden-files.review.json` | `e37e4e84eca8b615baa429e1f7241d40aeeb61cbdf30432cc3d6a1b2d09c13c2` | `628b37371fa8e73414f8c4009c7f6afa6695ec160eac07f21d33a79495e7f28d` | 1 |
 | `explorer.show-info-tips` | validated | `Docs/tweaks/research/records/explorer.show-info-tips.review.json` | `ac3bf40732016c93efa19809e2dfcd75429737d70ffc3eae56a5abe8e401ac13` | `fdf9a3768772063a425a7254bf6d47c2dd3225dfe38056021db41a1475044c48` | 1 |
 | `explorer.show-protected-operating-system-files` | validated | `Docs/tweaks/research/records/explorer.show-protected-operating-system-files.review.json` | `187b988ab3ef78b515818c9a2017dffc94c2419836b25f201d7211a8be525ec9` | `e81f069d16bb5fe4cdf37898885b66713f4fc12b22e3d4cc1ab4abbb629e0c4b` | 1 |
+| `explorer.show-status-bar` | validated | `Docs/tweaks/research/records/explorer.show-status-bar.review.json` | `86d5fc4618cbdda09962a72633d1d50f678d6cc0f7bbad8c242d833f696af759` | `9cbc0e1f749f45ec8df99669200d92db5614fefdbc6a3ecfa98e06ddb01383be` | 1 |
 | `explorer.taskbar-alignment-left` | validated | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
 | `network.disable-active-probing` | validated | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0` | 1 |
 | `network.disable-default-shares` | validated | `Docs/tweaks/research/records/network.disable-default-shares.json` | `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
@@ -3650,7 +3651,7 @@ _No provenance block present._
 - Source SHA256: `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02`
 - Proof SHA256: `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4`
 
-**Summary:** Microsoft documents disabling low disk space checks through the NoLowDiskSpaceChecks registry value under HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer. The app implementation was aligned to that documented machine-policy path on 2026-03-13, so this record now validates the official control surface rather than the previously mismatched HKCU variant.
+**Summary:** Microsoft documents disabling low disk space checks through the NoLowDiskSpaceChecks registry value under HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer. The 25H2 raw registry dump lists the same value name under the machine Explorer policy branch, and the app implementation was aligned to that documented machine-policy path on 2026-03-13. This record therefore validates the official control surface rather than the previously mismatched HKCU variant.
 
 **Targets**
 
@@ -3664,6 +3665,7 @@ _No provenance block present._
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `ms-low-disk-warning-article` | `official-doc` | `Microsoft official doc` | Microsoft Learn troubleshooting article for low disk space warnings | `high` |
+| `dump-25h2-policies-explorer-nolowdiskspacechecks` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for NoLowDiskSpaceChecks | `medium` |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
 **Provenance**
@@ -4152,6 +4154,45 @@ _No provenance block present._
 | exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1 |
 | key_found_on_page | True |
 | notes | Raw hit exports were also copied to H:\\Temp\\vm-tooling-staging\\showsuperhidden-0-hits.csv and H:\\Temp\\vm-tooling-staging\\showsuperhidden-1-hits.csv. |
+### `explorer.show-status-bar`
+
+- Status: `validated`
+- Category: `Explorer`
+- Area: `Observed Explorer Runtime Setting`
+- Scope: `user`
+- Source file: `Docs/tweaks/research/records/explorer.show-status-bar.review.json`
+- Source SHA256: `86d5fc4618cbdda09962a72633d1d50f678d6cc0f7bbad8c242d833f696af759`
+- Proof SHA256: `9cbc0e1f749f45ec8df99669200d92db5614fefdbc6a3ecfa98e06ddb01383be`
+
+**Summary:** Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.
+
+**Targets**
+
+- `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowStatusBar` / `REG_DWORD`
+  - Notes: This record validates the live Explorer runtime surface. The Microsoft settings reference describes the feature, while the 25H2 dump/default hive and Procmon probe corroborate the direct registry value.
+  - value | value=0 | label=Hide status bar | meaning=Explorer does not show the status bar. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.
+  - value | value=1 | label=Show status bar | meaning=Explorer shows the status bar. The 25H2 default-user hive sets ShowStatusBar = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | `medium` |
+| `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | `medium` |
+| `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | `high` |
+
+**Provenance**
+
+_No provenance block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\showstatusbar-result.txt |
+| exact_quote_or_path | STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0 |
+| key_found_on_page | True |
+| notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe. |
 ### `explorer.taskbar-alignment-left`
 
 - Status: `validated`

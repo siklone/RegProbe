@@ -1,0 +1,199 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "explorer.show-status-bar",
+  "tweak_id": "explorer.show-status-bar",
+  "record_status": "validated",
+  "summary": "Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.",
+  "setting": {
+    "name": "Show Status Bar",
+    "category": "Explorer",
+    "area": "Observed Explorer Runtime Setting",
+    "scope": "user",
+    "casual_explanation": "Explorer can show or hide its status bar at the bottom of the window.",
+    "why_people_change_it": "People show the status bar when they want extra file and selection details visible, or hide it when they want a cleaner Explorer window.",
+    "tradeoffs_overview": "This is a low-risk Explorer preference. Enabling it adds status details to Explorer windows, while disabling it keeps the interface cleaner.",
+    "professional_notes": "Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting. The 25H2 raw registry dump lists ShowStatusBar under the current-user Explorer\\Advanced branch and in the siloed user branches, while the 25H2 default-user hive sets ShowStatusBar = 1. A reversible Win25H2Clean Procmon probe on 2026-03-24 then confirmed live Explorer consumption: after writing ShowStatusBar = 0 and restarting Explorer, Explorer.EXE queried the value with Data: 0; after writing ShowStatusBar = 1 and restarting Explorer, Explorer.EXE queried the same value with Data: 1.",
+    "targets": [
+      {
+        "target_id": "explorer-showstatusbar-flag",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "value_name": "ShowStatusBar",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Hide status bar",
+            "meaning": "Explorer does not show the status bar. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+            "evidence_ids": [
+              "ms-settings-common-fileexplorer-showstatusbar",
+              "dump-25h2-explorer-advanced-showstatusbar",
+              "procmon-showstatusbar-runtime"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Show status bar",
+            "meaning": "Explorer shows the status bar. The 25H2 default-user hive sets ShowStatusBar = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+            "evidence_ids": [
+              "ms-settings-common-fileexplorer-showstatusbar",
+              "dump-25h2-explorer-advanced-showstatusbar",
+              "procmon-showstatusbar-runtime"
+            ]
+          }
+        ],
+        "notes": "This record validates the live Explorer runtime surface. The Microsoft settings reference describes the feature, while the 25H2 dump/default hive and Procmon probe corroborate the direct registry value."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "n/a",
+    "notes": "The app does not currently expose ShowStatusBar.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "25H2 default-user baseline",
+      "applies_to": "25H2 default profile",
+      "states": [
+        {
+          "target_id": "explorer-showstatusbar-flag",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "HKCU25H2.reg sets ShowStatusBar = 1 in the 25H2 default-user hive."
+        }
+      ],
+      "notes": "The validated VM user baseline differed from the default-user hive, but the 25H2 default profile still corroborates the expected default state.",
+      "evidence_ids": [
+        "dump-25h2-explorer-advanced-showstatusbar"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "show-status-bar",
+      "label": "Show status bar",
+      "intended_for": [
+        "Users who want extra details visible in Explorer windows"
+      ],
+      "avoid_for": [
+        "Users who prefer a cleaner Explorer interface"
+      ],
+      "states": [
+        {
+          "target_id": "explorer-showstatusbar-flag",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "This matches the 25H2 default-user hive and the runtime-observed Explorer read."
+        }
+      ],
+      "good_when": "You want the status bar shown in Explorer.",
+      "bad_when": "You want Explorer to use less UI space.",
+      "tradeoffs": [
+        "Adds status details to Explorer windows.",
+        "Uses a little more visual space."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-settings-common-fileexplorer-showstatusbar",
+        "dump-25h2-explorer-advanced-showstatusbar",
+        "procmon-showstatusbar-runtime"
+      ]
+    },
+    {
+      "profile_id": "hide-status-bar",
+      "label": "Hide status bar",
+      "intended_for": [
+        "Users who prefer a cleaner Explorer window"
+      ],
+      "avoid_for": [
+        "Users who rely on status details"
+      ],
+      "states": [
+        {
+          "target_id": "explorer-showstatusbar-flag",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "This matches the runtime-observed Explorer read for the hidden state."
+        }
+      ],
+      "good_when": "You want Explorer to hide the status bar.",
+      "bad_when": "You want visible file and selection details at the bottom of Explorer.",
+      "tradeoffs": [
+        "Removes the Explorer status bar.",
+        "Leaves the UI cleaner but with less status detail."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-settings-common-fileexplorer-showstatusbar",
+        "dump-25h2-explorer-advanced-showstatusbar",
+        "procmon-showstatusbar-runtime"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-settings-common-fileexplorer-showstatusbar",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: settings-common File Explorer Classic advanced settings",
+      "location": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common",
+      "summary": "Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting and says it indicates whether File Explorer should show the status bar.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "dump-25h2-explorer-advanced-showstatusbar",
+      "kind": "raw-registry-dump",
+      "title": "25H2 raw registry and default-hive corroboration for ShowStatusBar",
+      "location": "Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg",
+      "summary": "The 25H2 raw registry dump lists ShowStatusBar under the current-user Explorer\\Advanced branch and the siloed user branches, and the 25H2 default-user hive sets ShowStatusBar = 1.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "procmon-showstatusbar-runtime",
+      "kind": "procmon-trace",
+      "title": "Procmon capture - Explorer ShowStatusBar runtime surface",
+      "location": "H:\\Temp\\vm-tooling-staging\\showstatusbar-result.txt",
+      "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowStatusBar = 0 and ShowStatusBar = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with matching Data: 0 and Data: 1 values.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference.",
+    "blocking_issues": []
+  },
+  "open_questions": [
+    "Should the app expose ShowStatusBar as a general Explorer preference?"
+  ],
+  "last_reviewed_utc": "2026-03-24T09:10:00+03:00",
+  "validation_proof": {
+    "source_url": "H:\\Temp\\vm-tooling-staging\\showstatusbar-result.txt",
+    "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0",
+    "key_found_on_page": true,
+    "notes": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe."
+  }
+}

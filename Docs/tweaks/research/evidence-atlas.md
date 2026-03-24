@@ -1216,7 +1216,7 @@ Current write(s):
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Microsoft documents disabling low disk space checks through the NoLowDiskSpaceChecks registry value under HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer. The app implementation was aligned to that documented machine-policy path on 2026-03-13, so this record now validates the official control surface rather than the previously mismatched HKCU variant.
+**Summary:** Microsoft documents disabling low disk space checks through the NoLowDiskSpaceChecks registry value under HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer. The 25H2 raw registry dump lists the same value name under the machine Explorer policy branch, and the app implementation was aligned to that documented machine-policy path on 2026-03-13. This record therefore validates the official control surface rather than the previously mismatched HKCU variant.
 
 **Current implementation**
 
@@ -1269,6 +1269,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-low-disk-warning-article` | `official-doc` | `Microsoft official doc` | Microsoft Learn troubleshooting article for low disk space warnings | https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft | `high` | path, value, behavior |
+| `dump-25h2-policies-explorer-nolowdiskspacechecks` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for NoLowDiskSpaceChecks | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -1289,7 +1290,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The Microsoft troubleshooting article documents the exact HKLM Explorer path, NoLowDiskSpaceChecks value name, and value data 1. The app now writes the same machine-policy path, so the implementation matches the primary source and the record can be validated. recommended_for_general_users stays false because suppressing low-disk warnings is a niche administrative choice rather than a broadly helpful default. |
+| Why | The Microsoft troubleshooting article documents the exact HKLM Explorer path, NoLowDiskSpaceChecks value name, and value data 1. The 25H2 raw registry dump corroborates that the value family is still present on current builds. The app now writes the same machine-policy path, so the implementation matches the primary source and the record can be validated. recommended_for_general_users stays false because suppressing low-disk warnings is a niche administrative choice rather than a broadly helpful default. |
 
 ---
 
