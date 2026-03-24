@@ -18032,7 +18032,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\System\CurrentControlSet\Control\SessionManager\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset.
+**Summary:** Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\System\CurrentControlSet\Control\SessionManager\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset, and a bounded Win25H2Clean VM suite exercised the `0` state through real reboot, CPU and memory workloads, and restore back to the missing baseline.
 
 **Current implementation**
 
@@ -18093,6 +18093,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-threaded-dpcs` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to threaded DPCs | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-thread-dpc-enable-bounded-suite` | `vm-test` | `VM test / probe` | Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0 | Docs/tweaks/research/notes/thread-dpc-enable-vm-suite-20260324.md | `medium` | value, default, behavior, version-scope |
+| `etw-thread-dpc-enable-cpu3` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable CPU bounded run | H:\Temp\vm-tooling-staging\thread-dpc-enable-0-cpu3.etl | `medium` | behavior, version-scope |
+| `etw-thread-dpc-enable-mem2` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable memory bounded run | H:\Temp\vm-tooling-staging\thread-dpc-enable-0-mem2.etl | `medium` | behavior, version-scope |
 
 **Validation proof**
 
@@ -18101,7 +18104,7 @@ Windows Internals references:
 | Source URL | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs |
 | Exact quote / path | A threaded DPC is a DPC that the system executes at IRQL equal to PASSIVE_LEVEL. Threaded DPCs are enabled by default, but you can disable them by setting the HKLM\System\CCS\Control\SessionManager\Kernel\ThreadDpcEnable registry key to zero. When threaded DPCs are disabled, they execute as ordinary DPCs. |
 | Key found on page | `True` |
-| Notes | The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface. |
+| Notes | The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface, and the bounded VM suite confirms the `0` disable state can be exercised and restored back to the missing baseline. |
 
 **Decision**
 
@@ -18112,7 +18115,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact path, explicitly says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset. |
+| Why | Microsoft documents the exact path, explicitly says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset, and bounded VM runs now show that the `0` state can be exercised and restored safely in Win25H2Clean. |
 
 ---
 

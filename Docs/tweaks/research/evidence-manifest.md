@@ -58,7 +58,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `system.dwm-disable-mpo` | deprecated | `Docs/tweaks/research/records/system.dwm-disable-mpo.review.json` | `86932e4673dd8c9e5db4cd9d0a7cc82d4cb3dd53c2150a5e079d983c3ff674dc` | `cff71e2f37ceccde58b2eafe48044a4ac42b5453b9676780d76aa89c5cafe309` | 1 |
 | `system.graphics-disable-overlays` | deprecated | `Docs/tweaks/research/records/system.graphics-disable-overlays.review.json` | `6cf5e02e4ced0aa7b215752645b3239269b66d175b298283f93829863e01cf92` | `dbf1407cc708022946c9f7e61f339d401d97e7a859bb0e947f2824dbf29a803e` | 1 |
 | `system.graphics-page-fault-debug-mode` | deprecated | `Docs/tweaks/research/records/system.graphics-page-fault-debug-mode.review.json` | `98ef739d16ea86aabaedb34b97ce872b4f0fcd5fcb7d32ab364a8b863d489580` | `de461e3f29a05889c82ae0349ddf469cce6bcacc3a632e36c6bdcd1b029992df` | 1 |
-| `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc` | `84c3a10e4279611b07fb235549e264875a9a89304dfd3c10b30994d093f78c65` | 1 |
+| `system.kernel-adjust-dpc-threshold` | deprecated | `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json` | `b98430d6c64c7c0159d8dd8edc8978682c51c2e62b3fdd3eee4983aef9822af4` | `84c3a10e4279611b07fb235549e264875a9a89304dfd3c10b30994d093f78c65` | 1 |
 | `system.kernel-cache-aware-scheduling` | deprecated | `Docs/tweaks/research/records/system.kernel-cache-aware-scheduling.review.json` | `c71c786191fcbbda286b1f777121293a167deca0c559020752ae280665b02683` | `c3f8debabce5f85e918dd986eb331a900ffb0c11ea9c9409bc02e5d067799832` | 1 |
 | `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | `Docs/tweaks/research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | `2b7a318f39e4168d65dfc33011c490ad14c1b2eacec8781538e76ddd37cae801` | `bd6eb09cb779de67dbcbaaa293b39f58266085c2535cf005beab857de9d6cde2` | 1 |
 | `system.kernel-disable-low-qos-timer-resolution` | deprecated | `Docs/tweaks/research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | `5654170476a57a32c6aeedafde873585689b29024313b5d0240750c26990f60b` | `efcc02d642dacdff3f28dac8946c8878180d0ef83875ea5feff1ab89b5c9c126` | 1 |
@@ -2176,7 +2176,7 @@ Windows Internals references:
 - Area: `Kernel / DPC Scheduling`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json`
-- Source SHA256: `04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc`
+- Source SHA256: `b98430d6c64c7c0159d8dd8edc8978682c51c2e62b3fdd3eee4983aef9822af4`
 - Proof SHA256: `84c3a10e4279611b07fb235549e264875a9a89304dfd3c10b30994d093f78c65`
 
 **Summary:** Deprecated audit trail for AdjustDpcThreshold. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\AdjustDpcThreshold = 20, and the decompiled kernel set/query path now shows the raw value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T09:32:00.273613Z",
+  "generated_utc": "2026-03-24T09:33:41.441938Z",
   "source_index": "Docs/tweaks/research/evidence-index.json",
   "summary": {
     "total_records": 290,
@@ -8726,8 +8726,8 @@
       "tweak_id": "system.kernel-adjust-dpc-threshold",
       "record_status": "deprecated",
       "source_file": "Docs/tweaks/research/records/system.kernel-adjust-dpc-threshold.review.json",
-      "source_file_sha256": "04b067a13bd9f188088ecc2c944d05a6f305d15ecc670467993d402ef5b80bfc",
-      "source_file_size_bytes": 16586,
+      "source_file_sha256": "b98430d6c64c7c0159d8dd8edc8978682c51c2e62b3fdd3eee4983aef9822af4",
+      "source_file_size_bytes": 16923,
       "name": "Adjust DPC Threshold",
       "category": "System",
       "area": "Kernel / DPC Scheduling",
@@ -8740,7 +8740,7 @@
         "restore_default_supported": false,
         "restore_previous_supported": false,
         "needs_vm_validation": false,
-        "why": "The current semantics come from repo research notes, but this research pass did not capture a primary Microsoft source for AdjustDpcThreshold.",
+        "why": "The current semantics come from repo research notes plus decompiled system-information handlers that expose KiAdjustDpcThreshold, but this research pass still did not capture a primary Microsoft source for AdjustDpcThreshold.",
         "blocking_issues": [
           "No primary Microsoft source for AdjustDpcThreshold was captured in this research pass.",
           "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
@@ -8775,6 +8775,7 @@
               "label": "Primary Microsoft mapping not captured",
               "meaning": "This research pass did not capture a primary Microsoft source for the exact AdjustDpcThreshold registry semantics.",
               "evidence_ids": [
+                "ghidra-adjust-dpc-threshold-system-info",
                 "repo-system-doc-kernel"
               ]
             },
@@ -8784,6 +8785,7 @@
               "label": "Observed app profile",
               "meaning": "The current app treats 20 as the default threshold, based on repo research rather than a captured primary Microsoft source.",
               "evidence_ids": [
+                "ghidra-adjust-dpc-threshold-system-info",
                 "repo-system-doc-kernel",
                 "app-system-registry-provider"
               ]
