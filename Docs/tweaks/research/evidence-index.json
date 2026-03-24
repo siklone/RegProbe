@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T05:53:34.598251Z",
+  "generated_utc": "2026-03-24T05:55:05.176014Z",
   "summary": {
     "total_records": 285,
     "validated": 233,
@@ -15344,7 +15344,7 @@
       "category": "Explorer",
       "area": "Registry Policy",
       "scope": "device",
-      "summary": "Microsoft documents disabling low disk space checks through the NoLowDiskSpaceChecks registry value under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. The app implementation was aligned to that documented machine-policy path on 2026-03-13, so this record now validates the official control surface rather than the previously mismatched HKCU variant.",
+      "summary": "Microsoft documents disabling low disk space checks through the NoLowDiskSpaceChecks registry value under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. The 25H2 raw registry dump lists the same value name under the machine Explorer policy branch, and the app implementation was aligned to that documented machine-policy path on 2026-03-13. This record therefore validates the official control surface rather than the previously mismatched HKCU variant.",
       "decision": {
         "confidence": "high",
         "apply_allowed": true,
@@ -15352,7 +15352,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "The Microsoft troubleshooting article documents the exact HKLM Explorer path, NoLowDiskSpaceChecks value name, and value data 1. The app now writes the same machine-policy path, so the implementation matches the primary source and the record can be validated. recommended_for_general_users stays false because suppressing low-disk warnings is a niche administrative choice rather than a broadly helpful default.",
+        "why": "The Microsoft troubleshooting article documents the exact HKLM Explorer path, NoLowDiskSpaceChecks value name, and value data 1. The 25H2 raw registry dump corroborates that the value family is still present on current builds. The app now writes the same machine-policy path, so the implementation matches the primary source and the record can be validated. recommended_for_general_users stays false because suppressing low-disk warnings is a niche administrative choice rather than a broadly helpful default.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -15394,6 +15394,7 @@
               "meaning": "Windows does not check for or display the documented low disk space warnings.",
               "evidence_ids": [
                 "ms-low-disk-warning-article",
+                "dump-25h2-policies-explorer-nolowdiskspacechecks",
                 "app-visibility-provider"
               ]
             }
@@ -15475,6 +15476,7 @@
           "notes": "apply_allowed=true. The proof chain is exact: the Microsoft article names the HKLM path, NoLowDiskSpaceChecks value, and value data 1. The app now writes the same machine-policy path.",
           "evidence_ids": [
             "ms-low-disk-warning-article",
+            "dump-25h2-policies-explorer-nolowdiskspacechecks",
             "app-visibility-provider"
           ]
         }
@@ -15493,6 +15495,19 @@
             "behavior"
           ],
           "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "dump-25h2-policies-explorer-nolowdiskspacechecks",
+          "kind": "raw-registry-dump",
+          "title": "25H2 raw registry corroboration for NoLowDiskSpaceChecks",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+          "summary": "The 25H2 raw registry dump lists NoLowDiskSpaceChecks under the machine Explorer policy branch, corroborating that the value family is still present on current builds.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         },
         {
           "evidence_id": "app-visibility-provider",

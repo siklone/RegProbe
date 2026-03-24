@@ -1806,7 +1806,7 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Explorer can show the full path in the title bar. The current app writes the exact documented FullPath user preference under Explorer\CabinetState.
+**Summary:** Explorer can show the full path in the title bar. Microsoft Open Specifications documents the exact FullPath user preference under Explorer\CabinetState, and the 25H2 default hive exports the same value as 0. The current app writes the documented enabled state under that same Explorer preference surface.
 
 **Current implementation**
 
@@ -1846,8 +1846,8 @@ Nohuto lineage references:
 
 **Windows defaults**
 
-- Explorer baseline (Explorer user profiles that do not explicitly set the FullPath preference)
-  - explorer-fullpath-flag: missing — — Leave the explicit FullPath preference unset.
+- 25H2 default Explorer preference (Current-user Explorer CabinetState settings on the 25H2 default hive snapshot)
+  - explorer-fullpath-flag: value `0` — HKCU25H2.reg exports FullPath = 0 in the default Explorer\CabinetState block.
 
 **Recommended profiles**
 
@@ -1859,6 +1859,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptions | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a | `high` | path, value, allowed-values, behavior |
+| `dump-hkcu25h2-explorer-cabinetstate-fullpath` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for FullPath | Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg | `medium` | path, value, version-scope |
 | `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo provenance for explorer.show-full-path | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -1880,7 +1881,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft Open Specifications documents the exact FullPath Explorer preference under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState and states that 1 enables showing the full path while 0 disables it. The app writes the documented enabled state. |
+| Why | Microsoft Open Specifications documents the exact FullPath Explorer preference under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState and states that 1 enables showing the full path while 0 disables it. The 25H2 default hive corroborates the current disabled default state, and the app writes the documented enabled state. |
 
 ---
 

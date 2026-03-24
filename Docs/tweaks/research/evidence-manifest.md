@@ -86,7 +86,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `developer.ssh-agent-autostart` | validated | `Docs/tweaks/research/records/developer.ssh-agent-autostart.review.json` | `b3236efe7c1bf586a427ddb9a748aa911b732effdd6e8e270a386e5bc25b7485` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 1 |
 | `developer.windows-dev-mode` | validated | `Docs/tweaks/research/records/developer.windows-dev-mode.json` | `3c3defe4768d22994c71d0a3c131d12ea7eac123190b4fe89a56b7a2113a324d` | `0ed25dffb4bdabc7eaa24c879e79ec54649fabca8d204b46a0e2f6434ae60841` | 1 |
 | `developer.wsl2-memory` | validated | `Docs/tweaks/research/records/developer.wsl2-memory.json` | `9cf81d553d079e19fcf84fae9b126bdf1b081f7c4137cba883434eb9fdaee1fe` | `8483aaddd7cffe7e57ba75d9b795a94c65285ad73a64c77020d7502864a7d988` | 1 |
-| `explorer.disable-low-disk-space-warning` | validated | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `0a8d6ff0ef5c5251f4eb5dd99e44b4ab4dc53c21860f2eee72804da13e5e8ea5` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
+| `explorer.disable-low-disk-space-warning` | validated | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
 | `explorer.enable-explorer-compact-mode` | validated | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
 | `explorer.launch-folder-windows-in-a-separate-process` | validated | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `0b9f99f5eae8811b2493069bc7f36bfd4ff3f4ae8c118e33ff8782d051ba1e59` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
@@ -3647,7 +3647,7 @@ _No provenance block present._
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json`
-- Source SHA256: `0a8d6ff0ef5c5251f4eb5dd99e44b4ab4dc53c21860f2eee72804da13e5e8ea5`
+- Source SHA256: `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02`
 - Proof SHA256: `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4`
 
 **Summary:** Microsoft documents disabling low disk space checks through the NoLowDiskSpaceChecks registry value under HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer. The app implementation was aligned to that documented machine-policy path on 2026-03-13, so this record now validates the official control surface rather than the previously mismatched HKCU variant.
@@ -3978,7 +3978,7 @@ Nohuto lineage references:
 - Source SHA256: `04d7c7e028991d2417cfcf30b38620aafc8b340c00e65c40a7b0255a983f7d1d`
 - Proof SHA256: `3bbca557e00fb3d9868939a7ce080b8989145b853fe5d7555b953f5cd3adc72d`
 
-**Summary:** Explorer can show the full path in the title bar. The current app writes the exact documented FullPath user preference under Explorer\CabinetState.
+**Summary:** Explorer can show the full path in the title bar. Microsoft Open Specifications documents the exact FullPath user preference under Explorer\CabinetState, and the 25H2 default hive exports the same value as 0. The current app writes the documented enabled state under that same Explorer preference surface.
 
 **Targets**
 
@@ -3992,6 +3992,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptions | `high` |
+| `dump-hkcu25h2-explorer-cabinetstate-fullpath` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for FullPath | `medium` |
 | `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo provenance for explorer.show-full-path | `medium` |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
