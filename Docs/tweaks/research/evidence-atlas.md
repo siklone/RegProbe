@@ -21375,7 +21375,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean reversible probe confirmed Win32PrioritySeparation=38 under PriorityControl and restored the baseline 2.
+**Summary:** Win25H2Clean manual VM pass confirmed Win32PrioritySeparation transitions 2 -> 38 -> 2 with real reboots and bounded WinSAT CPU/memory runs.
 
 **Current implementation**
 
@@ -21383,7 +21383,7 @@ Windows Internals references:
 | --- | --- |
 | Status | `matches-research` |
 | Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
-| Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for Win32PrioritySeparation. |
+| Notes | Guest-side reversible probe and a later manual VM benchmark pass on Win25H2Clean confirmed the current app write and restore cycle for Win32PrioritySeparation. |
 
 Current write(s):
 
@@ -21448,15 +21448,16 @@ Windows Internals references:
 | `repo-system-decomp-prioritycontrol` | `decompilation` | `Ghidra decompilation` | Decompiled PriorityControl read/write path | Docs/system/assets/lsc-cimwin32.c | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
+| `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | H:\Temp\vm-tooling-staging\priority-control-20260324-201011\summary.json | `medium` | value, behavior, rollback, performance |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json |
-| Exact quote / path | HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation: before=2, after_apply=38, after_restore=2 |
+| Source URL | H:\Temp\vm-tooling-staging\priority-control-20260324-201011\summary.json |
+| Exact quote / path | baseline observed_value=2; candidate observed_value=38; restore observed_value=2; baseline CPU duration=35.28s; candidate CPU duration=26.04s; baseline mem duration=25.05s; candidate mem duration=25.11s |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparation, and Docs/system/system.md documents the AABBCC bitmask interpretation. |
+| Notes | Guest-side manual VM pass on Win25H2Clean; see H:\Temp\vm-tooling-staging\priority-control-20260324-201011\summary.json and the paired CPU/memory artifact zips. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparation, and Docs/system/system.md documents the AABBCC bitmask interpretation. |
 
 **Decision**
 
@@ -21467,7 +21468,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible probe confirmed Win32PrioritySeparation transitions 2 -> 38 -> 2 on the documented PriorityControl path. |
+| Why | Win25H2Clean reversible probe and a later manual VM pass both confirmed Win32PrioritySeparation transitions 2 -> 38 -> 2 on the documented PriorityControl path. The manual pass also ran bounded WinSAT CPU and memory workloads after real reboots. |
 
 ---
 

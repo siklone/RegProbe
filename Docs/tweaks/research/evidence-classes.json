@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T14:33:09.848982Z",
+  "generated_utc": "2026-03-24T17:19:43.254515Z",
   "summary": {
     "total_records": 290,
     "class_counts": {
@@ -18411,15 +18411,15 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparatio...",
+        "summary": "Guest-side manual VM pass on Win25H2Clean; see H:\\Temp\\vm-tooling-staging\\priority-control-20260324-201011\\summary.json and the paired CPU/memory artifact zips. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write pa...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
+            "url": "H:\\Temp\\vm-tooling-staging\\priority-control-20260324-201011\\summary.json",
             "kind": "validation-proof",
-            "summary": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: before=2, after_apply=38, after_restore=2"
+            "summary": "baseline observed_value=2; candidate observed_value=38; restore observed_value=2; baseline CPU duration=35.28s; candidate CPU duration=26.04s; baseline mem duration=25.05s; cand..."
           },
           {
             "title": "Microsoft Learn: Win32_OperatingSystem class",
@@ -18445,6 +18445,12 @@
             "url": "H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe changed Win32PrioritySeparation from 2 to 38 and restored 2, confirming the tuning value transitions on the PriorityControl path."
+          },
+          {
+            "title": "Win25H2Clean manual benchmark pass - Win32PrioritySeparation",
+            "url": "H:\\Temp\\vm-tooling-staging\\priority-control-20260324-201011\\summary.json",
+            "kind": "vm-test",
+            "summary": "Manual VM pass confirmed baseline 2, candidate 38, and restored 2 after real reboots. The same guest then ran bounded WinSAT CPU + WPR and WinSAT mem + WPR passes for both state..."
           }
         ]
       },

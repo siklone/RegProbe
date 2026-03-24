@@ -108,6 +108,12 @@ The active benchmark lane is:
 - `DiskSpd + WPR`
 - `AIDA64` for manual visible cross-check
 
+Manual reboot-sensitive comparison runs can use:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\run-manual-value-benchmark.ps1 -TestName priority-control -RegistryPath HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl -ValueName Win32PrioritySeparation -BaselineValue 2 -CandidateValue 38
+```
+
 The active suite avoids EULA-gated third-party stress tools.
 
 ## Bootstrapping Notes

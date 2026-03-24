@@ -282,7 +282,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.ntfs-enable-long-paths` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-enable-long-paths.json` | `d101a6382cc22b8bd2dd60f2d8ff325ea4c7c712f05bfc72566c2f6a1742cdab` | `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179` | 1 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
 | `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
-| `system.priority-control` | validated | Class D | `Docs/tweaks/research/records/system.priority-control.review.json` | `0384e02c10c9b9840925aeeaa7aafe9cbda97e864a0927bc7d1f46279ae7ab5d` | `c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b` | 1 |
+| `system.priority-control` | validated | Class D | `Docs/tweaks/research/records/system.priority-control.review.json` | `9e1f07a3b5d85840b5e49a1cc316e512d46529a339c1de92b66af7ddb1e18fb2` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
 | `system.reduce-shutdown-timeouts` | validated | Class D | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
 | `system.reliability-timestamp-enabled` | validated | Class C | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `721519b9c72c153fd891292cee7d8ceb28902ef780f964c43c1abae849b21b3e` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
@@ -16621,10 +16621,10 @@ Windows Internals references:
 - Area: `Scheduler / Priority Control`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.priority-control.review.json`
-- Source SHA256: `0384e02c10c9b9840925aeeaa7aafe9cbda97e864a0927bc7d1f46279ae7ab5d`
-- Proof SHA256: `c6419e1bcb8f2155db3f48e566754fc58fae25d5f38653c19c5cdd6cc862a05b`
+- Source SHA256: `9e1f07a3b5d85840b5e49a1cc316e512d46529a339c1de92b66af7ddb1e18fb2`
+- Proof SHA256: `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48`
 
-**Summary:** Win25H2Clean reversible probe confirmed Win32PrioritySeparation=38 under PriorityControl and restored the baseline 2.
+**Summary:** Win25H2Clean manual VM pass confirmed Win32PrioritySeparation transitions 2 -> 38 -> 2 with real reboots and bounded WinSAT CPU/memory runs.
 
 **Evidence class**
 
@@ -16651,6 +16651,7 @@ Windows Internals references:
 | `repo-system-decomp-prioritycontrol` | `decompilation` | `Ghidra decompilation` | Decompiled PriorityControl read/write path | `high` |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | `medium` |
+| `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | `medium` |
 
 **Sources**
 
@@ -16677,10 +16678,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json |
-| exact_quote_or_path | HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: before=2, after_apply=38, after_restore=2 |
+| source_url | H:\\Temp\\vm-tooling-staging\\priority-control-20260324-201011\\summary.json |
+| exact_quote_or_path | baseline observed_value=2; candidate observed_value=38; restore observed_value=2; baseline CPU duration=35.28s; candidate CPU duration=26.04s; baseline mem duration=25.05s; candidate mem duration=25.11s |
 | key_found_on_page | True |
-| notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparation, and Docs/system/system.md documents the AABBCC bitmask interpretation. |
+| notes | Guest-side manual VM pass on Win25H2Clean; see H:\\Temp\\vm-tooling-staging\\priority-control-20260324-201011\\summary.json and the paired CPU/memory artifact zips. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparation, and Docs/system/system.md documents the AABBCC bitmask interpretation. |
 ### `system.reduce-shutdown-timeouts`
 
 - Status: `validated`
