@@ -53,8 +53,17 @@ Artifacts:
 
 - `H:\Temp\vm-tooling-staging\registry-dumps\defender-policy-root-20260324-210024\defender-policy-root.txt`
 - `H:\Temp\vm-tooling-staging\registry-dumps\defender-policy-manager-20260324-210159\defender-policy-manager.txt`
+- `H:\Temp\vm-tooling-staging\registry-dumps\defender-reporting-20260324-211238\defender-reporting.txt`
+- `H:\Temp\vm-tooling-staging\registry-dumps\defender-spynet-20260324-211238\defender-spynet.txt`
 
 This matters because the upstream dump lists are still useful, but they are not a live 25H2 policy baseline by themselves. They show the possible surface, not the currently configured state in this VM.
+
+The first two narrow subkeys checked in this pass were also absent:
+
+- `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting`
+- `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet`
+
+That gives us a clean absent baseline for `DisableEnhancedNotifications`, `SpyNetReporting`, and `SubmitSamplesConsent`.
 
 ### Control\Power
 

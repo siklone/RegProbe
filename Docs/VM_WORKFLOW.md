@@ -148,6 +148,8 @@ That script exports:
 - `USBHUB3`
 - `CurrentVersion\Windows`
 
+The exporter will start the VM if it is powered off. Missing keys are written as metadata instead of being treated as a script failure.
+
 ## Bootstrapping Notes
 
 - The tooling is staged through the VM shared folder during setup.

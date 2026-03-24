@@ -49,12 +49,15 @@ $ErrorActionPreference = 'Stop'
 
 New-Item -ItemType Directory -Path (Split-Path -Parent $QueryOutputPath) -Force | Out-Null
 
-$queryOutput = & reg.exe query $RegistryPath /s 2>&1 | Out-String
+$queryCommand = 'reg query "{0}" /s > "{1}" 2>&1' -f $RegistryPath, $QueryOutputPath
+& cmd.exe /c $queryCommand | Out-Null
 $queryExitCode = $LASTEXITCODE
-$queryOutput | Set-Content -Path $QueryOutputPath -Encoding UTF8
 
-$exportOutput = & reg.exe export $RegistryPath $RegOutputPath /y 2>&1 | Out-String
+$exportStdoutPath = [System.IO.Path]::ChangeExtension($RegOutputPath, '.export.txt')
+$exportCommand = 'reg export "{0}" "{1}" /y > "{2}" 2>&1' -f $RegistryPath, $RegOutputPath, $exportStdoutPath
+& cmd.exe /c $exportCommand | Out-Null
 $exportExitCode = $LASTEXITCODE
+$exportOutput = if (Test-Path $exportStdoutPath) { Get-Content -Path $exportStdoutPath -Raw } else { '' }
 
 $lastBoot = (Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime.ToString('o')
 $metadata = [ordered]@{
@@ -70,6 +73,7 @@ $metadata = [ordered]@{
 }
 
 $metadata | ConvertTo-Json -Depth 6 | Set-Content -Path $MetadataPath -Encoding UTF8
+exit 0
 '@
 
 Set-Content -Path $hostRunner -Value $innerScript -Encoding UTF8
@@ -105,6 +109,14 @@ function Wait-GuestReady {
     throw 'Guest is not ready for vmrun guest operations.'
 }
 
+function Ensure-VmRunning {
+    $running = Invoke-Vmrun -Arguments @('-T', 'ws', 'list')
+    if ($running -notmatch [regex]::Escape($VmPath)) {
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath, 'nogui') | Out-Null
+    }
+}
+
+Ensure-VmRunning
 Wait-GuestReady
 
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'createDirectoryInGuest', $VmPath, $guestRoot) | Out-Null
