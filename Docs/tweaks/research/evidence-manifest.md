@@ -8,16 +8,17 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 
 | Field | Value |
 | --- | --- |
-| Total records | 294 |
-| Validated | 242 |
+| Total records | 295 |
+| Validated | 243 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 294 |
+| Records with evidence | 295 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | A count | 174 |
 | B count | 60 |
+| C count | 1 |
 | D count | 8 |
 | E count | 52 |
 
@@ -242,6 +243,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.enable-sudo` | validated | Class B | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class B | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `161b076ebd71e3b0361651f60a86766c4f07bbab4813b137508de5e55de26cfe` | `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891` | 1 |
 | `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
+| `security.threat-file-hash-logging` | validated | Class C | `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json` | `f221f44d1eeea24f5cafbc90061d65891a5ea311b03590ecbd63addaca301f3e` | `0d4158e1e0a9c9cb3fb1a28ca74f0e8bc8800af18002decbc88bea753acbe7b4` | 3 |
 | `security.trusted-path-credential-prompting` | validated | Class B | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
 | `security.uac-never-notify` | validated | Class B | `Docs/tweaks/research/records/security.uac-never-notify.json` | `c39a26d1490d55dd6e56b7be9b2ed61dbfd99ddfa553e82be7ea68669011ec2b` | `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f` | 3 |
 | `system.aero-shake` | validated | Class A | `Docs/tweaks/research/records/system.aero-shake.json` | `916c792d59ed667a14486ed23e06b87b5268bce3773834d4a84dbdf6a022f8f5` | `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b` | 1 |
@@ -13999,6 +14001,72 @@ Windows Internals references:
 | exact_quote_or_path | <policy name="EnableScripts" class="Both" ... key="Software\\Policies\\Microsoft\\Windows\\PowerShell" valueName="EnableScripts">; <enum id="ExecutionPolicy" valueName="ExecutionPolicy" required="true">; PowerShellExecutionPolicy.adml: `Turn on Script Execution` / `This policy setting lets you configure the script execution policy, controlling which scripts are allowed to run.` |
 | key_found_on_page | True |
 | notes | Local official ADMX and ADML files document the exact Group Policy surface under Software\\Policies\\Microsoft\\Windows\\PowerShell using EnableScripts and ExecutionPolicy, and the app now writes those documented values. |
+### `security.threat-file-hash-logging`
+
+- Status: `validated`
+- Evidence class: `Class C` - Key Known, Value Model Partial
+- Category: `Security`
+- Area: `Microsoft Defender file hash logging`
+- Scope: `device`
+- Source file: `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json`
+- Source SHA256: `f221f44d1eeea24f5cafbc90061d65891a5ea311b03590ecbd63addaca301f3e`
+- Proof SHA256: `0d4158e1e0a9c9cb3fb1a28ca74f0e8bc8800af18002decbc88bea753acbe7b4`
+
+**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface, but live Win25H2Clean traces also show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias. In the Defender-on 25H2 snapshot, a text EICAR probe produced event 1116 but no event 1120, which matches Microsoft's note that file-indicator hash support is for PE files.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class C |
+| Title | Key Known, Value Model Partial |
+| Action state | research-gated |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+
+**Targets**
+
+- `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender` / `ThreatFileHashLogging` / `REG_DWORD`
+  - Notes: This is the legacy dump-visible surface. It is live on the current 25H2 VM, but Microsoft's current docs do not present it as the canonical modern path.
+  - missing | label=Not configured | meaning=Leave the legacy root surface unset.
+  - value | value=0 | label=Legacy root disabled | meaning=Turns off the legacy root flag on the older ThreatFileHashLogging surface.
+  - value | value=1 | label=Legacy root enabled | meaning=Makes MsMpEng.exe read ThreatFileHashLogging = 1 directly from the root Defender policy key in the 25H2 VM.
+- `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager` / `EnableFileHashComputation` / `REG_DWORD`
+  - Notes: This alias is visible in upstream dumps and is live on the current 25H2 VM.
+  - missing | label=Not configured | meaning=Leave the Policy Manager alias unset.
+  - value | value=0 | label=Policy Manager alias disabled | meaning=Turns off the Policy Manager alias for file-hash computation.
+  - value | value=1 | label=Policy Manager alias enabled | meaning=Makes MsMpEng.exe read EnableFileHashComputation = 1 from the Policy Manager alias in the 25H2 VM.
+- `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\MpEngine` / `EnableFileHashComputation` / `REG_DWORD`
+  - Notes: Microsoft documents this path, but the current VM pass still needs a reboot or service-start follow-up before it can be treated as the only active surface.
+  - missing | label=Not configured | meaning=Leave the documented modern MpEngine surface unset.
+  - value | value=0 | label=Documented MpEngine path disabled | meaning=Turns off the documented modern MpEngine path.
+  - value | value=1 | label=Documented MpEngine path enabled | meaning=Microsoft documents this as the supported file-hash-computation policy state, but the non-rebooted 25H2 probe did not produce a live read from this path.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-defender-enable-file-hash-computation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Create indicators for files | `high` |
+| `ms-defender-file-hash-event1120` | `official-doc` | `Microsoft official doc` | Microsoft support: Troubleshoot Microsoft Defender Antivirus settings | `high` |
+| `repo-defender-threat-file-hash-dumps` | `repo-doc` | `Current repo docs` | Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation | `medium` |
+| `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | `high` |
+| `vm-defender-runtime-enabled-baseline` | `vm-test` | `VM test / probe` | Defender-on 25H2 snapshot baseline | `high` |
+| `vm-defender-threat-file-hash-baseline` | `vm-test` | `VM test / probe` | Defender-on baseline EICAR probe | `high` |
+| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | `high` |
+| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | `high` |
+| `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | `VM test / probe` | Non-rebooted MpEngine pass did not show a live read | `medium` |
+
+**Sources**
+
+_No source block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\defender-threat-file-hash-legacyroot-1-20260325-011845\\defender-threat-file-hash-legacyroot-1.txt |
+| exact_quote_or_path | MsMpEng.exe \| RegQueryValue \| HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
+| key_found_on_page | True |
+| notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. In the live set runs, MsMpEng.exe read the root ThreatFileHashLogging value directly and read the Policy Manager EnableFileHashComputation alias directly in a separate pass. |
 ### `security.trusted-path-credential-prompting`
 
 - Status: `validated`

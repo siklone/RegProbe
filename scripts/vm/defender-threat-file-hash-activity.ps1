@@ -1,0 +1,161 @@
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory = $true)]
+    [string]$OutputJson,
+
+    [Parameter(Mandatory = $true)]
+    [string]$OutputEvents,
+
+    [string]$OutputError = '',
+
+    [string]$WorkRoot = 'C:\Tools\Perf\Procmon\ThreatFileHashProbe'
+)
+
+$ErrorActionPreference = 'Stop'
+
+function Write-JsonFile {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object]$Value,
+        [Parameter(Mandatory = $true)]
+        [string]$Path
+    )
+
+    $Value | ConvertTo-Json -Depth 8 | Set-Content -Path $Path -Encoding UTF8
+}
+
+function Get-RecentDefenderEvents {
+    param(
+        [datetime]$StartTime
+    )
+
+    $eventIds = @(1116, 1120, 5007, 5001, 5013)
+    $events = Get-WinEvent -FilterHashtable @{
+        LogName = 'Microsoft-Windows-Windows Defender/Operational'
+        StartTime = $StartTime
+    } -ErrorAction SilentlyContinue
+
+    return @($events | Where-Object { $_.Id -in $eventIds } | Sort-Object TimeCreated)
+}
+
+function Get-MpStatusSummary {
+    try {
+        $status = Get-MpComputerStatus -ErrorAction Stop
+        return [ordered]@{
+            am_running_mode = $status.AMRunningMode
+            antivirus_enabled = $status.AntivirusEnabled
+            realtime_enabled = $status.RealTimeProtectionEnabled
+            behavior_monitor_enabled = $status.BehaviorMonitorEnabled
+            ioav_enabled = $status.IoavProtectionEnabled
+            antispyware_enabled = $status.AntispywareEnabled
+        }
+    }
+    catch {
+        return [ordered]@{
+            error = $_.Exception.Message
+        }
+    }
+}
+
+try {
+    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OutputJson) | Out-Null
+    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OutputEvents) | Out-Null
+    New-Item -ItemType Directory -Force -Path $WorkRoot | Out-Null
+
+    $startTime = Get-Date
+    $eicarPath = Join-Path $WorkRoot 'eicar.com'
+    $eicar = 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*'
+    [System.IO.File]::WriteAllText($eicarPath, $eicar, [System.Text.Encoding]::ASCII)
+
+    $statusBefore = Get-MpStatusSummary
+    $mpCmdRun = Join-Path $env:ProgramFiles 'Windows Defender\MpCmdRun.exe'
+    $events = @()
+    $deadline = (Get-Date).AddSeconds(45)
+    while ((Get-Date) -lt $deadline) {
+        Start-Sleep -Seconds 2
+        $events = Get-RecentDefenderEvents -StartTime $startTime
+        if (@($events | Where-Object Id -eq 1116).Count -gt 0) {
+            break
+        }
+    }
+
+    if (@($events | Where-Object Id -eq 1116).Count -eq 0) {
+        try {
+            Start-MpScan -ScanPath $WorkRoot -ErrorAction Stop | Out-Null
+        }
+        catch {
+        }
+
+        $deadline = (Get-Date).AddSeconds(30)
+        while ((Get-Date) -lt $deadline) {
+            Start-Sleep -Seconds 2
+            $events = Get-RecentDefenderEvents -StartTime $startTime
+            if (@($events | Where-Object Id -eq 1116).Count -gt 0) {
+                break
+            }
+        }
+    }
+
+    $mpCmdRunExitCode = $null
+    if (@($events | Where-Object Id -eq 1116).Count -eq 0 -and (Test-Path $mpCmdRun)) {
+        $scanProcess = Start-Process -FilePath $mpCmdRun -ArgumentList @('-Scan', '-ScanType', '3', '-File', $eicarPath) -Wait -PassThru -WindowStyle Hidden
+        $mpCmdRunExitCode = $scanProcess.ExitCode
+
+        $deadline = (Get-Date).AddSeconds(30)
+        while ((Get-Date) -lt $deadline) {
+            Start-Sleep -Seconds 2
+            $events = Get-RecentDefenderEvents -StartTime $startTime
+            if (@($events | Where-Object Id -eq 1116).Count -gt 0) {
+                break
+            }
+        }
+    }
+
+    $events = Get-RecentDefenderEvents -StartTime $startTime
+
+    $summary = [ordered]@{
+        start_time = $startTime.ToString('o')
+        eicar_path = $eicarPath
+        file_exists_after = Test-Path $eicarPath
+        mp_status_before = $statusBefore
+        mpcmdrun_exists = Test-Path $mpCmdRun
+        mpcmdrun_exit_code = $mpCmdRunExitCode
+        detection_event_count = @($events | Where-Object Id -eq 1116).Count
+        hash_event_count = @($events | Where-Object Id -eq 1120).Count
+        config_change_event_count = @($events | Where-Object Id -eq 5007).Count
+        recent_event_ids = @($events | Select-Object -ExpandProperty Id)
+        hash_event_messages = @(
+            $events |
+                Where-Object Id -eq 1120 |
+                ForEach-Object { ($_.Message -replace '\r?\n', ' ') }
+        )
+    }
+
+    $lines = New-Object System.Collections.Generic.List[string]
+    $lines.Add('START_TIME=' + $summary.start_time)
+    $lines.Add('EICAR_PATH=' + $summary.eicar_path)
+    $lines.Add('FILE_EXISTS_AFTER=' + $summary.file_exists_after)
+    $lines.Add('MP_STATUS=' + (($summary.mp_status_before | ConvertTo-Json -Compress)))
+    $lines.Add('MPCMDRUN_EXISTS=' + $summary.mpcmdrun_exists)
+    $lines.Add('MPCMDRUN_EXIT_CODE=' + $summary.mpcmdrun_exit_code)
+    $lines.Add('DETECTION_EVENT_COUNT=' + $summary.detection_event_count)
+    $lines.Add('HASH_EVENT_COUNT=' + $summary.hash_event_count)
+    $lines.Add('CONFIG_CHANGE_EVENT_COUNT=' + $summary.config_change_event_count)
+    foreach ($event in $events) {
+        $message = ($event.Message -replace '\r?\n', ' ').Trim()
+        $lines.Add(('{0:o} | ID={1} | {2}' -f $event.TimeCreated, $event.Id, $message))
+    }
+
+    Write-JsonFile -Value $summary -Path $OutputJson
+    $lines | Set-Content -Path $OutputEvents -Encoding UTF8
+}
+catch {
+    if (-not [string]::IsNullOrWhiteSpace($OutputError)) {
+        @(
+            'ERROR=' + $_.Exception.GetType().FullName + ': ' + $_.Exception.Message,
+            'AT=' + $_.InvocationInfo.PositionMessage
+        ) | Set-Content -Path $OutputError -Encoding UTF8
+    }
+
+    throw
+}

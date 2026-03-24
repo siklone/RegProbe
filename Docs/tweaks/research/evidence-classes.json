@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T21:33:26.310053Z",
+  "generated_utc": "2026-03-24T22:32:17.221574Z",
   "summary": {
-    "total_records": 294,
+    "total_records": 295,
     "class_counts": {
       "A": 174,
       "B": 60,
-      "C": 0,
+      "C": 1,
       "D": 8,
       "E": 52
     },
     "action_state_counts": {
       "actionable": 174,
       "archived": 52,
-      "research-gated": 68
+      "research-gated": 69
     }
   },
   "classes": {
@@ -14144,6 +14144,79 @@
             "summary": "Matched 3 audit token(s) in win-config."
           }
         ]
+      }
+    },
+    {
+      "record_id": "security.threat-file-hash-logging",
+      "tweak_id": "security.threat-file-hash-logging",
+      "record_status": "validated",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Value Model Partial",
+      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. In the live set runs, MsMpEng.exe read the root ThreatFileHashLogging value directly and read the Policy Manager EnableFileHashComputation alias directly in a separate pass.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "H:\\Temp\\vm-tooling-staging\\defender-threat-file-hash-legacyroot-1-20260325-011845\\defender-threat-file-hash-legacyroot-1.txt",
+            "kind": "validation-proof",
+            "summary": "MsMpEng.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1"
+          },
+          {
+            "title": "Microsoft Learn: Create indicators for files",
+            "url": "https://learn.microsoft.com/en-us/defender-endpoint/indicator-file",
+            "kind": "official-doc",
+            "summary": "Microsoft says file-hash computation is enabled by the Defender Antivirus MpEngine policy 'Enable File Hash Computation' and notes that file indicators support PE files only."
+          },
+          {
+            "title": "Microsoft support: Troubleshoot Microsoft Defender Antivirus settings",
+            "url": "https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d",
+            "kind": "official-doc",
+            "summary": "Microsoft documents event 1120 as the file-hash-logging event and says it is logged only when ThreatFileHashLogging is enabled."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The original high-risk snapshot had WinDefend and WdNisSvc set to Disabled and Get-MpComputerStatus reported 'Not running', which would have made Defender policy validation misleading until the VM was repaired.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Original high-risk snapshot had Defender disabled",
+            "url": "H:\\Temp\\vm-tooling-staging\\defender-runtime-repair.json",
+            "kind": "vm-test",
+            "summary": "The original high-risk snapshot had WinDefend and WdNisSvc set to Disabled and Get-MpComputerStatus reported 'Not running', which would have made Defender policy validation misl..."
+          },
+          {
+            "title": "Defender-on 25H2 snapshot baseline",
+            "url": "H:\\Temp\\vm-tooling-staging\\defender-runtime-repair.json",
+            "kind": "vm-test",
+            "summary": "After re-enabling WinDefend and waiting for the service to settle, Get-MpComputerStatus reported Normal with real-time protection, behavior monitoring, and IOAV protection enabl..."
+          },
+          {
+            "title": "Defender-on baseline EICAR probe",
+            "url": "H:\\Temp\\vm-tooling-staging\\defender-threat-file-hash-baseline-1-20260325-011024\\defender-threat-file-hash-baseline-events.json",
+            "kind": "vm-test",
+            "summary": "With all known file-hash-computation policy surfaces unset, the Defender-on 25H2 VM produced event 1116 for the EICAR text-file probe and no event 1120."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {

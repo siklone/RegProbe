@@ -7,16 +7,17 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 
 | Field | Value |
 | --- | --- |
-| Total records | 294 |
-| Validated | 242 |
+| Total records | 295 |
+| Validated | 243 |
 | Deprecated | 52 |
 | Review required | 0 |
-| Records with evidence | 294 |
+| Records with evidence | 295 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 174 |
 | Class B | 60 |
+| Class C | 1 |
 | Class D | 8 |
 | Class E | 52 |
 
@@ -34,7 +35,7 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Peripheral | 3 |
 | Power | 13 |
 | Privacy | 84 |
-| Security | 23 |
+| Security | 24 |
 | System | 74 |
 | Visibility | 23 |
 
@@ -17100,6 +17101,106 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | The official PowerShell Group Policy surface is clear, and the app now writes both required policy values. The record remains non-publishable for general apply because Unrestricted materially weakens script-execution protections. |
+
+---
+
+### `security.threat-file-hash-logging`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class C` |
+| Category | `Security` |
+| Area | `Microsoft Defender file hash logging` |
+| Scope | `device` |
+| Source file | `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json` |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface, but live Win25H2Clean traces also show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias. In the Defender-on 25H2 snapshot, a text EICAR probe produced event 1116 but no event 1120, which matches Microsoft's note that file-indicator hash support is for PE files.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `` |
+| Notes | The app does not write this yet because the current 25H2 runtime and the documented modern path do not line up cleanly enough for a one-click toggle. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class C` |
+| Title | Key Known, Value Model Partial |
+| Action state | `research-gated` |
+| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- Policy unset baseline (Systems where all known file-hash-computation policy surfaces stay unset)
+  - defender-threat-file-hash-logging-root: missing — — Leave the legacy root surface unset.
+  - defender-enable-file-hash-computation-policymanager: missing — — Leave the Policy Manager alias unset.
+  - defender-enable-file-hash-computation-mpengine: missing — — Leave the documented MpEngine path unset.
+
+**Recommended profiles**
+
+- `windows-default`: Windows default (apply_allowed=False)
+- `research-only-current-live-surfaces`: Research only (apply_allowed=False)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-defender-enable-file-hash-computation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Create indicators for files | https://learn.microsoft.com/en-us/defender-endpoint/indicator-file | `high` | path, value, behavior, tradeoff |
+| `ms-defender-file-hash-event1120` | `official-doc` | `Microsoft official doc` | Microsoft support: Troubleshoot Microsoft Defender Antivirus settings | https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d | `high` | behavior, value |
+| `repo-defender-threat-file-hash-dumps` | `repo-doc` | `Current repo docs` | Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation | Docs/security/assets/Windows-Defender.txt | `medium` | path, value |
+| `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | H:\Temp\vm-tooling-staging\defender-runtime-repair.json | `high` | default, behavior |
+| `vm-defender-runtime-enabled-baseline` | `vm-test` | `VM test / probe` | Defender-on 25H2 snapshot baseline | H:\Temp\vm-tooling-staging\defender-runtime-repair.json | `high` | default, behavior |
+| `vm-defender-threat-file-hash-baseline` | `vm-test` | `VM test / probe` | Defender-on baseline EICAR probe | H:\Temp\vm-tooling-staging\defender-threat-file-hash-baseline-1-20260325-011024\defender-threat-file-hash-baseline-events.json | `high` | default, behavior |
+| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | H:\Temp\vm-tooling-staging\defender-threat-file-hash-legacyroot-1-20260325-011845\defender-threat-file-hash-legacyroot-1.txt | `high` | path, value, runtime-read |
+| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | H:\Temp\vm-tooling-staging\defender-threat-file-hash-policymanager-1-20260325-012333\defender-threat-file-hash-policymanager-1.txt | `high` | path, value, runtime-read |
+| `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | `VM test / probe` | Non-rebooted MpEngine pass did not show a live read | H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-011519\defender-threat-file-hash-mpengine-1-events.json | `medium` | path, behavior |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | H:\Temp\vm-tooling-staging\defender-threat-file-hash-legacyroot-1-20260325-011845\defender-threat-file-hash-legacyroot-1.txt |
+| Exact quote / path | MsMpEng.exe \| RegQueryValue \| HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\ThreatFileHashLogging \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
+| Key found on page | `True` |
+| Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. In the live set runs, MsMpEng.exe read the root ThreatFileHashLogging value directly and read the Policy Manager EnableFileHashComputation alias directly in a separate pass. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The feature name and 0/1 semantics are documented, but current 25H2 runtime still shows more than one live control surface. The record is strong enough to keep in active research, but not tight enough yet for an app-facing one-click write. |
+
+Blocking issues:
+- The documented MpEngine path did not produce a live read in the same non-rebooted 25H2 pass.
+- The current runtime reads the legacy root value and the Policy Manager alias directly.
+- Event 1120 still needs a PE-based follow-up because Microsoft limits file-indicator hash support to PE files.
 
 ---
 

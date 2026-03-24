@@ -5,6 +5,7 @@ This queue starts from a clean `Win25H2Clean` baseline and the new snapshot-firs
 Snapshot used for this lane:
 
 - `baseline-20260324-high-risk-lane`
+- `baseline-20260325-defender-on`
 
 ## Clean 25H2 baseline
 
@@ -19,6 +20,26 @@ Artifacts:
 - `H:\Temp\vm-tooling-staging\registry-dumps\defender-spynet-20260324-211238\defender-spynet.txt`
 
 That gives us a clean absent baseline for the first ADMX-backed candidates.
+
+## Defender-on repair baseline
+
+The original high-risk snapshot was not valid for Defender policy work because the Defender engine was disabled.
+
+Artifact:
+
+- `H:\Temp\vm-tooling-staging\defender-runtime-repair.json`
+
+What changed:
+
+- `WinDefend` was re-enabled
+- `WdNisSvc` came back with Defender
+- `Get-MpComputerStatus` moved from `Not running` to `Normal`
+
+That repair was saved as:
+
+- `baseline-20260325-defender-on`
+
+All later Defender-specific probes should use that snapshot.
 
 ## Tier 1 - start here
 
@@ -87,8 +108,8 @@ These have the best mix of documented semantics and low blast radius.
   - the value exists in upstream dump/mirror material
   - the name strongly suggests a logging-only setting
 - What is still missing:
-  - a primary Microsoft source or a clean code path
-  - live runtime proof in the VM
+  - a PE-based follow-up for event `1120`
+  - a clean final answer on whether the documented `MpEngine` path or the live root / Policy Manager paths should be treated as canonical on 25H2
 
 ### HideExclusionsFromLocalAdmins
 
@@ -123,6 +144,24 @@ These have the best mix of documented semantics and low blast radius.
 - Record:
   - `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json`
 
+### ThreatFileHashLogging
+
+- Official docs now link the feature to `EnableFileHashComputation` and tie event `1120` to file-hash logging.
+- Live 25H2 VM proof now exists for:
+  - root path `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\ThreatFileHashLogging`
+  - Policy Manager alias `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\EnableFileHashComputation`
+- Result:
+  - baseline Defender-on EICAR probe produced event `1116` and no `1120`
+  - `MsMpEng.exe` read the root legacy value directly when it was set to `1`
+  - `MsMpEng.exe` read the Policy Manager alias directly when it was set to `1`
+  - the documented `MpEngine` path did not produce a live read in the same non-rebooted pass
+- Current classification:
+  - `Class C`
+  - not app-mapped
+  - research-gated
+- Record:
+  - `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json`
+
 ## Not first-pass candidates
 
 Do not start with these:
@@ -149,6 +188,7 @@ These are either overridden on modern builds, state-like, tenant-specific, or to
 3. `SubmitSamplesConsent`
    - same pattern
 4. `ThreatFileHashLogging`
-   - docs/code first
+   - PE-based follow-up for event `1120`
+   - reboot or service-start follow-up for the documented `MpEngine` path
 5. `HideExclusionsFromLocalAdmins`
-   - path disambiguation first
+   - done
