@@ -27,18 +27,12 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private ViewModelBase? _currentViewModel;
     private string _searchText = string.Empty;
     private readonly RelayCommand _clearSearchCommand;
-    public TrayViewModel TrayViewModel { get; } = new TrayViewModel();
     private readonly IHardwareDiscoveryService _hardwareDiscovery = new HardwareDiscoveryService();
     private readonly IRecommendationEngine _recommendationEngine = new RecommendationEngine();
     private readonly IRollbackStateStore _rollbackStore;
     private readonly IBusyService _busyService = new BusyService();
     private TweaksViewModel? _tweaksViewModel;
     private System.ComponentModel.PropertyChangedEventHandler? _tweaksPropertyChangedHandler;
-
-    // Tray tooltip binding properties
-    private int _optimizationScore;
-    private int _tweaksApplied;
-    private int _totalTweaksAvailable;
 
     // Crash recovery properties
     private bool _hasPendingRollbacks;
@@ -95,19 +89,9 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             new NavigationItem("about", "About", "Ã¢â€žÂ¹Ã¯Â¸Â", about)
         };
 
-        // Sync tray tooltip values from tweaks
-        SyncTrayTooltipValues();
-
         // Named handler for proper unsubscription
         _tweaksPropertyChangedHandler = (s, e) =>
         {
-            if (e.PropertyName is nameof(TweaksViewModel.GlobalOptimizationScore)
-                or nameof(TweaksViewModel.ScorableTweaksMeasuredTotal)
-                or nameof(TweaksViewModel.ScorableTweaksApplied))
-            {
-                SyncTrayTooltipValues();
-            }
-
             if (e.PropertyName is nameof(TweaksViewModel.IsBulkRunning))
             {
                 RaiseDashboardQuickActionCanExecuteChanged();
@@ -160,17 +144,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     }
 
-    private void SyncTrayTooltipValues()
-    {
-        if (_tweaksViewModel == null)
-            return;
-
-        // Sync for tray tooltip
-        OptimizationScore = _tweaksViewModel.GlobalOptimizationScore;
-        TweaksApplied = _tweaksViewModel.ScorableTweaksApplied;
-        TotalTweaksAvailable = _tweaksViewModel.TotalTweaksAvailable;
-    }
-
     public void Dispose()
     {
         // Unsubscribe event handlers to prevent memory leaks
@@ -178,8 +151,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         {
             _tweaksViewModel.PropertyChanged -= _tweaksPropertyChangedHandler;
         }
-
-        TrayViewModel.Dispose();
 
         // Dispose all view models
         foreach (var item in NavigationItems)
@@ -272,25 +243,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     public string AppVersionLabel => AppInfo.VersionLabel;
 
     public string AppCopyrightLabel => AppInfo.CopyrightLabel;
-
-    // Tray tooltip properties
-    public int OptimizationScore
-    {
-        get => _optimizationScore;
-        private set => SetProperty(ref _optimizationScore, value);
-    }
-
-    public int TweaksApplied
-    {
-        get => _tweaksApplied;
-        private set => SetProperty(ref _tweaksApplied, value);
-    }
-
-    public int TotalTweaksAvailable
-    {
-        get => _totalTweaksAvailable;
-        private set => SetProperty(ref _totalTweaksAvailable, value);
-    }
 
     // Crash recovery properties
     public bool HasPendingRollbacks

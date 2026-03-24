@@ -5,9 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:behaviors="clr-namespace:WindowsOptimizer.App.Behaviors"
-        xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:controls="clr-namespace:WindowsOptimizer.App.Views.Controls"
-        xmlns:views="clr-namespace:WindowsOptimizer.App.Views"
         mc:Ignorable="d"
         Title="Windows Optimizer Suite"
         Width="1000"
@@ -228,37 +226,6 @@
                 
                 <!-- Window Controls -->
                 <StackPanel Grid.Column="1" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True">
-                    <!-- Minimize -->
-                    <Button x:Name="MinimizeButton" Click="MinimizeButton_Click"
-                            Width="44" Height="44" 
-                            Background="Transparent" BorderThickness="0" Cursor="Hand"
-                            Focusable="False"
-                            FocusVisualStyle="{x:Null}"
-                            ToolTip="Minimize"
-                            WindowChrome.IsHitTestVisibleInChrome="True">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border x:Name="Bd" Background="{TemplateBinding Background}">
-                                                <Path Data="M 0,5 H 10" 
-                                                      Stroke="{DynamicResource ForegroundLightBrush}" 
-                                                      StrokeThickness="1"
-                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                    
                     <!-- Maximize/Restore -->
                     <Button x:Name="MaximizeButton" Click="MaximizeButton_Click"
                             Width="44" Height="44"
@@ -558,135 +525,6 @@
                 </StackPanel>
             </Border>
         </Grid>
-
-        <!-- System Tray Icon (outside layout Grid to avoid rendering in window) -->
-        <tb:TaskbarIcon x:Name="TrayIcon"
-                        ToolTipText="Windows Optimizer Suite"
-                        Visibility="Visible"
-                        PopupActivation="LeftClick"
-                        TrayMouseDoubleClick="TrayIcon_TrayMouseDoubleClick">
-
-            <tb:TaskbarIcon.TrayPopup>
-                <views:TrayPopupView DataContext="{Binding TrayViewModel, Mode=OneWay}"/>
-            </tb:TaskbarIcon.TrayPopup>
-
-            <tb:TaskbarIcon.TrayToolTip>
-                <Border Background="{DynamicResource BackgroundDarkestBrush}"
-                        BorderBrush="{DynamicResource BackgroundLightBrush}"
-                        BorderThickness="1"
-                        CornerRadius="8"
-                        Padding="12">
-                    <Border.Effect>
-                        <DropShadowEffect Color="{DynamicResource ShadowColorMedium}" BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
-                    </Border.Effect>
-                    <StackPanel DataContext="{Binding TrayViewModel}">
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                            <TextBlock Text="&#xE945;" FontFamily="Segoe MDL2 Assets" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"
-                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                            <TextBlock Text="Windows Optimizer Suite"
-                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                       FontWeight="Bold"
-                                       FontSize="13"/>
-                        </StackPanel>
-                        
-                        <Border Background="{DynamicResource BackgroundDarkBrush}" CornerRadius="4" Padding="8">
-                            <StackPanel>
-                                <Grid Margin="0,0,0,6">
-                                    <Grid.ColumnDefinitions><ColumnDefinition Width="60"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-                                    <TextBlock Text="CPU" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                    <TextBlock Grid.Column="1" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Right">
-                                        <Run Text="{Binding CpuUsage, StringFormat={}{0:F0}%}"/>
-                                        <Run Text=" "/>
-                                        <Run Text="{Binding CpuTemp}" Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                    </TextBlock>
-                                </Grid>
-
-                                <Grid Margin="0,0,0,6">
-                                    <Grid.ColumnDefinitions><ColumnDefinition Width="60"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-                                    <TextBlock Text="RAM" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                    <TextBlock Grid.Column="1" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource AccentPurpleBrush}" HorizontalAlignment="Right">
-                                        <Run Text="{Binding RamUsagePercent, StringFormat={}{0:F0}%}"/>
-                                    </TextBlock>
-                                </Grid>
-                                
-                                <Grid>
-                                    <Grid.ColumnDefinitions><ColumnDefinition Width="60"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-                                    <TextBlock Text="GPU" FontSize="11" Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding GpuTemp}" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource ForegroundBrightestBrush}" HorizontalAlignment="Right"/>
-                                </Grid>
-                            </StackPanel>
-                        </Border>
-                    </StackPanel>
-                </Border>
-            </tb:TaskbarIcon.TrayToolTip>
-
-            <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu HasDropShadow="True">
-                    <ContextMenu.Template>
-                        <ControlTemplate TargetType="ContextMenu">
-                            <Border Background="{DynamicResource BackgroundDarkestBrush}"
-                                    BorderBrush="{DynamicResource BackgroundLightBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="4"
-                                    Padding="4">
-                                <Border.Effect>
-                                    <DropShadowEffect Color="{DynamicResource ShadowColorMedium}" BlurRadius="8" ShadowDepth="2" Opacity="0.4"/>
-                                </Border.Effect>
-                                <StackPanel IsItemsHost="True"/>
-                            </Border>
-                        </ControlTemplate>
-                    </ContextMenu.Template>
-                    <ContextMenu.Resources>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="MenuItem">
-                                        <Border x:Name="Bd" Background="{TemplateBinding Background}"
-                                                CornerRadius="4"
-                                                Padding="12,8"
-                                                Margin="0,1"
-                                                SnapsToDevicePixels="True">
-                                            <ContentPresenter ContentSource="Header"
-                                                              HorizontalAlignment="Left"
-                                                              VerticalAlignment="Center"
-                                                              RecognizesAccessKey="True"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsHighlighted" Value="True">
-                                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                            </Trigger>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-                                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                        <Style TargetType="Separator">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Separator">
-                                        <Border Background="{DynamicResource BackgroundLightBrush}"
-                                                Height="1"
-                                                Margin="8,4"
-                                                SnapsToDevicePixels="True"/>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ContextMenu.Resources>
-                    <MenuItem Header="Dashboard" Click="MenuItem_Dashboard_Click"/>
-                    <MenuItem Header="Configuration" Click="MenuItem_Tweaks_Click"/>
-                    <Separator/>
-                    <MenuItem Header="Show Window" Click="MenuItem_Show_Click" FontWeight="SemiBold"/>
-                    <MenuItem Header="Exit" Click="MenuItem_Exit_Click"/>
-                </ContextMenu>
-            </tb:TaskbarIcon.ContextMenu>
-        </tb:TaskbarIcon>
 
         <!-- Toast Notifications Overlay -->
         <controls:NotificationHost x:Name="NotificationHost"

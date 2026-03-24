@@ -82,7 +82,6 @@ Good medium-priority additions:
 
 - `Open on last page`
 - `Open on Dashboard`
-- `Run minimized to tray`
 - `Show startup summary`
 
 These are classic app-level preferences and fit naturally here.
