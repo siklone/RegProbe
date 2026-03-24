@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-24T05:44:19.843662Z",
+  "generated_utc": "2026-03-24T05:50:51.943197Z",
   "summary": {
     "total_records": 285,
     "validated": 233,
@@ -15839,7 +15839,7 @@
       "category": "Explorer",
       "area": "Explorer Advanced Flags",
       "scope": "user",
-      "summary": "The app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode = 1, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.",
+      "summary": "The app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode = 1, the 25H2 raw registry dump lists the same value name under both the machine and current-user Explorer\\Advanced branches, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": true,
@@ -15847,7 +15847,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "UseCompactMode is now validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build. The remaining limitation is documentation quality: this is runtime-observed rather than Microsoft-documented.",
+        "why": "UseCompactMode is now validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build, and the 25H2 raw registry dump corroborates that the value family is still present on current builds. The remaining limitation is documentation quality: this is runtime-observed rather than Microsoft-documented.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -15880,6 +15880,7 @@
               "label": "Compact view disabled",
               "meaning": "Procmon confirmed that Explorer.EXE queries UseCompactMode = 0 on shell restart. This is the observed non-compact state on this build.",
               "evidence_ids": [
+                "dump-25h2-explorer-advanced-usecompactmode",
                 "procmon-explorer-compact-mode"
               ]
             },
@@ -15889,6 +15890,7 @@
               "label": "Compact view enabled",
               "meaning": "Procmon confirmed that Explorer.EXE queries UseCompactMode = 1 on shell restart. This is the observed compact-view state used by the app.",
               "evidence_ids": [
+                "dump-25h2-explorer-advanced-usecompactmode",
                 "procmon-explorer-compact-mode",
                 "app-visibility-provider"
               ]
@@ -15940,12 +15942,26 @@
           ],
           "apply_allowed": true,
           "evidence_ids": [
+            "dump-25h2-explorer-advanced-usecompactmode",
             "procmon-explorer-compact-mode",
             "app-visibility-provider"
           ]
         }
       ],
       "evidence": [
+        {
+          "evidence_id": "dump-25h2-explorer-advanced-usecompactmode",
+          "kind": "raw-registry-dump",
+          "title": "25H2 raw registry corroboration for UseCompactMode",
+          "location": "Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt",
+          "summary": "The 25H2 raw registry dump lists UseCompactMode under both the machine Explorer\\Advanced branch and the current-user Explorer\\Advanced branch, corroborating that the value family is still present on current builds.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
         {
           "evidence_id": "procmon-explorer-compact-mode",
           "kind": "procmon-trace",

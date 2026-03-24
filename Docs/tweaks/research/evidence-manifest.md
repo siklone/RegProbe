@@ -88,7 +88,7 @@ Nohuto references are lineage / naming provenance only; value semantics remain s
 | `developer.wsl2-memory` | validated | `Docs/tweaks/research/records/developer.wsl2-memory.json` | `9cf81d553d079e19fcf84fae9b126bdf1b081f7c4137cba883434eb9fdaee1fe` | `8483aaddd7cffe7e57ba75d9b795a94c65285ad73a64c77020d7502864a7d988` | 1 |
 | `explorer.disable-low-disk-space-warning` | validated | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `0a8d6ff0ef5c5251f4eb5dd99e44b4ab4dc53c21860f2eee72804da13e5e8ea5` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
-| `explorer.enable-explorer-compact-mode` | validated | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `fb13c872096fce4f3c769c009e924794eba3e1a02573460e41f0a89ade4ac12a` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
+| `explorer.enable-explorer-compact-mode` | validated | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
 | `explorer.launch-folder-windows-in-a-separate-process` | validated | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `0b9f99f5eae8811b2493069bc7f36bfd4ff3f4ae8c118e33ff8782d051ba1e59` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
 | `explorer.show-compressed-and-encrypted-files-in-color` | validated | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `b976a2e2767ddc7d57d5b0ff72916467281618730287197d707a754e08ea123d` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
 | `explorer.show-drive-letters-first` | validated | `Docs/tweaks/research/records/explorer.show-drive-letters-first.review.json` | `8bfa52fedcb995cc8db11a3c4235f7f2a205442dfad8c0c2d799703d755d28a9` | `3facbc010f0c81a6ba77b1a2c331c7a09486e5e5fabac130c893cfcb185add10` | 1 |
@@ -3753,7 +3753,7 @@ Nohuto lineage references:
 - Area: `Explorer Advanced Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json`
-- Source SHA256: `fb13c872096fce4f3c769c009e924794eba3e1a02573460e41f0a89ade4ac12a`
+- Source SHA256: `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69`
 - Proof SHA256: `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\UseCompactMode = 1, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.
@@ -4160,7 +4160,7 @@ _No provenance block present._
 - Source SHA256: `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0`
 - Proof SHA256: `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390`
 
-**Summary:** Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, while a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.
+**Summary:** Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, the 25H2 raw registry dump lists the same value name under the current-user Explorer\Advanced branch, and a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.
 
 **Targets**
 
@@ -4174,6 +4174,7 @@ _No provenance block present._
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | `Microsoft official doc` | Microsoft Windows 11 settings reference for taskbar alignment | `high` |
+| `dump-25h2-explorer-advanced-taskbaral` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for TaskbarAl | `medium` |
 | `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | `high` |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 

@@ -2142,7 +2142,7 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, while a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.
+**Summary:** Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, the 25H2 raw registry dump lists the same value name under the current-user Explorer\Advanced branch, and a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.
 
 **Current implementation**
 
@@ -2195,6 +2195,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | `Microsoft official doc` | Microsoft Windows 11 settings reference for taskbar alignment | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11 | `high` | behavior, version-scope |
+| `dump-25h2-explorer-advanced-taskbaral` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for TaskbarAl | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
 | `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | C:\Users\<USER>\AppData\Local\Temp\taskbar_alignment_capture_20260313.pml | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -2216,7 +2217,7 @@ Nohuto lineage references:
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Procmon on Windows 11 Pro 10.0.26200.8037 confirmed that Explorer consumes HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl as a REG_DWORD runtime setting with 0 = left and 1 = center. The app writes that same surface directly. The official settings reference remains useful feature-level context, but the runtime trace is the decisive proof for the persisted shell value. |
+| Why | Procmon on Windows 11 Pro 10.0.26200.8037 confirmed that Explorer consumes HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAl as a REG_DWORD runtime setting with 0 = left and 1 = center. The 25H2 raw registry dump corroborates that the value family is still present on current builds. The app writes that same surface directly. The official settings reference remains useful feature-level context, but the runtime trace is the decisive proof for the persisted shell value. |
 
 ---
 
