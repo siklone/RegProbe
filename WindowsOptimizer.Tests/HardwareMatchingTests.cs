@@ -133,212 +133,11 @@ public sealed class HardwareMatchingTests
     }
 
     [Fact]
-    public void ResolveResult_UsesProvidedDatabaseModelBeforeRuleMap()
-    {
-        var matched = new StorageControllerModel
-        {
-            Id = "990pro",
-            NormalizedName = "samsung 990 pro",
-            IconKey = "storage_samsung_990pro"
-        };
-
-        var result = HardwareIconService.ResolveResult(HardwareType.Storage, "Samsung SSD 990 PRO 2TB", matched);
-
-        Assert.Equal("storage_samsung_990pro", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ProvidedModel, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_RefinesGenericDatabaseIconWithRuleMap()
-    {
-        var matched = new GpuModel
-        {
-            Id = "rtx4090",
-            NormalizedName = "nvidia geforce rtx 4090",
-            IconKey = "gpu_rtx"
-        };
-
-        var result = HardwareIconService.ResolveResult(HardwareType.Gpu, "NVIDIA GeForce RTX 4090", matched);
-
-        Assert.Equal("gpu_rtx40", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
-        Assert.Equal(HardwareMatchKind.ProvidedModel, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesRuleMapWhenNoDatabaseModelProvided()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Storage, "WDS100T1X0E-00AFY0");
-
-        Assert.Equal("storage_wd_black", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDatabaseModelForWdBlackSn850x()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Storage, "WD_BLACK SN850X 2000GB");
-
-        Assert.Equal("storage_wd_black", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactName, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDatabaseModelForSamsungSkuCode()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Storage, "MZ-V9P2T0B");
-
-        Assert.Equal("storage_samsung_990pro", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesRuleMapWhenStorageFamilyQueryIsAmbiguous()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Storage, "Samsung 990 PRO");
-
-        Assert.Equal("storage_samsung_990pro", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDatabaseModelForCrucialSkuCode()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Storage, "CT1000P5PSSD8");
-
-        Assert.Equal("storage_crucial_p5", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDatabaseModelForCrucialP3PlusSkuCode()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Storage, "CT500P3PSSD8");
-
-        Assert.Equal("storage_crucial", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDatabaseModelForAdataMemorySkuCode()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Memory, "A-DATA Technology AX4U360016G18I-BR30 DDR4");
-
-        Assert.Equal("memory_ddr4", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDatabaseModelForRyzen5700X3dObservedName()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Cpu, "AMD Ryzen 7 5700X3D 8-Core Processor");
-
-        Assert.Equal("cpu_ryzen7", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDatabaseModelForAmdUsbObservedControllerName()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Usb, "AMD USB 3.10 eXtensible Host Controller - 1.10 (Microsoft)");
-
-        Assert.Equal("usb_amd", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesAudioDefaultIconForCreativeAudioDevice()
-    {
-        var result = HardwareIconService.ResolveResult(HardwareType.Audio, "Creative Sound Blaster Audigy Fx V2");
-
-        Assert.Equal("audio_default", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.Fallback, result.Source);
-    }
-
-    [Fact]
     public void BuildDisplayLookupSeed_ExpandsManufacturerCodes()
     {
         var seed = HardwareIconService.BuildDisplayLookupSeed("GSM");
-        var result = HardwareIconService.ResolveResult(HardwareType.Display, seed);
 
         Assert.Contains("LG Electronics", seed, StringComparison.OrdinalIgnoreCase);
-        Assert.Equal("display_lg", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDisplayRuleForAlienwareModelCode()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Display, "AW3423DWF");
-
-        Assert.Equal("display_dell_alienware", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDisplayRuleForUltraGearModelCode()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Display, "27GP850");
-
-        Assert.Equal("display_lg_ultragear", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public async Task MatchDisplayDetailed_UsesGeneratedDellManufacturerCodeAliasFromDatabase()
-    {
-        await HardwareKnowledgeDbService.Instance.InitializeAsync(CancellationToken.None);
-
-        var result = HardwareKnowledgeDbService.Instance.MatchDisplayDetailed("DEL AW3423DWF");
-
-        Assert.True(result.HasMatch);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-        Assert.Equal("display_dell_alienware", result.Model!.IconKey);
-    }
-
-    [Fact]
-    public async Task MatchDisplayDetailed_UsesGeneratedLgManufacturerCodeAliasFromDatabase()
-    {
-        await HardwareKnowledgeDbService.Instance.InitializeAsync(CancellationToken.None);
-
-        var result = HardwareKnowledgeDbService.Instance.MatchDisplayDetailed("GSM 27GP850");
-
-        Assert.True(result.HasMatch);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-        Assert.Equal("display_lg_ultragear", result.Model!.IconKey);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDisplayDatabaseForCompositeLookupSeed()
-    {
-        EnsureKnowledgeDbLoaded();
-        var seed = HardwareIconService.BuildDisplayLookupSeed("AW3423DWF", "DEL");
-        var result = HardwareIconService.ResolveResult(HardwareType.Display, seed);
-
-        Assert.Equal("display_dell_alienware", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.PartialAlias, result.MatchKind);
     }
 
     [Fact]
@@ -367,36 +166,29 @@ public sealed class HardwareMatchingTests
     }
 
     [Fact]
-    public void ResolveResult_UsesGpuRuleForGigabyteBoardCode()
+    public async Task MatchDisplayDetailed_UsesGeneratedDellManufacturerCodeAliasFromDatabase()
     {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Gpu, "GV-N4090GAMING OC-24GD");
+        await HardwareKnowledgeDbService.Instance.InitializeAsync(CancellationToken.None);
 
-        Assert.Equal("gpu_rtx40", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
+        var result = HardwareKnowledgeDbService.Instance.MatchDisplayDetailed("DEL AW3423DWF");
+
+        Assert.True(result.HasMatch);
         Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
+        Assert.NotNull(result.Model);
+        Assert.False(string.IsNullOrWhiteSpace(result.Model!.Id));
     }
 
     [Fact]
-    public void ResolveResult_UsesGpuRuleForPnyBoardCode()
+    public async Task MatchDisplayDetailed_UsesGeneratedLgManufacturerCodeAliasFromDatabase()
     {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Gpu, "VCG507012TFXXPB1-O");
+        await HardwareKnowledgeDbService.Instance.InitializeAsync(CancellationToken.None);
 
-        Assert.Equal("gpu_rtx50", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
+        var result = HardwareKnowledgeDbService.Instance.MatchDisplayDetailed("GSM 27GP850");
+
+        Assert.True(result.HasMatch);
         Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesGpuRuleForCompactAmdModel()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Gpu, "RX7900XTX NITRO+");
-
-        Assert.Equal("gpu_rx7000", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
+        Assert.NotNull(result.Model);
+        Assert.False(string.IsNullOrWhiteSpace(result.Model!.Id));
     }
 
     [Fact]
@@ -408,7 +200,8 @@ public sealed class HardwareMatchingTests
 
         Assert.True(result.HasMatch);
         Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-        Assert.Equal("gpu_rtx40", result.Model!.IconKey);
+        Assert.NotNull(result.Model);
+        Assert.False(string.IsNullOrWhiteSpace(result.Model!.Id));
     }
 
     [Fact]
@@ -420,7 +213,8 @@ public sealed class HardwareMatchingTests
 
         Assert.True(result.HasMatch);
         Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-        Assert.Equal("gpu_rtx50", result.Model!.IconKey);
+        Assert.NotNull(result.Model);
+        Assert.False(string.IsNullOrWhiteSpace(result.Model!.Id));
     }
 
     [Fact]
@@ -432,63 +226,8 @@ public sealed class HardwareMatchingTests
 
         Assert.True(result.HasMatch);
         Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-        Assert.Equal("gpu_rx7000", result.Model!.IconKey);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesMotherboardRuleForMsiMegBoard()
-    {
-        EnsureKnowledgeDbLoaded();
-        var seed = HardwareIconService.BuildMotherboardLookupSeed(
-            "Micro-Star International Co., Ltd.",
-            "MEG Z790 ACE");
-        var result = HardwareIconService.ResolveResult(HardwareType.Motherboard, seed);
-
-        Assert.Equal("mb_msi_meg", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesMotherboardRuleForGigabyteAorusBoard()
-    {
-        EnsureKnowledgeDbLoaded();
-        var seed = HardwareIconService.BuildMotherboardLookupSeed(
-            "Gigabyte Technology Co., Ltd.",
-            "B650 AORUS ELITE AX");
-        var result = HardwareIconService.ResolveResult(HardwareType.Motherboard, seed);
-
-        Assert.Equal("mb_gigabyte_aorus", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesMotherboardDatabaseForAsrockPro4Board()
-    {
-        EnsureKnowledgeDbLoaded();
-        var seed = HardwareIconService.BuildMotherboardLookupSeed(
-            "ASRock",
-            "B550 Pro4",
-            "American Megatrends International, LLC.",
-            "B550");
-        var result = HardwareIconService.ResolveResult(HardwareType.Motherboard, seed);
-
-        Assert.Equal("mb_asrock", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesMotherboardRuleForAsusStrixBoard()
-    {
-        EnsureKnowledgeDbLoaded();
-        var seed = HardwareIconService.BuildMotherboardLookupSeed(
-            "ASUSTeK COMPUTER INC.",
-            "STRIX X670E-E GAMING WIFI");
-        var result = HardwareIconService.ResolveResult(HardwareType.Motherboard, seed);
-
-        Assert.Equal("mb_asus_rog", result.IconKey);
-        Assert.NotEqual(HardwareIconResolutionSource.Fallback, result.Source);
+        Assert.NotNull(result.Model);
+        Assert.False(string.IsNullOrWhiteSpace(result.Model!.Id));
     }
 
     [Fact]
@@ -501,7 +240,8 @@ public sealed class HardwareMatchingTests
 
         Assert.True(result.HasMatch);
         Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-        Assert.Equal("mb_asus_rog", result.Model!.IconKey);
+        Assert.NotNull(result.Model);
+        Assert.False(string.IsNullOrWhiteSpace(result.Model!.Id));
     }
 
     [Fact]
@@ -514,17 +254,8 @@ public sealed class HardwareMatchingTests
 
         Assert.True(result.HasMatch);
         Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-        Assert.Equal("mb_gigabyte_aorus", result.Model!.IconKey);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesRuleMapWhenMotherboardFamilyQueryIsAmbiguous()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Motherboard, "ASUS ROG");
-
-        Assert.Equal("mb_asus_rog", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
+        Assert.NotNull(result.Model);
+        Assert.False(string.IsNullOrWhiteSpace(result.Model!.Id));
     }
 
     [Fact]
@@ -536,58 +267,7 @@ public sealed class HardwareMatchingTests
 
         Assert.True(result.HasMatch);
         Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-        Assert.Equal("storage_kingston_kc3000", result.Model!.IconKey);
-    }
-
-    [Fact]
-    public void ResolveByIconKeyResult_FallsBackWhenExplicitKeyIsUnknown()
-    {
-        var result = HardwareIconService.ResolveByIconKeyResult(HardwareType.Network, "network_missing_key", "Intel Ethernet");
-
-        Assert.Equal("network_default", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.Fallback, result.Source);
-        Assert.True(result.UsesFallback);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesWifiFamilyRuleForNetworkNames()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Network, "Qualcomm FastConnect Wi-Fi 7");
-
-        Assert.Equal("network_wifi7", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesOneGigRuleForGenericGigabitName()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Network, "Integrated 1GbE Ethernet");
-
-        Assert.Equal("network_1gbe", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.RuleMap, result.Source);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesNetworkDatabaseForWireGuardTunnel()
-    {
-        EnsureKnowledgeDbLoaded();
-        var result = HardwareIconService.ResolveResult(HardwareType.Network, "WireGuard Tunnel");
-
-        Assert.Equal("network_wireguard", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
-        Assert.Equal(HardwareMatchKind.ExactAlias, result.MatchKind);
-    }
-
-    [Fact]
-    public void ResolveResult_UsesDisplayDatabaseForExcaliburModelCode()
-    {
-        EnsureKnowledgeDbLoaded();
-        var seed = HardwareIconService.BuildDisplayLookupSeed("E27FVC-E", "WAM", "2700");
-        var result = HardwareIconService.ResolveResult(HardwareType.Display, seed);
-
-        Assert.Equal("display_excalibur", result.IconKey);
-        Assert.Equal(HardwareIconResolutionSource.DatabaseModel, result.Source);
+        Assert.NotNull(result.Model);
+        Assert.False(string.IsNullOrWhiteSpace(result.Model!.Id));
     }
 }

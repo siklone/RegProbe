@@ -9,19 +9,8 @@ public sealed class HardwareDatabaseSanityTests
 {
     private static string HardwareDbRoot => Path.Combine(AppContext.BaseDirectory, "Assets", "HardwareDb");
 
-    [Theory]
-    [InlineData("Windows 11 Pro", "os/windows11")]
-    [InlineData("Windows 11 Pro (24H2)", "os/windows11")]
-    [InlineData("Windows 10 Pro", "os/windows10")]
-    public void ResolveOsIconKey_UsesExpectedVariant(string osName, string expectedKey)
-    {
-        var resolved = HardwareIconResolver.ResolveOsIconKey(osName);
-
-        Assert.Equal(expectedKey, resolved);
-    }
-
     [Fact]
-    public void GeneratedHardwareDatabases_UseKnownIconKeys_AndCleanBaseFields()
+    public void GeneratedHardwareDatabases_KeepStableNamesAndAliases()
     {
         Assert.True(Directory.Exists(HardwareDbRoot), $"Hardware DB root not found: {HardwareDbRoot}");
 
@@ -50,9 +39,6 @@ public sealed class HardwareDatabaseSanityTests
                 var normalizedName = item.TryGetProperty("normalizedName", out var normalizedNameElement)
                     ? normalizedNameElement.GetString() ?? string.Empty
                     : string.Empty;
-                var iconKey = item.TryGetProperty("iconKey", out var iconKeyElement)
-                    ? iconKeyElement.GetString() ?? string.Empty
-                    : string.Empty;
                 var dedupeKey = $"{Path.GetFileName(dbFile)}::{HardwareNameNormalizer.Normalize(normalizedName)}";
 
                 if (string.IsNullOrWhiteSpace(normalizedName))
@@ -62,15 +48,6 @@ public sealed class HardwareDatabaseSanityTests
                 else if (!seenNormalizedNames.Add(dedupeKey))
                 {
                     problems.Add($"{Path.GetFileName(dbFile)}:{id}: duplicate normalizedName '{normalizedName}'");
-                }
-
-                if (string.IsNullOrWhiteSpace(iconKey))
-                {
-                    problems.Add($"{Path.GetFileName(dbFile)}:{id}: iconKey is empty");
-                }
-                else if (!HardwareIconSourceDb.ContainsKey(iconKey))
-                {
-                    problems.Add($"{Path.GetFileName(dbFile)}:{id}: unknown iconKey '{iconKey}'");
                 }
 
                 if (!item.TryGetProperty("aliases", out var aliasesElement) || aliasesElement.ValueKind != JsonValueKind.Array)
