@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-25T00:18:11.868136Z",
+  "generated_utc": "2026-03-25T00:21:01.086238Z",
   "summary": {
     "total_records": 295,
     "class_counts": {
       "A": 174,
-      "B": 65,
+      "B": 66,
       "C": 1,
-      "D": 3,
+      "D": 2,
       "E": 52
     },
     "action_state_counts": {
@@ -5726,20 +5726,20 @@
       "record_id": "power.disable-cpu-idle-states",
       "tweak_id": "power.disable-cpu-idle-states",
       "record_status": "validated",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Partial",
+      "class_description": "Key and primary values are known, but the record is still gated from one-click apply or has incomplete edge semantics.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "gating_reason": "Primary values are understood, but this record is still intentionally gated from one-click apply.",
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline.",
+        "summary": "Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -5747,7 +5747,7 @@
             "title": "Validation proof source",
             "url": "H:\\Temp\\vm-tooling-staging\\cpu_idle_probe.json",
             "kind": "validation-proof",
-            "summary": "DisableIdleStatesAtBoot=1; IdleStateTimeout=0; ExitLatencyCheckEnabled=1 -> restored to null"
+            "summary": "before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null"
           },
           {
             "title": "Microsoft Learn: Introduction to Processor Idle States",
@@ -5773,6 +5773,12 @@
             "url": "Docs/tweaks/_source-mirrors/win-registry/records/Power.txt",
             "kind": "registry-observation",
             "summary": "Power.txt lists DisableIdleStatesAtBoot in the power values block, matching the first element of the app's raw idle-states bundle."
+          },
+          {
+            "title": "Win25H2Clean reversible probe for the CPU idle-state bundle",
+            "url": "H:\\Temp\\vm-tooling-staging\\cpu_idle_probe.json",
+            "kind": "vm-test",
+            "summary": "The current 25H2 VM baseline had all three values missing, the app bundle wrote DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1, and the probe resto..."
           }
         ]
       },

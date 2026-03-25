@@ -4,7 +4,7 @@
   "record_id": "power.disable-cpu-idle-states",
   "tweak_id": "power.disable-cpu-idle-states",
   "record_status": "validated",
-  "summary": "Validated observed implementation only. This record now has machine-checkable VM proof for the raw CPU idle-state registry bundle, but Microsoft still does not publish it as a supported control surface.",
+  "summary": "Validated observed implementation only. This record now has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, plus a machine-checkable apply and restore pass for the app's current profile.",
   "setting": {
     "name": "CPU Idle States Bundle",
     "category": "Power",
@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "CPU idle states let Windows save power when the processor has little to do. This tweak tries to reduce or bypass that behavior for latency-focused systems.",
     "why_people_change_it": "People change it when chasing minimum latency for gaming, audio work, or other timing-sensitive workloads.",
-    "tradeoffs_overview": "Reducing idle-state behavior can increase responsiveness in some narrow cases, but it can also raise heat and power consumption. The current problem is that the app uses raw power-manager registry values instead of a clearly supported Microsoft control surface.",
-    "professional_notes": "The app writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The local Power.txt trace also lists DisableIdleStatesAtBoot in the power-values block. This review found Microsoft documentation for processor idle states as a feature area, but not a primary Microsoft registry mapping that validates this exact raw bundle as a supported configuration method.",
+    "tradeoffs_overview": "Reducing idle-state behavior can increase responsiveness in some narrow cases, but it can also raise heat and power consumption. The current app still uses raw power-manager registry values instead of a supported Microsoft control surface, so this stays research-gated.",
+    "professional_notes": "The app writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The local Power.txt notes also track these values with observed internal defaults of DisableIdleStatesAtBoot=0, ExitLatencyCheckEnabled=0, and IdleStateTimeout=500. The Win25H2Clean VM probe then showed the live baseline on this build as all three values missing, and confirmed a reversible apply of DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1 before restoring back to missing. That is strong enough to track the missing baseline and the app bundle as current observed states while keeping the record research-gated because Microsoft still does not publish this raw bundle as a supported tuning method.",
     "targets": [
       {
         "target_id": "cpu-idle-states-registry-bundle",
@@ -23,14 +23,26 @@
         "value_type": "REG_DWORD bundle",
         "allowed_values": [
           {
-            "state_kind": "unknown",
+            "state_kind": "missing",
             "value": null,
-            "label": "Primary-source mapping not confirmed",
-            "meaning": "The feature area is real, but this review did not find a primary Microsoft registry source validating this exact raw bundle.",
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current 25H2 VM baseline leaves DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled unset.",
             "evidence_ids": [
               "ms-cpu-idle-states",
+              "repo-power-doc",
+              "vm-cpu-idle-bundle-probe"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1",
+            "label": "Observed app latency-focused bundle",
+            "meaning": "The current app writes the raw latency-focused bundle that the VM probe applied and restored cleanly.",
+            "evidence_ids": [
               "app-power-provider",
-              "repo-power-doc"
+              "nohuto-power-disable-idle-states-trace",
+              "repo-power-doc",
+              "vm-cpu-idle-bundle-probe"
             ]
           }
         ]
@@ -54,19 +66,21 @@
   },
   "windows_defaults": [
     {
-      "label": "Windows-managed processor idle baseline",
-      "applies_to": "Windows systems using normal processor idle-state management",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current 25H2 builds where the raw CPU idle-state bundle is left unset",
       "states": [
         {
           "target_id": "cpu-idle-states-registry-bundle",
-          "state_kind": "unknown",
+          "state_kind": "missing",
           "value": null,
-          "rationale": "This review did not elevate the raw registry bundle to a published Windows baseline."
+          "rationale": "Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior."
         }
       ],
-      "notes": "Processor idle behavior should be treated as Windows-managed unless a supported control surface is confirmed.",
+      "notes": "This is the current observed VM baseline, not a primary Microsoft registry contract.",
       "evidence_ids": [
-        "ms-cpu-idle-states"
+        "ms-cpu-idle-states",
+        "repo-power-doc",
+        "vm-cpu-idle-bundle-probe"
       ]
     }
   ],
@@ -85,20 +99,55 @@
       "states": [
         {
           "target_id": "cpu-idle-states-registry-bundle",
-          "state_kind": "unknown",
+          "state_kind": "missing",
           "value": null,
-          "rationale": "Keep processor idle behavior under the normal Windows-managed baseline."
+          "rationale": "Keep the raw CPU idle-state bundle unset and stay on the current observed baseline."
         }
       ],
       "good_when": "You want supported Windows processor power management behavior.",
       "bad_when": "You are trying to force undocumented raw registry tuning.",
       "tradeoffs": [
-        "Windows keeps its normal idle-state logic.",
-        "The app's raw bundle remains documented but not validated."
+        "Windows keeps its current Windows-managed idle-state behavior.",
+        "The app's raw bundle stays documented but research-gated."
       ],
       "apply_allowed": false,
       "evidence_ids": [
-        "ms-cpu-idle-states"
+        "ms-cpu-idle-states",
+        "repo-power-doc",
+        "vm-cpu-idle-bundle-probe"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Latency experiments",
+        "Advanced VM-only power research"
+      ],
+      "avoid_for": [
+        "Battery-sensitive systems",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "cpu-idle-states-registry-bundle",
+          "state_kind": "value",
+          "value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1",
+          "rationale": "Use the current app bundle that the VM probe applied and restored cleanly."
+        }
+      ],
+      "good_when": "You are comparing the app's raw idle-state bundle against the current observed baseline.",
+      "bad_when": "You want only supported Microsoft power controls.",
+      "tradeoffs": [
+        "Can reduce idle-state behavior in latency-focused experiments.",
+        "Can also raise heat and power use, and it still is not a supported Microsoft registry contract."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-power-provider",
+        "nohuto-power-disable-idle-states-trace",
+        "repo-power-doc",
+        "vm-cpu-idle-bundle-probe"
       ]
     }
   ],
@@ -145,6 +194,20 @@
       "strength": "medium"
     },
     {
+      "evidence_id": "vm-cpu-idle-bundle-probe",
+      "kind": "vm-test",
+      "title": "Win25H2Clean reversible probe for the CPU idle-state bundle",
+      "location": "H:\\Temp\\vm-tooling-staging\\cpu_idle_probe.json",
+      "summary": "The current 25H2 VM baseline had all three values missing, the app bundle wrote DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1, and the probe restored all three back to missing.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "rollback"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "repo-power-doc",
       "kind": "repo-doc",
       "title": "Repo power notes",
@@ -164,14 +227,14 @@
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The VM probe captured the exact raw registry bundle written by the app and restored the baseline cleanly. The record remains apply_allowed false because Microsoft still does not publish this as a supported control surface.",
+    "why": "The repo power notes and the Win25H2Clean probe now line up on the same raw bundle and show both the current observed baseline and the app profile. That is enough to keep the record active and well-scoped, but not enough to treat the bundle as an app-ready supported control surface.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-21T10:10:55+03:00",
   "validation_proof": {
     "source_url": "H:\\Temp\\vm-tooling-staging\\cpu_idle_probe.json",
-    "exact_quote_or_path": "DisableIdleStatesAtBoot=1; IdleStateTimeout=0; ExitLatencyCheckEnabled=1 -> restored to null",
+    "exact_quote_or_path": "before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null",
     "key_found_on_page": true,
-    "notes": "Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline."
+    "notes": "Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present."
   }
 }

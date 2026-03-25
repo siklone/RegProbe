@@ -17,9 +17,9 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | A count | 174 |
-| B count | 64 |
+| B count | 66 |
 | C count | 1 |
-| D count | 4 |
+| D count | 2 |
 | E count | 52 |
 
 ## Record Index
@@ -147,7 +147,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `peripheral.autoplay-take-no-action` | validated | Class A | `Docs/tweaks/research/records/peripheral.autoplay-take-no-action.review.json` | `e6569c930a05f27153e74cc69f99130870474475c3dd28bff5022f38cb1e183b` | `6bf8b90fe59d4cf3ca5ac2b3c86e0b15bfd409ad27e51f54856fd76cc726df1a` | 1 |
 | `peripheral.disable-autoplay` | validated | Class A | `Docs/tweaks/research/records/peripheral.disable-autoplay.review.json` | `c72a6200a630b6cb859c13580bcdfc8dcc7ad96add4e69dd2cdd969fd6a700e9` | `1cba6d9b41c50cccf15290ce6131cd5daea44bc48c26f0f8f6d351963cd1e8a1` | 2 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class B | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` | `6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837` | `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e` | 1 |
-| `power.disable-cpu-idle-states` | validated | Class D | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `077d1ad70f7c569f24bde535f525128e2f0bd7af6dccc2644b4cdf5b58507d07` | `5bb8f021adc0fd46c8f2e4a4ac05aa30e50915bd05e77c48b85fb4db44e56697` | 1 |
+| `power.disable-cpu-idle-states` | validated | Class B | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `92660bb914ee8c5efd2912a91e00928c6b8dbe635a2327f385738bc7ce25421f` | `e9564c042475d4b463e11dbd8be14712a7aac319855e9971d0ce0061c2734bd1` | 1 |
 | `power.disable-fast-startup` | validated | Class A | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
 | `power.disable-modern-standby` | validated | Class D | `Docs/tweaks/research/records/power.disable-modern-standby.json` | `4735f00424ad14036f07e29a9a5327430e66c1de57f007d87934eaa80601127a` | `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e` | 1 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
@@ -157,7 +157,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `power.hide-lock-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-lock-option.json` | `e92e39c74366ca830f7cc4f3399394f72c581a57638e888be211aa421bf05856` | `cac67bd54c67255fb7bbd92e34790b14b07acbbfe0c5736954289301ac9f35bd` | 1 |
 | `power.hide-sleep-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-sleep-option.json` | `c9235ea4a57b3e8d4a6b7ae241430e25c8f46af21ff3158eef586668644423f8` | `9fd4a690ec7f01c46a0a7268de36b05197e70fea5ded44632b11d705011ea0b8` | 1 |
 | `power.optimize-cpu-boost` | validated | Class A | `Docs/tweaks/research/records/power.optimize-cpu-boost.json` | `cf75017ab18baf416f2b8999dc4bc085f9c557e25bc0be505a6b6b570b996d81` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 1 |
-| `power.optimize-gaming-network` | validated | Class D | `Docs/tweaks/research/records/power.optimize-gaming-network.json` | `923e7138125a06a7bcdbf14befde3dd1e6548659707388402c7f9bd92bcaa801` | `f21ead2862871a3b24aa2e310685dcce0808f29e5fde1307fc47f4c92477ba2b` | 5 |
+| `power.optimize-gaming-network` | validated | Class B | `Docs/tweaks/research/records/power.optimize-gaming-network.json` | `923e7138125a06a7bcdbf14befde3dd1e6548659707388402c7f9bd92bcaa801` | `920b367c452ee514e5b957872115d4d368fde843c5e29bffc543c37749e3e04b` | 5 |
 | `privacy.block-microsoft-accounts` | validated | Class A | `Docs/tweaks/research/records/privacy.block-microsoft-accounts.json` | `e71c635297efe028e8e2ee0196fbab0a4c471e63a3860d17e4afd34051260ab9` | `aadd043705a8dd7c0253c9959e72b05bdffcd4b3681169958fa169b7abf70d45` | 1 |
 | `privacy.deny-app-access.policy` | validated | Class B | `Docs/tweaks/research/records/privacy.deny-app-access.policy.review.json` | `3f92db45e192018ab405a500de812ae96fa2c52db982c10bbb1af4a16eefa78e` | `b1d082da5839ba837ab9aee8d2b0bd41c45882cd5b7400de0a78b8117dfcc660` | 1 |
 | `privacy.disable-activity-history` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-activity-history.json` | `f2b820383ce696be0998f99242c05387aa2c33dfe20987cacb1c63acac1153e6` | `bc005dd4397dc6efcde50924f04736c0579ff9a9b606f7d658f1f101fff2fec9` | 3 |
@@ -7954,29 +7954,30 @@ Windows Internals references:
 ### `power.disable-cpu-idle-states`
 
 - Status: `validated`
-- Evidence class: `Class D` - Key Known, Value Semantics Unknown
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Power`
 - Area: `Processor Idle Behavior`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.disable-cpu-idle-states.json`
-- Source SHA256: `077d1ad70f7c569f24bde535f525128e2f0bd7af6dccc2644b4cdf5b58507d07`
-- Proof SHA256: `5bb8f021adc0fd46c8f2e4a4ac05aa30e50915bd05e77c48b85fb4db44e56697`
+- Source SHA256: `92660bb914ee8c5efd2912a91e00928c6b8dbe635a2327f385738bc7ce25421f`
+- Proof SHA256: `e9564c042475d4b463e11dbd8be14712a7aac319855e9971d0ce0061c2734bd1`
 
-**Summary:** Validated observed implementation only. This record now has machine-checkable VM proof for the raw CPU idle-state registry bundle, but Microsoft still does not publish it as a supported control surface.
+**Summary:** Validated observed implementation only. This record now has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, plus a machine-checkable apply and restore pass for the app's current profile.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class D |
-| Title | Key Known, Value Semantics Unknown |
+| Class | Class B |
+| Title | Strong but Partial |
 | Action state | research-gated |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
 - `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled` / `REG_DWORD bundle`
-  - unknown | label=Primary-source mapping not confirmed | meaning=The feature area is real, but this review did not find a primary Microsoft registry source validating this exact raw bundle.
+  - missing | label=Observed Win25H2Clean baseline | meaning=The current 25H2 VM baseline leaves DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled unset.
+  - value | value="DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1" | label=Observed app latency-focused bundle | meaning=The current app writes the raw latency-focused bundle that the VM probe applied and restored cleanly.
 
 **Evidence**
 
@@ -7985,6 +7986,7 @@ Windows Internals references:
 | `ms-cpu-idle-states` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to Processor Idle States | `high` |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | `medium` |
+| `vm-cpu-idle-bundle-probe` | `vm-test` | `VM test / probe` | Win25H2Clean reversible probe for the CPU idle-state bundle | `high` |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | `medium` |
 
 **Sources**
@@ -8013,9 +8015,9 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | source_url | H:\\Temp\\vm-tooling-staging\\cpu_idle_probe.json |
-| exact_quote_or_path | DisableIdleStatesAtBoot=1; IdleStateTimeout=0; ExitLatencyCheckEnabled=1 -> restored to null |
+| exact_quote_or_path | before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null |
 | key_found_on_page | True |
-| notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. |
+| notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. |
 ### `power.disable-fast-startup`
 
 - Status: `validated`
@@ -8609,37 +8611,41 @@ Windows Internals references:
 ### `power.optimize-gaming-network`
 
 - Status: `validated`
-- Evidence class: `Class D` - Key Known, Value Semantics Unknown
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Power`
 - Area: `Multimedia Class Scheduler Service`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.optimize-gaming-network.json`
 - Source SHA256: `923e7138125a06a7bcdbf14befde3dd1e6548659707388402c7f9bd92bcaa801`
-- Proof SHA256: `f21ead2862871a3b24aa2e310685dcce0808f29e5fde1307fc47f4c92477ba2b`
+- Proof SHA256: `920b367c452ee514e5b957872115d4d368fde843c5e29bffc543c37749e3e04b`
 
-**Summary:** Official MMCSS task-profile registry surface for the built-in Games task. The app writes a custom high-priority Games profile using documented MMCSS keys and allowed values, while leaving the stock Games-task baseline explicitly build-dependent.
+**Summary:** Official MMCSS task-profile registry surface for the built-in Games task. The current Win25H2Clean VM now gives a concrete Games-task baseline, and the app's custom profile is narrowed to the exact fields it changes on top of that baseline.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class D |
-| Title | Key Known, Value Semantics Unknown |
+| Class | Class B |
+| Title | Strong but Partial |
 | Action state | research-gated |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
 - `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games` / `Priority` / `REG_DWORD`
-  - unknown | label=Windows-managed baseline | meaning=Microsoft documents the field and allowed range, but not one stock Games-task default value for every build.
+  - value | value=2 | label=Observed Win25H2Clean baseline | meaning=The current 25H2 VM baseline reads Priority = 2 on the built-in Games task.
   - value | value=8 | label=App high-priority profile | meaning=A documented MMCSS task priority value in the 1-8 range. For tasks with Scheduling Category set to High, MMCSS treats this value as 2.
 - `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games` / `Scheduling Category` / `REG_SZ`
+  - value | value="Medium" | label=Observed Win25H2Clean baseline | meaning=The current 25H2 VM baseline reads Scheduling Category = Medium on the built-in Games task.
   - value | value="High" | label=High scheduling category | meaning=One of Microsoft's documented MMCSS scheduling categories: High, Medium, or Low.
 - `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games` / `SFIO Priority` / `REG_SZ`
+  - value | value="Normal" | label=Observed Win25H2Clean baseline | meaning=The current 25H2 VM baseline reads SFIO Priority = Normal on the built-in Games task.
   - value | value="High" | label=High scheduled I/O priority | meaning=One of Microsoft's documented SFIO values: Idle, Low, Normal, or High. Microsoft also notes this field is not used.
 - `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games` / `GPU Priority` / `REG_DWORD`
+  - value | value=8 | label=Observed Win25H2Clean baseline | meaning=The current 25H2 VM baseline already reads GPU Priority = 8 on the built-in Games task.
   - value | value=8 | label=App GPU priority value | meaning=A documented GPU priority value within Microsoft's 0-31 range. Microsoft notes this field is not yet used.
 - `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games` / `Affinity` / `REG_DWORD`
+  - value | value=0 | label=Observed Win25H2Clean baseline | meaning=The current 25H2 VM baseline already reads Affinity = 0 on the built-in Games task.
   - value | value=0 | label=Affinity not forced | meaning=Microsoft documents that 0x00 and 0xFFFFFFFF both indicate processor affinity is not used.
 
 **Evidence**
@@ -8647,6 +8653,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | `high` |
+| `vm-games-mmcss-baseline` | `vm-test` | `VM test / probe` | Win25H2Clean export of the built-in Games MMCSS task | `high` |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 
 **Sources**
@@ -8674,10 +8681,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service |
-| exact_quote_or_path | HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile; Games; Priority: range 1-8; Scheduling Category: High, Medium, or Low; SFIO Priority: Idle, Low, Normal, or High; GPU Priority: range 0-31; Affinity: 0x00 indicates that processor affinity isn't used. |
+| source_url | H:\\Temp\\vm-tooling-staging\\registry-dumps\\mmcss-games-task-20260325-031514\\mmcss-games-task.txt |
+| exact_quote_or_path | Affinity=0x0; GPU Priority=0x8; Priority=0x2; Scheduling Category=Medium; SFIO Priority=Normal |
 | key_found_on_page | True |
-| notes | The Microsoft MMCSS page documents the exact SystemProfile registry path, lists Games as a built-in task, and publishes the allowed values for the fields the app writes. |
+| notes | The VM export gives the current 25H2 Games-task baseline, while the Microsoft MMCSS page documents the same path and the allowed values for the fields the app writes. |
 ### `privacy.block-microsoft-accounts`
 
 - Status: `validated`

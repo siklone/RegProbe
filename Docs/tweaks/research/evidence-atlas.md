@@ -16,9 +16,9 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 174 |
-| Class B | 64 |
+| Class B | 65 |
 | Class C | 1 |
-| Class D | 4 |
+| Class D | 3 |
 | Class E | 52 |
 
 ## Category Coverage
@@ -8306,7 +8306,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class D` |
+| Evidence class | `Class B` |
 | Category | `Power` |
 | Area | `Multimedia Class Scheduler Service` |
 | Scope | `device` |
@@ -8315,7 +8315,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Official MMCSS task-profile registry surface for the built-in Games task. The app writes a custom high-priority Games profile using documented MMCSS keys and allowed values, while leaving the stock Games-task baseline explicitly build-dependent.
+**Summary:** Official MMCSS task-profile registry surface for the built-in Games task. The current Win25H2Clean VM now gives a concrete Games-task baseline, and the app's custom profile is narrowed to the exact fields it changes on top of that baseline.
 
 **Current implementation**
 
@@ -8339,10 +8339,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class D` |
-| Title | Key Known, Value Semantics Unknown |
+| Label | `Class B` |
+| Title | Strong but Partial |
 | Action state | `research-gated` |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Sources**
 
@@ -8375,8 +8375,12 @@ Windows Internals references:
 
 **Windows defaults**
 
-- Windows Games-task baseline is build dependent (Windows systems with MMCSS and the built-in Games task)
-  - games-priority: unknown — — The official MMCSS source documents the Games task and allowed values, but not one stock Games-task default profile for every Windows build.
+- Observed Win25H2Clean baseline (Current 25H2 builds with the built-in Games MMCSS task)
+  - games-priority: value `2` — Use the current observed Games-task priority baseline.
+  - games-scheduling-category: value `Medium` — Use the current observed Games-task scheduling category baseline.
+  - games-sfio-priority: value `Normal` — Use the current observed Games-task SFIO baseline.
+  - games-gpu-priority: value `8` — Use the current observed Games-task GPU priority baseline.
+  - games-affinity: value `0` — Use the current observed Games-task affinity baseline.
 
 **Recommended profiles**
 
@@ -8388,16 +8392,17 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service | `high` | path, allowed-values, behavior, version-scope |
+| `vm-games-mmcss-baseline` | `vm-test` | `VM test / probe` | Win25H2Clean export of the built-in Games MMCSS task | H:\Temp\vm-tooling-staging\registry-dumps\mmcss-games-task-20260325-031514\mmcss-games-task.txt | `high` | path, value, default |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service |
-| Exact quote / path | HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile; Games; Priority: range 1-8; Scheduling Category: High, Medium, or Low; SFIO Priority: Idle, Low, Normal, or High; GPU Priority: range 0-31; Affinity: 0x00 indicates that processor affinity isn't used. |
+| Source URL | H:\Temp\vm-tooling-staging\registry-dumps\mmcss-games-task-20260325-031514\mmcss-games-task.txt |
+| Exact quote / path | Affinity=0x0; GPU Priority=0x8; Priority=0x2; Scheduling Category=Medium; SFIO Priority=Normal |
 | Key found on page | `True` |
-| Notes | The Microsoft MMCSS page documents the exact SystemProfile registry path, lists Games as a built-in task, and publishes the allowed values for the fields the app writes. |
+| Notes | The VM export gives the current 25H2 Games-task baseline, while the Microsoft MMCSS page documents the same path and the allowed values for the fields the app writes. |
 
 **Decision**
 
@@ -8408,7 +8413,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact MMCSS SystemProfile registry path, lists the built-in Games task, and publishes the allowed values for Priority, Scheduling Category, SFIO Priority, GPU Priority, and Affinity. The app writes only documented fields on that documented Games task path. |
+| Why | Microsoft documents the exact MMCSS SystemProfile registry path and allowed values, and the Win25H2Clean export now gives a concrete Games-task baseline for this build. That is enough to track the current baseline and the app's custom profile as observed states while keeping the tweak research-gated. |
 
 ---
 

@@ -80,7 +80,7 @@ public sealed class PowerTweakProvider : BaseTweakProvider
             context,
             "power.disable-cpu-idle-states",
             "Disable CPU Idle States (C-States)",
-            "Disables CPU idle states and C-States for minimum latency. Increases power consumption but improves responsiveness. Recommended for gaming/audio production.",
+            "Writes the app's raw CPU idle-state bundle for latency experiments. This can raise power use and heat.",
             TweakRiskLevel.Advanced,
             new[]
             {

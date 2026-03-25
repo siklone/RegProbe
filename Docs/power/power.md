@@ -1277,7 +1277,7 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="power.disable-cpu-idle-states"></a> `power.disable-cpu-idle-states` | Disable CPU Idle States (C-States) | Disables CPU idle states and C-States for minimum latency. Increases power consumption but improves responsiveness. Recommended for gamin... | Advanced | `WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L79` |
+| <a id="power.disable-cpu-idle-states"></a> `power.disable-cpu-idle-states` | Disable CPU Idle States (C-States) | Writes the app's raw CPU idle-state bundle for latency experiments. This can raise power use and heat. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L79` |
 | <a id="power.disable-cpu-parking"></a> `power.disable-cpu-parking` | Disable CPU Core Parking | Prevents Windows from parking CPU cores, keeping all cores active. Reduces latency and improves responsiveness for gaming and real-time a... | Safe | `WindowsOptimizer.Engine\Tweaks\Power\CPUPowerTweaks.cs#L29` |
 | <a id="power.disable-fast-startup"></a> `power.disable-fast-startup` | Disable Fast Startup (Hiberboot) | Disables Fast Startup feature which uses hibernation for faster boot times. Fixes some driver and dual-boot issues. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L37` |
 | <a id="power.disable-hibernation"></a> `power.disable-hibernation` | Disable Hibernation | Disables hibernation and deletes hiberfil.sys to save disk space. This prevents the system from entering hibernation mode but does not af... | Safe | `WindowsOptimizer.Engine\Tweaks\Commands\Power\DisableHibernationTweak.cs#L13` |
