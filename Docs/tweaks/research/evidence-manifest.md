@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 199 |
-| B count | 42 |
+| A count | 200 |
+| B count | 41 |
 | C count | 1 |
 | E count | 54 |
 
@@ -244,7 +244,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `3c0fe2ac6864177e93deda81796003cbf094fe6b07d66c4025eb0195d26cf67e` | `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891` | 1 |
 | `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
 | `security.threat-file-hash-logging` | validated | Class C | `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json` | `b4a77024114a37720667663e4eaa443d939cd32d347dcb4b07c8fac369708146` | `3075fda853772c6c36380e41d119e8fee92f79085c96404f4f0698af1a1518c3` | 3 |
-| `security.trusted-path-credential-prompting` | validated | Class B | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
+| `security.trusted-path-credential-prompting` | validated | Class A | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `56a93cf09afef12f05e1b19cf08c81597ebb7beae3c01a133e391db7bab87fa6` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
 | `security.uac-never-notify` | validated | Class B | `Docs/tweaks/research/records/security.uac-never-notify.json` | `c39a26d1490d55dd6e56b7be9b2ed61dbfd99ddfa553e82be7ea68669011ec2b` | `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f` | 3 |
 | `system.aero-shake` | validated | Class A | `Docs/tweaks/research/records/system.aero-shake.json` | `916c792d59ed667a14486ed23e06b87b5268bce3773834d4a84dbdf6a022f8f5` | `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b` | 1 |
 | `system.bsod-disable-auto-reboot` | validated | Class A | `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json` | `71ce59e9590a9c45f0132c3b72477d9fa8437f4e560eb9e9d6af8acfbf95e88b` | `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181` | 1 |
@@ -14258,30 +14258,30 @@ _No source block present._
 ### `security.trusted-path-credential-prompting`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json`
-- Source SHA256: `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e`
+- Source SHA256: `56a93cf09afef12f05e1b19cf08c81597ebb7beae3c01a133e391db7bab87fa6`
 - Proof SHA256: `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02`
 
-**Summary:** Win25H2Clean reversible probe confirmed EnableSecureCredentialPrompting=1 on the documented CredUI path and restored the baseline.
+**Summary:** CredUI.admx and CredUI.adml define the trusted-path credential policy on HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\CredUI. Win25H2Clean reversible proof confirmed the current app write of EnableSecureCredentialPrompting = 1 and restored the missing baseline cleanly.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
 - `HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI` / `EnableSecureCredentialPrompting` / `REG_DWORD`
   - missing | label=Not configured | meaning=Users enter credentials within the normal desktop session for supported nonlogon tasks.
-  - value | value=1 | label=Current app value | meaning=Observed app write intended to require Secure Desktop credential entry for supported nonlogon tasks.
+  - value | value=1 | label=Require trusted path | meaning=Observed enabled state for the documented CredUI policy that requires Secure Desktop credential entry for supported nonlogon tasks on this build.
 
 **Evidence**
 

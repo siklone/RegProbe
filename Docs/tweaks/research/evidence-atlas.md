@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 199 |
-| Class B | 42 |
+| Class A | 200 |
+| Class B | 41 |
 | Class C | 1 |
 | Class E | 54 |
 
@@ -17211,16 +17211,16 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean reversible probe confirmed EnableSecureCredentialPrompting=1 on the documented CredUI path and restored the baseline.
+**Summary:** CredUI.admx and CredUI.adml define the trusted-path credential policy on HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\CredUI. Win25H2Clean reversible proof confirmed the current app write of EnableSecureCredentialPrompting = 1 and restored the missing baseline cleanly.
 
 **Current implementation**
 
@@ -17240,10 +17240,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -17280,8 +17280,8 @@ Windows Internals references:
 
 **Recommended profiles**
 
-- `windows-managed-default`: Windows managed default (apply_allowed=False)
-- `current-app-profile`: Current app profile (apply_allowed=False)
+- `windows-managed-default`: Windows managed default (apply_allowed=True)
+- `require-trusted-path`: Require trusted path (apply_allowed=True)
 
 **Evidence**
 
@@ -17311,7 +17311,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible probe confirmed EnableSecureCredentialPrompting transitions through missing -> 1 -> missing on the documented CredUI path. |
+| Why | CredUI.admx and CredUI.adml define the policy path and behavior, and the Win25H2Clean reversible probe confirmed the app's enabled state by toggling EnableSecureCredentialPrompting through missing -> 1 -> missing on the same path. |
 
 ---
 
