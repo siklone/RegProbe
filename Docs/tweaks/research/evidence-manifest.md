@@ -17,8 +17,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | A count | 201 |
-| B count | 40 |
-| C count | 1 |
+| B count | 41 |
 | E count | 54 |
 
 ## Record Index
@@ -243,7 +242,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.enable-sudo` | validated | Class A | `Docs/tweaks/research/records/security.enable-sudo.json` | `8934276844f480262072241c97802a305ecc1a5de0eba9ac3b6db811a0594dca` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `3c0fe2ac6864177e93deda81796003cbf094fe6b07d66c4025eb0195d26cf67e` | `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891` | 1 |
 | `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
-| `security.threat-file-hash-logging` | validated | Class C | `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json` | `b4a77024114a37720667663e4eaa443d939cd32d347dcb4b07c8fac369708146` | `3075fda853772c6c36380e41d119e8fee92f79085c96404f4f0698af1a1518c3` | 3 |
+| `security.threat-file-hash-logging` | validated | Class B | `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json` | `aca6c9978d3275dfabdc76ec5159025e7478deaee8be225ce7a3a139efcae361` | `3075fda853772c6c36380e41d119e8fee92f79085c96404f4f0698af1a1518c3` | 3 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `56a93cf09afef12f05e1b19cf08c81597ebb7beae3c01a133e391db7bab87fa6` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
 | `security.uac-never-notify` | validated | Class B | `Docs/tweaks/research/records/security.uac-never-notify.json` | `c39a26d1490d55dd6e56b7be9b2ed61dbfd99ddfa553e82be7ea68669011ec2b` | `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f` | 3 |
 | `system.aero-shake` | validated | Class A | `Docs/tweaks/research/records/system.aero-shake.json` | `916c792d59ed667a14486ed23e06b87b5268bce3773834d4a84dbdf6a022f8f5` | `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b` | 1 |
@@ -14185,24 +14184,24 @@ Windows Internals references:
 ### `security.threat-file-hash-logging`
 
 - Status: `validated`
-- Evidence class: `Class C` - Key Known, Value Model Partial
+- Evidence class: `Class B` - Strong but Partial
 - Category: `Security`
 - Area: `Microsoft Defender file hash logging`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json`
-- Source SHA256: `b4a77024114a37720667663e4eaa443d939cd32d347dcb4b07c8fac369708146`
+- Source SHA256: `aca6c9978d3275dfabdc76ec5159025e7478deaee8be225ce7a3a139efcae361`
 - Proof SHA256: `3075fda853772c6c36380e41d119e8fee92f79085c96404f4f0698af1a1518c3`
 
-**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. Older text-file traces still show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias, while the documented policy MpEngine path still did not produce a direct read in either the non-rebooted pass or the rebooted follow-up.
+**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. The live 25H2 engine still reads the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias directly, so the app now tracks those two live surfaces as a research-gated batch instead of exposing a one-click supported toggle.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class C |
-| Title | Key Known, Value Model Partial |
+| Class | Class B |
+| Title | Strong but Partial |
 | Action state | research-gated |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 

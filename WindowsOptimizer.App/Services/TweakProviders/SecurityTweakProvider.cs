@@ -139,6 +139,18 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
+        yield return CreateRegistryValueBatchTweak(
+            context,
+            "security.threat-file-hash-logging",
+            "Research: Defender Threat File Hash Logging",
+            "Research-only batch that writes the two live 25H2 Defender surfaces seen in VM captures for file hash logging.",
+            TweakRiskLevel.Risky,
+            new[]
+            {
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender", "ThreatFileHashLogging", RegistryValueKind.DWord, 1),
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager", "EnableFileHashComputation", RegistryValueKind.DWord, 1)
+            });
+
         // System Defense
         // Windows Firewall Configuration
         // Source: Microsoft Defender Firewall Documentation

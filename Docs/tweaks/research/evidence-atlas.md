@@ -16,8 +16,7 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 201 |
-| Class B | 40 |
-| Class C | 1 |
+| Class B | 41 |
 | Class E | 54 |
 
 ## Category Coverage
@@ -17103,7 +17102,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class C` |
+| Evidence class | `Class B` |
 | Category | `Security` |
 | Area | `Microsoft Defender file hash logging` |
 | Scope | `device` |
@@ -17112,24 +17111,31 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. Older text-file traces still show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias, while the documented policy MpEngine path still did not produce a direct read in either the non-rebooted pass or the rebooted follow-up.
+**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. The live 25H2 engine still reads the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias directly, so the app now tracks those two live surfaces as a research-gated batch instead of exposing a one-click supported toggle.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `not-mapped` |
-| Provider source | `` |
-| Notes | The app does not write this yet because the current 25H2 runtime and the documented modern path do not line up cleanly enough for a one-click toggle. |
+| Status | `matches-research` |
+| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Notes | The app's research-gated batch writes the two live 25H2 surfaces that MsMpEng.exe read directly in the VM: the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias. It does not write the documented policy MpEngine path because that path did not produce a direct live read on this build. |
+
+Current write(s):
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `defender-threat-file-hash-logging-root` | `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender` | `ThreatFileHashLogging` | `1` | `value` |  |
+| `defender-enable-file-hash-computation-policymanager` | `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager` | `EnableFileHashComputation` | `1` | `value` |  |
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Label | `Class C` |
-| Title | Key Known, Value Model Partial |
+| Label | `Class B` |
+| Title | Strong but Partial |
 | Action state | `research-gated` |
-| Gating reason | The key is understood, but the app mapping is still partial or indirect. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Sources**
 
@@ -17196,13 +17202,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The feature name and 0/1 semantics are documented, but current 25H2 runtime still shows more than one live control surface. Even with an official Microsoft PE sample, the documented policy MpEngine path did not produce a direct read and event 1120 still did not appear, so the record stays in active research instead of becoming an app-facing write. |
-
-Blocking issues:
-- The documented policy MpEngine path did not produce a direct live read in either the non-rebooted or rebooted 25H2 pass.
-- A same-window WinDefend restart attempt was blocked in the guest, so service-restart evidence is still limited.
-- The current runtime reads the legacy root value and the Policy Manager alias directly.
-- An official Microsoft PE demo sample still produced event 1116 with no event 1120 on the baseline, the legacy root pass, and the Policy Manager pass.
+| Why | The feature name and 0/1 semantics are documented, and the current 25H2 VM now has a matching research-gated app batch for the two live surfaces that MsMpEng.exe read directly. The record stays below Class A because the runtime surface is still split and the documented MpEngine path still did not light up in the VM. |
 
 ---
 

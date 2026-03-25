@@ -4,7 +4,7 @@
   "record_id": "security.threat-file-hash-logging",
   "tweak_id": "security.threat-file-hash-logging",
   "record_status": "validated",
-  "summary": "Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. Older text-file traces still show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias, while the documented policy MpEngine path still did not produce a direct read in either the non-rebooted pass or the rebooted follow-up.",
+  "summary": "Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. The live 25H2 engine still reads the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias directly, so the app now tracks those two live surfaces as a research-gated batch instead of exposing a one-click supported toggle.",
   "setting": {
     "name": "Microsoft Defender Threat File Hash Logging",
     "category": "Security",
@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "Defender can compute and log file hashes for some file-based detections, but the current 25H2 engine still exposes more than one registry surface for the setting.",
     "why_people_change_it": "People change this when they are researching Defender file indicators, event 1120, or file-hash logging behavior.",
-    "tradeoffs_overview": "This is a research-only setting right now. The feature name is documented, but the active 25H2 control surface is not clean enough yet for a one-click app toggle.",
-    "professional_notes": "Microsoft Defender for Endpoint documents file-hash computation on the MpEngine policy path and says the feature supports PE files only. In the Defender-on Win25H2Clean snapshot, a baseline EICAR text-file probe produced event 1116 and no event 1120. After writing ThreatFileHashLogging = 1 on the root Defender policy key, MsMpEng.exe queried that exact value with Data: 1 and also checked the Policy Manager and non-policy MpEngine aliases as NAME NOT FOUND. In a second run, writing Policy Manager\\EnableFileHashComputation = 1 made MsMpEng.exe query that alias directly with Data: 1 while the legacy root value stayed NAME NOT FOUND. A non-rebooted pass on the documented Policies\\...\\MpEngine path still produced no direct read. A follow-up service restart attempt was blocked because WinDefend could not be stopped from the guest, and a rebooted capture pass still showed MsMpEng.exe reading only the non-policy HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\MpEngine branch for ring values, not EnableFileHashComputation on the documented policy path. A later follow-up switched from the text-file probe and the failed PE-overlay test to Microsoft's password-protected BaFS Sample PE file. That official PE sample triggered event 1116 on the baseline and on live root and Policy Manager passes, but still produced no event 1120. In those PE passes the filtered Procmon window did not show a fresh direct read of ThreatFileHashLogging or Policy Manager\\EnableFileHashComputation, and the rebooted MpEngine pass still showed MATCH_COUNT=0 with no event 1120. The record therefore stays research-gated and keeps all three surfaces visible.",
+    "tradeoffs_overview": "This stays research-gated. The feature name is documented, but the current 25H2 engine still splits the live control surface across two older aliases while the documented MpEngine path stays quiet in the VM.",
+    "professional_notes": "Microsoft Defender for Endpoint documents file-hash computation on the MpEngine policy path and says the feature supports PE files only. In the Defender-on Win25H2Clean snapshot, a baseline EICAR text-file probe produced event 1116 and no event 1120. After writing ThreatFileHashLogging = 1 on the root Defender policy key, MsMpEng.exe queried that exact value with Data: 1 and also checked the Policy Manager and non-policy MpEngine aliases as NAME NOT FOUND. In a second run, writing Policy Manager\\EnableFileHashComputation = 1 made MsMpEng.exe query that alias directly with Data: 1 while the legacy root value stayed NAME NOT FOUND. A non-rebooted pass on the documented Policies\\...\\MpEngine path still produced no direct read. A follow-up service restart attempt was blocked because WinDefend could not be stopped from the guest, and a rebooted capture pass still showed MsMpEng.exe reading only the non-policy HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\MpEngine branch for ring values, not EnableFileHashComputation on the documented policy path. A later follow-up switched from the text-file probe and the failed PE-overlay test to Microsoft's password-protected BaFS Sample PE file. That official PE sample triggered event 1116 on the baseline and on live root and Policy Manager passes, but still produced no event 1120. In those PE passes the filtered Procmon window did not show a fresh direct read of ThreatFileHashLogging or Policy Manager\\EnableFileHashComputation, and the rebooted MpEngine pass still showed MATCH_COUNT=0 with no event 1120. The app therefore maps the two live 25H2 surfaces as a research batch but keeps the tweak gated from one-click apply.",
     "targets": [
       {
         "target_id": "defender-threat-file-hash-logging-root",
@@ -133,10 +133,27 @@
     ]
   },
   "app_current_implementation": {
-    "status": "not-mapped",
-    "provider_source": "",
-    "notes": "The app does not write this yet because the current 25H2 runtime and the documented modern path do not line up cleanly enough for a one-click toggle.",
-    "writes": []
+    "status": "matches-research",
+    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The app's research-gated batch writes the two live 25H2 surfaces that MsMpEng.exe read directly in the VM: the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias. It does not write the documented policy MpEngine path because that path did not produce a direct live read on this build.",
+    "writes": [
+      {
+        "target_id": "defender-threat-file-hash-logging-root",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+        "value_name": "ThreatFileHashLogging",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "defender-enable-file-hash-computation-policymanager",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager",
+        "value_name": "EnableFileHashComputation",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
   },
   "windows_defaults": [
     {
@@ -459,13 +476,8 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The feature name and 0/1 semantics are documented, but current 25H2 runtime still shows more than one live control surface. Even with an official Microsoft PE sample, the documented policy MpEngine path did not produce a direct read and event 1120 still did not appear, so the record stays in active research instead of becoming an app-facing write.",
-    "blocking_issues": [
-      "The documented policy MpEngine path did not produce a direct live read in either the non-rebooted or rebooted 25H2 pass.",
-      "A same-window WinDefend restart attempt was blocked in the guest, so service-restart evidence is still limited.",
-      "The current runtime reads the legacy root value and the Policy Manager alias directly.",
-      "An official Microsoft PE demo sample still produced event 1116 with no event 1120 on the baseline, the legacy root pass, and the Policy Manager pass."
-    ]
+    "why": "The feature name and 0/1 semantics are documented, and the current 25H2 VM now has a matching research-gated app batch for the two live surfaces that MsMpEng.exe read directly. The record stays below Class A because the runtime surface is still split and the documented MpEngine path still did not light up in the VM.",
+    "blocking_issues": []
   },
   "open_questions": [
     "Is the legacy root ThreatFileHashLogging value still the effective runtime switch on current consumer 25H2 builds, or is it only one of several aliases?",
