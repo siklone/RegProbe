@@ -16,9 +16,9 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 174 |
-| Class B | 60 |
+| Class B | 64 |
 | Class C | 1 |
-| Class D | 8 |
+| Class D | 4 |
 | Class E | 52 |
 
 ## Category Coverage
@@ -18308,16 +18308,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class D` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `GameConfigStore / Compatibility Preference` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json` |
-| Apply allowed | `True` |
+| Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple and restored the baseline.
+**Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers the full observed story: Microsoft documents the feature area, repo research names the 2/2/1/1 tuple, and a Win25H2Clean reversible probe confirmed the tuple before restoring the missing baseline.
 
 **Current implementation**
 
@@ -18340,10 +18340,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class D` |
-| Title | Key Known, Value Semantics Unknown |
+| Label | `Class B` |
+| Title | Strong but Partial |
 | Action state | `research-gated` |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Sources**
 
@@ -18375,12 +18375,12 @@ Windows Internals references:
 
 **Windows defaults**
 
-- Conservative baseline (Systems where this dataset has not yet validated the exact GameConfigStore registry mapping for Fullscreen Optimizations)
-  - gameconfigstore-fso-values: unknown — — Do not publish a validated registry baseline until a primary Microsoft source is captured.
+- Observed baseline (Current builds where the GameConfigStore fullscreen-optimization tuple is left unset)
+  - gameconfigstore-fso-values: missing — — Leave the current GameConfigStore tuple unset.
 
 **Recommended profiles**
 
-- `hold-for-research`: Hold for research (apply_allowed=False)
+- `observed-default`: Observed default (apply_allowed=False)
 - `current-app-profile`: Current app profile (apply_allowed=False)
 
 **Evidence**
@@ -18405,12 +18405,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `True` |
+| Apply allowed | `False` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple writes and restored the baseline. |
+| Why | Microsoft's feature-level doc, the repo tuple mapping, and the Win25H2Clean reversible probe all line up on the same GameConfigStore surface. That is enough to track the missing baseline and the 2/2/1/1 tuple as current observed states, but not enough to treat the raw registry mapping as app-ready. |
 
 ---
 
@@ -18513,16 +18513,16 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class D` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Desktop Wallpaper Import Behavior` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json` |
-| Apply allowed | `True` |
+| Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean reversible probe confirmed JPEGImportQuality=100 under Control Panel\\Desktop and restored the baseline.
+**Summary:** The current build evidence for JPEGImportQuality now lines up across repo decomp notes and a Win25H2Clean reversible probe: the wallpaper transcode path falls back to 85 when the value is missing, clamps the user value into the 60..100 range, and the current app writes 100 before restoring the missing baseline cleanly.
 
 **Current implementation**
 
@@ -18542,10 +18542,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class D` |
-| Title | Key Known, Value Semantics Unknown |
+| Label | `Class B` |
+| Title | Strong but Partial |
 | Action state | `research-gated` |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Sources**
 
@@ -18578,12 +18578,12 @@ Windows Internals references:
 
 **Windows defaults**
 
-- Conservative baseline (Systems where this dataset has not yet validated JPEGImportQuality from a primary Microsoft source)
-  - jpeg-import-quality: unknown — — Do not publish a validated wallpaper-quality baseline until the exact registry mapping is backed by a primary Microsoft source.
+- Observed fallback baseline (Current builds where JPEGImportQuality is left unset and the wallpaper transcode path falls back to its internal default)
+  - jpeg-import-quality: missing — — Leave JPEGImportQuality unset and let the current wallpaper import path fall back to 85.
 
 **Recommended profiles**
 
-- `hold-for-research`: Hold for research (apply_allowed=False)
+- `observed-default`: Observed default (apply_allowed=False)
 - `current-app-profile`: Current app profile (apply_allowed=False)
 
 **Evidence**
@@ -18591,6 +18591,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | Docs/system/system.md | `medium` | path, value, behavior, ui-mapping, app-mismatch |
+| `repo-system-decomp-jpegtranscode` | `decompilation` | `Ghidra decompilation` | Decompiled wallpaper transcode path for JPEGImportQuality | Docs/system/assets/jpeg-TranscodeImage.c | `high` | path, value, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 
@@ -18601,18 +18602,18 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json |
 | Exact quote / path | HKCU\Control Panel\Desktop\JPEGImportQuality: before=__MISSING__, after_apply=100, after_restore=__MISSING__ |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json. The repo decomp path in Docs/system/assets/jpeg-TranscodeImage.c also shows the missing-value fallback of 85 and the 60..100 clamp. |
 
 **Decision**
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `True` |
+| Apply allowed | `False` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible probe confirmed JPEGImportQuality transitions through missing -> 100 -> missing on the documented Desktop path. |
+| Why | The repo decomp path and the Win25H2Clean reversible probe both line up on JPEGImportQuality. That is enough to track the missing fallback path and the value 100 app profile as current observed states, but not enough to treat the shell surface as app-ready. |
 
 ---
 
@@ -19159,16 +19160,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class D` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Explorer Startup Behavior` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` |
-| Apply allowed | `True` |
+| Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean reversible probe confirmed StartupDelayInMSec=0 under Explorer\Serialize and restored the baseline.
+**Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, and the value restores back to missing cleanly.
 
 **Current implementation**
 
@@ -19188,10 +19189,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class D` |
-| Title | Key Known, Value Semantics Unknown |
+| Label | `Class B` |
+| Title | Strong but Partial |
 | Action state | `research-gated` |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Sources**
 
@@ -19224,12 +19225,12 @@ Windows Internals references:
 
 **Windows defaults**
 
-- Conservative baseline (Systems where this dataset has not yet validated StartupDelayInMSec from a primary Microsoft source)
-  - startup-delay-in-msec: unknown — — Do not publish a validated startup-delay baseline until the exact registry mapping is backed by a primary Microsoft source.
+- Observed Win25H2Clean baseline (Current 25H2 builds where the Explorer Serialize baseline is still unset)
+  - startup-delay-in-msec: missing — — Keep StartupDelayInMSec unset, which is the current observed Win25H2Clean baseline.
 
 **Recommended profiles**
 
-- `hold-for-research`: Hold for research (apply_allowed=False)
+- `observed-default`: Observed default (apply_allowed=False)
 - `current-app-profile`: Current app profile (apply_allowed=False)
 
 **Evidence**
@@ -19255,12 +19256,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `True` |
+| Apply allowed | `False` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible probe confirmed StartupDelayInMSec transitions through missing -> 0 -> missing on the documented Explorer Serialize path. |
+| Why | Win25H2Clean reversible proof, a live Explorer Procmon trace, and a Ghidra string hit all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as current observed states, but not enough to make the tweak app-ready. |
 
 ---
 
@@ -21860,16 +21861,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class D` |
+| Evidence class | `Class B` |
 | Category | `System` |
 | Area | `Scheduler / Priority Control` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/system.priority-control.review.json` |
-| Apply allowed | `True` |
+| Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean manual VM pass confirmed Win32PrioritySeparation transitions 2 -> 38 -> 2 with real reboots and bounded WinSAT CPU/memory runs.
+**Summary:** Win25H2Clean now has a full current-build evidence chain for Win32PrioritySeparation: live read/write code paths, reversible 2 -> 38 -> 2 VM proof, and bounded CPU/memory benchmark runs after real reboots.
 
 **Current implementation**
 
@@ -21889,10 +21890,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class D` |
-| Title | Key Known, Value Semantics Unknown |
+| Label | `Class B` |
+| Title | Strong but Partial |
 | Action state | `research-gated` |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Sources**
 
@@ -21925,12 +21926,12 @@ Windows Internals references:
 
 **Windows defaults**
 
-- Conservative baseline (Systems where this dataset has not yet validated a modern raw Win32PrioritySeparation baseline)
-  - win32-priority-separation: unknown — — Do not publish a validated raw scheduler bitmask until a stronger Microsoft source is captured.
+- Observed Win25H2Clean baseline (Current 25H2 builds where the live baseline still reads back 2 before the app profile is applied)
+  - win32-priority-separation: value `2` — Use the current observed 25H2 VM baseline value.
 
 **Recommended profiles**
 
-- `hold-for-research`: Hold for research (apply_allowed=False)
+- `observed-default`: Observed default (apply_allowed=False)
 - `current-app-profile`: Current app profile (apply_allowed=False)
 
 **Evidence**
@@ -21957,12 +21958,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `True` |
+| Apply allowed | `False` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible probe and a later manual VM pass both confirmed Win32PrioritySeparation transitions 2 -> 38 -> 2 on the documented PriorityControl path. The manual pass also ran bounded WinSAT CPU and memory workloads after real reboots. |
+| Why | Win25H2Clean reversible proof, the later rebooted VM benchmark pass, and the repo decompiled read/write path all line up on Win32PrioritySeparation. That is enough to track the observed baseline value 2 and the app profile 38 as current-build states, but not enough to treat 0x26 as a published Microsoft default. |
 
 ---
 

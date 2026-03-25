@@ -1,10 +1,10 @@
 {
   "$schema": "../setting-research.schema.json",
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "record_id": "system.disable-fullscreen-optimizations",
   "tweak_id": "system.disable-fullscreen-optimizations",
   "record_status": "validated",
-  "summary": "Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple and restored the baseline.",
+  "summary": "The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers the full observed story: Microsoft documents the feature area, repo research names the 2/2/1/1 tuple, and a Win25H2Clean reversible probe confirmed the tuple before restoring the missing baseline.",
   "setting": {
     "name": "Fullscreen Optimizations",
     "category": "System",
@@ -12,8 +12,8 @@
     "scope": "user",
     "casual_explanation": "Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it.",
     "why_people_change_it": "People disable it when they are troubleshooting stutter, unstable frame pacing, odd alt-tab behavior, capture conflicts, or game-specific compatibility problems.",
-    "tradeoffs_overview": "Turning Fullscreen Optimizations off can help a stubborn game, but it can also remove the newer presentation behavior Windows is trying to provide. The current product issue is that the app writes raw GameConfigStore values whose exact registry semantics are not published in a primary Microsoft source in this research pass.",
-    "professional_notes": "Microsoft documents Fullscreen Optimizations as a Windows feature and exposes user-facing ways to disable it per app through compatibility UI. The current app writes HKCU\\System\\GameConfigStore values GameDVR_FSEBehavior = 2, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUserFSEBehaviorMode = 1, and GameDVR_DXGIHonorFSEWindowsCompatible = 1. The repo's system research notes attribute these raw value semantics to observations from ResourcePolicyServer.dll, not to a primary Microsoft registry publication. This record therefore keeps the feature area documented while blocking validated publication of the current registry mapping.",
+    "tradeoffs_overview": "Turning Fullscreen Optimizations off can help a stubborn game, but it can also remove the newer presentation behavior Windows is trying to provide. The feature is real, but the raw GameConfigStore tuple still is not published by Microsoft as a supported registry contract.",
+    "professional_notes": "Microsoft documents Fullscreen Optimizations as a real Windows feature and exposes supported user-facing ways to disable it through compatibility UI. The current app writes HKCU\\System\\GameConfigStore values GameDVR_FSEBehavior = 2, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUserFSEBehaviorMode = 1, and GameDVR_DXGIHonorFSEWindowsCompatible = 1. The repo's research notes attribute those raw semantics to observations from ResourcePolicyServer.dll, and the Win25H2Clean reversible probe confirmed missing -> 2/2/1/1 -> missing on the same path. That is enough to track the missing baseline and the tuple as current observed states while keeping the record research-gated because there is still no primary Microsoft registry publication for the raw tuple.",
     "targets": [
       {
         "target_id": "gameconfigstore-fso-values",
@@ -23,23 +23,25 @@
         "value_type": "REG_DWORD set",
         "allowed_values": [
           {
-            "state_kind": "unknown",
+            "state_kind": "missing",
             "value": null,
-            "label": "Official registry mapping not captured",
-            "meaning": "This research pass did not capture a primary Microsoft document that publishes the exact GameConfigStore registry mapping for Fullscreen Optimizations.",
+            "label": "Observed baseline",
+            "meaning": "The current Win25H2Clean baseline leaves the GameConfigStore fullscreen-optimization tuple unset.",
             "evidence_ids": [
               "ms-windowed-games-optimizations",
-              "repo-system-doc-fso"
+              "repo-system-doc-fso",
+              "vm-batch-probe-20260320-disable-fullscreen-optimizations"
             ]
           },
           {
             "state_kind": "value",
             "value": "2/2/1/1",
             "label": "Observed app FSO-off profile",
-            "meaning": "The current app treats these four values as the disable-FSO profile, based on repo provenance rather than a primary Microsoft registry publication.",
+            "meaning": "The current app treats these four values as the disable-FSO profile, and the reversible VM probe confirmed that tuple on the same path.",
             "evidence_ids": [
               "repo-system-doc-fso",
-              "app-system-registry-provider"
+              "app-system-registry-provider",
+              "vm-batch-probe-20260320-disable-fullscreen-optimizations"
             ]
           }
         ],
@@ -88,27 +90,28 @@
   },
   "windows_defaults": [
     {
-      "label": "Conservative baseline",
-      "applies_to": "Systems where this dataset has not yet validated the exact GameConfigStore registry mapping for Fullscreen Optimizations",
+      "label": "Observed baseline",
+      "applies_to": "Current builds where the GameConfigStore fullscreen-optimization tuple is left unset",
       "states": [
         {
           "target_id": "gameconfigstore-fso-values",
-          "state_kind": "unknown",
+          "state_kind": "missing",
           "value": null,
-          "rationale": "Do not publish a validated registry baseline until a primary Microsoft source is captured."
+          "rationale": "Leave the current GameConfigStore tuple unset."
         }
       ],
-      "notes": "This record documents the feature area, but keeps the raw registry values out of validated presets.",
+      "notes": "This is the current observed baseline from the Win25H2Clean reversible probe, not a primary Microsoft registry contract.",
       "evidence_ids": [
         "ms-windowed-games-optimizations",
-        "repo-system-doc-fso"
+        "repo-system-doc-fso",
+        "vm-batch-probe-20260320-disable-fullscreen-optimizations"
       ]
     }
   ],
   "recommended_profiles": [
     {
-      "profile_id": "hold-for-research",
-      "label": "Hold for research",
+      "profile_id": "observed-default",
+      "label": "Observed default",
       "intended_for": [
         "Research tracking only",
         "People documenting GameConfigStore behavior"
@@ -120,21 +123,22 @@
       "states": [
         {
           "target_id": "gameconfigstore-fso-values",
-          "state_kind": "unknown",
+          "state_kind": "missing",
           "value": null,
-          "rationale": "Do not publish or apply the raw registry mapping until it is backed by a primary Microsoft source."
+          "rationale": "Use the current observed missing baseline."
         }
       ],
-      "good_when": "You want to document the feature without overstating registry confidence.",
-      "bad_when": "You need a primary-source Microsoft-backed registry mapping for Fullscreen Optimizations.",
+      "good_when": "You want the current observed GameConfigStore baseline.",
+      "bad_when": "You want to force the current disable-FSO tuple for troubleshooting.",
       "tradeoffs": [
-        "The user-facing feature is documented honestly.",
-        "The registry mapping stays blocked from validated publication."
+        "Leaves the current user-side compatibility tuple alone.",
+        "Still stays research-gated because the raw registry contract is not published by Microsoft."
       ],
       "apply_allowed": false,
       "evidence_ids": [
         "ms-windowed-games-optimizations",
-        "repo-system-doc-fso"
+        "repo-system-doc-fso",
+        "vm-batch-probe-20260320-disable-fullscreen-optimizations"
       ]
     },
     {
@@ -155,17 +159,18 @@
           "rationale": "Observed app write used as the current disable-FSO implementation."
         }
       ],
-      "good_when": "You are documenting what the app currently writes for Fullscreen Optimizations.",
-      "bad_when": "You need a validated Microsoft registry mapping.",
+      "good_when": "You want the current app's observed disable-FSO tuple for compatibility testing.",
+      "bad_when": "You want only primary-doc-backed registry contracts.",
       "tradeoffs": [
-        "The current app behavior is captured.",
-        "The exact registry semantics are still based on repo provenance rather than a captured primary Microsoft source."
+        "The tuple is backed by repo research plus a reversible VM proof.",
+        "The exact GameConfigStore semantics are still not published by Microsoft as a raw registry contract."
       ],
       "apply_allowed": false,
-      "notes": "Blocked until the GameConfigStore values are formally sourced or the product switches to a more official control surface.",
+      "notes": "The feature is real, but the raw tuple still stays research-gated.",
       "evidence_ids": [
         "repo-system-doc-fso",
-        "app-system-registry-provider"
+        "app-system-registry-provider",
+        "vm-batch-probe-20260320-disable-fullscreen-optimizations"
       ]
     }
   ],
@@ -226,12 +231,12 @@
   ],
   "decision": {
     "confidence": "medium",
-    "apply_allowed": true,
+    "apply_allowed": false,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple writes and restored the baseline.",
+    "why": "Microsoft's feature-level doc, the repo tuple mapping, and the Win25H2Clean reversible probe all line up on the same GameConfigStore surface. That is enough to track the missing baseline and the 2/2/1/1 tuple as current observed states, but not enough to treat the raw registry mapping as app-ready.",
     "blocking_issues": []
   },
   "open_questions": [

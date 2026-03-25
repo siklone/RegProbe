@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-25T00:03:57.908977Z",
+  "generated_utc": "2026-03-25T00:12:31.118191Z",
   "summary": {
     "total_records": 295,
     "class_counts": {
       "A": 174,
-      "B": 62,
+      "B": 64,
       "C": 1,
-      "D": 6,
+      "D": 4,
       "E": 52
     },
     "action_state_counts": {
@@ -15010,15 +15010,15 @@
       "record_id": "system.disable-fullscreen-optimizations",
       "tweak_id": "system.disable-fullscreen-optimizations",
       "record_status": "validated",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Partial",
+      "class_description": "Key and primary values are known, but the record is still gated from one-click apply or has incomplete edge semantics.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "gating_reason": "Primary values are understood, but this record is still intentionally gated from one-click apply.",
       "confidence": "medium",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
@@ -15195,20 +15195,20 @@
       "record_id": "system.disable-jpeg-reduction",
       "tweak_id": "system.disable-jpeg-reduction",
       "record_status": "validated",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Partial",
+      "class_description": "Key and primary values are known, but the record is still gated from one-click apply or has incomplete edge semantics.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "gating_reason": "Primary values are understood, but this record is still intentionally gated from one-click apply.",
       "confidence": "medium",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json.",
+        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. The repo decomp path in Docs/system/assets/jpeg-TranscodeImage.c also shows the missing-value fallback of 85 and the 60..100...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -15225,10 +15225,10 @@
             "summary": "The repo documents JPEGImportQuality behavior, including a fallback of 85 and a clamp range of 60..100, based on code analysis rather than a primary Microsoft registry publication."
           },
           {
-            "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
-            "kind": "repo-code",
-            "summary": "The provider writes JPEGImportQuality = 100 for the current tweak."
+            "title": "Decompiled wallpaper transcode path for JPEGImportQuality",
+            "url": "Docs/system/assets/jpeg-TranscodeImage.c",
+            "kind": "decompilation",
+            "summary": "The decompiled transcode path reads HKCU\\Control Panel\\Desktop\\JPEGImportQuality, falls back to 85 when missing, clamps the number into the 60..100 range, and passes the final v..."
           }
         ]
       },

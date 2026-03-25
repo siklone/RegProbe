@@ -17,9 +17,9 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | A count | 174 |
-| B count | 60 |
+| B count | 62 |
 | C count | 1 |
-| D count | 8 |
+| D count | 6 |
 | E count | 52 |
 
 ## Record Index
@@ -254,15 +254,15 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.disable-background-gp-updates` | validated | Class A | `Docs/tweaks/research/records/system.disable-background-gp-updates.json` | `806163e1cbc97c3b430efa864ab360da1ae082b721dc7512a83f15320cbb5a0f` | `f405c9914ca39ee00ae820afba4f149eb84081715df8e3a7bcb2a26ab3742038` | 1 |
 | `system.disable-clipboard-history` | validated | Class A | `Docs/tweaks/research/records/system.disable-clipboard-history.json` | `c66a14e25508b24830c68834109b06f077c5a0ee93357939e1452834bbc0017f` | `6f1d55e33a45d3258dd257c8c34c0185d96ee07b14bf1427fbdbae1e18b728a0` | 2 |
 | `system.disable-clipboard-redirection` | validated | Class A | `Docs/tweaks/research/records/system.disable-clipboard-redirection.json` | `ef3a2483b68e5b960ce3c18e34f6e0065ef5708eda4ad3f73544823eb9fd11bd` | `bd7bbb0f1b1b0b7f114a02aa53890195d47f454c172025d9cfba62d70b973e8b` | 1 |
-| `system.disable-fullscreen-optimizations` | validated | Class D | `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json` | `f5cf6fa1e16180f13c4e3e6a3405152a23647e078bbf1e86ca5a4171f76963f9` | `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee` | 1 |
+| `system.disable-fullscreen-optimizations` | validated | Class D | `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json` | `38288423ed3ce0615366b940ed11d79846d1ebf092e7ef2fc6b0914414daaee7` | `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee` | 1 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `Docs/tweaks/research/records/system.disable-game-recording-broadcasting.json` | `5f934446faf47bd7cc617fa7233b69de7416e051e06b8e465f29cc846f390592` | `f00125e489190967e2738bd103050e96d50f5df6456d05b81cc1b82c63da5bfe` | 1 |
-| `system.disable-jpeg-reduction` | validated | Class D | `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json` | `70fadacc3893dd7f424c7f1d8c3e958b136c2d219104fc3612c754a29e48365f` | `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377` | 1 |
+| `system.disable-jpeg-reduction` | validated | Class D | `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json` | `301647ee3d35796622c1ba618052672845b6adeaed003c4c70a4e5c6c4572ff9` | `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377` | 1 |
 | `system.disable-restartable-apps` | validated | Class A | `Docs/tweaks/research/records/system.disable-restartable-apps.review.json` | `e609c09c45ebe3606b78558be0406b22803031299aa951e220fe09f008c71312` | `b4d567ea9ec033d06c9f6d2ff60f9ada14f4b5e8b50bb5318c2536ed22cff6c8` | 1 |
 | `system.disable-search-highlights-policy` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-highlights-policy.json` | `54e01656d9388fc57b31de631b46887097d0f16520e0139513dbbb5749844241` | `ae49b38ee6eec7f08e188c053143d1d430695aec6cb5b90db93af2281cc1b807` | 1 |
 | `system.disable-search-remote-queries` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `baefa2b5a3f28eb1f73a8f09b93506f2eda0fa23dfdcc4b9209c251abe608389` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
 | `system.disable-search-web-results` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-web-results.review.json` | `e795f098bea183761efafb0d3f87e77c09a48b74bf7e1277f122db8f73df0eae` | `bb1b1691889396c055ff9308c954c15fe921b1bf40045ac22449e871fd6c3a37` | 1 |
 | `system.disable-shortcut-arrow` | validated | Class B | `Docs/tweaks/research/records/system.disable-shortcut-arrow.json` | `e05e11b9584629849a78d1e94ab8022634dafb5ae4e4eba98ccdef122373c30f` | `4dc6f2003ee84572320f65a1acecf6c701fc68c055921e90ca666de432f9ebef` | 1 |
-| `system.disable-startup-delay` | validated | Class D | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `84c7c9903f3895cb93f19d557134290eeab219ed10a1fb9adae4e1af5c282f2b` | `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7` | 1 |
+| `system.disable-startup-delay` | validated | Class B | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `84c7c9903f3895cb93f19d557134290eeab219ed10a1fb9adae4e1af5c282f2b` | `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7` | 1 |
 | `system.disable-storage-sense` | validated | Class A | `Docs/tweaks/research/records/system.disable-storage-sense.json` | `c9278c284cb076386248e0e79304f7358634917c285f79ed11af236802821e80` | `aab0b6531e384b0ec9cbb05bc4fd51a5f72f5fffb64825086125f5d372926ff1` | 1 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `8d61ee5b4c35c7fa432ce252b1c66ec363052d7535070c3143540e4686a54356` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | Class A | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `9724d8cc13adf9784368f3d2c53404531e3d40d085235cadde376f377349e290` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
@@ -287,7 +287,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.ntfs-enable-long-paths` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-enable-long-paths.json` | `d101a6382cc22b8bd2dd60f2d8ff325ea4c7c712f05bfc72566c2f6a1742cdab` | `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179` | 1 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
 | `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
-| `system.priority-control` | validated | Class D | `Docs/tweaks/research/records/system.priority-control.review.json` | `65338290ddc475e60627d497c34c6f508e7920c8b14730a6324ab1a5ebec71e9` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
+| `system.priority-control` | validated | Class B | `Docs/tweaks/research/records/system.priority-control.review.json` | `65338290ddc475e60627d497c34c6f508e7920c8b14730a6324ab1a5ebec71e9` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
 | `system.reduce-shutdown-timeouts` | validated | Class D | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
 | `system.reliability-timestamp-enabled` | validated | Class B | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
@@ -14754,7 +14754,7 @@ Windows Internals references:
 - Area: `GameConfigStore / Compatibility Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json`
-- Source SHA256: `f5cf6fa1e16180f13c4e3e6a3405152a23647e078bbf1e86ca5a4171f76963f9`
+- Source SHA256: `38288423ed3ce0615366b940ed11d79846d1ebf092e7ef2fc6b0914414daaee7`
 - Proof SHA256: `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee`
 
 **Summary:** Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple and restored the baseline.
@@ -14870,7 +14870,7 @@ _No source block present._
 - Area: `Desktop Wallpaper Import Behavior`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json`
-- Source SHA256: `70fadacc3893dd7f424c7f1d8c3e958b136c2d219104fc3612c754a29e48365f`
+- Source SHA256: `301647ee3d35796622c1ba618052672845b6adeaed003c4c70a4e5c6c4572ff9`
 - Proof SHA256: `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377`
 
 **Summary:** Win25H2Clean reversible probe confirmed JPEGImportQuality=100 under Control Panel\\Desktop and restored the baseline.
@@ -15258,7 +15258,7 @@ Windows Internals references:
 ### `system.disable-startup-delay`
 
 - Status: `validated`
-- Evidence class: `Class D` - Key Known, Value Semantics Unknown
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Explorer Startup Behavior`
 - Scope: `user`
@@ -15266,22 +15266,22 @@ Windows Internals references:
 - Source SHA256: `84c7c9903f3895cb93f19d557134290eeab219ed10a1fb9adae4e1af5c282f2b`
 - Proof SHA256: `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7`
 
-**Summary:** Win25H2Clean reversible probe confirmed StartupDelayInMSec=0 under Explorer\Serialize and restored the baseline.
+**Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, and the value restores back to missing cleanly.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class D |
-| Title | Key Known, Value Semantics Unknown |
+| Class | Class B |
+| Title | Strong but Partial |
 | Action state | research-gated |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
 - `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize` / `StartupDelayInMSec` / `REG_DWORD`
-  - unknown | label=Primary Microsoft mapping not captured | meaning=This research pass did not capture a primary Microsoft source for the exact StartupDelayInMSec registry semantics.
-  - value | value=0 | label=Observed app no-delay profile | meaning=The current app treats 0 as the remove-startup-delay profile, based on repo observation rather than a captured primary Microsoft source.
+  - missing | label=Observed Win25H2Clean baseline | meaning=The current 25H2 VM baseline leaves StartupDelayInMSec unset and Explorer still reads the Serialize path live.
+  - value | value=0 | label=Observed no-delay profile | meaning=The current app and the Win25H2Clean shell trace both support 0 as the no-delay startup profile on the Explorer Serialize path.
 
 **Evidence**
 
@@ -16904,7 +16904,7 @@ Windows Internals references:
 ### `system.priority-control`
 
 - Status: `validated`
-- Evidence class: `Class D` - Key Known, Value Semantics Unknown
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Scheduler / Priority Control`
 - Scope: `device`
@@ -16912,23 +16912,23 @@ Windows Internals references:
 - Source SHA256: `65338290ddc475e60627d497c34c6f508e7920c8b14730a6324ab1a5ebec71e9`
 - Proof SHA256: `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48`
 
-**Summary:** Win25H2Clean manual VM pass confirmed Win32PrioritySeparation transitions 2 -> 38 -> 2 with real reboots and bounded WinSAT CPU/memory runs.
+**Summary:** Win25H2Clean now has a full current-build evidence chain for Win32PrioritySeparation: live read/write code paths, reversible 2 -> 38 -> 2 VM proof, and bounded CPU/memory benchmark runs after real reboots.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class D |
-| Title | Key Known, Value Semantics Unknown |
+| Class | Class B |
+| Title | Strong but Partial |
 | Action state | research-gated |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
 - `HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl` / `Win32PrioritySeparation` / `REG_DWORD`
-  - Notes: Tracked as an observed raw scheduler bitmask only.
-  - unknown | label=Modern validated default not captured | meaning=This research pass did not capture a modern primary Microsoft source that publishes the exact raw default DWORD for Win32PrioritySeparation.
-  - value | value=38 | label=Observed app profile | meaning=The current app treats 0x26 as its balanced foreground scheduling profile, but this record has not validated that exact raw value from a modern primary Microsoft source.
+  - Notes: Tracked as a current observed scheduler bitmask, not as a published Microsoft default.
+  - value | value=2 | label=Observed Win25H2Clean baseline | meaning=The current 25H2 VM baseline read back Win32PrioritySeparation = 2 before the app profile was applied.
+  - value | value=38 | label=Observed app profile | meaning=The current app treats 0x26 as its balanced foreground scheduling profile, and the Win25H2Clean VM confirmed that write under real rebooted runs.
 
 **Evidence**
 
