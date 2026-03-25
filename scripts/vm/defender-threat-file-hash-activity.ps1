@@ -8,8 +8,9 @@ param(
 
     [string]$OutputError = '',
     [switch]$RestartWinDefend,
-    [ValidateSet('com', 'pe')]
+    [ValidateSet('com', 'pe', 'custom')]
     [string]$SampleKind = 'com',
+    [string]$CustomSamplePath = '',
     [int]$ScanTimeoutSeconds = 60,
 
     [string]$WorkRoot = 'C:\Tools\Perf\Procmon\ThreatFileHashProbe'
@@ -108,6 +109,23 @@ function New-EicarSample {
     }
 }
 
+function Get-CustomSample {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Path)) {
+        throw 'CustomSamplePath is required when SampleKind is custom.'
+    }
+
+    if (-not (Test-Path $Path)) {
+        throw "Custom sample path does not exist: $Path"
+    }
+
+    return (Get-Item -LiteralPath $Path).FullName
+}
+
 try {
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OutputJson) | Out-Null
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OutputEvents) | Out-Null
@@ -120,7 +138,12 @@ try {
         succeeded = $false
         error = $null
     }
-    $samplePath = New-EicarSample -Root $WorkRoot -Kind $SampleKind
+    $samplePath = if ($SampleKind -eq 'custom') {
+        Get-CustomSample -Path $CustomSamplePath
+    }
+    else {
+        New-EicarSample -Root $WorkRoot -Kind $SampleKind
+    }
 
     $statusBefore = Get-MpStatusSummary
     $mpCmdRun = Join-Path $env:ProgramFiles 'Windows Defender\MpCmdRun.exe'

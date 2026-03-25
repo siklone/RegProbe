@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 188 |
-| Class B | 53 |
+| Class A | 190 |
+| Class B | 51 |
 | Class C | 1 |
 | Class E | 54 |
 
@@ -3156,12 +3156,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/network.disable-default-shares.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -3186,10 +3186,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -3253,12 +3253,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft directly documents AutoShareServer and AutoShareWks under HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters and explains that setting them to 0 stops automatic creation of administrative shares while missing values keep the default automatic behavior. The app writes those exact documented values on the documented path. |
+| Why | Microsoft directly documents AutoShareServer and AutoShareWks under HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters and explains that setting them to 0 stops automatic creation of administrative shares while missing values keep the default automatic behavior. The app writes those exact documented values on the same documented path, with no unresolved control-surface mismatch. |
 
 ---
 
@@ -17112,7 +17112,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface, but live Win25H2Clean traces show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias instead. In the Defender-on 25H2 snapshot, a text EICAR probe produced event 1116 but no event 1120, and the documented policy MpEngine path still did not produce a direct read in either the non-rebooted pass or the rebooted follow-up.
+**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. Older text-file traces still show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias, while the documented policy MpEngine path still did not produce a direct read in either the non-rebooted pass or the rebooted follow-up.
 
 **Current implementation**
 
@@ -17163,6 +17163,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-defender-enable-file-hash-computation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Create indicators for files | https://learn.microsoft.com/en-us/defender-endpoint/indicator-file | `high` | path, value, behavior, tradeoff |
 | `ms-defender-file-hash-event1120` | `official-doc` | `Microsoft official doc` | Microsoft support: Troubleshoot Microsoft Defender Antivirus settings | https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d | `high` | behavior, value |
+| `ms-defender-cloud-demo-sample` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Demonstrate cloud-delivered protection | https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection | `high` | behavior, path |
 | `repo-defender-threat-file-hash-dumps` | `repo-doc` | `Current repo docs` | Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation | Docs/security/assets/Windows-Defender.txt | `medium` | path, value |
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | H:\Temp\vm-tooling-staging\defender-runtime-repair.json | `high` | default, behavior |
 | `vm-defender-runtime-enabled-baseline` | `vm-test` | `VM test / probe` | Defender-on 25H2 snapshot baseline | H:\Temp\vm-tooling-staging\defender-runtime-repair.json | `high` | default, behavior |
@@ -17172,6 +17173,10 @@ Windows Internals references:
 | `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | `VM test / probe` | Non-rebooted MpEngine pass did not show a live read | H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-011519\defender-threat-file-hash-mpengine-1-events.json | `medium` | path, behavior |
 | `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | `VM test / probe` | WinDefend service restart follow-up was blocked | H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-095038\defender-threat-file-hash-mpengine-1-events.json | `medium` | behavior, runtime-read |
 | `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | `VM test / probe` | Rebooted MpEngine pass still did not show a direct policy-path read | H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-100039\defender-threat-file-hash-mpengine-1.txt | `high` | path, behavior, runtime-read |
+| `vm-defender-threat-file-hash-pe-baseline` | `vm-test` | `VM test / probe` | Official Microsoft PE sample baseline still produced no event 1120 | H:\Temp\vm-tooling-staging\defender-threat-file-hash-baseline-1-custom-20260325-131902\defender-threat-file-hash-baseline-custom-events.json | `high` | behavior, default |
+| `vm-defender-threat-file-hash-root-pe-no-hash` | `vm-test` | `VM test / probe` | Legacy root PE pass still produced no event 1120 | H:\Temp\vm-tooling-staging\defender-threat-file-hash-legacyroot-1-custom-20260325-133409\defender-threat-file-hash-legacyroot-1-custom-events.json | `high` | behavior, runtime-read |
+| `vm-defender-threat-file-hash-policymanager-pe-no-hash` | `vm-test` | `VM test / probe` | Policy Manager PE pass still produced no event 1120 | H:\Temp\vm-tooling-staging\defender-threat-file-hash-policymanager-1-custom-20260325-135316\defender-threat-file-hash-policymanager-1-custom-events.json | `high` | behavior, runtime-read |
+| `vm-defender-threat-file-hash-mpengine-pe-reboot-no-hash` | `vm-test` | `VM test / probe` | Rebooted MpEngine PE pass still produced no event 1120 | H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-custom-20260325-140816\defender-threat-file-hash-mpengine-1-custom-events.json | `high` | behavior, runtime-read, path |
 
 **Validation proof**
 
@@ -17180,7 +17185,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\defender-threat-file-hash-legacyroot-1-20260325-011845\defender-threat-file-hash-legacyroot-1.txt |
 | Exact quote / path | MsMpEng.exe \| RegQueryValue \| HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\ThreatFileHashLogging \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
 | Key found on page | `True` |
-| Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. In the live set runs, MsMpEng.exe read the root ThreatFileHashLogging value directly and read the Policy Manager EnableFileHashComputation alias directly in a separate pass. The documented policy MpEngine path still did not produce a direct read in the non-rebooted or rebooted follow-up. |
+| Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a separate pass. A later official Microsoft PE sample follow-up still produced event 1116 with no event 1120, and the documented policy MpEngine path still did not produce a direct read in the non-rebooted or rebooted follow-up. |
 
 **Decision**
 
@@ -17191,13 +17196,13 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The feature name and 0/1 semantics are documented, but current 25H2 runtime still shows more than one live control surface. The documented policy MpEngine path did not produce a direct read in the non-rebooted pass or the rebooted follow-up, so the record stays in active research instead of becoming an app-facing write. |
+| Why | The feature name and 0/1 semantics are documented, but current 25H2 runtime still shows more than one live control surface. Even with an official Microsoft PE sample, the documented policy MpEngine path did not produce a direct read and event 1120 still did not appear, so the record stays in active research instead of becoming an app-facing write. |
 
 Blocking issues:
 - The documented policy MpEngine path did not produce a direct live read in either the non-rebooted or rebooted 25H2 pass.
 - A same-window WinDefend restart attempt was blocked in the guest, so service-restart evidence is still limited.
 - The current runtime reads the legacy root value and the Policy Manager alias directly.
-- Event 1120 still needs a PE-based follow-up because Microsoft limits file-indicator hash support to PE files.
+- An official Microsoft PE demo sample still produced event 1116 with no event 1120 on the baseline, the legacy root pass, and the Policy Manager pass.
 
 ---
 
@@ -22286,12 +22291,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Service Start Mode` |
 | Scope | `user-session` |
 | Source file | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -22315,10 +22320,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -22377,12 +22382,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents Bluetooth User Support Service `(BluetoothUserService)` with a Manual default start mode, marks it `OK to disable`, and states that it supports Bluetooth features relevant to each user session. The app disables instantiated `BluetoothUserService_*` services, which is how the per-user service family appears in practice. |
+| Why | Microsoft documents Bluetooth User Support Service `(BluetoothUserService)` with a Manual default start mode, marks it `OK to disable`, and states that it supports Bluetooth features relevant to each user session. The app disables instantiated `BluetoothUserService_*` services, which is how the per-user service family appears in practice, so the runtime surface still matches the documented family cleanly. |
 
 ---
 

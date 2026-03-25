@@ -6,8 +6,9 @@ param(
     [ValidateSet(0, 1)]
     [int]$State = 1,
 
-    [ValidateSet('com', 'pe')]
+    [ValidateSet('com', 'pe', 'custom')]
     [string]$SampleKind = 'com',
+    [string]$HostCustomSamplePath = '',
 
     [string]$SnapshotName = 'baseline-20260325-defender-on',
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
@@ -31,6 +32,7 @@ $probeHostScript = Join-Path $PSScriptRoot 'defender-policy-probe.ps1'
 $activityHostScript = Join-Path $PSScriptRoot 'defender-threat-file-hash-activity.ps1'
 $guestProbeScript = Join-Path $GuestScriptRoot 'defender-policy-probe.ps1'
 $guestActivityScript = Join-Path $GuestScriptRoot 'defender-threat-file-hash-activity.ps1'
+$guestCustomSample = Join-Path $GuestOutputRoot 'defender-custom-sample.exe'
 
 $prefix = switch ($Mode) {
     'baseline' { "defender-threat-file-hash-baseline-$SampleKind" }
@@ -222,6 +224,21 @@ foreach ($scriptPair in @(
     Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $scriptPair.Host, $scriptPair.Guest) | Out-Null
 }
 
+if ($SampleKind -eq 'custom') {
+    if ([string]::IsNullOrWhiteSpace($HostCustomSamplePath)) {
+        throw 'HostCustomSamplePath is required when SampleKind is custom.'
+    }
+
+    if (-not (Test-Path $HostCustomSamplePath)) {
+        throw "Custom sample path does not exist: $HostCustomSamplePath"
+    }
+
+    Invoke-Vmrun -Arguments @(
+        '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
+        'CopyFileFromHostToGuest', $VmPath, $HostCustomSamplePath, $guestCustomSample
+    ) | Out-Null
+}
+
 if ($GuestRebootBeforeCapture -and $Mode -ne 'baseline') {
     Set-GuestDwordValue -RegistryKeyPath $registryPath -Name $valueName -Value $State
     $previousBoot = Get-GuestLastBootUpTime
@@ -234,6 +251,9 @@ if ($RestartWinDefend) {
     $activityCommand += ' -RestartWinDefend'
 }
 $activityCommand += " -SampleKind $SampleKind"
+if ($SampleKind -eq 'custom') {
+    $activityCommand += " -CustomSamplePath '$guestCustomSample'"
+}
 
 $matchFragments = @(
     'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\ThreatFileHashLogging',

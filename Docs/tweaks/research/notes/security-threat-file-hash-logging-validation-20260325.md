@@ -44,6 +44,8 @@ Official Microsoft docs:
 - `Create indicators for files`
   - path/feature: `MpEngine\EnableFileHashComputation`
   - key point: file-indicator hash support is for `PE` files only
+- `Demonstrate cloud-delivered protection`
+  - key point: Microsoft provides a password-protected `BaFS Sample` PE file for Defender demos
 - `Troubleshoot Microsoft Defender Antivirus settings`
   - key point: event `1120` is the file-hash-logging event and is tied to `ThreatFileHashLogging`
 
@@ -80,6 +82,14 @@ Artifacts:
   - `H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-095038`
 - rebooted documented MpEngine path:
   - `H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-100039`
+- official Microsoft PE sample baseline:
+  - `H:\Temp\vm-tooling-staging\defender-threat-file-hash-baseline-1-custom-20260325-131902`
+- official Microsoft PE sample with legacy root:
+  - `H:\Temp\vm-tooling-staging\defender-threat-file-hash-legacyroot-1-custom-20260325-133409`
+- official Microsoft PE sample with Policy Manager:
+  - `H:\Temp\vm-tooling-staging\defender-threat-file-hash-policymanager-1-custom-20260325-135316`
+- official Microsoft PE sample with rebooted MpEngine path:
+  - `H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-custom-20260325-140816`
 
 ### Baseline
 
@@ -226,6 +236,111 @@ HASH_EVENT_COUNT=0
 
 So this PE overlay sample did not trigger Defender at all. That means it is not a usable PE test sample for closing the `1120` gap.
 
+## Official Microsoft PE sample follow-up
+
+I then switched to the official Microsoft cloud-protection demo sample instead of the text-file EICAR probe or the synthetic PE overlay.
+
+Host extraction proof:
+
+- zip source: `https://go.microsoft.com/fwlink/?linkid=2298135`
+- extracted file:
+  - `H:\Temp\vm-tooling-staging\defender-cloud-demo-extracted\microsoft-defender-cloud-demo.exe`
+- file metadata:
+  - `FileDescription = BaFS Sample`
+  - `OriginalFilename = BaFS Sample.exe`
+  - `SHA256 = 670b00e90a7c9eb7ac6674441551e7764a8364c26e44dcc92474a9abcfac4c04`
+
+### Official PE baseline
+
+Artifacts:
+
+- `H:\Temp\vm-tooling-staging\defender-threat-file-hash-baseline-1-custom-20260325-131902`
+
+Result:
+
+```text
+DETECTION_EVENT_COUNT=1
+HASH_EVENT_COUNT=0
+Name: Trojan:Win32/Clengtst.A!plock
+Path: file:_C:\Tools\Perf\Procmon\defender-custom-sample.exe
+```
+
+So the official Microsoft PE sample was enough to trigger a real Defender detection on this VM, but event `1120` still did not appear on the unset baseline.
+
+### Official PE with legacy root
+
+Setting:
+
+- `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender`
+- `ThreatFileHashLogging = 1`
+
+Artifacts:
+
+- `H:\Temp\vm-tooling-staging\defender-threat-file-hash-legacyroot-1-custom-20260325-133409`
+
+Result:
+
+```text
+DETECTION_EVENT_COUNT=1
+HASH_EVENT_COUNT=0
+```
+
+The same PE sample still produced only event `1116`. In this PE detection window, the filtered Procmon summary did not show a fresh direct read of `ThreatFileHashLogging`.
+
+### Official PE with Policy Manager
+
+Setting:
+
+- `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager`
+- `EnableFileHashComputation = 1`
+
+Artifacts:
+
+- `H:\Temp\vm-tooling-staging\defender-threat-file-hash-policymanager-1-custom-20260325-135316`
+
+Result:
+
+```text
+DETECTION_EVENT_COUNT=1
+HASH_EVENT_COUNT=0
+```
+
+Again, the official PE sample produced event `1116` and no `1120`. In this PE detection window, the filtered Procmon summary did not show a fresh direct read of `Policy Manager\EnableFileHashComputation`.
+
+### Official PE with rebooted MpEngine path
+
+Setting:
+
+- `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine`
+- `EnableFileHashComputation = 1`
+
+Method:
+
+- revert to `baseline-20260325-defender-on`
+- write the documented policy value
+- perform a real guest reboot
+- run a capture-only Procmon pass plus the official Microsoft PE sample
+
+Artifacts:
+
+- `H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-custom-20260325-140816`
+
+Result:
+
+```text
+MATCH_COUNT=0
+DETECTION_EVENT_COUNT=0
+HASH_EVENT_COUNT=0
+FILE_EXISTS_AFTER=False
+MPCMDRUN_EXIT_CODE=2
+```
+
+This is a strong negative follow-up:
+
+- the documented policy path still did not produce a direct read after reboot
+- event `1120` still did not appear
+- the PE sample had already been removed by the time the activity collector checked for it
+
 ## What this means
 
 This record is not weak. It is just not clean enough for Class A.
@@ -243,8 +358,8 @@ What is still unresolved:
 
 - the documented policy `MpEngine` path did not produce a direct live read in either the non-rebooted or rebooted pass
 - a guest-side `WinDefend` restart was blocked, so there is still no service-restart trace window
-- the EICAR text-file probe is not enough to close the `1120` loop because Microsoft limits file-indicator hash support to `PE` files
-- the first PE overlay follow-up did not trigger Defender detection, so a better PE-only sample is still needed
+- even the official Microsoft `BaFS Sample` PE file produced event `1116` with no event `1120`
+- the official PE root and Policy Manager passes did not show a fresh direct read of the target values in the same detection window
 
 ## Current classification
 

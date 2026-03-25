@@ -108,8 +108,8 @@ These have the best mix of documented semantics and low blast radius.
   - the value exists in upstream dump/mirror material
   - the name strongly suggests a logging-only setting
 - What is still missing:
-  - a PE-based follow-up for event `1120`
   - a clean final answer on whether the documented `MpEngine` path or the live root / Policy Manager paths should be treated as canonical on 25H2
+  - a clean final answer on what extra condition is needed for event `1120` on 25H2, because the official Microsoft PE demo sample still did not produce it
 
 ### HideExclusionsFromLocalAdmins
 
@@ -158,6 +158,7 @@ These have the best mix of documented semantics and low blast radius.
 - a same-window `WinDefend` restart attempt was blocked in the guest
 - a rebooted capture pass still did not produce a direct read from the documented policy path
 - a PE overlay follow-up that copied a built-in Windows PE and appended the EICAR string did not trigger Defender at all, so it is not a usable `1120` sample
+- an official Microsoft `BaFS Sample` PE file later produced event `1116` on the baseline and on live root / Policy Manager passes, but still produced no event `1120`
 - Current classification:
   - `Class C`
   - not app-mapped
@@ -191,7 +192,7 @@ These are either overridden on modern builds, state-like, tenant-specific, or to
 3. `SubmitSamplesConsent`
    - same pattern
 4. `ThreatFileHashLogging`
-   - PE-based follow-up for event `1120`
-   - compare whether a safe PE sample changes the root / Policy Manager / policy-MpEngine story
+   - only revisit if a better explanation for missing event `1120` appears
+   - current PE follow-up is no longer missing; it is negative evidence
 5. `HideExclusionsFromLocalAdmins`
    - done

@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 188 |
-| B count | 53 |
+| A count | 190 |
+| B count | 51 |
 | C count | 1 |
 | E count | 54 |
 
@@ -110,7 +110,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `explorer.show-type-overlay` | validated | Class A | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` | `cfc0557b84bf4e97fe2aba9cc09ad19a8861d3a1c7e112ec25ac05e45367df7a` | `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2` | 1 |
 | `explorer.taskbar-alignment-left` | validated | Class A | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
 | `network.disable-active-probing` | validated | Class A | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0` | 1 |
-| `network.disable-default-shares` | validated | Class B | `Docs/tweaks/research/records/network.disable-default-shares.json` | `5940e2ab95a1f622a7bb367cc863648e9612c2e2b261e0a5ed7748fe5ffd37da` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
+| `network.disable-default-shares` | validated | Class A | `Docs/tweaks/research/records/network.disable-default-shares.json` | `5940e2ab95a1f622a7bb367cc863648e9612c2e2b261e0a5ed7748fe5ffd37da` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
 | `network.disable-ipv6` | validated | Class B | `Docs/tweaks/research/records/network.disable-ipv6.json` | `024c6f3d596e053e312ee3444561fa5647441f688703fabb36829995c58b1597` | `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa` | 1 |
 | `network.disable-llmnr` | validated | Class A | `Docs/tweaks/research/records/network.disable-llmnr.json` | `d5e97ff812fede46d53962ab8f26bdd0e04d33fe303dd25dabada41ecb8b808c` | `eed09962b64570b68d966d4d13cb149e60d9ac1b4b65b1159d77e3994570e5ff` | 1 |
 | `network.disable-lltd` | validated | Class A | `Docs/tweaks/research/records/network.disable-lltd.review.json` | `147a50cc0134ab85f1f14d21691d23fce788b4c5799540cea3c6d6b0023144b9` | `95621d902169844295e40dc7f4043671933f41cfbbad706d915315fae84b8121` | 2 |
@@ -243,7 +243,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.enable-sudo` | validated | Class A | `Docs/tweaks/research/records/security.enable-sudo.json` | `8934276844f480262072241c97802a305ecc1a5de0eba9ac3b6db811a0594dca` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `3c0fe2ac6864177e93deda81796003cbf094fe6b07d66c4025eb0195d26cf67e` | `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891` | 1 |
 | `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
-| `security.threat-file-hash-logging` | validated | Class C | `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json` | `e672685d4a0d8528ebcfec63e75faf64b3afbc369cd82bb1a8dd27ac34c894d8` | `3266b440e3fb8d682c704068ed9f36194d9189613eee04bd6a51f2ceb948c474` | 3 |
+| `security.threat-file-hash-logging` | validated | Class C | `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json` | `b4a77024114a37720667663e4eaa443d939cd32d347dcb4b07c8fac369708146` | `3075fda853772c6c36380e41d119e8fee92f79085c96404f4f0698af1a1518c3` | 3 |
 | `security.trusted-path-credential-prompting` | validated | Class B | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
 | `security.uac-never-notify` | validated | Class B | `Docs/tweaks/research/records/security.uac-never-notify.json` | `c39a26d1490d55dd6e56b7be9b2ed61dbfd99ddfa553e82be7ea68669011ec2b` | `c215bf43faa2f8fcec9b9170ca43ef374600ba4aa90aabbc6ad2d1ace9ff555f` | 3 |
 | `system.aero-shake` | validated | Class A | `Docs/tweaks/research/records/system.aero-shake.json` | `916c792d59ed667a14486ed23e06b87b5268bce3773834d4a84dbdf6a022f8f5` | `68235b77e28f36b4a80a21e0ff5443ca6bd12bde4fff5dee72fe2e1f30e9fa2b` | 1 |
@@ -291,7 +291,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.reliability-timestamp-enabled` | validated | Class B | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `a717e644a5b130e10935d806be394efbb25af18fa918495d4b3887d967467a49` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `596535c584273df8990c903759f417326e537acacfe61328e562415c7118c72b` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
-| `system.services.disable-bluetooth-user-service` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` | `1f4928052969e373c8b7c33441c6842890a6aff596d37a6f0f3dfb5d3ff248a8` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 1 |
+| `system.services.disable-bluetooth-user-service` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` | `1f4928052969e373c8b7c33441c6842890a6aff596d37a6f0f3dfb5d3ff248a8` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 1 |
 | `system.services.disable-connected-user-experiences` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-connected-user-experiences.json` | `80d322981d626d370d5eb5811e17aad443a6e71b7d5a27347a6ebd9b74b1ee7d` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 1 |
 | `system.services.disable-print-notifications` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-print-notifications.json` | `0df2ed45f129e592b93fc342f4547b53d961a468c8a1e710997e00c5c06cbd8c` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 1 |
 | `system.services.disable-print-spooler` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-print-spooler.json` | `62613c480244eb2cd56c4a2e791ea96f307785459fdab8e2523d7b3f5ec62b07` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 1 |
@@ -5552,7 +5552,7 @@ Windows Internals references:
 ### `network.disable-default-shares`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Configuration`
 - Scope: `device`
@@ -5566,10 +5566,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -14190,10 +14190,10 @@ Windows Internals references:
 - Area: `Microsoft Defender file hash logging`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json`
-- Source SHA256: `e672685d4a0d8528ebcfec63e75faf64b3afbc369cd82bb1a8dd27ac34c894d8`
-- Proof SHA256: `3266b440e3fb8d682c704068ed9f36194d9189613eee04bd6a51f2ceb948c474`
+- Source SHA256: `b4a77024114a37720667663e4eaa443d939cd32d347dcb4b07c8fac369708146`
+- Proof SHA256: `3075fda853772c6c36380e41d119e8fee92f79085c96404f4f0698af1a1518c3`
 
-**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface, but live Win25H2Clean traces show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias instead. In the Defender-on 25H2 snapshot, a text EICAR probe produced event 1116 but no event 1120, and the documented policy MpEngine path still did not produce a direct read in either the non-rebooted pass or the rebooted follow-up.
+**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. Older text-file traces still show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias, while the documented policy MpEngine path still did not produce a direct read in either the non-rebooted pass or the rebooted follow-up.
 
 **Evidence class**
 
@@ -14228,6 +14228,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- |
 | `ms-defender-enable-file-hash-computation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Create indicators for files | `high` |
 | `ms-defender-file-hash-event1120` | `official-doc` | `Microsoft official doc` | Microsoft support: Troubleshoot Microsoft Defender Antivirus settings | `high` |
+| `ms-defender-cloud-demo-sample` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Demonstrate cloud-delivered protection | `high` |
 | `repo-defender-threat-file-hash-dumps` | `repo-doc` | `Current repo docs` | Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation | `medium` |
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | `high` |
 | `vm-defender-runtime-enabled-baseline` | `vm-test` | `VM test / probe` | Defender-on 25H2 snapshot baseline | `high` |
@@ -14237,6 +14238,10 @@ Windows Internals references:
 | `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | `VM test / probe` | Non-rebooted MpEngine pass did not show a live read | `medium` |
 | `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | `VM test / probe` | WinDefend service restart follow-up was blocked | `medium` |
 | `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | `VM test / probe` | Rebooted MpEngine pass still did not show a direct policy-path read | `high` |
+| `vm-defender-threat-file-hash-pe-baseline` | `vm-test` | `VM test / probe` | Official Microsoft PE sample baseline still produced no event 1120 | `high` |
+| `vm-defender-threat-file-hash-root-pe-no-hash` | `vm-test` | `VM test / probe` | Legacy root PE pass still produced no event 1120 | `high` |
+| `vm-defender-threat-file-hash-policymanager-pe-no-hash` | `vm-test` | `VM test / probe` | Policy Manager PE pass still produced no event 1120 | `high` |
+| `vm-defender-threat-file-hash-mpengine-pe-reboot-no-hash` | `vm-test` | `VM test / probe` | Rebooted MpEngine PE pass still produced no event 1120 | `high` |
 
 **Sources**
 
@@ -14249,7 +14254,7 @@ _No source block present._
 | source_url | H:\\Temp\\vm-tooling-staging\\defender-threat-file-hash-legacyroot-1-20260325-011845\\defender-threat-file-hash-legacyroot-1.txt |
 | exact_quote_or_path | MsMpEng.exe \| RegQueryValue \| HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
 | key_found_on_page | True |
-| notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. In the live set runs, MsMpEng.exe read the root ThreatFileHashLogging value directly and read the Policy Manager EnableFileHashComputation alias directly in a separate pass. The documented policy MpEngine path still did not produce a direct read in the non-rebooted or rebooted follow-up. |
+| notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a separate pass. A later official Microsoft PE sample follow-up still produced event 1116 with no event 1120, and the documented policy MpEngine path still did not produce a direct read in the non-rebooted or rebooted follow-up. |
 ### `security.trusted-path-credential-prompting`
 
 - Status: `validated`
@@ -17352,7 +17357,7 @@ Windows Internals references:
 ### `system.services.disable-bluetooth-user-service`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `user-session`
@@ -17366,10 +17371,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
