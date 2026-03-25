@@ -184,8 +184,7 @@ public sealed class DashboardSnapshotDeltaService
 
     private static string FormatTimestamp(DateTimeOffset timestamp)
     {
-        var localTimestamp = timestamp.ToLocalTime();
-        return localTimestamp.ToString("yyyy-MM-dd HH:mm");
+        return timestamp.ToString("yyyy-MM-dd HH:mm");
     }
 }
 
