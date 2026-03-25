@@ -1,10 +1,10 @@
 {
   "$schema": "../setting-research.schema.json",
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "record_id": "system.priority-control",
   "tweak_id": "system.priority-control",
   "record_status": "validated",
-  "summary": "Win25H2Clean manual VM pass confirmed Win32PrioritySeparation transitions 2 -> 38 -> 2 with real reboots and bounded WinSAT CPU/memory runs.",
+  "summary": "Win25H2Clean now has a full current-build evidence chain for Win32PrioritySeparation: live read/write code paths, reversible 2 -> 38 -> 2 VM proof, and bounded CPU/memory benchmark runs after real reboots.",
   "setting": {
     "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
     "category": "System",
@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "This setting changes how Windows gives extra CPU time to the foreground application compared with background work. It is a low-level scheduler setting, not a normal everyday tweak.",
     "why_people_change_it": "People change it when chasing old gaming or responsiveness advice, or when undoing manual scheduler tweaks from third-party guides.",
-    "tradeoffs_overview": "Changing the value can alter how much extra runtime the foreground app gets and how scheduler quantums behave. The feature area is real, but this research pass did not capture a modern primary Microsoft source that validates the exact raw 0x26 value used by the app.",
-    "professional_notes": "Microsoft's Win32_OperatingSystem class maps Win32PrioritySeparation to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl and exposes related high-level properties such as ForegroundApplicationBoost, QuantumLength, and QuantumType. However, the modern WMI page only gives high-level boost values for ForegroundApplicationBoost and marks QuantumLength and QuantumType as not supported on newer systems. The current app writes the raw DWORD 38 (0x26), which this dataset cannot yet publish as a validated modern mapping because the primary sources captured in this research pass do not publish the exact bitmask semantics for current Windows releases.",
+    "tradeoffs_overview": "Changing the value can alter how much extra runtime the foreground app gets and how scheduler quantums behave. The feature area is real and the current build evidence is strong, but the exact raw bitmask semantics for 0x26 still do not come from a modern Microsoft publication.",
+    "professional_notes": "Microsoft's Win32_OperatingSystem class maps Win32PrioritySeparation to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl and exposes related high-level properties such as ForegroundApplicationBoost, QuantumLength, and QuantumType. Decompiled PriorityControl logic in the repo confirms the read/write path for the raw value. The Win25H2Clean VM then confirmed the current observed baseline value 2, the app profile 38 (0x26), and a clean restore back to 2 after real reboots. That is strong enough to treat 2 and 38 as current observed states, but not strong enough to publish raw 0x26 as a modern Microsoft default.",
     "targets": [
       {
         "target_id": "win32-priority-separation",
@@ -23,33 +23,37 @@
         "value_type": "REG_DWORD",
         "allowed_values": [
           {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Modern validated default not captured",
-            "meaning": "This research pass did not capture a modern primary Microsoft source that publishes the exact raw default DWORD for Win32PrioritySeparation.",
+            "state_kind": "value",
+            "value": 2,
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current 25H2 VM baseline read back Win32PrioritySeparation = 2 before the app profile was applied.",
             "evidence_ids": [
-              "ms-win32-operatingsystem-priority"
+              "vm-batch-probe-20260320-priority-control",
+              "vm-manual-benchmark-20260324-priority-control"
             ]
           },
           {
             "state_kind": "value",
             "value": 38,
             "label": "Observed app profile",
-            "meaning": "The current app treats 0x26 as its balanced foreground scheduling profile, but this record has not validated that exact raw value from a modern primary Microsoft source.",
+            "meaning": "The current app treats 0x26 as its balanced foreground scheduling profile, and the Win25H2Clean VM confirmed that write under real rebooted runs.",
             "evidence_ids": [
               "app-system-registry-provider",
-              "repo-system-doc-priority"
+              "repo-system-doc-priority",
+              "repo-system-decomp-prioritycontrol",
+              "vm-batch-probe-20260320-priority-control",
+              "vm-manual-benchmark-20260324-priority-control"
             ]
           }
         ],
-        "notes": "Tracked as an observed raw scheduler bitmask only."
+        "notes": "Tracked as a current observed scheduler bitmask, not as a published Microsoft default."
       }
     ]
   },
   "app_current_implementation": {
     "status": "matches-research",
     "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
-    "notes": "Guest-side reversible probe and a later manual VM benchmark pass on Win25H2Clean confirmed the current app write and restore cycle for Win32PrioritySeparation.",
+      "notes": "Guest-side reversible probe and a later manual VM benchmark pass on Win25H2Clean confirmed the current app write and restore cycle for Win32PrioritySeparation.",
     "writes": [
       {
         "target_id": "win32-priority-separation",
@@ -63,26 +67,27 @@
   },
   "windows_defaults": [
     {
-      "label": "Conservative baseline",
-      "applies_to": "Systems where this dataset has not yet validated a modern raw Win32PrioritySeparation baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current 25H2 builds where the live baseline still reads back 2 before the app profile is applied",
       "states": [
         {
           "target_id": "win32-priority-separation",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "Do not publish a validated raw scheduler bitmask until a stronger Microsoft source is captured."
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Use the current observed 25H2 VM baseline value."
         }
       ],
-      "notes": "This record documents the feature area but avoids publishing an unsupported raw default value.",
+      "notes": "This is the current observed VM baseline, not a claim about every Windows build.",
       "evidence_ids": [
-        "ms-win32-operatingsystem-priority"
+        "vm-batch-probe-20260320-priority-control",
+        "vm-manual-benchmark-20260324-priority-control"
       ]
     }
   ],
   "recommended_profiles": [
     {
-      "profile_id": "hold-for-research",
-      "label": "Hold for research",
+      "profile_id": "observed-default",
+      "label": "Observed default",
       "intended_for": [
         "Research tracking only",
         "Users documenting scheduler experiments"
@@ -94,20 +99,21 @@
       "states": [
         {
           "target_id": "win32-priority-separation",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "Do not publish or apply the raw bitmask until a modern Microsoft source is captured."
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Use the current observed baseline value from the 25H2 VM."
         }
       ],
-      "good_when": "You want to document the scheduler setting without overstating confidence.",
-      "bad_when": "You need a modern primary-source Microsoft-backed Win32PrioritySeparation preset.",
+      "good_when": "You want the current observed 25H2 baseline for comparisons.",
+      "bad_when": "You want the app's foreground-boost profile.",
       "tradeoffs": [
-        "The scheduler feature area is documented honestly.",
-        "The raw bitmask stays blocked from validated publication."
+        "Leaves the scheduler on the current observed baseline.",
+        "Still stays research-gated because the raw bitmask semantics are not fully published by Microsoft."
       ],
       "apply_allowed": false,
       "evidence_ids": [
-        "ms-win32-operatingsystem-priority"
+        "vm-batch-probe-20260320-priority-control",
+        "vm-manual-benchmark-20260324-priority-control"
       ]
     },
     {
@@ -125,20 +131,23 @@
           "target_id": "win32-priority-separation",
           "state_kind": "value",
           "value": 38,
-          "rationale": "Observed app write used as the current foreground scheduling profile."
+          "rationale": "Use the app's observed 0x26 foreground scheduling profile."
         }
       ],
-      "good_when": "You are documenting what the app currently writes for Win32PrioritySeparation.",
-      "bad_when": "You need a validated modern Microsoft mapping for the raw bitmask.",
+      "good_when": "You want to compare the app's current scheduler profile against the observed 25H2 baseline.",
+      "bad_when": "You want only Microsoft-published raw bitmask values.",
       "tradeoffs": [
-        "The current app behavior is captured.",
-        "The exact raw scheduler semantics remain unvalidated."
+        "The current app behavior is backed by VM runtime and bounded benchmark proof.",
+        "The exact raw scheduler semantics still are not published by Microsoft at the bit level."
       ],
       "apply_allowed": false,
-      "notes": "Blocked until a stronger Microsoft source for the raw bitmask mapping is captured.",
+      "notes": "Strong current-build evidence exists, but the raw scheduler bitmask still stays research-gated.",
       "evidence_ids": [
         "app-system-registry-provider",
-        "repo-system-doc-priority"
+        "repo-system-doc-priority",
+        "repo-system-decomp-prioritycontrol",
+        "vm-batch-probe-20260320-priority-control",
+        "vm-manual-benchmark-20260324-priority-control"
       ]
     }
   ],
@@ -227,12 +236,12 @@
   ],
   "decision": {
     "confidence": "medium",
-    "apply_allowed": true,
+    "apply_allowed": false,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Win25H2Clean reversible probe and a later manual VM pass both confirmed Win32PrioritySeparation transitions 2 -> 38 -> 2 on the documented PriorityControl path. The manual pass also ran bounded WinSAT CPU and memory workloads after real reboots.",
+    "why": "Win25H2Clean reversible proof, the later rebooted VM benchmark pass, and the repo decompiled read/write path all line up on Win32PrioritySeparation. That is enough to track the observed baseline value 2 and the app profile 38 as current-build states, but not enough to treat 0x26 as a published Microsoft default.",
     "blocking_issues": []
   },
   "open_questions": [

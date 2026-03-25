@@ -19,7 +19,7 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             context,
             "system.priority-control",
             "Set Foreground Scheduling Priority",
-            "Sets Win32PrioritySeparation to the Windows default (0x26) for balanced foreground boost.",
+            "Sets Win32PrioritySeparation to the app's observed 0x26 foreground scheduling profile for research comparisons.",
             TweakRiskLevel.Advanced,
             RegistryHive.LocalMachine,
             @"SYSTEM\CurrentControlSet\Control\PriorityControl",

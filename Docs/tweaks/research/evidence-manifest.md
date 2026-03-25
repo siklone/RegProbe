@@ -262,7 +262,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.disable-search-remote-queries` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `baefa2b5a3f28eb1f73a8f09b93506f2eda0fa23dfdcc4b9209c251abe608389` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
 | `system.disable-search-web-results` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-web-results.review.json` | `e795f098bea183761efafb0d3f87e77c09a48b74bf7e1277f122db8f73df0eae` | `bb1b1691889396c055ff9308c954c15fe921b1bf40045ac22449e871fd6c3a37` | 1 |
 | `system.disable-shortcut-arrow` | validated | Class B | `Docs/tweaks/research/records/system.disable-shortcut-arrow.json` | `e05e11b9584629849a78d1e94ab8022634dafb5ae4e4eba98ccdef122373c30f` | `4dc6f2003ee84572320f65a1acecf6c701fc68c055921e90ca666de432f9ebef` | 1 |
-| `system.disable-startup-delay` | validated | Class D | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1` | `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7` | 1 |
+| `system.disable-startup-delay` | validated | Class D | `Docs/tweaks/research/records/system.disable-startup-delay.review.json` | `84c7c9903f3895cb93f19d557134290eeab219ed10a1fb9adae4e1af5c282f2b` | `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7` | 1 |
 | `system.disable-storage-sense` | validated | Class A | `Docs/tweaks/research/records/system.disable-storage-sense.json` | `c9278c284cb076386248e0e79304f7358634917c285f79ed11af236802821e80` | `aab0b6531e384b0ec9cbb05bc4fd51a5f72f5fffb64825086125f5d372926ff1` | 1 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `8d61ee5b4c35c7fa432ce252b1c66ec363052d7535070c3143540e4686a54356` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | Class A | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `9724d8cc13adf9784368f3d2c53404531e3d40d085235cadde376f377349e290` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
@@ -287,7 +287,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.ntfs-enable-long-paths` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-enable-long-paths.json` | `d101a6382cc22b8bd2dd60f2d8ff325ea4c7c712f05bfc72566c2f6a1742cdab` | `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179` | 1 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
 | `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
-| `system.priority-control` | validated | Class D | `Docs/tweaks/research/records/system.priority-control.review.json` | `9e1f07a3b5d85840b5e49a1cc316e512d46529a339c1de92b66af7ddb1e18fb2` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
+| `system.priority-control` | validated | Class D | `Docs/tweaks/research/records/system.priority-control.review.json` | `65338290ddc475e60627d497c34c6f508e7920c8b14730a6324ab1a5ebec71e9` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
 | `system.reduce-shutdown-timeouts` | validated | Class D | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
 | `system.reliability-timestamp-enabled` | validated | Class B | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
@@ -15263,7 +15263,7 @@ Windows Internals references:
 - Area: `Explorer Startup Behavior`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.disable-startup-delay.review.json`
-- Source SHA256: `fb6acf31dde31d62a09a452236ccbee0e60dfade7375ae19e064695140e9e8e1`
+- Source SHA256: `84c7c9903f3895cb93f19d557134290eeab219ed10a1fb9adae4e1af5c282f2b`
 - Proof SHA256: `0508c44bf94115c6f22435ea590b7b5cf0c65c6f6e36553adeb7a86b08da47d7`
 
 **Summary:** Win25H2Clean reversible probe confirmed StartupDelayInMSec=0 under Explorer\Serialize and restored the baseline.
@@ -16909,7 +16909,7 @@ Windows Internals references:
 - Area: `Scheduler / Priority Control`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.priority-control.review.json`
-- Source SHA256: `9e1f07a3b5d85840b5e49a1cc316e512d46529a339c1de92b66af7ddb1e18fb2`
+- Source SHA256: `65338290ddc475e60627d497c34c6f508e7920c8b14730a6324ab1a5ebec71e9`
 - Proof SHA256: `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48`
 
 **Summary:** Win25H2Clean manual VM pass confirmed Win32PrioritySeparation transitions 2 -> 38 -> 2 with real reboots and bounded WinSAT CPU/memory runs.

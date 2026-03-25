@@ -1,10 +1,10 @@
 {
   "$schema": "../setting-research.schema.json",
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "record_id": "system.disable-startup-delay",
   "tweak_id": "system.disable-startup-delay",
   "record_status": "validated",
-  "summary": "Win25H2Clean reversible probe confirmed StartupDelayInMSec=0 under Explorer\\Serialize and restored the baseline.",
+  "summary": "Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, and the value restores back to missing cleanly.",
   "setting": {
     "name": "Startup Program Delay",
     "category": "System",
@@ -12,8 +12,8 @@
     "scope": "user",
     "casual_explanation": "Windows can stagger startup apps instead of launching them all immediately. People disable the delay when they want login to feel quicker, but that can also make startup load spike harder.",
     "why_people_change_it": "People disable it when they want startup apps to launch sooner after sign-in.",
-    "tradeoffs_overview": "Removing the startup delay can make apps appear sooner, but it can also increase boot-time contention and make sign-in feel heavier on slower systems. The current registry mapping is still only repo-observed in this dataset.",
-    "professional_notes": "The repo documentation and app both use HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\StartupDelayInMSec = 0 to disable the delay. This research pass did not capture a primary Microsoft document that publishes the key and its exact semantics, so the record remains a low-confidence observed mapping only.",
+    "tradeoffs_overview": "Removing the startup delay can make apps appear sooner, but it can also increase boot-time contention and make sign-in feel heavier on slower systems. The current build evidence is strong, but this still is not a primary Microsoft registry publication.",
+    "professional_notes": "The current dataset has three layers of proof for StartupDelayInMSec on HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize: repo notes, a Ghidra string hit for Explorer Serialize, and a Win25H2Clean Procmon shell-restart trace that reads StartupDelayInMSec live. The reversible VM probe confirmed missing -> 0 -> missing on the same path. That is strong enough to treat the missing baseline and value 0 as current observed states, but it still stays research-gated because the exact registry contract is not published by Microsoft as a supported shell policy.",
     "targets": [
       {
         "target_id": "startup-delay-in-msec",
@@ -23,22 +23,26 @@
         "value_type": "REG_DWORD",
         "allowed_values": [
           {
-            "state_kind": "unknown",
+            "state_kind": "missing",
             "value": null,
-            "label": "Primary Microsoft mapping not captured",
-            "meaning": "This research pass did not capture a primary Microsoft source for the exact StartupDelayInMSec registry semantics.",
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current 25H2 VM baseline leaves StartupDelayInMSec unset and Explorer still reads the Serialize path live.",
             "evidence_ids": [
-              "repo-system-doc-startup-delay"
+              "vm-batch-probe-20260320-disable-startup-delay",
+              "procmon-startup-delay-shell-restart"
             ]
           },
           {
             "state_kind": "value",
             "value": 0,
-            "label": "Observed app no-delay profile",
-            "meaning": "The current app treats 0 as the remove-startup-delay profile, based on repo observation rather than a captured primary Microsoft source.",
+            "label": "Observed no-delay profile",
+            "meaning": "The current app and the Win25H2Clean shell trace both support 0 as the no-delay startup profile on the Explorer Serialize path.",
             "evidence_ids": [
               "repo-system-doc-startup-delay",
-              "app-system-provider"
+              "app-system-provider",
+              "vm-batch-probe-20260320-disable-startup-delay",
+              "procmon-startup-delay-shell-restart",
+              "ghidra-explorer-serialize-search"
             ]
           }
         ]
@@ -62,26 +66,27 @@
   },
   "windows_defaults": [
     {
-      "label": "Conservative baseline",
-      "applies_to": "Systems where this dataset has not yet validated StartupDelayInMSec from a primary Microsoft source",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current 25H2 builds where the Explorer Serialize baseline is still unset",
       "states": [
         {
           "target_id": "startup-delay-in-msec",
-          "state_kind": "unknown",
+          "state_kind": "missing",
           "value": null,
-          "rationale": "Do not publish a validated startup-delay baseline until the exact registry mapping is backed by a primary Microsoft source."
+          "rationale": "Keep StartupDelayInMSec unset, which is the current observed Win25H2Clean baseline."
         }
       ],
-      "notes": "This keeps the startup-behavior tweak documented without overstating registry confidence.",
+      "notes": "This is the current observed shell baseline, not a published Microsoft shell policy contract.",
       "evidence_ids": [
-        "repo-system-doc-startup-delay"
+        "vm-batch-probe-20260320-disable-startup-delay",
+        "procmon-startup-delay-shell-restart"
       ]
     }
   ],
   "recommended_profiles": [
     {
-      "profile_id": "hold-for-research",
-      "label": "Hold for research",
+      "profile_id": "observed-default",
+      "label": "Observed default",
       "intended_for": [
         "Research tracking only",
         "Startup behavior comparisons"
@@ -92,20 +97,21 @@
       "states": [
         {
           "target_id": "startup-delay-in-msec",
-          "state_kind": "unknown",
+          "state_kind": "missing",
           "value": null,
-          "rationale": "Do not publish or apply the registry mapping until a primary Microsoft source is captured."
+          "rationale": "Use the current observed missing baseline on the Explorer Serialize path."
         }
       ],
-      "good_when": "You want to document startup delay behavior without overstating registry confidence.",
-      "bad_when": "You need a primary-source Microsoft-backed startup delay control.",
+      "good_when": "You want the current observed startup baseline on Win25H2Clean.",
+      "bad_when": "You want startup apps to launch immediately after sign-in.",
       "tradeoffs": [
-        "The feature area is documented honestly.",
-        "The registry mapping stays blocked from validated publication."
+        "Leaves Explorer startup staggering alone.",
+        "Still stays research-gated because Microsoft does not publish the registry contract directly."
       ],
       "apply_allowed": false,
       "evidence_ids": [
-        "repo-system-doc-startup-delay"
+        "vm-batch-probe-20260320-disable-startup-delay",
+        "procmon-startup-delay-shell-restart"
       ]
     },
     {
@@ -122,20 +128,23 @@
           "target_id": "startup-delay-in-msec",
           "state_kind": "value",
           "value": 0,
-          "rationale": "Observed app write used as the current no-delay startup profile."
+          "rationale": "Use the current no-delay profile that the VM reversible probe and shell trace both back."
         }
       ],
-      "good_when": "You are documenting what the app currently writes for startup delay.",
-      "bad_when": "You need a validated Microsoft registry mapping.",
+      "good_when": "You want startup apps to launch without the current staggered delay.",
+      "bad_when": "You want the current observed Explorer baseline or you want only primary-doc-backed tweaks.",
       "tradeoffs": [
-        "The current app behavior is captured.",
-        "The exact registry semantics remain based on repo provenance rather than a captured primary source."
+        "Can make startup feel quicker on some systems.",
+        "Can also make sign-in heavier by stacking more startup load at once."
       ],
       "apply_allowed": false,
-      "notes": "Blocked until a primary Microsoft source for StartupDelayInMSec is captured.",
+      "notes": "Strong current-build evidence exists, but the direct Microsoft registry contract is still missing.",
       "evidence_ids": [
         "repo-system-doc-startup-delay",
-        "app-system-provider"
+        "app-system-provider",
+        "vm-batch-probe-20260320-disable-startup-delay",
+        "procmon-startup-delay-shell-restart",
+        "ghidra-explorer-serialize-search"
       ]
     }
   ],
@@ -211,12 +220,12 @@
   ],
   "decision": {
     "confidence": "medium",
-    "apply_allowed": true,
+    "apply_allowed": false,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Win25H2Clean reversible probe confirmed StartupDelayInMSec transitions through missing -> 0 -> missing on the documented Explorer Serialize path.",
+    "why": "Win25H2Clean reversible proof, a live Explorer Procmon trace, and a Ghidra string hit all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as current observed states, but not enough to make the tweak app-ready.",
     "blocking_issues": []
   },
   "open_questions": [
