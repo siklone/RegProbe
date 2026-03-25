@@ -155,8 +155,9 @@ These have the best mix of documented semantics and low blast radius.
   - `MsMpEng.exe` read the root legacy value directly when it was set to `1`
   - `MsMpEng.exe` read the Policy Manager alias directly when it was set to `1`
   - the documented `MpEngine` path did not produce a direct live read in the non-rebooted pass
-  - a same-window `WinDefend` restart attempt was blocked in the guest
-  - a rebooted capture pass still did not produce a direct read from the documented policy path
+- a same-window `WinDefend` restart attempt was blocked in the guest
+- a rebooted capture pass still did not produce a direct read from the documented policy path
+- a PE overlay follow-up that copied a built-in Windows PE and appended the EICAR string did not trigger Defender at all, so it is not a usable `1120` sample
 - Current classification:
   - `Class C`
   - not app-mapped

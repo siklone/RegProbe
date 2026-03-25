@@ -8,6 +8,9 @@ param(
 
     [string]$OutputError = '',
     [switch]$RestartWinDefend,
+    [ValidateSet('com', 'pe')]
+    [string]$SampleKind = 'com',
+    [int]$ScanTimeoutSeconds = 60,
 
     [string]$WorkRoot = 'C:\Tools\Perf\Procmon\ThreatFileHashProbe'
 )
@@ -58,6 +61,53 @@ function Get-MpStatusSummary {
     }
 }
 
+function New-EicarSample {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Root,
+
+        [Parameter(Mandatory = $true)]
+        [ValidateSet('com', 'pe')]
+        [string]$Kind
+    )
+
+    $eicar = 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*'
+
+    switch ($Kind) {
+        'com' {
+            $path = Join-Path $Root 'eicar.com'
+            [System.IO.File]::WriteAllText($path, $eicar, [System.Text.Encoding]::ASCII)
+            return $path
+        }
+
+        'pe' {
+            $templateCandidates = @(
+                (Join-Path $env:SystemRoot 'System32\choice.exe'),
+                (Join-Path $env:SystemRoot 'System32\notepad.exe')
+            )
+
+            $templatePath = $templateCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+            if (-not $templatePath) {
+                throw 'Could not find a built-in PE template for the Defender PE sample.'
+            }
+
+            $path = Join-Path $Root 'eicar-pe.exe'
+            Copy-Item -Path $templatePath -Destination $path -Force
+
+            $bytes = [System.Text.Encoding]::ASCII.GetBytes($eicar)
+            $stream = [System.IO.File]::Open($path, [System.IO.FileMode]::Append, [System.IO.FileAccess]::Write, [System.IO.FileShare]::Read)
+            try {
+                $stream.Write($bytes, 0, $bytes.Length)
+            }
+            finally {
+                $stream.Dispose()
+            }
+
+            return $path
+        }
+    }
+}
+
 try {
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OutputJson) | Out-Null
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OutputEvents) | Out-Null
@@ -70,9 +120,7 @@ try {
         succeeded = $false
         error = $null
     }
-    $eicarPath = Join-Path $WorkRoot 'eicar.com'
-    $eicar = 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*'
-    [System.IO.File]::WriteAllText($eicarPath, $eicar, [System.Text.Encoding]::ASCII)
+    $samplePath = New-EicarSample -Root $WorkRoot -Kind $SampleKind
 
     $statusBefore = Get-MpStatusSummary
     $mpCmdRun = Join-Path $env:ProgramFiles 'Windows Defender\MpCmdRun.exe'
@@ -99,27 +147,21 @@ try {
         }
     }
 
-    if (@($events | Where-Object Id -eq 1116).Count -eq 0) {
-        try {
-            Start-MpScan -ScanPath $WorkRoot -ErrorAction Stop | Out-Null
-        }
-        catch {
-        }
-
-        $deadline = (Get-Date).AddSeconds(30)
-        while ((Get-Date) -lt $deadline) {
-            Start-Sleep -Seconds 2
-            $events = Get-RecentDefenderEvents -StartTime $startTime
-            if (@($events | Where-Object Id -eq 1116).Count -gt 0) {
-                break
-            }
-        }
-    }
-
+    $mpCmdRunTimedOut = $false
     $mpCmdRunExitCode = $null
     if (@($events | Where-Object Id -eq 1116).Count -eq 0 -and (Test-Path $mpCmdRun)) {
-        $scanProcess = Start-Process -FilePath $mpCmdRun -ArgumentList @('-Scan', '-ScanType', '3', '-File', $eicarPath) -Wait -PassThru -WindowStyle Hidden
-        $mpCmdRunExitCode = $scanProcess.ExitCode
+        $scanProcess = Start-Process -FilePath $mpCmdRun -ArgumentList @('-Scan', '-ScanType', '3', '-File', $samplePath) -PassThru -WindowStyle Hidden
+        if (-not $scanProcess.WaitForExit($ScanTimeoutSeconds * 1000)) {
+            $mpCmdRunTimedOut = $true
+            try {
+                Stop-Process -Id $scanProcess.Id -Force -ErrorAction Stop
+            }
+            catch {
+            }
+        }
+        else {
+            $mpCmdRunExitCode = $scanProcess.ExitCode
+        }
 
         $deadline = (Get-Date).AddSeconds(30)
         while ((Get-Date) -lt $deadline) {
@@ -135,12 +177,15 @@ try {
 
     $summary = [ordered]@{
         start_time = $startTime.ToString('o')
-        eicar_path = $eicarPath
-        file_exists_after = Test-Path $eicarPath
+        sample_kind = $SampleKind
+        sample_path = $samplePath
+        eicar_path = $samplePath
+        file_exists_after = Test-Path $samplePath
         mp_status_before = $statusBefore
         service_restart = $serviceRestart
         mpcmdrun_exists = Test-Path $mpCmdRun
         mpcmdrun_exit_code = $mpCmdRunExitCode
+        mpcmdrun_timed_out = $mpCmdRunTimedOut
         detection_event_count = @($events | Where-Object Id -eq 1116).Count
         hash_event_count = @($events | Where-Object Id -eq 1120).Count
         config_change_event_count = @($events | Where-Object Id -eq 5007).Count
@@ -154,12 +199,15 @@ try {
 
     $lines = New-Object System.Collections.Generic.List[string]
     $lines.Add('START_TIME=' + $summary.start_time)
+    $lines.Add('SAMPLE_KIND=' + $summary.sample_kind)
+    $lines.Add('SAMPLE_PATH=' + $summary.sample_path)
     $lines.Add('EICAR_PATH=' + $summary.eicar_path)
     $lines.Add('FILE_EXISTS_AFTER=' + $summary.file_exists_after)
     $lines.Add('MP_STATUS=' + (($summary.mp_status_before | ConvertTo-Json -Compress)))
     $lines.Add('SERVICE_RESTART=' + (($summary.service_restart | ConvertTo-Json -Compress)))
     $lines.Add('MPCMDRUN_EXISTS=' + $summary.mpcmdrun_exists)
     $lines.Add('MPCMDRUN_EXIT_CODE=' + $summary.mpcmdrun_exit_code)
+    $lines.Add('MPCMDRUN_TIMED_OUT=' + $summary.mpcmdrun_timed_out)
     $lines.Add('DETECTION_EVENT_COUNT=' + $summary.detection_event_count)
     $lines.Add('HASH_EVENT_COUNT=' + $summary.hash_event_count)
     $lines.Add('CONFIG_CHANGE_EVENT_COUNT=' + $summary.config_change_event_count)

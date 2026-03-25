@@ -199,6 +199,33 @@ Result in this pass:
 
 That is stronger than the first negative result because it removes the "maybe it only gets read after reboot" explanation.
 
+### PE overlay follow-up
+
+I also tried a bounded PE-only follow-up to avoid relying on the text-file EICAR path.
+
+Method:
+
+- revert to `baseline-20260325-defender-on`
+- copy a built-in Windows PE (`choice.exe` or `notepad.exe`)
+- append the EICAR string to the copied PE as an overlay
+- run the Defender activity pass with a hard `MpCmdRun` timeout
+
+Artifact:
+
+- `H:\Temp\vm-tooling-staging\defender-pe-baseline-20260325\defender-pe-baseline.json`
+
+Result:
+
+```text
+SAMPLE_KIND=pe
+MPCMDRUN_EXIT_CODE=0
+MPCMDRUN_TIMED_OUT=False
+DETECTION_EVENT_COUNT=0
+HASH_EVENT_COUNT=0
+```
+
+So this PE overlay sample did not trigger Defender at all. That means it is not a usable PE test sample for closing the `1120` gap.
+
 ## What this means
 
 This record is not weak. It is just not clean enough for Class A.
@@ -217,6 +244,7 @@ What is still unresolved:
 - the documented policy `MpEngine` path did not produce a direct live read in either the non-rebooted or rebooted pass
 - a guest-side `WinDefend` restart was blocked, so there is still no service-restart trace window
 - the EICAR text-file probe is not enough to close the `1120` loop because Microsoft limits file-indicator hash support to `PE` files
+- the first PE overlay follow-up did not trigger Defender detection, so a better PE-only sample is still needed
 
 ## Current classification
 

@@ -6,6 +6,9 @@ param(
     [ValidateSet(0, 1)]
     [int]$State = 1,
 
+    [ValidateSet('com', 'pe')]
+    [string]$SampleKind = 'com',
+
     [string]$SnapshotName = 'baseline-20260325-defender-on',
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
@@ -21,7 +24,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$hostRoot = Join-Path $HostOutputRoot ("defender-threat-file-hash-{0}-{1}-{2}" -f $Mode, $State, $stamp)
+$hostRoot = Join-Path $HostOutputRoot ("defender-threat-file-hash-{0}-{1}-{2}-{3}" -f $Mode, $State, $SampleKind, $stamp)
 New-Item -ItemType Directory -Path $hostRoot -Force | Out-Null
 
 $probeHostScript = Join-Path $PSScriptRoot 'defender-policy-probe.ps1'
@@ -30,10 +33,10 @@ $guestProbeScript = Join-Path $GuestScriptRoot 'defender-policy-probe.ps1'
 $guestActivityScript = Join-Path $GuestScriptRoot 'defender-threat-file-hash-activity.ps1'
 
 $prefix = switch ($Mode) {
-    'baseline' { 'defender-threat-file-hash-baseline' }
-    'mpengine' { 'defender-threat-file-hash-mpengine-1' }
-    'policymanager' { 'defender-threat-file-hash-policymanager-1' }
-    'legacyroot' { 'defender-threat-file-hash-legacyroot-1' }
+    'baseline' { "defender-threat-file-hash-baseline-$SampleKind" }
+    'mpengine' { "defender-threat-file-hash-mpengine-1-$SampleKind" }
+    'policymanager' { "defender-threat-file-hash-policymanager-1-$SampleKind" }
+    'legacyroot' { "defender-threat-file-hash-legacyroot-1-$SampleKind" }
 }
 
 $registryPath = switch ($Mode) {
@@ -230,6 +233,7 @@ $activityCommand = "& '$guestActivityScript' -OutputJson '$guestActivityJson' -O
 if ($RestartWinDefend) {
     $activityCommand += ' -RestartWinDefend'
 }
+$activityCommand += " -SampleKind $SampleKind"
 
 $matchFragments = @(
     'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\ThreatFileHashLogging',
