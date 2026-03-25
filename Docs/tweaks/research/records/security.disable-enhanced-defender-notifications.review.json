@@ -53,7 +53,7 @@
             ]
           }
         ],
-        "notes": "This record uses the Security Center Notifications path because the 25H2 VM trace showed SecurityHealthService.exe reading that path directly during a Windows Security launch."
+        "notes": "This record uses the Security Center Notifications path because the 25H2 VM trace showed SecurityHealthService.exe reading that path directly during a Windows Security launch. The Reporting alias remains a side observation, not the app path."
       }
     ]
   },
@@ -115,7 +115,7 @@
         "Keeps the default notification behavior.",
         "Does not suppress extra device-health and security reminders."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "ms-defender-security-center-disable-enhanced-notifications",
         "vm-defender-enhanced-notifications-baseline"
@@ -141,12 +141,12 @@
         }
       ],
       "good_when": "You want to cut down on non-critical Windows Security notifications and are comfortable with a still-gated policy record.",
-      "bad_when": "You want the most conservative supported baseline or need a fully settled app-ready record.",
+      "bad_when": "You want the most conservative supported baseline or still want routine Windows Security reminders.",
       "tradeoffs": [
         "Cuts notification noise on the Security Center policy surface.",
-        "This setting still sits next to a broader DisableNotifications policy already present in the clean VM snapshot."
+        "The clean VM snapshot already had the broader DisableNotifications sibling policy on the same branch."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "ms-defender-security-center-disable-enhanced-notifications",
         "vm-defender-enhanced-notifications-enabled",
@@ -236,24 +236,24 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
+    "confidence": "high",
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact Security Center Notifications value semantics, and the VM Procmon trace shows SecurityHealthService.exe reading DisableEnhancedNotifications from that path. The record stays gated because Microsoft also documents a Reporting alias for the same value name, and the clean VM already had the broader DisableNotifications policy set on the same Security Center branch.",
+    "why": "Microsoft documents the exact Security Center Notifications value semantics, and the VM Procmon trace shows SecurityHealthService.exe reading DisableEnhancedNotifications from that path. The Reporting alias did not win the runtime probe, and the sibling DisableNotifications baseline is a branch-level side observation rather than a blocker for this exact value.",
     "blocking_issues": []
   },
   "open_questions": [
     "Should the Reporting policy alias be modeled as a separate audit record or folded into this one as a parallel documented path?",
     "Should the app ever write both documented paths, or should it stay on the Security Center path only?"
   ],
-  "last_reviewed_utc": "2026-03-24T18:50:00Z",
+  "last_reviewed_utc": "2026-03-25T08:55:00Z",
   "validation_proof": {
     "source_url": "H:\\Temp\\vm-tooling-staging\\defender-enhanced-notifications-securitycenter-1-20260324-213118\\defender-disable-enhanced-securitycenter-1.txt",
     "exact_quote_or_path": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write.",
     "key_found_on_page": true,
-    "notes": "The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, which is why this record stays gated."
+    "notes": "The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, but that sibling policy does not change which path this value is read from."
   }
 }

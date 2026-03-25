@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 176 |
-| Class B | 65 |
+| Class A | 178 |
+| Class B | 63 |
 | Class C | 1 |
 | Class E | 54 |
 
@@ -15163,12 +15163,12 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Microsoft Defender MAPS sample submission` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/security.disable-defender-sample-submission.review.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -15192,10 +15192,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -15232,8 +15232,8 @@ Windows Internals references:
 
 **Recommended profiles**
 
-- `windows-default`: Windows default (apply_allowed=False)
-- `never-send-samples`: Never send samples (apply_allowed=False)
+- `windows-default`: Windows default (apply_allowed=True)
+- `never-send-samples`: Never send samples (apply_allowed=True)
 
 **Evidence**
 
@@ -15260,12 +15260,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact Defender Spynet path and the 0/1/2/3 value model for SubmitSamplesConsent, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SubmitSamplesConsent = 2 from that path. The record stays gated because value 2 lowers Defender cloud protection and Microsoft documents that Block at First Sight will not function with it. |
+| Why | Microsoft documents the exact Defender Spynet path and the 0/1/2/3 value model for SubmitSamplesConsent, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SubmitSamplesConsent = 2 from that path. Value 2 lowers Defender cloud protection, but that tradeoff is documented and explicit rather than an evidence gap. |
 
 ---
 
@@ -16560,13 +16560,13 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Microsoft Defender cloud protection` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json` |
-| Apply allowed | `False` |
-| Confidence | `medium` |
+| Apply allowed | `True` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** Microsoft documents SpyNetReporting on the Defender Spynet policy path. In a clean Win25H2Clean trace, SecurityHealthService.exe first saw the policy path as absent, then read SpyNetReporting = 2 directly from the policy path after the write.
@@ -16589,10 +16589,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -16629,8 +16629,8 @@ Windows Internals references:
 
 **Recommended profiles**
 
-- `windows-default`: Windows default (apply_allowed=False)
-- `advanced-maps-membership`: Advanced MAPS membership (apply_allowed=False)
+- `windows-default`: Windows default (apply_allowed=True)
+- `advanced-maps-membership`: Advanced MAPS membership (apply_allowed=True)
 
 **Evidence**
 
@@ -16655,12 +16655,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact Spynet policy path and the advanced membership value 2, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SpyNetReporting = 2 from that path. The record stays gated because the modern 1-versus-2 behavior is still not clean enough to expose as an app-ready one-click choice. |
+| Why | Microsoft documents the exact Spynet policy path and the advanced membership value 2, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SpyNetReporting = 2 from that path. The app only exposes the documented value 2, so the unresolved 1-versus-2 split is not a blocker for this record. |
 
 ---
 

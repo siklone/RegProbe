@@ -54,17 +54,17 @@ SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Win
 
 When only the Reporting path was set, this launch probe still showed the Security Center path being queried. It did not show a matching read from the Reporting path.
 
-## Why this stays Class B
+## Class result
 
-This is strong enough for a validated record, but it is not ready for one-click apply.
+This record is now app-ready on the Security Center Notifications path.
 
-- Microsoft documents a second path under `Windows Defender\Reporting`.
-- The clean VM already had `DisableNotifications = 1` on the Security Center branch.
-- That broader policy can hide the visible effect of the narrower enhanced-notifications switch.
+- Microsoft documents a second path under `Windows Defender\Reporting`, but the VM alias check still read the Security Center path.
+- The clean VM already had `DisableNotifications = 1` on the same branch, but that is a sibling policy, not a path conflict.
+- The app writes the Security Center path that the runtime probe actually consumed.
 
 So the current state is:
 
 - validated
 - app-mapped
-- research-gated
-- `Class B`
+- actionable
+- `Class A`
