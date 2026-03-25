@@ -207,12 +207,12 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact registry path, values, and default direction for modern Windows, and the app writes the documented disabled state.",
+    "why": "Microsoft documents the exact registry path, values, and modern default direction for this NTFS control, and the app writes the documented disabled state with a clean rollback story.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T01:22:00Z",

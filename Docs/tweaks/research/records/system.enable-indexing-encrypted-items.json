@@ -200,12 +200,12 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The local Microsoft policy files clearly document the registry mapping, values, default behavior, and security caveats, and the app writes the documented enabled value.",
+    "why": "Microsoft policy files document the registry mapping, values, default behavior, and security caveats clearly, and the app writes the documented enabled value with a clean restore path.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T00:55:30Z",

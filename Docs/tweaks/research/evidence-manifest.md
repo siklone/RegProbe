@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 201 |
-| B count | 41 |
+| A count | 204 |
+| B count | 38 |
 | E count | 54 |
 
 ## Record Index
@@ -85,7 +85,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `developer.docker-performance` | validated | Class A | `Docs/tweaks/research/records/developer.docker-performance.review.json` | `e86fa037da24385991ffe94edbb1039cf5b2ee636654d27c3d4f0e7d4062473a` | `e4c2f1a09fcfe91db5161301b71b4ec7262c17dc97de49b390f65f9abcf9253d` | 1 |
 | `developer.dotnet-telemetry-disable` | validated | Class A | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` | `0e893fbee7bb7405331425f61f4aba01593f3fddfe8656f6eff1e33c8f968807` | `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c` | 1 |
 | `developer.enable-windows-long-paths` | validated | Class A | `Docs/tweaks/research/records/developer.enable-windows-long-paths.review.json` | `78a0923a9944c8088657298210a233e5c5793924cb928f32ba853b18589c2a8c` | `2b390bcd3f0082f4558b386b1c876aebc02ae85fa482efb6be28b8696e197f29` | 1 |
-| `developer.nodejs-performance` | validated | Class B | `Docs/tweaks/research/records/developer.nodejs-performance.json` | `8a3f6554915352ce00f5f05973e420d3529b6310cbb1d3ff30970a1f3fc6c61a` | `afeb8b18277d7825b304d849b0406a81c8dc155974f74e40933534c301df9ad1` | 1 |
+| `developer.nodejs-performance` | validated | Class A | `Docs/tweaks/research/records/developer.nodejs-performance.json` | `7c98f1e1b3fc9ee407703203f5d78b80fab15866219887bffae9310f544f1515` | `afeb8b18277d7825b304d849b0406a81c8dc155974f74e40933534c301df9ad1` | 1 |
 | `developer.powershell-execution` | validated | Class A | `Docs/tweaks/research/records/developer.powershell-execution.json` | `ce4b6c46f7909d38aa65ad6b1cb2e6c9404d12cf14371fe0106c8df544581ef5` | `3a25fe7ca941325c96591236522cf807d8b269ff223bcc737bd5b073718cd047` | 1 |
 | `developer.python-path-fix` | validated | Class A | `Docs/tweaks/research/records/developer.python-path-fix.review.json` | `ce8f62b9295a1c477129e2e6aee7b1b55fb9f9764bfe6984328029bd2ee70ddc` | `ca039878abcb9e81f07fc1719a12c9dcefc1f2c42c36aba4c56ec7f80cc80e2a` | 1 |
 | `developer.ssh-agent-autostart` | validated | Class A | `Docs/tweaks/research/records/developer.ssh-agent-autostart.review.json` | `b3236efe7c1bf586a427ddb9a748aa911b732effdd6e8e270a386e5bc25b7485` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 1 |
@@ -268,7 +268,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.dwm-disable-overlay-min-fps` | validated | Class B | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
 | `system.enable-game-mode` | validated | Class A | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `75d1f7adb6c973b143971ddd93c3b8cdc447bca305f50da74c0e7501b2f7a280` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
 | `system.enable-hags` | validated | Class A | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
-| `system.enable-indexing-encrypted-items` | validated | Class B | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `bdc09bee78c232ef1bcd5b9ab483aef478a9dd429315fa88206e603628efac84` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
+| `system.enable-indexing-encrypted-items` | validated | Class A | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `64636c103d0008abf23a1b5ab588dba66220ca02bb845c09c9c0c152b601ce38` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
 | `system.graphics-tdr-ddi-delay` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
 | `system.graphics-tdr-delay` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-delay.json` | `7f68171dcc72f3211cb65563724d88a3c847454998a0d6f2331522fb49fe0614` | `b6da5db4f695d7ba7a08d29bd3859c1c57b438bb3ba83564b9ec1fd0a74c4dbf` | 1 |
 | `system.graphics-tdr-level` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-level.json` | `e6e9fe55f500bf803e86104ddd0f0feb379588a35c7e98701df25914697ac8dc` | `e1d685fde018737579c002e14fe7e9bb9e301555449c7032ac537be1aefab8b1` | 1 |
@@ -282,7 +282,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.memory-paged-pool-dynamic` | validated | Class B | `Docs/tweaks/research/records/system.memory-paged-pool-dynamic.json` | `2b237b2f02bee35264c954a94acec5f48f8115255420bb31dcdbce2ed0f810e6` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 1 |
 | `system.memory-registry-quota-default` | validated | Class A | `Docs/tweaks/research/records/system.memory-registry-quota-default.review.json` | `64c409ac03712e75ba66f605acbc94e7cf392a3cf7514ae1289dba78a99eee33` | `25c9afb706f3f644f188ca40e87d0e9a88dacfb4e738d93d292e3aed0a14f1a5` | 1 |
 | `system.ntfs-disable-8dot3` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-disable-8dot3.json` | `62f3205495b3a91231e2df74f34aa1452f203bf4e0090ec755f70e6b1f5cc4d2` | `ea929eeaf7bdd90e1cdacf69338485fefd38aca588e8af28bd4cf78a76b3cdc1` | 1 |
-| `system.ntfs-disable-last-access` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-disable-last-access.json` | `c7bf54d47ec0ca55d1c93beba623e73597451932ced624955d8490f7712777e3` | `999857adb93ea648e8ead434d9a350d2d2009985c6240ddd98032fc4b736d627` | 1 |
+| `system.ntfs-disable-last-access` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-disable-last-access.json` | `624a7e821c931f9bca85bc69d8a21f2cbf07c854b32f581a5bcbf07aaaf70290` | `999857adb93ea648e8ead434d9a350d2d2009985c6240ddd98032fc4b736d627` | 1 |
 | `system.ntfs-enable-long-paths` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-enable-long-paths.json` | `d101a6382cc22b8bd2dd60f2d8ff325ea4c7c712f05bfc72566c2f6a1742cdab` | `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179` | 1 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
 | `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
@@ -4066,12 +4066,12 @@ Nohuto lineage references:
 ### `developer.nodejs-performance`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Developer`
 - Area: `System Environment Variable`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/developer.nodejs-performance.json`
-- Source SHA256: `8a3f6554915352ce00f5f05973e420d3529b6310cbb1d3ff30970a1f3fc6c61a`
+- Source SHA256: `7c98f1e1b3fc9ee407703203f5d78b80fab15866219887bffae9310f544f1515`
 - Proof SHA256: `afeb8b18277d7825b304d849b0406a81c8dc155974f74e40933534c301df9ad1`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Officially documented environment-variable based Node.js launch override. The app sets NODE_OPTIONS to use a larger V8 old-space heap size globally, which can help large builds but also increases memory usage for Node.js processes.
@@ -4080,10 +4080,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15914,12 +15914,12 @@ Windows Internals references:
 ### `system.enable-indexing-encrypted-items`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json`
-- Source SHA256: `bdc09bee78c232ef1bcd5b9ab483aef478a9dd429315fa88206e603628efac84`
+- Source SHA256: `64636c103d0008abf23a1b5ab588dba66220ca02bb845c09c9c0c152b601ce38`
 - Proof SHA256: `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33`
 
 **Summary:** Policy-backed control for whether Windows Search indexes encrypted files. Useful for people who need fast search inside encrypted content, but it carries security caveats and rebuilds the index when changed.
@@ -15928,10 +15928,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -16828,12 +16828,12 @@ Windows Internals references:
 ### `system.ntfs-disable-last-access`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `File System Runtime Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.ntfs-disable-last-access.json`
-- Source SHA256: `c7bf54d47ec0ca55d1c93beba623e73597451932ced624955d8490f7712777e3`
+- Source SHA256: `624a7e821c931f9bca85bc69d8a21f2cbf07c854b32f581a5bcbf07aaaf70290`
 - Proof SHA256: `999857adb93ea648e8ead434d9a350d2d2009985c6240ddd98032fc4b736d627`
 
 **Summary:** Officially documented NTFS control for last-access timestamp updates. Good for reducing disk I/O and latency on large file trees, but some backup and archival tools rely on last-access data and can behave differently when it is disabled.
@@ -16842,10 +16842,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 

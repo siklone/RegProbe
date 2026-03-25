@@ -203,12 +203,12 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Node.js documents NODE_OPTIONS and the --max-old-space-size flag as supported launch controls, and Microsoft documents the machine environment store under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment. The app writes NODE_OPTIONS to that documented machine environment path.",
+    "why": "Node.js documents NODE_OPTIONS and --max-old-space-size as supported launch controls, Microsoft documents the machine environment store, and the app writes that exact value with a straightforward rollback path.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T01:32:25.0993203+03:00",

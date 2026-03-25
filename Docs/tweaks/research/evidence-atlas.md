@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 201 |
-| Class B | 41 |
+| Class A | 204 |
+| Class B | 38 |
 | Class E | 54 |
 
 ## Category Coverage
@@ -749,12 +749,12 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Developer` |
 | Area | `System Environment Variable` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/developer.nodejs-performance.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -778,10 +778,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -838,12 +838,12 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Node.js documents NODE_OPTIONS and the --max-old-space-size flag as supported launch controls, and Microsoft documents the machine environment store under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment. The app writes NODE_OPTIONS to that documented machine environment path. |
+| Why | Node.js documents NODE_OPTIONS and --max-old-space-size as supported launch controls, Microsoft documents the machine environment store, and the app writes that exact value with a straightforward rollback path. |
 
 ---
 
@@ -19925,12 +19925,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -19954,10 +19954,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -20019,12 +20019,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The local Microsoft policy files clearly document the registry mapping, values, default behavior, and security caveats, and the app writes the documented enabled value. |
+| Why | Microsoft policy files document the registry mapping, values, default behavior, and security caveats clearly, and the app writes the documented enabled value with a clean restore path. |
 
 ---
 
@@ -21431,12 +21431,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/system.ntfs-disable-last-access.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -21460,10 +21460,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -21526,12 +21526,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
-| Recommended for general users | `False` |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact registry path, values, and default direction for modern Windows, and the app writes the documented disabled state. |
+| Why | Microsoft documents the exact registry path, values, and modern default direction for this NTFS control, and the app writes the documented disabled state with a clean rollback story. |
 
 ---
 
