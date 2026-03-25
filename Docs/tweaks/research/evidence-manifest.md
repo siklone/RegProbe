@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 204 |
-| B count | 38 |
+| A count | 210 |
+| B count | 32 |
 | E count | 54 |
 
 ## Record Index
@@ -269,11 +269,11 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.enable-game-mode` | validated | Class A | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `75d1f7adb6c973b143971ddd93c3b8cdc447bca305f50da74c0e7501b2f7a280` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
 | `system.enable-hags` | validated | Class A | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
 | `system.enable-indexing-encrypted-items` | validated | Class A | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `64636c103d0008abf23a1b5ab588dba66220ca02bb845c09c9c0c152b601ce38` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
-| `system.graphics-tdr-ddi-delay` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
-| `system.graphics-tdr-delay` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-delay.json` | `7f68171dcc72f3211cb65563724d88a3c847454998a0d6f2331522fb49fe0614` | `b6da5db4f695d7ba7a08d29bd3859c1c57b438bb3ba83564b9ec1fd0a74c4dbf` | 1 |
-| `system.graphics-tdr-level` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-level.json` | `e6e9fe55f500bf803e86104ddd0f0feb379588a35c7e98701df25914697ac8dc` | `e1d685fde018737579c002e14fe7e9bb9e301555449c7032ac537be1aefab8b1` | 1 |
-| `system.graphics-tdr-limit-count` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-limit-count.json` | `b6ffdcd76da8a573f8e4a8dd846275c0b3ea35de4dd0a4cdc57e40e08ef2dff2` | `98793161f5d92ef41a5dffb17fe726e653b8bea67bf5fcc00384abd0cf49fdde` | 1 |
-| `system.graphics-tdr-limit-time` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-limit-time.json` | `807439c6b71d03d552670f0291a9c28ce5eeb10ac7ee6258f8822e2e067a1bde` | `b8db6b0b24bd9b6d64dd8e0ff6088b7079e260f5a620d73e10950a74b6499361` | 1 |
+| `system.graphics-tdr-ddi-delay` | validated | Class A | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `063c3bd2087ee0dcc651463be7868fe9f394380c0a11ee7f0b6fd46f089ffdb3` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
+| `system.graphics-tdr-delay` | validated | Class A | `Docs/tweaks/research/records/system.graphics-tdr-delay.json` | `42b77987d89b748afed1ad9437e88482ee478e96adb628a778a149446bede5a5` | `b6da5db4f695d7ba7a08d29bd3859c1c57b438bb3ba83564b9ec1fd0a74c4dbf` | 1 |
+| `system.graphics-tdr-level` | validated | Class A | `Docs/tweaks/research/records/system.graphics-tdr-level.json` | `1f1340a4379257d6a23d61cef555355a600cb128c08548af3e426534549a4733` | `e1d685fde018737579c002e14fe7e9bb9e301555449c7032ac537be1aefab8b1` | 1 |
+| `system.graphics-tdr-limit-count` | validated | Class A | `Docs/tweaks/research/records/system.graphics-tdr-limit-count.json` | `7e326f9b13be288d63c7284265f59db31dd73b5b28e6b03aee28fb4c030a3ebe` | `98793161f5d92ef41a5dffb17fe726e653b8bea67bf5fcc00384abd0cf49fdde` | 1 |
+| `system.graphics-tdr-limit-time` | validated | Class A | `Docs/tweaks/research/records/system.graphics-tdr-limit-time.json` | `d39188db934125281ba0b09e53161de1a72a0e61f2592a0d904d36fe1f027947` | `b8db6b0b24bd9b6d64dd8e0ff6088b7079e260f5a620d73e10950a74b6499361` | 1 |
 | `system.kernel-thread-dpc-enable` | validated | Class B | `Docs/tweaks/research/records/system.kernel-thread-dpc-enable.json` | `39b9545f28226227c98927feb4de4623e86b7dc8b18df5d91b8b8cb079c3329a` | `a15a06f3b91cf08536310bd098334ea2859c0ff7ad7d73e2594296a780a73f5e` | 1 |
 | `system.memory-clear-pagefile-at-shutdown` | validated | Class B | `Docs/tweaks/research/records/system.memory-clear-pagefile-at-shutdown.json` | `2717a4299cf44da2dc6cc6db5f9bf70fb81393c1dcfd168532dd03186402e04c` | `410daf2e1ff1285865db5d6768c6f4e852efd5e68d0b6f914845ca98b2dcc97b` | 1 |
 | `system.memory-disable-paging-executive` | validated | Class B | `Docs/tweaks/research/records/system.memory-disable-paging-executive.json` | `b256f188e0f4912f2aea7227bf89b0ab16c25021de1838466e445c1956b35eea` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 1 |
@@ -285,7 +285,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.ntfs-disable-last-access` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-disable-last-access.json` | `624a7e821c931f9bca85bc69d8a21f2cbf07c854b32f581a5bcbf07aaaf70290` | `999857adb93ea648e8ead434d9a350d2d2009985c6240ddd98032fc4b736d627` | 1 |
 | `system.ntfs-enable-long-paths` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-enable-long-paths.json` | `d101a6382cc22b8bd2dd60f2d8ff325ea4c7c712f05bfc72566c2f6a1742cdab` | `b9f6bd3590a2a78e3cefd41b14e004cb151645b57afc29632e4a0b4c0856f179` | 1 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
-| `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
+| `system.ntfs-reset-mft-zone` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `69914ddf1cf7392e4b2bc41d43fcb79f31a963f7d22b45b23be548a2bdb7cfef` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
 | `system.priority-control` | validated | Class B | `Docs/tweaks/research/records/system.priority-control.review.json` | `65338290ddc475e60627d497c34c6f508e7920c8b14730a6324ab1a5ebec71e9` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
 | `system.reliability-timestamp-enabled` | validated | Class B | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `a717e644a5b130e10935d806be394efbb25af18fa918495d4b3887d967467a49` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
@@ -15980,12 +15980,12 @@ Windows Internals references:
 ### `system.graphics-tdr-ddi-delay`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Graphics Drivers / TDR`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json`
-- Source SHA256: `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6`
+- Source SHA256: `063c3bd2087ee0dcc651463be7868fe9f394380c0a11ee7f0b6fd46f089ffdb3`
 - Proof SHA256: `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970`
 
 **Summary:** Officially documented TDR DDI timeout reset. This app write restores TdrDdiDelay to Microsoft's documented default of 5 seconds, but Microsoft warns that TDR keys are for driver testing and debugging rather than normal end-user tuning.
@@ -15994,10 +15994,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -16043,12 +16043,12 @@ Windows Internals references:
 ### `system.graphics-tdr-delay`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Graphics Drivers / TDR`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.graphics-tdr-delay.json`
-- Source SHA256: `7f68171dcc72f3211cb65563724d88a3c847454998a0d6f2331522fb49fe0614`
+- Source SHA256: `42b77987d89b748afed1ad9437e88482ee478e96adb628a778a149446bede5a5`
 - Proof SHA256: `b6da5db4f695d7ba7a08d29bd3859c1c57b438bb3ba83564b9ec1fd0a74c4dbf`
 
 **Summary:** Officially documented TDR timeout threshold reset. This app write restores TdrDelay to Microsoft's documented default of 2 seconds, but Microsoft says TDR keys are for targeted driver testing and debugging rather than normal end-user tuning.
@@ -16057,10 +16057,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -16106,12 +16106,12 @@ Windows Internals references:
 ### `system.graphics-tdr-level`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Graphics Drivers / TDR`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.graphics-tdr-level.json`
-- Source SHA256: `e6e9fe55f500bf803e86104ddd0f0feb379588a35c7e98701df25914697ac8dc`
+- Source SHA256: `1f1340a4379257d6a23d61cef555355a600cb128c08548af3e426534549a4733`
 - Proof SHA256: `e1d685fde018737579c002e14fe7e9bb9e301555449c7032ac537be1aefab8b1`
 
 **Summary:** Officially documented TDR recovery-level control. This app write restores TdrLevel to Microsoft's documented default of 3 (recover on timeout), but Microsoft warns that TDR keys are for driver testing and debugging rather than normal end-user tuning.
@@ -16120,10 +16120,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -16172,12 +16172,12 @@ Windows Internals references:
 ### `system.graphics-tdr-limit-count`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Graphics Drivers / TDR`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.graphics-tdr-limit-count.json`
-- Source SHA256: `b6ffdcd76da8a573f8e4a8dd846275c0b3ea35de4dd0a4cdc57e40e08ef2dff2`
+- Source SHA256: `7e326f9b13be288d63c7284265f59db31dd73b5b28e6b03aee28fb4c030a3ebe`
 - Proof SHA256: `98793161f5d92ef41a5dffb17fe726e653b8bea67bf5fcc00384abd0cf49fdde`
 
 **Summary:** Officially documented TDR hang-count reset. This app write restores TdrLimitCount to Microsoft's documented default of 5, but Microsoft warns that TDR keys are intended for driver testing and debugging rather than normal end-user tuning.
@@ -16186,10 +16186,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -16235,12 +16235,12 @@ Windows Internals references:
 ### `system.graphics-tdr-limit-time`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Graphics Drivers / TDR`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.graphics-tdr-limit-time.json`
-- Source SHA256: `807439c6b71d03d552670f0291a9c28ce5eeb10ac7ee6258f8822e2e067a1bde`
+- Source SHA256: `d39188db934125281ba0b09e53161de1a72a0e61f2592a0d904d36fe1f027947`
 - Proof SHA256: `b8db6b0b24bd9b6d64dd8e0ff6088b7079e260f5a620d73e10950a74b6499361`
 
 **Summary:** Officially documented TDR time-window reset. This app write restores TdrLimitTime to Microsoft's documented default of 60 seconds, but Microsoft warns that TDR keys are intended for driver testing and debugging rather than normal end-user tuning.
@@ -16249,10 +16249,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -17025,12 +17025,12 @@ Windows Internals references:
 ### `system.ntfs-reset-mft-zone`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `File System Runtime Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json`
-- Source SHA256: `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40`
+- Source SHA256: `69914ddf1cf7392e4b2bc41d43fcb79f31a963f7d22b45b23be548a2bdb7cfef`
 - Proof SHA256: `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6`
 
 **Summary:** Officially documented NTFS control for master file table reservation size. Good as a reset-to-default setting, but changing it is mainly for specialized file-server workloads and is usually unnecessary on typical systems.
@@ -17039,10 +17039,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
