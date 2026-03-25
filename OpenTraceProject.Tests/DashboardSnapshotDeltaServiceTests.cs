@@ -48,7 +48,7 @@ public sealed class DashboardSnapshotDeltaServiceTests
         var result = DashboardSnapshotDeltaService.Compare(previous, current);
 
         Assert.Equal("4 changes since last snapshot", result.Headline);
-        Assert.Equal("Firmware updated Â· GPU driver changed Â· Displays 1 -> 2 Â· +1 more", result.Detail);
+        Assert.Equal("Firmware updated | GPU driver changed | Displays 1 -> 2 | +1 more", result.Detail);
         Assert.Equal("Compared with 2026-03-07 21:30", result.Context);
         Assert.True(result.HasChanges);
     }

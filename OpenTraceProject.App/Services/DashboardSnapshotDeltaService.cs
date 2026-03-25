@@ -157,10 +157,10 @@ public sealed class DashboardSnapshotDeltaService
             };
         }
 
-        var detail = string.Join(" Â· ", changes.Take(3));
+        var detail = string.Join(" | ", changes.Take(3));
         if (changes.Count > 3)
         {
-            detail = $"{detail} Â· +{changes.Count - 3} more";
+            detail = $"{detail} | +{changes.Count - 3} more";
         }
 
         return new DashboardSnapshotDeltaResult

@@ -231,7 +231,7 @@ output = api.Execute("powershell", "-Command Get-Process")
 info = api.GetSystemInfo()
 ```
 
-### Required NuGet Packages
+### Required Package Dependencies
 - **NLua**: LUA interpreter for .NET
 - **pythonnet**: Python.NET integration (requires Python 3.x installed)
 
@@ -398,7 +398,7 @@ TweakEngine / PluginLoader / ScriptEngine
 
 ## Build Requirements
 
-### NuGet Packages Needed
+### Package Dependencies Needed
 ```bash
 # Plugin System
 # (No additional packages - uses built-in reflection)
@@ -533,7 +533,7 @@ dotnet add package pythonnet             # Python support
 
 ## Known Limitations
 
-1. **LUA/Python Engines**: Currently stubbed - requires NuGet packages
+1. **LUA/Python Engines**: Currently stubbed - requires package dependencies
 2. **Plugin Sandbox**: No AppDomain isolation yet
 3. **Digital Signatures**: Verification stub only
 4. **Backend API**: Not implemented - client-side only
