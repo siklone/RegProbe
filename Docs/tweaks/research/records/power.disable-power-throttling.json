@@ -197,15 +197,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The local Microsoft policy files clearly document the path, values, and meaning, and the app writes the documented turn-off value.",
+    "why": "The local Microsoft policy files clearly document the path, values, and meaning, and the app writes the documented turn-off value. There is no unresolved edge left for the app path.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T00:53:00Z",
+  "last_reviewed_utc": "2026-03-25T09:15:00Z",
   "validation_proof": {
     "source_url": "C:\\Windows\\PolicyDefinitions\\Power.admx",
     "exact_quote_or_path": "<policy name=\"PowerThrottlingTurnOff\" class=\"Machine\" ... key=\"System\\CurrentControlSet\\Control\\Power\\PowerThrottling\" valueName=\"PowerThrottlingOff\"> ... <enabledValue><decimal value=\"1\" /></enabledValue>",

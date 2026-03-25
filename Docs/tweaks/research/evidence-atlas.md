@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 178 |
-| Class B | 63 |
+| Class A | 179 |
+| Class B | 62 |
 | Class C | 1 |
 | Class E | 54 |
 
@@ -15381,13 +15381,13 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Windows Security notifications` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/security.disable-enhanced-defender-notifications.review.json` |
-| Apply allowed | `False` |
-| Confidence | `medium` |
+| Apply allowed | `True` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** Microsoft documents DisableEnhancedNotifications on two Defender policy paths. In a clean Win25H2Clean trace, SecurityHealthService.exe read the Security Center Notifications path and consumed DisableEnhancedNotifications = 1.
@@ -15410,10 +15410,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -15450,8 +15450,8 @@ Windows Internals references:
 
 **Recommended profiles**
 
-- `windows-default`: Windows default (apply_allowed=False)
-- `hide-noncritical-windows-security-notifications`: Hide non-critical Windows Security notifications (apply_allowed=False)
+- `windows-default`: Windows default (apply_allowed=True)
+- `hide-noncritical-windows-security-notifications`: Hide non-critical Windows Security notifications (apply_allowed=True)
 
 **Evidence**
 
@@ -15471,18 +15471,18 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\defender-enhanced-notifications-securitycenter-1-20260324-213118\defender-disable-enhanced-securitycenter-1.txt |
 | Exact quote / path | SecurityHealthService.exe \| RegQueryValue \| HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications\DisableEnhancedNotifications \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write. |
 | Key found on page | `True` |
-| Notes | The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, which is why this record stays gated. |
+| Notes | The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, but that sibling policy does not change which path this value is read from. |
 
 **Decision**
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact Security Center Notifications value semantics, and the VM Procmon trace shows SecurityHealthService.exe reading DisableEnhancedNotifications from that path. The record stays gated because Microsoft also documents a Reporting alias for the same value name, and the clean VM already had the broader DisableNotifications policy set on the same Security Center branch. |
+| Why | Microsoft documents the exact Security Center Notifications value semantics, and the VM Procmon trace shows SecurityHealthService.exe reading DisableEnhancedNotifications from that path. The Reporting alias did not win the runtime probe, and the sibling DisableNotifications baseline is a branch-level side observation rather than a blocker for this exact value. |
 
 ---
 

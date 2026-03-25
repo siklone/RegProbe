@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 178 |
-| B count | 63 |
+| A count | 179 |
+| B count | 62 |
 | C count | 1 |
 | E count | 54 |
 
@@ -151,8 +151,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `power.disable-cpu-idle-states` | validated | Class B | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `92660bb914ee8c5efd2912a91e00928c6b8dbe635a2327f385738bc7ce25421f` | `e9564c042475d4b463e11dbd8be14712a7aac319855e9971d0ce0061c2734bd1` | 1 |
 | `power.disable-fast-startup` | validated | Class A | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
-| `power.disable-power-throttling` | validated | Class B | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `6bbb0293de661b8c2c09bf60e67517b09b78ba45f66065f5bbdc249c5f2dcffc` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
-| `power.disable-windows-search` | validated | Class B | `Docs/tweaks/research/records/power.disable-windows-search.json` | `a71dd4b0dd816fd6f1fcbdd000f7d60651cc22532c03ef49228899aba5b74ff4` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
+| `power.disable-power-throttling` | validated | Class B | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `0feb7a6328e1224f1cae4febc01daf5ee533b3387ab47cf3da5b9ae7e5d2b61f` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
+| `power.disable-windows-search` | validated | Class B | `Docs/tweaks/research/records/power.disable-windows-search.json` | `f765c6663c5c831d903d38ec610432c25812aa51f048a91d3d720c041cc9c9f0` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
 | `power.hide-hibernate-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-hibernate-option.json` | `a9cd2a784e62a1619ea7f920d71387fee650e2ce8357a9b584b28e8579fb9825` | `a2ccf9b1a2c922e3273812eea45986113d2b2eec94a801bbf7cff7ecf9cdb417` | 1 |
 | `power.hide-lock-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-lock-option.json` | `e92e39c74366ca830f7cc4f3399394f72c581a57638e888be211aa421bf05856` | `cac67bd54c67255fb7bbd92e34790b14b07acbbfe0c5736954289301ac9f35bd` | 1 |
 | `power.hide-sleep-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-sleep-option.json` | `c9235ea4a57b3e8d4a6b7ae241430e25c8f46af21ff3158eef586668644423f8` | `9fd4a690ec7f01c46a0a7268de36b05197e70fea5ded44632b11d705011ea0b8` | 1 |
@@ -227,7 +227,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | `cd5527ef4c788ca56752769b9f884d367106f6d2e67fa8958bc7c272b5fa8ec6` | `cbf61febc21858b0337754ddc719d778a0a6c0f8f34b535b029e120bcecea03e` | 3 |
 | `security.disable-defender-sample-submission` | validated | Class A | `Docs/tweaks/research/records/security.disable-defender-sample-submission.review.json` | `66d3f0572cb302849618074d7df31371655f78ada21d072a6aae9fbd12fcc726` | `d82de4112b943a9ec6ef6d2e25aff47a14c3f9958e1352a827ae5241fc5ecba7` | 1 |
 | `security.disable-downloads-blocking` | validated | Class A | `Docs/tweaks/research/records/security.disable-downloads-blocking.json` | `f9574461ea84e7f9a84ed029d6469a4ea7020dd5399a7cdcc0201a3106f99d1c` | `37f0c6998110ae0723af795d2c3f93b894ac85bf013d9877cbdc60c381f3f2eb` | 1 |
-| `security.disable-enhanced-defender-notifications` | validated | Class B | `Docs/tweaks/research/records/security.disable-enhanced-defender-notifications.review.json` | `5f5d4724ad9296968bf7b8395134569167164968913a90ca6a9e2f47f0853ef8` | `a12e468c1b7df394776f91ac6de7601b047c298f81aa8bbae8df1441ecb28c2b` | 1 |
+| `security.disable-enhanced-defender-notifications` | validated | Class A | `Docs/tweaks/research/records/security.disable-enhanced-defender-notifications.review.json` | `5f5d4724ad9296968bf7b8395134569167164968913a90ca6a9e2f47f0853ef8` | `870d862cd47f07b6035f2145427d5a34863ee28dc4b1b324a20d2ee9f615c043` | 1 |
 | `security.disable-ntfs-encryption` | validated | Class B | `Docs/tweaks/research/records/security.disable-ntfs-encryption.json` | `b75f5abb843f5b452720a76ecf7b696cfc9544a8f8d34971eab365d6fdf8dfd3` | `a85e3450b7be35f290e9b7a8083815b660f2edd6afcb9d8151d04d4a677e9a0d` | 1 |
 | `security.disable-p2p-updates` | validated | Class A | `Docs/tweaks/research/records/security.disable-p2p-updates.review.json` | `a5915f3c7a416dcdd379f1e53e984222435ee2d5b91469252e8e3b2f4620a15f` | `e30fdfd201f0bf77b2b6fa51c308d5dd3e3f64adb81b8c6caa7a689101591a0a` | 1 |
 | `security.disable-password-reveal` | validated | Class A | `Docs/tweaks/research/records/security.disable-password-reveal.json` | `49cb1dede082e74036b4af6d4cdbc27ea3f85f9514ffe15dc9c5765c0ad91db5` | `50d97e420c30cbf63a70c9a209094c3baa6f45450925e287d51ea8a22288f57e` | 1 |
@@ -295,7 +295,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.services.disable-connected-user-experiences` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-connected-user-experiences.json` | `432df30061542fae8312ae99ee7a4dbc4b0ac0bddbeb63c1d35b97a0517eafea` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 1 |
 | `system.services.disable-print-notifications` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-notifications.json` | `341f0c561d3693787f3a35309441f261e6f76c986e61a507ab7b835846a1e6ee` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 1 |
 | `system.services.disable-print-spooler` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-spooler.json` | `d244f10b272a038623ae642806ea9e2c0f8c7171857f5c3655cc3af754d8505f` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 1 |
-| `system.services.disable-windows-search` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-windows-search.json` | `0a7a7b83cdb693c869b6fbc38dc856ad4ca756793379bbf7db2b3ff1cb69d3fc` | `7a939516d8b00a24b308632a8c4618acc5fd292fab45e9544a98c56f98788b37` | 1 |
+| `system.services.disable-windows-search` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-windows-search.json` | `8bd73f2ec96d568427c280bd93d614655be574bb3e2d5235ef6b63c9a00d964d` | `7a939516d8b00a24b308632a8c4618acc5fd292fab45e9544a98c56f98788b37` | 1 |
 | `system.verbose-status-messages` | validated | Class A | `Docs/tweaks/research/records/system.verbose-status-messages.json` | `444ecd213fb9c2bfe7a5770044a45ae4529404c9bb2e99302f3920560f8f9d3b` | `95d2e2d70159d0ddc6500d9a88c2420cc76d133e09b5ee7920891d07a3cc92ef` | 1 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `Docs/tweaks/research/records/system.wait-to-kill-service-timeout.review.json` | `a8e87c037e80fc40870b52c0f13f0eb57793cce6d9db688d101730fcd04bd765` | `75468f86e93fb6828a772007cfc2c8e7eff43a4f9938026224ae83e5b11a88a8` | 1 |
 | `visibility.default-account-picture` | validated | Class A | `Docs/tweaks/research/records/visibility.default-account-picture.json` | `fc2b38d67652b1af2628041fdad7fd58b061426dda04ecc201ab9d51b59c6486` | `ad18cf84978748d2e98ae9ba591d975b8b94780caa755d468c578aa640b06c45` | 1 |
@@ -8294,7 +8294,7 @@ _No source block present._
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.disable-power-throttling.json`
-- Source SHA256: `6bbb0293de661b8c2c09bf60e67517b09b78ba45f66065f5bbdc249c5f2dcffc`
+- Source SHA256: `0feb7a6328e1224f1cae4febc01daf5ee533b3387ab47cf3da5b9ae7e5d2b61f`
 - Proof SHA256: `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b`
 
 **Summary:** Policy-backed control for Windows Power Throttling. Good for machines that prioritize background responsiveness, but it can increase power use and reduce battery-life optimizations.
@@ -8362,7 +8362,7 @@ Windows Internals references:
 - Area: `Service Start Mode`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.disable-windows-search.json`
-- Source SHA256: `a71dd4b0dd816fd6f1fcbdd000f7d60651cc22532c03ef49228899aba5b74ff4`
+- Source SHA256: `f765c6663c5c831d903d38ec610432c25812aa51f048a91d3d720c041cc9c9f0`
 - Proof SHA256: `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, start-mode baseline, feature behavior, and says it is OK to disable in the service guidance used here. The app disables the service by setting its start mode to Disabled.
@@ -13116,13 +13116,13 @@ Windows Internals references:
 ### `security.disable-enhanced-defender-notifications`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Security`
 - Area: `Windows Security notifications`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.disable-enhanced-defender-notifications.review.json`
 - Source SHA256: `5f5d4724ad9296968bf7b8395134569167164968913a90ca6a9e2f47f0853ef8`
-- Proof SHA256: `a12e468c1b7df394776f91ac6de7601b047c298f81aa8bbae8df1441ecb28c2b`
+- Proof SHA256: `870d862cd47f07b6035f2145427d5a34863ee28dc4b1b324a20d2ee9f615c043`
 
 **Summary:** Microsoft documents DisableEnhancedNotifications on two Defender policy paths. In a clean Win25H2Clean trace, SecurityHealthService.exe read the Security Center Notifications path and consumed DisableEnhancedNotifications = 1.
 
@@ -13130,15 +13130,15 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
 - `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications` / `DisableEnhancedNotifications` / `REG_DWORD`
-  - Notes: This record uses the Security Center Notifications path because the 25H2 VM trace showed SecurityHealthService.exe reading that path directly during a Windows Security launch.
+  - Notes: This record uses the Security Center Notifications path because the 25H2 VM trace showed SecurityHealthService.exe reading that path directly during a Windows Security launch. The Reporting alias remains a side observation, not the app path.
   - missing | label=Not configured | meaning=Windows Security uses its normal notification behavior for this policy surface.
   - value | value=0 | label=Enhanced notifications allowed | meaning=The policy is disabled and Windows Security can continue showing non-critical notifications.
   - value | value=1 | label=Hide non-critical notifications | meaning=Windows Security only shows critical notifications on the documented Security Center policy surface.
@@ -13181,7 +13181,7 @@ Windows Internals references:
 | source_url | H:\\Temp\\vm-tooling-staging\\defender-enhanced-notifications-securitycenter-1-20260324-213118\\defender-disable-enhanced-securitycenter-1.txt |
 | exact_quote_or_path | SecurityHealthService.exe \| RegQueryValue \| HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write. |
 | key_found_on_page | True |
-| notes | The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, which is why this record stays gated. |
+| notes | The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, but that sibling policy does not change which path this value is read from. |
 ### `security.disable-ntfs-encryption`
 
 - Status: `validated`
@@ -17606,7 +17606,7 @@ Windows Internals references:
 - Area: `Service Start Mode`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.services.disable-windows-search.json`
-- Source SHA256: `0a7a7b83cdb693c869b6fbc38dc856ad4ca756793379bbf7db2b3ff1cb69d3fc`
+- Source SHA256: `8bd73f2ec96d568427c280bd93d614655be574bb3e2d5235ef6b63c9a00d964d`
 - Proof SHA256: `7a939516d8b00a24b308632a8c4618acc5fd292fab45e9544a98c56f98788b37`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, default start mode, and says it is OK to disable on Windows IoT Enterprise. The app disables the service by setting its start mode to Disabled.
