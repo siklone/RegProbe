@@ -222,7 +222,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "matches-research",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
                                        "notes":  "The app uses a batch scheduled-task tweak to disable the listed task paths. This record keeps the bundle in review because the tasks span multiple Windows feature areas and one task is version-dependent on the current review machine.",
                                        "writes":  [
                                                       {
@@ -429,7 +429,7 @@
                          "evidence_id":  "app-system-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
                          "summary":  "The provider disables the listed task paths through the batch scheduled-task tweak.",
                          "supports":  [
                                           "path",
@@ -466,7 +466,7 @@
                  },
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
                              "exact_quote_or_path":  "Offline Files: \\\\Microsoft\\\\Windows\\\\Offline Files\\\\Background Synchronization; \\\\Microsoft\\\\Windows\\\\Offline Files\\\\Logon Synchronization. Sleep Study: \\\\Microsoft\\\\Windows\\\\Power Efficiency Diagnostics\\\\AnalyzeSystem. Time Sync: \\\\Microsoft\\\\Windows\\\\Time Synchronization\\\\ForceSynchronizeTime; SynchronizeTime. Miscellaneous: \\\\Microsoft\\\\Windows\\\\Registry\\\\RegIdleBackup.",
                              "key_found_on_page":  true,
                              "notes":  "Scheduled-tasks bundle. The proof anchors the exact task paths the bundle manipulates in the mirror."

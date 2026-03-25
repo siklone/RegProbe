@@ -50,7 +50,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
     "notes": "The current app writes NtfsDisableLastAccessUpdate = 1, which matches the documented disabled state.",
     "writes": [
       {
@@ -195,7 +195,7 @@
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
       "summary": "The provider writes NtfsDisableLastAccessUpdate = 1 for the current tweak.",
       "supports": [
         "path",

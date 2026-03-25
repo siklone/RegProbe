@@ -9,8 +9,8 @@ from typing import Iterable
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DOCS_ROOT = REPO_ROOT / "Docs"
-PROVIDER_ROOT = REPO_ROOT / "WindowsOptimizer.App" / "Services" / "TweakProviders"
-ENGINE_ROOT = REPO_ROOT / "WindowsOptimizer.Engine" / "Tweaks"
+PROVIDER_ROOT = REPO_ROOT / "OpenTraceProject.App" / "Services" / "TweakProviders"
+ENGINE_ROOT = REPO_ROOT / "OpenTraceProject.Engine" / "Tweaks"
 OUTPUT_CSV = DOCS_ROOT / "tweaks" / "tweak-source-audit.csv"
 OUTPUT_MD = DOCS_ROOT / "tweaks" / "tweak-source-audit.md"
 

@@ -146,7 +146,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The current app writes official SettingSync policy values and the label now reflects the actual behavior: sync is turned off by default while user override remains allowed.",
     "writes": [
       {
@@ -342,7 +342,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider writes the SettingSync policy family with value 2, the UserOverride family with value 0, and DisableSyncOnPaidNetwork = 1.",
       "supports": [
         "path",

@@ -48,7 +48,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "partially-matches",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
                                        "notes":  "Most AppPrivacy writes line up with the official ForceDeny value 2, but the bundle is very broad and includes an exception for microphone plus an extra System policy write.",
                                        "writes":  [
                                                       {
@@ -156,7 +156,7 @@
                          "evidence_id":  "app-privacy-provider",
                          "kind":  "repo-code",
                          "title":  "Current privacy provider broad deny bundle",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
                          "summary":  "The provider writes a large AppPrivacy ForceDeny bundle plus AllowUserInfoAccess and a microphone exception.",
                          "supports":  [
                                           "ui-mapping",

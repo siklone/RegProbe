@@ -164,7 +164,7 @@
   },
   "app_current_implementation": {
     "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The current app targets the same feature family, but it uses opaque ContentDeliveryManager values instead of the named CloudContent policies documented in this record.",
     "writes": [
       {
@@ -400,7 +400,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider writes four ContentDeliveryManager SubscribedContent values to 0 for the current tweak.",
       "supports": [
         "path",

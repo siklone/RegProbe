@@ -77,7 +77,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs",
+    "provider_source": "OpenTraceProject.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs",
     "notes": "NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces.",
     "writes": [
       {
@@ -251,7 +251,7 @@
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
       "summary": "NetworkTweakProvider exposes the SMB Multichannel tweak and delegates it to a command-backed client and server configuration implementation.",
       "supports": [
         "ui-mapping"
@@ -262,7 +262,7 @@
       "evidence_id": "engine-network-command-tweak",
       "kind": "repo-code",
       "title": "Command-backed SMB Multichannel implementation",
-      "location": "WindowsOptimizer.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs",
+      "location": "OpenTraceProject.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs",
       "summary": "The engine tweak detects the current SMB client and server EnableMultiChannel booleans, applies Set-SmbClientConfiguration -EnableMultiChannel $true and Set-SmbServerConfiguration -EnableMultiChannel $true, verifies that both report true, and restores the previously detected boolean pair during rollback.",
       "supports": [
         "path",

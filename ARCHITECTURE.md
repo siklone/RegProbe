@@ -2,38 +2,38 @@
 
 ## Overview
 
-Windows Optimizer follows a clean, layered architecture with clear separation of concerns.
+Open Trace Project follows a clean, layered architecture with clear separation of concerns.
 
 ## Layer Diagram
 
 ```
-┌─────────────────────────────────────────┐
-│         WindowsOptimizer.App            │ ◄─── WPF UI Layer
-│    (Views, ViewModels, Converters)      │
-└─────────────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────┐
-│       WindowsOptimizer.Engine           │ ◄─── Business Logic
-│  (TweakExecutionPipeline, Providers)    │
-└─────────────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────┐
-│    WindowsOptimizer.Infrastructure      │ ◄─── External Services
-│  (Registry, Metrics, Elevation, Files)  │
-└─────────────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────┐
-│       WindowsOptimizer.Core             │ ◄─── Domain Models
-│   (Interfaces, Contracts, DTOs)         │
-└─────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚         OpenTraceProject.App            â”‚ â—„â”€â”€â”€ Desktop UI Layer
+â”‚    (Views, ViewModels, Converters)      â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                   â”‚
+                   â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚       OpenTraceProject.Engine           â”‚ â—„â”€â”€â”€ Business Logic
+â”‚  (TweakExecutionPipeline, Providers)    â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                   â”‚
+                   â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚    OpenTraceProject.Infrastructure      â”‚ â—„â”€â”€â”€ External Services
+â”‚  (Registry, Metrics, Elevation, Files)  â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                   â”‚
+                   â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚       OpenTraceProject.Core             â”‚ â—„â”€â”€â”€ Domain Models
+â”‚   (Interfaces, Contracts, DTOs)         â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Projects
 
-### WindowsOptimizer.Core
+### OpenTraceProject.Core
 **Purpose**: Domain models and contracts
 
 **Key Interfaces**:
@@ -48,11 +48,11 @@ Windows Optimizer follows a clean, layered architecture with clear separation of
 - `TweakStatus`: Enum (Detected, Applied, Verified, RolledBack, Failed)
 - `TweakRiskLevel`: Enum (Safe, Advanced, Risky)
 
-### WindowsOptimizer.Engine
+### OpenTraceProject.Engine
 **Purpose**: Business logic and execution orchestration
 
 **Key Components**:
-- `TweakExecutionPipeline`: Orchestrates Detect → Apply → Verify → Rollback
+- `TweakExecutionPipeline`: Orchestrates Detect â†’ Apply â†’ Verify â†’ Rollback
 - `ITweakProvider` implementations (11 categories + legacy bridge)
 - Concrete tweak types (RegistryValueTweak, ServiceTweak, CommandTweak, etc.)
 
@@ -68,7 +68,7 @@ public interface ITweakProvider
 }
 ```
 
-### WindowsOptimizer.Infrastructure
+### OpenTraceProject.Infrastructure
 **Purpose**: External service implementations
 
 **Key Services**:
@@ -77,8 +77,8 @@ public interface ITweakProvider
 - Hardware info services and providers for OS, motherboard, storage, and display details
 - `PluginLoader`: Dynamic plugin loading
 
-### WindowsOptimizer.App
-**Purpose**: WPF presentation layer
+### OpenTraceProject.App
+**Purpose**: Desktop presentation layer
 
 **MVVM Pattern**:
 - `MainViewModel`: Navigation and top-level state
@@ -91,24 +91,24 @@ public interface ITweakProvider
 - RelayCommand for button actions
 - Dashboard summaries are derived from detected tweak states and hardware snapshots (run Detect to populate current/applied status)
 
-**WPF Stability Notes**:
+**UI Stability Notes**:
 - Avoid animating Freezables created in templates/resources (`DropShadowEffect`, `SolidColorBrush`, etc.) because they can be frozen/shared.
 - Prefer animating named transforms (`TranslateTransform`, `ScaleTransform`, `RotateTransform`) and overlay `Opacity`.
 - When using shared resources for transforms, set `x:Shared="False"` to avoid shared instances.
 
-### WindowsOptimizer.ElevatedHost
+### OpenTraceProject.ElevatedHost
 **Purpose**: UAC elevation and privileged operations
 
 **Architecture**:
-- Named pipe communication (parent ↔ elevated child)
+- Named pipe communication (parent â†” elevated child)
 - JSON-based request/response protocol
 - Automatic process lifetime management
 
 **Executable Discovery**:
 - The app is not always-admin; admin-required operations run via ElevatedHost.
-- The UI resolves the ElevatedHost path via `WindowsOptimizer.App/Utilities/ElevatedHostLocator.cs`.
-- You can override discovery with the env var `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH`.
-- Recommended publish layout: `WindowsOptimizer.App/.../win-x64/ElevatedHost/WindowsOptimizer.ElevatedHost.exe`.
+- The UI resolves the ElevatedHost path via `OpenTraceProject.App/Utilities/ElevatedHostLocator.cs`.
+- You can override discovery with the env var `OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH`.
+- Recommended publish layout: `OpenTraceProject.App/.../win-x64/ElevatedHost/OpenTraceProject.ElevatedHost.exe`.
 
 ## Design Patterns
 
@@ -157,23 +157,23 @@ foreach (var plugin in plugins)
 ### Tweak Execution
 ```
 User clicks "Apply" on tweak
-    ↓
+    â†“
 TweaksViewModel.ApplyCommand
-    ↓
+    â†“
 TweakExecutionPipeline.ExecuteAsync()
-    ↓
+    â†“
 1. ITweak.DetectAsync()
 2. ITweak.ApplyAsync()
 3. ITweak.VerifyAsync()
-    ↓
+    â†“
 Update UI via INotifyPropertyChanged
-    ↓
+    â†“
 Log to FileTweakLogStore
 ```
 
 ## Threading Model
 
-- **UI Thread**: All ViewModels, WPF binding
+- **UI Thread**: All ViewModels and UI binding
 - **Background Threads**:
   - Tweak execution (async/await)
   - Plugin loading (Task.Run)

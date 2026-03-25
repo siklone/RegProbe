@@ -48,7 +48,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "matches-research",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
                                        "notes":  "The current app writes ShowDisconnectedDevices = 1, and Procmon confirmed that the classic Sound control panel reads the same value as a live preference on this build.",
                                        "writes":  [
                                                       {
@@ -131,7 +131,7 @@
                          "evidence_id":  "app-audio-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
                          "summary":  "The provider writes ShowDisconnectedDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl.",
                          "supports":  [
                                           "path",

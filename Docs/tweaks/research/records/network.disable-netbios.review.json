@@ -59,7 +59,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs",
+    "provider_source": "OpenTraceProject.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs",
     "notes": "The app now uses the documented per-interface control model. NetworkTweakProvider exposes the tweak card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2).",
     "writes": [
       {
@@ -223,7 +223,7 @@
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
       "summary": "NetworkTweakProvider exposes the netbios tweak and delegates it to a command-backed per-interface implementation.",
       "supports": [
         "ui-mapping"
@@ -234,7 +234,7 @@
       "evidence_id": "engine-network-command-tweak",
       "kind": "repo-code",
       "title": "Command-backed NetBIOS implementation",
-      "location": "WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs",
+      "location": "OpenTraceProject.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs",
       "summary": "The engine tweak enumerates IP-enabled adapters, detects current TcpipNetbiosOptions state, applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2), verifies that all targeted adapters report 2, and can restore the previously detected per-adapter state during rollback.",
       "supports": [
         "path",

@@ -58,7 +58,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
     "notes": "The current app writes AllowStorageSenseGlobal = 0, which matches the documented disable behavior.",
     "writes": [
       {
@@ -185,7 +185,7 @@
       "evidence_id": "app-system-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
       "summary": "The provider writes AllowStorageSenseGlobal = 0 for the current tweak.",
       "supports": [
         "path",

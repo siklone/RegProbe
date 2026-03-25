@@ -64,7 +64,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The current app now writes DisablePCA=1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat, which matches the documented machine policy for turning Program Compatibility Assistant off.",
     "writes": [
       {
@@ -216,7 +216,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "Current implementation writes DisablePCA=1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat for the tweak named 'Disable Program Compatibility Assistant'.",
       "supports": [
         "path",

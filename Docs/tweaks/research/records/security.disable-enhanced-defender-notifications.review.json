@@ -59,7 +59,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
     "notes": "The app writes DisableEnhancedNotifications = 1 on the Security Center Notifications policy path that the Win25H2Clean Procmon capture showed SecurityHealthService.exe reading.",
     "writes": [
       {
@@ -225,7 +225,7 @@
       "evidence_id": "app-security-provider-disable-enhanced-notifications",
       "kind": "repo-code",
       "title": "Current security provider enhanced notifications write",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
       "summary": "The app writes HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications = 1.",
       "supports": [
         "ui-mapping",

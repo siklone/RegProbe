@@ -49,7 +49,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs",
+    "provider_source": "OpenTraceProject.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs",
     "notes": "NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed SMB server configuration implementation that detects EnableLeasing and applies Set-SmbServerConfiguration -EnableLeasing $false.",
     "writes": [
       {
@@ -182,7 +182,7 @@
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
       "summary": "NetworkTweakProvider exposes the SMB leasing tweak and delegates it to a command-backed SMB server configuration implementation.",
       "supports": [
         "ui-mapping"
@@ -193,7 +193,7 @@
       "evidence_id": "engine-network-command-tweak",
       "kind": "repo-code",
       "title": "Command-backed SMB leasing implementation",
-      "location": "WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs",
+      "location": "OpenTraceProject.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs",
       "summary": "The engine tweak detects the current EnableLeasing boolean, applies Set-SmbServerConfiguration -EnableLeasing $false, verifies that leasing is disabled, and restores the previously detected boolean state during rollback.",
       "supports": [
         "path",

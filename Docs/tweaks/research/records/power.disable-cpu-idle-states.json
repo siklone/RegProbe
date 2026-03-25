@@ -51,7 +51,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
     "notes": "The app writes a raw CPU idle-state registry bundle, but this review did not find a primary Microsoft registry surface that validates it as a supported tuning method.",
     "writes": [
       {
@@ -170,7 +170,7 @@
       "evidence_id": "app-power-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
       "summary": "The provider writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under the Power key.",
       "supports": [
         "path",

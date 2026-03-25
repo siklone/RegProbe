@@ -46,7 +46,7 @@
   },
   "app_current_implementation": {
     "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The app writes five current-user suggestion-related ContentDeliveryManager values to 0.",
     "writes": [
       {
@@ -139,7 +139,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current privacy provider CDM suggestions bundle",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider writes five current-user ContentDeliveryManager suggestion-related values to 0.",
       "supports": [
         "path",

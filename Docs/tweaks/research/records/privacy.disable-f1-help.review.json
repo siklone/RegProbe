@@ -46,7 +46,7 @@
   },
   "app_current_implementation": {
     "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The app renames HelpPane.exe to HelpPane.exe.disabled. The upstream nohuto mirror documents the same HelpPane rename behavior and F1 handling.",
     "writes": [
       {
@@ -139,7 +139,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current privacy provider file rename",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider renames C:\\Windows\\System32\\HelpPane.exe to HelpPane.exe.disabled.",
       "supports": [
         "path",

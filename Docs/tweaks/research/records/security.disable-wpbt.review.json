@@ -50,7 +50,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "matches-research",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
                                        "notes":  "The app writes DisableWpbtExecution = 1 under HKLM\\System\\CurrentControlSet\\Control\\Session Manager. This record intentionally documents that exact registry write as an observed implementation only.",
                                        "writes":  [
                                                       {
@@ -146,7 +146,7 @@
                          "evidence_id":  "app-security-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
                          "summary":  "The provider writes HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\DisableWpbtExecution = 1 for the WPBT tweak.",
                          "supports":  [
                                           "path",
@@ -188,7 +188,7 @@
                        ],
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\security\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\security\\desc.md",
                              "exact_quote_or_path":  "\\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager : DisableWpbtExecution",
                              "key_found_on_page":  true,
                              "notes":  "Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle and is corroborated by raw registry traces in the nohuto mirror."

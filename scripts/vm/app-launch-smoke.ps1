@@ -22,7 +22,7 @@ try {
     New-Item -ItemType Directory -Path $AppRoot -Force | Out-Null
     Expand-Archive -Path $PublishZipPath -DestinationPath $AppRoot -Force
 
-    $exe = Join-Path $AppRoot 'WindowsOptimizer.App.exe'
+    $exe = Join-Path $AppRoot 'OpenTraceProject.App.exe'
     $docsRoot = Join-Path $AppRoot 'Docs'
     $evidenceClasses = Join-Path $docsRoot 'tweaks\research\evidence-classes.json'
     $tweakCatalog = Join-Path $docsRoot 'tweaks\tweak-catalog.html'

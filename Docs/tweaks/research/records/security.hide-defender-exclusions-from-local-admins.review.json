@@ -61,7 +61,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
     "notes": "The app writes HideExclusionsFromLocalAdmins = 1 on the documented root Defender policy path.",
     "writes": [
       {
@@ -251,7 +251,7 @@
       "evidence_id": "app-security-provider-hide-defender-exclusions-from-local-admins",
       "kind": "repo-code",
       "title": "Current security provider HideExclusionsFromLocalAdmins write",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
       "summary": "The app writes HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins = 1 on the documented root path.",
       "supports": [
         "path",

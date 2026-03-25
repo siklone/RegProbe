@@ -47,7 +47,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "partially-matches",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
                                        "notes":  "The provider disables the listed Application Experience tasks as one batch.",
                                        "writes":  [
                                                       {
@@ -141,7 +141,7 @@
                          "evidence_id":  "app-privacy-provider",
                          "kind":  "repo-code",
                          "title":  "Current privacy provider task bundle",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
                          "summary":  "The provider disables six scheduled tasks in the Application Experience folder as one bundle.",
                          "supports":  [
                                           "ui-mapping",
@@ -165,7 +165,7 @@
                  },
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
                              "exact_quote_or_path":  "Currently includes all existing tasks in \\\\Microsoft\\\\Windows\\\\Application Experience\\\\ (LTSC IoT Enterprise 2024): MareBackup, Microsoft Compatibility Appraiser, Microsoft Compatibility Appraiser Exp, PcaPatchDbTask, SdbinstMergeDbTask, StartupAppTask.",
                              "key_found_on_page":  true,
                              "notes":  "Task bundle subrecord. The proof captures the exact Application Experience task set described in the mirror."

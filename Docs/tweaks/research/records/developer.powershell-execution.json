@@ -67,7 +67,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
     "notes": "The current app writes ExecutionPolicy = RemoteSigned on the documented policy path.",
     "writes": [
       {
@@ -191,7 +191,7 @@
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
       "summary": "The provider writes ExecutionPolicy = RemoteSigned on the documented PowerShell policy path.",
       "supports": [
         "path",

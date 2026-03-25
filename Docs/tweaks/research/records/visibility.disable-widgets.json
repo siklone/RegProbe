@@ -60,7 +60,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
     "notes": "The current app writes AllowNewsAndInterests = 0, which matches the documented blocked state.",
     "writes": [
       {
@@ -203,7 +203,7 @@
       "evidence_id": "app-visibility-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
       "summary": "The provider writes AllowNewsAndInterests = 0 for the current tweak.",
       "supports": [
         "path",

@@ -46,7 +46,7 @@
   },
   "app_current_implementation": {
     "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The app disables CSC and CscService as part of the broader Offline Files bundle.",
     "writes": [
       {
@@ -152,7 +152,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current privacy provider service bundle",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider disables the CSC and CscService services for the current sub-tweak.",
       "supports": [
         "ui-mapping",

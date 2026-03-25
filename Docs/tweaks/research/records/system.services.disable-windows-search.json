@@ -49,7 +49,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
     "notes": "The app disables the WSearch service by setting its start mode to Disabled.",
     "writes": [
       {
@@ -194,7 +194,7 @@
       "evidence_id": "app-system-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
       "summary": "The provider disables the `WSearch` service through the batch service start-mode tweak.",
       "supports": [
         "path",

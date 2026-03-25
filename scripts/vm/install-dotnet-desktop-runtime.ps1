@@ -2,7 +2,7 @@
 param(
     [string]$InstallerPath = 'C:\Tools\Inbound\windowsdesktop-runtime-8.0.23-win-x64.exe',
     [string]$OutputRoot = 'C:\Tools\ValidationController\smoke',
-    [string]$AppExePath = 'C:\Tools\AppSmoke\WindowsOptimizer.App.exe'
+    [string]$AppExePath = 'C:\Tools\AppSmoke\OpenTraceProject.App.exe'
 )
 
 $ErrorActionPreference = 'Stop'

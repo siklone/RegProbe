@@ -164,7 +164,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
     "notes": "The app writes documented MMCSS fields under the built-in Games task profile.",
     "writes": [
       {
@@ -376,7 +376,7 @@
       "evidence_id": "app-power-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
       "summary": "The provider writes a custom MMCSS Games task profile using Priority, Scheduling Category, SFIO Priority, GPU Priority, and Affinity.",
       "supports": [
         "path",

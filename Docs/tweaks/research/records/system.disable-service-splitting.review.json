@@ -48,7 +48,7 @@
   },
   "app_current_implementation": {
     "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
     "notes": "The app targets the official svchost splitting control surface, but this research pass has not yet captured a primary Microsoft source that publishes 0xFFFFFFFF as the supported disable preset.",
     "writes": [
       {
@@ -188,7 +188,7 @@
       "evidence_id": "app-system-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
       "summary": "The provider writes SvcHostSplitThresholdInKB = -1 (0xFFFFFFFF) for the current tweak.",
       "supports": [
         "path",

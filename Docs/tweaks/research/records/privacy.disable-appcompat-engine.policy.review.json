@@ -75,7 +75,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The app writes both values as part of the broader application-compatibility policy path. Paths and values match local AppCompat.admx. SbEnable is now documented separately in privacy.disable-switchback.policy for standalone publication, but it remains here because the current app still writes it together with DisableEngine. The app also writes four AppDeviceInventory values and DisablePCA in the same code path; those are tracked in separate records.",
     "writes": [
       {
@@ -211,7 +211,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "Writes SbEnable=0 and DisableEngine=1 as part of the application-compatibility policy path.",
       "supports": ["path", "value", "ui-mapping"],
       "strength": "high"

@@ -1,4 +1,4 @@
-# Contributing to Windows Optimizer
+# Contributing to Open Trace Project
 
 Thank you for your interest in contributing! This document provides guidelines and instructions.
 
@@ -13,8 +13,8 @@ Thank you for your interest in contributing! This document provides guidelines a
 ### 1. Fork and Clone
 
 ```bash
-git clone https://github.com/siklone/WPF-Windows-optimizer-with-safe-reversible-tweaks.git
-cd WPF-Windows-optimizer-with-safe-reversible-tweaks
+git clone https://github.com/siklone/Open-Trace-Project.git
+cd Open-Trace-Project
 ```
 
 ### 2. Sync `main`
@@ -98,21 +98,21 @@ dotnet build
 ### Run
 
 ```powershell
-dotnet run --project WindowsOptimizer.App
+dotnet run --project OpenTraceProject.App
 ```
 
 ### Debug
 
-Open `WindowsOptimizerSuite.sln` in Visual Studio and press F5.
+Open `OpenTraceProject.sln` in Visual Studio and press F5.
 
 > Tip: If you run from `dotnet run` and the app can't find the ElevatedHost binary, set the env var:
-> `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH=C:\\path\\to\\WindowsOptimizer.ElevatedHost.exe`
+> `OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH=C:\\path\\to\\OpenTraceProject.ElevatedHost.exe`
 
 ## Adding New Tweaks
 
 ### Option 1: Add to Existing Provider
 
-Edit the appropriate provider in `WindowsOptimizer.App/Services/TweakProviders/`:
+Edit the appropriate provider in `OpenTraceProject.App/Services/TweakProviders/`:
 
 > Note: `LegacyTweakProvider` is temporary to restore missing tweaks. Do not add new tweaks there.
 
@@ -145,7 +145,7 @@ public class PrivacyTweakProvider : BaseTweakProvider
 
 ### Option 2: Create New Provider
 
-1. Create new file in `WindowsOptimizer.App/Services/TweakProviders/`:
+1. Create new file in `OpenTraceProject.App/Services/TweakProviders/`:
 
 ```csharp
 public sealed class MyTweakProvider : BaseTweakProvider
@@ -177,7 +177,7 @@ var providers = new ITweakProvider[]
 
 ### Option 3: Create Plugin
 
-See `WindowsOptimizer.Plugins.DevTools` for the current in-repo plugin/support assembly.
+See `OpenTraceProject.Plugins.DevTools` for the current in-repo plugin/support assembly.
 
 ## Tweak Guidelines
 
@@ -231,7 +231,7 @@ value = 1;
 ## Testing
 
 ### Unit Tests
-Create tests in `WindowsOptimizer.Tests`:
+Create tests in `OpenTraceProject.Tests`:
 
 ```csharp
 [Fact]
@@ -299,10 +299,10 @@ Before submitting PR:
 
 ## Questions?
 
-- 🐛 **Bug Reports**: GitHub Issues
-- 💡 **Feature Requests**: GitHub Discussions
-- 💬 **General Questions**: GitHub Discussions
-- 📧 **Private Inquiries**: maintainer@example.com
+- ðŸ› **Bug Reports**: GitHub Issues
+- ðŸ’¡ **Feature Requests**: GitHub Discussions
+- ðŸ’¬ **General Questions**: GitHub Discussions
+- ðŸ“§ **Private Inquiries**: maintainer@example.com
 
 ## License
 
@@ -315,4 +315,4 @@ Contributors will be acknowledged in:
 - Release notes
 - Commit history
 
-Thank you for contributing! 🎉
+Thank you for contributing! ðŸŽ‰

@@ -47,7 +47,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "unknown",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
                                        "notes":  "The current app writes PageFaultDebugMode = 1 under GraphicsDrivers, but this research pass has not yet captured a primary Microsoft source for the value.",
                                        "writes":  [
                                                       {
@@ -158,7 +158,7 @@
                          "evidence_id":  "app-system-registry-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
                          "summary":  "The provider writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\PageFaultDebugMode = 1 for the current tweak.",
                          "supports":  [
                                           "path",
@@ -187,7 +187,7 @@
                        ],
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgmms2\\-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgmms2\\-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c",
                              "exact_quote_or_path":  "if ( !g_PageFaultDebugMode \u0026\u0026 !KdRefreshDebuggerNotPresent() ) ... \"To disable debug breaks on page fault, run \\\"?? dxgmms2!g_PageFaultDebugMode=1\\\" command\" ... \u0026g_PageFaultDebugMode.",
                              "key_found_on_page":  true,
                              "notes":  "Page-fault debug-mode audit trail. The decompiled code exposes the exact debug gate and its toggle semantics."

@@ -38,7 +38,7 @@
   },
   "app_current_implementation": {
     "status": "not-mapped",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
     "notes": "The duplicate explorer.disable-taskbar-widgets provider entry was removed on 2026-03-13. The supported Widgets implementation remains visibility.disable-widgets, which writes the official machine policy AllowNewsAndInterests = 0.",
     "writes": []
   },

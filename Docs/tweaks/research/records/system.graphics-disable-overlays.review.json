@@ -47,7 +47,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "unknown",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
                                        "notes":  "The current app writes DisableOverlays = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers, but this research pass has not yet captured a primary Microsoft source that publishes the value as an official overlay-plane control.",
                                        "writes":  [
                                                       {
@@ -158,7 +158,7 @@
                          "evidence_id":  "app-system-registry-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
                          "summary":  "The provider writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\DisableOverlays = 1 for the current tweak.",
                          "supports":  [
                                           "path",
@@ -187,7 +187,7 @@
                        ],
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgkrnl\\-ReadConfig@DXGADAPTER@@AEAAXPEAU_DXGK_ADAPTER_CAPS@@@Z.c",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgkrnl\\-ReadConfig@DXGADAPTER@@AEAAXPEAU_DXGK_ADAPTER_CAPS@@@Z.c",
                              "exact_quote_or_path":  "v123 = L\"DisableOverlays\"; ... ADAPTER_RENDER::DisableOverlays((ADAPTER_RENDER *)v9[366]);",
                              "key_found_on_page":  true,
                              "notes":  "Graphics overlay audit trail. The decompiled code shows the explicit DisableOverlays string and the runtime call path."

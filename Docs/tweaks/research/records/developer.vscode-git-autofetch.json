@@ -89,7 +89,7 @@
   },
   "app_current_implementation": {
     "status": "mismatch-suspected",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
     "notes": "The current app targets the right feature area, but it writes an Explorer registry value instead of the documented VS Code settings surface.",
     "writes": [
       {
@@ -219,7 +219,7 @@
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
       "summary": "The provider writes DisableGitAutofetch = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
       "supports": [
         "path",
@@ -239,7 +239,7 @@
     "needs_vm_validation": false,
     "why": "VS Code's git.autofetch setting is validated at the feature level, but the app's Explorer\\\\Advanced\\\\DisableGitAutofetch registry path is still not validated by a primary source.",
     "blocking_issues": [
-      "VS Code'un git.autofetch ayarı doğrulandı ancak uygulamanın yazdığı Explorer\\Advanced\\DisableGitAutofetch registry path'i için birincil Microsoft kaynağı bulunamadı.",
+      "VS Code'un git.autofetch ayarÄ± doÄŸrulandÄ± ancak uygulamanÄ±n yazdÄ±ÄŸÄ± Explorer\\Advanced\\DisableGitAutofetch registry path'i iÃ§in birincil Microsoft kaynaÄŸÄ± bulunamadÄ±.",
       "The app writes an Explorer registry value instead of the documented git.autofetch setting."
     ]
   },

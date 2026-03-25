@@ -51,7 +51,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
     "notes": "The current app writes AllowDevelopmentWithoutDevLicense = 1 under the same AppModelUnlock path that Microsoft documents in the Regedit method for enabling Developer Mode.",
     "writes": [
       {
@@ -208,7 +208,7 @@
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
       "summary": "The provider writes AllowDevelopmentWithoutDevLicense = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock.",
       "supports": [
         "path",

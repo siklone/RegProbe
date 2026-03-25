@@ -1,8 +1,8 @@
-# Windows Optimizer - Ecosystem Foundations
+# Open Trace Project - Ecosystem Foundations
 
-This document summarizes the foundational architecture implemented for the Windows Optimizer ecosystem scaling plan.
+This document summarizes the foundational architecture implemented for the Open Trace Project ecosystem scaling plan.
 
-> **Status (2025-12-30):** This file is a roadmap + experimental foundation notes. The current WPF app does **not** ship a marketplace, cloud preset repo, or telemetry backend. Treat these sections as future work unless you confirm the code paths are wired into the UI and build.
+> **Status (2025-12-30):** This file is a roadmap + experimental foundation notes. The current desktop app does **not** ship a marketplace, cloud preset repo, or telemetry backend. Treat these sections as future work unless you confirm the code paths are wired into the UI and build.
 
 ## Overview
 
@@ -19,8 +19,8 @@ The ecosystem foundations enable:
 ## 1. Plugin System Architecture
 
 ### Files Created
-- `WindowsOptimizer.Core/Plugins/IPlugin.cs`
-- `WindowsOptimizer.Core/Plugins/PluginLoader.cs`
+- `OpenTraceProject.Core/Plugins/IPlugin.cs`
+- `OpenTraceProject.Core/Plugins/PluginLoader.cs`
 
 ### Features
 - **Plugin Interface**: Standard `IPlugin` interface with metadata, initialization, execution, and validation
@@ -41,14 +41,14 @@ The ecosystem foundations enable:
 ### Next Steps
 - Implement Authenticode signature verification
 - Create plugin sandbox with AppDomain isolation
-- Build plugin marketplace UI (WPF view)
+- Build plugin marketplace UI
 
 ---
 
 ## 2. Telemetry Foundation
 
 ### Files Created
-- `WindowsOptimizer.Core/Telemetry/TelemetryService.cs`
+- `OpenTraceProject.Core/Telemetry/TelemetryService.cs`
 
 ### Features
 - **Opt-In by Default**: Users must explicitly enable telemetry
@@ -83,7 +83,7 @@ The ecosystem foundations enable:
 ## 3. Cryptographic Logging
 
 ### Files Created
-- `WindowsOptimizer.Core/Security/CryptographicLogger.cs`
+- `OpenTraceProject.Core/Security/CryptographicLogger.cs`
 
 ### Features
 - **Blockchain-Like Chain**: Each log entry hashes the previous entry
@@ -115,7 +115,7 @@ The ecosystem foundations enable:
 ## 4. VSS Snapshot Integration
 
 ### Files Created
-- `WindowsOptimizer.Core/Security/VssSnapshotService.cs`
+- `OpenTraceProject.Core/Security/VssSnapshotService.cs`
 
 ### Features
 - **System Restore Points**: Create restore points before risky operations
@@ -125,9 +125,9 @@ The ecosystem foundations enable:
 
 ### Operations
 ```csharp
-- CreateSnapshotAsync(description) → VssSnapshotResult
-- ListSnapshotsAsync() → VssSnapshot[]
-- RestoreSnapshotAsync(snapshotId) → bool
+- CreateSnapshotAsync(description) â†’ VssSnapshotResult
+- ListSnapshotsAsync() â†’ VssSnapshot[]
+- RestoreSnapshotAsync(snapshotId) â†’ bool
 ```
 
 ### Workflow
@@ -146,8 +146,8 @@ The ecosystem foundations enable:
 ## 5. Cloud Preset Repository
 
 ### Files Created
-- `WindowsOptimizer.Core/Cloud/PresetModels.cs`
-- `WindowsOptimizer.Core/Cloud/PresetRepositoryClient.cs`
+- `OpenTraceProject.Core/Cloud/PresetModels.cs`
+- `OpenTraceProject.Core/Cloud/PresetRepositoryClient.cs`
 
 ### Features
 - **Community Presets**: Download Gaming, Work, Streaming optimization presets
@@ -190,10 +190,10 @@ GET  /api/v1/tweaks/{id}/effectiveness
 ## 6. Scripting Engine Foundation
 
 ### Files Created
-- `WindowsOptimizer.Core/Scripting/IScriptEngine.cs`
-- `WindowsOptimizer.Core/Scripting/ScriptApi.cs`
-- `WindowsOptimizer.Core/Scripting/LuaScriptEngine.cs` (stub)
-- `WindowsOptimizer.Core/Scripting/PythonScriptEngine.cs` (stub)
+- `OpenTraceProject.Core/Scripting/IScriptEngine.cs`
+- `OpenTraceProject.Core/Scripting/ScriptApi.cs`
+- `OpenTraceProject.Core/Scripting/LuaScriptEngine.cs` (stub)
+- `OpenTraceProject.Core/Scripting/PythonScriptEngine.cs` (stub)
 
 ### Features
 - **Multi-Language Support**: LUA and Python scripting engines
@@ -246,12 +246,12 @@ info = api.GetSystemInfo()
 ## 7. Remote Management Protocol
 
 ### Files Created
-- `WindowsOptimizer.Core/Remote/RemoteManagementModels.cs`
-- `WindowsOptimizer.Core/Remote/RemoteManagementClient.cs`
-- `WindowsOptimizer.Core/Remote/RemoteCommandHandler.cs`
+- `OpenTraceProject.Core/Remote/RemoteManagementModels.cs`
+- `OpenTraceProject.Core/Remote/RemoteManagementClient.cs`
+- `OpenTraceProject.Core/Remote/RemoteCommandHandler.cs`
 
 ### Features
-- **Fleet Management**: Centralized control of multiple Windows Optimizer installations
+- **Fleet Management**: Centralized control of multiple Open Trace Project installations
 - **WebSocket Communication**: Real-time command/response
 - **Agent Registration**: Automatic enrollment with management server
 - **Heartbeat Monitoring**: Detect offline agents
@@ -287,11 +287,11 @@ info = api.GetSystemInfo()
 ### Architecture
 ```
 Management Server (Backend)
-    ↓ (WebSocket / HTTPS)
+    â†“ (WebSocket / HTTPS)
 Remote Management Client (Agent on each PC)
-    ↓
+    â†“
 Remote Command Handler (Executes commands locally)
-    ↓
+    â†“
 TweakEngine / PluginLoader / ScriptEngine
 ```
 
@@ -309,54 +309,54 @@ TweakEngine / PluginLoader / ScriptEngine
 ### Component Interaction
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     Windows Optimizer UI                     │
-│  (WPF Application - MonitorView, TweaksView, SettingsView)  │
-└────────────────────┬────────────────────────────────────────┘
-                     │
-         ┌───────────┴───────────┐
-         │                       │
-         ▼                       ▼
-┌─────────────────┐    ┌──────────────────┐
-│  Plugin System  │    │  Script Engine   │
-│  - IPlugin      │    │  - LUA / Python  │
-│  - PluginLoader │    │  - ScriptApi     │
-└────────┬────────┘    └────────┬─────────┘
-         │                      │
-         └──────────┬───────────┘
-                    │
-                    ▼
-         ┌──────────────────────┐
-         │    TweakEngine       │
-         │  (Core Operations)   │
-         └──────────┬───────────┘
-                    │
-         ┌──────────┼───────────┐
-         │          │           │
-         ▼          ▼           ▼
-┌─────────────┐ ┌──────┐ ┌─────────────┐
-│Cryptographic│ │ VSS  │ │ Telemetry   │
-│   Logger    │ │Snapshot│ │  Service    │
-└─────────────┘ └──────┘ └──────┬──────┘
-                                 │
-                    ┌────────────┴────────────┐
-                    │                         │
-                    ▼                         ▼
-         ┌──────────────────┐    ┌────────────────────┐
-         │ Preset Repository│    │ Remote Management  │
-         │     Client       │    │      Client        │
-         └──────────────────┘    └────────────────────┘
-                    │                         │
-                    └────────────┬────────────┘
-                                 │
-                                 ▼
-                    ┌─────────────────────────┐
-                    │  Cloud Backend (Future) │
-                    │  - REST API             │
-                    │  - WebSocket Server     │
-                    │  - Database             │
-                    │  - Web Dashboard        │
-                    └─────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                     Open Trace Project UI                     â”‚
+â”‚  (Desktop application - MonitorView, TweaksView, SettingsView)  â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                     â”‚
+         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+         â”‚                       â”‚
+         â–¼                       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Plugin System  â”‚    â”‚  Script Engine   â”‚
+â”‚  - IPlugin      â”‚    â”‚  - LUA / Python  â”‚
+â”‚  - PluginLoader â”‚    â”‚  - ScriptApi     â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚                      â”‚
+         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚
+                    â–¼
+         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+         â”‚    TweakEngine       â”‚
+         â”‚  (Core Operations)   â”‚
+         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚
+         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+         â”‚          â”‚           â”‚
+         â–¼          â–¼           â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚Cryptographicâ”‚ â”‚ VSS  â”‚ â”‚ Telemetry   â”‚
+â”‚   Logger    â”‚ â”‚Snapshotâ”‚ â”‚  Service    â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜
+                                 â”‚
+                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                    â”‚                         â”‚
+                    â–¼                         â–¼
+         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+         â”‚ Preset Repositoryâ”‚    â”‚ Remote Management  â”‚
+         â”‚     Client       â”‚    â”‚      Client        â”‚
+         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚                         â”‚
+                    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                 â”‚
+                                 â–¼
+                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                    â”‚  Cloud Backend (Future) â”‚
+                    â”‚  - REST API             â”‚
+                    â”‚  - WebSocket Server     â”‚
+                    â”‚  - Database             â”‚
+                    â”‚  - Web Dashboard        â”‚
+                    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -366,30 +366,30 @@ TweakEngine / PluginLoader / ScriptEngine
 ### Created Files (17 total)
 
 **Plugins** (2 files)
-- `WindowsOptimizer.Core/Plugins/IPlugin.cs`
-- `WindowsOptimizer.Core/Plugins/PluginLoader.cs`
+- `OpenTraceProject.Core/Plugins/IPlugin.cs`
+- `OpenTraceProject.Core/Plugins/PluginLoader.cs`
 
 **Telemetry** (1 file)
-- `WindowsOptimizer.Core/Telemetry/TelemetryService.cs`
+- `OpenTraceProject.Core/Telemetry/TelemetryService.cs`
 
 **Security** (2 files)
-- `WindowsOptimizer.Core/Security/CryptographicLogger.cs`
-- `WindowsOptimizer.Core/Security/VssSnapshotService.cs`
+- `OpenTraceProject.Core/Security/CryptographicLogger.cs`
+- `OpenTraceProject.Core/Security/VssSnapshotService.cs`
 
 **Cloud** (2 files)
-- `WindowsOptimizer.Core/Cloud/PresetModels.cs`
-- `WindowsOptimizer.Core/Cloud/PresetRepositoryClient.cs`
+- `OpenTraceProject.Core/Cloud/PresetModels.cs`
+- `OpenTraceProject.Core/Cloud/PresetRepositoryClient.cs`
 
 **Scripting** (4 files)
-- `WindowsOptimizer.Core/Scripting/IScriptEngine.cs`
-- `WindowsOptimizer.Core/Scripting/ScriptApi.cs`
-- `WindowsOptimizer.Core/Scripting/LuaScriptEngine.cs`
-- `WindowsOptimizer.Core/Scripting/PythonScriptEngine.cs`
+- `OpenTraceProject.Core/Scripting/IScriptEngine.cs`
+- `OpenTraceProject.Core/Scripting/ScriptApi.cs`
+- `OpenTraceProject.Core/Scripting/LuaScriptEngine.cs`
+- `OpenTraceProject.Core/Scripting/PythonScriptEngine.cs`
 
 **Remote Management** (3 files)
-- `WindowsOptimizer.Core/Remote/RemoteManagementModels.cs`
-- `WindowsOptimizer.Core/Remote/RemoteManagementClient.cs`
-- `WindowsOptimizer.Core/Remote/RemoteCommandHandler.cs`
+- `OpenTraceProject.Core/Remote/RemoteManagementModels.cs`
+- `OpenTraceProject.Core/Remote/RemoteManagementClient.cs`
+- `OpenTraceProject.Core/Remote/RemoteCommandHandler.cs`
 
 **Documentation** (1 file)
 - `ECOSYSTEM_FOUNDATIONS.md` (this file)
@@ -440,7 +440,7 @@ dotnet add package pythonnet             # Python support
 - [ ] Test script execution (after installing NLua/pythonnet)
 
 ### Unit Testing (Future)
-- [ ] Create test project: `WindowsOptimizer.Tests`
+- [ ] Create test project: `OpenTraceProject.Tests`
 - [ ] Mock plugin loading tests
 - [ ] Telemetry serialization tests
 - [ ] Cryptographic hash chain verification tests
@@ -451,7 +451,7 @@ dotnet add package pythonnet             # Python support
 
 ## Roadmap
 
-### Phase 1: Current Foundation ✅
+### Phase 1: Current Foundation âœ…
 - [x] Plugin system architecture
 - [x] Telemetry foundation
 - [x] Cryptographic logging
@@ -468,7 +468,7 @@ dotnet add package pythonnet             # Python support
 - [ ] Admin web dashboard (React/Blazor)
 
 ### Phase 3: UI Integration
-- [ ] Plugin marketplace page in WPF app
+- [ ] Plugin marketplace page in the app
 - [ ] Settings page: Telemetry opt-in/out
 - [ ] Audit log viewer
 - [ ] Script editor with syntax highlighting
@@ -486,29 +486,29 @@ dotnet add package pythonnet             # Python support
 ## Security Considerations
 
 ### Plugin System
-- ✅ Digital signature verification (stub - needs implementation)
-- ✅ Permission-based sandboxing
-- ❌ AppDomain isolation (TODO)
-- ❌ Code signing certificate validation (TODO)
+- âœ… Digital signature verification (stub - needs implementation)
+- âœ… Permission-based sandboxing
+- âŒ AppDomain isolation (TODO)
+- âŒ Code signing certificate validation (TODO)
 
 ### Scripting Engine
-- ✅ Security context with granular permissions
-- ✅ Execution timeout protection
-- ✅ Memory limit enforcement
-- ✅ Path allowlist for file access
-- ❌ CPU usage throttling (TODO)
+- âœ… Security context with granular permissions
+- âœ… Execution timeout protection
+- âœ… Memory limit enforcement
+- âœ… Path allowlist for file access
+- âŒ CPU usage throttling (TODO)
 
 ### Remote Management
-- ❌ TLS/SSL for WebSocket (TODO)
-- ❌ API key authentication (implemented, needs backend)
-- ❌ Command signature verification (TODO)
-- ❌ Agent certificate pinning (TODO)
+- âŒ TLS/SSL for WebSocket (TODO)
+- âŒ API key authentication (implemented, needs backend)
+- âŒ Command signature verification (TODO)
+- âŒ Agent certificate pinning (TODO)
 
 ### Cryptographic Logging
-- ✅ SHA256 hash chain
-- ✅ Tamper detection
-- ❌ Log encryption at rest (TODO)
-- ❌ Digital signatures on log entries (TODO)
+- âœ… SHA256 hash chain
+- âœ… Tamper detection
+- âŒ Log encryption at rest (TODO)
+- âŒ Digital signatures on log entries (TODO)
 
 ---
 
@@ -544,7 +544,7 @@ dotnet add package pythonnet             # Python support
 
 ## License & Attribution
 
-This ecosystem foundation is part of the **Windows Optimizer** project.
+This ecosystem foundation is part of the **Open Trace Project** project.
 
 - **Core Architecture**: Custom implementation
 - **LibreHardwareMonitor**: GPL-3.0 (hardware monitoring)

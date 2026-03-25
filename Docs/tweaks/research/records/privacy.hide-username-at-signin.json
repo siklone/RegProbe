@@ -49,7 +49,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The current app writes DontDisplayUserName = 1, and the guest-side probe on Win25H2Clean confirmed that sceregvl.inf maps the documented security option to DontDisplayUserName. The earlier DontDisplayLockedUserId interpretation was a different nearby security option entry, not the surface used by this tweak.",
     "writes": [
       {
@@ -185,7 +185,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider writes DontDisplayUserName = 1 for the current tweak.",
       "supports": [
         "path",

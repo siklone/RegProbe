@@ -38,7 +38,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "mismatch-suspected",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
                                        "notes":  "The app writes a broad performance-focused registry bundle, but this review did not elevate that raw bundle to a primary-source-backed Windows preset.",
                                        "writes":  [
                                                       {
@@ -106,7 +106,7 @@
                          "evidence_id":  "app-power-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
                          "summary":  "The provider writes a six-value performance-focused bundle under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power.",
                          "supports":  [
                                           "path",
@@ -143,7 +143,7 @@
                  },
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\power\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\power\\desc.md",
                              "exact_quote_or_path":  "\"EnergySaverState\" = 2; // 1 = override state (more power savings)? if != 1 no override? ... # Disable NIC Power Savings",
                              "key_found_on_page":  true,
                              "notes":  "Raw power-manager performance bundle. The record is a composite preset, so the proof anchors the power-state and NIC power-saving pieces rather than claiming one supported Microsoft toggle."

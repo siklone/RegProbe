@@ -75,7 +75,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.Engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs",
+    "provider_source": "OpenTraceProject.Engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs",
     "notes": "The current app implementation is command-backed. It detects the current active power plan's PERFBOOSTMODE values, applies PERFBOOSTMODE=2 through powercfg, verifies the live state, and restores the previously detected AC/DC values on rollback.",
     "writes": [
       {
@@ -162,7 +162,7 @@
       "evidence_id": "app-power-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
       "summary": "The provider now exposes the command-backed CPU boost tweak instead of the old raw registry bundle.",
       "supports": [
         "path",
@@ -176,7 +176,7 @@
       "evidence_id": "engine-power-perfboostmode",
       "kind": "repo-code",
       "title": "Command-backed CPU boost implementation",
-      "location": "WindowsOptimizer.Engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs",
+      "location": "OpenTraceProject.Engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs",
       "summary": "The engine tweak detects PERFBOOSTMODE with powercfg /qh, applies PERFBOOSTMODE=2 on both AC and DC through powercfg /setacvalueindex and /setdcvalueindex, and restores the detected indices on rollback.",
       "supports": [
         "path",

@@ -810,7 +810,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md |
 | exact_quote_or_path | RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities. |
 | key_found_on_page | True |
 | notes | Mirror-backed SMB tuning bundle. This is a composite of documented SMB offload/RSS/VMQ surfaces, not a single supported toggle. |
@@ -928,7 +928,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md |
 | exact_quote_or_path | RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities. |
 | key_found_on_page | True |
 | notes | The bundle spans network adapter power and offload surfaces; this mirror line is the strongest source for the current write shape. |
@@ -994,7 +994,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\power\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\power\\desc.md |
 | exact_quote_or_path | "EnergySaverState" = 2; // 1 = override state (more power savings)? if != 1 no override? ... # Disable NIC Power Savings |
 | key_found_on_page | True |
 | notes | Raw power-manager performance bundle. The record is a composite preset, so the proof anchors the power-state and NIC power-saving pieces rather than claiming one supported Microsoft toggle. |
@@ -1113,7 +1113,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
 | exact_quote_or_path | Disables Windows Application Experience telemetry and compatibility components, Microsoft Compatibility Appraiser (including its daily task and CompatTelRunner.exe) and the Application Experience tasks. Currently includes all existing tasks in \\\\Microsoft\\\\Windows\\\\Application Experience\\\\ (LTSC IoT Enterprise 2024): MareBackup, Microsoft Compatibility Appraiser, Microsoft Compatibility Appraiser Exp, PcaPatchDbTask, SdbinstMergeDbTask, StartupAppTask. |
 | key_found_on_page | True |
 | notes | Composite Application Experience audit trail. This proof anchors the task family and telemetry components from the upstream mirror. |
@@ -1206,7 +1206,7 @@ _No source block present._
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
 | exact_quote_or_path | Currently includes all existing tasks in \\\\Microsoft\\\\Windows\\\\Application Experience\\\\ (LTSC IoT Enterprise 2024): MareBackup, Microsoft Compatibility Appraiser, Microsoft Compatibility Appraiser Exp, PcaPatchDbTask, SdbinstMergeDbTask, StartupAppTask. |
 | key_found_on_page | True |
 | notes | Task bundle subrecord. The proof captures the exact Application Experience task set described in the mirror. |
@@ -1263,7 +1263,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
 | exact_quote_or_path | "ValueName": "CEIPEnable" ... "KeyPath": ["HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\AppV\\\\CEIP"] ... "DisplayName": "Turn off Windows Customer Experience Improvement Program" ... "KeyPath": ["HKLM\\\\Software\\\\Policies\\\\Microsoft\\\\SQMClient\\\\Windows"] ... "ValueName": "CEIPEnable". |
 | key_found_on_page | True |
 | notes | Composite CEIP audit trail. The mirror shows CEIPEnable on both App-V and SQMClient policy surfaces. |
@@ -1506,7 +1506,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
 | exact_quote_or_path | Offline Files (Client-Side Caching, CSC) lets Windows cache files from network shares locally ... If you enable this policy setting, Offline Files is enabled and users cannot disable it. If you disable this policy setting, Offline Files is disabled and users cannot enable it. ... Hides or displays reminder balloons ... Synchronize all offline files before logging off ... Synchronize all offline files when logging on ... Remove "Work offline" command. |
 | key_found_on_page | True |
 | notes | Composite Offline Files policy bundle. The proof cites the documented NetCache policy family and the related task and UI behavior. |
@@ -1552,7 +1552,7 @@ _No source block present._
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
 | exact_quote_or_path | Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks, and renames mobsync.exe to block execution. |
 | key_found_on_page | True |
 | notes | Binary-rename subrecord. The proof anchors the mobsync.exe rename behavior inside the Offline Files composite bundle. |
@@ -1754,7 +1754,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
 | exact_quote_or_path | Sleep Study tracks modern sleep states to analyze energy usage and pinpoint battery drain. It disables Sleep Study by making ETL logs read-only, disabling related diagnostics, and turning off the scheduled task. wevtutil sl Microsoft-Windows-SleepStudy/Diagnostic /e:false ... SleepStudyDeviceAccountingLevel = 4; SleepStudyDisabled = 0. |
 | key_found_on_page | True |
 | notes | Sleep Study diagnostics bundle. The proof anchors the ETL channel, the related registry values, and the scheduled task behavior. |
@@ -1950,7 +1950,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md |
 | exact_quote_or_path | WMPlayer (Windows Media Player) sends player usage data by default ... This option turns off the Diagnostics and Feedback option ... Note: I gathered all registry values via the legacy WMPlayer. |
 | key_found_on_page | True |
 | notes | Windows Media Player telemetry bundle. The proof anchors the legacy WMPlayer-registry capture path and the usage-data behavior. |
@@ -2162,7 +2162,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\security\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\security\\desc.md |
 | exact_quote_or_path | \\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager : DisableWpbtExecution |
 | key_found_on_page | True |
 | notes | Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle and is corroborated by raw registry traces in the nohuto mirror. |
@@ -2289,7 +2289,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
 | exact_quote_or_path | Offline Files: \\\\Microsoft\\\\Windows\\\\Offline Files\\\\Background Synchronization; \\\\Microsoft\\\\Windows\\\\Offline Files\\\\Logon Synchronization. Sleep Study: \\\\Microsoft\\\\Windows\\\\Power Efficiency Diagnostics\\\\AnalyzeSystem. Time Sync: \\\\Microsoft\\\\Windows\\\\Time Synchronization\\\\ForceSynchronizeTime; SynchronizeTime. Miscellaneous: \\\\Microsoft\\\\Windows\\\\Registry\\\\RegIdleBackup. |
 | key_found_on_page | True |
 | notes | Scheduled-tasks bundle. The proof anchors the exact task paths the bundle manipulates in the mirror. |
@@ -2462,7 +2462,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
 | exact_quote_or_path | "OverlayTestMode" = 0; // 5 = MPO disabled, REG_DWORD. DwmDwordHelper = RegGetDwmDwordHelper(L"OverlayTestMode", &v11, 0LL). |
 | key_found_on_page | True |
 | notes | DWM MPO audit trail. The mirror shows the exact OverlayTestMode path and the MPO-disabled sentinel value. |
@@ -2527,7 +2527,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgkrnl\\-ReadConfig@DXGADAPTER@@AEAAXPEAU_DXGK_ADAPTER_CAPS@@@Z.c |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgkrnl\\-ReadConfig@DXGADAPTER@@AEAAXPEAU_DXGK_ADAPTER_CAPS@@@Z.c |
 | exact_quote_or_path | v123 = L"DisableOverlays"; ... ADAPTER_RENDER::DisableOverlays((ADAPTER_RENDER *)v9[366]); |
 | key_found_on_page | True |
 | notes | Graphics overlay audit trail. The decompiled code shows the explicit DisableOverlays string and the runtime call path. |
@@ -2592,7 +2592,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgmms2\\-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgmms2\\-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c |
 | exact_quote_or_path | if ( !g_PageFaultDebugMode && !KdRefreshDebuggerNotPresent() ) ... "To disable debug breaks on page fault, run \\"?? dxgmms2!g_PageFaultDebugMode=1\\" command" ... &g_PageFaultDebugMode. |
 | key_found_on_page | True |
 | notes | Page-fault debug-mode audit trail. The decompiled code exposes the exact debug gate and its toggle semantics. |
@@ -2658,7 +2658,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
 | exact_quote_or_path | "AdjustDpcThreshold" = 20; // KiAdjustDpcThreshold |
 | key_found_on_page | True |
 | notes | Kernel DPC threshold audit trail. The mirror exposes the raw kernel variable and the corresponding registry value, and the decompiled system-information paths corroborate the kernel consumption and query behavior. |
@@ -2724,7 +2724,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
 | exact_quote_or_path | "CacheAwareScheduling" = 47; // KiCacheAwareScheduling |
 | key_found_on_page | True |
 | notes | Kernel cache-aware scheduling audit trail. The mirrored win-config list records CacheAwareScheduling = 47 with the KiCacheAwareScheduling label, but this research pass did not capture a direct decompiled kernel path for the variable. |
@@ -2862,7 +2862,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\PspSetProcessTimerResolutionPolicy.c |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\PspSetProcessTimerResolutionPolicy.c |
 | exact_quote_or_path | if ( KeDisableLowQosTimerResolution ) { ... if ( a2 ) { ... } else { ... } ... ExpUpdateTimerResolution(0, 0, 0LL); } |
 | key_found_on_page | True |
 | notes | Timer-resolution audit trail. The mirror docs record DisableLowQosTimerResolution = 1, and the decompiled kernel routine shows the gate controlling the policy bit and timer-resolution refresh path. |
@@ -2928,7 +2928,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
 | exact_quote_or_path | *(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate; |
 | key_found_on_page | True |
 | notes | Kernel DPC queue-depth audit trail. The decompiled paths show the exact kernel values exported together and the setter side that loads KiMaximumDpcQueueDepth from the system-information buffer. |
@@ -2997,7 +2997,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\KeQueryDpcWatchdogConfiguration.c |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\KeQueryDpcWatchdogConfiguration.c |
 | exact_quote_or_path | if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src \| 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; } |
 | key_found_on_page | True |
 | notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block. |
@@ -3063,7 +3063,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
 | exact_quote_or_path | *(_DWORD *)(a4 + 16) = KiIdealDpcRate; |
 | key_found_on_page | True |
 | notes | Kernel ideal DPC rate audit trail. The mirrored docs record IdealDpcRate = 20, and the decompiled path exposes the KiIdealDpcRate kernel variable directly. |
@@ -3129,7 +3129,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c |
 | exact_quote_or_path | *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; |
 | key_found_on_page | True |
 | notes | Kernel minimum DPC rate audit trail. The mirrored docs record MinimumDpcRate = 3, and the decompiled path exposes the KiMinimumDpcRate kernel variable directly. |
@@ -3195,7 +3195,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| source_url | H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
+| source_url | H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md |
 | exact_quote_or_path | if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0]() != 0; } |
 | key_found_on_page | True |
 | notes | Timer serialization audit trail. The mirror docs and the decompiled timer-table initializer together show the kernel variable, the 0/1 behavior, and the registry fallback path. |
@@ -15643,7 +15643,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | source_url | C:\\Windows\\PolicyDefinitions\\StorageSense.admx |
-| exact_quote_or_path | StorageSense.admx: key="Software\\Policies\\Microsoft\\Windows\\StorageSense" valueName="AllowStorageSenseTemporaryFilesCleanup"; StorageSense.adml: Disabled: Storage Sense will not delete the user’s temporary files. Users cannot enable this setting in Storage settings. |
+| exact_quote_or_path | StorageSense.admx: key="Software\\Policies\\Microsoft\\Windows\\StorageSense" valueName="AllowStorageSenseTemporaryFilesCleanup"; StorageSense.adml: Disabled: Storage Sense will not delete the userâ€™s temporary files. Users cannot enable this setting in Storage settings. |
 | key_found_on_page | True |
 | notes | Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files. |
 ### `system.disable-store-open-with`

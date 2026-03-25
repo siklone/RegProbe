@@ -134,7 +134,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
     "notes": "The app's research-gated batch writes the two live 25H2 surfaces that MsMpEng.exe read directly in the VM: the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias. It does not write the documented policy MpEngine path because that path did not produce a direct live read on this build.",
     "writes": [
       {

@@ -48,7 +48,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "unknown",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
                                        "notes":  "The current app writes DpcQueueDepth = 4, but this research pass has not yet captured a primary Microsoft source for the value.",
                                        "writes":  [
                                                       {
@@ -161,7 +161,7 @@
                          "evidence_id":  "app-system-registry-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
                          "summary":  "The provider writes DpcQueueDepth = 4 for the current tweak.",
                          "supports":  [
                                           "path",
@@ -204,7 +204,7 @@
                        ],
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
                              "exact_quote_or_path":  "*(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate;",
                              "key_found_on_page":  true,
                              "notes":  "Kernel DPC queue-depth audit trail. The decompiled paths show the exact kernel values exported together and the setter side that loads KiMaximumDpcQueueDepth from the system-information buffer."

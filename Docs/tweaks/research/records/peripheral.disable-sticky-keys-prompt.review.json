@@ -52,7 +52,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PeripheralTweakProvider.cs",
     "notes": "The app writes Flags = \"506\" under HKCU\\Control Panel\\Accessibility\\StickyKeys. A local runtime diff confirmed that this matches the persisted API-backed profile that leaves SKF_HOTKEYACTIVE cleared on this build.",
     "writes": [
       {
@@ -161,7 +161,7 @@
       "evidence_id": "app-peripheral-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PeripheralTweakProvider.cs",
       "summary": "The provider writes Flags = \"506\" under HKCU\\Control Panel\\Accessibility\\StickyKeys.",
       "supports": [
         "path",

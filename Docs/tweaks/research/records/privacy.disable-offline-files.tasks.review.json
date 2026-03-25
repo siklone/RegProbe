@@ -46,7 +46,7 @@
   },
   "app_current_implementation": {
     "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The app disables the two Offline Files synchronization tasks as part of the broader bundle.",
     "writes": [
       {
@@ -152,7 +152,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current privacy provider task bundle",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider disables the Offline Files background and logon synchronization tasks.",
       "supports": [
         "ui-mapping",

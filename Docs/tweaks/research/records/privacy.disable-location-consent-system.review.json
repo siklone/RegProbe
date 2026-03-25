@@ -57,7 +57,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The provider writes Value = Deny under the machine-level location consent-store path, which matches the Microsoft-documented runtime control surface.",
     "writes": [
       {
@@ -167,7 +167,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current privacy provider system location-consent write",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value = Deny.",
       "supports": [
         "path",

@@ -58,7 +58,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
     "notes": "The current app writes EnableLLTDIO = 1, which matches the documented policy enable state.",
     "writes": [
       {
@@ -181,7 +181,7 @@
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
       "title": "Current network tweak provider",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
       "summary": "The current app writes EnableLLTDIO = 1 for this tweak.",
       "supports": [
         "ui-mapping",

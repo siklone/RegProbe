@@ -1,4 +1,4 @@
-﻿# Windows Optimizer - KapsamlÄ± Teknik Mimari DokÃ¼mantasyonu
+# Open Trace Project - KapsamlÄ± Teknik Mimari DokÃ¼mantasyonu
 
 Bu belge, uygulamanÄ±n tÃ¼m teknik bileÅŸenlerini, sensÃ¶r fallback mekanizmalarÄ±nÄ±, thread yÃ¶netimini, UI/UX yapÄ±sÄ±nÄ± ve servis mimarisini detaylÄ± olarak aÃ§Ä±klar.
 
@@ -7,17 +7,17 @@ Bu belge, uygulamanÄ±n tÃ¼m teknik bileÅŸenlerini, sensÃ¶r fallback meka
 ## ðŸ“ Dosya YapÄ±sÄ± Ã–zeti
 
 ```
-WindowsOptimizer/
-â”œâ”€â”€ WindowsOptimizer.Core/           # Temel arayÃ¼zler ve modeller
-â”œâ”€â”€ WindowsOptimizer.Engine/         # Tweak iÅŸleme motoru
+OpenTraceProject/
+â”œâ”€â”€ OpenTraceProject.Core/           # Temel arayÃ¼zler ve modeller
+â”œâ”€â”€ OpenTraceProject.Engine/         # Tweak iÅŸleme motoru
 â”‚   â””â”€â”€ Tweaks/                      # 9 tweak tÃ¼rÃ¼
-â”œâ”€â”€ WindowsOptimizer.Infrastructure/ # AltyapÄ± servisleri
+â”œâ”€â”€ OpenTraceProject.Infrastructure/ # AltyapÄ± servisleri
 â”‚   â””â”€â”€ Metrics/                     # 11 metrik dosyasÄ± (102KB+)
-â”œâ”€â”€ WindowsOptimizer.App/            # WPF UI uygulamasÄ±
+â”œâ”€â”€ OpenTraceProject.App/            # Masaustu UI uygulamasi
 â”‚   â”œâ”€â”€ Views/                       # XAML gÃ¶rÃ¼nÃ¼mleri
 â”‚   â”œâ”€â”€ ViewModels/                  # MVVM ViewModelleri
 â”‚   â””â”€â”€ Services/                    # Uygulama servisleri
-â””â”€â”€ WindowsOptimizer.ElevatedHost/   # YÃ¼kseltilmiÅŸ iÅŸlem sunucusu
+â””â”€â”€ OpenTraceProject.ElevatedHost/   # YÃ¼kseltilmiÅŸ iÅŸlem sunucusu
 ```
 
 ---
@@ -26,7 +26,7 @@ WindowsOptimizer/
 
 ### 1. TweakProvider Sistemi (13 dosya)
 
-Provider'lar `WindowsOptimizer.App/Services/TweakProviders/` dizininde bulunur:
+Provider'lar `OpenTraceProject.App/Services/TweakProviders/` dizininde bulunur:
 
 | Provider | Sorumluluk | Tweak SayÄ±sÄ± |
 |----------|------------|--------------|
@@ -314,7 +314,7 @@ sequenceDiagram
 
 **Named Pipe Ä°letiÅŸimi:**
 ```
-Pipe Name: WindowsOptimizerElevatedPipe
+Pipe Name: OpenTraceProjectElevatedPipe
 Security: Admin only access
 ```
 
@@ -388,4 +388,4 @@ private static extern uint GetPerTcpConnectionEStats(...);
 - [PerformanceCounter Class](https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.performancecounter)
 - [GetProcessIoCounters](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getprocessiocounters)
 - [GetExtendedTcpTable](https://learn.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getextendedtcptable)
-- [WPF Animation](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/graphics-multimedia/animation-overview)
+- [Desktop animation](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/graphics-multimedia/animation-overview)

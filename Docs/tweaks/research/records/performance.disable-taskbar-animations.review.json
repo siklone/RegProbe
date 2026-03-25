@@ -54,7 +54,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs",
     "notes": "The current app writes TaskbarAnimations = 0, and the guest probe confirmed that 0 disables taskbar animations on Win25H2Clean.",
     "writes": [
       {
@@ -135,7 +135,7 @@
       "evidence_id": "app-performance-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs",
       "summary": "The provider writes TaskbarAnimations = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
       "supports": [
         "path",

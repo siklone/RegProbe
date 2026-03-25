@@ -144,7 +144,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The app writes all four values as part of the broader application-compatibility policy path. Path and values match both local AppDeviceInventory.admx and the CSP page. The app still writes DisableEngine, SbEnable, and DisablePCA in the same code path; those are tracked in separate records.",
     "writes": [
       {
@@ -322,7 +322,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "Writes all four AppDeviceInventory values as part of the application-compatibility policy path.",
       "supports": ["path", "value", "ui-mapping"],
       "strength": "high"

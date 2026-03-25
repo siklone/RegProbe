@@ -47,7 +47,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
     "notes": "The app writes Shell Icons value 29 = %windir%\\System32\\shell32.dll,-50, which matches the Microsoft support guidance for removing shortcut arrows.",
     "writes": [
       {
@@ -158,7 +158,7 @@
       "evidence_id": "app-system-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
       "summary": "The provider writes Shell Icons value 29 = %windir%\\System32\\shell32.dll,-50 for the current tweak.",
       "supports": [
         "path",

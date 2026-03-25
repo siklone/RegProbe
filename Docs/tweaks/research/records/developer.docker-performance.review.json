@@ -59,7 +59,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
     "notes": "The app now writes wslEngineEnabled=true in the Docker settings file rather than the old UseWSL2 registry value.",
     "writes": [
       {
@@ -185,7 +185,7 @@
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
       "summary": "The provider writes wslEngineEnabled=true in %APPDATA%\\Docker\\settings-store.json.",
       "supports": [
         "path",

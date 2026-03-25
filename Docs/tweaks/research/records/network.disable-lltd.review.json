@@ -95,7 +95,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
     "notes": "The app writes the official LLTD policy path and value names, including EnableLLTDIO = 0 and EnableRspndr = 0. The UX now matches the documented semantics: policy-disabled or not configured leaves the default LLTD behavior in place rather than guaranteeing a hard-disable.",
     "writes": [
       {
@@ -297,7 +297,7 @@
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
       "title": "Current network tweak provider",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
       "summary": "The app writes zero values to both LLTD policy controls and presents the bundle as setting the LLTD policies back to documented default behavior.",
       "supports": [
         "ui-mapping",

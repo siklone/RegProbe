@@ -46,7 +46,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "partially-matches",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
                                        "notes":  "The provider writes three CEIP-related values across three different policy families.",
                                        "writes":  [
                                                       {
@@ -139,7 +139,7 @@
                          "evidence_id":  "app-privacy-provider",
                          "kind":  "repo-code",
                          "title":  "Current privacy provider CEIP bundle",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
                          "summary":  "The provider writes AppV CEIPEnable = 0, SQMClient CEIPEnable = 0, and Messenger CEIP = 2.",
                          "supports":  [
                                           "path",
@@ -163,7 +163,7 @@
                  },
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
                              "exact_quote_or_path":  "\"ValueName\": \"CEIPEnable\" ... \"KeyPath\": [\"HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\AppV\\\\CEIP\"] ... \"DisplayName\": \"Turn off Windows Customer Experience Improvement Program\" ... \"KeyPath\": [\"HKLM\\\\Software\\\\Policies\\\\Microsoft\\\\SQMClient\\\\Windows\"] ... \"ValueName\": \"CEIPEnable\".",
                              "key_found_on_page":  true,
                              "notes":  "Composite CEIP audit trail. The mirror shows CEIPEnable on both App-V and SQMClient policy surfaces."

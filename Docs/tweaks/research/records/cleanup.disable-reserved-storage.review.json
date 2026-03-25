@@ -51,7 +51,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs",
+    "provider_source": "OpenTraceProject.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs",
     "notes": "The current cleanup tweak implements the documented DISM surface directly: detect via /Get-ReservedStorageState, apply via /Set-ReservedStorageState /State:Disabled /NoRestart, and rollback via /State:Enabled when appropriate.",
     "writes": [
       {
@@ -177,7 +177,7 @@
       "evidence_id": "engine-cleanup-command-tweak",
       "kind": "repo-code",
       "title": "Current cleanup command implementation",
-      "location": "WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs",
+      "location": "OpenTraceProject.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs",
       "summary": "The engine tweak uses the documented DISM detect/apply/rollback flow: /Get-ReservedStorageState, /Set-ReservedStorageState /State:Disabled /NoRestart, and rollback to /State:Enabled when needed.",
       "supports": [
         "path",

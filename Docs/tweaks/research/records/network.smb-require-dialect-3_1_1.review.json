@@ -299,7 +299,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
     "notes": "The app now writes MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under the documented LanmanWorkstation and LanmanServer policy keys, which enforces exactly SMB 3.1.1 on both client and server policy surfaces.",
     "writes": [
       {
@@ -535,7 +535,7 @@
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
       "summary": "The provider writes MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation and HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer.",
       "supports": [
         "path",

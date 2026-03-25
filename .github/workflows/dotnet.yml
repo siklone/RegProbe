@@ -1,4 +1,4 @@
-# Windows Optimizer CI/CD Pipeline
+# Open Trace Project CI/CD Pipeline
 # Comprehensive build, test, and publish workflow
 # Source: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
@@ -17,10 +17,10 @@ env:
   DOTNET_VERSION: "8.0.x"
   CONFIGURATION: Release
   RUNTIME: win-x64
-  SOLUTION: WindowsOptimizerSuite.sln
-  TEST_PROJECT: WindowsOptimizer.Tests/WindowsOptimizer.Tests.csproj
-  APP_PROJECT: WindowsOptimizer.App/WindowsOptimizer.App.csproj
-  ELEVATED_HOST_PROJECT: WindowsOptimizer.ElevatedHost/WindowsOptimizer.ElevatedHost.csproj
+  SOLUTION: OpenTraceProject.sln
+  TEST_PROJECT: OpenTraceProject.Tests/OpenTraceProject.Tests.csproj
+  APP_PROJECT: OpenTraceProject.App/OpenTraceProject.App.csproj
+  ELEVATED_HOST_PROJECT: OpenTraceProject.ElevatedHost/OpenTraceProject.ElevatedHost.csproj
 
 jobs:
   build:
@@ -101,7 +101,7 @@ jobs:
 
       - name: Verify ElevatedHost packaging
         run: |
-          $hostPath = "publish/ElevatedHost/WindowsOptimizer.ElevatedHost.exe"
+          $hostPath = "publish/ElevatedHost/OpenTraceProject.ElevatedHost.exe"
           if (!(Test-Path $hostPath)) {
             Write-Error "CRITICAL: ElevatedHost.exe not found at $hostPath"
             exit 1
@@ -110,17 +110,17 @@ jobs:
 
       - name: Verify main application
         run: |
-          $appPath = "publish/WindowsOptimizer.App.exe"
+          $appPath = "publish/OpenTraceProject.App.exe"
           if (!(Test-Path $appPath)) {
             Write-Error "CRITICAL: Main application not found at $appPath"
             exit 1
           }
-          Write-Host "WindowsOptimizer.App.exe verified at $appPath"
+          Write-Host "OpenTraceProject.App.exe verified at $appPath"
 
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4
         with:
-          name: WindowsOptimizer-${{ github.sha }}
+          name: OpenTraceProject-${{ github.sha }}
           path: publish/
           retention-days: 30
 
@@ -156,12 +156,12 @@ jobs:
 
       - name: Create release archive
         run: |
-          Compress-Archive -Path release/* -DestinationPath WindowsOptimizer-${{ github.event.release.tag_name }}.zip
+          Compress-Archive -Path release/* -DestinationPath OpenTraceProject-${{ github.event.release.tag_name }}.zip
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
-          files: WindowsOptimizer-${{ github.event.release.tag_name }}.zip
+          files: OpenTraceProject-${{ github.event.release.tag_name }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

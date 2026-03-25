@@ -73,7 +73,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
     "notes": "The current app now writes HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon = 2, which matches the documented ConfigureChatIcon policy and the Hide state validated in this record. The previous HKCU TaskbarMn write was removed as part of the implementation-mismatch fix on 2026-03-13.",
     "writes": [
       {
@@ -216,7 +216,7 @@
       "evidence_id": "app-visibility-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
       "summary": "The provider writes HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat\\ChatIcon = 2 for the current tweak.",
       "supports": [
         "path",

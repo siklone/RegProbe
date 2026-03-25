@@ -59,7 +59,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
     "notes": "The current app writes DOTNET_CLI_TELEMETRY_OPTOUT = 1 as a persistent current-user environment variable.",
     "writes": [
       {
@@ -184,7 +184,7 @@
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
       "summary": "The provider writes DOTNET_CLI_TELEMETRY_OPTOUT = 1 under HKCU\\Environment for the current tweak.",
       "supports": [
         "path",

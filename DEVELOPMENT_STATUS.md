@@ -1,14 +1,14 @@
 # Development Status & Known Issues
 
 **Last Updated:** January 20, 2026
-**Project:** Windows Optimizer - WPF .NET 8
+**Project:** Open Trace Project - .NET 8 desktop app
 **Branch:** main
 
 > Runtime validation is performed in the `Win25H2Clean` VMware VM. The host machine is reserved for source edits and offline preparation only. See `Docs/VM_WORKFLOW.md`.
 
 ---
 
-## 📋 Table of Contents
+## ðŸ“‹ Table of Contents
 - [Recent Fixes & Changes](#recent-fixes--changes)
 - [Known Issues](#known-issues)
 - [Potential Issues](#potential-issues)
@@ -18,19 +18,19 @@
 
 ---
 
-## ✅ Recent Fixes & Changes
+## âœ… Recent Fixes & Changes
 
 ### 0. Sprint 1: Single Instance + Threading Architecture (Commit: pending)
 **Improvement:** Added core infrastructure for single instance enforcement and multi-threaded metric collection.
 
 **New Files:**
-- `WindowsOptimizer.App/Services/SingleInstanceManager.cs` - Named Mutex + Named Pipe IPC
-- `WindowsOptimizer.Infrastructure/Threading/MetricDataBus.cs` - Channel-based lock-free messaging
-- `WindowsOptimizer.Infrastructure/Threading/MetricWorkerPool.cs` - Dedicated worker thread pool
-- `WindowsOptimizer.Infrastructure/Threading/ThreadingDiagnostics.cs` - Performance tracking
+- `OpenTraceProject.App/Services/SingleInstanceManager.cs` - Named Mutex + Named Pipe IPC
+- `OpenTraceProject.Infrastructure/Threading/MetricDataBus.cs` - Channel-based lock-free messaging
+- `OpenTraceProject.Infrastructure/Threading/MetricWorkerPool.cs` - Dedicated worker thread pool
+- `OpenTraceProject.Infrastructure/Threading/ThreadingDiagnostics.cs` - Performance tracking
 
 **Modified Files:**
-- `WindowsOptimizer.App/App.xaml.cs` - Single instance integration
+- `OpenTraceProject.App/App.xaml.cs` - Single instance integration
 
 **Features:**
 - Only one app instance can run at a time
@@ -40,7 +40,7 @@
 - Dedicated worker threads for metric collection
 - Performance diagnostics for threading subsystem
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows testing
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows testing
 
 ---
 
@@ -48,10 +48,10 @@
 **Improvement:** Added data fetching from multiple sources and hardware identification.
 
 **New Files:**
-- `WindowsOptimizer.Infrastructure/Data/FallbackDataProvider.cs` - Priority-based fallback with retry + circuit breaker
-- `WindowsOptimizer.Infrastructure/Data/RetryPolicy.cs` - Exponential backoff retry configuration
-- `WindowsOptimizer.Infrastructure/Data/DataResult.cs` - Result types with error tracking
-- `WindowsOptimizer.Infrastructure/Hardware/HardwareIdentifier.cs` - CPU, GPU, Motherboard, RAM identification
+- `OpenTraceProject.Infrastructure/Data/FallbackDataProvider.cs` - Priority-based fallback with retry + circuit breaker
+- `OpenTraceProject.Infrastructure/Data/RetryPolicy.cs` - Exponential backoff retry configuration
+- `OpenTraceProject.Infrastructure/Data/DataResult.cs` - Result types with error tracking
+- `OpenTraceProject.Infrastructure/Hardware/HardwareIdentifier.cs` - CPU, GPU, Motherboard, RAM identification
 
 **Features:**
 - FallbackDataProvider tries sources in priority order until one succeeds
@@ -63,7 +63,7 @@
 - Motherboard: Manufacturer, product, serial
 - RAM: Modules, capacity, speed, type
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows testing
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows testing
 
 ---
 
@@ -71,7 +71,7 @@
 **Improvement:** Added PreloadManager for structured startup task management.
 
 **New Files:**
-- `WindowsOptimizer.App/Services/PreloadManager.cs` - Preload task orchestration
+- `OpenTraceProject.App/Services/PreloadManager.cs` - Preload task orchestration
 
 **Features:**
 - Critical tasks run sequentially (must succeed for app to start)
@@ -88,7 +88,7 @@ preloader.RegisterTask("Hardware", ScanHardware, isCritical: false, priority: 50
 var result = await preloader.RunAllAsync(ct);
 ```
 
-**Status:** 🧪 **IMPLEMENTED** - Ready for integration with StartupWindow
+**Status:** ðŸ§ª **IMPLEMENTED** - Ready for integration with StartupWindow
 
 ---
 
@@ -96,19 +96,19 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added reusable hardware card ViewModels for Monitor view redesign.
 
 **New Files:**
-- `WindowsOptimizer.App/ViewModels/Hardware/HardwareCardViewModelBase.cs` - Base class with common properties
-- `WindowsOptimizer.App/ViewModels/Hardware/CpuCardViewModel.cs` - CPU card with identification and metrics
-- `WindowsOptimizer.App/ViewModels/Hardware/GpuCardViewModel.cs` - GPU card with VRAM and vendor info
-- `WindowsOptimizer.App/ViewModels/Hardware/RamCardViewModel.cs` - RAM card with modules and speed
+- `OpenTraceProject.App/ViewModels/Hardware/HardwareCardViewModelBase.cs` - Base class with common properties
+- `OpenTraceProject.App/ViewModels/Hardware/CpuCardViewModel.cs` - CPU card with identification and metrics
+- `OpenTraceProject.App/ViewModels/Hardware/GpuCardViewModel.cs` - GPU card with VRAM and vendor info
+- `OpenTraceProject.App/ViewModels/Hardware/RamCardViewModel.cs` - RAM card with modules and speed
 
 **Features:**
 - Base class with Icon, Title, Subtitle, PrimaryValue, SecondaryMetrics
 - Automatic hardware identification via HardwareIdentifier
 - MetricDataBus integration for real-time updates
 - Color-coded status (green/yellow/red) based on thresholds
-- INotifyPropertyChanged for WPF binding
+- INotifyPropertyChanged for UI binding
 
-**Status:** 🧪 **IMPLEMENTED** - Ready for XAML integration
+**Status:** ðŸ§ª **IMPLEMENTED** - Ready for XAML integration
 
 ---
 
@@ -116,9 +116,9 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added process priority, affinity, and memory management utilities.
 
 **New Files:**
-- `WindowsOptimizer.Infrastructure/Process/ProcessPriorityManager.cs` - Priority control (Idle to Realtime)
-- `WindowsOptimizer.Infrastructure/Process/ProcessAffinityManager.cs` - CPU affinity with P/E-core presets
-- `WindowsOptimizer.Infrastructure/Process/ProcessMemoryManager.cs` - Working set trimming
+- `OpenTraceProject.Infrastructure/Process/ProcessPriorityManager.cs` - Priority control (Idle to Realtime)
+- `OpenTraceProject.Infrastructure/Process/ProcessAffinityManager.cs` - CPU affinity with P/E-core presets
+- `OpenTraceProject.Infrastructure/Process/ProcessMemoryManager.cs` - Working set trimming
 
 **Features:**
 - Set/Get process priority with admin detection
@@ -126,7 +126,7 @@ var result = await preloader.RunAllAsync(ct);
 - Working set trimming (single process or all)
 - Memory info retrieval (working set, private, virtual)
 
-**Status:** 🧪 **IMPLEMENTED** - Ready for UI integration
+**Status:** ðŸ§ª **IMPLEMENTED** - Ready for UI integration
 
 ---
 
@@ -134,14 +134,14 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added toast notification system and keyboard shortcuts for better UX.
 
 **New Files:**
-- `WindowsOptimizer.App/Services/INotificationService.cs` - Interface
-- `WindowsOptimizer.App/Services/NotificationService.cs` - Implementation
-- `WindowsOptimizer.App/Views/Controls/NotificationHost.xaml` - XAML overlay
-- `WindowsOptimizer.App/Converters/CommonConverters.cs` - NullToCollapsed etc.
+- `OpenTraceProject.App/Services/INotificationService.cs` - Interface
+- `OpenTraceProject.App/Services/NotificationService.cs` - Implementation
+- `OpenTraceProject.App/Views/Controls/NotificationHost.xaml` - XAML overlay
+- `OpenTraceProject.App/Converters/CommonConverters.cs` - NullToCollapsed etc.
 
 **Modified Files:**
-- `WindowsOptimizer.App/MainWindow.xaml` - Added NotificationHost, controls namespace
-- `WindowsOptimizer.App/MainWindow.xaml.cs` - NotificationService integration
+- `OpenTraceProject.App/MainWindow.xaml` - Added NotificationHost, controls namespace
+- `OpenTraceProject.App/MainWindow.xaml.cs` - NotificationService integration
 
 **Features:**
 - Toast notifications: Success/Warning/Error/Info
@@ -150,7 +150,7 @@ var result = await preloader.RunAllAsync(ct);
 - Global access via MainWindow.Instance.Notifications
 - Keyboard shortcuts: Ctrl+1-5 tabs, Ctrl+F search, Escape clear
 
-**Status:** ✅ **IMPLEMENTED** - Ready to use
+**Status:** âœ… **IMPLEMENTED** - Ready to use
 
 ---
 
@@ -158,35 +158,35 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Implemented Async/Await best practices and verified UI virtualization.
 
 **New Files:**
-- `WindowsOptimizer.App/ViewModels/AsyncRelayCommand.cs` - Safe async command implementation
-- `WindowsOptimizer.App/Utilities/TaskExtensions.cs` - SafeFireAndForget extension
+- `OpenTraceProject.App/ViewModels/AsyncRelayCommand.cs` - Safe async command implementation
+- `OpenTraceProject.App/Utilities/TaskExtensions.cs` - SafeFireAndForget extension
 
 **Modified Files:**
-- `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs` - Replaced `async void` with safe commands
-- `WindowsOptimizer.App/ViewModels/CategoryGroupViewModel.cs` - Stabilized expand/collapse logic
+- `OpenTraceProject.App/ViewModels/DashboardViewModel.cs` - Replaced `async void` with safe commands
+- `OpenTraceProject.App/ViewModels/CategoryGroupViewModel.cs` - Stabilized expand/collapse logic
 
 **Features:**
 - **Crash Prevention:** Replaced dangerous `async void` patterns with `AsyncRelayCommand` that handles exceptions safely.
 - **UI Responsiveness:** Verified `VirtualizingStackPanel` and Recycling mode in `TweaksView` to handle large lists efficiently.
 - **Safe Fire-and-Forget:** Added error logging for background tasks.
 
-**Status:** ✅ **OPTIMIZED** - Stability improved
+**Status:** âœ… **OPTIMIZED** - Stability improved
 
 ---
 ### 0.7 Startup Preload + Hardware Detail Live Metrics (Commit: pending)
 **Improvement:** Integrated PreloadManager and metric threading into startup; hardware detail windows now load async with live metrics.
 
 **New Files:**
-- `WindowsOptimizer.App/Services/AppServices.cs` - Shared MetricWorkerPool + MetricDataBus initialization
-- `WindowsOptimizer.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - Async hardware detail loader with live metric updates
+- `OpenTraceProject.App/Services/AppServices.cs` - Shared MetricWorkerPool + MetricDataBus initialization
+- `OpenTraceProject.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - Async hardware detail loader with live metric updates
 
 **Modified Files:**
-- `WindowsOptimizer.App/App.xaml.cs` - PreloadManager tasks + threading initialization before MainWindow
-- `WindowsOptimizer.App/StartupWindow.xaml.cs` - Splash progress updates for preload tasks
-- `WindowsOptimizer.App/ViewModels/MainViewModel.cs` - Pass MetricWorkerPool into MonitorViewModel
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Publish missing metric keys, disk bytes/sec, worker pool sampling
-- `WindowsOptimizer.App/ViewModels/Hardware/RamCardViewModel.cs` - RAM GB unit fix for live values
-- `WindowsOptimizer.App/Views/HardwareDetailWindow.xaml.cs` - Dispose view model on close
+- `OpenTraceProject.App/App.xaml.cs` - PreloadManager tasks + threading initialization before MainWindow
+- `OpenTraceProject.App/StartupWindow.xaml.cs` - Splash progress updates for preload tasks
+- `OpenTraceProject.App/ViewModels/MainViewModel.cs` - Pass MetricWorkerPool into MonitorViewModel
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs` - Publish missing metric keys, disk bytes/sec, worker pool sampling
+- `OpenTraceProject.App/ViewModels/Hardware/RamCardViewModel.cs` - RAM GB unit fix for live values
+- `OpenTraceProject.App/Views/HardwareDetailWindow.xaml.cs` - Dispose view model on close
 
 **Features:**
 - Startup preloads threading + hardware identifiers on splash (non-blocking)
@@ -204,17 +204,17 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added SQLite-backed hardware specs database with fallback resolver for CPU/GPU cards.
 
 **New Files:**
-- `WindowsOptimizer.Infrastructure/Hardware/HardwareDatabase.cs` - SQLite schema + lookup helpers
-- `WindowsOptimizer.Infrastructure/Hardware/HardwareSpecs.cs` - Specs models
-- `WindowsOptimizer.Infrastructure/Hardware/HardwareSpecsService.cs` - Fallback resolver using `FallbackDataProvider`
-- `WindowsOptimizer.Infrastructure/Hardware/hardware-seed.json` - Seed data (embedded)
+- `OpenTraceProject.Infrastructure/Hardware/HardwareDatabase.cs` - SQLite schema + lookup helpers
+- `OpenTraceProject.Infrastructure/Hardware/HardwareSpecs.cs` - Specs models
+- `OpenTraceProject.Infrastructure/Hardware/HardwareSpecsService.cs` - Fallback resolver using `FallbackDataProvider`
+- `OpenTraceProject.Infrastructure/Hardware/hardware-seed.json` - Seed data (embedded)
 
 **Modified Files:**
-- `WindowsOptimizer.Infrastructure/AppPaths.cs` - Hardware DB path
-- `WindowsOptimizer.Infrastructure/WindowsOptimizer.Infrastructure.csproj` - Microsoft.Data.Sqlite reference
-- `WindowsOptimizer.App/App.xaml.cs` - Preload database init
-- `WindowsOptimizer.App/ViewModels/Hardware/CpuCardViewModel.cs` - Use specs resolver
-- `WindowsOptimizer.App/ViewModels/Hardware/GpuCardViewModel.cs` - Use specs resolver
+- `OpenTraceProject.Infrastructure/AppPaths.cs` - Hardware DB path
+- `OpenTraceProject.Infrastructure/OpenTraceProject.Infrastructure.csproj` - Microsoft.Data.Sqlite reference
+- `OpenTraceProject.App/App.xaml.cs` - Preload database init
+- `OpenTraceProject.App/ViewModels/Hardware/CpuCardViewModel.cs` - Use specs resolver
+- `OpenTraceProject.App/ViewModels/Hardware/GpuCardViewModel.cs` - Use specs resolver
 
 **Features:**
 - Hardware DB schema created on startup under app data
@@ -232,8 +232,8 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Aligned storage size/speed formatting to binary (1024-based) units for consistent disk card and detail metrics.
 
 **Modified Files:**
-- `WindowsOptimizer.App/ViewModels/Hardware/DiskCardViewModel.cs` - 1024-based size/speed formatting and GB conversions.
-- `WindowsOptimizer.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - 1024-based size/speed formatting for disk details.
+- `OpenTraceProject.App/ViewModels/Hardware/DiskCardViewModel.cs` - 1024-based size/speed formatting and GB conversions.
+- `OpenTraceProject.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - 1024-based size/speed formatting for disk details.
 
 **Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
@@ -243,10 +243,10 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Surfaced live RAM and storage metrics under the primary value for quick visibility.
 
 **Modified Files:**
-- `WindowsOptimizer.App/ViewModels/Hardware/HardwareCardViewModelBase.cs` - LiveSummary support for cards.
-- `WindowsOptimizer.App/ViewModels/Hardware/RamCardViewModel.cs` - Live used/free summary updates.
-- `WindowsOptimizer.App/ViewModels/Hardware/DiskCardViewModel.cs` - Live read/write summary updates.
-- `WindowsOptimizer.App/Views/MonitorView.xaml` - Live summary line under primary metric.
+- `OpenTraceProject.App/ViewModels/Hardware/HardwareCardViewModelBase.cs` - LiveSummary support for cards.
+- `OpenTraceProject.App/ViewModels/Hardware/RamCardViewModel.cs` - Live used/free summary updates.
+- `OpenTraceProject.App/ViewModels/Hardware/DiskCardViewModel.cs` - Live read/write summary updates.
+- `OpenTraceProject.App/Views/MonitorView.xaml` - Live summary line under primary metric.
 
 **Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
@@ -256,10 +256,10 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added motherboard hardware detail view with DB-backed specs and a dashboard entry point.
 
 **Modified Files:**
-- `WindowsOptimizer.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - Motherboard detail loader and view config.
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Motherboard type routing in detail navigation.
-- `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs` - Command to open motherboard detail window.
-- `WindowsOptimizer.App/Views/DashboardView.xaml` - Motherboard details button.
+- `OpenTraceProject.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - Motherboard detail loader and view config.
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs` - Motherboard type routing in detail navigation.
+- `OpenTraceProject.App/ViewModels/DashboardViewModel.cs` - Command to open motherboard detail window.
+- `OpenTraceProject.App/Views/DashboardView.xaml` - Motherboard details button.
 
 **Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
@@ -269,9 +269,9 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added a motherboard hardware card to the Monitor page with optional PCIe/M.2/SATA/USB/LAN/WiFi details.
 
 **Modified Files:**
-- `WindowsOptimizer.App/ViewModels/Hardware/MotherboardCardViewModel.cs` - Motherboard card VM with DB-backed specs.
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs` - Card initialization and disposal.
-- `WindowsOptimizer.App/Views/MonitorView.xaml` - Motherboard card UI.
+- `OpenTraceProject.App/ViewModels/Hardware/MotherboardCardViewModel.cs` - Motherboard card VM with DB-backed specs.
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs` - Card initialization and disposal.
+- `OpenTraceProject.App/Views/MonitorView.xaml` - Motherboard card UI.
 
 **Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
@@ -295,8 +295,8 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Restored missing legacy privacy and SMB tweaks in category providers while avoiding renamed/overlapping entries.
 
 **Modified Files:**
-- `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` - Added missing privacy, diagnostics, and account policy tweaks.
-- `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` - Added SMB client signing + large MTU toggles.
+- `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` - Added missing privacy, diagnostics, and account policy tweaks.
+- `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` - Added SMB client signing + large MTU toggles.
 
 **Notes:**
 - Skipped legacy IDs already covered by newer IDs (e.g., `audio.disable-ducking`, `notifications.disable-lockscreen-toast`, `privacy.disable-location`).
@@ -310,7 +310,7 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Resolved template tweak IDs to their catalog/docs anchors so dynamic IDs still get links.
 
 **Modified Files:**
-- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs` - Match template IDs to anchors for Catalog/Details/Docs links.
+- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs` - Match template IDs to anchors for Catalog/Details/Docs links.
 
 **Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
@@ -333,9 +333,9 @@ var result = await preloader.RunAllAsync(ct);
 - Application now starts with partial monitoring if some services fail
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
 
-**Status:** ✅ **FIXED** - Monitor page loads gracefully even if some services fail
+**Status:** âœ… **FIXED** - Monitor page loads gracefully even if some services fail
 
 ---
 
@@ -354,9 +354,9 @@ var result = await preloader.RunAllAsync(ct);
 - Added nested try-catch for individual tweak detection to continue with other tweaks if one fails
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/CategoryGroupViewModel.cs`
+- `OpenTraceProject.App/ViewModels/CategoryGroupViewModel.cs`
 
-**Status:** ✅ **FIXED** - Category expansion is now stable and timeouts are logged
+**Status:** âœ… **FIXED** - Category expansion is now stable and timeouts are logged
 
 ---
 
@@ -375,9 +375,9 @@ var result = await preloader.RunAllAsync(ct);
 - Returns `TweakStatus.Failed` with clear timeout message
 
 **Files Changed:**
-- `WindowsOptimizer.Engine/TweakExecutionPipeline.cs`
+- `OpenTraceProject.Engine/TweakExecutionPipeline.cs`
 
-**Status:** ✅ **FIXED** - Tweaks now timeout after 30 seconds and show clear error message
+**Status:** âœ… **FIXED** - Tweaks now timeout after 30 seconds and show clear error message
 
 ---
 
@@ -387,7 +387,7 @@ var result = await preloader.RunAllAsync(ct);
 **Root Cause:**
 - Application was running on **Linux WSL2** (`uname -r` shows `6.6.87.2-microsoft-standard-WSL2`)
 - Power tweaks require:
-  1. **Elevated Host** (WindowsOptimizer.ElevatedHost.exe) - Windows executable
+  1. **Elevated Host** (OpenTraceProject.ElevatedHost.exe) - Windows executable
   2. **Windows Registry** (`HKEY_LOCAL_MACHINE`) - doesn't exist on Linux
   3. **Windows Named Pipes** - not compatible with Linux
 - `ElevatedHostClient` tried to connect for 30 seconds before giving up
@@ -401,20 +401,20 @@ var result = await preloader.RunAllAsync(ct);
 - Total time on non-Windows reduced to near-immediate failure (no connection attempts)
 
 **Files Changed:**
-- `WindowsOptimizer.Infrastructure/Elevation/ElevatedHostClient.cs`
-- `WindowsOptimizer.Infrastructure/Elevation/ElevatedHostClientOptions.cs`
-- `WindowsOptimizer.Infrastructure/Registry/LocalRegistryAccessor.cs`
+- `OpenTraceProject.Infrastructure/Elevation/ElevatedHostClient.cs`
+- `OpenTraceProject.Infrastructure/Elevation/ElevatedHostClientOptions.cs`
+- `OpenTraceProject.Infrastructure/Registry/LocalRegistryAccessor.cs`
 
-**Status:** ✅ **FIXED** - Platform issues now fail immediately with clear error messages
+**Status:** âœ… **FIXED** - Platform issues now fail immediately with clear error messages
 
 ---
 
-### 5. File Logging for WPF Debugging (Commits: Multiple)
-**Problem:** WPF applications don't show console output, making debugging impossible.
+### 5. File Logging for Desktop Debugging (Commits: Multiple)
+**Problem:** Desktop applications don't show console output, making debugging impossible.
 
 **Solution:**
 - Added `LogToFile()` helper methods to multiple ViewModels
-- Logs written to `%TEMP%\WindowsOptimizer_Debug.log`
+- Logs written to `%TEMP%\OpenTraceProject_Debug.log`
 - Tracks:
   - Navigation between pages
   - Category expansion/collapse
@@ -423,13 +423,13 @@ var result = await preloader.RunAllAsync(ct);
   - Errors and exceptions with stack traces
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
-- `WindowsOptimizer.App/ViewModels/CategoryGroupViewModel.cs`
-- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
-- `WindowsOptimizer.App/Views/MonitorView.xaml.cs`
-- `WindowsOptimizer.Infrastructure/Elevation/ElevatedHostClient.cs`
+- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
+- `OpenTraceProject.App/ViewModels/CategoryGroupViewModel.cs`
+- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
+- `OpenTraceProject.App/Views/MonitorView.xaml.cs`
+- `OpenTraceProject.Infrastructure/Elevation/ElevatedHostClient.cs`
 
-**Status:** ✅ **IMPLEMENTED** - Detailed logging available for debugging
+**Status:** âœ… **IMPLEMENTED** - Detailed logging available for debugging
 
 ---
 
@@ -442,10 +442,10 @@ var result = await preloader.RunAllAsync(ct);
 - Both monitors avoid returning an empty list solely because performance counters are unavailable
 
 **Files Changed:**
-- `WindowsOptimizer.Infrastructure/Metrics/NetworkMonitor.cs`
-- `WindowsOptimizer.Infrastructure/Metrics/DiskMonitor.cs`
+- `OpenTraceProject.Infrastructure/Metrics/NetworkMonitor.cs`
+- `OpenTraceProject.Infrastructure/Metrics/DiskMonitor.cs`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs verification on Windows 10/11 native
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs verification on Windows 10/11 native
 
 ---
 
@@ -457,15 +457,15 @@ var result = await preloader.RunAllAsync(ct);
 
 **Solution:**
 - Health score is now computed from *detected* scorable tweaks only.
-- Dashboard shows `—` until at least one tweak has a detected state.
+- Dashboard shows `â€”` until at least one tweak has a detected state.
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
-- `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs`
-- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
-- `WindowsOptimizer.App/Views/DashboardView.xaml`
+- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
+- `OpenTraceProject.App/ViewModels/DashboardViewModel.cs`
+- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
+- `OpenTraceProject.App/Views/DashboardView.xaml`
 
-**Status:** ✅ **IMPLEMENTED**
+**Status:** âœ… **IMPLEMENTED**
 
 ---
 
@@ -483,9 +483,9 @@ var result = await preloader.RunAllAsync(ct);
 - Added/kept short hover tooltips for batch actions (Detect/Preview/Apply/Verify/Rollback) and filters.
 
 **Files Changed:**
-- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `OpenTraceProject.App/Views/TweaksView.xaml`
 
-**Status:** ✅ **IMPLEMENTED** - Needs user verification on Windows 10/11
+**Status:** âœ… **IMPLEMENTED** - Needs user verification on Windows 10/11
 
 ---
 
@@ -501,9 +501,9 @@ var result = await preloader.RunAllAsync(ct);
 - Make Visibility category dense layout persistent during rebuilds.
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
 
-**Status:** ✅ **IMPLEMENTED** - Needs user verification on Windows
+**Status:** âœ… **IMPLEMENTED** - Needs user verification on Windows
 
 ---
 
@@ -515,10 +515,10 @@ var result = await preloader.RunAllAsync(ct);
 - Added unit tests covering not-found detection and apply/verify behavior.
 
 **Files Changed:**
-- `WindowsOptimizer.Engine/Tweaks/ScheduledTaskBatchTweak.cs`
-- `WindowsOptimizer.Tests/ScheduledTaskBatchTweakTests.cs`
+- `OpenTraceProject.Engine/Tweaks/ScheduledTaskBatchTweak.cs`
+- `OpenTraceProject.Tests/ScheduledTaskBatchTweakTests.cs`
 
-**Status:** ✅ **IMPLEMENTED** - Needs user verification on Windows
+**Status:** âœ… **IMPLEMENTED** - Needs user verification on Windows
 
 ---
 
@@ -530,11 +530,11 @@ var result = await preloader.RunAllAsync(ct);
 - CPU/RAM chart axes now use a fixed 0-100% scale while keeping Peak/Low/Now for accuracy.
 
 **Files Changed:**
-- `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs`
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
-- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `OpenTraceProject.Infrastructure/Metrics/ProcessMonitor.cs`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.App/Views/MonitorView.xaml`
 
-**Status:** ✅ **IMPLEMENTED**
+**Status:** âœ… **IMPLEMENTED**
 
 ---
 
@@ -556,7 +556,7 @@ var result = await preloader.RunAllAsync(ct);
 - `Docs/security/security.md`
 - `Docs/system/system.md`
 
-**Status:** ✅ **IMPLEMENTED** - Re-run audit after adding new tweaks
+**Status:** âœ… **IMPLEMENTED** - Re-run audit after adding new tweaks
 
 ---
 
@@ -568,10 +568,10 @@ var result = await preloader.RunAllAsync(ct);
 - Surface per-item breakdown in the Technical Info tab for quick inspection.
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
-- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
+- `OpenTraceProject.App/Views/TweaksView.xaml`
 
-**Status:** ✅ **IMPLEMENTED**
+**Status:** âœ… **IMPLEMENTED**
 
 ---
 
@@ -579,16 +579,16 @@ var result = await preloader.RunAllAsync(ct);
 **Problem:** Registry batch tweaks did not expose per-entry status, and collapsed cards lacked a quick "matched/missing" hint.
 
 **Solution:**
-- Registry batch detect messages now include per-entry details with current → target values.
+- Registry batch detect messages now include per-entry details with current â†’ target values.
 - Collapsed tweak cards show a compact "matched / missing" summary when batch details are available.
 
 **Files Changed:**
-- `WindowsOptimizer.Engine/Tweaks/RegistryValueBatchTweak.cs`
-- `WindowsOptimizer.Engine/Tweaks/RegistryValueSetTweak.cs`
-- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
-- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `OpenTraceProject.Engine/Tweaks/RegistryValueBatchTweak.cs`
+- `OpenTraceProject.Engine/Tweaks/RegistryValueSetTweak.cs`
+- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
+- `OpenTraceProject.App/Views/TweaksView.xaml`
 
-**Status:** ✅ **IMPLEMENTED**
+**Status:** âœ… **IMPLEMENTED**
 
 ---
 
@@ -599,9 +599,9 @@ var result = await preloader.RunAllAsync(ct);
 - Added Bluetooth and print-related service names (including per-user patterns) to the batch list.
 
 **Files Changed:**
-- `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs`
+- `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs`
 
-**Status:** ✅ **IMPLEMENTED**
+**Status:** âœ… **IMPLEMENTED**
 
 ---
 
@@ -610,16 +610,16 @@ var result = await preloader.RunAllAsync(ct);
 
 **Solution:**
 - ElevatedHost path discovery now checks common publish layouts, RID folders, and dev bin outputs.
-- Env var override supported: `WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH`.
+- Env var override supported: `OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH`.
 - Tweaks page shows a clear warning banner if the host executable is missing.
 
 **Files Changed:**
-- `WindowsOptimizer.App/Utilities/ElevatedHostLocator.cs`
-- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
-- `WindowsOptimizer.App/Views/TweaksView.xaml`
-- `WindowsOptimizer.Infrastructure/Elevation/ElevatedHostClient.cs`
+- `OpenTraceProject.App/Utilities/ElevatedHostLocator.cs`
+- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
+- `OpenTraceProject.App/Views/TweaksView.xaml`
+- `OpenTraceProject.Infrastructure/Elevation/ElevatedHostClient.cs`
 
-**Status:** ✅ **IMPLEMENTED** - Packaging still needs verification
+**Status:** âœ… **IMPLEMENTED** - Packaging still needs verification
 
 ---
 
@@ -633,12 +633,12 @@ var result = await preloader.RunAllAsync(ct);
 - Theme switching fix: Styles now use `DynamicResource` for theme-bound brushes.
 
 **Files Changed:**
-- `WindowsOptimizer.App/Services/TweakProviders/LegacyTweakProvider.cs`
-- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
-- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
-- `WindowsOptimizer.App/Resources/Styles.xaml`
+- `OpenTraceProject.App/Services/TweakProviders/LegacyTweakProvider.cs`
+- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
+- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
+- `OpenTraceProject.App/Resources/Styles.xaml`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification (tweak count + theme switch)
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification (tweak count + theme switch)
 
 ---
 
@@ -651,10 +651,10 @@ var result = await preloader.RunAllAsync(ct);
 - Keep splash visible while scan runs.
 
 **Files Changed:**
-- `WindowsOptimizer.App/App.xaml.cs`
-- `WindowsOptimizer.App/StartupWindow.xaml`
+- `OpenTraceProject.App/App.xaml.cs`
+- `OpenTraceProject.App/StartupWindow.xaml`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ---
 
@@ -665,9 +665,9 @@ var result = await preloader.RunAllAsync(ct);
 - `DetectStatusAsync` executes pipeline work on a background task.
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ---
 
@@ -679,49 +679,49 @@ var result = await preloader.RunAllAsync(ct);
 - Tweak docs linker reads `tweak-catalog.csv` and adds `Source file` links.
 
 **Files Changed:**
-- `WindowsOptimizer.App/Views/MonitorView.xaml`
-- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+- `OpenTraceProject.App/Views/MonitorView.xaml`
+- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ---
 
 ### 16. Startup Scan Progress Wiring (Commit: pending)
-**Problem:** Splash didn’t convey scan progress; user perceived freezes.
+**Problem:** Splash didnâ€™t convey scan progress; user perceived freezes.
 
 **Solution:**
 - Splash updates with `Scanning tweaks X/Y` and current tweak name.
 - Startup scan pipeline accepts progress + cancellation.
 
 **Files Changed:**
-- `WindowsOptimizer.App/StartupWindow.xaml`
-- `WindowsOptimizer.App/StartupWindow.xaml.cs`
-- `WindowsOptimizer.App/ViewModels/StartupScanProgress.cs`
-- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
-- `WindowsOptimizer.App/ViewModels/DashboardViewModel.cs`
-- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+- `OpenTraceProject.App/StartupWindow.xaml`
+- `OpenTraceProject.App/StartupWindow.xaml.cs`
+- `OpenTraceProject.App/ViewModels/StartupScanProgress.cs`
+- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
+- `OpenTraceProject.App/ViewModels/DashboardViewModel.cs`
+- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ---
 
 ### 17. Tweak Card Compact Summary (Commit: pending)
-**Problem:** Collapsed tweak cards did not surface `Current → Target` + impact area.
+**Problem:** Collapsed tweak cards did not surface `Current â†’ Target` + impact area.
 
 **Solution:**
 - Added an impact area badge (Registry/Service/Task/etc.).
-- One-line `Current → Target` summary shown on the card.
+- One-line `Current â†’ Target` summary shown on the card.
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
-- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
+- `OpenTraceProject.App/Views/TweaksView.xaml`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ---
 
 ### 18. Tweak Catalog Changes/Risk Columns (Commit: pending)
-**Problem:** Docs did not provide per‑tweak “what changes” and risk at a glance.
+**Problem:** Docs did not provide perâ€‘tweak â€œwhat changesâ€ and risk at a glance.
 
 **Solution:**
 - Catalog generator now extracts description + risk for each tweak.
@@ -733,15 +733,15 @@ var result = await preloader.RunAllAsync(ct);
 - `Docs/tweaks/tweak-catalog.md`
 - `Docs/tweaks/tweak-catalog.csv`
 - `Docs/tweaks/tweak-catalog.html`
-- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs`
 - `Docs/tweaks/tweaks.md`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ---
 
 ### 19. Category Docs Tweak Index Anchors (Commit: pending)
-**Problem:** Category docs were long and lacked per‑tweak anchors.
+**Problem:** Category docs were long and lacked perâ€‘tweak anchors.
 
 **Solution:**
 - Generator now injects a `Tweak Index (Generated)` section per doc.
@@ -750,10 +750,10 @@ var result = await preloader.RunAllAsync(ct);
 **Files Changed:**
 - `scripts/generate_tweak_catalog.py`
 - `Docs/*/*.md`
-- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
-- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs`
+- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ### 13. Light Theme Parity Across Main Views (Commit: pending)
 **Problem:** Light theme still showed dark surfaces in several views (hard-coded colors).
@@ -764,14 +764,14 @@ var result = await preloader.RunAllAsync(ct);
 - Added chart gradient color tokens for Monitor charts.
 
 **Files Changed:**
-- `WindowsOptimizer.App/MainWindow.xaml`
-- `WindowsOptimizer.App/Views/DashboardView.xaml`
-- `WindowsOptimizer.App/Views/TweaksView.xaml`
-- `WindowsOptimizer.App/Views/MonitorView.xaml`
-- `WindowsOptimizer.App/Resources/Colors.xaml`
-- `WindowsOptimizer.App/Resources/Colors.Light.xaml`
+- `OpenTraceProject.App/MainWindow.xaml`
+- `OpenTraceProject.App/Views/DashboardView.xaml`
+- `OpenTraceProject.App/Views/TweaksView.xaml`
+- `OpenTraceProject.App/Views/MonitorView.xaml`
+- `OpenTraceProject.App/Resources/Colors.xaml`
+- `OpenTraceProject.App/Resources/Colors.Light.xaml`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification (Light theme)
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification (Light theme)
 
 ---
 
@@ -780,15 +780,15 @@ var result = await preloader.RunAllAsync(ct);
 
 **Solution:**
 - Generated HTML catalog with per-tweak anchors.
-- Tweaks now include a direct “Catalog entry” link pointing to the anchor.
+- Tweaks now include a direct â€œCatalog entryâ€ link pointing to the anchor.
 
 **Files Changed:**
 - `scripts/generate_tweak_catalog.py`
 - `Docs/tweaks/tweak-catalog.html`
-- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
-- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs`
+- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
 
-**Status:** ✅ **IMPLEMENTED** - Needs Windows verification
+**Status:** âœ… **IMPLEMENTED** - Needs Windows verification
 
 ---
 
@@ -801,12 +801,12 @@ var result = await preloader.RunAllAsync(ct);
 - Detect-all preserves category expansion state.
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
-- `WindowsOptimizer.App/MainWindow.xaml`
-- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
-- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
+- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
+- `OpenTraceProject.App/MainWindow.xaml`
+- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
+- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
 
-**Status:** ✅ **IMPLEMENTED** - Needs Windows verification
+**Status:** âœ… **IMPLEMENTED** - Needs Windows verification
 
 ---
 
@@ -824,10 +824,10 @@ var result = await preloader.RunAllAsync(ct);
 - Modernized Monitor header toolbar with Live pill and icon Save button.
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
-- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.App/Views/MonitorView.xaml`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ---
 
@@ -840,10 +840,10 @@ var result = await preloader.RunAllAsync(ct);
 - Status tooltips now reflect Mixed state.
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/TweakItemViewModel.cs`
-- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
+- `OpenTraceProject.App/Views/TweaksView.xaml`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ---
 
@@ -856,9 +856,9 @@ var result = await preloader.RunAllAsync(ct);
 - Reduced row padding for denser layout.
 
 **Files Changed:**
-- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `OpenTraceProject.App/Views/MonitorView.xaml`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ---
 
@@ -871,12 +871,12 @@ var result = await preloader.RunAllAsync(ct);
 - UI now switches title/description based on measurement mode.
 
 **Files Changed:**
-- `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs`
-- `WindowsOptimizer.Infrastructure/Metrics/NetworkEtwSampler.cs`
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
-- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `OpenTraceProject.Infrastructure/Metrics/ProcessMonitor.cs`
+- `OpenTraceProject.Infrastructure/Metrics/NetworkEtwSampler.cs`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.App/Views/MonitorView.xaml`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
 ---
 
@@ -890,12 +890,12 @@ var result = await preloader.RunAllAsync(ct);
 - CSV export includes the new latency targets.
 
 **Files Changed:**
-- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
-- `WindowsOptimizer.Infrastructure/Metrics/ProcessMonitor.cs`
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
-- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `OpenTraceProject.Infrastructure/Metrics/MetricProvider.cs`
+- `OpenTraceProject.Infrastructure/Metrics/ProcessMonitor.cs`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.App/Views/MonitorView.xaml`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification (NVMe + OEM drivers)
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification (NVMe + OEM drivers)
 
 ---
 
@@ -910,7 +910,7 @@ var result = await preloader.RunAllAsync(ct);
 - `scripts/package_windows.cmd`
 - `scripts/package_windows.ps1`
 
-**Status:** ✅ **IMPLEMENTED**
+**Status:** âœ… **IMPLEMENTED**
 
 ---
 
@@ -923,11 +923,11 @@ var result = await preloader.RunAllAsync(ct);
 - Tweaks list cards are bitmap cached to reduce scroll jank.
 
 **Files Changed:**
-- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
-- `WindowsOptimizer.App/Views/TweaksView.xaml`
+- `OpenTraceProject.Infrastructure/Metrics/MetricProvider.cs`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.App/Views/TweaksView.xaml`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs Windows verification (varied hardware)
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification (varied hardware)
 
 ---
 
@@ -940,17 +940,17 @@ var result = await preloader.RunAllAsync(ct);
 - Added **Card Shadows** toggle in Settings (default OFF) to reduce GPU load during scrolling.
 
 **Files Changed:**
-- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
-- `WindowsOptimizer.App/Views/MonitorView.xaml`
-- `WindowsOptimizer.App/Views/TweaksView.xaml`
-- `WindowsOptimizer.App/Views/DashboardView.xaml`
-- `WindowsOptimizer.App/Resources/Styles.xaml`
-- `WindowsOptimizer.App/ViewModels/SettingsViewModel.cs`
-- `WindowsOptimizer.Infrastructure/AppSettings.cs`
-- `WindowsOptimizer.App/Services/UiPreferences.cs`
+- `OpenTraceProject.Infrastructure/Metrics/MetricProvider.cs`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.App/Views/MonitorView.xaml`
+- `OpenTraceProject.App/Views/TweaksView.xaml`
+- `OpenTraceProject.App/Views/DashboardView.xaml`
+- `OpenTraceProject.App/Resources/Styles.xaml`
+- `OpenTraceProject.App/ViewModels/SettingsViewModel.cs`
+- `OpenTraceProject.Infrastructure/AppSettings.cs`
+- `OpenTraceProject.App/Services/UiPreferences.cs`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs hardware verification on SATA/NVMe systems
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs hardware verification on SATA/NVMe systems
 
 ---
 
@@ -973,18 +973,18 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - DirectX registry value is trimmed before mapping.
 
 **Files Changed:**
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
-- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.Infrastructure/Metrics/MetricProvider.cs`
 
-**Status:** 🧪 **IMPLEMENTED** - Needs verification on Windows 10/11
+**Status:** ðŸ§ª **IMPLEMENTED** - Needs verification on Windows 10/11
 
 ---
 
-## 🐛 Known Issues
+## ðŸ› Known Issues
 
 ### 1. **Monitor Page - Empty Network Adapters and Disk Activity**
 **Severity:** Medium
-**Status:** 🧪 **NEEDS TESTING**
+**Status:** ðŸ§ª **NEEDS TESTING**
 
 **Description:**
 - Network Adapters and/or Disk Activity may show empty (or show 0 I/O) on some environments
@@ -1002,9 +1002,9 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - A UI update deferral fix was added in `1a16a95` (ContextIdle updates + retry), still needs verification on native Windows.
 
 **Files Affected:**
-- `WindowsOptimizer.Infrastructure/Metrics/NetworkMonitor.cs`
-- `WindowsOptimizer.Infrastructure/Metrics/DiskMonitor.cs`
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.Infrastructure/Metrics/NetworkMonitor.cs`
+- `OpenTraceProject.Infrastructure/Metrics/DiskMonitor.cs`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
 
 **Priority:** Medium - affects monitoring functionality but doesn't crash
 
@@ -1012,7 +1012,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 ### 2. **Disk Health / Fan Sensors Missing on Some Hardware**
 **Severity:** Medium
-**Status:** 🧪 **NEEDS HARDWARE VERIFICATION**
+**Status:** ðŸ§ª **NEEDS HARDWARE VERIFICATION**
 
 **Description:**
 - Some NVMe/SATA devices still report `N/A` for disk health (SMART/WMI coverage varies by vendor).
@@ -1026,8 +1026,8 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - New CPU/GPU fallbacks were added in `1a16a95` (perf WMI + GPU adapter memory counters) and need hardware validation.
 
 **Files Affected:**
-- `WindowsOptimizer.Infrastructure/Metrics/MetricProvider.cs`
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.Infrastructure/Metrics/MetricProvider.cs`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
 
 **Priority:** Medium - visible in UI but does not crash
 
@@ -1035,7 +1035,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 ### 3. **Power Tweaks Not Functional on WSL2/Linux**
 **Severity:** High (if running on WSL2), Low (if running on Windows)
-**Status:** ✅ **BY DESIGN**
+**Status:** âœ… **BY DESIGN**
 
 **Description:**
 - All Power category tweaks fail immediately on non-Windows platforms
@@ -1060,7 +1060,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 ### 4. **Elevated Host Launch on First Tweak Apply**
 **Severity:** Low
-**Status:** ⚠️ **KNOWN BEHAVIOR**
+**Status:** âš ï¸ **KNOWN BEHAVIOR**
 
 **Description:**
 - First time applying a tweak that requires elevation, a UAC prompt appears
@@ -1080,7 +1080,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 ### 5. **Legacy Provider Migration Needed**
 **Severity:** Medium
-**Status:** ⚠️ **PENDING**
+**Status:** âš ï¸ **PENDING**
 
 **Description:**
 - `LegacyTweakProvider` restores missing tweaks but duplicates the refactored provider catalog.
@@ -1093,11 +1093,11 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 ---
 
-## ⚠️ Potential Issues
+## âš ï¸ Potential Issues
 
 ### 1. **Memory Leak in Monitoring Services**
 **Severity:** Medium
-**Status:** 🔍 **NEEDS TESTING**
+**Status:** ðŸ” **NEEDS TESTING**
 
 **Description:**
 - DispatcherTimer runs every 1 second in MonitorViewModel
@@ -1110,14 +1110,14 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - Ensure all IDisposable resources are properly disposed
 
 **Files to Review:**
-- `WindowsOptimizer.App/ViewModels/MonitorViewModel.cs`
-- `WindowsOptimizer.Infrastructure/Metrics/*.cs`
+- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `OpenTraceProject.Infrastructure/Metrics/*.cs`
 
 ---
 
 ### 2. **Race Condition in Category Detection**
 **Severity:** Low
-**Status:** ⚠️ **POSSIBLE**
+**Status:** âš ï¸ **POSSIBLE**
 
 **Description:**
 - User could rapidly open/close categories before detection completes
@@ -1130,13 +1130,13 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - Add `_isDetecting` flag to prevent concurrent detection
 
 **Files Affected:**
-- `WindowsOptimizer.App/ViewModels/CategoryGroupViewModel.cs`
+- `OpenTraceProject.App/ViewModels/CategoryGroupViewModel.cs`
 
 ---
 
 ### 3. **ElevatedHost.exe Missing After Build**
 **Severity:** High
-**Status:** ⚠️ **BUILD CONFIGURATION**
+**Status:** âš ï¸ **BUILD CONFIGURATION**
 
 **Description:**
 - ElevatedHost must be discoverable for elevation-required tweaks.
@@ -1144,42 +1144,42 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - Build/publish configuration might still fail to copy the ElevatedHost into the app output directory.
 
 **Recommendation:**
-- Verify ElevatedHost exists in the publish output (`ElevatedHost/WindowsOptimizer.ElevatedHost.exe`)
+- Verify ElevatedHost exists in the publish output (`ElevatedHost/OpenTraceProject.ElevatedHost.exe`)
 - Add a post-build/publish copy step if missing (and/or CI check)
 - Consider a startup health check in addition to the Tweaks page banner
 
 **Files to Review:**
-- `WindowsOptimizer.App/WindowsOptimizer.App.csproj`
+- `OpenTraceProject.App/OpenTraceProject.App.csproj`
 - Build scripts
 
 ---
 
 ### 4. **Startup Scan Still Feels Blocking**
 **Severity:** Medium
-**Status:** 🧪 **NEEDS VERIFICATION**
+**Status:** ðŸ§ª **NEEDS VERIFICATION**
 
 **Description:**
 - Scan runs before MainWindow shows (by design).
-- If scan is heavy, splash may still feel “frozen”.
+- If scan is heavy, splash may still feel â€œfrozenâ€.
 
 **Recommendation:**
 - Verify on Windows 10/11 with full tweak catalog.
 - If still slow: move DetectAllTweaksAsync to background with progress + cancel.
 
 **Files to Review:**
-- `WindowsOptimizer.App/App.xaml.cs`
-- `WindowsOptimizer.App/ViewModels/MainViewModel.cs`
-- `WindowsOptimizer.App/ViewModels/TweaksViewModel.cs`
+- `OpenTraceProject.App/App.xaml.cs`
+- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
+- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
 
 ---
 
 ### 5. **Docs Linking: Template IDs**
 **Severity:** Low
-**Status:** ⚠️ **POSSIBLE**
+**Status:** âš ï¸ **POSSIBLE**
 
 **Description:**
 - Some catalog entries use templated IDs (e.g., `cleanup.eventlog-{logName}`).
-- UI links may not match runtime IDs if templates aren’t expanded in CSV.
+- UI links may not match runtime IDs if templates arenâ€™t expanded in CSV.
 
 **Recommendation:**
 - Ensure catalog generator expands template IDs or add runtime mapping.
@@ -1187,30 +1187,30 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 **Files to Review:**
 - `Docs/tweaks/tweak-catalog.csv`
 - `scripts/generate_tweak_catalog.py`
-- `WindowsOptimizer.App/Services/TweakDocumentationLinker.cs`
+- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs`
 
 ---
 
 ### 6. **Monitor Animations Regression Risk**
 **Severity:** Low
-**Status:** 🧪 **NEEDS VERIFICATION**
+**Status:** ðŸ§ª **NEEDS VERIFICATION**
 
 **Description:**
 - New reveal/hover animations must avoid Freezable animation errors.
-- WPF can throw when animating shared/freezed objects.
+- The UI can throw when animating shared/freezed objects.
 
 **Recommendation:**
 - Verify on Windows (dark/light themes).
 - Keep transforms `x:Shared="False"` and avoid animating brushes/effects.
 
 **Files to Review:**
-- `WindowsOptimizer.App/Views/MonitorView.xaml`
+- `OpenTraceProject.App/Views/MonitorView.xaml`
 
 ---
 
 ### 4. **Tweak State Persistence After Crash**
 **Severity:** Medium
-**Status:** 🔍 **NEEDS TESTING**
+**Status:** ðŸ” **NEEDS TESTING**
 
 **Description:**
 - If application crashes during tweak apply, the original state might not be saved
@@ -1223,40 +1223,40 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - Add recovery mechanism on application startup
 
 **Files Affected:**
-- `WindowsOptimizer.Engine/Tweaks/RegistryValueTweak.cs`
-- `WindowsOptimizer.Infrastructure/Logging/TweakLogStore.cs`
+- `OpenTraceProject.Engine/Tweaks/RegistryValueTweak.cs`
+- `OpenTraceProject.Infrastructure/Logging/TweakLogStore.cs`
 
 ---
 
-## 🖥️ Platform Compatibility
+## ðŸ–¥ï¸ Platform Compatibility
 
 ### Windows 10/11 (Native)
-- ✅ Full functionality
-- ✅ All monitoring features
-- ✅ All tweak categories
-- ✅ Elevated Host support
-- ✅ Registry operations
+- âœ… Full functionality
+- âœ… All monitoring features
+- âœ… All tweak categories
+- âœ… Elevated Host support
+- âœ… Registry operations
 
 ### WSL2 (Windows Subsystem for Linux)
-- ⚠️ **Limited functionality**
-- ✅ Application launches
-- ✅ UI works
-- ✅ CurrentUser registry tweaks (might work)
-- ❌ LocalMachine registry tweaks (fail immediately)
-- ❌ Power tweaks (not supported)
-- ❌ Network/Disk monitoring (empty)
-- ❌ Elevated Host (Windows executable)
+- âš ï¸ **Limited functionality**
+- âœ… Application launches
+- âœ… UI works
+- âœ… CurrentUser registry tweaks (might work)
+- âŒ LocalMachine registry tweaks (fail immediately)
+- âŒ Power tweaks (not supported)
+- âŒ Network/Disk monitoring (empty)
+- âŒ Elevated Host (Windows executable)
 
 ### Linux (Native)
-- ❌ **Not supported**
-- The application is WPF-based and requires Windows
+- âŒ **Not supported**
+- The application requires Windows
 - Might run under Wine but not recommended
 
 **Recommendation:** Use **Windows 10/11 native** for full functionality
 
 ---
 
-## 📝 Todo & Roadmap
+## ðŸ“ Todo & Roadmap
 
 > **Note:** The development roadmap (v2.1) is documented in [DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md). It covers Single Instance enforcement, multi-threading, the hardware database, the old Monitor View redesign, and process management changes.
 
@@ -1274,7 +1274,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 - [x] **Warn when ElevatedHost is missing**
   - Tweaks page shows a warning banner when the host executable isn't found
-  - Remaining work: ensure publish output copies `ElevatedHost/WindowsOptimizer.ElevatedHost.exe` reliably (CI/build step)
+  - Remaining work: ensure publish output copies `ElevatedHost/OpenTraceProject.ElevatedHost.exe` reliably (CI/build step)
 
 - [ ] **Implement Tweak State Persistence**
   - Save original values to durable storage before applying
@@ -1322,7 +1322,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 ---
 
-## ✅ Testing Checklist
+## âœ… Testing Checklist
 
 ### Before Release
 
@@ -1378,7 +1378,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 ---
 
-## 📊 Statistics
+## ðŸ“Š Statistics
 
 Key recent commits (not exhaustive):
 - `46abd80` ElevatedHost discovery for `dotnet run`
@@ -1390,7 +1390,7 @@ Key recent commits (not exhaustive):
 
 ---
 
-## 🔗 Related Documents
+## ðŸ”— Related Documents
 
 - [README.md](README.md) - Project overview and features
 - [ARCHITECTURE.md](ARCHITECTURE.md) - System architecture
@@ -1403,13 +1403,13 @@ Key recent commits (not exhaustive):
 
 ---
 
-## 📞 Support
+## ðŸ“ž Support
 
 If you encounter issues:
 
-1. Check `%TEMP%\WindowsOptimizer_Debug.log` for detailed error messages
+1. Check `%TEMP%\OpenTraceProject_Debug.log` for detailed error messages
 2. Ensure you're running on **Windows 10/11 native** (not WSL2)
-3. Check if `WindowsOptimizer.ElevatedHost.exe` exists in the application directory
+3. Check if `OpenTraceProject.ElevatedHost.exe` exists in the application directory
 4. Verify UAC is enabled and you can accept elevation prompts
 5. Open an issue on GitHub with:
    - OS version (`winver` output)
@@ -1420,5 +1420,5 @@ If you encounter issues:
 ---
 
 **Last Build:** Unverified in this environment (run `dotnet build` on Windows 10/11)
-**Build Status:** ⚠️ Requires Windows verification
-**Ready for Production:** ⚠️ Needs testing on Windows 10/11 native
+**Build Status:** âš ï¸ Requires Windows verification
+**Ready for Production:** âš ï¸ Needs testing on Windows 10/11 native

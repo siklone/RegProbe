@@ -51,7 +51,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
     "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current GameConfigStore write tuple and restore cycle.",
     "writes": [
       {
@@ -205,7 +205,7 @@
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
       "summary": "The provider writes the four GameConfigStore values 2/2/1/1 for the current Fullscreen Optimizations tweak.",
       "supports": [
         "path",

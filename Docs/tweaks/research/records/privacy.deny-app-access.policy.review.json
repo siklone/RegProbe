@@ -50,7 +50,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The provider writes the official AppPrivacy ForceDeny bundle. The extra AllowUserInfoAccess System policy write is intentionally excluded from this child record and remains in the deprecated parent audit trail.",
     "writes": [
       {
@@ -159,7 +159,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current privacy provider broad deny bundle",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider writes a large AppPrivacy ForceDeny bundle. The extra System policy write remains in the deprecated parent audit trail.",
       "supports": [
         "ui-mapping",

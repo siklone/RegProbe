@@ -50,7 +50,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
     "notes": "The app now exposes SeparateProcess through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
     "writes": [
       {

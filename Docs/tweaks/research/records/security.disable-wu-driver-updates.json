@@ -148,7 +148,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
     "notes": "The current app writes SearchOrderConfig = 0, DontSearchWindowsUpdate = 1, and ExcludeWUDriversInQualityUpdate = 1. Together these values align with the documented direction of keeping Windows Update out of the driver's sourcing and quality-update path.",
     "writes": [
       {
@@ -388,7 +388,7 @@
       "evidence_id": "app-security-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
       "summary": "The provider writes SearchOrderConfig = 0, DontSearchWindowsUpdate = 1, and ExcludeWUDriversInQualityUpdate = 1 for the current tweak.",
       "supports": [
         "path",

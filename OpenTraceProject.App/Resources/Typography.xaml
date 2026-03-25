@@ -1,0 +1,118 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- ============================================== -->
+    <!-- TYPOGRAPHY SYSTEM - Modern UI Text Standards   -->
+    <!-- ============================================== -->
+
+    <!-- Font Families -->
+    <FontFamily x:Key="FontFamilyDisplay">pack://application:,,,/OpenTraceProject.App;component/Resources/Fonts/#Syne</FontFamily>
+    <FontFamily x:Key="FontFamilyText">pack://application:,,,/OpenTraceProject.App;component/Resources/Fonts/#Syne</FontFamily>
+    <FontFamily x:Key="FontFamilyMono">pack://application:,,,/OpenTraceProject.App;component/Resources/Fonts/#JetBrains Mono</FontFamily>
+
+    <!-- Font Sizes - 8px Grid System -->
+    <sys:Double x:Key="FontSizeDisplayL">32</sys:Double>    <!-- Hero titles -->
+    <sys:Double x:Key="FontSizeDisplayM">28</sys:Double>    <!-- Main titles -->
+    <sys:Double x:Key="FontSizeDisplayS">24</sys:Double>    <!-- Section headers -->
+    <sys:Double x:Key="FontSizeTitleL">20</sys:Double>      <!-- Card titles -->
+    <sys:Double x:Key="FontSizeTitleM">18</sys:Double>      <!-- Tab headers -->
+    <sys:Double x:Key="FontSizeTitleS">16</sys:Double>      <!-- Subsection headers -->
+    <sys:Double x:Key="FontSizeBodyL">14</sys:Double>       <!-- Primary body -->
+    <sys:Double x:Key="FontSizeBodyM">13</sys:Double>       <!-- Default body -->
+    <sys:Double x:Key="FontSizeBodyS">12</sys:Double>       <!-- Secondary body -->
+    <sys:Double x:Key="FontSizeCaptionL">11</sys:Double>    <!-- Labels -->
+    <sys:Double x:Key="FontSizeCaptionM">10</sys:Double>    <!-- Small labels -->
+    <sys:Double x:Key="FontSizeCaptionS">9</sys:Double>     <!-- Badges -->
+
+    <!-- Font Weights -->
+    <FontWeight x:Key="FontWeightLight">Light</FontWeight>
+    <FontWeight x:Key="FontWeightRegular">Normal</FontWeight>
+    <FontWeight x:Key="FontWeightMedium">Medium</FontWeight>
+    <FontWeight x:Key="FontWeightSemiBold">SemiBold</FontWeight>
+    <FontWeight x:Key="FontWeightBold">Bold</FontWeight>
+
+    <!-- Line Heights (for TextBlocks with explicit heights) -->
+    <sys:Double x:Key="LineHeightTight">1.2</sys:Double>
+    <sys:Double x:Key="LineHeightNormal">1.5</sys:Double>
+    <sys:Double x:Key="LineHeightRelaxed">1.75</sys:Double>
+
+    <!-- Text Styles (Combined) -->
+    <Style x:Key="TextStyleDisplayL" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDisplay}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeDisplayL}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightLight}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+    </Style>
+
+    <Style x:Key="TextStyleDisplayM" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDisplay}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeDisplayM}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightLight}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+    </Style>
+
+    <Style x:Key="TextStyleTitleL" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDisplay}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeTitleL}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightSemiBold}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+    </Style>
+
+    <Style x:Key="TextStyleTitleM" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDisplay}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeTitleM}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightSemiBold}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+    </Style>
+
+    <Style x:Key="TextStyleTitleS" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyText}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeTitleS}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightSemiBold}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightBrush}"/>
+    </Style>
+
+    <Style x:Key="TextStyleBodyL" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyText}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeBodyL}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightRegular}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightBrush}"/>
+    </Style>
+
+    <Style x:Key="TextStyleBodyM" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyText}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeBodyM}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightRegular}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightBrush}"/>
+    </Style>
+
+    <Style x:Key="TextStyleBodyS" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyText}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeBodyS}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightRegular}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+    </Style>
+
+    <Style x:Key="TextStyleCaptionL" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyText}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeCaptionL}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightMedium}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+    </Style>
+
+    <Style x:Key="TextStyleCaptionM" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyText}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeCaptionM}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightMedium}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+    </Style>
+
+    <Style x:Key="TextStyleCaptionS" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyText}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeCaptionS}"/>
+        <Setter Property="FontWeight" Value="{StaticResource FontWeightMedium}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+    </Style>
+
+</ResourceDictionary>

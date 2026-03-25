@@ -68,7 +68,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
     "notes": "The app writes SpyNetReporting = 2 on the documented Defender Spynet policy path.",
     "writes": [
       {
@@ -222,7 +222,7 @@
       "evidence_id": "app-security-provider-enable-defender-maps-advanced-membership",
       "kind": "repo-code",
       "title": "Current security provider MAPS membership write",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
       "summary": "The app writes HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting = 2.",
       "supports": [
         "path",

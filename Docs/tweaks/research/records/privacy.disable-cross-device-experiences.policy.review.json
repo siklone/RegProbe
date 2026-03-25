@@ -65,7 +65,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The app writes EnableCdp = 0 as part of the broader cross-device bundle. This child record documents only the official machine-policy portion of that behavior.",
     "writes": [
       {
@@ -212,7 +212,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider writes EnableCdp = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\System as part of the broader cross-device bundle.",
       "supports": [
         "path",

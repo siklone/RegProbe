@@ -98,7 +98,7 @@
   },
   "app_current_implementation": {
     "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The current app mixes the official EnableCdp device policy with undocumented user-side CDP preset values to offer three presets.",
     "writes": [
       {
@@ -270,7 +270,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider mixes the official EnableCdp policy with user-side CDP registry values to model Off, My devices only, and Everyone nearby presets.",
       "supports": [
         "path",

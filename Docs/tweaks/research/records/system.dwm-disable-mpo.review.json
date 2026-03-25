@@ -47,7 +47,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "unknown",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
                                        "notes":  "The current app writes OverlayTestMode = 5 under HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm, but this research pass has not yet captured a primary Microsoft source that publishes the value as an official MPO control.",
                                        "writes":  [
                                                       {
@@ -158,7 +158,7 @@
                          "evidence_id":  "app-system-registry-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
                          "summary":  "The provider writes HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayTestMode = 5 for the current tweak.",
                          "supports":  [
                                           "path",
@@ -187,7 +187,7 @@
                        ],
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
                              "exact_quote_or_path":  "\"OverlayTestMode\" = 0; // 5 = MPO disabled, REG_DWORD. DwmDwordHelper = RegGetDwmDwordHelper(L\"OverlayTestMode\", \u0026v11, 0LL).",
                              "key_found_on_page":  true,
                              "notes":  "DWM MPO audit trail. The mirror shows the exact OverlayTestMode path and the MPO-disabled sentinel value."

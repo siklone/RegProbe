@@ -58,7 +58,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs; WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs; OpenTraceProject.Engine/Tweaks/Power/PowerSettingsTweaks.cs",
     "notes": "The app provider and engine helper both write HiberbootEnabled=0 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This matches the documented local Fast Startup setting. The previously used Control\\Power path was corrected on 2026-03-13.",
     "writes": [
       {
@@ -209,7 +209,7 @@
       "evidence_id": "app-power-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs and WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs and OpenTraceProject.Engine/Tweaks/Power/PowerSettingsTweaks.cs",
       "summary": "The app provider and engine helper both write HiberbootEnabled=0 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power.",
       "supports": [
         "path",

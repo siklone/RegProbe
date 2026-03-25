@@ -102,7 +102,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PeripheralTweakProvider.cs",
     "notes": "The provider now writes the documented user-scope AutoPlay policy values directly: NoDriveTypeAutoRun = 255 and NoAutoplayfornonVolume = 1.",
     "writes": [
       {
@@ -315,7 +315,7 @@
       "evidence_id": "app-peripheral-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PeripheralTweakProvider.cs",
       "summary": "The provider writes NoDriveTypeAutoRun = 255 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer and NoAutoplayfornonVolume = 1 under HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer.",
       "supports": [
         "path",

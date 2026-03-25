@@ -26,7 +26,7 @@ class Program
         var normalized = Normalize(cpu);
         Console.WriteLine("Normalized: " + normalized);
 
-        var jsonPath = Path.Combine("WindowsOptimizer.App", "Assets", "HardwareDb", "hardware_icons.json");
+        var jsonPath = Path.Combine("OpenTraceProject.App", "Assets", "HardwareDb", "hardware_icons.json");
         if (!File.Exists(jsonPath))
         {
             Console.WriteLine("hardware_icons.json not found at " + jsonPath);
@@ -43,7 +43,7 @@ class Program
             if (match != null)
             {
                 Console.WriteLine("Matched rule: match='" + match.Match + "' -> icon='" + match.Icon + "'");
-                var iconFile = Path.Combine("WindowsOptimizer.App", "Assets", "Icons", match.Icon + ".png");
+                var iconFile = Path.Combine("OpenTraceProject.App", "Assets", "Icons", match.Icon + ".png");
                 Console.WriteLine("Icon exists on disk: " + File.Exists(iconFile) + " (" + iconFile + ")");
             }
             else

@@ -85,7 +85,7 @@ C:\Tools\Scripts\wpa.cmd C:\Tools\Perf\capture.etl
 Example:
 
 ```cmd
-C:\Tools\Scripts\ghidra-headless.cmd C:\Tools\GhidraProjects\WindowsOptimizer analysis -import C:\Path\To\Binary.exe
+C:\Tools\Scripts\ghidra-headless.cmd C:\Tools\GhidraProjects\OpenTraceProject analysis -import C:\Path\To\Binary.exe
 ```
 
 ## Validation Smokes

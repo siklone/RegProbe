@@ -59,7 +59,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
     "notes": "The current app writes AllowStorageSenseTemporaryFilesCleanup = 0, which matches the documented disable behavior.",
     "writes": [
       {
@@ -186,7 +186,7 @@
       "evidence_id": "app-system-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
       "summary": "The provider writes AllowStorageSenseTemporaryFilesCleanup = 0 for the current tweak.",
       "supports": [
         "path",
@@ -221,7 +221,7 @@
   "last_reviewed_utc": "2026-03-12T21:10:28.6818900+03:00",
   "validation_proof": {
     "source_url": "C:\\Windows\\PolicyDefinitions\\StorageSense.admx",
-    "exact_quote_or_path": "StorageSense.admx: key=\"Software\\Policies\\Microsoft\\Windows\\StorageSense\" valueName=\"AllowStorageSenseTemporaryFilesCleanup\"; StorageSense.adml: Disabled: Storage Sense will not delete the user’s temporary files. Users cannot enable this setting in Storage settings.",
+    "exact_quote_or_path": "StorageSense.admx: key=\"Software\\Policies\\Microsoft\\Windows\\StorageSense\" valueName=\"AllowStorageSenseTemporaryFilesCleanup\"; StorageSense.adml: Disabled: Storage Sense will not delete the userâ€™s temporary files. Users cannot enable this setting in Storage settings.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files."
   }

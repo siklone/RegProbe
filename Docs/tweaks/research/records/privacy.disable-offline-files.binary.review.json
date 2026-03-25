@@ -46,7 +46,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "partially-matches",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
                                        "notes":  "The app renames mobsync.exe to mobsync.exe.disabled as part of the Offline Files bundle.",
                                        "writes":  [
                                                       {
@@ -140,7 +140,7 @@
                          "evidence_id":  "app-privacy-provider",
                          "kind":  "repo-code",
                          "title":  "Current privacy provider file rename",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
                          "summary":  "The provider renames mobsync.exe to mobsync.exe.disabled for the current sub-tweak.",
                          "supports":  [
                                           "ui-mapping",
@@ -164,7 +164,7 @@
                  },
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
                              "exact_quote_or_path":  "Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks, and renames mobsync.exe to block execution.",
                              "key_found_on_page":  true,
                              "notes":  "Binary-rename subrecord. The proof anchors the mobsync.exe rename behavior inside the Offline Files composite bundle."

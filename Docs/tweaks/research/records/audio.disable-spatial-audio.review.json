@@ -47,7 +47,7 @@
   },
   "app_current_implementation": {
     "status": "unknown",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
     "notes": "The current app writes DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract.",
     "writes": [
       {
@@ -128,7 +128,7 @@
       "evidence_id": "app-audio-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
       "summary": "The provider writes DisableSpatialOnLowLatency = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio.",
       "supports": [
         "path",

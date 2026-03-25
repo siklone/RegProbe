@@ -29,8 +29,8 @@ function Get-Version {
 }
 
 $repoRoot = Get-RepoRoot
-$projectPath = Join-Path $repoRoot "WindowsOptimizer.App\WindowsOptimizer.App.csproj"
-$publishDir = Join-Path $repoRoot "WindowsOptimizer.App\bin\$Configuration\net8.0-windows\$Runtime\publish"
+$projectPath = Join-Path $repoRoot "OpenTraceProject.App\OpenTraceProject.App.csproj"
+$publishDir = Join-Path $repoRoot "OpenTraceProject.App\bin\$Configuration\net8.0-windows\$Runtime\publish"
 
 if ($Clean -and (Test-Path $publishDir)) {
     Remove-Item -Recurse -Force $publishDir
@@ -42,7 +42,7 @@ if (!(Test-Path $projectPath)) {
 
 $readyToRunValue = if ($ReadyToRun.IsPresent) { "true" } else { "false" }
 
-Write-Host "Publishing WindowsOptimizer.App ($Configuration, $Runtime)..."
+Write-Host "Publishing OpenTraceProject.App ($Configuration, $Runtime)..."
 Write-Host "PublishReadyToRun=$readyToRunValue"
 dotnet publish $projectPath -c $Configuration -r $Runtime --self-contained:$SelfContained /p:PublishReadyToRun=$readyToRunValue
 
@@ -62,11 +62,11 @@ if (Test-Path $docsSource) {
 
 # Ensure ElevatedHost is present in publish output
 $hostTargetDir = Join-Path $publishDir "ElevatedHost"
-$hostTargetExe = Join-Path $hostTargetDir "WindowsOptimizer.ElevatedHost.exe"
+$hostTargetExe = Join-Path $hostTargetDir "OpenTraceProject.ElevatedHost.exe"
 if (!(Test-Path $hostTargetExe)) {
     $candidates = @(
-        Join-Path $repoRoot "WindowsOptimizer.ElevatedHost\bin\$Configuration\net8.0-windows\$Runtime\WindowsOptimizer.ElevatedHost.exe",
-        Join-Path $repoRoot "WindowsOptimizer.ElevatedHost\bin\$Configuration\net8.0-windows\$Runtime\publish\WindowsOptimizer.ElevatedHost.exe"
+        Join-Path $repoRoot "OpenTraceProject.ElevatedHost\bin\$Configuration\net8.0-windows\$Runtime\OpenTraceProject.ElevatedHost.exe",
+        Join-Path $repoRoot "OpenTraceProject.ElevatedHost\bin\$Configuration\net8.0-windows\$Runtime\publish\OpenTraceProject.ElevatedHost.exe"
     ) | Where-Object { Test-Path $_ }
 
     if ($candidates.Count -gt 0) {
@@ -81,7 +81,7 @@ New-Item -ItemType Directory -Path $distDir -Force | Out-Null
 
 $version = Get-Version -RepoRoot $repoRoot
 $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-$zipName = "WindowsOptimizerSuite-$version-$Runtime-$Configuration-$timestamp.zip"
+$zipName = "OpenTraceProject-$version-$Runtime-$Configuration-$timestamp.zip"
 $zipPath = Join-Path $distDir $zipName
 
 if (Test-Path $zipPath) {

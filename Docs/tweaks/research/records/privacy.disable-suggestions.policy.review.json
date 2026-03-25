@@ -137,7 +137,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The app now writes the three documented CloudContent policy values under HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent. The opaque ContentDeliveryManager IDs remain separate in the parent audit trail.",
     "writes": [
       {

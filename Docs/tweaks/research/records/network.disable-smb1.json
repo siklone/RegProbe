@@ -57,7 +57,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
     "notes": "The current app writes SMB1 = 0 for the tweak, which matches the documented disable behavior for the LanmanServer registry value.",
     "writes": [
       {
@@ -203,7 +203,7 @@
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
       "summary": "The provider writes SMB1 = 0 under LanmanServer for the current tweak.",
       "supports": [
         "path",

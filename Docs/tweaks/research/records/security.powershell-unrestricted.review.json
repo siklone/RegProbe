@@ -96,7 +96,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
     "notes": "The app now writes both official PowerShell Group Policy values through one batch tweak: EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell.",
     "writes": [
       {
@@ -237,7 +237,7 @@
       "evidence_id": "app-security-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
       "summary": "The provider writes EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell.",
       "supports": [
         "path",

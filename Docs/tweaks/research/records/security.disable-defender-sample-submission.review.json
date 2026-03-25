@@ -78,7 +78,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
     "notes": "The app writes SubmitSamplesConsent = 2 on the documented Defender Spynet policy path.",
     "writes": [
       {
@@ -256,7 +256,7 @@
       "evidence_id": "app-security-provider-disable-defender-sample-submission",
       "kind": "repo-code",
       "title": "Current security provider sample-submission write",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
       "summary": "The app writes HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent = 2.",
       "supports": [
         "path",

@@ -79,7 +79,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes Start = 4 under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep."
           }
@@ -162,7 +162,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes DisableSpatialOnLowLatency = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio."
           }
@@ -246,7 +246,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes empty strings to many HKCU\\AppEvents\\Schemes sound mappings."
           }
@@ -317,7 +317,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes ShowDisconnectedDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl."
           }
@@ -394,7 +394,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl."
           }
@@ -676,7 +676,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem."
           }
@@ -1040,7 +1040,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes DeveloperMode = 1 and EnableDebugTap = 1 under HKCU\\Software\\Microsoft\\Windows Terminal."
           }
@@ -1115,7 +1115,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes DisableAutoUpdating = 0 under HKCU\\Software\\Microsoft\\VisualStudio\\IntelliSense."
           }
@@ -1178,7 +1178,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes BackgroundAnalysis = 0 under HKCU\\Software\\Microsoft\\VisualStudio\\SolutionLoading."
           }
@@ -1501,7 +1501,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoLowDiskSpaceChecks = 1 for the current tweak."
           }
@@ -1694,7 +1694,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes UseCompactMode = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
           }
@@ -1777,7 +1777,7 @@
           },
           {
             "title": "Current app implementation for HideDrivesWithNoMedia",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "VisibilityTweakProvider now exposes explorer.hide-empty-drives and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia = 1 for the curr..."
           }
@@ -2087,7 +2087,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes HideFileExt = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
           }
@@ -2244,7 +2244,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes Hidden = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
           }
@@ -2478,7 +2478,7 @@
           },
           {
             "title": "Current app implementation for ShowRecent",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "VisibilityTweakProvider now exposes explorer.show-recent-items and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 for the current user."
           }
@@ -2560,7 +2560,7 @@
           },
           {
             "title": "Current app implementation for ShowStatusBar",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "VisibilityTweakProvider now exposes explorer.show-status-bar and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar = 1 for the current user."
           }
@@ -2719,7 +2719,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
           }
@@ -2958,7 +2958,7 @@
           },
           {
             "title": "Current network tweak provider",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The current app writes DisabledComponents = 255 for this tweak."
           }
@@ -3566,7 +3566,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes SMB1 = 0 under LanmanServer for the current tweak."
           }
@@ -3642,7 +3642,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes SMB2 = 0 for the current tweak."
           }
@@ -3930,7 +3930,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md",
             "kind": "validation-proof",
             "summary": "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled..."
           },
@@ -3942,7 +3942,7 @@
           },
           {
             "title": "Current network tweak provider",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The current app writes DisableBandwidthThrottling = 1, FileInfoCacheLifetime = 30, and DirectoryCacheLifetime = 30."
           }
@@ -4017,7 +4017,7 @@
           },
           {
             "title": "Current network tweak provider",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The current app writes DisabledComponents = 32 for this tweak."
           }
@@ -4232,7 +4232,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes DisableLargeMtu = 0 for the current tweak."
           }
@@ -4452,7 +4452,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes EncryptData = 1 for the current tweak."
           }
@@ -4528,7 +4528,7 @@
           },
           {
             "title": "Current network tweak provider",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The current app writes metadata cache and MaxCmds values that match Microsoft's documented client tuning example."
           }
@@ -4582,7 +4582,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes RejectUnencryptedAccess = 1 for the current tweak."
           }
@@ -4958,7 +4958,7 @@
           },
           {
             "title": "Current privacy provider feedback-frequency write",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes HKCU\\Software\\Microsoft\\Siuf\\Rules\\NumberOfSIUFInPeriod = 0 for the current user."
           }
@@ -5417,7 +5417,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes MenuShowDelay = \"0\" under HKCU\\Control Panel\\Desktop."
           }
@@ -5495,7 +5495,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes TaskbarAnimations = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
           },
@@ -5820,7 +5820,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under the Power key."
           }
@@ -5994,7 +5994,7 @@
           },
           {
             "title": "Former app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The older app implementation wrote MSDisabled = 1 and ModernSleep\\EnabledActions = 0 before the tweak was removed from the live surface."
           }
@@ -6097,7 +6097,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md",
             "kind": "validation-proof",
             "summary": "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled..."
           },
@@ -6594,7 +6594,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider now exposes the command-backed CPU boost tweak instead of the old raw registry bundle."
           }
@@ -6678,7 +6678,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes a custom MMCSS Games task profile using Priority, Scheduling Category, SFIO Priority, GPU Priority, and Affinity."
           }
@@ -6750,13 +6750,13 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\power\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\power\\desc.md",
             "kind": "validation-proof",
             "summary": "\"EnergySaverState\" = 2; // 1 = override state (more power savings)? if != 1 no override? ... # Disable NIC Power Savings"
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes a six-value performance-focused bundle under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power."
           },
@@ -6839,7 +6839,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes NoConnectedUser = 3 for the current tweak."
           }
@@ -6921,7 +6921,7 @@
           },
           {
             "title": "Current privacy provider broad deny bundle",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes a large AppPrivacy ForceDeny bundle. The extra System policy write remains in the deprecated parent audit trail."
           }
@@ -6975,7 +6975,7 @@
           },
           {
             "title": "Current privacy provider broad deny bundle",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes a large AppPrivacy ForceDeny bundle plus AllowUserInfoAccess and a microphone exception."
           }
@@ -7585,7 +7585,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
             "kind": "validation-proof",
             "summary": "Disables Windows Application Experience telemetry and compatibility components, Microsoft Compatibility Appraiser (including its daily task and CompatTelRunner.exe) and the Appl..."
           },
@@ -7648,13 +7648,13 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
             "kind": "validation-proof",
             "summary": "Currently includes all existing tasks in \\\\Microsoft\\\\Windows\\\\Application Experience\\\\ (LTSC IoT Enterprise 2024): MareBackup, Microsoft Compatibility Appraiser, Microsoft Comp..."
           },
           {
             "title": "Current privacy provider task bundle",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider disables six scheduled tasks in the Application Experience folder as one bundle."
           }
@@ -7858,7 +7858,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes Domain Accounts = 0 under the biometrics credential provider policy key."
           }
@@ -7933,7 +7933,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes Enabled = 0 under the biometrics credential provider policy key."
           }
@@ -8008,7 +8008,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes Enabled = 0 under the Biometrics policy key."
           }
@@ -8146,13 +8146,13 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
             "kind": "validation-proof",
             "summary": "\"ValueName\": \"CEIPEnable\" ... \"KeyPath\": [\"HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\AppV\\\\CEIP\"] ... \"DisplayName\": \"Turn off Windows Customer Experience Improvement Program\" ... \"K..."
           },
           {
             "title": "Current privacy provider CEIP bundle",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes AppV CEIPEnable = 0, SQMClient CEIPEnable = 0, and Messenger CEIP = 2."
           }
@@ -8841,7 +8841,7 @@
           },
           {
             "title": "Current privacy provider file rename",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider renames C:\\Windows\\System32\\HelpPane.exe to HelpPane.exe.disabled."
           }
@@ -9205,7 +9205,7 @@
           },
           {
             "title": "Current privacy provider typing and ink bundle",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes AllowLinguisticDataCollection = 0 and two Windows Ink Workspace policy values set to 0."
           },
@@ -9362,7 +9362,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes HttpAcceptLanguageOptOut = 1 under HKCU\\Control Panel\\International\\User Profile."
           }
@@ -9512,7 +9512,7 @@
           },
           {
             "title": "Current privacy provider system location-consent write",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value = Deny."
           }
@@ -9587,7 +9587,7 @@
           },
           {
             "title": "Current privacy provider location-consent batch",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes Deny into the current-user location consent store and the NonPackaged location consent subkey."
           }
@@ -9950,13 +9950,13 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
             "kind": "validation-proof",
             "summary": "Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks, and renames mobsync.exe..."
           },
           {
             "title": "Current privacy provider file rename",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider renames mobsync.exe to mobsync.exe.disabled for the current sub-tweak."
           }
@@ -10052,7 +10052,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
             "kind": "validation-proof",
             "summary": "Offline Files (Client-Side Caching, CSC) lets Windows cache files from network shares locally ... If you enable this policy setting, Offline Files is enabled and users cannot di..."
           },
@@ -10064,7 +10064,7 @@
           },
           {
             "title": "Current privacy provider composite",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider exposes privacy.disable-offline-files as a composite of the policy, service, task, and binary sub-tweaks."
           }
@@ -10127,7 +10127,7 @@
           },
           {
             "title": "Current privacy provider service bundle",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider disables the CSC and CscService services for the current sub-tweak."
           }
@@ -10181,7 +10181,7 @@
           },
           {
             "title": "Current privacy provider task bundle",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider disables the Offline Files background and logon synchronization tasks."
           }
@@ -10719,7 +10719,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 for the current tweak."
           }
@@ -11108,13 +11108,13 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
             "kind": "validation-proof",
             "summary": "Sleep Study tracks modern sleep states to analyze energy usage and pinpoint battery drain. It disables Sleep Study by making ETL logs read-only, disabling related diagnostics, a..."
           },
           {
             "title": "Current privacy provider sleep-study diagnostics bundle",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes Enabled = 0 under three WINEVT diagnostic channel keys related to sleep and power."
           }
@@ -11404,7 +11404,7 @@
           },
           {
             "title": "Current privacy provider CDM suggestions bundle",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes five current-user ContentDeliveryManager suggestion-related values to 0."
           },
@@ -11903,13 +11903,13 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
             "kind": "validation-proof",
             "summary": "WMPlayer (Windows Media Player) sends player usage data by default ... This option turns off the Diagnostics and Feedback option ... Note: I gathered all registry values via the..."
           },
           {
             "title": "Current privacy provider Windows Media Player bundle",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes a Windows Media Player preference bundle affecting metadata retrieval, usage tracking, and MRU behavior."
           }
@@ -13783,7 +13783,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\security\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\security\\desc.md",
             "kind": "validation-proof",
             "summary": "\\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager : DisableWpbtExecution"
           },
@@ -14517,7 +14517,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes EnableLUA = 1, ConsentPromptBehaviorAdmin = 0, and PromptOnSecureDesktop = 0."
           }
@@ -14752,7 +14752,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes DisplayParameters = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl for the current tweak."
           }
@@ -15490,7 +15490,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes RestartApps = 0 for the current tweak."
           }
@@ -15561,7 +15561,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
             "kind": "validation-proof",
             "summary": "Offline Files: \\\\Microsoft\\\\Windows\\\\Offline Files\\\\Background Synchronization; \\\\Microsoft\\\\Windows\\\\Offline Files\\\\Logon Synchronization. Sleep Study: \\\\Microsoft\\\\Windows\\\\Po..."
           },
@@ -15573,7 +15573,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider disables the listed task paths through the batch scheduled-task tweak."
           }
@@ -16002,7 +16002,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes Shell Icons value 29 = %windir%\\System32\\shell32.dll,-50 for the current tweak."
           }
@@ -16078,7 +16078,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes StartupDelayInMSec = 0 for the current tweak."
           }
@@ -16384,7 +16384,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
             "kind": "validation-proof",
             "summary": "\"OverlayTestMode\" = 0; // 5 = MPO disabled, REG_DWORD. DwmDwordHelper = RegGetDwmDwordHelper(L\"OverlayTestMode\", &v11, 0LL)."
           },
@@ -16396,7 +16396,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayTestMode = 5 for the current tweak."
           }
@@ -16473,7 +16473,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes OverlayMinFPS = 0 for the current tweak."
           }
@@ -16781,7 +16781,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgkrnl\\-ReadConfig@DXGADAPTER@@AEAAXPEAU_DXGK_ADAPTER_CAPS@@@Z.c",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgkrnl\\-ReadConfig@DXGADAPTER@@AEAAXPEAU_DXGK_ADAPTER_CAPS@@@Z.c",
             "kind": "validation-proof",
             "summary": "v123 = L\"DisableOverlays\"; ... ADAPTER_RENDER::DisableOverlays((ADAPTER_RENDER *)v9[366]);"
           },
@@ -16793,7 +16793,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\DisableOverlays = 1 for the current tweak."
           }
@@ -16858,7 +16858,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgmms2\\-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\dxgmms2\\-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c",
             "kind": "validation-proof",
             "summary": "if ( !g_PageFaultDebugMode && !KdRefreshDebuggerNotPresent() ) ... \"To disable debug breaks on page fault, run \\\"?? dxgmms2!g_PageFaultDebugMode=1\\\" command\" ... &g_PageFaultDeb..."
           },
@@ -16870,7 +16870,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\PageFaultDebugMode = 1 for the current tweak."
           }
@@ -16947,7 +16947,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes TdrDdiDelay = 5 for the current tweak."
           }
@@ -17024,7 +17024,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes TdrDelay = 2 for the current tweak."
           }
@@ -17101,7 +17101,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes TdrLevel = 3 for the current tweak."
           }
@@ -17178,7 +17178,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes TdrLimitCount = 5 for the current tweak."
           }
@@ -17255,7 +17255,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes TdrLimitTime = 60 for the current tweak."
           }
@@ -17320,7 +17320,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
             "kind": "validation-proof",
             "summary": "\"AdjustDpcThreshold\" = 20; // KiAdjustDpcThreshold"
           },
@@ -17332,7 +17332,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes AdjustDpcThreshold = 20 for the current tweak."
           }
@@ -17397,7 +17397,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
             "kind": "validation-proof",
             "summary": "\"CacheAwareScheduling\" = 47; // KiCacheAwareScheduling"
           },
@@ -17564,7 +17564,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\PspSetProcessTimerResolutionPolicy.c",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\PspSetProcessTimerResolutionPolicy.c",
             "kind": "validation-proof",
             "summary": "if ( KeDisableLowQosTimerResolution ) { ... if ( a2 ) { ... } else { ... } ... ExpUpdateTimerResolution(0, 0, 0LL); }"
           },
@@ -17641,7 +17641,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
             "kind": "validation-proof",
             "summary": "*(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate;"
           },
@@ -17653,7 +17653,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes DpcQueueDepth = 4 for the current tweak."
           }
@@ -17718,7 +17718,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\KeQueryDpcWatchdogConfiguration.c",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\KeQueryDpcWatchdogConfiguration.c",
             "kind": "validation-proof",
             "summary": "if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src | 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; }"
           },
@@ -17795,7 +17795,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
             "kind": "validation-proof",
             "summary": "*(_DWORD *)(a4 + 16) = KiIdealDpcRate;"
           },
@@ -17872,7 +17872,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\decompiled-pseudocode\\ntoskrnl\\ExpQuerySystemInformation.c",
             "kind": "validation-proof",
             "summary": "*(_DWORD *)(a4 + 8) = KiMinimumDpcRate;"
           },
@@ -17949,7 +17949,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+            "url": "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
             "kind": "validation-proof",
             "summary": "if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0..."
           },
@@ -17961,7 +17961,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes SerializeTimerExpiration = 1 for the current tweak."
           }
@@ -18038,7 +18038,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes ThreadDpcEnable = 1 for the current tweak."
           }
@@ -18809,7 +18809,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes NtfsMemoryUsage = 1 for the current tweak."
           }
@@ -19182,7 +19182,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider disables the `BTAGService` service through the batch service start-mode tweak."
           }
@@ -19252,7 +19252,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider disables the `bthserv` service through the batch service start-mode tweak."
           }
@@ -19322,7 +19322,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider disables instantiated `BluetoothUserService_*` services through the batch service start-mode tweak."
           }
@@ -19392,7 +19392,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider disables the `DiagTrack` service through the batch service start-mode tweak."
           }
@@ -19532,7 +19532,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider disables the `PrintNotify` service through the batch service start-mode tweak."
           }
@@ -19672,7 +19672,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider disables the `Spooler` service through the batch service start-mode tweak."
           }
@@ -20092,7 +20092,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes VerboseStatus = 1 for the current tweak."
           }
@@ -20245,7 +20245,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes UseDefaultTile = 1 for the current tweak."
           }
@@ -20848,7 +20848,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes NoLockScreen = 1 for the current tweak."
           }
@@ -21819,7 +21819,7 @@
           },
           {
             "title": "Current app implementation",
-            "url": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+            "url": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
             "kind": "repo-code",
             "summary": "The provider writes HidePeopleBar = 1 for the current tweak."
           }

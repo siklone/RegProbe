@@ -87,7 +87,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\vm\install-guest-validation-a
 This:
 
 - copies the guest agent to `C:\Tools\Scripts\guest-validation-agent.ps1`
-- registers the `WindowsOptimizerValidationAgent` startup task
+- registers the `OpenTraceProjectValidationAgent` startup task
 
 ## Run A Test
 

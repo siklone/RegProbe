@@ -1,6 +1,6 @@
-# Windows Optimizer Suite
+# Open Trace Project
 
-Windows Optimizer Suite is a WPF/.NET 8 desktop app for Windows 10/11. It focuses on safe, reversible tweaks, hardware details, and documented system research.
+Open Trace Project is a .NET 8 desktop app for Windows 10/11. It focuses on safe, reversible tweaks, hardware details, and documented system research.
 
 The project is for people who want more than a random "FPS boost" script:
 
@@ -11,7 +11,7 @@ The project is for people who want more than a random "FPS boost" script:
 
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4)
-![UI](https://img.shields.io/badge/UI-WPF-1f2937)
+![App](https://img.shields.io/badge/app-desktop-1f2937)
 ![Status](https://img.shields.io/badge/status-active%20development-ff5a5f)
 ![License](https://img.shields.io/badge/license-TBD-yellow)
 
@@ -36,7 +36,7 @@ The project is for people who want more than a random "FPS boost" script:
 - risk levels: `Safe`, `Advanced`, `Risky`
 - local logging and exportable tweak history
 - preset-backed tweaks and registry-backed multi-value actions
-- elevated registry and command execution through `WindowsOptimizer.ElevatedHost`
+- elevated registry and command execution through `OpenTraceProject.ElevatedHost`
 
 ### Research and sources
 
@@ -108,14 +108,14 @@ This project does not.
 ## Solution Layout
 
 ```text
-WindowsOptimizer.App/              WPF UI, view models, startup, assets, views
-WindowsOptimizer.Core/             Contracts, models, plugin and tweak abstractions
-WindowsOptimizer.Engine/           Tweak execution pipeline and concrete tweak types
-WindowsOptimizer.Infrastructure/   Registry, elevation, files, hardware info
-WindowsOptimizer.ElevatedHost/     Elevated helper process for admin-required actions
-WindowsOptimizer.CLI/              CLI entry point for non-UI scenarios
-WindowsOptimizer.Plugins.DevTools/ Bundled example/support plugin
-WindowsOptimizer.Tests/            Unit tests
+OpenTraceProject.App/              Desktop UI, view models, startup, assets, views
+OpenTraceProject.Core/             Contracts, models, plugin and tweak abstractions
+OpenTraceProject.Engine/           Tweak execution pipeline and concrete tweak types
+OpenTraceProject.Infrastructure/   Registry, elevation, files, hardware info
+OpenTraceProject.ElevatedHost/     Elevated helper process for admin-required actions
+OpenTraceProject.CLI/              CLI entry point for non-UI scenarios
+OpenTraceProject.Plugins.DevTools/ Bundled example/support plugin
+OpenTraceProject.Tests/            Unit tests
 Docs/                              Research notes, audits, tweak source maps
 Tools/                             One-off developer utilities
 scripts/                           Build, publish, cleanup, asset generation
@@ -149,26 +149,26 @@ Things this project does not do under SAFE:
 ### Clone
 
 ```powershell
-git clone https://github.com/siklone/WPF-Windows-optimizer-with-safe-reversible-tweaks.git
-cd WPF-Windows-optimizer-with-safe-reversible-tweaks
+git clone https://github.com/siklone/Open-Trace-Project.git
+cd Open-Trace-Project
 ```
 
 ### Build
 
 ```powershell
-dotnet build WindowsOptimizerSuite.sln
+dotnet build OpenTraceProject.sln
 ```
 
 ### Run the app
 
 ```powershell
-dotnet run --project WindowsOptimizer.App/WindowsOptimizer.App.csproj
+dotnet run --project OpenTraceProject.App/OpenTraceProject.App.csproj
 ```
 
 ### Run tests
 
 ```powershell
-dotnet test WindowsOptimizer.Tests/WindowsOptimizer.Tests.csproj -v minimal
+dotnet test OpenTraceProject.Tests/OpenTraceProject.Tests.csproj -v minimal
 ```
 
 ### Publish
@@ -187,14 +187,14 @@ pwsh -File scripts/clean_build_outputs.ps1 -WhatIfMode:$false
 
 The app is not always-admin.
 
-Admin-required operations are delegated to `WindowsOptimizer.ElevatedHost`, which is resolved by:
+Admin-required operations are delegated to `OpenTraceProject.ElevatedHost`, which is resolved by:
 
 - normal publish layout
 - app discovery logic
 - optional override through:
 
 ```powershell
-$env:WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH = "C:\path\to\WindowsOptimizer.ElevatedHost.exe"
+$env:OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH = "C:\path\to\OpenTraceProject.ElevatedHost.exe"
 ```
 
 ## Utility Scripts

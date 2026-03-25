@@ -50,7 +50,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
     "notes": "The app now writes only WaitToKillServiceTimeout = 2500 for this tweak.",
     "writes": [
       {
@@ -187,7 +187,7 @@
       "evidence_id": "app-system-registry-provider-service-timeout",
       "kind": "repo-code",
       "title": "Current app implementation for service shutdown timeout",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
       "summary": "The provider writes WaitToKillServiceTimeout = 2500 as a standalone service shutdown timeout tweak.",
       "supports": [
         "ui-mapping",

@@ -93,7 +93,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The provider writes Deny to the two documented current-user consent-store paths only: the packaged location path and the NonPackaged companion path.",
     "writes": [
       {
@@ -229,7 +229,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current privacy provider location-consent batch",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider writes Deny into the current-user location consent store and the NonPackaged location consent subkey.",
       "supports": [
         "path",

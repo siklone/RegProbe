@@ -63,7 +63,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The app writes SbEnable=0 as part of the broader application-compatibility policy bundle. This record documents SbEnable in isolation after extraction from privacy.disable-appcompat-engine.policy. Path and value match local AppCompat.admx and Procmon capture. The app still writes DisableEngine=1 in the same code path; that value is tracked separately in privacy.disable-appcompat-engine.policy.",
     "writes": [
       {
@@ -212,7 +212,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "Writes SbEnable=0 as part of the application-compatibility policy bundle.",
       "supports": [
         "path",

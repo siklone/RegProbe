@@ -62,7 +62,7 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs` |
 | Notes | The current app writes Start = 4 for the Beep driver, and the guest probe confirmed that Start=4 disables the Beep driver on Win25H2Clean. |
 
 Current write(s):
@@ -106,7 +106,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows service baseline observed in guest (Windows systems exposing the Beep driver key)
-  - beep-start-mode: value `1` — Guest baseline on Win25H2Clean was Start=1 and the reversible probe restored it to that value.
+  - beep-start-mode: value `1` â€” Guest baseline on Win25H2Clean was Start=1 and the reversible probe restored it to that value.
 
 **Recommended profiles**
 
@@ -119,7 +119,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-services-registry-tree` | `official-doc` | `Microsoft official doc` | HKLM\SYSTEM\CurrentControlSet\Services Registry Tree | https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree | `high` | path, value, allowed-values, version-scope |
 | `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | H:\Temp\vm-tooling-staging\beep_start_toggle_out.txt | `high` | value, behavior, version-scope |
-| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-audio-disable-beep` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-beep | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 
 **Validation proof**
@@ -165,7 +165,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs` |
 | Notes | The current app writes ShowDisconnectedDevices = 1, and Procmon confirmed that the classic Sound control panel reads the same value as a live preference on this build. |
 
 Current write(s):
@@ -209,7 +209,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Default state not captured (Classic Sound control panel profiles where the value is absent)
-  - audio-devicecpl-show-disconnected: unknown — — This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.
+  - audio-devicecpl-show-disconnected: unknown â€” â€” This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.
 
 **Recommended profiles**
 
@@ -220,7 +220,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
-| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -265,7 +265,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs` |
 | Notes | The current app writes ShowHiddenDevices = 1, and Procmon confirmed that the classic Sound control panel reads the same value as a live preference on this build. |
 
 Current write(s):
@@ -309,7 +309,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Default state not captured (Classic Sound control panel profiles where the value is absent)
-  - audio-devicecpl-show-hidden: unknown — — This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.
+  - audio-devicecpl-show-hidden: unknown â€” â€” This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.
 
 **Recommended profiles**
 
@@ -320,7 +320,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\audio_devicecpl_query_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
-| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -367,7 +367,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs` |
+| Provider source | `OpenTraceProject.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs` |
 | Notes | The current cleanup tweak implements the documented DISM surface directly: detect via /Get-ReservedStorageState, apply via /Set-ReservedStorageState /State:Disabled /NoRestart, and rollback via /State:Enabled when appropriate. |
 
 Current write(s):
@@ -408,7 +408,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows managed reserved-storage baseline (Windows systems that support Reserved Storage)
-  - reserved-storage-state-command: feature-dependent — — Microsoft documents the command surface, but the current effective baseline depends on the installed image and prior servicing state.
+  - reserved-storage-state-command: feature-dependent â€” â€” Microsoft documents the command surface, but the current effective baseline depends on the installed image and prior servicing state.
 
 **Recommended profiles**
 
@@ -421,7 +421,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dism-reserved-storage` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DISM Reserved Storage Command-line Options | https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-storage-reserve?view=windows-11 | `high` | path, allowed-values, behavior, version-scope |
 | `ms-dism-reserved-storage-api` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DismGetReservedStorageState function | https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism/dismgetreservedstoragestate-function?view=windows-11 | `high` | behavior, version-scope |
-| `engine-cleanup-command-tweak` | `repo-code` | `Current repo code` | Current cleanup command implementation | WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs | `high` | path, value, ui-mapping |
+| `engine-cleanup-command-tweak` | `repo-code` | `Current repo code` | Current cleanup command implementation | OpenTraceProject.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs | `high` | path, value, ui-mapping |
 | `local-dism-detect` | `vm-test` | `VM test / probe` | Local DISM detect run for Reserved Storage state | Local run - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
 | `repo-reserve-manager-side-effect` | `repo-doc` | `Current repo docs` | Repo Procmon note for Reserved Storage side effect | Docs/privacy/privacy.md | `medium` | behavior, side-effects |
 
@@ -470,7 +470,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The app now writes wslEngineEnabled=true in the Docker settings file rather than the old UseWSL2 registry value. |
 
 Current write(s):
@@ -505,7 +505,7 @@ Current write(s):
 **Windows defaults**
 
 - Docker default (Windows developer machines where Docker Desktop's WSL backend setting is not explicitly configured)
-  - docker-desktop-wsl2-backend: missing — — Leave Docker to its default backend behavior when the settings file does not explicitly enable the WSL engine.
+  - docker-desktop-wsl2-backend: missing â€” â€” Leave Docker to its default backend behavior when the settings file does not explicitly enable the WSL engine.
 
 **Recommended profiles**
 
@@ -518,7 +518,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- | --- |
 | `docker-settings-file-doc` | `official-doc` | `Microsoft official doc` | Docker Docs: Change your Docker Desktop settings | https://docs.docker.com/desktop/settings-and-maintenance/settings/ | `high` | path, behavior, version-scope |
 | `docker-wsl-backend-doc` | `official-doc` | `Microsoft official doc` | Docker Docs: Docker Desktop WSL 2 backend on Windows | https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/settings-reference/ | `high` | behavior, side-effects, value |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -563,7 +563,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app writes DOTNET_CLI_TELEMETRY_OPTOUT = 1 as a persistent current-user environment variable. |
 
 Current write(s):
@@ -606,7 +606,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows default (Current-user profiles that have not explicitly set the .NET CLI telemetry opt-out variable)
-  - dotnet-cli-telemetry-optout: missing — — Leave the .NET CLI opt-out variable unset.
+  - dotnet-cli-telemetry-optout: missing â€” â€” Leave the .NET CLI opt-out variable unset.
 
 **Recommended profiles**
 
@@ -619,7 +619,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: .NET SDK and .NET CLI telemetry | https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment | `high` | path, behavior |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -664,7 +664,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The app writes the exact Microsoft-documented Windows long-path control surface: LongPathsEnabled = 1 under HKLM\SYSTEM\CurrentControlSet\Control\FileSystem. |
 
 Current write(s):
@@ -707,7 +707,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows default (Windows devices that have not explicitly enabled LongPathsEnabled)
-  - windows-long-paths: missing — — Leave the Windows long-path policy at the default baseline.
+  - windows-long-paths: missing â€” â€” Leave the Windows long-path policy at the default baseline.
 
 **Recommended profiles**
 
@@ -720,7 +720,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation | `high` | path, value, behavior |
 | `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | H:\Temp\vm-tooling-staging\devmode_longpaths_probe.csv and H:\Temp\vm-tooling-staging\devmode_longpaths_probe.pml | `medium` | path, value, behavior, ui-mapping |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -765,7 +765,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app writes NODE_OPTIONS = --max-old-space-size=8192 as a persistent machine-level environment variable. |
 
 Current write(s):
@@ -809,7 +809,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows default (Machines that have not set a machine-level NODE_OPTIONS override)
-  - node-options: missing — — Leave the machine-level NODE_OPTIONS override unset.
+  - node-options: missing â€” â€” Leave the machine-level NODE_OPTIONS override unset.
 
 **Recommended profiles**
 
@@ -823,7 +823,7 @@ Nohuto lineage references:
 | `node-cli-node-options` | `official-doc` | `Microsoft official doc` | Node.js CLI documentation: NODE_OPTIONS | https://nodejs.org/api/cli.html | `high` | path, value, behavior |
 | `node-cli-max-old-space-size` | `official-doc` | `Microsoft official doc` | Node.js CLI documentation: --max-old-space-size | https://nodejs.org/api/cli.html | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment | `high` | path, behavior |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -868,7 +868,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app writes ExecutionPolicy = RemoteSigned on the documented policy path. |
 
 Current write(s):
@@ -911,7 +911,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows policy default (Windows systems where the PowerShell execution-policy machine policy is not configured)
-  - powershell-execution-policy: missing — — Leave the machine policy unset.
+  - powershell-execution-policy: missing â€” â€” Leave the machine policy unset.
 
 **Recommended profiles**
 
@@ -924,7 +924,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-powershell-executionpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | C:\Windows\PolicyDefinitions\PowerShellExecutionPolicy.admx | `high` | path, value, allowed-values |
 | `local-powershell-executionpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | C:\Windows\PolicyDefinitions\en-US\PowerShellExecutionPolicy.adml | `high` | behavior, side-effects |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -969,7 +969,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app writes LongPathsEnabled = 1 under HKLM\SYSTEM\CurrentControlSet\Control\FileSystem, matching the official Windows long-path control referenced by Python documentation. |
 
 Current write(s):
@@ -1012,7 +1012,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows default (Windows systems that have not explicitly enabled LongPathsEnabled)
-  - windows-long-paths: missing — — Leave the Windows long-path control at the default baseline.
+  - windows-long-paths: missing â€” â€” Leave the Windows long-path control at the default baseline.
 
 **Recommended profiles**
 
@@ -1027,7 +1027,7 @@ Nohuto lineage references:
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation | `high` | path, value, behavior, version-scope |
 | `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | path, value, allowed-values, version-scope |
 | `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | behavior, default, side-effects |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1072,7 +1072,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app writes ssh-agent.exe into the current-user Run key, and the Windows Run key documentation confirms that this is a supported logon autostart surface. |
 
 Current write(s):
@@ -1107,7 +1107,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows managed default (Windows developer profiles)
-  - ssh-agent-run-key: missing — — Leave the Run key value absent if you do not want ssh-agent to start automatically at logon.
+  - ssh-agent-run-key: missing â€” â€” Leave the Run key value absent if you do not want ssh-agent to start automatically at logon.
 
 **Recommended profiles**
 
@@ -1119,7 +1119,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-run-registry-keys` | `official-doc` | `Microsoft official doc` | Run and RunOnce Registry Keys | https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys | `high` | path, behavior, version-scope |
 | `openssh-ssh-agent-doc` | `official-doc` | `Microsoft official doc` | OpenSSH manual: ssh-agent | https://man.openbsd.org/ssh-agent | `medium` | behavior, side-effects |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1164,7 +1164,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app writes AllowDevelopmentWithoutDevLicense = 1 under the same AppModelUnlock path that Microsoft documents in the Regedit method for enabling Developer Mode. |
 
 Current write(s):
@@ -1199,7 +1199,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows default (Windows devices where Developer Mode has not been explicitly enabled through the direct AppModelUnlock method)
-  - allow-development-without-dev-license: missing — — Leave the direct Developer Mode registry value unset unless the machine is intentionally prepared for app development.
+  - allow-development-without-dev-license: missing â€” â€” Leave the direct Developer Mode registry value unset unless the machine is intentionally prepared for app development.
 
 **Recommended profiles**
 
@@ -1214,7 +1214,7 @@ Current write(s):
 | `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | H:\Temp\vm-tooling-staging\devmode_probe2.csv and H:\Temp\vm-tooling-staging\devmode_probe2.txt | `medium` | path, behavior, default, ui-mapping |
 | `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | C:\Windows\PolicyDefinitions\AppxPackageManager.admx | `high` | path, value, allowed-values, version-scope |
 | `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | C:\Windows\PolicyDefinitions\en-US\AppxPackageManager.adml | `high` | behavior, default, side-effects |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1259,7 +1259,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app writes %UserProfile%\.wslconfig with [wsl2] memory=4GB. |
 
 Current write(s):
@@ -1294,7 +1294,7 @@ Current write(s):
 **Windows defaults**
 
 - WSL default (WSL users who have not explicitly configured a memory cap in .wslconfig)
-  - wsl2-memory-setting: missing — — Leave WSL 2 on its default memory behavior until an explicit cap is configured.
+  - wsl2-memory-setting: missing â€” â€” Leave WSL 2 on its default memory behavior until an explicit cap is configured.
 
 **Recommended profiles**
 
@@ -1351,7 +1351,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app now exposes IconsOnly through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
 
 Current write(s):
@@ -1394,7 +1394,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - 25H2 default-user baseline (25H2 default profile)
-  - explorer-iconsonly-flag: value `0` — HKCU25H2.reg sets IconsOnly = 0 in the 25H2 default-user hive.
+  - explorer-iconsonly-flag: value `0` â€” HKCU25H2.reg sets IconsOnly = 0 in the 25H2 default-user hive.
 
 **Recommended profiles**
 
@@ -1452,7 +1452,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app now writes HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoLowDiskSpaceChecks = 1, which matches the documented Microsoft control surface. The older HKCU variant was removed on 2026-03-13 as part of the implementation-mismatch fix. |
 
 Current write(s):
@@ -1495,7 +1495,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows documented baseline (Windows systems using the documented Explorer machine-policy path)
-  - no-low-disk-space-checks: missing — — Leave the documented registry value absent.
+  - no-low-disk-space-checks: missing â€” â€” Leave the documented registry value absent.
 
 **Recommended profiles**
 
@@ -1508,7 +1508,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-low-disk-warning-article` | `official-doc` | `Microsoft official doc` | Microsoft Learn troubleshooting article for low disk space warnings | https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft | `high` | path, value, behavior |
 | `dump-25h2-policies-explorer-nolowdiskspacechecks` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for NoLowDiskSpaceChecks | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1553,7 +1553,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app now writes HKLM\Software\Policies\Microsoft\Windows\Windows Chat\ChatIcon = 2, which matches the documented ConfigureChatIcon policy and the Hide state validated in this record. The previous HKCU TaskbarMn write was removed as part of the implementation-mismatch fix on 2026-03-13. |
 
 Current write(s):
@@ -1596,7 +1596,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows Chat policy default (Windows 11 systems supporting ConfigureChatIcon policy)
-  - configure-chat-icon-policy: missing — — Leave the official device policy unset.
+  - configure-chat-icon-policy: missing â€” â€” Leave the official device policy unset.
 
 **Recommended profiles**
 
@@ -1610,7 +1610,7 @@ Nohuto lineage references:
 | `ms-experience-configure-chat-icon` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Experience / ConfigureChatIcon | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#configurechaticon | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-taskbar-admx-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | C:\Windows\PolicyDefinitions\Taskbar.admx | `high` | path, value, allowed-values, version-scope |
 | `local-taskbar-adml-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | C:\Windows\PolicyDefinitions\en-US\Taskbar.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1655,7 +1655,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes UseCompactMode = 1, and Procmon confirmed that Explorer.EXE reads the same value as a live preference on shell restart. The tweak id now matches the observed direction of the value. |
 
 Current write(s):
@@ -1698,7 +1698,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Default state not captured (Explorer user profiles where UseCompactMode is absent)
-  - explorer-usecompactmode-flag: unknown — — This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.
+  - explorer-usecompactmode-flag: unknown â€” â€” This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.
 
 **Recommended profiles**
 
@@ -1710,7 +1710,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for UseCompactMode | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
 | `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - C:\Users\<USER>\AppData\Local\Temp\explorer_batch_applied_20260314.pml and C:\Users\<USER>\AppData\Local\Temp\explorer_compact_zero_20260314.pml | `high` | path, value, behavior, ui-mapping |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1755,7 +1755,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app now exposes HideDrivesWithNoMedia through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
 
 Current write(s):
@@ -1807,7 +1807,7 @@ Nohuto lineage references:
 | `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
 | `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | H:\Temp\vm-tooling-staging\hideemptydrives-result.txt | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for HideDrivesWithNoMedia | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for HideDrivesWithNoMedia | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -1852,7 +1852,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app now exposes SeparateProcess through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
 
 Current write(s):
@@ -1895,7 +1895,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
-  - explorer-separateprocess-flag: value `0` — HKCU25H2.reg exports SeparateProcess = 0 in the default Explorer\Advanced block.
+  - explorer-separateprocess-flag: value `0` â€” HKCU25H2.reg exports SeparateProcess = 0 in the default Explorer\Advanced block.
 
 **Recommended profiles**
 
@@ -1953,7 +1953,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app now exposes ShowCompColor through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
 
 Current write(s):
@@ -1996,7 +1996,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
-  - explorer-showcompcolor-flag: value `1` — HKCU25H2.reg exports ShowCompColor = 1 in the default Explorer\Advanced block.
+  - explorer-showcompcolor-flag: value `1` â€” HKCU25H2.reg exports ShowCompColor = 1 in the default Explorer\Advanced block.
 
 **Recommended profiles**
 
@@ -2054,7 +2054,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app now exposes ShowDriveLettersFirst through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated. |
 
 Current write(s):
@@ -2150,7 +2150,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app writes HideFileExt = 0 under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced. The runtime capture confirmed that 0 is the show-file-extensions state consumed by Explorer on Windows 11 Pro 10.0.26200.8037. |
 
 Current write(s):
@@ -2193,7 +2193,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
-  - explorer-hidefileext-flag: value `1` — HKCU25H2.reg exports HideFileExt = 1 in the default Explorer\Advanced block.
+  - explorer-hidefileext-flag: value `1` â€” HKCU25H2.reg exports HideFileExt = 1 in the default Explorer\Advanced block.
 
 **Recommended profiles**
 
@@ -2207,7 +2207,7 @@ Nohuto lineage references:
 | `ms-gppref-global-folder-options-vista` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for HideFileExt | Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg; Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, value, version-scope |
 | `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | C:\Users\<USER>\AppData\Local\Temp\hidefileext_capture_20260313.pml | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2252,7 +2252,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes FullPath = 1, which matches the documented Explorer user-preference surface. |
 
 Current write(s):
@@ -2295,7 +2295,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - 25H2 default Explorer preference (Current-user Explorer CabinetState settings on the 25H2 default hive snapshot)
-  - explorer-fullpath-flag: value `0` — HKCU25H2.reg exports FullPath = 0 in the default Explorer\CabinetState block.
+  - explorer-fullpath-flag: value `0` â€” HKCU25H2.reg exports FullPath = 0 in the default Explorer\CabinetState block.
 
 **Recommended profiles**
 
@@ -2309,7 +2309,7 @@ Nohuto lineage references:
 | `ms-gppref-global-folder-options` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptions | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a | `high` | path, value, allowed-values, behavior |
 | `dump-hkcu25h2-explorer-cabinetstate-fullpath` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for FullPath | Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg | `medium` | path, value, version-scope |
 | `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo source note for explorer.show-full-path | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2354,7 +2354,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app writes Hidden = 1 under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced. The runtime capture confirmed that 1 is the show-hidden state consumed by Explorer on Windows 11 Pro 10.0.26200.8037. |
 
 Current write(s):
@@ -2397,7 +2397,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
-  - explorer-hidden-flag: value `2` — HKCU25H2.reg exports Hidden = 2 in the default Explorer\Advanced block.
+  - explorer-hidden-flag: value `2` â€” HKCU25H2.reg exports Hidden = 2 in the default Explorer\Advanced block.
 
 **Recommended profiles**
 
@@ -2411,7 +2411,7 @@ Nohuto lineage references:
 | `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-hidden` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for Hidden | Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg; Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, value, version-scope |
 | `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | C:\Users\<USER>\AppData\Local\Temp\hidden_capture_20260313.pml | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2456,7 +2456,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app now exposes ShowInfoTip through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
 
 Current write(s):
@@ -2499,7 +2499,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
-  - explorer-showinfotip-flag: value `1` — HKCU25H2.reg exports ShowInfoTip = 1 in the default Explorer\Advanced block.
+  - explorer-showinfotip-flag: value `1` â€” HKCU25H2.reg exports ShowInfoTip = 1 in the default Explorer\Advanced block.
 
 **Recommended profiles**
 
@@ -2557,7 +2557,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app now writes ShowSuperHidden = 1 on the same current-user Explorer path validated by the Microsoft spec and the Win25H2Clean Procmon capture. |
 
 Current write(s):
@@ -2600,7 +2600,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - 25H2 default Explorer preference (Current-user Explorer Advanced settings on the 25H2 default hive snapshot)
-  - explorer-showsuperhidden-flag: value `0` — HKCU25H2.reg exports ShowSuperHidden = 0 in the default Explorer\Advanced block.
+  - explorer-showsuperhidden-flag: value `0` â€” HKCU25H2.reg exports ShowSuperHidden = 0 in the default Explorer\Advanced block.
 
 **Recommended profiles**
 
@@ -2658,7 +2658,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app now exposes ShowRecent through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated. |
 
 Current write(s):
@@ -2710,7 +2710,7 @@ Nohuto lineage references:
 | `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer general settings | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowRecent | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
 | `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | H:\Temp\vm-tooling-staging\showrecent-result.txt | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowRecent | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowRecent | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2755,7 +2755,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app now exposes ShowStatusBar through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
 
 Current write(s):
@@ -2799,7 +2799,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - 25H2 default-user baseline (25H2 default profile)
-  - explorer-showstatusbar-flag: value `1` — HKCU25H2.reg sets ShowStatusBar = 1 in the 25H2 default-user hive.
+  - explorer-showstatusbar-flag: value `1` â€” HKCU25H2.reg sets ShowStatusBar = 1 in the 25H2 default-user hive.
 
 **Recommended profiles**
 
@@ -2813,7 +2813,7 @@ Nohuto lineage references:
 | `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg | `medium` | path, value, version-scope |
 | `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | H:\Temp\vm-tooling-staging\showstatusbar-result.txt | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowStatusBar | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowStatusBar | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -2858,7 +2858,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app now exposes ShowTypeOverlay through VisibilityTweakProvider and writes the same HKCU Explorer\Advanced value that the runtime probe validated. |
 
 Current write(s):
@@ -2901,7 +2901,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - 25H2 default-user baseline (25H2 default profile)
-  - explorer-showtypeoverlay-flag: value `1` — HKCU25H2.reg sets ShowTypeOverlay = 1 in the 25H2 default-user hive.
+  - explorer-showtypeoverlay-flag: value `1` â€” HKCU25H2.reg sets ShowTypeOverlay = 1 in the 25H2 default-user hive.
 
 **Recommended profiles**
 
@@ -2959,7 +2959,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app writes TaskbarAl = 0 under HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced. Procmon confirmed Explorer.EXE consumes the same runtime surface on Windows 11 Pro 10.0.26200.8037. |
 
 Current write(s):
@@ -3002,7 +3002,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows-managed alignment default (Windows 11 systems with taskbar alignment support)
-  - taskbar-alignment: unknown — — This record validates the explicit runtime values 0 and 1. It does not publish a machine-checked missing-value default.
+  - taskbar-alignment: unknown â€” â€” This record validates the explicit runtime values 0 and 1. It does not publish a machine-checked missing-value default.
 
 **Recommended profiles**
 
@@ -3016,7 +3016,7 @@ Nohuto lineage references:
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | `Microsoft official doc` | Microsoft Windows 11 settings reference for taskbar alignment | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11 | `high` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-taskbaral` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for TaskbarAl | Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, version-scope |
 | `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | C:\Users\<USER>\AppData\Local\Temp\taskbar_alignment_capture_20260313.pml | `high` | path, value, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3063,7 +3063,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The app now writes only the documented NCSI policy value HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator\NoActiveProbe = 1 for this tweak. |
 
 Current write(s):
@@ -3112,7 +3112,7 @@ Windows Internals references:
 **Windows defaults**
 
 - NCSI default active testing (Windows Vista and later policy surface documented by Microsoft)
-  - ncsi-noactiveprobe-policy: missing — — Microsoft says active tests run normally when the policy is not configured.
+  - ncsi-noactiveprobe-policy: missing â€” â€” Microsoft says active tests run normally when the policy is not configured.
 
 **Recommended profiles**
 
@@ -3125,7 +3125,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ncsi-icm-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for NCSI active probing | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
 | `ms-ncsi-icm-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for NCSI active probing policy | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, risk, default |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value, path |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value, path |
 | `nohuto-ncsi-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - NCSI NoActiveProbe registry evidence | Docs/tweaks/_source-mirrors/win-config/network/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, value, behavior |
 
 **Validation proof**
@@ -3171,7 +3171,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes AutoShareServer = 0 and AutoShareWks = 0, which matches Microsoft's documented way to stop automatic administrative share creation. |
 
 Current write(s):
@@ -3222,8 +3222,8 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows default administrative-share behavior (Windows client and server systems with LanmanServer enabled)
-  - auto-share-server: missing — — When the value does not exist, Windows uses the default behavior and creates administrative shares automatically.
-  - auto-share-workstation: missing — — When the value does not exist, Windows uses the default behavior and creates administrative shares automatically.
+  - auto-share-server: missing â€” â€” When the value does not exist, Windows uses the default behavior and creates administrative shares automatically.
+  - auto-share-workstation: missing â€” â€” When the value does not exist, Windows uses the default behavior and creates administrative shares automatically.
 
 **Recommended profiles**
 
@@ -3237,7 +3237,7 @@ Windows Internals references:
 | `ms-remove-admin-shares` | `official-doc` | `Microsoft official doc` | Microsoft Learn: remove administrative shares | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/remove-administrative-shares | `high` | path, value, behavior, risk |
 | `ms-admin-shares-missing` | `official-doc` | `Microsoft official doc` | Microsoft Learn: administrative shares are missing | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/problems-administrative-shares-missing | `high` | path, value, default, allowed-values, behavior, risk |
 | `ms-mss-autosharewks` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_MSS-legacy / Pol_MSS_AutoShareWks | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-mss-legacy | `medium` | ui-mapping, version-scope |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -3282,7 +3282,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes DisabledComponents = 255, which matches the documented disable-all-except-loopback setting. |
 
 Current write(s):
@@ -3331,7 +3331,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows IPv6 baseline (Supported Windows client and server releases covered by Microsoft guidance)
-  - ipv6-disabled-components: missing — — Microsoft documents normal IPv6 behavior when DisabledComponents is absent.
+  - ipv6-disabled-components: missing â€” â€” Microsoft documents normal IPv6 behavior when DisabledComponents is absent.
 
 **Recommended profiles**
 
@@ -3343,7 +3343,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ipv6-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure IPv6 in Windows | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -3388,7 +3388,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes EnableMulticast = 0, which matches the documented disable behavior. |
 
 Current write(s):
@@ -3437,7 +3437,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Unmanaged Windows devices)
-  - enable-multicast: missing — — If the policy is not configured, Microsoft says LLMNR stays enabled.
+  - enable-multicast: missing â€” â€” If the policy is not configured, Microsoft says LLMNR stays enabled.
 
 **Recommended profiles**
 
@@ -3450,7 +3450,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `high` | path, behavior, default, ui-mapping |
 | `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-llmnr` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -3496,7 +3496,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The app writes the official LLTD policy path and value names, including EnableLLTDIO = 0 and EnableRspndr = 0. The UX now matches the documented semantics: policy-disabled or not configured leaves the default LLTD behavior in place rather than guaranteeing a hard-disable. |
 
 Current write(s):
@@ -3546,8 +3546,8 @@ Windows Internals references:
 **Windows defaults**
 
 - Policy not configured (Windows Vista and later)
-  - lltdio-policy: missing — — Default LLTDIO behavior applies when the policy is not configured.
-  - lltd-responder-policy: missing — — Default Responder behavior applies when the policy is not configured.
+  - lltdio-policy: missing â€” â€” Default LLTDIO behavior applies when the policy is not configured.
+  - lltd-responder-policy: missing â€” â€” Default Responder behavior applies when the policy is not configured.
 
 **Recommended profiles**
 
@@ -3564,7 +3564,7 @@ Windows Internals references:
 | `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default |
 | `ms-admx-linklayertopologydiscovery-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_LinkLayerTopologyDiscovery | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery | `high` | path, behavior, version-scope |
 | `ms-lltd-disconnect-kb` | `official-doc` | `Microsoft official doc` | Microsoft Learn KB: network disconnection after configuring the LLTDIO and RSPNDR group policy objects | https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/network-disconnection-after-configuring-lltdio-rspndr-gpos | `medium` | side-effects, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -3609,7 +3609,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The app writes the official mDNS policy surface: EnableMDNS = 0 under HKLM\Software\Policies\Microsoft\Windows NT\DNSClient. The UX now matches the documented semantics: policy-disabled or not configured means the DNS client uses locally configured mDNS behavior. |
 
 Current write(s):
@@ -3658,7 +3658,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Policy not configured (Windows 10 version 1703 and later policy surface documented by Microsoft)
-  - dnsclient-enable-mdns: missing — — Microsoft says the DNS client uses locally configured settings when the policy is not configured.
+  - dnsclient-enable-mdns: missing â€” â€” Microsoft says the DNS client uses locally configured settings when the policy is not configured.
 
 **Recommended profiles**
 
@@ -3671,7 +3671,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-mdns-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for mDNS | C:\Windows\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
 | `ms-dnsclient-mdns-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for mDNS policy | C:\Windows\PolicyDefinitions\en-US\DnsClient.adml | `high` | behavior, default |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -3716,7 +3716,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs` |
+| Provider source | `OpenTraceProject.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs` |
 | Notes | The app now uses the documented per-interface control model. NetworkTweakProvider exposes the tweak card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2). |
 
 Current write(s):
@@ -3765,7 +3765,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Per-adapter Windows baseline (Windows network adapters using NetBT)
-  - netbios-options: per-interface `0` — The documented baseline is the DHCP-controlled option.
+  - netbios-options: per-interface `0` â€” The documented baseline is the DHCP-controlled option.
 
 **Recommended profiles**
 
@@ -3779,8 +3779,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-netbios-wmi` | `official-doc` | `Microsoft official doc` | Microsoft WMI: SetTcpipNetbios method | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/settcpipnetbios-method-in-class-win32-networkadapterconfiguration | `high` | path, value, allowed-values, behavior, version-scope |
 | `ms-netbios-unattend` | `official-doc` | `Microsoft official doc` | Microsoft unattended setup: NetbiosOptions | https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-netbt-interfaces-interface-netbiosoptions | `high` | path, value, allowed-values, default |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
-| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed NetBIOS implementation | WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs | `high` | path, value, behavior, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
+| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed NetBIOS implementation | OpenTraceProject.Engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs | `high` | path, value, behavior, ui-mapping |
 | `local-netbios-cim-detect` | `vm-test` | `VM test / probe` | Local read-only CIM detect run for NetBIOS over TCP/IP | Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
 | `repo-provenance-netbios` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | risk, version-scope |
 
@@ -3827,7 +3827,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes EnableNetbios = 0, which matches the strict disable mode documented in the local ADMX enum. |
 
 Current write(s):
@@ -3876,7 +3876,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows Vista and newer systems with the DNS client policy available)
-  - enable-netbios: missing — — The policy is enum-backed and not configured by default.
+  - enable-netbios: missing â€” â€” The policy is enum-backed and not configured by default.
 
 **Recommended profiles**
 
@@ -3890,7 +3890,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `medium` | path, behavior, ui-mapping |
 | `local-dnsclient-netbios-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values, behavior |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-netbios-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -3936,7 +3936,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes EnablePlainTextPassword = 0, which matches the documented safer baseline. |
 
 Current write(s):
@@ -3986,7 +3986,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows managed SMB client baseline (Windows SMB client releases with LanmanWorkstation plaintext password support)
-  - enable-plaintext-password: missing — — Leave the explicit override absent and let Windows keep its own baseline.
+  - enable-plaintext-password: missing â€” â€” Leave the explicit override absent and let Windows keep its own baseline.
 
 **Recommended profiles**
 
@@ -4000,7 +4000,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-plaintext-smb-password-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers | `high` | path, value, allowed-values, behavior, risk |
 | `ms-sceregvl-plaintext-smb-password` | `official-doc` | `Microsoft official doc` | Local Microsoft security metadata: sceregvl.inf | C:\Windows\inf\sceregvl.inf | `high` | path, value |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4045,7 +4045,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes DisableSmartNameResolution = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -4094,7 +4094,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Unmanaged Windows 8 and newer systems)
-  - disable-smart-name-resolution: missing — — Policy is not configured by default.
+  - disable-smart-name-resolution: missing â€” â€” Policy is not configured by default.
 
 **Recommended profiles**
 
@@ -4107,7 +4107,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient | `high` | path, behavior, default, ui-mapping |
 | `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | C:\WINDOWS\PolicyDefinitions\DnsClient.admx | `high` | path, value, allowed-values |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smart-name-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -4153,7 +4153,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes SMB1 = 0 for the tweak, which matches the documented disable behavior for the LanmanServer registry value. |
 
 Current write(s):
@@ -4202,7 +4202,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Version-dependent Windows baseline (Windows 10, Windows 11, and Windows Server families)
-  - lanmanserver-smb1: feature-dependent — — SMBv1 defaults vary by Windows version and feature installation state.
+  - lanmanserver-smb1: feature-dependent â€” â€” SMBv1 defaults vary by Windows version and feature installation state.
 
 **Recommended profiles**
 
@@ -4215,7 +4215,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-disable-enable` | `official-doc` | `Microsoft official doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1 | `high` | path, value, allowed-values, behavior, version-scope, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smb1` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk, version-scope |
 
 **Validation proof**
@@ -4261,7 +4261,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes SMB2 = 0, which matches Microsoft's documented disable behavior for SMBv2 and SMBv3 on the server component. |
 
 Current write(s):
@@ -4310,7 +4310,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows SMB server default (Supported Windows SMB server releases with SMBv2 and SMBv3 support)
-  - lanmanserver-smb2: missing — — Microsoft documents that the default configuration is enabled and the registry value may not exist.
+  - lanmanserver-smb2: missing â€” â€” Microsoft documents that the default configuration is enabled and the registry value may not exist.
 
 **Recommended profiles**
 
@@ -4322,7 +4322,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-protocol-toggle` | `official-doc` | `Microsoft official doc` | Microsoft Learn: detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows | https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3 | `high` | path, value, default, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4367,7 +4367,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes AutoConnectAllowedOEM = 0, which matches the documented disabled state. |
 
 Current write(s):
@@ -4416,7 +4416,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Policy not configured (Windows 10 client policy surface documented by Microsoft)
-  - wifi-sense-policy: missing — — Microsoft says users can choose whether to enable the features when the policy is not configured.
+  - wifi-sense-policy: missing â€” â€” Microsoft says users can choose whether to enable the features when the policy is not configured.
 
 **Recommended profiles**
 
@@ -4429,7 +4429,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-wifisense-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for Wi-Fi Sense policy | C:\Windows\PolicyDefinitions\wlansvc.admx | `high` | path, value, allowed-values |
 | `ms-wifisense-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for Wi-Fi Sense policy | C:\Windows\PolicyDefinitions\en-US\wlansvc.adml | `high` | behavior, default, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -4474,7 +4474,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The app writes EnableRspndr = 1, which matches the documented policy enable state. |
 
 Current write(s):
@@ -4523,7 +4523,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Policy not configured (Windows Vista and later)
-  - lltd-responder-policy: missing — — Microsoft says default Responder behavior applies when the policy is not configured.
+  - lltd-responder-policy: missing â€” â€” Microsoft says default Responder behavior applies when the policy is not configured.
 
 **Recommended profiles**
 
@@ -4536,7 +4536,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-lltd-responder-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Responder | C:\Windows\PolicyDefinitions\LinkLayerTopologyDiscovery.admx | `high` | path, value, allowed-values |
 | `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -4581,7 +4581,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes EnableLLTDIO = 1, which matches the documented policy enable state. |
 
 Current write(s):
@@ -4630,7 +4630,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Policy not configured (Windows Vista and later)
-  - lltdio-policy: missing — — Microsoft says the default LLTDIO behavior applies when the policy is not configured.
+  - lltdio-policy: missing â€” â€” Microsoft says the default LLTDIO behavior applies when the policy is not configured.
 
 **Recommended profiles**
 
@@ -4643,7 +4643,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-lltd-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Mapper I/O | C:\Windows\PolicyDefinitions\LinkLayerTopologyDiscovery.admx | `high` | path, value, allowed-values |
 | `ms-lltd-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Mapper I/O policy | C:\Windows\PolicyDefinitions\en-US\LinkLayerTopologyDiscovery.adml | `high` | behavior, default, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -4688,7 +4688,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes DisabledComponents = 32, which matches the Microsoft-documented prefer-IPv4 state. |
 
 Current write(s):
@@ -4737,7 +4737,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows IPv6 baseline (Supported Windows client and server releases covered by Microsoft guidance)
-  - ipv6-disabled-components: missing — — Microsoft documents the default behavior when the override is absent.
+  - ipv6-disabled-components: missing â€” â€” Microsoft documents the default behavior when the override is absent.
 
 **Recommended profiles**
 
@@ -4749,7 +4749,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ipv6-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure IPv6 in Windows | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -4794,7 +4794,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The app writes the exact Microsoft-documented NTLM SSP client security option: NTLMMinClientSec = 537395200 under HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0. The UX now reflects the documented NTLM SSP client scope instead of an SMB-only description. |
 
 Current write(s):
@@ -4842,7 +4842,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows security-option default (Windows systems exposing the NTLM SSP client security option)
-  - ntlm-min-client-sec: missing — — The policy can be left unset so Windows keeps the built-in baseline.
+  - ntlm-min-client-sec: missing â€” â€” The policy can be left unset so Windows keeps the built-in baseline.
 
 **Recommended profiles**
 
@@ -4855,7 +4855,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ntlm-client-security-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / NTLM SSP based clients | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients | `high` | path, value, allowed-values, behavior, version-scope |
 | `local-sceregvl-ntlm-min-client-sec` | `official-doc` | `Microsoft official doc` | Local Windows sceregvl NTLMMinClientSec metadata | C:\Windows\inf\sceregvl.inf | `high` | path, value, allowed-values, ui-mapping |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -4900,7 +4900,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs` |
+| Provider source | `OpenTraceProject.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs` |
 | Notes | NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed SMB server configuration implementation that detects EnableLeasing and applies Set-SmbServerConfiguration -EnableLeasing $false. |
 
 Current write(s):
@@ -4948,7 +4948,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows SMB server leasing baseline (Windows SMB server releases with SMBv2 and SMBv3 behavior)
-  - server-enable-leasing: feature-dependent — — Microsoft documents the configuration surface and describes leasing as integral to SMBv2 and SMBv3, but this record avoids collapsing every Windows build into one explicit baseline value.
+  - server-enable-leasing: feature-dependent â€” â€” Microsoft documents the configuration surface and describes leasing as integral to SMBv2 and SMBv3, but this record avoids collapsing every Windows build into one explicit baseline value.
 
 **Recommended profiles**
 
@@ -4961,8 +4961,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smbserver-class` | `official-doc` | `Microsoft official doc` | Microsoft Learn: MSFT_SmbServerConfiguration class | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration | `high` | path, value, allowed-values, behavior |
 | `ms-slow-smb-leasing` | `official-doc` | `Microsoft official doc` | Microsoft Learn: slow SMB file transfer guidance for leasing | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/slow-smb-file-transfer | `high` | behavior, risk, ui-mapping |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
-| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed SMB leasing implementation | WindowsOptimizer.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs | `high` | path, value, behavior, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
+| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed SMB leasing implementation | OpenTraceProject.Engine/Tweaks/Commands/Network/DisableSmbLeasingTweak.cs | `high` | path, value, behavior, ui-mapping |
 | `local-smb-leasing-detect` | `vm-test` | `VM test / probe` | Local read-only SMB leasing detect run | Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
 
 **Validation proof**
@@ -5008,7 +5008,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes DisableLargeMtu = 0, which matches the documented enabled state for SMB large MTU support. |
 
 Current write(s):
@@ -5058,7 +5058,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows SMB client default (Supported modern Windows SMB client releases)
-  - disable-large-mtu: missing — — Microsoft documents large MTU as enabled by default, so an explicit override is not required for the normal baseline.
+  - disable-large-mtu: missing â€” â€” Microsoft documents large MTU as enabled by default, so an explicit override is not required for the normal baseline.
 
 **Recommended profiles**
 
@@ -5071,7 +5071,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-file-server-performance` | `official-doc` | `Microsoft official doc` | Microsoft performance tuning for SMB file servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server | `high` | path, value, default, allowed-values, behavior |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5116,7 +5116,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs` |
+| Provider source | `OpenTraceProject.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs` |
 | Notes | NetworkTweakProvider now exposes the tweak card and delegates apply, verify, and rollback to a command-backed implementation that detects both SMB Multichannel booleans and applies the documented client and server configuration surfaces. |
 
 Current write(s):
@@ -5165,8 +5165,8 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows SMB Multichannel default (Supported Windows SMB client and server releases with SMB 3.0 and later behavior)
-  - client-enable-multichannel: value true — Microsoft states that SMB Multichannel is enabled by default.
-  - server-enable-multichannel: value true — Microsoft states that SMB Multichannel is enabled by default.
+  - client-enable-multichannel: value true â€” Microsoft states that SMB Multichannel is enabled by default.
+  - server-enable-multichannel: value true â€” Microsoft states that SMB Multichannel is enabled by default.
 
 **Recommended profiles**
 
@@ -5180,8 +5180,8 @@ Windows Internals references:
 | `ms-manage-smb-multichannel` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage SMB Multichannel | https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/manage-smb-multichannel | `high` | default, behavior, risk, ui-mapping, version-scope |
 | `ms-smbclient-setconfiguration` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SetConfiguration method of MSFT_SmbClientConfiguration | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/setconfiguration-msft-smbclientconfiguration | `high` | path, value, allowed-values, behavior |
 | `ms-smbserver-class` | `official-doc` | `Microsoft official doc` | Microsoft Learn: MSFT_SmbServerConfiguration class | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration | `high` | path, value, allowed-values, behavior |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
-| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed SMB Multichannel implementation | WindowsOptimizer.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs | `high` | path, value, behavior, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping |
+| `engine-network-command-tweak` | `repo-code` | `Current repo code` | Command-backed SMB Multichannel implementation | OpenTraceProject.Engine/Tweaks/Commands/Network/EnableSmbMultichannelTweak.cs | `high` | path, value, behavior, ui-mapping |
 | `local-smb-multichannel-detect` | `vm-test` | `VM test / probe` | Local read-only SMB Multichannel detect run | Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037 | `high` | behavior, version-scope |
 
 **Validation proof**
@@ -5227,7 +5227,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The app now writes EnableSMBQUIC = 1 under the documented LanmanWorkstation and LanmanServer policy keys. |
 
 Current write(s):
@@ -5278,8 +5278,8 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows 11 and Windows Server releases exposing the SMB over QUIC policies)
-  - client-smb-quic-policy: missing — — The official client policy is not configured by default.
-  - server-smb-quic-policy: missing — — The official server policy is not configured by default.
+  - client-smb-quic-policy: missing â€” â€” The official client policy is not configured by default.
+  - server-smb-quic-policy: missing â€” â€” The official server policy is not configured by default.
 
 **Recommended profiles**
 
@@ -5294,7 +5294,7 @@ Windows Internals references:
 | `local-lanmanworkstation-adml-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml SMB over QUIC help text | C:\Windows\PolicyDefinitions\en-US\LanmanWorkstation.adml | `high` | behavior, default, side-effects |
 | `local-lanmanserver-admx-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx SMB over QUIC mapping | C:\Windows\PolicyDefinitions\LanmanServer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-lanmanserver-adml-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml SMB over QUIC help text | C:\Windows\PolicyDefinitions\en-US\LanmanServer.adml | `high` | behavior, default, side-effects |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5339,7 +5339,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes EncryptData = 1, which matches the documented global SMB server encryption requirement. |
 
 Current write(s):
@@ -5389,7 +5389,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows SMB server baseline (Windows SMB server releases that expose the EncryptData LanmanServer value)
-  - server-encrypt-data: feature-dependent — — The official source documents the control and registry value, but this record does not collapse every Windows release baseline into a single universal number.
+  - server-encrypt-data: feature-dependent â€” â€” The official source documents the control and registry value, but this record does not collapse every Windows release baseline into a single universal number.
 
 **Recommended profiles**
 
@@ -5401,7 +5401,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-security-troubleshooting` | `official-doc` | `Microsoft official doc` | Microsoft SMB security enhancements troubleshooting | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5446,7 +5446,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The tweak targets real SMB tuning values and matches Microsoft's published client tuning example exactly. |
 
 Current write(s):
@@ -5484,10 +5484,10 @@ Current write(s):
 **Windows defaults**
 
 - Microsoft documented defaults (Windows SMB client tuning surface documented by Microsoft)
-  - smb-directory-cache-entries-max: value `16` — Microsoft documents 16 as the default.
-  - smb-fileinfo-cache-entries-max: value `64` — Microsoft documents 64 as the default.
-  - smb-filenotfound-cache-entries-max: value `128` — Microsoft documents 128 as the default.
-  - smb-maxcmds: value `15` — Microsoft documents 15 as the default.
+  - smb-directory-cache-entries-max: value `16` â€” Microsoft documents 16 as the default.
+  - smb-fileinfo-cache-entries-max: value `64` â€” Microsoft documents 64 as the default.
+  - smb-filenotfound-cache-entries-max: value `128` â€” Microsoft documents 128 as the default.
+  - smb-maxcmds: value `15` â€” Microsoft documents 15 as the default.
 
 **Recommended profiles**
 
@@ -5499,7 +5499,7 @@ Current write(s):
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-client-tuning` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance tuning for SMB file servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/ | `high` | path, value, allowed-values, default, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
@@ -5544,7 +5544,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes RejectUnencryptedAccess = 1, which matches the documented stricter SMB server behavior. |
 
 Current write(s):
@@ -5594,7 +5594,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows SMB server baseline (Windows SMB server releases that expose the RejectUnencryptedAccess LanmanServer value)
-  - server-reject-unencrypted-access: feature-dependent — — The official source documents the control surface, but this record does not claim a single universal default across every Windows SMB server release.
+  - server-reject-unencrypted-access: feature-dependent â€” â€” The official source documents the control surface, but this record does not claim a single universal default across every Windows SMB server release.
 
 **Recommended profiles**
 
@@ -5606,7 +5606,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-security-troubleshooting` | `official-doc` | `Microsoft official doc` | Microsoft SMB security enhancements troubleshooting | https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing | `high` | path, value, allowed-values, behavior, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5651,7 +5651,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The app now writes MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 under the documented LanmanWorkstation and LanmanServer policy keys, which enforces exactly SMB 3.1.1 on both client and server policy surfaces. |
 
 Current write(s):
@@ -5704,10 +5704,10 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows 11 and Windows Server releases exposing the SMB dialect policies)
-  - client-min-smb2-dialect-policy: missing — — The official client minimum-dialect policy is not configured by default.
-  - client-max-smb2-dialect-policy: missing — — The official client maximum-dialect policy is not configured by default.
-  - server-min-smb2-dialect-policy: missing — — The official server minimum-dialect policy is not configured by default.
-  - server-max-smb2-dialect-policy: missing — — The official server maximum-dialect policy is not configured by default.
+  - client-min-smb2-dialect-policy: missing â€” â€” The official client minimum-dialect policy is not configured by default.
+  - client-max-smb2-dialect-policy: missing â€” â€” The official client maximum-dialect policy is not configured by default.
+  - server-min-smb2-dialect-policy: missing â€” â€” The official server minimum-dialect policy is not configured by default.
+  - server-max-smb2-dialect-policy: missing â€” â€” The official server maximum-dialect policy is not configured by default.
 
 **Recommended profiles**
 
@@ -5722,7 +5722,7 @@ Windows Internals references:
 | `local-lanmanworkstation-adml-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml SMB dialect help text | C:\Windows\PolicyDefinitions\en-US\LanmanWorkstation.adml | `high` | behavior, allowed-values, version-scope |
 | `local-lanmanserver-admx-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx SMB dialect mapping | C:\Windows\PolicyDefinitions\LanmanServer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-lanmanserver-adml-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml SMB dialect help text | C:\Windows\PolicyDefinitions\en-US\LanmanServer.adml | `high` | behavior, allowed-values, version-scope |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5767,7 +5767,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes RequireSecuritySignature = 1 and EnableSecuritySignature = 1, matching the stricter SMB client signing posture described by Microsoft. |
 
 Current write(s):
@@ -5818,8 +5818,8 @@ Windows Internals references:
 **Windows defaults**
 
 - Version-dependent Windows SMB signing baseline (Windows SMB client releases with signing support)
-  - client-require-security-signature: feature-dependent — — Microsoft changes SMB signing defaults across Windows releases and scenarios.
-  - client-enable-security-signature: feature-dependent — — Microsoft changes SMB signing defaults across Windows releases and scenarios.
+  - client-require-security-signature: feature-dependent â€” â€” Microsoft changes SMB signing defaults across Windows releases and scenarios.
+  - client-enable-security-signature: feature-dependent â€” â€” Microsoft changes SMB signing defaults across Windows releases and scenarios.
 
 **Recommended profiles**
 
@@ -5832,7 +5832,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-signing-overview` | `official-doc` | `Microsoft official doc` | Microsoft SMB signing overview | https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview | `high` | path, value, allowed-values, behavior, version-scope, risk |
 | `ms-client-signing-policy` | `official-doc` | `Microsoft official doc` | Microsoft network client: Digitally sign communications (always) | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852186(v=ws.11) | `medium` | behavior, risk, ui-mapping |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5877,7 +5877,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The current app writes RequireSecuritySignature = 1 and EnableSecuritySignature = 1, matching the documented stricter SMB server signing posture. |
 
 Current write(s):
@@ -5928,8 +5928,8 @@ Windows Internals references:
 **Windows defaults**
 
 - Version-dependent Windows SMB server baseline (Windows SMB server releases with signing support)
-  - server-require-security-signature: feature-dependent — — Microsoft changes SMB signing defaults across Windows releases and scenarios.
-  - server-enable-security-signature: feature-dependent — — Microsoft changes SMB signing defaults across Windows releases and scenarios.
+  - server-require-security-signature: feature-dependent â€” â€” Microsoft changes SMB signing defaults across Windows releases and scenarios.
+  - server-enable-security-signature: feature-dependent â€” â€” Microsoft changes SMB signing defaults across Windows releases and scenarios.
 
 **Recommended profiles**
 
@@ -5942,7 +5942,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-signing-overview` | `official-doc` | `Microsoft official doc` | Microsoft SMB signing overview | https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview | `high` | path, value, allowed-values, behavior, version-scope, risk |
 | `ms-server-signing-policy` | `official-doc` | `Microsoft official doc` | Microsoft network server: Digitally sign communications (always) | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852239(v=ws.11) | `medium` | behavior, risk, ui-mapping |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -5987,7 +5987,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The app now writes the CipherSuiteOrder REG_MULTI_SZ list under the documented LanmanWorkstation and LanmanServer policy keys. |
 
 Current write(s):
@@ -6038,8 +6038,8 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows SMB client and server releases exposing the CipherSuiteOrder policy)
-  - client-cipher-suite-order-policy: missing — — If the policy is disabled or not configured, Windows uses the default SMB client cipher suite order.
-  - server-cipher-suite-order-policy: missing — — If the policy is disabled or not configured, Windows uses the default SMB server cipher suite order.
+  - client-cipher-suite-order-policy: missing â€” â€” If the policy is disabled or not configured, Windows uses the default SMB client cipher suite order.
+  - server-cipher-suite-order-policy: missing â€” â€” If the policy is disabled or not configured, Windows uses the default SMB server cipher suite order.
 
 **Recommended profiles**
 
@@ -6054,7 +6054,7 @@ Windows Internals references:
 | `local-lanmanworkstation-adml-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml cipher suite order help text | C:\Windows\PolicyDefinitions\en-US\LanmanWorkstation.adml | `high` | behavior, default, side-effects |
 | `local-lanmanserver-admx-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx cipher suite order mapping | C:\Windows\PolicyDefinitions\LanmanServer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-lanmanserver-adml-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml cipher suite order help text | C:\Windows\PolicyDefinitions\en-US\LanmanServer.adml | `high` | behavior, default, side-effects |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6101,7 +6101,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The provider writes NumberOfSIUFInPeriod = 0 for the current user on the same documented SIUF path this record validates. |
 
 Current write(s):
@@ -6144,7 +6144,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - User preference baseline (Current-user Windows feedback preference state)
-  - siuf-feedback-frequency: missing — — Treat the observed user value as optional and not as a validated official baseline.
+  - siuf-feedback-frequency: missing â€” â€” Treat the observed user value as optional and not as a validated official baseline.
 
 **Recommended profiles**
 
@@ -6156,7 +6156,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-feedback-frequency` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider feedback-frequency write | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider feedback-frequency write | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6201,7 +6201,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes NoToastApplicationNotificationOnLockScreen = 1 for the current user, which matches the documented disable behavior. |
 
 Current write(s):
@@ -6244,7 +6244,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Supported Windows editions with WPN lock-screen notification policy support)
-  - no-toast-application-notification-on-lock-screen: missing — — The user policy is not configured by default.
+  - no-toast-application-notification-on-lock-screen: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -6258,7 +6258,7 @@ Nohuto lineage references:
 | `ms-admx-wpn-no-lock-screen-toast` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoLockScreenToastNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-wpn-admx-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoLockScreenToastNotification mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
 | `local-wpn-adml-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoLockScreenToastNotification help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6303,7 +6303,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisallowNotificationMirroring = 1 for the current user, which matches the documented disable behavior. |
 
 Current write(s):
@@ -6346,7 +6346,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Supported Windows 10 and Windows 11 editions with notification mirroring policy support)
-  - disallow-notification-mirroring: missing — — The user policy is not configured by default.
+  - disallow-notification-mirroring: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -6360,7 +6360,7 @@ Nohuto lineage references:
 | `ms-admx-wpn-no-mirroring` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoNotificationMirroring | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nonotificationmirroring | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-wpn-admx-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoNotificationMirroring mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
 | `local-wpn-adml-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoNotificationMirroring help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6405,7 +6405,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes NoTileApplicationNotification = 1 for the current user, which matches the documented disable behavior. |
 
 Current write(s):
@@ -6448,7 +6448,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Supported Windows editions with tile notification policy support)
-  - no-tile-application-notification: missing — — The user policy is not configured by default.
+  - no-tile-application-notification: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -6462,7 +6462,7 @@ Nohuto lineage references:
 | `ms-notifications-csp-tile` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Notifications / DisallowTileNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-notifications#disallowtilenotification | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-wpn-admx-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoTileNotification mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
 | `local-wpn-adml-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoTileNotification help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6507,7 +6507,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes NoToastApplicationNotification = 1 for the current user, which matches the documented disable behavior. |
 
 Current write(s):
@@ -6550,7 +6550,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Supported Windows 10 and Windows 11 editions with WPN policy support)
-  - no-toast-application-notification: missing — — The user policy is not configured by default.
+  - no-toast-application-notification: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -6564,7 +6564,7 @@ Nohuto lineage references:
 | `ms-admx-wpn-no-toast` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoToastNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
 | `local-wpn-admx-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoToastNotification mapping | C:\Windows\PolicyDefinitions\WPN.admx | `high` | path, value, allowed-values, version-scope |
 | `local-wpn-adml-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoToastNotification help text | C:\Windows\PolicyDefinitions\en-US\WPN.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6611,7 +6611,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs` |
 | Notes | The app writes MinAnimate = "0" under HKCU\Control Panel\Desktop\WindowMetrics. A local runtime diff confirmed that this matches the persisted disabled state produced by the official Win32 animation API surface on this build. |
 
 Current write(s):
@@ -6661,7 +6661,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Default state not captured (Windows user profiles where this pass did not capture the absent-value default for MinAnimate)
-  - minanimate-registry: unknown — — This pass validated the persisted 0 and 1 states through the official Win32 animation API, but it did not capture the absent-value default.
+  - minanimate-registry: unknown â€” â€” This pass validated the persisted 0 and 1 states through the official Win32 animation API, but it did not capture the absent-value default.
 
 **Recommended profiles**
 
@@ -6674,7 +6674,7 @@ Windows Internals references:
 | `ms-animationinfo` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ANIMATIONINFO structure | https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-animationinfo | `high` | value, behavior |
 | `ms-systemparametersinfo-animation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - animation actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | behavior, allowed-values |
 | `runtime-spi-minanimate-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETANIMATION runtime diff - MinAnimate persistence | C:\Users\<USER>\AppData\Local\Temp\minanimate_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
-| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6719,7 +6719,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs` |
 | Notes | The app writes MenuShowDelay = "0" under HKCU\Control Panel\Desktop. A local runtime diff confirmed that this matches the persisted zero-delay state produced by the official Win32 menu-delay API on this build. |
 
 Current write(s):
@@ -6769,7 +6769,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Observed local baseline (Windows user profiles where MenuShowDelay is present)
-  - menu-show-delay-registry: value `400` — 400 ms is the commonly observed local baseline captured in the runtime diff and represents the non-zero delayed menu state on this machine.
+  - menu-show-delay-registry: value `400` â€” 400 ms is the commonly observed local baseline captured in the runtime diff and represents the non-zero delayed menu state on this machine.
 
 **Recommended profiles**
 
@@ -6781,7 +6781,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-systemparametersinfo-menushowdelay` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - menu show delay actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | value, behavior, allowed-values |
 | `runtime-spi-menushowdelay-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence | C:\Users\<USER>\AppData\Local\Temp\menushowdelay_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
-| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -6826,7 +6826,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs` |
 | Notes | The current app writes TaskbarAnimations = 0, and the guest probe confirmed that 0 disables taskbar animations on Win25H2Clean. |
 
 Current write(s):
@@ -6876,7 +6876,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows baseline observed in guest (Windows user profiles exposing TaskbarAnimations)
-  - taskbar-animations-registry: value `0` — Guest baseline on Win25H2Clean was 0 and the reversible probe restored it to 0.
+  - taskbar-animations-registry: value `0` â€” Guest baseline on Win25H2Clean was 0 and the reversible probe restored it to 0.
 
 **Recommended profiles**
 
@@ -6887,7 +6887,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | H:\Temp\vm-tooling-staging\taskbar_animations_probe_out.txt | `high` | value, behavior, version-scope |
-| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo source note for performance.disable-taskbar-animations | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
 
 **Validation proof**
@@ -6935,7 +6935,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PeripheralTweakProvider.cs` |
 | Notes | The current app writes MSTakeNoAction into multiple AutoplayHandlers paths for common media and device-arrival events. |
 
 Current write(s):
@@ -6986,7 +6986,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows AutoPlay default (Windows user profiles that have not stored explicit per-event handler choices)
-  - autoplay-event-default-handler: missing — — Do not publish the observed per-event handler value as an official baseline.
+  - autoplay-event-default-handler: missing â€” â€” Do not publish the observed per-event handler value as an official baseline.
 
 **Recommended profiles**
 
@@ -6999,7 +6999,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `microsoft-learn-autoplay-handlers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows settings reference - AutoplayHandlers registry values | https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common | `high` | path, value, allowed-values, behavior |
 | `local-autoplay-adml-remember-choice` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml remembered-choice guidance | C:\Windows\PolicyDefinitions\en-US\AutoPlay.adml | `high` | behavior, default, side-effects |
-| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -7044,7 +7044,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PeripheralTweakProvider.cs` |
 | Notes | The provider now writes the documented user-scope AutoPlay policy values directly: NoDriveTypeAutoRun = 255 and NoAutoplayfornonVolume = 1. |
 
 Current write(s):
@@ -7095,8 +7095,8 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows AutoPlay policy default (Supported Windows editions exposing the AutoPlay policy surfaces)
-  - turn-off-autoplay-policy: missing — — Leave the official AutoPlay drive policy unset.
-  - no-autoplay-for-non-volume-policy: missing — — Leave the official non-volume device policy unset.
+  - turn-off-autoplay-policy: missing â€” â€” Leave the official AutoPlay drive policy unset.
+  - no-autoplay-for-non-volume-policy: missing â€” â€” Leave the official non-volume device policy unset.
 
 **Recommended profiles**
 
@@ -7113,7 +7113,7 @@ Windows Internals references:
 | `ms-autoplay-non-volume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AutoPlay / DisallowAutoplayForNonVolumeDevices | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#disallowautoplayfornonvolumedevices | `high` | path, value, allowed-values, behavior, default, version-scope |
 | `local-autoplay-admx-non-volume` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.admx NoAutoplayfornonVolume mapping | C:\Windows\PolicyDefinitions\AutoPlay.admx | `high` | path, value, allowed-values, version-scope |
 | `local-autoplay-adml-non-volume` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml NoAutoplayfornonVolume help text | C:\Windows\PolicyDefinitions\en-US\AutoPlay.adml | `high` | behavior, default, side-effects |
-| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7158,7 +7158,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PeripheralTweakProvider.cs` |
 | Notes | The app writes Flags = "506" under HKCU\Control Panel\Accessibility\StickyKeys. A local runtime diff confirmed that this matches the persisted API-backed profile that leaves SKF_HOTKEYACTIVE cleared on this build. |
 
 Current write(s):
@@ -7208,7 +7208,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Observed local baseline (Windows user profiles where StickyKeys Flags is present)
-  - stickykeys-flags-registry: value `510` — 510 is the documented hotkey-active comparison state captured in the runtime diff.
+  - stickykeys-flags-registry: value `510` â€” 510 is the documented hotkey-active comparison state captured in the runtime diff.
 
 **Recommended profiles**
 
@@ -7221,7 +7221,7 @@ Windows Internals references:
 | `ms-systemparametersinfo-stickykeys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - Sticky Keys actions | https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa | `high` | behavior, allowed-values |
 | `ms-stickykeys-struct` | `official-doc` | `Microsoft official doc` | Microsoft Learn: STICKYKEYS structure | https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-stickykeys | `high` | value, allowed-values, behavior |
 | `runtime-spi-stickykeys-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence | C:\Users\<USER>\AppData\Local\Temp\stickykeys_spi_diff_20260314.json | `high` | path, value, behavior, ui-mapping |
-| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7268,7 +7268,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs` |
 | Notes | The app writes a raw CPU idle-state registry bundle, but this review did not find a primary Microsoft registry surface that validates it as a supported tuning method. |
 
 Current write(s):
@@ -7318,7 +7318,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Observed Win25H2Clean baseline (Current 25H2 builds where the raw CPU idle-state bundle is left unset)
-  - cpu-idle-states-registry-bundle: missing — — Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior.
+  - cpu-idle-states-registry-bundle: missing â€” â€” Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior.
 
 **Recommended profiles**
 
@@ -7330,7 +7330,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-cpu-idle-states` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to Processor Idle States | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states | `high` | behavior, side-effects, version-scope, app-mismatch |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
 | `vm-cpu-idle-bundle-probe` | `vm-test` | `VM test / probe` | Win25H2Clean reversible probe for the CPU idle-state bundle | H:\Temp\vm-tooling-staging\cpu_idle_probe.json | `high` | path, value, behavior, rollback |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
@@ -7378,7 +7378,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs; WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs; OpenTraceProject.Engine/Tweaks/Power/PowerSettingsTweaks.cs` |
 | Notes | The app provider and engine helper both write HiberbootEnabled=0 under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power. This matches the documented local Fast Startup setting. The previously used Control\Power path was corrected on 2026-03-13. |
 
 Current write(s):
@@ -7428,7 +7428,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows baseline is feature dependent (Windows devices where hibernation and Fast Startup are available)
-  - hiberboot-enabled: feature-dependent — — Fast Startup depends on hibernation support and system configuration.
+  - hiberboot-enabled: feature-dependent â€” â€” Fast Startup depends on hibernation support and system configuration.
 
 **Recommended profiles**
 
@@ -7443,7 +7443,7 @@ Windows Internals references:
 | `admx-wininit-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_WinInit | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wininit | `high` | path, behavior, version-scope |
 | `nohuto-fast-startup-asset` | `decompilation` | `Ghidra decompilation` | nohuto power asset for HiberbootEnabled research | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootPolicy.c and Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootGroupPolicy.c | `medium` | path, value, app-mismatch |
 | `live-registry-divergence` | `registry-observation` | `VM registry observation` | Live build observation of diverging HiberbootEnabled values | Local observation - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `medium` | path, app-mismatch |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs and WindowsOptimizer.Engine/Tweaks/Power/PowerSettingsTweaks.cs | `high` | path, value, ui-mapping |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs and OpenTraceProject.Engine/Tweaks/Power/PowerSettingsTweaks.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7488,7 +7488,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs` |
 | Notes | The app writes the documented values for DisableTaskOffload and SystemResponsiveness. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail. |
 
 Current write(s):
@@ -7524,8 +7524,8 @@ Current write(s):
 **Windows defaults**
 
 - Microsoft documented defaults (Windows SMB client tuning surface documented by Microsoft)
-  - disable-task-offload: value `0` — Microsoft lists 0 as the enabled baseline.
-  - system-responsiveness: value `10` — Microsoft's MMCSS documentation uses 10 as the example baseline.
+  - disable-task-offload: value `0` â€” Microsoft lists 0 as the enabled baseline.
+  - system-responsiveness: value `10` â€” Microsoft's MMCSS documentation uses 10 as the example baseline.
 
 **Recommended profiles**
 
@@ -7537,7 +7537,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-task-offload` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading | `high` | path, value, allowed-values, behavior |
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service | `high` | path, value, behavior, allowed-values |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7582,7 +7582,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs` |
 | Notes | The current app writes PowerThrottlingOff = 1 on the documented policy path. |
 
 Current write(s):
@@ -7634,7 +7634,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows 10 and later client systems exposing the policy)
-  - power-throttling-off: missing — — Leave the policy unset.
+  - power-throttling-off: missing â€” â€” Leave the policy unset.
 
 **Recommended profiles**
 
@@ -7647,7 +7647,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-power-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.admx mapping | C:\Windows\PolicyDefinitions\Power.admx | `high` | path, value, allowed-values, version-scope |
 | `local-power-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.adml help text | C:\Windows\PolicyDefinitions\en-US\Power.adml | `high` | behavior, default, side-effects |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7692,7 +7692,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs` |
 | Notes | The app disables the WSearch service by setting its start mode to Disabled through the batch service tweak. |
 
 Current write(s):
@@ -7742,7 +7742,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented baseline (Windows systems using the Windows Search service guidance and feature model captured in this record)
-  - wsearch-start-mode: value `Manual` — Keep the documented service baseline from the Microsoft service guidance used in this record.
+  - wsearch-start-mode: value `Manual` â€” Keep the documented service baseline from the Microsoft service guidance used in this record.
 
 **Recommended profiles**
 
@@ -7755,7 +7755,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-wsearch` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
 | `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview | `high` | behavior, side-effects, version-scope |
-| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -7800,7 +7800,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs` |
 | Notes | The current app writes ShowHibernateOption = 0, which matches the documented hide behavior. |
 
 Current write(s):
@@ -7850,7 +7850,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows 8 and later systems exposing the Explorer policy)
-  - show-hibernate-option: missing — — Leave the policy unset.
+  - show-hibernate-option: missing â€” â€” Leave the policy unset.
 
 **Recommended profiles**
 
@@ -7863,7 +7863,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for hibernation support | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, behavior, dependency |
 | `nohuto-showhibernateoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowHibernateOption policy | Docs/tweaks/_source-mirrors/win-config/power/desc.md | `high` | path, value, behavior, allowed-values |
 | `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | H:\Temp\vm-tooling-staging\power_hide_hibernate_option_probe.txt | `medium` | runtime writes, value semantics, rollback |
@@ -7911,7 +7911,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs` |
 | Notes | The current app writes ShowLockOption = 0, which matches the documented hide behavior. |
 
 Current write(s):
@@ -7961,7 +7961,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows 8 and later systems exposing the Explorer policy)
-  - show-lock-option: missing — — Leave the policy unset.
+  - show-lock-option: missing â€” â€” Leave the policy unset.
 
 **Recommended profiles**
 
@@ -7974,7 +7974,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showlockoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowLockOption policy | Docs/tweaks/_source-mirrors/win-config/power/desc.md | `high` | path, value, behavior, allowed-values |
 | `procmon-power-hide-lock-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | H:\Temp\vm-tooling-staging\power_hide_lock_option_probe.txt | `low` | runtime writes, rollback, trigger attempt |
 
@@ -8021,7 +8021,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs` |
 | Notes | The current app writes ShowSleepOption = 0, which matches the documented hide behavior. |
 
 Current write(s):
@@ -8071,7 +8071,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows 8 and later systems exposing the Explorer policy)
-  - show-sleep-option: missing — — Leave the policy unset.
+  - show-sleep-option: missing â€” â€” Leave the policy unset.
 
 **Recommended profiles**
 
@@ -8084,7 +8084,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\Windows\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsExplorer.adml | `high` | behavior, default, side-effects |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showsleepoption-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - ShowSleepOption policy | Docs/tweaks/_source-mirrors/win-config/power/desc.md | `high` | path, value, behavior, allowed-values |
 | `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | H:\Temp\vm-tooling-staging\power_hide_sleep_option_probe.txt | `medium` | runtime writes, value semantics, rollback |
 
@@ -8131,7 +8131,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.Engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs` |
+| Provider source | `OpenTraceProject.Engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs` |
 | Notes | The current app implementation is command-backed. It detects the current active power plan's PERFBOOSTMODE values, applies PERFBOOSTMODE=2 through powercfg, verifies the live state, and restores the previously detected AC/DC values on rollback. |
 
 Current write(s):
@@ -8180,7 +8180,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows-managed boost baseline (Windows systems using normal processor boost management)
-  - cpu-boost-perfmode-command: feature-dependent — — The active scheme can vary by machine, so the current PERFBOOSTMODE state should be observed rather than assumed.
+  - cpu-boost-perfmode-command: feature-dependent â€” â€” The active scheme can vary by machine, so the current PERFBOOSTMODE state should be observed rather than assumed.
 
 **Recommended profiles**
 
@@ -8191,8 +8191,8 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-perfboostmode` | `official-doc` | `Microsoft official doc` | Microsoft Learn: PERFBOOSTMODE | https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode | `high` | path, value, behavior, allowed-values, version-scope, app-mapping |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mapping |
-| `engine-power-perfboostmode` | `repo-code` | `Current repo code` | Command-backed CPU boost implementation | WindowsOptimizer.Engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs | `high` | path, value, behavior, ui-mapping, app-mapping |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mapping |
+| `engine-power-perfboostmode` | `repo-code` | `Current repo code` | Command-backed CPU boost implementation | OpenTraceProject.Engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs | `high` | path, value, behavior, ui-mapping, app-mapping |
 | `runtime-perfboostmode-diff` | `vm-test` | `VM test / probe` | Guest reversible probe for PERFBOOSTMODE | H:\Temp\vm-tooling-staging\perfboostmode-transition-probe.txt | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
@@ -8238,7 +8238,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs` |
 | Notes | The app writes documented MMCSS fields under the built-in Games task profile. |
 
 Current write(s):
@@ -8292,11 +8292,11 @@ Windows Internals references:
 **Windows defaults**
 
 - Observed Win25H2Clean baseline (Current 25H2 builds with the built-in Games MMCSS task)
-  - games-priority: value `2` — Use the current observed Games-task priority baseline.
-  - games-scheduling-category: value `Medium` — Use the current observed Games-task scheduling category baseline.
-  - games-sfio-priority: value `Normal` — Use the current observed Games-task SFIO baseline.
-  - games-gpu-priority: value `8` — Use the current observed Games-task GPU priority baseline.
-  - games-affinity: value `0` — Use the current observed Games-task affinity baseline.
+  - games-priority: value `2` â€” Use the current observed Games-task priority baseline.
+  - games-scheduling-category: value `Medium` â€” Use the current observed Games-task scheduling category baseline.
+  - games-sfio-priority: value `Normal` â€” Use the current observed Games-task SFIO baseline.
+  - games-gpu-priority: value `8` â€” Use the current observed Games-task GPU priority baseline.
+  - games-affinity: value `0` â€” Use the current observed Games-task affinity baseline.
 
 **Recommended profiles**
 
@@ -8309,7 +8309,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service | `high` | path, allowed-values, behavior, version-scope |
 | `vm-games-mmcss-baseline` | `vm-test` | `VM test / probe` | Win25H2Clean export of the built-in Games MMCSS task | H:\Temp\vm-tooling-staging\registry-dumps\mmcss-games-task-20260325-031514\mmcss-games-task.txt | `high` | path, value, default |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -8356,7 +8356,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes NoConnectedUser = 3, which matches the fully blocked Microsoft-account state documented by Microsoft. |
 
 Current write(s):
@@ -8399,7 +8399,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows security-option default (Windows client devices that expose the Accounts: Block Microsoft accounts security option)
-  - no-connected-user: value `0` — Microsoft documents the effective default value as 0.
+  - no-connected-user: value `0` â€” Microsoft documents the effective default value as 0.
 
 **Recommended profiles**
 
@@ -8412,7 +8412,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-localpoliciessecurityoptions-block-microsoft-accounts` | `policy-csp` | `Microsoft policy CSP` | Microsoft LocalPoliciesSecurityOptions CSP: Accounts_Block_Microsoft_accounts | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-block-microsoft-accounts` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-noconnecteduser-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - NoConnectedUser registry trace | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `high` | path, value, behavior, allowed-values |
 
@@ -8459,7 +8459,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The provider writes the official AppPrivacy ForceDeny bundle. The extra AllowUserInfoAccess System policy write is intentionally excluded from this child record and remains in the deprecated parent audit trail. |
 
 Current write(s):
@@ -8494,7 +8494,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows privacy-policy baseline (Windows 10 and later AppPrivacy policy surface)
-  - appprivacy-deny-bundle: value `windows-default` — The broad bundle should not be treated as the baseline for general systems.
+  - appprivacy-deny-bundle: value `windows-default` â€” The broad bundle should not be treated as the baseline for general systems.
 
 **Recommended profiles**
 
@@ -8506,7 +8506,7 @@ Current write(s):
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 
 **Validation proof**
 
@@ -8551,7 +8551,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes all three values to 0, which matches the privacy-focused disable profile. |
 
 Current write(s):
@@ -8596,9 +8596,9 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows policy default (Unmanaged Windows 10 and Windows 11 devices)
-  - enable-activity-feed: missing — — Policy is not configured by default.
-  - publish-user-activities: missing — — Policy is not configured by default.
-  - upload-user-activities: missing — — Policy is not configured by default.
+  - enable-activity-feed: missing â€” â€” Policy is not configured by default.
+  - publish-user-activities: missing â€” â€” Policy is not configured by default.
+  - upload-user-activities: missing â€” â€” Policy is not configured by default.
 
 **Recommended profiles**
 
@@ -8611,7 +8611,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-privacy-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Privacy Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy | `high` | path, value, allowed-values, default, behavior |
 | `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\OSPolicy.admx | `high` | path, value, allowed-values |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-activity-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -8657,7 +8657,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app writes the documented machine policy path directly: HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo\DisabledByGroupPolicy = 1. |
 
 Current write(s):
@@ -8700,7 +8700,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows policy default (Windows 8.1 and newer systems exposing the AdvertisingInfo policy)
-  - advertising-id-policy: missing — — Leave the official machine policy unset.
+  - advertising-id-policy: missing â€” â€” Leave the official machine policy unset.
 
 **Recommended profiles**
 
@@ -8713,7 +8713,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-userprofiles-admx-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.admx DisableAdvertisingId mapping | C:\Windows\PolicyDefinitions\UserProfiles.admx | `high` | path, value, allowed-values, version-scope |
 | `local-userprofiles-adml-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.adml DisableAdvertisingId help text | C:\Windows\PolicyDefinitions\en-US\UserProfiles.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -8758,7 +8758,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes LetAppsGetDiagnosticInfo = 2, which matches the documented Force Deny state. |
 
 Current write(s):
@@ -8799,7 +8799,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 RS2 and newer systems exposing the AppPrivacy diagnostics policy)
-  - let-apps-get-diagnostic-info: missing — — The policy is not configured by default.
+  - let-apps-get-diagnostic-info: missing â€” â€” The policy is not configured by default.
 
 **Recommended profiles**
 
@@ -8812,7 +8812,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-appprivacy-admx-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-appprivacy-adml-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text | C:\Windows\PolicyDefinitions\en-US\AppPrivacy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -8857,7 +8857,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes Start_TrackProgs = 0 under Explorer\Advanced, matching the Microsoft-documented toggle-off value. |
 
 Current write(s):
@@ -8900,7 +8900,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows managed default (Windows user profiles using the normal Privacy settings UI)
-  - start-trackprogs-observed: missing — — Leave the preference unset and let the Settings UI manage the tracking toggle.
+  - start-trackprogs-observed: missing â€” â€” Leave the preference unset and let the Settings UI manage the tracking toggle.
 
 **Recommended profiles**
 
@@ -8913,7 +8913,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windows-privacy-track-app-launches` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Manage connections from Windows operating system components to Microsoft services | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services | `high` | path, value, behavior, ui-mapping |
 | `ms-gppref-start-trackprogs` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5 | `high` | path, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-start-track-progs-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - Start_TrackProgs trace | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `high` | path, value, behavior, ui-mapping |
 | `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | H:\Temp\procmon-start-track-progs-1.pml and H:\Temp\procmon-start-track-progs-0.pml | `medium` | path, value, behavior, ui-mapping |
 
@@ -8960,7 +8960,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app targets the same feature area, but it writes a user-side ContentDeliveryManager value instead of the official CloudContent policy documented in this record. |
 
 Current write(s):
@@ -9002,8 +9002,8 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows policy default (Windows 10 and Windows 11 systems exposing the CloudContent third-party suggestions policy)
-  - disable-third-party-suggestions-policy: missing — — Leave the official user policy unset.
-  - system-pane-suggestions-observed: missing — — Do not treat the observed ContentDeliveryManager value as an official baseline.
+  - disable-third-party-suggestions-policy: missing â€” â€” Leave the official user policy unset.
+  - system-pane-suggestions-observed: missing â€” â€” Do not treat the observed ContentDeliveryManager value as an official baseline.
 
 **Recommended profiles**
 
@@ -9017,7 +9017,7 @@ Nohuto lineage references:
 | `microsoft-learn-contentdeliverymanager` | `official-doc` | `Microsoft official doc` | Microsoft Learn: VDI optimization guidance - ContentDeliveryManager suggestion setting | https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration | `high` | path, value, behavior |
 | `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
 | `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-app-suggestions-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - app suggestions registry evidence | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/23H2.txt and Docs/tweaks/_source-mirrors/win-registry/records/24H2.txt | `medium` | path, value, behavior |
 
 **Validation proof**
@@ -9063,7 +9063,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app writes both values as part of the broader application-compatibility policy path. Paths and values match local AppCompat.admx. SbEnable is now documented separately in privacy.disable-switchback.policy for standalone publication, but it remains here because the current app still writes it together with DisableEngine. The app also writes four AppDeviceInventory values and DisablePCA in the same code path; those are tracked in separate records. |
 
 Current write(s):
@@ -9099,8 +9099,8 @@ Current write(s):
 **Windows defaults**
 
 - Windows managed default (Windows 10 1903+ / Windows 11 all versions)
-  - sb-enable: missing — — Key absent; SwitchBack runs normally.
-  - disable-engine: missing — — Key absent; Application Compatibility Engine runs normally.
+  - sb-enable: missing â€” â€” Key absent; SwitchBack runs normally.
+  - disable-engine: missing â€” â€” Key absent; Application Compatibility Engine runs normally.
 
 **Recommended profiles**
 
@@ -9114,7 +9114,7 @@ Current write(s):
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat | `high` | path, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro) | `high` | value, behavior, version-scope |
 
 **Validation proof**
@@ -9160,7 +9160,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app writes all four values as part of the broader application-compatibility policy path. Path and values match both local AppDeviceInventory.admx and the CSP page. The app still writes DisableEngine, SbEnable, and DisablePCA in the same code path; those are tracked in separate records. |
 
 Current write(s):
@@ -9198,10 +9198,10 @@ Current write(s):
 **Windows defaults**
 
 - Windows managed default (Windows 11 24H2 and later)
-  - disable-api-samping: missing — — Key absent; API sampling runs normally.
-  - disable-application-footprint: missing — — Key absent; footprint collection runs normally.
-  - disable-install-tracing: missing — — Key absent; install tracing runs normally.
-  - disable-win32-app-backup: missing — — Key absent; Win32 app backup runs normally.
+  - disable-api-samping: missing â€” â€” Key absent; API sampling runs normally.
+  - disable-application-footprint: missing â€” â€” Key absent; footprint collection runs normally.
+  - disable-install-tracing: missing â€” â€” Key absent; install tracing runs normally.
+  - disable-win32-app-backup: missing â€” â€” Key absent; Win32 app backup runs normally.
 
 **Recommended profiles**
 
@@ -9214,7 +9214,7 @@ Current write(s):
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-appdeviceinventory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppDeviceInventory.admx mappings | C:\Windows\PolicyDefinitions\AppDeviceInventory.admx | `high` | path, value, allowed-values, version-scope |
 | `csp-appdeviceinventory` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - AppDeviceInventory | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory | `high` | path, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - four AppDeviceInventory policies | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro, OsVersion: 10.0.26200) | `high` | value, behavior, version-scope |
 
 **Validation proof**
@@ -9260,7 +9260,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes AITEnable = 0, which matches the documented policy state that turns Application Telemetry off. |
 
 Current write(s):
@@ -9303,7 +9303,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 7 and newer systems exposing the AppCompat telemetry policy)
-  - appcompat-ait-enable: missing — — The policy is not configured by default.
+  - appcompat-ait-enable: missing â€” â€” The policy is not configured by default.
 
 **Recommended profiles**
 
@@ -9317,7 +9317,7 @@ Nohuto lineage references:
 | `ms-admx-appcompat-application-telemetry` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP: AppCompatTurnOffApplicationImpactTelemetry | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry | `high` | path, value, allowed-values, behavior, version-scope |
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | C:\Windows\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values, version-scope |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects, default |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-application-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -9363,7 +9363,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes LetAppsRunInBackground = 2, which matches the documented Force Deny state. |
 
 Current write(s):
@@ -9406,7 +9406,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 and newer systems exposing the AppPrivacy background-app policy)
-  - let-apps-run-in-background: missing — — The policy is not configured by default.
+  - let-apps-run-in-background: missing â€” â€” The policy is not configured by default.
 
 **Recommended profiles**
 
@@ -9419,7 +9419,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-appprivacy-admx-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsRunInBackground mapping | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-appprivacy-adml-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsRunInBackground help text | C:\Windows\PolicyDefinitions\en-US\AppPrivacy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -9464,7 +9464,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes Enabled = 0 under the Biometrics policy key, which matches the documented disable behavior. |
 
 Current write(s):
@@ -9507,7 +9507,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 7 and newer systems with biometric policy support)
-  - biometrics-enabled: missing — — The device policy is not configured by default.
+  - biometrics-enabled: missing â€” â€” The device policy is not configured by default.
 
 **Recommended profiles**
 
@@ -9519,7 +9519,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-biometrics` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -9565,7 +9565,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes Domain Accounts = 0 under the biometrics credential provider key, which matches the documented disable behavior. |
 
 Current write(s):
@@ -9608,7 +9608,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 7 and newer systems with biometric credential provider support)
-  - biometric-domain-accounts: missing — — The device policy is not configured by default.
+  - biometric-domain-accounts: missing â€” â€” The device policy is not configured by default.
 
 **Recommended profiles**
 
@@ -9620,7 +9620,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-biometrics-domain-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -9666,7 +9666,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes Enabled = 0 under the biometrics credential provider key, which matches the documented disable behavior. |
 
 Current write(s):
@@ -9709,7 +9709,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 7 and newer systems with biometric credential provider support)
-  - biometric-logon-enabled: missing — — The device policy is not configured by default.
+  - biometric-logon-enabled: missing â€” â€” The device policy is not configured by default.
 
 **Recommended profiles**
 
@@ -9721,7 +9721,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | C:\WINDOWS\PolicyDefinitions\Biometrics.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-biometrics-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -9767,7 +9767,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes AllowCamera = 0, which matches the documented disable behavior. |
 
 Current write(s):
@@ -9810,7 +9810,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 and newer systems supporting the Camera policy)
-  - allow-camera: missing — — The machine policy is not configured by default.
+  - allow-camera: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -9823,7 +9823,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-camera-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.admx mapping | C:\WINDOWS\PolicyDefinitions\Camera.admx | `high` | path, value, allowed-values, version-scope |
 | `local-camera-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Camera.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-camera` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -9869,7 +9869,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes both documented opt-out variables as REG_SZ value 1 under HKCU\Environment. |
 
 Current write(s):
@@ -9913,8 +9913,8 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows default (Current-user profiles that have not explicitly set CLI telemetry opt-out variables)
-  - powershell-telemetry-optout: missing — — Leave the PowerShell opt-out variable unset.
-  - dotnet-cli-telemetry-optout: missing — — Leave the .NET CLI opt-out variable unset.
+  - powershell-telemetry-optout: missing â€” â€” Leave the PowerShell opt-out variable unset.
+  - dotnet-cli-telemetry-optout: missing â€” â€” Leave the .NET CLI opt-out variable unset.
 
 **Recommended profiles**
 
@@ -9928,7 +9928,7 @@ Nohuto lineage references:
 | `ms-powershell-about-environment-variables` | `official-doc` | `Microsoft official doc` | Microsoft Learn: about_Environment_Variables | https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5 | `high` | value, allowed-values, behavior |
 | `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Telemetry for the .NET CLI | https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment | `high` | path, default, behavior |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -9973,7 +9973,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableConsumerAccountStateContent = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -10014,7 +10014,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 11 version 21H2 and newer supported systems)
-  - disable-consumer-account-state-content: missing — — The machine policy is not configured by default.
+  - disable-consumer-account-state-content: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -10027,7 +10027,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-disable-consumer-account-state-content` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableConsumerAccountStateContent | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#disableconsumeraccountstatecontent | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx-consumer` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-consumer-account-content` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -10073,7 +10073,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes TurnOffWindowsCopilot = 1 for the current user, which matches the documented turn-off state. |
 
 Current write(s):
@@ -10116,7 +10116,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 11 systems exposing the Windows Copilot policy)
-  - turn-off-windows-copilot: missing — — The policy is not configured by default.
+  - turn-off-windows-copilot: missing â€” â€” The policy is not configured by default.
 
 **Recommended profiles**
 
@@ -10130,7 +10130,7 @@ Nohuto lineage references:
 | `ms-admx-windowscopilot-turnoff` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_WindowsCopilot Policy CSP: TurnOffWindowsCopilot | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowscopilot#turnoffwindowscopilot | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-windowscopilot-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx mapping | C:\Windows\PolicyDefinitions\WindowsCopilot.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowscopilot-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsCopilot.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-copilot` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -10176,7 +10176,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app writes EnableCdp = 0 as part of the broader cross-device bundle. This child record documents only the official machine-policy portion of that behavior. |
 
 Current write(s):
@@ -10211,7 +10211,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows mixed-scope baseline (Windows 10 and newer systems exposing Continue Experiences policy)
-  - enable-cdp-policy: missing — — Microsoft documents the device-policy default as depending on the Windows edition.
+  - enable-cdp-policy: missing â€” â€” Microsoft documents the device-policy default as depending on the Windows edition.
 
 **Recommended profiles**
 
@@ -10225,7 +10225,7 @@ Current write(s):
 | `ms-admx-grouppolicy-enablecdp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-enablecdp-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableCdp policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -10271,7 +10271,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes AllowDeviceNameInTelemetry = 0, which matches the documented privacy-oriented policy state. |
 
 Current write(s):
@@ -10314,7 +10314,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 version 1803 and newer supported systems)
-  - allow-device-name-in-telemetry: missing — — The machine policy is not configured by default.
+  - allow-device-name-in-telemetry: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -10327,7 +10327,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-device-name` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowDeviceNameInDiagnosticData | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-device-name-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-allow-device-name-telemetry-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - AllowDeviceNameInTelemetry trace | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `high` | path, value, behavior |
 
@@ -10374,7 +10374,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableDeviceDelete = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -10417,7 +10417,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 version 1809 and newer supported systems)
-  - disable-device-delete: missing — — The machine policy is not configured by default.
+  - disable-device-delete: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -10430,7 +10430,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-device-delete` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDeviceDelete | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-delete-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableDeviceDelete policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -10477,7 +10477,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableDiagnosticDataViewer = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -10520,7 +10520,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 version 1809 and newer supported systems)
-  - disable-diagnostic-data-viewer: missing — — The machine policy is not configured by default.
+  - disable-diagnostic-data-viewer: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -10533,7 +10533,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-ddv` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDiagnosticDataViewer | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-viewer-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableDiagnosticDataViewer policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -10580,7 +10580,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes SearchSuggestEnabled = 0, LocalProvidersEnabled = 0, and ShowSearchSuggestionsGlobal = 0, which align with the documented disabled states for the modern and legacy Edge policy surfaces. |
 
 Current write(s):
@@ -10623,9 +10623,9 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows policy default (Systems where Microsoft Edge policy is not explicitly configured)
-  - search-suggest-enabled: missing — — Leave the modern Edge web-suggestion policy unset.
-  - local-providers-enabled: missing — — Leave the modern Edge local-provider suggestion policy unset.
-  - show-search-suggestions-global: missing — — Leave the legacy Edge search-suggestion policy unset.
+  - search-suggest-enabled: missing â€” â€” Leave the modern Edge web-suggestion policy unset.
+  - local-providers-enabled: missing â€” â€” Leave the modern Edge local-provider suggestion policy unset.
+  - show-search-suggestions-global: missing â€” â€” Leave the legacy Edge search-suggestion policy unset.
 
 **Recommended profiles**
 
@@ -10640,7 +10640,7 @@ Nohuto lineage references:
 | `ms-edge-local-providers-enabled` | `official-doc` | `Microsoft official doc` | Microsoft Edge policy documentation: LocalProvidersEnabled | https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-microsoftedge-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MicrosoftEdge.admx mapping | C:\Windows\PolicyDefinitions\MicrosoftEdge.admx | `high` | path, value, allowed-values, version-scope |
 | `local-microsoftedge-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MicrosoftEdge.adml help text | C:\Windows\PolicyDefinitions\en-US\MicrosoftEdge.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -10685,7 +10685,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DoNotShowFeedbackNotifications = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -10728,7 +10728,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 and newer supported systems)
-  - do-not-show-feedback-notifications: missing — — The machine policy is not configured by default.
+  - do-not-show-feedback-notifications: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -10741,7 +10741,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-feedback-notifications` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DoNotShowFeedbackNotifications | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-feedback-notifications-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FeedbackNotifications.admx mapping | C:\WINDOWS\PolicyDefinitions\FeedbackNotifications.admx | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DoNotShowFeedbackNotifications policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior |
 | `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | H:\Temp\vm-tooling-staging\feedback_notifications_probe.txt | `medium` | runtime writes, value semantics, rollback |
@@ -10789,7 +10789,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes Disabled = 1 under the File History policy key, which matches the documented disable behavior. |
 
 Current write(s):
@@ -10832,7 +10832,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 8 and newer systems supporting File History policy)
-  - disable-file-history: missing — — The machine policy is not configured by default.
+  - disable-file-history: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -10845,7 +10845,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-filehistory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.admx mapping | C:\WINDOWS\PolicyDefinitions\FileHistory.admx | `high` | path, value, allowed-values, version-scope |
 | `local-filehistory-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\FileHistory.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-file-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -10891,7 +10891,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes AllowFindMyDevice = 0, which matches the documented disabled state. |
 
 Current write(s):
@@ -10934,7 +10934,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 version 1703 and later client systems exposing the policy)
-  - allow-find-my-device: value `1` — Microsoft documents the default value as 1.
+  - allow-find-my-device: value `1` â€” Microsoft documents the default value as 1.
 
 **Recommended profiles**
 
@@ -10948,7 +10948,7 @@ Nohuto lineage references:
 | `ms-experience-allow-find-my-device` | `policy-csp` | `Microsoft policy CSP` | Microsoft Experience Policy CSP: AllowFindMyDevice | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-findmy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.admx mapping | C:\Windows\PolicyDefinitions\FindMy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-findmy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.adml help text | C:\Windows\PolicyDefinitions\en-US\FindMy.adml | `high` | behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-find-my-device` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-findmydevice-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - Find My Device policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -10995,7 +10995,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes EnableFontProviders = 0, which matches the documented disable behavior. |
 
 Current write(s):
@@ -11038,7 +11038,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 and newer systems supporting the Network Fonts policy)
-  - enable-font-providers: missing — — The machine policy is not configured by default.
+  - enable-font-providers: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -11051,7 +11051,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-grouppolicy-admx-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-font-providers` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-enablefontproviders-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableFontProviders policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -11098,7 +11098,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes NoGenTicket = 1, which matches the documented opt-out behavior from the local Microsoft policy text. |
 
 Current write(s):
@@ -11141,7 +11141,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 and newer systems carrying the Software Protection Platform AVS validation policy)
-  - no-gen-ticket: missing — — The machine policy is not configured by default.
+  - no-gen-ticket: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -11155,7 +11155,7 @@ Nohuto lineage references:
 | `local-avs-validation-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.admx mapping | C:\WINDOWS\PolicyDefinitions\AVSValidationGP.admx | `high` | path, value, allowed-values, version-scope |
 | `local-avs-validation-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\AVSValidationGP.adml | `high` | behavior, default, side-effects |
 | `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx reference bundle | C:\WINDOWS\PolicyDefinitions\ICM.admx | `medium` | path, value |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-nogenticket-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - NoGenTicket policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -11202,7 +11202,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes HttpAcceptLanguageOptOut = 1 under the user's International profile. Microsoft documents that exact registry mapping for turning the setting off. |
 
 Current write(s):
@@ -11245,7 +11245,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows UI managed default (Windows user profiles using the normal Privacy settings UI)
-  - http-accept-language-opt-out: missing — — Leave the documented opt-out value absent and let Windows manage the setting through the UI.
+  - http-accept-language-opt-out: missing â€” â€” Leave the documented opt-out value absent and let Windows manage the setting through the UI.
 
 **Recommended profiles**
 
@@ -11257,7 +11257,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windows-privacy-language-list` | `official-doc` | `Microsoft official doc` | Microsoft privacy guidance for language list access | https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services | `high` | path, value, behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -11302,7 +11302,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes NoLocalPasswordResetQuestions = 1, which matches the documented blocked state. |
 
 Current write(s):
@@ -11345,7 +11345,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 RS6 and newer systems that support the local security-questions policy)
-  - no-local-password-reset-questions: missing — — The Group Policy path is normally not configured by default.
+  - no-local-password-reset-questions: missing â€” â€” The Group Policy path is normally not configured by default.
 
 **Recommended profiles**
 
@@ -11359,7 +11359,7 @@ Nohuto lineage references:
 | `ms-credui-no-local-password-reset-questions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_CredUI / NoLocalPasswordResetQuestions | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | C:\WINDOWS\PolicyDefinitions\CredUI.admx | `high` | path, ui-mapping, version-scope |
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-local-security-questions` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-nolocalpasswordresetquestions-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - NoLocalPasswordResetQuestions policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior |
 
@@ -11406,7 +11406,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The provider writes Deny to the two documented current-user consent-store paths only: the packaged location path and the NonPackaged companion path. |
 
 Current write(s):
@@ -11450,8 +11450,8 @@ Nohuto lineage references:
 **Windows defaults**
 
 - User consent baseline (Current-user location consent state)
-  - user-location-consent: missing — — Leave the packaged-app runtime consent value absent and let Windows manage the normal current-user consent behavior.
-  - user-location-consent-nonpackaged: missing — — Leave the desktop-app runtime consent value absent and let Windows manage the normal current-user consent behavior.
+  - user-location-consent: missing â€” â€” Leave the packaged-app runtime consent value absent and let Windows manage the normal current-user consent behavior.
+  - user-location-consent-nonpackaged: missing â€” â€” Leave the desktop-app runtime consent value absent and let Windows manage the normal current-user consent behavior.
 
 **Recommended profiles**
 
@@ -11463,7 +11463,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-location-consent-runtime-user` | `official-doc` | `Microsoft official doc` | Microsoft location consent runtime guidance for current-user access | https://learn.microsoft.com/en-us/azure/virtual-desktop/redirection-configure-location | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider location-consent batch | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider location-consent batch | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11508,7 +11508,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The provider writes Value = Deny under the machine-level location consent-store path, which matches the Microsoft-documented runtime control surface. |
 
 Current write(s):
@@ -11551,7 +11551,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - System consent baseline (Device-level location consent state)
-  - system-location-consent: missing — — Leave the runtime consent-store value absent and let Windows manage the normal device-level consent behavior.
+  - system-location-consent: missing â€” â€” Leave the runtime consent-store value absent and let Windows manage the normal device-level consent behavior.
 
 **Recommended profiles**
 
@@ -11563,7 +11563,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-location-consent-runtime` | `official-doc` | `Microsoft official doc` | Microsoft location consent runtime registry guidance | https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/cannot-set-timezone-automatically | `high` | path, value, allowed-values, behavior |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider system location-consent write | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider system location-consent write | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11608,7 +11608,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableLocationScripting = 1 under the machine policy key, which matches the documented disable behavior. |
 
 Current write(s):
@@ -11651,7 +11651,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 7 and newer systems with Location and Sensors policy support)
-  - disable-location-scripting: missing — — The machine policy is not configured by default.
+  - disable-location-scripting: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -11664,7 +11664,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-sensors-policy-csp-disable-location-scripting` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableLocationScripting | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | C:\WINDOWS\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-location-scripting` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -11710,7 +11710,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableLocation = 1 under the machine policy key, which matches the documented turned-off state. |
 
 Current write(s):
@@ -11753,7 +11753,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 7 and newer systems exposing the LocationAndSensors policy)
-  - disable-location: missing — — The machine policy is not configured by default.
+  - disable-location: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -11766,7 +11766,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-sensors-admx-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx DisableLocation mapping | C:\Windows\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, version-scope |
 | `local-sensors-adml-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.adml DisableLocation help text | C:\Windows\PolicyDefinitions\en-US\Sensors.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -11811,7 +11811,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableRegistration = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -11854,7 +11854,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 client systems supporting the MDM policy)
-  - disable-registration: missing — — The machine policy is not configured by default.
+  - disable-registration: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -11867,7 +11867,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-mdm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.admx mapping | C:\WINDOWS\PolicyDefinitions\MDM.admx | `high` | path, value, allowed-values, version-scope |
 | `local-mdm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\MDM.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-mdm-enrollment` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disableregistration-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableRegistration policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -11914,7 +11914,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes AllowMessageSync = 0, which matches the documented disable behavior. |
 
 Current write(s):
@@ -11957,7 +11957,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 version 1709 and newer systems with the Messaging policy available)
-  - allow-message-sync: missing — — The machine policy is not configured by default.
+  - allow-message-sync: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -11970,7 +11970,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-messaging-csp-allow-message-sync` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Messaging / AllowMessageSync | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-messaging-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft messaging.admx mapping | C:\WINDOWS\PolicyDefinitions\messaging.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-message-sync` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-allowmessagesync-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - AllowMessageSync policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -12017,7 +12017,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes Enabled = 0 under the NetCache policy key, which matches the documented disabled policy state. |
 
 Current write(s):
@@ -12052,7 +12052,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows Offline Files policy default (Windows client and server editions with Offline Files policy support)
-  - offline-files-enabled: missing — — If the policy is not configured, Offline Files is enabled on Windows client computers and disabled on Windows Server unless changed by the user.
+  - offline-files-enabled: missing â€” â€” If the policy is not configured, Offline Files is enabled on Windows client computers and disabled on Windows Server unless changed by the user.
 
 **Recommended profiles**
 
@@ -12066,7 +12066,7 @@ Current write(s):
 | `ms-offlinefiles-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_OfflineFiles / Pol_Enabled | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-offlinefiles | `high` | path, value, default, behavior, ui-mapping, version-scope |
 | `local-offlinefiles-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OfflineFiles.admx mapping | C:\Windows\PolicyDefinitions\OfflineFiles.admx | `high` | path, value, allowed-values |
 | `local-offlinefiles-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft OfflineFiles.adml help text | C:\Windows\PolicyDefinitions\en-US\OfflineFiles.adml | `high` | default, behavior, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12111,7 +12111,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableOneSettingsDownloads = 1, which matches the documented state that blocks OneSettings connectivity. |
 
 Current write(s):
@@ -12154,7 +12154,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 11 version 21H2 and later systems exposing the policy)
-  - disable-onesettings-downloads: value `0` — The policy is enabled only when administrators explicitly turn downloads off.
+  - disable-onesettings-downloads: value `0` â€” The policy is enabled only when administrators explicitly turn downloads off.
 
 **Recommended profiles**
 
@@ -12168,7 +12168,7 @@ Nohuto lineage references:
 | `ms-system-disable-onesettings-downloads` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: DisableOneSettingsDownloads | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads | `high` | path, behavior, default, version-scope |
 | `local-datacollection-admx-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
 | `local-datacollection-adml-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-onesettings-downloads` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disableonesettingsdownloads-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableOneSettingsDownloads policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -12215,7 +12215,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes AllowOnlineTips = 0, which matches the documented not-allowed behavior. |
 
 Current write(s):
@@ -12258,7 +12258,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 version 1709 and newer supported systems)
-  - allow-online-tips: missing — — The machine policy is not configured by default.
+  - allow-online-tips: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -12271,7 +12271,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-csp-allow-online-tips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowOnlineTips | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-control-panel-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx mapping | C:\WINDOWS\PolicyDefinitions\ControlPanel.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-online-tips` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-allowonlinetips-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - AllowOnlineTips policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior |
 
@@ -12318,7 +12318,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app now writes DisablePcaUI = 0 on the documented policy path. That matches the disabledValue in pca.admx and keeps this diagnostics-only policy separate from the full DisablePCA switch. |
 
 Current write(s):
@@ -12361,7 +12361,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows managed default (Windows 8+)
-  - disable-pca-ui: missing — — Key absent. PCA detects compatibility issues normally.
+  - disable-pca-ui: missing â€” â€” Key absent. PCA detects compatibility issues normally.
 
 **Recommended profiles**
 
@@ -12420,7 +12420,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes EnableMmx = 0, which matches the documented disabled state. |
 
 Current write(s):
@@ -12463,7 +12463,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows policy default (Windows 10 RS4 and later systems exposing the policy)
-  - enable-mmx: missing — — Leave the policy unset.
+  - enable-mmx: missing â€” â€” Leave the policy unset.
 
 **Recommended profiles**
 
@@ -12476,7 +12476,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-enablemmx-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableMmx policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -12522,7 +12522,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app now writes DisablePCA=1 under HKLM\Software\Policies\Microsoft\Windows\AppCompat, which matches the documented machine policy for turning Program Compatibility Assistant off. |
 
 Current write(s):
@@ -12557,7 +12557,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows managed default (Windows editions where Program Compatibility Assistant is present)
-  - disable-pca: missing — — Policy key is absent. Program Compatibility Assistant remains turned on in its default state.
+  - disable-pca: missing â€” â€” Policy key is absent. Program Compatibility Assistant remains turned on in its default state.
 
 **Recommended profiles**
 
@@ -12572,7 +12572,7 @@ Current write(s):
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects |
 | `admx-appcompat-turn-off-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat | `high` | path, behavior, version-scope |
 | `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - Turn off Program Compatibility Assistant | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | value, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12617,7 +12617,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableAIDataAnalysis = 1 for the current user, which matches the documented turn-off state. |
 
 Current write(s):
@@ -12660,7 +12660,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Managed-device user-policy default (Supported managed Windows 11 Enterprise, Education, Pro, and Sandbox systems exposing Recall policy controls)
-  - disable-ai-data-analysis: missing — — Microsoft states that on managed devices, snapshots are not saved when the policy is not configured.
+  - disable-ai-data-analysis: missing â€” â€” Microsoft states that on managed devices, snapshots are not saved when the policy is not configured.
 
 **Recommended profiles**
 
@@ -12675,7 +12675,7 @@ Nohuto lineage references:
 | `ms-windowsai-disable-ai-data-analysis` | `policy-csp` | `Microsoft policy CSP` | Microsoft WindowsAI Policy CSP: DisableAIDataAnalysis | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
 | `local-windowscopilot-admx-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx Recall mapping | C:\Windows\PolicyDefinitions\WindowsCopilot.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowscopilot-adml-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml Recall help text | C:\Windows\PolicyDefinitions\en-US\WindowsCopilot.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-recall` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disableaidataanalysis-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableAIDataAnalysis policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -12722,7 +12722,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes IsResumeAllowed = 0 under the runtime HKCU CrossDeviceResume configuration key. |
 
 Current write(s):
@@ -12765,7 +12765,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows managed default (User profiles where the current-user Resume setting is not explicitly set)
-  - resume-user-setting: missing — — Leave the current-user Resume setting unset.
+  - resume-user-setting: missing â€” â€” Leave the current-user Resume setting unset.
 
 **Recommended profiles**
 
@@ -12778,7 +12778,7 @@ Nohuto lineage references:
 | `repo-resume-procmon-notes` | `repo-doc` | `Current repo docs` | Repo Procmon notes for Resume settings | Docs/privacy/privacy.md | `medium` | path, value, behavior |
 | `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | HKCU\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration | `medium` | path, value, version-scope |
 | `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | H:\Temp\vm-tooling-staging\crossdevice_resume_probe.csv and H:\Temp\vm-tooling-staging\resume-policymanager-probe.txt | `medium` | path, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | H:\Temp\vm-tooling-staging\privacy_disable_resume_probe.txt and H:\Temp\vm-tooling-staging\privacy_disable_resume_probe.csv | `medium` | path, behavior, version-scope |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume | `high` | behavior, version-scope |
 
@@ -12825,7 +12825,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app now writes only the documented Group Policy value HKLM\Software\Policies\Microsoft\Windows\System\RSoPLogging = 0 for this tweak. |
 
 Current write(s):
@@ -12868,7 +12868,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows policy default (Windows systems exposing the Group Policy RSoP logging policy)
-  - rsop-logging-policy: missing — — Leave the official policy path unset.
+  - rsop-logging-policy: missing â€” â€” Leave the official policy path unset.
 
 **Recommended profiles**
 
@@ -12882,7 +12882,7 @@ Nohuto lineage references:
 | `ms-admx-grouppolicy-rsoplogging` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: RSoPLogging | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-grouppolicy-admx-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx RSoPLogging mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml RSoPLogging help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -12927,7 +12927,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableSearchBoxSuggestions = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -12970,7 +12970,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 10 version 2004 with KB5005101 and newer supported systems, plus Windows 11)
-  - disable-search-box-suggestions: missing — — The user policy is not configured by default.
+  - disable-search-box-suggestions: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -12983,7 +12983,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windowsexplorer-csp-disable-search-box-suggestions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSearchBoxSuggestions | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-windows-explorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | C:\WINDOWS\PolicyDefinitions\WindowsExplorer.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-box-suggestions` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchboxsuggestions-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSearchBoxSuggestions policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -13030,7 +13030,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableSearchHistory = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -13073,7 +13073,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows systems with the Search policy for DisableSearchHistory available)
-  - disable-search-history: missing — — The user policy is not configured by default.
+  - disable-search-history: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -13086,7 +13086,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\WINDOWS\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSearchHistory policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 | `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | H:\Temp\vm-tooling-staging\search_history_probe.txt | `low` | runtime writes, rollback, trigger attempt |
@@ -13134,7 +13134,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableSensors = 1 under the machine policy key, which matches the documented disable behavior. |
 
 Current write(s):
@@ -13177,7 +13177,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 7 and newer systems with Location and Sensors policy support)
-  - disable-sensors: missing — — The machine policy is not configured by default.
+  - disable-sensors: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -13190,7 +13190,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-sensors-policy-csp-disable-sensors` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSensors | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | C:\WINDOWS\PolicyDefinitions\Sensors.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-sensors` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disablesensors-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableSensors policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -13237,7 +13237,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableUAR = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -13287,7 +13287,7 @@ Other source references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 7 and newer supported systems)
-  - disable-uar: missing — — The device policy is not configured by default.
+  - disable-uar: missing â€” â€” The device policy is not configured by default.
 
 **Recommended profiles**
 
@@ -13300,7 +13300,7 @@ Other source references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-appcompat-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord | `high` | path, value, allowed-values, default, behavior |
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | C:\WINDOWS\PolicyDefinitions\AppCompat.admx | `high` | path, value, allowed-values |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-steps-recorder` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-uar-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableUAR policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -13347,7 +13347,7 @@ Other source references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app now writes the three documented CloudContent policy values under HKCU\Software\Policies\Microsoft\Windows\CloudContent. The opaque ContentDeliveryManager IDs remain separate in the parent audit trail. |
 
 Current write(s):
@@ -13392,9 +13392,9 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows policy default (Windows 10 and Windows 11 systems exposing the named CloudContent suggestion policies)
-  - disable-third-party-suggestions-policy: missing — — Leave the official third-party suggestions policy unset.
-  - disable-spotlight-on-settings-policy: missing — — Leave the official Settings suggestions policy unset.
-  - disable-welcome-experience-policy: missing — — Leave the official Windows Welcome Experience policy unset.
+  - disable-third-party-suggestions-policy: missing â€” â€” Leave the official third-party suggestions policy unset.
+  - disable-spotlight-on-settings-policy: missing â€” â€” Leave the official Settings suggestions policy unset.
+  - disable-welcome-experience-policy: missing â€” â€” Leave the official Windows Welcome Experience policy unset.
 
 **Recommended profiles**
 
@@ -13455,7 +13455,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app writes SbEnable=0 as part of the broader application-compatibility policy bundle. This record documents SbEnable in isolation after extraction from privacy.disable-appcompat-engine.policy. Path and value match local AppCompat.admx and Procmon capture. The app still writes DisableEngine=1 in the same code path; that value is tracked separately in privacy.disable-appcompat-engine.policy. |
 
 Current write(s):
@@ -13490,7 +13490,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows managed default (Windows 10 1903+ / Windows 11 all versions)
-  - sb-enable: missing — — Key absent. SwitchBack runs in its default enabled state.
+  - sb-enable: missing â€” â€” Key absent. SwitchBack runs in its default enabled state.
 
 **Recommended profiles**
 
@@ -13505,7 +13505,7 @@ Current write(s):
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | C:\Windows\PolicyDefinitions\en-US\AppCompat.adml | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat | `high` | path, behavior, version-scope |
 | `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - AppCompatTurnOffSwitchBack | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | value, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -13550,7 +13550,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableTelemetryOptInChangeNotification = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -13593,7 +13593,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 version 1803 and newer supported systems)
-  - disable-telemetry-opt-in-change-notification: missing — — The machine policy is not configured by default.
+  - disable-telemetry-opt-in-change-notification: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -13606,7 +13606,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-telemetry-change-notification` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ConfigureTelemetryOptInChangeNotification | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-telemetry-change-notifications` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -13652,7 +13652,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableTelemetryOptInSettingsUx = 1, which matches the documented state that disables the Settings UI. |
 
 Current write(s):
@@ -13695,7 +13695,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 version 1803 and later systems exposing the policy)
-  - disable-telemetry-optin-settings-ux: value `0` — Microsoft documents the default value as 0.
+  - disable-telemetry-optin-settings-ux: value `0` â€” Microsoft documents the default value as 0.
 
 **Recommended profiles**
 
@@ -13709,7 +13709,7 @@ Nohuto lineage references:
 | `ms-system-configure-telemetry-optin-ui` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: ConfigureTelemetryOptInSettingsUx | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-datacollection-admx-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
 | `local-datacollection-adml-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-optin-ui-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableTelemetryOptInSettingsUx policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -13756,7 +13756,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes Disabled = 1 under the machine Windows Error Reporting policy key, which matches the documented turn-off state. |
 
 Current write(s):
@@ -13799,7 +13799,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows Vista and newer systems exposing the Windows Error Reporting policy)
-  - wer-disabled: missing — — The machine disable policy is not configured by default.
+  - wer-disabled: missing â€” â€” The machine disable policy is not configured by default.
 
 **Recommended profiles**
 
@@ -13814,7 +13814,7 @@ Nohuto lineage references:
 | `local-errorreporting-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.admx mapping | C:\Windows\PolicyDefinitions\ErrorReporting.admx | `high` | path, value, allowed-values, version-scope |
 | `local-errorreporting-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.adml help text | C:\Windows\PolicyDefinitions\en-US\ErrorReporting.adml | `high` | behavior, side-effects, default |
 | `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, default, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-wer` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -13860,7 +13860,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DisableWindowsLocationProvider = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -13903,7 +13903,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 8 and newer systems with Windows Location Provider policy support)
-  - disable-windows-location-provider: missing — — The machine policy is not configured by default.
+  - disable-windows-location-provider: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -13916,7 +13916,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-location-provider-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableWindowsLocationProvider | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-location-provider-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft LocationProviderAdm.admx mapping | C:\WINDOWS\PolicyDefinitions\LocationProviderAdm.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-windows-location-provider` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-disablewindowslocationprovider-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - DisableWindowsLocationProvider policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
@@ -13963,7 +13963,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app now writes the documented machine policy DisableSoftLanding = 1 under HKLM\Software\Policies\Microsoft\Windows\CloudContent. The older user-side ContentDeliveryManager value remains documented only as historical context. |
 
 Current write(s):
@@ -14006,8 +14006,8 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows policy default (Windows 10 and newer systems exposing the CloudContent Windows tips policy)
-  - disable-soft-landing-policy: missing — — Leave the official machine policy unset.
-  - cdm-windows-tips-observed: missing — — Do not treat the observed user-side value as an official baseline.
+  - disable-soft-landing-policy: missing â€” â€” Leave the official machine policy unset.
+  - cdm-windows-tips-observed: missing â€” â€” Do not treat the observed user-side value as an official baseline.
 
 **Recommended profiles**
 
@@ -14021,7 +14021,7 @@ Nohuto lineage references:
 | `ms-experience-allowwindowstips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsTips | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips | `high` | behavior, default, version-scope |
 | `local-cloudcontent-admx-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableSoftLanding mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
 | `local-cloudcontent-adml-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableSoftLanding help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -14066,7 +14066,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DontDisplayLastUserName = 1, which matches the documented enabled security-option behavior. |
 
 Current write(s):
@@ -14109,7 +14109,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows security-option default (Windows client systems exposing the interactive logon security option)
-  - dont-display-last-user-name: value `0` — The local Windows security baseline files list a default of 0.
+  - dont-display-last-user-name: value `0` â€” The local Windows security baseline files list a default of 0.
 
 **Recommended profiles**
 
@@ -14123,7 +14123,7 @@ Nohuto lineage references:
 | `ms-security-option-hide-last-user` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display last user name | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852264(v=ws.11) | `high` | behavior, default, side-effects, version-scope |
 | `local-security-registry-last-user` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, ui-mapping |
 | `local-security-defaults-last-user` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | C:\Windows\inf\defltbase.inf | `high` | default, value |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-last-logged-in-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -14169,7 +14169,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes HideRecommendedPersonalizedSites = 1 under HKLM, using a command-backed registry tweak, which matches the documented hide behavior. |
 
 Current write(s):
@@ -14210,7 +14210,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 11 version 22H2 and later)
-  - hide-recommended-personalized-sites: missing — — The device policy is not configured by default.
+  - hide-recommended-personalized-sites: missing â€” â€” The device policy is not configured by default.
 
 **Recommended profiles**
 
@@ -14223,7 +14223,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-personalized-sites` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -14269,7 +14269,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes HideRecommendedPersonalizedSites = 1 under HKCU, which matches the documented hide behavior. |
 
 Current write(s):
@@ -14312,7 +14312,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 11 version 22H2 and later user profiles)
-  - hide-recommended-personalized-sites: missing — — The user policy is not configured by default.
+  - hide-recommended-personalized-sites: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -14325,7 +14325,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-personalized-sites-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -14371,7 +14371,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes HideRecommendedSection = 1 under HKLM, which matches the documented hide behavior. |
 
 Current write(s):
@@ -14412,7 +14412,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 11 version 22H2 and later)
-  - hide-recommended-section: missing — — The device policy is not configured by default.
+  - hide-recommended-section: missing â€” â€” The device policy is not configured by default.
 
 **Recommended profiles**
 
@@ -14425,7 +14425,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-section` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -14471,7 +14471,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes HideRecommendedSection = 1 under HKCU, which matches the documented hide behavior. |
 
 Current write(s):
@@ -14514,7 +14514,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 11 version 22H2 and later user profiles)
-  - hide-recommended-section: missing — — The user policy is not configured by default.
+  - hide-recommended-section: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -14527,7 +14527,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start | `high` | path, value, allowed-values, default, behavior |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, ui-mapping, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-section-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -14573,7 +14573,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes DontDisplayUserName = 1, and the guest-side probe on Win25H2Clean confirmed that sceregvl.inf maps the documented security option to DontDisplayUserName. The earlier DontDisplayLockedUserId interpretation was a different nearby security option entry, not the surface used by this tweak. |
 
 Current write(s):
@@ -14616,7 +14616,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows security-option default (Windows client systems exposing the interactive logon security option)
-  - dont-display-user-name: value `0` — The local Windows security baseline files list a default of 0.
+  - dont-display-user-name: value `0` â€” The local Windows security baseline files list a default of 0.
 
 **Recommended profiles**
 
@@ -14630,7 +14630,7 @@ Nohuto lineage references:
 | `ms-security-option-hide-username-signin` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display username at sign-in | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852277(v=ws.11) | `high` | behavior, side-effects, version-scope |
 | `local-security-registry-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, ui-mapping |
 | `local-security-defaults-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | C:\Windows\inf\defltbase.inf | `high` | default, value |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-username-at-signin` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -14676,7 +14676,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes LimitDiagnosticLogCollection = 1, which matches the documented limit behavior. |
 
 Current write(s):
@@ -14719,7 +14719,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 version 2004 and newer supported systems)
-  - limit-diagnostic-log-collection: missing — — The machine policy is not configured by default.
+  - limit-diagnostic-log-collection: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -14732,7 +14732,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-limit-diagnostic-log-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDiagnosticLogCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-limit-diagnostic-log-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -14778,7 +14778,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes LimitDumpCollection = 1, which matches the documented limit behavior. |
 
 Current write(s):
@@ -14821,7 +14821,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 version 2004 and newer supported systems)
-  - limit-dump-collection: missing — — The machine policy is not configured by default.
+  - limit-dump-collection: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -14834,7 +14834,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-limit-dump-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDumpCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\WINDOWS\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-limit-dump-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-crashdump-gate` | `decompilation` | `Ghidra decompilation` | nohuto crash-dump gate trace | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c; Docs/privacy/assets/crashdmp.c | `medium` | path, behavior, dependency |
 
@@ -14881,7 +14881,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes AllowTelemetry = 0 and the provider label now reflects the documented lowest supported diagnostic-data level. The implementation matches the research and stays edition-aware through the documented policy semantics. |
 
 Current write(s):
@@ -14916,7 +14916,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 and Windows 11 systems exposing the diagnostic-data policy)
-  - allow-telemetry: missing — — If the policy is disabled or not configured, Windows sends required diagnostic data and the user can choose optional diagnostic data.
+  - allow-telemetry: missing â€” â€” If the policy is disabled or not configured, Windows sends required diagnostic data and the user can choose optional diagnostic data.
 
 **Recommended profiles**
 
@@ -14930,7 +14930,7 @@ Current write(s):
 | `ms-system-allowtelemetry` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: AllowTelemetry | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-datacollection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | C:\Windows\PolicyDefinitions\DataCollection.admx | `high` | path, value, allowed-values, version-scope |
 | `local-datacollection-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | C:\Windows\PolicyDefinitions\en-US\DataCollection.adml | `high` | behavior, default, version-scope, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-allowtelemetry-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - AllowTelemetry policy | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md | `high` | path, value, behavior, allowed-values |
 
 **Validation proof**
@@ -14976,7 +14976,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes only the documented policy value 0 under HKLM\Software\Policies\Microsoft\Windows\Troubleshooting\AllowRecommendations. |
 
 Current write(s):
@@ -15019,7 +15019,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 version 1903 and newer systems exposing recommended troubleshooting policy)
-  - troubleshooting-allow-recommendations: missing — — Microsoft documents that if the policy is not configured, the user can configure how troubleshooting is applied.
+  - troubleshooting-allow-recommendations: missing â€” â€” Microsoft documents that if the policy is not configured, the user can configure how troubleshooting is applied.
 
 **Recommended profiles**
 
@@ -15033,7 +15033,7 @@ Nohuto lineage references:
 | `ms-troubleshooting-allowrecommendations` | `policy-csp` | `Microsoft policy CSP` | Microsoft Troubleshooting Policy CSP: TroubleshootingAllowRecommendations | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-msdt-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.admx mapping | C:\Windows\PolicyDefinitions\MSDT.admx | `high` | path, value, allowed-values, version-scope |
 | `local-msdt-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.adml help text | C:\Windows\PolicyDefinitions\en-US\MSDT.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
 
 **Validation proof**
 
@@ -15078,7 +15078,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app writes official SettingSync policy values and the label now reflects the actual behavior: sync is turned off by default while user override remains allowed. |
 
 Current write(s):
@@ -15115,9 +15115,9 @@ Current write(s):
 **Windows defaults**
 
 - Windows policy default (Windows 8 and newer systems exposing the SettingSync policy family)
-  - setting-sync-policy-family: missing — — Leave the sync-category policy values unset.
-  - setting-sync-useroverride-family: missing — — Leave the user-override values unset.
-  - disable-sync-on-paid-network: missing — — Leave the metered-network policy unset.
+  - setting-sync-policy-family: missing â€” â€” Leave the sync-category policy values unset.
+  - setting-sync-useroverride-family: missing â€” â€” Leave the user-override values unset.
+  - disable-sync-on-paid-network: missing â€” â€” Leave the metered-network policy unset.
 
 **Recommended profiles**
 
@@ -15131,7 +15131,7 @@ Current write(s):
 | `ms-admx-settingsync` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_SettingSync Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-settingsync | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-settingsync-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SettingSync.admx mapping | C:\Windows\PolicyDefinitions\SettingSync.admx | `high` | path, value, allowed-values, version-scope |
 | `local-settingsync-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SettingSync.adml help text | C:\Windows\PolicyDefinitions\en-US\SettingSync.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -15178,7 +15178,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The app writes SubmitSamplesConsent = 2 on the documented Defender Spynet policy path. |
 
 Current write(s):
@@ -15227,7 +15227,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Policy unset baseline (Systems where the Defender sample-submission policy is not configured on the local policy path)
-  - defender-submit-samples-consent: missing — — Leave the Defender Spynet sample-submission policy unset.
+  - defender-submit-samples-consent: missing â€” â€” Leave the Defender Spynet sample-submission policy unset.
 
 **Recommended profiles**
 
@@ -15244,7 +15244,7 @@ Windows Internals references:
 | `repo-defender-submit-samples-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes SubmitSamplesConsent | Docs/security/assets/Windows-Defender.txt | `medium` | path |
 | `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | H:\Temp\vm-tooling-staging\spynet-ui-state2.txt | `medium` | path, runtime-read, default |
 | `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | H:\Temp\vm-tooling-staging\submitsamples-ui-state2.txt | `high` | path, value, runtime-read, behavior |
-| `app-security-provider-disable-defender-sample-submission` | `repo-code` | `Current repo code` | Current security provider sample-submission write | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider-disable-defender-sample-submission` | `repo-code` | `Current repo code` | Current security provider sample-submission write | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -15289,7 +15289,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes SaveZoneInformation = 1, which matches the documented policy state that stops Windows from preserving zone information on attachments. |
 
 Current write(s):
@@ -15338,7 +15338,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting Attachment Manager policy)
-  - save-zone-information: missing — — If the policy is not configured, Windows marks file attachments with zone information.
+  - save-zone-information: missing â€” â€” If the policy is not configured, Windows marks file attachments with zone information.
 
 **Recommended profiles**
 
@@ -15351,7 +15351,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-attachmentmanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AttachmentManager.admx mapping | C:\Windows\PolicyDefinitions\AttachmentManager.admx | `high` | path, value, allowed-values, version-scope |
 | `local-attachmentmanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AttachmentManager.adml help text | C:\Windows\PolicyDefinitions\en-US\AttachmentManager.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -15396,7 +15396,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The app writes DisableEnhancedNotifications = 1 on the Security Center Notifications policy path that the Win25H2Clean Procmon capture showed SecurityHealthService.exe reading. |
 
 Current write(s):
@@ -15445,7 +15445,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows managed default (Windows Security systems where the enhanced-notifications policy is not configured)
-  - defender-security-center-disable-enhanced-notifications: missing — — Leave the Security Center enhanced-notifications policy unset.
+  - defender-security-center-disable-enhanced-notifications: missing â€” â€” Leave the Security Center enhanced-notifications policy unset.
 
 **Recommended profiles**
 
@@ -15461,7 +15461,7 @@ Windows Internals references:
 | `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | H:\Temp\vm-tooling-staging\defender-enhanced-notifications-baseline-1-20260324-214343\defender-disable-enhanced-baseline-1.txt | `high` | path, runtime-read, default |
 | `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | H:\Temp\vm-tooling-staging\defender-enhanced-notifications-securitycenter-1-20260324-213118\defender-disable-enhanced-securitycenter-1.txt | `high` | path, value, runtime-read, behavior |
 | `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | H:\Temp\vm-tooling-staging\defender-enhanced-notifications-reporting-1-20260324-213700\defender-disable-enhanced-reporting-1.txt | `medium` | path, runtime-read |
-| `app-security-provider-disable-enhanced-notifications` | `repo-code` | `Current repo code` | Current security provider enhanced notifications write | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | ui-mapping, path, value |
+| `app-security-provider-disable-enhanced-notifications` | `repo-code` | `Current repo code` | Current security provider enhanced notifications write | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | ui-mapping, path, value |
 
 **Validation proof**
 
@@ -15506,7 +15506,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes the documented NTFS encryption policy value under System\CurrentControlSet\Policies only. |
 
 Current write(s):
@@ -15555,7 +15555,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting the NTFS encryption policy)
-  - ntfs-disable-encryption-policy: missing — — Leave the official NTFS encryption policy unset.
+  - ntfs-disable-encryption-policy: missing â€” â€” Leave the official NTFS encryption policy unset.
 
 **Recommended profiles**
 
@@ -15567,7 +15567,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | path, value, allowed-values, version-scope |
 | `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | behavior, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -15612,7 +15612,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The app now writes the official HTTP-only value 0 under HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization\DODownloadMode. |
 
 Current write(s):
@@ -15661,7 +15661,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting the Delivery Optimization policy)
-  - do-download-mode-policy: missing — — Leave the official policy unset.
+  - do-download-mode-policy: missing â€” â€” Leave the official policy unset.
 
 **Recommended profiles**
 
@@ -15674,7 +15674,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-deliveryoptimization-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeliveryOptimization.admx mapping | C:\Windows\PolicyDefinitions\DeliveryOptimization.admx | `high` | path, value, allowed-values, version-scope |
 | `local-deliveryoptimization-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeliveryOptimization.adml help text | C:\Windows\PolicyDefinitions\en-US\DeliveryOptimization.adml | `high` | behavior, allowed-values, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -15719,7 +15719,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes DisablePasswordReveal = 1 under the machine policy path, which matches the documented enabled policy state for hiding the button. |
 
 Current write(s):
@@ -15768,7 +15768,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting the CredUI password reveal policy)
-  - disable-password-reveal: missing — — If the policy is not configured, Windows keeps the normal reveal-button behavior.
+  - disable-password-reveal: missing â€” â€” If the policy is not configured, Windows keeps the normal reveal-button behavior.
 
 **Recommended profiles**
 
@@ -15781,7 +15781,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | C:\Windows\PolicyDefinitions\CredUI.admx | `high` | path, value, allowed-values, version-scope |
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | C:\Windows\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -15826,7 +15826,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes BlockDomainPicturePassword = 1, which matches the documented enabled policy state that turns off picture password sign-in for domain users. |
 
 Current write(s):
@@ -15875,7 +15875,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting the BlockDomainPicturePassword policy)
-  - block-domain-picture-password: missing — — If the policy is not configured, domain users can use picture password sign-in.
+  - block-domain-picture-password: missing â€” â€” If the policy is not configured, domain users can use picture password sign-in.
 
 **Recommended profiles**
 
@@ -15888,7 +15888,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-credentialproviders-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.admx mapping | C:\Windows\PolicyDefinitions\CredentialProviders.admx | `high` | path, value, allowed-values, version-scope |
 | `local-credentialproviders-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.adml help text | C:\Windows\PolicyDefinitions\en-US\CredentialProviders.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -15933,7 +15933,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes fAllowToGetHelp = 0, which matches the documented disabled policy state. |
 
 Current write(s):
@@ -15982,7 +15982,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows editions with Solicited Remote Assistance policy support)
-  - fallowtogethelp: missing — — If the policy is not configured, users can control the feature through Windows.
+  - fallowtogethelp: missing â€” â€” If the policy is not configured, users can control the feature through Windows.
 
 **Recommended profiles**
 
@@ -15996,7 +15996,7 @@ Windows Internals references:
 | `ms-remote-assistance-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: RemoteAssistance / SolicitedRemoteAssistance | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-remoteassistance | `high` | path, value, default, behavior, ui-mapping |
 | `local-remoteassistance-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft RemoteAssistance.admx mapping | C:\Windows\PolicyDefinitions\RemoteAssistance.admx | `high` | path, value, allowed-values |
 | `local-remoteassistance-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft RemoteAssistance.adml help text | C:\Windows\PolicyDefinitions\en-US\RemoteAssistance.adml | `high` | default, behavior, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16041,14 +16041,14 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
-| Notes | The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\WindowsOptimizer\ExploitProtection\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider. |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Notes | The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\OpenTraceProject\ExploitProtection\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider. |
 
 Current write(s):
 
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `exploit-protection-policy` | `%TEMP%\WindowsOptimizer\ExploitProtection\security-disable-system-mitigations.xml` | `Set-ProcessMitigation -PolicyFilePath` | `ExploitProtection XML baseline` | `value` | The app stages the checked-in XML resource to a temp file and imports it through the documented ProcessMitigation surface. |
+| `exploit-protection-policy` | `%TEMP%\OpenTraceProject\ExploitProtection\security-disable-system-mitigations.xml` | `Set-ProcessMitigation -PolicyFilePath` | `ExploitProtection XML baseline` | `value` | The app stages the checked-in XML resource to a temp file and imports it through the documented ProcessMitigation surface. |
 
 **Evidence class**
 
@@ -16088,7 +16088,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows managed default (Windows systems using local exploit protection defaults or explicitly configured Windows Security settings)
-  - exploit-protection-policy: missing — — Leave the common Exploit Guard XML policy unset unless a managed mitigation baseline is intentionally deployed.
+  - exploit-protection-policy: missing â€” â€” Leave the common Exploit Guard XML policy unset unless a managed mitigation baseline is intentionally deployed.
 
 **Recommended profiles**
 
@@ -16102,7 +16102,7 @@ Windows Internals references:
 | `local-exploitguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.admx mapping | C:\Windows\PolicyDefinitions\ExploitGuard.admx | `high` | path, value, version-scope |
 | `local-exploitguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.adml help text | C:\Windows\PolicyDefinitions\en-US\ExploitGuard.adml | `high` | behavior, default, side-effects |
 | `ms-exploit-protection-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn exploit protection guidance | https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection | `high` | behavior, allowed-values, risk |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -16147,7 +16147,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes DisableSR = 1 under the official Policies path documented by SystemRestore.admx. |
 
 Current write(s):
@@ -16196,7 +16196,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting the System Restore policy)
-  - disable-system-restore-policy: missing — — Leave the System Restore policy unset.
+  - disable-system-restore-policy: missing â€” â€” Leave the System Restore policy unset.
 
 **Recommended profiles**
 
@@ -16209,7 +16209,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-systemrestore-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.admx mapping | C:\Windows\PolicyDefinitions\SystemRestore.admx | `high` | path, value, allowed-values, version-scope |
 | `local-systemrestore-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.adml help text | C:\Windows\PolicyDefinitions\en-US\SystemRestore.adml | `high` | behavior, default, side-effects, risk |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16254,7 +16254,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes EnableFirewall = 0 for DomainProfile and StandardProfile under the official WindowsFirewall policy path. |
 
 Current write(s):
@@ -16304,8 +16304,8 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems with the local Windows Defender Firewall policy templates)
-  - domain-firewall-policy: missing — — Leave the domain firewall policy unset.
-  - standard-firewall-policy: missing — — Leave the standard firewall policy unset.
+  - domain-firewall-policy: missing â€” â€” Leave the domain firewall policy unset.
+  - standard-firewall-policy: missing â€” â€” Leave the standard firewall policy unset.
 
 **Recommended profiles**
 
@@ -16320,7 +16320,7 @@ Windows Internals references:
 | `local-windowsfirewall-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.admx mapping | C:\Windows\PolicyDefinitions\WindowsFirewall.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowsfirewall-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsFirewall.adml | `high` | behavior, default, side-effects |
 | `ms-azure-firewall-runtime-paths` | `troubleshoot-doc` | `Microsoft support doc` | Microsoft Learn: Azure VM firewall recovery guidance | https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows | `medium-high` | path, runtime-surface |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matching |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matching |
 
 **Validation proof**
 
@@ -16365,7 +16365,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes only the documented official policy values in this child record. |
 
 Current write(s):
@@ -16401,7 +16401,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting these Windows Update policies)
-  - disable-windows-update-access: missing — — Leave the Windows Update access-removal policy unset.
+  - disable-windows-update-access: missing â€” â€” Leave the Windows Update access-removal policy unset.
 
 **Recommended profiles**
 
@@ -16415,7 +16415,7 @@ Current write(s):
 | `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
 | `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | C:\Windows\PolicyDefinitions\WindowsUpdate.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsUpdate.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
 
 **Validation proof**
 
@@ -16460,7 +16460,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes SearchOrderConfig = 0, DontSearchWindowsUpdate = 1, and ExcludeWUDriversInQualityUpdate = 1. Together these values align with the documented direction of keeping Windows Update out of the driver's sourcing and quality-update path. |
 
 Current write(s):
@@ -16511,9 +16511,9 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting the DriverSearching policies)
-  - search-order-config: missing — — Leave the search-order policy unset.
-  - dont-search-windows-update: missing — — Leave the Windows Update driver-search block unset.
-  - exclude-wu-drivers-in-quality-update: missing — — Leave the driver-exclusion quality-update policy unset.
+  - search-order-config: missing â€” â€” Leave the search-order policy unset.
+  - dont-search-windows-update: missing â€” â€” Leave the Windows Update driver-search block unset.
+  - exclude-wu-drivers-in-quality-update: missing â€” â€” Leave the driver-exclusion quality-update policy unset.
 
 **Recommended profiles**
 
@@ -16530,7 +16530,7 @@ Windows Internals references:
 | `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | C:\Windows\PolicyDefinitions\en-US\ICM.adml | `high` | behavior, default, side-effects |
 | `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | C:\Windows\PolicyDefinitions\WindowsUpdate.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsUpdate.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16575,7 +16575,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The app writes SpyNetReporting = 2 on the documented Defender Spynet policy path. |
 
 Current write(s):
@@ -16624,7 +16624,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Policy unset baseline (Systems where the Defender MAPS policy is not configured on the local policy path)
-  - defender-spynet-reporting: missing — — Leave the Defender Spynet policy branch unset.
+  - defender-spynet-reporting: missing â€” â€” Leave the Defender Spynet policy branch unset.
 
 **Recommended profiles**
 
@@ -16639,7 +16639,7 @@ Windows Internals references:
 | `repo-defender-spynet-lead` | `repo-doc` | `Current repo docs` | Local Defender MAPS lead note | Docs/tweaks/research/notes/windows-11-settings-and-privacy-leads.md | `medium` | path, value, allowed-values |
 | `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | H:\Temp\vm-tooling-staging\spynet-ui-baseline.txt | `high` | path, runtime-read, default |
 | `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | H:\Temp\vm-tooling-staging\spynet-ui-state2.txt | `high` | path, value, runtime-read, behavior |
-| `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | `Current repo code` | Current security provider MAPS membership write | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | `Current repo code` | Current security provider MAPS membership write | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16684,7 +16684,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The app now writes DynamicLock = 1 on the official Passport for Work policy path. |
 
 Current write(s):
@@ -16733,7 +16733,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting the Passport for Work Dynamic Lock policy)
-  - dynamic-lock-policy: missing — — Leave the official Dynamic Lock policy unset.
+  - dynamic-lock-policy: missing â€” â€” Leave the official Dynamic Lock policy unset.
 
 **Recommended profiles**
 
@@ -16746,7 +16746,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-passport-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.admx mapping | C:\Windows\PolicyDefinitions\Passport.admx | `high` | path, value, allowed-values, version-scope |
 | `local-passport-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.adml help text | C:\Windows\PolicyDefinitions\en-US\Passport.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, ui-mapping |
 
 **Validation proof**
 
@@ -16791,7 +16791,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes Enabled = 3, which matches the documented Normal mode in the official Sudo policy. |
 
 Current write(s):
@@ -16840,7 +16840,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows 11 client editions supporting the Sudo policy)
-  - sudo-enabled-mode: missing — — Leave the policy unset.
+  - sudo-enabled-mode: missing â€” â€” Leave the policy unset.
 
 **Recommended profiles**
 
@@ -16853,7 +16853,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-sudo-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.admx mapping | C:\Windows\PolicyDefinitions\Sudo.admx | `high` | path, value, allowed-values, version-scope |
 | `local-sudo-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.adml help text | C:\Windows\PolicyDefinitions\en-US\Sudo.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -16898,7 +16898,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The app writes HideExclusionsFromLocalAdmins = 1 on the documented root Defender policy path. |
 
 Current write(s):
@@ -16947,7 +16947,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Policy unset baseline (Systems where the Defender exclusion-visibility policy is not configured)
-  - defender-hide-exclusions-from-local-admins: missing — — Leave the policy unset so local admins can see managed exclusions.
+  - defender-hide-exclusions-from-local-admins: missing â€” â€” Leave the policy unset so local admins can see managed exclusions.
 
 **Recommended profiles**
 
@@ -16965,7 +16965,7 @@ Windows Internals references:
 | `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | H:\Temp\vm-tooling-staging\hideexclusions-admins-root-1-20260325-002348\hideexclusions-admins-root-1.txt | `high` | path, value, runtime-read, behavior |
 | `vm-defender-hide-exclusions-root-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | H:\Temp\vm-tooling-staging\hideexclusions-admins-root-1-20260325-002348\hideexclusions-admins-root-1-visibility.json | `high` | value, behavior |
 | `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | H:\Temp\vm-tooling-staging\hideexclusions-admins-policymanager-1-20260325-002004\hideexclusions-admins-policymanager-1.txt | `high` | path, value, runtime-read, behavior |
-| `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | `Current repo code` | Current security provider HideExclusionsFromLocalAdmins write | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | `Current repo code` | Current security provider HideExclusionsFromLocalAdmins write | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -17010,7 +17010,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The app now writes both official PowerShell Group Policy values through one batch tweak: EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\Software\Policies\Microsoft\Windows\PowerShell. |
 
 Current write(s):
@@ -17060,7 +17060,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting the Windows PowerShell execution policy setting)
-  - enable-scripts-policy: missing — — Leave the official script execution policy unset.
+  - enable-scripts-policy: missing â€” â€” Leave the official script execution policy unset.
 
 **Recommended profiles**
 
@@ -17073,7 +17073,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-powershellpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | C:\Windows\PolicyDefinitions\PowerShellExecutionPolicy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-powershellpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | C:\Windows\PolicyDefinitions\en-US\PowerShellExecutionPolicy.adml | `high` | behavior, default, side-effects, risk |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -17118,7 +17118,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The app's research-gated batch writes the two live 25H2 surfaces that MsMpEng.exe read directly in the VM: the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias. It does not write the documented policy MpEngine path because that path did not produce a direct live read on this build. |
 
 Current write(s):
@@ -17154,9 +17154,9 @@ Current write(s):
 **Windows defaults**
 
 - Policy unset baseline (Systems where all known file-hash-computation policy surfaces stay unset)
-  - defender-threat-file-hash-logging-root: missing — — Leave the legacy root surface unset.
-  - defender-enable-file-hash-computation-policymanager: missing — — Leave the Policy Manager alias unset.
-  - defender-enable-file-hash-computation-mpengine: missing — — Leave the documented MpEngine path unset.
+  - defender-threat-file-hash-logging-root: missing â€” â€” Leave the legacy root surface unset.
+  - defender-enable-file-hash-computation-policymanager: missing â€” â€” Leave the Policy Manager alias unset.
+  - defender-enable-file-hash-computation-mpengine: missing â€” â€” Leave the documented MpEngine path unset.
 
 **Recommended profiles**
 
@@ -17227,7 +17227,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for EnableSecureCredentialPrompting. |
 
 Current write(s):
@@ -17276,7 +17276,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting the CredUI trusted-path policy)
-  - enable-secure-credential-prompting: missing — — Leave the policy unset.
+  - enable-secure-credential-prompting: missing â€” â€” Leave the policy unset.
 
 **Recommended profiles**
 
@@ -17289,7 +17289,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | C:\Windows\PolicyDefinitions\CredUI.admx | `high` | path, ui-mapping, version-scope |
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | C:\Windows\PolicyDefinitions\en-US\CredUI.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-enablesecurecredentialprompting-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - EnableSecureCredentialPrompting policy | Docs/tweaks/_source-mirrors/win-config/security/desc.md | `high` | path, value, behavior |
 | `vm-batch-probe-20260320-trusted-path-credential-prompting` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Trusted path credential prompting | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 
@@ -17336,7 +17336,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes the least restrictive administrator prompt combination while keeping EnableLUA enabled. |
 
 Current write(s):
@@ -17387,9 +17387,9 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows default UAC baseline (Modern Windows client systems using the documented UAC defaults)
-  - enable-lua: value `1` — Keep UAC enabled.
-  - consent-prompt-admin: value `5` — Prompt administrators for consent for non-Windows binaries.
-  - prompt-secure-desktop: value `1` — Use the Secure Desktop for elevation prompts.
+  - enable-lua: value `1` â€” Keep UAC enabled.
+  - consent-prompt-admin: value `5` â€” Prompt administrators for consent for non-Windows binaries.
+  - prompt-secure-desktop: value `1` â€” Use the Secure Desktop for elevation prompts.
 
 **Recommended profiles**
 
@@ -17401,7 +17401,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-uac-registry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: User Account Control registry key entries | https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings | `high` | path, value, allowed-values, default, behavior |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-uac-bootphase` | `decompilation` | `Ghidra decompilation` | nohuto boot-phase UAC value read | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c | `medium` | path, behavior, dependency |
 | `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | Local capture - C:\Users\<USER>\AppData\Local\Temp\uac-procmon\uac_never_notify_capture.pml and C:\Users\<USER>\AppData\Local\Temp\uac-procmon\uac_never_notify_capture.csv | `high` | path, value, behavior, ui-mapping |
 
@@ -17450,7 +17450,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current app writes NoWindowMinimizingShortcuts = 1 for the current user, which matches the documented disable behavior. |
 
 Current write(s):
@@ -17500,7 +17500,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 7 and newer user profiles)
-  - no-window-minimizing-shortcuts: missing — — The user policy is not configured by default.
+  - no-window-minimizing-shortcuts: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -17513,7 +17513,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-desktop-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Desktop Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-desktop | `high` | path, behavior, default, ui-mapping |
 | `local-desktop-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Desktop.admx mapping | C:\WINDOWS\PolicyDefinitions\Desktop.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-aero-shake` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -17559,7 +17559,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes AutoReboot = 0, which matches the documented disabled state. |
 
 Current write(s):
@@ -17609,7 +17609,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows default (Windows systems using the normal crash-recovery baseline)
-  - auto-reboot: value `1` — Microsoft documents automatic restart as turned on by default.
+  - auto-reboot: value `1` â€” Microsoft documents automatic restart as turned on by default.
 
 **Recommended profiles**
 
@@ -17623,7 +17623,7 @@ Windows Internals references:
 | `ms-configure-system-failure-recovery` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure system failure and recovery options | https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options | `high` | path, value, default, behavior, side-effects |
 | `ms-memory-dump-file-options` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory dump file options | https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/memory-dump-file-options | `high` | path, value, default, version-scope |
 | `ms-win32-osrecoveryconfiguration` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OSRecoveryConfiguration | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration | `high` | path, behavior |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -17668,7 +17668,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes DisplayParameters = 1 under CrashControl to surface more crash detail on the blue screen. |
 
 Current write(s):
@@ -17718,7 +17718,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows published default (Systems where DisplayParameters has not been formally mapped in this dataset)
-  - display-parameters: value `0` — The Microsoft Support article documents 0 as the state that does not display stop error information.
+  - display-parameters: value `0` â€” The Microsoft Support article documents 0 as the state that does not display stop error information.
 
 **Recommended profiles**
 
@@ -17730,7 +17730,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `microsoft-support-display-parameters` | `official-doc` | `Microsoft official doc` | Microsoft Support: Stop error information isn't displayed on the blue screen in Windows | https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237 | `high` | path, value, allowed-values, behavior |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -17775,7 +17775,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current app writes AllowAutomaticAppArchiving = 0, which matches the documented disabled state. |
 
 Current write(s):
@@ -17825,7 +17825,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows device-policy default (Windows 10 and newer systems exposing the automatic app archiving policy)
-  - allow-automatic-app-archiving: missing — — The policy is not configured by default.
+  - allow-automatic-app-archiving: missing â€” â€” The policy is not configured by default.
 
 **Recommended profiles**
 
@@ -17839,7 +17839,7 @@ Windows Internals references:
 | `ms-applicationmanagement-allowautomaticapparchiving` | `policy-csp` | `Microsoft policy CSP` | Microsoft ApplicationManagement Policy CSP: AllowAutomaticAppArchiving | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowautomaticapparchiving | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | C:\Windows\PolicyDefinitions\AppxPackageManager.admx | `high` | path, value, allowed-values, version-scope |
 | `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | C:\Windows\PolicyDefinitions\en-US\AppxPackageManager.adml | `high` | behavior, default, side-effects |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -17884,7 +17884,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for MaintenanceDisabled. |
 
 Current write(s):
@@ -17934,7 +17934,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows feature default (Windows systems with Automatic Maintenance)
-  - maintenance-disabled-observed: missing — — Automatic Maintenance runs as part of ordinary Windows behavior unless MaintenanceDisabled is explicitly set.
+  - maintenance-disabled-observed: missing â€” â€” Automatic Maintenance runs as part of ordinary Windows behavior unless MaintenanceDisabled is explicitly set.
 
 **Recommended profiles**
 
@@ -17947,7 +17947,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-automatic-maintenance-overview` | `official-doc` | `Microsoft official doc` | Microsoft Automatic Maintenance overview | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance | `high` | behavior, default, version-scope |
 | `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable | `high` | path, value, behavior, default |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Automatic maintenance override | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 | `nohuto-maintenance-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - Automatic Maintenance registry evidence | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, value, behavior |
 
@@ -17994,7 +17994,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current app writes DisableBkGndGroupPolicy = 1, which matches the enabled-policy behavior described by Microsoft. |
 
 Current write(s):
@@ -18044,7 +18044,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows device-policy default (Windows systems where Group Policy is in use)
-  - disable-background-group-policy: missing — — The policy is not configured by default.
+  - disable-background-group-policy: missing â€” â€” The policy is not configured by default.
 
 **Recommended profiles**
 
@@ -18057,7 +18057,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-grouppolicy-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#disablebackgroundpolicy | `high` | path, default, behavior, ui-mapping |
 | `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\GroupPolicy.admx | `high` | path, ui-mapping, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-background-gp-updates` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -18103,7 +18103,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current implementation writes both policy values to 0, which matches the documented disable behavior. |
 
 Current write(s):
@@ -18154,8 +18154,8 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Unmanaged Windows 10 and Windows 11 devices)
-  - allow-clipboard-history: missing — — Default policy state is not configured.
-  - allow-cross-device-clipboard: missing — — Default policy state is not configured.
+  - allow-clipboard-history: missing â€” â€” Default policy state is not configured.
+  - allow-cross-device-clipboard: missing â€” â€” Default policy state is not configured.
 
 **Recommended profiles**
 
@@ -18170,7 +18170,7 @@ Windows Internals references:
 | `ms-clipboard-history-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowClipboardHistory | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowclipboardhistory | `high` | path, value, allowed-values, default, behavior |
 | `ms-cross-device-clipboard-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowCrossDeviceClipboard | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowcrossdeviceclipboard | `high` | path, value, allowed-values, default, behavior |
 | `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | C:\WINDOWS\PolicyDefinitions\OSPolicy.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-clipboard-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -18216,7 +18216,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current app writes fDisableClip = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -18266,7 +18266,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Unmanaged Windows devices)
-  - disable-clipboard-redirection: missing — — Default policy state is not configured.
+  - disable-clipboard-redirection: missing â€” â€” Default policy state is not configured.
 
 **Recommended profiles**
 
@@ -18280,7 +18280,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-terminalserver-clipboard-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP ADMX TerminalServer: Disable clipboard redirection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-terminalserver#ts_disableclipboardredirection | `high` | path, value, allowed-values, default, behavior |
 | `local-terminalserver-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft TerminalServer.admx mapping | C:\Windows\PolicyDefinitions\TerminalServer.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-clipboard-redirection` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -18326,7 +18326,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the current GameConfigStore write tuple and restore cycle. |
 
 Current write(s):
@@ -18378,7 +18378,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Observed baseline (Current builds where the GameConfigStore fullscreen-optimization tuple is left unset)
-  - gameconfigstore-fso-values: missing — — Leave the current GameConfigStore tuple unset.
+  - gameconfigstore-fso-values: missing â€” â€” Leave the current GameConfigStore tuple unset.
 
 **Recommended profiles**
 
@@ -18391,7 +18391,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952 | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | Docs/system/system.md | `medium` | value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 
 **Validation proof**
@@ -18437,7 +18437,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes AllowGameDVR = 0, which matches the documented disabled policy state. |
 
 Current write(s):
@@ -18472,7 +18472,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows policy default (Windows client systems that expose the GameDVR policy but do not configure it)
-  - allow-game-dvr: missing — — Leave the policy unset.
+  - allow-game-dvr: missing â€” â€” Leave the policy unset.
 
 **Recommended profiles**
 
@@ -18486,7 +18486,7 @@ Current write(s):
 | `ms-applicationmanagement-allowgamedvr` | `policy-csp` | `Microsoft policy CSP` | Microsoft ApplicationManagement Policy CSP: AllowGameDVR | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr | `high` | path, value, allowed-values, behavior, version-scope |
 | `local-gamedvr-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.admx mapping | C:\Windows\PolicyDefinitions\GameDVR.admx | `high` | path, value, allowed-values, version-scope |
 | `local-gamedvr-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.adml help text | C:\Windows\PolicyDefinitions\en-US\GameDVR.adml | `high` | behavior, default, side-effects |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -18531,7 +18531,7 @@ Current write(s):
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for JPEGImportQuality. |
 
 Current write(s):
@@ -18581,7 +18581,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Observed fallback baseline (Current builds where JPEGImportQuality is left unset and the wallpaper transcode path falls back to its internal default)
-  - jpeg-import-quality: missing — — Leave JPEGImportQuality unset and let the current wallpaper import path fall back to 85.
+  - jpeg-import-quality: missing â€” â€” Leave JPEGImportQuality unset and let the current wallpaper import path fall back to 85.
 
 **Recommended profiles**
 
@@ -18594,7 +18594,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | Docs/system/system.md | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `repo-system-decomp-jpegtranscode` | `decompilation` | `Ghidra decompilation` | Decompiled wallpaper transcode path for JPEGImportQuality | Docs/system/assets/jpeg-TranscodeImage.c | `high` | path, value, behavior |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 
 **Validation proof**
@@ -18640,7 +18640,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current app writes RestartApps = 0, and the guest probe confirmed that 0 disables automatic app restart after sign-in on Win25H2Clean. |
 
 Current write(s):
@@ -18690,7 +18690,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows feature baseline observed in guest (Windows user profiles exposing the Restart apps feature)
-  - restart-apps-registry-observed: missing — — Guest baseline was missing before the probe and was restored to missing afterward.
+  - restart-apps-registry-observed: missing â€” â€” Guest baseline was missing before the probe and was restored to missing afterward.
 
 **Recommended profiles**
 
@@ -18703,7 +18703,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-support-restart-apps` | `official-doc` | `Microsoft official doc` | Microsoft support article for the Restart apps sign-in feature | https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d | `medium` | behavior, default, side-effects, version-scope |
 | `runtime-restartapps-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - RestartApps registry mapping | H:\Temp\vm-tooling-staging\restartapps_toggle_out.txt | `high` | value, behavior, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -18748,7 +18748,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current app writes EnableDynamicContentInWSB = 0, which matches the documented disable behavior. |
 
 Current write(s):
@@ -18798,7 +18798,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Supported Windows 10 and Windows 11 systems)
-  - enable-dynamic-content-in-wsb: missing — — Policy is not configured by default.
+  - enable-dynamic-content-in-wsb: missing â€” â€” Policy is not configured by default.
 
 **Recommended profiles**
 
@@ -18811,7 +18811,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-search-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Search Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#allowsearchhighlights | `high` | path, value, allowed-values, default, behavior |
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\WINDOWS\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-search-highlights` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -18857,7 +18857,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes PreventRemoteQueries = 1, which matches the documented block-remote-queries behavior. |
 
 Current write(s):
@@ -18907,7 +18907,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems exposing the Windows Search policy)
-  - prevent-remote-queries: missing — — Leave the policy unset.
+  - prevent-remote-queries: missing â€” â€” Leave the policy unset.
 
 **Recommended profiles**
 
@@ -18920,7 +18920,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\Windows\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | C:\Windows\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -18965,7 +18965,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The app now writes ConnectedSearchUseWeb = 0 under the Windows Search policy key, which matches the documented disabled state. |
 
 Current write(s):
@@ -19013,7 +19013,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems exposing the older Windows Search web-results policy)
-  - connected-search-use-web: missing — — Leave the official policy unset.
+  - connected-search-use-web: missing â€” â€” Leave the official policy unset.
 
 **Recommended profiles**
 
@@ -19026,7 +19026,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\Windows\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | C:\Windows\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19071,7 +19071,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app writes Shell Icons value 29 = %windir%\System32\shell32.dll,-50, which matches the Microsoft support guidance for removing shortcut arrows. |
 
 Current write(s):
@@ -19121,7 +19121,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows default (Windows Explorer shortcut overlay behavior without a custom Shell Icons override)
-  - shell-icons-29: missing — — Microsoft support says removing the custom Shell Icons value restores the default shortcut-arrow behavior.
+  - shell-icons-29: missing â€” â€” Microsoft support says removing the custom Shell Icons value restores the default shortcut-arrow behavior.
 
 **Recommended profiles**
 
@@ -19133,7 +19133,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-shell-icons-shortcut-arrow` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: remove shortcut arrow using Shell Icons value 29 | https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p | `medium` | path, value, default, behavior |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19178,7 +19178,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for StartupDelayInMSec. |
 
 Current write(s):
@@ -19228,7 +19228,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Observed Win25H2Clean baseline (Current 25H2 builds where the Explorer Serialize baseline is still unset)
-  - startup-delay-in-msec: missing — — Keep StartupDelayInMSec unset, which is the current observed Win25H2Clean baseline.
+  - startup-delay-in-msec: missing â€” â€” Keep StartupDelayInMSec unset, which is the current observed Win25H2Clean baseline.
 
 **Recommended profiles**
 
@@ -19240,7 +19240,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | H:\Temp\vm-tooling-staging\ghidra_explorer_serialize.txt | `medium` | path, string-reference, behavior |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 | `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | H:\Temp\procmon-startup-delay.pml | `medium` | path, value, behavior, ui-mapping |
@@ -19288,7 +19288,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current app writes AllowStorageSenseGlobal = 0, which matches the documented disable behavior. |
 
 Current write(s):
@@ -19338,7 +19338,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows 10 version 1903 and newer)
-  - allow-storage-sense-global: missing — — Policy is not configured by default.
+  - allow-storage-sense-global: missing â€” â€” Policy is not configured by default.
 
 **Recommended profiles**
 
@@ -19351,7 +19351,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-storage-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Storage Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage | `high` | path, value, allowed-values, default, behavior |
 | `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | C:\WINDOWS\PolicyDefinitions\StorageSense.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-storage-sense` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -19397,7 +19397,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current app writes AllowStorageSenseTemporaryFilesCleanup = 0, which matches the documented disable behavior. |
 
 Current write(s):
@@ -19447,7 +19447,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows 10 version 1903 and newer)
-  - allow-storage-sense-temporary-files-cleanup: missing — — Policy is not configured by default.
+  - allow-storage-sense-temporary-files-cleanup: missing â€” â€” Policy is not configured by default.
 
 **Recommended profiles**
 
@@ -19460,7 +19460,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-storage-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Storage Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage#allowstoragesensetemporaryfilescleanup | `high` | path, value, allowed-values, default, behavior |
 | `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | C:\WINDOWS\PolicyDefinitions\StorageSense.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-storage-sense-temp-cleanup` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -19468,7 +19468,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source URL | C:\Windows\PolicyDefinitions\StorageSense.admx |
-| Exact quote / path | StorageSense.admx: key="Software\Policies\Microsoft\Windows\StorageSense" valueName="AllowStorageSenseTemporaryFilesCleanup"; StorageSense.adml: Disabled: Storage Sense will not delete the user’s temporary files. Users cannot enable this setting in Storage settings. |
+| Exact quote / path | StorageSense.admx: key="Software\Policies\Microsoft\Windows\StorageSense" valueName="AllowStorageSenseTemporaryFilesCleanup"; StorageSense.adml: Disabled: Storage Sense will not delete the userâ€™s temporary files. Users cannot enable this setting in Storage settings. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files. |
 
@@ -19506,7 +19506,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current app writes NoUseStoreOpenWith = 1, which matches the documented disable behavior. |
 
 Current write(s):
@@ -19556,7 +19556,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows 8 and newer unmanaged systems)
-  - no-use-store-open-with: missing — — Policy is not configured by default.
+  - no-use-store-open-with: missing â€” â€” Policy is not configured by default.
 
 **Recommended profiles**
 
@@ -19569,7 +19569,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-icm-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ICM Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-icm#shellnousestoreopenwith_2 | `high` | path, behavior, default, ui-mapping |
 | `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping | C:\WINDOWS\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-store-open-with` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -19615,7 +19615,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes OverlayMinFPS = 0 on the Microsoft-documented DWM path. |
 
 Current write(s):
@@ -19665,7 +19665,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Normal DWM baseline (Systems not applying an explicit overlay minimum-FPS override)
-  - overlay-min-fps: missing — — Leave the registry override absent so DWM uses its built-in overlay behavior.
+  - overlay-min-fps: missing â€” â€” Leave the registry override absent so DWM uses its built-in overlay behavior.
 
 **Recommended profiles**
 
@@ -19677,7 +19677,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dwm-registry-settings` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DWM Registry Settings | https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values | `high` | path, value, behavior, side-effects, risk, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19722,7 +19722,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app targets an official Windows gaming feature, and the guest-side Procmon capture on 2026-03-20 confirmed the live Game Mode registry read path on the interactive Administrator profile. |
 
 Current write(s):
@@ -19772,7 +19772,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated AutoGameModeEnabled from a primary Microsoft source)
-  - auto-game-mode-enabled: unknown — — Do not publish a validated registry baseline until the exact Game Mode mapping is backed by a primary Microsoft source.
+  - auto-game-mode-enabled: unknown â€” â€” Do not publish a validated registry baseline until the exact Game Mode mapping is backed by a primary Microsoft source.
 
 **Recommended profiles**
 
@@ -19787,7 +19787,7 @@ Windows Internals references:
 | `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | H:\Temp\vm-tooling-staging\gamemode_admin_probe.txt and H:\Temp\vm-tooling-staging\gamemode_admin_zero_probe.txt | `high` | path, value, behavior, ui-mapping, version-scope |
 | `repo-system-decomp-game-mode` | `decompilation` | `Ghidra decompilation` | Decompiled Game Mode handler string reference | Docs/system/assets/gamemode-GamingHandlers.c | `medium` | path, value, behavior, ui-mapping |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -19832,7 +19832,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app targets an official graphics feature, and the guest-side reversible probe on Win25H2Clean confirmed the live HwSchMode mapping on this build. |
 
 Current write(s):
@@ -19882,7 +19882,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Observed guest baseline (Win25H2Clean guest baseline captured in the reversible probe)
-  - hw-sch-mode: missing — — Guest-side reversible probe started from a missing HwSchMode value and restored to missing after the probe.
+  - hw-sch-mode: missing â€” â€” Guest-side reversible probe started from a missing HwSchMode value and restored to missing after the probe.
 
 **Recommended profiles**
 
@@ -19895,7 +19895,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-hags-feature` | `official-doc` | `Microsoft official doc` | DirectX Developer Blog: Hardware Accelerated GPU Scheduling | https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/ | `high` | behavior, side-effects, version-scope |
 | `repo-system-doc-hags` | `repo-doc` | `Current repo docs` | Repo system research notes for HAGS | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `runtime-hags-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe for HwSchMode | H:\Temp\vm-tooling-staging\hags_toggle_out.txt | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
@@ -19941,7 +19941,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes AllowIndexingEncryptedStoresOrItems = 1, which matches the documented enabled state. |
 
 Current write(s):
@@ -19991,7 +19991,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems exposing the Windows Search policy)
-  - allow-indexing-encrypted-stores-or-items: missing — — Leave the policy unset.
+  - allow-indexing-encrypted-stores-or-items: missing â€” â€” Leave the policy unset.
 
 **Recommended profiles**
 
@@ -20004,7 +20004,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | C:\Windows\PolicyDefinitions\Search.admx | `high` | path, value, allowed-values, version-scope |
 | `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | C:\Windows\PolicyDefinitions\en-US\Search.adml | `high` | behavior, default, side-effects, risk |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20049,7 +20049,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes TdrDdiDelay = 5 on the documented GraphicsDrivers path. |
 
 Current write(s):
@@ -20099,7 +20099,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Systems restoring the documented TDR DDI delay baseline)
-  - tdr-ddi-delay: value `5` — Microsoft documents 5 seconds as the default TdrDdiDelay value.
+  - tdr-ddi-delay: value `5` â€” Microsoft documents 5 seconds as the default TdrDdiDelay value.
 
 **Recommended profiles**
 
@@ -20110,7 +20110,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20155,7 +20155,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes TdrDelay = 2 on the Microsoft-documented GraphicsDrivers path. |
 
 Current write(s):
@@ -20205,7 +20205,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Systems restoring the documented TDR delay baseline)
-  - tdr-delay: value `2` — Microsoft documents 2 seconds as the default TdrDelay value.
+  - tdr-delay: value `2` â€” Microsoft documents 2 seconds as the default TdrDelay value.
 
 **Recommended profiles**
 
@@ -20216,7 +20216,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20261,7 +20261,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes TdrLevel = 3 on the documented GraphicsDrivers path. |
 
 Current write(s):
@@ -20311,7 +20311,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Systems restoring the documented TDR recovery baseline)
-  - tdr-level: value `3` — Microsoft documents TdrLevel = 3 as the default recovery mode.
+  - tdr-level: value `3` â€” Microsoft documents TdrLevel = 3 as the default recovery mode.
 
 **Recommended profiles**
 
@@ -20322,7 +20322,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, allowed-values, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20367,7 +20367,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes TdrLimitCount = 5 on the documented GraphicsDrivers path. |
 
 Current write(s):
@@ -20417,7 +20417,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Systems restoring the documented TDR hang-count baseline)
-  - tdr-limit-count: value `5` — Microsoft documents 5 as the default TdrLimitCount value.
+  - tdr-limit-count: value `5` â€” Microsoft documents 5 as the default TdrLimitCount value.
 
 **Recommended profiles**
 
@@ -20428,7 +20428,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20473,7 +20473,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes TdrLimitTime = 60 on the documented GraphicsDrivers path. |
 
 Current write(s):
@@ -20523,7 +20523,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Systems restoring the documented TDR time-window baseline)
-  - tdr-limit-time: value `60` — Microsoft documents 60 seconds as the default TdrLimitTime value.
+  - tdr-limit-time: value `60` â€” Microsoft documents 60 seconds as the default TdrLimitTime value.
 
 **Recommended profiles**
 
@@ -20534,7 +20534,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Testing and debugging TDR during driver development | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `high` | path, value, default, behavior, side-effects, version-scope, risk |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20579,7 +20579,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes ThreadDpcEnable = 1 on the Microsoft-documented path. |
 
 Current write(s):
@@ -20629,7 +20629,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows default (Windows systems that use the standard threaded-DPC behavior)
-  - thread-dpc-enable: missing — — Microsoft documents threaded DPCs as enabled by default.
+  - thread-dpc-enable: missing â€” â€” Microsoft documents threaded DPCs as enabled by default.
 
 **Recommended profiles**
 
@@ -20641,7 +20641,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-threaded-dpcs` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to threaded DPCs | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-thread-dpc-enable-bounded-suite` | `vm-test` | `VM test / probe` | Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0 | Docs/tweaks/research/notes/thread-dpc-enable-vm-suite-20260324.md | `medium` | value, default, behavior, version-scope |
 | `etw-thread-dpc-enable-cpu3` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable CPU bounded run | H:\Temp\vm-tooling-staging\thread-dpc-enable-0-cpu3.etl | `medium` | behavior, version-scope |
 | `etw-thread-dpc-enable-mem2` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable memory bounded run | H:\Temp\vm-tooling-staging\thread-dpc-enable-0-mem2.etl | `medium` | behavior, version-scope |
@@ -20689,7 +20689,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes ClearPageFileAtShutdown = 1 on the documented security-option path. |
 
 Current write(s):
@@ -20739,7 +20739,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows security baseline default (Windows systems using the default local security template values)
-  - clear-pagefile-at-shutdown: value `0` — The default local security templates set the value to 0.
+  - clear-pagefile-at-shutdown: value `0` â€” The default local security templates set the value to 0.
 
 **Recommended profiles**
 
@@ -20753,7 +20753,7 @@ Windows Internals references:
 | `ms-shutdown-clear-virtual-memory-pagefile` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Shutdown: Clear virtual memory pagefile | https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile | `high` | value, behavior, side-effects |
 | `local-sceregvl-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft security registry mapping | C:\Windows\inf\sceregvl.inf | `high` | path, value |
 | `local-defltbase-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft default security template | C:\Windows\inf\defltbase.inf | `high` | default, value |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20798,7 +20798,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes DisablePagingExecutive = 1 on the Microsoft-documented Memory Management path. |
 
 Current write(s):
@@ -20848,7 +20848,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Normal non-diagnostics baseline (Systems that are not temporarily enabling this tracing-oriented behavior)
-  - disable-paging-executive: value `0` — Microsoft's documented command examples use 0 to turn the behavior off when the diagnosis scenario is not needed.
+  - disable-paging-executive: value `0` â€” Microsoft's documented command examples use 0 to turn the behavior off when the diagnosis scenario is not needed.
 
 **Recommended profiles**
 
@@ -20862,7 +20862,7 @@ Windows Internals references:
 | `ms-kernel-trace-control-api` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Kernel Trace Control API Reference | https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference | `high` | path, value, behavior, version-scope |
 | `ms-enable-trace-parameters-v1` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ENABLE_TRACE_PARAMETERS_V1 | https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters_v1 | `high` | path, value, behavior, side-effects, risk, version-scope |
 | `ms-wpr-disablepagingexecutive` | `official-doc` | `Microsoft official doc` | Microsoft Learn: WPR Command-Line Options | https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options | `high` | value, behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -20907,7 +20907,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the current app write is idempotent at the baseline LargeSystemCache=0 value. |
 
 Current write(s):
@@ -20957,7 +20957,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative publication baseline (Modern systems where this dataset does not yet publish LargeSystemCache as a supported tuning surface)
-  - large-system-cache: unknown — — Do not publish a validated default until a modern Microsoft registry source is captured.
+  - large-system-cache: unknown â€” â€” Do not publish a validated default until a modern Microsoft registry source is captured.
 
 **Recommended profiles**
 
@@ -20970,7 +20970,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-win32-operatingsystem-largesystemcache` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem LargeSystemCache | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem | `high` | value, behavior, risk |
 | `ms-memory-limits-large-system-cache` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases | `medium` | behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -21015,7 +21015,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes NonPagedPoolSize = 0, matching the default value captured in Microsoft Q&A. |
 
 Current write(s):
@@ -21065,7 +21065,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative publication baseline (Modern systems where this dataset has not yet published a validated NonPagedPoolSize reset mapping)
-  - nonpaged-pool-size: value `0` — Microsoft Q&A captures NonPagedPoolSize = 0 as the default value.
+  - nonpaged-pool-size: value `0` â€” Microsoft Q&A captures NonPagedPoolSize = 0 as the default value.
 
 **Recommended profiles**
 
@@ -21078,7 +21078,7 @@ Windows Internals references:
 | `ms-memory-management-qna-nonpaged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m | `medium` | path, value, default, behavior |
 | `ms-memory-management-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Management Registry Keys | https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys | `high` | path, behavior, version-scope |
 | `ms-memory-limits` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases | `high` | behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -21123,7 +21123,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes PagedPoolSize = 0, matching the default value captured in Microsoft Q&A. |
 
 Current write(s):
@@ -21173,7 +21173,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative publication baseline (Modern systems where this dataset has not yet published a validated PagedPoolSize reset mapping)
-  - paged-pool-size: value `0` — Microsoft Q&A captures PagedPoolSize = 0 as the default value.
+  - paged-pool-size: value `0` â€” Microsoft Q&A captures PagedPoolSize = 0 as the default value.
 
 **Recommended profiles**
 
@@ -21186,7 +21186,7 @@ Windows Internals references:
 | `ms-memory-management-qna-paged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m | `medium` | path, value, default, behavior |
 | `ms-memory-management-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Management Registry Keys | https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys | `high` | path, behavior, version-scope |
 | `ms-unable-allocate-paged-pool` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool | `high` | path, value, behavior, risk, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -21231,7 +21231,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The app now writes RegistrySizeLimit=0 under HKLM\System\CurrentControlSet\Control, matching the documented Microsoft control surface for automatic registry sizing. The older RegistryQuota write under Session Manager\Memory Management was removed on 2026-03-13. |
 
 Current write(s):
@@ -21279,7 +21279,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows automatic sizing baseline (Systems using the official published RegistrySizeLimit control surface)
-  - registry-size-limit: missing — — If the key is absent, Windows automatically sizes the registry as needed.
+  - registry-size-limit: missing â€” â€” If the key is absent, Windows automatically sizes the registry as needed.
 
 **Recommended profiles**
 
@@ -21293,7 +21293,7 @@ Windows Internals references:
 | `ms-rsl-functionality` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Registry Size Limit functionality is still honored if the RegistrySizeLimit registry key is set | https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set | `high` | path, value, default, behavior, side-effects, version-scope |
 | `ms-getsystemregistryquota` | `official-doc` | `Microsoft official doc` | Microsoft Learn: GetSystemRegistryQuota | https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getsystemregistryquota | `medium` | behavior, version-scope |
 | `live-registrysize-missing` | `registry-observation` | `VM registry observation` | Validation host observation of missing RegistrySizeLimit | Local observation - 2026-03-13, HKLM\System\CurrentControlSet\Control | `medium` | default |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -21338,7 +21338,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes NtfsDisable8dot3NameCreation = 1, which matches the documented 'disable on all volumes' mode. |
 
 Current write(s):
@@ -21388,7 +21388,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows default (Windows systems using the normal 8.3 short-name baseline)
-  - ntfs-disable-8dot3-name-creation: value `2` — Use the documented per-volume default mode.
+  - ntfs-disable-8dot3-name-creation: value `2` â€” Use the documented per-volume default mode.
 
 **Recommended profiles**
 
@@ -21402,7 +21402,7 @@ Windows Internals references:
 | `ms-fsutil-8dot3name` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil 8dot3name | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name | `high` | path, value, allowed-values, default, behavior |
 | `local-filesys-admx-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx short-name mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | value, allowed-values, version-scope |
 | `local-filesys-adml-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml short-name help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | allowed-values, default, behavior, side-effects |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -21447,7 +21447,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes NtfsDisableLastAccessUpdate = 1, which matches the documented disabled state. |
 
 Current write(s):
@@ -21497,7 +21497,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Modern Windows default (Clean modern Windows installations using the default NTFS baseline)
-  - ntfs-disable-last-access-update: value `1` — Modern Windows uses the disabled state by default for this setting.
+  - ntfs-disable-last-access-update: value `1` â€” Modern Windows uses the disabled state by default for this setting.
 
 **Recommended profiles**
 
@@ -21511,7 +21511,7 @@ Windows Internals references:
 | `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior | `high` | path, value, allowed-values, behavior, side-effects, version-scope |
 | `ms-performance-tuning-web-servers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance Tuning Web Servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/ | `high` | path, default, behavior, side-effects, version-scope |
 | `ms-using-agestore` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using AgeStore | https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore | `high` | default, value, behavior, side-effects |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -21556,7 +21556,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes LongPathsEnabled = 1 on the Microsoft-documented path. |
 
 Current write(s):
@@ -21606,7 +21606,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows default (Windows 10 and later systems that have not explicitly enabled long paths)
-  - long-paths-enabled: missing — — Leave the value unset unless long-path support is needed.
+  - long-paths-enabled: missing â€” â€” Leave the value unset unless long-path support is needed.
 
 **Recommended profiles**
 
@@ -21620,7 +21620,7 @@ Windows Internals references:
 | `ms-maximum-file-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation | `high` | path, value, behavior, version-scope |
 | `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | C:\Windows\PolicyDefinitions\FileSys.admx | `high` | path, value, allowed-values, version-scope |
 | `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | C:\Windows\PolicyDefinitions\en-US\FileSys.adml | `high` | behavior, default, side-effects |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -21665,7 +21665,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The provider writes NtfsMemoryUsage = 1, which matches the documented default for this control. |
 
 Current write(s):
@@ -21715,7 +21715,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows default (Windows systems using the documented NTFS memory-usage baseline)
-  - ntfs-memory-usage: value `1` — Microsoft documents 1 as the default.
+  - ntfs-memory-usage: value `1` â€” Microsoft documents 1 as the default.
 
 **Recommended profiles**
 
@@ -21726,7 +21726,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
 
 **Validation proof**
 
@@ -21771,7 +21771,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes NtfsMftZoneReservation = 1, which matches the documented default-value reset. |
 
 Current write(s):
@@ -21821,7 +21821,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows default (Windows systems using the normal NTFS MFT reservation baseline)
-  - ntfs-mft-zone-reservation: value `1` — The documented default reservation value is 1.
+  - ntfs-mft-zone-reservation: value `1` â€” The documented default reservation value is 1.
 
 **Recommended profiles**
 
@@ -21834,7 +21834,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-fsutil-behavior` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil behavior | https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior | `high` | value, allowed-values, default, behavior, version-scope |
 | `ms-ntfs-reserves-space-for-mft` | `official-doc` | `Microsoft official doc` | Microsoft Learn: How NTFS reserves space for MFT | https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft | `high` | path, value, allowed-values, default, behavior, side-effects |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -21879,7 +21879,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | Guest-side reversible probe and a later manual VM benchmark pass on Win25H2Clean confirmed the current app write and restore cycle for Win32PrioritySeparation. |
 
 Current write(s):
@@ -21929,7 +21929,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Observed Win25H2Clean baseline (Current 25H2 builds where the live baseline still reads back 2 before the app profile is applied)
-  - win32-priority-separation: value `2` — Use the current observed 25H2 VM baseline value.
+  - win32-priority-separation: value `2` â€” Use the current observed 25H2 VM baseline value.
 
 **Recommended profiles**
 
@@ -21943,7 +21943,7 @@ Windows Internals references:
 | `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem | `high` | path, behavior, version-scope, risk |
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | Docs/system/system.md | `medium` | value, ui-mapping, app-mismatch |
 | `repo-system-decomp-prioritycontrol` | `decompilation` | `Ghidra decompilation` | Decompiled PriorityControl read/write path | Docs/system/assets/lsc-cimwin32.c | `high` | path, value, behavior |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | H:\Temp\vm-tooling-staging\priority-control-20260324-201011\summary.json | `medium` | value, behavior, rollback, performance |
 
@@ -21990,7 +21990,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The app now writes the documented policy gate plus the companion 24-hour interval cap used by this record. |
 
 Current write(s):
@@ -22041,7 +22041,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows managed default (Systems where this dataset has not yet published an explicit Reliability timestamp policy)
-  - reliability-timestamp-enabled: missing — — Leave the policy unset and let Windows use its normal reliability timestamp behavior.
+  - reliability-timestamp-enabled: missing â€” â€” Leave the policy unset and let Windows use its normal reliability timestamp behavior.
 
 **Recommended profiles**
 
@@ -22097,7 +22097,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables BTAGService by setting its start mode to Disabled. |
 
 Current write(s):
@@ -22145,7 +22145,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal Bluetooth Audio Gateway service configuration)
-  - btagservice-start-mode: value `Manual` — Microsoft lists BTAGService with a Manual default start mode.
+  - btagservice-start-mode: value `Manual` â€” Microsoft lists BTAGService with a Manual default start mode.
 
 **Recommended profiles**
 
@@ -22157,7 +22157,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-btagservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Audio Gateway Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -22202,7 +22202,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables bthserv by setting its start mode to Disabled. |
 
 Current write(s):
@@ -22250,7 +22250,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal Bluetooth Support Service configuration)
-  - bthserv-start-mode: value `Manual` — Microsoft lists bthserv with a Manual default start mode.
+  - bthserv-start-mode: value `Manual` â€” Microsoft lists bthserv with a Manual default start mode.
 
 **Recommended profiles**
 
@@ -22262,7 +22262,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-bthserv` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Support Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -22307,7 +22307,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables instantiated BluetoothUserService per-user services through the wildcard pattern BluetoothUserService_*. |
 
 Current write(s):
@@ -22355,7 +22355,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems with the Bluetooth User Service family instantiated for signed-in users)
-  - bluetoothuserservice-start-mode: value `Manual` — Microsoft lists BluetoothUserService with a Manual default start mode.
+  - bluetoothuserservice-start-mode: value `Manual` â€” Microsoft lists BluetoothUserService with a Manual default start mode.
 
 **Recommended profiles**
 
@@ -22367,7 +22367,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-bluetoothuserservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth User Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -22412,7 +22412,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables the DiagTrack service by setting its start mode to Disabled. |
 
 Current write(s):
@@ -22460,7 +22460,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal telemetry service configuration)
-  - diagtrack-start-mode: value `Automatic` — Microsoft lists DiagTrack with an Automatic default start mode in the service guidance.
+  - diagtrack-start-mode: value `Automatic` â€” Microsoft lists DiagTrack with an Automatic default start mode in the service guidance.
 
 **Recommended profiles**
 
@@ -22472,7 +22472,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-diagtrack` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Connected User Experiences and Telemetry | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -22517,7 +22517,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables PrintNotify by setting its start mode to Disabled. |
 
 Current write(s):
@@ -22565,7 +22565,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal PrintNotify configuration)
-  - printnotify-start-mode: value `Manual` — Microsoft lists PrintNotify with a Manual default start mode.
+  - printnotify-start-mode: value `Manual` â€” Microsoft lists PrintNotify with a Manual default start mode.
 
 **Recommended profiles**
 
@@ -22577,7 +22577,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-printnotify` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Notification Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -22622,7 +22622,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables Spooler by setting its start mode to Disabled. |
 
 Current write(s):
@@ -22670,7 +22670,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal Print Spooler configuration)
-  - spooler-start-mode: value `Automatic` — Microsoft lists Spooler with an Automatic default start mode.
+  - spooler-start-mode: value `Automatic` â€” Microsoft lists Spooler with an Automatic default start mode.
 
 **Recommended profiles**
 
@@ -22682,7 +22682,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-spooler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Spooler | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -22727,7 +22727,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables the WSearch service by setting its start mode to Disabled. |
 
 Current write(s):
@@ -22775,7 +22775,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal Windows Search service configuration)
-  - wsearch-start-mode: value `Manual` — Microsoft lists WSearch with a Manual default start mode in the service guidance.
+  - wsearch-start-mode: value `Manual` â€” Microsoft lists WSearch with a Manual default start mode in the service guidance.
 
 **Recommended profiles**
 
@@ -22789,7 +22789,7 @@ Windows Internals references:
 | `ms-iot-services-wsearch` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
 | `local-scm-wsearch-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - WSearch | Docs/tweaks/research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
 | `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview | `high` | behavior, side-effects, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -22834,7 +22834,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The current app writes VerboseStatus = 1, which matches the documented enabled policy state. |
 
 Current write(s):
@@ -22884,7 +22884,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 version 2004 with KB5005101 and later, plus Windows 11 systems that expose ADMX_Logon)
-  - verbose-status: missing — — Microsoft documents the normal simpler status display when the policy is disabled or not configured.
+  - verbose-status: missing â€” â€” Microsoft documents the normal simpler status display when the policy is disabled or not configured.
 
 **Recommended profiles**
 
@@ -22896,7 +22896,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-logon-verbose-status` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Logon Policy CSP: VerboseStatus | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon | `high` | path, behavior, default, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-verbose-status-messages` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -22942,7 +22942,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The app now writes only WaitToKillServiceTimeout = 2500 for this tweak. |
 
 Current write(s):
@@ -22990,7 +22990,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Observed Win25H2Clean baseline (The current validation VM and any system that already uses the same service timeout baseline)
-  - wait-to-kill-service-timeout: value `5000` — The current validation VM reported 5000 before the app value was applied.
+  - wait-to-kill-service-timeout: value `5000` â€” The current validation VM reported 5000 before the app value was applied.
 
 **Recommended profiles**
 
@@ -23004,7 +23004,7 @@ Windows Internals references:
 | `ms-service-control-handler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service Control Handler Function | https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function | `high` | path, behavior, risk |
 | `repo-system-doc-shutdown` | `repo-doc` | `Current repo docs` | Repo shutdown timing notes | Docs/system/system.md | `medium` | path, value, default |
 | `vm-wait-to-kill-service-timeout-probe` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe for WaitToKillServiceTimeout | H:\Temp\vm-tooling-staging\wait-to-kill-service-timeout-probe-20260325-103117\wait-to-kill-service-timeout-probe.txt | `high` | path, value, runtime-read, restore |
-| `app-system-registry-provider-service-timeout` | `repo-code` | `Current repo code` | Current app implementation for service shutdown timeout | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | ui-mapping, path, value |
+| `app-system-registry-provider-service-timeout` | `repo-code` | `Current repo code` | Current app implementation for service shutdown timeout | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | ui-mapping, path, value |
 
 **Validation proof**
 
@@ -23051,7 +23051,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes UseDefaultTile = 1, which matches the documented enabled policy state. |
 
 Current write(s):
@@ -23094,7 +23094,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 version 2004 with KB5005101 and later, plus Windows 11 systems that expose ADMX_Cpls)
-  - use-default-tile: missing — — The public Microsoft policy documentation describes user customization as the behavior when the policy is disabled or not configured.
+  - use-default-tile: missing â€” â€” The public Microsoft policy documentation describes user customization as the behavior when the policy is disabled or not configured.
 
 **Recommended profiles**
 
@@ -23106,7 +23106,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-cpls-use-default-tile` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Cpls Policy CSP: UseDefaultTile | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-cpls#usedefaulttile | `high` | path, behavior, default, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-default-account-picture` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -23152,7 +23152,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes DisableAcrylicBackgroundOnLogon = 1, which matches the documented enabled policy state. |
 
 Current write(s):
@@ -23195,7 +23195,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 RS5 and later systems exposing ADMX_Logon)
-  - disable-acrylic-background-on-logon: missing — — Microsoft documents acrylic blur as the baseline behavior when the policy is disabled or not configured.
+  - disable-acrylic-background-on-logon: missing â€” â€” Microsoft documents acrylic blur as the baseline behavior when the policy is disabled or not configured.
 
 **Recommended profiles**
 
@@ -23209,7 +23209,7 @@ Nohuto lineage references:
 | `ms-admx-logon-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Logon Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon | `high` | path, behavior, default, version-scope |
 | `local-logon-admx-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | C:\Windows\PolicyDefinitions\Logon.admx | `high` | path, ui-mapping, version-scope |
 | `local-logon-adml-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | C:\Windows\PolicyDefinitions\en-US\Logon.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-acrylic-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -23255,7 +23255,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes TurnOffSPIAnimations = 1 for the current user, which matches the documented enabled policy state. |
 
 Current write(s):
@@ -23298,7 +23298,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows Vista and newer user profiles)
-  - turn-off-spi-animations: missing — — The user policy is not configured by default.
+  - turn-off-spi-animations: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -23311,7 +23311,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-explorer-admx-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.admx mapping | C:\Windows\PolicyDefinitions\Explorer.admx | `high` | path, value, allowed-values, version-scope |
 | `local-explorer-adml-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.adml help text | C:\Windows\PolicyDefinitions\en-US\Explorer.adml | `high` | behavior, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-common-control-animations` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -23357,7 +23357,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes EnableFirstLogonAnimation = 0, which matches the documented disabled-policy behavior. |
 
 Current write(s):
@@ -23400,7 +23400,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows client devices with first sign-in animation support)
-  - enable-first-logon-animation: missing — — The machine policy is not configured by default.
+  - enable-first-logon-animation: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -23413,7 +23413,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-logon-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | C:\WINDOWS\PolicyDefinitions\Logon.admx | `high` | path, value, allowed-values, version-scope |
 | `local-logon-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\Logon.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-first-signin-animation` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -23459,7 +23459,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes NoLockScreen = 1, which matches the documented enabled policy state. |
 
 Current write(s):
@@ -23502,7 +23502,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 version 2004 with KB5005101 and later, plus Windows 11 systems that expose ADMX_ControlPanelDisplay)
-  - no-lock-screen: missing — — Microsoft documents the normal lock-screen behavior when the policy is disabled or not configured.
+  - no-lock-screen: missing â€” â€” Microsoft documents the normal lock-screen behavior when the policy is disabled or not configured.
 
 **Recommended profiles**
 
@@ -23514,7 +23514,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-controlpaneldisplay-no-lock-screen` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP: NoLockScreen | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-lock-screen` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -23560,7 +23560,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes NoLockScreenCamera = 1, which matches the documented enabled policy state. |
 
 Current write(s):
@@ -23603,7 +23603,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 version 2004 with KB5005101 and later, plus Windows 11 systems exposing ADMX_ControlPanelDisplay)
-  - no-lock-screen-camera: missing — — The public Microsoft policy documentation describes camera access as available when the policy is disabled or not configured.
+  - no-lock-screen-camera: missing â€” â€” The public Microsoft policy documentation describes camera access as available when the policy is disabled or not configured.
 
 **Recommended profiles**
 
@@ -23616,7 +23616,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-controlpaneldisplay-admx-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
 | `local-controlpaneldisplay-adml-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-lock-screen-camera` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -23662,7 +23662,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes NoChangingLockScreen = 1, which matches the documented enabled policy state. |
 
 Current write(s):
@@ -23705,7 +23705,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 version 2004 with KB5005101 and later, plus Windows 11 systems exposing ADMX_ControlPanelDisplay)
-  - no-changing-lock-screen: missing — — Microsoft documents user customization as available when the policy is disabled or not configured.
+  - no-changing-lock-screen: missing â€” â€” Microsoft documents user customization as available when the policy is disabled or not configured.
 
 **Recommended profiles**
 
@@ -23719,7 +23719,7 @@ Nohuto lineage references:
 | `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
 | `local-controlpaneldisplay-admx-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
 | `local-controlpaneldisplay-adml-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-lock-screen-changes` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -23765,7 +23765,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes AnimateLockScreenBackground = 1, which matches the documented enabled policy state for preventing motion. |
 
 Current write(s):
@@ -23808,7 +23808,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 client devices with accelerometer-backed lock-screen motion support)
-  - animate-lock-screen-background: missing — — The machine policy is not configured by default.
+  - animate-lock-screen-background: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -23822,7 +23822,7 @@ Nohuto lineage references:
 | `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
 | `local-controlpaneldisplay-admx-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
 | `local-controlpaneldisplay-adml-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-lock-screen-motion` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -23868,7 +23868,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes NoLockScreenSlideshow = 1, which matches the documented enabled policy state. |
 
 Current write(s):
@@ -23911,7 +23911,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 version 2004 with KB5005101 and later, plus Windows 11 systems exposing ADMX_ControlPanelDisplay)
-  - no-lock-screen-slideshow: missing — — Microsoft documents slideshow availability when the policy is disabled or not configured.
+  - no-lock-screen-slideshow: missing â€” â€” Microsoft documents slideshow availability when the policy is disabled or not configured.
 
 **Recommended profiles**
 
@@ -23925,7 +23925,7 @@ Nohuto lineage references:
 | `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay | `high` | path, behavior, default, version-scope |
 | `local-controlpaneldisplay-admx-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | C:\Windows\PolicyDefinitions\ControlPanelDisplay.admx | `high` | path, ui-mapping, version-scope |
 | `local-controlpaneldisplay-adml-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | C:\Windows\PolicyDefinitions\en-US\ControlPanelDisplay.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-lock-screen-slideshow` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -23971,7 +23971,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes DisableWindowsSpotlightOnActionCenter = 1, which matches the documented Group Policy disable behavior. |
 
 Current write(s):
@@ -24014,7 +24014,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 10 version 1703 and newer supported systems)
-  - disable-windows-spotlight-on-action-center: missing — — The user policy is not configured by default.
+  - disable-windows-spotlight-on-action-center: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -24027,7 +24027,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-spotlight-action-center` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightOnActionCenter | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonactioncenter | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-action-center` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -24073,7 +24073,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes DisableSpotlightCollectionOnDesktop = 1, which matches the documented Group Policy disable behavior. |
 
 Current write(s):
@@ -24116,7 +24116,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 10 and Windows 11 client systems that support desktop Spotlight collection)
-  - disable-spotlight-collection-on-desktop: missing — — The user policy is not configured by default.
+  - disable-spotlight-collection-on-desktop: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -24129,7 +24129,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-spotlight-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowSpotlightCollection | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowspotlightcollection | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-desktop-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -24175,7 +24175,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes DisableWindowsSpotlightFeatures = 1, which matches the documented Group Policy disable behavior. |
 
 Current write(s):
@@ -24218,7 +24218,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 10 and Windows 11 client systems)
-  - disable-windows-spotlight-features: missing — — The user policy is not configured by default.
+  - disable-windows-spotlight-features: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -24231,7 +24231,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-windows-spotlight` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlight | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlight | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-features` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -24277,7 +24277,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes DisableWindowsSpotlightOnSettings = 1, which matches the documented Group Policy disable behavior. |
 
 Current write(s):
@@ -24320,7 +24320,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 10 version 1803 and newer supported systems)
-  - disable-windows-spotlight-on-settings: missing — — The user policy is not configured by default.
+  - disable-windows-spotlight-on-settings: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -24333,7 +24333,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-spotlight-settings` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightOnSettings | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonsettings | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-settings` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -24379,7 +24379,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes DisableThirdPartySuggestions = 1, which matches the documented Group Policy disable behavior. |
 
 Current write(s):
@@ -24422,7 +24422,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 10 and Windows 11 client systems)
-  - disable-third-party-suggestions: missing — — The user policy is not configured by default.
+  - disable-third-party-suggestions: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -24435,7 +24435,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-third-party-spotlight` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowThirdPartySuggestionsInWindowsSpotlight | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-third-party` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -24481,7 +24481,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes DisableWindowsSpotlightWindowsWelcomeExperience = 1, which matches the documented Group Policy disable behavior. |
 
 Current write(s):
@@ -24524,7 +24524,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 10 version 1703 and newer supported systems)
-  - disable-windows-spotlight-welcome: missing — — The user policy is not configured by default.
+  - disable-windows-spotlight-welcome: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -24537,7 +24537,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-spotlight-welcome` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightWindowsWelcomeExperience | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightwindowswelcomeexperience | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | C:\WINDOWS\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-welcome` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -24583,7 +24583,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes DisableWcnUi = 1 at machine scope, which matches the documented blocked state. |
 
 Current write(s):
@@ -24626,7 +24626,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows Vista and newer systems that still expose Windows Connect Now policy definitions)
-  - disable-wcn-ui: missing — — The machine policy is not configured by default.
+  - disable-wcn-ui: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -24639,7 +24639,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-wcn-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.admx mapping | C:\WINDOWS\PolicyDefinitions\WindowsConnectNow.admx | `high` | path, value, allowed-values, version-scope |
 | `local-wcn-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\WindowsConnectNow.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-wcn-wizards` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -24685,7 +24685,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes AllowNewsAndInterests = 0, which matches the documented blocked state. |
 
 Current write(s):
@@ -24728,7 +24728,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 and Windows 11 client systems that support Widgets policy)
-  - allow-news-and-interests: missing — — The device policy is not configured by default.
+  - allow-news-and-interests: missing â€” â€” The device policy is not configured by default.
 
 **Recommended profiles**
 
@@ -24742,7 +24742,7 @@ Nohuto lineage references:
 | `ms-news-and-interests-allow-widgets` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: NewsAndInterests / AllowWidgets | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-newsandinterests#allowwidgets | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-news-and-interests-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.admx mapping | C:\WINDOWS\PolicyDefinitions\NewsAndInterests.admx | `high` | path, value, allowed-values, version-scope |
 | `local-news-and-interests-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\NewsAndInterests.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-widgets` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -24788,7 +24788,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes DisallowAnimations = 1 at machine scope, which matches the documented blocked state. |
 
 Current write(s):
@@ -24831,7 +24831,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows Vista and newer systems that expose the DWM animation policy)
-  - disallow-animations: missing — — The machine policy is not configured by default.
+  - disallow-animations: missing â€” â€” The machine policy is not configured by default.
 
 **Recommended profiles**
 
@@ -24844,7 +24844,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-dwm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.admx mapping | C:\WINDOWS\PolicyDefinitions\DWM.admx | `high` | path, value, allowed-values, version-scope |
 | `local-dwm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\DWM.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-window-animations` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -24890,7 +24890,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes ForceClassicControlPanel = 1, which matches the documented icon-view state. |
 
 Current write(s):
@@ -24933,7 +24933,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows systems exposing the Control Panel view policy)
-  - force-classic-control-panel: missing — — The user policy is not configured by default.
+  - force-classic-control-panel: missing â€” â€” The user policy is not configured by default.
 
 **Recommended profiles**
 
@@ -24946,7 +24946,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-controlpanel-admx-classic` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx ForceClassicControlPanel mapping | C:\Windows\PolicyDefinitions\ControlPanel.admx | `high` | path, value, allowed-values, version-scope |
 | `local-controlpanel-adml-classic` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.adml ForceClassicControlPanel help text | C:\Windows\PolicyDefinitions\en-US\ControlPanel.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -24991,7 +24991,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app hides the language bar by writing ShowStatus = 3 for the current user. |
 
 Current write(s):
@@ -25032,7 +25032,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - User preference baseline unknown (Windows users with the language bar available)
-  - ctf-langbar-showstatus: unknown — — This review did not establish one official Microsoft-published default for the ShowStatus registry value.
+  - ctf-langbar-showstatus: unknown â€” â€” This review did not establish one official Microsoft-published default for the ShowStatus registry value.
 
 **Recommended profiles**
 
@@ -25045,7 +25045,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `microsoft-qna-language-bar-showstatus` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter | `medium` | path, value, behavior |
 | `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | Docs/visibility/visibility.md | `medium` | path, value, allowed-values, behavior |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | H:\Temp\procmon-hide-language-bar-3.pml | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
@@ -25091,7 +25091,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes ShowOrHideMostUsedApps = 2, which matches the documented force-hide state. |
 
 Current write(s):
@@ -25134,7 +25134,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows machine-policy default (Windows 10 21H2 and newer systems that support the Start menu policy)
-  - show-or-hide-most-used-apps: missing — — The policy is not configured by default.
+  - show-or-hide-most-used-apps: missing â€” â€” The policy is not configured by default.
 
 **Recommended profiles**
 
@@ -25147,7 +25147,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | C:\WINDOWS\PolicyDefinitions\StartMenu.admx | `high` | path, value, allowed-values, version-scope |
 | `local-startmenu-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.adml help text | C:\WINDOWS\PolicyDefinitions\en-US\StartMenu.adml | `high` | behavior, default, side-effects |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-most-used-apps` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 
 **Validation proof**
@@ -25193,7 +25193,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The current app writes HidePeopleBar = 1 for the current user, which matches the documented hide state. |
 
 Current write(s):
@@ -25236,7 +25236,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows user-policy default (Windows 10 version 1709 and later systems that still expose the People Bar policy)
-  - hide-people-bar: value `0` — Microsoft documents the default value as 0, meaning the feature is not hidden.
+  - hide-people-bar: value `0` â€” Microsoft documents the default value as 0, meaning the feature is not hidden.
 
 **Recommended profiles**
 
@@ -25248,7 +25248,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-hide-people-bar` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP: HidePeopleBar | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start#hidepeoplebar | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-people-bar` | `repo-doc` | `Current repo docs` | Existing tweak source record | Docs/tweaks/tweak-provenance.json | `medium` | ui-mapping, risk |
 | `nohuto-hidepeoplebar-admx` | `decompilation` | `Ghidra decompilation` | nohuto win-config mirror - HidePeopleBar policy | Docs/tweaks/_source-mirrors/win-config/visibility/desc.md | `high` | path, value, behavior |
 
@@ -25295,7 +25295,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The app writes an empty default value under the known Windows 11 classic-context-menu CLSID path. |
 
 Current write(s):
@@ -25338,7 +25338,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows 11 default context menu (Windows 11 systems without the custom CLSID workaround key)
-  - classic-context-menu-clsid: missing — — Repo notes say deleting the custom key restores the default Windows 11 context menu.
+  - classic-context-menu-clsid: missing â€” â€” Repo notes say deleting the custom key restores the default Windows 11 context menu.
 
 **Recommended profiles**
 
@@ -25351,7 +25351,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-visibility-classic-context` | `repo-doc` | `Current repo docs` | Repo visibility notes for classic context menu | Docs/visibility/visibility.md | `medium` | path, value, default, behavior |
 | `repo-visibility-classic-context-usecase` | `repo-doc` | `Current repo docs` | Repo visibility use-case guide for classic context menu | Docs/visibility/use-case-guide.md | `medium` | path, value |
-| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -25400,7 +25400,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs` |
 | Notes | The current app writes DisableSpatialOnLowLatency = 1, but this pass did not capture a primary Microsoft source for the exact registry contract. |
 
 Current write(s):
@@ -25444,7 +25444,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Conservative baseline (Windows systems where this dataset has not validated the spatial-audio registry contract)
-  - audio-disable-spatial-on-low-latency: unknown — — Do not publish the spatial-audio registry write as validated until a primary Microsoft source is captured.
+  - audio-disable-spatial-on-low-latency: unknown â€” â€” Do not publish the spatial-audio registry write as validated until a primary Microsoft source is captured.
 
 **Recommended profiles**
 
@@ -25455,7 +25455,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-spatial-audio | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
-| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 | `guest-audio-string-scan` | `vm-test` | `VM test / probe` | Guest string scan for spatial-audio registry contract | H:\Temp\vm-tooling-staging\spatial_audio_string_search.txt | `low` | behavior, app-mismatch |
 
 **Validation proof**
@@ -25504,7 +25504,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs` |
 | Notes | The current app clears many AppEvents sound mappings, but this pass did not capture a primary Microsoft source for the exact AppEvents bundle contract. |
 
 Current write(s):
@@ -25548,7 +25548,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Conservative baseline (Windows user profiles where this dataset has not validated the AppEvents bundle contract)
-  - appevents-sound-scheme-bundle: unknown — — Do not publish the AppEvents write bundle as validated until a primary Microsoft source is captured.
+  - appevents-sound-scheme-bundle: unknown â€” â€” Do not publish the AppEvents write bundle as validated until a primary Microsoft source is captured.
 
 **Recommended profiles**
 
@@ -25559,7 +25559,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-provenance-audio-disable-system-sounds` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-system-sounds | Docs/tweaks/tweak-provenance.json | `medium` | path, value, ui-mapping |
-| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -25609,7 +25609,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app writes DeveloperMode = 1 and EnableDebugTap = 1, but this pass did not capture a primary Windows Terminal registry contract for those values. |
 
 Current write(s):
@@ -25653,8 +25653,8 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Conservative baseline (Windows Terminal profiles where this dataset has not validated the registry contract for internal developer flags)
-  - terminal-developer-mode: unknown — — Do not publish DeveloperMode as validated until a primary Windows Terminal source is captured.
-  - terminal-enable-debug-tap: unknown — — Do not publish EnableDebugTap as validated until a primary Windows Terminal source is captured.
+  - terminal-developer-mode: unknown â€” â€” Do not publish DeveloperMode as validated until a primary Windows Terminal source is captured.
+  - terminal-enable-debug-tap: unknown â€” â€” Do not publish EnableDebugTap as validated until a primary Windows Terminal source is captured.
 
 **Recommended profiles**
 
@@ -25668,7 +25668,7 @@ Nohuto lineage references:
 | `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup | `medium` | behavior, app-mismatch |
 | `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | C:\Tools\WindowsTerminal\terminal-1.24.10621.0\TerminalApp.dll; C:\Temp\terminal-ghidra.txt; C:\Temp\terminal-ghidra-enabledebugtap.txt | `medium` | negative-evidence, binary-scan |
 | `wpr-terminal-launch-trace` | `wpr-trace` | `unspecified` | WPR capture of Windows Terminal launch | C:\Temp\terminal-launch.etl | `low` | behavior, process-tree, startup-context |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -25718,7 +25718,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app writes DisableAutoUpdating = 0, but this pass did not capture a primary Microsoft registry contract for that Visual Studio value. |
 
 Current write(s):
@@ -25759,7 +25759,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Conservative baseline (Visual Studio user profiles where this dataset has not validated the IntelliSense registry contract)
-  - vs-intellisense-disable-auto-updating: unknown — — Do not publish the IntelliSense registry write as validated until a primary Microsoft source is captured.
+  - vs-intellisense-disable-auto-updating: unknown â€” â€” Do not publish the IntelliSense registry write as validated until a primary Microsoft source is captured.
 
 **Recommended profiles**
 
@@ -25771,7 +25771,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `vs-performance-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Optimize Visual Studio performance | https://learn.microsoft.com/en-us/visualstudio/ide/optimize-visual-studio-performance | `medium` | behavior, side-effects |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -25820,7 +25820,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app writes BackgroundAnalysis = 0, but this pass did not capture a primary Microsoft registry contract for that Visual Studio value. |
 
 Current write(s):
@@ -25861,7 +25861,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Conservative baseline (Visual Studio user profiles where this dataset has not validated the solution-loading registry contract)
-  - vs-solution-loading-background-analysis: unknown — — Do not publish the solution-loading registry write as validated until a primary Microsoft source is captured.
+  - vs-solution-loading-background-analysis: unknown â€” â€” Do not publish the solution-loading registry write as validated until a primary Microsoft source is captured.
 
 **Recommended profiles**
 
@@ -25873,7 +25873,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `vs-performance-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Optimize Visual Studio performance | https://learn.microsoft.com/en-us/visualstudio/ide/optimize-visual-studio-performance | `medium` | behavior, side-effects |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -25922,7 +25922,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `mismatch-suspected` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs` |
 | Notes | The current app targets the right feature area, but it writes an Explorer registry value instead of the documented VS Code settings surface. |
 
 Current write(s):
@@ -25965,8 +25965,8 @@ Nohuto lineage references:
 **Windows defaults**
 
 - VS Code settings default (Users who have not explicitly set git.autofetch in VS Code settings)
-  - vscode-git-autofetch-setting: missing — — Keep the official VS Code setting unset until the app implementation is aligned.
-  - app-disable-git-autofetch-registry: unknown — — Do not publish the observed registry write as the official VS Code control.
+  - vscode-git-autofetch-setting: missing â€” â€” Keep the official VS Code setting unset until the app implementation is aligned.
+  - app-disable-git-autofetch-registry: unknown â€” â€” Do not publish the observed registry write as the official VS Code control.
 
 **Recommended profiles**
 
@@ -25979,7 +25979,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `vscode-settings-reference` | `official-doc` | `Microsoft official doc` | VS Code documentation: Default settings reference | https://code.visualstudio.com/docs/reference/default-settings | `high` | value, allowed-values, behavior |
 | `vscode-source-control-faq` | `official-doc` | `Microsoft official doc` | VS Code documentation: Source Control FAQ | https://code.visualstudio.com/docs/sourcecontrol/faq | `high` | value, behavior |
-| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -26002,7 +26002,7 @@ Nohuto lineage references:
 | Why | VS Code's git.autofetch setting is validated at the feature level, but the app's Explorer\\Advanced\\DisableGitAutofetch registry path is still not validated by a primary source. |
 
 Blocking issues:
-- VS Code'un git.autofetch ayarı doğrulandı ancak uygulamanın yazdığı Explorer\Advanced\DisableGitAutofetch registry path'i için birincil Microsoft kaynağı bulunamadı.
+- VS Code'un git.autofetch ayarÄ± doÄŸrulandÄ± ancak uygulamanÄ±n yazdÄ±ÄŸÄ± Explorer\Advanced\DisableGitAutofetch registry path'i iÃ§in birincil Microsoft kaynaÄŸÄ± bulunamadÄ±.
 - The app writes an Explorer registry value instead of the documented git.autofetch setting.
 
 ---
@@ -26030,7 +26030,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `not-mapped` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs` |
 | Notes | The duplicate explorer.disable-taskbar-widgets provider entry was removed on 2026-03-13. The supported Widgets implementation remains visibility.disable-widgets, which writes the official machine policy AllowNewsAndInterests = 0. |
 
 **Evidence class**
@@ -26059,7 +26059,7 @@ Blocking issues:
 **Windows defaults**
 
 - Deprecated audit trail (Research metadata only)
-  - deprecated-duplicate-reference: value `deprecated` — This record remains only to preserve the retired tweak ID and point future research to visibility.disable-widgets.
+  - deprecated-duplicate-reference: value `deprecated` â€” This record remains only to preserve the retired tweak ID and point future research to visibility.disable-widgets.
 
 **Recommended profiles**
 
@@ -26116,7 +26116,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `mismatch-suspected` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` |
 | Notes | The app uses the correct registry path but not the Microsoft example values for cache lifetimes. |
 
 Current write(s):
@@ -26168,9 +26168,9 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented defaults (Windows SMB client tuning surface documented by Microsoft)
-  - smb-disable-bandwidth-throttling: value `1` — Microsoft lists 1 as the default value.
-  - smb-fileinfo-cache-lifetime: value `10` — Microsoft lists 10 seconds as the default value.
-  - smb-directory-cache-lifetime: value `10` — Microsoft lists 10 seconds as the default value.
+  - smb-disable-bandwidth-throttling: value `1` â€” Microsoft lists 1 as the default value.
+  - smb-fileinfo-cache-lifetime: value `10` â€” Microsoft lists 10 seconds as the default value.
+  - smb-directory-cache-lifetime: value `10` â€” Microsoft lists 10 seconds as the default value.
 
 **Recommended profiles**
 
@@ -26182,13 +26182,13 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-client-tuning` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance tuning for SMB file servers | https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/ | `high` | path, value, allowed-values, default, risk |
-| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
+| `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\network\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\network\desc.md |
 | Exact quote / path | RegSetValue HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities. |
 | Key found on page | `True` |
 | Notes | Mirror-backed SMB tuning bundle. This is a composite of documented SMB offload/RSS/VMQ surfaces, not a single supported toggle. |
@@ -26261,7 +26261,7 @@ Blocking issues:
 **Windows defaults**
 
 - Hardware and image dependent baseline (Systems whose shipped platform design supports either Modern Standby or S3)
-  - modern-standby-registry-bundle: feature-dependent — — The shipped sleep model depends on platform support and image design, not on a validated post-install registry toggle.
+  - modern-standby-registry-bundle: feature-dependent â€” â€” The shipped sleep model depends on platform support and image design, not on a validated post-install registry toggle.
 
 **Recommended profiles**
 
@@ -26272,7 +26272,7 @@ Blocking issues:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-modern-standby` | `official-doc` | `Microsoft official doc` | Microsoft Learn: What is Modern Standby | https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby | `high` | behavior, side-effects, version-scope, app-mismatch |
-| `app-power-provider` | `repo-code` | `Current repo code` | Former app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-power-provider` | `repo-code` | `Current repo code` | Former app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-power-msdisabled-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for MSDisabled | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
 
@@ -26319,7 +26319,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs` |
 | Notes | The app writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. Only two of these values are backed by primary Microsoft documentation in this review, and the bundle mixes separate feature areas. |
 
 Current write(s):
@@ -26371,9 +26371,9 @@ Windows Internals references:
 **Windows defaults**
 
 - Mixed Windows baseline (Windows systems using TCP/IP offload and MMCSS features)
-  - disable-task-offload: value `0` — Microsoft documents that 0 enables task offloads.
-  - system-responsiveness: unknown — — Microsoft documents how SystemResponsiveness behaves, but this record does not publish one stock cross-version default value.
-  - network-throttling-index: unknown — — Primary Microsoft documentation for this exact value name has not been confirmed in this review.
+  - disable-task-offload: value `0` â€” Microsoft documents that 0 enables task offloads.
+  - system-responsiveness: unknown â€” â€” Microsoft documents how SystemResponsiveness behaves, but this record does not publish one stock cross-version default value.
+  - network-throttling-index: unknown â€” â€” Primary Microsoft documentation for this exact value name has not been confirmed in this review.
 
 **Recommended profiles**
 
@@ -26385,14 +26385,14 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-task-offload` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading | `high` | path, value, allowed-values, behavior |
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service | `high` | path, value, behavior, allowed-values |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\network\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\network\desc.md |
 | Exact quote / path | RegSetValue HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities. |
 | Key found on page | `True` |
 | Notes | The bundle spans network adapter power and offload surfaces; this mirror line is the strongest source for the current write shape. |
@@ -26435,7 +26435,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `mismatch-suspected` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs` |
 | Notes | The app writes a broad performance-focused registry bundle, but this review did not elevate that raw bundle to a primary-source-backed Windows preset. |
 
 Current write(s):
@@ -26488,7 +26488,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows-managed power baseline (Windows systems using normal power-manager behavior)
-  - power-performance-registry-bundle: unknown — — This review does not publish a raw bundled registry baseline for these low-level values.
+  - power-performance-registry-bundle: unknown â€” â€” This review does not publish a raw bundled registry baseline for these low-level values.
 
 **Recommended profiles**
 
@@ -26498,14 +26498,14 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\power\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\power\desc.md |
 | Exact quote / path | "EnergySaverState" = 2; // 1 = override state (more power savings)? if != 1 no override? ... # Disable NIC Power Savings |
 | Key found on page | `True` |
 | Notes | Raw power-manager performance bundle. The record is a composite preset, so the proof anchors the power-state and NIC power-saving pieces rather than claiming one supported Microsoft toggle. |
@@ -26549,7 +26549,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | Most AppPrivacy writes line up with the official ForceDeny value 2, but the bundle is very broad and includes an exception for microphone plus an extra System policy write. |
 
 Current write(s):
@@ -26592,7 +26592,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows privacy-policy baseline (Windows 10 and later AppPrivacy policy surface)
-  - appprivacy-deny-bundle: value `windows-default` — The broad bundle should not be treated as the baseline for general systems.
+  - appprivacy-deny-bundle: value `windows-default` â€” The broad bundle should not be treated as the baseline for general systems.
 
 **Recommended profiles**
 
@@ -26604,7 +26604,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | C:\Windows\PolicyDefinitions\AppPrivacy.admx | `high` | path, value, allowed-values |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 
 **Validation proof**
 
@@ -26653,7 +26653,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app intentionally exposes a composite toggle that wraps one reviewed policy bundle and one reviewed task bundle. |
 
 Current write(s):
@@ -26694,7 +26694,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows baseline composite state (Windows systems using the normal AppCompat policy and task baseline)
-  - appcompat-composite: value `windows-default` — Neither subrecord is validated as a product-ready one-click disable bundle.
+  - appcompat-composite: value `windows-default` â€” Neither subrecord is validated as a product-ready one-click disable bundle.
 
 **Recommended profiles**
 
@@ -26707,13 +26707,13 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `policy-subrecord` | `repo-doc` | `Current repo docs` | Existing AppCompat policy review record | Docs/tweaks/research/records/privacy.disable-application-compatibility.policy.review.json | `high` | behavior, risk |
 | `tasks-subrecord` | `repo-doc` | `Current repo docs` | Application Experience task review record | Docs/tweaks/research/records/privacy.disable-application-compatibility.tasks.review.json | `medium` | behavior, risk |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider composite | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider composite | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
 | Exact quote / path | Disables Windows Application Experience telemetry and compatibility components, Microsoft Compatibility Appraiser (including its daily task and CompatTelRunner.exe) and the Application Experience tasks. Currently includes all existing tasks in \\Microsoft\\Windows\\Application Experience\\ (LTSC IoT Enterprise 2024): MareBackup, Microsoft Compatibility Appraiser, Microsoft Compatibility Appraiser Exp, PcaPatchDbTask, SdbinstMergeDbTask, StartupAppTask. |
 | Key found on page | `True` |
 | Notes | Composite Application Experience audit trail. This proof anchors the task family and telemetry components from the upstream mirror. |
@@ -26755,7 +26755,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | App implementation unchanged. See child records for current implementation details and evidence mapping. |
 
 **Evidence class**
@@ -26784,7 +26784,7 @@ Blocking issues:
 **Windows defaults**
 
 - Deprecated audit trail (Research metadata only)
-  - deprecated-split-reference: value `deprecated` — This record remains only to preserve the split history and the original record identity.
+  - deprecated-split-reference: value `deprecated` â€” This record remains only to preserve the split history and the original record identity.
 
 **Recommended profiles**
 
@@ -26839,7 +26839,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The provider disables the listed Application Experience tasks as one batch. |
 
 Current write(s):
@@ -26874,7 +26874,7 @@ Current write(s):
 **Windows defaults**
 
 - Windows scheduled-task baseline (Windows builds that ship the Application Experience task folder)
-  - app-experience-task-bundle: value `default` — Do not treat the app's disable bundle as the documented Windows baseline.
+  - app-experience-task-bundle: value `default` â€” Do not treat the app's disable bundle as the documented Windows baseline.
 
 **Recommended profiles**
 
@@ -26885,13 +26885,13 @@ Current write(s):
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider task bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, path, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider task bundle | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, path, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
 | Exact quote / path | Currently includes all existing tasks in \\Microsoft\\Windows\\Application Experience\\ (LTSC IoT Enterprise 2024): MareBackup, Microsoft Compatibility Appraiser, Microsoft Compatibility Appraiser Exp, PcaPatchDbTask, SdbinstMergeDbTask, StartupAppTask. |
 | Key found on page | `True` |
 | Notes | Task bundle subrecord. The proof captures the exact Application Experience task set described in the mirror. |
@@ -26933,7 +26933,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The provider writes three CEIP-related values across three different policy families. |
 
 Current write(s):
@@ -26974,7 +26974,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Mixed CEIP baseline (Windows systems where these product-specific policy paths exist)
-  - ceip-bundle: value `windows-default` — Treat the bundle as mixed product policy state rather than one official Windows baseline.
+  - ceip-bundle: value `windows-default` â€” Treat the bundle as mixed product policy state rather than one official Windows baseline.
 
 **Recommended profiles**
 
@@ -26985,13 +26985,13 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider CEIP bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider CEIP bundle | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
 | Exact quote / path | "ValueName": "CEIPEnable" ... "KeyPath": ["HKLM\\SOFTWARE\\Policies\\Microsoft\\AppV\\CEIP"] ... "DisplayName": "Turn off Windows Customer Experience Improvement Program" ... "KeyPath": ["HKLM\\Software\\Policies\\Microsoft\\SQMClient\\Windows"] ... "ValueName": "CEIPEnable". |
 | Key found on page | `True` |
 | Notes | Composite CEIP audit trail. The mirror shows CEIPEnable on both App-V and SQMClient policy surfaces. |
@@ -27033,7 +27033,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app mixes the official EnableCdp device policy with undocumented user-side CDP preset values to offer three presets. |
 
 Current write(s):
@@ -27077,7 +27077,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows mixed-scope baseline (Windows 10 and newer systems exposing Continue Experiences policy)
-  - enable-cdp-policy: missing — — Microsoft documents the device-policy default as depending on the Windows edition.
+  - enable-cdp-policy: missing â€” â€” Microsoft documents the device-policy default as depending on the Windows edition.
 
 **Recommended profiles**
 
@@ -27091,7 +27091,7 @@ Nohuto lineage references:
 | `ms-admx-grouppolicy-enablecdp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | C:\Windows\PolicyDefinitions\GroupPolicy.admx | `high` | path, value, allowed-values, version-scope |
 | `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | C:\Windows\PolicyDefinitions\en-US\GroupPolicy.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | Decompiled Shared Experiences singleton | Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c | `medium` | path, value, behavior |
 | `guest-crossdevice-launch` | `vm-test` | `VM test / probe` | Guest launch of CrossDeviceResume | H:\Temp\vm-tooling-staging\crossdevice_resume_probe.csv | `low` | behavior, version-scope |
 
@@ -27141,7 +27141,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app renames HelpPane.exe to HelpPane.exe.disabled. The upstream nohuto mirror documents the same HelpPane rename behavior and F1 handling. |
 
 Current write(s):
@@ -27182,7 +27182,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Normal HelpPane state (Windows systems that ship HelpPane.exe)
-  - helppane-binary: value `present` — Treat the normal file location as the baseline.
+  - helppane-binary: value `present` â€” Treat the normal file location as the baseline.
 
 **Recommended profiles**
 
@@ -27193,7 +27193,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider file rename | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider file rename | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -27241,7 +27241,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app exposes a three-value registry bundle spanning TextInput and Windows Ink Workspace paths. |
 
 Current write(s):
@@ -27284,7 +27284,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Typing and ink baseline (Windows systems with the relevant typing and ink components)
-  - inking-typing-bundle: value `windows-default` — Do not treat the current mixed bundle as a validated baseline override.
+  - inking-typing-bundle: value `windows-default` â€” Do not treat the current mixed bundle as a validated baseline override.
 
 **Recommended profiles**
 
@@ -27295,7 +27295,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider typing and ink bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider typing and ink bundle | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-privacy-verified-inking-typing` | `repo-doc` | `Current repo docs` | Repo privacy docs for inking and typing personalization | Docs/privacy/privacy.md | `high` | path, value, behavior |
 
 **Validation proof**
@@ -27344,7 +27344,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app exposes a composite that includes one validated policy control plus several broader implementation-level sub-tweaks. |
 
 Current write(s):
@@ -27385,7 +27385,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Offline Files baseline (Windows client and server systems with Offline Files support)
-  - offline-files-composite: value `windows-default` — The parent bundle should not outrun the validated policy subrecord.
+  - offline-files-composite: value `windows-default` â€” The parent bundle should not outrun the validated policy subrecord.
 
 **Recommended profiles**
 
@@ -27397,13 +27397,13 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `offline-policy-subrecord` | `repo-doc` | `Current repo docs` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider composite | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider composite | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
 | Exact quote / path | Offline Files (Client-Side Caching, CSC) lets Windows cache files from network shares locally ... If you enable this policy setting, Offline Files is enabled and users cannot disable it. If you disable this policy setting, Offline Files is disabled and users cannot enable it. ... Hides or displays reminder balloons ... Synchronize all offline files before logging off ... Synchronize all offline files when logging on ... Remove "Work offline" command. |
 | Key found on page | `True` |
 | Notes | Composite Offline Files policy bundle. The proof cites the documented NetCache policy family and the related task and UI behavior. |
@@ -27445,7 +27445,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app renames mobsync.exe to mobsync.exe.disabled as part of the Offline Files bundle. |
 
 Current write(s):
@@ -27480,7 +27480,7 @@ Current write(s):
 **Windows defaults**
 
 - Normal binary state (Windows systems that ship Sync Center)
-  - mobsync-binary: value `present` — Treat the normal executable path as the baseline.
+  - mobsync-binary: value `present` â€” Treat the normal executable path as the baseline.
 
 **Recommended profiles**
 
@@ -27491,13 +27491,13 @@ Current write(s):
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider file rename | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, path, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider file rename | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, path, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
 | Exact quote / path | Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks, and renames mobsync.exe to block execution. |
 | Key found on page | `True` |
 | Notes | Binary-rename subrecord. The proof anchors the mobsync.exe rename behavior inside the Offline Files composite bundle. |
@@ -27539,7 +27539,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app disables CSC and CscService as part of the broader Offline Files bundle. |
 
 Current write(s):
@@ -27574,7 +27574,7 @@ Current write(s):
 **Windows defaults**
 
 - Offline Files service baseline (Windows systems with the Offline Files feature components present)
-  - offline-files-services: value `default` — Use the normal Windows service configuration unless there is a stronger reason to change it.
+  - offline-files-services: value `default` â€” Use the normal Windows service configuration unless there is a stronger reason to change it.
 
 **Recommended profiles**
 
@@ -27586,7 +27586,7 @@ Current write(s):
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `offline-policy-subrecord` | `repo-doc` | `Current repo docs` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider service bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider service bundle | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 | `repo-privacy-verified-offline-files` | `repo-doc` | `Current repo docs` | Repo privacy docs for Offline Files service hardening | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
 
 **Validation proof**
@@ -27635,7 +27635,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app disables the two Offline Files synchronization tasks as part of the broader bundle. |
 
 Current write(s):
@@ -27670,7 +27670,7 @@ Current write(s):
 **Windows defaults**
 
 - Offline Files task baseline (Windows systems with the Offline Files task folder present)
-  - offline-files-task-bundle: value `default` — Treat the task state as part of the normal Windows feature baseline unless a stronger reason exists.
+  - offline-files-task-bundle: value `default` â€” Treat the task state as part of the normal Windows feature baseline unless a stronger reason exists.
 
 **Recommended profiles**
 
@@ -27682,7 +27682,7 @@ Current write(s):
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `offline-policy-subrecord` | `repo-doc` | `Current repo docs` | Existing Offline Files policy record | Docs/tweaks/research/records/privacy.disable-offline-files.policy.json | `high` | behavior, risk |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider task bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider task bundle | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 | `repo-privacy-offline-files-tasks` | `repo-doc` | `Current repo docs` | Repo privacy docs for Offline Files scheduled tasks | Docs/privacy/privacy.md | `high` | path, value, behavior |
 
 **Validation proof**
@@ -27731,8 +27731,8 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `not-mapped` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
-| Notes | The retired privacy duplicate has been removed from the provider. The supported implementation now lives only at cleanup.disable-reserved-storage in WindowsOptimizer.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs. |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Notes | The retired privacy duplicate has been removed from the provider. The supported implementation now lives only at cleanup.disable-reserved-storage in OpenTraceProject.Engine/Tweaks/Commands/Cleanup/DisableReservedStorageTweak.cs. |
 
 **Evidence class**
 
@@ -27760,7 +27760,7 @@ Blocking issues:
 **Windows defaults**
 
 - Deprecated audit trail (Research metadata only)
-  - deprecated-privacy-duplicate: value `deprecated` — This record remains only to preserve the retired privacy ID and point to the supported cleanup tweak.
+  - deprecated-privacy-duplicate: value `deprecated` â€” This record remains only to preserve the retired privacy ID and point to the supported cleanup tweak.
 
 **Recommended profiles**
 
@@ -27815,7 +27815,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app disables three diagnostic event channels by setting Enabled = 0. |
 
 Current write(s):
@@ -27859,7 +27859,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Diagnostic channel baseline (Windows systems with the related WINEVT channels)
-  - sleepstudy-diagnostic-bundle: value `windows-default` — Treat the current event-channel disable bundle as an observed override rather than a validated baseline.
+  - sleepstudy-diagnostic-bundle: value `windows-default` â€” Treat the current event-channel disable bundle as an observed override rather than a validated baseline.
 
 **Recommended profiles**
 
@@ -27870,13 +27870,13 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider sleep-study diagnostics bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider sleep-study diagnostics bundle | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
 | Exact quote / path | Sleep Study tracks modern sleep states to analyze energy usage and pinpoint battery drain. It disables Sleep Study by making ETL logs read-only, disabling related diagnostics, and turning off the scheduled task. wevtutil sl Microsoft-Windows-SleepStudy/Diagnostic /e:false ... SleepStudyDeviceAccountingLevel = 4; SleepStudyDisabled = 0. |
 | Key found on page | `True` |
 | Notes | Sleep Study diagnostics bundle. The proof anchors the ETL channel, the related registry values, and the scheduled task behavior. |
@@ -27918,7 +27918,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app writes five current-user suggestion-related ContentDeliveryManager values to 0. |
 
 Current write(s):
@@ -27960,7 +27960,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Current-user CDM baseline (Current-user Content Delivery Manager settings)
-  - cdm-suggestions-bundle: value `windows-default` — Treat the numeric suggestion IDs as observed implementation details until they are better sourced.
+  - cdm-suggestions-bundle: value `windows-default` â€” Treat the numeric suggestion IDs as observed implementation details until they are better sourced.
 
 **Recommended profiles**
 
@@ -27971,7 +27971,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider CDM suggestions bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider CDM suggestions bundle | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-privacy-verified-suggestions` | `repo-doc` | `Current repo docs` | Repo privacy docs for Content Delivery Manager suggestion IDs | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
 
 **Validation proof**
@@ -28020,7 +28020,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The current app targets the same feature family, but it uses opaque ContentDeliveryManager values instead of the named CloudContent policies documented in this record. |
 
 Current write(s):
@@ -28065,10 +28065,10 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows policy default (Windows 10 and Windows 11 systems exposing the named CloudContent suggestion policies)
-  - disable-third-party-suggestions-policy: missing — — Leave the official third-party suggestions policy unset.
-  - disable-spotlight-on-settings-policy: missing — — Leave the official Settings suggestions policy unset.
-  - disable-welcome-experience-policy: missing — — Leave the official Windows Welcome Experience policy unset.
-  - content-delivery-manager-suggestions-observed: missing — — Do not treat the observed SubscribedContent values as an official baseline.
+  - disable-third-party-suggestions-policy: missing â€” â€” Leave the official third-party suggestions policy unset.
+  - disable-spotlight-on-settings-policy: missing â€” â€” Leave the official Settings suggestions policy unset.
+  - disable-welcome-experience-policy: missing â€” â€” Leave the official Windows Welcome Experience policy unset.
+  - content-delivery-manager-suggestions-observed: missing â€” â€” Do not treat the observed SubscribedContent values as an official baseline.
 
 **Recommended profiles**
 
@@ -28085,7 +28085,7 @@ Nohuto lineage references:
 | `local-cloudcontent-adml-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
 | `local-cloudcontent-admx-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | C:\Windows\PolicyDefinitions\CloudContent.admx | `high` | path, value, allowed-values, version-scope |
 | `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | C:\Windows\PolicyDefinitions\en-US\CloudContent.adml | `high` | behavior, default, side-effects |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `repo-privacy-verified-suggestions-cdm` | `repo-doc` | `Current repo docs` | Repo privacy docs for Content Delivery Manager suggestions | Docs/privacy/privacy-verified.md | `high` | path, value, behavior |
 
 **Validation proof**
@@ -28134,7 +28134,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` |
 | Notes | The app writes a product-specific Windows Media Player preference bundle under the current user hive. |
 
 Current write(s):
@@ -28177,7 +28177,7 @@ Nohuto lineage references:
 **Windows defaults**
 
 - Windows Media Player preference baseline (Current-user Windows Media Player preference state)
-  - wmplayer-preferences-bundle: value `windows-default` — Treat the product-specific preference bundle as optional rather than as a validated Windows baseline.
+  - wmplayer-preferences-bundle: value `windows-default` â€” Treat the product-specific preference bundle as optional rather than as a validated Windows baseline.
 
 **Recommended profiles**
 
@@ -28188,13 +28188,13 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider Windows Media Player bundle | WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider Windows Media Player bundle | OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\privacy\desc.md |
 | Exact quote / path | WMPlayer (Windows Media Player) sends player usage data by default ... This option turns off the Diagnostics and Feedback option ... Note: I gathered all registry values via the legacy WMPlayer. |
 | Key found on page | `True` |
 | Notes | Windows Media Player telemetry bundle. The proof anchors the legacy WMPlayer-registry capture path and the usage-data behavior. |
@@ -28238,7 +28238,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes the documented disabled values for the three Device Guard settings it manages. |
 
 Current write(s):
@@ -28289,9 +28289,9 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting Device Guard policy settings)
-  - enable-vbs: missing — — Leave the main Device Guard policy unset.
-  - hvci-mode: missing — — Do not force an HVCI mode through policy.
-  - credential-guard-mode: missing — — Do not force a Credential Guard mode through policy.
+  - enable-vbs: missing â€” â€” Leave the main Device Guard policy unset.
+  - hvci-mode: missing â€” â€” Do not force an HVCI mode through policy.
+  - credential-guard-mode: missing â€” â€” Do not force a Credential Guard mode through policy.
 
 **Recommended profiles**
 
@@ -28304,7 +28304,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `local-deviceguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.admx mapping | C:\Windows\PolicyDefinitions\DeviceGuard.admx | `high` | path, value, allowed-values, version-scope |
 | `local-deviceguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.adml help text | C:\Windows\PolicyDefinitions\en-US\DeviceGuard.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -28354,7 +28354,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The current app writes two official policy values and also writes three long-dated pause timestamps under HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings. Those pause values are not the same thing as the official Group Policy controls. |
 
 Current write(s):
@@ -28404,7 +28404,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows policy default (Windows systems supporting these Windows Update policies)
-  - disable-windows-update-access: missing — — Leave the Windows Update access-removal policy unset.
+  - disable-windows-update-access: missing â€” â€” Leave the Windows Update access-removal policy unset.
 
 **Recommended profiles**
 
@@ -28417,7 +28417,7 @@ Windows Internals references:
 | `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | C:\Windows\PolicyDefinitions\ICM.admx | `high` | path, value, allowed-values |
 | `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | C:\Windows\PolicyDefinitions\WindowsUpdate.admx | `high` | path, value, allowed-values, version-scope |
 | `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | C:\Windows\PolicyDefinitions\en-US\WindowsUpdate.adml | `high` | behavior, default, side-effects |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
@@ -28466,7 +28466,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs` |
 | Notes | The app writes DisableWpbtExecution = 1 under HKLM\System\CurrentControlSet\Control\Session Manager. This record intentionally documents that exact registry write as an observed implementation only. |
 
 Current write(s):
@@ -28516,7 +28516,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where WPBT management should only be published from an official Microsoft surface)
-  - disable-wpbt-execution: unknown — — Do not publish this registry path as the supported WPBT control until a primary Microsoft mapping is captured.
+  - disable-wpbt-execution: unknown â€” â€” Do not publish this registry path as the supported WPBT control until a primary Microsoft mapping is captured.
 
 **Recommended profiles**
 
@@ -28528,14 +28528,14 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dfci-wpbt` | `official-doc` | `Microsoft official doc` | Microsoft Learn DFCI WPBT setting reference | https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings | `high` | behavior, allowed-values, default |
 | `repo-security-note` | `repo-doc` | `Current repo docs` | Repo security notes for WPBT | Docs/security/security.md | `medium` | path, value, app-mismatch |
-| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `regkit-session-manager-trace` | `registry-observation` | `VM registry observation` | nohuto regkit trace for Session Manager | Docs/tweaks/_source-mirrors/regkit/assets/traces/23H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/24H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/25H2.txt; Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt | `high` | path, value, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\security\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\security\desc.md |
 | Exact quote / path | \Registry\Machine\SYSTEM\ControlSet001\Control\Session Manager : DisableWpbtExecution |
 | Key found on page | `True` |
 | Notes | Observed WPBT registry write. The proof anchors the exact kernel/session-manager value used by the bundle and is corroborated by raw registry traces in the nohuto mirror. |
@@ -28580,7 +28580,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-game-recording-broadcasting. |
 
 **Evidence class**
@@ -28655,7 +28655,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app uses a batch scheduled-task tweak to disable the listed task paths. This record keeps the bundle in review because the tasks span multiple Windows feature areas and one task is version-dependent on the current review machine. |
 
 Current write(s):
@@ -28711,13 +28711,13 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows task baseline varies by build (Windows systems where these task paths may exist with different defaults across versions and editions)
-  - marebackup-task: unknown — — The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
-  - compat-appraiser-task: unknown — — The current review host does not include this exact task path, showing version-dependent task presence.
-  - consolidator-task: unknown — — The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
-  - usbceip-task: unknown — — The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
-  - silentcleanup-task: unknown — — The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
-  - siuf-dmclient-task: unknown — — The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
-  - queue-reporting-task: unknown — — The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
+  - marebackup-task: unknown â€” â€” The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
+  - compat-appraiser-task: unknown â€” â€” The current review host does not include this exact task path, showing version-dependent task presence.
+  - consolidator-task: unknown â€” â€” The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
+  - usbceip-task: unknown â€” â€” The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
+  - silentcleanup-task: unknown â€” â€” The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
+  - siuf-dmclient-task: unknown â€” â€” The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
+  - queue-reporting-task: unknown â€” â€” The bundle spans multiple feature areas and this record does not publish a single Windows-wide default state.
 
 **Recommended profiles**
 
@@ -28730,14 +28730,14 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-task-scheduler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Task Scheduler start page | https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page | `high` | behavior, version-scope |
 | `vm-task-observation` | `vm-test` | `VM test / probe` | Local Windows task file observation | C:\Windows\System32\Tasks\Microsoft\Windows | `medium` | path, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, ui-mapping |
 | `repo-system-doc` | `repo-doc` | `Current repo docs` | Repo notes for the scheduled-tasks bundle | Docs/system/system.md | `medium` | behavior, side-effects |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
 | Exact quote / path | Offline Files: \\Microsoft\\Windows\\Offline Files\\Background Synchronization; \\Microsoft\\Windows\\Offline Files\\Logon Synchronization. Sleep Study: \\Microsoft\\Windows\\Power Efficiency Diagnostics\\AnalyzeSystem. Time Sync: \\Microsoft\\Windows\\Time Synchronization\\ForceSynchronizeTime; SynchronizeTime. Miscellaneous: \\Microsoft\\Windows\\Registry\\RegIdleBackup. |
 | Key found on page | `True` |
 | Notes | Scheduled-tasks bundle. The proof anchors the exact task paths the bundle manipulates in the mirror. |
@@ -28781,7 +28781,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-search-highlights-policy. |
 
 **Evidence class**
@@ -28856,7 +28856,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app targets the official svchost splitting control surface, but this research pass has not yet captured a primary Microsoft source that publishes 0xFFFFFFFF as the supported disable preset. |
 
 Current write(s):
@@ -28905,7 +28905,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Modern Windows baseline (Systems using the standard svchost service-refactoring behavior)
-  - svchost-split-threshold: unknown — — The official memory-threshold behavior is documented, but this dataset is not yet publishing a fully validated raw default threshold value.
+  - svchost-split-threshold: unknown â€” â€” The official memory-threshold behavior is documented, but this dataset is not yet publishing a fully validated raw default threshold value.
 
 **Recommended profiles**
 
@@ -28919,7 +28919,7 @@ Windows Internals references:
 | `ms-svchost-service-refactoring` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service host grouping in Windows 10 | https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring | `high` | behavior, side-effects, version-scope |
 | `repo-system-doc-service-splitting` | `repo-doc` | `Current repo docs` | Repo system research notes for service splitting | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
 | `decompiled-servicesplitting-scm` | `decompiled-pseudocode` | `nohuto upstream pseudocode` | Decompiled SCM configuration reader for service splitting | Docs/system/assets/servicesplitting-ScReadSCMConfiguration.c | `medium` | path, value, behavior |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -28968,7 +28968,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes OverlayTestMode = 5 under HKLM\SOFTWARE\Microsoft\Windows\Dwm, but this research pass has not yet captured a primary Microsoft source that publishes the value as an official MPO control. |
 
 Current write(s):
@@ -29018,7 +29018,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated OverlayTestMode as an official Microsoft control surface)
-  - dwm-overlay-test-mode: missing — — Do not publish a supported override until a primary Microsoft source is captured.
+  - dwm-overlay-test-mode: missing â€” â€” Do not publish a supported override until a primary Microsoft source is captured.
 
 **Recommended profiles**
 
@@ -29030,13 +29030,13 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dwm-registry-settings` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DWM Registry Settings | https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values | `medium` | path, behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
 | Exact quote / path | "OverlayTestMode" = 0; // 5 = MPO disabled, REG_DWORD. DwmDwordHelper = RegGetDwmDwordHelper(L"OverlayTestMode", &v11, 0LL). |
 | Key found on page | `True` |
 | Notes | DWM MPO audit trail. The mirror shows the exact OverlayTestMode path and the MPO-disabled sentinel value. |
@@ -29079,7 +29079,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes DisableOverlays = 1 under HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers, but this research pass has not yet captured a primary Microsoft source that publishes the value as an official overlay-plane control. |
 
 Current write(s):
@@ -29129,7 +29129,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated DisableOverlays as an official Microsoft control surface)
-  - disable-overlays: missing — — Do not publish a supported graphics override until a primary Microsoft source is captured.
+  - disable-overlays: missing â€” â€” Do not publish a supported graphics override until a primary Microsoft source is captured.
 
 **Recommended profiles**
 
@@ -29141,13 +29141,13 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: TDR Registry Keys | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `medium` | path, behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\dxgkrnl\-ReadConfig@DXGADAPTER@@AEAAXPEAU_DXGK_ADAPTER_CAPS@@@Z.c |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\decompiled-pseudocode\dxgkrnl\-ReadConfig@DXGADAPTER@@AEAAXPEAU_DXGK_ADAPTER_CAPS@@@Z.c |
 | Exact quote / path | v123 = L"DisableOverlays"; ... ADAPTER_RENDER::DisableOverlays((ADAPTER_RENDER *)v9[366]); |
 | Key found on page | `True` |
 | Notes | Graphics overlay audit trail. The decompiled code shows the explicit DisableOverlays string and the runtime call path. |
@@ -29190,7 +29190,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes PageFaultDebugMode = 1 under GraphicsDrivers, but this research pass has not yet captured a primary Microsoft source for the value. |
 
 Current write(s):
@@ -29240,7 +29240,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated PageFaultDebugMode as an official Microsoft graphics-debug control)
-  - page-fault-debug-mode: unknown — — Do not publish a validated baseline until a primary Microsoft source is captured.
+  - page-fault-debug-mode: unknown â€” â€” Do not publish a validated baseline until a primary Microsoft source is captured.
 
 **Recommended profiles**
 
@@ -29252,13 +29252,13 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: TDR Registry Keys | https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys | `medium` | path, behavior, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\dxgmms2\-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\decompiled-pseudocode\dxgmms2\-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c |
 | Exact quote / path | if ( !g_PageFaultDebugMode && !KdRefreshDebuggerNotPresent() ) ... "To disable debug breaks on page fault, run \"?? dxgmms2!g_PageFaultDebugMode=1\" command" ... &g_PageFaultDebugMode. |
 | Key found on page | `True` |
 | Notes | Page-fault debug-mode audit trail. The decompiled code exposes the exact debug gate and its toggle semantics. |
@@ -29301,7 +29301,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes AdjustDpcThreshold = 20, but this research pass has not yet captured a primary Microsoft source for the value. |
 
 Current write(s):
@@ -29351,7 +29351,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated AdjustDpcThreshold from a primary Microsoft source)
-  - adjust-dpc-threshold: unknown — — Do not publish a validated DPC threshold baseline until the exact registry mapping is backed by a primary Microsoft source.
+  - adjust-dpc-threshold: unknown â€” â€” Do not publish a validated DPC threshold baseline until the exact registry mapping is backed by a primary Microsoft source.
 
 **Recommended profiles**
 
@@ -29363,14 +29363,14 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `ghidra-adjust-dpc-threshold-system-info` | `decompilation` | `Ghidra decompilation` | Decompiled DPC threshold system-information handler | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c; Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c | `high` | path, value, behavior, runtime-gate |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
 | Exact quote / path | "AdjustDpcThreshold" = 20; // KiAdjustDpcThreshold |
 | Key found on page | `True` |
 | Notes | Kernel DPC threshold audit trail. The mirror exposes the raw kernel variable and the corresponding registry value, and the decompiled system-information paths corroborate the kernel consumption and query behavior. |
@@ -29413,7 +29413,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes CacheAwareScheduling = 47, but this research pass has not yet captured a primary Microsoft source for the value. |
 
 Current write(s):
@@ -29463,7 +29463,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated CacheAwareScheduling from a primary Microsoft source)
-  - cache-aware-scheduling: unknown — — Do not publish a validated cache-aware scheduling baseline until the exact registry mapping is backed by a primary Microsoft source.
+  - cache-aware-scheduling: unknown â€” â€” Do not publish a validated cache-aware scheduling baseline until the exact registry mapping is backed by a primary Microsoft source.
 
 **Recommended profiles**
 
@@ -29476,13 +29476,13 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `nohuto-cache-aware-scheduling-mirror` | `repo-doc` | `Current repo docs` | nohuto mirror: kernel cache-aware scheduling value list | Docs/tweaks/_source-mirrors/win-config/system/desc.md | `medium` | path, value |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
 | Exact quote / path | "CacheAwareScheduling" = 47; // KiCacheAwareScheduling |
 | Key found on page | `True` |
 | Notes | Kernel cache-aware scheduling audit trail. The mirrored win-config list records CacheAwareScheduling = 47 with the KiCacheAwareScheduling label, but this research pass did not capture a direct decompiled kernel path for the variable. |
@@ -29525,7 +29525,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `partially-matches` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes DefaultDynamicHeteroCpuPolicy = 3. Microsoft publishes adjacent heterogeneous scheduling policy value meanings, and the nohuto mirror now captures the same 3 mapping plus the decompiled kernel derivation, but this remains a deprecated audit trail rather than an active published preset. |
 
 Current write(s):
@@ -29575,7 +29575,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated DefaultDynamicHeteroCpuPolicy from a primary Microsoft kernel source)
-  - default-dynamic-hetero-cpu-policy: unknown — — Do not publish a validated heterogeneous-policy baseline until the exact kernel mapping is backed by a primary Microsoft source.
+  - default-dynamic-hetero-cpu-policy: unknown â€” â€” Do not publish a validated heterogeneous-policy baseline until the exact kernel mapping is backed by a primary Microsoft source.
 
 **Recommended profiles**
 
@@ -29592,7 +29592,7 @@ Windows Internals references:
 | `nohuto-session-manager-quota` | `registry-observation` | `VM registry observation` | nohuto Session Manager quota-system trace | Docs/tweaks/_source-mirrors/win-registry/records/Session-Manager.txt | `medium` | path, dependency, behavior |
 | `regkit-default-dynamic-hetero-cpu-policy-trace` | `registry-observation` | `VM registry observation` | nohuto trace for DefaultDynamicHeteroCpuPolicy | Docs/tweaks/_source-mirrors/regkit/assets/traces/23H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/24H2.txt; Docs/tweaks/_source-mirrors/regkit/assets/traces/25H2.txt | `high` | path, value, behavior |
 | `vm-hetero-policy-strict-sweep-20260322` | `runtime-benchmark` | `unspecified` | Strict VM sweep of DefaultDynamicHeteroCpuPolicy values 0..7 | Docs/tweaks/research/notes/hetero-dynamic-policy-strict-sweep-20260322.md; H:\Temp\vm-tooling-staging\hetero-sweep-strict\hetero-sweep-strict-summary.csv; H:\Temp\vm-tooling-staging\hetero-sweep-strict\hetero-sweep-strict-detail.json | `medium` | value, behavior, performance, version-scope |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -29641,7 +29641,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes DisableLowQosTimerResolution = 1, but this research pass has not yet captured a primary Microsoft source for the value itself. |
 
 Current write(s):
@@ -29691,7 +29691,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated DisableLowQosTimerResolution from a primary Microsoft source)
-  - disable-low-qos-timer-resolution: unknown — — Do not publish a validated timer-behavior baseline until the exact registry mapping is backed by a primary Microsoft source.
+  - disable-low-qos-timer-resolution: unknown â€” â€” Do not publish a validated timer-behavior baseline until the exact registry mapping is backed by a primary Microsoft source.
 
 **Recommended profiles**
 
@@ -29706,13 +29706,13 @@ Windows Internals references:
 | `ms-timer-resolution` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Timer Resolution | https://learn.microsoft.com/en-us/windows/win32/multimedia/timer-resolution | `high` | behavior, side-effects, version-scope |
 | `nohuto-low-qos-timer-resolution-ghidra` | `decompilation` | `Ghidra decompilation` | nohuto mirror: low-QoS timer resolution gate | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/PspSetProcessTimerResolutionPolicy.c; Docs/tweaks/_source-mirrors/win-config/system/desc.md | `high` | path, value, behavior, runtime-gate |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\PspSetProcessTimerResolutionPolicy.c |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\PspSetProcessTimerResolutionPolicy.c |
 | Exact quote / path | if ( KeDisableLowQosTimerResolution ) { ... if ( a2 ) { ... } else { ... } ... ExpUpdateTimerResolution(0, 0, 0LL); } |
 | Key found on page | `True` |
 | Notes | Timer-resolution audit trail. The mirror docs record DisableLowQosTimerResolution = 1, and the decompiled kernel routine shows the gate controlling the policy bit and timer-resolution refresh path. |
@@ -29755,7 +29755,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes DpcQueueDepth = 4, but this research pass has not yet captured a primary Microsoft source for the value. |
 
 Current write(s):
@@ -29805,7 +29805,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated DpcQueueDepth from a primary Microsoft source)
-  - dpc-queue-depth: unknown — — Do not publish a validated DPC queue-depth baseline until the exact registry mapping is backed by a primary Microsoft source.
+  - dpc-queue-depth: unknown â€” â€” Do not publish a validated DPC queue-depth baseline until the exact registry mapping is backed by a primary Microsoft source.
 
 **Recommended profiles**
 
@@ -29817,14 +29817,14 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `ghidra-dpc-queue-depth-system-info` | `decompilation` | `Ghidra decompilation` | Decompiled DPC queue-depth system-information handler | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c; Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c | `high` | path, value, behavior, runtime-gate |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
 | Exact quote / path | *(_DWORD *)(a4 + 4) = KiMaximumDpcQueueDepth; *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; *(_DWORD *)(a4 + 12) = KiAdjustDpcThreshold; *(_DWORD *)(a4 + 16) = KiIdealDpcRate; |
 | Key found on page | `True` |
 | Notes | Kernel DPC queue-depth audit trail. The decompiled paths show the exact kernel values exported together and the setter side that loads KiMaximumDpcQueueDepth from the system-information buffer. |
@@ -29867,7 +29867,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes DpcWatchdogPeriod = 120000, but this research pass has not yet captured a primary Microsoft source for the value itself. |
 
 Current write(s):
@@ -29917,7 +29917,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated DpcWatchdogPeriod from a primary Microsoft source)
-  - dpc-watchdog-period: unknown — — Do not publish a validated watchdog-period baseline until the exact registry mapping is backed by a primary Microsoft source.
+  - dpc-watchdog-period: unknown â€” â€” Do not publish a validated watchdog-period baseline until the exact registry mapping is backed by a primary Microsoft source.
 
 **Recommended profiles**
 
@@ -29932,14 +29932,14 @@ Windows Internals references:
 | `ms-avoid-dpc-watchdog-timeouts` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports | https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems | `high` | behavior, side-effects, risk |
 | `ghidra-dpc-watchdog-period-reader` | `decompilation` | `Ghidra decompilation` | Decompiled DPC watchdog configuration reader | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c | `high` | path, value, behavior, runtime-gate |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `ghidra-dpc-watchdog-period-reader` | `decompilation` | `Ghidra decompilation` | Decompiled DPC watchdog configuration reader | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c | `high` | path, value, behavior, runtime-gate |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\KeQueryDpcWatchdogConfiguration.c |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\KeQueryDpcWatchdogConfiguration.c |
 | Exact quote / path | if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src \| 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; } |
 | Key found on page | `True` |
 | Notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block. |
@@ -29982,7 +29982,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes IdealDpcRate = 20, but this research pass has not yet captured a primary Microsoft source for the value. |
 
 Current write(s):
@@ -30032,7 +30032,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated IdealDpcRate from a primary Microsoft source)
-  - ideal-dpc-rate: unknown — — Do not publish a validated DPC-rate baseline until the exact registry mapping is backed by a primary Microsoft source.
+  - ideal-dpc-rate: unknown â€” â€” Do not publish a validated DPC-rate baseline until the exact registry mapping is backed by a primary Microsoft source.
 
 **Recommended profiles**
 
@@ -30045,13 +30045,13 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `nohuto-ideal-dpc-rate-ghidra` | `decompilation` | `Ghidra decompilation` | nohuto mirror: ideal DPC rate query path | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c; Docs/tweaks/_source-mirrors/win-config/system/desc.md | `high` | path, value, behavior |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
 | Exact quote / path | *(_DWORD *)(a4 + 16) = KiIdealDpcRate; |
 | Key found on page | `True` |
 | Notes | Kernel ideal DPC rate audit trail. The mirrored docs record IdealDpcRate = 20, and the decompiled path exposes the KiIdealDpcRate kernel variable directly. |
@@ -30094,7 +30094,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes MinimumDpcRate = 3, but this research pass has not yet captured a primary Microsoft source for the value. |
 
 Current write(s):
@@ -30144,7 +30144,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated MinimumDpcRate from a primary Microsoft source)
-  - minimum-dpc-rate: unknown — — Do not publish a validated DPC-rate baseline until the exact registry mapping is backed by a primary Microsoft source.
+  - minimum-dpc-rate: unknown â€” â€” Do not publish a validated DPC-rate baseline until the exact registry mapping is backed by a primary Microsoft source.
 
 **Recommended profiles**
 
@@ -30157,13 +30157,13 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `nohuto-minimum-dpc-rate-ghidra` | `decompilation` | `Ghidra decompilation` | nohuto mirror: minimum DPC rate query path | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c; Docs/tweaks/_source-mirrors/win-config/system/desc.md | `high` | path, value, behavior |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\decompiled-pseudocode\ntoskrnl\ExpQuerySystemInformation.c |
 | Exact quote / path | *(_DWORD *)(a4 + 8) = KiMinimumDpcRate; |
 | Key found on page | `True` |
 | Notes | Kernel minimum DPC rate audit trail. The mirrored docs record MinimumDpcRate = 3, and the decompiled path exposes the KiMinimumDpcRate kernel variable directly. |
@@ -30206,7 +30206,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `unknown` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs` |
 | Notes | The current app writes SerializeTimerExpiration = 1, but this research pass has not yet captured a primary Microsoft source for the value. |
 
 Current write(s):
@@ -30256,7 +30256,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Conservative baseline (Systems where this dataset has not yet validated SerializeTimerExpiration from a primary Microsoft source)
-  - serialize-timer-expiration: unknown — — Do not publish a validated timer-scheduling baseline until the exact registry mapping is backed by a primary Microsoft source.
+  - serialize-timer-expiration: unknown â€” â€” Do not publish a validated timer-scheduling baseline until the exact registry mapping is backed by a primary Microsoft source.
 
 **Recommended profiles**
 
@@ -30268,14 +30268,14 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | Docs/system/system.md | `medium` | path, value, behavior, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Ghidra decompilation` | Decompiled timer-serialization gate | Docs/tweaks/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c | `high` | path, value, behavior, runtime-gate |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source URL | H:\D\Dev\WPF-Windows-optimizer-with-safe-reversible-tweaks\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
+| Source URL | H:\D\Dev\Open-Trace-Project\Docs\tweaks\_source-mirrors\win-config\system\desc.md |
 | Exact quote / path | if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0]() != 0; } |
 | Key found on page | `True` |
 | Notes | Timer serialization audit trail. The mirror docs and the decompiled timer-table initializer together show the kernel variable, the 0/1 behavior, and the registry fallback path. |
@@ -30347,10 +30347,10 @@ Blocking issues:
 **Windows defaults**
 
 - Documented timeout concept defaults (Systems using the documented shutdown-timeout concepts without an aggressive custom bundle)
-  - wait-to-kill-service-timeout: value `20000` — Microsoft documents a 20000 ms default service shutdown timeout.
-  - hung-app-timeout: value `5000` — Microsoft documents a 5000 ms hung app timeout concept.
-  - wait-to-kill-app-timeout: unknown — — This research pass did not capture a primary Microsoft registry publication for the exact current-user value name.
-  - auto-end-tasks: unknown — — This research pass did not capture a primary Microsoft source for the exact registry mapping.
+  - wait-to-kill-service-timeout: value `20000` â€” Microsoft documents a 20000 ms default service shutdown timeout.
+  - hung-app-timeout: value `5000` â€” Microsoft documents a 5000 ms hung app timeout concept.
+  - wait-to-kill-app-timeout: unknown â€” â€” This research pass did not capture a primary Microsoft registry publication for the exact current-user value name.
+  - auto-end-tasks: unknown â€” â€” This research pass did not capture a primary Microsoft source for the exact registry mapping.
 
 **Recommended profiles**
 
@@ -30365,7 +30365,7 @@ Blocking issues:
 | `ms-rm-shutdown-type` | `official-doc` | `Microsoft official doc` | Microsoft Learn: RM_SHUTDOWN_TYPE | https://learn.microsoft.com/en-us/windows/win32/api/restartmanager/ne-restartmanager-rm_shutdown_type | `high` | behavior, side-effects, version-scope |
 | `ms-service-control-handler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service Control Handler Function | https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function | `high` | path, value, behavior, side-effects, risk |
 | `repo-system-doc-shutdown` | `repo-doc` | `Current repo docs` | Repo system research notes for shutdown timeouts | Docs/system/system.md | `medium` | path, value, ui-mapping, app-mismatch |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -30410,7 +30410,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables PrintDeviceConfigurationService by setting its start mode to Disabled. |
 
 Current write(s):
@@ -30458,7 +30458,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal Print Device Configuration Service configuration)
-  - printdeviceconfigurationservice-start-mode: value `Manual` — Microsoft lists PrintDeviceConfigurationService with a Manual default start mode.
+  - printdeviceconfigurationservice-start-mode: value `Manual` â€” Microsoft lists PrintDeviceConfigurationService with a Manual default start mode.
 
 **Recommended profiles**
 
@@ -30471,7 +30471,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-printdeviceconfigurationservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Device Configuration Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `medium` | behavior, side-effects, version-scope |
 | `local-scm-printdeviceconfigurationservice-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - PrintDeviceConfigurationService | Docs/tweaks/research/notes/service-snapshots/printdeviceconfigurationservice-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -30520,7 +30520,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables PrintScanBrokerService by setting its start mode to Disabled. |
 
 Current write(s):
@@ -30568,7 +30568,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal Print Scan Broker Service configuration)
-  - printscanbrokerservice-start-mode: value `Manual` — Microsoft lists PrintScanBrokerService with a Manual default start mode.
+  - printscanbrokerservice-start-mode: value `Manual` â€” Microsoft lists PrintScanBrokerService with a Manual default start mode.
 
 **Recommended profiles**
 
@@ -30581,7 +30581,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-printscanbrokerservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Scan Broker Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `medium` | behavior, version-scope |
 | `local-scm-printscanbrokerservice-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - PrintScanBrokerService | Docs/tweaks/research/notes/service-snapshots/printscanbrokerservice-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -30630,7 +30630,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables instantiated PrintWorkflowUserSvc per-user services through the wildcard pattern PrintWorkflowUserSvc_*. |
 
 Current write(s):
@@ -30678,7 +30678,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems with the Print Workflow service family instantiated for signed-in users)
-  - printworkflowusersvc-start-mode: value `Manual` — Microsoft lists PrintWorkflowUserSvc with a Manual default start mode.
+  - printworkflowusersvc-start-mode: value `Manual` â€” Microsoft lists PrintWorkflowUserSvc with a Manual default start mode.
 
 **Recommended profiles**
 
@@ -30691,7 +30691,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-printworkflowusersvc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Workflow Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
 | `local-scm-printworkflowusersvc-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - PrintWorkflowUserSvc instance | Docs/tweaks/research/notes/service-snapshots/printworkflowusersvc_7598c-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -30739,7 +30739,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables SysMain by setting its start mode to Disabled, but Microsoft's service guidance explicitly says not to disable it. |
 
 Current write(s):
@@ -30787,7 +30787,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal SysMain configuration)
-  - sysmain-start-mode: value `Automatic` — Microsoft lists SysMain with an Automatic default start mode and advises not to disable it.
+  - sysmain-start-mode: value `Automatic` â€” Microsoft lists SysMain with an Automatic default start mode and advises not to disable it.
 
 **Recommended profiles**
 
@@ -30800,7 +30800,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-sysmain` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - SysMain | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
 | `local-scm-sysmain-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - SysMain | Docs/tweaks/research/notes/service-snapshots/sysmain-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -30848,7 +30848,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables dmwappushservice by setting its start mode to Disabled, but Microsoft's service guidance provides no disable recommendation. |
 
 Current write(s):
@@ -30896,7 +30896,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal WAP Push Message Routing service configuration)
-  - dmwappushservice-start-mode: value `Automatic` — Microsoft lists dmwappushservice with an Automatic default start mode.
+  - dmwappushservice-start-mode: value `Automatic` â€” Microsoft lists dmwappushservice with an Automatic default start mode.
 
 **Recommended profiles**
 
@@ -30909,7 +30909,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-dmwappushservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - WAP Push Message Routing Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, version-scope |
 | `local-scm-dmwappushservice-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - dmwappushservice | Docs/tweaks/research/notes/service-snapshots/dmwappushservice-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
@@ -30957,7 +30957,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `matches-research` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs` |
+| Provider source | `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs` |
 | Notes | The app disables WerSvc by setting its start mode to Disabled, but Microsoft's service guidance explicitly says not to disable it. |
 
 Current write(s):
@@ -31005,7 +31005,7 @@ Windows Internals references:
 **Windows defaults**
 
 - Microsoft documented default (Windows systems using the normal Windows Error Reporting service configuration)
-  - wersvc-start-mode: value `Manual` — Microsoft lists WerSvc with a Manual default start mode and advises not to disable it.
+  - wersvc-start-mode: value `Manual` â€” Microsoft lists WerSvc with a Manual default start mode and advises not to disable it.
 
 **Recommended profiles**
 
@@ -31018,7 +31018,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-wersvc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Error Reporting Service | https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services | `high` | path, value, default, behavior, side-effects, version-scope |
 | `local-scm-wersvc-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - WerSvc | Docs/tweaks/research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt | `high` | path, value, version-scope |
-| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 

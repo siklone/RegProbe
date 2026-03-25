@@ -56,7 +56,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
     "notes": "The current app writes ssh-agent.exe into the current-user Run key, and the Windows Run key documentation confirms that this is a supported logon autostart surface.",
     "writes": [
       {
@@ -151,7 +151,7 @@
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
       "summary": "The provider writes SSH Agent = C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run.",
       "supports": [
         "path",

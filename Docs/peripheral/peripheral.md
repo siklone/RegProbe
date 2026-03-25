@@ -1,7 +1,7 @@
 # Mouse Values
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
-> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect â†’ Apply â†’ Verify â†’ Rollback, Preview/DryRun by default).
+> **Doc note (2025-12-27):** Reference material (mostly sourced from `win-config`). The app may not implement every item here yet; treat this as background when turning items into SAFE/reversible tweaks (Detect Ã¢â€ â€™ Apply Ã¢â€ â€™ Verify Ã¢â€ â€™ Rollback, Preview/DryRun by default).
 
 Requires elevation: No.
 
@@ -312,7 +312,7 @@ if (!v11)
     // Set default to 100 if value was 0
     v11 = 100;
 }
-else if (v11 > 0xAAAAAAA) // â‰ˆ 178956970
+else if (v11 > 0xAAAAAAA) // Ã¢â€°Ë† 178956970
 {
     v12 = 2400;
 }
@@ -405,10 +405,10 @@ Everything listed below is based on personal research. Mistakes may exist, some 
     "MultiTouchEnabled"; = 1;
 
 "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad";
-    "AAPThreshold"; = 2; // range 0â€“4, touchpad sensitivity
-    "CursorSpeed"; = 10; // range 1â€“20, pointer speed
-    "FeedbackIntensity"; = 50; // range 0â€“100 (%), haptic feedback strength
-    "ClickForceSensitivity"; = 50; // range 0â€“100 (%), relative click-force sensitivity
+    "AAPThreshold"; = 2; // range 0Ã¢â‚¬â€œ4, touchpad sensitivity
+    "CursorSpeed"; = 10; // range 1Ã¢â‚¬â€œ20, pointer speed
+    "FeedbackIntensity"; = 50; // range 0Ã¢â‚¬â€œ100 (%), haptic feedback strength
+    "ClickForceSensitivity"; = 50; // range 0Ã¢â‚¬â€œ100 (%), relative click-force sensitivity
     "LeaveOnWithMouse"; = 1; // 0 = disable touchpad when mouse present, 1 = leave enabled
     "FeedbackEnabled"; = 1; // 0 = no haptics, 1 = haptics on
     "TapsEnabled"; = 1; // 0/1, single-finger tap-to-click
@@ -548,7 +548,7 @@ UnDimOnInputDeviceTypes = -1  // 0xFFFFFFFF
 ---
 
 ```c
-.rdata:00000001C00606B8 g_WakeOnConnectUI db  1Eh               ; DATA XREF: HUBREG_QueryGlobalHubValues+2DCâ†“o
+.rdata:00000001C00606B8 g_WakeOnConnectUI db  1Eh               ; DATA XREF: HUBREG_QueryGlobalHubValues+2DCÃ¢â€ â€œo
 .rdata:00000001C00606C0                 dq offset aWakeonconnectu ; "WakeOnConnectUI"
 
 int *, _QWORD, _QWORD))(WdfFunctions_01015 + 1880))(
@@ -592,15 +592,15 @@ Requires elevation: No.
 
 | Value | Type | Values | Ranges | Notes |
 | --- | --- | --- | --- | --- |
-| `AmbientLightingEnabled` | REG_DWORD | `0 = off`, `1 = on` | `0â€“1` | Master toggle for Dynamic Lighting. |
-| `UseSystemAccentColor` | REG_DWORD | `0 = use custom Color/Color2`, `1 = match Windows accent` | `0â€“1` | When `1`, `Color` is ignored. |
-| `Color` | REG_DWORD | `COLORREF (RGB)` | `0x00000000â€“0x00FFFFFF`    | Format `0x00BBGGRR`. Used when `UseSystemAccentColor = 0`. |
-| `Color2` | REG_DWORD | `COLORREF (RGB)` | `0x00000000â€“0x00FFFFFF`    | Secondary color for some effects. |
+| `AmbientLightingEnabled` | REG_DWORD | `0 = off`, `1 = on` | `0Ã¢â‚¬â€œ1` | Master toggle for Dynamic Lighting. |
+| `UseSystemAccentColor` | REG_DWORD | `0 = use custom Color/Color2`, `1 = match Windows accent` | `0Ã¢â‚¬â€œ1` | When `1`, `Color` is ignored. |
+| `Color` | REG_DWORD | `COLORREF (RGB)` | `0x00000000Ã¢â‚¬â€œ0x00FFFFFF`    | Format `0x00BBGGRR`. Used when `UseSystemAccentColor = 0`. |
+| `Color2` | REG_DWORD | `COLORREF (RGB)` | `0x00000000Ã¢â‚¬â€œ0x00FFFFFF`    | Secondary color for some effects. |
 | `EffectType` | REG_DWORD | `0 = Solid`, `1 = Breathing`, `2 = Rainbow`, `4 = Wave`, `5 = Wheel`, `6 = Gradient` | `discrete enum` | Defines animation. |
-| `Speed` | REG_DWORD | `integer` | `1â€“10` | Higher = faster. |
-| `EffectMode` | REG_DWORD | Rainbow: `0 = Forward`, `1 = Reverse` Â· Wave: `0 = Right`, `1 = Left`, `2 = Down`, `3 = Up` Â· Wheel: `0 = Clockwise`, `1 = Counterclockwise` Â· Gradient: `0 = Horizontal`, `1 = Vertical`, `2 = Outward` | `discrete enum per effect` | Depends on `EffectType`. |
-| `Brightness` | REG_DWORD | `integer (%)` | `0â€“100` | - |
-| `ControlledByForegroundApp` | REG_DWORD | `0 = ignore apps`, `1 = apps can take control` | `0â€“1` | - |
+| `Speed` | REG_DWORD | `integer` | `1Ã¢â‚¬â€œ10` | Higher = faster. |
+| `EffectMode` | REG_DWORD | Rainbow: `0 = Forward`, `1 = Reverse` Ã‚Â· Wave: `0 = Right`, `1 = Left`, `2 = Down`, `3 = Up` Ã‚Â· Wheel: `0 = Clockwise`, `1 = Counterclockwise` Ã‚Â· Gradient: `0 = Horizontal`, `1 = Vertical`, `2 = Outward` | `discrete enum per effect` | Depends on `EffectType`. |
+| `Brightness` | REG_DWORD | `integer (%)` | `0Ã¢â‚¬â€œ100` | - |
+| `ControlledByForegroundApp` | REG_DWORD | `0 = ignore apps`, `1 = apps can take control` | `0Ã¢â‚¬â€œ1` | - |
 
 > https://learn.microsoft.com/en-us/windows-hardware/design/component-guidelines/dynamic-lighting-devices
 > https://support.microsoft.com/en-us/windows/control-dynamic-lighting-devices-in-windows-8e8f22e3-e820-476c-8f9d-9ffc7b6ffcd2
@@ -770,18 +770,18 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="audio.disable-beep"></a> `audio.disable-beep` | Disable System Beep | Disables the hardware system beep driver (Beep.sys). | Safe | `WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L22` |
-| <a id="audio.disable-spatial-audio"></a> `audio.disable-spatial-audio` | Disable Spatial Audio | Disables spatial audio for low-latency devices. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L60` |
-| <a id="audio.disable-system-sounds"></a> `audio.disable-system-sounds` | Disable System Sounds | Clears the default sound events for common system sounds. | Safe | `WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L72` |
-| <a id="audio.show-disconnected-devices"></a> `audio.show-disconnected-devices` | Show Disconnected Audio Devices | Shows disconnected audio devices in the sound control panel. | Safe | `WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L47` |
-| <a id="audio.show-hidden-devices"></a> `audio.show-hidden-devices` | Show Hidden Audio Devices | Shows hidden audio devices in the sound control panel. | Safe | `WindowsOptimizer.App\Services\TweakProviders\AudioTweakProvider.cs#L34` |
-| <a id="peripheral.audio-disable-ducking"></a> `peripheral.audio-disable-ducking` | Disable Audio Ducking | Disables Windows automatic volume adjustment when making calls or using communication apps. Equivalent to 'Do nothing' in Sound settings. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\AudioTweaks.cs#L24` |
-| <a id="peripheral.audio-disable-enhancements"></a> `peripheral.audio-disable-enhancements` | Disable Audio Enhancements | Disables audio enhancements and exclusive mode for audio devices. Provides cleaner audio output without processing. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\AudioTweaks.cs#L50` |
-| <a id="peripheral.autoplay-take-no-action"></a> `peripheral.autoplay-take-no-action` | AutoPlay: Take No Action | Sets AutoPlay handlers to take no action for common media events. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L63` |
-| <a id="peripheral.disable-autoplay"></a> `peripheral.disable-autoplay` | Disable AutoPlay | Disables AutoPlay on all drives and blocks AutoPlay for non-volume devices for the current user. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L40` |
-| <a id="peripheral.disable-sticky-keys-prompt"></a> `peripheral.disable-sticky-keys-prompt` | Disable Sticky Keys Prompt | Prevents the annoying prompt when pressing Shift multiple times. | Safe | `WindowsOptimizer.App\Services\TweakProviders\PeripheralTweakProvider.cs#L27` |
-| <a id="peripheral.keyboard-disable-language-hotkey"></a> `peripheral.keyboard-disable-language-hotkey` | Disable Language Switch Hotkey | Disables Ctrl+Shift and Alt+Shift language switching hotkeys to prevent accidental language changes during gaming or typing. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L52` |
-| <a id="peripheral.keyboard-optimize-repeat"></a> `peripheral.keyboard-optimize-repeat` | Optimize Keyboard Repeat Rate | Sets keyboard to minimum repeat delay and maximum repeat rate for faster typing. Also slows cursor blink rate to 900ms. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L27` |
-| <a id="peripheral.mouse-disable-acceleration"></a> `peripheral.mouse-disable-acceleration` | Disable Enhanced Pointer Precision (Mouse Acceleration) | Disables mouse acceleration for 1:1 mouse movement. Preferred by gamers and precision users. | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\MouseTweaks.cs#L55` |
-| <a id="peripheral.mouse-disable-throttle"></a> `peripheral.mouse-disable-throttle` | Disable Mouse Throttling for Background Windows | Disables raw mouse input throttling for background windows, improving mouse responsiveness. Useful when checking raw-input behavior with... | Safe | `WindowsOptimizer.Engine\Tweaks\Peripheral\MouseTweaks.cs#L27` |
+| <a id="audio.disable-beep"></a> `audio.disable-beep` | Disable System Beep | Disables the hardware system beep driver (Beep.sys). | Safe | `OpenTraceProject.App\Services\TweakProviders\AudioTweakProvider.cs#L22` |
+| <a id="audio.disable-spatial-audio"></a> `audio.disable-spatial-audio` | Disable Spatial Audio | Disables spatial audio for low-latency devices. | Advanced | `OpenTraceProject.App\Services\TweakProviders\AudioTweakProvider.cs#L60` |
+| <a id="audio.disable-system-sounds"></a> `audio.disable-system-sounds` | Disable System Sounds | Clears the default sound events for common system sounds. | Safe | `OpenTraceProject.App\Services\TweakProviders\AudioTweakProvider.cs#L72` |
+| <a id="audio.show-disconnected-devices"></a> `audio.show-disconnected-devices` | Show Disconnected Audio Devices | Shows disconnected audio devices in the sound control panel. | Safe | `OpenTraceProject.App\Services\TweakProviders\AudioTweakProvider.cs#L47` |
+| <a id="audio.show-hidden-devices"></a> `audio.show-hidden-devices` | Show Hidden Audio Devices | Shows hidden audio devices in the sound control panel. | Safe | `OpenTraceProject.App\Services\TweakProviders\AudioTweakProvider.cs#L34` |
+| <a id="peripheral.audio-disable-ducking"></a> `peripheral.audio-disable-ducking` | Disable Audio Ducking | Disables Windows automatic volume adjustment when making calls or using communication apps. Equivalent to 'Do nothing' in Sound settings. | Safe | `OpenTraceProject.Engine\Tweaks\Peripheral\AudioTweaks.cs#L24` |
+| <a id="peripheral.audio-disable-enhancements"></a> `peripheral.audio-disable-enhancements` | Disable Audio Enhancements | Disables audio enhancements and exclusive mode for audio devices. Provides cleaner audio output without processing. | Safe | `OpenTraceProject.Engine\Tweaks\Peripheral\AudioTweaks.cs#L50` |
+| <a id="peripheral.autoplay-take-no-action"></a> `peripheral.autoplay-take-no-action` | AutoPlay: Take No Action | Sets AutoPlay handlers to take no action for common media events. | Safe | `OpenTraceProject.App\Services\TweakProviders\PeripheralTweakProvider.cs#L63` |
+| <a id="peripheral.disable-autoplay"></a> `peripheral.disable-autoplay` | Disable AutoPlay | Disables AutoPlay on all drives and blocks AutoPlay for non-volume devices for the current user. | Safe | `OpenTraceProject.App\Services\TweakProviders\PeripheralTweakProvider.cs#L40` |
+| <a id="peripheral.disable-sticky-keys-prompt"></a> `peripheral.disable-sticky-keys-prompt` | Disable Sticky Keys Prompt | Prevents the annoying prompt when pressing Shift multiple times. | Safe | `OpenTraceProject.App\Services\TweakProviders\PeripheralTweakProvider.cs#L27` |
+| <a id="peripheral.keyboard-disable-language-hotkey"></a> `peripheral.keyboard-disable-language-hotkey` | Disable Language Switch Hotkey | Disables Ctrl+Shift and Alt+Shift language switching hotkeys to prevent accidental language changes during gaming or typing. | Safe | `OpenTraceProject.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L52` |
+| <a id="peripheral.keyboard-optimize-repeat"></a> `peripheral.keyboard-optimize-repeat` | Optimize Keyboard Repeat Rate | Sets keyboard to minimum repeat delay and maximum repeat rate for faster typing. Also slows cursor blink rate to 900ms. | Safe | `OpenTraceProject.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L27` |
+| <a id="peripheral.mouse-disable-acceleration"></a> `peripheral.mouse-disable-acceleration` | Disable Enhanced Pointer Precision (Mouse Acceleration) | Disables mouse acceleration for 1:1 mouse movement. Preferred by gamers and precision users. | Safe | `OpenTraceProject.Engine\Tweaks\Peripheral\MouseTweaks.cs#L55` |
+| <a id="peripheral.mouse-disable-throttle"></a> `peripheral.mouse-disable-throttle` | Disable Mouse Throttling for Background Windows | Disables raw mouse input throttling for background windows, improving mouse responsiveness. Useful when checking raw-input behavior with... | Safe | `OpenTraceProject.Engine\Tweaks\Peripheral\MouseTweaks.cs#L27` |
 <!-- TWEAK INDEX END -->

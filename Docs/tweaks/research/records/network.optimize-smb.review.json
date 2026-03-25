@@ -118,7 +118,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "mismatch-suspected",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
                                        "notes":  "The app uses the correct registry path but not the Microsoft example values for cache lifetimes.",
                                        "writes":  [
                                                       {
@@ -280,7 +280,7 @@
                          "evidence_id":  "app-network-provider",
                          "kind":  "repo-code",
                          "title":  "Current network tweak provider",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
                          "summary":  "The current app writes DisableBandwidthThrottling = 1, FileInfoCacheLifetime = 30, and DirectoryCacheLifetime = 30.",
                          "supports":  [
                                           "ui-mapping",
@@ -303,7 +303,7 @@
                  },
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md",
                              "exact_quote_or_path":  "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won\u0027t work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities.",
                              "key_found_on_page":  true,
                              "notes":  "Mirror-backed SMB tuning bundle. This is a composite of documented SMB offload/RSS/VMQ surfaces, not a single supported toggle."

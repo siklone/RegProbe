@@ -1,6 +1,6 @@
 # Icon Pack Builder
 
-Generates icon manifest and folder structure for Windows Optimizer hardware database.
+Generates icon manifest and folder structure for Open Trace Project hardware database.
 
 ## Generated Files
 
@@ -14,40 +14,40 @@ Generates icon manifest and folder structure for Windows Optimizer hardware data
 ## Icon Resolution Order
 
 ```
-1. Series Match (priority 90-100)  → e.g., "rtx 50" → gpu_rtx50
-2. Vendor Match (priority 70-89)   → e.g., "corsair" → memory_corsair  
-3. Type Match (priority 40-69)     → e.g., "intel" → cpu_intel
-4. Fallback                         → e.g., cpu_default
+1. Series Match (priority 90-100)  â†’ e.g., "rtx 50" â†’ gpu_rtx50
+2. Vendor Match (priority 70-89)   â†’ e.g., "corsair" â†’ memory_corsair  
+3. Type Match (priority 40-69)     â†’ e.g., "intel" â†’ cpu_intel
+4. Fallback                         â†’ e.g., cpu_default
 ```
 
 ## Folder Structure
 
 ```
 Assets/Icons/
-├── cpu/
-│   ├── cpu_default.png
-│   ├── cpu_intel.png
-│   ├── cpu_i5.png
-│   └── ...
-├── gpu/
-│   ├── gpu_default.png
-│   ├── gpu_nvidia.png
-│   ├── gpu_rtx.png
-│   └── ...
-├── motherboard/
-├── chipset/
-├── memory/
-├── storage/
-├── network/
-├── usb/
-├── display/
-├── brand/
-│   ├── asus.png
-│   ├── msi.png
-│   └── ...
-└── os/
-    ├── windows10.png
-    └── windows11.png
+â”œâ”€â”€ cpu/
+â”‚   â”œâ”€â”€ cpu_default.png
+â”‚   â”œâ”€â”€ cpu_intel.png
+â”‚   â”œâ”€â”€ cpu_i5.png
+â”‚   â””â”€â”€ ...
+â”œâ”€â”€ gpu/
+â”‚   â”œâ”€â”€ gpu_default.png
+â”‚   â”œâ”€â”€ gpu_nvidia.png
+â”‚   â”œâ”€â”€ gpu_rtx.png
+â”‚   â””â”€â”€ ...
+â”œâ”€â”€ motherboard/
+â”œâ”€â”€ chipset/
+â”œâ”€â”€ memory/
+â”œâ”€â”€ storage/
+â”œâ”€â”€ network/
+â”œâ”€â”€ usb/
+â”œâ”€â”€ display/
+â”œâ”€â”€ brand/
+â”‚   â”œâ”€â”€ asus.png
+â”‚   â”œâ”€â”€ msi.png
+â”‚   â””â”€â”€ ...
+â””â”€â”€ os/
+    â”œâ”€â”€ windows10.png
+    â””â”€â”€ windows11.png
 ```
 
 ## Icon Specifications

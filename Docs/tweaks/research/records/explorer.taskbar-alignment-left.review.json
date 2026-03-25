@@ -50,7 +50,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
     "notes": "The app writes TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced. Procmon confirmed Explorer.EXE consumes the same runtime surface on Windows 11 Pro 10.0.26200.8037.",
     "writes": [
       {
@@ -185,7 +185,7 @@
       "evidence_id": "app-visibility-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
       "summary": "The provider writes TaskbarAl = 0 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
       "supports": [
         "path",

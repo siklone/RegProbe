@@ -73,7 +73,7 @@
   },
   "app_current_implementation": {
     "status": "unknown",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
     "notes": "The current app writes DeveloperMode = 1 and EnableDebugTap = 1, but this pass did not capture a primary Windows Terminal registry contract for those values.",
     "writes": [
       {
@@ -235,7 +235,7 @@
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
       "summary": "The provider writes DeveloperMode = 1 and EnableDebugTap = 1 under HKCU\\Software\\Microsoft\\Windows Terminal.",
       "supports": [
         "path",

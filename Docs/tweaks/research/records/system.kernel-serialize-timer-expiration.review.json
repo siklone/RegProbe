@@ -48,7 +48,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "unknown",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
                                        "notes":  "The current app writes SerializeTimerExpiration = 1, but this research pass has not yet captured a primary Microsoft source for the value.",
                                        "writes":  [
                                                       {
@@ -162,7 +162,7 @@
                          "evidence_id":  "app-system-registry-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/SystemRegistryTweakProvider.cs",
                          "summary":  "The provider writes SerializeTimerExpiration = 1 for the current tweak.",
                          "supports":  [
                                           "path",
@@ -205,7 +205,7 @@
                        ],
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\system\\desc.md",
                              "exact_quote_or_path":  "if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0]() != 0; }",
                              "key_found_on_page":  true,
                              "notes":  "Timer serialization audit trail. The mirror docs and the decompiled timer-table initializer together show the kernel variable, the 0/1 behavior, and the registry fallback path."

@@ -85,7 +85,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "partially-matches",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
                                        "notes":  "The app writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. Only two of these values are backed by primary Microsoft documentation in this review, and the bundle mixes separate feature areas.",
                                        "writes":  [
                                                       {
@@ -210,7 +210,7 @@
                          "evidence_id":  "app-power-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/PowerTweakProvider.cs",
                          "summary":  "The provider writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10.",
                          "supports":  [
                                           "path",
@@ -248,7 +248,7 @@
                  },
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\network\\desc.md",
                              "exact_quote_or_path":  "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won\u0027t work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities.",
                              "key_found_on_page":  true,
                              "notes":  "The bundle spans network adapter power and offload surfaces; this mirror line is the strongest source for the current write shape."

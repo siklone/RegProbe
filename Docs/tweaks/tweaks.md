@@ -4,7 +4,7 @@
 ## Overview
 Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Rollback. The execution pipeline is handled by `TweakExecutionPipeline`, which logs every step and supports DryRun/Preview by default.
 
-> **Note (2025-12-30):** Durable rollback state is persisted to `%AppData%\\WindowsOptimizerSuite\\rollback-state.json` for crash recovery and cross-session rollback.
+> **Note (2025-12-30):** Durable rollback state is persisted to `%AppData%\\OpenTraceProject\\rollback-state.json` for crash recovery and cross-session rollback.
 
 ## Safety guarantees (Detect -> Apply -> Verify -> Rollback)
 - Detect always runs first to capture current configuration.
@@ -30,18 +30,18 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="developer.dotnet-telemetry-disable"></a> `developer.dotnet-telemetry-disable` | Disable .NET SDK Telemetry | Stops .NET SDK from sending usage data to Microsoft. Source: Microsoft .NET SDK Documentation | Safe | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L42` |
-| <a id="developer.enable-windows-long-paths"></a> `developer.enable-windows-long-paths` | Enable Windows Long Paths | Enables the Windows long-path prerequisite for compatible applications, including development tools that work with deep directory trees.... | Safe | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L28` |
-| <a id="developer.nodejs-performance"></a> `developer.nodejs-performance` | Optimize Node.js Performance | Increases Node.js memory limit and enables performance optimizations for large JavaScript projects. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L86` |
-| <a id="developer.powershell-execution"></a> `developer.powershell-execution` | Allow Local PowerShell Scripts | Sets PowerShell execution policy to RemoteSigned, allowing local scripts to run while requiring signatures for remote scripts. Source: Mi... | Advanced | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L145` |
-| <a id="developer.python-path-fix"></a> `developer.python-path-fix` | Fix Python Path Length Issues | Ensures Python can handle long paths on Windows, preventing import errors in deep directory structures. | Safe | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L114` |
-| <a id="developer.ssh-agent-autostart"></a> `developer.ssh-agent-autostart` | Enable SSH Agent Auto-start | Automatically starts SSH agent on login for seamless Git SSH key authentication. | Safe | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L158` |
-| <a id="developer.terminal-dev-mode"></a> `developer.terminal-dev-mode` | Enable Windows Terminal Developer Features | Enables advanced features in Windows Terminal like debug tap and developer mode settings. | Safe | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L70` |
-| <a id="developer.vs-intellisense-cache"></a> `developer.vs-intellisense-cache` | Optimize VS IntelliSense Cache | Increases Visual Studio IntelliSense cache size for better code completion performance in large projects. | Safe | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L56` |
-| <a id="developer.vs-solution-load"></a> `developer.vs-solution-load` | Speed Up Visual Studio Solution Load | Disables background solution load analysis for faster Visual Studio startup on large solutions. | Safe | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L176` |
-| <a id="developer.vscode-git-autofetch"></a> `developer.vscode-git-autofetch` | Disable VS Code Git Autofetch | Disables automatic Git fetching in VS Code to reduce network usage and CPU spikes. | Safe | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L100` |
-| <a id="developer.windows-dev-mode"></a> `developer.windows-dev-mode` | Enable Windows Developer Mode | Enables Windows Developer Mode for sideloading apps and accessing advanced development features. Source: Microsoft Windows Developer Docu... | Advanced | `WindowsOptimizer.App\Services\TweakProviders\DeveloperTweakProvider.cs#L128` |
-| <a id="system-check-disk-health"></a> `system-check-disk-health` | Check Disk Health (C:) | Performs a read-only check of the C: drive for file system errors without making any changes. Provides information about disk health and... | Safe | `WindowsOptimizer.Engine\Tweaks\Commands\System\CheckDiskHealthTweak.cs#L14` |
+| <a id="developer.dotnet-telemetry-disable"></a> `developer.dotnet-telemetry-disable` | Disable .NET SDK Telemetry | Stops .NET SDK from sending usage data to Microsoft. Source: Microsoft .NET SDK Documentation | Safe | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L42` |
+| <a id="developer.enable-windows-long-paths"></a> `developer.enable-windows-long-paths` | Enable Windows Long Paths | Enables the Windows long-path prerequisite for compatible applications, including development tools that work with deep directory trees.... | Safe | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L28` |
+| <a id="developer.nodejs-performance"></a> `developer.nodejs-performance` | Optimize Node.js Performance | Increases Node.js memory limit and enables performance optimizations for large JavaScript projects. | Advanced | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L86` |
+| <a id="developer.powershell-execution"></a> `developer.powershell-execution` | Allow Local PowerShell Scripts | Sets PowerShell execution policy to RemoteSigned, allowing local scripts to run while requiring signatures for remote scripts. Source: Mi... | Advanced | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L145` |
+| <a id="developer.python-path-fix"></a> `developer.python-path-fix` | Fix Python Path Length Issues | Ensures Python can handle long paths on Windows, preventing import errors in deep directory structures. | Safe | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L114` |
+| <a id="developer.ssh-agent-autostart"></a> `developer.ssh-agent-autostart` | Enable SSH Agent Auto-start | Automatically starts SSH agent on login for seamless Git SSH key authentication. | Safe | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L158` |
+| <a id="developer.terminal-dev-mode"></a> `developer.terminal-dev-mode` | Enable Windows Terminal Developer Features | Enables advanced features in Windows Terminal like debug tap and developer mode settings. | Safe | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L70` |
+| <a id="developer.vs-intellisense-cache"></a> `developer.vs-intellisense-cache` | Optimize VS IntelliSense Cache | Increases Visual Studio IntelliSense cache size for better code completion performance in large projects. | Safe | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L56` |
+| <a id="developer.vs-solution-load"></a> `developer.vs-solution-load` | Speed Up Visual Studio Solution Load | Disables background solution load analysis for faster Visual Studio startup on large solutions. | Safe | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L176` |
+| <a id="developer.vscode-git-autofetch"></a> `developer.vscode-git-autofetch` | Disable VS Code Git Autofetch | Disables automatic Git fetching in VS Code to reduce network usage and CPU spikes. | Safe | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L100` |
+| <a id="developer.windows-dev-mode"></a> `developer.windows-dev-mode` | Enable Windows Developer Mode | Enables Windows Developer Mode for sideloading apps and accessing advanced development features. Source: Microsoft Windows Developer Docu... | Advanced | `OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L128` |
+| <a id="system-check-disk-health"></a> `system-check-disk-health` | Check Disk Health (C:) | Performs a read-only check of the C: drive for file system errors without making any changes. Provides information about disk health and... | Safe | `OpenTraceProject.Engine\Tweaks\Commands\System\CheckDiskHealthTweak.cs#L14` |
 <!-- TWEAK INDEX END -->
 
 `).
@@ -58,7 +58,7 @@ Do not edit manually.
 
 ### ElevatedHost discovery (dev runs)
 When running via `dotnet run`, you can override the elevated host location with:
-`WINDOWS_OPTIMIZER_ELEVATED_HOST_PATH=C:\\path\\to\\WindowsOptimizer.ElevatedHost.exe`.
+`OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH=C:\\path\\to\\OpenTraceProject.ElevatedHost.exe`.
 
 ## Execution logging
 

@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$SharedRoot,
 
-    [string]$TaskName = 'WindowsOptimizerValidationAgent'
+    [string]$TaskName = 'OpenTraceProjectValidationAgent'
 )
 
 $ErrorActionPreference = 'Stop'

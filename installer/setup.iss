@@ -1,8 +1,8 @@
-#define MyAppName "Windows Optimizer"
+#define MyAppName "Open Trace Project"
 #define MyAppVersion "1.0.0"
-#define MyAppPublisher "Windows Optimizer Team"
-#define MyAppURL "https://github.com/siklone/WPF-Windows-optimizer-with-safe-reversible-tweaks"
-#define MyAppExeName "WindowsOptimizer.App.exe"
+#define MyAppPublisher "Open Trace Project"
+#define MyAppURL "https://github.com/siklone/Open-Trace-Project"
+#define MyAppExeName "OpenTraceProject.App.exe"
 
 [Setup]
 AppId={{B8E7C3D0-1234-5678-9ABC-DEF012345678}
@@ -18,8 +18,8 @@ AllowNoIcons=yes
 LicenseFile=license.txt
 PrivilegesRequired=admin
 OutputDir=output
-OutputBaseFilename=WindowsOptimizer_Setup_{#MyAppVersion}
-SetupIconFile=..\WindowsOptimizer.App\icon.ico
+OutputBaseFilename=OpenTraceProject_Setup_{#MyAppVersion}
+SetupIconFile=..\OpenTraceProject.App\icon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
@@ -37,7 +37,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 6.1; Check: not IsAdminInstallMode
 
 [Files]
-Source: "..\WindowsOptimizer.App\bin\Release\net8.0-windows\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\OpenTraceProject.App\bin\Release\net8.0-windows\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -59,7 +59,7 @@ begin
   // Check if .NET 8 Desktop Runtime is installed
   if not RegKeyExists(HKLM, 'SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App\8.0.0') then
   begin
-    if MsgBox('Windows Optimizer requires .NET 8 Desktop Runtime.' + #13#10 + 
+    if MsgBox('Open Trace Project requires .NET 8 Desktop Runtime.' + #13#10 + 
               'Would you like to download it now?', mbConfirmation, MB_YESNO) = IDYES then
     begin
       ShellExec('open', 'https://dotnet.microsoft.com/download/dotnet/8.0', '', '', SW_SHOWNORMAL, ewNoWait, Result);

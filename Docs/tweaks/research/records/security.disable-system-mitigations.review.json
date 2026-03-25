@@ -49,12 +49,12 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
-    "notes": "The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\\WindowsOptimizer\\ExploitProtection\\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider.",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\\OpenTraceProject\\ExploitProtection\\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider.",
     "writes": [
       {
         "target_id": "exploit-protection-policy",
-        "path": "%TEMP%\\WindowsOptimizer\\ExploitProtection\\security-disable-system-mitigations.xml",
+        "path": "%TEMP%\\OpenTraceProject\\ExploitProtection\\security-disable-system-mitigations.xml",
         "value_name": "Set-ProcessMitigation -PolicyFilePath",
         "value_type": "XML",
         "state_kind": "value",
@@ -188,7 +188,7 @@
       "evidence_id": "app-security-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
       "summary": "The provider writes raw binary MitigationOptions and MitigationAuditOptions values directly under HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\kernel.",
       "supports": [
         "path",

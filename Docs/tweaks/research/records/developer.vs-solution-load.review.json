@@ -47,7 +47,7 @@
   },
   "app_current_implementation": {
     "status": "unknown",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
     "notes": "The current app writes BackgroundAnalysis = 0, but this pass did not capture a primary Microsoft registry contract for that Visual Studio value.",
     "writes": [
       {
@@ -158,7 +158,7 @@
       "evidence_id": "app-developer-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/DeveloperTweakProvider.cs",
       "summary": "The provider writes BackgroundAnalysis = 0 under HKCU\\Software\\Microsoft\\VisualStudio\\SolutionLoading.",
       "supports": [
         "path",

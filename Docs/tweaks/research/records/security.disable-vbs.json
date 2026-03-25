@@ -174,7 +174,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "matches-research",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
                                        "notes":  "The current app writes the documented disabled values for the three Device Guard settings it manages.",
                                        "writes":  [
                                                       {
@@ -353,7 +353,7 @@
                          "evidence_id":  "app-security-provider",
                          "kind":  "repo-code",
                          "title":  "Current app implementation",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
                          "summary":  "The provider writes EnableVirtualizationBasedSecurity = 0, HypervisorEnforcedCodeIntegrity = 0, and LsaCfgFlags = 0 under the official Device Guard policy key.",
                          "supports":  [
                                           "path",

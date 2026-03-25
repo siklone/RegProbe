@@ -77,7 +77,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
     "notes": "The current app writes AllowTelemetry = 0 and the provider label now reflects the documented lowest supported diagnostic-data level. The implementation matches the research and stays edition-aware through the documented policy semantics.",
     "writes": [
       {
@@ -224,7 +224,7 @@
       "evidence_id": "app-privacy-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
       "summary": "The provider writes AllowTelemetry = 0 and labels the tweak as disabling diagnostic data.",
       "supports": [
         "path",

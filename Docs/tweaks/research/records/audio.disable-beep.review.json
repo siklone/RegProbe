@@ -56,7 +56,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
     "notes": "The current app writes Start = 4 for the Beep driver, and the guest probe confirmed that Start=4 disables the Beep driver on Win25H2Clean.",
     "writes": [
       {
@@ -179,7 +179,7 @@
       "evidence_id": "app-audio-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
       "summary": "The provider writes Start = 4 under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep.",
       "supports": [
         "path",

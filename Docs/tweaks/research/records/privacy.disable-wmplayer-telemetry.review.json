@@ -46,7 +46,7 @@
                 },
     "app_current_implementation":  {
                                        "status":  "partially-matches",
-                                       "provider_source":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                                       "provider_source":  "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
                                        "notes":  "The app writes a product-specific Windows Media Player preference bundle under the current user hive.",
                                        "writes":  [
                                                       {
@@ -139,7 +139,7 @@
                          "evidence_id":  "app-privacy-provider",
                          "kind":  "repo-code",
                          "title":  "Current privacy provider Windows Media Player bundle",
-                         "location":  "WindowsOptimizer.App/Services/TweakProviders/PrivacyTweakProvider.cs",
+                         "location":  "OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs",
                          "summary":  "The provider writes a Windows Media Player preference bundle affecting metadata retrieval, usage tracking, and MRU behavior.",
                          "supports":  [
                                           "path",
@@ -163,7 +163,7 @@
                  },
     "last_reviewed_utc":  "2026-03-21T07:42:45.369317Z",
     "validation_proof":  {
-                             "source_url":  "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
+                             "source_url":  "H:\\D\\Dev\\Open-Trace-Project\\Docs\\tweaks\\_source-mirrors\\win-config\\privacy\\desc.md",
                              "exact_quote_or_path":  "WMPlayer (Windows Media Player) sends player usage data by default ... This option turns off the Diagnostics and Feedback option ... Note: I gathered all registry values via the legacy WMPlayer.",
                              "key_found_on_page":  true,
                              "notes":  "Windows Media Player telemetry bundle. The proof anchors the legacy WMPlayer-registry capture path and the usage-data behavior."

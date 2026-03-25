@@ -2,7 +2,7 @@
 
 > Archived note (2026-03-24): this roadmap contains historical design work for a telemetry-heavy surface that is no longer part of the shipped app. Keep it as background only; the current product direction is tweak workflow, hardware details, and evidence-backed validation.
 
-**Project:** Windows Optimizer
+**Project:** Open Trace Project
 **Created:** January 19, 2026
 **Status:** APPROVED - Ready for Implementation
 
@@ -27,7 +27,7 @@
 
 ## Executive Summary
 
-This roadmap outlines major architectural improvements to the Windows Optimizer application, focusing on:
+This roadmap outlines major architectural improvements to the Open Trace Project application, focusing on:
 
 - **Single Instance Enforcement**: Only one app instance can run at a time
 - **Multi-threaded Architecture**: Dedicated worker threads for responsiveness on multi-core CPUs
@@ -44,12 +44,12 @@ This roadmap outlines major architectural improvements to the Windows Optimizer 
 ### 1.1 Named Mutex Implementation
 
 ```csharp
-// WindowsOptimizer.App/Services/SingleInstanceManager.cs
+// OpenTraceProject.App/Services/SingleInstanceManager.cs
 
 public sealed class SingleInstanceManager : IDisposable
 {
-    private const string MutexName = "Global\\WindowsOptimizer_SingleInstance_v2";
-    private const string PipeName = "WindowsOptimizer_IPC_v2";
+    private const string MutexName = "Global\\OpenTraceProject_SingleInstance_v2";
+    private const string PipeName = "OpenTraceProject_IPC_v2";
 
     private Mutex? _mutex;
     private NamedPipeServerStream? _pipeServer;
@@ -148,7 +148,7 @@ public sealed class SingleInstanceManager : IDisposable
             MessageBox.Show(
                 "Another instance appears to be running but not responding.\n" +
                 "Please close it manually or restart your computer.",
-                "Windows Optimizer",
+                "Open Trace Project",
                 MessageBoxButton.OK,
                 MessageBoxImage.Warning);
         }
@@ -234,39 +234,39 @@ public partial class App : Application
 ### 2.1 Thread Pool Design
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                         UI Thread (STA)                         │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐ │
-│  │   XAML      │  │  Bindings   │  │    Animations           │ │
-│  └─────────────┘  └─────────────┘  └─────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-                              ▲
-                              │ Dispatcher.InvokeAsync
-                              │
-┌─────────────────────────────────────────────────────────────────┐
-│                      MetricDataBus (Channel)                    │
-│  ┌─────────────────────────────────────────────────────────────┐│
-│  │ Channel<MetricUpdate> - Lock-free bounded queue (1000)      ││
-│  │ 60fps debounced UI dispatch                                 ││
-│  └─────────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────────┘
-         ▲                    ▲                    ▲
-         │                    │                    │
-┌────────┴────────┐  ┌────────┴────────┐  ┌───────┴─────────┐
-│  Metric Pool    │  │    I/O Pool     │  │  Dedicated      │
-│  (4 workers)    │  │   (2 workers)   │  │  Threads        │
-├─────────────────┤  ├─────────────────┤  ├─────────────────┤
-│ • CPU %         │  │ • File I/O      │  │ • ETW Sampler   │
-│ • RAM %         │  │ • Registry      │  │ • Network Stats │
-│ • GPU %         │  │ • SQLite        │  │ • Disk Health   │
-│ • Temps         │  │ • Network API   │  │ • LHM Polling   │
-└─────────────────┘  └─────────────────┘  └─────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                         UI Thread (STA)                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚   XAML      â”‚  â”‚  Bindings   â”‚  â”‚    Animations           â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                              â–²
+                              â”‚ Dispatcher.InvokeAsync
+                              â”‚
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                      MetricDataBus (Channel)                    â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”â”‚
+â”‚  â”‚ Channel<MetricUpdate> - Lock-free bounded queue (1000)      â”‚â”‚
+â”‚  â”‚ 60fps debounced UI dispatch                                 â”‚â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â–²                    â–²                    â–²
+         â”‚                    â”‚                    â”‚
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Metric Pool    â”‚  â”‚    I/O Pool     â”‚  â”‚  Dedicated      â”‚
+â”‚  (4 workers)    â”‚  â”‚   (2 workers)   â”‚  â”‚  Threads        â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ â€¢ CPU %         â”‚  â”‚ â€¢ File I/O      â”‚  â”‚ â€¢ ETW Sampler   â”‚
+â”‚ â€¢ RAM %         â”‚  â”‚ â€¢ Registry      â”‚  â”‚ â€¢ Network Stats â”‚
+â”‚ â€¢ GPU %         â”‚  â”‚ â€¢ SQLite        â”‚  â”‚ â€¢ Disk Health   â”‚
+â”‚ â€¢ Temps         â”‚  â”‚ â€¢ Network API   â”‚  â”‚ â€¢ LHM Polling   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### 2.2 MetricDataBus Implementation
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Threading/MetricDataBus.cs
+// OpenTraceProject.Infrastructure/Threading/MetricDataBus.cs
 
 public sealed class MetricDataBus : IDisposable
 {
@@ -370,7 +370,7 @@ public class MetricBatchEventArgs : EventArgs
 ### 2.3 Worker Thread Management
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Threading/MetricWorkerPool.cs
+// OpenTraceProject.Infrastructure/Threading/MetricWorkerPool.cs
 
 public sealed class MetricWorkerPool : IDisposable
 {
@@ -483,7 +483,7 @@ public class ThreadingDiagnostics
 ### 3.1 PreloadManager
 
 ```csharp
-// WindowsOptimizer.App/Services/PreloadManager.cs
+// OpenTraceProject.App/Services/PreloadManager.cs
 
 public sealed class PreloadManager
 {
@@ -597,7 +597,7 @@ public class PreloadResult
 ### 3.2 Splash Integration
 
 ```csharp
-// WindowsOptimizer.App/StartupWindow.xaml.cs
+// OpenTraceProject.App/StartupWindow.xaml.cs
 
 public partial class StartupWindow : Window
 {
@@ -746,7 +746,7 @@ public class PreloadErrorRecovery
 
 ```sql
 -- Hardware Specs Database
--- Location: %APPDATA%/WindowsOptimizer/hardware.db
+-- Location: %APPDATA%/OpenTraceProject/hardware.db
 
 CREATE TABLE IF NOT EXISTS cpu_specs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -877,7 +877,7 @@ INSERT OR REPLACE INTO db_metadata (key, value) VALUES ('last_update', datetime(
 ### 4.2 Hardware Identifier Service
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Hardware/HardwareIdentifier.cs
+// OpenTraceProject.Infrastructure/Hardware/HardwareIdentifier.cs
 
 public class HardwareIdentifier
 {
@@ -1026,7 +1026,7 @@ public class GpuIdentity
 ### 4.3 Matching Algorithm
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Hardware/HardwareDatabase.cs
+// OpenTraceProject.Infrastructure/Hardware/HardwareDatabase.cs
 
 public class HardwareDatabase
 {
@@ -1040,7 +1040,7 @@ public class HardwareDatabase
     {
         var dbPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "WindowsOptimizer", "hardware.db");
+            "OpenTraceProject", "hardware.db");
 
         Directory.CreateDirectory(Path.GetDirectoryName(dbPath)!);
 
@@ -1136,58 +1136,58 @@ public class HardwareDatabase
 ### 5.1 Fallback Chain Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                      Data Request                                │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  Source 1: Legacy hardware telemetry provider (historical)     │
-│  ├─ CPU: Temps, Voltage, Power, Clocks                          │
-│  ├─ GPU: Temps, Voltage, Power, Clocks, Memory                  │
-│  ├─ Storage: Temps, SMART data                                  │
-│  └─ Motherboard: Voltages, Temps                                │
-└─────────────────────────────────────────────────────────────────┘
-                              │ Timeout/Error
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  Source 2: WMI (Secondary)                                      │
-│  ├─ Win32_Processor: Name, Cores, Threads, Speed                │
-│  ├─ Win32_VideoController: GPU Name, Memory, Driver             │
-│  ├─ Win32_DiskDrive: Model, Size, Interface                     │
-│  ├─ MSAcpi_ThermalZoneTemperature: CPU/System temps             │
-│  └─ MSFT_PhysicalDisk: NVMe health                              │
-└─────────────────────────────────────────────────────────────────┘
-                              │ Timeout/Error
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  Source 3: Performance Counters                                 │
-│  ├─ Processor: CPU usage, frequency                             │
-│  ├─ Memory: Available, committed, cache                         │
-│  ├─ LogicalDisk: Read/Write bytes per sec                       │
-│  └─ Network Interface: Bytes sent/received                      │
-└─────────────────────────────────────────────────────────────────┘
-                              │ Timeout/Error
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  Source 4: System APIs (Fallback)                               │
-│  ├─ Environment: ProcessorCount, OSVersion                      │
-│  ├─ DriveInfo: Available space, total size                      │
-│  ├─ NetworkInterface: Basic stats                               │
-│  └─ Process: Memory working set                                 │
-└─────────────────────────────────────────────────────────────────┘
-                              │ All Failed
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  Default/Unknown Values                                         │
-│  └─ Return N/A, 0, or reasonable defaults                       │
-└─────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                      Data Request                                â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                              â”‚
+                              â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Source 1: Legacy hardware telemetry provider (historical)     â”‚
+â”‚  â”œâ”€ CPU: Temps, Voltage, Power, Clocks                          â”‚
+â”‚  â”œâ”€ GPU: Temps, Voltage, Power, Clocks, Memory                  â”‚
+â”‚  â”œâ”€ Storage: Temps, SMART data                                  â”‚
+â”‚  â””â”€ Motherboard: Voltages, Temps                                â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                              â”‚ Timeout/Error
+                              â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Source 2: WMI (Secondary)                                      â”‚
+â”‚  â”œâ”€ Win32_Processor: Name, Cores, Threads, Speed                â”‚
+â”‚  â”œâ”€ Win32_VideoController: GPU Name, Memory, Driver             â”‚
+â”‚  â”œâ”€ Win32_DiskDrive: Model, Size, Interface                     â”‚
+â”‚  â”œâ”€ MSAcpi_ThermalZoneTemperature: CPU/System temps             â”‚
+â”‚  â””â”€ MSFT_PhysicalDisk: NVMe health                              â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                              â”‚ Timeout/Error
+                              â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Source 3: Performance Counters                                 â”‚
+â”‚  â”œâ”€ Processor: CPU usage, frequency                             â”‚
+â”‚  â”œâ”€ Memory: Available, committed, cache                         â”‚
+â”‚  â”œâ”€ LogicalDisk: Read/Write bytes per sec                       â”‚
+â”‚  â””â”€ Network Interface: Bytes sent/received                      â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                              â”‚ Timeout/Error
+                              â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Source 4: System APIs (Fallback)                               â”‚
+â”‚  â”œâ”€ Environment: ProcessorCount, OSVersion                      â”‚
+â”‚  â”œâ”€ DriveInfo: Available space, total size                      â”‚
+â”‚  â”œâ”€ NetworkInterface: Basic stats                               â”‚
+â”‚  â””â”€ Process: Memory working set                                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                              â”‚ All Failed
+                              â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Default/Unknown Values                                         â”‚
+â”‚  â””â”€ Return N/A, 0, or reasonable defaults                       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### 5.2 FallbackDataProvider
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Data/FallbackDataProvider.cs
+// OpenTraceProject.Infrastructure/Data/FallbackDataProvider.cs
 
 public class FallbackDataProvider<T>
 {
@@ -1322,7 +1322,7 @@ public record DataSourceError(string Source, string Message);
 ### 5.3 Usage Example
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Metrics/CpuDataProvider.cs
+// OpenTraceProject.Infrastructure/Metrics/CpuDataProvider.cs
 
 public class CpuDataProvider
 {
@@ -1367,9 +1367,9 @@ public class CpuDataProvider
 ### 6.1 Hardware Card Component
 
 ```xml
-<!-- WindowsOptimizer.App/Views/Components/HardwareCardView.xaml -->
+<!-- OpenTraceProject.App/Views/Components/HardwareCardView.xaml -->
 
-<UserControl x:Class="WindowsOptimizer.App.Views.Components.HardwareCardView"
+<UserControl x:Class="OpenTraceProject.App.Views.Components.HardwareCardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
@@ -1522,7 +1522,7 @@ public class CpuDataProvider
 ### 6.2 CPU Card ViewModel
 
 ```csharp
-// WindowsOptimizer.App/ViewModels/Hardware/CpuCardViewModel.cs
+// OpenTraceProject.App/ViewModels/Hardware/CpuCardViewModel.cs
 
 public class CpuCardViewModel : HardwareCardViewModelBase
 {
@@ -1535,7 +1535,7 @@ public class CpuCardViewModel : HardwareCardViewModelBase
         _bus = bus;
         _db = db;
 
-        Icon = "🔲";
+        Icon = "ðŸ”²";
         Title = "CPU";
         IconBackground = new SolidColorBrush(Color.FromRgb(59, 130, 246)); // Blue
 
@@ -1574,7 +1574,7 @@ public class CpuCardViewModel : HardwareCardViewModelBase
 
         if (e.Updates.TryGetValue("cpu.temp.package", out var temp))
         {
-            UpdateSecondaryMetric("Temp", $"{temp.Value:F0}", "°C");
+            UpdateSecondaryMetric("Temp", $"{temp.Value:F0}", "Â°C");
             StatusColor = GetTempStatusColor((float)temp.Value);
         }
 
@@ -1625,7 +1625,7 @@ public class CpuCardViewModel : HardwareCardViewModelBase
 ### 6.3 GPU Card ViewModel
 
 ```csharp
-// WindowsOptimizer.App/ViewModels/Hardware/GpuCardViewModel.cs
+// OpenTraceProject.App/ViewModels/Hardware/GpuCardViewModel.cs
 
 public class GpuCardViewModel : HardwareCardViewModelBase
 {
@@ -1638,7 +1638,7 @@ public class GpuCardViewModel : HardwareCardViewModelBase
         _bus = bus;
         _db = db;
 
-        Icon = "🎮";
+        Icon = "ðŸŽ®";
         Title = "GPU";
         IconBackground = new SolidColorBrush(Color.FromRgb(34, 197, 94)); // Green
 
@@ -1658,12 +1658,12 @@ public class GpuCardViewModel : HardwareCardViewModelBase
             HasSpecs = _specs?.IsFromDatabase == true;
 
             SecondaryMetrics.Clear();
-            SecondaryMetrics.Add(new MetricItem("VRAM", "—", "GB"));
-            SecondaryMetrics.Add(new MetricItem("Core", "—", "MHz"));
-            SecondaryMetrics.Add(new MetricItem("Mem", "—", "MHz"));
-            SecondaryMetrics.Add(new MetricItem("Fan", "—", "RPM"));
-            SecondaryMetrics.Add(new MetricItem("Power", "—", "W"));
-            SecondaryMetrics.Add(new MetricItem("Temp", "—", "°C"));
+            SecondaryMetrics.Add(new MetricItem("VRAM", "â€”", "GB"));
+            SecondaryMetrics.Add(new MetricItem("Core", "â€”", "MHz"));
+            SecondaryMetrics.Add(new MetricItem("Mem", "â€”", "MHz"));
+            SecondaryMetrics.Add(new MetricItem("Fan", "â€”", "RPM"));
+            SecondaryMetrics.Add(new MetricItem("Power", "â€”", "W"));
+            SecondaryMetrics.Add(new MetricItem("Temp", "â€”", "Â°C"));
         });
     }
 
@@ -1678,7 +1678,7 @@ public class GpuCardViewModel : HardwareCardViewModelBase
 
         if (e.Updates.TryGetValue("gpu.temp.core", out var temp))
         {
-            UpdateSecondaryMetric("Temp", $"{temp.Value:F0}", "°C");
+            UpdateSecondaryMetric("Temp", $"{temp.Value:F0}", "Â°C");
             StatusColor = GetTempStatusColor((float)temp.Value);
         }
 
@@ -1714,9 +1714,9 @@ public class GpuCardViewModel : HardwareCardViewModelBase
 ### 6.4 Hardware Details Layout
 
 ```xml
-<!-- WindowsOptimizer.App/Views/HardwareDetailsView.xaml (Redesigned) -->
+<!-- OpenTraceProject.App/Views/HardwareDetailsView.xaml (Redesigned) -->
 
-<UserControl x:Class="WindowsOptimizer.App.Views.HardwareDetailsView">
+<UserControl x:Class="OpenTraceProject.App.Views.HardwareDetailsView">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>  <!-- Header -->
@@ -1750,7 +1750,7 @@ public class GpuCardViewModel : HardwareCardViewModelBase
                 </Border>
 
                 <!-- Export Button -->
-                <Button Content="📊"
+                <Button Content="ðŸ“Š"
                         Command="{Binding ExportCommand}"
                         ToolTip="Export Sensor Diagnostics"
                         Style="{StaticResource IconButtonStyle}"
@@ -1851,10 +1851,10 @@ public class GpuCardViewModel : HardwareCardViewModelBase
 <Color x:Key="InfoColor">#3B82F6</Color>        <!-- Blue - Informational -->
 
 <!-- Temperature Gradient -->
-<Color x:Key="TempCoolColor">#22D3EE</Color>    <!-- Cyan - Cool (<50°C) -->
-<Color x:Key="TempWarmColor">#FBBF24</Color>    <!-- Yellow - Warm (50-70°C) -->
-<Color x:Key="TempHotColor">#F97316</Color>     <!-- Orange - Hot (70-85°C) -->
-<Color x:Key="TempCriticalColor">#DC2626</Color> <!-- Red - Critical (>85°C) -->
+<Color x:Key="TempCoolColor">#22D3EE</Color>    <!-- Cyan - Cool (<50Â°C) -->
+<Color x:Key="TempWarmColor">#FBBF24</Color>    <!-- Yellow - Warm (50-70Â°C) -->
+<Color x:Key="TempHotColor">#F97316</Color>     <!-- Orange - Hot (70-85Â°C) -->
+<Color x:Key="TempCriticalColor">#DC2626</Color> <!-- Red - Critical (>85Â°C) -->
 
 <!-- Usage Gradient -->
 <Color x:Key="UsageLowColor">#10B981</Color>    <!-- Emerald - Low (<30%) -->
@@ -1878,7 +1878,7 @@ public class GpuCardViewModel : HardwareCardViewModelBase
 ### 8.1 Priority Control
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Process/ProcessPriorityManager.cs
+// OpenTraceProject.Infrastructure/Process/ProcessPriorityManager.cs
 
 public class ProcessPriorityManager
 {
@@ -1930,7 +1930,7 @@ public class ProcessPriorityManager
 ### 8.2 CPU Affinity Control
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Process/ProcessAffinityManager.cs
+// OpenTraceProject.Infrastructure/Process/ProcessAffinityManager.cs
 
 public class ProcessAffinityManager
 {
@@ -2001,7 +2001,7 @@ public class ProcessAffinityManager
 ### 8.3 Memory Trim
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Process/ProcessMemoryManager.cs
+// OpenTraceProject.Infrastructure/Process/ProcessMemoryManager.cs
 
 public class ProcessMemoryManager
 {
@@ -2122,7 +2122,7 @@ public record ProcessMemoryInfo
 ### 8.4 I/O Priority
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Process/ProcessIoPriorityManager.cs
+// OpenTraceProject.Infrastructure/Process/ProcessIoPriorityManager.cs
 
 public class ProcessIoPriorityManager
 {
@@ -2204,7 +2204,7 @@ public class ProcessIoPriorityManager
 ### 8.5 Process Tree Operations
 
 ```csharp
-// WindowsOptimizer.Infrastructure/Process/ProcessTreeManager.cs
+// OpenTraceProject.Infrastructure/Process/ProcessTreeManager.cs
 
 public class ProcessTreeManager
 {
@@ -2433,51 +2433,51 @@ public class ProcessTreeNode
 ## 10. File Structure
 
 ```
-WindowsOptimizer.App/
-├── Services/
-│   ├── SingleInstanceManager.cs         ✨ NEW
-│   ├── PreloadManager.cs                 ✨ NEW
-│   └── ThemeManager.cs
-├── ViewModels/
-│   ├── Hardware/                         ✨ NEW FOLDER
-│   │   ├── HardwareCardViewModelBase.cs
-│   │   ├── CpuCardViewModel.cs
-│   │   ├── GpuCardViewModel.cs
-│   │   ├── RamCardViewModel.cs
-│   │   ├── StorageCardViewModel.cs
-│   │   ├── NetworkCardViewModel.cs
-│   │   └── MotherboardCardViewModel.cs
-│   └── Hardware detail view models      (major update)
-├── Views/
-│   ├── Components/                       ✨ NEW FOLDER
-│   │   ├── HardwareCardView.xaml
-│   │   ├── StorageCardView.xaml
-│   │   ├── NetworkCardView.xaml
-│   │   └── ProcessListCard.xaml
-│   └── Hardware details views           (redesigned)
-└── Resources/
-    └── Colors.xaml                      (extended)
+OpenTraceProject.App/
+â”œâ”€â”€ Services/
+â”‚   â”œâ”€â”€ SingleInstanceManager.cs         âœ¨ NEW
+â”‚   â”œâ”€â”€ PreloadManager.cs                 âœ¨ NEW
+â”‚   â””â”€â”€ ThemeManager.cs
+â”œâ”€â”€ ViewModels/
+â”‚   â”œâ”€â”€ Hardware/                         âœ¨ NEW FOLDER
+â”‚   â”‚   â”œâ”€â”€ HardwareCardViewModelBase.cs
+â”‚   â”‚   â”œâ”€â”€ CpuCardViewModel.cs
+â”‚   â”‚   â”œâ”€â”€ GpuCardViewModel.cs
+â”‚   â”‚   â”œâ”€â”€ RamCardViewModel.cs
+â”‚   â”‚   â”œâ”€â”€ StorageCardViewModel.cs
+â”‚   â”‚   â”œâ”€â”€ NetworkCardViewModel.cs
+â”‚   â”‚   â””â”€â”€ MotherboardCardViewModel.cs
+â”‚   â””â”€â”€ Hardware detail view models      (major update)
+â”œâ”€â”€ Views/
+â”‚   â”œâ”€â”€ Components/                       âœ¨ NEW FOLDER
+â”‚   â”‚   â”œâ”€â”€ HardwareCardView.xaml
+â”‚   â”‚   â”œâ”€â”€ StorageCardView.xaml
+â”‚   â”‚   â”œâ”€â”€ NetworkCardView.xaml
+â”‚   â”‚   â””â”€â”€ ProcessListCard.xaml
+â”‚   â””â”€â”€ Hardware details views           (redesigned)
+â””â”€â”€ Resources/
+    â””â”€â”€ Colors.xaml                      (extended)
 
-WindowsOptimizer.Infrastructure/
-├── Threading/                            ✨ NEW FOLDER
-│   ├── MetricDataBus.cs
-│   ├── MetricWorkerPool.cs
-│   └── ThreadingDiagnostics.cs
-├── Hardware/                             ✨ NEW FOLDER
-│   ├── HardwareDatabase.cs
-│   ├── HardwareIdentifier.cs
-│   └── HardwareSpecs.cs
-├── Data/                                 ✨ NEW FOLDER
-│   ├── FallbackDataProvider.cs
-│   └── RetryPolicy.cs
-├── Process/                              ✨ NEW FOLDER
-│   ├── ProcessPriorityManager.cs
-│   ├── ProcessAffinityManager.cs
-│   ├── ProcessMemoryManager.cs
-│   ├── ProcessIoPriorityManager.cs
-│   └── ProcessTreeManager.cs
-└── Metrics/
-    └── (existing files updated)
+OpenTraceProject.Infrastructure/
+â”œâ”€â”€ Threading/                            âœ¨ NEW FOLDER
+â”‚   â”œâ”€â”€ MetricDataBus.cs
+â”‚   â”œâ”€â”€ MetricWorkerPool.cs
+â”‚   â””â”€â”€ ThreadingDiagnostics.cs
+â”œâ”€â”€ Hardware/                             âœ¨ NEW FOLDER
+â”‚   â”œâ”€â”€ HardwareDatabase.cs
+â”‚   â”œâ”€â”€ HardwareIdentifier.cs
+â”‚   â””â”€â”€ HardwareSpecs.cs
+â”œâ”€â”€ Data/                                 âœ¨ NEW FOLDER
+â”‚   â”œâ”€â”€ FallbackDataProvider.cs
+â”‚   â””â”€â”€ RetryPolicy.cs
+â”œâ”€â”€ Process/                              âœ¨ NEW FOLDER
+â”‚   â”œâ”€â”€ ProcessPriorityManager.cs
+â”‚   â”œâ”€â”€ ProcessAffinityManager.cs
+â”‚   â”œâ”€â”€ ProcessMemoryManager.cs
+â”‚   â”œâ”€â”€ ProcessIoPriorityManager.cs
+â”‚   â””â”€â”€ ProcessTreeManager.cs
+â””â”€â”€ Metrics/
+    â””â”€â”€ (existing files updated)
 ```
 
 ---

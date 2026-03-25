@@ -50,7 +50,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs",
     "notes": "The app writes MenuShowDelay = \"0\" under HKCU\\Control Panel\\Desktop. A local runtime diff confirmed that this matches the persisted zero-delay state produced by the official Win32 menu-delay API on this build.",
     "writes": [
       {
@@ -146,7 +146,7 @@
       "evidence_id": "app-performance-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/PerformanceTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/PerformanceTweakProvider.cs",
       "summary": "The provider writes MenuShowDelay = \"0\" under HKCU\\Control Panel\\Desktop.",
       "supports": [
         "path",

@@ -79,7 +79,7 @@
   },
   "app_current_implementation": {
     "status": "partially-matches",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
     "notes": "The current app writes two official policy values and also writes three long-dated pause timestamps under HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings. Those pause values are not the same thing as the official Group Policy controls.",
     "writes": [
       {
@@ -196,7 +196,7 @@
       "evidence_id": "app-security-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
       "summary": "The provider writes DisableWindowsUpdateAccess = 1, NoAutoUpdate = 1, and three pause timestamp values under the UX settings path.",
       "supports": [
         "path",

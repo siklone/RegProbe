@@ -57,7 +57,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
     "notes": "The app writes the official mDNS policy surface: EnableMDNS = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient. The UX now matches the documented semantics: policy-disabled or not configured means the DNS client uses locally configured mDNS behavior.",
     "writes": [
       {
@@ -179,7 +179,7 @@
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
       "title": "Current network tweak provider",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
       "summary": "The current app writes EnableMDNS = 0 and presents the control as setting the mDNS policy back to local-settings behavior.",
       "supports": [
         "ui-mapping",

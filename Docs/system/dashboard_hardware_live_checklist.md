@@ -1,11 +1,11 @@
-﻿# Dashboard Hardware Live Check Checklist
+# Dashboard Hardware Live Check Checklist
 
 Date: 2026-02-27
 Scope: Dashboard cards and hardware detail windows (OS, Motherboard, CPU, GPU, Memory, Storage, Displays, Network, USB).
 
 ## Preconditions
 
-1. Launch app: `dotnet run --project WindowsOptimizer.App\\WindowsOptimizer.App.csproj`
+1. Launch app: `dotnet run --project OpenTraceProject.App\\OpenTraceProject.App.csproj`
 2. Wait until dashboard loading overlay disappears.
 3. Confirm all 9 hardware cards are visible and clickable.
 

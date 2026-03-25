@@ -95,7 +95,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
     "notes": "The current app writes EnableFirewall = 0 for DomainProfile and StandardProfile under the official WindowsFirewall policy path.",
     "writes": [
       {
@@ -275,7 +275,7 @@
       "evidence_id": "app-security-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/SecurityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/SecurityTweakProvider.cs",
       "summary": "The provider writes EnableFirewall = 0 under HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile and HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile.",
       "supports": [
         "path",

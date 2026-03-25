@@ -7,7 +7,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 README_PATH = REPO_ROOT / "README.md"
 DOCS_ROOT = REPO_ROOT / "Docs"
-TWEAKS_VIEW_MODEL = REPO_ROOT / "WindowsOptimizer.App" / "ViewModels" / "TweaksViewModel.cs"
+TWEAKS_VIEW_MODEL = REPO_ROOT / "OpenTraceProject.App" / "ViewModels" / "TweaksViewModel.cs"
 PROGRESS_SVG = REPO_ROOT / "assets" / "progress.svg"
 CONFIG_PATH = REPO_ROOT / "scripts" / "progress_config.json"
 

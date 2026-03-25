@@ -51,7 +51,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
     "notes": "The app now exposes ShowRecent through VisibilityTweakProvider and writes the same HKCU Explorer value that the runtime probe validated.",
     "writes": [
       {
@@ -171,7 +171,7 @@
       "evidence_id": "app-visibility-provider",
       "kind": "repo-code",
       "title": "Current app implementation for ShowRecent",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/VisibilityTweakProvider.cs",
       "summary": "VisibilityTweakProvider now exposes explorer.show-recent-items and writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent = 1 for the current user.",
       "supports": [
         "path",

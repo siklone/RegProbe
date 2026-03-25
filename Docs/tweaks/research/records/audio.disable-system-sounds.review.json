@@ -48,7 +48,7 @@
   },
   "app_current_implementation": {
     "status": "unknown",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
     "notes": "The current app clears many AppEvents sound mappings, but this pass did not capture a primary Microsoft source for the exact AppEvents bundle contract.",
     "writes": [
       {
@@ -129,7 +129,7 @@
       "evidence_id": "app-audio-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/AudioTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/AudioTweakProvider.cs",
       "summary": "The provider writes empty strings to many HKCU\\AppEvents\\Schemes sound mappings.",
       "supports": [
         "path",

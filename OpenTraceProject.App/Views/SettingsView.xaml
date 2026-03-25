@@ -1,0 +1,272 @@
+<UserControl x:Class="OpenTraceProject.App.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:services="clr-namespace:OpenTraceProject.App.Services"
+             mc:Ignorable="d"
+             FontFamily="{DynamicResource FontFamilyText}"
+             FontSize="12">
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="ThemePickerPanel">
+            <WrapPanel/>
+        </ItemsPanelTemplate>
+
+        <Style x:Key="ThemePickerListStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="ItemsPanel" Value="{StaticResource ThemePickerPanel}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+
+        <Style x:Key="ThemePickerItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Chip"
+                                Padding="12,8"
+                                Background="{DynamicResource AppChipSurfaceBrush}"
+                                BorderBrush="{DynamicResource GlassBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Chip" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
+                                <Setter TargetName="Chip" Property="Background" Value="{DynamicResource AppWorkspaceHoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Chip" Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
+                                <Setter TargetName="Chip" Property="BorderBrush" Value="{DynamicResource AppWorkspaceSelectedBorderBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SettingsSectionCardStyle" TargetType="Border" BasedOn="{StaticResource AppSurfaceCardStyle}">
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+
+        <Style x:Key="SettingsInsetCardStyle" TargetType="Border" BasedOn="{StaticResource AppInsetPanelStyle}">
+            <Setter Property="Padding" Value="14,12"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="CornerRadius" Value="14"/>
+        </Style>
+
+        <Style x:Key="SettingsItemTitleTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Key="SettingsItemBodyTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Key="SettingsMetaChipStyle" TargetType="Border" BasedOn="{StaticResource AppChipStyle}">
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="CornerRadius" Value="11"/>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  HorizontalContentAlignment="Stretch"
+                  Background="{DynamicResource BackgroundDarkestBrush}">
+        <Grid Margin="16,8,16,12"
+              HorizontalAlignment="Stretch">
+            <StackPanel Margin="0,6,0,8">
+                <StackPanel Margin="0,0,0,14">
+                    <TextBlock Text="Preferences"
+                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                    <TextBlock Text="{Binding Title}"
+                               Margin="0,3,0,0"
+                               Style="{StaticResource AppHeroTitleTextStyle}"/>
+                    <TextBlock Margin="0,4,0,0"
+                               Style="{StaticResource AppHeroSubtitleTextStyle}"
+                               Text="Theme and general app behavior."/>
+                </StackPanel>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="0.9*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0"
+                            Style="{StaticResource SettingsSectionCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Appearance"
+                                       Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                            <TextBlock Text="Choose a theme"
+                                       Margin="0,6,0,0"
+                                       Style="{StaticResource AppSectionTitleTextStyle}"
+                                       FontSize="20"/>
+                            <TextBlock Margin="0,6,0,14"
+                                       Style="{StaticResource AppSectionSubtitleTextStyle}"
+                                       Text="Accent changes apply immediately."/>
+
+                            <ListBox ItemsSource="{Binding AvailableThemes}"
+                                     SelectedItem="{Binding CurrentThemePalette, Mode=TwoWay}"
+                                     Style="{StaticResource ThemePickerListStyle}"
+                                     ItemContainerStyle="{StaticResource ThemePickerItemStyle}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type services:ThemePalette}">
+                                        <TextBlock Text="{Binding Name}"
+                                                   FontSize="12"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <Border Style="{StaticResource SettingsInsetCardStyle}" Margin="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Margin="0,0,12,0">
+                                        <TextBlock Text="Dark base"
+                                                   Style="{StaticResource SettingsItemTitleTextStyle}"/>
+                                        <TextBlock Margin="0,3,0,0"
+                                                   Style="{StaticResource SettingsItemBodyTextStyle}"
+                                                   Text="Keeps the darker desktop-first shell style."/>
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1"
+                                              VerticalAlignment="Center"
+                                              Style="{StaticResource ToggleSwitchStyle}"
+                                              IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="2"
+                            Style="{StaticResource SettingsSectionCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Behavior"
+                                       Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                            <TextBlock Text="General"
+                                       Margin="0,6,0,0"
+                                       Style="{StaticResource AppSectionTitleTextStyle}"
+                                       FontSize="20"/>
+                            <TextBlock Margin="0,6,0,14"
+                                       Style="{StaticResource AppSectionSubtitleTextStyle}"
+                                       Text="Small app-wide behavior preferences only."/>
+
+                            <Border Style="{StaticResource SettingsInsetCardStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Margin="0,0,12,0">
+                                        <TextBlock Text="Run startup scan on launch"
+                                                   Style="{StaticResource SettingsItemTitleTextStyle}"/>
+                                        <TextBlock Margin="0,3,0,0"
+                                                   Style="{StaticResource SettingsItemBodyTextStyle}"
+                                                   Text="Performs a quick scan before the main workspace settles."/>
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1"
+                                              VerticalAlignment="Center"
+                                              Style="{StaticResource ToggleSwitchStyle}"
+                                              IsChecked="{Binding RunStartupScanOnLaunch, Mode=TwoWay}"/>
+                                </Grid>
+                            </Border>
+
+                            <Border Style="{StaticResource SettingsInsetCardStyle}" Margin="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Margin="0,0,12,0">
+                                        <TextBlock Text="Show preview hints"
+                                                   Style="{StaticResource SettingsItemTitleTextStyle}"/>
+                                        <TextBlock Margin="0,3,0,0"
+                                                   Style="{StaticResource SettingsItemBodyTextStyle}"
+                                                   Text="Keeps small guidance hints visible around safe preview flows."/>
+                                    </StackPanel>
+                                    <CheckBox Grid.Column="1"
+                                              VerticalAlignment="Center"
+                                              Style="{StaticResource ToggleSwitchStyle}"
+                                              IsChecked="{Binding ShowPreviewHint, Mode=TwoWay}"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0"
+                            Style="{StaticResource SettingsSectionCardStyle}"
+                            Margin="0">
+                        <StackPanel>
+                            <TextBlock Text="Build"
+                                       Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                            <WrapPanel Margin="0,8,0,0">
+                                <Border Style="{StaticResource SettingsMetaChipStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="Version" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
+                                        <TextBlock Text="{Binding AppVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource SettingsMetaChipStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="Build" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
+                                        <TextBlock Text="{Binding BuildConfiguration}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource SettingsMetaChipStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="Framework" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
+                                        <TextBlock Text="{Binding Framework}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                </Border>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="2"
+                            Style="{StaticResource SettingsSectionCardStyle}"
+                            Margin="0">
+                        <StackPanel>
+                            <TextBlock Text="Status"
+                                       Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                            <TextBlock Text="{Binding StatusMessage}"
+                                       Margin="0,6,0,0"
+                                       Style="{StaticResource AppSectionTitleTextStyle}"
+                                       FontSize="16"
+                                       TextWrapping="Wrap"/>
+                            <Button Margin="0,14,0,0"
+                                    MinWidth="148"
+                                    Command="{Binding SaveCommand}"
+                                    Content="Save changes"
+                                    Style="{StaticResource ModernButtonStyle}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

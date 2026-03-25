@@ -154,7 +154,7 @@
   },
   "app_current_implementation": {
     "status": "matches-research",
-    "provider_source": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+    "provider_source": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
     "notes": "The tweak targets real SMB tuning values and matches Microsoft's published client tuning example exactly.",
     "writes": [
       {
@@ -342,7 +342,7 @@
       "evidence_id": "app-network-provider",
       "kind": "repo-code",
       "title": "Current network tweak provider",
-      "location": "WindowsOptimizer.App/Services/TweakProviders/NetworkTweakProvider.cs",
+      "location": "OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs",
       "summary": "The current app writes metadata cache and MaxCmds values that match Microsoft's documented client tuning example.",
       "supports": [
         "ui-mapping",
