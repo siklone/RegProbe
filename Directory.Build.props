@@ -12,6 +12,7 @@
     <!-- Analysis Settings -->
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <DefaultItemExcludes>$(DefaultItemExcludes);**\artifacts\**</DefaultItemExcludes>
     
     <!-- 
