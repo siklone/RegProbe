@@ -24,7 +24,7 @@ public partial class StartupWindow : Window
     public void UpdateScanProgress(StartupScanProgress progress)
     {
         var label = string.IsNullOrWhiteSpace(progress.CurrentName)
-            ? "Scanning system..."
+            ? "Scanning"
             : progress.CurrentName;
 
         SetProgress(progress.Percent, label);
@@ -36,7 +36,7 @@ public partial class StartupWindow : Window
             ? progress.Message
             : !string.IsNullOrWhiteSpace(progress.CurrentTask)
                 ? progress.CurrentTask
-                : "Loading services...";
+                : "Loading";
 
         SetProgress(progress.Percentage, label);
     }
@@ -58,7 +58,7 @@ public partial class StartupWindow : Window
         _isClosing = true;
         SetProgress(100, "Ready");
 
-        var remaining = TimeSpan.FromMilliseconds(500) - (DateTime.UtcNow - _shownAtUtc);
+        var remaining = TimeSpan.FromMilliseconds(320) - (DateTime.UtcNow - _shownAtUtc);
         if (remaining > TimeSpan.Zero)
         {
             await Task.Delay(remaining);
@@ -71,8 +71,7 @@ public partial class StartupWindow : Window
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         ApplyVersionText();
-        LoadProgress.Value = 0;
-        LoadLabel.Text = "Initializing...";
+        LoadLabel.Text = "Starting";
     }
 
     private void ApplyVersionText()
@@ -94,8 +93,6 @@ public partial class StartupWindow : Window
             _ = Dispatcher.InvokeAsync(() => SetProgress(percent, label), DispatcherPriority.Background);
             return;
         }
-
-        LoadProgress.Value = Math.Clamp(percent, 0d, 100d);
 
         if (!string.IsNullOrWhiteSpace(label))
         {
