@@ -4,7 +4,7 @@
   "record_id": "audio.show-hidden-devices",
   "tweak_id": "audio.show-hidden-devices",
   "record_status": "validated",
-  "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.",
+  "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowHiddenDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.",
   "setting": {
     "name": "Show Hidden Audio Devices",
     "category": "Audio",
@@ -13,7 +13,7 @@
     "casual_explanation": "This makes hidden audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or driver cleanup.",
     "why_people_change_it": "People enable it when they need to inspect or troubleshoot devices that the normal sound list does not show.",
     "tradeoffs_overview": "Showing hidden devices can help debugging, but it can also expose stale or confusing audio entries that most users never need to see. This is a runtime-observed control-panel preference rather than a Microsoft-documented policy surface.",
-    "professional_notes": "The app writes ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl. On 2026-03-14, Procmon captures of rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 showed RegQueryValue reads for ShowHiddenDevices with Data:1 and Data:0 when the value was toggled and restored. That proves the classic Sound control panel consumes this registry value on this build. No primary Microsoft Learn or ADMX source for the DeviceCpl contract was captured in this pass, so the record is validated as a runtime-observed preference rather than as a fully documented Microsoft contract.",
+    "professional_notes": "The app writes ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl. On 2026-03-14, Procmon captures of rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 showed RegQueryValue reads for ShowHiddenDevices with Data:1 and Data:0 when the value was toggled and restored. On 2026-03-26, a Ghidra headless pass against mmsys.cpl decompiled the DeviceCpl flag handlers and showed SHGetValueW and SHSetValueW calls for ShowHiddenDevices and the same DeviceCpl branch. That proves the classic Sound control panel both consumes and persists this registry value on this build. No primary Microsoft Learn or ADMX source for the DeviceCpl contract was captured in this pass, so the record is validated as a runtime-observed preference rather than as a fully documented Microsoft contract.",
     "targets": [
       {
         "target_id": "audio-devicecpl-show-hidden",
@@ -128,6 +128,19 @@
       "strength": "high"
     },
     {
+      "evidence_id": "ghidra-mmsys-devicecpl-flags",
+      "kind": "ghidra-headless",
+      "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
+      "location": "research/evidence-files/vm-tooling-staging/ghidra-probes/audio-devicecpl-ghidra-20260326-015910/audio-devicecpl-ghidra.md",
+      "summary": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "app-audio-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
@@ -148,7 +161,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, and the app writes the same show-hidden state with a clean restore story.",
+    "why": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-hidden state with a clean restore story.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",

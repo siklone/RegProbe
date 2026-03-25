@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-25T21:15:46.757453Z",
+  "generated_utc": "2026-03-25T23:02:07.261143Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
-      "A": 213,
-      "B": 29
+      "A": 215,
+      "B": 27
     },
     "lane_counts": {
       "official-policy": 235,
@@ -13,8 +13,8 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 213,
-      "ghidra": 3,
+      "none": 215,
+      "ghidra": 1,
       "decision-gate": 21,
       "procmon": 3,
       "incident-review": 1,
@@ -46,17 +46,17 @@
     {
       "record_id": "audio.show-disconnected-devices",
       "tweak_id": "audio.show-disconnected-devices",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "procmon": true,
-      "ghidra": false,
+      "ghidra": true,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "apply_allowed": true,
@@ -67,17 +67,17 @@
     {
       "record_id": "audio.show-hidden-devices",
       "tweak_id": "audio.show-hidden-devices",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "procmon": true,
-      "ghidra": false,
+      "ghidra": true,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "apply_allowed": true,

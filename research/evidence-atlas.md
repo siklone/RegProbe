@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 213 |
-| Class B | 29 |
+| Class A | 215 |
+| Class B | 27 |
 | Class E | 54 |
 
 ## Category coverage
@@ -167,7 +167,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Audio` |
 | Area | `Sound Control Panel DeviceCpl Flags` |
 | Scope | `user` |
@@ -176,7 +176,7 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
+**Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
 
 **Current implementation**
 
@@ -196,10 +196,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter ghidra layer before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -256,6 +256,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-20260314-pml.md) and [research/evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/vm-tooling-staging/ghidra-probes/audio-devicecpl-ghidra-20260326-015910/audio-devicecpl-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/audio-devicecpl-ghidra-20260326-015910/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -276,7 +277,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, and the app writes the same show-disconnected state with a clean restore story. |
+| Why | The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story. |
 
 ---
 
@@ -285,7 +286,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Audio` |
 | Area | `Sound Control Panel DeviceCpl Flags` |
 | Scope | `user` |
@@ -294,7 +295,7 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
+**Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowHiddenDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
 
 **Current implementation**
 
@@ -314,10 +315,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter ghidra layer before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -374,6 +375,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-20260314-pml.md) and [research/evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/vm-tooling-staging/ghidra-probes/audio-devicecpl-ghidra-20260326-015910/audio-devicecpl-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/audio-devicecpl-ghidra-20260326-015910/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -394,7 +396,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, and the app writes the same show-hidden state with a clean restore story. |
+| Why | The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-hidden state with a clean restore story. |
 
 ---
 
