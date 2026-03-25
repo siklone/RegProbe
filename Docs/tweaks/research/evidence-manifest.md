@@ -225,7 +225,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class B | `Docs/tweaks/research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | `b847c8b83a9ff3caed416297dc72f4bf75f582338a6c3e641c3e240a03a98de3` | `e05403394ebd8329e2d2001f0b186efecf6a6108029c50fdbd9b20c6384cc033` | 1 |
 | `privacy.troubleshooter-dont-run` | validated | Class A | `Docs/tweaks/research/records/privacy.troubleshooter-dont-run.review.json` | `0d7c80add69e4226a6eeefa2436330be4eb3d6c256266c19172fd70ca09917a4` | `7dcc7ddffc4e900be0639a531fe65c9f9e91f3571e105777966de2c6b82f3f86` | 1 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `Docs/tweaks/research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | `cd5527ef4c788ca56752769b9f884d367106f6d2e67fa8958bc7c272b5fa8ec6` | `cbf61febc21858b0337754ddc719d778a0a6c0f8f34b535b029e120bcecea03e` | 3 |
-| `security.disable-defender-sample-submission` | validated | Class B | `Docs/tweaks/research/records/security.disable-defender-sample-submission.review.json` | `287a05adaf4d7e97c5176afc826b8902835318f9cddc64b42707d031b1f2751a` | `d82de4112b943a9ec6ef6d2e25aff47a14c3f9958e1352a827ae5241fc5ecba7` | 1 |
+| `security.disable-defender-sample-submission` | validated | Class B | `Docs/tweaks/research/records/security.disable-defender-sample-submission.review.json` | `66d3f0572cb302849618074d7df31371655f78ada21d072a6aae9fbd12fcc726` | `d82de4112b943a9ec6ef6d2e25aff47a14c3f9958e1352a827ae5241fc5ecba7` | 1 |
 | `security.disable-downloads-blocking` | validated | Class A | `Docs/tweaks/research/records/security.disable-downloads-blocking.json` | `f9574461ea84e7f9a84ed029d6469a4ea7020dd5399a7cdcc0201a3106f99d1c` | `37f0c6998110ae0723af795d2c3f93b894ac85bf013d9877cbdc60c381f3f2eb` | 1 |
 | `security.disable-enhanced-defender-notifications` | validated | Class B | `Docs/tweaks/research/records/security.disable-enhanced-defender-notifications.review.json` | `423998f5cf355f1d27c890da884dec5ccf5571fb463bcf1439dde92ffcdaf78b` | `a12e468c1b7df394776f91ac6de7601b047c298f81aa8bbae8df1441ecb28c2b` | 1 |
 | `security.disable-ntfs-encryption` | validated | Class B | `Docs/tweaks/research/records/security.disable-ntfs-encryption.json` | `b75f5abb843f5b452720a76ecf7b696cfc9544a8f8d34971eab365d6fdf8dfd3` | `a85e3450b7be35f290e9b7a8083815b660f2edd6afcb9d8151d04d4a677e9a0d` | 1 |
@@ -238,7 +238,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.disable-windows-firewall` | validated | Class B | `Docs/tweaks/research/records/security.disable-windows-firewall.review.json` | `4669ad9f2652dc128d4cdd6123ce6652542887e95801c4e8183dbe93704b52bc` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 2 |
 | `security.disable-windows-update.policy` | validated | Class B | `Docs/tweaks/research/records/security.disable-windows-update.policy.review.json` | `d348a89d3dd278084d0cdc9fbf56c168e99433d42d157b9ebf9cda001e3b21df` | `b1697a5c3feaa9da12b61d23e66a337b9339e4fffeeb2e37d8395d5f461ed060` | 2 |
 | `security.disable-wu-driver-updates` | validated | Class B | `Docs/tweaks/research/records/security.disable-wu-driver-updates.json` | `488a5f5680947b908ba0ba69742a588b0d33a7654cf4d2a1975afac13fa061b8` | `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa` | 3 |
-| `security.enable-defender-maps-advanced-membership` | validated | Class B | `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json` | `09647ad8584f7b7829d1431fcac330a07204b0a27cd719d2b510e8aa891ee1da` | `42cc4c40a3161dc76cf3730b1397c4402aa66ae5e625a4ff85962df616ee1324` | 1 |
+| `security.enable-defender-maps-advanced-membership` | validated | Class B | `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json` | `483e9052385085d3120be737683655ec5cfc22ae224f682a1753781ad0630cbe` | `42cc4c40a3161dc76cf3730b1397c4402aa66ae5e625a4ff85962df616ee1324` | 1 |
 | `security.enable-dynamic-lock` | validated | Class A | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `ed4ac310ae9d2b5e6e3d53e642cbcd4ab7700097aa1981b8ede4089a23f9854e` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
 | `security.enable-sudo` | validated | Class B | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `3c0fe2ac6864177e93deda81796003cbf094fe6b07d66c4025eb0195d26cf67e` | `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891` | 1 |
@@ -12984,7 +12984,7 @@ _No source block present._
 - Area: `Microsoft Defender MAPS sample submission`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.disable-defender-sample-submission.review.json`
-- Source SHA256: `287a05adaf4d7e97c5176afc826b8902835318f9cddc64b42707d031b1f2751a`
+- Source SHA256: `66d3f0572cb302849618074d7df31371655f78ada21d072a6aae9fbd12fcc726`
 - Proof SHA256: `d82de4112b943a9ec6ef6d2e25aff47a14c3f9958e1352a827ae5241fc5ecba7`
 
 **Summary:** Microsoft documents SubmitSamplesConsent on the Defender Spynet policy path. In Win25H2Clean, SecurityHealthService.exe read SubmitSamplesConsent = 2 directly from the policy path after the write.
@@ -13850,7 +13850,7 @@ Windows Internals references:
 - Area: `Microsoft Defender cloud protection`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json`
-- Source SHA256: `09647ad8584f7b7829d1431fcac330a07204b0a27cd719d2b510e8aa891ee1da`
+- Source SHA256: `483e9052385085d3120be737683655ec5cfc22ae224f682a1753781ad0630cbe`
 - Proof SHA256: `42cc4c40a3161dc76cf3730b1397c4402aa66ae5e625a4ff85962df616ee1324`
 
 **Summary:** Microsoft documents SpyNetReporting on the Defender Spynet policy path. In a clean Win25H2Clean trace, SecurityHealthService.exe first saw the policy path as absent, then read SpyNetReporting = 2 directly from the policy path after the write.

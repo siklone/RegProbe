@@ -72,7 +72,7 @@
             ]
           }
         ],
-        "notes": "The runtime proof is strong for value 2. This record stays gated because that value weakens Defender cloud protection instead of just changing UI behavior."
+        "notes": "The runtime proof is strong for value 2. This is a documented protection tradeoff, not an unknown value model."
       }
     ]
   },
@@ -134,7 +134,7 @@
         "Leaves the policy branch alone.",
         "Does not force a specific sample-submission mode."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "ms-defender-submit-samples-consent",
         "vm-defender-submit-samples-baseline"
@@ -165,7 +165,7 @@
         "Stops automatic sample submission on the documented policy surface.",
         "Microsoft documents that this value disables Block at First Sight."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "ms-defender-submit-samples-consent",
         "ms-defender-block-at-first-sight-dependency",
@@ -268,19 +268,19 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact Defender Spynet path and the 0/1/2/3 value model for SubmitSamplesConsent, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SubmitSamplesConsent = 2 from that path. The record stays gated because value 2 lowers Defender cloud protection and Microsoft documents that Block at First Sight will not function with it.",
+    "why": "Microsoft documents the exact Defender Spynet path and the 0/1/2/3 value model for SubmitSamplesConsent, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SubmitSamplesConsent = 2 from that path. Value 2 lowers Defender cloud protection, but that tradeoff is documented and explicit rather than an evidence gap.",
     "blocking_issues": []
   },
   "open_questions": [
     "Should the app ever expose the documented default value 1 for comparison, or should it stay on the research-only Never send value?",
     "Do managed Defender environments layer tenant-side overrides on top of the local SubmitSamplesConsent policy in a way the current VM does not show?"
   ],
-  "last_reviewed_utc": "2026-03-24T20:20:00Z",
+  "last_reviewed_utc": "2026-03-25T08:40:00Z",
   "validation_proof": {
     "source_url": "H:\\Temp\\vm-tooling-staging\\submitsamples-ui-state2.txt",
     "exact_quote_or_path": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent | SUCCESS | Type: REG_DWORD, Length: 4, Data: 2",

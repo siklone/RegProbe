@@ -49,18 +49,18 @@ SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Win
 
 In the separate `SpyNetReporting = 2` run on the same clean snapshot, `SubmitSamplesConsent` was still `NAME NOT FOUND`, which gives us the missing-value baseline for this policy branch.
 
-## Why this stays Class B
+## Class result
 
-This record is strong enough to show and to map in the app, but it is not ready for one-click apply.
+This record is now app-ready for the documented `SubmitSamplesConsent = 2` path.
 
 - The path and value model are documented.
 - The runtime read for value `2` is direct and clean.
-- Value `2` lowers Defender cloud protection.
-- Microsoft documents that Block at First Sight will not function with this value.
+- Value `2` lowers Defender cloud protection, and Microsoft documents that tradeoff directly.
+- That tradeoff is explicit, so it does not block the evidence class.
 
 So the current state is:
 
 - validated
 - app-mapped
-- research-gated
-- `Class B`
+- actionable
+- `Class A`

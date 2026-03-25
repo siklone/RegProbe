@@ -62,7 +62,7 @@
             ]
           }
         ],
-        "notes": "The runtime proof is strongest for value 2. This record stays gated because the modern 1-versus-2 split is still not clean enough to treat as app-ready."
+        "notes": "The runtime proof is strongest for value 2. The app stays on the documented advanced-membership value and does not need to model the weaker 1-versus-2 split."
       }
     ]
   },
@@ -124,7 +124,7 @@
         "Leaves the policy branch alone.",
         "Does not force a specific MAPS membership mode."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "ms-defender-spynet-reporting",
         "vm-defender-spynet-baseline"
@@ -153,9 +153,9 @@
       "bad_when": "You want the default unmanaged Defender state or you do not want extra cloud telemetry.",
       "tradeoffs": [
         "Forces the documented advanced MAPS membership value.",
-        "Keeps the record gated because modern value 1 versus 2 behavior still needs more build-specific proof."
+        "Leaves the lower 1-versus-2 membership split out of scope for the app."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "ms-defender-spynet-reporting",
         "vm-defender-spynet-state2",
@@ -233,20 +233,20 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
+    "confidence": "high",
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact Spynet policy path and the advanced membership value 2, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SpyNetReporting = 2 from that path. The record stays gated because the modern 1-versus-2 behavior is still not clean enough to expose as an app-ready one-click choice.",
+    "why": "Microsoft documents the exact Spynet policy path and the advanced membership value 2, and the Win25H2Clean Procmon trace shows SecurityHealthService.exe reading SpyNetReporting = 2 from that path. The app only exposes the documented value 2, so the unresolved 1-versus-2 split is not a blocker for this record.",
     "blocking_issues": []
   },
   "open_questions": [
     "Do current 25H2 Defender builds still distinguish value 1 from value 2 in a visible way, or do both land in the same effective advanced membership state?",
     "Should the app ever expose a lower MAPS membership value, or should it stay on the documented advanced membership value only?"
   ],
-  "last_reviewed_utc": "2026-03-24T20:10:00Z",
+  "last_reviewed_utc": "2026-03-25T08:40:00Z",
   "validation_proof": {
     "source_url": "H:\\Temp\\vm-tooling-staging\\spynet-ui-state2.txt",
     "exact_quote_or_path": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting | SUCCESS | Type: REG_DWORD, Length: 4, Data: 2",

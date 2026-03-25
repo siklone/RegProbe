@@ -20,7 +20,7 @@ Microsoft documents this policy on the Defender Spynet path:
   - `1 = basic membership`
   - `2 = advanced membership`
 
-The same page also notes that on modern Windows builds value `1` or `2` can both land in advanced membership behavior. That is why this record stays gated even though value `2` is clean.
+The same page also notes that on modern Windows builds value `1` or `2` can both land in advanced membership behavior. The app only exposes the documented advanced value `2`, so that edge does not block the current record.
 
 ## VM proof
 
@@ -50,18 +50,18 @@ SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Win
 
 The same state-`2` trace also showed the sibling `SubmitSamplesConsent` value still absent on the branch, which keeps this probe narrow.
 
-## Why this stays Class B
+## Class result
 
-This record is strong enough to show and to map in the app, but it is not ready for one-click apply.
+This record is now app-ready for the documented `SpyNetReporting = 2` path.
 
 - The path and value are documented.
 - The runtime read for value `2` is direct and clean.
-- The `1` versus `2` split is still not clear enough on modern builds.
-- MAPS membership also interacts with other Defender cloud policies on the same branch.
+- The app only writes the documented advanced-membership value `2`.
+- The `1` versus `2` split stays as background context, not a blocker.
 
 So the current state is:
 
 - validated
 - app-mapped
-- research-gated
-- `Class B`
+- actionable
+- `Class A`
