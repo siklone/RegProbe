@@ -37,7 +37,6 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: "..\OpenTraceProject.App\bin\Release\net8.0-windows\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -55,10 +54,9 @@ Type: filesandordirs; Name: "{app}\Logs"
 function InitializeSetup(): Boolean;
 begin
   Result := True;
-  // Check if .NET 8 Desktop Runtime is installed
   if not RegKeyExists(HKLM, 'SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App\8.0.0') then
   begin
-    if MsgBox('Open Trace Project requires .NET 8 Desktop Runtime.' + #13#10 + 
+    if MsgBox('Open Trace Project requires .NET 8 Desktop Runtime.' + #13#10 +
               'Would you like to download it now?', mbConfirmation, MB_YESNO) = IDYES then
     begin
       ShellExec('open', 'https://dotnet.microsoft.com/download/dotnet/8.0', '', '', SW_SHOWNORMAL, ewNoWait, Result);
