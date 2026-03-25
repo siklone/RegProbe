@@ -216,15 +216,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The local Microsoft Sudo policy files explicitly define the policy path HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo, the value name Enabled, and enum values 0 through 3. The app writes the documented Normal mode value 3 on that exact machine policy surface.",
+    "why": "The local Microsoft Sudo policy files explicitly define the policy path HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo, the value name Enabled, and enum values 0 through 3. The app writes the documented Normal mode value 3 on that exact machine policy surface, with no unresolved path mismatch.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T01:36:45.0000000+03:00",
+  "last_reviewed_utc": "2026-03-25T09:25:00Z",
   "validation_proof": {
     "source_url": "C:\\Windows\\PolicyDefinitions\\Sudo.admx",
     "exact_quote_or_path": "<policy name=\"EnableSudo\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Sudo\"> ... <enum id=\"SudoModes\" valueName=\"Enabled\"> ... <decimal value=\"0\" /> ... <decimal value=\"1\" /> ... <decimal value=\"2\" /> ... <decimal value=\"3\" />; Sudo.adml: \"Normal\": When sudo launches a command line application, it will launch the app in the current console window.",

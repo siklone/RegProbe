@@ -172,15 +172,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the bthserv service name, its Manual default start mode, the Bluetooth behavior it provides, and that it is OK to disable in the service guidance used here. The app's service-start-mode action matches that documented control surface.",
+    "why": "Microsoft documents the bthserv service name, its Manual default start mode, the Bluetooth behavior it provides, and that it is OK to disable in the service guidance used here. The app's service-start-mode action matches that documented control surface cleanly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T01:17:34Z",
+  "last_reviewed_utc": "2026-03-25T09:25:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
     "exact_quote_or_path": "Bluetooth Support Service (bthserv); Manual; The Bluetooth service supports discovery and association of remote Bluetooth devices. Stopping or disabling this service prevent Bluetooth devices from operating properly and prevent new devices from being discovered or associated.; OK to disable: This service provides functionality that is useful to some but not all enterprises, and security-focused enterprises that don't use it can safely disable it.",

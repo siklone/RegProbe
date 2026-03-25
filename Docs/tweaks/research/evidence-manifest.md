@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 179 |
-| B count | 62 |
+| A count | 182 |
+| B count | 59 |
 | C count | 1 |
 | E count | 54 |
 
@@ -151,8 +151,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `power.disable-cpu-idle-states` | validated | Class B | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `92660bb914ee8c5efd2912a91e00928c6b8dbe635a2327f385738bc7ce25421f` | `e9564c042475d4b463e11dbd8be14712a7aac319855e9971d0ce0061c2734bd1` | 1 |
 | `power.disable-fast-startup` | validated | Class A | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
-| `power.disable-power-throttling` | validated | Class B | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `0feb7a6328e1224f1cae4febc01daf5ee533b3387ab47cf3da5b9ae7e5d2b61f` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
-| `power.disable-windows-search` | validated | Class B | `Docs/tweaks/research/records/power.disable-windows-search.json` | `f765c6663c5c831d903d38ec610432c25812aa51f048a91d3d720c041cc9c9f0` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
+| `power.disable-power-throttling` | validated | Class A | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `0feb7a6328e1224f1cae4febc01daf5ee533b3387ab47cf3da5b9ae7e5d2b61f` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
+| `power.disable-windows-search` | validated | Class A | `Docs/tweaks/research/records/power.disable-windows-search.json` | `f765c6663c5c831d903d38ec610432c25812aa51f048a91d3d720c041cc9c9f0` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
 | `power.hide-hibernate-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-hibernate-option.json` | `a9cd2a784e62a1619ea7f920d71387fee650e2ce8357a9b584b28e8579fb9825` | `a2ccf9b1a2c922e3273812eea45986113d2b2eec94a801bbf7cff7ecf9cdb417` | 1 |
 | `power.hide-lock-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-lock-option.json` | `e92e39c74366ca830f7cc4f3399394f72c581a57638e888be211aa421bf05856` | `cac67bd54c67255fb7bbd92e34790b14b07acbbfe0c5736954289301ac9f35bd` | 1 |
 | `power.hide-sleep-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-sleep-option.json` | `c9235ea4a57b3e8d4a6b7ae241430e25c8f46af21ff3158eef586668644423f8` | `9fd4a690ec7f01c46a0a7268de36b05197e70fea5ded44632b11d705011ea0b8` | 1 |
@@ -240,7 +240,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.disable-wu-driver-updates` | validated | Class B | `Docs/tweaks/research/records/security.disable-wu-driver-updates.json` | `488a5f5680947b908ba0ba69742a588b0d33a7654cf4d2a1975afac13fa061b8` | `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa` | 3 |
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json` | `483e9052385085d3120be737683655ec5cfc22ae224f682a1753781ad0630cbe` | `42cc4c40a3161dc76cf3730b1397c4402aa66ae5e625a4ff85962df616ee1324` | 1 |
 | `security.enable-dynamic-lock` | validated | Class A | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `ed4ac310ae9d2b5e6e3d53e642cbcd4ab7700097aa1981b8ede4089a23f9854e` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
-| `security.enable-sudo` | validated | Class B | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
+| `security.enable-sudo` | validated | Class B | `Docs/tweaks/research/records/security.enable-sudo.json` | `8934276844f480262072241c97802a305ecc1a5de0eba9ac3b6db811a0594dca` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `3c0fe2ac6864177e93deda81796003cbf094fe6b07d66c4025eb0195d26cf67e` | `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891` | 1 |
 | `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
 | `security.threat-file-hash-logging` | validated | Class C | `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json` | `e672685d4a0d8528ebcfec63e75faf64b3afbc369cd82bb1a8dd27ac34c894d8` | `3266b440e3fb8d682c704068ed9f36194d9189613eee04bd6a51f2ceb948c474` | 3 |
@@ -289,13 +289,13 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
 | `system.priority-control` | validated | Class B | `Docs/tweaks/research/records/system.priority-control.review.json` | `65338290ddc475e60627d497c34c6f508e7920c8b14730a6324ab1a5ebec71e9` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
 | `system.reliability-timestamp-enabled` | validated | Class B | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
-| `system.services.disable-bluetooth-audio-gateway` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
-| `system.services.disable-bluetooth-support` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `c41242b6b93a6c0726a408024b2d24f989f06a68dbd803a2976d1755cc320372` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
+| `system.services.disable-bluetooth-audio-gateway` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `a717e644a5b130e10935d806be394efbb25af18fa918495d4b3887d967467a49` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
+| `system.services.disable-bluetooth-support` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `596535c584273df8990c903759f417326e537acacfe61328e562415c7118c72b` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
 | `system.services.disable-bluetooth-user-service` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` | `0dbc2e23199be2975ec038e31ccb35313500be6a9c1284230346332a7617adcd` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 1 |
-| `system.services.disable-connected-user-experiences` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-connected-user-experiences.json` | `432df30061542fae8312ae99ee7a4dbc4b0ac0bddbeb63c1d35b97a0517eafea` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 1 |
-| `system.services.disable-print-notifications` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-notifications.json` | `341f0c561d3693787f3a35309441f261e6f76c986e61a507ab7b835846a1e6ee` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 1 |
-| `system.services.disable-print-spooler` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-spooler.json` | `d244f10b272a038623ae642806ea9e2c0f8c7171857f5c3655cc3af754d8505f` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 1 |
-| `system.services.disable-windows-search` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-windows-search.json` | `8bd73f2ec96d568427c280bd93d614655be574bb3e2d5235ef6b63c9a00d964d` | `7a939516d8b00a24b308632a8c4618acc5fd292fab45e9544a98c56f98788b37` | 1 |
+| `system.services.disable-connected-user-experiences` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-connected-user-experiences.json` | `80d322981d626d370d5eb5811e17aad443a6e71b7d5a27347a6ebd9b74b1ee7d` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 1 |
+| `system.services.disable-print-notifications` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-notifications.json` | `0df2ed45f129e592b93fc342f4547b53d961a468c8a1e710997e00c5c06cbd8c` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 1 |
+| `system.services.disable-print-spooler` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-spooler.json` | `62613c480244eb2cd56c4a2e791ea96f307785459fdab8e2523d7b3f5ec62b07` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 1 |
+| `system.services.disable-windows-search` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-windows-search.json` | `8bd73f2ec96d568427c280bd93d614655be574bb3e2d5235ef6b63c9a00d964d` | `7a939516d8b00a24b308632a8c4618acc5fd292fab45e9544a98c56f98788b37` | 1 |
 | `system.verbose-status-messages` | validated | Class A | `Docs/tweaks/research/records/system.verbose-status-messages.json` | `444ecd213fb9c2bfe7a5770044a45ae4529404c9bb2e99302f3920560f8f9d3b` | `95d2e2d70159d0ddc6500d9a88c2420cc76d133e09b5ee7920891d07a3cc92ef` | 1 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `Docs/tweaks/research/records/system.wait-to-kill-service-timeout.review.json` | `a8e87c037e80fc40870b52c0f13f0eb57793cce6d9db688d101730fcd04bd765` | `75468f86e93fb6828a772007cfc2c8e7eff43a4f9938026224ae83e5b11a88a8` | 1 |
 | `visibility.default-account-picture` | validated | Class A | `Docs/tweaks/research/records/visibility.default-account-picture.json` | `fc2b38d67652b1af2628041fdad7fd58b061426dda04ecc201ab9d51b59c6486` | `ad18cf84978748d2e98ae9ba591d975b8b94780caa755d468c578aa640b06c45` | 1 |
@@ -8289,7 +8289,7 @@ _No source block present._
 ### `power.disable-power-throttling`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Power`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -8303,10 +8303,10 @@ _No source block present._
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8357,7 +8357,7 @@ Windows Internals references:
 ### `power.disable-windows-search`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Power`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -8371,10 +8371,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -13983,7 +13983,7 @@ Windows Internals references:
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.enable-sudo.json`
-- Source SHA256: `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608`
+- Source SHA256: `8934276844f480262072241c97802a305ecc1a5de0eba9ac3b6db811a0594dca`
 - Proof SHA256: `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official policy-backed control for Windows sudo behavior. The current app sets the maximum allowed sudo mode to Normal, which allows in-place use and also permits the stricter modes.
@@ -17233,7 +17233,7 @@ Windows Internals references:
 - Area: `Service Start Mode`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json`
-- Source SHA256: `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557`
+- Source SHA256: `a717e644a5b130e10935d806be394efbb25af18fa918495d4b3887d967467a49`
 - Proof SHA256: `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Bluetooth Audio Gateway Service (BTAGService). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -17295,7 +17295,7 @@ Windows Internals references:
 - Area: `Service Start Mode`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json`
-- Source SHA256: `c41242b6b93a6c0726a408024b2d24f989f06a68dbd803a2976d1755cc320372`
+- Source SHA256: `596535c584273df8990c903759f417326e537acacfe61328e562415c7118c72b`
 - Proof SHA256: `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Bluetooth Support Service (bthserv). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -17420,7 +17420,7 @@ Windows Internals references:
 - Area: `Service Start Mode`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.services.disable-connected-user-experiences.json`
-- Source SHA256: `432df30061542fae8312ae99ee7a4dbc4b0ac0bddbeb63c1d35b97a0517eafea`
+- Source SHA256: `80d322981d626d370d5eb5811e17aad443a6e71b7d5a27347a6ebd9b74b1ee7d`
 - Proof SHA256: `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for Connected User Experiences and Telemetry (DiagTrack). Microsoft documents the service name, default start mode, and says it is OK to disable on Windows IoT Enterprise. The app disables the service by setting its start mode to Disabled.
@@ -17482,7 +17482,7 @@ Windows Internals references:
 - Area: `Service Start Mode`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.services.disable-print-notifications.json`
-- Source SHA256: `341f0c561d3693787f3a35309441f261e6f76c986e61a507ab7b835846a1e6ee`
+- Source SHA256: `0df2ed45f129e592b93fc342f4547b53d961a468c8a1e710997e00c5c06cbd8c`
 - Proof SHA256: `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for the PrintNotify service. Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -17544,7 +17544,7 @@ Windows Internals references:
 - Area: `Service Start Mode`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.services.disable-print-spooler.json`
-- Source SHA256: `d244f10b272a038623ae642806ea9e2c0f8c7171857f5c3655cc3af754d8505f`
+- Source SHA256: `62613c480244eb2cd56c4a2e791ea96f307785459fdab8e2523d7b3f5ec62b07`
 - Proof SHA256: `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Official Windows service control for the Print Spooler service (Spooler). Microsoft documents the service name, default start mode, and says it is OK to disable. The app disables the service by setting its start mode to Disabled.
@@ -17601,7 +17601,7 @@ Windows Internals references:
 ### `system.services.disable-windows-search`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -17615,10 +17615,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
