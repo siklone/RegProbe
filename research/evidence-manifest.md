@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 215 |
-| Class B | 27 |
+| Class A | 216 |
+| Class B | 26 |
 | Class E | 54 |
 
 ## Record index
@@ -92,7 +92,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `explorer.always-show-icons-never-thumbnails` | validated | Class A | `research/records/explorer.always-show-icons-never-thumbnails.review.json` | `737a0327124b343b2d1e502a9f5056f143e1d6b9f9b1fc188945baacf40dccd1` | `d3ff2acaee3a582445b3311d899c1d41f4134323f73864ba18d85280c4a78f71` | 3 |
 | `explorer.disable-low-disk-space-warning` | validated | Class A | `research/records/explorer.disable-low-disk-space-warning.json` | `e7c3b918961c1ef450b86967954809a6bd7d6b7f5a6ea0ab0c109f396df72788` | `862a1280ae5b7b88c161664df3545ddc27cd2e2de2d1a36fa5273c96086deb8e` | 3 |
 | `explorer.disable-taskbar-chat` | validated | Class A | `research/records/explorer.disable-taskbar-chat.json` | `6bb5018cb9aa7a809e989991b46d607917b4604c9ea9dab389ec27840964c509` | `d94fcdaed6dd700461a07a03005ada7c3ec5a14b7d31ab35967744183b9d90b6` | 4 |
-| `explorer.enable-explorer-compact-mode` | validated | Class B | `research/records/explorer.enable-explorer-compact-mode.review.json` | `60ca079c86cde62346c6ca999b72d96c7c534c15fc3bb2be8bf7b672d5e95793` | `ee9c93f2223f14fabbbf1f808914a3ef9c8d2a65af4aa351da05249d7cbe1ef4` | 3 |
+| `explorer.enable-explorer-compact-mode` | validated | Class A | `research/records/explorer.enable-explorer-compact-mode.review.json` | `e2242dd747e097f3f5bb90bc65e47e6fb504902edcd1bb037db90caad75d36fa` | `ee9c93f2223f14fabbbf1f808914a3ef9c8d2a65af4aa351da05249d7cbe1ef4` | 4 |
 | `explorer.hide-empty-drives` | validated | Class A | `research/records/explorer.hide-empty-drives.review.json` | `6a3957d72ded455148224a1ed948e1b8840daeda363723c1cfe6ae38734924a0` | `4cf29dc8aeabe2545d3db43aa5fa4f21743bc2d357f15dc70027808d88ddc072` | 4 |
 | `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `7b7fd3a1f9971b046bf6d5df50bf6c9315a871f8dd2fcc29886ae5aff0d1610c` | `2ca8e9ccb55c6f0b9a541d734ba85ff8db89faff7cf9f0659b650c0325181341` | 3 |
 | `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `66c5fac8430bdc223d134c10ff885a4ec89e0f7025f86673459bfb4c95961839` | `d0a836326dc93702ff9e105cd20f9a19573972b3ccb9b995fc30cf0b94b79f24` | 3 |
@@ -2283,12 +2283,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `explorer.enable-explorer-compact-mode`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/explorer.enable-explorer-compact-mode.review.json`
-- Source SHA256: `60ca079c86cde62346c6ca999b72d96c7c534c15fc3bb2be8bf7b672d5e95793`
+- Source SHA256: `e2242dd747e097f3f5bb90bc65e47e6fb504902edcd1bb037db90caad75d36fa`
 - Proof SHA256: `ee9c93f2223f14fabbbf1f808914a3ef9c8d2a65af4aa351da05249d7cbe1ef4`
 
-**Summary:** The app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode = 1, the 25H2 raw registry dump lists the same value name under both the machine and current-user Explorer\\Advanced branches, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.
+**Summary:** The app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode = 1, the 25H2 raw registry dump lists the same value name under both the machine and current-user Explorer\\Advanced branches, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against ExplorerFrame.dll also decompiled the code path that calls RegGetValueW for UseCompactMode from both HKCU and HKLM Explorer\\Advanced. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.
 
 **Evidence**
 
@@ -2296,6 +2296,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
 | `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [research/evidence-files/missing/explorer-batch-applied-20260314-pml.md](evidence-files/missing/explorer-batch-applied-20260314-pml.md) and [research/evidence-files/missing/explorer-compact-zero-20260314-pml.md](evidence-files/missing/explorer-compact-zero-20260314-pml.md) |
+| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [research/evidence-files/vm-tooling-staging/ghidra-probes/explorerframe-usecompactmode-ghidra-20260326-022015/explorerframe-usecompactmode-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/explorerframe-usecompactmode-ghidra-20260326-022015/explorerframe-usecompactmode-ghidra.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**

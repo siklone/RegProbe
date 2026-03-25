@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-25T23:02:07.261143Z",
+  "generated_utc": "2026-03-25T23:25:04.268198Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
-      "A": 215,
-      "B": 27
+      "A": 216,
+      "B": 26
     },
     "lane_counts": {
       "official-policy": 235,
@@ -13,8 +13,7 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 215,
-      "ghidra": 1,
+      "none": 216,
       "decision-gate": 21,
       "procmon": 3,
       "incident-review": 1,
@@ -361,17 +360,17 @@
     {
       "record_id": "explorer.enable-explorer-compact-mode",
       "tweak_id": "explorer.enable-explorer-compact-mode",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "procmon": true,
-      "ghidra": false,
+      "ghidra": true,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "apply_allowed": true,
