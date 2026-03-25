@@ -174,13 +174,13 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
+    "confidence": "high",
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact registry path and the app writes the documented override value, but the control is best understood as a DWM overlay troubleshooting override rather than a general optimization setting.",
+    "why": "Microsoft documents the exact registry path and override value, and the app writes that documented DWM troubleshooting control with a clean rollback story.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T01:03:30Z",

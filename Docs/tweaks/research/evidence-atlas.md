@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 210 |
-| Class B | 32 |
+| Class A | 212 |
+| Class B | 30 |
 | Class E | 54 |
 
 ## Category Coverage
@@ -4992,12 +4992,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/network.smb-enable-large-mtu.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -5021,10 +5021,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -5086,12 +5086,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
-| Recommended for general users | `False` |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact registry value and meaning used by the app, including the default enabled behavior for large MTU. |
+| Why | Microsoft documents the exact registry value and meaning used by the app, including the default enabled behavior for large MTU, and the app writes that documented state with a clean rollback story. |
 
 ---
 
@@ -19599,13 +19599,13 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Desktop Window Manager / Overlay Diagnostics` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` |
-| Apply allowed | `False` |
-| Confidence | `medium` |
+| Apply allowed | `True` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** Microsoft documents the DWM registry override OverlayMinFPS and says setting it to 0 disables the minimum-FPS check used for overlay assignment. The app writes that exact documented value, but this is a troubleshooting-style graphics override rather than a normal consumer optimization.
@@ -19628,10 +19628,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -19692,12 +19692,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact registry path and the app writes the documented override value, but the control is best understood as a DWM overlay troubleshooting override rather than a general optimization setting. |
+| Why | Microsoft documents the exact registry path and override value, and the app writes that documented DWM troubleshooting control with a clean rollback story. |
 
 ---
 

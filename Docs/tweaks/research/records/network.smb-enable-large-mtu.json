@@ -209,12 +209,12 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact registry value and meaning used by the app, including the default enabled behavior for large MTU.",
+    "why": "Microsoft documents the exact registry value and meaning used by the app, including the default enabled behavior for large MTU, and the app writes that documented state with a clean rollback story.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T00:58:30Z",

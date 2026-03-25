@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 210 |
-| B count | 32 |
+| A count | 212 |
+| B count | 30 |
 | E count | 54 |
 
 ## Record Index
@@ -126,7 +126,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `network.prefer-ipv4` | validated | Class B | `Docs/tweaks/research/records/network.prefer-ipv4.json` | `12a1b9daf05ca7291c64063af013fc697144c19d47ea05ba1e0d7edc770d796f` | `716ad6ac1200efc085880de052a42a79f81af9ad24329f1c6cc07c9553f71644` | 1 |
 | `network.require-ntlm-ssp-client-session-security` | validated | Class A | `Docs/tweaks/research/records/network.require-ntlm-ssp-client-session-security.review.json` | `f84c709a4d4bbfc0c04575fecb75182b36647c25f9e2088093586042366098c5` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 1 |
 | `network.smb-disable-leasing` | validated | Class A | `Docs/tweaks/research/records/network.smb-disable-leasing.review.json` | `660ff172621f5edbfac2bf1c5b3bf575351ebad1e1ed46db5f08a0ca4b34d80e` | `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9` | 1 |
-| `network.smb-enable-large-mtu` | validated | Class B | `Docs/tweaks/research/records/network.smb-enable-large-mtu.json` | `d0272947e2ae119ae84e0335ac1b7b66eb91c74cc74d155fdbf05f44aaba5d56` | `baeecfe02b08e4e38fdadcbbc3a8c6134c0bc27de55bfaa8f016ff7d7fd5a45f` | 1 |
+| `network.smb-enable-large-mtu` | validated | Class A | `Docs/tweaks/research/records/network.smb-enable-large-mtu.json` | `6b10a9808a7819cff8f7f001da1c460f56223d33b565d1fcdecc94444ca2d76e` | `baeecfe02b08e4e38fdadcbbc3a8c6134c0bc27de55bfaa8f016ff7d7fd5a45f` | 1 |
 | `network.smb-enable-multichannel` | validated | Class A | `Docs/tweaks/research/records/network.smb-enable-multichannel.review.json` | `e0891e1fd368a2dbcb47cb32680ee9ce6d183d41cfb1883b8e8979893cc535dc` | `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22` | 2 |
 | `network.smb-enable-quic` | validated | Class A | `Docs/tweaks/research/records/network.smb-enable-quic.review.json` | `5cb5d022813f5e90d000006517ecd4bb50b6161af54039679655277702db87a4` | `d0812e9f4c65a1bd0f53b117419613631b049fef49b82b3e12ed594295440e19` | 2 |
 | `network.smb-encrypt-data` | validated | Class B | `Docs/tweaks/research/records/network.smb-encrypt-data.json` | `3c1bf644733e2ab70c664da9d11a98d89063178a2b1a6d047e8ffb83ab16cc66` | `aaa4f8307120426c917f6f2d3db3bcdec1303fb61195bee5e9e7506e3c568544` | 1 |
@@ -265,7 +265,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.disable-storage-sense` | validated | Class A | `Docs/tweaks/research/records/system.disable-storage-sense.json` | `c9278c284cb076386248e0e79304f7358634917c285f79ed11af236802821e80` | `aab0b6531e384b0ec9cbb05bc4fd51a5f72f5fffb64825086125f5d372926ff1` | 1 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `8d61ee5b4c35c7fa432ce252b1c66ec363052d7535070c3143540e4686a54356` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | Class A | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `9724d8cc13adf9784368f3d2c53404531e3d40d085235cadde376f377349e290` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
-| `system.dwm-disable-overlay-min-fps` | validated | Class B | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
+| `system.dwm-disable-overlay-min-fps` | validated | Class A | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `eb511192ced5a849f74d73b21613fae0b1df6f414c39ff895c4e947f830f9c13` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
 | `system.enable-game-mode` | validated | Class A | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `75d1f7adb6c973b143971ddd93c3b8cdc447bca305f50da74c0e7501b2f7a280` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
 | `system.enable-hags` | validated | Class A | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
 | `system.enable-indexing-encrypted-items` | validated | Class A | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `64636c103d0008abf23a1b5ab588dba66220ca02bb845c09c9c0c152b601ce38` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
@@ -6684,12 +6684,12 @@ Windows Internals references:
 ### `network.smb-enable-large-mtu`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Configuration`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/network.smb-enable-large-mtu.json`
-- Source SHA256: `d0272947e2ae119ae84e0335ac1b7b66eb91c74cc74d155fdbf05f44aaba5d56`
+- Source SHA256: `6b10a9808a7819cff8f7f001da1c460f56223d33b565d1fcdecc94444ca2d76e`
 - Proof SHA256: `baeecfe02b08e4e38fdadcbbc3a8c6134c0bc27de55bfaa8f016ff7d7fd5a45f`
 
 **Summary:** Controls the SMB client DisableLargeMtu value under LanmanWorkstation. Large MTU usually improves throughput on modern networks, but some troubleshooting cases temporarily disable it when old network gear or filtering devices behave badly.
@@ -6698,10 +6698,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15716,12 +15716,12 @@ Windows Internals references:
 ### `system.dwm-disable-overlay-min-fps`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Desktop Window Manager / Overlay Diagnostics`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json`
-- Source SHA256: `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4`
+- Source SHA256: `eb511192ced5a849f74d73b21613fae0b1df6f414c39ff895c4e947f830f9c13`
 - Proof SHA256: `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087`
 
 **Summary:** Microsoft documents the DWM registry override OverlayMinFPS and says setting it to 0 disables the minimum-FPS check used for overlay assignment. The app writes that exact documented value, but this is a troubleshooting-style graphics override rather than a normal consumer optimization.
@@ -15730,10 +15730,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
