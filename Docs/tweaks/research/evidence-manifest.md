@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 192 |
-| B count | 49 |
+| A count | 195 |
+| B count | 46 |
 | C count | 1 |
 | E count | 54 |
 
@@ -80,8 +80,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-wap-push-routing.review.json` | `e97ccaa2298a6068f8c0ddfc9cbd17d1bcb07a8f1d6d2c60159afbaea3fdb677` | `2458c27ca10eeeb2d794bbd64ce5d2fd8c2c88ef8f854ad9c8ed425fc0894f28` | 1 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-windows-error-reporting.review.json` | `2d1d17ca9a3df5dac34d597126d30439408c364f975cc8e5284721bb3b25e337` | `1af4ce46fa6d4c619326da763939eb8969b2300b9eabd16fbb0e485987356791` | 1 |
 | `audio.disable-beep` | validated | Class A | `Docs/tweaks/research/records/audio.disable-beep.review.json` | `16f3b26832233949a02d64bb472fb319f8824733b73ccd7803d7ad00cd2725c1` | `4d074ac9987be3f1f28b06277c747e6c49da4b27be38ff2380400b9cc1a6b4ef` | 1 |
-| `audio.show-disconnected-devices` | validated | Class B | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` | `6ebe3325d9398956ed2e1c38645bc1605f1efb4404396b0e12faee5baff56373` | `8d67f764d7eaaf3719428c7c806dc6ec55bc227135dbb6daa493eaf8c390c9a1` | 1 |
-| `audio.show-hidden-devices` | validated | Class B | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `53977bf3d42a6320f03cd04c3e782abd1c8c91c3bede2f0a11ce060401eb8a53` | `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95` | 1 |
+| `audio.show-disconnected-devices` | validated | Class B | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` | `57f89db398ff23a1c8ffa06d50d8f4353c186c1aee2ab97f8a75debccce9560e` | `8d67f764d7eaaf3719428c7c806dc6ec55bc227135dbb6daa493eaf8c390c9a1` | 1 |
+| `audio.show-hidden-devices` | validated | Class B | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `ba47cbe107565b7fedc7ad000d69723fadd69bceacc4a3bae6d319ec69735b88` | `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95` | 1 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `Docs/tweaks/research/records/cleanup.disable-reserved-storage.review.json` | `d613803743ec930d75f7bb5a7dd770a6232bdd95d955a591812b92631ae2fd76` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 1 |
 | `developer.docker-performance` | validated | Class A | `Docs/tweaks/research/records/developer.docker-performance.review.json` | `e86fa037da24385991ffe94edbb1039cf5b2ee636654d27c3d4f0e7d4062473a` | `e4c2f1a09fcfe91db5161301b71b4ec7262c17dc97de49b390f65f9abcf9253d` | 1 |
 | `developer.dotnet-telemetry-disable` | validated | Class A | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` | `0e893fbee7bb7405331425f61f4aba01593f3fddfe8656f6eff1e33c8f968807` | `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c` | 1 |
@@ -95,7 +95,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `explorer.always-show-icons-never-thumbnails` | validated | Class A | `Docs/tweaks/research/records/explorer.always-show-icons-never-thumbnails.review.json` | `00511c1e8e9105e173b3a322b4f5039e4cc130744424405f1bcb0c4dc2bb748f` | `b7ac9b5f0745fe76c95b7c8864517314a2c401bac224bb610acb66022a804fcb` | 1 |
 | `explorer.disable-low-disk-space-warning` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
-| `explorer.enable-explorer-compact-mode` | validated | Class B | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `1cb7d0db58bb9060dcbbd2f3a4e38f256d7739c7115318525e91e23015b1a6c8` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
+| `explorer.enable-explorer-compact-mode` | validated | Class A | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `1cb7d0db58bb9060dcbbd2f3a4e38f256d7739c7115318525e91e23015b1a6c8` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
 | `explorer.hide-empty-drives` | validated | Class A | `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json` | `839640a80755f3e00c17e65cf64369cd4bce9aa2b0b581aeb4b6b266de56b931` | `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765` | 1 |
 | `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `edabe26e1582cc0da37a8a735e36887c98925be802207f7b43a187908fba30a5` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
 | `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `547d12c8e8f70c4decdcd1e14dfe3dd2108e75c7a556a7286f1860ed887df046` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
@@ -317,10 +317,10 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `visibility.disable-widgets` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-widgets.json` | `ce3bcf64ed0c4e7483bdd56ee8c8fd2e1733f20f8f7b5ec1255697747b8009ef` | `51e5a1f879b109db9b774b9202bc9a647344f646d8b00ec3c13360674ab215bd` | 1 |
 | `visibility.disable-window-animations` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-window-animations.json` | `23d41e64bfd659830b167e0c0a6a9ee486a26a73a1c5be5512f8dbf13b4ae548` | `571192ff25e0c81ae5dce332c8b0051a472bbf9841b730d58ca887806de5ea2f` | 1 |
 | `visibility.force-classic-control-panel` | validated | Class A | `Docs/tweaks/research/records/visibility.force-classic-control-panel.json` | `5f95ffcb6973992c6cc7c5dba884f054b5a7228568a12b04788a9588b0606090` | `8fc57213d5f2695c6314ee2e7b6b126656c9c3218f18a7c77133c4f5178cad20` | 1 |
-| `visibility.hide-language-bar` | validated | Class B | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` | `11ffceb9ac644bb63dda1ade421ed2e746ccd8adad5c64ae6c7f148ddae5ef0c` | `3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc` | 1 |
+| `visibility.hide-language-bar` | validated | Class A | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` | `11ffceb9ac644bb63dda1ade421ed2e746ccd8adad5c64ae6c7f148ddae5ef0c` | `3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc` | 1 |
 | `visibility.hide-most-used-apps` | validated | Class A | `Docs/tweaks/research/records/visibility.hide-most-used-apps.json` | `46f2a5fd5cc71eef4117d9aec26993429e6eee1c81c9d02247a964fc8c09e03c` | `b66e6752f3c72b835115d0a715643e28a6be0061d9e0b1246115269dd8eb1f8e` | 1 |
 | `visibility.hide-people-bar` | validated | Class A | `Docs/tweaks/research/records/visibility.hide-people-bar.json` | `3d314f01213f3135cc817d72f995a9d20a0c5cb0d9d2767ed5a2e36954294fa9` | `ca25eca99b530fd221ccdc49679625c25e7e2ebb3e5fb21edaca6075a73732ad` | 1 |
-| `visibility.restore-classic-context-menu` | validated | Class B | `Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json` | `06982c9a4adaf5c6b0f16f8c1836e875006896c482e6939819b1e4ae41868e7d` | `2be626add6056b666c3453999702cf52a7408132c80f6da39aa897ff0f90ecf2` | 1 |
+| `visibility.restore-classic-context-menu` | validated | Class A | `Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json` | `06982c9a4adaf5c6b0f16f8c1836e875006896c482e6939819b1e4ae41868e7d` | `2be626add6056b666c3453999702cf52a7408132c80f6da39aa897ff0f90ecf2` | 1 |
 
 ## Per-Record Details
 
@@ -3713,7 +3713,7 @@ Nohuto lineage references:
 - Area: `Sound Control Panel DeviceCpl Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json`
-- Source SHA256: `6ebe3325d9398956ed2e1c38645bc1605f1efb4404396b0e12faee5baff56373`
+- Source SHA256: `57f89db398ff23a1c8ffa06d50d8f4353c186c1aee2ab97f8a75debccce9560e`
 - Proof SHA256: `8d67f764d7eaaf3719428c7c806dc6ec55bc227135dbb6daa493eaf8c390c9a1`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
@@ -3775,7 +3775,7 @@ Nohuto lineage references:
 - Area: `Sound Control Panel DeviceCpl Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/audio.show-hidden-devices.review.json`
-- Source SHA256: `53977bf3d42a6320f03cd04c3e782abd1c8c91c3bede2f0a11ce060401eb8a53`
+- Source SHA256: `ba47cbe107565b7fedc7ad000d69723fadd69bceacc4a3bae6d319ec69735b88`
 - Proof SHA256: `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
@@ -4610,7 +4610,7 @@ Nohuto lineage references:
 ### `explorer.enable-explorer-compact-mode`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Explorer`
 - Area: `Explorer Advanced Flags`
 - Scope: `user`
@@ -4624,10 +4624,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -18992,7 +18992,7 @@ Nohuto lineage references:
 ### `visibility.hide-language-bar`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `User Preference`
 - Scope: `user`
@@ -19006,10 +19006,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -19179,7 +19179,7 @@ Nohuto lineage references:
 ### `visibility.restore-classic-context-menu`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Visibility`
 - Area: `Explorer Context Menu`
 - Scope: `user`
@@ -19193,10 +19193,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 

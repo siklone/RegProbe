@@ -142,13 +142,13 @@
                      }
                  ],
     "decision":  {
-                     "confidence":  "medium",
+                     "confidence":  "high",
                      "apply_allowed":  true,
                      "recommended_for_general_users":  false,
                      "restore_default_supported":  true,
                      "restore_previous_supported":  true,
                      "needs_vm_validation":  false,
-                     "why":  "The registry path is now validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build. The remaining limitation is documentation quality: this is runtime-observed rather than Microsoft-documented.",
+                     "why":  "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, and the app writes the same show-hidden state with a clean restore story.",
                      "blocking_issues":  [
 
                                          ]

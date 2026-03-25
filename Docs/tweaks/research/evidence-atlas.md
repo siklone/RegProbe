@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 192 |
-| Class B | 49 |
+| Class A | 195 |
+| Class B | 46 |
 | Class C | 1 |
 | Class E | 54 |
 
@@ -1640,13 +1640,13 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Explorer` |
 | Area | `Explorer Advanced Flags` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** The app writes HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\UseCompactMode = 1, the 25H2 raw registry dump lists the same value name under both the machine and current-user Explorer\Advanced branches, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.
@@ -1669,10 +1669,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -1731,7 +1731,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | UseCompactMode is now validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build, and the 25H2 raw registry dump corroborates that the value family is still present on current builds. The remaining limitation is documentation quality: this is runtime-observed rather than Microsoft-documented. |
+| Why | UseCompactMode is validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build, the app writes the same enabled state, and the 25H2 raw registry dump corroborates that the value family is still present on current builds. |
 
 ---
 
@@ -24975,13 +24975,13 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `User Preference` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. A Microsoft Q&A thread now documents ShowStatus = 3 for the hidden state, so the record can be validated.
@@ -25004,10 +25004,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -25066,7 +25066,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The feature mapping is corroborated by the repo notes and a Microsoft Q&A thread that shows ShowStatus = 3 as the hidden-state value. |
+| Why | The feature mapping is backed by the current app write, a Microsoft Q&A thread that shows ShowStatus = 3 for the hidden state, and a Win25H2Clean Procmon trace around a ctfmon.exe restart. |
 
 ---
 
@@ -25279,13 +25279,13 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Visibility` |
 | Area | `Explorer Context Menu` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 with an empty default value. Microsoft Q&A now documents the same registry workaround, so the record is validated.
@@ -25308,10 +25308,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -25371,7 +25371,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft Q&A now documents the same CLSID workaround: create the InprocServer32 key and leave the default value blank to restore the classic Windows 11 context menu. The record matches the app and can be published as validated. |
+| Why | Microsoft Q&A documents the same CLSID workaround the app writes, and removing the key restores the stock Windows 11 context menu. The record matches the app and has a clean restore story. |
 
 ---
 
