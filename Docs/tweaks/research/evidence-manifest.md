@@ -17,9 +17,9 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | A count | 174 |
-| B count | 62 |
+| B count | 64 |
 | C count | 1 |
-| D count | 6 |
+| D count | 4 |
 | E count | 52 |
 
 ## Record Index
@@ -157,7 +157,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `power.hide-lock-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-lock-option.json` | `e92e39c74366ca830f7cc4f3399394f72c581a57638e888be211aa421bf05856` | `cac67bd54c67255fb7bbd92e34790b14b07acbbfe0c5736954289301ac9f35bd` | 1 |
 | `power.hide-sleep-option` | validated | Class A | `Docs/tweaks/research/records/power.hide-sleep-option.json` | `c9235ea4a57b3e8d4a6b7ae241430e25c8f46af21ff3158eef586668644423f8` | `9fd4a690ec7f01c46a0a7268de36b05197e70fea5ded44632b11d705011ea0b8` | 1 |
 | `power.optimize-cpu-boost` | validated | Class A | `Docs/tweaks/research/records/power.optimize-cpu-boost.json` | `cf75017ab18baf416f2b8999dc4bc085f9c557e25bc0be505a6b6b570b996d81` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 1 |
-| `power.optimize-gaming-network` | validated | Class D | `Docs/tweaks/research/records/power.optimize-gaming-network.json` | `79e7719a7772df3cf7ef8515b4b2d1f377993f835b90c5697de4cf789fe89b70` | `f21ead2862871a3b24aa2e310685dcce0808f29e5fde1307fc47f4c92477ba2b` | 5 |
+| `power.optimize-gaming-network` | validated | Class D | `Docs/tweaks/research/records/power.optimize-gaming-network.json` | `923e7138125a06a7bcdbf14befde3dd1e6548659707388402c7f9bd92bcaa801` | `f21ead2862871a3b24aa2e310685dcce0808f29e5fde1307fc47f4c92477ba2b` | 5 |
 | `privacy.block-microsoft-accounts` | validated | Class A | `Docs/tweaks/research/records/privacy.block-microsoft-accounts.json` | `e71c635297efe028e8e2ee0196fbab0a4c471e63a3860d17e4afd34051260ab9` | `aadd043705a8dd7c0253c9959e72b05bdffcd4b3681169958fa169b7abf70d45` | 1 |
 | `privacy.deny-app-access.policy` | validated | Class B | `Docs/tweaks/research/records/privacy.deny-app-access.policy.review.json` | `3f92db45e192018ab405a500de812ae96fa2c52db982c10bbb1af4a16eefa78e` | `b1d082da5839ba837ab9aee8d2b0bd41c45882cd5b7400de0a78b8117dfcc660` | 1 |
 | `privacy.disable-activity-history` | validated | Class A | `Docs/tweaks/research/records/privacy.disable-activity-history.json` | `f2b820383ce696be0998f99242c05387aa2c33dfe20987cacb1c63acac1153e6` | `bc005dd4397dc6efcde50924f04736c0579ff9a9b606f7d658f1f101fff2fec9` | 3 |
@@ -254,9 +254,9 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.disable-background-gp-updates` | validated | Class A | `Docs/tweaks/research/records/system.disable-background-gp-updates.json` | `806163e1cbc97c3b430efa864ab360da1ae082b721dc7512a83f15320cbb5a0f` | `f405c9914ca39ee00ae820afba4f149eb84081715df8e3a7bcb2a26ab3742038` | 1 |
 | `system.disable-clipboard-history` | validated | Class A | `Docs/tweaks/research/records/system.disable-clipboard-history.json` | `c66a14e25508b24830c68834109b06f077c5a0ee93357939e1452834bbc0017f` | `6f1d55e33a45d3258dd257c8c34c0185d96ee07b14bf1427fbdbae1e18b728a0` | 2 |
 | `system.disable-clipboard-redirection` | validated | Class A | `Docs/tweaks/research/records/system.disable-clipboard-redirection.json` | `ef3a2483b68e5b960ce3c18e34f6e0065ef5708eda4ad3f73544823eb9fd11bd` | `bd7bbb0f1b1b0b7f114a02aa53890195d47f454c172025d9cfba62d70b973e8b` | 1 |
-| `system.disable-fullscreen-optimizations` | validated | Class D | `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json` | `38288423ed3ce0615366b940ed11d79846d1ebf092e7ef2fc6b0914414daaee7` | `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee` | 1 |
+| `system.disable-fullscreen-optimizations` | validated | Class B | `Docs/tweaks/research/records/system.disable-fullscreen-optimizations.review.json` | `38288423ed3ce0615366b940ed11d79846d1ebf092e7ef2fc6b0914414daaee7` | `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee` | 1 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `Docs/tweaks/research/records/system.disable-game-recording-broadcasting.json` | `5f934446faf47bd7cc617fa7233b69de7416e051e06b8e465f29cc846f390592` | `f00125e489190967e2738bd103050e96d50f5df6456d05b81cc1b82c63da5bfe` | 1 |
-| `system.disable-jpeg-reduction` | validated | Class D | `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json` | `301647ee3d35796622c1ba618052672845b6adeaed003c4c70a4e5c6c4572ff9` | `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377` | 1 |
+| `system.disable-jpeg-reduction` | validated | Class B | `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json` | `301647ee3d35796622c1ba618052672845b6adeaed003c4c70a4e5c6c4572ff9` | `fa92e5312151e5acf8bfc09f5fa3a86f5b58495bbb90d53eaf42d65dd57917b2` | 1 |
 | `system.disable-restartable-apps` | validated | Class A | `Docs/tweaks/research/records/system.disable-restartable-apps.review.json` | `e609c09c45ebe3606b78558be0406b22803031299aa951e220fe09f008c71312` | `b4d567ea9ec033d06c9f6d2ff60f9ada14f4b5e8b50bb5318c2536ed22cff6c8` | 1 |
 | `system.disable-search-highlights-policy` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-highlights-policy.json` | `54e01656d9388fc57b31de631b46887097d0f16520e0139513dbbb5749844241` | `ae49b38ee6eec7f08e188c053143d1d430695aec6cb5b90db93af2281cc1b807` | 1 |
 | `system.disable-search-remote-queries` | validated | Class A | `Docs/tweaks/research/records/system.disable-search-remote-queries.json` | `baefa2b5a3f28eb1f73a8f09b93506f2eda0fa23dfdcc4b9209c251abe608389` | `cd674372d7fd9de0a491ea0fca3e750a090e056dde0ddbca2cbe060eb07eed07` | 1 |
@@ -8614,7 +8614,7 @@ Windows Internals references:
 - Area: `Multimedia Class Scheduler Service`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/power.optimize-gaming-network.json`
-- Source SHA256: `79e7719a7772df3cf7ef8515b4b2d1f377993f835b90c5697de4cf789fe89b70`
+- Source SHA256: `923e7138125a06a7bcdbf14befde3dd1e6548659707388402c7f9bd92bcaa801`
 - Proof SHA256: `f21ead2862871a3b24aa2e310685dcce0808f29e5fde1307fc47f4c92477ba2b`
 
 **Summary:** Official MMCSS task-profile registry surface for the built-in Games task. The app writes a custom high-priority Games profile using documented MMCSS keys and allowed values, while leaving the stock Games-task baseline explicitly build-dependent.
@@ -14749,7 +14749,7 @@ Windows Internals references:
 ### `system.disable-fullscreen-optimizations`
 
 - Status: `validated`
-- Evidence class: `Class D` - Key Known, Value Semantics Unknown
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `GameConfigStore / Compatibility Preference`
 - Scope: `user`
@@ -14757,23 +14757,23 @@ Windows Internals references:
 - Source SHA256: `38288423ed3ce0615366b940ed11d79846d1ebf092e7ef2fc6b0914414daaee7`
 - Proof SHA256: `18eeeda0f7517c6fd599b33e604d90f6369bceab5f5ca421c7ca9e308aec69ee`
 
-**Summary:** Win25H2Clean reversible probe confirmed the GameConfigStore fullscreen-optimization tuple and restored the baseline.
+**Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers the full observed story: Microsoft documents the feature area, repo research names the 2/2/1/1 tuple, and a Win25H2Clean reversible probe confirmed the tuple before restoring the missing baseline.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class D |
-| Title | Key Known, Value Semantics Unknown |
+| Class | Class B |
+| Title | Strong but Partial |
 | Action state | research-gated |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
 - `HKCU\\System\\GameConfigStore` / `GameDVR_FSEBehavior / GameDVR_FSEBehaviorMode / GameDVR_HonorUserFSEBehaviorMode / GameDVR_DXGIHonorFSEWindowsCompatible` / `REG_DWORD set`
   - Notes: Tracked as an observed user-side GameConfigStore mapping only.
-  - unknown | label=Official registry mapping not captured | meaning=This research pass did not capture a primary Microsoft document that publishes the exact GameConfigStore registry mapping for Fullscreen Optimizations.
-  - value | value="2/2/1/1" | label=Observed app FSO-off profile | meaning=The current app treats these four values as the disable-FSO profile, based on repo provenance rather than a primary Microsoft registry publication.
+  - missing | label=Observed baseline | meaning=The current Win25H2Clean baseline leaves the GameConfigStore fullscreen-optimization tuple unset.
+  - value | value="2/2/1/1" | label=Observed app FSO-off profile | meaning=The current app treats these four values as the disable-FSO profile, and the reversible VM probe confirmed that tuple on the same path.
 
 **Evidence**
 
@@ -14865,36 +14865,38 @@ _No source block present._
 ### `system.disable-jpeg-reduction`
 
 - Status: `validated`
-- Evidence class: `Class D` - Key Known, Value Semantics Unknown
+- Evidence class: `Class B` - Strong but Partial
 - Category: `System`
 - Area: `Desktop Wallpaper Import Behavior`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.disable-jpeg-reduction.review.json`
 - Source SHA256: `301647ee3d35796622c1ba618052672845b6adeaed003c4c70a4e5c6c4572ff9`
-- Proof SHA256: `f4f6c0d75101109bc66cb2faa6a29bb89f07293abce7b0f4ba2a5a1e188f4377`
+- Proof SHA256: `fa92e5312151e5acf8bfc09f5fa3a86f5b58495bbb90d53eaf42d65dd57917b2`
 
-**Summary:** Win25H2Clean reversible probe confirmed JPEGImportQuality=100 under Control Panel\\Desktop and restored the baseline.
+**Summary:** The current build evidence for JPEGImportQuality now lines up across repo decomp notes and a Win25H2Clean reversible probe: the wallpaper transcode path falls back to 85 when the value is missing, clamps the user value into the 60..100 range, and the current app writes 100 before restoring the missing baseline cleanly.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class D |
-| Title | Key Known, Value Semantics Unknown |
+| Class | Class B |
+| Title | Strong but Partial |
 | Action state | research-gated |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Targets**
 
 - `HKCU\\Control Panel\\Desktop` / `JPEGImportQuality` / `REG_DWORD`
-  - unknown | label=Primary Microsoft mapping not captured | meaning=This research pass did not capture a primary Microsoft source for the exact JPEGImportQuality registry semantics.
-  - value | value=100 | label=Observed app max-quality profile | meaning=The current app treats 100 as the no-reduction wallpaper quality profile, based on repo observation rather than a captured primary Microsoft source.
+  - Notes: The repo decomp path also shows a 60..100 clamp range with a missing-value fallback of 85.
+  - missing | label=Observed fallback profile | meaning=When JPEGImportQuality is missing, the current repo decomp path falls back to 85 before encoding the wallpaper JPEG.
+  - value | value=100 | label=Observed app max-quality profile | meaning=The current app writes 100, which the repo decomp path accepts as the top of the 60..100 clamp range.
 
 **Evidence**
 
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | `medium` |
+| `repo-system-decomp-jpegtranscode` | `decompilation` | `Ghidra decompilation` | Decompiled wallpaper transcode path for JPEGImportQuality | `high` |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | `medium` |
 
@@ -14926,7 +14928,7 @@ Windows Internals references:
 | source_url | H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json |
 | exact_quote_or_path | HKCU\\Control Panel\\Desktop\\JPEGImportQuality: before=__MISSING__, after_apply=100, after_restore=__MISSING__ |
 | key_found_on_page | True |
-| notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. |
+| notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in H:\\Temp\\vm-tooling-staging\\vm-batch-probe-20260320.json. The repo decomp path in Docs/system/assets/jpeg-TranscodeImage.c also shows the missing-value fallback of 85 and the 60..100 clamp. |
 ### `system.disable-restartable-apps`
 
 - Status: `validated`

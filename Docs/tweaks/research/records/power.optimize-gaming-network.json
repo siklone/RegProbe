@@ -4,7 +4,7 @@
   "record_id": "power.optimize-gaming-network",
   "tweak_id": "power.optimize-gaming-network",
   "record_status": "validated",
-  "summary": "Official MMCSS task-profile registry surface for the built-in Games task. The app writes a custom high-priority Games profile using documented MMCSS keys and allowed values, while leaving the stock Games-task baseline explicitly build-dependent.",
+  "summary": "Official MMCSS task-profile registry surface for the built-in Games task. The current Win25H2Clean VM now gives a concrete Games-task baseline, and the app's custom profile is narrowed to the exact fields it changes on top of that baseline.",
   "setting": {
     "name": "Games MMCSS Task Profile",
     "category": "Power",
@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "Windows uses MMCSS to prioritize time-sensitive multimedia work. This tweak changes the built-in Games task profile to use more aggressive scheduling values.",
     "why_people_change_it": "People change it when they want game-related work to get a more aggressive MMCSS profile and do not mind trading some balance for responsiveness.",
-    "tradeoffs_overview": "A more aggressive Games profile can bias scheduling toward game-related work, but it is not a general-purpose setting and Microsoft does not publish one global default profile for all builds.",
-    "professional_notes": "Microsoft documents the MMCSS SystemProfile path, the built-in Games task, and the allowed values for Affinity, GPU Priority, Priority, Scheduling Category, and SFIO Priority. The app writes a custom Games profile using those documented fields. Exact stock default values for the Games task are not published in the source used here, so this record validates the control surface and allowed values rather than a single global default.",
+    "tradeoffs_overview": "A more aggressive Games profile can bias scheduling toward game-related work, but it is not a general-purpose setting. The path and allowed values are official, but the app still applies a custom profile rather than a Microsoft-published default preset.",
+    "professional_notes": "Microsoft documents the MMCSS SystemProfile path, the built-in Games task, and the allowed values for Affinity, GPU Priority, Priority, Scheduling Category, and SFIO Priority. The current Win25H2Clean VM export then showed the live Games-task baseline on this build: Priority=2, Scheduling Category=Medium, SFIO Priority=Normal, GPU Priority=8, Affinity=0. That means the app's custom profile changes Priority from 2 to 8, Scheduling Category from Medium to High, and SFIO Priority from Normal to High, while GPU Priority and Affinity already match the live baseline. This is strong enough to treat the current build baseline and app profile as observed states while keeping the record research-gated because the app still applies a custom MMCSS profile rather than a Microsoft default.",
     "targets": [
       {
         "target_id": "games-priority",
@@ -23,12 +23,13 @@
         "value_type": "REG_DWORD",
         "allowed_values": [
           {
-            "state_kind": "unknown",
-            "value": null,
-            "label": "Windows-managed baseline",
-            "meaning": "Microsoft documents the field and allowed range, but not one stock Games-task default value for every build.",
+            "state_kind": "value",
+            "value": 2,
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current 25H2 VM baseline reads Priority = 2 on the built-in Games task.",
             "evidence_ids": [
-              "ms-mmcss"
+              "ms-mmcss",
+              "vm-games-mmcss-baseline"
             ]
           },
           {
@@ -52,6 +53,16 @@
         "allowed_values": [
           {
             "state_kind": "value",
+            "value": "Medium",
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current 25H2 VM baseline reads Scheduling Category = Medium on the built-in Games task.",
+            "evidence_ids": [
+              "ms-mmcss",
+              "vm-games-mmcss-baseline"
+            ]
+          },
+          {
+            "state_kind": "value",
             "value": "High",
             "label": "High scheduling category",
             "meaning": "One of Microsoft's documented MMCSS scheduling categories: High, Medium, or Low.",
@@ -69,6 +80,16 @@
         "value_name": "SFIO Priority",
         "value_type": "REG_SZ",
         "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Normal",
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current 25H2 VM baseline reads SFIO Priority = Normal on the built-in Games task.",
+            "evidence_ids": [
+              "ms-mmcss",
+              "vm-games-mmcss-baseline"
+            ]
+          },
           {
             "state_kind": "value",
             "value": "High",
@@ -91,6 +112,16 @@
           {
             "state_kind": "value",
             "value": 8,
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current 25H2 VM baseline already reads GPU Priority = 8 on the built-in Games task.",
+            "evidence_ids": [
+              "ms-mmcss",
+              "vm-games-mmcss-baseline"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 8,
             "label": "App GPU priority value",
             "meaning": "A documented GPU priority value within Microsoft's 0-31 range. Microsoft notes this field is not yet used.",
             "evidence_ids": [
@@ -107,6 +138,16 @@
         "value_name": "Affinity",
         "value_type": "REG_DWORD",
         "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current 25H2 VM baseline already reads Affinity = 0 on the built-in Games task.",
+            "evidence_ids": [
+              "ms-mmcss",
+              "vm-games-mmcss-baseline"
+            ]
+          },
           {
             "state_kind": "value",
             "value": 0,
@@ -170,19 +211,44 @@
   },
   "windows_defaults": [
     {
-      "label": "Windows Games-task baseline is build dependent",
-      "applies_to": "Windows systems with MMCSS and the built-in Games task",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current 25H2 builds with the built-in Games MMCSS task",
       "states": [
         {
           "target_id": "games-priority",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "The official MMCSS source documents the Games task and allowed values, but not one stock Games-task default profile for every Windows build."
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Use the current observed Games-task priority baseline."
+        },
+        {
+          "target_id": "games-scheduling-category",
+          "state_kind": "value",
+          "value": "Medium",
+          "rationale": "Use the current observed Games-task scheduling category baseline."
+        },
+        {
+          "target_id": "games-sfio-priority",
+          "state_kind": "value",
+          "value": "Normal",
+          "rationale": "Use the current observed Games-task SFIO baseline."
+        },
+        {
+          "target_id": "games-gpu-priority",
+          "state_kind": "value",
+          "value": 8,
+          "rationale": "Use the current observed Games-task GPU priority baseline."
+        },
+        {
+          "target_id": "games-affinity",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Use the current observed Games-task affinity baseline."
         }
       ],
-      "notes": "This record validates the registry surface and documented value semantics rather than a universal stock Games-task baseline.",
+      "notes": "This is the current observed Win25H2Clean baseline, not a claim about every Windows build.",
       "evidence_ids": [
-        "ms-mmcss"
+        "ms-mmcss",
+        "vm-games-mmcss-baseline"
       ]
     }
   ],
@@ -200,12 +266,36 @@
       "states": [
         {
           "target_id": "games-priority",
-          "state_kind": "unknown",
-          "value": null,
-          "rationale": "Keep the stock Games profile because Microsoft does not publish one universal default matrix here."
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Keep the current observed Games-task priority baseline."
+        },
+        {
+          "target_id": "games-scheduling-category",
+          "state_kind": "value",
+          "value": "Medium",
+          "rationale": "Keep the current observed Games-task scheduling category baseline."
+        },
+        {
+          "target_id": "games-sfio-priority",
+          "state_kind": "value",
+          "value": "Normal",
+          "rationale": "Keep the current observed Games-task SFIO baseline."
+        },
+        {
+          "target_id": "games-gpu-priority",
+          "state_kind": "value",
+          "value": 8,
+          "rationale": "Keep the current observed Games-task GPU priority baseline."
+        },
+        {
+          "target_id": "games-affinity",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the current observed Games-task affinity baseline."
         }
       ],
-      "good_when": "You want to leave the Games MMCSS task at the Windows-managed baseline.",
+      "good_when": "You want to leave the Games MMCSS task on the current observed 25H2 baseline.",
       "bad_when": "You intentionally want the app's custom Games profile.",
       "tradeoffs": [
         "Windows keeps the stock Games task profile.",
@@ -244,7 +334,7 @@
       "good_when": "You explicitly want a more aggressive Games MMCSS task profile.",
       "bad_when": "You need a fully Microsoft-default task profile.",
       "tradeoffs": [
-        "The Games task profile becomes more aggressive than the unknown stock baseline.",
+        "The Games task profile becomes more aggressive than the current observed baseline.",
         "This is a documented custom profile, not a Microsoft-published default."
       ],
       "apply_allowed": true,
@@ -270,6 +360,19 @@
       "strength": "high"
     },
     {
+      "evidence_id": "vm-games-mmcss-baseline",
+      "kind": "vm-test",
+      "title": "Win25H2Clean export of the built-in Games MMCSS task",
+      "location": "H:\\Temp\\vm-tooling-staging\\registry-dumps\\mmcss-games-task-20260325-031514\\mmcss-games-task.txt",
+      "summary": "The current 25H2 VM baseline reads Priority=2, Scheduling Category=Medium, SFIO Priority=Normal, GPU Priority=8, and Affinity=0 under the built-in Games task.",
+      "supports": [
+        "path",
+        "value",
+        "default"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "app-power-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
@@ -290,14 +393,14 @@
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact MMCSS SystemProfile registry path, lists the built-in Games task, and publishes the allowed values for Priority, Scheduling Category, SFIO Priority, GPU Priority, and Affinity. The app writes only documented fields on that documented Games task path.",
+    "why": "Microsoft documents the exact MMCSS SystemProfile registry path and allowed values, and the Win25H2Clean export now gives a concrete Games-task baseline for this build. That is enough to track the current baseline and the app's custom profile as observed states while keeping the tweak research-gated.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T01:19:50Z",
   "validation_proof": {
-    "source_url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
-    "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile; Games; Priority: range 1-8; Scheduling Category: High, Medium, or Low; SFIO Priority: Idle, Low, Normal, or High; GPU Priority: range 0-31; Affinity: 0x00 indicates that processor affinity isn't used.",
+    "source_url": "H:\\Temp\\vm-tooling-staging\\registry-dumps\\mmcss-games-task-20260325-031514\\mmcss-games-task.txt",
+    "exact_quote_or_path": "Affinity=0x0; GPU Priority=0x8; Priority=0x2; Scheduling Category=Medium; SFIO Priority=Normal",
     "key_found_on_page": true,
-    "notes": "The Microsoft MMCSS page documents the exact SystemProfile registry path, lists Games as a built-in task, and publishes the allowed values for the fields the app writes."
+    "notes": "The VM export gives the current 25H2 Games-task baseline, while the Microsoft MMCSS page documents the same path and the allowed values for the fields the app writes."
   }
 }

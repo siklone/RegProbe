@@ -111,7 +111,7 @@ public sealed class PowerTweakProvider : BaseTweakProvider
             context,
             "power.optimize-gaming-network",
             "Optimize Gaming Network Settings",
-            "Boosts priority for gaming tasks, improving network latency and frame timing. Sets high priority for GPU, scheduling, and I/O.",
+            "Writes a more aggressive MMCSS Games task profile by raising task priority, scheduling category, and I/O priority.",
             TweakRiskLevel.Safe,
             new[]
             {

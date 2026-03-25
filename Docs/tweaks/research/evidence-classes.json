@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-25T00:12:31.118191Z",
+  "generated_utc": "2026-03-25T00:18:11.868136Z",
   "summary": {
     "total_records": 295,
     "class_counts": {
       "A": 174,
-      "B": 64,
+      "B": 65,
       "C": 1,
-      "D": 4,
+      "D": 3,
       "E": 52
     },
     "action_state_counts": {
@@ -6601,28 +6601,28 @@
       "record_id": "power.optimize-gaming-network",
       "tweak_id": "power.optimize-gaming-network",
       "record_status": "validated",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Partial",
+      "class_description": "Key and primary values are known, but the record is still gated from one-click apply or has incomplete edge semantics.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "gating_reason": "Primary values are understood, but this record is still intentionally gated from one-click apply.",
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The Microsoft MMCSS page documents the exact SystemProfile registry path, lists Games as a built-in task, and publishes the allowed values for the fields the app writes.",
+        "summary": "The VM export gives the current 25H2 Games-task baseline, while the Microsoft MMCSS page documents the same path and the allowed values for the fields the app writes.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+            "url": "H:\\Temp\\vm-tooling-staging\\registry-dumps\\mmcss-games-task-20260325-031514\\mmcss-games-task.txt",
             "kind": "validation-proof",
-            "summary": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile; Games; Priority: range 1-8; Scheduling Category: High, Medium, or Low; SFIO Priority: I..."
+            "summary": "Affinity=0x0; GPU Priority=0x8; Priority=0x2; Scheduling Category=Medium; SFIO Priority=Normal"
           },
           {
             "title": "Microsoft Learn: Multimedia Class Scheduler Service",
@@ -6639,10 +6639,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "The current 25H2 VM baseline reads Priority=2, Scheduling Category=Medium, SFIO Priority=Normal, GPU Priority=8, and Affinity=0 under the built-in Games task.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean export of the built-in Games MMCSS task",
+            "url": "H:\\Temp\\vm-tooling-staging\\registry-dumps\\mmcss-games-task-20260325-031514\\mmcss-games-task.txt",
+            "kind": "vm-test",
+            "summary": "The current 25H2 VM baseline reads Priority=2, Scheduling Category=Medium, SFIO Priority=Normal, GPU Priority=8, and Affinity=0 under the built-in Games task."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
