@@ -23015,7 +23015,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Documented Shell Icons registry mapping for the shortcut-arrow overlay. Microsoft guidance shows that Shell Icons value `29` can be pointed at `%windir%\System32\shell32.dll,-50` to remove shortcut arrows, and removing the custom Shell Icons value restores the default overlay behavior. The app writes that exact value.
+**Summary:** Documented Shell Icons registry mapping for the shortcut-arrow overlay. Microsoft guidance shows that Shell Icons value `29` can be pointed at `%windir%\System32\shell32.dll,-50` to remove shortcut arrows, and removing the custom Shell Icons value restores the default overlay behavior. The app writes that exact value. A VM shell incident during the shortcut-arrow probe was reviewed and folded into the record: Explorer dropped briefly during restart, then recovered without snapshot revert.
 
 **Current implementation**
 
@@ -23102,6 +23102,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-shell-icons-shortcut-arrow` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: remove shortcut arrow using Shell Icons value 29 | [https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p](https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p) | `medium` | path, value, default, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-incident-shortcut-arrow-shell-drop` | `vm-incident` | `unspecified` | VM incident review - shortcut-arrow shell drop | [research/vm-incidents.json](vm-incidents.json) | `medium` | behavior, side-effects, version-scope |
 
 **Validation proof**
 
@@ -23121,7 +23122,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft guidance shows creating `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons`, adding string value `29`, and setting it to `%windir%\System32\shell32.dll,-50` for the no-arrow shortcut overlay. The app writes that exact Shell Icons override. |
+| Why | Microsoft guidance shows creating `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons`, adding string value `29`, and setting it to `%windir%\System32\shell32.dll,-50` for the no-arrow shortcut overlay. The app writes that exact Shell Icons override. Incident reviewed: the VM shell dropped briefly during the probe and then recovered, so this record keeps a shell-risk note even though the mapping itself is clear. |
 
 ---
 

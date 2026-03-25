@@ -4,7 +4,7 @@
   "record_id": "system.disable-shortcut-arrow",
   "tweak_id": "system.disable-shortcut-arrow",
   "record_status": "validated",
-  "summary": "Documented Shell Icons registry mapping for the shortcut-arrow overlay. Microsoft guidance shows that Shell Icons value `29` can be pointed at `%windir%\\System32\\shell32.dll,-50` to remove shortcut arrows, and removing the custom Shell Icons value restores the default overlay behavior. The app writes that exact value.",
+  "summary": "Documented Shell Icons registry mapping for the shortcut-arrow overlay. Microsoft guidance shows that Shell Icons value `29` can be pointed at `%windir%\\System32\\shell32.dll,-50` to remove shortcut arrows, and removing the custom Shell Icons value restores the default overlay behavior. The app writes that exact value. A VM shell incident during the shortcut-arrow probe was reviewed and folded into the record: Explorer dropped briefly during restart, then recovered without snapshot revert.",
   "setting": {
     "name": "Shortcut Arrow Overlay",
     "category": "System",
@@ -13,7 +13,7 @@
     "casual_explanation": "Windows normally shows a small arrow on shortcut icons. This setting swaps that overlay resource so the arrow is no longer shown.",
     "why_people_change_it": "People change it because they dislike the shortcut arrow and want a cleaner desktop or Explorer look.",
     "tradeoffs_overview": "Removing the arrow makes shortcuts look cleaner, but it also removes the visual hint that an icon is a shortcut instead of the real file or app.",
-    "professional_notes": "Microsoft support documents the Explorer Shell Icons mapping and states that value `29` can reference `%windir%\\System32\\shell32.dll,-50` to remove shortcut arrows. The same Microsoft guidance states that deleting the custom Shell Icons value restores the default Windows arrow overlay.",
+    "professional_notes": "Microsoft support documents the Explorer Shell Icons mapping and states that value `29` can reference `%windir%\\System32\\shell32.dll,-50` to remove shortcut arrows. The same Microsoft guidance states that deleting the custom Shell Icons value restores the default Windows arrow overlay. Incident reviewed: during the VM shortcut-arrow probe, Explorer restart caused the desktop to disappear briefly before explorer.exe, sihost.exe, and ShellHost.exe recovered. That keeps this setting in the shell-touching bucket and means future probes should stay snapshot-first.",
     "targets": [
       {
         "target_id": "shell-icons-29",
@@ -166,6 +166,19 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-incident-shortcut-arrow-shell-drop",
+      "kind": "vm-incident",
+      "title": "VM incident review - shortcut-arrow shell drop",
+      "location": "research/vm-incidents.json",
+      "summary": "Incident reviewed: the shortcut-arrow probe caused a brief Explorer shell drop during restart, but the shell recovered without snapshot revert. Future shell-touching probes for this family should stay snapshot-first.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -175,7 +188,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft guidance shows creating `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons`, adding string value `29`, and setting it to `%windir%\\System32\\shell32.dll,-50` for the no-arrow shortcut overlay. The app writes that exact Shell Icons override.",
+    "why": "Microsoft guidance shows creating `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons`, adding string value `29`, and setting it to `%windir%\\System32\\shell32.dll,-50` for the no-arrow shortcut overlay. The app writes that exact Shell Icons override. Incident reviewed: the VM shell dropped briefly during the probe and then recovered, so this record keeps a shell-risk note even though the mapping itself is clear.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T01:34:00Z",

@@ -1,0 +1,36 @@
+﻿{
+    "generated_utc":  "2026-03-25T23:49:15.3518071Z",
+    "state":  "missing",
+    "registry_path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+    "value_name":  "StartupDelayInMSec",
+    "before":  {
+                   "path_exists":  false,
+                   "value_exists":  false,
+                   "value":  null
+               },
+    "applied":  {
+                    "path_exists":  true,
+                    "value_exists":  false,
+                    "value":  null
+                },
+    "restored":  {
+                     "path_exists":  false,
+                     "value_exists":  false,
+                     "value":  null
+                 },
+    "explorer_restart_duration_seconds":  25.04,
+    "shell_before":  {
+                         "explorer":  true,
+                         "sihost":  true,
+                         "ShellHost":  true,
+                         "ctfmon":  true
+                     },
+    "shell_after":  {
+                        "explorer":  true,
+                        "sihost":  true,
+                        "ShellHost":  true,
+                        "ctfmon":  true
+                    },
+    "etl_exists":  true,
+    "etl_path":  "C:\\Tools\\ValidationController\\startup-delay-wpr\\startup-delay-wpr-20260326-024701\\missing\\startup-delay-missing.etl"
+}

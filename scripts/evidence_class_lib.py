@@ -73,6 +73,10 @@ BENCHMARK_EVIDENCE_KINDS = {
     "runtime-benchmark",
 }
 
+INCIDENT_EVIDENCE_KINDS = {
+    "vm-incident",
+}
+
 SEMANTICS_EVIDENCE_KINDS = {
     "official-doc",
     "policy-csp",
@@ -314,6 +318,13 @@ def has_reboot_evidence(record: dict[str, Any]) -> bool:
     return any(keyword in blob for keyword in REBOOT_HINTS)
 
 
+def has_incident_review(record: dict[str, Any]) -> bool:
+    if any(evidence_kind(item) in INCIDENT_EVIDENCE_KINDS for item in evidence_items(record)):
+        return True
+    blob = record_text_blob(record)
+    return "incident reviewed" in blob or "shell recovered" in blob
+
+
 def is_early_boot_record(record: dict[str, Any]) -> bool:
     paths = " ".join(target_paths(record)).lower()
     return any(hint in paths for hint in EARLY_BOOT_PATH_HINTS)
@@ -493,7 +504,7 @@ def next_missing_layer(record: dict[str, Any], incident_seen: bool = False) -> s
         return "app-mapping"
     if not restore_story_known(record):
         return "restore-story"
-    if incident_seen:
+    if incident_seen and not has_incident_review(record):
         return "incident-review"
 
     lane = determine_evidence_lane(record)
