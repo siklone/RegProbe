@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 175 |
-| Class B | 66 |
+| Class A | 176 |
+| Class B | 65 |
 | Class C | 1 |
 | Class E | 54 |
 
@@ -16883,16 +16883,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Microsoft Defender exclusions visibility` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when either the root policy path or the Policy Manager alias was set to 1.
+**Summary:** Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when the documented root policy path was set to 1. Current 25H2 builds also honor a Policy Manager alias for the same behavior.
 
 **Current implementation**
 
@@ -16912,10 +16912,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -16952,8 +16952,8 @@ Windows Internals references:
 
 **Recommended profiles**
 
-- `windows-default`: Windows default (apply_allowed=False)
-- `hide-managed-defender-exclusions`: Hide managed exclusions from local admins (apply_allowed=False)
+- `windows-default`: Windows default (apply_allowed=True)
+- `hide-managed-defender-exclusions`: Hide managed exclusions from local admins (apply_allowed=True)
 
 **Evidence**
 
@@ -16981,12 +16981,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the value model clearly, and the Win25H2Clean VM shows both the official root policy path and a Policy Manager alias hiding managed exclusions from Get-MpPreference while the managed exclusions branch stays populated. The record stays gated because current 25H2 builds honor two registry surfaces for the same behavior. |
+| Why | Microsoft documents the value model clearly, and the Win25H2Clean VM shows the documented root policy path hiding managed exclusions from Get-MpPreference while the managed exclusions branch stays populated. The Policy Manager alias is a current-build side observation, not a blocker for the documented root path. |
 
 ---
 

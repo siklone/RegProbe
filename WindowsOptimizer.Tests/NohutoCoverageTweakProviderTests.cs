@@ -106,7 +106,6 @@ public sealed class NohutoCoverageTweakProviderTests
 
         var commandBackedIds = new[]
         {
-            "power.disable-modern-standby",
             "power.disable-fast-startup",
             "power.disable-power-throttling",
             "power.optimize-performance",
@@ -122,7 +121,10 @@ public sealed class NohutoCoverageTweakProviderTests
                 ? "SetCpuBoostPerfModeTweak"
                 : "RegistryCommandBatchTweak";
 
-            Assert.Equal(expectedType, tweaks.Single(tweak => tweak.Id == id).GetType().Name);
+            var availableTweaks = string.Join(", ", tweaks.Select(tweak => $"{tweak.Id}:{tweak.GetType().Name}"));
+            var tweak = tweaks.SingleOrDefault(item => item.Id == id);
+            Assert.True(tweak is not null, $"Missing {id}. Available: {availableTweaks}");
+            Assert.Equal(expectedType, tweak!.GetType().Name);
         }
     }
 

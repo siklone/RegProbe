@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 175 |
-| B count | 66 |
+| A count | 176 |
+| B count | 65 |
 | C count | 1 |
 | E count | 54 |
 
@@ -241,7 +241,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.enable-defender-maps-advanced-membership` | validated | Class B | `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json` | `09647ad8584f7b7829d1431fcac330a07204b0a27cd719d2b510e8aa891ee1da` | `42cc4c40a3161dc76cf3730b1397c4402aa66ae5e625a4ff85962df616ee1324` | 1 |
 | `security.enable-dynamic-lock` | validated | Class A | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `ed4ac310ae9d2b5e6e3d53e642cbcd4ab7700097aa1981b8ede4089a23f9854e` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
 | `security.enable-sudo` | validated | Class B | `Docs/tweaks/research/records/security.enable-sudo.json` | `130fefa0f1253c36ac4ef376fc49784bd0f0db3bbee635fa49e806785b408608` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
-| `security.hide-defender-exclusions-from-local-admins` | validated | Class B | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `161b076ebd71e3b0361651f60a86766c4f07bbab4813b137508de5e55de26cfe` | `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891` | 1 |
+| `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `3c0fe2ac6864177e93deda81796003cbf094fe6b07d66c4025eb0195d26cf67e` | `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891` | 1 |
 | `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
 | `security.threat-file-hash-logging` | validated | Class C | `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json` | `e672685d4a0d8528ebcfec63e75faf64b3afbc369cd82bb1a8dd27ac34c894d8` | `3266b440e3fb8d682c704068ed9f36194d9189613eee04bd6a51f2ceb948c474` | 3 |
 | `security.trusted-path-credential-prompting` | validated | Class B | `Docs/tweaks/research/records/security.trusted-path-credential-prompting.review.json` | `33c9fda50d61931746e93cd41ac1ba5af27e7c0868723463eaa6d530ffe5ce4e` | `14fbc29f7a81e351103ff731f4370b8575a36f67dd9a9a8b8fbafb1dfaa2dc02` | 1 |
@@ -14045,29 +14045,29 @@ Windows Internals references:
 ### `security.hide-defender-exclusions-from-local-admins`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Security`
 - Area: `Microsoft Defender exclusions visibility`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json`
-- Source SHA256: `161b076ebd71e3b0361651f60a86766c4f07bbab4813b137508de5e55de26cfe`
+- Source SHA256: `3c0fe2ac6864177e93deda81796003cbf094fe6b07d66c4025eb0195d26cf67e`
 - Proof SHA256: `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891`
 
-**Summary:** Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when either the root policy path or the Policy Manager alias was set to 1.
+**Summary:** Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when the documented root policy path was set to 1. Current 25H2 builds also honor a Policy Manager alias for the same behavior.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
 - `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender` / `HideExclusionsFromLocalAdmins` / `REG_DWORD`
-  - Notes: The official path is the root Defender policy key. Win25H2Clean also honored a Policy Manager alias with the same value name, so this record stays gated until that dual-surface behavior is modeled more cleanly.
+  - Notes: The official path is the root Defender policy key. Win25H2Clean also honored a Policy Manager alias with the same value name, but the app stays on the documented root path.
   - missing | label=Not configured | meaning=Leave the policy unset so local admins can view managed exclusions.
   - value | value=0 | label=Exclusions visible to local admins | meaning=The policy is disabled and local admins can inspect managed exclusions through the usual Defender surfaces.
   - value | value=1 | label=Hide managed exclusions from local admins | meaning=Managed exclusions stay on the policy exclusions branch, but Get-MpPreference hides them from local admin views.
