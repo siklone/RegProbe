@@ -83,10 +83,10 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
         NavigationItems = new ObservableCollection<NavigationItem>
         {
-            new NavigationItem("dashboard", "Dashboard", "ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã…Â ", dashboard),
-            new NavigationItem("tweaks", "Configuration", "ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂºÃ‚Â ÃƒÂ¯Ã‚Â¸Ã‚Â", tweaks),
-            new NavigationItem("settings", "Settings", "ÃƒÂ¢Ã…Â¡Ã¢â€žÂ¢ÃƒÂ¯Ã‚Â¸Ã‚Â", settings),
-            new NavigationItem("about", "About", "ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¹ÃƒÂ¯Ã‚Â¸Ã‚Â", about)
+            new NavigationItem("dashboard", "Dashboard", dashboard),
+            new NavigationItem("tweaks", "Configuration", tweaks),
+            new NavigationItem("settings", "Settings", settings),
+            new NavigationItem("about", "About", about)
         };
 
         // Named handler for proper unsubscription

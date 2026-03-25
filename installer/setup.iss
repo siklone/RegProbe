@@ -19,7 +19,6 @@ LicenseFile=license.txt
 PrivilegesRequired=admin
 OutputDir=output
 OutputBaseFilename=OpenTraceProject_Setup_{#MyAppVersion}
-SetupIconFile=..\OpenTraceProject.App\icon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
