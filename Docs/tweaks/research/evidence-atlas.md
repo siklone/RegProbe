@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 200 |
-| Class B | 41 |
+| Class A | 201 |
+| Class B | 40 |
 | Class C | 1 |
 | Class E | 54 |
 
@@ -17868,16 +17868,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Observed Registry Setting` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean reversible probe confirmed MaintenanceDisabled=1 under Schedule\Maintenance and restored the baseline.
+**Summary:** Microsoft Learn now gives a direct operational meaning for MaintenanceDisabled on HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance: UWF turns Automatic Maintenance off by setting this value. Win25H2Clean reversible proof also confirmed missing -> 1 -> missing on the same path.
 
 **Current implementation**
 
@@ -17897,10 +17897,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -17934,19 +17934,19 @@ Windows Internals references:
 **Windows defaults**
 
 - Windows feature default (Windows systems with Automatic Maintenance)
-  - maintenance-disabled-observed: missing — — Automatic Maintenance runs as part of ordinary Windows behavior unless explicitly overridden.
+  - maintenance-disabled-observed: missing — — Automatic Maintenance runs as part of ordinary Windows behavior unless MaintenanceDisabled is explicitly set.
 
 **Recommended profiles**
 
-- `windows-default`: Windows default (apply_allowed=False)
-- `current-app-profile`: Current app profile (apply_allowed=False)
+- `windows-default`: Windows default (apply_allowed=True)
+- `disable-automatic-maintenance`: Disable Automatic Maintenance (apply_allowed=True)
 
 **Evidence**
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-automatic-maintenance-overview` | `official-doc` | `Microsoft official doc` | Microsoft Automatic Maintenance overview | https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance | `high` | behavior, default, version-scope |
-| `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable | `medium` | path, behavior |
+| `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable | `high` | path, value, behavior, default |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Automatic maintenance override | H:\Temp\vm-tooling-staging\vm-batch-probe-20260320.json | `medium` | path, value, behavior, rollback |
 | `nohuto-maintenance-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - Automatic Maintenance registry evidence | Docs/tweaks/_source-mirrors/win-config/privacy/desc.md and Docs/tweaks/_source-mirrors/win-registry/records/25H2.txt | `medium` | path, value, behavior |
@@ -17969,7 +17969,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible probe confirmed MaintenanceDisabled transitions through missing -> 1 -> missing under the documented maintenance path. |
+| Why | Microsoft now states that Maintenance Hour is disabled by setting MaintenanceDisabled on this path, and the Win25H2Clean reversible probe confirmed the app's write through missing -> 1 -> missing on the same key. |
 
 ---
 

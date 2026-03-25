@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 200 |
-| B count | 41 |
+| A count | 201 |
+| B count | 40 |
 | C count | 1 |
 | E count | 54 |
 
@@ -250,7 +250,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.bsod-disable-auto-reboot` | validated | Class A | `Docs/tweaks/research/records/system.bsod-disable-auto-reboot.json` | `71ce59e9590a9c45f0132c3b72477d9fa8437f4e560eb9e9d6af8acfbf95e88b` | `1ab107dc479b7a8c96b6cf2b585b8c4d5e9bba04bfc52d8ecd97fd76b599d181` | 1 |
 | `system.bsod-display-parameters` | validated | Class A | `Docs/tweaks/research/records/system.bsod-display-parameters.review.json` | `e90d825e8244b7d4e7ebbe1dc881d969713133feee0c06d638d5a5253523d0ae` | `1eea0c9c620c9caae29215c18a6608b3d6f5eea2beb90bc41fc83ec26ef41b3f` | 1 |
 | `system.disable-app-archiving` | validated | Class A | `Docs/tweaks/research/records/system.disable-app-archiving.json` | `b3c6bd1bd22f6745b52d3339cc337fbebef422300f30232dfc86cbad2ac01e75` | `d67f5f4b6c441bd7dea3dbb512898a32c4b4661c1c0db83b86bbdde063bdf630` | 1 |
-| `system.disable-auto-maintenance` | validated | Class B | `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json` | `70f2b46aef4c94a5986fe41c6d528bc4d40f77e2a337057fb6358e743242a439` | `9da0a6c6d8df99a060e122cfb988f132a9b125c369ff383d020cbb3657ac012c` | 1 |
+| `system.disable-auto-maintenance` | validated | Class A | `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json` | `1df1eb23286bba85b72b1c9dccd5bccad6a59b1a029f77dbf464fcc7ac4e492f` | `9da0a6c6d8df99a060e122cfb988f132a9b125c369ff383d020cbb3657ac012c` | 1 |
 | `system.disable-background-gp-updates` | validated | Class A | `Docs/tweaks/research/records/system.disable-background-gp-updates.json` | `806163e1cbc97c3b430efa864ab360da1ae082b721dc7512a83f15320cbb5a0f` | `f405c9914ca39ee00ae820afba4f149eb84081715df8e3a7bcb2a26ab3742038` | 1 |
 | `system.disable-clipboard-history` | validated | Class A | `Docs/tweaks/research/records/system.disable-clipboard-history.json` | `c66a14e25508b24830c68834109b06f077c5a0ee93357939e1452834bbc0017f` | `6f1d55e33a45d3258dd257c8c34c0185d96ee07b14bf1427fbdbae1e18b728a0` | 2 |
 | `system.disable-clipboard-redirection` | validated | Class A | `Docs/tweaks/research/records/system.disable-clipboard-redirection.json` | `ef3a2483b68e5b960ce3c18e34f6e0065ef5708eda4ad3f73544823eb9fd11bd` | `bd7bbb0f1b1b0b7f114a02aa53890195d47f454c172025d9cfba62d70b973e8b` | 1 |
@@ -14663,38 +14663,38 @@ Windows Internals references:
 ### `system.disable-auto-maintenance`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Observed Registry Setting`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.disable-auto-maintenance.review.json`
-- Source SHA256: `70f2b46aef4c94a5986fe41c6d528bc4d40f77e2a337057fb6358e743242a439`
+- Source SHA256: `1df1eb23286bba85b72b1c9dccd5bccad6a59b1a029f77dbf464fcc7ac4e492f`
 - Proof SHA256: `9da0a6c6d8df99a060e122cfb988f132a9b125c369ff383d020cbb3657ac012c`
 
-**Summary:** Win25H2Clean reversible probe confirmed MaintenanceDisabled=1 under Schedule\Maintenance and restored the baseline.
+**Summary:** Microsoft Learn now gives a direct operational meaning for MaintenanceDisabled on HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance: UWF turns Automatic Maintenance off by setting this value. Win25H2Clean reversible proof also confirmed missing -> 1 -> missing on the same path.
 
 **Evidence class**
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
 - `HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance` / `MaintenanceDisabled` / `REG_DWORD`
-  - Notes: This target remains review-only until a stronger official value table is attached.
+  - Notes: Current Microsoft guidance gives the operational disable meaning for value 1 on this path.
   - missing | label=No explicit maintenance override | meaning=Windows follows its ordinary Automatic Maintenance behavior.
-  - value | value=1 | label=Observed app disable candidate | meaning=The current app writes 1 here to stop Automatic Maintenance, but this record still needs a stronger official raw-value table before publishing it as validated.
+  - value | value=1 | label=Automatic Maintenance disabled | meaning=Microsoft's current UWF guidance says Maintenance Hour is disabled by setting MaintenanceDisabled on this path.
 
 **Evidence**
 
 | Evidence ID | Kind | Origin | Title | Strength |
 | --- | --- | --- | --- | --- |
 | `ms-automatic-maintenance-overview` | `official-doc` | `Microsoft official doc` | Microsoft Automatic Maintenance overview | `high` |
-| `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | `medium` |
+| `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | `high` |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
 | `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Automatic maintenance override | `medium` |
 | `nohuto-maintenance-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - Automatic Maintenance registry evidence | `medium` |
