@@ -1012,7 +1012,7 @@ This policy setting specifies that power management is disabled when the machine
 - If this policy setting is enabled, Windows Connection Manager doesn't manage adapter radios to reduce power consumption when the machine enters connected standby mode.
 - If this policy setting isn't configured or is disabled, power management is enabled when the machine enters connected standby mode.
 
-`Disable Modern Standby`:
+Historical `Disable Modern Standby` bundle:
 ```c
 "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power";
     "MSDisabled"; = 1; // PopModernStandbyDisabled
@@ -1022,6 +1022,8 @@ This policy setting specifies that power management is disabled when the machine
     "EnableDsNetRefresh"; = 0; // PopEnableDsNetRefresh
 ```
 > https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values
+
+This bundle is no longer part of the live app surface. Microsoft says switching between Modern Standby and S3 is not supported through a Windows setting change, so this stays as research history only.
 
 | Power state | ACPI state | Description |
 |-------------|------------|-------------|

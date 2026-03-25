@@ -1,6 +1,6 @@
 # Tweak Docs Report (Generated)
 
-Total tweaks: 308
+Total tweaks: 307
 Missing docs files: 0
 Missing docs anchors: 0
 Missing details anchors: 0
@@ -118,7 +118,6 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `power.disable-cpu-parking` | `Docs\power\power.md` | yes | yes | yes | yes |
 | `power.disable-fast-startup` | `Docs\power\power.md` | yes | yes | yes | yes |
 | `power.disable-hibernation` | `Docs\power\power.md` | yes | yes | yes | yes |
-| `power.disable-modern-standby` | `Docs\power\power.md` | yes | yes | yes | yes |
 | `power.disable-network-power-saving` | `Docs\power\power.md` | yes | yes | yes | yes |
 | `power.disable-power-throttling` | `Docs\power\power.md` | yes | yes | yes | yes |
 | `power.disable-superfetch` | `Docs\power\power.md` | yes | yes | yes | yes |

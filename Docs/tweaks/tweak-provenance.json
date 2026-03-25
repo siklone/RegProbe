@@ -1,9 +1,9 @@
 {
-  "GeneratedAtUtc": "2026-03-25T07:54:40Z",
-  "Summary": "306/308 tweaks have upstream dump or pseudocode links, 152 have Windows Internals notes, 26 still need review.",
-  "TotalTweaks": 308,
-  "RepoBackedTweaks": 306,
-  "InternalsBackedTweaks": 152,
+  "GeneratedAtUtc": "2026-03-25T08:18:02Z",
+  "Summary": "305/307 tweaks have upstream dump or pseudocode links, 151 have Windows Internals notes, 26 still need review.",
+  "TotalTweaks": 307,
+  "RepoBackedTweaks": 305,
+  "InternalsBackedTweaks": 151,
   "ReviewNeededTweaks": 26,
   "Sources": [
     {
@@ -4289,7 +4289,7 @@
       "Name": "Disable CPU Idle States (C-States)",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L79",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L66",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4393,7 +4393,7 @@
       "Name": "Disable Fast Startup (Hiberboot)",
       "Category": "Power",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L37",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L24",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4483,66 +4483,11 @@
       ]
     },
     {
-      "Id": "power.disable-modern-standby",
-      "Name": "Disable Modern Standby",
-      "Category": "Power",
-      "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L24",
-      "HasNohutoEvidence": true,
-      "HasWindowsInternalsContext": true,
-      "NeedsReview": false,
-      "CoverageState": "repo-backed",
-      "Summary": "Matched 4 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
-      "SourceRepositories": [
-        "win-config",
-        "win-registry",
-        "decompiled-pseudocode"
-      ],
-      "MatchedTokens": [
-        "power",
-        "msdisabled",
-        "modernsleep",
-        "enabledactions"
-      ],
-      "References": [
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / power/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
-          "Summary": "Matched 4 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-registry / README.md",
-          "Url": "https://github.com/nohuto/win-registry/blob/main/README.md",
-          "Summary": "Matched 4 audit token(s) in win-registry."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "win-config / system/desc.md",
-          "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-          "Summary": "Matched 2 audit token(s) in win-config."
-        },
-        {
-          "Kind": "nohuto",
-          "Title": "decompiled-pseudocode / mmcss",
-          "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
-          "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
-        },
-        {
-          "Kind": "internals",
-          "Title": "Windows Internals resource page",
-          "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
-          "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
-        }
-      ]
-    },
-    {
       "Id": "power.disable-network-power-saving",
       "Name": "Disable Network Adapter Power Saving",
       "Category": "Power",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L96",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L83",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4598,7 +4543,7 @@
       "Name": "Disable Power Throttling",
       "Category": "Power",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L49",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L36",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4757,7 +4702,7 @@
       "Name": "Hide Hibernate Power Option",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L151",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L138",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4810,7 +4755,7 @@
       "Name": "Hide Lock Power Option",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L127",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L114",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4863,7 +4808,7 @@
       "Name": "Hide Sleep Power Option",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L139",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L126",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -4965,7 +4910,7 @@
       "Name": "Optimize Gaming Network Settings",
       "Category": "Power",
       "Risk": "Safe",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L110",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L97",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
@@ -5026,7 +4971,7 @@
       "Name": "Optimize Power Settings for Performance",
       "Category": "Power",
       "Risk": "Advanced",
-      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L61",
+      "Source": "WindowsOptimizer.App\\Services\\TweakProviders\\PowerTweakProvider.cs#L48",
       "HasNohutoEvidence": true,
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,

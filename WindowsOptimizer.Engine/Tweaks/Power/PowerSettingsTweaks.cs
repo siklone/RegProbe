@@ -8,29 +8,6 @@ namespace WindowsOptimizer.Engine.Tweaks.Power;
 public static class PowerSettingsTweaks
 {
     /// <summary>
-    /// Disables Modern Standby (S0 Low Power Idle)
-    /// </summary>
-    public static RegistryValueBatchTweak CreateDisableModernStandbyTweak(IRegistryAccessor registryAccessor)
-    {
-        var entries = new List<RegistryValueBatchEntry>
-        {
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "MSDisabled", RegistryValueKind.DWord, 1, RegistryView.Default),
-
-            // Disable aggressive standby actions
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power\ModernSleep", "EnabledActions", RegistryValueKind.DWord, 0, RegistryView.Default)
-        };
-
-        return new RegistryValueBatchTweak(
-            id: "power.disable-modern-standby",
-            name: "Disable Modern Standby",
-            description: "Disables Modern Standby (S0 Low Power Idle) and switches to traditional S3 sleep mode. Improves desktop power behavior.",
-            risk: TweakRiskLevel.Advanced,
-            entries: entries,
-            registryAccessor: registryAccessor,
-            requiresElevation: true);
-    }
-
-    /// <summary>
     /// Disables Fast Startup (Hiberboot)
     /// </summary>
     public static RegistryValueBatchTweak CreateDisableFastStartupTweak(IRegistryAccessor registryAccessor)

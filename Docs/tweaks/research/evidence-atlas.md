@@ -8,8 +8,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Field | Value |
 | --- | --- |
 | Total records | 296 |
-| Validated | 243 |
-| Deprecated | 53 |
+| Validated | 242 |
+| Deprecated | 54 |
 | Review required | 0 |
 | Records with evidence | 296 |
 | Records without evidence | 0 |
@@ -18,8 +18,7 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Class A | 175 |
 | Class B | 66 |
 | Class C | 1 |
-| Class D | 1 |
-| Class E | 53 |
+| Class E | 54 |
 
 ## Category Coverage
 
@@ -7466,114 +7465,6 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | The local Fast Startup toggle is explicitly documented by Microsoft at HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\HiberbootEnabled, with 0 meaning disabled and 1 meaning enabled. The separate WinInit policy path only forces Fast Startup on and falls back to the local setting when disabled or not configured. The app provider and engine helper now both write the documented local surface, so the implementation matches the researched behavior. |
-
----
-
-### `power.disable-modern-standby`
-
-| Field | Value |
-| --- | --- |
-| Status | `validated` |
-| Evidence class | `Class D` |
-| Category | `Power` |
-| Area | `Sleep Model` |
-| Scope | `device` |
-| Source file | `Docs/tweaks/research/records/power.disable-modern-standby.json` |
-| Apply allowed | `False` |
-| Confidence | `high` |
-| Needs VM validation | `False` |
-
-**Summary:** Legacy validated record without machine-checkable validation proof. This record now validates Microsoft's guidance that switching between Modern Standby and S3 is not a supported Windows setting change. The current app's registry bundle remains documented as an implementation mismatch rather than a supported control.
-
-**Current implementation**
-
-| Field | Value |
-| --- | --- |
-| Status | `mismatch-suspected` |
-| Provider source | `WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs` |
-| Notes | The app writes MSDisabled = 1 and ModernSleep\EnabledActions = 0, but the Microsoft guidance used here says switching power models is not supported by changing a Windows setting. |
-
-Current write(s):
-
-| Target | Path | Value | State | Kind | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `modern-standby-registry-bundle` | `HKLM\SYSTEM\CurrentControlSet\Control\Power` | `MSDisabled + ModernSleep\EnabledActions` | `MSDisabled=1;EnabledActions=0` | `value` |  |
-
-**Evidence class**
-
-| Field | Value |
-| --- | --- |
-| Label | `Class D` |
-| Title | Key Known, Value Semantics Unknown |
-| Action state | `research-gated` |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
-
-**Sources**
-
-| Field | Value |
-| --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto evidence | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | power, msdisabled, modernsleep, enabledactions |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
-
-Nohuto lineage references:
-
-| Title | URL | Summary |
-| --- | --- | --- |
-| win-config / power/desc.md | https://github.com/nohuto/win-config/blob/main/power/desc.md | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | https://github.com/nohuto/win-registry/blob/main/README.md | Matched 4 audit token(s) in win-registry. |
-| win-config / system/desc.md | https://github.com/nohuto/win-config/blob/main/system/desc.md | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | URL | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals | Official Microsoft landing page for the Windows Internals books and companion material. |
-
-**Targets**
-
-**Windows defaults**
-
-- Hardware and image dependent baseline (Systems whose shipped platform design supports either Modern Standby or S3)
-  - modern-standby-registry-bundle: feature-dependent — — The shipped sleep model depends on platform support and image design, not on a validated post-install registry toggle.
-
-**Recommended profiles**
-
-- `windows-shipped-baseline`: Windows shipped baseline (apply_allowed=False)
-
-**Evidence**
-
-| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- | --- |
-| `ms-modern-standby` | `official-doc` | `Microsoft official doc` | Microsoft Learn: What is Modern Standby | https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby | `high` | behavior, side-effects, version-scope, app-mismatch |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `nohuto-power-msdisabled-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for MSDisabled | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
-| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
-
-**Validation proof**
-
-| Field | Value |
-| --- | --- |
-| Source URL | https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby |
-| Exact quote / path | Switching the power model is not supported in Windows without a complete OS re-install. |
-| Key found on page | `True` |
-| Notes | Microsoft documents that switching between S3 and Modern Standby is not supported through a Windows setting change. |
-
-**Decision**
-
-| Field | Value |
-| --- | --- |
-| Apply allowed | `False` |
-| Recommended for general users | `False` |
-| Restore default supported | `False` |
-| Restore previous supported | `True` |
-| Needs VM validation | `False` |
-| Why | Microsoft's guidance is now validated in this record, and it does not support switching between Modern Standby and S3 through a Windows setting change. The record is documented for research, not as a supported Windows tweak. |
 
 ---
 
@@ -26314,6 +26205,93 @@ Blocking issues:
 ---
 
 ### Power
+
+### `power.disable-modern-standby`
+
+| Field | Value |
+| --- | --- |
+| Status | `deprecated` |
+| Evidence class | `Class E` |
+| Category | `Power` |
+| Area | `Sleep Model` |
+| Scope | `device` |
+| Source file | `Docs/tweaks/research/records/power.disable-modern-standby.json` |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Historical research record for the old Modern Standby registry bundle. Microsoft says switching between Modern Standby and S3 is not a supported Windows setting change, so this bundle is no longer part of the live app surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | `` |
+| Notes | The live app surface no longer exposes this unsupported power-model switch. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto evidence | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+**Windows defaults**
+
+- Hardware and image dependent baseline (Systems whose shipped platform design supports either Modern Standby or S3)
+  - modern-standby-registry-bundle: feature-dependent — — The shipped sleep model depends on platform support and image design, not on a validated post-install registry toggle.
+
+**Recommended profiles**
+
+- `windows-shipped-baseline`: Windows shipped baseline (apply_allowed=False)
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `ms-modern-standby` | `official-doc` | `Microsoft official doc` | Microsoft Learn: What is Modern Standby | https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby | `high` | behavior, side-effects, version-scope, app-mismatch |
+| `app-power-provider` | `repo-code` | `Current repo code` | Former app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `nohuto-power-msdisabled-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for MSDisabled | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source URL | https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby |
+| Exact quote / path | Switching the power model is not supported in Windows without a complete OS re-install. |
+| Key found on page | `True` |
+| Notes | Microsoft documents that switching between S3 and Modern Standby is not supported through a Windows setting change, so the old registry bundle was retired from the app. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Microsoft's guidance does not support switching between Modern Standby and S3 through a Windows setting change. The bundle stays only as historical research. |
+
+---
 
 ### `power.disable-network-power-saving`
 

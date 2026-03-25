@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-25T07:54:40.299470Z",
+  "generated_utc": "2026-03-25T08:18:03.054834Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
       "A": 175,
       "B": 66,
       "C": 1,
-      "D": 1,
-      "E": 53
+      "D": 0,
+      "E": 54
     },
     "action_state_counts": {
       "actionable": 175,
-      "archived": 53,
-      "research-gated": 68
+      "archived": 54,
+      "research-gated": 67
     }
   },
   "classes": {
@@ -5962,21 +5962,21 @@
     {
       "record_id": "power.disable-modern-standby",
       "tweak_id": "power.disable-modern-standby",
-      "record_status": "validated",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
-      "show_in_app": true,
+      "record_status": "deprecated",
+      "evidence_class": "E",
+      "class_label": "Class E",
+      "class_title": "Archived / Audit Trail",
+      "class_description": "Deprecated, blocked, or historical audit-trail record. Keep it in research, not in the normal tweak surface.",
+      "show_in_app": false,
       "is_actionable": false,
-      "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "is_archived": true,
+      "action_state": "archived",
+      "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
       "confidence": "high",
-      "app_mapping_status": "mismatch-suspected",
+      "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Microsoft documents that switching between S3 and Modern Standby is not supported through a Windows setting change.",
+        "summary": "Microsoft documents that switching between S3 and Modern Standby is not supported through a Windows setting change, so the old registry bundle was retired from the app.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -5993,10 +5993,10 @@
             "summary": "Microsoft documents Modern Standby and states that switching between S3 and Modern Standby is not supported in Windows without a complete OS reinstall."
           },
           {
-            "title": "Current app implementation",
+            "title": "Former app implementation",
             "url": "WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs",
             "kind": "repo-code",
-            "summary": "The provider writes MSDisabled = 1 and ModernSleep\\EnabledActions = 0 for the current tweak."
+            "summary": "The older app implementation wrote MSDisabled = 1 and ModernSleep\\EnabledActions = 0 before the tweak was removed from the live surface."
           }
         ]
       },
@@ -6014,33 +6014,10 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-        "has_nohuto_lineage": true,
-        "source_repositories": [
-          "win-config",
-          "win-registry",
-          "decompiled-pseudocode"
-        ],
-        "links": [
-          {
-            "title": "win-config / power/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 4 audit token(s) in win-config."
-          },
-          {
-            "title": "win-registry / README.md",
-            "url": "https://github.com/nohuto/win-registry/blob/main/README.md",
-            "kind": "nohuto",
-            "summary": "Matched 4 audit token(s) in win-registry."
-          },
-          {
-            "title": "win-config / system/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 2 audit token(s) in win-config."
-          }
-        ]
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {

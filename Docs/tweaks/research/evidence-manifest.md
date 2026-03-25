@@ -9,8 +9,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Field | Value |
 | --- | --- |
 | Total records | 296 |
-| Validated | 243 |
-| Deprecated | 53 |
+| Validated | 242 |
+| Deprecated | 54 |
 | Review required | 0 |
 | Records with evidence | 296 |
 | Records without evidence | 0 |
@@ -19,8 +19,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | A count | 175 |
 | B count | 66 |
 | C count | 1 |
-| D count | 1 |
-| E count | 53 |
+| E count | 54 |
 
 ## Record Index
 
@@ -34,6 +33,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `developer.vscode-git-autofetch` | deprecated | Class E | `Docs/tweaks/research/records/developer.vscode-git-autofetch.json` | `2dfbdf4481e9703aba1a03d90f091ab9336b95e75eb34fa64486ccd77f140373` | `e06716163838e4757577a19baa2082882403e415767e632da3bcaa89018fadce` | 2 |
 | `explorer.disable-taskbar-widgets` | deprecated | Class E | `Docs/tweaks/research/records/explorer.disable-taskbar-widgets.json` | `f89b4a4a9a01987090b432d2e87de9a2682701f8de4ddcc2f22fe8831eb775c3` | `c564531bb27c99c5c6d31c16fdc2cfef794fcda04ce5ca8598956cb5763f433a` | 1 |
 | `network.optimize-smb` | deprecated | Class E | `Docs/tweaks/research/records/network.optimize-smb.review.json` | `f428f4197f8b38732a254d31a7bae77c1ece46ac72f6db950191556d15315a68` | `f20537679384da6d919b7646f4217435225bdad41c9462c7c48cad785a19e5eb` | 3 |
+| `power.disable-modern-standby` | deprecated | Class E | `Docs/tweaks/research/records/power.disable-modern-standby.json` | `9f546885ba67b73db22a2ca0594677670cd6fc9b625146a6fcd3725d91548f8b` | `4c9e42cbeeb141e097c91feb15f0d3f25d872767973192e6c16cc719f69c9046` | 1 |
 | `power.disable-network-power-saving` | deprecated | Class E | `Docs/tweaks/research/records/power.disable-network-power-saving.review.json` | `a8a0ba2b003c31ef593996ad0600414abee42c4e738cf40a2d4564bf3b0afa9f` | `8a44b3c793b7747a5bef848a85808afb5dfc209af650712b4ebf8b03f19e4da9` | 3 |
 | `power.optimize-performance` | deprecated | Class E | `Docs/tweaks/research/records/power.optimize-performance.review.json` | `9a6099fdbda41141c13516f6bbba3f49bcf7db77d9baece2b2de08038c254020` | `58dc7326379a58002bfc8e69fc5bcc60b649ec53bb89088c2dbbf5d96c9dbdc2` | 1 |
 | `privacy.deny-app-access` | deprecated | Class E | `Docs/tweaks/research/records/privacy.deny-app-access.review.json` | `56e52c1cfe030b7599bad5a650f1becd2d3362b8112bf56bda2e1f7a45600512` | `4ae5728a5c387aaf0d21810f025314b52714ec69482975da463be70c18be5a3a` | 1 |
@@ -150,7 +150,6 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `peripheral.disable-sticky-keys-prompt` | validated | Class B | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` | `6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837` | `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e` | 1 |
 | `power.disable-cpu-idle-states` | validated | Class B | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `92660bb914ee8c5efd2912a91e00928c6b8dbe635a2327f385738bc7ce25421f` | `e9564c042475d4b463e11dbd8be14712a7aac319855e9971d0ce0061c2734bd1` | 1 |
 | `power.disable-fast-startup` | validated | Class A | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
-| `power.disable-modern-standby` | validated | Class D | `Docs/tweaks/research/records/power.disable-modern-standby.json` | `4735f00424ad14036f07e29a9a5327430e66c1de57f007d87934eaa80601127a` | `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e` | 1 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
 | `power.disable-power-throttling` | validated | Class B | `Docs/tweaks/research/records/power.disable-power-throttling.json` | `6bbb0293de661b8c2c09bf60e67517b09b78ba45f66065f5bbdc249c5f2dcffc` | `0c7c4f1949a9b5b24bee38e217c6cb08d7e74205bbcb3734504d77c6f28f211b` | 1 |
 | `power.disable-windows-search` | validated | Class B | `Docs/tweaks/research/records/power.disable-windows-search.json` | `a71dd4b0dd816fd6f1fcbdd000f7d60651cc22532c03ef49228899aba5b74ff4` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 1 |
@@ -816,6 +815,54 @@ Windows Internals references:
 | exact_quote_or_path | RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities. |
 | key_found_on_page | True |
 | notes | Mirror-backed SMB tuning bundle. This is a composite of documented SMB offload/RSS/VMQ surfaces, not a single supported toggle. |
+### `power.disable-modern-standby`
+
+- Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
+- Category: `Power`
+- Area: `Sleep Model`
+- Scope: `device`
+- Source file: `Docs/tweaks/research/records/power.disable-modern-standby.json`
+- Source SHA256: `9f546885ba67b73db22a2ca0594677670cd6fc9b625146a6fcd3725d91548f8b`
+- Proof SHA256: `4c9e42cbeeb141e097c91feb15f0d3f25d872767973192e6c16cc719f69c9046`
+
+**Summary:** Historical research record for the old Modern Standby registry bundle. Microsoft says switching between Modern Standby and S3 is not a supported Windows setting change, so this bundle is no longer part of the live app surface.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
+
+**Targets**
+
+- `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `MSDisabled + ModernSleep\\EnabledActions` / `REG_DWORD bundle`
+  - unknown | label=Unsupported Windows-side switch | meaning=The official Microsoft guidance used in this review does not support switching between Modern Standby and S3 through a registry setting.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-modern-standby` | `official-doc` | `Microsoft official doc` | Microsoft Learn: What is Modern Standby | `high` |
+| `app-power-provider` | `repo-code` | `Current repo code` | Former app implementation | `high` |
+| `nohuto-power-msdisabled-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for MSDisabled | `medium` |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | `medium` |
+
+**Sources**
+
+_No source block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby |
+| exact_quote_or_path | Switching the power model is not supported in Windows without a complete OS re-install. |
+| key_found_on_page | True |
+| notes | Microsoft documents that switching between S3 and Modern Standby is not supported through a Windows setting change, so the old registry bundle was retired from the app. |
 ### `power.disable-network-power-saving`
 
 - Status: `deprecated`
@@ -8189,71 +8236,6 @@ Windows Internals references:
 | exact_quote_or_path | To disable fast startup, set the following registry value: Key: HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power Name: HiberbootEnabled Type: DWORD Value: 0 (0 = Disabled, 1 = Enabled) |
 | key_found_on_page | True |
 | notes | Official Microsoft guidance documents Fast Startup through HiberbootEnabled under the Session Manager Power path, and the current app now writes that documented local surface. |
-### `power.disable-modern-standby`
-
-- Status: `validated`
-- Evidence class: `Class D` - Key Known, Value Semantics Unknown
-- Category: `Power`
-- Area: `Sleep Model`
-- Scope: `device`
-- Source file: `Docs/tweaks/research/records/power.disable-modern-standby.json`
-- Source SHA256: `4735f00424ad14036f07e29a9a5327430e66c1de57f007d87934eaa80601127a`
-- Proof SHA256: `98f6a9df7f928bfe6ede81cbca99f1447381a5584864f491829d66a19e135c4e`
-
-**Summary:** Legacy validated record without machine-checkable validation proof. This record now validates Microsoft's guidance that switching between Modern Standby and S3 is not a supported Windows setting change. The current app's registry bundle remains documented as an implementation mismatch rather than a supported control.
-
-**Evidence class**
-
-| Field | Value |
-| --- | --- |
-| Class | Class D |
-| Title | Key Known, Value Semantics Unknown |
-| Action state | research-gated |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
-
-**Targets**
-
-- `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `MSDisabled + ModernSleep\\EnabledActions` / `REG_DWORD bundle`
-  - unknown | label=Unsupported Windows-side switch | meaning=The official Microsoft guidance used in this review does not support switching between Modern Standby and S3 through a registry setting.
-
-**Evidence**
-
-| Evidence ID | Kind | Origin | Title | Strength |
-| --- | --- | --- | --- | --- |
-| `ms-modern-standby` | `official-doc` | `Microsoft official doc` | Microsoft Learn: What is Modern Standby | `high` |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
-| `nohuto-power-msdisabled-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for MSDisabled | `medium` |
-| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | `medium` |
-
-**Sources**
-
-| Field | Value |
-| --- | --- |
-| Coverage state | repo-backed |
-| Has nohuto evidence | True |
-| Has Windows Internals notes | True |
-| Needs review | False |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | power, msdisabled, modernsleep, enabledactions |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
-
-Nohuto lineage references:
-- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 4 audit token(s) in win-config.
-- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 4 audit token(s) in win-registry.
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
-- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
-
-Windows Internals references:
-- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
-
-**Validation proof**
-
-| Field | Value |
-| --- | --- |
-| source_url | https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby |
-| exact_quote_or_path | Switching the power model is not supported in Windows without a complete OS re-install. |
-| key_found_on_page | True |
-| notes | Microsoft documents that switching between S3 and Modern Standby is not supported through a Windows setting change. |
 ### `power.disable-network-power-saving.policy`
 
 - Status: `validated`

@@ -103,21 +103,20 @@ peripheral.keyboard-disable-language-hotkey,Disable Language Switch Hotkey,Docs\
 peripheral.keyboard-optimize-repeat,Optimize Keyboard Repeat Rate,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L27
 peripheral.mouse-disable-acceleration,Disable Enhanced Pointer Precision (Mouse Acceleration),Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Peripheral\MouseTweaks.cs#L55
 peripheral.mouse-disable-throttle,Disable Mouse Throttling for Background Windows,Docs\peripheral\peripheral.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Peripheral\MouseTweaks.cs#L27
-power.disable-cpu-idle-states,Disable CPU Idle States (C-States),Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L79
+power.disable-cpu-idle-states,Disable CPU Idle States (C-States),Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L66
 power.disable-cpu-parking,Disable CPU Core Parking,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Power\CPUPowerTweaks.cs#L29
-power.disable-fast-startup,Disable Fast Startup (Hiberboot),Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L37
+power.disable-fast-startup,Disable Fast Startup (Hiberboot),Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L24
 power.disable-hibernation,Disable Hibernation,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Power\DisableHibernationTweak.cs#L13
-power.disable-modern-standby,Disable Modern Standby,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L24
-power.disable-network-power-saving,Disable Network Adapter Power Saving,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L96
-power.disable-power-throttling,Disable Power Throttling,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L49
+power.disable-network-power-saving,Disable Network Adapter Power Saving,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L83
+power.disable-power-throttling,Disable Power Throttling,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L36
 power.disable-superfetch,Disable Superfetch (SysMain),Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Performance\DisableSuperfetchTweak.cs#L13
 power.disable-windows-search,Disable Windows Search,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PerformanceTweakProvider.cs#L68
-power.hide-hibernate-option,Hide Hibernate Power Option,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L151
-power.hide-lock-option,Hide Lock Power Option,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L127
-power.hide-sleep-option,Hide Sleep Power Option,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L139
+power.hide-hibernate-option,Hide Hibernate Power Option,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L138
+power.hide-lock-option,Hide Lock Power Option,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L114
+power.hide-sleep-option,Hide Sleep Power Option,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L126
 power.optimize-cpu-boost,Optimize CPU Performance Boost,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.Engine\Tweaks\Commands\Power\SetCpuBoostPerfModeTweak.cs#L22
-power.optimize-gaming-network,Optimize Gaming Network Settings,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L110
-power.optimize-performance,Optimize Power Settings for Performance,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L61
+power.optimize-gaming-network,Optimize Gaming Network Settings,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L97
+power.optimize-performance,Optimize Power Settings for Performance,Docs\power\power.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PowerTweakProvider.cs#L48
 privacy.block-microsoft-accounts,Block Microsoft Accounts,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L805
 privacy.deny-app-access,Deny App Access (Except Microphone),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L422
 privacy.disable-activity-history,Disable Activity History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,WindowsOptimizer.App\Services\TweakProviders\PrivacyTweakProvider.cs#L46

@@ -23,19 +23,6 @@ public sealed class PowerTweakProvider : BaseTweakProvider
         // Advanced Power Settings
         yield return CreateRegistryValueBatchTweak(
             context,
-            "power.disable-modern-standby",
-            "Disable Modern Standby",
-            "Disables Modern Standby (S0 Low Power Idle) and switches to traditional S3 sleep mode. Improves desktop power behavior.",
-            TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "MSDisabled", RegistryValueKind.DWord, 1, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power\ModernSleep", "EnabledActions", RegistryValueKind.DWord, 0, RegistryView.Default)
-            },
-            requiresElevation: true);
-
-        yield return CreateRegistryValueBatchTweak(
-            context,
             "power.disable-fast-startup",
             "Disable Fast Startup (Hiberboot)",
             "Disables Fast Startup feature which uses hibernation for faster boot times. Fixes some driver and dual-boot issues.",
