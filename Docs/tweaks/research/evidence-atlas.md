@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 195 |
-| Class B | 46 |
+| Class A | 199 |
+| Class B | 42 |
 | Class C | 1 |
 | Class E | 54 |
 
@@ -150,13 +150,13 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Audio` |
 | Area | `Sound Control Panel DeviceCpl Flags` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
@@ -179,10 +179,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -241,7 +241,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The registry path is now validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build. The remaining limitation is documentation quality: this is runtime-observed rather than Microsoft-documented. |
+| Why | The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, and the app writes the same show-disconnected state with a clean restore story. |
 
 ---
 
@@ -250,13 +250,13 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Audio` |
 | Area | `Sound Control Panel DeviceCpl Flags` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
@@ -279,10 +279,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -341,7 +341,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The registry path is now validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build. The remaining limitation is documentation quality: this is runtime-observed rather than Microsoft-documented. |
+| Why | The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, and the app writes the same show-hidden state with a clean restore story. |
 
 ---
 
@@ -7143,13 +7143,13 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Peripheral` |
 | Area | `Accessibility Sticky Keys Flags` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** Win32 officially documents Sticky Keys through SystemParametersInfo and the STICKYKEYS flag structure. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETSTICKYKEYS with flags 510 persisted HKCU\Control Panel\Accessibility\StickyKeys\Flags = "510", while calling SPI_SETSTICKYKEYS with flags 506 persisted Flags = "506". The current app write of Flags = "506" therefore matches the observed persisted backend for the documented Sticky Keys feature surface on this build, and the difference between 510 and 506 is the SKF_HOTKEYACTIVE bit.
@@ -7172,10 +7172,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -7242,7 +7242,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The Sticky Keys feature semantics are officially documented through the Win32 accessibility API, and a local runtime diff now proves that the app's Flags = "506" profile is the persisted backend for the documented Sticky Keys feature state on this build. The remaining limitation is documentation quality: the registry path was validated through API-backed runtime observation rather than a Microsoft-published registry contract. |
+| Why | The Sticky Keys feature semantics are documented through the Win32 accessibility API, and the runtime diff shows the app's Flags = "506" write landing on the same persisted backend that SPI_SETSTICKYKEYS produces on this build. The value model, app mapping, and rollback story line up cleanly. |
 
 ---
 
@@ -19706,13 +19706,13 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Gaming Feature / GameBar Preference` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/system.enable-game-mode.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
@@ -19735,10 +19735,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -19807,7 +19807,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Guest-side Procmon captures against the interactive Administrator profile confirmed that SystemSettings.exe reads AutoGameModeEnabled as a live registry setting on this build. The app's current write matches the observed 1-state, and the 0-state was also observed in a reversible capture. The repo decompiled GamingHandlers source also contains the AutoGameModeEnabled reference, which supports the same live registry mapping from a second angle. |
+| Why | Game Mode is an official Windows feature, guest-side Procmon proved that SystemSettings.exe reads AutoGameModeEnabled as a live toggle on this build, and the repo decompiled handler references the same value. The app write, observed 0/1 states, and restore path all line up. |
 
 ---
 

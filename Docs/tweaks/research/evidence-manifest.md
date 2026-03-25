@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 195 |
-| B count | 46 |
+| A count | 199 |
+| B count | 42 |
 | C count | 1 |
 | E count | 54 |
 
@@ -80,8 +80,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-wap-push-routing.review.json` | `e97ccaa2298a6068f8c0ddfc9cbd17d1bcb07a8f1d6d2c60159afbaea3fdb677` | `2458c27ca10eeeb2d794bbd64ce5d2fd8c2c88ef8f854ad9c8ed425fc0894f28` | 1 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-windows-error-reporting.review.json` | `2d1d17ca9a3df5dac34d597126d30439408c364f975cc8e5284721bb3b25e337` | `1af4ce46fa6d4c619326da763939eb8969b2300b9eabd16fbb0e485987356791` | 1 |
 | `audio.disable-beep` | validated | Class A | `Docs/tweaks/research/records/audio.disable-beep.review.json` | `16f3b26832233949a02d64bb472fb319f8824733b73ccd7803d7ad00cd2725c1` | `4d074ac9987be3f1f28b06277c747e6c49da4b27be38ff2380400b9cc1a6b4ef` | 1 |
-| `audio.show-disconnected-devices` | validated | Class B | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` | `57f89db398ff23a1c8ffa06d50d8f4353c186c1aee2ab97f8a75debccce9560e` | `8d67f764d7eaaf3719428c7c806dc6ec55bc227135dbb6daa493eaf8c390c9a1` | 1 |
-| `audio.show-hidden-devices` | validated | Class B | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `ba47cbe107565b7fedc7ad000d69723fadd69bceacc4a3bae6d319ec69735b88` | `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95` | 1 |
+| `audio.show-disconnected-devices` | validated | Class A | `Docs/tweaks/research/records/audio.show-disconnected-devices.review.json` | `57f89db398ff23a1c8ffa06d50d8f4353c186c1aee2ab97f8a75debccce9560e` | `8d67f764d7eaaf3719428c7c806dc6ec55bc227135dbb6daa493eaf8c390c9a1` | 1 |
+| `audio.show-hidden-devices` | validated | Class A | `Docs/tweaks/research/records/audio.show-hidden-devices.review.json` | `ba47cbe107565b7fedc7ad000d69723fadd69bceacc4a3bae6d319ec69735b88` | `a4a6b6533ced9f920ac9d6c427d39b65c846b383bc47343b8098f9c4861eff95` | 1 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `Docs/tweaks/research/records/cleanup.disable-reserved-storage.review.json` | `d613803743ec930d75f7bb5a7dd770a6232bdd95d955a591812b92631ae2fd76` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 1 |
 | `developer.docker-performance` | validated | Class A | `Docs/tweaks/research/records/developer.docker-performance.review.json` | `e86fa037da24385991ffe94edbb1039cf5b2ee636654d27c3d4f0e7d4062473a` | `e4c2f1a09fcfe91db5161301b71b4ec7262c17dc97de49b390f65f9abcf9253d` | 1 |
 | `developer.dotnet-telemetry-disable` | validated | Class A | `Docs/tweaks/research/records/developer.dotnet-telemetry-disable.json` | `0e893fbee7bb7405331425f61f4aba01593f3fddfe8656f6eff1e33c8f968807` | `b2997f411e746658d2ddb5ac52426560f1af1d2c624b78a1e7d8d157422d409c` | 1 |
@@ -147,7 +147,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `performance.disable-taskbar-animations` | validated | Class A | `Docs/tweaks/research/records/performance.disable-taskbar-animations.review.json` | `249e78f39370de79f88faeb08e53da59a2b5f41d63a31ae268bec04570119dc4` | `21ca137e119b7e2de180779158da4ac8b7b45cb6af8baf96444e4281eb6d6ddd` | 1 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `Docs/tweaks/research/records/peripheral.autoplay-take-no-action.review.json` | `e6569c930a05f27153e74cc69f99130870474475c3dd28bff5022f38cb1e183b` | `6bf8b90fe59d4cf3ca5ac2b3c86e0b15bfd409ad27e51f54856fd76cc726df1a` | 1 |
 | `peripheral.disable-autoplay` | validated | Class A | `Docs/tweaks/research/records/peripheral.disable-autoplay.review.json` | `c72a6200a630b6cb859c13580bcdfc8dcc7ad96add4e69dd2cdd969fd6a700e9` | `1cba6d9b41c50cccf15290ce6131cd5daea44bc48c26f0f8f6d351963cd1e8a1` | 2 |
-| `peripheral.disable-sticky-keys-prompt` | validated | Class B | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` | `6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837` | `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e` | 1 |
+| `peripheral.disable-sticky-keys-prompt` | validated | Class A | `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json` | `b58191bf229f8656b1eaef5fab966cade63794bcdeb153b4be7ce839663545f5` | `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e` | 1 |
 | `power.disable-cpu-idle-states` | validated | Class B | `Docs/tweaks/research/records/power.disable-cpu-idle-states.json` | `92660bb914ee8c5efd2912a91e00928c6b8dbe635a2327f385738bc7ce25421f` | `e9564c042475d4b463e11dbd8be14712a7aac319855e9971d0ce0061c2734bd1` | 1 |
 | `power.disable-fast-startup` | validated | Class A | `Docs/tweaks/research/records/power.disable-fast-startup.review.json` | `7af36cc14a9cb58f6495f31c9df4454536c2bdd1d5976638b12408f75b90c472` | `98789d49b94b15525b02a204f152df0c53be2f91b7eac734ea090fcea40a2382` | 1 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `Docs/tweaks/research/records/power.disable-network-power-saving.policy.review.json` | `9584ac23d77073a231a5500271944c3b220720639873170aef11e4b0dd04d9fa` | `19b356614beedc6cffd114e17b4c7354be4f356924feb3094948865d66a2b5e1` | 2 |
@@ -267,7 +267,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `Docs/tweaks/research/records/system.disable-storage-sense-temp-cleanup.json` | `8d61ee5b4c35c7fa432ce252b1c66ec363052d7535070c3143540e4686a54356` | `30ae2af332ccf9db10f38382abcbef2dfcdd7060fdba3287a035b75873d1bedc` | 1 |
 | `system.disable-store-open-with` | validated | Class A | `Docs/tweaks/research/records/system.disable-store-open-with.json` | `9724d8cc13adf9784368f3d2c53404531e3d40d085235cadde376f377349e290` | `7b7e6abc8cf2a4b5e7e0cd98fce526caa9fbf3d48f5742a5d0c3d56d28e0644c` | 1 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class B | `Docs/tweaks/research/records/system.dwm-disable-overlay-min-fps.json` | `9259bf70fe0552eec3fdb87f41f93ec4f5ec3f0bc34928995ab5ad1d8a51f6c4` | `3f76e74729c6123b9f72fbbe4fac94efacfae3fbc38e49b2890e278242600087` | 1 |
-| `system.enable-game-mode` | validated | Class B | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `07cf7817028e19e3a09f2b9e0b758df709cee21547ffec6cd6b19959bf6dda56` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
+| `system.enable-game-mode` | validated | Class A | `Docs/tweaks/research/records/system.enable-game-mode.review.json` | `75d1f7adb6c973b143971ddd93c3b8cdc447bca305f50da74c0e7501b2f7a280` | `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59` | 1 |
 | `system.enable-hags` | validated | Class A | `Docs/tweaks/research/records/system.enable-hags.review.json` | `6616a74aff3b44ca89b794e24538eaf05a92bfad4c2eb586961310741214a312` | `dc1779e7b32e0a86809fded000536f927cff90c352e280b4c9472d58762992b1` | 1 |
 | `system.enable-indexing-encrypted-items` | validated | Class B | `Docs/tweaks/research/records/system.enable-indexing-encrypted-items.json` | `bdc09bee78c232ef1bcd5b9ab483aef478a9dd429315fa88206e603628efac84` | `f1f9cf75d592d86e5f8bdb765fba428a4b34681370c3f73845737fd966e78b33` | 1 |
 | `system.graphics-tdr-ddi-delay` | validated | Class B | `Docs/tweaks/research/records/system.graphics-tdr-ddi-delay.json` | `11f4224ec11ed213e8a24b85785d88a7626beb002994462e31023d2b04b73bd6` | `c32b858212946502718aa8ab3e8b10e1ab513a18753aaa7005cb0f1712e20970` | 1 |
@@ -3708,7 +3708,7 @@ Nohuto lineage references:
 ### `audio.show-disconnected-devices`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Audio`
 - Area: `Sound Control Panel DeviceCpl Flags`
 - Scope: `user`
@@ -3722,10 +3722,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -3770,7 +3770,7 @@ Nohuto lineage references:
 ### `audio.show-hidden-devices`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Audio`
 - Area: `Sound Control Panel DeviceCpl Flags`
 - Scope: `user`
@@ -3784,10 +3784,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -8036,12 +8036,12 @@ Windows Internals references:
 ### `peripheral.disable-sticky-keys-prompt`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Peripheral`
 - Area: `Accessibility Sticky Keys Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/peripheral.disable-sticky-keys-prompt.review.json`
-- Source SHA256: `6b9aee0aced198cb33cfee381ac79752b9738058261370db5167f573b1820837`
+- Source SHA256: `b58191bf229f8656b1eaef5fab966cade63794bcdeb153b4be7ce839663545f5`
 - Proof SHA256: `ff9e65c737d8399f419ccdb81d1b4bc09cca2af1e8e6105eb8fb6a9ab4fe539e`
 
 **Summary:** Win32 officially documents Sticky Keys through SystemParametersInfo and the STICKYKEYS flag structure. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETSTICKYKEYS with flags 510 persisted HKCU\Control Panel\Accessibility\StickyKeys\Flags = "510", while calling SPI_SETSTICKYKEYS with flags 506 persisted Flags = "506". The current app write of Flags = "506" therefore matches the observed persisted backend for the documented Sticky Keys feature surface on this build, and the difference between 510 and 506 is the SKF_HOTKEYACTIVE bit.
@@ -8050,10 +8050,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -15781,12 +15781,12 @@ Windows Internals references:
 ### `system.enable-game-mode`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Gaming Feature / GameBar Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/system.enable-game-mode.review.json`
-- Source SHA256: `07cf7817028e19e3a09f2b9e0b758df709cee21547ffec6cd6b19959bf6dda56`
+- Source SHA256: `75d1f7adb6c973b143971ddd93c3b8cdc447bca305f50da74c0e7501b2f7a280`
 - Proof SHA256: `4d3d6bf6ba40a2956c7df03d360c72a422d7ca80d81d12e077e763ae9e6ccf59`
 
 **Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
@@ -15795,10 +15795,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 

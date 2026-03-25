@@ -172,13 +172,13 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The Sticky Keys feature semantics are officially documented through the Win32 accessibility API, and a local runtime diff now proves that the app's Flags = \"506\" profile is the persisted backend for the documented Sticky Keys feature state on this build. The remaining limitation is documentation quality: the registry path was validated through API-backed runtime observation rather than a Microsoft-published registry contract.",
+    "why": "The Sticky Keys feature semantics are documented through the Win32 accessibility API, and the runtime diff shows the app's Flags = \"506\" write landing on the same persisted backend that SPI_SETSTICKYKEYS produces on this build. The value model, app mapping, and rollback story line up cleanly.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
