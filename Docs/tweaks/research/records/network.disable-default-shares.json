@@ -278,15 +278,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft directly documents AutoShareServer and AutoShareWks under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters and explains that setting them to 0 stops automatic creation of administrative shares while missing values keep the default automatic behavior. The app writes those exact documented values on the documented path.",
+    "why": "Microsoft directly documents AutoShareServer and AutoShareWks under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters and explains that setting them to 0 stops automatic creation of administrative shares while missing values keep the default automatic behavior. The app writes those exact documented values on the same documented path, with no unresolved control-surface mismatch.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T02:35:36.4214570+03:00",
+  "last_reviewed_utc": "2026-03-25T09:35:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/remove-administrative-shares",
     "exact_quote_or_path": "`HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareServer` ... `0`; `AutoShareWks`; `If the AutoShareServer (server) or AutoShareWks (workstation) registry entry is set to 0, Windows won't automatically create administrative shares.`",

@@ -173,15 +173,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents Bluetooth User Support Service `(BluetoothUserService)` with a Manual default start mode, marks it `OK to disable`, and states that it supports Bluetooth features relevant to each user session. The app disables instantiated `BluetoothUserService_*` services, which is how the per-user service family appears in practice.",
+    "why": "Microsoft documents Bluetooth User Support Service `(BluetoothUserService)` with a Manual default start mode, marks it `OK to disable`, and states that it supports Bluetooth features relevant to each user session. The app disables instantiated `BluetoothUserService_*` services, which is how the per-user service family appears in practice, so the runtime surface still matches the documented family cleanly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T01:25:00Z",
+  "last_reviewed_utc": "2026-03-25T09:35:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
     "exact_quote_or_path": "Bluetooth User Support Service (BluetoothUserService) | Manual | OK to disable | Supports proper functionality of Bluetooth features relevant to each user session.",

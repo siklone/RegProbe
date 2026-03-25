@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 182 |
-| B count | 59 |
+| A count | 188 |
+| B count | 53 |
 | C count | 1 |
 | E count | 54 |
 
@@ -110,7 +110,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `explorer.show-type-overlay` | validated | Class A | `Docs/tweaks/research/records/explorer.show-type-overlay.review.json` | `cfc0557b84bf4e97fe2aba9cc09ad19a8861d3a1c7e112ec25ac05e45367df7a` | `bfd4abf5647740260091b9ff1e1243f35f3b45c479a1bafff7f7e79ba8e066c2` | 1 |
 | `explorer.taskbar-alignment-left` | validated | Class A | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
 | `network.disable-active-probing` | validated | Class A | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0` | 1 |
-| `network.disable-default-shares` | validated | Class B | `Docs/tweaks/research/records/network.disable-default-shares.json` | `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
+| `network.disable-default-shares` | validated | Class B | `Docs/tweaks/research/records/network.disable-default-shares.json` | `5940e2ab95a1f622a7bb367cc863648e9612c2e2b261e0a5ed7748fe5ffd37da` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
 | `network.disable-ipv6` | validated | Class B | `Docs/tweaks/research/records/network.disable-ipv6.json` | `024c6f3d596e053e312ee3444561fa5647441f688703fabb36829995c58b1597` | `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa` | 1 |
 | `network.disable-llmnr` | validated | Class A | `Docs/tweaks/research/records/network.disable-llmnr.json` | `d5e97ff812fede46d53962ab8f26bdd0e04d33fe303dd25dabada41ecb8b808c` | `eed09962b64570b68d966d4d13cb149e60d9ac1b4b65b1159d77e3994570e5ff` | 1 |
 | `network.disable-lltd` | validated | Class A | `Docs/tweaks/research/records/network.disable-lltd.review.json` | `147a50cc0134ab85f1f14d21691d23fce788b4c5799540cea3c6d6b0023144b9` | `95621d902169844295e40dc7f4043671933f41cfbbad706d915315fae84b8121` | 2 |
@@ -240,7 +240,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.disable-wu-driver-updates` | validated | Class B | `Docs/tweaks/research/records/security.disable-wu-driver-updates.json` | `488a5f5680947b908ba0ba69742a588b0d33a7654cf4d2a1975afac13fa061b8` | `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa` | 3 |
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json` | `483e9052385085d3120be737683655ec5cfc22ae224f682a1753781ad0630cbe` | `42cc4c40a3161dc76cf3730b1397c4402aa66ae5e625a4ff85962df616ee1324` | 1 |
 | `security.enable-dynamic-lock` | validated | Class A | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `ed4ac310ae9d2b5e6e3d53e642cbcd4ab7700097aa1981b8ede4089a23f9854e` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
-| `security.enable-sudo` | validated | Class B | `Docs/tweaks/research/records/security.enable-sudo.json` | `8934276844f480262072241c97802a305ecc1a5de0eba9ac3b6db811a0594dca` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
+| `security.enable-sudo` | validated | Class A | `Docs/tweaks/research/records/security.enable-sudo.json` | `8934276844f480262072241c97802a305ecc1a5de0eba9ac3b6db811a0594dca` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `Docs/tweaks/research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `3c0fe2ac6864177e93deda81796003cbf094fe6b07d66c4025eb0195d26cf67e` | `f05cc3dd3b2a9c8faaf40bd9146bc79ac49137969986ef329482009de6113891` | 1 |
 | `security.powershell-unrestricted` | validated | Class B | `Docs/tweaks/research/records/security.powershell-unrestricted.review.json` | `2385714f4913280f00d781e51130de814a55d21729524bf341142dc28254b719` | `0b7945e7db287a5aad3504c3e5b0578422a3fdfe50bde960718bed35301f2983` | 2 |
 | `security.threat-file-hash-logging` | validated | Class C | `Docs/tweaks/research/records/security.threat-file-hash-logging.review.json` | `e672685d4a0d8528ebcfec63e75faf64b3afbc369cd82bb1a8dd27ac34c894d8` | `3266b440e3fb8d682c704068ed9f36194d9189613eee04bd6a51f2ceb948c474` | 3 |
@@ -289,12 +289,12 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
 | `system.priority-control` | validated | Class B | `Docs/tweaks/research/records/system.priority-control.review.json` | `65338290ddc475e60627d497c34c6f508e7920c8b14730a6324ab1a5ebec71e9` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
 | `system.reliability-timestamp-enabled` | validated | Class B | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
-| `system.services.disable-bluetooth-audio-gateway` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `a717e644a5b130e10935d806be394efbb25af18fa918495d4b3887d967467a49` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
-| `system.services.disable-bluetooth-support` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `596535c584273df8990c903759f417326e537acacfe61328e562415c7118c72b` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
-| `system.services.disable-bluetooth-user-service` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` | `0dbc2e23199be2975ec038e31ccb35313500be6a9c1284230346332a7617adcd` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 1 |
-| `system.services.disable-connected-user-experiences` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-connected-user-experiences.json` | `80d322981d626d370d5eb5811e17aad443a6e71b7d5a27347a6ebd9b74b1ee7d` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 1 |
-| `system.services.disable-print-notifications` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-notifications.json` | `0df2ed45f129e592b93fc342f4547b53d961a468c8a1e710997e00c5c06cbd8c` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 1 |
-| `system.services.disable-print-spooler` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-spooler.json` | `62613c480244eb2cd56c4a2e791ea96f307785459fdab8e2523d7b3f5ec62b07` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 1 |
+| `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `a717e644a5b130e10935d806be394efbb25af18fa918495d4b3887d967467a49` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
+| `system.services.disable-bluetooth-support` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `596535c584273df8990c903759f417326e537acacfe61328e562415c7118c72b` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
+| `system.services.disable-bluetooth-user-service` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json` | `1f4928052969e373c8b7c33441c6842890a6aff596d37a6f0f3dfb5d3ff248a8` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 1 |
+| `system.services.disable-connected-user-experiences` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-connected-user-experiences.json` | `80d322981d626d370d5eb5811e17aad443a6e71b7d5a27347a6ebd9b74b1ee7d` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 1 |
+| `system.services.disable-print-notifications` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-print-notifications.json` | `0df2ed45f129e592b93fc342f4547b53d961a468c8a1e710997e00c5c06cbd8c` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 1 |
+| `system.services.disable-print-spooler` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-print-spooler.json` | `62613c480244eb2cd56c4a2e791ea96f307785459fdab8e2523d7b3f5ec62b07` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 1 |
 | `system.services.disable-windows-search` | validated | Class A | `Docs/tweaks/research/records/system.services.disable-windows-search.json` | `8bd73f2ec96d568427c280bd93d614655be574bb3e2d5235ef6b63c9a00d964d` | `7a939516d8b00a24b308632a8c4618acc5fd292fab45e9544a98c56f98788b37` | 1 |
 | `system.verbose-status-messages` | validated | Class A | `Docs/tweaks/research/records/system.verbose-status-messages.json` | `444ecd213fb9c2bfe7a5770044a45ae4529404c9bb2e99302f3920560f8f9d3b` | `95d2e2d70159d0ddc6500d9a88c2420cc76d133e09b5ee7920891d07a3cc92ef` | 1 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `Docs/tweaks/research/records/system.wait-to-kill-service-timeout.review.json` | `a8e87c037e80fc40870b52c0f13f0eb57793cce6d9db688d101730fcd04bd765` | `75468f86e93fb6828a772007cfc2c8e7eff43a4f9938026224ae83e5b11a88a8` | 1 |
@@ -5557,7 +5557,7 @@ Windows Internals references:
 - Area: `Registry Configuration`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/network.disable-default-shares.json`
-- Source SHA256: `78679c8a898a7cf256271a5197cebd8b418e2ee9ce43e4f1ca572c945d4bb767`
+- Source SHA256: `5940e2ab95a1f622a7bb367cc863648e9612c2e2b261e0a5ed7748fe5ffd37da`
 - Proof SHA256: `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Controls the AutoShareServer and AutoShareWks values under LanmanServer. Disabling automatic administrative shares can reduce remote administration exposure, but it can also break workflows and tools that expect the built-in shares to exist.
@@ -13978,7 +13978,7 @@ Windows Internals references:
 ### `security.enable-sudo`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Security`
 - Area: `Registry Policy`
 - Scope: `device`
@@ -13992,10 +13992,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -17228,7 +17228,7 @@ Windows Internals references:
 ### `system.services.disable-bluetooth-audio-gateway`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -17242,10 +17242,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -17290,7 +17290,7 @@ Windows Internals references:
 ### `system.services.disable-bluetooth-support`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -17304,10 +17304,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -17357,7 +17357,7 @@ Windows Internals references:
 - Area: `Service Start Mode`
 - Scope: `user-session`
 - Source file: `Docs/tweaks/research/records/system.services.disable-bluetooth-user-service.json`
-- Source SHA256: `0dbc2e23199be2975ec038e31ccb35313500be6a9c1284230346332a7617adcd`
+- Source SHA256: `1f4928052969e373c8b7c33441c6842890a6aff596d37a6f0f3dfb5d3ff248a8`
 - Proof SHA256: `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64`
 
 **Summary:** Official Windows service-family control for Bluetooth User Support Service. Microsoft documents the base service family, default start mode, and says it is OK to disable. The app disables instantiated per-user BluetoothUserService services through a wildcard service pattern.
@@ -17415,7 +17415,7 @@ Windows Internals references:
 ### `system.services.disable-connected-user-experiences`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -17429,10 +17429,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -17477,7 +17477,7 @@ Windows Internals references:
 ### `system.services.disable-print-notifications`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -17491,10 +17491,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -17539,7 +17539,7 @@ Windows Internals references:
 ### `system.services.disable-print-spooler`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Service Start Mode`
 - Scope: `device`
@@ -17553,10 +17553,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
