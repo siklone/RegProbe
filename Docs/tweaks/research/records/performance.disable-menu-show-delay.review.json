@@ -157,13 +157,13 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The menu-delay feature semantics are officially documented through the Win32 API, and a local runtime diff now proves that MenuShowDelay is the persisted backend for the tested delayed and zero-delay states on this build. The remaining limitation is documentation quality: MenuShowDelay was validated through API-backed runtime observation rather than a Microsoft-published registry contract.",
+    "why": "The menu-delay feature semantics are officially documented through the Win32 API, and the runtime diff proves that MenuShowDelay is the persisted backend for the tested delayed and zero-delay states on this build. The app writes the same zero-delay state and supports restoring the previous value.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",

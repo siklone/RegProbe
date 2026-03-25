@@ -142,8 +142,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `notifications.disable-mirroring` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-mirroring.json` | `12048a71562be16820123e75c0d715331bba471370286cfa56f8aa4e2dea5d48` | `e839a3b288ca983fd2356198ef6177a12f17692a8e9242e5c03faff485ee8267` | 1 |
 | `notifications.disable-tile` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-tile.json` | `f0dc5dce3c141a010807410d08462ae0ae5054eb67236a25e1f4b3d2222f5201` | `4eadf1fc0c0e7cb833e44cb784acfe7224407c3eed9c58f213a233b80a379700` | 1 |
 | `notifications.disable-toast` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-toast.json` | `f34932c9eefe4f9474bc39b38dfabefca69ccc07ca11033d4a77395f228e8844` | `c838efd9cac161fc6219e64cce19d02953984124d758641d844f84d13fb6b96a` | 1 |
-| `performance.disable-animations` | validated | Class B | `Docs/tweaks/research/records/performance.disable-animations.review.json` | `066c630d5f833dce8fc641418136f15ca0e53613c4ca4d973467aed16239bf97` | `b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2` | 1 |
-| `performance.disable-menu-show-delay` | validated | Class B | `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json` | `af6766e751f23939a57100cf1bce63e6f9f2a512620348f23ffb46adcae36930` | `2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3` | 1 |
+| `performance.disable-animations` | validated | Class B | `Docs/tweaks/research/records/performance.disable-animations.review.json` | `7f7445d70c207f25d9374d38c32ba7bdd5c0104cb7775ebbbfc4c7a8fdb583ef` | `b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2` | 1 |
+| `performance.disable-menu-show-delay` | validated | Class B | `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json` | `fc101c84f6d68dabee427c80c4aa30048f11f21924713c132d19c2f6971ee503` | `2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3` | 1 |
 | `performance.disable-taskbar-animations` | validated | Class A | `Docs/tweaks/research/records/performance.disable-taskbar-animations.review.json` | `249e78f39370de79f88faeb08e53da59a2b5f41d63a31ae268bec04570119dc4` | `21ca137e119b7e2de180779158da4ac8b7b45cb6af8baf96444e4281eb6d6ddd` | 1 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `Docs/tweaks/research/records/peripheral.autoplay-take-no-action.review.json` | `e6569c930a05f27153e74cc69f99130870474475c3dd28bff5022f38cb1e183b` | `6bf8b90fe59d4cf3ca5ac2b3c86e0b15bfd409ad27e51f54856fd76cc726df1a` | 1 |
 | `peripheral.disable-autoplay` | validated | Class A | `Docs/tweaks/research/records/peripheral.disable-autoplay.review.json` | `c72a6200a630b6cb859c13580bcdfc8dcc7ad96add4e69dd2cdd969fd6a700e9` | `1cba6d9b41c50cccf15290ce6131cd5daea44bc48c26f0f8f6d351963cd1e8a1` | 2 |
@@ -7702,7 +7702,7 @@ Nohuto lineage references:
 - Area: `Win32 Animation Effects`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/performance.disable-animations.review.json`
-- Source SHA256: `066c630d5f833dce8fc641418136f15ca0e53613c4ca4d973467aed16239bf97`
+- Source SHA256: `7f7445d70c207f25d9374d38c32ba7bdd5c0104cb7775ebbbfc4c7a8fdb583ef`
 - Proof SHA256: `b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2`
 
 **Summary:** Microsoft documents window animation behavior through SystemParametersInfo(SPI_GETANIMATION / SPI_SETANIMATION) and ANIMATIONINFO.iMinAnimate. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETANIMATION with animations enabled persisted HKCU\Control Panel\Desktop\WindowMetrics\MinAnimate = "1", while calling SPI_SETANIMATION with animations disabled persisted MinAnimate = "0". The current app write of MinAnimate = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
@@ -7769,7 +7769,7 @@ Windows Internals references:
 - Area: `Win32 Menu Timing`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json`
-- Source SHA256: `af6766e751f23939a57100cf1bce63e6f9f2a512620348f23ffb46adcae36930`
+- Source SHA256: `fc101c84f6d68dabee427c80c4aa30048f11f21924713c132d19c2f6971ee503`
 - Proof SHA256: `2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3`
 
 **Summary:** Microsoft documents menu show delay through SystemParametersInfo with SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETMENUSHOWDELAY with 400 persisted HKCU\Control Panel\Desktop\MenuShowDelay = "400", while calling SPI_SETMENUSHOWDELAY with 0 persisted MenuShowDelay = "0". The current app write of MenuShowDelay = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
