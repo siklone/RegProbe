@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-25T07:19:13.789765Z",
+  "generated_utc": "2026-03-25T07:54:40.299470Z",
   "summary": {
-    "total_records": 295,
+    "total_records": 296,
     "class_counts": {
-      "A": 174,
+      "A": 175,
       "B": 66,
       "C": 1,
-      "D": 2,
-      "E": 52
+      "D": 1,
+      "E": 53
     },
     "action_state_counts": {
-      "actionable": 174,
-      "archived": 52,
-      "research-gated": 69
+      "actionable": 175,
+      "archived": 53,
+      "research-gated": 68
     }
   },
   "classes": {
@@ -1797,10 +1797,31 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / peripheral/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / power/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {
@@ -2395,10 +2416,31 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / peripheral/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / power/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {
@@ -2456,10 +2498,31 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / misc/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/misc/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / cleanup/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 1 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / peripheral/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/peripheral/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 1 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {
@@ -10358,10 +10421,31 @@
         "links": []
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / privacy/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 3 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / system/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / privacy/assets/locationaccess-LocationApi.c",
+            "url": "https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c",
+            "kind": "nohuto",
+            "summary": "Matched 1 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {
@@ -11287,10 +11371,31 @@
         "links": []
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / privacy/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / system/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / visibility/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/visibility/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {
@@ -12688,10 +12793,32 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "win-registry"
+        ],
+        "links": [
+          {
+            "title": "win-config / security/assets/Windows-Defender.txt",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt",
+            "kind": "nohuto",
+            "summary": "Matched 3 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / security/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-registry / records/Windows-Defender.txt",
+            "url": "https://github.com/nohuto/win-registry/blob/main/records/Windows-Defender.txt",
+            "kind": "nohuto",
+            "summary": "Matched 3 audit token(s) in win-registry."
+          }
+        ]
       }
     },
     {
@@ -12836,10 +12963,31 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / system/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 6 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / security/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 4 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / privacy/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 5 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {
@@ -13855,10 +14003,31 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / security/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / security/assets/Windows-Defender.txt",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / privacy/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {
@@ -13919,17 +14088,17 @@
             "title": "win-config / security/desc.md",
             "url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
             "kind": "nohuto",
-            "summary": "Matched 2 audit token(s) in win-config."
+            "summary": "Matched 3 audit token(s) in win-config."
           },
           {
-            "title": "win-config / privacy/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+            "title": "win-config / security/assets/Windows-Defender.txt",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt",
             "kind": "nohuto",
             "summary": "Matched 1 audit token(s) in win-config."
           },
           {
-            "title": "win-config / visibility/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/visibility/desc.md",
+            "title": "win-config / affinities/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/affinities/desc.md",
             "kind": "nohuto",
             "summary": "Matched 1 audit token(s) in win-config."
           }
@@ -14078,10 +14247,32 @@
         ]
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "win-registry"
+        ],
+        "links": [
+          {
+            "title": "win-config / security/assets/Windows-Defender.txt",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt",
+            "kind": "nohuto",
+            "summary": "Matched 3 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / security/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-registry / records/Windows-Defender.txt",
+            "url": "https://github.com/nohuto/win-registry/blob/main/records/Windows-Defender.txt",
+            "kind": "nohuto",
+            "summary": "Matched 3 audit token(s) in win-registry."
+          }
+        ]
       }
     },
     {
@@ -18852,21 +19043,21 @@
     {
       "record_id": "system.reduce-shutdown-timeouts",
       "tweak_id": "system.reduce-shutdown-timeouts",
-      "record_status": "validated",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
-      "show_in_app": true,
+      "record_status": "deprecated",
+      "evidence_class": "E",
+      "class_label": "Class E",
+      "class_title": "Archived / Audit Trail",
+      "class_description": "Deprecated, blocked, or historical audit-trail record. Keep it in research, not in the normal tweak surface.",
+      "show_in_app": false,
       "is_actionable": false,
-      "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "is_archived": true,
+      "action_state": "archived",
+      "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
       "confidence": "medium",
-      "app_mapping_status": "matches-research",
+      "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The proof bundle combines the documented service timeout path, the Restart Manager shutdown timeout guidance, and Microsoft Q&A examples for the user-side shutdown registry values.",
+        "summary": "Historical proof bundle for the retired mixed shutdown tweak.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -18874,7 +19065,7 @@
             "title": "Validation proof source",
             "url": "Docs/tweaks/research/notes/reduce-shutdown-timeouts-proof.md",
             "kind": "validation-proof",
-            "summary": "WaitToKillServiceTimeout=2500; WaitToKillAppTimeout=2500; HungAppTimeout=1500; AutoEndTasks=1"
+            "summary": "Historical mixed bundle: WaitToKillServiceTimeout=2500; WaitToKillAppTimeout=2500; HungAppTimeout=1500; AutoEndTasks=1"
           },
           {
             "title": "Microsoft Learn: SystemParametersInfoW function",
@@ -18897,33 +19088,10 @@
         "links": []
       },
       "upstream_lineage": {
-        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-        "has_nohuto_lineage": true,
-        "source_repositories": [
-          "win-config",
-          "win-registry",
-          "decompiled-pseudocode"
-        ],
-        "links": [
-          {
-            "title": "win-config / system/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 9 audit token(s) in win-config."
-          },
-          {
-            "title": "win-registry / README.md",
-            "url": "https://github.com/nohuto/win-registry/blob/main/README.md",
-            "kind": "nohuto",
-            "summary": "Matched 5 audit token(s) in win-registry."
-          },
-          {
-            "title": "win-config / power/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/power/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 4 audit token(s) in win-config."
-          }
-        ]
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {
@@ -18974,10 +19142,32 @@
         "links": []
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "win-config / system/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / system/assets/services.txt",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/assets/services.txt",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / system/assets/timestamp-OsEventsTimestampInterval.c",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/assets/timestamp-OsEventsTimestampInterval.c",
+            "kind": "nohuto",
+            "summary": "Matched 2 audit token(s) in win-config."
+          }
+        ]
       }
     },
     {
@@ -19962,6 +20152,83 @@
             "url": "https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c",
             "kind": "nohuto",
             "summary": "Matched 1 audit token(s) in win-config."
+          }
+        ]
+      }
+    },
+    {
+      "record_id": "system.wait-to-kill-service-timeout",
+      "tweak_id": "system.wait-to-kill-service-timeout",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "App Ready",
+      "class_description": "Key exists, app-exposed values have trusted meanings, validation proof is present, the app mapping matches research, and the restore/default story is known.",
+      "show_in_app": true,
+      "is_actionable": true,
+      "is_archived": false,
+      "action_state": "actionable",
+      "gating_reason": "This record is app-ready and can stay one-click actionable.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The reversible VM probe confirmed the current baseline, the app write, and a clean restore.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "H:\\Temp\\vm-tooling-staging\\wait-to-kill-service-timeout-probe-20260325-103117\\wait-to-kill-service-timeout-probe.txt",
+            "kind": "validation-proof",
+            "summary": "ORIGINAL={\"path_exists\":true,\"value_exists\":true,\"value\":\"5000\"}; AFTER={\"path_exists\":true,\"value_exists\":true,\"value\":\"2500\"}; RESTORED={\"path_exists\":true,\"value_exists\":true..."
+          },
+          {
+            "title": "Microsoft Learn: Service Control Handler Function",
+            "url": "https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function",
+            "kind": "official-doc",
+            "summary": "Microsoft documents HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout as the service shutdown timeout used during operating system restart and says services should..."
+          },
+          {
+            "title": "Repo shutdown timing notes",
+            "url": "Docs/system/system.md",
+            "kind": "repo-doc",
+            "summary": "The repo notes show WaitToKillServiceTimeout = 2500 for the old tweak bundle and record a current baseline of 5000 in the same section."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The VM probe captured ORIGINAL=5000, AFTER=2500, and RESTORED=5000 for HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean reversible probe for WaitToKillServiceTimeout",
+            "url": "H:\\Temp\\vm-tooling-staging\\wait-to-kill-service-timeout-probe-20260325-103117\\wait-to-kill-service-timeout-probe.txt",
+            "kind": "runtime-diff",
+            "summary": "The VM probe captured ORIGINAL=5000, AFTER=2500, and RESTORED=5000 for HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "win-config / system/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 1 audit token(s) in win-config."
+          },
+          {
+            "title": "decompiled-pseudocode / mmcss",
+            "url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+            "kind": "nohuto",
+            "summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
           }
         ]
       }

@@ -1160,24 +1160,47 @@ Storage Sense deletes temporary files automatically - revert it by changing it b
 },
 ```
 
-# Reduce Shutdown Time
+### <a id="system.wait-to-kill-service-timeout"></a> Reduce Service Shutdown Timeout
 
-Requires elevation: No.
+Requires elevation: Yes.
 
-Forces hung apps and services to terminate faster.
+This is now the documented part of the old shutdown-timeout bundle.
 
 ```
 \Registry\Machine\SYSTEM\ControlSet001\Control : WaitToKillServiceTimeout
+```
+
+Current app value:
+
+- `WaitToKillServiceTimeout` -> `2500`
+
+Observed Win25H2Clean baseline:
+
+- `WaitToKillServiceTimeout` -> `5000`
+
+This shortens the service cleanup window during shutdown. It can help if one service is blocking exit, but it also gives services less time to stop cleanly.
+
+### <a id="system.reduce-shutdown-timeouts"></a> Historical Mixed Shutdown Timeout Bundle
+
+The older bundle mixed these current-user values together:
+
+```
 \Registry\User\S-ID\Control Panel\Desktop : WaitToKillTimeout
 \Registry\User\S-ID\Control Panel\Desktop : HungAppTimeout
 \Registry\User\S-ID\Control Panel\Desktop : AutoEndTasks
 ```
-`HungAppTimeout`-> `1500` (`1.5` sec; default is `5` sec)
-`WaitToKillTimeout`-> `2500` (`2.5` sec)
-`WaitToKillServiceTimeout`-> `2500` (`2.5` sec; default is `5` sec)
-`WaitToKillAppTimeout` seems to not be used anymore (would have a default of `20000` (`20` sec))
 
-More timeout related values located in `HKCU\Control Panel\Desktop`: `CriticalAppShutdownCleanupTimeout`, `CriticalAppShutdownTimeout`, `QuickResolverTimeout`, `ActiveWndTrkTimeout`, `CaretTimeout`, `ForegroundLockTimeout`, `LowLevelHooksTimeout`. I may add information about some of them soon.
+Historical app values:
+
+- `HungAppTimeout` -> `1500`
+- `WaitToKillTimeout` -> `2500`
+- `AutoEndTasks` -> `1`
+
+`WaitToKillAppTimeout` seems to not be used anymore.
+
+This mixed bundle is no longer part of the live app surface. It stays in research only because the user-side values are not sourced as cleanly as `WaitToKillServiceTimeout`.
+
+More timeout related values located in `HKCU\Control Panel\Desktop`: `CriticalAppShutdownCleanupTimeout`, `CriticalAppShutdownTimeout`, `QuickResolverTimeout`, `ActiveWndTrkTimeout`, `CaretTimeout`, `ForegroundLockTimeout`, `LowLevelHooksTimeout`.
 
 > https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt
 
@@ -2322,20 +2345,20 @@ Do not edit manually.
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
 | <a id="system.aero-shake"></a> `system.aero-shake` | Disable Aero Shake | Prevents windows from being minimized or restored when the active window is shaken back and forth with the mouse. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L182` |
-| <a id="system.bsod-disable-auto-reboot"></a> `system.bsod-disable-auto-reboot` | Disable Auto Reboot on Crash | Prevents automatic reboot after a crash to allow reading the BSOD. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L408` |
-| <a id="system.bsod-display-parameters"></a> `system.bsod-display-parameters` | Show BSOD Parameters | Displays additional crash parameters on the blue screen. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L396` |
-| <a id="system.disable-app-archiving"></a> `system.disable-app-archiving` | Disable Automatic App Archiving | Stops Windows from archiving unused apps automatically. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L520` |
+| <a id="system.bsod-disable-auto-reboot"></a> `system.bsod-disable-auto-reboot` | Disable Auto Reboot on Crash | Prevents automatic reboot after a crash to allow reading the BSOD. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L405` |
+| <a id="system.bsod-display-parameters"></a> `system.bsod-display-parameters` | Show BSOD Parameters | Displays additional crash parameters on the blue screen. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L393` |
+| <a id="system.disable-app-archiving"></a> `system.disable-app-archiving` | Disable Automatic App Archiving | Stops Windows from archiving unused apps automatically. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L517` |
 | <a id="system.disable-auto-maintenance"></a> `system.disable-auto-maintenance` | Disable Automatic Maintenance | Stops scheduled automatic maintenance tasks from running. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L246` |
 | <a id="system.disable-background-gp-updates"></a> `system.disable-background-gp-updates` | Disable Background Group Policy Updates | Prevents Group Policy from refreshing while users are active. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L234` |
 | <a id="system.disable-clipboard-history"></a> `system.disable-clipboard-history` | Disable Clipboard History & Sync | Turns off clipboard history and cross-device clipboard synchronization. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L208` |
 | <a id="system.disable-clipboard-redirection"></a> `system.disable-clipboard-redirection` | Disable Clipboard Redirection (RDP) | Prevents clipboard sharing between remote desktop sessions and the local machine. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L222` |
-| <a id="system.disable-fullscreen-optimizations"></a> `system.disable-fullscreen-optimizations` | Disable Fullscreen Optimizations | Disables fullscreen optimizations for more consistent exclusive fullscreen behavior. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L341` |
+| <a id="system.disable-fullscreen-optimizations"></a> `system.disable-fullscreen-optimizations` | Disable Fullscreen Optimizations | Disables fullscreen optimizations for more consistent exclusive fullscreen behavior. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L338` |
 | <a id="system.disable-jpeg-reduction"></a> `system.disable-jpeg-reduction` | Disable JPEG Reduction | Sets the desktop wallpaper JPEG import quality to 100% to avoid compression artifacts. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L195` |
 | <a id="system.disable-restartable-apps"></a> `system.disable-restartable-apps` | Disable Restartable Apps | Prevents apps from automatically restarting after sign-in. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L270` |
 | <a id="system.disable-scheduled-tasks"></a> `system.disable-scheduled-tasks` | Disable Telemetry & Maintenance Tasks | Disables dozens of scheduled tasks related to telemetry, data collection, and non-essential maintenance. | Risky | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L87` |
 | <a id="system.disable-search-highlights-policy"></a> `system.disable-search-highlights-policy` | Disable Search Highlights (Policy) | Disables search highlights via policy for all users. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L321` |
-| <a id="system.disable-search-remote-queries"></a> `system.disable-search-remote-queries` | Disable Remote Search Queries | Prevents remote clients from querying this device's search index. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L371` |
-| <a id="system.disable-search-web-results"></a> `system.disable-search-web-results` | Disable Web Search Results | Removes web results from Windows Search for all users. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L359` |
+| <a id="system.disable-search-remote-queries"></a> `system.disable-search-remote-queries` | Disable Remote Search Queries | Prevents remote clients from querying this device's search index. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L368` |
+| <a id="system.disable-search-web-results"></a> `system.disable-search-web-results` | Disable Web Search Results | Removes web results from Windows Search for all users. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L356` |
 | <a id="system.disable-service-splitting"></a> `system.disable-service-splitting` | Disable Service Splitting | Prevents services from being split into separate svchost processes. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L333` |
 | <a id="system.disable-shortcut-arrow"></a> `system.disable-shortcut-arrow` | Remove Shortcut Arrow Overlay | Removes the small arrow icon that appears on desktop shortcuts. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L74` |
 | <a id="system.disable-startup-delay"></a> `system.disable-startup-delay` | Disable Startup Program Delay | Removes the artificial 10-second delay for startup programs to make boot feel faster. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L48` |
@@ -2346,9 +2369,9 @@ Do not edit manually.
 | <a id="system.dwm-disable-overlay-min-fps"></a> `system.dwm-disable-overlay-min-fps` | DWM: Disable Overlay Minimum FPS | Removes the minimum FPS requirement for overlay assignment. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L237` |
 | <a id="system.enable-game-mode"></a> `system.enable-game-mode` | Enable Game Mode | Ensures Windows Game Mode is active for optimized resource allocation during gaming. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L35` |
 | <a id="system.enable-hags"></a> `system.enable-hags` | Enable Hardware-Accelerated GPU Scheduling | Lets the GPU handle its own scheduling for improved responsiveness. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L285` |
-| <a id="system.enable-indexing-encrypted-items"></a> `system.enable-indexing-encrypted-items` | Enable Indexing of Encrypted Items | Allows encrypted files to be indexed by Windows Search. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L383` |
+| <a id="system.enable-indexing-encrypted-items"></a> `system.enable-indexing-encrypted-items` | Enable Indexing of Encrypted Items | Allows encrypted files to be indexed by Windows Search. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L380` |
 | <a id="system.graphics-disable-overlays"></a> `system.graphics-disable-overlays` | Graphics: Disable Overlay Planes | Disables overlay planes to reduce composition issues in some configurations. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L212` |
-| <a id="system.graphics-page-fault-debug-mode"></a> `system.graphics-page-fault-debug-mode` | Graphics: Page Fault Debug Mode | Restores the graphics page-fault debug mode value Windows expects by default. Useful when undoing manual scheduler experiments. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L507` |
+| <a id="system.graphics-page-fault-debug-mode"></a> `system.graphics-page-fault-debug-mode` | Graphics: Page Fault Debug Mode | Restores the graphics page-fault debug mode value Windows expects by default. Useful when undoing manual scheduler experiments. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L504` |
 | <a id="system.graphics-tdr-ddi-delay"></a> `system.graphics-tdr-ddi-delay` | Graphics: TDR DDI Delay (Default) | Sets the DDI timeout delay (TdrDdiDelay) to the documented default. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L164` |
 | <a id="system.graphics-tdr-delay"></a> `system.graphics-tdr-delay` | Graphics: TDR Delay (Default) | Sets the GPU timeout delay (TdrDelay) to the documented default. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L152` |
 | <a id="system.graphics-tdr-level"></a> `system.graphics-tdr-level` | Graphics: TDR Level (Default) | Sets the TDR recovery level to the documented default. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L176` |
@@ -2364,20 +2387,19 @@ Do not edit manually.
 | <a id="system.kernel-minimum-dpc-rate"></a> `system.kernel-minimum-dpc-rate` | Kernel: Minimum DPC Rate | Sets the minimum DPC rate threshold to the documented default. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L55` |
 | <a id="system.kernel-serialize-timer-expiration"></a> `system.kernel-serialize-timer-expiration` | Kernel: Serialize Timer Expiration | Enables timer serialization using the documented default value. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L91` |
 | <a id="system.kernel-thread-dpc-enable"></a> `system.kernel-thread-dpc-enable` | Kernel: Threaded DPC Enable | Enables threaded DPCs using the documented default value. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L127` |
-| <a id="system.memory-clear-pagefile-at-shutdown"></a> `system.memory-clear-pagefile-at-shutdown` | Clear Page File at Shutdown | Clears the page file on shutdown for privacy (slower shutdown). | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L421` |
-| <a id="system.memory-disable-paging-executive"></a> `system.memory-disable-paging-executive` | Disable Paging Executive | Keeps kernel and drivers in RAM (requires sufficient memory). | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L433` |
-| <a id="system.memory-large-system-cache-client"></a> `system.memory-large-system-cache-client` | Memory: Use Client System Cache | Keeps memory behavior on the normal desktop/client default so Windows favors applications instead of file-server style caching. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L459` |
-| <a id="system.memory-nonpaged-pool-dynamic"></a> `system.memory-nonpaged-pool-dynamic` | Memory: Reset Non-Paged Pool Size | Returns kernel non-paged pool allocation to the Windows-managed dynamic default. This is mainly a rollback-to-default style setting. | Risky | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L483` |
-| <a id="system.memory-paged-pool-dynamic"></a> `system.memory-paged-pool-dynamic` | Memory: Reset Paged Pool Size | Returns kernel paged pool allocation to the Windows-managed dynamic default. Use this when a manual pool tweak should be undone. | Risky | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L471` |
-| <a id="system.memory-registry-quota-default"></a> `system.memory-registry-quota-default` | Memory: Reset Registry Quota | Restores registry quota to the documented default so the registry goes back to normal Windows sizing behavior. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L495` |
+| <a id="system.memory-clear-pagefile-at-shutdown"></a> `system.memory-clear-pagefile-at-shutdown` | Clear Page File at Shutdown | Clears the page file on shutdown for privacy (slower shutdown). | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L418` |
+| <a id="system.memory-disable-paging-executive"></a> `system.memory-disable-paging-executive` | Disable Paging Executive | Keeps kernel and drivers in RAM (requires sufficient memory). | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L430` |
+| <a id="system.memory-large-system-cache-client"></a> `system.memory-large-system-cache-client` | Memory: Use Client System Cache | Keeps memory behavior on the normal desktop/client default so Windows favors applications instead of file-server style caching. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L456` |
+| <a id="system.memory-nonpaged-pool-dynamic"></a> `system.memory-nonpaged-pool-dynamic` | Memory: Reset Non-Paged Pool Size | Returns kernel non-paged pool allocation to the Windows-managed dynamic default. This is mainly a rollback-to-default style setting. | Risky | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L480` |
+| <a id="system.memory-paged-pool-dynamic"></a> `system.memory-paged-pool-dynamic` | Memory: Reset Paged Pool Size | Returns kernel paged pool allocation to the Windows-managed dynamic default. Use this when a manual pool tweak should be undone. | Risky | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L468` |
+| <a id="system.memory-registry-quota-default"></a> `system.memory-registry-quota-default` | Memory: Reset Registry Quota | Restores registry quota to the documented default so the registry goes back to normal Windows sizing behavior. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L492` |
 | <a id="system.ntfs-disable-8dot3"></a> `system.ntfs-disable-8dot3` | Disable 8.3 Name Creation | Stops NTFS from creating 8.3 short file names on all volumes. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L250` |
 | <a id="system.ntfs-disable-last-access"></a> `system.ntfs-disable-last-access` | Disable Last Access Updates | Disables last access timestamp updates to reduce disk I/O. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L262` |
 | <a id="system.ntfs-enable-long-paths"></a> `system.ntfs-enable-long-paths` | Enable Win32 Long Paths | Allows Win32 long paths for applications that opt in. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L274` |
 | <a id="system.ntfs-reset-memory-usage"></a> `system.ntfs-reset-memory-usage` | Reset NTFS Memory Usage | Resets NTFS memory usage back to the Windows default. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L286` |
 | <a id="system.ntfs-reset-mft-zone"></a> `system.ntfs-reset-mft-zone` | Reset NTFS MFT Zone Reservation | Resets the MFT zone reservation back to the Windows default. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L298` |
 | <a id="system.priority-control"></a> `system.priority-control` | Set Foreground Scheduling Priority | Sets Win32PrioritySeparation to the app's observed 0x26 foreground scheduling profile for research comparisons. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L18` |
-| <a id="system.reduce-shutdown-timeouts"></a> `system.reduce-shutdown-timeouts` | Reduce Shutdown Timeouts | Shortens shutdown wait times for faster logoff and shutdown. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L311` |
-| <a id="system.reliability-timestamp-enabled"></a> `system.reliability-timestamp-enabled` | Enable Reliability Event Timestamping | Turns on the reliability timestamp gate and sets the companion policy interval to 24 hours. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L445` |
+| <a id="system.reliability-timestamp-enabled"></a> `system.reliability-timestamp-enabled` | Enable Reliability Event Timestamping | Turns on the reliability timestamp gate and sets the companion policy interval to 24 hours. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L442` |
 | <a id="system.services.disable-bluetooth-audio-gateway"></a> `system.services.disable-bluetooth-audio-gateway` | Disable Bluetooth Audio Gateway Service | Disables the Bluetooth Audio Gateway service. | Unknown | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L176` |
 | <a id="system.services.disable-bluetooth-support"></a> `system.services.disable-bluetooth-support` | Disable Bluetooth Support Service | Disables the main Bluetooth support service. | Unknown | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L164` |
 | <a id="system.services.disable-bluetooth-user-service"></a> `system.services.disable-bluetooth-user-service` | Disable Bluetooth User Service | Disables per-user Bluetooth services. | Unknown | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L170` |
@@ -2392,4 +2414,5 @@ Do not edit manually.
 | <a id="system.services.disable-windows-error-reporting"></a> `system.services.disable-windows-error-reporting` | Disable Windows Error Reporting Service | Disables the Windows Error Reporting service. | Unknown | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L128` |
 | <a id="system.services.disable-windows-search"></a> `system.services.disable-windows-search` | Disable Windows Search Service | Disables the Windows Search indexing service. | Unknown | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L122` |
 | <a id="system.verbose-status-messages"></a> `system.verbose-status-messages` | Enable Verbose Status Messages | Shows detailed status messages during startup, shutdown, logon, and logoff. | Safe | `WindowsOptimizer.App\Services\TweakProviders\SystemTweakProvider.cs#L61` |
+| <a id="system.wait-to-kill-service-timeout"></a> `system.wait-to-kill-service-timeout` | Reduce Service Shutdown Timeout | Shortens the service shutdown timeout so Windows waits less time before terminating an unresponsive service during shutdown. | Advanced | `WindowsOptimizer.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L311` |
 <!-- TWEAK INDEX END -->

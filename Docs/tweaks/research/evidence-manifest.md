@@ -8,19 +8,19 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 
 | Field | Value |
 | --- | --- |
-| Total records | 295 |
+| Total records | 296 |
 | Validated | 243 |
-| Deprecated | 52 |
+| Deprecated | 53 |
 | Review required | 0 |
-| Records with evidence | 295 |
+| Records with evidence | 296 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 174 |
+| A count | 175 |
 | B count | 66 |
 | C count | 1 |
-| D count | 2 |
-| E count | 52 |
+| D count | 1 |
+| E count | 53 |
 
 ## Record Index
 
@@ -72,6 +72,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.kernel-ideal-dpc-rate` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-ideal-dpc-rate.review.json` | `347e1247d53b76d238429f3c7f8708b2a6375173bb8b1a6788cbd185d2820b11` | `4cb385e6c43a5d3b92e6c1d9fbfd5fafd56e6c40cc1c9d59099d180c3a091f8c` | 1 |
 | `system.kernel-minimum-dpc-rate` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-minimum-dpc-rate.review.json` | `0b7c3064afe58a4383a6559f08e5fd5131b8cba66cb0bd66a50858624843ceb1` | `e8aff541bfbec81d2ba53fad66a8cb2cfaab889a5de285e620c483b9393313d2` | 1 |
 | `system.kernel-serialize-timer-expiration` | deprecated | Class E | `Docs/tweaks/research/records/system.kernel-serialize-timer-expiration.review.json` | `5e687fa484102bf47596f14af77de8fdde46c2b334e39fa6ef850a3cea94cc1e` | `20588f7da590eb22af6ec02882f2208f12c9f2288dd4a2f68b463a29d902deed` | 1 |
+| `system.reduce-shutdown-timeouts` | deprecated | Class E | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `edef1664dec7bde16f60caf584d21accd29dc8f8c9fdb6fd3ef5df8700c14b07` | `e6af4e80a334f6aa387d8a4d439eee08639849ea65ad44fad56e0028843e6ac4` | 4 |
 | `system.services.disable-print-device-configuration` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-print-device-configuration.json` | `3101fdf06a38bfbd1fb99a735145546b6f2bcf9439946b8840db2ec2136c6893` | `02fb442a6fc902af0a89043f68fb1c32cd90fc04bb17cad014b82bb78b2266ac` | 1 |
 | `system.services.disable-print-scan-broker` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-print-scan-broker.json` | `fb63ce1ae6ec3c78f95b271148dcdecbb4258908b06426c4fbe85efa7cee1e41` | `d96f33b3f944ebfba9155d20db5cfcb4d4596e130a3e1f07b831f24ad3fe112a` | 1 |
 | `system.services.disable-print-workflow-user-service` | deprecated | Class E | `Docs/tweaks/research/records/system.services.disable-print-workflow-user-service.json` | `1b8b436ef97a5a02a86e8436a8eb8b79ef50d0f0118b1bac0bb53059c15ebeb6` | `94381b6c1d68589882ee162feab63d1d35964b621bf82a6e0b9188782d790055` | 1 |
@@ -288,7 +289,6 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.ntfs-reset-memory-usage` | validated | Class A | `Docs/tweaks/research/records/system.ntfs-reset-memory-usage.json` | `dea3b183699854ca606ca5623702f53cbbc5493e81f4bd5cec85f8f2a436e760` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 1 |
 | `system.ntfs-reset-mft-zone` | validated | Class B | `Docs/tweaks/research/records/system.ntfs-reset-mft-zone.json` | `49760115f50860c9f6441fdf757cc71db1c8bd6d672318262804ec71a7023f40` | `761116b7df62660d29832a92e86ced57afe15c5e77aabb0d20e13ca0b17d14f6` | 1 |
 | `system.priority-control` | validated | Class B | `Docs/tweaks/research/records/system.priority-control.review.json` | `65338290ddc475e60627d497c34c6f508e7920c8b14730a6324ab1a5ebec71e9` | `a0052c01feb825816cea1e1f4797e026f3d01574dd58788de14577044e0d7f48` | 1 |
-| `system.reduce-shutdown-timeouts` | validated | Class D | `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json` | `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace` | `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763` | 4 |
 | `system.reliability-timestamp-enabled` | validated | Class B | `Docs/tweaks/research/records/system.reliability-timestamp-enabled.review.json` | `92f9e36a55d7c75c3f569afa4ecbc22305c1353adc12d364b2e7c59229040cc1` | `095e0637a09a7ee6331bbebd07433dafeecb9182cf6a49ef97ca40e5340171af` | 2 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-audio-gateway.json` | `099a70fc3414dce17ccbc10e6882736fd9b954e0c7e8f40fc7effc3395fc0557` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 1 |
 | `system.services.disable-bluetooth-support` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-bluetooth-support.json` | `c41242b6b93a6c0726a408024b2d24f989f06a68dbd803a2976d1755cc320372` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 1 |
@@ -298,6 +298,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.services.disable-print-spooler` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-print-spooler.json` | `d244f10b272a038623ae642806ea9e2c0f8c7171857f5c3655cc3af754d8505f` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 1 |
 | `system.services.disable-windows-search` | validated | Class B | `Docs/tweaks/research/records/system.services.disable-windows-search.json` | `0a7a7b83cdb693c869b6fbc38dc856ad4ca756793379bbf7db2b3ff1cb69d3fc` | `7a939516d8b00a24b308632a8c4618acc5fd292fab45e9544a98c56f98788b37` | 1 |
 | `system.verbose-status-messages` | validated | Class A | `Docs/tweaks/research/records/system.verbose-status-messages.json` | `444ecd213fb9c2bfe7a5770044a45ae4529404c9bb2e99302f3920560f8f9d3b` | `95d2e2d70159d0ddc6500d9a88c2420cc76d133e09b5ee7920891d07a3cc92ef` | 1 |
+| `system.wait-to-kill-service-timeout` | validated | Class A | `Docs/tweaks/research/records/system.wait-to-kill-service-timeout.review.json` | `a8e87c037e80fc40870b52c0f13f0eb57793cce6d9db688d101730fcd04bd765` | `75468f86e93fb6828a772007cfc2c8e7eff43a4f9938026224ae83e5b11a88a8` | 1 |
 | `visibility.default-account-picture` | validated | Class A | `Docs/tweaks/research/records/visibility.default-account-picture.json` | `fc2b38d67652b1af2628041fdad7fd58b061426dda04ecc201ab9d51b59c6486` | `ad18cf84978748d2e98ae9ba591d975b8b94780caa755d468c578aa640b06c45` | 1 |
 | `visibility.disable-acrylic-logon` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-acrylic-logon.json` | `e4dae75e88780fa2100a6e802178339eae0783ed0f6208fb0147c10a6aecd045` | `b8f40fdcfee835f4f10a9f9dcbe34876f7fa4889dbcf838ac809f972d48eb972` | 1 |
 | `visibility.disable-common-control-animations` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-common-control-animations.json` | `7156db1b19baa88565cf70bc58fd843fdd3ba387e0fee5b545d88ff4780dd4a6` | `adfa8da46fa1d6eeb719bc15c967c593bd41eb9e52552f834d45437a25adbc73` | 1 |
@@ -3152,6 +3153,68 @@ Windows Internals references:
 | exact_quote_or_path | if ( KiSerializeTimerExpiration ) { if ( KiSerializeTimerExpiration != 1 ) KiSerializeTimerExpiration = 0; } else { KiSerializeTimerExpiration = (unsigned __int8)off_140C01C70[0]() != 0; } |
 | key_found_on_page | True |
 | notes | Timer serialization audit trail. The mirror docs and the decompiled timer-table initializer together show the kernel variable, the 0/1 behavior, and the registry fallback path. |
+### `system.reduce-shutdown-timeouts`
+
+- Status: `deprecated`
+- Evidence class: `Class E` - Archived / Audit Trail
+- Category: `System`
+- Area: `Shutdown and Logoff Timing`
+- Scope: `mixed`
+- Source file: `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json`
+- Source SHA256: `edef1664dec7bde16f60caf584d21accd29dc8f8c9fdb6fd3ef5df8700c14b07`
+- Proof SHA256: `e6af4e80a334f6aa387d8a4d439eee08639849ea65ad44fad56e0028843e6ac4`
+
+**Summary:** Historical mixed shutdown-timeout bundle. The live app surface no longer writes this bundle as one tweak; the documented service-side timeout was split into its own record, and this bundle remains only as audit trail.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class E |
+| Title | Archived / Audit Trail |
+| Action state | archived |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
+
+**Targets**
+
+- `HKLM\\SYSTEM\\CurrentControlSet\\Control` / `WaitToKillServiceTimeout` / `REG_SZ`
+  - value | value="20000" | label=Documented default service timeout | meaning=Service Control Manager waits 20 seconds before terminating a service that does not respond to shutdown.
+  - value | value="2500" | label=Observed app fast-shutdown service timeout | meaning=The current app shortens the service shutdown timeout to 2.5 seconds.
+- `HKCU\\Control Panel\\Desktop` / `HungAppTimeout` / `REG_SZ`
+  - Notes: The timeout concept is official, but this research pass did not capture a primary Microsoft registry publication for this exact HKCU path.
+  - value | value="5000" | label=Documented timeout concept default | meaning=Windows considers an app unresponsive after 5000 ms in the documented API-level timeout concept.
+  - value | value="1500" | label=Observed app fast-shutdown app-hung timeout | meaning=The current app shortens the app unresponsive threshold to 1.5 seconds.
+- `HKCU\\Control Panel\\Desktop` / `WaitToKillAppTimeout` / `REG_SZ`
+  - Notes: Repo notes say WaitToKillAppTimeout may no longer be used and point to WaitToKillTimeout instead.
+  - unknown | label=Primary Microsoft registry mapping not captured | meaning=This research pass did not capture a primary Microsoft document that publishes the exact WaitToKillAppTimeout registry value name on the current user path.
+  - value | value="2500" | label=Observed app fast-shutdown app-kill timeout | meaning=The current app shortens the app shutdown timeout to 2.5 seconds.
+- `HKCU\\Control Panel\\Desktop` / `AutoEndTasks` / `REG_SZ`
+  - Notes: Tracked as an observed user-side shutdown preference only.
+  - unknown | label=Primary Microsoft mapping not captured | meaning=This research pass did not capture a primary Microsoft source that publishes AutoEndTasks as a supported shutdown control in the current dataset.
+  - value | value="1" | label=Observed app auto-end setting | meaning=The current app turns on automatic ending of tasks during shutdown.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-systemparametersinfo-timeouts` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfoW function | `high` |
+| `ms-rm-shutdown-type` | `official-doc` | `Microsoft official doc` | Microsoft Learn: RM_SHUTDOWN_TYPE | `high` |
+| `ms-service-control-handler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service Control Handler Function | `high` |
+| `repo-system-doc-shutdown` | `repo-doc` | `Current repo docs` | Repo system research notes for shutdown timeouts | `medium` |
+| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
+
+**Sources**
+
+_No source block present._
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | Docs/tweaks/research/notes/reduce-shutdown-timeouts-proof.md |
+| exact_quote_or_path | Historical mixed bundle: WaitToKillServiceTimeout=2500; WaitToKillAppTimeout=2500; HungAppTimeout=1500; AutoEndTasks=1 |
+| key_found_on_page | True |
+| notes | Historical proof bundle for the retired mixed shutdown tweak. |
 ### `system.services.disable-print-device-configuration`
 
 - Status: `deprecated`
@@ -4599,7 +4662,20 @@ Nohuto lineage references:
 
 **Sources**
 
-_No source block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5085,7 +5161,20 @@ Nohuto lineage references:
 
 **Sources**
 
-_No source block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, advanced |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -5135,7 +5224,20 @@ _No source block present._
 
 **Sources**
 
-_No source block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | explorer, showrecent |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / misc/desc.md | `https://github.com/nohuto/win-config/blob/main/misc/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / cleanup/desc.md | `https://github.com/nohuto/win-config/blob/main/cleanup/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / peripheral/desc.md | `https://github.com/nohuto/win-config/blob/main/peripheral/desc.md` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -11171,7 +11273,20 @@ Nohuto lineage references:
 
 **Sources**
 
-_No source block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, appcompat, disablepcaui |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/assets/locationaccess-LocationApi.c | `https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c` | Matched 1 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -11801,7 +11916,20 @@ Other source references:
 
 **Sources**
 
-_No source block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | False |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, cloudcontent |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 2 audit token(s) in win-config.
 
 **Validation proof**
 
@@ -12912,7 +13040,23 @@ _No source block present._
 
 **Sources**
 
-_No source block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, defender, submitsamplesconsent |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 3 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / records/Windows-Defender.txt | `https://github.com/nohuto/win-registry/blob/main/records/Windows-Defender.txt` | Matched 3 audit token(s) in win-registry.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -13030,7 +13174,23 @@ Windows Internals references:
 
 **Sources**
 
-_No source block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, defender, security, center, notifications, disableenhancednotifications |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 6 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 4 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 5 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -13743,7 +13903,23 @@ Windows Internals references:
 
 **Sources**
 
-_No source block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | True |
+| Needs review | False |
+| Source repositories | win-config |
+| Matched tokens | policies, defender |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 2 audit token(s) in win-config.
+- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 2 audit token(s) in win-config.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -13798,13 +13974,13 @@ _No source block present._
 | Has Windows Internals notes | True |
 | Needs review | False |
 | Source repositories | win-config |
-| Matched tokens | winlogon, enablegoodbye |
+| Matched tokens | policies, passportforwork, dynamiclock |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
 
 Nohuto lineage references:
-- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 2 audit token(s) in win-config.
-- win-config / privacy/desc.md | `https://github.com/nohuto/win-config/blob/main/privacy/desc.md` | Matched 1 audit token(s) in win-config.
-- win-config / visibility/desc.md | `https://github.com/nohuto/win-config/blob/main/visibility/desc.md` | Matched 1 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 3 audit token(s) in win-config.
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 1 audit token(s) in win-config.
+- win-config / affinities/desc.md | `https://github.com/nohuto/win-config/blob/main/affinities/desc.md` | Matched 1 audit token(s) in win-config.
 
 Windows Internals references:
 - Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
@@ -13929,7 +14105,23 @@ Windows Internals references:
 
 **Sources**
 
-_No source block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | True |
+| Needs review | False |
+| Source repositories | win-config, win-registry |
+| Matched tokens | policies, defender, hideexclusionsfromlocaladmins |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / security/assets/Windows-Defender.txt | `https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt` | Matched 3 audit token(s) in win-config.
+- win-config / security/desc.md | `https://github.com/nohuto/win-config/blob/main/security/desc.md` | Matched 2 audit token(s) in win-config.
+- win-registry / records/Windows-Defender.txt | `https://github.com/nohuto/win-registry/blob/main/records/Windows-Defender.txt` | Matched 3 audit token(s) in win-registry.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -16981,85 +17173,6 @@ Windows Internals references:
 | exact_quote_or_path | baseline observed_value=2; candidate observed_value=38; restore observed_value=2; baseline CPU duration=35.28s; candidate CPU duration=26.04s; baseline mem duration=25.05s; candidate mem duration=25.11s |
 | key_found_on_page | True |
 | notes | Guest-side manual VM pass on Win25H2Clean; see H:\\Temp\\vm-tooling-staging\\priority-control-20260324-201011\\summary.json and the paired CPU/memory artifact zips. Decompiled PriorityControl logic in Docs/system/assets/lsc-cimwin32.c confirms the read/write path for Win32PrioritySeparation, and Docs/system/system.md documents the AABBCC bitmask interpretation. |
-### `system.reduce-shutdown-timeouts`
-
-- Status: `validated`
-- Evidence class: `Class D` - Key Known, Value Semantics Unknown
-- Category: `System`
-- Area: `Shutdown and Logoff Timing`
-- Scope: `mixed`
-- Source file: `Docs/tweaks/research/records/system.reduce-shutdown-timeouts.review.json`
-- Source SHA256: `9c6135d71c39ceb8659e4cc392a0bb86d17fb5a113f65545b1f726016b83eace`
-- Proof SHA256: `03725345fafaffd0e533893c38ec56ff107549f9e21d6e923728052c72805763`
-
-**Summary:** The current app applies a mixed shutdown-timeout bundle: HKLM\SYSTEM\CurrentControlSet\Control\WaitToKillServiceTimeout = 2500, HKCU\Control Panel\Desktop\WaitToKillAppTimeout = 2500, HKCU\Control Panel\Desktop\HungAppTimeout = 1500, and HKCU\Control Panel\Desktop\AutoEndTasks = 1. Microsoft documents the shutdown-timeout concepts and the supporting Microsoft Q&A threads now show the user-side registry values, so the bundle can be validated as observed implementation rather than left as an open research gap.
-
-**Evidence class**
-
-| Field | Value |
-| --- | --- |
-| Class | Class D |
-| Title | Key Known, Value Semantics Unknown |
-| Action state | research-gated |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
-
-**Targets**
-
-- `HKLM\\SYSTEM\\CurrentControlSet\\Control` / `WaitToKillServiceTimeout` / `REG_SZ`
-  - value | value="20000" | label=Documented default service timeout | meaning=Service Control Manager waits 20 seconds before terminating a service that does not respond to shutdown.
-  - value | value="2500" | label=Observed app fast-shutdown service timeout | meaning=The current app shortens the service shutdown timeout to 2.5 seconds.
-- `HKCU\\Control Panel\\Desktop` / `HungAppTimeout` / `REG_SZ`
-  - Notes: The timeout concept is official, but this research pass did not capture a primary Microsoft registry publication for this exact HKCU path.
-  - value | value="5000" | label=Documented timeout concept default | meaning=Windows considers an app unresponsive after 5000 ms in the documented API-level timeout concept.
-  - value | value="1500" | label=Observed app fast-shutdown app-hung timeout | meaning=The current app shortens the app unresponsive threshold to 1.5 seconds.
-- `HKCU\\Control Panel\\Desktop` / `WaitToKillAppTimeout` / `REG_SZ`
-  - Notes: Repo notes say WaitToKillAppTimeout may no longer be used and point to WaitToKillTimeout instead.
-  - unknown | label=Primary Microsoft registry mapping not captured | meaning=This research pass did not capture a primary Microsoft document that publishes the exact WaitToKillAppTimeout registry value name on the current user path.
-  - value | value="2500" | label=Observed app fast-shutdown app-kill timeout | meaning=The current app shortens the app shutdown timeout to 2.5 seconds.
-- `HKCU\\Control Panel\\Desktop` / `AutoEndTasks` / `REG_SZ`
-  - Notes: Tracked as an observed user-side shutdown preference only.
-  - unknown | label=Primary Microsoft mapping not captured | meaning=This research pass did not capture a primary Microsoft source that publishes AutoEndTasks as a supported shutdown control in the current dataset.
-  - value | value="1" | label=Observed app auto-end setting | meaning=The current app turns on automatic ending of tasks during shutdown.
-
-**Evidence**
-
-| Evidence ID | Kind | Origin | Title | Strength |
-| --- | --- | --- | --- | --- |
-| `ms-systemparametersinfo-timeouts` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfoW function | `high` |
-| `ms-rm-shutdown-type` | `official-doc` | `Microsoft official doc` | Microsoft Learn: RM_SHUTDOWN_TYPE | `high` |
-| `ms-service-control-handler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service Control Handler Function | `high` |
-| `repo-system-doc-shutdown` | `repo-doc` | `Current repo docs` | Repo system research notes for shutdown timeouts | `medium` |
-| `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | `high` |
-
-**Sources**
-
-| Field | Value |
-| --- | --- |
-| Coverage state | repo-backed |
-| Has nohuto evidence | True |
-| Has Windows Internals notes | True |
-| Needs review | False |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | waittokillservicetimeout, 2500, panel, desktop, waittokillapptimeout, hungapptimeout, 1500, autoendtasks, 1 |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
-
-Nohuto lineage references:
-- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 9 audit token(s) in win-config.
-- win-registry / README.md | `https://github.com/nohuto/win-registry/blob/main/README.md` | Matched 5 audit token(s) in win-registry.
-- win-config / power/desc.md | `https://github.com/nohuto/win-config/blob/main/power/desc.md` | Matched 4 audit token(s) in win-config.
-- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
-
-Windows Internals references:
-- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
-
-**Validation proof**
-
-| Field | Value |
-| --- | --- |
-| source_url | Docs/tweaks/research/notes/reduce-shutdown-timeouts-proof.md |
-| exact_quote_or_path | WaitToKillServiceTimeout=2500; WaitToKillAppTimeout=2500; HungAppTimeout=1500; AutoEndTasks=1 |
-| key_found_on_page | True |
-| notes | The proof bundle combines the documented service timeout path, the Restart Manager shutdown timeout guidance, and Microsoft Q&A examples for the user-side shutdown registry values. |
 ### `system.reliability-timestamp-enabled`
 
 - Status: `validated`
@@ -17103,7 +17216,24 @@ Windows Internals references:
 
 **Sources**
 
-_No source block present._
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | policies, reliability |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/services.txt | `https://github.com/nohuto/win-config/blob/main/system/assets/services.txt` | Matched 2 audit token(s) in win-config.
+- win-config / system/assets/timestamp-OsEventsTimestampInterval.c | `https://github.com/nohuto/win-config/blob/main/system/assets/timestamp-OsEventsTimestampInterval.c` | Matched 2 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
 
 **Validation proof**
 
@@ -17615,6 +17745,71 @@ Windows Internals references:
 | exact_quote_or_path | <policy name="VerboseStatus" class="Machine" ... key="Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" valueName="VerboseStatus">; Logon.adml: This policy setting directs the system to display highly detailed status messages. |
 | key_found_on_page | True |
 | notes | Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that the policy enables highly detailed status messages during system transitions. |
+### `system.wait-to-kill-service-timeout`
+
+- Status: `validated`
+- Evidence class: `Class A` - App Ready
+- Category: `System`
+- Area: `Service shutdown timing`
+- Scope: `device`
+- Source file: `Docs/tweaks/research/records/system.wait-to-kill-service-timeout.review.json`
+- Source SHA256: `a8e87c037e80fc40870b52c0f13f0eb57793cce6d9db688d101730fcd04bd765`
+- Proof SHA256: `75468f86e93fb6828a772007cfc2c8e7eff43a4f9938026224ae83e5b11a88a8`
+
+**Summary:** The app now exposes WaitToKillServiceTimeout as a standalone service-shutdown setting instead of mixing it into the older shutdown bundle. Microsoft documents the path and behavior, and a Win25H2Clean reversible probe confirmed the current VM baseline of 5000, the app write of 2500, and a clean restore back to 5000.
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
+
+**Targets**
+
+- `HKLM\\SYSTEM\\CurrentControlSet\\Control` / `WaitToKillServiceTimeout` / `REG_SZ`
+  - Notes: This record uses the observed current VM baseline instead of assuming an older published default.
+  - value | value="5000" | label=Observed Win25H2Clean baseline | meaning=The current Win25H2Clean VM waits 5 seconds before terminating an unresponsive service during shutdown.
+  - value | value="2500" | label=Current app profile | meaning=The app shortens the service shutdown timeout to 2.5 seconds.
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Strength |
+| --- | --- | --- | --- | --- |
+| `ms-service-control-handler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service Control Handler Function | `high` |
+| `repo-system-doc-shutdown` | `repo-doc` | `Current repo docs` | Repo shutdown timing notes | `medium` |
+| `vm-wait-to-kill-service-timeout-probe` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe for WaitToKillServiceTimeout | `high` |
+| `app-system-registry-provider-service-timeout` | `repo-code` | `Current repo code` | Current app implementation for service shutdown timeout | `high` |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | repo-backed |
+| Has nohuto evidence | True |
+| Has Windows Internals notes | True |
+| Needs review | False |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | waittokillservicetimeout |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record's evidence and validation_proof blocks. |
+
+Nohuto lineage references:
+- win-config / system/desc.md | `https://github.com/nohuto/win-config/blob/main/system/desc.md` | Matched 1 audit token(s) in win-config.
+- decompiled-pseudocode / mmcss | `https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss` | MMCSS pseudocode relevant to SystemProfile scheduler values.
+
+Windows Internals references:
+- Windows Internals resource page | `https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals` | Official Microsoft landing page for the Windows Internals books and companion material.
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| source_url | H:\\Temp\\vm-tooling-staging\\wait-to-kill-service-timeout-probe-20260325-103117\\wait-to-kill-service-timeout-probe.txt |
+| exact_quote_or_path | ORIGINAL={"path_exists":true,"value_exists":true,"value":"5000"}; AFTER={"path_exists":true,"value_exists":true,"value":"2500"}; RESTORED={"path_exists":true,"value_exists":true,"value":"5000"} |
+| key_found_on_page | True |
+| notes | The reversible VM probe confirmed the current baseline, the app write, and a clean restore. |
 ### `visibility.default-account-picture`
 
 - Status: `validated`

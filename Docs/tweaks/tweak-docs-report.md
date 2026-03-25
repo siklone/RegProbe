@@ -1,6 +1,6 @@
 # Tweak Docs Report (Generated)
 
-Total tweaks: 298
+Total tweaks: 308
 Missing docs files: 0
 Missing docs anchors: 0
 Missing details anchors: 0
@@ -49,6 +49,7 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `explorer.disable-low-disk-space-warning` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.disable-taskbar-chat` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.enable-explorer-compact-mode` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
+| `explorer.hide-empty-drives` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.launch-folder-windows-in-a-separate-process` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-compressed-and-encrypted-files-in-color` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-drive-letters-first` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
@@ -56,6 +57,8 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `explorer.show-full-path` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-hidden-files` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-info-tips` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
+| `explorer.show-protected-operating-system-files` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
+| `explorer.show-recent-items` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-status-bar` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.show-type-overlay` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `explorer.taskbar-alignment-left` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
@@ -168,6 +171,7 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `privacy.disable-offline-files` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-onesettings-downloads` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-online-tips` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-pca-diagnostics.policy` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-phone-linking` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-recall` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-resume` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
@@ -179,6 +183,7 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `privacy.disable-steps-recorder` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-suggestions` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-suggestions-cdm` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `privacy.disable-suggestions.policy` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-sync-settings` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-telemetry-change-notifications` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.disable-telemetry-optin-ui` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
@@ -195,7 +200,9 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `privacy.limit-diagnostic-log-collection` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.limit-dump-collection` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
 | `privacy.troubleshooter-dont-run` | `Docs\privacy\privacy-verified.md` | yes | yes | yes | yes |
+| `security.disable-defender-sample-submission` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.disable-downloads-blocking` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
+| `security.disable-enhanced-defender-notifications` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.disable-ntfs-encryption` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.disable-p2p-updates` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.disable-password-reveal` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
@@ -209,8 +216,10 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `security.disable-windows-update` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.disable-wpbt` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.disable-wu-driver-updates` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
+| `security.enable-defender-maps-advanced-membership` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.enable-dynamic-lock` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.enable-sudo` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
+| `security.hide-defender-exclusions-from-local-admins` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.powershell-unrestricted` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.trusted-path-credential-prompting` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
 | `security.uac-never-notify` | `Docs\security\security-verified.md` | yes | yes | yes | yes |
@@ -270,7 +279,7 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `system.ntfs-reset-memory-usage` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.ntfs-reset-mft-zone` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.priority-control` | `Docs\system\system.md` | yes | yes | yes | yes |
-| `system.reduce-shutdown-timeouts` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.reliability-timestamp-enabled` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.services.disable-bluetooth-audio-gateway` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.services.disable-bluetooth-support` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.services.disable-bluetooth-user-service` | `Docs\system\system.md` | yes | yes | yes | yes |
@@ -285,6 +294,7 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `system.services.disable-windows-error-reporting` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.services.disable-windows-search` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `system.verbose-status-messages` | `Docs\system\system.md` | yes | yes | yes | yes |
+| `system.wait-to-kill-service-timeout` | `Docs\system\system.md` | yes | yes | yes | yes |
 | `visibility.default-account-picture` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `visibility.disable-acrylic-logon` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |
 | `visibility.disable-common-control-animations` | `Docs\visibility\visibility.md` | yes | yes | yes | yes |

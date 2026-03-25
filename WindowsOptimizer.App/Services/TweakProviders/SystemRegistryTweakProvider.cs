@@ -307,21 +307,18 @@ public sealed class SystemRegistryTweakProvider : BaseTweakProvider
             RegistryValueKind.DWord,
             1);
 
-        // Shutdown timeouts (HKLM + HKCU)
-        yield return CreateRegistryValueBatchTweak(
+        // Service shutdown timeout
+        yield return CreateRegistryTweak(
             context,
-            "system.reduce-shutdown-timeouts",
-            "Reduce Shutdown Timeouts",
-            "Shortens shutdown wait times for faster logoff and shutdown.",
+            "system.wait-to-kill-service-timeout",
+            "Reduce Service Shutdown Timeout",
+            "Shortens the service shutdown timeout so Windows waits less time before terminating an unresponsive service during shutdown.",
             TweakRiskLevel.Advanced,
-            new[]
-            {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Control", "WaitToKillServiceTimeout", RegistryValueKind.String, "2500", RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Desktop", "WaitToKillAppTimeout", RegistryValueKind.String, "2500", RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Desktop", "HungAppTimeout", RegistryValueKind.String, "1500", RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Control Panel\Desktop", "AutoEndTasks", RegistryValueKind.String, "1", RegistryView.Default),
-            },
-            requiresElevation: true);
+            RegistryHive.LocalMachine,
+            @"SYSTEM\CurrentControlSet\Control",
+            "WaitToKillServiceTimeout",
+            RegistryValueKind.String,
+            "2500");
 
         // Game DVR + Fullscreen Optimizations
         yield return WithMicrosoftDoc(
