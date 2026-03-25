@@ -154,7 +154,9 @@ These have the best mix of documented semantics and low blast radius.
   - baseline Defender-on EICAR probe produced event `1116` and no `1120`
   - `MsMpEng.exe` read the root legacy value directly when it was set to `1`
   - `MsMpEng.exe` read the Policy Manager alias directly when it was set to `1`
-  - the documented `MpEngine` path did not produce a live read in the same non-rebooted pass
+  - the documented `MpEngine` path did not produce a direct live read in the non-rebooted pass
+  - a same-window `WinDefend` restart attempt was blocked in the guest
+  - a rebooted capture pass still did not produce a direct read from the documented policy path
 - Current classification:
   - `Class C`
   - not app-mapped
@@ -189,6 +191,6 @@ These are either overridden on modern builds, state-like, tenant-specific, or to
    - same pattern
 4. `ThreatFileHashLogging`
    - PE-based follow-up for event `1120`
-   - reboot or service-start follow-up for the documented `MpEngine` path
+   - compare whether a safe PE sample changes the root / Policy Manager / policy-MpEngine story
 5. `HideExclusionsFromLocalAdmins`
    - done

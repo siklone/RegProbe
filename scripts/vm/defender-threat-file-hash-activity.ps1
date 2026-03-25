@@ -7,6 +7,7 @@ param(
     [string]$OutputEvents,
 
     [string]$OutputError = '',
+    [switch]$RestartWinDefend,
 
     [string]$WorkRoot = 'C:\Tools\Perf\Procmon\ThreatFileHashProbe'
 )
@@ -63,12 +64,31 @@ try {
     New-Item -ItemType Directory -Force -Path $WorkRoot | Out-Null
 
     $startTime = Get-Date
+    $serviceRestart = [ordered]@{
+        requested = [bool]$RestartWinDefend
+        attempted = $false
+        succeeded = $false
+        error = $null
+    }
     $eicarPath = Join-Path $WorkRoot 'eicar.com'
     $eicar = 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*'
     [System.IO.File]::WriteAllText($eicarPath, $eicar, [System.Text.Encoding]::ASCII)
 
     $statusBefore = Get-MpStatusSummary
     $mpCmdRun = Join-Path $env:ProgramFiles 'Windows Defender\MpCmdRun.exe'
+
+    if ($RestartWinDefend) {
+        $serviceRestart.attempted = $true
+        try {
+            Restart-Service -Name 'WinDefend' -Force -ErrorAction Stop
+            Start-Sleep -Seconds 10
+            $serviceRestart.succeeded = $true
+        }
+        catch {
+            $serviceRestart.error = $_.Exception.Message
+        }
+    }
+
     $events = @()
     $deadline = (Get-Date).AddSeconds(45)
     while ((Get-Date) -lt $deadline) {
@@ -118,6 +138,7 @@ try {
         eicar_path = $eicarPath
         file_exists_after = Test-Path $eicarPath
         mp_status_before = $statusBefore
+        service_restart = $serviceRestart
         mpcmdrun_exists = Test-Path $mpCmdRun
         mpcmdrun_exit_code = $mpCmdRunExitCode
         detection_event_count = @($events | Where-Object Id -eq 1116).Count
@@ -136,6 +157,7 @@ try {
     $lines.Add('EICAR_PATH=' + $summary.eicar_path)
     $lines.Add('FILE_EXISTS_AFTER=' + $summary.file_exists_after)
     $lines.Add('MP_STATUS=' + (($summary.mp_status_before | ConvertTo-Json -Compress)))
+    $lines.Add('SERVICE_RESTART=' + (($summary.service_restart | ConvertTo-Json -Compress)))
     $lines.Add('MPCMDRUN_EXISTS=' + $summary.mpcmdrun_exists)
     $lines.Add('MPCMDRUN_EXIT_CODE=' + $summary.mpcmdrun_exit_code)
     $lines.Add('DETECTION_EVENT_COUNT=' + $summary.detection_event_count)

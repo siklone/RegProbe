@@ -16,9 +16,9 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 174 |
-| Class B | 65 |
+| Class B | 66 |
 | Class C | 1 |
-| Class D | 3 |
+| Class D | 2 |
 | Class E | 52 |
 
 ## Category Coverage
@@ -7230,7 +7230,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class D` |
+| Evidence class | `Class B` |
 | Category | `Power` |
 | Area | `Processor Idle Behavior` |
 | Scope | `device` |
@@ -7239,7 +7239,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated observed implementation only. This record now has machine-checkable VM proof for the raw CPU idle-state registry bundle, but Microsoft still does not publish it as a supported control surface.
+**Summary:** Validated observed implementation only. This record now has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, plus a machine-checkable apply and restore pass for the app's current profile.
 
 **Current implementation**
 
@@ -7259,10 +7259,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class D` |
-| Title | Key Known, Value Semantics Unknown |
+| Label | `Class B` |
+| Title | Strong but Partial |
 | Action state | `research-gated` |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
 
 **Sources**
 
@@ -7295,12 +7295,13 @@ Windows Internals references:
 
 **Windows defaults**
 
-- Windows-managed processor idle baseline (Windows systems using normal processor idle-state management)
-  - cpu-idle-states-registry-bundle: unknown — — This review did not elevate the raw registry bundle to a published Windows baseline.
+- Observed Win25H2Clean baseline (Current 25H2 builds where the raw CPU idle-state bundle is left unset)
+  - cpu-idle-states-registry-bundle: missing — — Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior.
 
 **Recommended profiles**
 
 - `windows-default`: Windows default (apply_allowed=False)
+- `current-app-profile`: Current app profile (apply_allowed=False)
 
 **Evidence**
 
@@ -7309,6 +7310,7 @@ Windows Internals references:
 | `ms-cpu-idle-states` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to Processor Idle States | https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states | `high` | behavior, side-effects, version-scope, app-mismatch |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | WindowsOptimizer.App/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | Docs/tweaks/_source-mirrors/win-registry/records/Power.txt | `medium` | path, value, behavior |
+| `vm-cpu-idle-bundle-probe` | `vm-test` | `VM test / probe` | Win25H2Clean reversible probe for the CPU idle-state bundle | H:\Temp\vm-tooling-staging\cpu_idle_probe.json | `high` | path, value, behavior, rollback |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | Docs/power/power.md | `medium` | ui-mapping, app-mismatch |
 
 **Validation proof**
@@ -7316,9 +7318,9 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source URL | H:\Temp\vm-tooling-staging\cpu_idle_probe.json |
-| Exact quote / path | DisableIdleStatesAtBoot=1; IdleStateTimeout=0; ExitLatencyCheckEnabled=1 -> restored to null |
+| Exact quote / path | before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null |
 | Key found on page | `True` |
-| Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. |
+| Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. |
 
 **Decision**
 
@@ -7329,7 +7331,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The VM probe captured the exact raw registry bundle written by the app and restored the baseline cleanly. The record remains apply_allowed false because Microsoft still does not publish this as a supported control surface. |
+| Why | The repo power notes and the Win25H2Clean probe now line up on the same raw bundle and show both the current observed baseline and the app profile. That is enough to keep the record active and well-scoped, but not enough to treat the bundle as an app-ready supported control surface. |
 
 ---
 
@@ -17123,7 +17125,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface, but live Win25H2Clean traces also show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias. In the Defender-on 25H2 snapshot, a text EICAR probe produced event 1116 but no event 1120, which matches Microsoft's note that file-indicator hash support is for PE files.
+**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface, but live Win25H2Clean traces show MsMpEng.exe reading the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias instead. In the Defender-on 25H2 snapshot, a text EICAR probe produced event 1116 but no event 1120, and the documented policy MpEngine path still did not produce a direct read in either the non-rebooted pass or the rebooted follow-up.
 
 **Current implementation**
 
@@ -17181,6 +17183,8 @@ Windows Internals references:
 | `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | H:\Temp\vm-tooling-staging\defender-threat-file-hash-legacyroot-1-20260325-011845\defender-threat-file-hash-legacyroot-1.txt | `high` | path, value, runtime-read |
 | `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | H:\Temp\vm-tooling-staging\defender-threat-file-hash-policymanager-1-20260325-012333\defender-threat-file-hash-policymanager-1.txt | `high` | path, value, runtime-read |
 | `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | `VM test / probe` | Non-rebooted MpEngine pass did not show a live read | H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-011519\defender-threat-file-hash-mpengine-1-events.json | `medium` | path, behavior |
+| `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | `VM test / probe` | WinDefend service restart follow-up was blocked | H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-095038\defender-threat-file-hash-mpengine-1-events.json | `medium` | behavior, runtime-read |
+| `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | `VM test / probe` | Rebooted MpEngine pass still did not show a direct policy-path read | H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-100039\defender-threat-file-hash-mpengine-1.txt | `high` | path, behavior, runtime-read |
 
 **Validation proof**
 
@@ -17189,7 +17193,7 @@ Windows Internals references:
 | Source URL | H:\Temp\vm-tooling-staging\defender-threat-file-hash-legacyroot-1-20260325-011845\defender-threat-file-hash-legacyroot-1.txt |
 | Exact quote / path | MsMpEng.exe \| RegQueryValue \| HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\ThreatFileHashLogging \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
 | Key found on page | `True` |
-| Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. In the live set runs, MsMpEng.exe read the root ThreatFileHashLogging value directly and read the Policy Manager EnableFileHashComputation alias directly in a separate pass. |
+| Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. In the live set runs, MsMpEng.exe read the root ThreatFileHashLogging value directly and read the Policy Manager EnableFileHashComputation alias directly in a separate pass. The documented policy MpEngine path still did not produce a direct read in the non-rebooted or rebooted follow-up. |
 
 **Decision**
 
@@ -17200,10 +17204,11 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The feature name and 0/1 semantics are documented, but current 25H2 runtime still shows more than one live control surface. The record is strong enough to keep in active research, but not tight enough yet for an app-facing one-click write. |
+| Why | The feature name and 0/1 semantics are documented, but current 25H2 runtime still shows more than one live control surface. The documented policy MpEngine path did not produce a direct read in the non-rebooted pass or the rebooted follow-up, so the record stays in active research instead of becoming an app-facing write. |
 
 Blocking issues:
-- The documented MpEngine path did not produce a live read in the same non-rebooted 25H2 pass.
+- The documented policy MpEngine path did not produce a direct live read in either the non-rebooted or rebooted 25H2 pass.
+- A same-window WinDefend restart attempt was blocked in the guest, so service-restart evidence is still limited.
 - The current runtime reads the legacy root value and the Policy Manager alias directly.
 - Event 1120 still needs a PE-based follow-up because Microsoft limits file-indicator hash support to PE files.
 

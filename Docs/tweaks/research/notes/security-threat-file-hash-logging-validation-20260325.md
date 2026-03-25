@@ -76,6 +76,10 @@ Artifacts:
   - `H:\Temp\vm-tooling-staging\defender-threat-file-hash-legacyroot-1-20260325-011845`
 - Policy Manager alias:
   - `H:\Temp\vm-tooling-staging\defender-threat-file-hash-policymanager-1-20260325-012333`
+- service-restart follow-up:
+  - `H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-095038`
+- rebooted documented MpEngine path:
+  - `H:\Temp\vm-tooling-staging\defender-threat-file-hash-mpengine-1-20260325-100039`
 
 ### Baseline
 
@@ -148,7 +152,52 @@ Result in this pass:
 - event `1120` still did not happen
 - no clean live `RegQueryValue` read for the documented MpEngine path was captured in the same non-rebooted probe window
 
-That is the main gap left in this record.
+That was the main gap left in this record, so I ran two more follow-ups.
+
+### Service restart follow-up
+
+Setting:
+
+- `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine`
+- `EnableFileHashComputation = 1`
+
+Result in this pass:
+
+- the helper requested a `WinDefend` restart before the EICAR probe
+- Defender blocked the service stop/start from the guest
+- the event log still showed `1116`
+- the pass still showed no clean live `RegQueryValue` read for the documented policy path
+
+Recorded service result:
+
+```text
+SERVICE_RESTART={"requested":true,"attempted":true,"succeeded":false,"error":"Service 'Microsoft Defender Antivirus Service (WinDefend)' cannot be stopped ..."}
+```
+
+So this pass did not unlock any extra MpEngine evidence. It only proved that a same-window guest-side service restart is not available in this lab setup.
+
+### Rebooted MpEngine follow-up
+
+Setting:
+
+- `HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine`
+- `EnableFileHashComputation = 1`
+
+Method:
+
+- revert to `baseline-20260325-defender-on`
+- write the documented policy value
+- perform a real guest reboot
+- run a capture-only Procmon pass plus the same EICAR activity
+
+Result in this pass:
+
+- `MATCH_COUNT=0` for the tracked `EnableFileHashComputation` and `ThreatFileHashLogging` fragments
+- event `1116` still happened
+- event `1120` still did not happen
+- `MsMpEng.exe` did read the non-policy `HKLM\SOFTWARE\Microsoft\Windows Defender\MpEngine` branch again, but only for existing ring values like `MpEngineRing`, `MpCampRing`, and `MpSignatureRing`
+
+That is stronger than the first negative result because it removes the "maybe it only gets read after reboot" explanation.
 
 ## What this means
 
@@ -161,10 +210,12 @@ What is solid:
 - the current 25H2 VM reads `ThreatFileHashLogging = 1` on the legacy root path
 - the current 25H2 VM reads `EnableFileHashComputation = 1` on the Policy Manager alias
 - the baseline Defender-on snapshot is now fixed and repeatable
+- the documented policy `MpEngine` path still did not produce a direct live read even after a full rebooted follow-up
 
 What is still unresolved:
 
-- the documented `MpEngine` path did not produce a live read in this non-rebooted pass
+- the documented policy `MpEngine` path did not produce a direct live read in either the non-rebooted or rebooted pass
+- a guest-side `WinDefend` restart was blocked, so there is still no service-restart trace window
 - the EICAR text-file probe is not enough to close the `1120` loop because Microsoft limits file-indicator hash support to `PE` files
 
 ## Current classification
@@ -178,4 +229,4 @@ Current state:
 
 That is the right class for now.
 
-The key exists, the values are partly understood, and the live runtime story is much better than it was before this pass. But the active current-build control surface still needs one more tightening pass before this becomes a one-click app setting.
+The key exists, the values are partly understood, and the live runtime story is much tighter now. But the active current-build control surface is still split, so this stays research-gated instead of moving into a one-click app write.

@@ -6,14 +6,16 @@ param(
     [ValidateSet(0, 1)]
     [int]$State = 1,
 
-    [string]$SnapshotName = 'baseline-20260324-high-risk-lane',
+    [string]$SnapshotName = 'baseline-20260325-defender-on',
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
-    [string]$GuestOutputRoot = 'C:\Tools\Perf\Procmon'
+    [string]$GuestOutputRoot = 'C:\Tools\Perf\Procmon',
+    [switch]$RestartWinDefend,
+    [switch]$GuestRebootBeforeCapture
 )
 
 $ErrorActionPreference = 'Stop'
@@ -48,7 +50,15 @@ $valueName = switch ($Mode) {
     'legacyroot' { 'ThreatFileHashLogging' }
 }
 
-$probeMode = if ($Mode -eq 'baseline') { 'baseline' } else { 'set' }
+$probeMode = if ($Mode -eq 'baseline') {
+    'baseline'
+}
+elseif ($GuestRebootBeforeCapture) {
+    'capture'
+}
+else {
+    'set'
+}
 $guestPml = Join-Path $GuestOutputRoot "$prefix.pml"
 $guestCsv = Join-Path $GuestOutputRoot "$prefix.csv"
 $guestTxt = Join-Path $GuestOutputRoot "$prefix.txt"
@@ -102,6 +112,102 @@ function Wait-GuestReady {
     throw 'Guest is not ready for vmrun guest operations.'
 }
 
+function Invoke-GuestProgram {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$FilePath,
+
+        [string[]]$ArgumentList = @()
+    )
+
+    Invoke-Vmrun -Arguments (@(
+        '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
+        'runProgramInGuest', $VmPath, $FilePath
+    ) + $ArgumentList) | Out-Null
+}
+
+function Get-GuestLastBootUpTime {
+    $guestBootScript = Join-Path $GuestScriptRoot 'write-lastboot.ps1'
+    $hostBootScript = Join-Path $HostOutputRoot 'write-lastboot.ps1'
+    $guestBootPath = Join-Path $GuestOutputRoot 'threat-file-hash-lastboot.txt'
+    $hostBootPath = Join-Path $hostRoot 'threat-file-hash-lastboot.txt'
+    $bootScript = @'
+param([string]$OutputPath)
+$boot = (Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime
+Set-Content -Path $OutputPath -Value $boot.ToString('o') -Encoding UTF8
+'@
+
+    Set-Content -Path $hostBootScript -Value $bootScript -Encoding UTF8
+    Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostBootScript, $guestBootScript) | Out-Null
+    Invoke-GuestProgram -FilePath 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' -ArgumentList @(
+        '-NoProfile',
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        $guestBootScript,
+        '-OutputPath',
+        $guestBootPath
+    )
+    Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestBootPath, $hostBootPath) | Out-Null
+    return [DateTimeOffset]::Parse((Get-Content -Path $hostBootPath -Raw).Trim())
+}
+
+function Wait-GuestReboot {
+    param([DateTimeOffset]$PreviousBoot, [int]$TimeoutSeconds = 600)
+
+    $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+    while ((Get-Date) -lt $deadline) {
+        try {
+            $state = Invoke-Vmrun -Arguments @('-T', 'ws', 'checkToolsState', $VmPath)
+            if ($state -match 'running|installed') {
+                $currentBoot = Get-GuestLastBootUpTime
+                if ($currentBoot -gt $PreviousBoot) {
+                    Start-Sleep -Seconds 20
+                    return
+                }
+            }
+        }
+        catch {
+        }
+
+        Start-Sleep -Seconds 5
+    }
+
+    throw 'Guest reboot did not complete in time.'
+}
+
+function Set-GuestDwordValue {
+    param([string]$RegistryKeyPath, [string]$Name, [int]$Value)
+
+    Invoke-GuestProgram -FilePath 'C:\Windows\System32\reg.exe' -ArgumentList @(
+        'add',
+        $RegistryKeyPath.Replace('HKLM:\', 'HKLM\').Replace('HKCU:\', 'HKCU\'),
+        '/v',
+        $Name,
+        '/t',
+        'REG_DWORD',
+        '/d',
+        "$Value",
+        '/f'
+    )
+}
+
+function Remove-GuestValue {
+    param([string]$RegistryKeyPath, [string]$Name)
+
+    try {
+        Invoke-GuestProgram -FilePath 'C:\Windows\System32\reg.exe' -ArgumentList @(
+            'delete',
+            $RegistryKeyPath.Replace('HKLM:\', 'HKLM\').Replace('HKCU:\', 'HKCU\'),
+            '/v',
+            $Name,
+            '/f'
+        )
+    }
+    catch {
+    }
+}
+
 Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $VmPath, $SnapshotName) | Out-Null
 Ensure-VmRunning
 Wait-GuestReady
@@ -113,7 +219,17 @@ foreach ($scriptPair in @(
     Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $scriptPair.Host, $scriptPair.Guest) | Out-Null
 }
 
+if ($GuestRebootBeforeCapture -and $Mode -ne 'baseline') {
+    Set-GuestDwordValue -RegistryKeyPath $registryPath -Name $valueName -Value $State
+    $previousBoot = Get-GuestLastBootUpTime
+    Invoke-GuestProgram -FilePath 'C:\Windows\System32\shutdown.exe' -ArgumentList @('/r', '/t', '0', '/f')
+    Wait-GuestReboot -PreviousBoot $previousBoot
+}
+
 $activityCommand = "& '$guestActivityScript' -OutputJson '$guestActivityJson' -OutputEvents '$guestActivityTxt' -OutputError '$guestActivityError'"
+if ($RestartWinDefend) {
+    $activityCommand += ' -RestartWinDefend'
+}
 
 $matchFragments = @(
     'HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\ThreatFileHashLogging',
@@ -170,6 +286,10 @@ foreach ($pair in @(
     }
     catch {
     }
+}
+
+if ($GuestRebootBeforeCapture -and $Mode -ne 'baseline') {
+    Remove-GuestValue -RegistryKeyPath $registryPath -Name $valueName
 }
 
 if ($guestRunFailed) {

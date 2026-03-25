@@ -1,6 +1,6 @@
 [CmdletBinding(PositionalBinding = $false)]
 param(
-    [ValidateSet('baseline', 'set')]
+    [ValidateSet('baseline', 'set', 'capture')]
     [string]$Mode = 'baseline',
 
     [Parameter(Mandatory = $true)]
@@ -122,7 +122,7 @@ try {
     if ($Mode -eq 'baseline') {
         Remove-ItemProperty -Path $RegistryPath -Name $ValueName -ErrorAction SilentlyContinue
     }
-    else {
+    elseif ($Mode -eq 'set') {
         New-Item -Path $RegistryPath -Force | Out-Null
         New-ItemProperty -Path $RegistryPath -Name $ValueName -PropertyType DWord -Value $State -Force | Out-Null
     }
