@@ -1,0 +1,19 @@
+﻿{
+    "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "before":  {
+                   "DisableIdleStatesAtBoot":  null,
+                   "IdleStateTimeout":  null,
+                   "ExitLatencyCheckEnabled":  null
+               },
+    "after":  {
+                  "DisableIdleStatesAtBoot":  1,
+                  "IdleStateTimeout":  0,
+                  "ExitLatencyCheckEnabled":  1
+              },
+    "restored":  {
+                     "DisableIdleStatesAtBoot":  null,
+                     "IdleStateTimeout":  null,
+                     "ExitLatencyCheckEnabled":  null
+                 },
+    "timestamp":  "2026-03-21T10:10:55.3974925+03:00"
+}

@@ -1,0 +1,191 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "developer.vs-solution-load",
+  "tweak_id": "developer.vs-solution-load",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the Visual Studio solution-loading tweak. Microsoft documents solution-loading behavior broadly, but this research pass did not capture a primary Microsoft registry contract for BackgroundAnalysis.",
+  "setting": {
+    "name": "Visual Studio Background Solution Analysis",
+    "category": "Developer",
+    "area": "Visual Studio Solution Loading",
+    "scope": "user",
+    "casual_explanation": "The app tries to reduce some background work while Visual Studio loads solutions. That can matter on big codebases, but it is not a normal Windows setting.",
+    "why_people_change_it": "People would change it when Visual Studio feels heavy on startup or when large solutions spend too much time in background analysis work.",
+    "tradeoffs_overview": "Reducing background analysis can improve startup responsiveness, but this research pass did not capture a primary Microsoft registry mapping for the value written by the app.",
+    "professional_notes": "Microsoft documents Visual Studio performance guidance and solution-loading concepts, but this pass did not capture a primary Microsoft source that publishes HKCU\\Software\\Microsoft\\VisualStudio\\SolutionLoading\\BackgroundAnalysis as the supported control surface. The current app writes 0 there, which is tracked only as an observed implementation.",
+    "targets": [
+      {
+        "target_id": "vs-solution-loading-background-analysis",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\VisualStudio\\SolutionLoading",
+        "value_name": "BackgroundAnalysis",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Primary Visual Studio mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft source that publishes BackgroundAnalysis as a supported Visual Studio registry setting.",
+            "evidence_ids": [
+              "vs-performance-doc"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Observed app profile",
+            "meaning": "The current app writes 0 here to reduce background solution analysis work in its current optimization profile.",
+            "evidence_ids": [
+              "app-developer-provider"
+            ]
+          }
+        ],
+        "notes": "Tracked as an observed Visual Studio registry mapping only."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "notes": "The current app writes BackgroundAnalysis = 0, but this pass did not capture a primary Microsoft registry contract for that Visual Studio value.",
+    "writes": [
+      {
+        "target_id": "vs-solution-loading-background-analysis",
+        "path": "HKCU\\Software\\Microsoft\\VisualStudio\\SolutionLoading",
+        "value_name": "BackgroundAnalysis",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative baseline",
+      "applies_to": "Visual Studio user profiles where this dataset has not validated the solution-loading registry contract",
+      "states": [
+        {
+          "target_id": "vs-solution-loading-background-analysis",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish the solution-loading registry write as validated until a primary Microsoft source is captured."
+        }
+      ],
+      "notes": "This keeps the Visual Studio tuning record honest without overstating confidence in the registry path.",
+      "evidence_ids": [
+        "vs-performance-doc"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Visual Studio implementation review"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "vs-solution-loading-background-analysis",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the registry write blocked until a primary Microsoft source is captured."
+        }
+      ],
+      "good_when": "You want to document the current solution-loading tweak without publishing it as a validated Visual Studio control.",
+      "bad_when": "You need a fully sourced Visual Studio solution-loading record.",
+      "tradeoffs": [
+        "The app behavior is documented.",
+        "The registry mapping remains blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "vs-performance-doc"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "vs-solution-loading-background-analysis",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Observed registry value written by the current app."
+        }
+      ],
+      "good_when": "You are documenting the app's current Visual Studio behavior for later cleanup.",
+      "bad_when": "You want a sourced Visual Studio solution-loading control.",
+      "tradeoffs": [
+        "The product's current write is captured.",
+        "The exact registry mapping is not yet validated from a primary Microsoft source."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until a primary Microsoft source for BackgroundAnalysis is captured or the product moves to a documented Visual Studio control surface.",
+      "evidence_ids": [
+        "vs-performance-doc",
+        "app-developer-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "vs-performance-doc",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Optimize Visual Studio performance",
+      "location": "https://learn.microsoft.com/en-us/visualstudio/ide/optimize-visual-studio-performance",
+      "summary": "Microsoft documents Visual Studio performance tuning and solution-loading guidance, but this research pass did not capture a primary registry contract for BackgroundAnalysis.",
+      "supports": [
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-developer-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "summary": "The provider writes BackgroundAnalysis = 0 under HKCU\\Software\\Microsoft\\VisualStudio\\SolutionLoading.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The feature area is well understood, but this research pass did not capture a primary Microsoft registry contract for the exact Visual Studio value written by the app.",
+    "blocking_issues": [
+      "No primary Microsoft source for HKCU\\Software\\Microsoft\\VisualStudio\\SolutionLoading\\BackgroundAnalysis was captured in this pass.",
+      "The current record can document the app behavior, but not validate it as the supported Visual Studio control surface."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/visualstudio/ide/optimize-visual-studio-performance",
+    "exact_quote_or_path": "Microsoft Learn: Optimize Visual Studio performance: Microsoft documents Visual Studio performance tuning and solution-loading guidance, but this research pass did not capture a primary registry contract for BackgroundAnalysis.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id vs-performance-doc (official-doc); deprecated audit trail."
+  }
+}

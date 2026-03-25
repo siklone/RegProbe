@@ -1,0 +1,195 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "system.graphics-page-fault-debug-mode",
+  "tweak_id": "system.graphics-page-fault-debug-mode",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for GraphicsDrivers page-fault debug mode. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\PageFaultDebugMode = 1 as a low-level graphics setting, but this research pass did not capture a primary Microsoft source that documents PageFaultDebugMode and its semantics.",
+  "setting": {
+    "name": "Graphics Page Fault Debug Mode",
+    "category": "System",
+    "area": "Graphics Drivers / Debug Setting",
+    "scope": "device",
+    "casual_explanation": "This looks like a low-level graphics debugging setting rather than a normal end-user option. Most people should never need to touch it.",
+    "why_people_change_it": "People would only change this when undoing manual graphics-debug experiments or following a very specific low-level troubleshooting workflow.",
+    "tradeoffs_overview": "Because this research pass did not capture a primary Microsoft document for the exact key and value, the safest outcome is to keep it documented only as an observed app write and block it from validated publication.",
+    "professional_notes": "The current app writes PageFaultDebugMode = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers. This research pass found adjacent official Microsoft graphics-debug documentation for TDR-related registry keys on the same GraphicsDrivers path, but did not capture a primary Microsoft page that publishes PageFaultDebugMode, its supported values, or its current support status. The setting is therefore treated as a low-confidence observed app implementation only.",
+    "targets": [
+      {
+        "target_id": "page-fault-debug-mode",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "value_name": "PageFaultDebugMode",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Official value mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft source that publishes supported values for PageFaultDebugMode.",
+            "evidence_ids": [
+              "ms-tdr-registry-keys"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Observed app value",
+            "meaning": "The current app treats 1 as the graphics page-fault debug mode baseline, but this record has not validated that meaning from a primary Microsoft source.",
+            "evidence_ids": [
+              "app-system-registry-provider"
+            ]
+          }
+        ],
+        "notes": "Tracked as an observed registry value only."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes PageFaultDebugMode = 1 under GraphicsDrivers, but this research pass has not yet captured a primary Microsoft source for the value.",
+    "writes": [
+      {
+        "target_id": "page-fault-debug-mode",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "value_name": "PageFaultDebugMode",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative baseline",
+      "applies_to": "Systems where this dataset has not yet validated PageFaultDebugMode as an official Microsoft graphics-debug control",
+      "states": [
+        {
+          "target_id": "page-fault-debug-mode",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish a validated baseline until a primary Microsoft source is captured."
+        }
+      ],
+      "notes": "This keeps the low-level graphics setting out of published presets until it is properly sourced.",
+      "evidence_ids": [
+        "ms-tdr-registry-keys"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Low-level graphics debugging notes"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "page-fault-debug-mode",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish or apply the value until a primary Microsoft source is captured."
+        }
+      ],
+      "good_when": "You want to document the app behavior without overstating confidence.",
+      "bad_when": "You need a primary-source Microsoft-backed page-fault debug registry control.",
+      "tradeoffs": [
+        "The low-level setting is documented honestly.",
+        "The value stays blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-tdr-registry-keys"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published validated presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "page-fault-debug-mode",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Observed app write treated as the current baseline by the product."
+        }
+      ],
+      "good_when": "You are documenting what the app currently writes for the graphics page-fault setting.",
+      "bad_when": "You need a validated Microsoft registry mapping.",
+      "tradeoffs": [
+        "The current app behavior is captured.",
+        "The exact value semantics remain unvalidated."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until a primary Microsoft source for PageFaultDebugMode is captured.",
+      "evidence_ids": [
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-tdr-registry-keys",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: TDR Registry Keys",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "summary": "Microsoft documents supported GraphicsDrivers debug keys such as TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime. This research pass used the page as the nearest official GraphicsDrivers debug surface, but it does not publish PageFaultDebugMode.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\PageFaultDebugMode = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "This research pass did not capture a primary Microsoft source that documents PageFaultDebugMode and its supported values.",
+    "blocking_issues": [
+      "No primary Microsoft source for PageFaultDebugMode was captured in this research pass.",
+      "The current app write cannot be published as a validated graphics-debug control until its semantics are sourced."
+    ]
+  },
+  "open_questions": [
+    "Is PageFaultDebugMode documented in a Microsoft primary source outside the current GraphicsDrivers debug pages?",
+    "Should this tweak be removed from user-facing presets unless its source and intent can be proven?"
+  ],
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "research/_source-mirrors/decompiled-pseudocode/dxgmms2/-VidSchiAllowToDebugPageFault@@YAXPEAU_VIDSCH_DMA_PACKET@@@Z.c",
+    "exact_quote_or_path": "if ( !g_PageFaultDebugMode && !KdRefreshDebuggerNotPresent() ) ... \"To disable debug breaks on page fault, run \\\"?? dxgmms2!g_PageFaultDebugMode=1\\\" command\" ... &g_PageFaultDebugMode.",
+    "key_found_on_page": true,
+    "notes": "Page-fault debug-mode audit trail. The decompiled code exposes the exact debug gate and its toggle semantics."
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-cross-device-experiences.policy",
+  "tweak_id": "privacy.disable-cross-device-experiences.policy",
+  "record_status": "validated",
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "summary": "Controls the official machine policy for Cross-Device Experiences. The current app writes EnableCdp = 0 as part of the broader bundle, but this child record tracks only the documented machine policy while the user-side CDP preset values remain in the deprecated parent audit trail.",
+  "setting": {
+    "name": "Cross-Device Experiences Machine Policy",
+    "category": "Privacy",
+    "area": "Machine Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can let devices belonging to the same user discover each other and continue some experiences across devices. This policy controls the official machine-level part of that feature.",
+    "why_people_change_it": "People turn it off for privacy or to avoid device discoverability, while others keep it on for cross-device convenience.",
+    "tradeoffs_overview": "Turning it off reduces discoverability and continue experiences. Unlike the broader parent bundle, this record is just the documented machine policy and is fully sourced.",
+    "professional_notes": "GroupPolicy.admx documents HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp with enabledValue 1 and disabledValue 0. The app writes EnableCdp = 0 as part of the broader cross-device bundle; the user-side CDP preset values remain tracked only in the deprecated parent audit trail.",
+    "targets": [
+      {
+        "target_id": "enable-cdp-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "EnableCdp",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The device follows the Windows edition default for continue experiences.",
+            "evidence_ids": [
+              "ms-admx-grouppolicy-enablecdp",
+              "local-grouppolicy-adml-enablecdp",
+              "nohuto-enablecdp-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Continue experiences blocked",
+            "meaning": "The device is not discoverable by other devices and cannot participate in cross-device experiences.",
+            "evidence_ids": [
+              "ms-admx-grouppolicy-enablecdp",
+              "local-grouppolicy-admx-enablecdp",
+              "local-grouppolicy-adml-enablecdp",
+              "app-privacy-provider",
+              "nohuto-enablecdp-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Continue experiences allowed",
+            "meaning": "The device can participate in cross-device experiences.",
+            "evidence_ids": [
+              "ms-admx-grouppolicy-enablecdp",
+              "local-grouppolicy-admx-enablecdp",
+              "local-grouppolicy-adml-enablecdp",
+              "nohuto-enablecdp-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app writes EnableCdp = 0 as part of the broader cross-device bundle. This child record documents only the official machine-policy portion of that behavior.",
+    "writes": [
+      {
+        "target_id": "enable-cdp-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "EnableCdp",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows mixed-scope baseline",
+      "applies_to": "Windows 10 and newer systems exposing Continue Experiences policy",
+      "states": [
+        {
+          "target_id": "enable-cdp-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Microsoft documents the device-policy default as depending on the Windows edition."
+        }
+      ],
+      "notes": "The user-side CDP values remain outside this child record.",
+      "evidence_ids": [
+        "ms-admx-grouppolicy-enablecdp",
+        "local-grouppolicy-adml-enablecdp",
+        "nohuto-enablecdp-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems where cross-device requirements are unknown"
+      ],
+      "avoid_for": [
+        "Environments that want a strict policy block"
+      ],
+      "states": [
+        {
+          "target_id": "enable-cdp-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official machine policy unset."
+        }
+      ],
+      "good_when": "You want the documented Windows edition default.",
+      "bad_when": "You need a clear and fully sourced preset for cross-device behavior.",
+      "tradeoffs": [
+        "Windows keeps its ordinary policy baseline.",
+        "The user-side preset values remain unresolved in the parent audit trail."
+      ],
+      "apply_allowed": true,
+      "recommended_for_general_users": false,
+      "evidence_ids": [
+        "ms-admx-grouppolicy-enablecdp",
+        "nohuto-enablecdp-admx"
+      ]
+    },
+    {
+      "profile_id": "block-cross-device-experiences",
+      "label": "Block cross-device experiences",
+      "intended_for": [
+        "Privacy-focused systems",
+        "Users who want continue experiences turned off"
+      ],
+      "avoid_for": [
+        "Anyone expecting the broader preset semantics to be fully official today"
+      ],
+      "states": [
+        {
+          "target_id": "enable-cdp-policy",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Official machine policy block."
+        }
+      ],
+      "good_when": "You want the documented machine-policy behavior only.",
+      "bad_when": "You want the legacy mixed preset model that also includes undocumented per-user values.",
+      "tradeoffs": [
+        "The official machine-policy part is clear.",
+        "The user-side preset values are intentionally excluded from this child record."
+      ],
+      "apply_allowed": true,
+      "recommended_for_general_users": false,
+      "evidence_ids": [
+        "ms-admx-grouppolicy-enablecdp",
+        "local-grouppolicy-admx-enablecdp",
+        "local-grouppolicy-adml-enablecdp",
+        "nohuto-enablecdp-admx"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-admx-grouppolicy-enablecdp",
+      "kind": "policy-csp",
+      "title": "Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp",
+      "summary": "Official documentation for the machine policy that controls whether the device can participate in continue experiences.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-grouppolicy-admx-enablecdp",
+      "kind": "official-doc",
+      "title": "Local Microsoft GroupPolicy.admx EnableCDP mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx",
+      "summary": "The local ADMX file maps EnableCdp to Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-grouppolicy-adml-enablecdp",
+      "kind": "official-doc",
+      "title": "Local Microsoft GroupPolicy.adml EnableCDP help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
+      "summary": "The local ADML help text explains that enabling the policy allows continue experiences, disabling it blocks them, and the not-configured default depends on the Windows edition.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes EnableCdp = 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\System as part of the broader cross-device bundle.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-enablecdp-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - EnableCdp policy",
+      "location": "research/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "GroupPolicy.admx shows EnableCdp under HKLM\\Software\\Policies\\Microsoft\\Windows\\System. The mirrored ExplainText says enabling the policy allows the device to participate in cross-device experiences and be discoverable by other Windows devices, while disabling it prevents discoverability and cross-device participation. EnabledValue=1 and DisabledValue=0 are explicit.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
+    }
+  ],
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp",
+    "exact_quote_or_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp",
+    "key_found_on_page": true,
+    "notes": "Local GroupPolicy.admx also maps EnableCdp with enabledValue 1 and disabledValue 0. The deprecated parent audit trail keeps the mixed user-side CDP preset values separate from this child record. Added nohuto mirror corroboration via nohuto-enablecdp-admx."
+  },
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official machine policy is clear, documented, and machine-checkable. The unresolved user-side CDP preset values remain in the deprecated parent audit trail rather than this child record.",
+    "blocking_issues": []
+  },
+  "open_questions": [
+    "Are the user-side CDP values fully official somewhere, or should they remain documented only as the deprecated parent audit trail?"
+  ]
+}

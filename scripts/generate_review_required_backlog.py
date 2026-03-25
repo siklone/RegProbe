@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-RESEARCH_ROOT = REPO_ROOT / "Docs" / "tweaks" / "research"
+RESEARCH_ROOT = REPO_ROOT / "research"
 RECORDS_ROOT = RESEARCH_ROOT / "records"
 OUTPUT_JSON = RESEARCH_ROOT / "review-required-backlog.json"
 FIX_OUTPUT_JSON = RESEARCH_ROOT / "fix-backlog.json"
@@ -437,7 +437,7 @@ def should_include_in_backlog(record: dict) -> bool:
 def load_review_records() -> list[dict]:
     records: list[dict] = []
     for path in sorted(RECORDS_ROOT.glob("*.json")):
-        data = json.loads(path.read_text(encoding="utf-8"))
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
         if not should_include_in_backlog(data):
             continue
         data["_source_file"] = str(path.relative_to(REPO_ROOT)).replace("\\", "/")

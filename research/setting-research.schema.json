@@ -1,0 +1,673 @@
+{
+  "$schema": "https://json.schema.org/draft/2020-12/schema",
+  "$id": "https://opentraceproject.local/research/setting-research.schema.json",
+  "title": "Open Trace Project Setting Research Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "tweak_id",
+    "record_status",
+    "summary",
+    "setting",
+    "app_current_implementation",
+    "windows_defaults",
+    "recommended_profiles",
+    "evidence",
+    "decision",
+    "last_reviewed_utc"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "enum": [
+        "1.0",
+        "1.1"
+      ]
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "legacy_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "tweak_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "record_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review-required",
+        "validated",
+        "published",
+        "deprecated"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "validation_proof": {
+      "$ref": "#/$defs/validationProof"
+    },
+    "setting": {
+      "$ref": "#/$defs/setting"
+    },
+    "app_current_implementation": {
+      "$ref": "#/$defs/appCurrentImplementation"
+    },
+    "windows_defaults": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/baselineState"
+      }
+    },
+    "recommended_profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/recommendedProfile"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/evidenceItem"
+      }
+    },
+    "decision": {
+      "$ref": "#/$defs/decision"
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tested_on": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/testedOn"
+      }
+    },
+    "last_reviewed_utc": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schema_version": {
+            "const": "1.1"
+          },
+          "record_status": {
+            "enum": [
+              "validated",
+              "published"
+            ]
+          }
+        },
+        "required": [
+          "schema_version",
+          "record_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "validation_proof"
+        ],
+        "properties": {
+          "validation_proof": {
+            "type": "object",
+            "required": [
+              "key_found_on_page"
+            ],
+            "properties": {
+              "key_found_on_page": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "valueLiteral": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "stateKind": {
+      "type": "string",
+      "enum": [
+        "value",
+        "missing",
+        "per-interface",
+        "feature-dependent",
+        "managed-elsewhere",
+        "unknown"
+      ]
+    },
+    "setting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "category",
+        "area",
+        "scope",
+        "casual_explanation",
+        "why_people_change_it",
+        "tradeoffs_overview",
+        "targets"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "area": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "device",
+            "user",
+            "per-interface",
+            "session",
+            "mixed"
+          ]
+        },
+        "casual_explanation": {
+          "type": "string"
+        },
+        "why_people_change_it": {
+          "type": "string"
+        },
+        "tradeoffs_overview": {
+          "type": "string"
+        },
+        "professional_notes": {
+          "type": "string"
+        },
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/settingTarget"
+          }
+        }
+      }
+    },
+    "settingTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_id",
+        "location_kind",
+        "path",
+        "value_name",
+        "value_type",
+        "allowed_values"
+      ],
+      "properties": {
+        "target_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "location_kind": {
+          "type": "string",
+          "enum": [
+            "registry",
+            "policy-csp",
+            "group-policy",
+            "wmi",
+            "service",
+            "command",
+            "scheduled-task",
+            "file",
+            "feature",
+            "api",
+            "unknown"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "value_name": {
+          "type": "string"
+        },
+        "value_type": {
+          "type": "string"
+        },
+        "allowed_values": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/allowedValue"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "allowedValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_kind",
+        "label",
+        "meaning"
+      ],
+      "properties": {
+        "state_kind": {
+          "$ref": "#/$defs/stateKind"
+        },
+        "value": {
+          "$ref": "#/$defs/valueLiteral"
+        },
+        "label": {
+          "type": "string"
+        },
+        "meaning": {
+          "type": "string"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "appCurrentImplementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "provider_source",
+        "writes"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "not-mapped",
+            "matches-research",
+            "partially-matches",
+            "mismatch-suspected",
+            "unknown"
+          ]
+        },
+        "provider_source": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "writes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/implementationWrite"
+          }
+        }
+      }
+    },
+    "implementationWrite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_id",
+        "path",
+        "value_name",
+        "value_type",
+        "state_kind"
+      ],
+      "properties": {
+        "target_id": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "value_name": {
+          "type": "string"
+        },
+        "value_type": {
+          "type": "string"
+        },
+        "state_kind": {
+          "$ref": "#/$defs/stateKind"
+        },
+        "value": {
+          "$ref": "#/$defs/valueLiteral"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "baselineState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "applies_to",
+        "states"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "applies_to": {
+          "type": "string"
+        },
+        "states": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/targetState"
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "targetState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_id",
+        "state_kind"
+      ],
+      "properties": {
+        "target_id": {
+          "type": "string"
+        },
+        "state_kind": {
+          "$ref": "#/$defs/stateKind"
+        },
+        "value": {
+          "$ref": "#/$defs/valueLiteral"
+        },
+        "rationale": {
+          "type": "string"
+        }
+      }
+    },
+    "recommendedProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_id",
+        "label",
+        "intended_for",
+        "states",
+        "good_when",
+        "bad_when",
+        "tradeoffs",
+        "apply_allowed"
+      ],
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "label": {
+          "type": "string"
+        },
+        "intended_for": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "avoid_for": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "states": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/targetState"
+          }
+        },
+        "good_when": {
+          "type": "string"
+        },
+        "bad_when": {
+          "type": "string"
+        },
+        "tradeoffs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "apply_allowed": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evidenceItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "kind",
+        "title",
+        "location",
+        "summary",
+        "supports",
+        "strength"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "official-doc",
+            "policy-csp",
+            "repo-code",
+            "repo-doc",
+            "ui-toggle-diff",
+            "registry-observation",
+            "procmon-trace",
+            "etw-trace",
+            "decompilation",
+            "vm-test",
+            "community-report",
+            "inference"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "supports": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "path",
+              "value",
+              "default",
+              "allowed-values",
+              "behavior",
+              "side-effects",
+              "ui-mapping",
+              "app-mismatch",
+              "version-scope",
+              "risk"
+            ]
+          }
+        },
+        "strength": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        }
+      }
+    },
+    "validationProof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_url",
+        "exact_quote_or_path",
+        "key_found_on_page"
+      ],
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exact_quote_or_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "key_found_on_page": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "confidence",
+        "apply_allowed",
+        "recommended_for_general_users",
+        "restore_default_supported",
+        "restore_previous_supported",
+        "needs_vm_validation",
+        "why",
+        "blocking_issues"
+      ],
+      "properties": {
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ]
+        },
+        "apply_allowed": {
+          "type": "boolean"
+        },
+        "recommended_for_general_users": {
+          "type": "boolean"
+        },
+        "restore_default_supported": {
+          "type": "boolean"
+        },
+        "restore_previous_supported": {
+          "type": "boolean"
+        },
+        "needs_vm_validation": {
+          "type": "boolean"
+        },
+        "why": {
+          "type": "string"
+        },
+        "blocking_issues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "testedOn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "environment",
+        "os",
+        "notes"
+      ],
+      "properties": {
+        "environment": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "edition": {
+          "type": "string"
+        },
+        "build": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.disable-remote-assistance",
+  "tweak_id": "security.disable-remote-assistance",
+  "record_status": "validated",
+  "summary": "Policy-backed control for Solicited Remote Assistance. The local Microsoft RemoteAssistance.admx file explicitly documents the same Terminal Services policy key and fAllowToGetHelp value name that the app uses.",
+  "setting": {
+    "name": "Solicited Remote Assistance",
+    "category": "Security",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Remote Assistance lets a user invite someone to help with the PC remotely. This policy decides whether that built-in help feature is allowed.",
+    "why_people_change_it": "People disable it to reduce remote access surface area on machines that do not use Remote Assistance. They keep it enabled when support staff or family help still relies on the built-in feature.",
+    "tradeoffs_overview": "Turning it off reduces one remote-help entry point, but it also removes the built-in way for users to ask for Remote Assistance.",
+    "professional_notes": "RemoteAssistance.admx documents RA_Solicit under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\Terminal Services with value fAllowToGetHelp. Enabled policy sets 1 and disabled policy sets 0.",
+    "targets": [
+      {
+        "target_id": "fallowtogethelp",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+        "value_name": "fAllowToGetHelp",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Users can control Solicited Remote Assistance through the normal Windows settings.",
+            "evidence_ids": [
+              "ms-remote-assistance-csp",
+              "local-remoteassistance-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Solicited Remote Assistance disabled",
+            "meaning": "Users cannot ask for help by using the built-in Solicited Remote Assistance feature.",
+            "evidence_ids": [
+              "ms-remote-assistance-csp",
+              "local-remoteassistance-admx",
+              "local-remoteassistance-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Solicited Remote Assistance enabled",
+            "meaning": "Users can ask for help by using the built-in Solicited Remote Assistance feature.",
+            "evidence_ids": [
+              "ms-remote-assistance-csp",
+              "local-remoteassistance-admx",
+              "local-remoteassistance-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The current app writes fAllowToGetHelp = 0, which matches the documented disabled policy state.",
+    "writes": [
+      {
+        "target_id": "fallowtogethelp",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+        "value_name": "fAllowToGetHelp",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows editions with Solicited Remote Assistance policy support",
+      "states": [
+        {
+          "target_id": "fallowtogethelp",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "If the policy is not configured, users can control the feature through Windows."
+        }
+      ],
+      "notes": "This record tracks the policy baseline, not firewall or additional Remote Assistance prerequisites.",
+      "evidence_ids": [
+        "ms-remote-assistance-csp",
+        "local-remoteassistance-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems where built-in help may still be needed"
+      ],
+      "avoid_for": [
+        "Machines that should minimize remote-help surface area"
+      ],
+      "states": [
+        {
+          "target_id": "fallowtogethelp",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You still want the built-in Remote Assistance option available.",
+      "bad_when": "You want to reduce remote-help features on the machine.",
+      "tradeoffs": [
+        "Users keep access to built-in Remote Assistance.",
+        "A remote-help surface remains available."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-remote-assistance-csp"
+      ]
+    },
+    {
+      "profile_id": "disable-remote-assistance",
+      "label": "Disable Remote Assistance",
+      "intended_for": [
+        "Security-focused systems",
+        "Machines that do not use built-in Remote Assistance"
+      ],
+      "avoid_for": [
+        "Support workflows that still rely on Solicited Remote Assistance"
+      ],
+      "states": [
+        {
+          "target_id": "fallowtogethelp",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable Solicited Remote Assistance by policy."
+        }
+      ],
+      "good_when": "You want to remove this built-in help path as part of a stricter support and access baseline.",
+      "bad_when": "Users still need to invite helpers by using the Windows feature.",
+      "tradeoffs": [
+        "Remote-help surface is reduced.",
+        "The built-in ask-for-help workflow stops working."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-remote-assistance-csp",
+        "local-remoteassistance-admx",
+        "app-security-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-remote-assistance-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: RemoteAssistance / SolicitedRemoteAssistance",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-remoteassistance",
+      "summary": "Microsoft documents the Solicited Remote Assistance policy and maps it to fAllowToGetHelp under the Terminal Services policy key.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-remoteassistance-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft RemoteAssistance.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/RemoteAssistance.admx",
+      "summary": "The local ADMX file maps RA_Solicit to fAllowToGetHelp with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-remoteassistance-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft RemoteAssistance.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/RemoteAssistance.adml",
+      "summary": "The local ADML help text explains the enabled, disabled, and not configured behavior for Solicited Remote Assistance.",
+      "supports": [
+        "default",
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The provider writes fAllowToGetHelp = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft RemoteAssistance.admx file explicitly defines RA_Solicit under Software\\Policies\\Microsoft\\Windows NT\\Terminal Services with valueName fAllowToGetHelp, and the ADML help text states that the policy turns Solicited Remote Assistance on or off. The app writes that documented disabled policy state.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T19:57:17.8070811+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/RemoteAssistance.admx",
+    "exact_quote_or_path": "<policy name=\"RA_Solicit\" class=\"Machine\" ... key=\"Software\\policies\\Microsoft\\Windows NT\\Terminal Services\" valueName=\"fAllowToGetHelp\">",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same Terminal Services policy key and fAllowToGetHelp value used by the app. The paired ADML help text states that this policy turns Solicited Remote Assistance on or off."
+  }
+}

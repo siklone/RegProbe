@@ -2,37 +2,38 @@
 from __future__ import annotations
 
 import json
+import os
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-EVIDENCE_INDEX_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-index.json"
-OUTPUT_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-atlas.md"
-REDACTED_USER = "<USER>"
-HOME_PATH = str(Path.home())
-HOME_PATH_FWD = HOME_PATH.replace("\\", "/")
-USER_PATH_REPLACEMENTS = {
-    HOME_PATH: HOME_PATH.replace(Path.home().name, REDACTED_USER),
-    HOME_PATH_FWD: HOME_PATH_FWD.replace(Path.home().name, REDACTED_USER),
-}
+from research_path_lib import REPO_ROOT, RESEARCH_ROOT, display_reference_label, linkify_reference_text, normalize_reference
 
-
-def sanitize_text(value: Any) -> str:
-    text = "" if value is None else str(value)
-    for source, replacement in USER_PATH_REPLACEMENTS.items():
-        text = text.replace(source, replacement)
-    return text
+EVIDENCE_INDEX_PATH = RESEARCH_ROOT / "evidence-index.json"
+OUTPUT_PATH = RESEARCH_ROOT / "evidence-atlas.md"
 
 
 def md_escape(value: Any) -> str:
-    text = sanitize_text(value)
-    return text.replace("|", "\\|").replace("\n", "<br>")
+    text = "" if value is None else str(value)
+    return text.replace("|", "\\|").replace("\r", "").replace("\n", "<br>")
 
 
 def md_code(value: Any) -> str:
-    text = sanitize_text(value)
+    text = "" if value is None else str(value)
     return "`" + text.replace("`", "\\`") + "`"
+
+
+def md_link(target: str, label: str | None = None) -> str:
+    normalized = normalize_reference(target)
+    if not normalized:
+        return md_escape(label or target)
+
+    if normalized.startswith("http://") or normalized.startswith("https://"):
+        return f"[{md_escape(label or normalized)}]({normalized})"
+
+    absolute = REPO_ROOT / normalized.replace("/", os.sep)
+    relative = os.path.relpath(absolute, OUTPUT_PATH.parent).replace("\\", "/")
+    return f"[{md_escape(label or display_reference_label(normalized))}]({relative})"
 
 
 def format_value(value: Any) -> str:
@@ -53,10 +54,6 @@ def render_table(headers: list[str], rows: list[list[str]]) -> list[str]:
     return out
 
 
-def as_lines(text: str) -> list[str]:
-    return text.splitlines() if text else []
-
-
 def load_index() -> dict[str, Any]:
     with EVIDENCE_INDEX_PATH.open("r", encoding="utf-8") as handle:
         return json.load(handle)
@@ -69,7 +66,7 @@ def group_records(records: list[dict[str, Any]]) -> dict[str, dict[str, list[dic
         category = record.get("category", "Uncategorized") or "Uncategorized"
         grouped[status][category].append(record)
     for status_map in grouped.values():
-        for category, rows in status_map.items():
+        for rows in status_map.values():
             rows.sort(key=lambda item: item.get("record_id") or "")
     return grouped
 
@@ -84,7 +81,7 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
         ["Category", md_code(record.get("category"))],
         ["Area", md_code(record.get("area"))],
         ["Scope", md_code(record.get("scope"))],
-        ["Source file", md_code(record.get("source_file"))],
+        ["Source file", md_link(str(record.get("source_file") or ""))],
         ["Apply allowed", md_code((record.get("decision") or {}).get("apply_allowed"))],
         ["Confidence", md_code((record.get("decision") or {}).get("confidence"))],
         ["Needs VM validation", md_code((record.get("decision") or {}).get("needs_vm_validation"))],
@@ -99,7 +96,7 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
     lines.append("")
     impl_rows = [
         ["Status", md_code(impl.get("status"))],
-        ["Provider source", md_code(impl.get("provider_source"))],
+        ["Provider source", md_escape(impl.get("provider_source"))],
         ["Notes", md_escape(impl.get("notes"))],
     ]
     lines.extend(render_table(["Field", "Value"], impl_rows))
@@ -116,12 +113,11 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
                 md_code(write.get("state_kind")),
                 md_escape(write.get("notes")),
             ])
-        lines.append("Current write(s):")
+        lines.append("Current writes")
         lines.append("")
         lines.extend(render_table(["Target", "Path", "Value", "State", "Kind", "Notes"], write_rows))
         lines.append("")
 
-    provenance = record.get("provenance") or {}
     evidence_class = record.get("evidence_class") or {}
     lines.append("**Evidence class**")
     lines.append("")
@@ -134,11 +130,12 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
     lines.extend(render_table(["Field", "Value"], class_rows))
     lines.append("")
 
+    provenance = record.get("provenance") or {}
     lines.append("**Sources**")
     lines.append("")
     provenance_rows = [
         ["Coverage state", md_code(provenance.get("coverage_state"))],
-        ["Has nohuto evidence", md_code(provenance.get("has_nohuto_evidence"))],
+        ["Has nohuto lineage", md_code(provenance.get("has_nohuto_evidence"))],
         ["Has Windows Internals notes", md_code(provenance.get("has_windows_internals_context"))],
         ["Needs review", md_code(provenance.get("needs_review"))],
         ["Source repositories", md_escape(", ".join(provenance.get("source_repositories", []) or []))],
@@ -147,45 +144,31 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
     ]
     lines.extend(render_table(["Field", "Value"], provenance_rows))
     lines.append("")
-    if provenance.get("nohuto_references"):
-        lines.append("Nohuto lineage references:")
+    for label, key in (
+        ("Nohuto lineage references", "nohuto_references"),
+        ("Windows Internals references", "windows_internals_references"),
+        ("Other source references", "other_references"),
+    ):
+        refs = provenance.get(key) or []
+        if not refs:
+            continue
+        lines.append(f"{label}:")
         lines.append("")
-        nohuto_rows = []
-        for ref in provenance.get("nohuto_references", []) or []:
-            nohuto_rows.append([
-                md_escape(ref.get("Title")),
-                md_escape(ref.get("Url")),
+        ref_rows = []
+        for ref in refs:
+            row = [md_escape(ref.get("Title"))]
+            if key == "other_references":
+                row.insert(0, md_escape(ref.get("Kind")))
+            row.extend([
+                linkify_reference_text(ref.get("Url"), OUTPUT_PATH),
                 md_escape(ref.get("Summary")),
             ])
-        lines.extend(render_table(["Title", "URL", "Summary"], nohuto_rows))
-        lines.append("")
-    if provenance.get("windows_internals_references"):
-        lines.append("Windows Internals references:")
-        lines.append("")
-        internals_rows = []
-        for ref in provenance.get("windows_internals_references", []) or []:
-            internals_rows.append([
-                md_escape(ref.get("Title")),
-                md_escape(ref.get("Url")),
-                md_escape(ref.get("Summary")),
-            ])
-        lines.extend(render_table(["Title", "URL", "Summary"], internals_rows))
-        lines.append("")
-    if provenance.get("other_references"):
-        lines.append("Other source references:")
-        lines.append("")
-        other_rows = []
-        for ref in provenance.get("other_references", []) or []:
-            other_rows.append([
-                md_escape(ref.get("Kind")),
-                md_escape(ref.get("Title")),
-                md_escape(ref.get("Url")),
-                md_escape(ref.get("Summary")),
-            ])
-        lines.extend(render_table(["Kind", "Title", "URL", "Summary"], other_rows))
+            ref_rows.append(row)
+        headers = ["Title", "Location", "Summary"] if key != "other_references" else ["Kind", "Title", "Location", "Summary"]
+        lines.extend(render_table(headers, ref_rows))
         lines.append("")
 
-    targets = record.get("setting", {}).get("targets", []) or []
+    targets = record.get("targets", []) or []
     lines.append("**Targets**")
     lines.append("")
     for target in targets:
@@ -198,7 +181,7 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
             ["Value type", md_code(target.get("value_type"))],
         ]
         if target.get("notes"):
-            target_rows.append(["Notes", md_escape(target.get("notes"))])
+            target_rows.append(["Notes", linkify_reference_text(str(target.get("notes")), OUTPUT_PATH)])
         lines.extend(render_table(["Field", "Value"], target_rows))
         lines.append("")
         allowed_rows = []
@@ -218,24 +201,35 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
     if defaults:
         lines.append("**Windows defaults**")
         lines.append("")
+        default_rows = []
         for default in defaults:
-            lines.append(f"- {md_escape(default.get('label'))} ({md_escape(default.get('applies_to'))})")
+            states = []
             for state in default.get("states", []) or []:
-                lines.append(
-                    f"  - {md_escape(state.get('target_id'))}: {md_escape(state.get('state_kind'))} "
-                    f"{format_value(state.get('value'))} — {md_escape(state.get('rationale'))}"
+                states.append(
+                    f"{state.get('target_id')}: {state.get('state_kind')} {state.get('value')!r} - {state.get('rationale')}"
                 )
+            default_rows.append([
+                md_escape(default.get("label")),
+                md_escape(default.get("applies_to")),
+                md_escape("; ".join(states)),
+            ])
+        lines.extend(render_table(["Label", "Applies to", "States"], default_rows))
         lines.append("")
 
     profiles = record.get("recommended_profiles", []) or []
     if profiles:
         lines.append("**Recommended profiles**")
         lines.append("")
+        profile_rows = []
         for profile in profiles:
-            lines.append(
-                f"- {md_code(profile.get('profile_id'))}: {md_escape(profile.get('label'))} "
-                f"(apply_allowed={md_escape(profile.get('apply_allowed'))})"
-            )
+            profile_rows.append([
+                md_code(profile.get("profile_id")),
+                md_escape(profile.get("label")),
+                md_escape(profile.get("intended_for")),
+                md_escape(profile.get("avoid_for")),
+                md_code(profile.get("apply_allowed")),
+            ])
+        lines.extend(render_table(["Profile", "Label", "Intended for", "Avoid for", "Apply allowed"], profile_rows))
         lines.append("")
 
     evidence = record.get("evidence", []) or []
@@ -249,7 +243,7 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
                 md_code(item.get("kind")),
                 md_code(item.get("origin")),
                 md_escape(item.get("title")),
-                md_escape(item.get("location")),
+                linkify_reference_text(item.get("location"), OUTPUT_PATH),
                 md_code(item.get("strength")),
                 md_escape(", ".join(item.get("supports", []) or [])),
             ])
@@ -261,12 +255,12 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
         lines.append("**Validation proof**")
         lines.append("")
         proof_rows = [
-            ["Source URL", md_escape(proof.get("source_url"))],
-            ["Exact quote / path", md_escape(proof.get("exact_quote_or_path"))],
+            ["Source", linkify_reference_text(proof.get("source_url"), OUTPUT_PATH)],
+            ["Exact quote / path", linkify_reference_text(proof.get("exact_quote_or_path"), OUTPUT_PATH)],
             ["Key found on page", md_code(proof.get("key_found_on_page"))],
         ]
         if proof.get("notes"):
-            proof_rows.append(["Notes", md_escape(proof.get("notes"))])
+            proof_rows.append(["Notes", linkify_reference_text(str(proof.get("notes")), OUTPUT_PATH)])
         lines.extend(render_table(["Field", "Value"], proof_rows))
         lines.append("")
 
@@ -308,8 +302,8 @@ def main() -> int:
     lines: list[str] = []
     lines.append("# Evidence Atlas")
     lines.append("")
-    lines.append("This report consolidates every tweak record into a single human-readable atlas of key/value mappings, allowed values, evidence, and validation proof.")
-    lines.append("Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.")
+    lines.append("This report collects every tweak record into one place: keys, values, evidence, runtime proof, and source links.")
+    lines.append("Nohuto references only show upstream dump or naming links. Value semantics come from the record evidence and validation proof.")
     lines.append("")
     lines.append("## Summary")
     lines.append("")
@@ -329,7 +323,7 @@ def main() -> int:
             summary_rows.append([f"Class {class_id}", str(class_counts[class_id])])
     lines.extend(render_table(["Field", "Value"], summary_rows))
     lines.append("")
-    lines.append("## Category Coverage")
+    lines.append("## Category coverage")
     lines.append("")
     category_rows = [[md_escape(category), str(count)] for category, count in sorted(category_counts.items())]
     lines.extend(render_table(["Category", "Records"], category_rows))

@@ -1,0 +1,226 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "visibility.disable-window-animations",
+  "tweak_id": "visibility.disable-window-animations",
+  "record_status": "validated",
+  "summary": "Machine policy for desktop window animations. The local Microsoft DWM.admx file documents the same DWM policy key and DisallowAnimations value used by the app.",
+  "setting": {
+    "name": "Window Animations",
+    "category": "Visibility",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can animate windows when they open, close, minimize, and restore. This policy decides whether those window animations are allowed.",
+    "why_people_change_it": "People change this to reduce visual motion, simplify the desktop feel, or align Windows behavior with reduced-motion preferences on some systems.",
+    "tradeoffs_overview": "Disabling window animations reduces motion, but it also removes a familiar part of the desktop experience.",
+    "professional_notes": "DWM.admx defines both user and machine versions of DisallowAnimations. The app uses the machine policy at HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations with enabledValue 1 and disabledValue 0. The local ADML help text also notes that logoff is required for the policy to apply.",
+    "targets": [
+      {
+        "target_id": "disallow-animations",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM",
+        "value_name": "DisallowAnimations",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The device is not forcing the DWM window-animation policy.",
+            "evidence_ids": [
+              "local-dwm-admx",
+              "local-dwm-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Window animations allowed",
+            "meaning": "The policy is disabled and normal window animations stay on.",
+            "evidence_ids": [
+              "local-dwm-admx",
+              "local-dwm-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Window animations blocked",
+            "meaning": "The policy is enabled and window animations are turned off.",
+            "evidence_ids": [
+              "local-dwm-admx",
+              "local-dwm-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The current app writes DisallowAnimations = 1 at machine scope, which matches the documented blocked state.",
+    "writes": [
+      {
+        "target_id": "disallow-animations",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM",
+        "value_name": "DisallowAnimations",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows machine-policy default",
+      "applies_to": "Windows Vista and newer systems that expose the DWM animation policy",
+      "states": [
+        {
+          "target_id": "disallow-animations",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The machine policy is not configured by default."
+        }
+      ],
+      "notes": "The local ADML help text says window animations are on when the policy is disabled or not configured.",
+      "evidence_ids": [
+        "local-dwm-admx",
+        "local-dwm-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Users who like the normal Windows desktop feel"
+      ],
+      "avoid_for": [
+        "Users who prefer reduced motion"
+      ],
+      "states": [
+        {
+          "target_id": "disallow-animations",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave window animations under normal Windows control."
+        }
+      ],
+      "good_when": "You want to keep the standard animated window transitions.",
+      "bad_when": "You want a calmer or less animated desktop.",
+      "tradeoffs": [
+        "Normal window animations remain available.",
+        "The device does not enforce a motion reduction policy."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-dwm-adml"
+      ]
+    },
+    {
+      "profile_id": "reduced-motion",
+      "label": "Reduced motion",
+      "intended_for": [
+        "Users who dislike motion",
+        "Minimalist desktop setups"
+      ],
+      "avoid_for": [
+        "Users who want the standard animated desktop look"
+      ],
+      "states": [
+        {
+          "target_id": "disallow-animations",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Turn off window animations through DWM policy."
+        }
+      ],
+      "good_when": "You want less motion during restore, minimize, and maximize actions.",
+      "bad_when": "You like animated window transitions.",
+      "tradeoffs": [
+        "Desktop motion is reduced.",
+        "A logoff is required for the policy change to apply."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-dwm-admx",
+        "local-dwm-adml",
+        "app-visibility-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-dwm-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft DWM.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DWM.admx",
+      "summary": "The local ADMX file defines both user and machine DisallowAnimations policies with enabledValue 1 and disabledValue 0 at the DWM policy path.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-dwm-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft DWM.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DWM.adml",
+      "summary": "The local ADML help text says enabling the policy turns window animations off, disabling or not configuring it keeps them on, and logoff is required to apply the change.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes DisallowAnimations = 1 at machine scope for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-window-animations",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft DWM.admx file explicitly defines DisallowAnimations under SOFTWARE\\Policies\\Microsoft\\Windows\\DWM with enabledValue 1 and disabledValue 0, and the app writes the documented blocked value at that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:29:22.7863493+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DWM.admx",
+    "exact_quote_or_path": "<policy name=\"DwmDisallowAnimations_2\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\" valueName=\"DisallowAnimations\">",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same DWM machine policy surface used by the app. The paired ADML help text documents that enabling the policy turns window animations off and disabling or not configuring it keeps them on."
+  }
+}

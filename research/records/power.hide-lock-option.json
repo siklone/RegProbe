@@ -1,0 +1,248 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.hide-lock-option",
+  "tweak_id": "power.hide-lock-option",
+  "record_status": "validated",
+  "summary": "Policy-backed control for whether the Lock option is shown in the user tile menu. Useful for locked-down or simplified menus, but it removes one quick route to locking the session.",
+  "setting": {
+    "name": "Show Lock Option",
+    "category": "Power",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can show or hide the Lock action in the user tile menu. This policy decides whether that shortcut is visible.",
+    "why_people_change_it": "People hide it when they want a simpler menu or when they want to control which sign-in actions are visible to users.",
+    "tradeoffs_overview": "Hiding the Lock option makes the menu simpler, but it also removes one quick way for users to lock the session.",
+    "professional_notes": "WindowsExplorer.admx maps ShowLockOption under HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer with enabledValue 1 and disabledValue 0. WindowsExplorer.adml says enabled shows Lock, disabled hides it, and not configured lets users choose through Power Options Control Panel.",
+    "targets": [
+      {
+        "target_id": "show-lock-option",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "value_name": "ShowLockOption",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force Lock visibility and users can choose through the normal controls.",
+            "evidence_ids": [
+              "local-windowsexplorer-admx",
+              "local-windowsexplorer-adml",
+              "nohuto-showlockoption-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Lock option hidden",
+            "meaning": "The Lock option is never shown in the user tile menu.",
+            "evidence_ids": [
+              "local-windowsexplorer-admx",
+              "local-windowsexplorer-adml",
+              "app-power-provider",
+              "nohuto-showlockoption-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Lock option shown",
+            "meaning": "The Lock option is shown in the user tile menu.",
+            "evidence_ids": [
+              "local-windowsexplorer-admx",
+              "local-windowsexplorer-adml",
+              "nohuto-showlockoption-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+    "notes": "The current app writes ShowLockOption = 0, which matches the documented hide behavior.",
+    "writes": [
+      {
+        "target_id": "show-lock-option",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "value_name": "ShowLockOption",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows 8 and later systems exposing the Explorer policy",
+      "states": [
+        {
+          "target_id": "show-lock-option",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "notes": "Not configured leaves Lock visibility under the normal Windows controls.",
+      "evidence_ids": [
+        "local-windowsexplorer-admx",
+        "local-windowsexplorer-adml",
+        "nohuto-showlockoption-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users"
+      ],
+      "avoid_for": [
+        "Managed systems that want a simplified user menu"
+      ],
+      "states": [
+        {
+          "target_id": "show-lock-option",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep the normal Lock visibility behavior.",
+      "bad_when": "You want the Lock shortcut hidden by policy.",
+      "tradeoffs": [
+        "The Lock shortcut can remain visible.",
+        "No forced menu simplification is applied."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-windowsexplorer-adml",
+        "nohuto-showlockoption-admx"
+      ]
+    },
+    {
+      "profile_id": "simplified-user-menu",
+      "label": "Simplified user menu",
+      "intended_for": [
+        "Managed devices",
+        "Kiosk-like setups",
+        "Systems that want fewer visible session actions"
+      ],
+      "avoid_for": [
+        "Users who rely on the Lock shortcut"
+      ],
+      "states": [
+        {
+          "target_id": "show-lock-option",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Hide the Lock option from the user tile menu."
+        }
+      ],
+      "good_when": "You want a simpler visible sign-in action menu.",
+      "bad_when": "You want users to have an obvious Lock shortcut in the menu.",
+      "tradeoffs": [
+        "The Lock shortcut disappears from the menu.",
+        "Users must use another lock method such as keyboard shortcuts."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-windowsexplorer-admx",
+        "local-windowsexplorer-adml",
+        "app-power-provider",
+        "nohuto-showlockoption-admx"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-windowsexplorer-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft WindowsExplorer.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx",
+      "summary": "The local ADMX file maps ShowLockOption under HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-windowsexplorer-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft WindowsExplorer.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml",
+      "summary": "The local ADML help text says enabling the policy shows Lock, disabling it hides Lock, and not configuring it leaves the choice to the user through the normal controls.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-power-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
+      "summary": "The provider writes ShowLockOption = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-showlockoption-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - ShowLockOption policy",
+      "location": "research/_source-mirrors/win-config/power/desc.md",
+      "summary": "WindowsExplorer.admx shows ShowLockOption under HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer. The mirrored ExplainText says enabling the policy shows Lock in the user tile menu, disabling it never shows Lock, and not configuring it leaves the user able to choose the setting via Power Options Control Panel. The mirror also includes a DllHost.exe RegSetValue trace to HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FlyoutMenuSettings\\ShowLockOption with Data 1.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-power-hide-lock-option",
+      "kind": "procmon-trace",
+      "title": "Win25H2Clean reversible probe - ShowLockOption 0/1 toggle",
+      "location": "research/evidence-files/vm-tooling-staging/power_hide_lock_option_probe.txt",
+      "summary": "The guest probe wrote ShowLockOption=0 and ShowLockOption=1, queried the live registry after each write, opened the Start menu surface twice, and restored the original state; no direct registry read lines were captured in Procmon in this capture.",
+      "supports": [
+        "runtime writes",
+        "rollback",
+        "trigger attempt"
+      ],
+      "strength": "low"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft policy files document the exact policy surface, value semantics, and user-facing behavior. The app writes the documented hide state.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:50:40.9899199+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx",
+    "exact_quote_or_path": "<policy name=\"ShowLockOption\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"ShowLockOption\">; WindowsExplorer.adml: If you disable this policy setting, the lock option will never be shown in the User Tile menu.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. Win25H2Clean reversible probe at research/evidence-files/vm-tooling-staging/power_hide_lock_option_probe.txt confirmed writes for 0 and 1, live registry queries after each write, Start menu opening in both states, and restoration to the original state; no direct read lines were captured in Procmon."
+  }
+}

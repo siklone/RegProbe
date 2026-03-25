@@ -1,0 +1,6 @@
+﻿REGISTRY_PATH=HKLM\SYSTEM\CurrentControlSet\Control
+VALUE_NAME=WaitToKillServiceTimeout
+CANDIDATE=2500
+ORIGINAL={"path_exists":true,"value_exists":true,"value":"5000"}
+AFTER={"path_exists":true,"value_exists":true,"value":"2500"}
+RESTORED={"path_exists":true,"value_exists":true,"value":"5000"}

@@ -1,0 +1,207 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "explorer.show-type-overlay",
+  "tweak_id": "explorer.show-type-overlay",
+  "record_status": "validated",
+  "summary": "Observed Explorer runtime setting for ShowTypeOverlay. Microsoft Open Specifications maps displayIconThumb to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay with both Data: 0 and Data: 1 after Explorer restart.",
+  "setting": {
+    "name": "Display File Icons On Thumbnails",
+    "category": "Explorer",
+    "area": "Observed Explorer Runtime Setting",
+    "scope": "user",
+    "casual_explanation": "Explorer can show or hide file icons on top of thumbnails.",
+    "why_people_change_it": "People enable this when they want thumbnails to keep their file-type icon overlay, or disable it when they prefer cleaner thumbnails.",
+    "tradeoffs_overview": "This is a low-risk Explorer preference. Enabling it adds file-type icon overlays to thumbnails, while disabling it leaves thumbnails cleaner.",
+    "professional_notes": "Microsoft Open Specifications maps the displayIconThumb option to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay and defines 1 as enabled and 0 as disabled. The 25H2 raw registry dump lists ShowTypeOverlay under the current-user Explorer\\Advanced branch and the siloed user branches, while the 25H2 default-user hive sets ShowTypeOverlay = 1. A reversible Win25H2Clean Procmon probe on 2026-03-24 then confirmed live Explorer consumption: after writing ShowTypeOverlay = 0 and restarting Explorer, Explorer.EXE queried the value with Data: 0; after writing ShowTypeOverlay = 1 and restarting Explorer, Explorer.EXE queried the same value with Data: 1.",
+    "targets": [
+      {
+        "target_id": "explorer-showtypeoverlay-flag",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "value_name": "ShowTypeOverlay",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Do not show file icons on thumbnails",
+            "meaning": "Explorer does not show file icons on top of thumbnails. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart.",
+            "evidence_ids": [
+              "ms-gppref-global-folder-options-vista-displayiconthumb",
+              "dump-25h2-explorer-advanced-showtypeoverlay",
+              "procmon-showtypeoverlay-runtime"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Show file icons on thumbnails",
+            "meaning": "Explorer shows file icons on top of thumbnails. Microsoft documents 1 as the enabled state, the 25H2 default-user hive sets ShowTypeOverlay = 1, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart.",
+            "evidence_ids": [
+              "ms-gppref-global-folder-options-vista-displayiconthumb",
+              "dump-25h2-explorer-advanced-showtypeoverlay",
+              "procmon-showtypeoverlay-runtime"
+            ]
+          }
+        ],
+        "notes": "This record validates the documented 0/1 semantics against the live Explorer runtime surface on Win25H2Clean."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The app now exposes ShowTypeOverlay through VisibilityTweakProvider and writes the same HKCU Explorer\\Advanced value that the runtime probe validated.",
+    "writes": [
+      {
+        "target_id": "explorer-showtypeoverlay-flag",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "value_name": "ShowTypeOverlay",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "25H2 default-user baseline",
+      "applies_to": "25H2 default profile",
+      "states": [
+        {
+          "target_id": "explorer-showtypeoverlay-flag",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "HKCU25H2.reg sets ShowTypeOverlay = 1 in the 25H2 default-user hive."
+        }
+      ],
+      "notes": "The validated VM user baseline matched the 25H2 default-user hive.",
+      "evidence_ids": [
+        "dump-25h2-explorer-advanced-showtypeoverlay"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "show-file-icons-on-thumbnails",
+      "label": "Show file icons on thumbnails",
+      "intended_for": [
+        "Users who want file-type icon overlays visible on thumbnails"
+      ],
+      "avoid_for": [
+        "Users who prefer cleaner thumbnail previews"
+      ],
+      "states": [
+        {
+          "target_id": "explorer-showtypeoverlay-flag",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "This matches the documented enabled state, the 25H2 default-user hive, and the runtime-observed Explorer read."
+        }
+      ],
+      "good_when": "You want Explorer thumbnails to keep their file-type icon overlays.",
+      "bad_when": "You want cleaner thumbnails without icon overlays.",
+      "tradeoffs": [
+        "Adds file-type icon overlays to thumbnails.",
+        "Makes thumbnail previews slightly busier."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-gppref-global-folder-options-vista-displayiconthumb",
+        "dump-25h2-explorer-advanced-showtypeoverlay",
+        "procmon-showtypeoverlay-runtime"
+      ]
+    },
+    {
+      "profile_id": "hide-file-icons-on-thumbnails",
+      "label": "Hide file icons on thumbnails",
+      "intended_for": [
+        "Users who want cleaner thumbnail previews"
+      ],
+      "avoid_for": [
+        "Users who rely on visible icon overlays"
+      ],
+      "states": [
+        {
+          "target_id": "explorer-showtypeoverlay-flag",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "This matches the documented disabled state and the runtime-observed Explorer read."
+        }
+      ],
+      "good_when": "You want thumbnails without file-type icon overlays.",
+      "bad_when": "You rely on icon overlays for visual recognition.",
+      "tradeoffs": [
+        "Leaves thumbnails cleaner.",
+        "Removes the file-type icon overlay cue."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-gppref-global-folder-options-vista-displayiconthumb",
+        "dump-25h2-explorer-advanced-showtypeoverlay",
+        "procmon-showtypeoverlay-runtime"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-gppref-global-folder-options-vista-displayiconthumb",
+      "kind": "official-doc",
+      "title": "Microsoft Open Specifications: GlobalFolderOptionsVista displayIconThumb",
+      "location": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "summary": "Microsoft maps displayIconThumb to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay and states that it MUST be 1 to enable or 0 to disable.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "dump-25h2-explorer-advanced-showtypeoverlay",
+      "kind": "raw-registry-dump",
+      "title": "25H2 raw registry and default-hive corroboration for ShowTypeOverlay",
+      "location": "research/_source-mirrors/win-registry/records/25H2.txt; research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg",
+      "summary": "The 25H2 raw registry dump lists ShowTypeOverlay under the current-user Explorer\\Advanced branch and the siloed user branches, and the 25H2 default-user hive sets ShowTypeOverlay = 1.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "procmon-showtypeoverlay-runtime",
+      "kind": "procmon-trace",
+      "title": "Procmon capture - Explorer ShowTypeOverlay runtime surface",
+      "location": "research/evidence-files/vm-tooling-staging/showtypeoverlay-result.txt",
+      "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowTypeOverlay = 0 and ShowTypeOverlay = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay with matching Data: 0 and Data: 1 values.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft Open Specifications documents the exact ShowTypeOverlay path and 0/1 semantics, the 25H2 dump/default hive corroborate the value family on current builds, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states. This is a low-risk user-scope Explorer preference.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-24T09:12:00+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/vm-tooling-staging/showtypeoverlay-result.txt",
+    "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=1",
+    "key_found_on_page": true,
+    "notes": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe."
+  }
+}

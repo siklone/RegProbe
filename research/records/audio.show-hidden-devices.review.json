@@ -1,0 +1,161 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "audio.show-hidden-devices",
+  "tweak_id": "audio.show-hidden-devices",
+  "record_status": "validated",
+  "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled, so the registry surface is now validated as a live runtime preference on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.",
+  "setting": {
+    "name": "Show Hidden Audio Devices",
+    "category": "Audio",
+    "area": "Sound Control Panel DeviceCpl Flags",
+    "scope": "user",
+    "casual_explanation": "This makes hidden audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or driver cleanup.",
+    "why_people_change_it": "People enable it when they need to inspect or troubleshoot devices that the normal sound list does not show.",
+    "tradeoffs_overview": "Showing hidden devices can help debugging, but it can also expose stale or confusing audio entries that most users never need to see. This is a runtime-observed control-panel preference rather than a Microsoft-documented policy surface.",
+    "professional_notes": "The app writes ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl. On 2026-03-14, Procmon captures of rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 showed RegQueryValue reads for ShowHiddenDevices with Data:1 and Data:0 when the value was toggled and restored. That proves the classic Sound control panel consumes this registry value on this build. No primary Microsoft Learn or ADMX source for the DeviceCpl contract was captured in this pass, so the record is validated as a runtime-observed preference rather than as a fully documented Microsoft contract.",
+    "targets": [
+      {
+        "target_id": "audio-devicecpl-show-hidden",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+        "value_name": "ShowHiddenDevices",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Hide hidden audio devices",
+            "meaning": "Procmon confirmed that the classic Sound control panel reads ShowHiddenDevices = 0 on this build. This is the observed off state for the preference.",
+            "evidence_ids": [
+              "procmon-audio-show-hidden-devices"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Show hidden audio devices",
+            "meaning": "Procmon confirmed that the classic Sound control panel reads ShowHiddenDevices = 1 on this build. This is the observed show-hidden state used by the app.",
+            "evidence_ids": [
+              "procmon-audio-show-hidden-devices",
+              "app-audio-provider"
+            ]
+          }
+        ],
+        "notes": "Validated as a runtime-observed control-panel preference. The absent-value default was not captured in this pass."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/AudioTweakProvider.cs",
+    "notes": "The current app writes ShowHiddenDevices = 1, and Procmon confirmed that the classic Sound control panel reads the same value as a live preference on this build.",
+    "writes": [
+      {
+        "target_id": "audio-devicecpl-show-hidden",
+        "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+        "value_name": "ShowHiddenDevices",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Default state not captured",
+      "applies_to": "Classic Sound control panel profiles where the value is absent",
+      "states": [
+        {
+          "target_id": "audio-devicecpl-show-hidden",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default."
+        }
+      ],
+      "notes": "Use this record as a validated runtime preference map for 0 and 1, not as a complete Microsoft-documented default model.",
+      "evidence_ids": [
+        "procmon-audio-show-hidden-devices"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "show-hidden-audio-devices",
+      "label": "Show hidden audio devices",
+      "intended_for": [
+        "Audio troubleshooting",
+        "Advanced audio setup",
+        "Driver cleanup"
+      ],
+      "avoid_for": [
+        "General users who do not need extra device visibility"
+      ],
+      "states": [
+        {
+          "target_id": "audio-devicecpl-show-hidden",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Set the runtime-observed preference to the show-hidden state that the Sound control panel reads on this build."
+        }
+      ],
+      "good_when": "You need the classic Sound control panel to expose hidden devices.",
+      "bad_when": "You want the cleanest possible device list with fewer stale entries.",
+      "tradeoffs": [
+        "Hidden devices become visible in the classic Sound control panel.",
+        "The device list can become noisier or more confusing."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "procmon-audio-show-hidden-devices",
+        "app-audio-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "procmon-audio-show-hidden-devices",
+      "kind": "procmon-trace",
+      "title": "Procmon capture - Sound control panel ShowHiddenDevices runtime reads",
+      "location": "Local captures - research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md and research/evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md",
+      "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and Data:0 in separate reversible captures. That proves the classic Sound control panel consumes this registry value on this build.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-audio-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/AudioTweakProvider.cs",
+      "summary": "The provider writes ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, and the app writes the same show-hidden state with a clean restore story.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md",
+    "exact_quote_or_path": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:0.",
+    "key_found_on_page": true,
+    "notes": "The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report."
+  }
+}

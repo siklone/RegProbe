@@ -1,0 +1,216 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-restartable-apps",
+  "tweak_id": "system.disable-restartable-apps",
+  "record_status": "validated",
+  "summary": "Microsoft documents the Restart apps sign-in feature, and a guest-side reversible probe on Win25H2Clean confirmed the raw RestartApps registry mapping under HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon. The current app writes 0 there, which the probe confirmed disables automatic app restart after sign-in on this build.",
+  "validation_proof": {
+    "source_url": "research/evidence-files/vm-tooling-staging/restartapps_toggle_out.txt",
+    "exact_quote_or_path": "restartapps_toggle_out.txt: BASELINE=MISSING. AFTER_1=1. AFTER_0=0. RESTORED=MISSING.",
+    "key_found_on_page": true,
+    "notes": "Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 1 / 0 toggle sequence, then restored the machine back to missing."
+  },
+  "setting": {
+    "name": "Restart Apps After Sign-In",
+    "category": "System",
+    "area": "Feature Setting vs Observed Registry Setting",
+    "scope": "user",
+    "casual_explanation": "Windows can automatically save certain restartable apps and reopen them after you sign back in. People turn it off when they want a cleaner sign-in and do not want apps reopening on their own.",
+    "why_people_change_it": "People disable it to reduce sign-in clutter, control what launches after logon, or avoid apps reopening unexpectedly.",
+    "tradeoffs_overview": "Turning it off can make sign-in feel cleaner, but it also removes the convenience of apps automatically reopening where supported. The current product issue is that the app writes a registry value whose raw mapping is now runtime-validated.",
+    "professional_notes": "Microsoft documents the Restart apps feature in Sign-in options, and the guest probe confirmed the raw RestartApps mapping on Win25H2Clean. Value 0 disables automatic app restart after sign-in, value 1 enables it, and missing means the value is not configured.",
+    "targets": [
+      {
+        "target_id": "restart-apps-registry-observed",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+        "value_name": "RestartApps",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The registry value is absent and Windows uses the feature's default Restart apps behavior for the current user.",
+            "evidence_ids": [
+              "ms-support-restart-apps",
+              "runtime-restartapps-registry-diff"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Restart apps off",
+            "meaning": "Disables automatic app restart after sign-in. The current app writes 0 here and the guest probe confirmed that 0 is the off state.",
+            "evidence_ids": [
+              "ms-support-restart-apps",
+              "app-system-provider",
+              "runtime-restartapps-registry-diff"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Restart apps on",
+            "meaning": "Enables automatic app restart after sign-in. The guest probe confirmed that 1 is the on state.",
+            "evidence_ids": [
+              "ms-support-restart-apps",
+              "runtime-restartapps-registry-diff"
+            ]
+          }
+        ],
+        "notes": "RestartApps is now runtime-validated on Win25H2Clean. Value 0 disables automatic app restart after sign-in, value 1 enables it, and missing means the value is not configured."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The current app writes RestartApps = 0, and the guest probe confirmed that 0 disables automatic app restart after sign-in on Win25H2Clean.",
+    "writes": [
+      {
+        "target_id": "restart-apps-registry-observed",
+        "path": "HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+        "value_name": "RestartApps",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows feature baseline observed in guest",
+      "applies_to": "Windows user profiles exposing the Restart apps feature",
+      "states": [
+        {
+          "target_id": "restart-apps-registry-observed",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Guest baseline was missing before the probe and was restored to missing afterward."
+        }
+      ],
+      "notes": "The raw registry baseline on Win25H2Clean was missing before and after the reversible probe.",
+      "evidence_ids": [
+        "ms-support-restart-apps",
+        "runtime-restartapps-registry-diff"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "turn-off-restart-apps",
+      "label": "Turn off Restart Apps",
+      "intended_for": [
+        "People who want a cleaner sign-in experience",
+        "Users who do not want apps reopening automatically after sign-in"
+      ],
+      "avoid_for": [
+        "Users who rely on supported apps reopening automatically after sign-in"
+      ],
+      "states": [
+        {
+          "target_id": "restart-apps-registry-observed",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Value 0 disables automatic app restart after sign-in."
+        }
+      ],
+      "good_when": "You want apps to stay closed across sign-in.",
+      "bad_when": "You want supported apps to reopen automatically after sign-in.",
+      "tradeoffs": [
+        "Automatic app restart after sign-in is disabled.",
+        "This is reversible by writing 1 or removing the value."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-support-restart-apps",
+        "app-system-provider",
+        "runtime-restartapps-registry-diff"
+      ]
+    },
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "Users who want the feature left at its default configured state"
+      ],
+      "avoid_for": [],
+      "states": [
+        {
+          "target_id": "restart-apps-registry-observed",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the value unset."
+        }
+      ],
+      "good_when": "You do not want to publish an explicit RestartApps policy value.",
+      "bad_when": "You need to explicitly disable restart apps.",
+      "tradeoffs": [
+        "The registry value remains absent.",
+        "Windows uses the baseline documented behavior for the current user."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-support-restart-apps",
+        "runtime-restartapps-registry-diff"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-support-restart-apps",
+      "kind": "official-doc",
+      "title": "Microsoft support article for the Restart apps sign-in feature",
+      "location": "https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d",
+      "summary": "Microsoft documents the user-facing Restart apps feature in Sign-in options, including what it does and how users turn it on or off.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "runtime-restartapps-registry-diff",
+      "kind": "runtime-diff",
+      "title": "Guest reversible probe - RestartApps registry mapping",
+      "location": "research/evidence-files/vm-tooling-staging/restartapps_toggle_out.txt",
+      "summary": "Guest reversible probe on Win25H2Clean confirmed RestartApps transitions through missing, 1, and 0 before restoring to missing.",
+      "supports": [
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes RestartApps = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The guest-side reversible probe on Win25H2Clean confirmed the raw RestartApps registry mapping: missing, 1, and 0 are all observable states, and 0 disables automatic app restart after sign-in. The current app write now matches the observed off state.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-20T00:00:00Z"
+}

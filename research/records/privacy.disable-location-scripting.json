@@ -1,0 +1,230 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-location-scripting",
+  "tweak_id": "privacy.disable-location-scripting",
+  "record_status": "validated",
+  "summary": "Policy-backed control for location scripting access. Microsoft documents the same device policy path and value name that the app writes, and the policy description matches the disabled behavior.",
+  "setting": {
+    "name": "Location Scripting",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Some scripts and apps can access Windows location features through scripting interfaces. This policy decides whether that scripting access is allowed.",
+    "why_people_change_it": "People disable it when they want to reduce location access paths on the device, especially on managed or privacy-focused systems.",
+    "tradeoffs_overview": "Turning this off reduces one path to location data, but location-aware scripts and automation can stop working.",
+    "professional_notes": "Sensors.admx defines both user and machine variants of DisableLocationScripting. The current app writes the machine policy at HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocationScripting with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "disable-location-scripting",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "value_name": "DisableLocationScripting",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the machine policy for location scripting.",
+            "evidence_ids": [
+              "ms-sensors-policy-csp-disable-location-scripting",
+              "local-sensors-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Location scripting allowed",
+            "meaning": "The policy is disabled and scripted access to location remains allowed.",
+            "evidence_ids": [
+              "ms-sensors-policy-csp-disable-location-scripting",
+              "local-sensors-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Location scripting disabled",
+            "meaning": "Scripted access to location is blocked by policy.",
+            "evidence_ids": [
+              "ms-sensors-policy-csp-disable-location-scripting",
+              "local-sensors-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DisableLocationScripting = 1 under the machine policy key, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "disable-location-scripting",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "value_name": "DisableLocationScripting",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 7 and newer systems with Location and Sensors policy support",
+      "states": [
+        {
+          "target_id": "disable-location-scripting",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The machine policy is not configured by default."
+        }
+      ],
+      "notes": "Sensors.admx contains both user and machine mappings. This record validates the machine-side mapping used by the current app.",
+      "evidence_ids": [
+        "ms-sensors-policy-csp-disable-location-scripting",
+        "local-sensors-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Devices that use location-aware automation or scripts"
+      ],
+      "avoid_for": [
+        "Strict privacy baselines"
+      ],
+      "states": [
+        {
+          "target_id": "disable-location-scripting",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep ordinary location scripting behavior.",
+      "bad_when": "You want to reduce access paths to location data.",
+      "tradeoffs": [
+        "Location-aware scripts and automation can continue to work.",
+        "No explicit restriction is enforced for scripted location access."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-sensors-policy-csp-disable-location-scripting"
+      ]
+    },
+    {
+      "profile_id": "privacy-focused",
+      "label": "Privacy focused",
+      "intended_for": [
+        "Privacy-sensitive systems",
+        "Managed devices that do not need scripted location access"
+      ],
+      "avoid_for": [
+        "Automation scenarios that rely on location data"
+      ],
+      "states": [
+        {
+          "target_id": "disable-location-scripting",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Disable location scripting by policy."
+        }
+      ],
+      "good_when": "You want to block scripts and similar automation from using location features.",
+      "bad_when": "You rely on scripts or apps that use scripted access to location data.",
+      "tradeoffs": [
+        "Scripted access to location is blocked.",
+        "Some automation or apps that expect location scripting can stop working."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-sensors-policy-csp-disable-location-scripting",
+        "local-sensors-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-sensors-policy-csp-disable-location-scripting",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: DisableLocationScripting",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting",
+      "summary": "Official documentation for the policy that controls whether location scripting is allowed.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-sensors-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Sensors.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx",
+      "summary": "The local ADMX file shows DisableLocationScripting for both user and machine scope with enabledValue 1 and disabledValue 0 under the LocationAndSensors policy key.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DisableLocationScripting = 1 under the machine policy key for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-location-scripting",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents DisableLocationScripting directly in the ADMX_Sensors Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocationScripting. The same page describes that enabling the policy disables location scripting, and the app writes that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T14:11:36.6972806+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting",
+    "exact_quote_or_path": "If you enable this policy setting, location scripting will be disabled for all users. ADMX mapping: Name DisableLocationScripting ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\LocationAndSensors ... Registry Value Name DisableLocationScripting.",
+    "key_found_on_page": true,
+    "notes": "The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior."
+  }
+}

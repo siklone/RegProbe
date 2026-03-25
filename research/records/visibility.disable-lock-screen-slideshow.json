@@ -1,0 +1,233 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "visibility.disable-lock-screen-slideshow",
+  "tweak_id": "visibility.disable-lock-screen-slideshow",
+  "record_status": "validated",
+  "summary": "Machine policy for lock screen slideshow behavior. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreenSlideshow value used by the app.",
+  "setting": {
+    "name": "Lock Screen Slideshow",
+    "category": "Visibility",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can run a slideshow on the lock screen instead of always showing a single image. This policy decides whether users can use that slideshow feature.",
+    "why_people_change_it": "People disable it to keep the lock screen static, reduce distraction, or simplify the lock-screen experience on managed systems.",
+    "tradeoffs_overview": "Disabling it makes the lock screen more predictable and static, but it removes slideshow personalization.",
+    "professional_notes": "Microsoft documents NoLockScreenSlideshow through ADMX_ControlPanelDisplay and local policy files map it to HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\NoLockScreenSlideshow. The public documentation clearly describes the enabled policy behavior and the not-configured or disabled baseline behavior, but it does not publish a raw DWORD table, so this record models the documented enforced state plus the default unset state.",
+    "targets": [
+      {
+        "target_id": "no-lock-screen-slideshow",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization",
+        "value_name": "NoLockScreenSlideshow",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Users can still enable a lock-screen slideshow because the policy is not being forced.",
+            "evidence_ids": [
+              "ms-admx-controlpaneldisplay-lock-screen-page",
+              "local-controlpaneldisplay-admx-lock-slideshow",
+              "local-controlpaneldisplay-adml-lock-slideshow"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Prevent lock-screen slideshow",
+            "meaning": "The policy is enabled and no lock-screen slideshow will ever start.",
+            "evidence_ids": [
+              "ms-admx-controlpaneldisplay-lock-screen-page",
+              "local-controlpaneldisplay-admx-lock-slideshow",
+              "local-controlpaneldisplay-adml-lock-slideshow",
+              "app-visibility-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The current app writes NoLockScreenSlideshow = 1, which matches the documented enabled policy state.",
+    "writes": [
+      {
+        "target_id": "no-lock-screen-slideshow",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization",
+        "value_name": "NoLockScreenSlideshow",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows machine-policy default",
+      "applies_to": "Windows 10 version 2004 with KB5005101 and later, plus Windows 11 systems exposing ADMX_ControlPanelDisplay",
+      "states": [
+        {
+          "target_id": "no-lock-screen-slideshow",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Microsoft documents slideshow availability when the policy is disabled or not configured."
+        }
+      ],
+      "notes": "The default behavior leaves lock-screen slideshow available to users.",
+      "evidence_ids": [
+        "ms-admx-controlpaneldisplay-lock-screen-page",
+        "local-controlpaneldisplay-adml-lock-slideshow"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Users who like lock-screen slideshow personalization"
+      ],
+      "avoid_for": [
+        "Managed or distraction-free setups"
+      ],
+      "states": [
+        {
+          "target_id": "no-lock-screen-slideshow",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave lock-screen slideshow behavior under Windows control."
+        }
+      ],
+      "good_when": "You want slideshow personalization to remain available.",
+      "bad_when": "You want a static lock screen only.",
+      "tradeoffs": [
+        "Users can still configure slideshow behavior.",
+        "The lock screen may feel busier or less predictable."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-controlpaneldisplay-adml-lock-slideshow"
+      ]
+    },
+    {
+      "profile_id": "static-lock-screen",
+      "label": "Static lock screen",
+      "intended_for": [
+        "Managed desktops",
+        "Minimalist setups",
+        "Shared systems"
+      ],
+      "avoid_for": [
+        "Users who want slideshow personalization"
+      ],
+      "states": [
+        {
+          "target_id": "no-lock-screen-slideshow",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Prevent lock-screen slideshow from running."
+        }
+      ],
+      "good_when": "You want the lock screen to stay static and predictable.",
+      "bad_when": "You want photo slideshow behavior on the lock screen.",
+      "tradeoffs": [
+        "No slideshow can start on the lock screen.",
+        "Users lose slideshow-based personalization."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-admx-controlpaneldisplay-lock-screen-page",
+        "local-controlpaneldisplay-adml-lock-slideshow",
+        "app-visibility-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-admx-controlpaneldisplay-lock-screen-page",
+      "kind": "policy-csp",
+      "title": "Microsoft ADMX_ControlPanelDisplay Policy CSP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay",
+      "summary": "Microsoft documents the lock-screen personalization policies on this page, including NoLockScreenSlideshow and the baseline behavior when the policy is disabled or not configured.",
+      "supports": [
+        "path",
+        "behavior",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-controlpaneldisplay-admx-lock-slideshow",
+      "kind": "official-doc",
+      "title": "Local Microsoft ControlPanelDisplay.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx",
+      "summary": "The local ADMX file maps the machine policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\NoLockScreenSlideshow.",
+      "supports": [
+        "path",
+        "ui-mapping",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-controlpaneldisplay-adml-lock-slideshow",
+      "kind": "official-doc",
+      "title": "Local Microsoft ControlPanelDisplay.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml",
+      "summary": "The local ADML help text says enabling the policy prevents lock-screen slideshow settings and ensures no slide show will ever start, while slideshow remains available by default.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes NoLockScreenSlideshow = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-lock-screen-slideshow",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft ControlPanelDisplay.admx file explicitly defines NoLockScreenSlideshow under Software\\Policies\\Microsoft\\Windows\\Personalization, and the paired ADML help text documents that enabling the policy prevents lock-screen slideshows from playing. The app writes that exact enabled state.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:34:25.6329894+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx",
+    "exact_quote_or_path": "<policy name=\"CPL_Personalization_NoLockScreenSlideshow\" class=\"Machine\" ... valueName=\"NoLockScreenSlideshow\">",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents a slide show from playing on the lock screen."
+  }
+}

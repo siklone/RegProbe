@@ -1,0 +1,263 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.block-microsoft-accounts",
+  "tweak_id": "privacy.block-microsoft-accounts",
+  "record_status": "validated",
+  "summary": "Security policy for Microsoft account usage on the device. The local Microsoft security option metadata explicitly documents the same registry path, value name, and allowed values that the app uses.",
+  "setting": {
+    "name": "Microsoft Accounts on This Device",
+    "category": "Privacy",
+    "area": "Security Option Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can let people add Microsoft accounts or sign in with them on the device. This security option controls whether Microsoft accounts are allowed, partly blocked, or fully blocked.",
+    "why_people_change_it": "People change this on kiosks, shared devices, lab systems, or privacy-focused PCs where they want to keep the machine local-account-only.",
+    "tradeoffs_overview": "Blocking Microsoft accounts increases local control, but it can prevent account linking, Microsoft account sign-in, and other consumer features that depend on Microsoft identity.",
+    "professional_notes": "Microsoft documents this security option through LocalPoliciesSecurityOptions. The registry mapping is HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser with allowed values 0, 1, and 3.",
+    "targets": [
+      {
+        "target_id": "no-connected-user",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "NoConnectedUser",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Microsoft accounts allowed",
+            "meaning": "The security option is disabled and users can add or sign in with Microsoft accounts normally.",
+            "evidence_ids": [
+              "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+              "nohuto-noconnecteduser-trace"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Block adding new Microsoft accounts",
+            "meaning": "Users cannot add new Microsoft accounts, but the stronger sign-in block is not enforced.",
+            "evidence_ids": [
+              "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+              "nohuto-noconnecteduser-trace"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Block adding and signing in with Microsoft accounts",
+            "meaning": "Users cannot add Microsoft accounts and cannot sign in with them on the device.",
+            "evidence_ids": [
+              "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+              "nohuto-noconnecteduser-trace"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes NoConnectedUser = 3, which matches the fully blocked Microsoft-account state documented by Microsoft.",
+    "writes": [
+      {
+        "target_id": "no-connected-user",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "NoConnectedUser",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 3
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows security-option default",
+      "applies_to": "Windows client devices that expose the Accounts: Block Microsoft accounts security option",
+      "states": [
+        {
+          "target_id": "no-connected-user",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Microsoft documents the effective default value as 0."
+        }
+      ],
+      "notes": "The official LocalPoliciesSecurityOptions documentation lists 0 as the default effective value for this setting.",
+      "evidence_ids": [
+        "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+        "nohuto-noconnecteduser-trace"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Devices that use Microsoft accounts normally"
+      ],
+      "avoid_for": [
+        "Kiosk-style systems",
+        "Devices that must stay local-account-only"
+      ],
+      "states": [
+        {
+          "target_id": "no-connected-user",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep Microsoft account features available."
+        }
+      ],
+      "good_when": "You want the normal Windows consumer account experience.",
+      "bad_when": "You want to prevent Microsoft account usage on the device.",
+      "tradeoffs": [
+        "Microsoft account sign-in and linking remain available.",
+        "No identity restriction is enforced by this security option."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+        "nohuto-noconnecteduser-trace"
+      ]
+    },
+    {
+      "profile_id": "no-new-microsoft-accounts",
+      "label": "No new Microsoft accounts",
+      "intended_for": [
+        "Managed shared devices",
+        "Systems that should not add new cloud identities casually"
+      ],
+      "avoid_for": [
+        "Personal devices where users may need to link a Microsoft account"
+      ],
+      "states": [
+        {
+          "target_id": "no-connected-user",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Block adding new Microsoft accounts without selecting the strongest sign-in restriction."
+        }
+      ],
+      "good_when": "You want a lighter restriction than a full sign-in block.",
+      "bad_when": "Users need to add Microsoft accounts freely.",
+      "tradeoffs": [
+        "Adding new Microsoft accounts is restricted.",
+        "This is still a policy-enforced identity restriction."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+        "nohuto-noconnecteduser-trace"
+      ]
+    },
+    {
+      "profile_id": "local-only-sign-in",
+      "label": "Local-only sign-in",
+      "intended_for": [
+        "Kiosks",
+        "Lab machines",
+        "Privacy-focused local-account systems"
+      ],
+      "avoid_for": [
+        "General home devices",
+        "Devices that rely on Microsoft account sign-in"
+      ],
+      "states": [
+        {
+          "target_id": "no-connected-user",
+          "state_kind": "value",
+          "value": 3,
+          "rationale": "Use the strongest documented Microsoft-account block."
+        }
+      ],
+      "good_when": "You want to stop Microsoft accounts from being added or used to sign in.",
+      "bad_when": "Users need Microsoft account-based sign-in, syncing, or account linking.",
+      "tradeoffs": [
+        "Microsoft account sign-in is blocked.",
+        "Consumer account-based workflows can stop working as expected."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+        "app-privacy-provider",
+        "nohuto-noconnecteduser-trace"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-localpoliciessecurityoptions-block-microsoft-accounts",
+      "kind": "policy-csp",
+      "title": "Microsoft LocalPoliciesSecurityOptions CSP: Accounts_Block_Microsoft_accounts",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts",
+      "summary": "Microsoft documents the registry path, registry value name, allowed values 0, 1, and 3, and the default effective value for this security option.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes NoConnectedUser = 3 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-block-microsoft-accounts",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-noconnecteduser-trace",
+      "kind": "registry-observation",
+      "title": "nohuto win-config mirror - NoConnectedUser registry trace",
+      "location": "research/_source-mirrors/win-config/privacy/desc.md and research/_source-mirrors/win-registry/records/25H2.txt",
+      "summary": "The mirror trace shows services.exe writing HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser with Data 0, 1, and 3. The inline comments explain the semantics: 0 means the policy is disabled, 1 means users cannot add Microsoft accounts, and 3 means users cannot add or log on with Microsoft accounts.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft security option metadata in sceregvl.inf explicitly defines NoConnectedUser under Policies\\System with allowed values 0, 1, and 3, and the app writes one of those documented values.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T09:10:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+    "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser,4,%BlockConnectedUser%,3,0|%PolicyDisabled%,1|%BlockAdd%,3|%BlockLogin%",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft security option metadata names the same registry path and value used by the app and exposes the documented 0, 1, and 3 states. Added nohuto mirror corroboration via nohuto-noconnecteduser-trace."
+  }
+}

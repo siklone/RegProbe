@@ -24,7 +24,7 @@ try {
 
     $exe = Join-Path $AppRoot 'OpenTraceProject.App.exe'
     $docsRoot = Join-Path $AppRoot 'Docs'
-    $evidenceClasses = Join-Path $docsRoot 'tweaks\research\evidence-classes.json'
+    $evidenceClasses = Join-Path $docsRoot 'research\evidence-classes.json'
     $tweakCatalog = Join-Path $docsRoot 'tweaks\tweak-catalog.html'
 
     $result.executable = $exe

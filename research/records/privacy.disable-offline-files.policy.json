@@ -1,0 +1,231 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-offline-files.policy",
+  "tweak_id": "privacy.disable-offline-files.policy",
+  "record_status": "validated",
+  "summary": "Policy-backed control for the core Offline Files feature. The local Microsoft OfflineFiles.admx file explicitly documents the same NetCache policy key, Enabled value name, and 1/0 mapping that the app uses.",
+  "setting": {
+    "name": "Offline Files Feature Policy",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Offline Files keeps local copies of network files so they can still be used when the computer is offline. This policy decides whether the feature is allowed at all.",
+    "why_people_change_it": "People disable Offline Files when they do not want local caching of network files or when they want to reduce background sync and cache complexity. They keep it enabled when laptops or roaming users depend on offline access to network content.",
+    "tradeoffs_overview": "Turning Offline Files off reduces local caching of network content, but users lose a built-in Windows feature for working with network files while disconnected.",
+    "professional_notes": "OfflineFiles.admx documents Pol_Enabled under HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache with value name Enabled. Enabled policy sets 1 and disabled policy sets 0. Microsoft documents that the not configured default is enabled on Windows client computers and disabled on Windows Server unless changed by the user.",
+    "targets": [
+      {
+        "target_id": "offline-files-enabled",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache",
+        "value_name": "Enabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows default policy state",
+            "meaning": "Offline Files is enabled on Windows client computers and disabled on Windows Server unless changed by the user.",
+            "evidence_ids": [
+              "ms-offlinefiles-csp",
+              "local-offlinefiles-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Offline Files disabled",
+            "meaning": "Offline Files is disabled and users cannot enable it.",
+            "evidence_ids": [
+              "ms-offlinefiles-csp",
+              "local-offlinefiles-admx",
+              "local-offlinefiles-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Offline Files enabled",
+            "meaning": "Offline Files is enabled and users cannot disable it.",
+            "evidence_ids": [
+              "ms-offlinefiles-csp",
+              "local-offlinefiles-admx",
+              "local-offlinefiles-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes Enabled = 0 under the NetCache policy key, which matches the documented disabled policy state.",
+    "writes": [
+      {
+        "target_id": "offline-files-enabled",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache",
+        "value_name": "Enabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows Offline Files policy default",
+      "applies_to": "Windows client and server editions with Offline Files policy support",
+      "states": [
+        {
+          "target_id": "offline-files-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "If the policy is not configured, Offline Files is enabled on Windows client computers and disabled on Windows Server unless changed by the user."
+        }
+      ],
+      "notes": "This default depends on whether the machine is a client or server SKU.",
+      "evidence_ids": [
+        "ms-offlinefiles-csp",
+        "local-offlinefiles-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Laptops or roaming users that may rely on offline copies of network files"
+      ],
+      "avoid_for": [
+        "Systems that explicitly want Offline Files turned off"
+      ],
+      "states": [
+        {
+          "target_id": "offline-files-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset and keep the Windows baseline."
+        }
+      ],
+      "good_when": "You want Windows to keep its normal Offline Files baseline for the current SKU.",
+      "bad_when": "You want to guarantee that Offline Files is disabled.",
+      "tradeoffs": [
+        "The built-in offline network-file feature remains available where Windows normally allows it.",
+        "Local caching of network content can still occur."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-offlinefiles-csp"
+      ]
+    },
+    {
+      "profile_id": "disable-offline-files",
+      "label": "Disable Offline Files",
+      "intended_for": [
+        "Systems that do not use Offline Files",
+        "Users who want to avoid local caching of network content"
+      ],
+      "avoid_for": [
+        "Laptops or workflows that depend on offline access to network files"
+      ],
+      "states": [
+        {
+          "target_id": "offline-files-enabled",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable the Offline Files feature by policy."
+        }
+      ],
+      "good_when": "You know the machine does not need the built-in Offline Files feature.",
+      "bad_when": "Users still rely on local cached copies of network files while disconnected.",
+      "tradeoffs": [
+        "Offline Files caching and related feature behavior stop.",
+        "Disconnected access to network files through this feature is lost."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-offlinefiles-csp",
+        "local-offlinefiles-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-offlinefiles-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: ADMX_OfflineFiles / Pol_Enabled",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-offlinefiles",
+      "summary": "Microsoft documents the Offline Files policy, its registry mapping, and the default behavior on Windows client versus Windows Server.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior",
+        "ui-mapping",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-offlinefiles-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft OfflineFiles.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx",
+      "summary": "The local ADMX file maps Pol_Enabled to NetCache\\Enabled with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-offlinefiles-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft OfflineFiles.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/OfflineFiles.adml",
+      "summary": "The local ADML help text explains the enabled, disabled, and not configured behavior for the Offline Files feature.",
+      "supports": [
+        "default",
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes Enabled = 0 under the NetCache policy key for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft OfflineFiles.admx file explicitly defines Pol_Enabled under Software\\Policies\\Microsoft\\Windows\\NetCache with valueName Enabled, enabledValue 1, and disabledValue 0, which matches the app's policy write.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T19:10:41.8261076+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx",
+    "exact_quote_or_path": "<policy name=\"Pol_Enabled\" ... key=\"Software\\Policies\\Microsoft\\Windows\\NetCache\" valueName=\"Enabled\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same NetCache policy key and Enabled value used by the app, and it confirms the 1/0 mapping."
+  }
+}

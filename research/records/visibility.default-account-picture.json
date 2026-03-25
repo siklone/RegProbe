@@ -1,0 +1,200 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "visibility.default-account-picture",
+  "tweak_id": "visibility.default-account-picture",
+  "record_status": "validated",
+  "summary": "Machine policy for forcing the default account picture for all users. The local Microsoft Cpls.admx file documents the same Explorer policy key and UseDefaultTile value used by the app.",
+  "setting": {
+    "name": "Default Account Picture for All Users",
+    "category": "Visibility",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows normally lets each user choose their own account picture. This policy forces every user on the device to use the default account picture instead.",
+    "why_people_change_it": "People enable this on managed or branded systems where they want a consistent sign-in appearance.",
+    "tradeoffs_overview": "Turning it on standardizes the sign-in profile image, but it removes personal picture customization for all users.",
+    "professional_notes": "Microsoft documents UseDefaultTile through the ADMX_Cpls Policy CSP and maps it to HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\UseDefaultTile. The public documentation describes the enabled policy state and the not-configured or disabled behavior, but it does not publish a raw DWORD value table, so this record models the documented enforced state plus the default unset state.",
+    "targets": [
+      {
+        "target_id": "use-default-tile",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "value_name": "UseDefaultTile",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Users can customize their account pictures because the policy is not being enforced.",
+            "evidence_ids": [
+              "ms-admx-cpls-use-default-tile"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Force the default account picture",
+            "meaning": "The policy is enabled and all users are shown the default account picture with no customization allowed.",
+            "evidence_ids": [
+              "ms-admx-cpls-use-default-tile"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The current app writes UseDefaultTile = 1, which matches the documented enabled policy state.",
+    "writes": [
+      {
+        "target_id": "use-default-tile",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "value_name": "UseDefaultTile",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows machine-policy default",
+      "applies_to": "Windows 10 version 2004 with KB5005101 and later, plus Windows 11 systems that expose ADMX_Cpls",
+      "states": [
+        {
+          "target_id": "use-default-tile",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The public Microsoft policy documentation describes user customization as the behavior when the policy is disabled or not configured."
+        }
+      ],
+      "notes": "The default behavior leaves account picture customization available.",
+      "evidence_ids": [
+        "ms-admx-cpls-use-default-tile"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Personal systems"
+      ],
+      "avoid_for": [
+        "Managed or standardized sign-in environments"
+      ],
+      "states": [
+        {
+          "target_id": "use-default-tile",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave user customization enabled."
+        }
+      ],
+      "good_when": "You want each user to pick their own account picture.",
+      "bad_when": "You want a uniform sign-in appearance across the device.",
+      "tradeoffs": [
+        "Users can personalize their profile picture.",
+        "There is no standardized account-image policy."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-admx-cpls-use-default-tile"
+      ]
+    },
+    {
+      "profile_id": "standardized-signin-branding",
+      "label": "Standardized sign-in branding",
+      "intended_for": [
+        "Managed desktops",
+        "Branded corporate systems",
+        "Shared kiosks"
+      ],
+      "avoid_for": [
+        "Personal devices"
+      ],
+      "states": [
+        {
+          "target_id": "use-default-tile",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Force the default account picture for all users."
+        }
+      ],
+      "good_when": "You want every user profile to present the same default account image.",
+      "bad_when": "You want users to keep personal profile pictures.",
+      "tradeoffs": [
+        "Sign-in presentation becomes consistent across users.",
+        "Per-user account picture customization is removed."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-admx-cpls-use-default-tile",
+        "app-visibility-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-admx-cpls-use-default-tile",
+      "kind": "policy-csp",
+      "title": "Microsoft ADMX_Cpls Policy CSP: UseDefaultTile",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-cpls#usedefaulttile",
+      "summary": "Microsoft documents the scope, behavior, supported OS versions, and registry mapping for UseDefaultTile, including the enabled policy behavior and the not-configured or disabled baseline behavior.",
+      "supports": [
+        "path",
+        "behavior",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes UseDefaultTile = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-default-account-picture",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft Cpls.admx file explicitly defines UseDefaultTile under Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer, and the paired Cpls.adml help text documents that enabling the policy forces the default account picture for all users. The app writes that exact enabled state.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:39:16.2759098+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/Cpls.admx",
+    "exact_quote_or_path": "<policy name=\"UseDefaultTile\" class=\"Machine\" ... key=\"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" valueName=\"UseDefaultTile\">",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired Cpls.adml help text states that enabling the policy forces the default account picture for all users with no customization allowed."
+  }
+}

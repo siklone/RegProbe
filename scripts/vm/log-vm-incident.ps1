@@ -24,7 +24,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 if ([string]::IsNullOrWhiteSpace($IncidentPath)) {
-    $IncidentPath = Join-Path $PSScriptRoot '..\..\Docs\tweaks\research\vm-incidents.json'
+    $IncidentPath = Join-Path $PSScriptRoot '..\..\research\vm-incidents.json'
 }
 
 $incidentDirectory = Split-Path -Parent $IncidentPath

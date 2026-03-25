@@ -1,0 +1,89 @@
+﻿MODE=baseline
+REGISTRY_PATH=HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender
+VALUE_NAME=HideExclusionsFromLocalAdmins
+STATE=1
+PML_EXISTS=True
+CSV_EXISTS=True
+MATCH_COUNT=80
+12:16:19.1382573 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center | SUCCESS | Desired Access: Read
+12:16:19.1382761 AM | SecurityHealthService.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center | SUCCESS | 
+12:16:19.1382937 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1383706 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1384278 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1384532 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1384715 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1384891 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1385346 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device security | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1385677 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Firewall and network protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1386262 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray | SUCCESS | Desired Access: Query Value
+12:16:19.1386429 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray\HideSystray | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1
+12:16:19.1386538 AM | SecurityHealthService.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray | SUCCESS | 
+12:16:19.1386708 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1386891 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device performance and health | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1387067 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Family options | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1387247 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | Desired Access: Query Value
+12:16:19.1387373 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications\DisableNotifications | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1
+12:16:19.1387471 AM | SecurityHealthService.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | 
+12:16:19.1388012 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | Desired Access: Query Value
+12:16:19.1388145 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications\DisableEnhancedNotifications | NAME NOT FOUND | Length: 16
+12:16:19.1388246 AM | SecurityHealthService.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | 
+12:16:19.1388783 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Enterprise Customization | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1389049 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Enterprise Customization | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1389237 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Enterprise Customization | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1389417 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Enterprise Customization | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1389588 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Enterprise Customization | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1393761 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Enterprise Customization | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1395027 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Account protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1398551 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Account protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1401512 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Account protection | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1401817 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device security | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1402025 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device security | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1402514 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device security | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1406837 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device security | NAME NOT FOUND | Desired Access: Query Value
+12:16:19.1486144 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection | NAME NOT FOUND | Desired Access: Read
+12:16:19.1487413 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowRealtimeMonitoring | NAME NOT FOUND | Length: 16
+12:16:19.1494264 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet | NAME NOT FOUND | Desired Access: Read
+12:16:19.1494726 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowCloudProtection | NAME NOT FOUND | Length: 16
+12:16:19.1498277 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SubmitSamplesConsent | NAME NOT FOUND | Length: 16
+12:16:19.2429893 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection | NAME NOT FOUND | Desired Access: Read
+12:16:19.2430055 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowRealtimeMonitoring | NAME NOT FOUND | Length: 16
+12:16:19.2434011 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet | NAME NOT FOUND | Desired Access: Read
+12:16:19.2434549 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowCloudProtection | NAME NOT FOUND | Length: 16
+12:16:19.2437435 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SubmitSamplesConsent | NAME NOT FOUND | Length: 16
+12:16:19.2489285 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\ | SUCCESS | Desired Access: Read
+12:16:19.2489503 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\DisableAntiSpyware | NAME NOT FOUND | Length: 16
+12:16:19.2490889 AM | SecurityHealthService.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender | SUCCESS | 
+12:16:19.2682232 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection | NAME NOT FOUND | Desired Access: Read
+12:16:19.2682408 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowRealtimeMonitoring | NAME NOT FOUND | Length: 16
+12:16:19.2685874 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet | NAME NOT FOUND | Desired Access: Read
+12:16:19.2686041 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowCloudProtection | NAME NOT FOUND | Length: 16
+12:16:19.2692980 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SubmitSamplesConsent | NAME NOT FOUND | Length: 16
+12:16:19.2754135 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Threats\ThreatIDDefaultAction | NAME NOT FOUND | Desired Access: Read
+12:16:19.2768491 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection | NAME NOT FOUND | Desired Access: Read
+12:16:19.2771682 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowRealtimeMonitoring | NAME NOT FOUND | Length: 16
+12:16:19.2776271 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet | NAME NOT FOUND | Desired Access: Read
+12:16:19.2776433 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowCloudProtection | NAME NOT FOUND | Length: 16
+12:16:19.2778242 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SubmitSamplesConsent | NAME NOT FOUND | Length: 16
+12:16:19.2833608 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Threats\ThreatIDDefaultAction | NAME NOT FOUND | Desired Access: Read
+12:16:19.2845550 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Threats\ThreatIDDefaultAction | NAME NOT FOUND | Desired Access: Read
+12:16:19.4652424 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Threats\ThreatIDDefaultAction | NAME NOT FOUND | Desired Access: Read
+12:16:19.6028691 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection | NAME NOT FOUND | Desired Access: Read
+12:16:19.6029006 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowRealtimeMonitoring | NAME NOT FOUND | Length: 16
+12:16:19.6031429 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet | NAME NOT FOUND | Desired Access: Read
+12:16:19.6031578 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowCloudProtection | NAME NOT FOUND | Length: 16
+12:16:19.6034452 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SubmitSamplesConsent | NAME NOT FOUND | Length: 16
+12:16:19.6037307 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Threats\ThreatIDDefaultAction | NAME NOT FOUND | Desired Access: Read
+12:16:19.6697694 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection | NAME NOT FOUND | Desired Access: Read
+12:16:19.6697855 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowRealtimeMonitoring | NAME NOT FOUND | Length: 16
+12:16:19.6700661 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet | NAME NOT FOUND | Desired Access: Read
+12:16:19.6700808 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowCloudProtection | NAME NOT FOUND | Length: 16
+12:16:19.6702576 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SubmitSamplesConsent | NAME NOT FOUND | Length: 16
+12:16:20.0667304 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection | NAME NOT FOUND | Desired Access: Read
+12:16:20.0667478 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowRealtimeMonitoring | NAME NOT FOUND | Length: 16
+12:16:20.0670903 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet | NAME NOT FOUND | Desired Access: Read
+12:16:20.0671075 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowCloudProtection | NAME NOT FOUND | Length: 16
+12:16:20.0673111 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SubmitSamplesConsent | NAME NOT FOUND | Length: 16
+12:16:20.1969609 AM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection | NAME NOT FOUND | Desired Access: Read
+12:16:20.1969856 AM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AllowRealtimeMonitoring | NAME NOT FOUND | Length: 16
+ORIGINAL={"path_exists":true,"value_exists":false,"value":null}
+RESTORED={"path_exists":true,"value_exists":false,"value":null}

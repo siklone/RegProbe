@@ -1,0 +1,292 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.disable-netbios",
+  "tweak_id": "network.disable-netbios",
+  "record_status": "validated",
+  "summary": "Disables NetBIOS over TCP/IP through the documented per-interface Windows control surface. Official Microsoft documentation exposes NetbiosOptions per adapter with values 0 = DHCP setting, 1 = enabled, 2 = disabled, and also documents the Win32_NetworkAdapterConfiguration.SetTcpipNetbios method for applying that state. The app now uses a command-backed per-interface implementation that sets NetbiosOptions = 2 on all IP-enabled adapters and can restore the previously detected per-adapter state.",
+  "setting": {
+    "name": "NetBIOS over TCP/IP",
+    "category": "Network",
+    "area": "Per-interface Registry Configuration",
+    "scope": "per-interface",
+    "casual_explanation": "NetBIOS over TCP/IP is an older naming and networking layer that some legacy Windows networks still use. Most modern home users never notice it unless they have very old devices or legacy enterprise naming dependencies.",
+    "why_people_change_it": "People disable it to modernize the network stack and reduce reliance on old name-resolution behavior. They keep it enabled only when old devices or legacy discovery workflows still depend on it.",
+    "tradeoffs_overview": "Disabling NetBIOS over TCP/IP is usually harmless on modern networks, but some old discovery and share-browsing workflows can break. This tweak now uses the documented per-adapter Windows control rather than an unrelated global NetBT parameter.",
+    "professional_notes": "Windows exposes NetBIOS over TCP/IP control per adapter through NetbiosOptions and the Win32_NetworkAdapterConfiguration.SetTcpipNetbios method. The app now uses a command-backed tweak to enumerate IP-enabled adapters and apply SetTcpipNetbios(2), which corresponds to NetbiosOptions = 2 (disabled) for each adapter. This is more accurate than the earlier NoNameReleaseOnDemand write under the global NetBT parameters key, which affected name release behavior rather than the actual NetBIOS over TCP/IP mode switch.",
+    "targets": [
+      {
+        "target_id": "netbios-options",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_*",
+        "value_name": "NetbiosOptions",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "per-interface",
+            "value": 0,
+            "label": "Use DHCP setting",
+            "meaning": "Windows follows the NetBIOS preference provided by DHCP for that adapter.",
+            "evidence_ids": [
+              "ms-netbios-wmi",
+              "ms-netbios-unattend"
+            ]
+          },
+          {
+            "state_kind": "per-interface",
+            "value": 1,
+            "label": "Enabled",
+            "meaning": "NetBIOS over TCP/IP is enabled for that adapter.",
+            "evidence_ids": [
+              "ms-netbios-wmi",
+              "ms-netbios-unattend"
+            ]
+          },
+          {
+            "state_kind": "per-interface",
+            "value": 2,
+            "label": "Disabled",
+            "meaning": "NetBIOS over TCP/IP is disabled for that adapter.",
+            "evidence_ids": [
+              "ms-netbios-wmi",
+              "ms-netbios-unattend"
+            ]
+          }
+        ],
+        "notes": "This is adapter-specific. A correct app experience may need to enumerate interfaces instead of pretending the setting is a single global toggle."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs",
+    "notes": "The app now uses the documented per-interface control model. NetworkTweakProvider exposes the tweak card and delegates apply/verify/rollback to a command-backed tweak that enumerates IP-enabled adapters and applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2).",
+    "writes": [
+      {
+        "target_id": "netbios-options",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_*",
+        "value_name": "NetbiosOptions",
+        "value_type": "REG_DWORD",
+        "state_kind": "per-interface",
+        "value": 2,
+        "notes": "Applied per IP-enabled adapter via Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2)."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Per-adapter Windows baseline",
+      "applies_to": "Windows network adapters using NetBT",
+      "states": [
+        {
+          "target_id": "netbios-options",
+          "state_kind": "per-interface",
+          "value": 0,
+          "rationale": "The documented baseline is the DHCP-controlled option."
+        }
+      ],
+      "notes": "This is not a single device-wide value. A correct restore-default flow needs to understand interface scope.",
+      "evidence_ids": [
+        "ms-netbios-wmi",
+        "ms-netbios-unattend"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Networks where NetBIOS needs are unknown"
+      ],
+      "avoid_for": [
+        "People who have already verified that NetBIOS must be disabled per adapter"
+      ],
+      "states": [
+        {
+          "target_id": "netbios-options",
+          "state_kind": "per-interface",
+          "value": 0,
+          "rationale": "Keeps adapter behavior under the documented DHCP-controlled default."
+        }
+      ],
+      "good_when": "You want the documented Windows baseline without pretending there is one magic global switch.",
+      "bad_when": "You need a deliberate per-interface hard-disable.",
+      "tradeoffs": [
+        "Behavior can still vary by adapter and DHCP configuration.",
+        "This is more honest than an incorrect global toggle."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-netbios-wmi",
+        "ms-netbios-unattend"
+      ]
+    },
+    {
+      "profile_id": "modern-tcp-only",
+      "label": "Modern TCP/IP only",
+      "intended_for": [
+        "Modern networks",
+        "Users who want to remove legacy NetBIOS dependencies"
+      ],
+      "avoid_for": [
+        "Legacy name-resolution environments",
+        "Old NAS or printer discovery scenarios"
+      ],
+      "states": [
+        {
+          "target_id": "netbios-options",
+          "state_kind": "per-interface",
+          "value": 2,
+          "rationale": "Candidate recommended value for disabling NetBIOS over TCP/IP per adapter."
+        }
+      ],
+      "good_when": "You have confirmed that the adapters and devices involved do not need NetBIOS.",
+      "bad_when": "You still depend on legacy browsing or name-resolution paths.",
+      "tradeoffs": [
+        "Legacy discovery workflows may stop working.",
+        "This profile is documented but not approved for Apply until the app models per-interface scope correctly."
+      ],
+      "apply_allowed": true,
+      "notes": "Applies NetbiosOptions = 2 per IP-enabled adapter through the documented WMI method and records prior per-adapter state for rollback.",
+      "evidence_ids": [
+        "ms-netbios-wmi",
+        "ms-netbios-unattend",
+        "engine-network-command-tweak",
+        "local-netbios-cim-detect"
+      ]
+    },
+    {
+      "profile_id": "legacy-netbios-required",
+      "label": "Legacy NetBIOS required",
+      "intended_for": [
+        "Known legacy environments",
+        "Compatibility testing"
+      ],
+      "avoid_for": [
+        "Security-focused or modernized networks"
+      ],
+      "states": [
+        {
+          "target_id": "netbios-options",
+          "state_kind": "per-interface",
+          "value": 1,
+          "rationale": "Candidate recommended value for explicitly enabling NetBIOS over TCP/IP per adapter."
+        }
+      ],
+      "good_when": "A required legacy workflow is confirmed to depend on NetBIOS.",
+      "bad_when": "You are enabling it without proof that you need it.",
+      "tradeoffs": [
+        "Compatibility improves for some old workflows.",
+        "This profile is documented but not approved for Apply until scope and UX are redesigned."
+      ],
+      "apply_allowed": false,
+      "notes": "Candidate profile only. Do not expose as a device-wide Apply preset yet.",
+      "evidence_ids": [
+        "ms-netbios-wmi",
+        "ms-netbios-unattend"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-netbios-wmi",
+      "kind": "official-doc",
+      "title": "Microsoft WMI: SetTcpipNetbios method",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/settcpipnetbios-method-in-class-win32-networkadapterconfiguration",
+      "summary": "Official documentation for the per-adapter NetBIOS over TCP/IP control values 0, 1, and 2.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-netbios-unattend",
+      "kind": "official-doc",
+      "title": "Microsoft unattended setup: NetbiosOptions",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-netbt-interfaces-interface-netbiosoptions",
+      "summary": "Official documentation for the NetbiosOptions values used per interface.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "NetworkTweakProvider exposes the netbios tweak and delegates it to a command-backed per-interface implementation.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-network-command-tweak",
+      "kind": "repo-code",
+      "title": "Command-backed NetBIOS implementation",
+      "location": "engine/Tweaks/Commands/Network/DisableNetbiosOverTcpIpTweak.cs",
+      "summary": "The engine tweak enumerates IP-enabled adapters, detects current TcpipNetbiosOptions state, applies Win32_NetworkAdapterConfiguration.SetTcpipNetbios(2), verifies that all targeted adapters report 2, and can restore the previously detected per-adapter state during rollback.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-netbios-cim-detect",
+      "kind": "vm-test",
+      "title": "Local read-only CIM detect run for NetBIOS over TCP/IP",
+      "location": "Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037",
+      "summary": "Read-only Get-CimInstance Win32_NetworkAdapterConfiguration run on the current machine returned four IP-enabled adapters and exposed TcpipNetbiosOptions for each, confirming that the documented detect surface is live on this build.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-netbios",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "Repo provenance links the old tweak history to NoNameReleaseOnDemand references. This remains useful as audit history, but the live implementation now follows the documented NetbiosOptions and SetTcpipNetbios surfaces instead.",
+      "supports": [
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Official Microsoft documentation is explicit about the real per-interface control surface: NetbiosOptions values 0, 1, and 2 plus the SetTcpipNetbios method. The app now matches that model with a command-backed implementation that enumerates IP-enabled adapters, applies the documented disabled state, and keeps prior per-adapter state for rollback.",
+    "blocking_issues": []
+  },
+  "open_questions": [
+    "Should the UI eventually expose adapter selection instead of applying the documented disabled state to all IP-enabled adapters?"
+  ],
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/settcpipnetbios-method-in-class-win32-networkadapterconfiguration",
+    "exact_quote_or_path": "SetTcpipNetbios method of the Win32_NetworkAdapterConfiguration class. The SetTcpipNetbios method sets the TCP/IP NetBIOS options for the network adapter. Option 0 = Use NetBIOS setting from the DHCP server. Option 1 = Enable NetBIOS. Option 2 = Disable NetBIOS.",
+    "key_found_on_page": true,
+    "notes": "Microsoft's official WMI page and unattended setup page both document the same per-interface 0/1/2 NetBIOS control. The app now matches that model with a command-backed SetTcpipNetbios(2) implementation rather than the old global NoNameReleaseOnDemand write."
+  }
+}

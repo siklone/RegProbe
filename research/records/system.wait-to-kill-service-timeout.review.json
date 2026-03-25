@@ -1,0 +1,217 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.wait-to-kill-service-timeout",
+  "tweak_id": "system.wait-to-kill-service-timeout",
+  "record_status": "validated",
+  "summary": "The app now exposes WaitToKillServiceTimeout as a standalone service-shutdown setting instead of mixing it into the older shutdown bundle. Microsoft documents the path and behavior, and a Win25H2Clean reversible probe confirmed the current VM baseline of 5000, the app write of 2500, and a clean restore back to 5000.",
+  "setting": {
+    "name": "Service Shutdown Timeout",
+    "category": "System",
+    "area": "Service shutdown timing",
+    "scope": "device",
+    "casual_explanation": "Windows waits a set amount of time for a service to stop cleanly during shutdown. Lowering that timeout can make shutdown finish faster, but it gives services less time to flush state and clean up.",
+    "why_people_change_it": "People change this when shutdown feels slow because one or more services hang for too long.",
+    "tradeoffs_overview": "A lower timeout can speed shutdown up, but it also raises the chance of unclean service termination and skipped cleanup work.",
+    "professional_notes": "Microsoft documents WaitToKillServiceTimeout on HKLM\\SYSTEM\\CurrentControlSet\\Control as the timeout Service Control Manager uses during restart and shutdown handling. The Win25H2Clean probe showed a live baseline of 5000 on this VM, then applied the app value 2500, and restored 5000. This record covers only the service-side timeout. The older mixed bundle that also touched current-user desktop values is now left as historical research.",
+    "targets": [
+      {
+        "target_id": "wait-to-kill-service-timeout",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control",
+        "value_name": "WaitToKillServiceTimeout",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "5000",
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current Win25H2Clean VM waits 5 seconds before terminating an unresponsive service during shutdown.",
+            "evidence_ids": [
+              "vm-wait-to-kill-service-timeout-probe",
+              "repo-system-doc-shutdown"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "2500",
+            "label": "Current app profile",
+            "meaning": "The app shortens the service shutdown timeout to 2.5 seconds.",
+            "evidence_ids": [
+              "ms-service-control-handler",
+              "vm-wait-to-kill-service-timeout-probe",
+              "app-system-registry-provider-service-timeout"
+            ]
+          }
+        ],
+        "notes": "This record uses the observed current VM baseline instead of assuming an older published default."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The app now writes only WaitToKillServiceTimeout = 2500 for this tweak.",
+    "writes": [
+      {
+        "target_id": "wait-to-kill-service-timeout",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control",
+        "value_name": "WaitToKillServiceTimeout",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "2500"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "The current validation VM and any system that already uses the same service timeout baseline",
+      "states": [
+        {
+          "target_id": "wait-to-kill-service-timeout",
+          "state_kind": "value",
+          "value": "5000",
+          "rationale": "The current validation VM reported 5000 before the app value was applied."
+        }
+      ],
+      "evidence_ids": [
+        "vm-wait-to-kill-service-timeout-probe"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-current-build-baseline",
+      "label": "Observed current-build baseline",
+      "intended_for": [
+        "General users",
+        "Systems that should keep their current service shutdown timing"
+      ],
+      "avoid_for": [
+        "People intentionally reducing service shutdown wait time"
+      ],
+      "states": [
+        {
+          "target_id": "wait-to-kill-service-timeout",
+          "state_kind": "value",
+          "value": "5000",
+          "rationale": "Keep the observed current-build baseline from the validation VM."
+        }
+      ],
+      "good_when": "You want to keep the current service shutdown timing intact.",
+      "bad_when": "You want faster shutdown even if services get less time to stop cleanly.",
+      "tradeoffs": [
+        "Keeps the current service cleanup window.",
+        "Does not shorten shutdown."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "vm-wait-to-kill-service-timeout-probe"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Advanced users",
+        "Shutdown tuning research"
+      ],
+      "avoid_for": [
+        "Systems where clean service shutdown matters more than shutdown speed"
+      ],
+      "states": [
+        {
+          "target_id": "wait-to-kill-service-timeout",
+          "state_kind": "value",
+          "value": "2500",
+          "rationale": "Use the current app value that halves the observed Win25H2Clean service timeout."
+        }
+      ],
+      "good_when": "You want a shorter service shutdown wait time and accept the cleanup risk.",
+      "bad_when": "You need services to keep their full current cleanup window.",
+      "tradeoffs": [
+        "Can shorten shutdown when slow services are blocking exit.",
+        "Gives services less time to stop cleanly."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-service-control-handler",
+        "vm-wait-to-kill-service-timeout-probe",
+        "app-system-registry-provider-service-timeout"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-service-control-handler",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Service Control Handler Function",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function",
+      "summary": "Microsoft documents HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout as the service shutdown timeout used during operating system restart and says services should not raise it themselves.",
+      "supports": [
+        "path",
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-system-doc-shutdown",
+      "kind": "repo-doc",
+      "title": "Repo shutdown timing notes",
+      "location": "Docs/system/system.md",
+      "summary": "The repo notes show WaitToKillServiceTimeout = 2500 for the old tweak bundle and record a current baseline of 5000 in the same section.",
+      "supports": [
+        "path",
+        "value",
+        "default"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-wait-to-kill-service-timeout-probe",
+      "kind": "runtime-diff",
+      "title": "Win25H2Clean reversible probe for WaitToKillServiceTimeout",
+      "location": "research/evidence-files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt",
+      "summary": "The VM probe captured ORIGINAL=5000, AFTER=2500, and RESTORED=5000 for HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "restore"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider-service-timeout",
+      "kind": "repo-code",
+      "title": "Current app implementation for service shutdown timeout",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes WaitToKillServiceTimeout = 2500 as a standalone service shutdown timeout tweak.",
+      "supports": [
+        "ui-mapping",
+        "path",
+        "value"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The path and behavior are documented, the app mapping is exact, and the VM probe confirmed the current baseline, app value, and restore path cleanly.",
+    "blocking_issues": []
+  },
+  "validation_proof": {
+    "source_url": "research/evidence-files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt",
+    "exact_quote_or_path": "ORIGINAL={\"path_exists\":true,\"value_exists\":true,\"value\":\"5000\"}; AFTER={\"path_exists\":true,\"value_exists\":true,\"value\":\"2500\"}; RESTORED={\"path_exists\":true,\"value_exists\":true,\"value\":\"5000\"}",
+    "key_found_on_page": true,
+    "notes": "The reversible VM probe confirmed the current baseline, the app write, and a clean restore."
+  },
+  "last_reviewed_utc": "2026-03-25T07:40:00Z"
+}

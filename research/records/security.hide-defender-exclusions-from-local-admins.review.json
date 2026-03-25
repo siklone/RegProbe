@@ -1,0 +1,285 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.hide-defender-exclusions-from-local-admins",
+  "tweak_id": "security.hide-defender-exclusions-from-local-admins",
+  "record_status": "validated",
+  "summary": "Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when the documented root policy path was set to 1. Current 25H2 builds also honor a Policy Manager alias for the same behavior.",
+  "setting": {
+    "name": "Hide Defender Exclusions From Local Admins",
+    "category": "Security",
+    "area": "Microsoft Defender exclusions visibility",
+    "scope": "device",
+    "casual_explanation": "Defender can keep managed exclusions in effect but stop local admins from seeing them in the usual Defender admin surfaces.",
+    "why_people_change_it": "People change this when they want managed exclusions to stay enforced without exposing the exclusion list to local administrators.",
+    "tradeoffs_overview": "This does not change scan enforcement. It changes who can inspect exclusions through local admin tools.",
+    "professional_notes": "Microsoft documents HideExclusionsFromLocalAdmins on the Defender policy surface with 0 or not configured meaning local admins can view exclusions and 1 meaning they cannot. In the clean 25H2 VM, a managed exclusion under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Exclusions\\Paths was visible in Get-MpPreference when the policy was unset. After writing HideExclusionsFromLocalAdmins = 1 on the root policy path, wmiprvse.exe and powershell.exe both read that value and Get-MpPreference returned 'N/A: Administrators are not allowed to view exclusions'. A second run showed the same behavior when only HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager\\HideExclusionsFromLocalAdmins was set to 1, so current 25H2 builds honor both surfaces.",
+    "targets": [
+      {
+        "target_id": "defender-hide-exclusions-from-local-admins",
+        "location_kind": "group-policy",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+        "value_name": "HideExclusionsFromLocalAdmins",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Leave the policy unset so local admins can view managed exclusions.",
+            "evidence_ids": [
+              "ms-defender-hide-exclusions-from-local-admins",
+              "vm-defender-hide-exclusions-baseline-visibility"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Exclusions visible to local admins",
+            "meaning": "The policy is disabled and local admins can inspect managed exclusions through the usual Defender surfaces.",
+            "evidence_ids": [
+              "ms-defender-hide-exclusions-from-local-admins"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Hide managed exclusions from local admins",
+            "meaning": "Managed exclusions stay on the policy exclusions branch, but Get-MpPreference hides them from local admin views.",
+            "evidence_ids": [
+              "ms-defender-hide-exclusions-from-local-admins",
+              "ms-defender-exclusions-visibility-note",
+              "vm-defender-hide-exclusions-root-state1",
+              "vm-defender-hide-exclusions-root-visibility",
+              "app-security-provider-hide-defender-exclusions-from-local-admins"
+            ]
+          }
+        ],
+        "notes": "The official path is the root Defender policy key. Win25H2Clean also honored a Policy Manager alias with the same value name, but the app stays on the documented root path."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The app writes HideExclusionsFromLocalAdmins = 1 on the documented root Defender policy path.",
+    "writes": [
+      {
+        "target_id": "defender-hide-exclusions-from-local-admins",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+        "value_name": "HideExclusionsFromLocalAdmins",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Policy unset baseline",
+      "applies_to": "Systems where the Defender exclusion-visibility policy is not configured",
+      "states": [
+        {
+          "target_id": "defender-hide-exclusions-from-local-admins",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset so local admins can see managed exclusions."
+        }
+      ],
+      "evidence_ids": [
+        "ms-defender-hide-exclusions-from-local-admins",
+        "vm-defender-hide-exclusions-baseline-visibility"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "Systems where local admins should still be able to inspect managed Defender exclusions"
+      ],
+      "avoid_for": [
+        "Locked-down managed systems that intentionally hide exclusion lists from local admins"
+      ],
+      "states": [
+        {
+          "target_id": "defender-hide-exclusions-from-local-admins",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the exclusion-visibility policy unset until there is a reason to hide the managed list."
+        }
+      ],
+      "good_when": "You want the normal local-admin inspection behavior for managed exclusions.",
+      "bad_when": "You need managed exclusions enforced but hidden from local admins.",
+      "tradeoffs": [
+        "Leaves exclusion visibility unchanged.",
+        "Does not hide the managed exclusion list from local admin tools."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-defender-hide-exclusions-from-local-admins",
+        "vm-defender-hide-exclusions-baseline-visibility"
+      ]
+    },
+    {
+      "profile_id": "hide-managed-defender-exclusions",
+      "label": "Hide managed exclusions from local admins",
+      "intended_for": [
+        "Advanced users",
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "Systems that expect local admins to audit managed Defender exclusions"
+      ],
+      "states": [
+        {
+          "target_id": "defender-hide-exclusions-from-local-admins",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the documented root Defender policy path that wmiprvse.exe and powershell.exe read directly in the 25H2 VM."
+        }
+      ],
+      "good_when": "You want managed exclusions to stay active while local admins lose the normal exclusion listing views.",
+      "bad_when": "You want the most transparent local admin inspection path.",
+      "tradeoffs": [
+        "Get-MpPreference stops listing the managed exclusion even though it still exists on the managed policy branch.",
+        "Current 25H2 builds also honor a Policy Manager alias, but the app uses the documented root path."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-defender-hide-exclusions-from-local-admins",
+        "ms-defender-exclusions-visibility-note",
+        "vm-defender-hide-exclusions-root-state1",
+        "vm-defender-hide-exclusions-root-visibility",
+        "app-security-provider-hide-defender-exclusions-from-local-admins"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-defender-hide-exclusions-from-local-admins",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Defender CSP HideExclusionsFromLocalAdmins",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/defender-csp",
+      "summary": "Microsoft documents HideExclusionsFromLocalAdmins with 0 or not configured meaning exclusions stay visible to local admins and 1 meaning local admins can no longer view exclusions.",
+      "supports": [
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-defender-exclusions-visibility-note",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Configure exclusions in Defender Antivirus",
+      "location": "https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus",
+      "summary": "Microsoft notes that HideExclusionsFromLocalAdmins affects whether local admins can view exclusions and that the setting does not remove exclusions from policy storage.",
+      "supports": [
+        "behavior",
+        "tradeoff"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-defender-hide-exclusions-dump",
+      "kind": "repo-doc",
+      "title": "Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins",
+      "location": "Docs/security/assets/Windows-Defender.txt",
+      "summary": "The local Defender dump list shows HideExclusionsFromLocalAdmins under both HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender and HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager.",
+      "supports": [
+        "path"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-defender-hide-exclusions-baseline-visibility",
+      "kind": "vm-test",
+      "title": "Win25H2Clean baseline visibility with managed exclusion present",
+      "location": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json",
+      "summary": "With both HideExclusionsFromLocalAdmins surfaces unset, a managed exclusion under the policy exclusions branch still appeared in Get-MpPreference and remained present in the managed policy hive.",
+      "supports": [
+        "default",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-defender-hide-exclusions-root-state1",
+      "kind": "procmon-trace",
+      "title": "Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1",
+      "location": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt",
+      "summary": "After writing HideExclusionsFromLocalAdmins = 1 on the root Defender policy path, wmiprvse.exe and powershell.exe both queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins and read Data: 1.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-defender-hide-exclusions-root-visibility",
+      "kind": "vm-test",
+      "title": "Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1",
+      "location": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json",
+      "summary": "With the root policy path set to 1, the managed exclusion still existed on the policy exclusions branch, but Get-MpPreference returned 'N/A: Administrators are not allowed to view exclusions'.",
+      "supports": [
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-defender-hide-exclusions-policymanager-alias",
+      "kind": "procmon-trace",
+      "title": "Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1",
+      "location": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-policymanager-1-20260325-002004/hideexclusions-admins-policymanager-1.txt",
+      "summary": "With only the Policy Manager surface set to 1, wmiprvse.exe first saw the root value as NAME NOT FOUND and then read HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager\\HideExclusionsFromLocalAdmins = 1. The paired visibility JSON showed the same hidden-exclusions behavior.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider-hide-defender-exclusions-from-local-admins",
+      "kind": "repo-code",
+      "title": "Current security provider HideExclusionsFromLocalAdmins write",
+      "location": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The app writes HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins = 1 on the documented root path.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the value model clearly, and the Win25H2Clean VM shows the documented root policy path hiding managed exclusions from Get-MpPreference while the managed exclusions branch stays populated. The Policy Manager alias is a current-build side observation, not a blocker for the documented root path.",
+    "blocking_issues": []
+  },
+  "open_questions": [
+    "Should the Policy Manager alias be modeled as a separate audit record or folded into this record permanently as a current-build alias?",
+    "Should the app stay on the documented root path only, or is there any Defender scenario where writing both surfaces is required?"
+  ],
+  "last_reviewed_utc": "2026-03-25T09:05:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt",
+    "exact_quote_or_path": "wmiprvse.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1",
+    "key_found_on_page": true,
+    "notes": "The baseline visibility JSON showed the managed exclusion path in Get-MpPreference while both policy values were unset. The root-path state-1 run then hid that exclusion from Get-MpPreference, and a separate Policy Manager run produced the same behavior after reading the alias path instead."
+  }
+}

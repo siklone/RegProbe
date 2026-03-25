@@ -1,0 +1,216 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-search-remote-queries",
+  "tweak_id": "system.disable-search-remote-queries",
+  "record_status": "validated",
+  "summary": "Policy-backed control for whether remote clients can query this computer's Windows Search index. Good for reducing remote index exposure, but it also removes indexed-search convenience for network shares hosted on the machine.",
+  "setting": {
+    "name": "Remote Windows Search Queries",
+    "category": "System",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows Search can let other computers query this PC's search index over the network. This policy decides whether that remote index use is allowed.",
+    "why_people_change_it": "People disable it when they do not want other devices using this computer's search index, or when the machine should behave more like a standalone PC.",
+    "tradeoffs_overview": "Turning it off reduces remote search exposure, but network clients lose indexed search behavior for shares hosted on this computer.",
+    "professional_notes": "Search.admx maps PreventRemoteQueries under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search with enabledValue 1 and disabledValue 0. Search.adml says enabled blocks remote index queries, disabled allows them, and the default behavior is disabled.",
+    "targets": [
+      {
+        "target_id": "prevent-remote-queries",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "value_name": "PreventRemoteQueries",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the policy, and the default behavior allows client search requests to use this computer's index.",
+            "evidence_ids": [
+              "local-search-admx",
+              "local-search-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Remote queries allowed",
+            "meaning": "Client search requests can use this computer's search index.",
+            "evidence_ids": [
+              "local-search-admx",
+              "local-search-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Remote queries blocked",
+            "meaning": "Clients cannot query this computer's index remotely.",
+            "evidence_ids": [
+              "local-search-admx",
+              "local-search-adml",
+              "app-system-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes PreventRemoteQueries = 1, which matches the documented block-remote-queries behavior.",
+    "writes": [
+      {
+        "target_id": "prevent-remote-queries",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "value_name": "PreventRemoteQueries",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows systems exposing the Windows Search policy",
+      "states": [
+        {
+          "target_id": "prevent-remote-queries",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "notes": "Microsoft's local ADML help text says the default behavior is disabled, which means remote clients can use the index unless this policy is set to block them.",
+      "evidence_ids": [
+        "local-search-admx",
+        "local-search-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that do not care about remote index exposure"
+      ],
+      "avoid_for": [
+        "Systems that should block remote index queries"
+      ],
+      "states": [
+        {
+          "target_id": "prevent-remote-queries",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want Windows Search to keep its normal policy baseline.",
+      "bad_when": "You want to prevent other computers from using this machine's index.",
+      "tradeoffs": [
+        "Remote clients can still use indexed search behavior where supported.",
+        "No policy-based block is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-search-adml"
+      ]
+    },
+    {
+      "profile_id": "no-remote-index-queries",
+      "label": "No remote index queries",
+      "intended_for": [
+        "Privacy-focused systems",
+        "Standalone desktops",
+        "Managed devices"
+      ],
+      "avoid_for": [
+        "File servers or systems that rely on remote indexed-search behavior"
+      ],
+      "states": [
+        {
+          "target_id": "prevent-remote-queries",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Block remote clients from querying this computer's index."
+        }
+      ],
+      "good_when": "You want network clients kept out of this computer's search index.",
+      "bad_when": "You want remote clients to benefit from indexed search behavior on this machine.",
+      "tradeoffs": [
+        "Remote index queries are blocked.",
+        "Searching shared content from other devices can be less convenient."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-search-admx",
+        "local-search-adml",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-search-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Search.admx mapping",
+      "location": "research/evidence-files/missing/search-admx.md",
+      "summary": "The local ADMX file maps PreventRemoteQueries under the Windows Search policy key with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-search-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft Search.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/Search.adml",
+      "summary": "The local ADML help text says enabling the policy blocks remote index queries, disabling it allows them, and the default behavior is disabled.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes PreventRemoteQueries = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft Search policy files explicitly define the machine policy path HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search, the value name PreventRemoteQueries, and the enabled/disabled mapping. The app writes the documented enabled-state value 1 that blocks remote clients from querying the local search index.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/missing/search-admx.md",
+    "exact_quote_or_path": "<policy name=\"PreventRemoteQueries\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" valueName=\"PreventRemoteQueries\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; Search.adml: \"If enabled, clients will be unable to query this computer's index remotely ... If disabled, client search requests will use this computer's index. Default is disabled.\"",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy blocks remote index queries and that the default behavior leaves them allowed."
+  }
+}

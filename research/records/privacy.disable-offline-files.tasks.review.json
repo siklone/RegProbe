@@ -1,0 +1,196 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "privacy.disable-offline-files.tasks",
+  "tweak_id": "privacy.disable-offline-files.tasks",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the Offline Files task subrecord. The app disables the Offline Files background and logon synchronization tasks, but the publishable control surface is tracked separately in the policy record.",
+  "setting": {
+    "name": "Offline Files Task Bundle",
+    "category": "Privacy",
+    "area": "Scheduled Task Bundle",
+    "scope": "device",
+    "casual_explanation": "Offline Files uses scheduled jobs to synchronize cached data. This sub-tweak disables those jobs directly.",
+    "why_people_change_it": "People use this when they want fewer Offline Files background actions after they already intend to disable the feature.",
+    "tradeoffs_overview": "Disabling the tasks reduces background sync behavior, but it is a stronger operational change than simply using the documented feature policy.",
+    "professional_notes": "The provider disables the Background Synchronization and Logon Synchronization tasks in the Offline Files task folder. This record tracks the task bundle as observed app behavior.",
+    "targets": [
+      {
+        "target_id": "offline-files-task-bundle",
+        "location_kind": "scheduled-task",
+        "path": "\\Microsoft\\Windows\\Offline Files\\*",
+        "value_name": "EnabledState",
+        "value_type": "TASK_STATE",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "default",
+            "label": "Windows default",
+            "meaning": "The Offline Files tasks keep their normal Windows baseline.",
+            "evidence_ids": [
+              "offline-policy-subrecord"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "disabled",
+            "label": "Disable task bundle",
+            "meaning": "The current app disables the listed Offline Files tasks.",
+            "evidence_ids": [
+              "app-privacy-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app disables the two Offline Files synchronization tasks as part of the broader bundle.",
+    "writes": [
+      {
+        "target_id": "offline-files-task-bundle",
+        "path": "\\Microsoft\\Windows\\Offline Files\\*",
+        "value_name": "EnabledState",
+        "value_type": "TASK_STATE",
+        "state_kind": "value",
+        "value": "disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Offline Files task baseline",
+      "applies_to": "Windows systems with the Offline Files task folder present",
+      "states": [
+        {
+          "target_id": "offline-files-task-bundle",
+          "state_kind": "value",
+          "value": "default",
+          "rationale": "Treat the task state as part of the normal Windows feature baseline unless a stronger reason exists."
+        }
+      ],
+      "evidence_ids": [
+        "offline-policy-subrecord"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "Policy-first management of Offline Files"
+      ],
+      "avoid_for": [
+        "Research comparison of the current app bundle"
+      ],
+      "states": [
+        {
+          "target_id": "offline-files-task-bundle",
+          "state_kind": "value",
+          "value": "default",
+          "rationale": "Do not treat task-disable behavior as the first-class official control."
+        }
+      ],
+      "good_when": "You want the feature baseline to remain closer to Windows defaults.",
+      "bad_when": "You explicitly want the broader app bundle.",
+      "tradeoffs": [
+        "More conservative and reversible baseline.",
+        "Does not aggressively remove background sync jobs."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "offline-policy-subrecord"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app bundle",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure"
+      ],
+      "states": [
+        {
+          "target_id": "offline-files-task-bundle",
+          "state_kind": "value",
+          "value": "disabled",
+          "rationale": "Track the task-level behavior the app currently applies."
+        }
+      ],
+      "good_when": "You are documenting the broader product behavior.",
+      "bad_when": "You want only the validated policy mapping.",
+      "tradeoffs": [
+        "Reduces background task activity.",
+        "Adds a broader implementation layer beyond the official feature policy."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "offline-policy-subrecord",
+      "kind": "repo-doc",
+      "title": "Existing Offline Files policy record",
+      "location": "research/records/privacy.disable-offline-files.policy.json",
+      "summary": "The validated policy record documents the official feature control separately from this task bundle.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current privacy provider task bundle",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider disables the Offline Files background and logon synchronization tasks.",
+      "supports": [
+        "ui-mapping",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-privacy-offline-files-tasks",
+      "kind": "repo-doc",
+      "title": "Repo privacy docs for Offline Files scheduled tasks",
+      "location": "Docs/privacy/privacy.md",
+      "summary": "The repo docs state that disabling Offline Files turns off the two Offline Files scheduled tasks, and also describe the logon/background synchronization behavior in the Offline Files section.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The task bundle is broader than the single validated NetCache policy, but the repo docs explicitly describe the two Offline Files scheduled tasks and their synchronization behavior. The remaining concern is bundle semantics rather than missing proof.",
+    "blocking_issues": [
+      "The task bundle is an observed implementation layer beyond the validated Offline Files feature policy."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "validation_proof": {
+    "source_url": "Docs/privacy/privacy.md",
+    "exact_quote_or_path": "Disable Offline Files (CSC) via policy and services. Sets NetCache policy keys, disables CSC/CscService, disables the two Offline Files scheduled tasks (they're disabled by default), and renames mobsync.exe to block execution.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id repo-privacy-offline-files-tasks (repo-doc); deprecated audit trail."
+  }
+}

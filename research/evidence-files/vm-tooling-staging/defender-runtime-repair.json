@@ -1,0 +1,82 @@
+﻿{
+    "timestamp":  "2026-03-25T01:05:41.2423886+03:00",
+    "repair_requested":  false,
+    "before":  {
+                   "mp_status":  {
+                                     "am_running_mode":  "Normal",
+                                     "antivirus_enabled":  true,
+                                     "realtime_enabled":  true,
+                                     "behavior_monitor_enabled":  true,
+                                     "ioav_enabled":  true,
+                                     "antispyware_enabled":  true
+                                 },
+                   "services":  [
+                                    {
+                                        "name":  "WinDefend",
+                                        "exists":  true,
+                                        "state":  "Running",
+                                        "status":  "OK",
+                                        "start_mode":  "Auto",
+                                        "path_name":  "\"C:\\Program Files\\Windows Defender\\MsMpEng.exe\""
+                                    },
+                                    {
+                                        "name":  "WdNisSvc",
+                                        "exists":  true,
+                                        "state":  "Running",
+                                        "status":  "OK",
+                                        "start_mode":  "Manual",
+                                        "path_name":  "\"C:\\Program Files\\Windows Defender\\NisSrv.exe\""
+                                    },
+                                    {
+                                        "name":  "SecurityHealthService",
+                                        "exists":  true,
+                                        "state":  "Running",
+                                        "status":  "OK",
+                                        "start_mode":  "Manual",
+                                        "path_name":  "C:\\Windows\\system32\\SecurityHealthService.exe"
+                                    }
+                                ]
+               },
+    "actions":  [
+
+                ],
+    "errors":  [
+
+               ],
+    "after":  {
+                  "mp_status":  {
+                                    "am_running_mode":  "Normal",
+                                    "antivirus_enabled":  true,
+                                    "realtime_enabled":  true,
+                                    "behavior_monitor_enabled":  true,
+                                    "ioav_enabled":  true,
+                                    "antispyware_enabled":  true
+                                },
+                  "services":  [
+                                   {
+                                       "name":  "WinDefend",
+                                       "exists":  true,
+                                       "state":  "Running",
+                                       "status":  "OK",
+                                       "start_mode":  "Auto",
+                                       "path_name":  "\"C:\\Program Files\\Windows Defender\\MsMpEng.exe\""
+                                   },
+                                   {
+                                       "name":  "WdNisSvc",
+                                       "exists":  true,
+                                       "state":  "Running",
+                                       "status":  "OK",
+                                       "start_mode":  "Manual",
+                                       "path_name":  "\"C:\\Program Files\\Windows Defender\\NisSrv.exe\""
+                                   },
+                                   {
+                                       "name":  "SecurityHealthService",
+                                       "exists":  true,
+                                       "state":  "Running",
+                                       "status":  "OK",
+                                       "start_mode":  "Manual",
+                                       "path_name":  "C:\\Windows\\system32\\SecurityHealthService.exe"
+                                   }
+                               ]
+              }
+}

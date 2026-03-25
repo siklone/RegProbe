@@ -1,0 +1,205 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.services.disable-sysmain",
+  "tweak_id": "system.services.disable-sysmain",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for SysMain. Microsoft's Windows IoT Enterprise service guidance explicitly marks SysMain as `Don't disable`, so the current app's disable action is kept as reference only.",
+  "setting": {
+    "name": "SysMain Service",
+    "category": "System",
+    "area": "Service Start Mode",
+    "scope": "device",
+    "casual_explanation": "SysMain helps Windows improve responsiveness over time by learning usage patterns and managing performance-related preloading behavior.",
+    "why_people_change_it": "People disable it when troubleshooting stutter, disk activity, or when following old performance-tuning guides.",
+    "tradeoffs_overview": "Turning it off can reduce one source of background activity, but Microsoft does not recommend disabling it and some systems can lose intended performance behavior.",
+    "professional_notes": "Microsoft's Windows IoT Enterprise service guidance lists SysMain `(SysMain)` with a default start mode of `Automatic` and marks it `Don't disable`, describing it as a service that maintains and improves system performance over time. A local SCM snapshot confirms the exact SysMain service identity on the review host: display name `SysMain`, binary path `research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md -k LocalSystemNetworkRestricted -p`, and current start type `4 DISABLED`. The app currently disables the service through a service start-mode tweak, so the control surface is real but the recommendation conflicts with Microsoft's guidance.",
+    "targets": [
+      {
+        "target_id": "sysmain-start-mode",
+        "location_kind": "service",
+        "path": "SysMain",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Automatic",
+            "label": "Windows default",
+            "meaning": "SysMain keeps its documented default service mode and performance-maintenance behavior.",
+            "evidence_ids": [
+              "ms-iot-services-sysmain"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Disabled",
+            "label": "SysMain disabled",
+            "meaning": "The service no longer starts, but Microsoft does not recommend disabling it.",
+            "evidence_ids": [
+              "ms-iot-services-sysmain",
+              "app-system-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The app disables SysMain by setting its start mode to Disabled, but Microsoft's service guidance explicitly says not to disable it.",
+    "writes": [
+      {
+        "target_id": "sysmain-start-mode",
+        "path": "SysMain",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "state_kind": "value",
+        "value": "Disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented default",
+      "applies_to": "Windows systems using the normal SysMain configuration",
+      "states": [
+        {
+          "target_id": "sysmain-start-mode",
+          "state_kind": "value",
+          "value": "Automatic",
+          "rationale": "Microsoft lists SysMain with an Automatic default start mode and advises not to disable it."
+        }
+      ],
+      "notes": "This review record keeps the documented baseline because Microsoft's guidance conflicts with the current tweak intent.",
+      "evidence_ids": [
+        "ms-iot-services-sysmain"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Most desktops and laptops"
+      ],
+      "avoid_for": [
+        "None by default until stronger evidence exists"
+      ],
+      "states": [
+        {
+          "target_id": "sysmain-start-mode",
+          "state_kind": "value",
+          "value": "Automatic",
+          "rationale": "Keep the documented default because Microsoft marks SysMain as Don't disable."
+        }
+      ],
+      "good_when": "You want to stay aligned with Microsoft's service guidance.",
+      "bad_when": "You are intentionally running a narrow troubleshooting experiment and understand the tradeoff.",
+      "tradeoffs": [
+        "Windows keeps the documented SysMain performance-maintenance behavior.",
+        "The app's current disable action is intentionally not published as a validated preset."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-iot-services-sysmain"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "sysmain-start-mode",
+          "state_kind": "value",
+          "value": "Disabled",
+          "rationale": "Document the current app behavior without validating it as recommended."
+        }
+      ],
+      "good_when": "You are documenting the current product behavior for cleanup work.",
+      "bad_when": "You want a Microsoft-backed recommended state.",
+      "tradeoffs": [
+        "The control surface itself is real and reversible.",
+        "Microsoft explicitly advises against disabling the service."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-iot-services-sysmain",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-iot-services-sysmain",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Guidance on configuring system services - SysMain",
+      "location": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "summary": "Microsoft lists SysMain `(SysMain)` with start mode `Automatic` and marks it `Don't disable`.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-scm-sysmain-2026-03-14",
+      "kind": "repo-doc",
+      "title": "Local SCM snapshot - SysMain",
+      "location": "research/notes/service-snapshots/sysmain-sc-qc-2026-03-14.txt",
+      "summary": "Checked-in `sc qc SysMain` snapshot from Microsoft Windows 11 Pro 10.0.26200 confirming the exact service identifier, display name, binary path, and current START_TYPE line on the review host. This proves the exact SCM control surface the app targets.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider disables the `SysMain` service through the batch service start-mode tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The service control surface is official, but Microsoft's own service guidance marks SysMain as Don't disable, so the current tweak should stay in review rather than in the validated safe set.",
+    "blocking_issues": [
+      "Official Microsoft guidance conflicts with the current disable recommendation."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "research/notes/service-snapshots/sysmain-sc-qc-2026-03-14.txt",
+    "exact_quote_or_path": "SERVICE_NAME: SysMain | START_TYPE : 4 DISABLED | DISPLAY_NAME: SysMain | BINARY_PATH_NAME: research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md -k LocalSystemNetworkRestricted -p",
+    "key_found_on_page": true,
+    "notes": "The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker."
+  }
+}

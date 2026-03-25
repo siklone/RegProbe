@@ -8,11 +8,11 @@ from pathlib import Path
 from typing import Any
 
 from evidence_class_lib import build_class_entry, load_provenance_map as load_provenance_entries
+from research_path_lib import REPO_ROOT, RESEARCH_ROOT, normalize_reference, normalize_reference_text
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-RECORDS_DIR = REPO_ROOT / "Docs" / "tweaks" / "research" / "records"
+RECORDS_DIR = RESEARCH_ROOT / "records"
 PROVENANCE_PATH = REPO_ROOT / "Docs" / "tweaks" / "tweak-provenance.json"
-OUTPUT_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-index.json"
+OUTPUT_PATH = RESEARCH_ROOT / "evidence-index.json"
 REDACTED_USER = "<USER>"
 HOME_PATH = str(Path.home())
 HOME_PATH_FWD = HOME_PATH.replace("\\", "/")
@@ -80,6 +80,8 @@ def compact_targets(record: dict[str, Any]) -> list[dict[str, Any]]:
                 "notes",
             ],
         )
+        if isinstance(compact.get("notes"), str):
+            compact["notes"] = normalize_reference_text(str(compact["notes"]), title=str(compact.get("target_id") or "Target"))
         compact["allowed_values"] = compact_allowed_values(target)
         targets.append(compact)
     return targets
@@ -112,29 +114,19 @@ def compact_profiles(record: dict[str, Any]) -> list[dict[str, Any]]:
                 "evidence_ids",
             ],
         )
+        if isinstance(compact.get("notes"), str):
+            compact["notes"] = normalize_reference_text(str(compact["notes"]), title=str(compact.get("profile_id") or "Profile"))
         profiles.append(compact)
     return profiles
 
 
-def compact_evidence(record: dict[str, Any]) -> list[dict[str, Any]]:
-    evidence: list[dict[str, Any]] = []
-    for item in record.get("evidence", []) or []:
-        evidence.append(
-            pick(
-                item,
-                [
-                    "evidence_id",
-                    "kind",
-                    "title",
-                    "location",
-                    "summary",
-                    "strength",
-                    "supports",
-                ],
-            )
-        )
-        evidence[-1]["origin"] = evidence_origin(evidence[-1].get("kind"))
-    return evidence
+def has_nohuto_lineage(provenance_entry: dict[str, Any] | None) -> bool:
+    if not provenance_entry:
+        return False
+    for item in provenance_entry.get("References", []) or []:
+        if str(item.get("Kind") or "").strip().lower() == "nohuto":
+            return True
+    return False
 
 
 def evidence_origin(kind: Any) -> str:
@@ -148,14 +140,52 @@ def evidence_origin(kind: Any) -> str:
         "runtime-diff": "VM runtime diff",
         "vm-test": "VM test / probe",
         "registry-observation": "VM registry observation",
-        "decompilation": "Ghidra decompilation",
-        "decompiled-pseudocode": "nohuto upstream pseudocode",
+        "decompilation": "Our Ghidra decompilation",
+        "decompiled-pseudocode": "Nohuto upstream pseudocode",
     }
     return mapping.get(str(kind), "unspecified")
 
 
+def compact_evidence(record: dict[str, Any], provenance_entry: dict[str, Any] | None) -> list[dict[str, Any]]:
+    evidence: list[dict[str, Any]] = []
+    includes_nohuto = has_nohuto_lineage(provenance_entry)
+    for item in record.get("evidence", []) or []:
+        compact = pick(
+            item,
+            [
+                "evidence_id",
+                "kind",
+                "title",
+                "location",
+                "summary",
+                "strength",
+                "supports",
+            ],
+        )
+        title = str(compact.get("title") or "")
+        location = str(compact.get("location") or "")
+        is_nohuto_decomp = compact.get("kind") == "decompilation" and (
+            includes_nohuto or "nohuto" in title.lower() or "nohuto" in location.lower()
+        )
+        origin = evidence_origin(compact.get("kind"))
+        if is_nohuto_decomp:
+            origin = "Nohuto's and our Ghidra decompilation"
+        compact["origin"] = origin
+        if isinstance(compact.get("location"), str):
+            compact["location"] = normalize_reference_text(str(compact["location"]), title=str(compact.get("title") or "Evidence"))
+        if is_nohuto_decomp:
+            title = str(compact.get("title") or "Decompilation")
+            if not title.startswith("Nohuto's and our Ghidra decompilation"):
+                compact["title"] = f"Nohuto's and our Ghidra decompilation - {title}"
+        evidence.append(compact)
+    return evidence
+
+
 def compact_reference(item: dict[str, Any]) -> dict[str, Any]:
-    return pick(item, ["Kind", "Title", "Url", "Summary"])
+    compact = pick(item, ["Kind", "Title", "Url", "Summary"])
+    if isinstance(compact.get("Url"), str):
+        compact["Url"] = normalize_reference(str(compact["Url"]), title=str(compact.get("Title") or "Reference"))
+    return compact
 
 
 def compact_provenance(record: dict[str, Any], provenance_map: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
@@ -178,7 +208,7 @@ def compact_provenance(record: dict[str, Any], provenance_map: dict[str, dict[st
             "matched_tokens": entry.get("MatchedTokens"),
             "lineage_note": (
                 "Nohuto references only show upstream dump or naming links. "
-                "Value semantics are validated separately in the record's evidence and validation_proof blocks."
+                "Value semantics are validated separately in the record evidence and validation proof."
             ),
             "nohuto_references": nohuto_references,
             "windows_internals_references": internals_references,
@@ -189,9 +219,17 @@ def compact_provenance(record: dict[str, Any], provenance_map: dict[str, dict[st
 
 def compact_validation_proof(record: dict[str, Any]) -> dict[str, Any] | None:
     proof = record.get("validation_proof")
-    if isinstance(proof, dict):
-        return sanitize_value(proof)
-    return None
+    if not isinstance(proof, dict):
+        return None
+
+    normalized = sanitize_value(proof)
+    if isinstance(normalized.get("source_url"), str):
+        normalized["source_url"] = normalize_reference(str(normalized["source_url"]), title="Validation proof")
+    if isinstance(normalized.get("exact_quote_or_path"), str):
+        normalized["exact_quote_or_path"] = normalize_reference_text(str(normalized["exact_quote_or_path"]), title="Validation proof")
+    if isinstance(normalized.get("notes"), str):
+        normalized["notes"] = normalize_reference_text(str(normalized["notes"]), title="Validation proof")
+    return normalized
 
 
 def compact_decision(record: dict[str, Any]) -> dict[str, Any] | None:
@@ -238,13 +276,15 @@ def main() -> int:
     class_counts: Counter[str] = Counter()
 
     for path in sorted(RECORDS_DIR.glob("*.json")):
-        with path.open("r", encoding="utf-8") as handle:
+        with path.open("r", encoding="utf-8-sig") as handle:
             record = json.load(handle)
 
+        record_key = str(record.get("record_id") or record.get("tweak_id") or "")
+        provenance_entry = provenance_map.get(record_key)
         status = record.get("record_status", "unknown")
         status_counts[status] += 1
 
-        evidence = compact_evidence(record)
+        evidence = compact_evidence(record, provenance_entry)
         if not evidence:
             evidence_counts["missing"] += 1
         else:
@@ -258,7 +298,7 @@ def main() -> int:
 
         class_entry = build_class_entry(
             record,
-            provenance_entry=provenance_map.get(str(record.get("record_id") or record.get("tweak_id") or "")),
+            provenance_entry=provenance_entry,
         )
         class_counts[class_entry["evidence_class"]] += 1
 
@@ -292,7 +332,7 @@ def main() -> int:
             "total_records": len(records),
             "validated": status_counts.get("validated", 0),
             "deprecated": status_counts.get("deprecated", 0),
-            "review_required": status_counts.get("review-required", 0),
+            "review_required": status_counts.get("review_required", 0),
             "records_with_evidence": evidence_counts.get("present", 0),
             "records_without_evidence": evidence_counts.get("missing", 0),
             "records_missing_validation_proof": validation_proof_missing,

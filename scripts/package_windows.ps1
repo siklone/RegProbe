@@ -29,8 +29,8 @@ function Get-Version {
 }
 
 $repoRoot = Get-RepoRoot
-$projectPath = Join-Path $repoRoot "OpenTraceProject.App\OpenTraceProject.App.csproj"
-$publishDir = Join-Path $repoRoot "OpenTraceProject.App\bin\$Configuration\net8.0-windows\$Runtime\publish"
+$projectPath = Join-Path $repoRoot "app\app.csproj"
+$publishDir = Join-Path $repoRoot "app\bin\$Configuration\net8.0-windows\$Runtime\publish"
 
 if ($Clean -and (Test-Path $publishDir)) {
     Remove-Item -Recurse -Force $publishDir
@@ -65,8 +65,8 @@ $hostTargetDir = Join-Path $publishDir "ElevatedHost"
 $hostTargetExe = Join-Path $hostTargetDir "OpenTraceProject.ElevatedHost.exe"
 if (!(Test-Path $hostTargetExe)) {
     $candidates = @(
-        Join-Path $repoRoot "OpenTraceProject.ElevatedHost\bin\$Configuration\net8.0-windows\$Runtime\OpenTraceProject.ElevatedHost.exe",
-        Join-Path $repoRoot "OpenTraceProject.ElevatedHost\bin\$Configuration\net8.0-windows\$Runtime\publish\OpenTraceProject.ElevatedHost.exe"
+        Join-Path $repoRoot "elevated-host\bin\$Configuration\net8.0-windows\$Runtime\OpenTraceProject.ElevatedHost.exe",
+        Join-Path $repoRoot "elevated-host\bin\$Configuration\net8.0-windows\$Runtime\publish\OpenTraceProject.ElevatedHost.exe"
     ) | Where-Object { Test-Path $_ }
 
     if ($candidates.Count -gt 0) {

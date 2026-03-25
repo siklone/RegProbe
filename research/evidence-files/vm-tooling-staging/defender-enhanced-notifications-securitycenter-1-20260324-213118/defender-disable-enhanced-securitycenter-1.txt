@@ -1,0 +1,21 @@
+﻿MODE=securitycenter
+STATE=1
+PML_EXISTS=True
+CSV_EXISTS=True
+MATCH_COUNT=12
+9:33:19.7389554 PM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | Desired Access: Query Value
+9:33:19.7390575 PM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications\DisableNotifications | NAME NOT FOUND | Length: 16
+9:33:19.7390781 PM | SecurityHealthService.exe | RegCloseKey | HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | 
+9:33:19.7391333 PM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | Desired Access: Query Value
+9:33:19.7392206 PM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications\DisableEnhancedNotifications | NAME NOT FOUND | Length: 16
+9:33:19.7392319 PM | SecurityHealthService.exe | RegCloseKey | HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | 
+9:33:19.7407957 PM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | Desired Access: Query Value
+9:33:19.7408090 PM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications\DisableNotifications | NAME NOT FOUND | Length: 16
+9:33:19.7408194 PM | SecurityHealthService.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | 
+9:33:19.7408364 PM | SecurityHealthService.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | Desired Access: Query Value
+9:33:19.7408456 PM | SecurityHealthService.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications\DisableEnhancedNotifications | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1
+9:33:19.7408541 PM | SecurityHealthService.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications | SUCCESS | 
+ORIGINAL_REPORTING={"path_exists":false,"value_exists":false,"value":null}
+ORIGINAL_SECURITYCENTER={"path_exists":true,"value_exists":false,"value":null}
+RESTORED_REPORTING={"path_exists":false,"value_exists":false,"value":null}
+RESTORED_SECURITYCENTER={"path_exists":true,"value_exists":false,"value":null}

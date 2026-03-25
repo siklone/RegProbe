@@ -1,0 +1,349 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-clipboard-history",
+  "tweak_id": "system.disable-clipboard-history",
+  "record_status": "validated",
+  "summary": "Device policies for Clipboard History and cross-device clipboard sync. The local Microsoft OSPolicy.admx file explicitly documents the same policy key, value names, and enabled/disabled values that the app uses for this bundle.",
+  "setting": {
+    "name": "Clipboard History and Cross-Device Clipboard Sync",
+    "category": "System",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can keep a history of copied items and can sync clipboard data across devices. These two policy values decide whether those features are allowed.",
+    "why_people_change_it": "People disable these policies for privacy, compliance, or to avoid cloud-backed clipboard sync. Some teams still want local clipboard history while blocking cross-device sync.",
+    "tradeoffs_overview": "Turning both policies off removes Clipboard History and cross-device clipboard sync. Leaving them not configured lets Windows and the user settings decide the final behavior.",
+    "professional_notes": "These are machine policy values under HKLM and are appropriate for device-level management. The local OSPolicy.admx file defines both values under Software\\Policies\\Microsoft\\Windows\\System with enabledValue 1 and disabledValue 0. They describe whether Windows is allowed to expose the features, not every possible Settings app state.",
+    "targets": [
+      {
+        "target_id": "allow-clipboard-history",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "AllowClipboardHistory",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows policy does not force the feature. The user-facing behavior stays under normal Windows control.",
+            "evidence_ids": [
+              "ms-clipboard-history-csp",
+              "local-ospolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Disabled",
+            "meaning": "Clipboard History is blocked by policy.",
+            "evidence_ids": [
+              "ms-clipboard-history-csp",
+              "local-ospolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Enabled",
+            "meaning": "Clipboard History is explicitly allowed by policy.",
+            "evidence_ids": [
+              "ms-clipboard-history-csp",
+              "local-ospolicy-admx"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "allow-cross-device-clipboard",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "AllowCrossDeviceClipboard",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows policy does not force clipboard sync. The final behavior stays under normal Windows control.",
+            "evidence_ids": [
+              "ms-cross-device-clipboard-csp",
+              "local-ospolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Disabled",
+            "meaning": "Cross-device clipboard sync is blocked by policy.",
+            "evidence_ids": [
+              "ms-cross-device-clipboard-csp",
+              "local-ospolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Enabled",
+            "meaning": "Cross-device clipboard sync is explicitly allowed by policy.",
+            "evidence_ids": [
+              "ms-cross-device-clipboard-csp",
+              "local-ospolicy-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The current implementation writes both policy values to 0, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "allow-clipboard-history",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "AllowClipboardHistory",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "allow-cross-device-clipboard",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "AllowCrossDeviceClipboard",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Unmanaged Windows 10 and Windows 11 devices",
+      "states": [
+        {
+          "target_id": "allow-clipboard-history",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Default policy state is not configured."
+        },
+        {
+          "target_id": "allow-cross-device-clipboard",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Default policy state is not configured."
+        }
+      ],
+      "notes": "This describes policy state, not the end-user Settings app toggle default.",
+      "evidence_ids": [
+        "ms-clipboard-history-csp",
+        "ms-cross-device-clipboard-csp",
+        "local-ospolicy-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want Windows to decide feature availability normally"
+      ],
+      "avoid_for": [
+        "Managed devices that require clipboard restrictions"
+      ],
+      "states": [
+        {
+          "target_id": "allow-clipboard-history",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keeps the device at the normal Windows policy baseline."
+        },
+        {
+          "target_id": "allow-cross-device-clipboard",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keeps the device at the normal Windows policy baseline."
+        }
+      ],
+      "good_when": "You want standard Windows behavior and do not need to lock the feature down with policy.",
+      "bad_when": "You are trying to hard-disable clipboard retention or device-to-device sync.",
+      "tradeoffs": [
+        "Feature availability remains under Windows and user settings.",
+        "Does not enforce a privacy-focused clipboard policy."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-clipboard-history-csp",
+        "ms-cross-device-clipboard-csp"
+      ]
+    },
+    {
+      "profile_id": "privacy-focused",
+      "label": "Privacy focused",
+      "intended_for": [
+        "Privacy-conscious users",
+        "Managed devices",
+        "Shared machines"
+      ],
+      "avoid_for": [
+        "Users who rely on Win+V history",
+        "People who want cross-device paste"
+      ],
+      "states": [
+        {
+          "target_id": "allow-clipboard-history",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disables Clipboard History by policy."
+        },
+        {
+          "target_id": "allow-cross-device-clipboard",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disables cross-device clipboard sync by policy."
+        }
+      ],
+      "good_when": "You want copied content to stay out of clipboard history and cloud-backed sync paths.",
+      "bad_when": "You use Clipboard History as part of your daily workflow.",
+      "tradeoffs": [
+        "Win+V history is no longer available.",
+        "Cross-device clipboard sync stops working."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-clipboard-history-csp",
+        "ms-cross-device-clipboard-csp",
+        "local-ospolicy-admx",
+        "app-system-provider"
+      ]
+    },
+    {
+      "profile_id": "local-history-only",
+      "label": "Local history only",
+      "intended_for": [
+        "Users who want Clipboard History",
+        "People who do not want device-to-device sync"
+      ],
+      "avoid_for": [
+        "Strictly managed environments that ban clipboard retention"
+      ],
+      "states": [
+        {
+          "target_id": "allow-clipboard-history",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Explicitly allows Clipboard History."
+        },
+        {
+          "target_id": "allow-cross-device-clipboard",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Blocks cross-device clipboard sync while keeping local history allowed."
+        }
+      ],
+      "good_when": "You want Win+V history but do not want synced clipboard content moving between devices.",
+      "bad_when": "You want the simplest possible default policy or a full privacy lock-down.",
+      "tradeoffs": [
+        "Local clipboard history is still retained on the device.",
+        "The app does not currently expose this mixed profile as a first-class preset."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-clipboard-history-csp",
+        "ms-cross-device-clipboard-csp",
+        "local-ospolicy-admx"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-clipboard-history-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: AllowClipboardHistory",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowclipboardhistory",
+      "summary": "Official documentation for the AllowClipboardHistory policy value and its supported values.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-cross-device-clipboard-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: AllowCrossDeviceClipboard",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowcrossdeviceclipboard",
+      "summary": "Official documentation for the AllowCrossDeviceClipboard policy value and its supported values.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-ospolicy-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft OSPolicy.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx",
+      "summary": "The local ADMX file shows both AllowCrossDeviceClipboard and AllowClipboardHistory under Software\\Policies\\Microsoft\\Windows\\System with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes both policy values to 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-clipboard-history",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "Current repo provenance already links this tweak to nohuto references and internal audit output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft OSPolicy.admx file explicitly defines AllowCrossDeviceClipboard and AllowClipboardHistory under Software\\Policies\\Microsoft\\Windows\\System with enabledValue 1 and disabledValue 0, which matches the app's machine-policy bundle.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T15:22:05.5259006+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx",
+    "exact_quote_or_path": "<policy name=\"AllowCrossDeviceClipboard\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"AllowCrossDeviceClipboard\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; <policy name=\"AllowClipboardHistory\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"AllowClipboardHistory\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same policy key and both value names used by the app, and it confirms the shared 1/0 mapping."
+  }
+}

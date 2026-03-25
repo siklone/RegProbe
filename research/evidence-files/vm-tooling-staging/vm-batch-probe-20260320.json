@@ -1,0 +1,106 @@
+﻿[
+    {
+        "id":  "security.trusted-path-credential-prompting",
+        "kind":  "registry",
+        "path":  "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI\\\\EnableSecureCredentialPrompting",
+        "before":  "__MISSING__",
+        "after_apply":  1,
+        "after_restore":  "__MISSING__",
+        "status":  "ok",
+        "error":  ""
+    },
+    {
+        "id":  "system.disable-auto-maintenance",
+        "kind":  "registry",
+        "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\\\MaintenanceDisabled",
+        "before":  "__MISSING__",
+        "after_apply":  1,
+        "after_restore":  "__MISSING__",
+        "status":  "ok",
+        "error":  ""
+    },
+    {
+        "id":  "system.disable-jpeg-reduction",
+        "kind":  "registry",
+        "path":  "HKCU:\\Control Panel\\Desktop\\\\JPEGImportQuality",
+        "before":  "__MISSING__",
+        "after_apply":  100,
+        "after_restore":  "__MISSING__",
+        "status":  "ok",
+        "error":  ""
+    },
+    {
+        "id":  "system.priority-control",
+        "kind":  "registry",
+        "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\\\Win32PrioritySeparation",
+        "before":  2,
+        "after_apply":  38,
+        "after_restore":  2,
+        "status":  "ok",
+        "error":  ""
+    },
+    {
+        "id":  "system.memory-large-system-cache-client",
+        "kind":  "registry",
+        "path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\\\LargeSystemCache",
+        "before":  0,
+        "after_apply":  0,
+        "after_restore":  0,
+        "status":  "ok",
+        "error":  ""
+    },
+    {
+        "id":  "system.disable-startup-delay",
+        "kind":  "registry",
+        "path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\\\StartupDelayInMSec",
+        "before":  "__MISSING__",
+        "after_apply":  0,
+        "after_restore":  "__MISSING__",
+        "status":  "ok",
+        "error":  ""
+    },
+    {
+        "id":  "system.disable-fullscreen-optimizations",
+        "kind":  "registry-set",
+        "path":  "HKCU:\\System\\GameConfigStore",
+        "before":  {
+                       "GameDVR_FSEBehavior":  "__MISSING__",
+                       "GameDVR_FSEBehaviorMode":  "__MISSING__",
+                       "GameDVR_HonorUserFSEBehaviorMode":  "__MISSING__",
+                       "GameDVR_DXGIHonorFSEWindowsCompatible":  "__MISSING__"
+                   },
+        "after_apply":  {
+                            "GameDVR_FSEBehavior":  2,
+                            "GameDVR_FSEBehaviorMode":  2,
+                            "GameDVR_HonorUserFSEBehaviorMode":  1,
+                            "GameDVR_DXGIHonorFSEWindowsCompatible":  1
+                        },
+        "after_restore":  {
+                              "GameDVR_FSEBehavior":  "__MISSING__",
+                              "GameDVR_FSEBehaviorMode":  "__MISSING__",
+                              "GameDVR_HonorUserFSEBehaviorMode":  "__MISSING__",
+                              "GameDVR_DXGIHonorFSEWindowsCompatible":  "__MISSING__"
+                          },
+        "status":  "ok",
+        "error":  ""
+    },
+    {
+        "id":  "privacy.disable-f1-help",
+        "kind":  "file-rename",
+        "path":  "C:\\Windows\\System32\\HelpPane.exe",
+        "before":  {
+                       "present":  false,
+                       "disabled_present":  false
+                   },
+        "after_apply":  {
+                            "present":  false,
+                            "disabled_present":  false
+                        },
+        "after_restore":  {
+                              "present":  false,
+                              "disabled_present":  false
+                          },
+        "status":  "apply_failed",
+        "error":  "HelpPane.exe missing before rename."
+    }
+]

@@ -1,0 +1,253 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-telemetry-optin-ui",
+  "tweak_id": "privacy.disable-telemetry-optin-ui",
+  "record_status": "validated",
+  "summary": "Machine policy for whether users can change diagnostic data opt-in settings in Settings. Microsoft documents the same device policy path, default, and numeric meanings that the app writes, and the local ADMX confirms the exact value name.",
+  "setting": {
+    "name": "Diagnostic Data Opt-In Settings UI",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can show controls in Settings that let a user change diagnostic data choices. This policy decides whether that Settings UI stays available.",
+    "why_people_change_it": "People disable this UI on managed systems so users cannot change diagnostic data settings from the Settings app.",
+    "tradeoffs_overview": "Disabling the UI makes diagnostic policy more consistent, but it removes user control in Settings.",
+    "professional_notes": "Microsoft documents ConfigureTelemetryOptInSettingsUx in the System Policy CSP and DataCollection.admx maps it to HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx. Both the ADMX and the Microsoft Learn page document 0 and 1 explicitly.",
+    "targets": [
+      {
+        "target_id": "disable-telemetry-optin-settings-ux",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+        "value_name": "DisableTelemetryOptInSettingsUx",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Enable diagnostic data opt-in settings",
+            "meaning": "End users can change the device diagnostic settings in the Settings app.",
+            "evidence_ids": [
+              "ms-system-configure-telemetry-optin-ui",
+              "local-datacollection-admx-optin-ui",
+              "local-datacollection-adml-optin-ui",
+              "nohuto-datacollection-optin-ui-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Disable diagnostic data opt-in settings",
+            "meaning": "Diagnostic data settings are disabled in the Settings app and users cannot change them there.",
+            "evidence_ids": [
+              "ms-system-configure-telemetry-optin-ui",
+              "local-datacollection-admx-optin-ui",
+              "local-datacollection-adml-optin-ui",
+              "app-privacy-provider",
+              "nohuto-datacollection-optin-ui-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DisableTelemetryOptInSettingsUx = 1, which matches the documented state that disables the Settings UI.",
+    "writes": [
+      {
+        "target_id": "disable-telemetry-optin-settings-ux",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+        "value_name": "DisableTelemetryOptInSettingsUx",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows machine-policy default",
+      "applies_to": "Windows 10 version 1803 and later systems exposing the policy",
+      "states": [
+        {
+          "target_id": "disable-telemetry-optin-settings-ux",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Microsoft documents the default value as 0."
+        }
+      ],
+      "notes": "By default, users can change the device diagnostic settings in Settings.",
+      "evidence_ids": [
+        "ms-system-configure-telemetry-optin-ui",
+        "nohuto-datacollection-optin-ui-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems where user control over diagnostics settings is acceptable"
+      ],
+      "avoid_for": [
+        "Managed corporate systems with fixed telemetry policy"
+      ],
+      "states": [
+        {
+          "target_id": "disable-telemetry-optin-settings-ux",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the Settings UI available."
+        }
+      ],
+      "good_when": "You want users to keep access to diagnostic data settings.",
+      "bad_when": "You want diagnostics choices locked down by policy.",
+      "tradeoffs": [
+        "Users can change diagnostic settings in Settings.",
+        "The device has less centralized control over that UI."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-system-configure-telemetry-optin-ui",
+        "nohuto-datacollection-optin-ui-admx"
+      ]
+    },
+    {
+      "profile_id": "managed-diagnostics-ui",
+      "label": "Managed diagnostics UI",
+      "intended_for": [
+        "Corporate systems",
+        "School devices",
+        "Managed fleets"
+      ],
+      "avoid_for": [
+        "Personal systems where the owner expects to change diagnostics settings"
+      ],
+      "states": [
+        {
+          "target_id": "disable-telemetry-optin-settings-ux",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Disable the diagnostic-data opt-in UI in Settings."
+        }
+      ],
+      "good_when": "You want to keep diagnostic data choices under policy control instead of user control.",
+      "bad_when": "You want the Settings app to remain fully user-adjustable.",
+      "tradeoffs": [
+        "Diagnostic-data settings are locked down in Settings.",
+        "Users lose a familiar control surface."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-system-configure-telemetry-optin-ui",
+        "app-privacy-provider",
+        "nohuto-datacollection-optin-ui-admx"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-system-configure-telemetry-optin-ui",
+      "kind": "policy-csp",
+      "title": "Microsoft System Policy CSP: ConfigureTelemetryOptInSettingsUx",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux",
+      "summary": "Microsoft documents the default value, allowed values 0 and 1, user-facing behavior, and Group Policy mapping for the diagnostic data opt-in settings UI policy.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-datacollection-admx-optin-ui",
+      "kind": "official-doc",
+      "title": "Local Microsoft DataCollection.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx",
+      "summary": "The local ADMX file maps the policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-datacollection-adml-optin-ui",
+      "kind": "official-doc",
+      "title": "Local Microsoft DataCollection.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml",
+      "summary": "The local ADML help text says users can change diagnostic settings by default, while setting the policy to disable the opt-in UI removes that control from Settings.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DisableTelemetryOptInSettingsUx = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-telemetry-optin-ui",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-datacollection-optin-ui-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - DisableTelemetryOptInSettingsUx policy",
+      "location": "research/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "DataCollection.admx shows DisableTelemetryOptInSettingsUx under HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection. The mirrored enum lists 1 as disable diagnostic data opt-in settings and 0 as enable them, with EnabledValue=1 and DisabledValue=0. This is the exact policy UI gate for the telemetry opt-in settings surface.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents ConfigureTelemetryOptInSettingsUx directly in the System Policy CSP, including the exact DataCollection policy key, default, and 0/1 semantics. The page uses the CSP control name while the local DataCollection.admx confirms the registry value name DisableTelemetryOptInSettingsUx, and the app writes that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T15:05:03.3434487+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux",
+    "exact_quote_or_path": "This policy setting controls whether users can change the device diagnostic settings in settings. If you set this policy setting to Disable diagnostic data opt-in settings, the Settings app diagnostic data opt-in settings page is disabled. ... Default Value 0. Allowed values: 0 (Default) Enable diagnostic data opt-in settings. 1 Disable diagnostic data opt-in settings. Group policy mapping: Name ConfigureTelemetryOptInSettingsUx ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection.",
+    "key_found_on_page": true,
+    "notes": "The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInSettingsUx. Added nohuto mirror corroboration via nohuto-datacollection-optin-ui-admx."
+  }
+}

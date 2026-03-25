@@ -1,0 +1,188 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "privacy.deny-app-access",
+  "tweak_id": "privacy.deny-app-access",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the broad AppPrivacy deny bundle. The official AppPrivacy policy family is split into a child record; the extra System policy write and broader implementation details remain tracked only here.",
+  "setting": {
+    "name": "Broad App Capability Deny Bundle",
+    "category": "Privacy",
+    "area": "Registry Policy Bundle",
+    "scope": "device",
+    "casual_explanation": "This bundle tries to stop Windows apps from accessing many sensitive capabilities like camera, contacts, location, and background activity.",
+    "why_people_change_it": "People use this when they want a very strict privacy posture for Windows apps.",
+    "tradeoffs_overview": "A broad deny bundle can improve privacy, but it can also break normal app behavior and is harder to explain than targeted per-capability controls.",
+    "professional_notes": "AppPrivacy.admx documents many LetAppsAccess* policies with enum values including 0 for user control and 2 for force deny. The current app also writes AllowUserInfoAccess under the System policy path and keeps LetAppsAccessMicrophone at 0, which makes the bundle broader and more opinionated than a simple one-line privacy recommendation. These AppPrivacy policy values primarily govern the supported Windows app-capability policy surface and should not be described as if they fully control classic Win32 desktop apps such as Chrome, Zoom, or Discord.",
+    "targets": [
+      {
+        "target_id": "appprivacy-deny-bundle",
+        "location_kind": "group-policy",
+        "path": "Composite: HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy + HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "BundleState",
+        "value_type": "COMPOSITE",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "windows-default",
+            "label": "Windows default",
+            "meaning": "Leave capability access policies at the normal Windows baseline.",
+            "evidence_ids": [
+              "ms-appprivacy-admx",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "current-app-profile",
+            "label": "Current broad deny bundle",
+            "meaning": "Apply the current broad set of ForceDeny values the app writes.",
+            "evidence_ids": [
+              "ms-appprivacy-admx",
+              "app-privacy-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "Most AppPrivacy writes line up with the official ForceDeny value 2, but the bundle is very broad and includes an exception for microphone plus an extra System policy write.",
+    "writes": [
+      {
+        "target_id": "appprivacy-deny-bundle",
+        "path": "Composite: HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy + HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "BundleState",
+        "value_type": "COMPOSITE",
+        "state_kind": "value",
+        "value": "current-app-profile"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows privacy-policy baseline",
+      "applies_to": "Windows 10 and later AppPrivacy policy surface",
+      "states": [
+        {
+          "target_id": "appprivacy-deny-bundle",
+          "state_kind": "value",
+          "value": "windows-default",
+          "rationale": "The broad bundle should not be treated as the baseline for general systems."
+        }
+      ],
+      "evidence_ids": [
+        "ms-appprivacy-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "People who want capability prompts and app access decisions to remain more granular"
+      ],
+      "avoid_for": [
+        "Strict privacy hardening experiments"
+      ],
+      "states": [
+        {
+          "target_id": "appprivacy-deny-bundle",
+          "state_kind": "value",
+          "value": "windows-default",
+          "rationale": "Do not expose a very broad deny bundle as a default recommendation."
+        }
+      ],
+      "good_when": "You want fewer surprise app breakages.",
+      "bad_when": "You are deliberately pursuing a strict deny-all posture.",
+      "tradeoffs": [
+        "More compatibility for Windows apps.",
+        "Less aggressive privacy hardening."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-appprivacy-admx"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current broad deny bundle",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Normal Apply exposure"
+      ],
+      "states": [
+        {
+          "target_id": "appprivacy-deny-bundle",
+          "state_kind": "value",
+          "value": "current-app-profile",
+          "rationale": "Track the broad deny behavior currently implemented by the app."
+        }
+      ],
+      "good_when": "You are documenting the product's current privacy-hardening bundle.",
+      "bad_when": "You want a smaller, clearly explained per-capability policy strategy.",
+      "tradeoffs": [
+        "More aggressive privacy posture.",
+        "Higher chance of app regressions and user confusion."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-appprivacy-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-appprivacy-admx",
+      "kind": "official-doc",
+      "title": "Microsoft AppPrivacy administrative template",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
+      "summary": "The local AppPrivacy administrative template documents many LetAppsAccess* policy values, including 2 for ForceDeny and 0 for user control.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current privacy provider broad deny bundle",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes a large AppPrivacy ForceDeny bundle plus AllowUserInfoAccess and a microphone exception.",
+      "supports": [
+        "ui-mapping",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Many underlying values are official, but the breadth and mixed-family nature of the bundle make it too opinionated for a simple validated toggle, and the policy surface should not be over-described as a complete Win32 privacy control.",
+    "blocking_issues": [
+      "The bundle is very broad and mixes AppPrivacy policies with an extra System policy write.",
+      "The LetAppsAccess* policy family should not be presented as if it fully governs classic Win32 desktop apps."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
+    "exact_quote_or_path": "policy name=\"LetAppsAccessCamera\" class=\"Machine\" key=\"Software\\Policies\\Microsoft\\Windows\\AppPrivacy\" valueName=\"LetAppsAccessCamera\"; policy name=\"LetAppsAccessMicrophone\" class=\"Machine\" key=\"Software\\Policies\\Microsoft\\Windows\\AppPrivacy\" valueName=\"LetAppsAccessMicrophone\"; policy name=\"LetAppsAccessLocation\" class=\"Machine\" key=\"Software\\Policies\\Microsoft\\Windows\\AppPrivacy\" valueName=\"LetAppsAccessLocation\".",
+    "key_found_on_page": true,
+    "notes": "Composite AppPrivacy deny bundle. The proof anchors the official AppPrivacy family and its per-capability policy names."
+  }
+}

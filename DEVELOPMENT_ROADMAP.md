@@ -44,7 +44,7 @@ This roadmap outlines major architectural improvements to the Open Trace Project
 ### 1.1 Named Mutex Implementation
 
 ```csharp
-// OpenTraceProject.App/Services/SingleInstanceManager.cs
+// app/Services/SingleInstanceManager.cs
 
 public sealed class SingleInstanceManager : IDisposable
 {
@@ -266,7 +266,7 @@ public partial class App : Application
 ### 2.2 MetricDataBus Implementation
 
 ```csharp
-// OpenTraceProject.Infrastructure/Threading/MetricDataBus.cs
+// infrastructure/Threading/MetricDataBus.cs
 
 public sealed class MetricDataBus : IDisposable
 {
@@ -370,7 +370,7 @@ public class MetricBatchEventArgs : EventArgs
 ### 2.3 Worker Thread Management
 
 ```csharp
-// OpenTraceProject.Infrastructure/Threading/MetricWorkerPool.cs
+// infrastructure/Threading/MetricWorkerPool.cs
 
 public sealed class MetricWorkerPool : IDisposable
 {
@@ -483,7 +483,7 @@ public class ThreadingDiagnostics
 ### 3.1 PreloadManager
 
 ```csharp
-// OpenTraceProject.App/Services/PreloadManager.cs
+// app/Services/PreloadManager.cs
 
 public sealed class PreloadManager
 {
@@ -597,7 +597,7 @@ public class PreloadResult
 ### 3.2 Splash Integration
 
 ```csharp
-// OpenTraceProject.App/StartupWindow.xaml.cs
+// app/StartupWindow.xaml.cs
 
 public partial class StartupWindow : Window
 {
@@ -877,7 +877,7 @@ INSERT OR REPLACE INTO db_metadata (key, value) VALUES ('last_update', datetime(
 ### 4.2 Hardware Identifier Service
 
 ```csharp
-// OpenTraceProject.Infrastructure/Hardware/HardwareIdentifier.cs
+// infrastructure/Hardware/HardwareIdentifier.cs
 
 public class HardwareIdentifier
 {
@@ -1026,7 +1026,7 @@ public class GpuIdentity
 ### 4.3 Matching Algorithm
 
 ```csharp
-// OpenTraceProject.Infrastructure/Hardware/HardwareDatabase.cs
+// infrastructure/Hardware/HardwareDatabase.cs
 
 public class HardwareDatabase
 {
@@ -1187,7 +1187,7 @@ public class HardwareDatabase
 ### 5.2 FallbackDataProvider
 
 ```csharp
-// OpenTraceProject.Infrastructure/Data/FallbackDataProvider.cs
+// infrastructure/Data/FallbackDataProvider.cs
 
 public class FallbackDataProvider<T>
 {
@@ -1322,7 +1322,7 @@ public record DataSourceError(string Source, string Message);
 ### 5.3 Usage Example
 
 ```csharp
-// OpenTraceProject.Infrastructure/Metrics/CpuDataProvider.cs
+// infrastructure/Metrics/CpuDataProvider.cs
 
 public class CpuDataProvider
 {
@@ -1367,7 +1367,7 @@ public class CpuDataProvider
 ### 6.1 Hardware Card Component
 
 ```xml
-<!-- OpenTraceProject.App/Views/Components/HardwareCardView.xaml -->
+<!-- app/Views/Components/HardwareCardView.xaml -->
 
 <UserControl x:Class="OpenTraceProject.App.Views.Components.HardwareCardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -1522,7 +1522,7 @@ public class CpuDataProvider
 ### 6.2 CPU Card ViewModel
 
 ```csharp
-// OpenTraceProject.App/ViewModels/Hardware/CpuCardViewModel.cs
+// app/ViewModels/Hardware/CpuCardViewModel.cs
 
 public class CpuCardViewModel : HardwareCardViewModelBase
 {
@@ -1625,7 +1625,7 @@ public class CpuCardViewModel : HardwareCardViewModelBase
 ### 6.3 GPU Card ViewModel
 
 ```csharp
-// OpenTraceProject.App/ViewModels/Hardware/GpuCardViewModel.cs
+// app/ViewModels/Hardware/GpuCardViewModel.cs
 
 public class GpuCardViewModel : HardwareCardViewModelBase
 {
@@ -1714,7 +1714,7 @@ public class GpuCardViewModel : HardwareCardViewModelBase
 ### 6.4 Hardware Details Layout
 
 ```xml
-<!-- OpenTraceProject.App/Views/HardwareDetailsView.xaml (Redesigned) -->
+<!-- app/Views/HardwareDetailsView.xaml (Redesigned) -->
 
 <UserControl x:Class="OpenTraceProject.App.Views.HardwareDetailsView">
     <Grid>
@@ -1878,7 +1878,7 @@ public class GpuCardViewModel : HardwareCardViewModelBase
 ### 8.1 Priority Control
 
 ```csharp
-// OpenTraceProject.Infrastructure/Process/ProcessPriorityManager.cs
+// infrastructure/Process/ProcessPriorityManager.cs
 
 public class ProcessPriorityManager
 {
@@ -1930,7 +1930,7 @@ public class ProcessPriorityManager
 ### 8.2 CPU Affinity Control
 
 ```csharp
-// OpenTraceProject.Infrastructure/Process/ProcessAffinityManager.cs
+// infrastructure/Process/ProcessAffinityManager.cs
 
 public class ProcessAffinityManager
 {
@@ -2001,7 +2001,7 @@ public class ProcessAffinityManager
 ### 8.3 Memory Trim
 
 ```csharp
-// OpenTraceProject.Infrastructure/Process/ProcessMemoryManager.cs
+// infrastructure/Process/ProcessMemoryManager.cs
 
 public class ProcessMemoryManager
 {
@@ -2122,7 +2122,7 @@ public record ProcessMemoryInfo
 ### 8.4 I/O Priority
 
 ```csharp
-// OpenTraceProject.Infrastructure/Process/ProcessIoPriorityManager.cs
+// infrastructure/Process/ProcessIoPriorityManager.cs
 
 public class ProcessIoPriorityManager
 {
@@ -2204,7 +2204,7 @@ public class ProcessIoPriorityManager
 ### 8.5 Process Tree Operations
 
 ```csharp
-// OpenTraceProject.Infrastructure/Process/ProcessTreeManager.cs
+// infrastructure/Process/ProcessTreeManager.cs
 
 public class ProcessTreeManager
 {
@@ -2433,7 +2433,7 @@ public class ProcessTreeNode
 ## 10. File Structure
 
 ```
-OpenTraceProject.App/
+app/
 â”œâ”€â”€ Services/
 â”‚   â”œâ”€â”€ SingleInstanceManager.cs         âœ¨ NEW
 â”‚   â”œâ”€â”€ PreloadManager.cs                 âœ¨ NEW
@@ -2458,7 +2458,7 @@ OpenTraceProject.App/
 â””â”€â”€ Resources/
     â””â”€â”€ Colors.xaml                      (extended)
 
-OpenTraceProject.Infrastructure/
+infrastructure/
 â”œâ”€â”€ Threading/                            âœ¨ NEW FOLDER
 â”‚   â”œâ”€â”€ MetricDataBus.cs
 â”‚   â”œâ”€â”€ MetricWorkerPool.cs

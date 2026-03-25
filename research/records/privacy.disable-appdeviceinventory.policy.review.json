@@ -1,0 +1,434 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-appdeviceinventory.policy",
+  "tweak_id": "privacy.disable-appdeviceinventory.policy",
+  "record_status": "validated",
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "summary": "Four AppDeviceInventory policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Derived from the former mixed application-compatibility policy record on 2026-03-13.",
+  "setting": {
+    "name": "Disable App Device Inventory Policies",
+    "category": "Privacy",
+    "area": "Application Compatibility",
+    "scope": "device",
+    "casual_explanation": "Windows 11 24H2 added policies that track which APIs applications use, record install events, capture application footprints, and back up Win32 app data. These four policies let you turn those collection behaviors off.",
+    "why_people_change_it": "People disable these policies when they want to reduce telemetry and data collection on Windows 11 24H2+ systems. They leave them enabled when they want Windows to maintain full application inventory and compatibility data.",
+    "tradeoffs_overview": "Disabling these policies reduces what Windows collects about installed applications. The practical impact on day-to-day use is low. On pre-24H2 systems the keys may be written but Windows silently ignores them.",
+    "professional_notes": "All four values live under HKLM/Software/Policies/Microsoft/Windows/AppCompat. Policy family: AppDeviceInventory.admx. Version scope: Windows 11 24H2 minimum per local ADMX; Procmon confirmed these policies are active on Windows 11 Pro 10.0.26200.8037 on 2026-03-13. Microsoft Learn CSP page: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory. Local ADMX confirms explicit enabledValue=1 and disabledValue=0 for all four values. Derived from the former mixed application-compatibility policy record on 2026-03-13.",
+    "targets": [
+      {
+        "target_id": "disable-api-samping",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableAPISamping",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows keeps the normal API sampling behavior. The system collects data about API usage patterns.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "API sampling enabled (policy explicit)",
+            "meaning": "disabledValue in AppDeviceInventory.admx. API sampling runs normally. Equivalent to missing.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Turn off API sampling",
+            "meaning": "enabledValue in AppDeviceInventory.admx. Stops collection of API usage data. Confirmed app write. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableAPISamping=REG_DWORD 0x1 during gpupdate /force.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory",
+              "app-privacy-provider",
+              "procmon-appdeviceinventory"
+            ]
+          }
+        ],
+        "notes": "Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableAPISamping=REG_DWORD 0x1 during gpupdate /force."
+      },
+      {
+        "target_id": "disable-application-footprint",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableApplicationFootprint",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows keeps the normal application footprint collection behavior.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Application footprint collection enabled (policy explicit)",
+            "meaning": "disabledValue in AppDeviceInventory.admx. Collection runs normally. Equivalent to missing.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Turn off application footprint collection",
+            "meaning": "enabledValue in AppDeviceInventory.admx. Stops collection of application footprint data. Confirmed app write. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableApplicationFootprint=REG_DWORD 0x1 during gpupdate /force.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory",
+              "app-privacy-provider",
+              "procmon-appdeviceinventory"
+            ]
+          }
+        ],
+        "notes": "Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableApplicationFootprint=REG_DWORD 0x1 during gpupdate /force."
+      },
+      {
+        "target_id": "disable-install-tracing",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableInstallTracing",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows keeps the normal install tracing behavior.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Install tracing enabled (policy explicit)",
+            "meaning": "disabledValue in AppDeviceInventory.admx. Tracing runs normally. Equivalent to missing.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Turn off install tracing",
+            "meaning": "enabledValue in AppDeviceInventory.admx. Stops tracing of application install events. Confirmed app write. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableInstallTracing=REG_DWORD 0x1 during gpupdate /force.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory",
+              "app-privacy-provider",
+              "procmon-appdeviceinventory"
+            ]
+          }
+        ],
+        "notes": "Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableInstallTracing=REG_DWORD 0x1 during gpupdate /force."
+      },
+      {
+        "target_id": "disable-win32-app-backup",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableWin32AppBackup",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows keeps the normal Win32 app backup behavior.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Win32 app backup enabled (policy explicit)",
+            "meaning": "disabledValue in AppDeviceInventory.admx. Backup runs normally. Equivalent to missing.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Turn off Win32 app backup",
+            "meaning": "enabledValue in AppDeviceInventory.admx. Stops Win32 application backup collection. Confirmed app write. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableWin32AppBackup=REG_DWORD 0x1 during gpupdate /force.",
+            "evidence_ids": [
+              "local-appdeviceinventory-admx",
+              "csp-appdeviceinventory",
+              "app-privacy-provider",
+              "procmon-appdeviceinventory"
+            ]
+          }
+        ],
+        "notes": "Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableWin32AppBackup=REG_DWORD 0x1 during gpupdate /force."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app writes all four values as part of the broader application-compatibility policy path. Path and values match both local AppDeviceInventory.admx and the CSP page. The app still writes DisableEngine, SbEnable, and DisablePCA in the same code path; those are tracked in separate records.",
+    "writes": [
+      {
+        "target_id": "disable-api-samping",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableAPISamping",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "disable-application-footprint",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableApplicationFootprint",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "disable-install-tracing",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableInstallTracing",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "disable-win32-app-backup",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableWin32AppBackup",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows managed default",
+      "applies_to": "Windows 11 24H2 and later",
+      "states": [
+        {
+          "target_id": "disable-api-samping",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Key absent; API sampling runs normally."
+        },
+        {
+          "target_id": "disable-application-footprint",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Key absent; footprint collection runs normally."
+        },
+        {
+          "target_id": "disable-install-tracing",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Key absent; install tracing runs normally."
+        },
+        {
+          "target_id": "disable-win32-app-backup",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Key absent; Win32 app backup runs normally."
+        }
+      ],
+      "notes": "On pre-24H2 systems these keys may be written but Windows silently ignores them. Confirmed active on Win11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro) via Procmon capture 2026-03-13 - svchost.exe (gpsvc) wrote all four values during gpupdate /force.",
+      "evidence_ids": [
+        "local-appdeviceinventory-admx",
+        "csp-appdeviceinventory",
+        "procmon-appdeviceinventory"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "turn-off-appdeviceinventory",
+      "label": "Turn off App Device Inventory collection",
+      "intended_for": [
+        "Windows 11 24H2+ users who want reduced telemetry"
+      ],
+      "avoid_for": [
+        "Pre-24H2 systems (keys written but silently ignored)",
+        "Systems managed by Intune or GPO already setting these policies"
+      ],
+      "states": [
+        {
+          "target_id": "disable-api-samping",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "enabledValue confirmed in ADMX and CSP."
+        },
+        {
+          "target_id": "disable-application-footprint",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "enabledValue confirmed in ADMX and CSP."
+        },
+        {
+          "target_id": "disable-install-tracing",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "enabledValue confirmed in ADMX and CSP."
+        },
+        {
+          "target_id": "disable-win32-app-backup",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "enabledValue confirmed in ADMX and CSP."
+        }
+      ],
+      "good_when": "Running Win11 24H2+ and want to reduce app inventory telemetry.",
+      "bad_when": "Running pre-24H2 or relying on Windows app backup and restore features.",
+      "tradeoffs": [
+        "Reduces application inventory and install event collection.",
+        "No effect on pre-24H2 - keys written but ignored.",
+        "May interfere with future Windows features that depend on app inventory data."
+      ],
+      "apply_allowed": true,
+      "notes": "apply_allowed=true. Proof chain is complete: AppDeviceInventory.admx (explicit enabledValue=1), the Microsoft Learn CSP page, and Procmon runtime proof on Win11 Pro 10.0.26200.8037 (2026-03-13). Pre-24H2 caveat remains: older builds may ignore the keys.",
+      "evidence_ids": [
+        "local-appdeviceinventory-admx",
+        "csp-appdeviceinventory",
+        "procmon-appdeviceinventory"
+      ]
+    },
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "All users who want normal Windows behavior"
+      ],
+      "avoid_for": [],
+      "states": [
+        {
+          "target_id": "disable-api-samping",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave policy unset."
+        },
+        {
+          "target_id": "disable-application-footprint",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave policy unset."
+        },
+        {
+          "target_id": "disable-install-tracing",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave policy unset."
+        },
+        {
+          "target_id": "disable-win32-app-backup",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave policy unset."
+        }
+      ],
+      "good_when": "You want Windows to maintain full application inventory data.",
+      "bad_when": "You want to reduce telemetry on Win11 24H2+.",
+      "tradeoffs": [
+        "Full app inventory collection remains active."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-appdeviceinventory-admx"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-appdeviceinventory-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft AppDeviceInventory.admx mappings",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx",
+      "summary": "Maps all four values (DisableAPISamping, DisableApplicationFootprint, DisableInstallTracing, DisableWin32AppBackup) with explicit enabledValue=1 and disabledValue=0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. Marked as supported on Windows 11 24H2.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "csp-appdeviceinventory",
+      "kind": "policy-csp",
+      "title": "Policy CSP - AppDeviceInventory",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory",
+      "summary": "Microsoft Learn CSP page confirming all four policies exist and are device-scoped. The page still carries Insider Preview language as of 2026-03-13, but Procmon confirmed these policies are active on Windows 11 Pro 10.0.26200.8037.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "Writes all four AppDeviceInventory values as part of the application-compatibility policy path.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-appdeviceinventory",
+      "kind": "procmon-trace",
+      "title": "Procmon + LGPO capture - four AppDeviceInventory policies",
+      "location": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro, OsVersion: 10.0.26200)",
+      "summary": "LGPO.exe applied six AppCompat policy values including all four AppDeviceInventory values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM/Software/Policies/Microsoft/Windows/AppCompat during gpupdate /force. RegSetValue confirmed DisableAPISamping=REG_DWORD 0x1, DisableApplicationFootprint=REG_DWORD 0x1, DisableInstallTracing=REG_DWORD 0x1, and DisableWin32AppBackup=REG_DWORD 0x1. reg query after gpupdate showed all four values present at expected paths. Rollback removed Registry.pol, deleted the values with reg delete, and gpupdate /force returned the key to AITEnable=0x0 only. Capture file: research/evidence-files/missing/appcompat-policy-capture-lgpo-clean-pml.md",
+      "supports": [
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "All four values are now confirmed in three layers: local AppDeviceInventory.admx (explicit enabledValue=1), the Microsoft Learn CSP page, and Procmon capture showing gpsvc writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Risk is low because these policies reduce telemetry collection rather than core application compatibility behavior. Pre-24H2 systems may ignore the keys, but that is a scope caveat rather than a safety blocker.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx",
+    "exact_quote_or_path": "AppDeviceInventory.admx: `<policy name=\"TurnOffInstallTracing\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisableInstallTracing\">`, `<policy name=\"TurnOffAPISamping\" ... valueName=\"DisableAPISamping\">`, `<policy name=\"TurnOffApplicationFootprint\" ... valueName=\"DisableApplicationFootprint\">`, and `<policy name=\"TurnOffWin32AppBackup\" ... valueName=\"DisableWin32AppBackup\">`, each with `<enabledValue><decimal value=\"1\" /></enabledValue>` and `<disabledValue><decimal value=\"0\" /></disabledValue>` and `supportedOn ref=\"windows:SUPPORTED_Windows_11_0_24H2\"`.",
+    "key_found_on_page": true,
+    "notes": "Local official AppDeviceInventory.admx documents all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat with explicit enabledValue=1 and disabledValue=0, and Procmon confirmed gpsvc writes all four values on Windows 11 Pro 10.0.26200.8037."
+  }
+}

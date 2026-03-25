@@ -1,0 +1,208 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-biometrics-logon",
+  "tweak_id": "privacy.disable-biometrics-logon",
+  "record_status": "validated",
+  "summary": "Machine policy for biometric sign-in through the credential provider. Good for strict sign-in policies, but it removes fingerprint or face sign-in for local sign-in scenarios.",
+  "setting": {
+    "name": "Biometric Sign-in",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can let users sign in with biometrics like fingerprint or face through the credential provider. This policy controls whether that sign-in path is available.",
+    "why_people_change_it": "Some environments disable biometric sign-in because they want passwords, smart cards, or other methods only. Others keep it enabled because it is convenient.",
+    "tradeoffs_overview": "Disabling biometric sign-in removes a convenient sign-in method, but it also enforces a stricter authentication policy.",
+    "professional_notes": "Biometrics.admx maps the sign-in policy to SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Enabled with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "biometric-logon-enabled",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider",
+        "value_name": "Enabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The device does not force biometric sign-in on or off through this policy.",
+            "evidence_ids": [
+              "local-biometrics-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Biometric sign-in disabled",
+            "meaning": "Users cannot sign in with biometrics through the credential provider.",
+            "evidence_ids": [
+              "local-biometrics-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Biometric sign-in enabled",
+            "meaning": "Biometric sign-in is allowed through the credential provider.",
+            "evidence_ids": [
+              "local-biometrics-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes Enabled = 0 under the biometrics credential provider key, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "biometric-logon-enabled",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider",
+        "value_name": "Enabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 7 and newer systems with biometric credential provider support",
+      "states": [
+        {
+          "target_id": "biometric-logon-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The device policy is not configured by default."
+        }
+      ],
+      "notes": "This policy baseline is separate from whether the device has biometric hardware enrolled.",
+      "evidence_ids": [
+        "local-biometrics-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Users who want biometric sign-in available when supported"
+      ],
+      "avoid_for": [
+        "Environments with a policy against biometric sign-in"
+      ],
+      "states": [
+        {
+          "target_id": "biometric-logon-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the sign-in policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep its ordinary biometric sign-in policy behavior.",
+      "bad_when": "You need a hard policy disable for biometric sign-in.",
+      "tradeoffs": [
+        "Biometric sign-in can remain available.",
+        "No explicit sign-in restriction is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-biometrics-admx"
+      ]
+    },
+    {
+      "profile_id": "no-biometric-sign-in",
+      "label": "No biometric sign-in",
+      "intended_for": [
+        "Strict authentication baselines",
+        "Compliance-sensitive systems"
+      ],
+      "avoid_for": [
+        "Users who rely on quick biometric sign-in"
+      ],
+      "states": [
+        {
+          "target_id": "biometric-logon-enabled",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable biometric sign-in through the credential provider."
+        }
+      ],
+      "good_when": "You want passwords, smart cards, or other non-biometric methods only.",
+      "bad_when": "You want fingerprint or face sign-in convenience to remain available.",
+      "tradeoffs": [
+        "Convenient biometric sign-in is removed.",
+        "The device follows a stricter sign-in policy."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-biometrics-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-biometrics-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Biometrics.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
+      "summary": "The local ADMX file defines the biometric credential provider policy and shows Enabled with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes Enabled = 0 under the biometrics credential provider policy key.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-biometrics-logon",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft policy files document the exact credential provider policy surface, value semantics, and sign-in behavior. The app writes the documented disable value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:57:25.3102002+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
+    "exact_quote_or_path": "<policy name=\"Biometrics_EnableCredProv\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\" valueName=\"Enabled\">; Biometrics.adml: If you disable this policy setting, biometrics cannot be used by any users to log on to a local Windows-based computer.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks biometric sign-in for local computer logon."
+  }
+}

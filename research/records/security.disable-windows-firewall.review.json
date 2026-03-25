@@ -1,0 +1,306 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.disable-windows-firewall",
+  "tweak_id": "security.disable-windows-firewall",
+  "record_status": "validated",
+  "summary": "The official Windows Defender Firewall policy surface is documented in Firewall CSP under HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall, while the app now writes EnableFirewall = 0 under that policy path for DomainProfile and StandardProfile. The runtime SharedAccess paths remain real troubleshooting surfaces, but the app no longer uses them.",
+  "setting": {
+    "name": "Windows Defender Firewall Policy",
+    "category": "Security",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows Defender Firewall protects the PC's network connections. The official policy can force the firewall on or off for managed profiles.",
+    "why_people_change_it": "People turn it off for troubleshooting, legacy software, labs, or temporary network testing. In most normal setups it should stay on.",
+    "tradeoffs_overview": "Disabling the firewall can remove connection blocks, but it also removes a major security boundary between the PC and the network.",
+    "professional_notes": "Firewall CSP and WindowsFirewall.admx document the managed policy surface under HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall, including EnableFirewall for DomainProfile and StandardProfile. The current app now writes those policy keys directly instead of the runtime SharedAccess\\Parameters\\FirewallPolicy profile paths.",
+    "targets": [
+      {
+        "target_id": "domain-firewall-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile",
+        "value_name": "EnableFirewall",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Administrators can manage the firewall through the normal Windows Defender Firewall controls.",
+            "evidence_ids": [
+              "local-windowsfirewall-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Firewall forced off",
+            "meaning": "The policy disables Windows Defender Firewall for the documented profile.",
+            "evidence_ids": [
+              "local-windowsfirewall-admx",
+              "local-windowsfirewall-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Firewall forced on",
+            "meaning": "The policy enables Windows Defender Firewall for the documented profile.",
+            "evidence_ids": [
+              "local-windowsfirewall-admx",
+              "local-windowsfirewall-adml"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "standard-firewall-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile",
+        "value_name": "EnableFirewall",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Administrators can manage the firewall through the normal Windows Defender Firewall controls.",
+            "evidence_ids": [
+              "local-windowsfirewall-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Firewall forced off",
+            "meaning": "The policy disables Windows Defender Firewall for the documented profile.",
+            "evidence_ids": [
+              "local-windowsfirewall-admx",
+              "local-windowsfirewall-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Firewall forced on",
+            "meaning": "The policy enables Windows Defender Firewall for the documented profile.",
+            "evidence_ids": [
+              "local-windowsfirewall-admx",
+              "local-windowsfirewall-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The current app writes EnableFirewall = 0 for DomainProfile and StandardProfile under the official WindowsFirewall policy path.",
+    "writes": [
+      {
+        "target_id": "domain-firewall-policy",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile",
+        "value_name": "EnableFirewall",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "standard-firewall-policy",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile",
+        "value_name": "EnableFirewall",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows systems with the local Windows Defender Firewall policy templates",
+      "states": [
+        {
+          "target_id": "domain-firewall-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the domain firewall policy unset."
+        },
+        {
+          "target_id": "standard-firewall-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the standard firewall policy unset."
+        }
+      ],
+      "notes": "This record validates the official Group Policy surface directly and the app now matches it.",
+      "evidence_ids": [
+        "local-windowsfirewall-admx",
+        "local-windowsfirewall-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "General users",
+        "Most desktops and laptops"
+      ],
+      "avoid_for": [
+        "Lab scenarios that intentionally test with the firewall disabled"
+      ],
+      "states": [
+        {
+          "target_id": "domain-firewall-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not publish a runtime-path write as the validated firewall policy."
+        },
+        {
+          "target_id": "standard-firewall-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official firewall policy path untouched."
+        }
+      ],
+      "good_when": "You want the official firewall policy surface to remain unmanaged until explicitly configured.",
+      "bad_when": "You want a validated managed policy that explicitly forces the firewall off.",
+      "tradeoffs": [
+        "Windows Defender Firewall remains under normal Windows management.",
+        "The current app behavior now matches the documented policy surface."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "local-windowsfirewall-adml"
+      ]
+    },
+    {
+      "profile_id": "disable-windows-firewall",
+      "label": "Disable Windows Firewall",
+      "intended_for": [
+        "Troubleshooting",
+        "Temporary lab scenarios"
+      ],
+      "avoid_for": [
+        "General users",
+        "Systems exposed to untrusted networks"
+      ],
+      "states": [
+        {
+          "target_id": "domain-firewall-policy",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable the firewall for the domain policy profile."
+        },
+        {
+          "target_id": "standard-firewall-policy",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable the firewall for the standard policy profile."
+        }
+      ],
+      "good_when": "You are intentionally testing firewall-disabled behavior in a controlled environment.",
+      "bad_when": "You need normal network protection.",
+      "tradeoffs": [
+        "Firewall protection is disabled for the documented policy profiles.",
+        "This remains a risky security setting and should not be promoted for general users."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "local-windowsfirewall-admx",
+        "local-windowsfirewall-adml",
+        "ms-firewall-csp"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-firewall-csp",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Firewall CSP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp",
+      "summary": "Microsoft documents the Windows Defender Firewall policy surface, including EnableFirewall, DefaultInboundAction, DefaultOutboundAction, and DisableUnicastResponsesToMulticastBroadcast.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-windowsfirewall-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft WindowsFirewall.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsFirewall.admx",
+      "summary": "The local ADMX file maps EnableFirewall under HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile and HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile, with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-windowsfirewall-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft WindowsFirewall.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml",
+      "summary": "The local ADML help text says enabling the policy makes Windows Defender Firewall run, disabling it ensures the firewall does not run, and not configuring it leaves local administrators able to turn it on or off.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-azure-firewall-runtime-paths",
+      "kind": "troubleshoot-doc",
+      "title": "Microsoft Learn: Azure VM firewall recovery guidance",
+      "location": "https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows",
+      "summary": "Microsoft troubleshooting guidance uses SharedAccess\\Parameters\\FirewallPolicy\\{DomainProfile|StandardProfile} directly, which confirms the runtime firewall profile paths are real Windows surfaces.",
+      "supports": [
+        "path",
+        "runtime-surface"
+      ],
+      "strength": "medium-high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The provider writes EnableFirewall = 0 under HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile and HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-matching"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official Windows Defender Firewall policy mapping is clear from Firewall CSP and the local ADMX files. The current app now writes the official policy surface directly, but this remains a risky security setting that is not suitable for general users.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-20T00:00:00+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp",
+    "exact_quote_or_path": "./Vendor/MSFT/Firewall/MdmStore/DomainProfile/EnableFirewall; ./Vendor/MSFT/Firewall/MdmStore/StandardProfile/EnableFirewall",
+    "key_found_on_page": true,
+    "notes": "Microsoft documents the official Firewall CSP surface for EnableFirewall, DefaultInboundAction, DefaultOutboundAction, and related values. The current app now writes the documented policy surface instead of the runtime SharedAccess profile paths."
+  }
+}

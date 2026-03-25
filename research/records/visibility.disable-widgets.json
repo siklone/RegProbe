@@ -1,0 +1,245 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "visibility.disable-widgets",
+  "tweak_id": "visibility.disable-widgets",
+  "record_status": "validated",
+  "summary": "Machine policy for the Widgets feature. Good for a quieter desktop with fewer Microsoft content surfaces, but it removes the Widgets board and its taskbar entry point.",
+  "setting": {
+    "name": "Widgets Feature",
+    "category": "Visibility",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows Widgets can show a board with news, weather, and other feed content. This policy decides whether the Widgets feature is allowed on the device at all.",
+    "why_people_change_it": "People disable Widgets to reduce feed-style content, remove the taskbar entry point, and keep the desktop quieter.",
+    "tradeoffs_overview": "Turning Widgets off removes an extra content surface and taskbar entry point, but it also removes the board for people who actually use it.",
+    "professional_notes": "The NewsAndInterests Policy CSP uses the allow-form name AllowNewsAndInterests, and NewsAndInterests.admx maps the machine Group Policy to HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "allow-news-and-interests",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh",
+        "value_name": "AllowNewsAndInterests",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The device is not forcing a Widgets policy and Windows keeps its normal default behavior.",
+            "evidence_ids": [
+              "ms-news-and-interests-allow-widgets",
+              "local-news-and-interests-admx",
+              "local-news-and-interests-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Widgets allowed",
+            "meaning": "The policy is enabled in allow-form and the Widgets feature is available on the device.",
+            "evidence_ids": [
+              "ms-news-and-interests-allow-widgets",
+              "local-news-and-interests-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Widgets blocked",
+            "meaning": "The policy is disabled in allow-form and the Widgets board and its taskbar entry point are not available.",
+            "evidence_ids": [
+              "ms-news-and-interests-allow-widgets",
+              "local-news-and-interests-admx",
+              "local-news-and-interests-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The current app writes AllowNewsAndInterests = 0, which matches the documented blocked state.",
+    "writes": [
+      {
+        "target_id": "allow-news-and-interests",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh",
+        "value_name": "AllowNewsAndInterests",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows machine-policy default",
+      "applies_to": "Windows 10 and Windows 11 client systems that support Widgets policy",
+      "states": [
+        {
+          "target_id": "allow-news-and-interests",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The device policy is not configured by default."
+        }
+      ],
+      "notes": "Microsoft documents the allow-form default as 1, and the local ADML help text says Widgets are turned on by default unless changed in settings.",
+      "evidence_ids": [
+        "ms-news-and-interests-allow-widgets",
+        "local-news-and-interests-admx",
+        "local-news-and-interests-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who use the Widgets board"
+      ],
+      "avoid_for": [
+        "Users who want a quieter desktop"
+      ],
+      "states": [
+        {
+          "target_id": "allow-news-and-interests",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave Widgets under normal Windows control."
+        }
+      ],
+      "good_when": "You want the normal Windows Widgets behavior.",
+      "bad_when": "You want to remove feed-style content and its taskbar entry point.",
+      "tradeoffs": [
+        "Widgets remain available.",
+        "The device does not enforce a Widgets restriction."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-news-and-interests-allow-widgets"
+      ]
+    },
+    {
+      "profile_id": "no-widgets",
+      "label": "No widgets",
+      "intended_for": [
+        "Users who want fewer feed surfaces",
+        "Managed PCs"
+      ],
+      "avoid_for": [
+        "Users who rely on Widgets"
+      ],
+      "states": [
+        {
+          "target_id": "allow-news-and-interests",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Block the Widgets feature through policy."
+        }
+      ],
+      "good_when": "You want a quieter desktop and no Widgets board.",
+      "bad_when": "You want access to the Widgets board and its content.",
+      "tradeoffs": [
+        "The Widgets board and taskbar entry point are removed.",
+        "Users lose the built-in Widgets experience."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-news-and-interests-allow-widgets",
+        "local-news-and-interests-admx",
+        "app-visibility-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-news-and-interests-allow-widgets",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: NewsAndInterests / AllowWidgets",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-newsandinterests#allowwidgets",
+      "summary": "Microsoft documents the allow-form Widgets policy, its default value, and the related registry path and value name.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-news-and-interests-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft NewsAndInterests.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/NewsAndInterests.admx",
+      "summary": "The local ADMX file maps the machine policy to HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-news-and-interests-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft NewsAndInterests.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/NewsAndInterests.adml",
+      "summary": "The local ADML help text says Widgets are on by default unless changed in settings, and enabling the block removes the board and taskbar entry point.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes AllowNewsAndInterests = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-widgets",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft Widgets policy files document the exact allow-form policy surface, numeric mapping, and default behavior. The app writes the documented blocked value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T21:14:43.5557490+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/NewsAndInterests.admx",
+    "exact_quote_or_path": "<policy name=\"AllowNewsAndInterests\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Dsh\" valueName=\"AllowNewsAndInterests\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; NewsAndInterests.adml: This policy specifies whether the widgets feature is allowed on the device. Widgets will be turned on by default unless you change this in your settings.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact machine-policy key, value name, and 1/0 mapping; local ADML confirms this is the Widgets allow-form policy and documents its default behavior."
+  }
+}

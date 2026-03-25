@@ -1,0 +1,231 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-jpeg-reduction",
+  "tweak_id": "system.disable-jpeg-reduction",
+  "record_status": "validated",
+  "summary": "The current build evidence for JPEGImportQuality now lines up across repo decomp notes and a Win25H2Clean reversible probe: the wallpaper transcode path falls back to 85 when the value is missing, clamps the user value into the 60..100 range, and the current app writes 100 before restoring the missing baseline cleanly.",
+  "setting": {
+    "name": "Wallpaper JPEG Import Quality",
+    "category": "System",
+    "area": "Desktop Wallpaper Import Behavior",
+    "scope": "user",
+    "casual_explanation": "Windows can reduce the quality of JPEG images when you set them as wallpaper. People change this when they want the wallpaper to stay as sharp as possible.",
+    "why_people_change_it": "People set it to 100 when they notice wallpaper compression artifacts or want the imported wallpaper to match the original image quality more closely.",
+    "tradeoffs_overview": "Raising JPEG import quality can improve wallpaper image fidelity, but this still is not a primary Microsoft registry publication. The value model is strong enough for research tracking, not for a one-click app-ready claim.",
+    "professional_notes": "The repo has a direct decompiled `TranscodeImage` path that reads HKCU\\Control Panel\\Desktop\\JPEGImportQuality, uses 85 when the value is missing, clamps the configured number into the 60..100 range, and passes the final value into the WIC JPEG encoder as ImageQuality. The current app writes 100, and the Win25H2Clean reversible probe confirmed missing -> 100 -> missing on the same path. That is enough to treat the missing baseline and value 100 as current observed states while keeping the record research-gated because there is still no primary Microsoft registry publication for this shell surface.",
+    "targets": [
+      {
+        "target_id": "jpeg-import-quality",
+        "location_kind": "registry",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "JPEGImportQuality",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Observed fallback profile",
+            "meaning": "When JPEGImportQuality is missing, the current repo decomp path falls back to 85 before encoding the wallpaper JPEG.",
+            "evidence_ids": [
+              "repo-system-doc-jpeg",
+              "repo-system-decomp-jpegtranscode",
+              "vm-batch-probe-20260320-disable-jpeg-reduction"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 100,
+            "label": "Observed app max-quality profile",
+            "meaning": "The current app writes 100, which the repo decomp path accepts as the top of the 60..100 clamp range.",
+            "evidence_ids": [
+              "repo-system-doc-jpeg",
+              "repo-system-decomp-jpegtranscode",
+              "app-system-provider",
+              "vm-batch-probe-20260320-disable-jpeg-reduction"
+            ]
+          }
+        ],
+        "notes": "The repo decomp path also shows a 60..100 clamp range with a missing-value fallback of 85."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for JPEGImportQuality.",
+    "writes": [
+      {
+        "target_id": "jpeg-import-quality",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "value_name": "JPEGImportQuality",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 100
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed fallback baseline",
+      "applies_to": "Current builds where JPEGImportQuality is left unset and the wallpaper transcode path falls back to its internal default",
+      "states": [
+        {
+          "target_id": "jpeg-import-quality",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave JPEGImportQuality unset and let the current wallpaper import path fall back to 85."
+        }
+      ],
+      "notes": "This is the current observed fallback behavior from the repo decomp path, not a primary Microsoft registry contract.",
+      "evidence_ids": [
+        "repo-system-doc-jpeg",
+        "repo-system-decomp-jpegtranscode",
+        "vm-batch-probe-20260320-disable-jpeg-reduction"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-default",
+      "label": "Observed default",
+      "intended_for": [
+        "Research tracking only",
+        "Wallpaper quality comparisons"
+      ],
+      "avoid_for": [
+        "Published presets"
+      ],
+      "states": [
+        {
+          "target_id": "jpeg-import-quality",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Use the current observed fallback path by leaving JPEGImportQuality unset."
+        }
+      ],
+      "good_when": "You want the current observed wallpaper import baseline.",
+      "bad_when": "You want the sharpest possible imported JPEG wallpaper.",
+      "tradeoffs": [
+        "Leaves the current import fallback in place.",
+        "Still stays research-gated because the registry surface is not published by Microsoft."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-system-doc-jpeg",
+        "repo-system-decomp-jpegtranscode",
+        "vm-batch-probe-20260320-disable-jpeg-reduction"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published validated presets"
+      ],
+      "states": [
+        {
+          "target_id": "jpeg-import-quality",
+          "state_kind": "value",
+          "value": 100,
+          "rationale": "Observed app write used as the current max-quality wallpaper profile."
+        }
+      ],
+      "good_when": "You want the current app's maximum wallpaper import quality profile.",
+      "bad_when": "You want only primary-doc-backed shell settings.",
+      "tradeoffs": [
+        "Keeps imported JPEG wallpapers at the top of the observed clamp range.",
+        "Still relies on decomp plus VM proof instead of a primary Microsoft registry publication."
+      ],
+      "apply_allowed": false,
+      "notes": "The value model is strong, but the shell surface still stays research-gated.",
+      "evidence_ids": [
+        "repo-system-doc-jpeg",
+        "repo-system-decomp-jpegtranscode",
+        "app-system-provider",
+        "vm-batch-probe-20260320-disable-jpeg-reduction"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-system-doc-jpeg",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for wallpaper JPEG import quality",
+      "location": "Docs/system/system.md",
+      "summary": "The repo documents JPEGImportQuality behavior, including a fallback of 85 and a clamp range of 60..100, based on code analysis rather than a primary Microsoft registry publication.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "repo-system-decomp-jpegtranscode",
+      "kind": "decompilation",
+      "title": "Decompiled wallpaper transcode path for JPEGImportQuality",
+      "location": "Docs/system/assets/jpeg-TranscodeImage.c",
+      "summary": "The decompiled transcode path reads HKCU\\Control Panel\\Desktop\\JPEGImportQuality, falls back to 85 when missing, clamps the number into the 60..100 range, and passes the final value into the JPEG encoder as ImageQuality.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes JPEGImportQuality = 100 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-batch-probe-20260320-disable-jpeg-reduction",
+      "kind": "runtime-diff",
+      "title": "Win25H2Clean reversible probe - Wallpaper JPEG import quality",
+      "location": "research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json",
+      "summary": "Guest reversible probe toggled JPEGImportQuality to 100 and restored the missing baseline on HKCU\\Control Panel\\Desktop, confirming the current app write and rollback cycle.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "rollback"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The repo decomp path and the Win25H2Clean reversible probe both line up on JPEGImportQuality. That is enough to track the missing fallback path and the value 100 app profile as current observed states, but not enough to treat the shell surface as app-ready.",
+    "blocking_issues": []
+  },
+  "open_questions": [
+    "Can a primary Microsoft source for JPEGImportQuality be captured?",
+    "Should this setting be treated only as an advanced wallpaper preference?"
+  ],
+  "last_reviewed_utc": "2026-03-12T00:00:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json",
+    "exact_quote_or_path": "HKCU\\Control Panel\\Desktop\\JPEGImportQuality: before=__MISSING__, after_apply=100, after_restore=__MISSING__",
+    "key_found_on_page": true,
+    "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md The repo decomp path in Docs/system/assets/jpeg-TranscodeImage.c also shows the missing-value fallback of 85 and the 60..100 clamp."
+  }
+}

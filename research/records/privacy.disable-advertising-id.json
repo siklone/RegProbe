@@ -1,0 +1,217 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-advertising-id",
+  "tweak_id": "privacy.disable-advertising-id",
+  "record_status": "validated",
+  "summary": "Official machine policy for turning off the Windows advertising ID. Microsoft documents HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy with enabledValue = 1 and disabledValue = 0. The app now writes that same policy surface directly.",
+  "setting": {
+    "name": "Disable Advertising ID",
+    "category": "Privacy",
+    "area": "Machine Policy",
+    "scope": "device",
+    "casual_explanation": "Windows uses an advertising ID so apps can personalize experiences across apps. Turning it off stops apps from using that ID for cross-app personalization.",
+    "why_people_change_it": "People disable it when they want less app personalization and fewer cross-app tracking signals.",
+    "tradeoffs_overview": "Turning it off reduces personalization in apps that rely on the advertising ID, but it is a straightforward privacy policy with low operational risk.",
+    "professional_notes": "UserProfiles.admx documents the official machine policy at HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy with enabledValue 1 and disabledValue 0. UserProfiles.adml states that enabling the policy turns off the advertising ID and prevents apps from using it for experiences across apps.",
+    "targets": [
+      {
+        "target_id": "advertising-id-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo",
+        "value_name": "DisabledByGroupPolicy",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Users can control whether apps use the advertising ID for experiences across apps.",
+            "evidence_ids": [
+              "local-userprofiles-admx-advertising",
+              "local-userprofiles-adml-advertising"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Policy not turning it off",
+            "meaning": "The policy is disabled and users can still control whether apps use the advertising ID.",
+            "evidence_ids": [
+              "local-userprofiles-admx-advertising",
+              "local-userprofiles-adml-advertising"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Advertising ID turned off by policy",
+            "meaning": "Apps cannot use the advertising ID for experiences across apps.",
+            "evidence_ids": [
+              "local-userprofiles-admx-advertising",
+              "local-userprofiles-adml-advertising",
+              "app-privacy-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app writes the documented machine policy path directly: HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy = 1.",
+    "writes": [
+      {
+        "target_id": "advertising-id-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo",
+        "value_name": "DisabledByGroupPolicy",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows 8.1 and newer systems exposing the AdvertisingInfo policy",
+      "states": [
+        {
+          "target_id": "advertising-id-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official machine policy unset."
+        }
+      ],
+      "notes": "If the policy is not configured, users can control whether apps use the advertising ID.",
+      "evidence_ids": [
+        "local-userprofiles-admx-advertising",
+        "local-userprofiles-adml-advertising"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "disable-advertising-id",
+      "label": "Disable advertising ID",
+      "intended_for": [
+        "Privacy-focused users",
+        "Systems that want less cross-app personalization"
+      ],
+      "avoid_for": [
+        "Users who want apps to keep using personalized ad and recommendation experiences"
+      ],
+      "states": [
+        {
+          "target_id": "advertising-id-policy",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the documented machine policy state that turns off the advertising ID."
+        }
+      ],
+      "good_when": "You want a policy-backed off state for the Windows advertising ID.",
+      "bad_when": "You prefer apps to keep using cross-app personalization features.",
+      "tradeoffs": [
+        "Apps cannot use the advertising ID for experiences across apps.",
+        "This can reduce personalization and app recommendations.",
+        "Reversible by deleting the policy value or setting it to 0."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-userprofiles-admx-advertising",
+        "local-userprofiles-adml-advertising",
+        "app-privacy-provider"
+      ]
+    },
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems where personalization policy is not centrally managed"
+      ],
+      "avoid_for": [
+        "Organizations that want a strict advertising-ID block"
+      ],
+      "states": [
+        {
+          "target_id": "advertising-id-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official machine policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep normal user control over the advertising ID.",
+      "bad_when": "You need a policy-backed off state.",
+      "tradeoffs": [
+        "Users keep control of the feature.",
+        "Apps may still use the advertising ID depending on user settings."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-userprofiles-adml-advertising"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-userprofiles-admx-advertising",
+      "kind": "official-doc",
+      "title": "Local Microsoft UserProfiles.admx DisableAdvertisingId mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/UserProfiles.admx",
+      "summary": "The local ADMX file maps the advertising-ID policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-userprofiles-adml-advertising",
+      "kind": "official-doc",
+      "title": "Local Microsoft UserProfiles.adml DisableAdvertisingId help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/UserProfiles.adml",
+      "summary": "The local ADML help text says enabling the policy turns off the advertising ID, while disabling or not configuring it leaves users in control of whether apps can use the advertising ID.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy = 1 for the tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local official ADMX and ADML files document the exact machine-policy surface for disabling the advertising ID, including the numeric enabled and disabled states. The app now writes that documented policy path directly.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-13T17:50:00+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/UserProfiles.admx",
+    "exact_quote_or_path": "<policy name=\"DisableAdvertisingId\" class=\"Machine\" key=\"Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\" valueName=\"DisabledByGroupPolicy\">; enabledValue = 1; disabledValue = 0; UserProfiles.adml: If you enable this policy setting, the advertising ID is turned off. Apps can't use the ID for experiences across apps.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX and ADML files publish the exact machine-policy path, value name, and numeric semantics for disabling the advertising ID."
+  }
+}

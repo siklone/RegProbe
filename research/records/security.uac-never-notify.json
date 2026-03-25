@@ -1,0 +1,364 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.uac-never-notify",
+  "tweak_id": "security.uac-never-notify",
+  "record_status": "validated",
+  "summary": "Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.",
+  "setting": {
+    "name": "User Account Control Prompting Profile",
+    "category": "Security",
+    "area": "Registry Security Setting",
+    "scope": "device",
+    "casual_explanation": "These settings control whether Windows asks administrators before elevated actions and whether those prompts appear on the Secure Desktop.",
+    "why_people_change_it": "People lower UAC prompting when they want fewer interruptions during local admin work. They keep the defaults when they want Windows to warn before elevated changes happen.",
+    "tradeoffs_overview": "Lowering prompt behavior makes admin work smoother, but it removes a key safety friction that helps stop accidental or malicious elevation.",
+    "professional_notes": "Microsoft's UAC registry documentation describes EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The current app writes EnableLUA = 1, ConsentPromptBehaviorAdmin = 0, and PromptOnSecureDesktop = 0, which matches the least restrictive administrator prompt combination while the UAC framework stays enabled. A Win25H2Clean Procmon capture on 2026-03-21 also showed DllHost.exe reading the same values while the UAC settings surface was open.",
+    "targets": [
+      {
+        "target_id": "enable-lua",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "EnableLUA",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "UAC framework off",
+            "meaning": "Admin Approval Mode is disabled.",
+            "evidence_ids": [
+              "ms-uac-registry"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "UAC framework on",
+            "meaning": "Admin Approval Mode is enabled.",
+            "evidence_ids": [
+              "ms-uac-registry",
+              "app-security-provider",
+              "procmon-uac-never-notify"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "consent-prompt-admin",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "ConsentPromptBehaviorAdmin",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Elevate without prompting",
+            "meaning": "Administrators elevate without consent or credential prompts.",
+            "evidence_ids": [
+              "ms-uac-registry",
+              "app-security-provider",
+              "procmon-uac-never-notify"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Prompt for credentials on Secure Desktop",
+            "meaning": "Administrators are prompted for credentials on the Secure Desktop.",
+            "evidence_ids": [
+              "ms-uac-registry"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Prompt for consent on Secure Desktop",
+            "meaning": "Administrators are prompted for consent on the Secure Desktop.",
+            "evidence_ids": [
+              "ms-uac-registry"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Prompt for credentials",
+            "meaning": "Administrators are prompted for credentials on the interactive desktop.",
+            "evidence_ids": [
+              "ms-uac-registry"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 4,
+            "label": "Prompt for consent",
+            "meaning": "Administrators are prompted for consent on the interactive desktop.",
+            "evidence_ids": [
+              "ms-uac-registry"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 5,
+            "label": "Prompt for consent for non-Windows binaries",
+            "meaning": "Administrators are prompted for consent only for non-Windows binaries.",
+            "evidence_ids": [
+              "ms-uac-registry"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "prompt-secure-desktop",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "PromptOnSecureDesktop",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Prompt on interactive desktop",
+            "meaning": "Elevation prompts appear on the normal interactive desktop instead of the Secure Desktop.",
+            "evidence_ids": [
+              "ms-uac-registry",
+              "app-security-provider",
+              "procmon-uac-never-notify"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Prompt on Secure Desktop",
+            "meaning": "Elevation prompts appear on the Secure Desktop.",
+            "evidence_ids": [
+              "ms-uac-registry"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The current app writes the least restrictive administrator prompt combination while keeping EnableLUA enabled.",
+    "writes": [
+      {
+        "target_id": "enable-lua",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "EnableLUA",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "consent-prompt-admin",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "ConsentPromptBehaviorAdmin",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "prompt-secure-desktop",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "PromptOnSecureDesktop",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows default UAC baseline",
+      "applies_to": "Modern Windows client systems using the documented UAC defaults",
+      "states": [
+        {
+          "target_id": "enable-lua",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Keep UAC enabled."
+        },
+        {
+          "target_id": "consent-prompt-admin",
+          "state_kind": "value",
+          "value": 5,
+          "rationale": "Prompt administrators for consent for non-Windows binaries."
+        },
+        {
+          "target_id": "prompt-secure-desktop",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the Secure Desktop for elevation prompts."
+        }
+      ],
+      "notes": "This baseline preserves prompt-based protection for elevated actions.",
+      "evidence_ids": [
+        "ms-uac-registry"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Security-focused systems"
+      ],
+      "avoid_for": [
+        "People intentionally minimizing UAC prompts for local admin work"
+      ],
+      "states": [
+        {
+          "target_id": "enable-lua",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Keep UAC enabled."
+        },
+        {
+          "target_id": "consent-prompt-admin",
+          "state_kind": "value",
+          "value": 5,
+          "rationale": "Use the documented default prompt behavior."
+        },
+        {
+          "target_id": "prompt-secure-desktop",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Keep prompts on the Secure Desktop."
+        }
+      ],
+      "good_when": "You want Windows to continue warning before elevated non-Windows changes.",
+      "bad_when": "You intentionally want almost no prompt friction for administrators.",
+      "tradeoffs": [
+        "UAC protections remain stronger.",
+        "Administrators see prompts more often."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-uac-registry"
+      ]
+    },
+    {
+      "profile_id": "least-restrictive-admin-prompts",
+      "label": "Least restrictive admin prompts",
+      "intended_for": [
+        "Advanced local admin workflows",
+        "Temporary troubleshooting on isolated systems"
+      ],
+      "avoid_for": [
+        "General users",
+        "Security-hardened devices"
+      ],
+      "states": [
+        {
+          "target_id": "enable-lua",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Keep the UAC framework enabled."
+        },
+        {
+          "target_id": "consent-prompt-admin",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Elevate without prompting."
+        },
+        {
+          "target_id": "prompt-secure-desktop",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Do not switch to the Secure Desktop for prompts."
+        }
+      ],
+      "good_when": "You explicitly accept weaker elevation prompting to reduce interruptions.",
+      "bad_when": "You want Windows to act as a meaningful barrier before admin actions.",
+      "tradeoffs": [
+        "Administrator interruptions are minimized.",
+        "Protection against unwanted elevation is weakened."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-uac-registry",
+        "app-security-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-uac-registry",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: User Account Control registry key entries",
+      "location": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings",
+      "summary": "Microsoft documents the registry paths, default values, and allowed values for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The provider writes EnableLUA = 1, ConsentPromptBehaviorAdmin = 0, and PromptOnSecureDesktop = 0.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-uac-bootphase",
+      "kind": "decompilation",
+      "title": "nohuto boot-phase UAC value read",
+      "location": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c",
+      "summary": "PsBootPhaseComplete.c references EnableLUA, EnableVirtualization, and EnableInstallerDetection under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System during boot-phase processing.",
+      "supports": [
+        "path",
+        "behavior",
+        "dependency"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "procmon-uac-never-notify",
+      "kind": "procmon-trace",
+      "title": "Procmon capture - UAC policy value reads",
+      "location": "Local capture - research/evidence-files/missing/uac-never-notify-capture-pml.md and research/evidence-files/missing/uac-never-notify-capture-csv.md",
+      "summary": "Win25H2Clean Procmon captured DllHost.exe reading EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop while the UAC settings surface was open. The guest probe restored the original registry state after the capture.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft explicitly documents the UAC registry path, default values, and numeric meanings for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System, and the app writes that exact control surface. A Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values. This is still not a casual-safe profile, so the record remains non-default even though validation is complete.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings",
+    "exact_quote_or_path": "The registry keys are found under the key: `HKLresearch/evidence-files/missing/system-consentpromptbehavioradmin-0-elevate-without-prompting.md 5 (Default) = Prompt for consent for non-Windows binaries. `EnableLUA` 0 = Disabled, 1 (Default) = Enabled. `PromptOnSecureDesktop` 0 = Disabled, 1 (Default) = Enabled.",
+    "key_found_on_page": true,
+    "notes": "The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open. Normalized for the consolidated evidence report."
+  }
+}

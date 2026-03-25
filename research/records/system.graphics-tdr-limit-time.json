@@ -1,0 +1,155 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.graphics-tdr-limit-time",
+  "tweak_id": "system.graphics-tdr-limit-time",
+  "record_status": "validated",
+  "summary": "Officially documented TDR time-window reset. This app write restores TdrLimitTime to Microsoft's documented default of 60 seconds, but Microsoft warns that TDR keys are intended for driver testing and debugging rather than normal end-user tuning.",
+  "setting": {
+    "name": "Graphics TDR Limit Time",
+    "category": "System",
+    "area": "Graphics Drivers / TDR",
+    "scope": "device",
+    "casual_explanation": "Windows measures GPU hang events within a time window when deciding how to respond to repeated timeouts. This setting controls that time window.",
+    "why_people_change_it": "People usually touch it only when undoing manual TDR debugging changes or restoring graphics timeout behavior to the documented baseline.",
+    "tradeoffs_overview": "Restoring the documented default helps clean up manual driver experiments, but Microsoft does not position this as a normal end-user tuning control.",
+    "professional_notes": "Microsoft documents TdrLimitTime under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 60 seconds. The same Microsoft page warns that TDR keys are intended for testing or debugging during driver development only.",
+    "targets": [
+      {
+        "target_id": "tdr-limit-time",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "value_name": "TdrLimitTime",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 60,
+            "label": "Microsoft default time window",
+            "meaning": "The TDR repeated-hang time window is set to Microsoft's documented default of 60 seconds.",
+            "evidence_ids": [
+              "ms-tdr-registry-keys",
+              "app-system-registry-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes TdrLimitTime = 60 on the documented GraphicsDrivers path.",
+    "writes": [
+      {
+        "target_id": "tdr-limit-time",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "value_name": "TdrLimitTime",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 60
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented default",
+      "applies_to": "Systems restoring the documented TDR time-window baseline",
+      "states": [
+        {
+          "target_id": "tdr-limit-time",
+          "state_kind": "value",
+          "value": 60,
+          "rationale": "Microsoft documents 60 seconds as the default TdrLimitTime value."
+        }
+      ],
+      "notes": "This record exists to document and restore the default baseline rather than to encourage casual TDR tuning.",
+      "evidence_ids": [
+        "ms-tdr-registry-keys"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "reset-to-microsoft-default",
+      "label": "Reset to Microsoft default",
+      "intended_for": [
+        "Undoing manual TDR edits",
+        "Driver debugging cleanup",
+        "Systems returning to the documented baseline"
+      ],
+      "avoid_for": [
+        "Casual optimization use",
+        "Speculative graphics tweaking"
+      ],
+      "states": [
+        {
+          "target_id": "tdr-limit-time",
+          "state_kind": "value",
+          "value": 60,
+          "rationale": "Restore the documented default repeated-hang time window."
+        }
+      ],
+      "good_when": "You are removing custom TDR edits and want the Microsoft baseline back.",
+      "bad_when": "You are treating TDR timing keys as normal consumer tuning.",
+      "tradeoffs": [
+        "The documented Microsoft default is restored.",
+        "The setting remains a driver-debugging surface rather than a general-user recommendation."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-tdr-registry-keys",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-tdr-registry-keys",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Testing and debugging TDR during driver development",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "summary": "Microsoft documents TdrLimitTime under HKLM\\System\\CurrentControlSet\\Control\\GraphicsDrivers and states that the default value is 60 seconds, while warning that TDR keys are for targeted driver testing and debugging only.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes TdrLimitTime = 60 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the exact path and default value, and the app writes that documented default as a reset-to-baseline action with a clean rollback story.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:17:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+    "exact_quote_or_path": "KeyPath : HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\GraphicsDrivers; KeyValue : TdrLimitTime; ValueType : REG_DWORD; ValueData : Number of seconds before crashing. The default value is 60 seconds.",
+    "key_found_on_page": true,
+    "notes": "Microsoft's TDR registry keys page documents the exact GraphicsDrivers runtime path, the TdrLimitTime value name, and the documented default of 60 seconds."
+  }
+}

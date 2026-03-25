@@ -210,10 +210,11 @@ Do not promote yet:
 
 Primary upstream references used for this audit:
 
-- `Docs/tweaks/_source-mirrors/win-config/home.md`
-- `Docs/tweaks/_source-mirrors/win-config/nvidia/desc.md`
-- `Docs/tweaks/_source-mirrors/win-config/policies/desc.md`
-- `Docs/tweaks/_source-mirrors/win-config/affinities/desc.md`
-- `Docs/tweaks/_source-mirrors/win-registry/README.md`
+- `research/_source-mirrors/win-config/home.md`
+- `research/_source-mirrors/win-config/nvidia/desc.md`
+- `research/_source-mirrors/win-config/policies/desc.md`
+- `research/_source-mirrors/win-config/affinities/desc.md`
+- `research/_source-mirrors/win-registry/README.md`
 - `Docs/tweaks/tweak-provenance.csv`
 - `Docs/tweaks/tweak-provenance-missing.csv`
+

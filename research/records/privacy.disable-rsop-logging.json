@@ -1,0 +1,233 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-rsop-logging",
+  "tweak_id": "privacy.disable-rsop-logging",
+  "record_status": "validated",
+  "summary": "This record validates the official Group Policy surface for RSoP logging. GroupPolicy.admx maps HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging with enabledValue 0 and disabledValue 1, and the app now writes only that documented machine-policy value.",
+  "setting": {
+    "name": "Resultant Set of Policy Logging",
+    "category": "Privacy",
+    "area": "Group Policy",
+    "scope": "device",
+    "casual_explanation": "RSoP logging records which Group Policy settings were applied to the PC. Some people turn it off to reduce policy logging, while administrators often keep it on for troubleshooting and auditing.",
+    "why_people_change_it": "People change it when they want less policy logging or when they no longer need Resultant Set of Policy troubleshooting data to stay available.",
+    "tradeoffs_overview": "Turning it off reduces policy troubleshooting visibility. It does not disable policy processing itself; it only stops the client from logging RSoP data used for troubleshooting and auditing.",
+    "professional_notes": "GroupPolicy.admx maps HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging with enabledValue 0 and disabledValue 1. GroupPolicy.adml says enabling the policy turns RSoP logging off, while disabling or not configuring it keeps logging on. The app previously wrote an extra unsourced Winlogon companion value, but that write was removed on 2026-03-13 so the implementation now matches the documented Group Policy surface exactly.",
+    "targets": [
+      {
+        "target_id": "rsop-logging-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "RSoPLogging",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "RSoP logging stays on by default.",
+            "evidence_ids": [
+              "ms-admx-grouppolicy-rsoplogging",
+              "local-grouppolicy-adml-rsoplogging"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "RSoP logging turned off",
+            "meaning": "The policy is enabled and RSoP logging is turned off.",
+            "evidence_ids": [
+              "ms-admx-grouppolicy-rsoplogging",
+              "local-grouppolicy-admx-rsoplogging",
+              "local-grouppolicy-adml-rsoplogging",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "RSoP logging turned on",
+            "meaning": "The policy is disabled and RSoP logging stays on.",
+            "evidence_ids": [
+              "ms-admx-grouppolicy-rsoplogging",
+              "local-grouppolicy-admx-rsoplogging",
+              "local-grouppolicy-adml-rsoplogging"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app now writes only the documented Group Policy value HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging = 0 for this tweak.",
+    "writes": [
+      {
+        "target_id": "rsop-logging-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "RSoPLogging",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows systems exposing the Group Policy RSoP logging policy",
+      "states": [
+        {
+          "target_id": "rsop-logging-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official policy path unset."
+        }
+      ],
+      "notes": "Microsoft documents that not configuring the policy leaves RSoP logging on by default.",
+      "evidence_ids": [
+        "ms-admx-grouppolicy-rsoplogging",
+        "local-grouppolicy-adml-rsoplogging"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Administrators who want standard policy troubleshooting data available"
+      ],
+      "avoid_for": [
+        "People who explicitly want RSoP logging disabled"
+      ],
+      "states": [
+        {
+          "target_id": "rsop-logging-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official policy unset."
+        }
+      ],
+      "good_when": "You want the documented Windows default and RSoP data available.",
+      "bad_when": "You intentionally want to suppress RSoP logging.",
+      "tradeoffs": [
+        "RSoP logging remains available for policy troubleshooting."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-admx-grouppolicy-rsoplogging"
+      ]
+    },
+    {
+      "profile_id": "turn-off-rsop-logging",
+      "label": "Turn off RSoP logging",
+      "intended_for": [
+        "Administrators and advanced users who intentionally want less Group Policy troubleshooting data retained"
+      ],
+      "avoid_for": [
+        "General users",
+        "Systems where Group Policy troubleshooting and auditing are important"
+      ],
+      "states": [
+        {
+          "target_id": "rsop-logging-policy",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Official policy setting that turns RSoP logging off."
+        }
+      ],
+      "good_when": "You intentionally want to suppress RSoP logging and do not rely on local RSoP troubleshooting data.",
+      "bad_when": "You want to keep Group Policy troubleshooting and auditing information readily available.",
+      "tradeoffs": [
+        "RSoP logging is turned off.",
+        "Policy troubleshooting visibility is reduced."
+      ],
+      "apply_allowed": true,
+      "notes": "This is the documented Microsoft machine-policy surface with exact ADMX and ADML proof.",
+      "evidence_ids": [
+        "ms-admx-grouppolicy-rsoplogging",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-admx-grouppolicy-rsoplogging",
+      "kind": "policy-csp",
+      "title": "Microsoft ADMX_GroupPolicy Policy CSP: RSoPLogging",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging",
+      "summary": "Official documentation for the Group Policy setting that controls whether RSoP logging is enabled on the client.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-grouppolicy-admx-rsoplogging",
+      "kind": "official-doc",
+      "title": "Local Microsoft GroupPolicy.admx RSoPLogging mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx",
+      "summary": "The local ADMX file maps RSoPLogging to Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging with enabledValue 0 and disabledValue 1.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-grouppolicy-adml-rsoplogging",
+      "kind": "official-doc",
+      "title": "Local Microsoft GroupPolicy.adml RSoPLogging help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
+      "summary": "The local ADML help text states that enabling the policy turns RSoP logging off, while disabling or not configuring it keeps logging on by default.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes only the documented Group Policy value HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging = 0 for this tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official Group Policy mapping is backed by exact Microsoft ADMX, ADML, and Policy CSP proof, and the app now writes only that documented surface. The tweak is reversible and low-risk for informed users, but it is not recommended for general users because it reduces policy troubleshooting visibility.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx",
+    "exact_quote_or_path": "<policy name=\"RSoPLogging\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"RSoPLogging\"> ... <enabledValue><decimal value=\"0\" /></enabledValue>; GroupPolicy.adml: If you enable this setting, RSoP logging is turned off. If you disable or do not configure this setting, RSoP logging is turned on. By default, RSoP logging is always on.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy turns RSoP logging off. The app now matches that documented surface exactly."
+  }
+}

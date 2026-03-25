@@ -1,0 +1,215 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.disable-downloads-blocking",
+  "tweak_id": "security.disable-downloads-blocking",
+  "record_status": "validated",
+  "summary": "Official Attachment Manager policy for stopping Windows from preserving zone-of-origin metadata on downloaded files. The local Microsoft AttachmentManager.admx file explicitly documents the same Attachments policy key, SaveZoneInformation value name, and enabled/disabled values that the app uses.",
+  "setting": {
+    "name": "Preserve Zone Information on Attachments",
+    "category": "Security",
+    "area": "Registry Policy",
+    "scope": "user",
+    "casual_explanation": "Windows normally tags downloaded files with where they came from, like the Internet or intranet. That information helps Windows decide when to warn or protect you. This policy controls whether that tagging happens.",
+    "why_people_change_it": "People disable it when they want fewer prompts or compatibility issues caused by Mark-of-the-Web tagging. They leave it enabled when they want Windows to keep normal safety checks for downloaded files.",
+    "tradeoffs_overview": "Turning it off can reduce prompts and restrictions for downloaded files, but it also removes information Windows uses for risk decisions.",
+    "professional_notes": "AttachmentManager.admx documents SaveZoneInformation under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments with enabledValue 1 and disabledValue 2. The local ADML help text says enabling the policy stops Windows from marking attachments with zone information, while disabled or not configured keeps marking enabled.",
+    "targets": [
+      {
+        "target_id": "save-zone-information",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments",
+        "value_name": "SaveZoneInformation",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows default",
+            "meaning": "Windows marks attachments with their zone information.",
+            "evidence_ids": [
+              "local-attachmentmanager-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Do not preserve zone information",
+            "meaning": "Windows does not mark downloaded attachments with zone-of-origin information.",
+            "evidence_ids": [
+              "local-attachmentmanager-admx",
+              "local-attachmentmanager-adml",
+              "app-security-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Preserve zone information",
+            "meaning": "Windows marks downloaded attachments with zone-of-origin information.",
+            "evidence_ids": [
+              "local-attachmentmanager-admx",
+              "local-attachmentmanager-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The current app writes SaveZoneInformation = 1, which matches the documented policy state that stops Windows from preserving zone information on attachments.",
+    "writes": [
+      {
+        "target_id": "save-zone-information",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments",
+        "value_name": "SaveZoneInformation",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows systems supporting Attachment Manager policy",
+      "states": [
+        {
+          "target_id": "save-zone-information",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "If the policy is not configured, Windows marks file attachments with zone information."
+        }
+      ],
+      "notes": "This behavior requires NTFS to function correctly.",
+      "evidence_ids": [
+        "local-attachmentmanager-admx",
+        "local-attachmentmanager-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Machines that should keep normal attachment risk signals"
+      ],
+      "avoid_for": [
+        "People intentionally removing Mark-of-the-Web tagging"
+      ],
+      "states": [
+        {
+          "target_id": "save-zone-information",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep normal downloaded-file safety behavior.",
+      "bad_when": "Mark-of-the-Web tagging is causing a specific compatibility problem you accept the risk of bypassing.",
+      "tradeoffs": [
+        "Downloaded files keep their origin metadata.",
+        "Windows can continue making risk assessments based on origin."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-attachmentmanager-adml"
+      ]
+    },
+    {
+      "profile_id": "no-zone-marking",
+      "label": "Do not mark downloads",
+      "intended_for": [
+        "Special compatibility cases",
+        "Advanced users who understand the safety tradeoff"
+      ],
+      "avoid_for": [
+        "General users",
+        "Security-focused systems"
+      ],
+      "states": [
+        {
+          "target_id": "save-zone-information",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Stop Windows from preserving zone information on attachments."
+        }
+      ],
+      "good_when": "You specifically want to remove Mark-of-the-Web style tagging from downloaded files.",
+      "bad_when": "You rely on Windows to apply warnings and protections based on file origin.",
+      "tradeoffs": [
+        "MOTW-style zone tagging is removed.",
+        "Windows loses origin data that supports risk warnings."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-attachmentmanager-admx",
+        "local-attachmentmanager-adml",
+        "app-security-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-attachmentmanager-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft AttachmentManager.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx",
+      "summary": "The local ADMX file maps SaveZoneInformation under the user Attachments policy key with enabledValue 1 and disabledValue 2.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-attachmentmanager-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft AttachmentManager.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/AttachmentManager.adml",
+      "summary": "The local ADML help text says enabling the policy stops Windows from marking attachments with zone information, while disabled or not configured keeps marking enabled.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The provider writes SaveZoneInformation = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft AttachmentManager.admx file explicitly defines SaveZoneInformation under Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments with enabledValue 1 and disabledValue 2, and the paired ADML help text states that enabling the policy stops Windows from marking attachments with zone information while disabled or not configured keeps marking enabled. The app writes that documented enabled-policy state.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:04:21.2349557+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx",
+    "exact_quote_or_path": "<policy name=\"AM_MarkZoneOnSavedAtttachments\" class=\"User\" ... key=\"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\" valueName=\"SaveZoneInformation\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"2\" /></disabledValue>",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same Attachments policy key and SaveZoneInformation value used by the app, and it confirms the 1/2 mapping. The paired ADML help text states that enabling the policy stops Windows from marking attachments with zone information."
+  }
+}

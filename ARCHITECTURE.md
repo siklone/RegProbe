@@ -6,34 +6,16 @@ Open Trace Project follows a clean, layered architecture with clear separation o
 
 ## Layer Diagram
 
-```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚         OpenTraceProject.App            â”‚ â—„â”€â”€â”€ Desktop UI Layer
-â”‚    (Views, ViewModels, Converters)      â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                   â”‚
-                   â–¼
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚       OpenTraceProject.Engine           â”‚ â—„â”€â”€â”€ Business Logic
-â”‚  (TweakExecutionPipeline, Providers)    â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                   â”‚
-                   â–¼
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚    OpenTraceProject.Infrastructure      â”‚ â—„â”€â”€â”€ External Services
-â”‚  (Registry, Metrics, Elevation, Files)  â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                   â”‚
-                   â–¼
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚       OpenTraceProject.Core             â”‚ â—„â”€â”€â”€ Domain Models
-â”‚   (Interfaces, Contracts, DTOs)         â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+```text
+app            -> desktop UI
+engine         -> tweak execution and orchestration
+infrastructure -> registry, elevation, files, and adapters
+core           -> contracts, models, and shared abstractions
 ```
 
 ## Projects
 
-### OpenTraceProject.Core
+### core
 **Purpose**: Domain models and contracts
 
 **Key Interfaces**:
@@ -48,7 +30,7 @@ Open Trace Project follows a clean, layered architecture with clear separation o
 - `TweakStatus`: Enum (Detected, Applied, Verified, RolledBack, Failed)
 - `TweakRiskLevel`: Enum (Safe, Advanced, Risky)
 
-### OpenTraceProject.Engine
+### engine
 **Purpose**: Business logic and execution orchestration
 
 **Key Components**:
@@ -68,7 +50,7 @@ public interface ITweakProvider
 }
 ```
 
-### OpenTraceProject.Infrastructure
+### infrastructure
 **Purpose**: External service implementations
 
 **Key Services**:
@@ -77,7 +59,7 @@ public interface ITweakProvider
 - Hardware info services and providers for OS, motherboard, storage, and display details
 - `PluginLoader`: Dynamic plugin loading
 
-### OpenTraceProject.App
+### app
 **Purpose**: Desktop presentation layer
 
 **MVVM Pattern**:
@@ -96,7 +78,7 @@ public interface ITweakProvider
 - Prefer animating named transforms (`TranslateTransform`, `ScaleTransform`, `RotateTransform`) and overlay `Opacity`.
 - When using shared resources for transforms, set `x:Shared="False"` to avoid shared instances.
 
-### OpenTraceProject.ElevatedHost
+### elevated-host
 **Purpose**: UAC elevation and privileged operations
 
 **Architecture**:
@@ -106,9 +88,9 @@ public interface ITweakProvider
 
 **Executable Discovery**:
 - The app is not always-admin; admin-required operations run via ElevatedHost.
-- The UI resolves the ElevatedHost path via `OpenTraceProject.App/Utilities/ElevatedHostLocator.cs`.
+- The UI resolves the ElevatedHost path via `app/Utilities/ElevatedHostLocator.cs`.
 - You can override discovery with the env var `OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH`.
-- Recommended publish layout: `OpenTraceProject.App/.../win-x64/ElevatedHost/OpenTraceProject.ElevatedHost.exe`.
+- Recommended publish layout: `app/.../win-x64/ElevatedHost/OpenTraceProject.ElevatedHost.exe`.
 
 ## Design Patterns
 

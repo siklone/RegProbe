@@ -1,0 +1,236 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "system.disable-auto-maintenance",
+  "tweak_id": "system.disable-auto-maintenance",
+  "record_status": "validated",
+  "summary": "Microsoft Learn now gives a direct operational meaning for MaintenanceDisabled on HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance: UWF turns Automatic Maintenance off by setting this value. Win25H2Clean reversible proof also confirmed missing -> 1 -> missing on the same path.",
+  "setting": {
+    "name": "Automatic Maintenance",
+    "category": "System",
+    "area": "Observed Registry Setting",
+    "scope": "device",
+    "casual_explanation": "Automatic Maintenance runs maintenance work like updates, scans, and housekeeping when Windows thinks the PC is idle. People disable it when they want tighter control over when maintenance runs.",
+    "why_people_change_it": "People change it to reduce background activity at unwanted times or to take full manual control of maintenance tasks.",
+    "tradeoffs_overview": "Turning it off can reduce automatic background work, but it also means Windows will no longer run its ordinary scheduled maintenance flow on its own.",
+    "professional_notes": "Microsoft documents Automatic Maintenance as a Windows feature and, in current UWF guidance, says Maintenance Hour is disabled by setting HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\MaintenanceDisabled. Win25H2Clean reversible proof confirmed the same path through missing -> 1 -> missing, so the documented disable meaning, app mapping, and restore story now line up on this build.",
+    "targets": [
+      {
+        "target_id": "maintenance-disabled-observed",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance",
+        "value_name": "MaintenanceDisabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "No explicit maintenance override",
+            "meaning": "Windows follows its ordinary Automatic Maintenance behavior.",
+            "evidence_ids": [
+              "ms-automatic-maintenance-overview",
+              "ms-uwf-maintenance-disabled"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Automatic Maintenance disabled",
+            "meaning": "Microsoft's current UWF guidance says Maintenance Hour is disabled by setting MaintenanceDisabled on this path.",
+            "evidence_ids": [
+              "ms-automatic-maintenance-overview",
+              "ms-uwf-maintenance-disabled",
+              "app-system-provider",
+              "vm-batch-probe-20260320-disable-auto-maintenance"
+            ]
+          }
+        ],
+        "notes": "Current Microsoft guidance gives the operational disable meaning for value 1 on this path."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "Guest-side reversible probe on Win25H2Clean confirmed the current app write and restore cycle for MaintenanceDisabled.",
+    "writes": [
+      {
+        "target_id": "maintenance-disabled-observed",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance",
+        "value_name": "MaintenanceDisabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows feature default",
+      "applies_to": "Windows systems with Automatic Maintenance",
+      "states": [
+        {
+          "target_id": "maintenance-disabled-observed",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Automatic Maintenance runs as part of ordinary Windows behavior unless MaintenanceDisabled is explicitly set."
+        }
+      ],
+      "notes": "This record treats missing as the ordinary baseline because Microsoft's current guidance only calls out the disabled state when the value is set.",
+      "evidence_ids": [
+        "ms-automatic-maintenance-overview"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that rely on ordinary Windows maintenance behavior"
+      ],
+      "avoid_for": [
+        "People who want to suppress scheduled maintenance activity"
+      ],
+      "states": [
+        {
+          "target_id": "maintenance-disabled-observed",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not set the override value."
+        }
+      ],
+      "good_when": "You want Windows to keep its normal maintenance workflow.",
+      "bad_when": "You want scheduled maintenance turned off.",
+      "tradeoffs": [
+        "Windows keeps performing ordinary maintenance work automatically.",
+        "No explicit maintenance override is applied."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-automatic-maintenance-overview"
+      ]
+    },
+    {
+      "profile_id": "disable-automatic-maintenance",
+      "label": "Disable Automatic Maintenance",
+      "intended_for": [
+        "Advanced users",
+        "People who want to suppress scheduled maintenance activity"
+      ],
+      "avoid_for": [
+        "General users",
+        "Systems that rely on Windows automatic maintenance"
+      ],
+      "states": [
+        {
+          "target_id": "maintenance-disabled-observed",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the documented disabled state on the maintenance policy path."
+        }
+      ],
+      "good_when": "You want scheduled Automatic Maintenance disabled.",
+      "bad_when": "You want Windows to keep running maintenance automatically.",
+      "tradeoffs": [
+        "Turns off the documented Maintenance Hour override.",
+        "Windows will no longer run its ordinary maintenance flow on its own."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-automatic-maintenance-overview",
+        "ms-uwf-maintenance-disabled",
+        "app-system-provider",
+        "vm-batch-probe-20260320-disable-auto-maintenance"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-automatic-maintenance-overview",
+      "kind": "official-doc",
+      "title": "Microsoft Automatic Maintenance overview",
+      "location": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance",
+      "summary": "Microsoft documents Automatic Maintenance as the Windows feature that performs maintenance tasks during idle time.",
+      "supports": [
+        "behavior",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-uwf-maintenance-disabled",
+      "kind": "official-doc",
+      "title": "Microsoft Unified Write Filter guidance referencing MaintenanceDisabled",
+      "location": "https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable",
+      "summary": "Microsoft's current UWF guidance says Maintenance Hour is disabled by setting HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\MaintenanceDisabled, and that the change is reverted after UWF is disabled.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "default"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes MaintenanceDisabled = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-batch-probe-20260320-disable-auto-maintenance",
+      "kind": "runtime-diff",
+      "title": "Win25H2Clean reversible probe - Automatic maintenance override",
+      "location": "research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json",
+      "summary": "Guest reversible probe toggled MaintenanceDisabled through 1 and back to missing under the maintenance schedule policy path, matching the app behavior captured in the batch probe.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "rollback"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-maintenance-mirror",
+      "kind": "registry-observation",
+      "title": "nohuto mirror - Automatic Maintenance registry evidence",
+      "location": "research/_source-mirrors/win-config/privacy/desc.md and research/_source-mirrors/win-registry/records/25H2.txt",
+      "summary": "The local nohuto mirror records PolicyName and ValueName as MaintenanceDisabled and includes the registry path \\Registry\\Machine\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance : MaintenanceDisabled.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft now states that Maintenance Hour is disabled by setting MaintenanceDisabled on this path, and the Win25H2Clean reversible probe confirmed the app's write through missing -> 1 -> missing on the same key.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-11T00:00:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json",
+    "exact_quote_or_path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\MaintenanceDisabled: before=__MISSING__, after_apply=1, after_restore=__MISSING__",
+    "key_found_on_page": true,
+    "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md The local nohuto mirror also shows the same MaintenanceDisabled registry path."
+  }
+}

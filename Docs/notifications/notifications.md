@@ -39,9 +39,9 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="notifications.disable-feedback-frequency"></a> `notifications.disable-feedback-frequency` | Disable Feedback Requests | Stops Windows from asking for feedback or ratings. | Safe | `OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L533` |
-| <a id="notifications.disable-lock-screen"></a> `notifications.disable-lock-screen` | Disable Lock Screen Notifications | Prevents app notifications from showing on the lock screen. | Advanced | `OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L520` |
-| <a id="notifications.disable-mirroring"></a> `notifications.disable-mirroring` | Disable Notification Mirroring | Stops notifications from being mirrored to other devices. | Advanced | `OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L571` |
-| <a id="notifications.disable-tile"></a> `notifications.disable-tile` | Disable Tile Notifications | Prevents apps from updating tiles and tile badges. | Advanced | `OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L558` |
-| <a id="notifications.disable-toast"></a> `notifications.disable-toast` | Disable Toast Notifications | Blocks balloon and toast notifications for all applications for the current user. | Advanced | `OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L507` |
+| <a id="notifications.disable-feedback-frequency"></a> `notifications.disable-feedback-frequency` | Disable Feedback Requests | Stops Windows from asking for feedback or ratings. | Safe | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L533` |
+| <a id="notifications.disable-lock-screen"></a> `notifications.disable-lock-screen` | Disable Lock Screen Notifications | Prevents app notifications from showing on the lock screen. | Advanced | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L520` |
+| <a id="notifications.disable-mirroring"></a> `notifications.disable-mirroring` | Disable Notification Mirroring | Stops notifications from being mirrored to other devices. | Advanced | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L571` |
+| <a id="notifications.disable-tile"></a> `notifications.disable-tile` | Disable Tile Notifications | Prevents apps from updating tiles and tile badges. | Advanced | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L558` |
+| <a id="notifications.disable-toast"></a> `notifications.disable-toast` | Disable Toast Notifications | Blocks balloon and toast notifications for all applications for the current user. | Advanced | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L507` |
 <!-- TWEAK INDEX END -->

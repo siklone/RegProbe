@@ -1,0 +1,214 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "developer.dotnet-telemetry-disable",
+  "tweak_id": "developer.dotnet-telemetry-disable",
+  "record_status": "validated",
+  "summary": "Officially documented user environment variable for opting the .NET CLI out of telemetry. Good for privacy-focused or quiet developer workstations, but it removes default telemetry signals from the .NET SDK and CLI.",
+  "setting": {
+    "name": ".NET CLI Telemetry Opt-Out",
+    "category": "Developer",
+    "area": "User Environment Variable",
+    "scope": "user",
+    "casual_explanation": "The .NET SDK and CLI can send telemetry about tool usage. This tweak sets the current user's opt-out environment variable so new .NET CLI sessions stop sending that telemetry.",
+    "why_people_change_it": "People change it when they want quieter developer tooling, less usage reporting from the .NET SDK, or a privacy-focused developer profile.",
+    "tradeoffs_overview": "Opting out reduces telemetry from the .NET CLI, but it also removes usage and crash signals that Microsoft uses for diagnostics and product improvement.",
+    "professional_notes": "Microsoft documents DOTNET_CLI_TELEMETRY_OPTOUT and says values such as 1 and true opt the .NET CLI out of telemetry. Microsoft also documents that persistent user environment variables are stored for the current user under HKCU\\Environment.",
+    "targets": [
+      {
+        "target_id": "dotnet-cli-telemetry-optout",
+        "location_kind": "registry",
+        "path": "HKCU\\Environment",
+        "value_name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+        "value_type": "REG_SZ",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Default telemetry behavior",
+            "meaning": "The .NET CLI uses its normal telemetry behavior because no persistent opt-out variable is set for the current user.",
+            "evidence_ids": [
+              "ms-dotnet-cli-telemetry",
+              "ms-win32-environment"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "1",
+            "label": ".NET CLI telemetry opted out",
+            "meaning": "The .NET CLI telemetry is opted out for the current user.",
+            "evidence_ids": [
+              "ms-dotnet-cli-telemetry",
+              "ms-win32-environment",
+              "app-developer-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "true",
+            "label": ".NET CLI telemetry opted out",
+            "meaning": "The .NET CLI telemetry is opted out for the current user.",
+            "evidence_ids": [
+              "ms-dotnet-cli-telemetry",
+              "ms-win32-environment"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "notes": "The current app writes DOTNET_CLI_TELEMETRY_OPTOUT = 1 as a persistent current-user environment variable.",
+    "writes": [
+      {
+        "target_id": "dotnet-cli-telemetry-optout",
+        "path": "HKCU\\Environment",
+        "value_name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+        "value_type": "REG_SZ",
+        "state_kind": "value",
+        "value": "1"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows default",
+      "applies_to": "Current-user profiles that have not explicitly set the .NET CLI telemetry opt-out variable",
+      "states": [
+        {
+          "target_id": "dotnet-cli-telemetry-optout",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the .NET CLI opt-out variable unset."
+        }
+      ],
+      "notes": "Without this environment variable, the .NET CLI keeps its normal telemetry baseline.",
+      "evidence_ids": [
+        "ms-dotnet-cli-telemetry",
+        "ms-win32-environment"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Developer machines that want the default .NET telemetry baseline"
+      ],
+      "avoid_for": [
+        "Privacy-focused developers",
+        "Managed developer workstations that should opt out"
+      ],
+      "states": [
+        {
+          "target_id": "dotnet-cli-telemetry-optout",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the .NET CLI opt-out variable unset."
+        }
+      ],
+      "good_when": "You want the .NET SDK and CLI to keep their default telemetry behavior.",
+      "bad_when": "You want to minimize usage reporting from .NET developer tools.",
+      "tradeoffs": [
+        ".NET keeps its normal telemetry baseline.",
+        "No user-level privacy opt-out is enforced for the .NET CLI."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-dotnet-cli-telemetry"
+      ]
+    },
+    {
+      "profile_id": "dotnet-cli-privacy",
+      "label": "CLI privacy",
+      "intended_for": [
+        "Privacy-focused developers",
+        "Managed shell environments"
+      ],
+      "avoid_for": [
+        "Users who want to leave .NET CLI telemetry enabled"
+      ],
+      "states": [
+        {
+          "target_id": "dotnet-cli-telemetry-optout",
+          "state_kind": "value",
+          "value": "1",
+          "rationale": "Set the documented .NET CLI opt-out variable."
+        }
+      ],
+      "good_when": "You want the .NET CLI to stop sending its default telemetry for the current user.",
+      "bad_when": "You want to leave the tool on its default telemetry baseline for diagnostics or feedback.",
+      "tradeoffs": [
+        ".NET CLI telemetry is opted out for the current user.",
+        "New terminal windows or new shell sessions may be needed before all tools pick up the updated environment."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-dotnet-cli-telemetry",
+        "ms-win32-environment",
+        "app-developer-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-dotnet-cli-telemetry",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: .NET SDK and .NET CLI telemetry",
+      "location": "https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry",
+      "summary": "Microsoft documents DOTNET_CLI_TELEMETRY_OPTOUT and says setting it to 1 or true opts the .NET CLI out of telemetry.",
+      "supports": [
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-win32-environment",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Win32_Environment class",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment",
+      "summary": "Microsoft documents persistent user environment variables and their Windows storage model, which maps to HKCU\\Environment for the current user.",
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-developer-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "summary": "The provider writes DOTNET_CLI_TELEMETRY_OPTOUT = 1 under HKCU\\Environment for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft directly documents the opt-out environment variable, and the app writes a supported opt-out value in the current user's persistent environment store.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry",
+    "exact_quote_or_path": "The .NET SDK telemetry feature is enabled by default... To opt out of the telemetry feature, set the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to 1 or true.; Win32_Environment: Querying this class returns environment variables found in HKEY_USERS\\<user>\\Environment.",
+    "key_found_on_page": true,
+    "notes": "Microsoft directly documents DOTNET_CLI_TELEMETRY_OPTOUT as the opt-out environment variable, and Win32_Environment documents that persistent user environment variables are stored under HKEY_USERS\\<user>\\Environment. The app writes the current user's variable under HKCU\\Environment, which is the current-user view of that store."
+  }
+}

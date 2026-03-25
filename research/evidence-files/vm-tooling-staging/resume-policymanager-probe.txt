@@ -1,0 +1,20 @@
+﻿=== HKCU:\Software\Microsoft\PolicyManager\current\user\Connectivity ===
+ERROR: Cannot find path 'HKCU:\Software\Microsoft\PolicyManager\current\user\Connectivity' because it does not exist.
+=== HKLM:\SOFTWARE\Microsoft\PolicyManager\current\user\Connectivity ===
+ERROR: Cannot find path 'HKLM:\SOFTWARE\Microsoft\PolicyManager\current\user\Connectivity' because it does not exist.
+=== HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Connectivity\DisableCrossDeviceResume ===
+
+
+Behavior       : 16
+highrange      : 1
+lowrange       : 0
+mergealgorithm : 1
+policytype     : 4
+value          : 0
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Connec
+                 tivity\DisableCrossDeviceResume
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Connec
+                 tivity
+PSChildName    : DisableCrossDeviceResume
+PSDrive        : HKLM
+PSProvider     : Microsoft.PowerShell.Core\Registry

@@ -1,0 +1,190 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "system.bsod-display-parameters",
+  "tweak_id": "system.bsod-display-parameters",
+  "record_status": "validated",
+  "summary": "Validated record with machine-checkable proof for the CrashControl DisplayParameters setting. The app writes the documented value and Microsoft Support documents the 0/1 semantics.",
+  "setting": {
+    "name": "Display Blue Screen Parameters",
+    "category": "System",
+    "area": "Crash Recovery / Bug Check Display",
+    "scope": "device",
+    "casual_explanation": "This tweak tries to show extra technical parameters on a blue screen. That can help advanced debugging, but most users will not benefit from the extra numbers.",
+    "why_people_change_it": "People enable it when they are actively investigating a crash and want more detail on the blue screen itself.",
+    "tradeoffs_overview": "Showing more crash data can help debugging, and the registry semantics are now validated against a primary Microsoft support article.",
+    "professional_notes": "The app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters = 1. Microsoft Support documents the setting on the CrashControl surface and explicitly states that 0 does not display the stop error information while 1 does display it.",
+    "targets": [
+      {
+        "target_id": "display-parameters",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+        "value_name": "DisplayParameters",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Do not display stop error information",
+            "meaning": "Microsoft Support documents this CrashControl value as the state that hides the extra stop-error details from the blue screen.",
+            "evidence_ids": [
+              "microsoft-support-display-parameters"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Display stop error information",
+            "meaning": "Microsoft Support documents this CrashControl value as the state that shows additional stop-error details on the blue screen.",
+            "evidence_ids": [
+              "microsoft-support-display-parameters",
+              "app-system-registry-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes DisplayParameters = 1 under CrashControl to surface more crash detail on the blue screen.",
+    "writes": [
+      {
+        "target_id": "display-parameters",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+        "value_name": "DisplayParameters",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1,
+        "notes": "Observed app value under review."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows published default",
+      "applies_to": "Systems where DisplayParameters has not been formally mapped in this dataset",
+      "states": [
+        {
+          "target_id": "display-parameters",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "The Microsoft Support article documents 0 as the state that does not display stop error information."
+        }
+      ],
+      "notes": "The Microsoft Support article documents the registry semantics directly, so the record no longer needs to stay conservative.",
+      "evidence_ids": [
+        "microsoft-support-display-parameters"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only"
+      ],
+      "avoid_for": [
+        "Published validated presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "display-parameters",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the documented state that displays stop error information."
+        }
+      ],
+      "good_when": "You want to show stop error details for debugging.",
+      "bad_when": "You need a different crash-screen behavior.",
+      "tradeoffs": [
+        "The app behavior is documented honestly.",
+        "The setting is now published from a primary Microsoft support article."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "microsoft-support-display-parameters",
+        "app-system-registry-provider"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published validated presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "display-parameters",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Observed app value that is still waiting for a primary-source mapping."
+        }
+      ],
+      "good_when": "You are documenting the current app behavior with a validated mapping.",
+      "bad_when": "You need a different crash-screen behavior.",
+      "tradeoffs": [
+        "The observed tweak behavior is captured.",
+        "The value semantics are now published as officially validated."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "microsoft-support-display-parameters",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "microsoft-support-display-parameters",
+      "kind": "official-doc",
+      "title": "Microsoft Support: Stop error information isn't displayed on the blue screen in Windows",
+      "location": "https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237",
+      "summary": "Microsoft Support documents HKLM\\System\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters with explicit 0 and 1 meanings. 0 does not display stop error information; 1 displays it.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes DisplayParameters = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft Support documents DisplayParameters directly on CrashControl with explicit 0/1 semantics, and the app writes the documented display state.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-20T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237",
+    "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\CrashControl; \"0 - Do not display the Stop error information\"; \"1 - Display the Stop error information\".",
+    "key_found_on_page": true,
+    "notes": "Validated against Microsoft Support documentation for the CrashControl DisplayParameters value."
+  }
+}

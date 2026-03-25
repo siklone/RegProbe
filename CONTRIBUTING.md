@@ -98,7 +98,7 @@ dotnet build
 ### Run
 
 ```powershell
-dotnet run --project OpenTraceProject.App
+dotnet run --project app/app.csproj
 ```
 
 ### Debug
@@ -112,7 +112,7 @@ Open `OpenTraceProject.sln` in Visual Studio and press F5.
 
 ### Option 1: Add to Existing Provider
 
-Edit the appropriate provider in `OpenTraceProject.App/Services/TweakProviders/`:
+Edit the appropriate provider in `app/Services/TweakProviders/`:
 
 > Note: `LegacyTweakProvider` is temporary to restore missing tweaks. Do not add new tweaks there.
 
@@ -145,7 +145,7 @@ public class PrivacyTweakProvider : BaseTweakProvider
 
 ### Option 2: Create New Provider
 
-1. Create new file in `OpenTraceProject.App/Services/TweakProviders/`:
+1. Create new file in `app/Services/TweakProviders/`:
 
 ```csharp
 public sealed class MyTweakProvider : BaseTweakProvider
@@ -177,7 +177,7 @@ var providers = new ITweakProvider[]
 
 ### Option 3: Create Plugin
 
-See `OpenTraceProject.Plugins.DevTools` for the current in-repo plugin/support assembly.
+See `plugins-devtools` for the current in-repo plugin/support assembly.
 
 ## Tweak Guidelines
 
@@ -231,7 +231,7 @@ value = 1;
 ## Testing
 
 ### Unit Tests
-Create tests in `OpenTraceProject.Tests`:
+Create tests in `tests`:
 
 ```csharp
 [Fact]

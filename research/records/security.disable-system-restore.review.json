@@ -1,0 +1,218 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.disable-system-restore",
+  "tweak_id": "security.disable-system-restore",
+  "record_status": "validated",
+  "summary": "Official System Restore policy control. The app now uses DisableSR under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore, which is the documented machine policy for turning System Restore off.",
+  "setting": {
+    "name": "Turn Off System Restore",
+    "category": "Security",
+    "area": "System Restore Policy",
+    "scope": "device",
+    "casual_explanation": "System Restore lets Windows roll the system back to an earlier state after problems. This policy turns that recovery feature off.",
+    "why_people_change_it": "People disable it to save disk space or because they rely on a different recovery strategy. They leave it enabled when they want a built-in rollback path for drivers, updates, or software problems.",
+    "tradeoffs_overview": "Turning System Restore off removes a built-in recovery option. That can reduce disk usage, but it also removes a safety net when system changes go wrong.",
+    "professional_notes": "SystemRestore.admx documents DisableSR under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore with enabledValue 1 and disabledValue 0. SystemRestore.adml explains that enabling the policy turns off System Restore. The same ADML file also says that if Turn off System Restore is enabled, the separate Turn off Configuration policy is overwritten, so this tweak only needs DisableSR.",
+    "targets": [
+      {
+        "target_id": "disable-system-restore-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore",
+        "value_name": "DisableSR",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows keeps the normal System Restore policy state.",
+            "evidence_ids": [
+              "local-systemrestore-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "System Restore allowed",
+            "meaning": "The policy is disabled and System Restore is not turned off by this policy.",
+            "evidence_ids": [
+              "local-systemrestore-admx",
+              "local-systemrestore-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Turn off System Restore",
+            "meaning": "System Restore is turned off and the recovery feature is disabled by policy.",
+            "evidence_ids": [
+              "local-systemrestore-admx",
+              "local-systemrestore-adml",
+              "app-security-provider"
+            ]
+          }
+        ],
+        "notes": "DisableConfig is a separate related policy, but local ADML states that Turn off System Restore overrides it when enabled."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The current app writes DisableSR = 1 under the official Policies path documented by SystemRestore.admx.",
+    "writes": [
+      {
+        "target_id": "disable-system-restore-policy",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore",
+        "value_name": "DisableSR",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows systems supporting the System Restore policy",
+      "states": [
+        {
+          "target_id": "disable-system-restore-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the System Restore policy unset."
+        }
+      ],
+      "notes": "This record validates the documented turn-off policy only.",
+      "evidence_ids": [
+        "local-systemrestore-admx",
+        "local-systemrestore-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "General users",
+        "Machines that should keep built-in recovery available"
+      ],
+      "avoid_for": [
+        "Systems where an administrator intentionally wants System Restore disabled"
+      ],
+      "states": [
+        {
+          "target_id": "disable-system-restore-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not apply the turn-off policy."
+        }
+      ],
+      "good_when": "You want to keep built-in rollback available.",
+      "bad_when": "You are intentionally disabling System Restore as part of a managed hardening or imaging strategy.",
+      "tradeoffs": [
+        "Built-in recovery remains available.",
+        "Disk space and restore-point activity remain under normal Windows behavior."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-systemrestore-adml"
+      ]
+    },
+    {
+      "profile_id": "turn-off-system-restore",
+      "label": "Turn off System Restore",
+      "intended_for": [
+        "Advanced users",
+        "Managed systems using another recovery strategy"
+      ],
+      "avoid_for": [
+        "General users",
+        "Machines that rely on restore points for rollback"
+      ],
+      "states": [
+        {
+          "target_id": "disable-system-restore-policy",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Enable the documented System Restore turn-off policy."
+        }
+      ],
+      "good_when": "You intentionally want to remove System Restore as a recovery option.",
+      "bad_when": "You want Windows to keep a built-in rollback path for system changes.",
+      "tradeoffs": [
+        "System Restore is disabled by policy.",
+        "A built-in recovery path is removed, so another rollback strategy should exist."
+      ],
+      "apply_allowed": false,
+      "notes": "The control surface is fully validated, but apply remains blocked for general publishing because it removes a built-in recovery safeguard.",
+      "evidence_ids": [
+        "local-systemrestore-admx",
+        "local-systemrestore-adml",
+        "app-security-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-systemrestore-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft SystemRestore.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/SystemRestore.admx",
+      "summary": "The local ADMX file documents DisableSR under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-systemrestore-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft SystemRestore.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/SystemRestore.adml",
+      "summary": "The local ADML help text explains that enabling Turn off System Restore disables the feature and that this policy overrides the separate Turn off Configuration policy.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The provider writes DisableSR = 1 under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official System Restore policy surface is clear and the app now writes that exact documented value. Apply remains blocked for general publishing because the tweak removes a built-in recovery option.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T18:32:00+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/SystemRestore.admx",
+    "exact_quote_or_path": "<policy name=\"SR_DisableSR\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\SystemRestore\" valueName=\"DisableSR\">; SystemRestore.adml: \"This policy setting allows you to turn off System Restore.\"",
+    "key_found_on_page": true,
+    "notes": "Local official Microsoft ADMX and ADML files document DisableSR as the supported System Restore turn-off policy. The app now writes that exact documented value."
+  }
+}

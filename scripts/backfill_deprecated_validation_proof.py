@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-RECORDS_DIR = REPO_ROOT / "Docs" / "tweaks" / "research" / "records"
+RECORDS_DIR = REPO_ROOT / "research" / "records"
 EVIDENCE_INDEX_SCRIPT = REPO_ROOT / "scripts" / "generate_evidence_index.py"
 
 KIND_PRIORITY = {

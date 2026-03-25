@@ -1,0 +1,379 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-edge-search-suggestions",
+  "tweak_id": "privacy.disable-edge-search-suggestions",
+  "record_status": "validated",
+  "summary": "Officially documented bundle for reducing suggestion sources in the Edge address bar. Microsoft documents the same modern Edge policy paths and the local legacy Edge ADMX confirms the older MicrosoftEdge policy surface that the app writes.",
+  "setting": {
+    "name": "Edge Address Bar Suggestions",
+    "category": "Privacy",
+    "area": "Registry Policy Bundle",
+    "scope": "device",
+    "casual_explanation": "Microsoft Edge can show web suggestions, local history and favorites suggestions, and legacy address-bar search suggestions as you type. This bundle turns those suggestion sources off.",
+    "why_people_change_it": "People disable these suggestions when they want a quieter address bar, fewer suggestion lookups, and less typed-input sharing with Microsoft services.",
+    "tradeoffs_overview": "Turning the bundle off reduces suggestions and telemetry-related lookups, but it also removes convenience from the address bar and may require an Edge restart for some parts.",
+    "professional_notes": "Modern Microsoft Edge documents SearchSuggestEnabled and LocalProvidersEnabled under SOFTWARE\\Policies\\Microsoft\\Edge. Legacy Microsoft Edge documents ShowSearchSuggestionsGlobal under SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes with enabledValue 1 and disabledValue 0. The current app writes all three values as 0.",
+    "targets": [
+      {
+        "target_id": "search-suggest-enabled",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+        "value_name": "SearchSuggestEnabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Web search suggestions are enabled by default, but the user can change them.",
+            "evidence_ids": [
+              "ms-edge-search-suggest-enabled"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Web search suggestions disabled",
+            "meaning": "Web search suggestions are never used in the address bar, and the typed characters and URLs are not included in telemetry to Microsoft for this feature.",
+            "evidence_ids": [
+              "ms-edge-search-suggest-enabled",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Web search suggestions enabled",
+            "meaning": "Web search suggestions are used in the address bar.",
+            "evidence_ids": [
+              "ms-edge-search-suggest-enabled"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "local-providers-enabled",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+        "value_name": "LocalProvidersEnabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Local providers such as favorites and browsing history are allowed by default, but the user can change the setting.",
+            "evidence_ids": [
+              "ms-edge-local-providers-enabled"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Local provider suggestions disabled",
+            "meaning": "Suggestions from local providers such as browsing history and favorites are not used.",
+            "evidence_ids": [
+              "ms-edge-local-providers-enabled",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Local provider suggestions enabled",
+            "meaning": "Suggestions from local providers are used in the address bar and auto-suggest list.",
+            "evidence_ids": [
+              "ms-edge-local-providers-enabled"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "show-search-suggestions-global",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes",
+        "value_name": "ShowSearchSuggestionsGlobal",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Legacy Microsoft Edge does not force the search-suggestions setting and the user can choose it.",
+            "evidence_ids": [
+              "local-microsoftedge-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Legacy Edge search suggestions disabled",
+            "meaning": "Search suggestions do not appear in the address bar of legacy Microsoft Edge.",
+            "evidence_ids": [
+              "local-microsoftedge-admx",
+              "local-microsoftedge-adml",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Legacy Edge search suggestions enabled",
+            "meaning": "Search suggestions appear in the address bar of legacy Microsoft Edge.",
+            "evidence_ids": [
+              "local-microsoftedge-admx",
+              "local-microsoftedge-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes SearchSuggestEnabled = 0, LocalProvidersEnabled = 0, and ShowSearchSuggestionsGlobal = 0, which align with the documented disabled states for the modern and legacy Edge policy surfaces.",
+    "writes": [
+      {
+        "target_id": "search-suggest-enabled",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+        "value_name": "SearchSuggestEnabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "local-providers-enabled",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+        "value_name": "LocalProvidersEnabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "show-search-suggestions-global",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes",
+        "value_name": "ShowSearchSuggestionsGlobal",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Systems where Microsoft Edge policy is not explicitly configured",
+      "states": [
+        {
+          "target_id": "search-suggest-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the modern Edge web-suggestion policy unset."
+        },
+        {
+          "target_id": "local-providers-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the modern Edge local-provider suggestion policy unset."
+        },
+        {
+          "target_id": "show-search-suggestions-global",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the legacy Edge search-suggestion policy unset."
+        }
+      ],
+      "notes": "Modern Edge allows users to choose these behaviors when not configured. Legacy Edge also leaves the setting user-controlled when not configured.",
+      "evidence_ids": [
+        "ms-edge-search-suggest-enabled",
+        "ms-edge-local-providers-enabled",
+        "local-microsoftedge-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want normal Edge suggestion behavior"
+      ],
+      "avoid_for": [
+        "Users who want a quieter and more local-only address bar"
+      ],
+      "states": [
+        {
+          "target_id": "search-suggest-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the web-search suggestion policy unset."
+        },
+        {
+          "target_id": "local-providers-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the local-provider suggestion policy unset."
+        },
+        {
+          "target_id": "show-search-suggestions-global",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the legacy Edge search-suggestion policy unset."
+        }
+      ],
+      "good_when": "You want Edge to keep its normal address-bar suggestion behavior.",
+      "bad_when": "You want fewer address-bar suggestions and less suggestion-related telemetry.",
+      "tradeoffs": [
+        "Address-bar suggestions remain available.",
+        "Users can keep changing their own suggestion preferences."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-edge-search-suggest-enabled",
+        "ms-edge-local-providers-enabled",
+        "local-microsoftedge-adml"
+      ]
+    },
+    {
+      "profile_id": "quiet-address-bar",
+      "label": "Quiet address bar",
+      "intended_for": [
+        "Privacy-focused users",
+        "Managed devices",
+        "People who want fewer address-bar suggestions"
+      ],
+      "avoid_for": [
+        "Users who rely on address-bar suggestions for convenience"
+      ],
+      "states": [
+        {
+          "target_id": "search-suggest-enabled",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable web search suggestions."
+        },
+        {
+          "target_id": "local-providers-enabled",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable local-provider suggestions such as history and favorites."
+        },
+        {
+          "target_id": "show-search-suggestions-global",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable legacy Edge address-bar search suggestions."
+        }
+      ],
+      "good_when": "You want the Edge address bar to stop surfacing web and local suggestions.",
+      "bad_when": "You want the convenience of suggested queries, history, and favorites while typing.",
+      "tradeoffs": [
+        "Web and local suggestions disappear.",
+        "Local history and favorites suggestions are also removed.",
+        "Some parts of the bundle may require restarting the browser."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-edge-search-suggest-enabled",
+        "ms-edge-local-providers-enabled",
+        "local-microsoftedge-admx",
+        "local-microsoftedge-adml",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-edge-search-suggest-enabled",
+      "kind": "official-doc",
+      "title": "Microsoft Edge policy documentation: SearchSuggestEnabled",
+      "location": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled",
+      "summary": "Microsoft documents SearchSuggestEnabled under SOFTWARE\\Policies\\Microsoft\\Edge as a boolean policy that controls web search suggestions in the Edge address bar.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-edge-local-providers-enabled",
+      "kind": "official-doc",
+      "title": "Microsoft Edge policy documentation: LocalProvidersEnabled",
+      "location": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled",
+      "summary": "Microsoft documents LocalProvidersEnabled under SOFTWARE\\Policies\\Microsoft\\Edge as a boolean policy that controls local suggestions such as history and favorites in the Edge address bar.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-microsoftedge-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft MicrosoftEdge.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx",
+      "summary": "The local ADMX file maps the legacy Edge search-suggestion policy to HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes\\ShowSearchSuggestionsGlobal with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-microsoftedge-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft MicrosoftEdge.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/MicrosoftEdge.adml",
+      "summary": "The local ADML help text says disabling the legacy policy prevents search suggestions in the Microsoft Edge address bar, while not configuring it lets the user choose.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes SearchSuggestEnabled = 0, LocalProvidersEnabled = 0, and ShowSearchSuggestionsGlobal = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft Edge officially documents SearchSuggestEnabled and LocalProvidersEnabled under Software\\Policies\\Microsoft\\Edge with 0 as the disabled state, and the local MicrosoftEdge.admx file confirms the legacy ShowSearchSuggestionsGlobal mapping under Software\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes with disabledValue 0. The app writes those exact disabled values for all three policy surfaces.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T15:13:40.4233180+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled",
+    "exact_quote_or_path": "If you disable this policy, web search suggestions are never used, however local history and local favorites suggestions still appear. ... Registry settings: Path (Mandatory): SOFTWARE\\Policies\\Microsoft\\Edge ... Value name: SearchSuggestEnabled ... Value type: REG_DWORD.",
+    "key_found_on_page": true,
+    "notes": "Bundle validation completed with three exact surfaces: 1) SearchSuggestEnabled is documented on the linked Microsoft Edge policy page. 2) LocalProvidersEnabled is documented on https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled with Path (Mandatory): SOFTWARE/Policies/Microsoft/Edge and Value name: LocalProvidersEnabled. 3) Legacy Edge is confirmed locally in research/evidence-files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx with key=\"Software/Policies/Microsoft/MicrosoftEdge/SearchScopes\" valueName=\"ShowSearchSuggestionsGlobal\" and disabledValue 0."
+  }
+}

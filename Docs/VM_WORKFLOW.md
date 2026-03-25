@@ -131,7 +131,7 @@ If a test drops the desktop, shell host, input, Store app startup, or app launch
 powershell -ExecutionPolicy Bypass -File scripts\vm\log-vm-incident.ps1 -RecordId system.disable-shortcut-arrow -TestId shortcut-arrow-noarrow-probe -Symptom "Desktop disappeared after Explorer restart"
 ```
 
-Incidents are tracked in `Docs\tweaks\research\vm-incidents.json` and folded into `evidence-audit.json`.
+Incidents are tracked in `research\vm-incidents.json` and folded into `research\evidence-audit.json`.
 
 Before Explorer, graphics, input, or Defender work, capture a shell-stable snapshot:
 

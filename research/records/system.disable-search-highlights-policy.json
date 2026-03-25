@@ -1,0 +1,227 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-search-highlights-policy",
+  "tweak_id": "system.disable-search-highlights-policy",
+  "record_status": "validated",
+  "summary": "Policy-backed control for Search Highlights. Good for quieter and more static search UX, but it removes dynamic content from search home and taskbar or Start search surfaces.",
+  "setting": {
+    "name": "Search Highlights",
+    "category": "System",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Search Highlights are the dynamic bits Windows shows in the search area, such as seasonal or suggested content. This policy decides whether those highlights are allowed.",
+    "why_people_change_it": "People disable it when they want a cleaner search experience without dynamic content or suggestions. Others keep it on because they like the extra search home content.",
+    "tradeoffs_overview": "Turning it off makes search more static and less promotional, but it also removes some of the dynamic info Windows tries to surface in search.",
+    "professional_notes": "This setting maps to EnableDynamicContentInWSB under the Windows Search policy key. Search.admx and the Search Policy CSP both use 0 for disabled and 1 for enabled.",
+    "targets": [
+      {
+        "target_id": "enable-dynamic-content-in-wsb",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "value_name": "EnableDynamicContentInWSB",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Search Highlights stay enabled by default because the policy is not forcing them off.",
+            "evidence_ids": [
+              "ms-search-policy-csp",
+              "local-search-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Disabled",
+            "meaning": "Search Highlights are turned off.",
+            "evidence_ids": [
+              "ms-search-policy-csp",
+              "local-search-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Enabled",
+            "meaning": "Search Highlights are explicitly allowed.",
+            "evidence_ids": [
+              "ms-search-policy-csp",
+              "local-search-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The current app writes EnableDynamicContentInWSB = 0, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "enable-dynamic-content-in-wsb",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "value_name": "EnableDynamicContentInWSB",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Supported Windows 10 and Windows 11 systems",
+      "states": [
+        {
+          "target_id": "enable-dynamic-content-in-wsb",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Policy is not configured by default."
+        }
+      ],
+      "notes": "Microsoft documents the functional default as enabled. This record still keeps the registry baseline as missing for restore-default semantics.",
+      "evidence_ids": [
+        "ms-search-policy-csp",
+        "local-search-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want the standard Windows search experience"
+      ],
+      "avoid_for": [
+        "Users who want a quieter search UI"
+      ],
+      "states": [
+        {
+          "target_id": "enable-dynamic-content-in-wsb",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want the default dynamic search experience.",
+      "bad_when": "You want search to stop surfacing highlights and dynamic content.",
+      "tradeoffs": [
+        "Search can continue showing highlight content.",
+        "No forced policy lock-down is applied."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-search-policy-csp"
+      ]
+    },
+    {
+      "profile_id": "minimal-search-ui",
+      "label": "Minimal search UI",
+      "intended_for": [
+        "Users who want a cleaner search experience",
+        "Managed devices"
+      ],
+      "avoid_for": [
+        "People who like dynamic search content"
+      ],
+      "states": [
+        {
+          "target_id": "enable-dynamic-content-in-wsb",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Turn Search Highlights off."
+        }
+      ],
+      "good_when": "You want search to look quieter and more static.",
+      "bad_when": "You want the extra info and dynamic content Windows surfaces in search.",
+      "tradeoffs": [
+        "Search Highlights disappear.",
+        "The search surface becomes more minimal."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-search-policy-csp",
+        "local-search-admx",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-search-policy-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft Search Policy CSP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#allowsearchhighlights",
+      "summary": "Official documentation for AllowSearchHighlights and the EnableDynamicContentInWSB registry mapping.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-search-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft Search.admx mapping",
+      "location": "research/evidence-files/missing/search-admx.md",
+      "summary": "The local ADMX file shows AllowSearchHighlights with enabledValue 1 and disabledValue 0 for EnableDynamicContentInWSB.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes EnableDynamicContentInWSB = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-search-highlights",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft Search policy files document the exact machine-policy surface and the Search Highlights behavior. The app writes the documented disabled value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T21:37:01.2379374+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/missing/search-admx.md",
+    "exact_quote_or_path": "<policy name=\"AllowSearchHighlights\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" valueName=\"EnableDynamicContentInWSB\">; Search.adml: Disabling this setting turns off search highlights in the start menu search box and in search home.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that disabling the policy turns off Search Highlights in Start search and search home."
+  }
+}

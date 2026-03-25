@@ -1,0 +1,230 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-telemetry-change-notifications",
+  "tweak_id": "privacy.disable-telemetry-change-notifications",
+  "record_status": "validated",
+  "summary": "Machine policy for the notification shown when diagnostic-data consent settings change. Microsoft documents the same device policy path, default, and numeric meanings that the app writes, and the local ADMX confirms the exact value name.",
+  "setting": {
+    "name": "Diagnostic Data Change Notifications",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown.",
+    "why_people_change_it": "Organizations may suppress change notifications to keep the experience quieter or more controlled. Personal users often prefer those notifications to stay visible.",
+    "tradeoffs_overview": "Disabling these notifications reduces interruption and UI noise, but it also removes a transparency signal that tells users their diagnostic-data setting changed.",
+    "professional_notes": "DataCollection.admx maps this machine policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "disable-telemetry-opt-in-change-notification",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+        "value_name": "DisableTelemetryOptInChangeNotification",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the notification policy.",
+            "evidence_ids": [
+              "ms-system-policy-csp-telemetry-change-notification",
+              "local-data-collection-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Notification allowed",
+            "meaning": "The policy is disabled and the change notification can be shown.",
+            "evidence_ids": [
+              "ms-system-policy-csp-telemetry-change-notification",
+              "local-data-collection-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Notification disabled",
+            "meaning": "The change notification is blocked by policy.",
+            "evidence_ids": [
+              "ms-system-policy-csp-telemetry-change-notification",
+              "local-data-collection-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DisableTelemetryOptInChangeNotification = 1, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "disable-telemetry-opt-in-change-notification",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+        "value_name": "DisableTelemetryOptInChangeNotification",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 10 version 1803 and newer supported systems",
+      "states": [
+        {
+          "target_id": "disable-telemetry-opt-in-change-notification",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The machine policy is not configured by default."
+        }
+      ],
+      "notes": "This is the policy baseline and not a statement about every possible OEM or enterprise configuration.",
+      "evidence_ids": [
+        "ms-system-policy-csp-telemetry-change-notification",
+        "local-data-collection-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Users who want to see when this privacy-related setting changes"
+      ],
+      "avoid_for": [
+        "Environments that want the quietest possible managed experience"
+      ],
+      "states": [
+        {
+          "target_id": "disable-telemetry-opt-in-change-notification",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep its normal behavior for this notification.",
+      "bad_when": "You want the change notification hidden on managed devices.",
+      "tradeoffs": [
+        "Users can still be notified when diagnostic-data opt-in changes.",
+        "No policy-based suppression is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-system-policy-csp-telemetry-change-notification"
+      ]
+    },
+    {
+      "profile_id": "quiet-managed",
+      "label": "Quiet managed",
+      "intended_for": [
+        "Managed devices",
+        "Locked-down or reduced-notification environments"
+      ],
+      "avoid_for": [
+        "Users who want explicit visibility when diagnostic-data choices change"
+      ],
+      "states": [
+        {
+          "target_id": "disable-telemetry-opt-in-change-notification",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Disable the change notification by policy."
+        }
+      ],
+      "good_when": "You want a quieter managed experience and do not want this notification shown.",
+      "bad_when": "You value visible alerts for privacy-related configuration changes.",
+      "tradeoffs": [
+        "Notification noise is reduced.",
+        "Users lose a built-in signal that the diagnostic-data opt-in setting changed."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-system-policy-csp-telemetry-change-notification",
+        "local-data-collection-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-system-policy-csp-telemetry-change-notification",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: ConfigureTelemetryOptInChangeNotification",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification",
+      "summary": "Official documentation for the policy that controls whether diagnostic-data opt-in change notifications are shown.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-data-collection-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft DataCollection.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx",
+      "summary": "The local ADMX file shows DisableTelemetryOptInChangeNotification with enabledValue 1 and disabledValue 0 under the DataCollection policy key.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DisableTelemetryOptInChangeNotification = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-telemetry-change-notifications",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents ConfigureTelemetryOptInChangeNotification directly in the System Policy CSP, including the exact DataCollection policy key, default, and 0/1 semantics. The page uses the CSP control name while the local DataCollection.admx confirms the registry value name DisableTelemetryOptInChangeNotification, and the app writes that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T15:00:19.7365760+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification",
+    "exact_quote_or_path": "This policy setting controls whether notifications are shown, following a change to diagnostic data opt-in settings, on first logon and when the changes occur in settings. If you set this policy setting to \"Disable diagnostic data change notifications\", diagnostic data opt-in change notifications won't appear. ... Default Value 0. Allowed values: 0 (Default) Enable telemetry change notifications. 1 Disable telemetry change notifications. Group policy mapping: Name ConfigureTelemetryOptInChangeNotification ... Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection.",
+    "key_found_on_page": true,
+    "notes": "The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInChangeNotification."
+  }
+}

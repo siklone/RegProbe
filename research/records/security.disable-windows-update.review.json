@@ -1,0 +1,230 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "security.disable-windows-update",
+  "tweak_id": "security.disable-windows-update",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the old Windows Update composite bundle. The official policy controls now live in a separate child record, while the pause timestamp writes remain documented here as historical behavior.",
+  "setting": {
+    "name": "Windows Update Disable Bundle",
+    "category": "Security",
+    "area": "Registry Policy Bundle",
+    "scope": "device",
+    "casual_explanation": "This bundle tries to stop Windows Update by combining policy-based switches with long-dated pause values.",
+    "why_people_change_it": "People change it when they want to keep Windows Update from installing updates automatically or showing normal Windows Update access points.",
+    "tradeoffs_overview": "Blocking Windows Update can stop unwanted updates, but it also removes a major source of security patches and feature fixes.",
+    "professional_notes": "Official Microsoft policy files document DisableWindowsUpdateAccess and NoAutoUpdate. The current app also writes PauseFeatureUpdatesEndTime, PauseQualityUpdatesEndTime, and PauseUpdatesExpiryTime under HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings, which are runtime pause values rather than the main policy surface.",
+    "targets": [
+      {
+        "target_id": "disable-windows-update-access",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+        "value_name": "DisableWindowsUpdateAccess",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows Update access is not blocked by this specific policy.",
+            "evidence_ids": [
+              "local-icm-admx",
+              "local-windowsupdate-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Remove access to Windows Update",
+            "meaning": "Windows Update features and access points are removed by policy.",
+            "evidence_ids": [
+              "local-icm-admx",
+              "local-windowsupdate-adml",
+              "app-security-provider"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "no-auto-update",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+        "value_name": "NoAutoUpdate",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Automatic updating policy enabled",
+            "meaning": "The Configure Automatic Updates policy is enabled and AUOptions determines behavior.",
+            "evidence_ids": [
+              "local-windowsupdate-admx",
+              "local-windowsupdate-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Automatic updates turned off",
+            "meaning": "Automatic updates are prohibited by this policy.",
+            "evidence_ids": [
+              "local-windowsupdate-admx",
+              "local-windowsupdate-adml",
+              "app-security-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "partially-matches",
+    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The current app writes two official policy values and also writes three long-dated pause timestamps under HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings. Those pause values are not the same thing as the official Group Policy controls.",
+    "writes": [
+      {
+        "target_id": "disable-windows-update-access",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+        "value_name": "DisableWindowsUpdateAccess",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      },
+      {
+        "target_id": "no-auto-update",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+        "value_name": "NoAutoUpdate",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows systems supporting these Windows Update policies",
+      "states": [
+        {
+          "target_id": "disable-windows-update-access",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the Windows Update access-removal policy unset."
+        }
+      ],
+      "notes": "This record intentionally does not validate the bundle as a whole because the app mixes policy values with runtime pause timestamps.",
+      "evidence_ids": [
+        "local-icm-admx",
+        "local-windowsupdate-admx",
+        "local-windowsupdate-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "General users",
+        "Systems that should keep receiving updates normally"
+      ],
+      "avoid_for": [
+        "Research-only documentation of the current app bundle"
+      ],
+      "states": [
+        {
+          "target_id": "disable-windows-update-access",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Do not apply the access-removal policy."
+        }
+      ],
+      "good_when": "You want to avoid publishing a mixed policy-plus-runtime pause bundle as validated.",
+      "bad_when": "You want a reviewed Windows Update-off control regardless of how the app currently implements it.",
+      "tradeoffs": [
+        "Windows Update remains available.",
+        "The current bundle remains documented but not validated."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "local-windowsupdate-adml"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-icm-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx",
+      "summary": "The local ADMX file maps DisableWindowsUpdateAccess with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-windowsupdate-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft WindowsUpdate.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx",
+      "summary": "The local ADMX file documents NoAutoUpdate under the AU policy key and shows the official Enable/Disable mapping for Configure Automatic Updates.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-windowsupdate-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft WindowsUpdate.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml",
+      "summary": "The local ADML help text explains DisableWindowsUpdateAccess, NoAutoUpdate, and the driver-exclusion policy, and clarifies that NoAutoUpdate = 1 prohibits Windows from searching for updates.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The provider writes DisableWindowsUpdateAccess = 1, NoAutoUpdate = 1, and three pause timestamp values under the UX settings path.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "The official policy values are real, but the current tweak mixes them with runtime pause timestamps in one over-broad bundle.",
+    "blocking_issues": [
+      "The current tweak combines official policy values with non-policy pause timestamp writes under HKLM\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings.",
+      "The bundle should be split into narrower controls before it is published as validated."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx",
+    "exact_quote_or_path": "Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess: The local ADMX file maps DisableWindowsUpdateAccess with enabledValue 1 and disabledValue 0.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id local-icm-admx (official-doc); deprecated audit trail."
+  }
+}

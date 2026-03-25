@@ -1,0 +1,227 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.memory-disable-paging-executive",
+  "tweak_id": "system.memory-disable-paging-executive",
+  "record_status": "validated",
+  "summary": "Officially documented Memory Management control for DisablePagingExecutive, but Microsoft explicitly states that systems with Windows 8 and higher do not need this registry change. The key exists and is writable, but it should not be treated as an effective Windows 11 tweak.",
+  "setting": {
+    "name": "Disable Paging Executive",
+    "category": "System",
+    "area": "Memory Management",
+    "scope": "device",
+    "casual_explanation": "This setting was used for older tracing and diagnosis scenarios to keep some kernel-mode code and drivers in RAM instead of letting Windows page them out to disk. Microsoft says Windows 8 and newer systems do not need this change.",
+    "why_people_change_it": "People usually only touched it for older x64 tracing workflows or legacy tuning advice. It should not be treated as a normal Windows 11 performance tweak.",
+    "tradeoffs_overview": "Turning it on can increase memory usage, and Microsoft explicitly says Windows 8 and later do not need this registry change for the documented tracing scenario.",
+    "professional_notes": "Microsoft documents DisablePagingExecutive under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management, but the same Kernel Trace Control API guidance explicitly says: \"Systems with Windows 8 and higher do not need this registry change.\" The key therefore remains a real documented control surface, but not a meaningful Windows 11 optimization target.",
+    "targets": [
+      {
+        "target_id": "disable-paging-executive",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "value_name": "DisablePagingExecutive",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Paging executive allowed",
+            "meaning": "The special tracing-oriented nonpaged behavior is turned off.",
+            "evidence_ids": [
+              "ms-kernel-trace-control-api",
+              "ms-enable-trace-parameters-v1"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Paging executive disabled",
+            "meaning": "Drivers and kernel-mode system code are kept from being paged to disk for the documented diagnosis and tracing scenarios.",
+            "evidence_ids": [
+              "ms-kernel-trace-control-api",
+              "ms-enable-trace-parameters-v1",
+              "ms-wpr-disablepagingexecutive",
+              "app-system-registry-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes DisablePagingExecutive = 1 on the Microsoft-documented Memory Management path.",
+    "writes": [
+      {
+        "target_id": "disable-paging-executive",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "value_name": "DisablePagingExecutive",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Normal non-diagnostics baseline",
+      "applies_to": "Systems that are not temporarily enabling this tracing-oriented behavior",
+      "states": [
+        {
+          "target_id": "disable-paging-executive",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Microsoft's documented command examples use 0 to turn the behavior off when the diagnosis scenario is not needed."
+        }
+      ],
+      "notes": "This record treats 0 as the normal off state for the documented tracing scenario and does not treat DisablePagingExecutive as a routine Windows 11 performance tweak.",
+      "evidence_ids": [
+        "ms-kernel-trace-control-api",
+        "ms-enable-trace-parameters-v1"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "normal-baseline",
+      "label": "Normal baseline",
+      "intended_for": [
+        "General users",
+        "Normal desktops and laptops",
+        "Systems not doing the documented diagnosis workflow"
+      ],
+      "avoid_for": [
+        "Short-lived tracing sessions that explicitly need the behavior"
+      ],
+      "states": [
+        {
+          "target_id": "disable-paging-executive",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the documented diagnosis-oriented setting off when it is not needed."
+        }
+      ],
+      "good_when": "You want the normal baseline and do not need the extra tracing behavior.",
+      "bad_when": "You are following a Microsoft diagnosis workflow that explicitly requires DisablePagingExecutive = 1.",
+      "tradeoffs": [
+        "The system avoids the extra memory usage of the diagnosis-oriented setting.",
+        "The special stackwalking aid described in the tracing docs is not enabled."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-kernel-trace-control-api",
+        "ms-enable-trace-parameters-v1"
+      ]
+    },
+    {
+      "profile_id": "temporary-diagnosis",
+      "label": "Temporary diagnosis",
+      "intended_for": [
+        "Tracing sessions",
+        "Kernel diagnosis",
+        "Advanced debugging workflows"
+      ],
+      "avoid_for": [
+        "Casual optimization",
+        "Permanent general-user presets"
+      ],
+      "states": [
+        {
+          "target_id": "disable-paging-executive",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Enable the Microsoft-documented diagnosis-oriented behavior."
+        }
+      ],
+      "good_when": "You are documenting or comparing an older Microsoft tracing workflow on pre-Windows-8 systems.",
+      "bad_when": "You are looking for a meaningful Windows 11 performance tweak or a normal user preset.",
+      "tradeoffs": [
+        "The documented diagnosis-oriented behavior is enabled.",
+        "System memory usage increases and Microsoft says this should be temporary."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-kernel-trace-control-api",
+        "ms-enable-trace-parameters-v1",
+        "ms-wpr-disablepagingexecutive",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-kernel-trace-control-api",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Kernel Trace Control API Reference",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference",
+      "summary": "Microsoft documents DisablePagingExecutive under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management and also states that systems with Windows 8 and higher do not need this registry change.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-enable-trace-parameters-v1",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: ENABLE_TRACE_PARAMETERS_V1",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters_v1",
+      "summary": "Microsoft documents that setting DisablePagingExecutive to 1 enables the stackwalking-related behavior on the documented path and warns that this should only be done for temporary diagnosis purposes because it increases system memory usage.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "side-effects",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-wpr-disablepagingexecutive",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: WPR Command-Line Options",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options",
+      "summary": "Microsoft documents the wpr -disablepagingexecutive option and states that turning it on prevents paging of drivers and kernel-mode system code, with Windows 7-specific tracing guidance.",
+      "supports": [
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes DisablePagingExecutive = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the exact path and values, but the same primary source also says Windows 8 and higher do not need this registry change. Keep it as a documented legacy tracing surface, not as a normal Windows 11 tuning recommendation.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference",
+    "exact_quote_or_path": "DisablePagingExecutive = 1. Systems with Windows 8 and higher do not need this registry change.",
+    "key_found_on_page": true,
+    "notes": "Microsoft explicitly documents the setting and explicitly says newer Windows systems do not need it, so the record stays research-only for Windows 11 rather than moving toward Apply."
+  }
+}

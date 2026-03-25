@@ -18,9 +18,9 @@ env:
   CONFIGURATION: Release
   RUNTIME: win-x64
   SOLUTION: OpenTraceProject.sln
-  TEST_PROJECT: OpenTraceProject.Tests/OpenTraceProject.Tests.csproj
-  APP_PROJECT: OpenTraceProject.App/OpenTraceProject.App.csproj
-  ELEVATED_HOST_PROJECT: OpenTraceProject.ElevatedHost/OpenTraceProject.ElevatedHost.csproj
+  TEST_PROJECT: tests/tests.csproj
+  APP_PROJECT: app/app.csproj
+  ELEVATED_HOST_PROJECT: elevated-host/elevated-host.csproj
 
 jobs:
   build:

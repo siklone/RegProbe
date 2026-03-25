@@ -24,13 +24,13 @@
 **Improvement:** Added core infrastructure for single instance enforcement and multi-threaded metric collection.
 
 **New Files:**
-- `OpenTraceProject.App/Services/SingleInstanceManager.cs` - Named Mutex + Named Pipe IPC
-- `OpenTraceProject.Infrastructure/Threading/MetricDataBus.cs` - Channel-based lock-free messaging
-- `OpenTraceProject.Infrastructure/Threading/MetricWorkerPool.cs` - Dedicated worker thread pool
-- `OpenTraceProject.Infrastructure/Threading/ThreadingDiagnostics.cs` - Performance tracking
+- `app/Services/SingleInstanceManager.cs` - Named Mutex + Named Pipe IPC
+- `infrastructure/Threading/MetricDataBus.cs` - Channel-based lock-free messaging
+- `infrastructure/Threading/MetricWorkerPool.cs` - Dedicated worker thread pool
+- `infrastructure/Threading/ThreadingDiagnostics.cs` - Performance tracking
 
 **Modified Files:**
-- `OpenTraceProject.App/App.xaml.cs` - Single instance integration
+- `app/App.xaml.cs` - Single instance integration
 
 **Features:**
 - Only one app instance can run at a time
@@ -48,10 +48,10 @@
 **Improvement:** Added data fetching from multiple sources and hardware identification.
 
 **New Files:**
-- `OpenTraceProject.Infrastructure/Data/FallbackDataProvider.cs` - Priority-based fallback with retry + circuit breaker
-- `OpenTraceProject.Infrastructure/Data/RetryPolicy.cs` - Exponential backoff retry configuration
-- `OpenTraceProject.Infrastructure/Data/DataResult.cs` - Result types with error tracking
-- `OpenTraceProject.Infrastructure/Hardware/HardwareIdentifier.cs` - CPU, GPU, Motherboard, RAM identification
+- `infrastructure/Data/FallbackDataProvider.cs` - Priority-based fallback with retry + circuit breaker
+- `infrastructure/Data/RetryPolicy.cs` - Exponential backoff retry configuration
+- `infrastructure/Data/DataResult.cs` - Result types with error tracking
+- `infrastructure/Hardware/HardwareIdentifier.cs` - CPU, GPU, Motherboard, RAM identification
 
 **Features:**
 - FallbackDataProvider tries sources in priority order until one succeeds
@@ -71,7 +71,7 @@
 **Improvement:** Added PreloadManager for structured startup task management.
 
 **New Files:**
-- `OpenTraceProject.App/Services/PreloadManager.cs` - Preload task orchestration
+- `app/Services/PreloadManager.cs` - Preload task orchestration
 
 **Features:**
 - Critical tasks run sequentially (must succeed for app to start)
@@ -96,10 +96,10 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added reusable hardware card ViewModels for Monitor view redesign.
 
 **New Files:**
-- `OpenTraceProject.App/ViewModels/Hardware/HardwareCardViewModelBase.cs` - Base class with common properties
-- `OpenTraceProject.App/ViewModels/Hardware/CpuCardViewModel.cs` - CPU card with identification and metrics
-- `OpenTraceProject.App/ViewModels/Hardware/GpuCardViewModel.cs` - GPU card with VRAM and vendor info
-- `OpenTraceProject.App/ViewModels/Hardware/RamCardViewModel.cs` - RAM card with modules and speed
+- `app/ViewModels/Hardware/HardwareCardViewModelBase.cs` - Base class with common properties
+- `app/ViewModels/Hardware/CpuCardViewModel.cs` - CPU card with identification and metrics
+- `app/ViewModels/Hardware/GpuCardViewModel.cs` - GPU card with VRAM and vendor info
+- `app/ViewModels/Hardware/RamCardViewModel.cs` - RAM card with modules and speed
 
 **Features:**
 - Base class with Icon, Title, Subtitle, PrimaryValue, SecondaryMetrics
@@ -116,9 +116,9 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added process priority, affinity, and memory management utilities.
 
 **New Files:**
-- `OpenTraceProject.Infrastructure/Process/ProcessPriorityManager.cs` - Priority control (Idle to Realtime)
-- `OpenTraceProject.Infrastructure/Process/ProcessAffinityManager.cs` - CPU affinity with P/E-core presets
-- `OpenTraceProject.Infrastructure/Process/ProcessMemoryManager.cs` - Working set trimming
+- `infrastructure/Process/ProcessPriorityManager.cs` - Priority control (Idle to Realtime)
+- `infrastructure/Process/ProcessAffinityManager.cs` - CPU affinity with P/E-core presets
+- `infrastructure/Process/ProcessMemoryManager.cs` - Working set trimming
 
 **Features:**
 - Set/Get process priority with admin detection
@@ -134,14 +134,14 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added toast notification system and keyboard shortcuts for better UX.
 
 **New Files:**
-- `OpenTraceProject.App/Services/INotificationService.cs` - Interface
-- `OpenTraceProject.App/Services/NotificationService.cs` - Implementation
-- `OpenTraceProject.App/Views/Controls/NotificationHost.xaml` - XAML overlay
-- `OpenTraceProject.App/Converters/CommonConverters.cs` - NullToCollapsed etc.
+- `app/Services/INotificationService.cs` - Interface
+- `app/Services/NotificationService.cs` - Implementation
+- `app/Views/Controls/NotificationHost.xaml` - XAML overlay
+- `app/Converters/CommonConverters.cs` - NullToCollapsed etc.
 
 **Modified Files:**
-- `OpenTraceProject.App/MainWindow.xaml` - Added NotificationHost, controls namespace
-- `OpenTraceProject.App/MainWindow.xaml.cs` - NotificationService integration
+- `app/MainWindow.xaml` - Added NotificationHost, controls namespace
+- `app/MainWindow.xaml.cs` - NotificationService integration
 
 **Features:**
 - Toast notifications: Success/Warning/Error/Info
@@ -158,12 +158,12 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Implemented Async/Await best practices and verified UI virtualization.
 
 **New Files:**
-- `OpenTraceProject.App/ViewModels/AsyncRelayCommand.cs` - Safe async command implementation
-- `OpenTraceProject.App/Utilities/TaskExtensions.cs` - SafeFireAndForget extension
+- `app/ViewModels/AsyncRelayCommand.cs` - Safe async command implementation
+- `app/Utilities/TaskExtensions.cs` - SafeFireAndForget extension
 
 **Modified Files:**
-- `OpenTraceProject.App/ViewModels/DashboardViewModel.cs` - Replaced `async void` with safe commands
-- `OpenTraceProject.App/ViewModels/CategoryGroupViewModel.cs` - Stabilized expand/collapse logic
+- `app/ViewModels/DashboardViewModel.cs` - Replaced `async void` with safe commands
+- `app/ViewModels/CategoryGroupViewModel.cs` - Stabilized expand/collapse logic
 
 **Features:**
 - **Crash Prevention:** Replaced dangerous `async void` patterns with `AsyncRelayCommand` that handles exceptions safely.
@@ -177,16 +177,16 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Integrated PreloadManager and metric threading into startup; hardware detail windows now load async with live metrics.
 
 **New Files:**
-- `OpenTraceProject.App/Services/AppServices.cs` - Shared MetricWorkerPool + MetricDataBus initialization
-- `OpenTraceProject.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - Async hardware detail loader with live metric updates
+- `app/Services/AppServices.cs` - Shared MetricWorkerPool + MetricDataBus initialization
+- `app/ViewModels/Hardware/HardwareDetailViewModel.cs` - Async hardware detail loader with live metric updates
 
 **Modified Files:**
-- `OpenTraceProject.App/App.xaml.cs` - PreloadManager tasks + threading initialization before MainWindow
-- `OpenTraceProject.App/StartupWindow.xaml.cs` - Splash progress updates for preload tasks
-- `OpenTraceProject.App/ViewModels/MainViewModel.cs` - Pass MetricWorkerPool into MonitorViewModel
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs` - Publish missing metric keys, disk bytes/sec, worker pool sampling
-- `OpenTraceProject.App/ViewModels/Hardware/RamCardViewModel.cs` - RAM GB unit fix for live values
-- `OpenTraceProject.App/Views/HardwareDetailWindow.xaml.cs` - Dispose view model on close
+- `app/App.xaml.cs` - PreloadManager tasks + threading initialization before MainWindow
+- `app/StartupWindow.xaml.cs` - Splash progress updates for preload tasks
+- `app/ViewModels/MainViewModel.cs` - Pass MetricWorkerPool into MonitorViewModel
+- `app/ViewModels/MonitorViewModel.cs` - Publish missing metric keys, disk bytes/sec, worker pool sampling
+- `app/ViewModels/Hardware/RamCardViewModel.cs` - RAM GB unit fix for live values
+- `app/Views/HardwareDetailWindow.xaml.cs` - Dispose view model on close
 
 **Features:**
 - Startup preloads threading + hardware identifiers on splash (non-blocking)
@@ -204,17 +204,17 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added SQLite-backed hardware specs database with fallback resolver for CPU/GPU cards.
 
 **New Files:**
-- `OpenTraceProject.Infrastructure/Hardware/HardwareDatabase.cs` - SQLite schema + lookup helpers
-- `OpenTraceProject.Infrastructure/Hardware/HardwareSpecs.cs` - Specs models
-- `OpenTraceProject.Infrastructure/Hardware/HardwareSpecsService.cs` - Fallback resolver using `FallbackDataProvider`
-- `OpenTraceProject.Infrastructure/Hardware/hardware-seed.json` - Seed data (embedded)
+- `infrastructure/Hardware/HardwareDatabase.cs` - SQLite schema + lookup helpers
+- `infrastructure/Hardware/HardwareSpecs.cs` - Specs models
+- `infrastructure/Hardware/HardwareSpecsService.cs` - Fallback resolver using `FallbackDataProvider`
+- `infrastructure/Hardware/hardware-seed.json` - Seed data (embedded)
 
 **Modified Files:**
-- `OpenTraceProject.Infrastructure/AppPaths.cs` - Hardware DB path
-- `OpenTraceProject.Infrastructure/OpenTraceProject.Infrastructure.csproj` - Microsoft.Data.Sqlite reference
-- `OpenTraceProject.App/App.xaml.cs` - Preload database init
-- `OpenTraceProject.App/ViewModels/Hardware/CpuCardViewModel.cs` - Use specs resolver
-- `OpenTraceProject.App/ViewModels/Hardware/GpuCardViewModel.cs` - Use specs resolver
+- `infrastructure/AppPaths.cs` - Hardware DB path
+- `infrastructure/infrastructure.csproj` - Microsoft.Data.Sqlite reference
+- `app/App.xaml.cs` - Preload database init
+- `app/ViewModels/Hardware/CpuCardViewModel.cs` - Use specs resolver
+- `app/ViewModels/Hardware/GpuCardViewModel.cs` - Use specs resolver
 
 **Features:**
 - Hardware DB schema created on startup under app data
@@ -232,8 +232,8 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Aligned storage size/speed formatting to binary (1024-based) units for consistent disk card and detail metrics.
 
 **Modified Files:**
-- `OpenTraceProject.App/ViewModels/Hardware/DiskCardViewModel.cs` - 1024-based size/speed formatting and GB conversions.
-- `OpenTraceProject.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - 1024-based size/speed formatting for disk details.
+- `app/ViewModels/Hardware/DiskCardViewModel.cs` - 1024-based size/speed formatting and GB conversions.
+- `app/ViewModels/Hardware/HardwareDetailViewModel.cs` - 1024-based size/speed formatting for disk details.
 
 **Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
@@ -243,10 +243,10 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Surfaced live RAM and storage metrics under the primary value for quick visibility.
 
 **Modified Files:**
-- `OpenTraceProject.App/ViewModels/Hardware/HardwareCardViewModelBase.cs` - LiveSummary support for cards.
-- `OpenTraceProject.App/ViewModels/Hardware/RamCardViewModel.cs` - Live used/free summary updates.
-- `OpenTraceProject.App/ViewModels/Hardware/DiskCardViewModel.cs` - Live read/write summary updates.
-- `OpenTraceProject.App/Views/MonitorView.xaml` - Live summary line under primary metric.
+- `app/ViewModels/Hardware/HardwareCardViewModelBase.cs` - LiveSummary support for cards.
+- `app/ViewModels/Hardware/RamCardViewModel.cs` - Live used/free summary updates.
+- `app/ViewModels/Hardware/DiskCardViewModel.cs` - Live read/write summary updates.
+- `app/Views/MonitorView.xaml` - Live summary line under primary metric.
 
 **Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
@@ -256,10 +256,10 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added motherboard hardware detail view with DB-backed specs and a dashboard entry point.
 
 **Modified Files:**
-- `OpenTraceProject.App/ViewModels/Hardware/HardwareDetailViewModel.cs` - Motherboard detail loader and view config.
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs` - Motherboard type routing in detail navigation.
-- `OpenTraceProject.App/ViewModels/DashboardViewModel.cs` - Command to open motherboard detail window.
-- `OpenTraceProject.App/Views/DashboardView.xaml` - Motherboard details button.
+- `app/ViewModels/Hardware/HardwareDetailViewModel.cs` - Motherboard detail loader and view config.
+- `app/ViewModels/MonitorViewModel.cs` - Motherboard type routing in detail navigation.
+- `app/ViewModels/DashboardViewModel.cs` - Command to open motherboard detail window.
+- `app/Views/DashboardView.xaml` - Motherboard details button.
 
 **Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
@@ -269,9 +269,9 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Added a motherboard hardware card to the Monitor page with optional PCIe/M.2/SATA/USB/LAN/WiFi details.
 
 **Modified Files:**
-- `OpenTraceProject.App/ViewModels/Hardware/MotherboardCardViewModel.cs` - Motherboard card VM with DB-backed specs.
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs` - Card initialization and disposal.
-- `OpenTraceProject.App/Views/MonitorView.xaml` - Motherboard card UI.
+- `app/ViewModels/Hardware/MotherboardCardViewModel.cs` - Motherboard card VM with DB-backed specs.
+- `app/ViewModels/MonitorViewModel.cs` - Card initialization and disposal.
+- `app/Views/MonitorView.xaml` - Motherboard card UI.
 
 **Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
@@ -295,8 +295,8 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Restored missing legacy privacy and SMB tweaks in category providers while avoiding renamed/overlapping entries.
 
 **Modified Files:**
-- `OpenTraceProject.App/Services/TweakProviders/PrivacyTweakProvider.cs` - Added missing privacy, diagnostics, and account policy tweaks.
-- `OpenTraceProject.App/Services/TweakProviders/NetworkTweakProvider.cs` - Added SMB client signing + large MTU toggles.
+- `app/Services/TweakProviders/PrivacyTweakProvider.cs` - Added missing privacy, diagnostics, and account policy tweaks.
+- `app/Services/TweakProviders/NetworkTweakProvider.cs` - Added SMB client signing + large MTU toggles.
 
 **Notes:**
 - Skipped legacy IDs already covered by newer IDs (e.g., `audio.disable-ducking`, `notifications.disable-lockscreen-toast`, `privacy.disable-location`).
@@ -310,7 +310,7 @@ var result = await preloader.RunAllAsync(ct);
 **Improvement:** Resolved template tweak IDs to their catalog/docs anchors so dynamic IDs still get links.
 
 **Modified Files:**
-- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs` - Match template IDs to anchors for Catalog/Details/Docs links.
+- `app/Services/TweakDocumentationLinker.cs` - Match template IDs to anchors for Catalog/Details/Docs links.
 
 **Status:** ?. **IMPLEMENTED** - Needs Windows verification
 
@@ -333,7 +333,7 @@ var result = await preloader.RunAllAsync(ct);
 - Application now starts with partial monitoring if some services fail
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `app/ViewModels/MonitorViewModel.cs`
 
 **Status:** âœ… **FIXED** - Monitor page loads gracefully even if some services fail
 
@@ -354,7 +354,7 @@ var result = await preloader.RunAllAsync(ct);
 - Added nested try-catch for individual tweak detection to continue with other tweaks if one fails
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/CategoryGroupViewModel.cs`
+- `app/ViewModels/CategoryGroupViewModel.cs`
 
 **Status:** âœ… **FIXED** - Category expansion is now stable and timeouts are logged
 
@@ -375,7 +375,7 @@ var result = await preloader.RunAllAsync(ct);
 - Returns `TweakStatus.Failed` with clear timeout message
 
 **Files Changed:**
-- `OpenTraceProject.Engine/TweakExecutionPipeline.cs`
+- `engine/TweakExecutionPipeline.cs`
 
 **Status:** âœ… **FIXED** - Tweaks now timeout after 30 seconds and show clear error message
 
@@ -401,9 +401,9 @@ var result = await preloader.RunAllAsync(ct);
 - Total time on non-Windows reduced to near-immediate failure (no connection attempts)
 
 **Files Changed:**
-- `OpenTraceProject.Infrastructure/Elevation/ElevatedHostClient.cs`
-- `OpenTraceProject.Infrastructure/Elevation/ElevatedHostClientOptions.cs`
-- `OpenTraceProject.Infrastructure/Registry/LocalRegistryAccessor.cs`
+- `infrastructure/Elevation/ElevatedHostClient.cs`
+- `infrastructure/Elevation/ElevatedHostClientOptions.cs`
+- `infrastructure/Registry/LocalRegistryAccessor.cs`
 
 **Status:** âœ… **FIXED** - Platform issues now fail immediately with clear error messages
 
@@ -423,11 +423,11 @@ var result = await preloader.RunAllAsync(ct);
   - Errors and exceptions with stack traces
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
-- `OpenTraceProject.App/ViewModels/CategoryGroupViewModel.cs`
-- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
-- `OpenTraceProject.App/Views/MonitorView.xaml.cs`
-- `OpenTraceProject.Infrastructure/Elevation/ElevatedHostClient.cs`
+- `app/ViewModels/MainViewModel.cs`
+- `app/ViewModels/CategoryGroupViewModel.cs`
+- `app/ViewModels/TweakItemViewModel.cs`
+- `app/Views/MonitorView.xaml.cs`
+- `infrastructure/Elevation/ElevatedHostClient.cs`
 
 **Status:** âœ… **IMPLEMENTED** - Detailed logging available for debugging
 
@@ -442,8 +442,8 @@ var result = await preloader.RunAllAsync(ct);
 - Both monitors avoid returning an empty list solely because performance counters are unavailable
 
 **Files Changed:**
-- `OpenTraceProject.Infrastructure/Metrics/NetworkMonitor.cs`
-- `OpenTraceProject.Infrastructure/Metrics/DiskMonitor.cs`
+- `infrastructure/Metrics/NetworkMonitor.cs`
+- `infrastructure/Metrics/DiskMonitor.cs`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs verification on Windows 10/11 native
 
@@ -460,10 +460,10 @@ var result = await preloader.RunAllAsync(ct);
 - Dashboard shows `â€”` until at least one tweak has a detected state.
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
-- `OpenTraceProject.App/ViewModels/DashboardViewModel.cs`
-- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
-- `OpenTraceProject.App/Views/DashboardView.xaml`
+- `app/ViewModels/TweaksViewModel.cs`
+- `app/ViewModels/DashboardViewModel.cs`
+- `app/ViewModels/MainViewModel.cs`
+- `app/Views/DashboardView.xaml`
 
 **Status:** âœ… **IMPLEMENTED**
 
@@ -483,7 +483,7 @@ var result = await preloader.RunAllAsync(ct);
 - Added/kept short hover tooltips for batch actions (Detect/Preview/Apply/Verify/Rollback) and filters.
 
 **Files Changed:**
-- `OpenTraceProject.App/Views/TweaksView.xaml`
+- `app/Views/TweaksView.xaml`
 
 **Status:** âœ… **IMPLEMENTED** - Needs user verification on Windows 10/11
 
@@ -501,7 +501,7 @@ var result = await preloader.RunAllAsync(ct);
 - Make Visibility category dense layout persistent during rebuilds.
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
+- `app/ViewModels/TweaksViewModel.cs`
 
 **Status:** âœ… **IMPLEMENTED** - Needs user verification on Windows
 
@@ -515,8 +515,8 @@ var result = await preloader.RunAllAsync(ct);
 - Added unit tests covering not-found detection and apply/verify behavior.
 
 **Files Changed:**
-- `OpenTraceProject.Engine/Tweaks/ScheduledTaskBatchTweak.cs`
-- `OpenTraceProject.Tests/ScheduledTaskBatchTweakTests.cs`
+- `engine/Tweaks/ScheduledTaskBatchTweak.cs`
+- `tests/ScheduledTaskBatchTweakTests.cs`
 
 **Status:** âœ… **IMPLEMENTED** - Needs user verification on Windows
 
@@ -530,9 +530,9 @@ var result = await preloader.RunAllAsync(ct);
 - CPU/RAM chart axes now use a fixed 0-100% scale while keeping Peak/Low/Now for accuracy.
 
 **Files Changed:**
-- `OpenTraceProject.Infrastructure/Metrics/ProcessMonitor.cs`
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
-- `OpenTraceProject.App/Views/MonitorView.xaml`
+- `infrastructure/Metrics/ProcessMonitor.cs`
+- `app/ViewModels/MonitorViewModel.cs`
+- `app/Views/MonitorView.xaml`
 
 **Status:** âœ… **IMPLEMENTED**
 
@@ -568,8 +568,8 @@ var result = await preloader.RunAllAsync(ct);
 - Surface per-item breakdown in the Technical Info tab for quick inspection.
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
-- `OpenTraceProject.App/Views/TweaksView.xaml`
+- `app/ViewModels/TweakItemViewModel.cs`
+- `app/Views/TweaksView.xaml`
 
 **Status:** âœ… **IMPLEMENTED**
 
@@ -583,10 +583,10 @@ var result = await preloader.RunAllAsync(ct);
 - Collapsed tweak cards show a compact "matched / missing" summary when batch details are available.
 
 **Files Changed:**
-- `OpenTraceProject.Engine/Tweaks/RegistryValueBatchTweak.cs`
-- `OpenTraceProject.Engine/Tweaks/RegistryValueSetTweak.cs`
-- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
-- `OpenTraceProject.App/Views/TweaksView.xaml`
+- `engine/Tweaks/RegistryValueBatchTweak.cs`
+- `engine/Tweaks/RegistryValueSetTweak.cs`
+- `app/ViewModels/TweakItemViewModel.cs`
+- `app/Views/TweaksView.xaml`
 
 **Status:** âœ… **IMPLEMENTED**
 
@@ -599,7 +599,7 @@ var result = await preloader.RunAllAsync(ct);
 - Added Bluetooth and print-related service names (including per-user patterns) to the batch list.
 
 **Files Changed:**
-- `OpenTraceProject.App/Services/TweakProviders/SystemTweakProvider.cs`
+- `app/Services/TweakProviders/SystemTweakProvider.cs`
 
 **Status:** âœ… **IMPLEMENTED**
 
@@ -614,10 +614,10 @@ var result = await preloader.RunAllAsync(ct);
 - Tweaks page shows a clear warning banner if the host executable is missing.
 
 **Files Changed:**
-- `OpenTraceProject.App/Utilities/ElevatedHostLocator.cs`
-- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
-- `OpenTraceProject.App/Views/TweaksView.xaml`
-- `OpenTraceProject.Infrastructure/Elevation/ElevatedHostClient.cs`
+- `app/Utilities/ElevatedHostLocator.cs`
+- `app/ViewModels/TweaksViewModel.cs`
+- `app/Views/TweaksView.xaml`
+- `infrastructure/Elevation/ElevatedHostClient.cs`
 
 **Status:** âœ… **IMPLEMENTED** - Packaging still needs verification
 
@@ -633,10 +633,10 @@ var result = await preloader.RunAllAsync(ct);
 - Theme switching fix: Styles now use `DynamicResource` for theme-bound brushes.
 
 **Files Changed:**
-- `OpenTraceProject.App/Services/TweakProviders/LegacyTweakProvider.cs`
-- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
-- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
-- `OpenTraceProject.App/Resources/Styles.xaml`
+- `app/Services/TweakProviders/LegacyTweakProvider.cs`
+- `app/ViewModels/MainViewModel.cs`
+- `app/ViewModels/TweaksViewModel.cs`
+- `app/Resources/Styles.xaml`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification (tweak count + theme switch)
 
@@ -651,8 +651,8 @@ var result = await preloader.RunAllAsync(ct);
 - Keep splash visible while scan runs.
 
 **Files Changed:**
-- `OpenTraceProject.App/App.xaml.cs`
-- `OpenTraceProject.App/StartupWindow.xaml`
+- `app/App.xaml.cs`
+- `app/StartupWindow.xaml`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
@@ -665,7 +665,7 @@ var result = await preloader.RunAllAsync(ct);
 - `DetectStatusAsync` executes pipeline work on a background task.
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
+- `app/ViewModels/TweakItemViewModel.cs`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
@@ -679,8 +679,8 @@ var result = await preloader.RunAllAsync(ct);
 - Tweak docs linker reads `tweak-catalog.csv` and adds `Source file` links.
 
 **Files Changed:**
-- `OpenTraceProject.App/Views/MonitorView.xaml`
-- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs`
+- `app/Views/MonitorView.xaml`
+- `app/Services/TweakDocumentationLinker.cs`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
@@ -694,12 +694,12 @@ var result = await preloader.RunAllAsync(ct);
 - Startup scan pipeline accepts progress + cancellation.
 
 **Files Changed:**
-- `OpenTraceProject.App/StartupWindow.xaml`
-- `OpenTraceProject.App/StartupWindow.xaml.cs`
-- `OpenTraceProject.App/ViewModels/StartupScanProgress.cs`
-- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
-- `OpenTraceProject.App/ViewModels/DashboardViewModel.cs`
-- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
+- `app/StartupWindow.xaml`
+- `app/StartupWindow.xaml.cs`
+- `app/ViewModels/StartupScanProgress.cs`
+- `app/ViewModels/MainViewModel.cs`
+- `app/ViewModels/DashboardViewModel.cs`
+- `app/ViewModels/TweaksViewModel.cs`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
@@ -713,8 +713,8 @@ var result = await preloader.RunAllAsync(ct);
 - One-line `Current â†’ Target` summary shown on the card.
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
-- `OpenTraceProject.App/Views/TweaksView.xaml`
+- `app/ViewModels/TweakItemViewModel.cs`
+- `app/Views/TweaksView.xaml`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
@@ -733,7 +733,7 @@ var result = await preloader.RunAllAsync(ct);
 - `Docs/tweaks/tweak-catalog.md`
 - `Docs/tweaks/tweak-catalog.csv`
 - `Docs/tweaks/tweak-catalog.html`
-- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs`
+- `app/Services/TweakDocumentationLinker.cs`
 - `Docs/tweaks/tweaks.md`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
@@ -750,8 +750,8 @@ var result = await preloader.RunAllAsync(ct);
 **Files Changed:**
 - `scripts/generate_tweak_catalog.py`
 - `Docs/*/*.md`
-- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs`
-- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
+- `app/Services/TweakDocumentationLinker.cs`
+- `app/ViewModels/TweakItemViewModel.cs`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
@@ -764,12 +764,12 @@ var result = await preloader.RunAllAsync(ct);
 - Added chart gradient color tokens for Monitor charts.
 
 **Files Changed:**
-- `OpenTraceProject.App/MainWindow.xaml`
-- `OpenTraceProject.App/Views/DashboardView.xaml`
-- `OpenTraceProject.App/Views/TweaksView.xaml`
-- `OpenTraceProject.App/Views/MonitorView.xaml`
-- `OpenTraceProject.App/Resources/Colors.xaml`
-- `OpenTraceProject.App/Resources/Colors.Light.xaml`
+- `app/MainWindow.xaml`
+- `app/Views/DashboardView.xaml`
+- `app/Views/TweaksView.xaml`
+- `app/Views/MonitorView.xaml`
+- `app/Resources/Colors.xaml`
+- `app/Resources/Colors.Light.xaml`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification (Light theme)
 
@@ -785,8 +785,8 @@ var result = await preloader.RunAllAsync(ct);
 **Files Changed:**
 - `scripts/generate_tweak_catalog.py`
 - `Docs/tweaks/tweak-catalog.html`
-- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs`
-- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
+- `app/Services/TweakDocumentationLinker.cs`
+- `app/ViewModels/TweakItemViewModel.cs`
 
 **Status:** âœ… **IMPLEMENTED** - Needs Windows verification
 
@@ -801,10 +801,10 @@ var result = await preloader.RunAllAsync(ct);
 - Detect-all preserves category expansion state.
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
-- `OpenTraceProject.App/MainWindow.xaml`
-- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
-- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
+- `app/ViewModels/MainViewModel.cs`
+- `app/MainWindow.xaml`
+- `app/ViewModels/TweaksViewModel.cs`
+- `app/ViewModels/TweakItemViewModel.cs`
 
 **Status:** âœ… **IMPLEMENTED** - Needs Windows verification
 
@@ -824,8 +824,8 @@ var result = await preloader.RunAllAsync(ct);
 - Modernized Monitor header toolbar with Live pill and icon Save button.
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
-- `OpenTraceProject.App/Views/MonitorView.xaml`
+- `app/ViewModels/MonitorViewModel.cs`
+- `app/Views/MonitorView.xaml`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
@@ -840,8 +840,8 @@ var result = await preloader.RunAllAsync(ct);
 - Status tooltips now reflect Mixed state.
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/TweakItemViewModel.cs`
-- `OpenTraceProject.App/Views/TweaksView.xaml`
+- `app/ViewModels/TweakItemViewModel.cs`
+- `app/Views/TweaksView.xaml`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
@@ -856,7 +856,7 @@ var result = await preloader.RunAllAsync(ct);
 - Reduced row padding for denser layout.
 
 **Files Changed:**
-- `OpenTraceProject.App/Views/MonitorView.xaml`
+- `app/Views/MonitorView.xaml`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
@@ -871,10 +871,10 @@ var result = await preloader.RunAllAsync(ct);
 - UI now switches title/description based on measurement mode.
 
 **Files Changed:**
-- `OpenTraceProject.Infrastructure/Metrics/ProcessMonitor.cs`
-- `OpenTraceProject.Infrastructure/Metrics/NetworkEtwSampler.cs`
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
-- `OpenTraceProject.App/Views/MonitorView.xaml`
+- `infrastructure/Metrics/ProcessMonitor.cs`
+- `infrastructure/Metrics/NetworkEtwSampler.cs`
+- `app/ViewModels/MonitorViewModel.cs`
+- `app/Views/MonitorView.xaml`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification
 
@@ -890,10 +890,10 @@ var result = await preloader.RunAllAsync(ct);
 - CSV export includes the new latency targets.
 
 **Files Changed:**
-- `OpenTraceProject.Infrastructure/Metrics/MetricProvider.cs`
-- `OpenTraceProject.Infrastructure/Metrics/ProcessMonitor.cs`
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
-- `OpenTraceProject.App/Views/MonitorView.xaml`
+- `infrastructure/Metrics/MetricProvider.cs`
+- `infrastructure/Metrics/ProcessMonitor.cs`
+- `app/ViewModels/MonitorViewModel.cs`
+- `app/Views/MonitorView.xaml`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification (NVMe + OEM drivers)
 
@@ -923,9 +923,9 @@ var result = await preloader.RunAllAsync(ct);
 - Tweaks list cards are bitmap cached to reduce scroll jank.
 
 **Files Changed:**
-- `OpenTraceProject.Infrastructure/Metrics/MetricProvider.cs`
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
-- `OpenTraceProject.App/Views/TweaksView.xaml`
+- `infrastructure/Metrics/MetricProvider.cs`
+- `app/ViewModels/MonitorViewModel.cs`
+- `app/Views/TweaksView.xaml`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs Windows verification (varied hardware)
 
@@ -940,15 +940,15 @@ var result = await preloader.RunAllAsync(ct);
 - Added **Card Shadows** toggle in Settings (default OFF) to reduce GPU load during scrolling.
 
 **Files Changed:**
-- `OpenTraceProject.Infrastructure/Metrics/MetricProvider.cs`
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
-- `OpenTraceProject.App/Views/MonitorView.xaml`
-- `OpenTraceProject.App/Views/TweaksView.xaml`
-- `OpenTraceProject.App/Views/DashboardView.xaml`
-- `OpenTraceProject.App/Resources/Styles.xaml`
-- `OpenTraceProject.App/ViewModels/SettingsViewModel.cs`
-- `OpenTraceProject.Infrastructure/AppSettings.cs`
-- `OpenTraceProject.App/Services/UiPreferences.cs`
+- `infrastructure/Metrics/MetricProvider.cs`
+- `app/ViewModels/MonitorViewModel.cs`
+- `app/Views/MonitorView.xaml`
+- `app/Views/TweaksView.xaml`
+- `app/Views/DashboardView.xaml`
+- `app/Resources/Styles.xaml`
+- `app/ViewModels/SettingsViewModel.cs`
+- `infrastructure/AppSettings.cs`
+- `app/Services/UiPreferences.cs`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs hardware verification on SATA/NVMe systems
 
@@ -973,8 +973,8 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - DirectX registry value is trimmed before mapping.
 
 **Files Changed:**
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
-- `OpenTraceProject.Infrastructure/Metrics/MetricProvider.cs`
+- `app/ViewModels/MonitorViewModel.cs`
+- `infrastructure/Metrics/MetricProvider.cs`
 
 **Status:** ðŸ§ª **IMPLEMENTED** - Needs verification on Windows 10/11
 
@@ -1002,9 +1002,9 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - A UI update deferral fix was added in `1a16a95` (ContextIdle updates + retry), still needs verification on native Windows.
 
 **Files Affected:**
-- `OpenTraceProject.Infrastructure/Metrics/NetworkMonitor.cs`
-- `OpenTraceProject.Infrastructure/Metrics/DiskMonitor.cs`
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `infrastructure/Metrics/NetworkMonitor.cs`
+- `infrastructure/Metrics/DiskMonitor.cs`
+- `app/ViewModels/MonitorViewModel.cs`
 
 **Priority:** Medium - affects monitoring functionality but doesn't crash
 
@@ -1026,8 +1026,8 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - New CPU/GPU fallbacks were added in `1a16a95` (perf WMI + GPU adapter memory counters) and need hardware validation.
 
 **Files Affected:**
-- `OpenTraceProject.Infrastructure/Metrics/MetricProvider.cs`
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
+- `infrastructure/Metrics/MetricProvider.cs`
+- `app/ViewModels/MonitorViewModel.cs`
 
 **Priority:** Medium - visible in UI but does not crash
 
@@ -1110,8 +1110,8 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - Ensure all IDisposable resources are properly disposed
 
 **Files to Review:**
-- `OpenTraceProject.App/ViewModels/MonitorViewModel.cs`
-- `OpenTraceProject.Infrastructure/Metrics/*.cs`
+- `app/ViewModels/MonitorViewModel.cs`
+- `infrastructure/Metrics/*.cs`
 
 ---
 
@@ -1130,7 +1130,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - Add `_isDetecting` flag to prevent concurrent detection
 
 **Files Affected:**
-- `OpenTraceProject.App/ViewModels/CategoryGroupViewModel.cs`
+- `app/ViewModels/CategoryGroupViewModel.cs`
 
 ---
 
@@ -1149,7 +1149,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - Consider a startup health check in addition to the Tweaks page banner
 
 **Files to Review:**
-- `OpenTraceProject.App/OpenTraceProject.App.csproj`
+- `app/app.csproj`
 - Build scripts
 
 ---
@@ -1167,9 +1167,9 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - If still slow: move DetectAllTweaksAsync to background with progress + cancel.
 
 **Files to Review:**
-- `OpenTraceProject.App/App.xaml.cs`
-- `OpenTraceProject.App/ViewModels/MainViewModel.cs`
-- `OpenTraceProject.App/ViewModels/TweaksViewModel.cs`
+- `app/App.xaml.cs`
+- `app/ViewModels/MainViewModel.cs`
+- `app/ViewModels/TweaksViewModel.cs`
 
 ---
 
@@ -1187,7 +1187,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 **Files to Review:**
 - `Docs/tweaks/tweak-catalog.csv`
 - `scripts/generate_tweak_catalog.py`
-- `OpenTraceProject.App/Services/TweakDocumentationLinker.cs`
+- `app/Services/TweakDocumentationLinker.cs`
 
 ---
 
@@ -1204,7 +1204,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - Keep transforms `x:Shared="False"` and avoid animating brushes/effects.
 
 **Files to Review:**
-- `OpenTraceProject.App/Views/MonitorView.xaml`
+- `app/Views/MonitorView.xaml`
 
 ---
 
@@ -1223,8 +1223,8 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - Add recovery mechanism on application startup
 
 **Files Affected:**
-- `OpenTraceProject.Engine/Tweaks/RegistryValueTweak.cs`
-- `OpenTraceProject.Infrastructure/Logging/TweakLogStore.cs`
+- `engine/Tweaks/RegistryValueTweak.cs`
+- `infrastructure/Logging/TweakLogStore.cs`
 
 ---
 

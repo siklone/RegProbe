@@ -1,0 +1,51 @@
+﻿
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows
+    (Default)    REG_SZ    mnmsrvc
+    AppInit_DLLs    REG_SZ    
+    DdeSendTimeout    REG_DWORD    0x0
+    DesktopHeapLogging    REG_DWORD    0x1
+    DeviceNotSelectedTimeout    REG_SZ    15
+    DwmInputUsesIoCompletionPort    REG_DWORD    0x1
+    EnableDwmInputProcessing    REG_DWORD    0x7
+    GDIProcessHandleQuota    REG_DWORD    0x2710
+    IconServiceLib    REG_SZ    IconCodecService.dll
+    LoadAppInit_DLLs    REG_DWORD    0x0
+    NaturalInputHandler    REG_SZ    Ninput.dll
+    RapidHpdTimeoutMs    REG_DWORD    0xbb8
+    ShutdownWarningDialogTimeout    REG_DWORD    0xffffffff
+    Spooler    REG_SZ    yes
+    TransmissionRetryTimeout    REG_SZ    90
+    USERNestedWindowLimit    REG_DWORD    0x32
+    USERPostMessageLimit    REG_DWORD    0x2710
+    USERProcessHandleQuota    REG_DWORD    0x2710
+    Win32kLastWriteTime    REG_SZ    1DC2678A1E86128
+    LeakTrackingAllocatorMode    REG_DWORD    0x0
+    PoolLeakedState    REG_DWORD    0x0
+    LeakedPoolTag0    REG_DWORD    0x0
+    LeakedPoolTag1    REG_DWORD    0x0
+    LeakedPoolTag2    REG_DWORD    0x0
+    LeakedPoolTag3    REG_DWORD    0x0
+    LeakedPoolTag4    REG_DWORD    0x0
+    LeakedPoolTag5    REG_DWORD    0x0
+    LeakedPoolTag6    REG_DWORD    0x0
+    LeakedPoolTag7    REG_DWORD    0x0
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\Win32knsWPP
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\Win32knsWPP\Parameters
+    ForceLogsInMiniDump    REG_DWORD    0x1
+    LogPages    REG_DWORD    0x14
+    Verbose    REG_DWORD    0x1
+    WppRecorder_PerBufferMaxBytes    REG_DWORD    0x14000
+    WppRecorder_PerBufferMinBytes    REG_DWORD    0x200
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\Win32kWPP
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\Win32kWPP\Parameters
+    ForceLogsInMiniDump    REG_DWORD    0x1
+    LogPages    REG_DWORD    0x14
+    Verbose    REG_DWORD    0x1
+    WppRecorder_PerBufferMaxBytes    REG_DWORD    0x14000
+    WppRecorder_PerBufferMinBytes    REG_DWORD    0x200
+
+

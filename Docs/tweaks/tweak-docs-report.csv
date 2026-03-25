@@ -1,308 +1,308 @@
 id,name,docs,docs_exists,docs_anchor,details_anchor,catalog_anchor,source
-audio.disable-beep,Disable System Beep,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\AudioTweakProvider.cs#L22
-audio.disable-spatial-audio,Disable Spatial Audio,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\AudioTweakProvider.cs#L60
-audio.disable-system-sounds,Disable System Sounds,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\AudioTweakProvider.cs#L72
-audio.show-disconnected-devices,Show Disconnected Audio Devices,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\AudioTweakProvider.cs#L47
-audio.show-hidden-devices,Show Hidden Audio Devices,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\AudioTweakProvider.cs#L34
-cleanup.background-history,Clear Wallpaper History,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearBackgroundHistoryTweak.cs#L14
-cleanup.component-store,Cleanup Component Store,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\CleanupComponentStoreTweak.cs#L14
-cleanup.delivery-optimization,Clear Delivery Optimization Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearDeliveryOptimizationFilesTweak.cs#L14
-cleanup.directx-shader-cache,Clear DirectX Shader Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearDirectXShaderCacheTweak.cs#L11
-cleanup.disable-reserved-storage,Disable Reserved Storage,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\DisableReservedStorageTweak.cs#L14
-cleanup.eventlog-{logName.ToLowerInvariant()},Clear {logName} Event Log,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearEventLogsTweak.cs#L15
-cleanup.font-cache,Clear Font Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearFontCacheTweak.cs#L14
-cleanup.internet-temp-files,Clear Temporary Internet Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearTemporaryInternetFilesTweak.cs#L11
-cleanup.memory-dumps,Clear Memory Dump Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearMemoryDumpFilesTweak.cs#L11
-cleanup.prefetch-files,Clear Prefetch Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearPrefetchFilesTweak.cs#L11
-cleanup.product-key,Remove Product Key from Registry,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\RemoveProductKeyTweak.cs#L14
-cleanup.recycle-bin,Empty Recycle Bin,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearRecycleBinTweak.cs#L14
-cleanup.shadow-copies,Clear Shadow Copies,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearShadowCopiesTweak.cs#L14
-cleanup.srum-data,Clear SRUM Database,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearSRUMDataTweak.cs#L11
-cleanup.temp-files,Clear Temporary Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearTemporaryFilesTweak.cs#L11
-cleanup.thumbnail-cache,Clear Thumbnail Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearThumbnailCacheTweak.cs#L11
-cleanup.wer-files,Clear Windows Error Reporting Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearWERFilesTweak.cs#L11
-cleanup.windows-old,Delete Windows.old Folder,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearWindowsOldTweak.cs#L11
-cleanup.windows-update-cache,Clear Windows Update Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Cleanup\ClearWindowsUpdateCacheTweak.cs#L11
-developer.dotnet-telemetry-disable,Disable .NET SDK Telemetry,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L42
-developer.enable-windows-long-paths,Enable Windows Long Paths,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L28
-developer.nodejs-performance,Optimize Node.js Performance,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L86
-developer.powershell-execution,Allow Local PowerShell Scripts,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L145
-developer.python-path-fix,Fix Python Path Length Issues,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L114
-developer.ssh-agent-autostart,Enable SSH Agent Auto-start,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L158
-developer.terminal-dev-mode,Enable Windows Terminal Developer Features,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L70
-developer.vs-intellisense-cache,Optimize VS IntelliSense Cache,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L56
-developer.vs-solution-load,Speed Up Visual Studio Solution Load,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L176
-developer.vscode-git-autofetch,Disable VS Code Git Autofetch,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L100
-developer.windows-dev-mode,Enable Windows Developer Mode,Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\DeveloperTweakProvider.cs#L128
-explorer.always-show-icons-never-thumbnails,"Always Show Icons, Never Thumbnails",Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L122
-explorer.disable-low-disk-space-warning,Disable Low Disk Space Warning,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L226
-explorer.disable-taskbar-chat,Hide Taskbar Chat Icon,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L214
-explorer.enable-explorer-compact-mode,Enable Compact View,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L70
-explorer.hide-empty-drives,Hide Empty Drives,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L174
-explorer.launch-folder-windows-in-a-separate-process,Launch Folder Windows in a Separate Process,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L161
-explorer.show-compressed-and-encrypted-files-in-color,Show Compressed and Encrypted Files in Color,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L135
-explorer.show-drive-letters-first,Show Drive Letters First,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L148
-explorer.show-file-extensions,Show File Extensions,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L44
-explorer.show-full-path,Show Full Path in Title Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L57
-explorer.show-hidden-files,Show Hidden Files and Folders,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L18
-explorer.show-info-tips,Show Explorer Info Tips,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L96
-explorer.show-protected-operating-system-files,Show Protected Operating System Files,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L31
-explorer.show-recent-items,Show Recent Items In Home,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L187
-explorer.show-status-bar,Show Explorer Status Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L83
-explorer.show-type-overlay,Display File Icons on Thumbnails,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L109
-explorer.taskbar-alignment-left,Align Taskbar to Left,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L201
-misc.disable-edge-features,Disable Microsoft Edge Features,Docs\misc\misc.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Misc\DisableEdgeFeaturesTweaks.cs#L88
-misc.disable-office-telemetry,Disable Microsoft Office Telemetry,Docs\misc\misc.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Misc\DisableOfficeTelemetryTweak.cs#L51
-misc.disable-onedrive,Disable OneDrive,Docs\misc\misc.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Misc\DisableOneDriveTweaks.cs#L36
-misc.disable-visual-studio-telemetry,Disable Visual Studio Telemetry,Docs\misc\misc.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Misc\DisableVisualStudioTelemetryTweak.cs#L37
-misc.optimize-7zip-settings,Optimize 7-Zip Context Menu Settings,Docs\misc\misc.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Misc\SevenZipSettingsTweak.cs#L54
-network.disable-active-probing,Disable Active Probing,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L178
-network.disable-default-shares,Disable Default Shares,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L307
-network.disable-ipv6,Disable IPv6,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L82
-network.disable-llmnr,Disable LLMNR,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L110
-network.disable-lltd,Set LLTD Policies to Default Behavior,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L158
-network.disable-mdns,Set mDNS Policy to Local Settings,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L122
-network.disable-netbios,Disable NetBIOS over TCP/IP,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Network\DisableNetbiosOverTcpIpTweak.cs#L19
-network.disable-netbios-resolution,Disable NetBIOS Name Resolution,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L134
-network.disable-plaintext-smb-passwords,Disable Plaintext SMB Passwords,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L343
-network.disable-smart-name-resolution,Disable Smart Multi-Homed Name Resolution,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L146
-network.disable-smb1,Disable SMBv1,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L319
-network.disable-smb2,Disable SMBv2/SMBv3,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L331
-network.disable-wifi-sense,Disable Wi-Fi Sense,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L96
-network.enable-lltd-responder,Enable LLTD Responder,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L31
-network.enable-lltdio,Enable LLTD Mapper I/O,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L19
-network.flush-dns-cache,Flush DNS Cache,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Network\FlushDnsCacheTweak.cs#L13
-network.optimize-smb,Optimize SMB Performance,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L44
-network.prefer-ipv4,Prefer IPv4 over IPv6,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L189
-network.require-ntlm-ssp-client-session-security,Require NTLM SSP Client Session Security and 128-bit Encryption,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L355
-network.reset-winsock,Reset Winsock Catalog,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Network\ResetNetworkStackTweak.cs#L13
-network.smb-disable-leasing,SMB: Disable Leasing,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Network\DisableSmbLeasingTweak.cs#L15
-network.smb-enable-large-mtu,SMB: Enable Large MTU,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L202
-network.smb-enable-multichannel,SMB: Enable Multichannel,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Network\EnableSmbMultichannelTweak.cs#L16
-network.smb-enable-quic,SMB: Enable QUIC,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L269
-network.smb-encrypt-data,SMB: Require Encryption,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L241
-network.smb-reject-unencrypted-access,SMB: Reject Unencrypted Access,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L253
-network.smb-require-dialect-3_1_1,SMB: Require Dialect 3.1.1,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L281
-network.smb-require-signing-client,SMB: Require Client Signing,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L214
-network.smb-require-signing-server,SMB: Require Signing (Server),Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L227
-network.smb-set-cipher-suite-order,SMB: Set Cipher Suite Order,Docs\network\network.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\NetworkTweakProvider.cs#L295
-notifications.disable-feedback-frequency,Disable Feedback Requests,Docs\notifications\notifications.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L533
-notifications.disable-lock-screen,Disable Lock Screen Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L520
-notifications.disable-mirroring,Disable Notification Mirroring,Docs\notifications\notifications.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L571
-notifications.disable-tile,Disable Tile Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L558
-notifications.disable-toast,Disable Toast Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L507
-performance.disable-animations,Disable Window Animations,Docs\performance\performance.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PerformanceTweakProvider.cs#L27
-performance.disable-menu-show-delay,Remove Menu Show Delay,Docs\performance\performance.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PerformanceTweakProvider.cs#L40
-performance.disable-taskbar-animations,Disable Taskbar Animations,Docs\performance\performance.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PerformanceTweakProvider.cs#L53
-peripheral.audio-disable-ducking,Disable Audio Ducking,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Peripheral\AudioTweaks.cs#L24
-peripheral.audio-disable-enhancements,Disable Audio Enhancements,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Peripheral\AudioTweaks.cs#L50
-peripheral.autoplay-take-no-action,AutoPlay: Take No Action,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PeripheralTweakProvider.cs#L63
-peripheral.disable-autoplay,Disable AutoPlay,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PeripheralTweakProvider.cs#L40
-peripheral.disable-sticky-keys-prompt,Disable Sticky Keys Prompt,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PeripheralTweakProvider.cs#L27
-peripheral.keyboard-disable-language-hotkey,Disable Language Switch Hotkey,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L52
-peripheral.keyboard-optimize-repeat,Optimize Keyboard Repeat Rate,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Peripheral\KeyboardTweaks.cs#L27
-peripheral.mouse-disable-acceleration,Disable Enhanced Pointer Precision (Mouse Acceleration),Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Peripheral\MouseTweaks.cs#L55
-peripheral.mouse-disable-throttle,Disable Mouse Throttling for Background Windows,Docs\peripheral\peripheral.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Peripheral\MouseTweaks.cs#L27
-power.disable-cpu-idle-states,Disable CPU Idle States (C-States),Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PowerTweakProvider.cs#L66
-power.disable-cpu-parking,Disable CPU Core Parking,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Power\CPUPowerTweaks.cs#L29
-power.disable-fast-startup,Disable Fast Startup (Hiberboot),Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PowerTweakProvider.cs#L24
-power.disable-hibernation,Disable Hibernation,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Power\DisableHibernationTweak.cs#L13
-power.disable-network-power-saving,Disable Network Adapter Power Saving,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PowerTweakProvider.cs#L83
-power.disable-power-throttling,Disable Power Throttling,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PowerTweakProvider.cs#L36
-power.disable-superfetch,Disable Superfetch (SysMain),Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Performance\DisableSuperfetchTweak.cs#L13
-power.disable-windows-search,Disable Windows Search,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PerformanceTweakProvider.cs#L68
-power.hide-hibernate-option,Hide Hibernate Power Option,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PowerTweakProvider.cs#L138
-power.hide-lock-option,Hide Lock Power Option,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PowerTweakProvider.cs#L114
-power.hide-sleep-option,Hide Sleep Power Option,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PowerTweakProvider.cs#L126
-power.optimize-cpu-boost,Optimize CPU Performance Boost,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Power\SetCpuBoostPerfModeTweak.cs#L22
-power.optimize-gaming-network,Optimize Gaming Network Settings,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PowerTweakProvider.cs#L97
-power.optimize-performance,Optimize Power Settings for Performance,Docs\power\power.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PowerTweakProvider.cs#L48
-privacy.block-microsoft-accounts,Block Microsoft Accounts,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L805
-privacy.deny-app-access,Deny App Access (Except Microphone),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L422
-privacy.disable-activity-history,Disable Activity History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L46
-privacy.disable-advertising-id,Disable Advertising ID,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L34
-privacy.disable-app-diagnostics,Disable App Diagnostics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L458
-privacy.disable-app-launch-tracking,Disable App Launch Tracking,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1068
-privacy.disable-app-suggestions,Disable App Suggestions in Start,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L324
-privacy.disable-application-compatibility,Disable Application Compatibility,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L73
-privacy.disable-application-telemetry,Disable Application Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L61
-privacy.disable-background-apps,Disable Background Apps,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L494
-privacy.disable-biometrics,Disable Biometrics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1081
-privacy.disable-biometrics-domain-logon,Disable Biometrics for Domain Logon,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1105
-privacy.disable-biometrics-logon,Disable Biometrics Logon,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1093
-privacy.disable-camera,Disable Camera Access (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L482
-privacy.disable-ceip,Disable CEIP,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L139
-privacy.disable-cli-telemetry,Disable PowerShell & .NET CLI Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L724
-privacy.disable-consumer-account-content,Disable Consumer Account State Content,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L947
-privacy.disable-copilot,Disable Windows Copilot,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L395
-privacy.disable-cross-device-experiences,Cross-Device Sharing,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L619
-privacy.disable-device-name-telemetry,Disable Device Name in Diagnostics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L152
-privacy.disable-diagnostic-data,Set Diagnostic Data to Minimum Supported Level,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L22
-privacy.disable-diagnostic-data-delete,Disable Diagnostic Data Deletion,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L176
-privacy.disable-diagnostic-data-viewer,Disable Diagnostic Data Viewer,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L164
-privacy.disable-edge-search-suggestions,Disable Edge Search Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L982
-privacy.disable-f1-help,Disable F1 Help,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L973
-privacy.disable-feedback-notifications,Disable Feedback Notifications,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L546
-privacy.disable-file-history,Disable File History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L585
-privacy.disable-find-my-device,Disable Find My Device,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L663
-privacy.disable-font-providers,Disable Font Providers,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L370
-privacy.disable-inking-typing-personalization,Disable Inking & Typing Personalization,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L382
-privacy.disable-kms-activation-telemetry,Disable KMS Activation Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L248
-privacy.disable-language-list-access,Disable Website Access to Language List,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L739
-privacy.disable-local-security-questions,Disable Local Security Questions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L817
-privacy.disable-location-consent,Disable Location Consent (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L995
-privacy.disable-location-consent-system,Disable Location Consent (System),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1008
-privacy.disable-location-scripting,Disable Location Scripting,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1020
-privacy.disable-location-services,Disable Location Services,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L470
-privacy.disable-mdm-enrollment,Disable MDM Enrollment,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L712
-privacy.disable-message-sync,Disable Message Sync,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L700
-privacy.disable-offline-files,Disable Offline Files,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L598
-privacy.disable-onesettings-downloads,Disable OneSettings Downloads,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L236
-privacy.disable-online-tips,Disable Online Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L959
-privacy.disable-pca-diagnostics.policy,Disable PCA Diagnostics Detection,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L115
-privacy.disable-phone-linking,Disable Phone Linking,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L675
-privacy.disable-recall,Disable Windows Recall,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L408
-privacy.disable-resume,Disable Resume Experiences,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L687
-privacy.disable-rsop-logging,Disable RSoP Logging,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L260
-privacy.disable-search-box-suggestions,Disable Search Box Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L866
-privacy.disable-search-history,Disable Search History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L853
-privacy.disable-sensors,Disable Sensors,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1044
-privacy.disable-sleep-study-diagnostics,Disable Sleep Study Diagnostics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L271
-privacy.disable-steps-recorder,Disable Steps Recorder,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1056
-privacy.disable-suggestions,Disable Suggestions & Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L929
-privacy.disable-suggestions-cdm,Disable Content Delivery Manager Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L337
-privacy.disable-suggestions.policy,Disable Suggestion Surfaces (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L354
-privacy.disable-sync-settings,Turn Off Settings Sync by Default,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L774
-privacy.disable-telemetry-change-notifications,Disable Diagnostic Data Change Notifications,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L188
-privacy.disable-telemetry-optin-ui,Disable Diagnostic Data Opt-in UI,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L200
-privacy.disable-wer,Disable Windows Error Reporting,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L127
-privacy.disable-windows-location-provider,Disable Windows Location Provider,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L1032
-privacy.disable-windows-tips,Turn Off Windows Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L312
-privacy.disable-wmplayer-telemetry,Disable Windows Media Player Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L752
-privacy.hide-last-logged-in-user,Hide Last Logged-In User,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L829
-privacy.hide-recommended-personalized-sites,Hide Start Personalized Site Recommendations (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L904
-privacy.hide-recommended-personalized-sites-user,Hide Start Personalized Site Recommendations (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L916
-privacy.hide-recommended-section,Hide Start Recommended Section (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L879
-privacy.hide-recommended-section-user,Hide Start Recommended Section (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L891
-privacy.hide-username-at-signin,Hide Username at Sign-In,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L841
-privacy.limit-diagnostic-log-collection,Limit Diagnostic Log Collection,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L212
-privacy.limit-dump-collection,Limit Dump Collection,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L224
-privacy.troubleshooter-dont-run,Troubleshooter: Don't Run Any,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\PrivacyTweakProvider.cs#L299
-security.disable-defender-sample-submission,Never Send Defender Samples,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L118
-security.disable-downloads-blocking,Disable Downloads Blocking,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L289
-security.disable-enhanced-defender-notifications,Hide Non-Critical Windows Security Notifications,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L94
-security.disable-ntfs-encryption,Disable NTFS Encryption (EFS),Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L229
-security.disable-p2p-updates,Disable P2P Updates,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L265
-security.disable-password-reveal,Disable Password Reveal Button,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L58
-security.disable-picture-password,Disable Picture Password Sign-In,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L70
-security.disable-remote-assistance,Disable Remote Assistance,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L217
-security.disable-system-mitigations,Disable System Mitigations,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Security\DisableSystemMitigationsTweak.cs#L30
-security.disable-system-restore,Disable System Restore,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L277
-security.disable-uac,Disable UAC (Full),Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\Security\DisableUacFullTweak.cs#L18
-security.disable-vbs,Disable VBS (HVCI),Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L160
-security.disable-windows-firewall,Disable Windows Firewall,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L146
-security.disable-windows-update,Disable Windows Update,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L188
-security.disable-wpbt,Disable WPBT Execution,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L175
-security.disable-wu-driver-updates,Disable WU Driver Updates,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L203
-security.enable-defender-maps-advanced-membership,Join Microsoft MAPS (Advanced),Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L106
-security.enable-dynamic-lock,Enable Dynamic Lock,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L82
-security.enable-sudo,Enable Windows Sudo,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L253
-security.hide-defender-exclusions-from-local-admins,Hide Defender Exclusions From Local Admins,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L130
-security.powershell-unrestricted,Set PowerShell Policy to Unrestricted,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L241
-security.trusted-path-credential-prompting,Require Trusted Path for Credentials,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L46
-security.uac-never-notify,Set UAC to Never Notify,Docs\security\security-verified.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SecurityTweakProvider.cs#L29
-system-check-disk-health,Check Disk Health (C:),Docs\tweaks\tweaks.md,yes,yes,yes,yes,OpenTraceProject.Engine\Tweaks\Commands\System\CheckDiskHealthTweak.cs#L14
-system.aero-shake,Disable Aero Shake,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L182
-system.bsod-disable-auto-reboot,Disable Auto Reboot on Crash,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L405
-system.bsod-display-parameters,Show BSOD Parameters,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L393
-system.disable-app-archiving,Disable Automatic App Archiving,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L517
-system.disable-auto-maintenance,Disable Automatic Maintenance,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L246
-system.disable-background-gp-updates,Disable Background Group Policy Updates,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L234
-system.disable-clipboard-history,Disable Clipboard History & Sync,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L208
-system.disable-clipboard-redirection,Disable Clipboard Redirection (RDP),Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L222
-system.disable-fullscreen-optimizations,Disable Fullscreen Optimizations,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L338
-system.disable-jpeg-reduction,Disable JPEG Reduction,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L195
-system.disable-restartable-apps,Disable Restartable Apps,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L270
-system.disable-scheduled-tasks,Disable Telemetry & Maintenance Tasks,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L87
-system.disable-search-highlights-policy,Disable Search Highlights (Policy),Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L321
-system.disable-search-remote-queries,Disable Remote Search Queries,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L368
-system.disable-search-web-results,Disable Web Search Results,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L356
-system.disable-service-splitting,Disable Service Splitting,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L333
-system.disable-shortcut-arrow,Remove Shortcut Arrow Overlay,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L74
-system.disable-startup-delay,Disable Startup Program Delay,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L48
-system.disable-storage-sense,Disable Storage Sense,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L297
-system.disable-storage-sense-temp-cleanup,Disable Storage Sense Temporary Files Cleanup,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L309
-system.disable-store-open-with,Disable Store in Open With,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L258
-system.dwm-disable-mpo,DWM: Disable Multiplane Overlay (MPO),Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L225
-system.dwm-disable-overlay-min-fps,DWM: Disable Overlay Minimum FPS,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L237
-system.enable-game-mode,Enable Game Mode,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L35
-system.enable-hags,Enable Hardware-Accelerated GPU Scheduling,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L285
-system.enable-indexing-encrypted-items,Enable Indexing of Encrypted Items,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L380
-system.graphics-disable-overlays,Graphics: Disable Overlay Planes,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L212
-system.graphics-page-fault-debug-mode,Graphics: Page Fault Debug Mode,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L504
-system.graphics-tdr-ddi-delay,Graphics: TDR DDI Delay (Default),Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L164
-system.graphics-tdr-delay,Graphics: TDR Delay (Default),Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L152
-system.graphics-tdr-level,Graphics: TDR Level (Default),Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L176
-system.graphics-tdr-limit-count,Graphics: TDR Limit Count (Default),Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L188
-system.graphics-tdr-limit-time,Graphics: TDR Limit Time (Default),Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L200
-system.kernel-adjust-dpc-threshold,Kernel: Adjust DPC Threshold,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L31
-system.kernel-cache-aware-scheduling,Kernel: Cache-Aware Scheduling,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L103
-system.kernel-default-dynamic-hetero-cpu-policy,Kernel: Default Dynamic Hetero CPU Policy,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L115
-system.kernel-disable-low-qos-timer-resolution,Kernel: Disable Low QoS Timer Resolution,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L139
-system.kernel-dpc-queue-depth,Kernel: DPC Queue Depth,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L67
-system.kernel-dpc-watchdog-period,Kernel: DPC Watchdog Period,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L79
-system.kernel-ideal-dpc-rate,Kernel: Ideal DPC Rate,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L43
-system.kernel-minimum-dpc-rate,Kernel: Minimum DPC Rate,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L55
-system.kernel-serialize-timer-expiration,Kernel: Serialize Timer Expiration,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L91
-system.kernel-thread-dpc-enable,Kernel: Threaded DPC Enable,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L127
-system.memory-clear-pagefile-at-shutdown,Clear Page File at Shutdown,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L418
-system.memory-disable-paging-executive,Disable Paging Executive,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L430
-system.memory-large-system-cache-client,Memory: Use Client System Cache,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L456
-system.memory-nonpaged-pool-dynamic,Memory: Reset Non-Paged Pool Size,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L480
-system.memory-paged-pool-dynamic,Memory: Reset Paged Pool Size,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L468
-system.memory-registry-quota-default,Memory: Reset Registry Quota,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L492
-system.ntfs-disable-8dot3,Disable 8.3 Name Creation,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L250
-system.ntfs-disable-last-access,Disable Last Access Updates,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L262
-system.ntfs-enable-long-paths,Enable Win32 Long Paths,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L274
-system.ntfs-reset-memory-usage,Reset NTFS Memory Usage,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L286
-system.ntfs-reset-mft-zone,Reset NTFS MFT Zone Reservation,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L298
-system.priority-control,Set Foreground Scheduling Priority,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L18
-system.reliability-timestamp-enabled,Enable Reliability Event Timestamping,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L442
-system.services.disable-bluetooth-audio-gateway,Disable Bluetooth Audio Gateway Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L176
-system.services.disable-bluetooth-support,Disable Bluetooth Support Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L164
-system.services.disable-bluetooth-user-service,Disable Bluetooth User Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L170
-system.services.disable-connected-user-experiences,Disable Connected User Experiences Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L104
-system.services.disable-print-device-configuration,Disable Print Device Configuration Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L152
-system.services.disable-print-notifications,Disable Print Notification Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L140
-system.services.disable-print-scan-broker,Disable Print Scan Broker Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L158
-system.services.disable-print-spooler,Disable Print Spooler Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L134
-system.services.disable-print-workflow-user-service,Disable Print Workflow User Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L146
-system.services.disable-sysmain,Disable SysMain Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L116
-system.services.disable-wap-push-routing,Disable WAP Push Routing Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L110
-system.services.disable-windows-error-reporting,Disable Windows Error Reporting Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L128
-system.services.disable-windows-search,Disable Windows Search Service,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L122
-system.verbose-status-messages,Enable Verbose Status Messages,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemTweakProvider.cs#L61
-system.wait-to-kill-service-timeout,Reduce Service Shutdown Timeout,Docs\system\system.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\SystemRegistryTweakProvider.cs#L311
-visibility.default-account-picture,Use Default Account Picture,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L264
-visibility.disable-acrylic-logon,Disable Acrylic Logon Background,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L490
-visibility.disable-common-control-animations,Disable Common Control Animations,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L239
-visibility.disable-first-signin-animation,Disable First Sign-In Animation,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L288
-visibility.disable-lock-screen,Disable Lock Screen,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L430
-visibility.disable-lock-screen-camera,Disable Lock Screen Camera,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L442
-visibility.disable-lock-screen-changes,Prevent Changing Lock Screen,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L478
-visibility.disable-lock-screen-motion,Disable Lock Screen Background Motion,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L466
-visibility.disable-lock-screen-slideshow,Disable Lock Screen Slideshow,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L454
-visibility.disable-spotlight-action-center,Disable Windows Spotlight on Action Center,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L377
-visibility.disable-spotlight-desktop-collection,Disable Spotlight Collection on Desktop,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L403
-visibility.disable-spotlight-features,Disable Windows Spotlight Features,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L351
-visibility.disable-spotlight-settings,Disable Windows Spotlight on Settings,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L390
-visibility.disable-spotlight-third-party,Disable Spotlight Third-Party Suggestions,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L416
-visibility.disable-spotlight-welcome,Disable Windows Spotlight Welcome Experience,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L364
-visibility.disable-wcn-wizards,Disable Windows Connect Now Wizards,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L276
-visibility.disable-widgets,Disable Widgets (Policy),Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L313
-visibility.disable-window-animations,Disable Window Animations,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L252
-visibility.force-classic-control-panel,Force Classic Control Panel View,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L515
-visibility.hide-language-bar,Hide Language Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L300
-visibility.hide-most-used-apps,Hide Most Used Apps,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L325
-visibility.hide-people-bar,Hide People Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L337
-visibility.restore-classic-context-menu,Restore Classic Context Menu,Docs\visibility\visibility.md,yes,yes,yes,yes,OpenTraceProject.App\Services\TweakProviders\VisibilityTweakProvider.cs#L502
+audio.disable-beep,Disable System Beep,Docs\peripheral\peripheral.md,yes,yes,yes,yes,app\Services\TweakProviders\AudioTweakProvider.cs#L22
+audio.disable-spatial-audio,Disable Spatial Audio,Docs\peripheral\peripheral.md,yes,yes,yes,yes,app\Services\TweakProviders\AudioTweakProvider.cs#L60
+audio.disable-system-sounds,Disable System Sounds,Docs\peripheral\peripheral.md,yes,yes,yes,yes,app\Services\TweakProviders\AudioTweakProvider.cs#L72
+audio.show-disconnected-devices,Show Disconnected Audio Devices,Docs\peripheral\peripheral.md,yes,yes,yes,yes,app\Services\TweakProviders\AudioTweakProvider.cs#L47
+audio.show-hidden-devices,Show Hidden Audio Devices,Docs\peripheral\peripheral.md,yes,yes,yes,yes,app\Services\TweakProviders\AudioTweakProvider.cs#L34
+cleanup.background-history,Clear Wallpaper History,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearBackgroundHistoryTweak.cs#L14
+cleanup.component-store,Cleanup Component Store,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\CleanupComponentStoreTweak.cs#L14
+cleanup.delivery-optimization,Clear Delivery Optimization Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearDeliveryOptimizationFilesTweak.cs#L14
+cleanup.directx-shader-cache,Clear DirectX Shader Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearDirectXShaderCacheTweak.cs#L11
+cleanup.disable-reserved-storage,Disable Reserved Storage,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\DisableReservedStorageTweak.cs#L14
+cleanup.eventlog-{logName.ToLowerInvariant()},Clear {logName} Event Log,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearEventLogsTweak.cs#L15
+cleanup.font-cache,Clear Font Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearFontCacheTweak.cs#L14
+cleanup.internet-temp-files,Clear Temporary Internet Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearTemporaryInternetFilesTweak.cs#L11
+cleanup.memory-dumps,Clear Memory Dump Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearMemoryDumpFilesTweak.cs#L11
+cleanup.prefetch-files,Clear Prefetch Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearPrefetchFilesTweak.cs#L11
+cleanup.product-key,Remove Product Key from Registry,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\RemoveProductKeyTweak.cs#L14
+cleanup.recycle-bin,Empty Recycle Bin,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearRecycleBinTweak.cs#L14
+cleanup.shadow-copies,Clear Shadow Copies,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearShadowCopiesTweak.cs#L14
+cleanup.srum-data,Clear SRUM Database,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearSRUMDataTweak.cs#L11
+cleanup.temp-files,Clear Temporary Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearTemporaryFilesTweak.cs#L11
+cleanup.thumbnail-cache,Clear Thumbnail Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearThumbnailCacheTweak.cs#L11
+cleanup.wer-files,Clear Windows Error Reporting Files,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearWERFilesTweak.cs#L11
+cleanup.windows-old,Delete Windows.old Folder,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearWindowsOldTweak.cs#L11
+cleanup.windows-update-cache,Clear Windows Update Cache,Docs\cleanup\cleanup.md,yes,yes,yes,yes,engine\Tweaks\Commands\Cleanup\ClearWindowsUpdateCacheTweak.cs#L11
+developer.dotnet-telemetry-disable,Disable .NET SDK Telemetry,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L42
+developer.enable-windows-long-paths,Enable Windows Long Paths,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L28
+developer.nodejs-performance,Optimize Node.js Performance,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L86
+developer.powershell-execution,Allow Local PowerShell Scripts,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L145
+developer.python-path-fix,Fix Python Path Length Issues,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L114
+developer.ssh-agent-autostart,Enable SSH Agent Auto-start,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L158
+developer.terminal-dev-mode,Enable Windows Terminal Developer Features,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L70
+developer.vs-intellisense-cache,Optimize VS IntelliSense Cache,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L56
+developer.vs-solution-load,Speed Up Visual Studio Solution Load,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L176
+developer.vscode-git-autofetch,Disable VS Code Git Autofetch,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L100
+developer.windows-dev-mode,Enable Windows Developer Mode,Docs\tweaks\tweaks.md,yes,yes,yes,yes,app\Services\TweakProviders\DeveloperTweakProvider.cs#L128
+explorer.always-show-icons-never-thumbnails,"Always Show Icons, Never Thumbnails",Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L122
+explorer.disable-low-disk-space-warning,Disable Low Disk Space Warning,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L226
+explorer.disable-taskbar-chat,Hide Taskbar Chat Icon,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L214
+explorer.enable-explorer-compact-mode,Enable Compact View,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L70
+explorer.hide-empty-drives,Hide Empty Drives,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L174
+explorer.launch-folder-windows-in-a-separate-process,Launch Folder Windows in a Separate Process,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L161
+explorer.show-compressed-and-encrypted-files-in-color,Show Compressed and Encrypted Files in Color,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L135
+explorer.show-drive-letters-first,Show Drive Letters First,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L148
+explorer.show-file-extensions,Show File Extensions,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L44
+explorer.show-full-path,Show Full Path in Title Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L57
+explorer.show-hidden-files,Show Hidden Files and Folders,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L18
+explorer.show-info-tips,Show Explorer Info Tips,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L96
+explorer.show-protected-operating-system-files,Show Protected Operating System Files,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L31
+explorer.show-recent-items,Show Recent Items In Home,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L187
+explorer.show-status-bar,Show Explorer Status Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L83
+explorer.show-type-overlay,Display File Icons on Thumbnails,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L109
+explorer.taskbar-alignment-left,Align Taskbar to Left,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L201
+misc.disable-edge-features,Disable Microsoft Edge Features,Docs\misc\misc.md,yes,yes,yes,yes,engine\Tweaks\Misc\DisableEdgeFeaturesTweaks.cs#L88
+misc.disable-office-telemetry,Disable Microsoft Office Telemetry,Docs\misc\misc.md,yes,yes,yes,yes,engine\Tweaks\Misc\DisableOfficeTelemetryTweak.cs#L51
+misc.disable-onedrive,Disable OneDrive,Docs\misc\misc.md,yes,yes,yes,yes,engine\Tweaks\Misc\DisableOneDriveTweaks.cs#L36
+misc.disable-visual-studio-telemetry,Disable Visual Studio Telemetry,Docs\misc\misc.md,yes,yes,yes,yes,engine\Tweaks\Misc\DisableVisualStudioTelemetryTweak.cs#L37
+misc.optimize-7zip-settings,Optimize 7-Zip Context Menu Settings,Docs\misc\misc.md,yes,yes,yes,yes,engine\Tweaks\Misc\SevenZipSettingsTweak.cs#L54
+network.disable-active-probing,Disable Active Probing,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L178
+network.disable-default-shares,Disable Default Shares,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L307
+network.disable-ipv6,Disable IPv6,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L82
+network.disable-llmnr,Disable LLMNR,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L110
+network.disable-lltd,Set LLTD Policies to Default Behavior,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L158
+network.disable-mdns,Set mDNS Policy to Local Settings,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L122
+network.disable-netbios,Disable NetBIOS over TCP/IP,Docs\network\network.md,yes,yes,yes,yes,engine\Tweaks\Commands\Network\DisableNetbiosOverTcpIpTweak.cs#L19
+network.disable-netbios-resolution,Disable NetBIOS Name Resolution,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L134
+network.disable-plaintext-smb-passwords,Disable Plaintext SMB Passwords,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L343
+network.disable-smart-name-resolution,Disable Smart Multi-Homed Name Resolution,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L146
+network.disable-smb1,Disable SMBv1,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L319
+network.disable-smb2,Disable SMBv2/SMBv3,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L331
+network.disable-wifi-sense,Disable Wi-Fi Sense,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L96
+network.enable-lltd-responder,Enable LLTD Responder,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L31
+network.enable-lltdio,Enable LLTD Mapper I/O,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L19
+network.flush-dns-cache,Flush DNS Cache,Docs\network\network.md,yes,yes,yes,yes,engine\Tweaks\Commands\Network\FlushDnsCacheTweak.cs#L13
+network.optimize-smb,Optimize SMB Performance,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L44
+network.prefer-ipv4,Prefer IPv4 over IPv6,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L189
+network.require-ntlm-ssp-client-session-security,Require NTLM SSP Client Session Security and 128-bit Encryption,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L355
+network.reset-winsock,Reset Winsock Catalog,Docs\network\network.md,yes,yes,yes,yes,engine\Tweaks\Commands\Network\ResetNetworkStackTweak.cs#L13
+network.smb-disable-leasing,SMB: Disable Leasing,Docs\network\network.md,yes,yes,yes,yes,engine\Tweaks\Commands\Network\DisableSmbLeasingTweak.cs#L15
+network.smb-enable-large-mtu,SMB: Enable Large MTU,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L202
+network.smb-enable-multichannel,SMB: Enable Multichannel,Docs\network\network.md,yes,yes,yes,yes,engine\Tweaks\Commands\Network\EnableSmbMultichannelTweak.cs#L16
+network.smb-enable-quic,SMB: Enable QUIC,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L269
+network.smb-encrypt-data,SMB: Require Encryption,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L241
+network.smb-reject-unencrypted-access,SMB: Reject Unencrypted Access,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L253
+network.smb-require-dialect-3_1_1,SMB: Require Dialect 3.1.1,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L281
+network.smb-require-signing-client,SMB: Require Client Signing,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L214
+network.smb-require-signing-server,SMB: Require Signing (Server),Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L227
+network.smb-set-cipher-suite-order,SMB: Set Cipher Suite Order,Docs\network\network.md,yes,yes,yes,yes,app\Services\TweakProviders\NetworkTweakProvider.cs#L295
+notifications.disable-feedback-frequency,Disable Feedback Requests,Docs\notifications\notifications.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L533
+notifications.disable-lock-screen,Disable Lock Screen Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L520
+notifications.disable-mirroring,Disable Notification Mirroring,Docs\notifications\notifications.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L571
+notifications.disable-tile,Disable Tile Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L558
+notifications.disable-toast,Disable Toast Notifications,Docs\notifications\notifications.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L507
+performance.disable-animations,Disable Window Animations,Docs\performance\performance.md,yes,yes,yes,yes,app\Services\TweakProviders\PerformanceTweakProvider.cs#L27
+performance.disable-menu-show-delay,Remove Menu Show Delay,Docs\performance\performance.md,yes,yes,yes,yes,app\Services\TweakProviders\PerformanceTweakProvider.cs#L40
+performance.disable-taskbar-animations,Disable Taskbar Animations,Docs\performance\performance.md,yes,yes,yes,yes,app\Services\TweakProviders\PerformanceTweakProvider.cs#L53
+peripheral.audio-disable-ducking,Disable Audio Ducking,Docs\peripheral\peripheral.md,yes,yes,yes,yes,engine\Tweaks\Peripheral\AudioTweaks.cs#L24
+peripheral.audio-disable-enhancements,Disable Audio Enhancements,Docs\peripheral\peripheral.md,yes,yes,yes,yes,engine\Tweaks\Peripheral\AudioTweaks.cs#L50
+peripheral.autoplay-take-no-action,AutoPlay: Take No Action,Docs\peripheral\peripheral.md,yes,yes,yes,yes,app\Services\TweakProviders\PeripheralTweakProvider.cs#L63
+peripheral.disable-autoplay,Disable AutoPlay,Docs\peripheral\peripheral.md,yes,yes,yes,yes,app\Services\TweakProviders\PeripheralTweakProvider.cs#L40
+peripheral.disable-sticky-keys-prompt,Disable Sticky Keys Prompt,Docs\peripheral\peripheral.md,yes,yes,yes,yes,app\Services\TweakProviders\PeripheralTweakProvider.cs#L27
+peripheral.keyboard-disable-language-hotkey,Disable Language Switch Hotkey,Docs\peripheral\peripheral.md,yes,yes,yes,yes,engine\Tweaks\Peripheral\KeyboardTweaks.cs#L52
+peripheral.keyboard-optimize-repeat,Optimize Keyboard Repeat Rate,Docs\peripheral\peripheral.md,yes,yes,yes,yes,engine\Tweaks\Peripheral\KeyboardTweaks.cs#L27
+peripheral.mouse-disable-acceleration,Disable Enhanced Pointer Precision (Mouse Acceleration),Docs\peripheral\peripheral.md,yes,yes,yes,yes,engine\Tweaks\Peripheral\MouseTweaks.cs#L55
+peripheral.mouse-disable-throttle,Disable Mouse Throttling for Background Windows,Docs\peripheral\peripheral.md,yes,yes,yes,yes,engine\Tweaks\Peripheral\MouseTweaks.cs#L27
+power.disable-cpu-idle-states,Disable CPU Idle States (C-States),Docs\power\power.md,yes,yes,yes,yes,app\Services\TweakProviders\PowerTweakProvider.cs#L66
+power.disable-cpu-parking,Disable CPU Core Parking,Docs\power\power.md,yes,yes,yes,yes,engine\Tweaks\Power\CPUPowerTweaks.cs#L29
+power.disable-fast-startup,Disable Fast Startup (Hiberboot),Docs\power\power.md,yes,yes,yes,yes,app\Services\TweakProviders\PowerTweakProvider.cs#L24
+power.disable-hibernation,Disable Hibernation,Docs\power\power.md,yes,yes,yes,yes,engine\Tweaks\Commands\Power\DisableHibernationTweak.cs#L13
+power.disable-network-power-saving,Disable Network Adapter Power Saving,Docs\power\power.md,yes,yes,yes,yes,app\Services\TweakProviders\PowerTweakProvider.cs#L83
+power.disable-power-throttling,Disable Power Throttling,Docs\power\power.md,yes,yes,yes,yes,app\Services\TweakProviders\PowerTweakProvider.cs#L36
+power.disable-superfetch,Disable Superfetch (SysMain),Docs\power\power.md,yes,yes,yes,yes,engine\Tweaks\Commands\Performance\DisableSuperfetchTweak.cs#L13
+power.disable-windows-search,Disable Windows Search,Docs\power\power.md,yes,yes,yes,yes,app\Services\TweakProviders\PerformanceTweakProvider.cs#L68
+power.hide-hibernate-option,Hide Hibernate Power Option,Docs\power\power.md,yes,yes,yes,yes,app\Services\TweakProviders\PowerTweakProvider.cs#L138
+power.hide-lock-option,Hide Lock Power Option,Docs\power\power.md,yes,yes,yes,yes,app\Services\TweakProviders\PowerTweakProvider.cs#L114
+power.hide-sleep-option,Hide Sleep Power Option,Docs\power\power.md,yes,yes,yes,yes,app\Services\TweakProviders\PowerTweakProvider.cs#L126
+power.optimize-cpu-boost,Optimize CPU Performance Boost,Docs\power\power.md,yes,yes,yes,yes,engine\Tweaks\Commands\Power\SetCpuBoostPerfModeTweak.cs#L22
+power.optimize-gaming-network,Optimize Gaming Network Settings,Docs\power\power.md,yes,yes,yes,yes,app\Services\TweakProviders\PowerTweakProvider.cs#L97
+power.optimize-performance,Optimize Power Settings for Performance,Docs\power\power.md,yes,yes,yes,yes,app\Services\TweakProviders\PowerTweakProvider.cs#L48
+privacy.block-microsoft-accounts,Block Microsoft Accounts,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L805
+privacy.deny-app-access,Deny App Access (Except Microphone),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L422
+privacy.disable-activity-history,Disable Activity History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L46
+privacy.disable-advertising-id,Disable Advertising ID,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L34
+privacy.disable-app-diagnostics,Disable App Diagnostics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L458
+privacy.disable-app-launch-tracking,Disable App Launch Tracking,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L1068
+privacy.disable-app-suggestions,Disable App Suggestions in Start,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L324
+privacy.disable-application-compatibility,Disable Application Compatibility,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L73
+privacy.disable-application-telemetry,Disable Application Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L61
+privacy.disable-background-apps,Disable Background Apps,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L494
+privacy.disable-biometrics,Disable Biometrics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L1081
+privacy.disable-biometrics-domain-logon,Disable Biometrics for Domain Logon,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L1105
+privacy.disable-biometrics-logon,Disable Biometrics Logon,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L1093
+privacy.disable-camera,Disable Camera Access (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L482
+privacy.disable-ceip,Disable CEIP,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L139
+privacy.disable-cli-telemetry,Disable PowerShell & .NET CLI Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L724
+privacy.disable-consumer-account-content,Disable Consumer Account State Content,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L947
+privacy.disable-copilot,Disable Windows Copilot,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L395
+privacy.disable-cross-device-experiences,Cross-Device Sharing,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L619
+privacy.disable-device-name-telemetry,Disable Device Name in Diagnostics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L152
+privacy.disable-diagnostic-data,Set Diagnostic Data to Minimum Supported Level,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L22
+privacy.disable-diagnostic-data-delete,Disable Diagnostic Data Deletion,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L176
+privacy.disable-diagnostic-data-viewer,Disable Diagnostic Data Viewer,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L164
+privacy.disable-edge-search-suggestions,Disable Edge Search Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L982
+privacy.disable-f1-help,Disable F1 Help,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L973
+privacy.disable-feedback-notifications,Disable Feedback Notifications,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L546
+privacy.disable-file-history,Disable File History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L585
+privacy.disable-find-my-device,Disable Find My Device,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L663
+privacy.disable-font-providers,Disable Font Providers,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L370
+privacy.disable-inking-typing-personalization,Disable Inking & Typing Personalization,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L382
+privacy.disable-kms-activation-telemetry,Disable KMS Activation Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L248
+privacy.disable-language-list-access,Disable Website Access to Language List,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L739
+privacy.disable-local-security-questions,Disable Local Security Questions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L817
+privacy.disable-location-consent,Disable Location Consent (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L995
+privacy.disable-location-consent-system,Disable Location Consent (System),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L1008
+privacy.disable-location-scripting,Disable Location Scripting,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L1020
+privacy.disable-location-services,Disable Location Services,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L470
+privacy.disable-mdm-enrollment,Disable MDM Enrollment,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L712
+privacy.disable-message-sync,Disable Message Sync,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L700
+privacy.disable-offline-files,Disable Offline Files,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L598
+privacy.disable-onesettings-downloads,Disable OneSettings Downloads,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L236
+privacy.disable-online-tips,Disable Online Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L959
+privacy.disable-pca-diagnostics.policy,Disable PCA Diagnostics Detection,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L115
+privacy.disable-phone-linking,Disable Phone Linking,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L675
+privacy.disable-recall,Disable Windows Recall,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L408
+privacy.disable-resume,Disable Resume Experiences,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L687
+privacy.disable-rsop-logging,Disable RSoP Logging,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L260
+privacy.disable-search-box-suggestions,Disable Search Box Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L866
+privacy.disable-search-history,Disable Search History,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L853
+privacy.disable-sensors,Disable Sensors,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L1044
+privacy.disable-sleep-study-diagnostics,Disable Sleep Study Diagnostics,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L271
+privacy.disable-steps-recorder,Disable Steps Recorder,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L1056
+privacy.disable-suggestions,Disable Suggestions & Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L929
+privacy.disable-suggestions-cdm,Disable Content Delivery Manager Suggestions,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L337
+privacy.disable-suggestions.policy,Disable Suggestion Surfaces (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L354
+privacy.disable-sync-settings,Turn Off Settings Sync by Default,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L774
+privacy.disable-telemetry-change-notifications,Disable Diagnostic Data Change Notifications,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L188
+privacy.disable-telemetry-optin-ui,Disable Diagnostic Data Opt-in UI,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L200
+privacy.disable-wer,Disable Windows Error Reporting,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L127
+privacy.disable-windows-location-provider,Disable Windows Location Provider,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L1032
+privacy.disable-windows-tips,Turn Off Windows Tips,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L312
+privacy.disable-wmplayer-telemetry,Disable Windows Media Player Telemetry,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L752
+privacy.hide-last-logged-in-user,Hide Last Logged-In User,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L829
+privacy.hide-recommended-personalized-sites,Hide Start Personalized Site Recommendations (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L904
+privacy.hide-recommended-personalized-sites-user,Hide Start Personalized Site Recommendations (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L916
+privacy.hide-recommended-section,Hide Start Recommended Section (Policy),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L879
+privacy.hide-recommended-section-user,Hide Start Recommended Section (User),Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L891
+privacy.hide-username-at-signin,Hide Username at Sign-In,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L841
+privacy.limit-diagnostic-log-collection,Limit Diagnostic Log Collection,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L212
+privacy.limit-dump-collection,Limit Dump Collection,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L224
+privacy.troubleshooter-dont-run,Troubleshooter: Don't Run Any,Docs\privacy\privacy-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\PrivacyTweakProvider.cs#L299
+security.disable-defender-sample-submission,Never Send Defender Samples,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L118
+security.disable-downloads-blocking,Disable Downloads Blocking,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L289
+security.disable-enhanced-defender-notifications,Hide Non-Critical Windows Security Notifications,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L94
+security.disable-ntfs-encryption,Disable NTFS Encryption (EFS),Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L229
+security.disable-p2p-updates,Disable P2P Updates,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L265
+security.disable-password-reveal,Disable Password Reveal Button,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L58
+security.disable-picture-password,Disable Picture Password Sign-In,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L70
+security.disable-remote-assistance,Disable Remote Assistance,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L217
+security.disable-system-mitigations,Disable System Mitigations,Docs\security\security-verified.md,yes,yes,yes,yes,engine\Tweaks\Commands\Security\DisableSystemMitigationsTweak.cs#L30
+security.disable-system-restore,Disable System Restore,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L277
+security.disable-uac,Disable UAC (Full),Docs\security\security-verified.md,yes,yes,yes,yes,engine\Tweaks\Commands\Security\DisableUacFullTweak.cs#L18
+security.disable-vbs,Disable VBS (HVCI),Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L160
+security.disable-windows-firewall,Disable Windows Firewall,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L146
+security.disable-windows-update,Disable Windows Update,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L188
+security.disable-wpbt,Disable WPBT Execution,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L175
+security.disable-wu-driver-updates,Disable WU Driver Updates,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L203
+security.enable-defender-maps-advanced-membership,Join Microsoft MAPS (Advanced),Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L106
+security.enable-dynamic-lock,Enable Dynamic Lock,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L82
+security.enable-sudo,Enable Windows Sudo,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L253
+security.hide-defender-exclusions-from-local-admins,Hide Defender Exclusions From Local Admins,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L130
+security.powershell-unrestricted,Set PowerShell Policy to Unrestricted,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L241
+security.trusted-path-credential-prompting,Require Trusted Path for Credentials,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L46
+security.uac-never-notify,Set UAC to Never Notify,Docs\security\security-verified.md,yes,yes,yes,yes,app\Services\TweakProviders\SecurityTweakProvider.cs#L29
+system-check-disk-health,Check Disk Health (C:),Docs\tweaks\tweaks.md,yes,yes,yes,yes,engine\Tweaks\Commands\System\CheckDiskHealthTweak.cs#L14
+system.aero-shake,Disable Aero Shake,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L182
+system.bsod-disable-auto-reboot,Disable Auto Reboot on Crash,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L405
+system.bsod-display-parameters,Show BSOD Parameters,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L393
+system.disable-app-archiving,Disable Automatic App Archiving,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L517
+system.disable-auto-maintenance,Disable Automatic Maintenance,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L246
+system.disable-background-gp-updates,Disable Background Group Policy Updates,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L234
+system.disable-clipboard-history,Disable Clipboard History & Sync,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L208
+system.disable-clipboard-redirection,Disable Clipboard Redirection (RDP),Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L222
+system.disable-fullscreen-optimizations,Disable Fullscreen Optimizations,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L338
+system.disable-jpeg-reduction,Disable JPEG Reduction,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L195
+system.disable-restartable-apps,Disable Restartable Apps,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L270
+system.disable-scheduled-tasks,Disable Telemetry & Maintenance Tasks,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L87
+system.disable-search-highlights-policy,Disable Search Highlights (Policy),Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L321
+system.disable-search-remote-queries,Disable Remote Search Queries,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L368
+system.disable-search-web-results,Disable Web Search Results,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L356
+system.disable-service-splitting,Disable Service Splitting,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L333
+system.disable-shortcut-arrow,Remove Shortcut Arrow Overlay,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L74
+system.disable-startup-delay,Disable Startup Program Delay,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L48
+system.disable-storage-sense,Disable Storage Sense,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L297
+system.disable-storage-sense-temp-cleanup,Disable Storage Sense Temporary Files Cleanup,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L309
+system.disable-store-open-with,Disable Store in Open With,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L258
+system.dwm-disable-mpo,DWM: Disable Multiplane Overlay (MPO),Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L225
+system.dwm-disable-overlay-min-fps,DWM: Disable Overlay Minimum FPS,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L237
+system.enable-game-mode,Enable Game Mode,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L35
+system.enable-hags,Enable Hardware-Accelerated GPU Scheduling,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L285
+system.enable-indexing-encrypted-items,Enable Indexing of Encrypted Items,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L380
+system.graphics-disable-overlays,Graphics: Disable Overlay Planes,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L212
+system.graphics-page-fault-debug-mode,Graphics: Page Fault Debug Mode,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L504
+system.graphics-tdr-ddi-delay,Graphics: TDR DDI Delay (Default),Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L164
+system.graphics-tdr-delay,Graphics: TDR Delay (Default),Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L152
+system.graphics-tdr-level,Graphics: TDR Level (Default),Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L176
+system.graphics-tdr-limit-count,Graphics: TDR Limit Count (Default),Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L188
+system.graphics-tdr-limit-time,Graphics: TDR Limit Time (Default),Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L200
+system.kernel-adjust-dpc-threshold,Kernel: Adjust DPC Threshold,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L31
+system.kernel-cache-aware-scheduling,Kernel: Cache-Aware Scheduling,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L103
+system.kernel-default-dynamic-hetero-cpu-policy,Kernel: Default Dynamic Hetero CPU Policy,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L115
+system.kernel-disable-low-qos-timer-resolution,Kernel: Disable Low QoS Timer Resolution,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L139
+system.kernel-dpc-queue-depth,Kernel: DPC Queue Depth,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L67
+system.kernel-dpc-watchdog-period,Kernel: DPC Watchdog Period,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L79
+system.kernel-ideal-dpc-rate,Kernel: Ideal DPC Rate,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L43
+system.kernel-minimum-dpc-rate,Kernel: Minimum DPC Rate,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L55
+system.kernel-serialize-timer-expiration,Kernel: Serialize Timer Expiration,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L91
+system.kernel-thread-dpc-enable,Kernel: Threaded DPC Enable,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L127
+system.memory-clear-pagefile-at-shutdown,Clear Page File at Shutdown,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L418
+system.memory-disable-paging-executive,Disable Paging Executive,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L430
+system.memory-large-system-cache-client,Memory: Use Client System Cache,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L456
+system.memory-nonpaged-pool-dynamic,Memory: Reset Non-Paged Pool Size,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L480
+system.memory-paged-pool-dynamic,Memory: Reset Paged Pool Size,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L468
+system.memory-registry-quota-default,Memory: Reset Registry Quota,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L492
+system.ntfs-disable-8dot3,Disable 8.3 Name Creation,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L250
+system.ntfs-disable-last-access,Disable Last Access Updates,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L262
+system.ntfs-enable-long-paths,Enable Win32 Long Paths,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L274
+system.ntfs-reset-memory-usage,Reset NTFS Memory Usage,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L286
+system.ntfs-reset-mft-zone,Reset NTFS MFT Zone Reservation,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L298
+system.priority-control,Set Foreground Scheduling Priority,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L18
+system.reliability-timestamp-enabled,Enable Reliability Event Timestamping,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L442
+system.services.disable-bluetooth-audio-gateway,Disable Bluetooth Audio Gateway Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L176
+system.services.disable-bluetooth-support,Disable Bluetooth Support Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L164
+system.services.disable-bluetooth-user-service,Disable Bluetooth User Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L170
+system.services.disable-connected-user-experiences,Disable Connected User Experiences Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L104
+system.services.disable-print-device-configuration,Disable Print Device Configuration Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L152
+system.services.disable-print-notifications,Disable Print Notification Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L140
+system.services.disable-print-scan-broker,Disable Print Scan Broker Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L158
+system.services.disable-print-spooler,Disable Print Spooler Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L134
+system.services.disable-print-workflow-user-service,Disable Print Workflow User Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L146
+system.services.disable-sysmain,Disable SysMain Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L116
+system.services.disable-wap-push-routing,Disable WAP Push Routing Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L110
+system.services.disable-windows-error-reporting,Disable Windows Error Reporting Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L128
+system.services.disable-windows-search,Disable Windows Search Service,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L122
+system.verbose-status-messages,Enable Verbose Status Messages,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemTweakProvider.cs#L61
+system.wait-to-kill-service-timeout,Reduce Service Shutdown Timeout,Docs\system\system.md,yes,yes,yes,yes,app\Services\TweakProviders\SystemRegistryTweakProvider.cs#L311
+visibility.default-account-picture,Use Default Account Picture,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L264
+visibility.disable-acrylic-logon,Disable Acrylic Logon Background,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L490
+visibility.disable-common-control-animations,Disable Common Control Animations,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L239
+visibility.disable-first-signin-animation,Disable First Sign-In Animation,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L288
+visibility.disable-lock-screen,Disable Lock Screen,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L430
+visibility.disable-lock-screen-camera,Disable Lock Screen Camera,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L442
+visibility.disable-lock-screen-changes,Prevent Changing Lock Screen,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L478
+visibility.disable-lock-screen-motion,Disable Lock Screen Background Motion,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L466
+visibility.disable-lock-screen-slideshow,Disable Lock Screen Slideshow,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L454
+visibility.disable-spotlight-action-center,Disable Windows Spotlight on Action Center,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L377
+visibility.disable-spotlight-desktop-collection,Disable Spotlight Collection on Desktop,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L403
+visibility.disable-spotlight-features,Disable Windows Spotlight Features,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L351
+visibility.disable-spotlight-settings,Disable Windows Spotlight on Settings,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L390
+visibility.disable-spotlight-third-party,Disable Spotlight Third-Party Suggestions,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L416
+visibility.disable-spotlight-welcome,Disable Windows Spotlight Welcome Experience,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L364
+visibility.disable-wcn-wizards,Disable Windows Connect Now Wizards,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L276
+visibility.disable-widgets,Disable Widgets (Policy),Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L313
+visibility.disable-window-animations,Disable Window Animations,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L252
+visibility.force-classic-control-panel,Force Classic Control Panel View,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L515
+visibility.hide-language-bar,Hide Language Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L300
+visibility.hide-most-used-apps,Hide Most Used Apps,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L325
+visibility.hide-people-bar,Hide People Bar,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L337
+visibility.restore-classic-context-menu,Restore Classic Context Menu,Docs\visibility\visibility.md,yes,yes,yes,yes,app\Services\TweakProviders\VisibilityTweakProvider.cs#L502

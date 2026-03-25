@@ -36,11 +36,12 @@ The project is for people who want more than a random "FPS boost" script:
 - risk levels: `Safe`, `Advanced`, `Risky`
 - local logging and exportable tweak history
 - preset-backed tweaks and registry-backed multi-value actions
-- elevated registry and command execution through `OpenTraceProject.ElevatedHost`
+- elevated registry and command execution through `elevated-host`
 
 ### Research and sources
 
-- local documentation and source mapping under `Docs/`
+- research records, evidence, and captured artifacts under `research/`
+- supporting docs under `Docs/`
 - uses Nohuto's research (`win-config`, `win-registry`) and cross-checks it against live builds
 - Microsoft-backed and repo-backed coverage tests for tweak providers
 
@@ -108,17 +109,18 @@ This project does not.
 ## Solution Layout
 
 ```text
-OpenTraceProject.App/              Desktop UI, view models, startup, assets, views
-OpenTraceProject.Core/             Contracts, models, plugin and tweak abstractions
-OpenTraceProject.Engine/           Tweak execution pipeline and concrete tweak types
-OpenTraceProject.Infrastructure/   Registry, elevation, files, hardware info
-OpenTraceProject.ElevatedHost/     Elevated helper process for admin-required actions
-OpenTraceProject.CLI/              CLI entry point for non-UI scenarios
-OpenTraceProject.Plugins.DevTools/ Bundled example/support plugin
-OpenTraceProject.Tests/            Unit tests
-Docs/                              Research notes, audits, tweak source maps
-Tools/                             One-off developer utilities
-scripts/                           Build, publish, cleanup, asset generation
+app/              Desktop UI, view models, startup, assets, views
+core/             Contracts, models, plugin and tweak abstractions
+engine/           Tweak execution pipeline and concrete tweak types
+infrastructure/   Registry, elevation, files, hardware info
+elevated-host/    Elevated helper process for admin-required actions
+cli/              CLI entry point for non-UI scenarios
+plugins-devtools/ Bundled example/support plugin
+tests/            Unit tests
+research/         Records, evidence, captured files, generated audit outputs
+Docs/             Supporting docs, workflows, and longer notes
+Tools/            One-off developer utilities
+scripts/          Build, publish, cleanup, asset generation
 ```
 
 ## Safety Model
@@ -162,13 +164,13 @@ dotnet build OpenTraceProject.sln
 ### Run the app
 
 ```powershell
-dotnet run --project OpenTraceProject.App/OpenTraceProject.App.csproj
+dotnet run --project app/app.csproj
 ```
 
 ### Run tests
 
 ```powershell
-dotnet test OpenTraceProject.Tests/OpenTraceProject.Tests.csproj -v minimal
+dotnet test tests/tests.csproj -v minimal
 ```
 
 ### Publish
@@ -187,7 +189,7 @@ pwsh -File scripts/clean_build_outputs.ps1 -WhatIfMode:$false
 
 The app is not always-admin.
 
-Admin-required operations are delegated to `OpenTraceProject.ElevatedHost`, which is resolved by:
+Admin-required operations are delegated to `elevated-host`, which is resolved by:
 
 - normal publish layout
 - app discovery logic
@@ -208,6 +210,8 @@ Useful scripts:
 
 Good starting points:
 
+- [research/README.md](research/README.md)
+- [research/evidence-atlas.md](research/evidence-atlas.md)
 - [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
 - [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
 - [Docs/RESEARCH_CREDITS.md](Docs/RESEARCH_CREDITS.md)

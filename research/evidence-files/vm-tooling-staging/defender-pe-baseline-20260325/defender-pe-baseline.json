@@ -1,0 +1,33 @@
+﻿{
+    "start_time":  "2026-03-25T11:54:52.0219083+03:00",
+    "sample_kind":  "pe",
+    "sample_path":  "C:\\Tools\\Perf\\Procmon\\ThreatFileHashProbe\\eicar-pe.exe",
+    "eicar_path":  "C:\\Tools\\Perf\\Procmon\\ThreatFileHashProbe\\eicar-pe.exe",
+    "file_exists_after":  true,
+    "mp_status_before":  {
+                             "am_running_mode":  "Normal",
+                             "antivirus_enabled":  true,
+                             "realtime_enabled":  true,
+                             "behavior_monitor_enabled":  true,
+                             "ioav_enabled":  true,
+                             "antispyware_enabled":  true
+                         },
+    "service_restart":  {
+                            "requested":  false,
+                            "attempted":  false,
+                            "succeeded":  false,
+                            "error":  null
+                        },
+    "mpcmdrun_exists":  true,
+    "mpcmdrun_exit_code":  0,
+    "mpcmdrun_timed_out":  false,
+    "detection_event_count":  0,
+    "hash_event_count":  0,
+    "config_change_event_count":  0,
+    "recent_event_ids":  [
+
+                         ],
+    "hash_event_messages":  [
+
+                            ]
+}

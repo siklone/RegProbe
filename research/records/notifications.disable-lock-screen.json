@@ -1,0 +1,233 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "notifications.disable-lock-screen",
+  "tweak_id": "notifications.disable-lock-screen",
+  "record_status": "validated",
+  "summary": "Policy-backed control for lock-screen toast notifications. The local Microsoft WPN.admx file explicitly documents the same user policy key, value name, and enabled/disabled values that the app uses.",
+  "setting": {
+    "name": "Lock Screen Toast Notifications",
+    "category": "Notifications",
+    "area": "Registry Policy",
+    "scope": "user",
+    "casual_explanation": "Windows can show some app notifications directly on the lock screen. This policy decides whether apps can raise those lock-screen toast alerts for the current user.",
+    "why_people_change_it": "People disable lock-screen notifications to keep sensitive information off the lock screen and make the sign-in surface quieter.",
+    "tradeoffs_overview": "Turning this off improves lock-screen privacy, but apps can no longer show toast notifications there.",
+    "professional_notes": "Microsoft documents NoLockScreenToastNotification in ADMX_WPN. The app uses the user-side policy path HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoToastApplicationNotificationOnLockScreen = 1, which matches the documented disable behavior.",
+    "targets": [
+      {
+        "target_id": "no-toast-application-notification-on-lock-screen",
+        "location_kind": "registry",
+        "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+        "value_name": "NoToastApplicationNotificationOnLockScreen",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Applications can still raise toast notifications on the lock screen under normal Windows behavior.",
+            "evidence_ids": [
+              "ms-admx-wpn-no-lock-screen-toast",
+              "local-wpn-admx-no-lock-screen-toast",
+              "local-wpn-adml-no-lock-screen-toast"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Lock-screen toasts allowed",
+            "meaning": "The policy is disabled and apps can still raise toast notifications on the lock screen.",
+            "evidence_ids": [
+              "ms-admx-wpn-no-lock-screen-toast",
+              "local-wpn-admx-no-lock-screen-toast",
+              "local-wpn-adml-no-lock-screen-toast"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Lock-screen toasts turned off",
+            "meaning": "Applications cannot raise toast notifications on the lock screen.",
+            "evidence_ids": [
+              "ms-admx-wpn-no-lock-screen-toast",
+              "local-wpn-admx-no-lock-screen-toast",
+              "local-wpn-adml-no-lock-screen-toast"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes NoToastApplicationNotificationOnLockScreen = 1 for the current user, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "no-toast-application-notification-on-lock-screen",
+        "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+        "value_name": "NoToastApplicationNotificationOnLockScreen",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows user-policy default",
+      "applies_to": "Supported Windows editions with WPN lock-screen notification policy support",
+      "states": [
+        {
+          "target_id": "no-toast-application-notification-on-lock-screen",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The user policy is not configured by default."
+        }
+      ],
+      "notes": "Microsoft documents the functional default as lock-screen toast notifications allowed when the policy is not configured.",
+      "evidence_ids": [
+        "ms-admx-wpn-no-lock-screen-toast",
+        "local-wpn-adml-no-lock-screen-toast"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want normal lock-screen notification behavior"
+      ],
+      "avoid_for": [
+        "Privacy-focused or shared devices"
+      ],
+      "states": [
+        {
+          "target_id": "no-toast-application-notification-on-lock-screen",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the user policy unset."
+        }
+      ],
+      "good_when": "You want apps to keep surfacing supported alerts on the lock screen.",
+      "bad_when": "You want the lock screen to reveal less information.",
+      "tradeoffs": [
+        "Lock-screen notifications can continue appearing.",
+        "No policy-based privacy restriction is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-admx-wpn-no-lock-screen-toast"
+      ]
+    },
+    {
+      "profile_id": "private-lock-screen",
+      "label": "Private lock screen",
+      "intended_for": [
+        "Shared PCs",
+        "Privacy-focused users"
+      ],
+      "avoid_for": [
+        "Users who rely on lock-screen alerts"
+      ],
+      "states": [
+        {
+          "target_id": "no-toast-application-notification-on-lock-screen",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Block app toast notifications on the lock screen."
+        }
+      ],
+      "good_when": "You want less information exposed before sign-in.",
+      "bad_when": "You rely on lock-screen toasts for awareness.",
+      "tradeoffs": [
+        "The lock screen becomes quieter and more private.",
+        "Apps lose their ability to surface toast alerts there."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-admx-wpn-no-lock-screen-toast",
+        "local-wpn-admx-no-lock-screen-toast",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-admx-wpn-no-lock-screen-toast",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: ADMX_WPN / NoLockScreenToastNotification",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification",
+      "summary": "Official Microsoft documentation for the policy that turns off app toast notifications on the lock screen.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-wpn-admx-no-lock-screen-toast",
+      "kind": "official-doc",
+      "title": "Local Microsoft WPN.admx NoLockScreenToastNotification mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx",
+      "summary": "The local ADMX file maps NoLockScreenToastNotification to the PushNotifications policy key with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-wpn-adml-no-lock-screen-toast",
+      "kind": "official-doc",
+      "title": "Local Microsoft WPN.adml NoLockScreenToastNotification help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml",
+      "summary": "The local ADML help text says enabling the policy turns off toast notifications on the lock screen.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes NoToastApplicationNotificationOnLockScreen = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft WPN.admx file explicitly defines NoLockScreenToastNotification at SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications with valueName NoToastApplicationNotificationOnLockScreen and enabledValue 1 / disabledValue 0, which matches the app's user policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T08:33:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx",
+    "exact_quote_or_path": "<policy name=\"NoLockScreenToastNotification\" class=\"User\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\" valueName=\"NoToastApplicationNotificationOnLockScreen\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping."
+  }
+}

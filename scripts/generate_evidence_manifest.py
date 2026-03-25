@@ -1,25 +1,17 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import hashlib
 import json
+import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-INDEX_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-index.json"
-JSON_OUTPUT_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-manifest.json"
-MD_OUTPUT_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-manifest.md"
+from research_path_lib import REPO_ROOT, RESEARCH_ROOT, file_sha256, linkify_reference_text
 
-
-def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
-
-
-def sha256_json(value: Any) -> str:
-    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
-    return sha256_bytes(payload)
+INDEX_PATH = RESEARCH_ROOT / "evidence-index.json"
+JSON_OUTPUT_PATH = RESEARCH_ROOT / "evidence-manifest.json"
+MD_OUTPUT_PATH = RESEARCH_ROOT / "evidence-manifest.md"
 
 
 def escape_md_cell(value: Any) -> str:
@@ -46,14 +38,16 @@ def record_source_hash(source_file: str) -> tuple[str | None, int | None]:
     source_path = REPO_ROOT / source_file
     if not source_path.exists():
         return None, None
-    data = source_path.read_bytes()
-    return sha256_bytes(data), len(data)
+    return file_sha256(source_path), source_path.stat().st_size
 
 
 def normalize_record(index_record: dict[str, Any]) -> dict[str, Any]:
     source_hash, source_size = record_source_hash(index_record["source_file"])
     proof = index_record.get("validation_proof")
-    proof_hash = sha256_json(proof) if proof is not None else None
+    proof_hash = None
+    if proof is not None:
+        payload = json.dumps(proof, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        proof_hash = hashlib.sha256(payload).hexdigest()
 
     return {
         "record_id": index_record.get("record_id"),
@@ -80,189 +74,91 @@ def normalize_record(index_record: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def render_allowed_value(item: dict[str, Any]) -> str:
-    state = item.get("state_kind", "unknown")
-    value = item.get("value")
-    label = item.get("label")
-    meaning = item.get("meaning")
-    pieces = [f"{state}"]
-    if value is not None:
-        pieces.append(f"value={json.dumps(value, ensure_ascii=False)}")
-    if label:
-        pieces.append(f"label={label}")
-    if meaning:
-        pieces.append(f"meaning={meaning}")
-    return " | ".join(escape_md_cell(piece) for piece in pieces)
-
-
 def render_md(manifest: dict[str, Any]) -> str:
     lines: list[str] = []
     summary = manifest["summary"]
     lines.append("# Evidence Manifest")
     lines.append("")
-    lines.append("This manifest is the forensic companion to the evidence atlas.")
-    lines.append("Each record includes the raw source-file SHA256, the exact validation proof block, and source links.")
-    lines.append("Nohuto references only show upstream dump or naming links. Value semantics still come from the record evidence and validation proof.")
+    lines.append("This file is the index-friendly companion to the atlas. It tracks source hashes, proof hashes, and the normalized evidence links that were pulled into the repo.")
     lines.append("")
     lines.append("## Summary")
     lines.append("")
-    lines.append("| Field | Value |")
-    lines.append("| --- | --- |")
-    lines.append(f"| Total records | {summary['total_records']} |")
-    lines.append(f"| Validated | {summary['validated']} |")
-    lines.append(f"| Deprecated | {summary['deprecated']} |")
-    lines.append(f"| Review required | {summary['review_required']} |")
-    lines.append(f"| Records with evidence | {summary['records_with_evidence']} |")
-    lines.append(f"| Records without evidence | {summary['records_without_evidence']} |")
-    lines.append(f"| Records missing validation proof | {summary['records_missing_validation_proof']} |")
-    lines.append(f"| Deprecated missing validation proof | {summary['deprecated_missing_validation_proof']} |")
+    rows = [
+        ["Total records", str(summary.get("total_records", 0))],
+        ["Validated", str(summary.get("validated", 0))],
+        ["Deprecated", str(summary.get("deprecated", 0))],
+        ["Review required", str(summary.get("review_required", 0))],
+        ["Records with evidence", str(summary.get("records_with_evidence", 0))],
+        ["Records without evidence", str(summary.get("records_without_evidence", 0))],
+        ["Records missing validation proof", str(summary.get("records_missing_validation_proof", 0))],
+        ["Deprecated missing validation proof", str(summary.get("deprecated_missing_validation_proof", 0))],
+    ]
     class_counts = summary.get("class_counts") or {}
     for class_id in ["A", "B", "C", "D", "E"]:
         if class_id in class_counts:
-            lines.append(f"| {class_id} count | {class_counts[class_id]} |")
+            rows.append([f"Class {class_id}", str(class_counts[class_id])])
+    lines.extend(render_table(["Field", "Value"], rows))
     lines.append("")
-    lines.append("## Record Index")
+    lines.append("## Record index")
     lines.append("")
-    lines.append("| Record | Status | Class | Source file | Source SHA256 | Proof SHA256 | Targets |")
-    lines.append("| --- | --- | --- | --- | --- | --- | --- |")
-    total_records = len(manifest["records"])
-    for index, record in enumerate(manifest["records"]):
-        lines.append(
-            "| "
-            + " | ".join(
-                [
-                    f"`{escape_md_cell(record.get('record_id'))}`",
-                    escape_md_cell(record.get("record_status", "")),
-                    escape_md_cell((record.get("evidence_class") or {}).get("class_label", "")),
-                    f"`{escape_md_cell(record.get('source_file'))}`",
-                    f"`{escape_md_cell(record.get('source_file_sha256'))}`" if record.get("source_file_sha256") else "",
-                    f"`{escape_md_cell(record.get('validation_proof_sha256'))}`" if record.get("validation_proof_sha256") else "",
-                    str(len(record.get("targets", []))),
-                ]
-            )
-            + " |"
-        )
+    index_rows = []
+    for record in manifest["records"]:
+        index_rows.append([
+            f"`{escape_md_cell(record.get('record_id'))}`",
+            escape_md_cell(record.get("record_status")),
+            escape_md_cell((record.get("evidence_class") or {}).get("class_label")),
+            f"`{escape_md_cell(record.get('source_file'))}`",
+            f"`{escape_md_cell(record.get('source_file_sha256'))}`" if record.get("source_file_sha256") else "",
+            f"`{escape_md_cell(record.get('validation_proof_sha256'))}`" if record.get("validation_proof_sha256") else "",
+            str(len(record.get("evidence", []))),
+        ])
+    lines.extend(render_table(["Record", "Status", "Class", "Source file", "Source SHA256", "Proof SHA256", "Evidence"], index_rows))
     lines.append("")
-    lines.append("## Per-Record Details")
+    lines.append("## Per-record details")
     lines.append("")
     for record in manifest["records"]:
         lines.append(f"### `{record.get('record_id')}`")
         lines.append("")
-        lines.append(f"- Status: `{record.get('record_status')}`")
-        evidence_class = record.get("evidence_class") or {}
-        lines.append(f"- Evidence class: `{escape_md_cell(evidence_class.get('class_label'))}` - {escape_md_cell(evidence_class.get('class_title'))}")
-        lines.append(f"- Category: `{escape_md_cell(record.get('category'))}`")
-        lines.append(f"- Area: `{escape_md_cell(record.get('area'))}`")
-        lines.append(f"- Scope: `{escape_md_cell(record.get('scope'))}`")
+        lines.append(f"- Status: `{escape_md_cell(record.get('record_status'))}`")
+        lines.append(f"- Evidence class: `{escape_md_cell((record.get('evidence_class') or {}).get('class_label'))}`")
         lines.append(f"- Source file: `{escape_md_cell(record.get('source_file'))}`")
         lines.append(f"- Source SHA256: `{escape_md_cell(record.get('source_file_sha256'))}`")
         lines.append(f"- Proof SHA256: `{escape_md_cell(record.get('validation_proof_sha256'))}`")
         lines.append("")
-        summary_text = record.get("summary")
-        if summary_text:
-            lines.append(f"**Summary:** {summary_text}")
+        if record.get("summary"):
+            lines.append(f"**Summary:** {escape_md_cell(record.get('summary'))}")
             lines.append("")
-        if evidence_class:
-            lines.append("**Evidence class**")
-            lines.append("")
-            class_rows = [
-                ["Class", escape_md_cell(evidence_class.get("class_label"))],
-                ["Title", escape_md_cell(evidence_class.get("class_title"))],
-                ["Action state", escape_md_cell(evidence_class.get("action_state"))],
-                ["Gating reason", escape_md_cell(evidence_class.get("gating_reason"))],
-            ]
-            lines.extend(render_table(["Field", "Value"], class_rows))
-            lines.append("")
-        lines.append("**Targets**")
-        lines.append("")
-        for target in record.get("targets", []):
-            lines.append(
-                f"- `{escape_md_cell(target.get('path'))}` / "
-                f"`{escape_md_cell(target.get('value_name'))}` / "
-                f"`{escape_md_cell(target.get('value_type'))}`"
-            )
-            notes = target.get("notes")
-            if notes:
-                lines.append(f"  - Notes: {escape_md_cell(notes)}")
-            for allowed in target.get("allowed_values", []) or []:
-                lines.append(f"  - {render_allowed_value(allowed)}")
-        lines.append("")
-        lines.append("**Evidence**")
-        lines.append("")
         evidence_rows = []
         for evidence in record.get("evidence", []):
             evidence_rows.append([
                 f"`{escape_md_cell(evidence.get('evidence_id'))}`",
                 f"`{escape_md_cell(evidence.get('kind'))}`",
-                f"`{escape_md_cell(evidence.get('origin'))}`",
                 escape_md_cell(evidence.get("title")),
-                f"`{escape_md_cell(evidence.get('strength'))}`",
+                linkify_reference_text(evidence.get("location"), MD_OUTPUT_PATH),
             ])
-        lines.extend(render_table(["Evidence ID", "Kind", "Origin", "Title", "Strength"], evidence_rows))
-        lines.append("")
-
-        provenance = record.get("provenance")
-        lines.append("**Sources**")
-        lines.append("")
-        if isinstance(provenance, dict):
-            provenance_rows = [
-                ["Coverage state", escape_md_cell(provenance.get("coverage_state"))],
-                ["Has nohuto evidence", escape_md_cell(provenance.get("has_nohuto_evidence"))],
-                ["Has Windows Internals notes", escape_md_cell(provenance.get("has_windows_internals_context"))],
-                ["Needs review", escape_md_cell(provenance.get("needs_review"))],
-                ["Source repositories", escape_md_cell(", ".join(provenance.get("source_repositories", []) or []))],
-                ["Matched tokens", escape_md_cell(", ".join(provenance.get("matched_tokens", []) or []))],
-                ["Lineage note", escape_md_cell(provenance.get("lineage_note"))],
-            ]
-            lines.extend(render_table(["Field", "Value"], provenance_rows))
+        if evidence_rows:
+            lines.append("**Evidence**")
             lines.append("")
-
-            if provenance.get("nohuto_references"):
-                lines.append("Nohuto lineage references:")
-                for ref in provenance.get("nohuto_references", []):
-                    lines.append(
-                        f"- {escape_md_cell(ref.get('Title'))} | `{escape_md_cell(ref.get('Url'))}` | {escape_md_cell(ref.get('Summary'))}"
-                    )
-                lines.append("")
-
-            if provenance.get("windows_internals_references"):
-                lines.append("Windows Internals references:")
-                for ref in provenance.get("windows_internals_references", []):
-                    lines.append(
-                        f"- {escape_md_cell(ref.get('Title'))} | `{escape_md_cell(ref.get('Url'))}` | {escape_md_cell(ref.get('Summary'))}"
-                    )
-                lines.append("")
-
-            if provenance.get("other_references"):
-                lines.append("Other source references:")
-                for ref in provenance.get("other_references", []):
-                    lines.append(
-                        f"- {escape_md_cell(ref.get('Kind'))}: {escape_md_cell(ref.get('Title'))} | `{escape_md_cell(ref.get('Url'))}` | {escape_md_cell(ref.get('Summary'))}"
-                    )
-                lines.append("")
-        else:
-            lines.append("_No source block present._")
+            lines.extend(render_table(["Evidence ID", "Kind", "Title", "Location"], evidence_rows))
             lines.append("")
-
         proof = record.get("validation_proof")
-        lines.append("**Validation proof**")
-        lines.append("")
         if isinstance(proof, dict):
-            lines.append("| Field | Value |")
-            lines.append("| --- | --- |")
-            for key in ["source_url", "exact_quote_or_path", "key_found_on_page", "notes"]:
-                value = proof.get(key)
-                if value is None:
-                    continue
-                text = json.dumps(value, ensure_ascii=False) if isinstance(value, (dict, list)) else str(value)
-                lines.append(f"| {escape_md_cell(key)} | {escape_md_cell(text)} |")
-        else:
-            lines.append("_No validation proof present._")
-        if index < total_records - 1:
+            lines.append("**Validation proof**")
             lines.append("")
-            lines.append("---")
+            lines.extend(
+                render_table(
+                    ["Field", "Value"],
+                    [
+                        ["Source", linkify_reference_text(proof.get("source_url"), MD_OUTPUT_PATH)],
+                        ["Exact quote / path", linkify_reference_text(proof.get("exact_quote_or_path"), MD_OUTPUT_PATH)],
+                        ["Notes", linkify_reference_text(proof.get("notes"), MD_OUTPUT_PATH)],
+                    ],
+                )
+            )
             lines.append("")
-    return "\n".join(lines)
+        lines.append("---")
+        lines.append("")
+    return "\n".join(lines).rstrip()
 
 
 def main() -> int:
@@ -279,23 +175,11 @@ def main() -> int:
     manifest["summary"]["records_without_source_hashes"] = sum(1 for record in manifest["records"] if not record.get("source_file_sha256"))
 
     JSON_OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with JSON_OUTPUT_PATH.open("w", encoding="utf-8", newline="\n") as handle:
-        json.dump(manifest, handle, ensure_ascii=False, indent=2)
-        handle.write("\n")
-
-    with MD_OUTPUT_PATH.open("w", encoding="utf-8", newline="\n") as handle:
-        handle.write(render_md(manifest))
-        handle.write("\n")
+    JSON_OUTPUT_PATH.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    MD_OUTPUT_PATH.write_text(render_md(manifest) + "\n", encoding="utf-8")
 
     print(f"Wrote {JSON_OUTPUT_PATH}")
     print(f"Wrote {MD_OUTPUT_PATH}")
-    print(
-        "Summary: "
-        f"{manifest['summary']['total_records']} records, "
-        f"{manifest['summary']['validated']} validated, "
-        f"{manifest['summary']['deprecated']} deprecated, "
-        f"{manifest['summary']['review_required']} review-required."
-    )
     return 0
 
 

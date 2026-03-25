@@ -1,0 +1,206 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.services.disable-print-workflow-user-service",
+  "tweak_id": "system.services.disable-print-workflow-user-service",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for Print Workflow User Service. Microsoft documents the base service family and default start mode, but marks it No guidance rather than OK to disable. The app disables instantiated per-user PrintWorkflowUserSvc services through a wildcard service pattern, so the record is kept as reference only.",
+  "setting": {
+    "name": "Print Workflow User Service",
+    "category": "System",
+    "area": "Service Start Mode",
+    "scope": "user-session",
+    "casual_explanation": "This per-user service supports Print Workflow applications. Disabling it can stop those print workflow features and may prevent some printing scenarios from working correctly.",
+    "why_people_change_it": "People disable it on stripped-down systems that do not print and do not use Print Workflow applications.",
+    "tradeoffs_overview": "Disabling it can trim per-user print workflow services, but Microsoft notes that printing may fail if it is turned off.",
+    "professional_notes": "Microsoft's Windows IoT Enterprise service guidance lists Print Workflow `(PrintWorkflowUserSvc)` with a default start mode of `Manual` and marks it `No guidance`, warning that some printing functions might not work successfully if it is turned off. Windows instantiates this as per-user services, so the app targets `PrintWorkflowUserSvc_*` to disable created instances. A local SCM snapshot confirms one instantiated service on the review host, `PrintWorkflowUserSvc_7598c`, with display name `PrintWorkflow_7598c`, binary path `research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md -k PrintWorkflow`, and current start type `3 DEMAND_START`.",
+    "targets": [
+      {
+        "target_id": "printworkflowusersvc-start-mode",
+        "location_kind": "service",
+        "path": "PrintWorkflowUserSvc_*",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Manual",
+            "label": "Windows default",
+            "meaning": "Per-user PrintWorkflowUserSvc instances use Microsoft's documented Manual start mode.",
+            "evidence_ids": [
+              "ms-iot-services-printworkflowusersvc"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Disabled",
+            "label": "Print workflow user service disabled",
+            "meaning": "Instantiated PrintWorkflowUserSvc per-user services are disabled until their start mode is restored.",
+            "evidence_ids": [
+              "ms-iot-services-printworkflowusersvc",
+              "app-system-provider"
+            ]
+          }
+        ],
+        "notes": "Microsoft documents the base service family as PrintWorkflowUserSvc. The app applies the setting to instantiated per-user service names using a wildcard."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The app disables instantiated PrintWorkflowUserSvc per-user services through the wildcard pattern PrintWorkflowUserSvc_*.",
+    "writes": [
+      {
+        "target_id": "printworkflowusersvc-start-mode",
+        "path": "PrintWorkflowUserSvc_*",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "state_kind": "value",
+        "value": "Disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented default",
+      "applies_to": "Windows systems with the Print Workflow service family instantiated for signed-in users",
+      "states": [
+        {
+          "target_id": "printworkflowusersvc-start-mode",
+          "state_kind": "value",
+          "value": "Manual",
+          "rationale": "Microsoft lists PrintWorkflowUserSvc with a Manual default start mode."
+        }
+      ],
+      "notes": "This baseline preserves the documented per-user print workflow behavior.",
+      "evidence_ids": [
+        "ms-iot-services-printworkflowusersvc"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that print normally"
+      ],
+      "avoid_for": [
+        "Minimal builds intentionally removing print workflow support"
+      ],
+      "states": [
+        {
+          "target_id": "printworkflowusersvc-start-mode",
+          "state_kind": "value",
+          "value": "Manual",
+          "rationale": "Keep the documented default service mode for instantiated PrintWorkflowUserSvc instances."
+        }
+      ],
+      "good_when": "You want normal print workflow support available.",
+      "bad_when": "You do not print and want these per-user services removed.",
+      "tradeoffs": [
+        "Print workflow support remains available.",
+        "Windows can still start the service family when user-session print workflow features need it."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-iot-services-printworkflowusersvc"
+      ]
+    },
+    {
+      "profile_id": "no-print-workflow-user-service",
+      "label": "No print workflow user service",
+      "intended_for": [
+        "Systems not using print workflow apps",
+        "Stripped-down builds"
+      ],
+      "avoid_for": [
+        "Users who print through Windows or need print workflow support"
+      ],
+      "states": [
+        {
+          "target_id": "printworkflowusersvc-start-mode",
+          "state_kind": "value",
+          "value": "Disabled",
+          "rationale": "Disable instantiated PrintWorkflowUserSvc per-user services."
+        }
+      ],
+      "good_when": "You intentionally do not want the per-user print workflow service family active.",
+      "bad_when": "You may need Windows printing workflows.",
+      "tradeoffs": [
+        "Per-user print workflow service activity stops.",
+        "Printing may not work successfully until the service family is restored."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-iot-services-printworkflowusersvc",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-iot-services-printworkflowusersvc",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Guidance on configuring system services - Print Workflow Service",
+      "location": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "summary": "Microsoft lists Print Workflow `(PrintWorkflowUserSvc)` with start mode `Manual` and marks it `No guidance`, noting that some printing functions might not work successfully if it is turned off.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-scm-printworkflowusersvc-2026-03-14",
+      "kind": "repo-doc",
+      "title": "Local SCM snapshot - PrintWorkflowUserSvc instance",
+      "location": "research/notes/service-snapshots/printworkflowusersvc_7598c-sc-qc-2026-03-14.txt",
+      "summary": "Checked-in `sc qc PrintWorkflowUserSvc_7598c` snapshot from Microsoft Windows 11 Pro 10.0.26200 confirming a live instantiated per-user PrintWorkflowUserSvc service, its display name, binary path, and current START_TYPE line on the review host. This anchors the wildcard app mapping to a real service instance.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider disables instantiated `PrintWorkflowUserSvc_*` services through the batch service start-mode tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents Print Workflow `(PrintWorkflowUserSvc)` with a Manual default start mode, but marks it `No guidance` rather than safe to disable. Because the official service guidance does not endorse disabling it, this record remains research-only even though the exact service family is now proven.",
+    "blocking_issues": [
+      "Official Microsoft service guidance marks PrintWorkflowUserSvc as No guidance rather than OK to disable."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+    "exact_quote_or_path": "Print Workflow (PrintWorkflowUserSvc) | Manual | No guidance | Provides support for Print Workflow applications. If you turn off this service, some printing functions might not work successfully.",
+    "key_found_on_page": true,
+    "notes": "The official Learn services page documents the base per-user service family as PrintWorkflowUserSvc, but the recommendation is No guidance, not OK to disable. A companion SCM snapshot is checked in at research/notes/service-snapshots/printworkflowusersvc_7598c-sc-qc-2026-03-14.txt."
+  }
+}

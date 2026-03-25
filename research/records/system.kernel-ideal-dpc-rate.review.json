@@ -1,0 +1,213 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "system.kernel-ideal-dpc-rate",
+  "tweak_id": "system.kernel-ideal-dpc-rate",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for IdealDpcRate. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\IdealDpcRate = 20, and the mirror plus decompiled kernel query path now expose the backing KiIdealDpcRate variable even though this research pass still did not capture a primary Microsoft source for the exact registry key and value semantics.",
+  "setting": {
+    "name": "Ideal DPC Rate",
+    "category": "System",
+    "area": "Kernel / DPC Scheduling",
+    "scope": "device",
+    "casual_explanation": "This appears to be a kernel target rate for deferred procedure calls. It is a very low-level scheduler value that normal users should not touch.",
+    "why_people_change_it": "People would only change it when reproducing kernel tuning experiments or undoing manual registry changes from advanced tweak guides.",
+    "tradeoffs_overview": "Changing DPC rate targets can influence latency-sensitive kernel behavior in ways that are hard to predict. Without a primary Microsoft source for the key, the safe choice is to keep it in review.",
+    "professional_notes": "The repo research notes list IdealDpcRate = 20 and associate it with KiIdealDpcRate. The mirrored win-config list records the same mapping, and the decompiled ExpQuerySystemInformation path copies KiIdealDpcRate into the queried system-information buffer. However, this research pass still did not capture a primary Microsoft page that documents the registry key, its supported values, or its current support status. The record therefore treats the value as observed repo provenance plus kernel pseudocode corroboration only.",
+    "targets": [
+      {
+        "target_id": "ideal-dpc-rate",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "IdealDpcRate",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "unknown",
+            "value": null,
+            "label": "Primary Microsoft mapping not captured",
+            "meaning": "This research pass did not capture a primary Microsoft source for the exact IdealDpcRate registry semantics.",
+            "evidence_ids": [
+              "nohuto-ideal-dpc-rate-ghidra",
+              "repo-system-doc-kernel"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 20,
+            "label": "Observed app profile",
+            "meaning": "The current app treats 20 as the default DPC rate target, based on repo research rather than a captured primary Microsoft source.",
+            "evidence_ids": [
+              "nohuto-ideal-dpc-rate-ghidra",
+              "repo-system-doc-kernel",
+              "app-system-registry-provider"
+            ]
+          }
+        ],
+        "notes": "Tracked as an observed kernel registry mapping only."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes IdealDpcRate = 20, but this research pass has not yet captured a primary Microsoft source for the value.",
+    "writes": [
+      {
+        "target_id": "ideal-dpc-rate",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "IdealDpcRate",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 20
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Conservative baseline",
+      "applies_to": "Systems where this dataset has not yet validated IdealDpcRate from a primary Microsoft source",
+      "states": [
+        {
+          "target_id": "ideal-dpc-rate",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish a validated DPC-rate baseline until the exact registry mapping is backed by a primary Microsoft source."
+        }
+      ],
+      "notes": "This keeps the low-level kernel rate target out of published presets until it is properly sourced.",
+      "evidence_ids": [
+        "repo-system-doc-kernel"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Kernel experiment documentation"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "ideal-dpc-rate",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish or apply the value until a primary Microsoft source is captured."
+        }
+      ],
+      "good_when": "You want to document the kernel setting without overstating confidence.",
+      "bad_when": "You need a primary-source Microsoft-backed DPC rate control.",
+      "tradeoffs": [
+        "The app behavior is documented honestly.",
+        "The low-level DPC rate stays blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-system-doc-kernel"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published validated presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "ideal-dpc-rate",
+          "state_kind": "value",
+          "value": 20,
+          "rationale": "Observed app write used as the current DPC-rate profile."
+        }
+      ],
+      "good_when": "You are documenting what the app currently writes for IdealDpcRate.",
+      "bad_when": "You need a validated Microsoft registry mapping.",
+      "tradeoffs": [
+        "The current app behavior is captured.",
+        "The exact registry semantics remain based on repo provenance rather than a captured primary source."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until a primary Microsoft source for IdealDpcRate is captured.",
+      "evidence_ids": [
+        "repo-system-doc-kernel",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "nohuto-ideal-dpc-rate-ghidra",
+      "kind": "decompilation",
+      "title": "nohuto mirror: ideal DPC rate query path",
+      "location": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c; research/_source-mirrors/win-config/system/desc.md",
+      "summary": "The decompiled kernel query path copies KiIdealDpcRate into the system-information buffer, and the mirror docs record the matching IdealDpcRate = 20 mapping.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-system-doc-kernel",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for kernel registry values",
+      "location": "Docs/system/system.md",
+      "summary": "The repo documents IdealDpcRate = 20 as personal research and ties it to KiIdealDpcRate.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes IdealDpcRate = 20 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "The current semantics come from repo research notes plus mirrored kernel pseudocode that exposes KiIdealDpcRate, but this research pass still did not capture a primary Microsoft source for IdealDpcRate.",
+    "blocking_issues": [
+      "No primary Microsoft source for IdealDpcRate was captured in this research pass.",
+      "The current app mapping relies on repo provenance instead of a directly captured Microsoft source."
+    ]
+  },
+  "open_questions": [
+    "Can a primary Microsoft source for IdealDpcRate be captured?",
+    "Should the app surface this only as an experimental kernel setting?"
+  ],
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c",
+    "exact_quote_or_path": "*(_DWORD *)(a4 + 16) = KiIdealDpcRate;",
+    "key_found_on_page": true,
+    "notes": "Kernel ideal DPC rate audit trail. The mirrored docs record IdealDpcRate = 20, and the decompiled path exposes the KiIdealDpcRate kernel variable directly."
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-feedback-notifications",
+  "tweak_id": "privacy.disable-feedback-notifications",
+  "record_status": "validated",
+  "summary": "Machine policy for Microsoft feedback prompts. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.",
+  "setting": {
+    "name": "Microsoft Feedback Notifications",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can occasionally show prompts asking for feedback. This policy decides whether those feedback questions appear on the device.",
+    "why_people_change_it": "People disable feedback prompts to reduce interruptions, prevent Microsoft feedback requests on managed devices, or keep the UI quieter.",
+    "tradeoffs_overview": "Turning this off reduces prompts and distractions, but it also removes a built-in way for Windows to request feedback from the user.",
+    "professional_notes": "The Experience Policy CSP documents DoNotShowFeedbackNotifications. FeedbackNotifications.admx maps the machine policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DoNotShowFeedbackNotifications with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "do-not-show-feedback-notifications",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+        "value_name": "DoNotShowFeedbackNotifications",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the feedback-notification policy.",
+            "evidence_ids": [
+              "ms-experience-csp-feedback-notifications",
+              "local-feedback-notifications-admx",
+              "nohuto-donotshowfeedbacknotifications-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Feedback notifications allowed",
+            "meaning": "The policy is disabled and Windows feedback prompts may be shown.",
+            "evidence_ids": [
+              "ms-experience-csp-feedback-notifications",
+              "local-feedback-notifications-admx",
+              "nohuto-donotshowfeedbacknotifications-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Feedback notifications disabled",
+            "meaning": "Windows feedback prompts are blocked by policy.",
+            "evidence_ids": [
+              "ms-experience-csp-feedback-notifications",
+              "local-feedback-notifications-admx",
+              "nohuto-donotshowfeedbacknotifications-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DoNotShowFeedbackNotifications = 1, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "do-not-show-feedback-notifications",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+        "value_name": "DoNotShowFeedbackNotifications",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 10 and newer supported systems",
+      "states": [
+        {
+          "target_id": "do-not-show-feedback-notifications",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The machine policy is not configured by default."
+        }
+      ],
+      "notes": "This is the policy baseline and not a claim about every regional or edition-specific feedback experience.",
+      "evidence_ids": [
+        "ms-experience-csp-feedback-notifications",
+        "local-feedback-notifications-admx",
+        "nohuto-donotshowfeedbacknotifications-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Devices where occasional Microsoft feedback requests are acceptable"
+      ],
+      "avoid_for": [
+        "Managed systems that should stay quiet"
+      ],
+      "states": [
+        {
+          "target_id": "do-not-show-feedback-notifications",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep its normal policy behavior for feedback prompts.",
+      "bad_when": "You want to suppress Microsoft feedback requests.",
+      "tradeoffs": [
+        "Windows can continue showing feedback questions.",
+        "No policy-based suppression is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-experience-csp-feedback-notifications",
+        "nohuto-donotshowfeedbacknotifications-admx"
+      ]
+    },
+    {
+      "profile_id": "quiet-managed",
+      "label": "Quiet managed",
+      "intended_for": [
+        "Managed devices",
+        "Distraction-free setups"
+      ],
+      "avoid_for": [
+        "Users who want Windows to prompt for feedback"
+      ],
+      "states": [
+        {
+          "target_id": "do-not-show-feedback-notifications",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Block Microsoft feedback prompts by policy."
+        }
+      ],
+      "good_when": "You want Windows feedback requests suppressed on the device.",
+      "bad_when": "You want an easy built-in path for Windows feedback prompts to appear.",
+      "tradeoffs": [
+        "Feedback prompts are removed.",
+        "Users are less likely to see a built-in invitation to send Microsoft feedback."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-experience-csp-feedback-notifications",
+        "local-feedback-notifications-admx",
+        "app-privacy-provider",
+        "nohuto-donotshowfeedbacknotifications-admx"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-experience-csp-feedback-notifications",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: DoNotShowFeedbackNotifications",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications",
+      "summary": "Official documentation for the policy that prevents Windows devices from showing Microsoft feedback questions.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-feedback-notifications-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft FeedbackNotifications.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/FeedbackNotifications.admx",
+      "summary": "The local ADMX file shows DoNotShowFeedbackNotifications with enabledValue 1 and disabledValue 0 under the DataCollection policy key.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DoNotShowFeedbackNotifications = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-feedback-notifications",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "nohuto-donotshowfeedbacknotifications-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - DoNotShowFeedbackNotifications policy",
+      "location": "research/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "The privacy mirror lists DoNotShowFeedbackNotifications under the DataCollection policy family with the exact PolicyName and ValueName. The policy name indicates Microsoft Feedback Notifications are suppressed; the mirrored metadata keeps the registry surface tied to the value name used by the app.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-feedback-notifications",
+      "kind": "procmon-trace",
+      "title": "Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle",
+      "location": "research/evidence-files/vm-tooling-staging/feedback_notifications_probe.txt",
+      "summary": "The guest probe wrote DoNotShowFeedbackNotifications=0 and DoNotShowFeedbackNotifications=1, queried the live registry after each write, opened the feedback settings surface in both states, and restored the original state.",
+      "supports": [
+        "runtime writes",
+        "value semantics",
+        "rollback"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents DoNotShowFeedbackNotifications directly in the Experience Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\DataCollection\\DoNotShowFeedbackNotifications with 0 as the default not-disabled state and 1 as disabled. The app writes that exact machine policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T13:18:10.1644837+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications",
+    "exact_quote_or_path": "Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled.",
+    "key_found_on_page": true,
+    "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at research/evidence-files/vm-tooling-staging/feedback_notifications_probe.txt confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state."
+  }
+}

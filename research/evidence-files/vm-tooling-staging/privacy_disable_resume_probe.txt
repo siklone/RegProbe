@@ -1,0 +1,20 @@
+WRITE=0
+QUERY=HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration
+    IsResumeAllowed    REG_DWORD    0x0
+OPEN_CROSSDEVICE_SETTINGS=YES
+WRITE=1
+QUERY=HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration
+    IsResumeAllowed    REG_DWORD    0x1
+OPEN_CROSSDEVICE_SETTINGS=YES
+RESTORED=ABSENT
+MATCHES=YES
+"10:20:19.2492269 PM","Explorer.EXE","4660","Process Profiling","","SUCCESS","User Time: 2.5625000 seconds, Kernel Time: 11.2656250 seconds, Private Bytes: 33,583,104, Working Set: 152,645,632"
+"10:20:19.2492336 PM","ShellHost.exe","4748","Process Profiling","","SUCCESS","User Time: 0.3437500 seconds, Kernel Time: 0.2968750 seconds, Private Bytes: 6,631,424, Working Set: 41,545,728"
+"10:20:19.2493612 PM","SearchHost.exe","1516","Process Profiling","","SUCCESS","User Time: 1.4218750 seconds, Kernel Time: 3.0937500 seconds, Private Bytes: 30,949,376, Working Set: 113,418,240"
+"10:20:19.2493688 PM","StartMenuExperienceHost.exe","2124","Process Profiling","","SUCCESS","User Time: 0.7187500 seconds, Kernel Time: 1.6406250 seconds, Private Bytes: 43,167,744, Working Set: 117,542,912"
+"10:20:20.2640239 PM","Explorer.EXE","4660","Process Profiling","","SUCCESS","User Time: 2.5625000 seconds, Kernel Time: 11.2656250 seconds, Private Bytes: 33,583,104, Working Set: 152,645,632"
+"10:20:20.2640242 PM","ShellHost.exe","4748","Process Profiling","","SUCCESS","User Time: 0.3437500 seconds, Kernel Time: 0.2968750 seconds, Private Bytes: 6,631,424, Working Set: 41,545,728"
+"10:20:20.2640265 PM","SearchHost.exe","1516","Process Profiling","","SUCCESS","User Time: 1.4218750 seconds, Kernel Time: 3.0937500 seconds, Private Bytes: 30,949,376, Working Set: 113,418,240"
+"10:20:20.2640268 PM","StartMenuExperienceHost.exe","2124","Process Profiling","","SUCCESS","User Time: 0.7187500 seconds, Kernel Time: 1.6406250 seconds, Private Bytes: 43,167,744, Working Set: 117,542,912"
+HAD_VALUE=False
+ORIGINAL=

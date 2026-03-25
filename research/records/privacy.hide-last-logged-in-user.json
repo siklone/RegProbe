@@ -1,0 +1,228 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.hide-last-logged-in-user",
+  "tweak_id": "privacy.hide-last-logged-in-user",
+  "record_status": "validated",
+  "summary": "Security option for whether the last signed-in username is shown at sign-in. Local Windows security metadata documents the same Policies\\System\\DontDisplayLastUserName value that the app writes.",
+  "setting": {
+    "name": "Display of the Last Signed-In Username",
+    "category": "Privacy",
+    "area": "Security Option",
+    "scope": "device",
+    "casual_explanation": "Windows can show the name of the last person who signed in on the sign-in screen. This setting decides whether that username is shown or hidden.",
+    "why_people_change_it": "People hide the last signed-in username on shared or public-facing systems so the sign-in screen reveals less information about who uses the device.",
+    "tradeoffs_overview": "Hiding it improves privacy at the sign-in screen, but it also removes a convenience hint that makes it easier for the usual user to see which account signed in last.",
+    "professional_notes": "Microsoft documents this as the security option 'Interactive logon: Do not display last user name'. The local Windows security INF files map it to HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName with a default of 0. The app uses the conventional enabled-state value of 1 to hide the username.",
+    "targets": [
+      {
+        "target_id": "dont-display-last-user-name",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "DontDisplayLastUserName",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Show the last signed-in username",
+            "meaning": "The security option is not enabled, so the last signed-in username can appear at sign-in.",
+            "evidence_ids": [
+              "ms-security-option-hide-last-user",
+              "local-security-defaults-last-user"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Hide the last signed-in username",
+            "meaning": "The security option is enabled and the last signed-in username is not shown on the sign-in screen.",
+            "evidence_ids": [
+              "ms-security-option-hide-last-user",
+              "local-security-registry-last-user",
+              "app-privacy-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DontDisplayLastUserName = 1, which matches the documented enabled security-option behavior.",
+    "writes": [
+      {
+        "target_id": "dont-display-last-user-name",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "DontDisplayLastUserName",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows security-option default",
+      "applies_to": "Windows client systems exposing the interactive logon security option",
+      "states": [
+        {
+          "target_id": "dont-display-last-user-name",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "The local Windows security baseline files list a default of 0."
+        }
+      ],
+      "notes": "By default, Windows does not force the username to be hidden through this security option.",
+      "evidence_ids": [
+        "local-security-defaults-last-user"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Single-user devices",
+        "Home systems"
+      ],
+      "avoid_for": [
+        "Shared or public-facing systems"
+      ],
+      "states": [
+        {
+          "target_id": "dont-display-last-user-name",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the normal sign-in cue visible."
+        }
+      ],
+      "good_when": "You want the sign-in screen to show which account was used last.",
+      "bad_when": "You do not want account names exposed on the sign-in screen.",
+      "tradeoffs": [
+        "Sign-in is slightly more convenient for the usual user.",
+        "The sign-in screen exposes more identity information."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-security-option-hide-last-user",
+        "local-security-defaults-last-user"
+      ]
+    },
+    {
+      "profile_id": "private-signin-screen",
+      "label": "Private sign-in screen",
+      "intended_for": [
+        "Shared PCs",
+        "Office desktops",
+        "Public or semi-public systems"
+      ],
+      "avoid_for": [
+        "Users who want the most convenient sign-in flow"
+      ],
+      "states": [
+        {
+          "target_id": "dont-display-last-user-name",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Hide the last signed-in username at the sign-in screen."
+        }
+      ],
+      "good_when": "You want the sign-in screen to reveal less information about who uses the device.",
+      "bad_when": "You want the usual user to see the last account name immediately.",
+      "tradeoffs": [
+        "Sign-in privacy is improved.",
+        "Users must remember or type their username instead of relying on the visible last account."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-security-option-hide-last-user",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-security-option-hide-last-user",
+      "kind": "official-doc",
+      "title": "Microsoft security policy setting: Interactive logon: Do not display last user name",
+      "location": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852264(v=ws.11)",
+      "summary": "Microsoft documents the purpose of the security option, its enabled and disabled behavior, and its default state.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-security-registry-last-user",
+      "kind": "official-doc",
+      "title": "Local Windows security option registry mapping",
+      "location": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+      "summary": "The local Windows security registry metadata maps the security option to HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName.",
+      "supports": [
+        "path",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-security-defaults-last-user",
+      "kind": "official-doc",
+      "title": "Local Windows default security baseline entry",
+      "location": "research/evidence-files/external/c/Windows/inf/defltbase.inf.md",
+      "summary": "The local Windows default security baseline lists DontDisplayLastUserName with default value 0.",
+      "supports": [
+        "default",
+        "value"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DontDisplayLastUserName = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-hide-last-logged-in-user",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the security-option behavior for hiding the last signed-in username, and local Windows security metadata explicitly maps that option to Policies\\System\\DontDisplayLastUserName with a default of 0. The app writes the expected enabled-state value of 1.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:21:59.0000000+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+    "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName,4,%DontDisplayLastUserName%,0",
+    "key_found_on_page": true,
+    "notes": "The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. research/evidence-files/external/c/Windows/inf/defltbase.inf.md also confirms the default value 0, and Microsoft documents the enabled behavior as hiding the last signed-in username."
+  }
+}

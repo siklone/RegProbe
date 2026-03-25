@@ -1,0 +1,216 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-background-gp-updates",
+  "tweak_id": "system.disable-background-gp-updates",
+  "record_status": "validated",
+  "summary": "Policy-backed control for background Group Policy refresh. The local Microsoft GroupPolicy.admx file explicitly documents the same policy key and DisableBkGndGroupPolicy value name that the app uses, and the ADML help text explains the behavior.",
+  "setting": {
+    "name": "Background Group Policy Refresh",
+    "category": "System",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows normally refreshes Group Policy in the background while the system is being used. This policy lets the device wait until logoff before applying those updates.",
+    "why_people_change_it": "Some administrators change it when they want policy application to happen less during active use and more at predictable sign-out or restart boundaries.",
+    "tradeoffs_overview": "Turning background refresh off can make policy timing more predictable, but new policy changes will not take effect until later. That makes it a niche admin setting, not a broad everyday optimization.",
+    "professional_notes": "The ADMX_GroupPolicy Policy CSP documents the setting and its registry mapping. GroupPolicy.admx identifies the key and value name, while the app currently writes the enabled-policy state as 1.",
+    "targets": [
+      {
+        "target_id": "disable-background-group-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "DisableBkGndGroupPolicy",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Background Group Policy refresh remains allowed because the policy is not forcing it off.",
+            "evidence_ids": [
+              "ms-grouppolicy-policy-csp",
+              "local-grouppolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Background refresh disabled",
+            "meaning": "The system waits until logoff before applying computer and user policy updates.",
+            "evidence_ids": [
+              "ms-grouppolicy-policy-csp",
+              "app-system-provider"
+            ]
+          }
+        ],
+        "notes": "The current research record only validates the enabled-policy state written by the app and the not-configured baseline. It does not claim an explicit documented meaning for a stored 0 value."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The current app writes DisableBkGndGroupPolicy = 1, which matches the enabled-policy behavior described by Microsoft.",
+    "writes": [
+      {
+        "target_id": "disable-background-group-policy",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "DisableBkGndGroupPolicy",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows systems where Group Policy is in use",
+      "states": [
+        {
+          "target_id": "disable-background-group-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The policy is not configured by default."
+        }
+      ],
+      "notes": "Microsoft says disable or not configured both allow background refresh. This record uses the missing state as the restore-default baseline.",
+      "evidence_ids": [
+        "ms-grouppolicy-policy-csp",
+        "local-grouppolicy-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Most users",
+        "Most managed environments that expect regular policy refresh"
+      ],
+      "avoid_for": [
+        "Admins who explicitly want no background refresh"
+      ],
+      "states": [
+        {
+          "target_id": "disable-background-group-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset and preserve ordinary background refresh behavior."
+        }
+      ],
+      "good_when": "You want policy changes to continue applying while the system is in normal use.",
+      "bad_when": "You want policy updates delayed until the user logs off.",
+      "tradeoffs": [
+        "Background refresh remains active.",
+        "Policy timing stays closer to ordinary Windows behavior."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-grouppolicy-policy-csp"
+      ]
+    },
+    {
+      "profile_id": "no-background-policy-refresh",
+      "label": "No background policy refresh",
+      "intended_for": [
+        "Administrators with a deliberate policy-processing reason"
+      ],
+      "avoid_for": [
+        "General users",
+        "Environments that expect timely policy updates during active sessions"
+      ],
+      "states": [
+        {
+          "target_id": "disable-background-group-policy",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the enabled-policy state that turns background refresh off."
+        }
+      ],
+      "good_when": "You want policy changes applied at logoff rather than during active use.",
+      "bad_when": "You expect policy changes to flow in without waiting for logoff or restart.",
+      "tradeoffs": [
+        "Policy updates are delayed.",
+        "This is an admin-oriented behavior change, not a general performance tweak."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-grouppolicy-policy-csp",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-grouppolicy-policy-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft ADMX_GroupPolicy Policy CSP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#disablebackgroundpolicy",
+      "summary": "Official documentation for the policy that turns off background Group Policy refresh and its registry mapping.",
+      "supports": [
+        "path",
+        "default",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-grouppolicy-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft GroupPolicy.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx",
+      "summary": "The local ADMX file maps DisableBackgroundPolicy to Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableBkGndGroupPolicy.",
+      "supports": [
+        "path",
+        "ui-mapping",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes DisableBkGndGroupPolicy = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-background-gp-updates",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft GroupPolicy.admx file explicitly defines DisableBackgroundPolicy under Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System with valueName DisableBkGndGroupPolicy, and the ADML help text documents that enabling the policy prevents Group Policy from being updated while the computer is in use. The app writes that enabled-policy state.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T19:43:33.3741864+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx",
+    "exact_quote_or_path": "<policy name=\"DisableBackgroundPolicy\" class=\"Machine\" ... key=\"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" valueName=\"DisableBkGndGroupPolicy\">",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same policy key and DisableBkGndGroupPolicy value used by the app. The paired GroupPolicy.adml help text states that enabling the policy prevents Group Policy from being updated while the computer is in use."
+  }
+}

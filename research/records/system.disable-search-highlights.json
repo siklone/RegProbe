@@ -1,0 +1,58 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-search-highlights",
+  "tweak_id": "system.disable-search-highlights",
+  "record_status": "deprecated",
+  "summary": "This record previously tracked a user-side SearchSettings write for Search Highlights. It has been retired in favor of the official validated policy-backed record system.disable-search-highlights-policy, which uses HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\EnableDynamicContentInWSB. Do not use this record for publication or apply decisions.",
+  "setting": {
+    "name": "Search Highlights (deprecated duplicate)",
+    "category": "System",
+    "area": "Deprecated Duplicate",
+    "scope": "mixed",
+    "casual_explanation": "This duplicate user-side Search Highlights record has been retired. Use system.disable-search-highlights-policy instead.",
+    "why_people_change_it": "See system.disable-search-highlights-policy for the supported policy-backed control.",
+    "tradeoffs_overview": "The live supported control is the machine-policy record, not this retired user-side duplicate.",
+    "professional_notes": "Retired on 2026-03-13 because the repo already contains a validated official Search Highlights policy record: system.disable-search-highlights-policy. The app provider entry for the user-side SearchSettings value was removed so the live tweak catalog no longer exposes two different controls for the same feature area.",
+    "targets": []
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-search-highlights-policy.",
+    "writes": []
+  },
+  "windows_defaults": [],
+  "recommended_profiles": [],
+  "evidence": [
+    {
+      "evidence_id": "duplicate-retirement-audit",
+      "kind": "repo-doc",
+      "title": "Duplicate retirement audit trail",
+      "location": "research/records/system.disable-search-highlights-policy.json",
+      "summary": "The official validated replacement for this retired duplicate is system.disable-search-highlights-policy, which uses the documented Search policy surface.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "Deprecated duplicate. The repo now uses the validated machine-policy Search Highlights control instead of the retired user-side SearchSettings variant.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "validation_proof": {
+    "source_url": "research/records/system.disable-search-highlights-policy.json",
+    "exact_quote_or_path": "Duplicate retirement audit trail: The official validated replacement for this retired duplicate is system.disable-search-highlights-policy, which uses the documented Search policy surface.",
+    "key_found_on_page": true,
+    "notes": "Backfilled from evidence_id duplicate-retirement-audit (repo-doc); deprecated audit trail."
+  }
+}

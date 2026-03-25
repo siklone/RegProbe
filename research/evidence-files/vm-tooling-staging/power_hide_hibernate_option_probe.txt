@@ -1,0 +1,15 @@
+WRITE=0
+QUERY=HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer
+    ShowHibernateOption    REG_DWORD    0x0
+OPEN_POWER_OPTIONS=YES
+WRITE=1
+QUERY=HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer
+    ShowHibernateOption    REG_DWORD    0x1
+OPEN_POWER_OPTIONS=YES
+RESTORED=ABSENT
+MATCHES=YES
+"9:30:07.5183290 PM","SystemSettingsAdminFlows.exe","4240","Process Profiling","","SUCCESS","User Time: 1.0937500 seconds, Kernel Time: 1.9375000 seconds, Private Bytes: 3,743,744, Working Set: 22,167,552"
+"9:30:08.5526588 PM","SystemSettingsAdminFlows.exe","4240","Process Profiling","","SUCCESS","User Time: 1.0937500 seconds, Kernel Time: 1.9375000 seconds, Private Bytes: 3,743,744, Working Set: 22,167,552"
+"9:30:09.9928668 PM","SystemSettingsAdminFlows.exe","4240","Process Profiling","","SUCCESS","User Time: 1.0937500 seconds, Kernel Time: 1.9375000 seconds, Private Bytes: 3,743,744, Working Set: 22,167,552"
+HAD_VALUE=False
+ORIGINAL=

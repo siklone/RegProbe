@@ -1,0 +1,202 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.services.disable-print-scan-broker",
+  "tweak_id": "system.services.disable-print-scan-broker",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for Print Scan Broker Service (PrintScanBrokerService). A local SCM snapshot confirms the exact service identifier, display name, binary path, and current start type on the review host, but this pass did not re-capture a machine-checkable exact Microsoft guidance row from the live services page. Keep the record as reference only.",
+  "setting": {
+    "name": "Print Scan Broker Service",
+    "category": "System",
+    "area": "Service Start Mode",
+    "scope": "device",
+    "casual_explanation": "This service supports secure privileged operations needed by the lower-privilege print spooler components. Disabling it removes that support path.",
+    "why_people_change_it": "People disable it on systems that do not print or scan and where printing-related broker services are being stripped down.",
+    "tradeoffs_overview": "Disabling it can trim unused printing infrastructure, but print and scan operations relying on this broker may stop working correctly.",
+    "professional_notes": "A local SCM snapshot confirms the exact PrintScanBrokerService service identity on the review host: display name `PrintScanBrokerService`, binary path `research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md -k PrintScanBrokerService -p`, and current start type `3 DEMAND_START`. The app uses a service start-mode tweak that disables `PrintScanBrokerService`. Earlier research summarized the Microsoft Windows IoT Enterprise services page as documenting this service with a Manual default and `OK to disable`, but this review pass did not re-capture a machine-checkable exact row from the live page. Under the service-proof methodology, local SCM identity proof is strong but not enough by itself to restore validated status.",
+    "targets": [
+      {
+        "target_id": "printscanbrokerservice-start-mode",
+        "location_kind": "service",
+        "path": "PrintScanBrokerService",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Manual",
+            "label": "Windows default",
+            "meaning": "The service starts on demand with Microsoft's documented default mode.",
+            "evidence_ids": [
+              "ms-iot-services-printscanbrokerservice"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Disabled",
+            "label": "Print scan broker disabled",
+            "meaning": "The service no longer starts until its start mode is restored.",
+            "evidence_ids": [
+              "ms-iot-services-printscanbrokerservice",
+              "app-system-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The app disables PrintScanBrokerService by setting its start mode to Disabled.",
+    "writes": [
+      {
+        "target_id": "printscanbrokerservice-start-mode",
+        "path": "PrintScanBrokerService",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "state_kind": "value",
+        "value": "Disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented default",
+      "applies_to": "Windows systems using the normal Print Scan Broker Service configuration",
+      "states": [
+        {
+          "target_id": "printscanbrokerservice-start-mode",
+          "state_kind": "value",
+          "value": "Manual",
+          "rationale": "Microsoft lists PrintScanBrokerService with a Manual default start mode."
+        }
+      ],
+      "notes": "This baseline preserves the documented print scan broker behavior.",
+      "evidence_ids": [
+        "ms-iot-services-printscanbrokerservice"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that use Windows printing or scanning"
+      ],
+      "avoid_for": [
+        "Minimal builds intentionally trimming print infrastructure"
+      ],
+      "states": [
+        {
+          "target_id": "printscanbrokerservice-start-mode",
+          "state_kind": "value",
+          "value": "Manual",
+          "rationale": "Keep the documented default service mode."
+        }
+      ],
+      "good_when": "You want normal print and scan infrastructure available.",
+      "bad_when": "You never use those features and want the broker removed.",
+      "tradeoffs": [
+        "Print and scan support remains available.",
+        "The service can still start when Windows needs it."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-iot-services-printscanbrokerservice"
+      ]
+    },
+    {
+      "profile_id": "no-print-scan-broker",
+      "label": "No print scan broker",
+      "intended_for": [
+        "Systems without printing or scanning needs",
+        "Stripped-down builds"
+      ],
+      "avoid_for": [
+        "Users who print or scan through Windows"
+      ],
+      "states": [
+        {
+          "target_id": "printscanbrokerservice-start-mode",
+          "state_kind": "value",
+          "value": "Disabled",
+          "rationale": "Disable the documented Print Scan Broker Service."
+        }
+      ],
+      "good_when": "You intentionally do not want this broker service active.",
+      "bad_when": "You need Windows print or scan operations that depend on it.",
+      "tradeoffs": [
+        "Unused broker infrastructure is removed.",
+        "Printing or scanning flows that depend on the broker can stop working."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-iot-services-printscanbrokerservice",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-iot-services-printscanbrokerservice",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Guidance on configuring system services - Print Scan Broker Service",
+      "location": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "summary": "This Microsoft Learn services page remains the intended official guidance source for Print Scan Broker Service, but this review pass did not re-capture a machine-checkable exact row for `PrintScanBrokerService` from the live page. Treat it as historical guidance context until the exact service entry is captured again.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "local-scm-printscanbrokerservice-2026-03-14",
+      "kind": "repo-doc",
+      "title": "Local SCM snapshot - PrintScanBrokerService",
+      "location": "research/notes/service-snapshots/printscanbrokerservice-sc-qc-2026-03-14.txt",
+      "summary": "Checked-in `sc qc PrintScanBrokerService` snapshot from Microsoft Windows 11 Pro 10.0.26200 confirming the exact service identifier, display name, binary path, and current START_TYPE line on the review host. This proves the exact SCM control surface the app targets.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider disables the `PrintScanBrokerService` service through the batch service start-mode tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The exact service identity is now proven locally through a checked-in SCM snapshot, and the app targets that same service control surface. However, this review pass did not re-capture a machine-checkable exact Microsoft guidance row for PrintScanBrokerService from the live services page. Under the service-proof methodology, that means the service identity is proven but the official guidance proof is still incomplete, so the record stays in review.",
+    "blocking_issues": [
+      "The current Microsoft Learn services page was not re-captured with a machine-checkable exact row for PrintScanBrokerService in this review pass.",
+      "Under the service-proof methodology, local SCM identity proof alone is not enough to restore validated status without exact Microsoft guidance capture."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "research/notes/service-snapshots/printscanbrokerservice-sc-qc-2026-03-14.txt",
+    "exact_quote_or_path": "SERVICE_NAME: PrintScanBrokerService | START_TYPE : 3 DEMAND_START | DISPLAY_NAME: PrintScanBrokerService | BINARY_PATH_NAME: research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md -k PrintScanBrokerService -p",
+    "key_found_on_page": true,
+    "notes": "The local SCM snapshot proves the exact service identity and control surface on the review host. This does not restore validated status by itself because the Microsoft services page still needs an exact guidance row re-captured in a later pass."
+  }
+}

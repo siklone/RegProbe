@@ -1,0 +1,230 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-consumer-account-content",
+  "tweak_id": "privacy.disable-consumer-account-content",
+  "record_status": "validated",
+  "summary": "Policy-backed control for cloud consumer account state content in Windows experiences. The local Microsoft CloudContent.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.",
+  "setting": {
+    "name": "Cloud Consumer Account State Content",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Some Windows experiences can use cloud-backed consumer account state content. This policy decides whether those experiences may use that content or must fall back to default content instead.",
+    "why_people_change_it": "People disable it to reduce cloud-driven content in Windows experiences, simplify the user experience, or keep managed systems away from consumer-style content flows.",
+    "tradeoffs_overview": "Turning this off reduces cloud consumer content, but it can also make some Windows experiences less personalized or less dynamic.",
+    "professional_notes": "The Experience Policy CSP documents DisableConsumerAccountStateContent directly. CloudContent.admx maps it to HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableConsumerAccountStateContent with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "disable-consumer-account-state-content",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "value_name": "DisableConsumerAccountStateContent",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the cloud consumer account content policy.",
+            "evidence_ids": [
+              "ms-experience-csp-disable-consumer-account-state-content",
+              "local-cloud-content-admx-consumer"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Cloud consumer content allowed",
+            "meaning": "The policy is disabled and Windows experiences may use cloud consumer account state content.",
+            "evidence_ids": [
+              "ms-experience-csp-disable-consumer-account-state-content",
+              "local-cloud-content-admx-consumer"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Cloud consumer content disabled",
+            "meaning": "Windows experiences using this client component fall back to default content instead.",
+            "evidence_ids": [
+              "ms-experience-csp-disable-consumer-account-state-content",
+              "local-cloud-content-admx-consumer"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DisableConsumerAccountStateContent = 1, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "disable-consumer-account-state-content",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+        "value_name": "DisableConsumerAccountStateContent",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 11 version 21H2 and newer supported systems",
+      "states": [
+        {
+          "target_id": "disable-consumer-account-state-content",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The machine policy is not configured by default."
+        }
+      ],
+      "notes": "The Experience Policy CSP documents behavior for supported Enterprise-oriented editions; this record describes the policy baseline, not every UI surface affected by cloud content.",
+      "evidence_ids": [
+        "ms-experience-csp-disable-consumer-account-state-content",
+        "local-cloud-content-admx-consumer"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Devices that should keep ordinary cloud-backed Windows experience content"
+      ],
+      "avoid_for": [
+        "Managed or minimal-content environments"
+      ],
+      "states": [
+        {
+          "target_id": "disable-consumer-account-state-content",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the machine policy unset."
+        }
+      ],
+      "good_when": "You want Windows experiences to keep their normal cloud consumer account content behavior.",
+      "bad_when": "You want those experiences to fall back to default content instead.",
+      "tradeoffs": [
+        "Windows can continue using cloud consumer account state content where supported.",
+        "No policy-based restriction is enforced for this content path."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-experience-csp-disable-consumer-account-state-content"
+      ]
+    },
+    {
+      "profile_id": "managed-minimal",
+      "label": "Managed minimal",
+      "intended_for": [
+        "Managed devices",
+        "Enterprise-style minimal-content setups"
+      ],
+      "avoid_for": [
+        "Users who want the most dynamic Microsoft-provided experience content"
+      ],
+      "states": [
+        {
+          "target_id": "disable-consumer-account-state-content",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Force Windows experiences using this component to use default fallback content."
+        }
+      ],
+      "good_when": "You want fewer cloud consumer content paths active in Windows experiences.",
+      "bad_when": "You want the related Windows experiences to stay as personalized and dynamic as possible.",
+      "tradeoffs": [
+        "Some Microsoft-delivered experience content is reduced.",
+        "Affected Windows experiences may feel less dynamic or less personalized."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-experience-csp-disable-consumer-account-state-content",
+        "local-cloud-content-admx-consumer",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-experience-csp-disable-consumer-account-state-content",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: DisableConsumerAccountStateContent",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#disableconsumeraccountstatecontent",
+      "summary": "Official documentation for the policy that turns off cloud consumer account state content in Windows experiences.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-cloud-content-admx-consumer",
+      "kind": "official-doc",
+      "title": "Local Microsoft CloudContent.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx",
+      "summary": "The local ADMX file shows DisableConsumerAccountStateContent with enabledValue 1 and disabledValue 0 under the CloudContent policy key.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DisableConsumerAccountStateContent = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-consumer-account-content",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft CloudContent.admx file explicitly defines DisableConsumerAccountStateContent at SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent with enabledValue 1 and disabledValue 0, which matches the app's policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T12:42:34.7172784+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx",
+    "exact_quote_or_path": "<policy name=\"DisableConsumerAccountStateContent\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\CloudContent\" valueName=\"DisableConsumerAccountStateContent\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the 1/0 mapping."
+  }
+}

@@ -5,7 +5,7 @@ Scope: Dashboard cards and hardware detail windows (OS, Motherboard, CPU, GPU, M
 
 ## Preconditions
 
-1. Launch app: `dotnet run --project OpenTraceProject.App\\OpenTraceProject.App.csproj`
+1. Launch app: `dotnet run --project app\\app.csproj`
 2. Wait until dashboard loading overlay disappears.
 3. Confirm all 9 hardware cards are visible and clickable.
 

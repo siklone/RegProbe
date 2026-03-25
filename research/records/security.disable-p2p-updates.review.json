@@ -1,0 +1,253 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "security.disable-p2p-updates",
+  "tweak_id": "security.disable-p2p-updates",
+  "record_status": "validated",
+  "summary": "Disables Delivery Optimization peer-to-peer update sharing by writing DODownloadMode = 0 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization. The local Microsoft DeliveryOptimization ADMX and ADML files define value 0 as HTTP only with no peering. The app previously wrote the same value under HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\DeliveryOptimization; it now uses the documented policy path.",
+  "setting": {
+    "name": "Delivery Optimization Download Mode",
+    "category": "Security",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Delivery Optimization controls whether Windows uses other PCs to help download updates and Microsoft content. This policy sets how much peer-to-peer sharing Delivery Optimization is allowed to use.",
+    "why_people_change_it": "People change it when they want to limit or remove peer sharing for updates and downloads.",
+    "tradeoffs_overview": "Setting it to HTTP only disables peer sharing, but it can also remove bandwidth-sharing benefits on local networks.",
+    "professional_notes": "DeliveryOptimization.admx documents the official policy path as HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization with value name DODownloadMode. The local ADMX and ADML files define value 0 as HTTP only with no peering. The previously used PolicyManager default path was removed from the product implementation on 2026-03-13 so the tweak now targets the documented policy surface directly.",
+    "targets": [
+      {
+        "target_id": "do-download-mode-policy",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+        "value_name": "DODownloadMode",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows keeps the normal Delivery Optimization behavior without this policy override.",
+            "evidence_ids": [
+              "local-deliveryoptimization-admx",
+              "local-deliveryoptimization-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "HTTP only",
+            "meaning": "Delivery Optimization uses HTTP only and no peering.",
+            "evidence_ids": [
+              "local-deliveryoptimization-admx",
+              "local-deliveryoptimization-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "LAN peering",
+            "meaning": "Delivery Optimization uses HTTP blended with peering behind the same NAT.",
+            "evidence_ids": [
+              "local-deliveryoptimization-admx",
+              "local-deliveryoptimization-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Group peering",
+            "meaning": "Delivery Optimization uses HTTP blended with peering across a private group.",
+            "evidence_ids": [
+              "local-deliveryoptimization-admx",
+              "local-deliveryoptimization-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Internet peering",
+            "meaning": "Delivery Optimization uses HTTP blended with Internet peering.",
+            "evidence_ids": [
+              "local-deliveryoptimization-admx",
+              "local-deliveryoptimization-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 99,
+            "label": "Simple",
+            "meaning": "HTTP only, no peering, and no use of the Delivery Optimization cloud service.",
+            "evidence_ids": [
+              "local-deliveryoptimization-admx",
+              "local-deliveryoptimization-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 100,
+            "label": "Bypass",
+            "meaning": "Bypass Delivery Optimization.",
+            "evidence_ids": [
+              "local-deliveryoptimization-admx",
+              "local-deliveryoptimization-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+    "notes": "The app now writes the official HTTP-only value 0 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode.",
+    "writes": [
+      {
+        "target_id": "do-download-mode-policy",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+        "value_name": "DODownloadMode",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Windows systems supporting the Delivery Optimization policy",
+      "states": [
+        {
+          "target_id": "do-download-mode-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official policy unset."
+        }
+      ],
+      "notes": "This record validates the official policy surface.",
+      "evidence_ids": [
+        "local-deliveryoptimization-admx",
+        "local-deliveryoptimization-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "General users"
+      ],
+      "avoid_for": [
+        "Environments that explicitly want no Delivery Optimization peering"
+      ],
+      "states": [
+        {
+          "target_id": "do-download-mode-policy",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official policy unset."
+        }
+      ],
+      "good_when": "You want normal Windows Delivery Optimization behavior.",
+      "bad_when": "You need an explicit no-peering policy.",
+      "tradeoffs": [
+        "Windows keeps its default Delivery Optimization behavior."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-deliveryoptimization-adml"
+      ]
+    },
+    {
+      "profile_id": "http-only-no-peering",
+      "label": "HTTP only (no peering)",
+      "intended_for": [
+        "Privacy-focused systems",
+        "Environments that do not want update peering"
+      ],
+      "avoid_for": [
+        "Networks that intentionally use local or group peering to reduce bandwidth"
+      ],
+      "states": [
+        {
+          "target_id": "do-download-mode-policy",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Use the official HTTP-only value with no peering."
+        }
+      ],
+      "good_when": "You want Delivery Optimization downloads without peer sharing.",
+      "bad_when": "You want LAN or group peering benefits.",
+      "tradeoffs": [
+        "Peer-to-peer update sharing is disabled.",
+        "Bandwidth-saving benefits from peering are removed."
+      ],
+      "apply_allowed": true,
+      "notes": "Validated official policy path and value.",
+      "evidence_ids": [
+        "local-deliveryoptimization-admx",
+        "local-deliveryoptimization-adml"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-deliveryoptimization-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft DeliveryOptimization.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx",
+      "summary": "The local ADMX file maps DODownloadMode under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization and defines enum values 0, 1, 2, 3, 99, and 100.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-deliveryoptimization-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft DeliveryOptimization.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DeliveryOptimization.adml",
+      "summary": "The local ADML help text explains that value 0 means HTTP only with no peering, and documents the other Delivery Optimization modes.",
+      "supports": [
+        "behavior",
+        "allowed-values",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-security-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "summary": "The provider writes DODownloadMode = 0 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official Delivery Optimization policy path and enum values are clear from the local Microsoft ADMX and ADML files, and the app now writes the documented policy surface directly.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-13T18:52:00+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx",
+    "exact_quote_or_path": "DeliveryOptimization.admx: `valueName=\"DODownloadMode\"`; DeliveryOptimization.adml: `Download Mode` / `Specifies the method that Delivery Optimization can use to download content on behalf of various Microsoft products.` The local ADMX/ADML pair documents DODownloadMode under the official policy path and its enum values 0, 1, 2, 3, 99, and 100.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX and ADML files document the exact Delivery Optimization policy surface under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization, and the app now writes that documented path."
+  }
+}

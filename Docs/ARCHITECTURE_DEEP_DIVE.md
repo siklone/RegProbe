@@ -8,16 +8,16 @@ Bu belge, uygulamanÄ±n tÃ¼m teknik bileÅŸenlerini, sensÃ¶r fallback meka
 
 ```
 OpenTraceProject/
-â”œâ”€â”€ OpenTraceProject.Core/           # Temel arayÃ¼zler ve modeller
-â”œâ”€â”€ OpenTraceProject.Engine/         # Tweak iÅŸleme motoru
+â”œâ”€â”€ core/           # Temel arayÃ¼zler ve modeller
+â”œâ”€â”€ engine/         # Tweak iÅŸleme motoru
 â”‚   â””â”€â”€ Tweaks/                      # 9 tweak tÃ¼rÃ¼
-â”œâ”€â”€ OpenTraceProject.Infrastructure/ # AltyapÄ± servisleri
+â”œâ”€â”€ infrastructure/ # AltyapÄ± servisleri
 â”‚   â””â”€â”€ Metrics/                     # 11 metrik dosyasÄ± (102KB+)
-â”œâ”€â”€ OpenTraceProject.App/            # Masaustu UI uygulamasi
+â”œâ”€â”€ app/            # Masaustu UI uygulamasi
 â”‚   â”œâ”€â”€ Views/                       # XAML gÃ¶rÃ¼nÃ¼mleri
 â”‚   â”œâ”€â”€ ViewModels/                  # MVVM ViewModelleri
 â”‚   â””â”€â”€ Services/                    # Uygulama servisleri
-â””â”€â”€ OpenTraceProject.ElevatedHost/   # YÃ¼kseltilmiÅŸ iÅŸlem sunucusu
+â””â”€â”€ elevated-host/   # YÃ¼kseltilmiÅŸ iÅŸlem sunucusu
 ```
 
 ---
@@ -26,7 +26,7 @@ OpenTraceProject/
 
 ### 1. TweakProvider Sistemi (13 dosya)
 
-Provider'lar `OpenTraceProject.App/Services/TweakProviders/` dizininde bulunur:
+Provider'lar `app/Services/TweakProviders/` dizininde bulunur:
 
 | Provider | Sorumluluk | Tweak SayÄ±sÄ± |
 |----------|------------|--------------|

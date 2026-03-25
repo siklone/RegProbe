@@ -1,0 +1,222 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-resume",
+  "tweak_id": "privacy.disable-resume",
+  "record_status": "validated",
+  "summary": "The current app writes the current-user Resume setting HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0. Repo notes and local registry observations confirm that this runtime user setting is real and behaves as expected on this build.",
+  "setting": {
+    "name": "Disable Resume for Current User",
+    "category": "Privacy",
+    "area": "Current-user Resume Setting",
+    "scope": "user",
+    "casual_explanation": "Resume lets you start on one device and continue on this PC. This tweak turns off that current-user Resume setting.",
+    "why_people_change_it": "People turn it off when they do not want cross-device handoff behavior for their account. They leave it on when they use Continue on PC or related app handoff flows.",
+    "tradeoffs_overview": "Turning it off reduces cross-device convenience for the current user. The app now matches the observed current-user setting rather than a separate managed policy surface.",
+    "professional_notes": "The current app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0. Repo notes show Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on. Microsoft also documents a separate user-scope policy CSP for managed deployment, but that is not the control surface this tweak uses.",
+    "targets": [
+      {
+        "target_id": "resume-user-setting",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+        "value_name": "IsResumeAllowed",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "No explicit user setting",
+            "meaning": "Windows uses its normal current-user Resume behavior.",
+            "evidence_ids": [
+              "repo-resume-procmon-notes"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Resume disabled",
+            "meaning": "Observed Settings and app value for turning the current-user Resume setting off.",
+            "evidence_ids": [
+              "repo-resume-procmon-notes",
+              "local-resume-registry-observation",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Resume enabled",
+            "meaning": "Observed Settings value for turning the current-user Resume setting on.",
+            "evidence_ids": [
+              "repo-resume-procmon-notes"
+            ]
+          }
+        ],
+        "notes": "This is the runtime user setting the app currently writes."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes IsResumeAllowed = 0 under the runtime HKCU CrossDeviceResume configuration key.",
+    "writes": [
+      {
+        "target_id": "resume-user-setting",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+        "value_name": "IsResumeAllowed",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows managed default",
+      "applies_to": "User profiles where the current-user Resume setting is not explicitly set",
+      "states": [
+        {
+          "target_id": "resume-user-setting",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the current-user Resume setting unset."
+        }
+      ],
+      "notes": "This record now tracks the observed current-user Resume setting directly.",
+      "evidence_ids": [
+        "repo-resume-procmon-notes"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "disable-resume",
+      "label": "Disable Resume",
+      "intended_for": [
+        "General users who do not want cross-device handoff",
+        "People who want Resume turned off for the current account"
+      ],
+      "avoid_for": [
+        "People who use Continue on PC or related cross-device handoff flows"
+      ],
+      "states": [
+        {
+          "target_id": "resume-user-setting",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Set the current-user Resume setting to off."
+        }
+      ],
+      "good_when": "You want to disable Resume for the current account.",
+      "bad_when": "You want cross-device handoff to remain available.",
+      "tradeoffs": [
+        "Resume is disabled for the current user.",
+        "The setting is reversible by setting IsResumeAllowed back to 1."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "repo-resume-procmon-notes",
+        "local-resume-registry-observation",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-resume-procmon-notes",
+      "kind": "repo-doc",
+      "title": "Repo Procmon notes for Resume settings",
+      "location": "Docs/privacy/privacy.md",
+      "summary": "Repo notes show Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "local-resume-registry-observation",
+      "kind": "registry-observation",
+      "title": "Local CrossDeviceResume registry observation",
+      "location": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+      "summary": "Local read-only registry query on March 14, 2026 found IsResumeAllowed = 0 and IsOneDriveResumeAllowed = 1 under the current-user CrossDeviceResume configuration key, confirming the observed runtime path is present and active on this build.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-resume-policymanager-probe",
+      "kind": "procmon-trace",
+      "title": "Guest Procmon and PolicyManager probe for CrossDeviceResume",
+      "location": "research/evidence-files/vm-tooling-staging/crossdevice_resume_probe.csv and research/evidence-files/vm-tooling-staging/resume-policymanager-probe.txt",
+      "summary": "Guest-side Procmon capture shows CrossDeviceResume.exe launching while PolicyManager DLL loads. The companion registry probe confirms the managed policy default branch at HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity\\DisableCrossDeviceResume with value 0 and no current-user PolicyManager Connectivity path on this build.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-crossdevice-resume-probe",
+      "kind": "procmon-trace",
+      "title": "Guest Procmon probe for CrossDeviceResume resume toggle",
+      "location": "research/evidence-files/vm-tooling-staging/privacy_disable_resume_probe.txt and research/evidence-files/missing/privacy-disable-resume-probe-csv.md",
+      "summary": "Guest-side reversible probe toggled IsResumeAllowed between 0 and 1 while opening the CrossDeviceResume settings surface. Procmon captured Explorer, ShellHost, SearchHost, and StartMenuExperienceHost activity around the toggle.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "ms-connectivity-disable-cross-device-resume",
+      "kind": "policy-csp",
+      "title": "Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume",
+      "summary": "Microsoft documents a separate managed policy surface for cross-device resume. This record keeps that policy as related context, but the app uses the runtime current-user setting instead.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Repo notes and local registry observations confirm the current-user Resume setting, and the app now matches that observed surface directly.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-20T00:00:00+03:00",
+  "validation_proof": {
+    "source_url": "Docs/privacy/privacy.md",
+    "exact_quote_or_path": "Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on.",
+    "key_found_on_page": true,
+    "notes": "This record now documents the current-user Resume setting that the app actually writes. The companion guest Procmon probe captured CrossDeviceResume settings activity while IsResumeAllowed was toggled between 0 and 1 and then restored. The separate policy CSP remains related context, not the active control surface for this tweak."
+  }
+}

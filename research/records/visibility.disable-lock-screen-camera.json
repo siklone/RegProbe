@@ -1,0 +1,217 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "visibility.disable-lock-screen-camera",
+  "tweak_id": "visibility.disable-lock-screen-camera",
+  "record_status": "validated",
+  "summary": "Machine policy for lock-screen camera access. The local Microsoft ControlPanelDisplay.admx file documents the same Personalization policy key and NoLockScreenCamera value used by the app.",
+  "setting": {
+    "name": "Lock Screen Camera Access",
+    "category": "Visibility",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can allow a camera to be used directly from the lock screen. This policy decides whether that lock-screen camera access can be enabled.",
+    "why_people_change_it": "People disable it to keep the lock screen simpler, reduce camera exposure before sign-in, or match stricter privacy policies.",
+    "tradeoffs_overview": "Turning it off reduces pre-sign-in camera access, but it also removes a convenience feature for users who want to use the camera from the lock screen.",
+    "professional_notes": "Microsoft documents NoLockScreenCamera through ADMX_ControlPanelDisplay and local policy files map it to HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\NoLockScreenCamera. The public documentation clearly explains the enabled policy behavior and the not-configured or disabled baseline behavior, but does not publish a raw DWORD table, so this record models the documented enforced state plus the default unset state.",
+    "targets": [
+      {
+        "target_id": "no-lock-screen-camera",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization",
+        "value_name": "NoLockScreenCamera",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Users can still enable lock-screen camera access because the device is not forcing this policy.",
+            "evidence_ids": [
+              "local-controlpaneldisplay-admx-lock-camera",
+              "local-controlpaneldisplay-adml-lock-camera"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Prevent lock-screen camera access",
+            "meaning": "The policy is enabled and users cannot enable or invoke camera access from the lock screen.",
+            "evidence_ids": [
+              "local-controlpaneldisplay-admx-lock-camera",
+              "local-controlpaneldisplay-adml-lock-camera",
+              "app-visibility-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The current app writes NoLockScreenCamera = 1, which matches the documented enabled policy state.",
+    "writes": [
+      {
+        "target_id": "no-lock-screen-camera",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization",
+        "value_name": "NoLockScreenCamera",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows machine-policy default",
+      "applies_to": "Windows 10 version 2004 with KB5005101 and later, plus Windows 11 systems exposing ADMX_ControlPanelDisplay",
+      "states": [
+        {
+          "target_id": "no-lock-screen-camera",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The public Microsoft policy documentation describes camera access as available when the policy is disabled or not configured."
+        }
+      ],
+      "notes": "The default behavior does not force lock-screen camera access off.",
+      "evidence_ids": [
+        "local-controlpaneldisplay-admx-lock-camera",
+        "local-controlpaneldisplay-adml-lock-camera"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Users who want lock-screen camera access available"
+      ],
+      "avoid_for": [
+        "Systems with stricter privacy requirements"
+      ],
+      "states": [
+        {
+          "target_id": "no-lock-screen-camera",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the lock-screen camera policy unset."
+        }
+      ],
+      "good_when": "You want the normal Windows lock-screen camera option to remain available.",
+      "bad_when": "You do not want camera access exposed before sign-in.",
+      "tradeoffs": [
+        "Users can still choose to enable lock-screen camera access.",
+        "There is no policy-based restriction on the feature."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-controlpaneldisplay-adml-lock-camera"
+      ]
+    },
+    {
+      "profile_id": "no-pre-signin-camera",
+      "label": "No pre-sign-in camera",
+      "intended_for": [
+        "Privacy-focused systems",
+        "Managed desktops",
+        "Shared devices"
+      ],
+      "avoid_for": [
+        "Users who rely on invoking the camera from the lock screen"
+      ],
+      "states": [
+        {
+          "target_id": "no-lock-screen-camera",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Prevent lock-screen camera access through policy."
+        }
+      ],
+      "good_when": "You want camera access blocked before the user signs in.",
+      "bad_when": "You want the convenience of launching the camera from the lock screen.",
+      "tradeoffs": [
+        "Pre-sign-in camera access is removed.",
+        "Users lose the lock-screen camera convenience feature."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-controlpaneldisplay-admx-lock-camera",
+        "local-controlpaneldisplay-adml-lock-camera",
+        "app-visibility-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-controlpaneldisplay-admx-lock-camera",
+      "kind": "official-doc",
+      "title": "Local Microsoft ControlPanelDisplay.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx",
+      "summary": "The local ADMX file maps the machine policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\NoLockScreenCamera.",
+      "supports": [
+        "path",
+        "ui-mapping",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-controlpaneldisplay-adml-lock-camera",
+      "kind": "official-doc",
+      "title": "Local Microsoft ControlPanelDisplay.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml",
+      "summary": "The local ADML help text says enabling the policy disables the lock-screen camera toggle and prevents a camera from being invoked on the lock screen, while users can enable it by default.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes NoLockScreenCamera = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-lock-screen-camera",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft ControlPanelDisplay.admx file explicitly defines NoLockScreenCamera under Software\\Policies\\Microsoft\\Windows\\Personalization, and the paired ADML help text documents that enabling the policy blocks lock-screen camera access. The app writes that exact enabled state.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:32:33.0455208+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx",
+    "exact_quote_or_path": "<policy name=\"CPL_Personalization_NoLockScreenCamera\" class=\"Machine\" ... valueName=\"NoLockScreenCamera\">",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents a camera from being invoked on the lock screen."
+  }
+}

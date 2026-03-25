@@ -1,0 +1,225 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.hide-recommended-section",
+  "tweak_id": "privacy.hide-recommended-section",
+  "record_status": "validated",
+  "summary": "Machine policy for the Recommended section in the Windows 11 Start menu. The official Start Policy CSP and local StartMenu.admx file document the same Explorer policy key and HideRecommendedSection value used by the app.",
+  "setting": {
+    "name": "Start Menu Recommended Section",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows 11 Start can show a Recommended section with suggested apps and files. This policy lets the device hide that section for everyone.",
+    "why_people_change_it": "People hide it when they want a simpler Start menu, less suggestion-driven UI, or less visible recent-content surfacing.",
+    "tradeoffs_overview": "Hiding the section makes Start cleaner, but users lose a built-in place where Windows surfaces suggested or recent content.",
+    "professional_notes": "This is a both-scope Start policy backed by StartMenu.admx and the Start Policy CSP. The app's machine variant writes the device-scoped policy value under HKLM.",
+    "targets": [
+      {
+        "target_id": "hide-recommended-section",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "value_name": "HideRecommendedSection",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The device does not force the Start menu to hide the Recommended section.",
+            "evidence_ids": [
+              "ms-start-policy-csp",
+              "local-startmenu-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Recommended section shown",
+            "meaning": "The section remains visible.",
+            "evidence_ids": [
+              "ms-start-policy-csp"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Recommended section hidden",
+            "meaning": "The section is removed from Start.",
+            "evidence_ids": [
+              "ms-start-policy-csp",
+              "local-startmenu-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes HideRecommendedSection = 1 under HKLM, which matches the documented hide behavior.",
+    "writes": [
+      {
+        "target_id": "hide-recommended-section",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+        "value_name": "HideRecommendedSection",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 11 version 22H2 and later",
+      "states": [
+        {
+          "target_id": "hide-recommended-section",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The device policy is not configured by default."
+        }
+      ],
+      "notes": "The Start Policy CSP documents a functional default of 0, but restore-default for the policy layer is represented here as the missing value.",
+      "evidence_ids": [
+        "ms-start-policy-csp",
+        "local-startmenu-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Users who want the default Start experience"
+      ],
+      "avoid_for": [
+        "Devices where a cleaner Start menu is preferred"
+      ],
+      "states": [
+        {
+          "target_id": "hide-recommended-section",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the device policy unset."
+        }
+      ],
+      "good_when": "You want Windows 11 to keep its usual Start layout behavior.",
+      "bad_when": "You want to remove the Recommended section entirely.",
+      "tradeoffs": [
+        "Recommended content can remain visible.",
+        "No device-wide Start lock-down is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-start-policy-csp"
+      ]
+    },
+    {
+      "profile_id": "clean-start-menu",
+      "label": "Clean Start menu",
+      "intended_for": [
+        "Users who want a less suggestive Start experience",
+        "Managed devices"
+      ],
+      "avoid_for": [
+        "Users who rely on Start recommendations"
+      ],
+      "states": [
+        {
+          "target_id": "hide-recommended-section",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Hide the Recommended section for everyone on the device."
+        }
+      ],
+      "good_when": "You want Start to look cleaner and less recommendation-driven.",
+      "bad_when": "You want Windows to keep surfacing recommended files and apps there.",
+      "tradeoffs": [
+        "The Recommended section disappears.",
+        "Users lose one place where recent or suggested content appears."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-start-policy-csp",
+        "local-startmenu-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-start-policy-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft Start Policy CSP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start",
+      "summary": "Official documentation for HideRecommendedSection and HideRecommendedPersonalizedSites, including allowed values and scope.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-startmenu-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft StartMenu.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
+      "summary": "The local ADMX file maps HideRecommendedSection and HideRecommendedPersonalizedSites to the Explorer policy key with both user and machine scope.",
+      "supports": [
+        "path",
+        "ui-mapping",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes HideRecommendedSection = 1 under the machine policy path for this tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-hide-recommended-section",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official Start Policy CSP documents HideRecommendedSection with the Explorer policy path and explicit 0/1 meanings, and the local StartMenu.admx file confirms the same value name under the same policy key. The app writes that documented machine-scoped hide value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T20:12:07.5358609+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start",
+    "exact_quote_or_path": "Registry Key Name Software\\Policies\\Microsoft\\Windows\\Explorer; Registry Value Name HideRecommendedSection; 0 (Default) Recommended section shown; 1 Recommended section hidden.",
+    "key_found_on_page": true,
+    "notes": "The official Start Policy CSP documents the exact Explorer policy key, value name, and 0/1 semantics. The local StartMenu.admx file confirms the same Both-scope policy surface for Windows 11 22H2 and later."
+  }
+}

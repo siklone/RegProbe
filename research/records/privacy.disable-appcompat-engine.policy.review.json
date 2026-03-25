@@ -1,0 +1,304 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-appcompat-engine.policy",
+  "tweak_id": "privacy.disable-appcompat-engine.policy",
+  "record_status": "validated",
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "summary": "Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.",
+  "setting": {
+    "name": "Disable Application Compatibility Engine and SwitchBack",
+    "category": "Privacy",
+    "area": "Application Compatibility",
+    "scope": "device",
+    "casual_explanation": "Windows includes an Application Compatibility Engine that checks a database every time an app starts and may apply compatibility fixes. SwitchBack allows apps that detect Windows Vista or later to also receive fixes designed for older OS versions. These two policies let you disable both behaviors.",
+    "why_people_change_it": "People disable these to get a slightly leaner system or to stop Windows from applying compatibility shims to applications. They leave them enabled when they run legacy or older software that depends on Windows compatibility assistance.",
+    "tradeoffs_overview": "Disabling the compatibility engine can break older applications and may cause unexpected behavior including BSOD if old security software is installed - Microsoft explicitly warns about this in the ADML text. The practical impact on a modern Windows 11 system running only current software is low, but the risk is non-trivial.",
+    "professional_notes": "Both values live under HKLM/Software/Policies/Microsoft/Windows/AppCompat. Policy family: AppCompat.admx. Version scope: Win10 1903+ / Win11 all versions. Microsoft Learn CSP page: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat. SbEnable: local ADMX has explicit enabledValue=0 and disabledValue=1, and Procmon confirmed gpsvc writes SbEnable=0 when the policy is enabled. SbEnable has been extracted to privacy.disable-switchback.policy for standalone publication guidance, but it remains documented here because the current app still writes it in the same bundle as DisableEngine. DisableEngine: present in ADMX under AppCompatTurnOffEngine without an explicit numeric block, but Procmon confirmed gpsvc writes DisableEngine=1 when the policy is enabled. Microsoft ADML explicitly warns that disabling the engine may cause BSOD if old antivirus software is installed.",
+    "targets": [
+      {
+        "target_id": "sb-enable",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "SbEnable",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows keeps the normal SwitchBack behavior. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions.",
+            "evidence_ids": [
+              "local-appcompat-admx",
+              "local-appcompat-adml",
+              "admx-appcompat-csp"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "SwitchBack enabled (policy explicit)",
+            "meaning": "disabledValue in AppCompat.admx. SwitchBack runs normally. Equivalent to missing.",
+            "evidence_ids": [
+              "local-appcompat-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Turn off SwitchBack",
+            "meaning": "enabledValue in AppCompat.admx. SwitchBack is disabled. This is the value the app writes. Numeric direction is explicitly confirmed via the ADMX enabledValue block. Procmon confirmed: svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 during gpupdate /force on 2026-03-13 (Windows 11 Pro 10.0.26200.8037).",
+            "evidence_ids": [
+              "local-appcompat-admx",
+              "local-appcompat-adml",
+              "admx-appcompat-csp",
+              "app-privacy-provider",
+              "procmon-appcompat-engine"
+            ]
+          }
+        ],
+        "notes": "Windows default is missing (key absent). SbEnable is the cleanest proven value in this record. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 when AppCompatTurnOffSwitchBack policy is enabled via LGPO + gpupdate. Numeric direction is fully proven. Standalone publication guidance now lives in privacy.disable-switchback.policy; this target remains here to document the current combined app bundle."
+      },
+      {
+        "target_id": "disable-engine",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableEngine",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows keeps the normal Application Compatibility Engine behavior. The engine checks a compatibility database each time an application starts and may apply run-time fixes, compatibility shims, or display Application Help messages for known incompatible applications.",
+            "evidence_ids": [
+              "local-appcompat-admx",
+              "local-appcompat-adml",
+              "admx-appcompat-csp"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Turn off Application Compatibility Engine",
+            "meaning": "Intended to disable the Application Compatibility Engine. Value=1 is consistent with AppCompat.admx policy behavior, and Procmon confirmed svchost.exe (gpsvc) writes DisableEngine=REG_DWORD 0x1 during gpupdate /force on 2026-03-13 (Windows 11 Pro 10.0.26200.8037). Microsoft ADML explicitly states this may cause BSOD if old antivirus software is installed.",
+            "evidence_ids": [
+              "local-appcompat-admx",
+              "local-appcompat-adml",
+              "admx-appcompat-csp",
+              "app-privacy-provider",
+              "procmon-appcompat-engine"
+            ]
+          }
+        ],
+        "notes": "Windows default is missing (key absent). Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableEngine=REG_DWORD 0x1 when AppCompatTurnOffEngine policy is enabled via LGPO + gpupdate. Numeric direction proven; explicit ADMX enabledValue block absence is no longer a blocker."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The app writes both values as part of the broader application-compatibility policy path. Paths and values match local AppCompat.admx. SbEnable is now documented separately in privacy.disable-switchback.policy for standalone publication, but it remains here because the current app still writes it together with DisableEngine. The app also writes four AppDeviceInventory values and DisablePCA in the same code path; those are tracked in separate records.",
+    "writes": [
+      {
+        "target_id": "sb-enable",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "SbEnable",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "disable-engine",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "DisableEngine",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows managed default",
+      "applies_to": "Windows 10 1903+ / Windows 11 all versions",
+      "states": [
+        {
+          "target_id": "sb-enable",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Key absent; SwitchBack runs normally."
+        },
+        {
+          "target_id": "disable-engine",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Key absent; Application Compatibility Engine runs normally."
+        }
+      ],
+      "evidence_ids": [
+        "local-appcompat-admx",
+        "local-appcompat-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "turn-off-appcompat-engine",
+      "label": "Turn off Application Compatibility Engine and SwitchBack",
+      "intended_for": [
+        "Advanced users on modern Win11 systems running no legacy software"
+      ],
+      "avoid_for": [
+        "Systems with old antivirus or security software (BSOD risk - Microsoft warning)",
+        "Systems running legacy or older applications that depend on compatibility shims",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "sb-enable",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "enabledValue confirmed in ADMX."
+        },
+        {
+          "target_id": "disable-engine",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Procmon confirmed gpsvc writes DisableEngine=1 when the policy is enabled."
+        }
+      ],
+      "good_when": "Running a clean Win11 system with only current software and no legacy or security products that depend on compatibility shims.",
+      "bad_when": "Running legacy software, old antivirus, or any app that may need Windows compatibility assistance.",
+      "tradeoffs": [
+        "Removes compatibility shim application on app launch - slight performance benefit at start.",
+        "May break older applications that rely on Windows compatibility fixes.",
+        "Microsoft explicitly warns of BSOD risk if old antivirus software is present.",
+        "recommended_for_general_users=false due to risk level."
+      ],
+      "apply_allowed": false,
+      "notes": "apply_allowed=false. Proof is complete after the 2026-03-13 Procmon capture, but Microsoft's BSOD warning remains a publication blocker for this bundle. SbEnable could be published separately; this bundle stays false while it includes DisableEngine.",
+      "evidence_ids": [
+        "local-appcompat-admx",
+        "local-appcompat-adml",
+        "admx-appcompat-csp",
+        "procmon-appcompat-engine"
+      ]
+    },
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "All users who want normal Windows compatibility behavior"
+      ],
+      "avoid_for": [],
+      "states": [
+        {
+          "target_id": "sb-enable",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave policy unset."
+        },
+        {
+          "target_id": "disable-engine",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave policy unset."
+        }
+      ],
+      "good_when": "You want Windows to provide compatibility assistance for all applications.",
+      "bad_when": "You want a leaner system with no compatibility shim overhead.",
+      "tradeoffs": [
+        "Full compatibility engine remains active."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-appcompat-admx"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-appcompat-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft AppCompat.admx mappings",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
+      "summary": "Maps SbEnable with explicit enabledValue=0 and disabledValue=1. Maps DisableEngine under AppCompatTurnOffEngine without an explicit numeric block, so the local ADMX alone leaves numeric direction implicit. Procmon now complements that gap by confirming gpsvc writes DisableEngine=1 when the policy is enabled.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-appcompat-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft AppCompat.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml",
+      "summary": "Describes Application Compatibility Engine and SwitchBack behavior. Provides semantic direction for both values. Microsoft explicitly warns in this text that disabling the engine may cause BSOD if old antivirus software is installed.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "admx-appcompat-csp",
+      "kind": "policy-csp",
+      "title": "Policy CSP - ADMX_AppCompat",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat",
+      "summary": "Microsoft Learn CSP page confirming AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack policies exist, are device-scoped, and apply to Windows 11 21H2+. Does not expose raw REG_DWORD numeric values directly - those come from the local ADMX.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "Writes SbEnable=0 and DisableEngine=1 as part of the application-compatibility policy path.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-appcompat-engine",
+      "kind": "procmon-trace",
+      "title": "Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack",
+      "location": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro)",
+      "summary": "LGPO.exe applied six AppCompat policy values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM/Software/Policies/Microsoft/Windows/AppCompat during gpupdate /force. RegSetValue confirmed DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0. reg query after gpupdate showed both values present at expected paths. Rollback removed Registry.pol, deleted both values with reg delete, and gpupdate /force returned the key to AITEnable=0x0 only. Capture file: research/evidence-files/missing/appcompat-policy-capture-lgpo-clean-pml.md",
+      "supports": [
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Both values are now proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and Procmon capture showing gpsvc writes DisableEngine=1 and SbEnable=0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Proof is no longer the blocker; risk is. Microsoft ADML explicitly warns that disabling the Application Compatibility Engine can cause BSOD when old antivirus or other security software is installed, which keeps apply_allowed=false for this combined bundle.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
+    "exact_quote_or_path": "AppCompat.admx: `<policy name=\"AppCompatTurnOffSwitchBack\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"SbEnable\">` with `<enabledValue><decimal value=\"0\" /></enabledValue>` and `<disabledValue><decimal value=\"1\" /></disabledValue>`; AppCompat.admx: `<policy name=\"AppCompatTurnOffEngine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisableEngine\">`; AppCompat.adml: `If you enable this policy setting, Switchback will be turned off.` and `If you enable this policy setting, the Application Compatibility Engine will be turned off.`",
+    "key_found_on_page": true,
+    "notes": "Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. Procmon then confirmed gpsvc writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037."
+  }
+}

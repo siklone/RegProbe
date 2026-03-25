@@ -1,0 +1,193 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.dwm-disable-overlay-min-fps",
+  "tweak_id": "system.dwm-disable-overlay-min-fps",
+  "record_status": "validated",
+  "summary": "Microsoft documents the DWM registry override OverlayMinFPS and says setting it to 0 disables the minimum-FPS check used for overlay assignment. The app writes that exact documented value, but this is a troubleshooting-style graphics override rather than a normal consumer optimization.",
+  "setting": {
+    "name": "DWM Overlay Minimum FPS Check",
+    "category": "System",
+    "area": "Desktop Window Manager / Overlay Diagnostics",
+    "scope": "device",
+    "casual_explanation": "Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off.",
+    "why_people_change_it": "People change it when testing overlay behavior, troubleshooting presentation issues, or undoing manual graphics experiments.",
+    "tradeoffs_overview": "Turning the check off can change how DWM decides to assign overlays. That can help troubleshooting, but it is not a normal everyday performance tweak for most users.",
+    "professional_notes": "Microsoft's DWM registry settings page documents HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayMinFPS and says setting the DWORD to 0 disables the check that otherwise requires a surface to animate above 15 FPS for overlay assignment. The same page presents this as a registry override used for the overlay system. This record treats the missing value as the normal baseline because Microsoft documents creating the value when an override is needed rather than publishing a separate required default value.",
+    "targets": [
+      {
+        "target_id": "overlay-min-fps",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm",
+        "value_name": "OverlayMinFPS",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Normal DWM baseline",
+            "meaning": "DWM uses its normal built-in overlay minimum-FPS behavior because no override is present.",
+            "evidence_ids": [
+              "ms-dwm-registry-settings"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Minimum-FPS check disabled",
+            "meaning": "The overlay minimum-FPS check is disabled.",
+            "evidence_ids": [
+              "ms-dwm-registry-settings",
+              "app-system-registry-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes OverlayMinFPS = 0 on the Microsoft-documented DWM path.",
+    "writes": [
+      {
+        "target_id": "overlay-min-fps",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm",
+        "value_name": "OverlayMinFPS",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Normal DWM baseline",
+      "applies_to": "Systems not applying an explicit overlay minimum-FPS override",
+      "states": [
+        {
+          "target_id": "overlay-min-fps",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the registry override absent so DWM uses its built-in overlay behavior."
+        }
+      ],
+      "notes": "The baseline is inferred from Microsoft's documentation describing how to create the value when the check should be disabled.",
+      "evidence_ids": [
+        "ms-dwm-registry-settings"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "normal-baseline",
+      "label": "Normal baseline",
+      "intended_for": [
+        "General users",
+        "Normal desktops and laptops",
+        "Systems not troubleshooting overlay behavior"
+      ],
+      "avoid_for": [
+        "Targeted DWM overlay troubleshooting"
+      ],
+      "states": [
+        {
+          "target_id": "overlay-min-fps",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep DWM on its normal built-in behavior."
+        }
+      ],
+      "good_when": "You want Windows to keep its ordinary overlay assignment behavior.",
+      "bad_when": "You are specifically testing or troubleshooting the overlay minimum-FPS check.",
+      "tradeoffs": [
+        "Windows keeps its ordinary overlay eligibility behavior.",
+        "You do not override the overlay minimum-FPS check."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-dwm-registry-settings"
+      ]
+    },
+    {
+      "profile_id": "disable-overlay-min-fps-check",
+      "label": "Disable overlay minimum-FPS check",
+      "intended_for": [
+        "Graphics troubleshooting",
+        "Presentation-path experiments",
+        "Advanced users undoing or reproducing overlay tests"
+      ],
+      "avoid_for": [
+        "Casual optimization presets",
+        "Users who do not know why they are changing overlay behavior"
+      ],
+      "states": [
+        {
+          "target_id": "overlay-min-fps",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Use the Microsoft-documented override that disables the overlay minimum-FPS check."
+        }
+      ],
+      "good_when": "You are troubleshooting overlay assignment and explicitly want the documented check turned off.",
+      "bad_when": "You are looking for a general-purpose gaming or desktop performance tweak.",
+      "tradeoffs": [
+        "The documented DWM minimum-FPS overlay check is disabled.",
+        "Overlay assignment behavior can change in ways that are only useful for troubleshooting or targeted experiments."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-dwm-registry-settings",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-dwm-registry-settings",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: DWM Registry Settings",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
+      "summary": "Microsoft documents HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayMinFPS and says setting it to 0 disables the check requiring a surface to animate above 15 FPS for overlay assignment.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "side-effects",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes OverlayMinFPS = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the exact registry path and override value, and the app writes that documented DWM troubleshooting control with a clean rollback story.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T01:03:30Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
+    "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\Dwm OverlayMinFPS A DWORD. If this value is present and set to zero, the Desktop Window Manager disables its minimum frame rate requirement for assigning DirectX swap chains to overlay planes in hardware that supports overlays.",
+    "key_found_on_page": true,
+    "notes": "Microsoft Learn documents the exact DWM runtime path and explains that setting OverlayMinFPS to 0 disables the minimum frame-rate check used for overlay assignment."
+  }
+}

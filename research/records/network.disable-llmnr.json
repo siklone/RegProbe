@@ -1,0 +1,226 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.disable-llmnr",
+  "tweak_id": "network.disable-llmnr",
+  "record_status": "validated",
+  "summary": "Policy-backed control for Link-Local Multicast Name Resolution (LLMNR). Good for hardened or modern networks, but it can remove a fallback name-resolution path on local subnets.",
+  "setting": {
+    "name": "Link-Local Multicast Name Resolution (LLMNR)",
+    "category": "Network",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "LLMNR lets Windows ask nearby devices for names on the local subnet when normal DNS does not help. Modern networks often disable it, but it can still help in some small or legacy local networks.",
+    "why_people_change_it": "Security-focused users disable LLMNR to reduce legacy name-resolution exposure. Some environments leave it on as a fallback for simple local discovery.",
+    "tradeoffs_overview": "Disabling LLMNR can reduce unnecessary multicast-based name resolution, but some local fallback discovery scenarios may stop working.",
+    "professional_notes": "The policy name is 'Turn off multicast name resolution'. In DnsClient.admx, enabling the policy writes EnableMulticast = 0 and disabling it writes EnableMulticast = 1.",
+    "targets": [
+      {
+        "target_id": "enable-multicast",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+        "value_name": "EnableMulticast",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "LLMNR stays enabled by default because the policy is not forced.",
+            "evidence_ids": [
+              "ms-dnsclient-policy-csp",
+              "local-dnsclient-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "LLMNR disabled",
+            "meaning": "The policy is enabled and multicast name resolution is turned off.",
+            "evidence_ids": [
+              "ms-dnsclient-policy-csp",
+              "local-dnsclient-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "LLMNR enabled",
+            "meaning": "The policy is disabled and multicast name resolution is allowed.",
+            "evidence_ids": [
+              "ms-dnsclient-policy-csp",
+              "local-dnsclient-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The current app writes EnableMulticast = 0, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "enable-multicast",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+        "value_name": "EnableMulticast",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Unmanaged Windows devices",
+      "states": [
+        {
+          "target_id": "enable-multicast",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "If the policy is not configured, Microsoft says LLMNR stays enabled."
+        }
+      ],
+      "notes": "Explicit value 1 and missing are not identical implementation states, but they both correspond to an enabled LLMNR outcome.",
+      "evidence_ids": [
+        "ms-dnsclient-policy-csp",
+        "local-dnsclient-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Small local networks that may still use multicast fallback"
+      ],
+      "avoid_for": [
+        "Hardened or strictly managed networks"
+      ],
+      "states": [
+        {
+          "target_id": "enable-multicast",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep Windows at the standard policy baseline."
+        }
+      ],
+      "good_when": "You do not want to force a name-resolution hardening decision yet.",
+      "bad_when": "You want to remove multicast fallback resolution intentionally.",
+      "tradeoffs": [
+        "LLMNR remains available.",
+        "No hardening policy is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-dnsclient-policy-csp"
+      ]
+    },
+    {
+      "profile_id": "hardened-network",
+      "label": "Hardened network",
+      "intended_for": [
+        "Security-focused systems",
+        "Modern managed networks"
+      ],
+      "avoid_for": [
+        "Environments that still depend on multicast fallback name resolution"
+      ],
+      "states": [
+        {
+          "target_id": "enable-multicast",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Turn off multicast name resolution."
+        }
+      ],
+      "good_when": "DNS and other intended name-resolution methods already cover the network.",
+      "bad_when": "Local subnet fallback resolution is still needed.",
+      "tradeoffs": [
+        "Legacy or fallback local name discovery can break.",
+        "The network stack becomes more predictable and locked down."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-dnsclient-policy-csp",
+        "local-dnsclient-admx",
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-dnsclient-policy-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft ADMX_DnsClient Policy CSP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient",
+      "summary": "Official documentation for the 'Turn off multicast name resolution' policy and the EnableMulticast mapping.",
+      "supports": [
+        "path",
+        "behavior",
+        "default",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-dnsclient-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft DnsClient.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
+      "summary": "The local ADMX file shows enabledValue 0 and disabledValue 1 for the Turn_Off_Multicast policy writing EnableMulticast.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The provider writes EnableMulticast = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-llmnr",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The Microsoft ADMX_DnsClient Policy CSP page explicitly documents the same registry key and value name used by the app for disabling LLMNR, and the local ADMX file confirms the integer mapping.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T08:13:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient",
+    "exact_quote_or_path": "Friendly Name Turn off multicast name resolution; Registry Key Name Software\\Policies\\Microsoft\\Windows NT\\DNSClient; Registry Value Name EnableMulticast",
+    "key_found_on_page": true,
+    "notes": "The official Policy CSP page names the same registry key and value name that the app writes when it disables LLMNR."
+  }
+}

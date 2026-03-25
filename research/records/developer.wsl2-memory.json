@@ -1,0 +1,145 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "developer.wsl2-memory",
+  "tweak_id": "developer.wsl2-memory",
+  "record_status": "validated",
+  "summary": "Controls the WSL 2 memory limit through %UserProfile%\\.wslconfig. The app now writes the documented [wsl2] memory setting instead of a registry surrogate.",
+  "setting": {
+    "name": "WSL 2 Memory Limit",
+    "category": "Developer",
+    "area": "WSL Configuration",
+    "scope": "user",
+    "casual_explanation": "WSL 2 can use a lot of RAM. Microsoft documents memory limits in .wslconfig, and this tweak writes that documented setting directly.",
+    "why_people_change_it": "People limit WSL 2 memory when Linux development workloads consume too much RAM and make the Windows side of the machine feel sluggish.",
+    "tradeoffs_overview": "A memory limit can protect the Windows host from WSL overuse. The app now targets the documented .wslconfig [wsl2] memory surface, so the behavior is explicit and reversible.",
+    "professional_notes": "Microsoft documents WSL configuration in .wslconfig and describes memory as a WSL 2 host setting under [wsl2]. The current app writes %UserProfile%\\.wslconfig with a [wsl2] memory setting, which matches the documented surface.",
+    "targets": [
+      {
+        "target_id": "wsl2-memory-setting",
+        "location_kind": "file",
+        "path": "%UserProfile%\\.wslconfig",
+        "value_name": "[wsl2].memory",
+        "value_type": "WSL setting",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "WSL default memory behavior",
+            "meaning": "WSL 2 uses its normal default memory behavior because no explicit memory limit is configured in .wslconfig.",
+            "evidence_ids": [
+              "ms-wsl-config"
+            ]
+          },
+          {
+            "state_kind": "feature-dependent",
+            "value": null,
+            "label": "Configured memory limit",
+            "meaning": "WSL 2 memory is explicitly limited in .wslconfig using a size value such as 4GB or 8GB.",
+            "evidence_ids": [
+              "ms-wsl-config"
+            ]
+          }
+        ],
+        "notes": "The documented WSL memory control lives in .wslconfig under the [wsl2] section."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "notes": "The current app writes %UserProfile%\\.wslconfig with [wsl2] memory=4GB.",
+    "writes": [
+      {
+        "target_id": "wsl2-memory-setting",
+        "path": "%UserProfile%\\.wslconfig",
+        "value_name": "[wsl2].memory",
+        "value_type": "WSL setting",
+        "state_kind": "value",
+        "value": "4GB"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "WSL default",
+      "applies_to": "WSL users who have not explicitly configured a memory cap in .wslconfig",
+      "states": [
+        {
+          "target_id": "wsl2-memory-setting",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave WSL 2 on its default memory behavior until an explicit cap is configured."
+        }
+      ],
+      "notes": "This record now tracks the documented WSL memory setting directly.",
+      "evidence_ids": [
+        "ms-wsl-config"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "set-wsl2-memory-limit",
+      "label": "Set WSL 2 memory limit",
+      "intended_for": [
+        "Windows users running WSL 2 workloads",
+        "Users who want to cap WSL 2 memory usage"
+      ],
+      "avoid_for": [
+        "Users who need WSL 2 to dynamically consume available RAM without a cap"
+      ],
+      "states": [
+        {
+          "target_id": "wsl2-memory-setting",
+          "state_kind": "value",
+          "value": "4GB",
+          "rationale": "Microsoft documents memory under .wslconfig [wsl2]; the app writes the same surface with a 4GB cap."
+        }
+      ],
+      "good_when": "You want a fixed WSL 2 memory ceiling.",
+      "bad_when": "You want WSL 2 to use more than 4GB when available.",
+      "tradeoffs": [
+        "Caps WSL 2 memory at 4GB.",
+        "Reversible by removing the setting or changing the value in .wslconfig."
+      ],
+      "apply_allowed": true,
+      "notes": "apply_allowed=true. The app now matches the documented .wslconfig memory surface.",
+      "evidence_ids": [
+        "ms-wsl-config"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-wsl-config",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Advanced settings configuration in WSL",
+      "location": "https://learn.microsoft.com/en-us/windows/wsl/wsl-config",
+      "summary": "Microsoft documents WSL 2 memory limits in the .wslconfig file under the [wsl2] section.",
+      "supports": [
+        "behavior",
+        "allowed-values",
+        "app-matching"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents WSL 2 memory limits through the .wslconfig file under the [wsl2] section. The app now writes that documented surface directly, so the record is validated and publishable.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-20T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/wsl/wsl-config",
+    "exact_quote_or_path": "The .wslconfig file configures settings globally for all Linux distributions running with WSL 2.; [wsl2]; memory=4GB",
+    "key_found_on_page": true,
+    "notes": "Microsoft documents WSL 2 memory limits in %UserProfile%\\.wslconfig under the [wsl2] section using the memory setting. The current app writes the same documented surface."
+  }
+}

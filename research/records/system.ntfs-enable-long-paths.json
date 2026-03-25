@@ -1,0 +1,231 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.ntfs-enable-long-paths",
+  "tweak_id": "system.ntfs-enable-long-paths",
+  "record_status": "validated",
+  "summary": "Officially documented control for Win32 long paths. Good for development and tooling workflows that hit the 260-character path limit, but it only helps applications that opt in to long-path support.",
+  "setting": {
+    "name": "Win32 Long Paths",
+    "category": "System",
+    "area": "File System Registry Setting",
+    "scope": "device",
+    "casual_explanation": "Windows normally keeps many apps limited to shorter file paths. This setting allows long paths for apps that are built to support them.",
+    "why_people_change_it": "People enable it when development tools, package managers, archives, or deep folder structures hit the normal path-length limit.",
+    "tradeoffs_overview": "Turning it on helps long-path-aware apps, but older apps that do not opt in still keep their normal limitations.",
+    "professional_notes": "Microsoft documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in the maximum path limitation guidance. FileSys.admx maps the same path and value name with enabledValue 1 and disabledValue 0. FileSys.adml says enabling the setting allows manifested Win32 applications and packaged Microsoft Store applications to access paths beyond the normal 260-character limit.",
+    "targets": [
+      {
+        "target_id": "long-paths-enabled",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "LongPathsEnabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Default behavior",
+            "meaning": "Win32 long paths are not explicitly enabled through this registry value.",
+            "evidence_ids": [
+              "ms-maximum-file-path-limitation",
+              "local-filesys-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Long paths disabled",
+            "meaning": "Win32 long paths are not enabled through this setting.",
+            "evidence_ids": [
+              "local-filesys-admx",
+              "local-filesys-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Long paths enabled",
+            "meaning": "Long-path-aware applications can access paths beyond the normal 260-character limit.",
+            "evidence_ids": [
+              "ms-maximum-file-path-limitation",
+              "local-filesys-admx",
+              "local-filesys-adml",
+              "app-system-registry-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes LongPathsEnabled = 1 on the Microsoft-documented path.",
+    "writes": [
+      {
+        "target_id": "long-paths-enabled",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "LongPathsEnabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows default",
+      "applies_to": "Windows 10 and later systems that have not explicitly enabled long paths",
+      "states": [
+        {
+          "target_id": "long-paths-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the value unset unless long-path support is needed."
+        }
+      ],
+      "notes": "Microsoft documents the registry value as the enablement mechanism. When it is not set, long-path support is not explicitly enabled for Win32 apps through this control.",
+      "evidence_ids": [
+        "ms-maximum-file-path-limitation",
+        "local-filesys-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that do not hit path-length limits"
+      ],
+      "avoid_for": [
+        "Developer workstations that regularly hit deep path trees"
+      ],
+      "states": [
+        {
+          "target_id": "long-paths-enabled",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the long-path setting at its normal baseline."
+        }
+      ],
+      "good_when": "You do not have applications or workflows that hit the path-length limit.",
+      "bad_when": "You regularly hit long path errors in development or packaging workflows.",
+      "tradeoffs": [
+        "Windows keeps its normal path-limit baseline.",
+        "Long-path-aware apps do not gain the extended path behavior through this setting."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-maximum-file-path-limitation"
+      ]
+    },
+    {
+      "profile_id": "long-path-aware-workflows",
+      "label": "Long-path aware workflows",
+      "intended_for": [
+        "Developers",
+        "Build machines",
+        "Systems using deep folder trees or package caches"
+      ],
+      "avoid_for": [
+        "Machines that do not need extended path support"
+      ],
+      "states": [
+        {
+          "target_id": "long-paths-enabled",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Enable Win32 long paths for apps that opt in."
+        }
+      ],
+      "good_when": "You hit long-path issues in developer tools or file-heavy workflows.",
+      "bad_when": "You do not need the feature and want to keep the system closer to its default baseline.",
+      "tradeoffs": [
+        "Long-path-aware applications can exceed the old 260-character limit.",
+        "Older apps that do not opt in still keep their normal limitations."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-maximum-file-path-limitation",
+        "local-filesys-adml",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-maximum-file-path-limitation",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Maximum Path Length Limitation",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+      "summary": "Microsoft documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem and explains that a value of 1 enables long paths for applications that opt in.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-filesys-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft FileSys.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx",
+      "summary": "The local ADMX file maps LongPathsEnabled to System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-filesys-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft FileSys.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml",
+      "summary": "The local ADML help text says enabling the setting allows manifested Win32 applications and packaged Microsoft Store applications to access paths beyond the normal 260-character limit.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes LongPathsEnabled = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft FileSys policy files document the exact machine registry surface and the long-path behavior. The app writes the documented enabled value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T21:34:02.4377701+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx",
+    "exact_quote_or_path": "<policy name=\"LongPathsEnabled\" class=\"Machine\" ... key=\"System\\CurrentControlSet\\Control\\FileSystem\" valueName=\"LongPathsEnabled\">; FileSys.adml: Enabling Win32 long paths will allow manifested win32 applications and packaged Microsoft Store applications to access paths beyond the normal 260 character limit.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact machine key and value name; local ADML confirms that enabling the policy allows long-path-aware Win32 and packaged apps to access paths beyond the normal 260-character limit."
+  }
+}

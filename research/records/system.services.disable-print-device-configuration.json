@@ -1,0 +1,203 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.services.disable-print-device-configuration",
+  "tweak_id": "system.services.disable-print-device-configuration",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for Print Device Configuration Service (PrintDeviceConfigurationService). A local SCM snapshot confirms the exact service identifier, display name, binary path, and current start type on the review host, but this pass did not re-capture a machine-checkable exact Microsoft guidance row from the live services page. Keep the record as reference only.",
+  "setting": {
+    "name": "Print Device Configuration Service",
+    "category": "System",
+    "area": "Service Start Mode",
+    "scope": "device",
+    "casual_explanation": "This service manages installation details for IPP and UP printers. Disabling it can stop that printer-installation support.",
+    "why_people_change_it": "People disable it on systems that do not install printers or on minimal builds where printer setup features are not needed.",
+    "tradeoffs_overview": "Disabling it can reduce unused printer-setup plumbing, but printer installations in progress may be canceled and related setup flows can stop working.",
+    "professional_notes": "A local SCM snapshot confirms the exact PrintDeviceConfigurationService service identity on the review host: display name `Print Device Configuration Service`, binary path `research/evidence-files/external/c/Windows/System32/svchost.exe.md -k LocalSystemNetworkRestricted -p`, and current start type `3 DEMAND_START`. The app uses a service start-mode tweak that disables `PrintDeviceConfigurationService`. Earlier research summarized the Microsoft Windows IoT Enterprise services page as documenting this service with a Manual default and `OK to disable`, but this review pass did not re-capture a machine-checkable exact row from the live page. Under the service-proof methodology, local SCM identity proof is strong but not enough by itself to restore validated status.",
+    "targets": [
+      {
+        "target_id": "printdeviceconfigurationservice-start-mode",
+        "location_kind": "service",
+        "path": "PrintDeviceConfigurationService",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Manual",
+            "label": "Windows default",
+            "meaning": "The service starts on demand with Microsoft's documented default mode.",
+            "evidence_ids": [
+              "ms-iot-services-printdeviceconfigurationservice"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Disabled",
+            "label": "Printer device configuration disabled",
+            "meaning": "The service no longer starts until its start mode is restored.",
+            "evidence_ids": [
+              "ms-iot-services-printdeviceconfigurationservice",
+              "app-system-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The app disables PrintDeviceConfigurationService by setting its start mode to Disabled.",
+    "writes": [
+      {
+        "target_id": "printdeviceconfigurationservice-start-mode",
+        "path": "PrintDeviceConfigurationService",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "state_kind": "value",
+        "value": "Disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented default",
+      "applies_to": "Windows systems using the normal Print Device Configuration Service configuration",
+      "states": [
+        {
+          "target_id": "printdeviceconfigurationservice-start-mode",
+          "state_kind": "value",
+          "value": "Manual",
+          "rationale": "Microsoft lists PrintDeviceConfigurationService with a Manual default start mode."
+        }
+      ],
+      "notes": "This baseline preserves the documented printer device configuration behavior.",
+      "evidence_ids": [
+        "ms-iot-services-printdeviceconfigurationservice"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that install printers normally"
+      ],
+      "avoid_for": [
+        "Minimal builds that intentionally remove printer setup support"
+      ],
+      "states": [
+        {
+          "target_id": "printdeviceconfigurationservice-start-mode",
+          "state_kind": "value",
+          "value": "Manual",
+          "rationale": "Keep the documented default service mode."
+        }
+      ],
+      "good_when": "You want printer installation flows to remain available.",
+      "bad_when": "You never install printers and want this service family trimmed.",
+      "tradeoffs": [
+        "Printer installation support remains available.",
+        "The service can still start when Windows needs it."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-iot-services-printdeviceconfigurationservice"
+      ]
+    },
+    {
+      "profile_id": "no-printer-device-configuration",
+      "label": "No printer device configuration",
+      "intended_for": [
+        "Systems that do not install printers",
+        "Minimal builds trimming printing support"
+      ],
+      "avoid_for": [
+        "Users who add or reconfigure printers"
+      ],
+      "states": [
+        {
+          "target_id": "printdeviceconfigurationservice-start-mode",
+          "state_kind": "value",
+          "value": "Disabled",
+          "rationale": "Disable the documented Print Device Configuration Service."
+        }
+      ],
+      "good_when": "You intentionally do not want this printer setup service running.",
+      "bad_when": "You may need printer installation support.",
+      "tradeoffs": [
+        "Unused printer setup plumbing is removed.",
+        "Printer installations in progress may be canceled."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-iot-services-printdeviceconfigurationservice",
+        "app-system-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-iot-services-printdeviceconfigurationservice",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Guidance on configuring system services - Print Device Configuration Service",
+      "location": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "summary": "This Microsoft Learn services page remains the intended official guidance source for Print Device Configuration Service, but this review pass did not re-capture a machine-checkable exact row for `PrintDeviceConfigurationService` from the live page. Treat it as historical guidance context until the exact service entry is captured again.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "local-scm-printdeviceconfigurationservice-2026-03-14",
+      "kind": "repo-doc",
+      "title": "Local SCM snapshot - PrintDeviceConfigurationService",
+      "location": "research/notes/service-snapshots/printdeviceconfigurationservice-sc-qc-2026-03-14.txt",
+      "summary": "Checked-in `sc qc PrintDeviceConfigurationService` snapshot from Microsoft Windows 11 Pro 10.0.26200 confirming the exact service identifier, display name, binary path, and current START_TYPE line on the review host. This proves the exact SCM control surface the app targets.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider disables the `PrintDeviceConfigurationService` service through the batch service start-mode tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The exact service identity is now proven locally through a checked-in SCM snapshot, and the app targets that same service control surface. However, this review pass did not re-capture a machine-checkable exact Microsoft guidance row for PrintDeviceConfigurationService from the live services page. Under the service-proof methodology, that means the service identity is proven but the official guidance proof is still incomplete, so the record stays in review.",
+    "blocking_issues": [
+      "The current Microsoft Learn services page was not re-captured with a machine-checkable exact row for PrintDeviceConfigurationService in this review pass.",
+      "Under the service-proof methodology, local SCM identity proof alone is not enough to restore validated status without exact Microsoft guidance capture."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "research/notes/service-snapshots/printdeviceconfigurationservice-sc-qc-2026-03-14.txt",
+    "exact_quote_or_path": "SERVICE_NAME: PrintDeviceConfigurationService | START_TYPE : 3 DEMAND_START | DISPLAY_NAME: Print Device Configuration Service | BINARY_PATH_NAME: research/evidence-files/external/c/WINDOWS/System32/svchost.exe.md -k LocalSystemNetworkRestricted -p",
+    "key_found_on_page": true,
+    "notes": "The local SCM snapshot proves the exact service identity and control surface on the review host. This does not restore validated status by itself because the Microsoft services page still needs an exact guidance row re-captured in a later pass."
+  }
+}

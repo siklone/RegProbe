@@ -13,12 +13,12 @@ from evidence_class_lib import (
     load_overrides,
     load_provenance_map,
 )
+from research_path_lib import REPO_ROOT, RESEARCH_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-RECORDS_DIR = REPO_ROOT / "Docs" / "tweaks" / "research" / "records"
+RECORDS_DIR = RESEARCH_ROOT / "records"
 PROVENANCE_PATH = REPO_ROOT / "Docs" / "tweaks" / "tweak-provenance.json"
-OVERRIDES_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-class-overrides.json"
-OUTPUT_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-classes.json"
+OVERRIDES_PATH = RESEARCH_ROOT / "evidence-class-overrides.json"
+OUTPUT_PATH = RESEARCH_ROOT / "evidence-classes.json"
 
 
 def main() -> int:

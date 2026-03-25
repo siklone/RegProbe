@@ -1,0 +1,259 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.disable-clipboard-redirection",
+  "tweak_id": "system.disable-clipboard-redirection",
+  "record_status": "validated",
+  "summary": "Device policy for RDP clipboard redirection. The local Microsoft TerminalServer.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.",
+  "setting": {
+    "name": "RDP Clipboard Redirection",
+    "category": "System",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Remote Desktop can let text and files move between your local clipboard and the remote machine. This policy controls whether that copy and paste bridge is allowed.",
+    "why_people_change_it": "Admins disable clipboard redirection for hardened remote sessions, kiosk devices, and compliance-sensitive environments. Power users often keep it enabled because it is convenient.",
+    "tradeoffs_overview": "Blocking clipboard redirection can reduce accidental data movement between local and remote systems, but it also removes one of the most common RDP convenience features.",
+    "professional_notes": "This record describes the policy-backed fDisableClip value under Terminal Services. The local TerminalServer.admx file defines it under SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services with enabledValue 1 and disabledValue 0. It is a device policy, not a per-session preference.",
+    "targets": [
+      {
+        "target_id": "disable-clipboard-redirection",
+        "location_kind": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+        "value_name": "fDisableClip",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force clipboard redirection behavior through policy.",
+            "evidence_ids": [
+              "ms-terminalserver-clipboard-policy",
+              "local-terminalserver-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Clipboard redirection allowed",
+            "meaning": "Clipboard sharing between local and remote sessions is allowed.",
+            "evidence_ids": [
+              "ms-terminalserver-clipboard-policy",
+              "local-terminalserver-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Clipboard redirection blocked",
+            "meaning": "Clipboard sharing between local and remote sessions is blocked.",
+            "evidence_ids": [
+              "ms-terminalserver-clipboard-policy",
+              "local-terminalserver-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The current app writes fDisableClip = 1, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "disable-clipboard-redirection",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+        "value_name": "fDisableClip",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Unmanaged Windows devices",
+      "states": [
+        {
+          "target_id": "disable-clipboard-redirection",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Default policy state is not configured."
+        }
+      ],
+      "notes": "Default policy state does not guarantee the same behavior across every RDP scenario, but it does mean the device is not forcing the restriction through policy.",
+      "evidence_ids": [
+        "ms-terminalserver-clipboard-policy",
+        "local-terminalserver-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Devices where RDP convenience matters"
+      ],
+      "avoid_for": [
+        "Locked-down remote access environments"
+      ],
+      "states": [
+        {
+          "target_id": "disable-clipboard-redirection",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keeps the machine at the normal Windows policy baseline."
+        }
+      ],
+      "good_when": "You want standard Remote Desktop behavior and do not need to enforce data movement restrictions.",
+      "bad_when": "You need to stop users from copying data between local and remote machines.",
+      "tradeoffs": [
+        "Clipboard copy and paste can still work across RDP boundaries.",
+        "No policy lock-down is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-terminalserver-clipboard-policy"
+      ]
+    },
+    {
+      "profile_id": "hardened-rdp",
+      "label": "Hardened RDP",
+      "intended_for": [
+        "Kiosk devices",
+        "Compliance-sensitive environments",
+        "Administrative jump boxes"
+      ],
+      "avoid_for": [
+        "Users who rely on copy and paste between systems"
+      ],
+      "states": [
+        {
+          "target_id": "disable-clipboard-redirection",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Forces clipboard redirection off."
+        }
+      ],
+      "good_when": "You want to reduce the chance of content moving between the local machine and an RDP session.",
+      "bad_when": "Copy and paste between systems is part of the workflow.",
+      "tradeoffs": [
+        "Text and file copy and paste between local and remote sessions stops working.",
+        "Some support workflows become slower."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-terminalserver-clipboard-policy",
+        "local-terminalserver-admx",
+        "app-system-provider"
+      ]
+    },
+    {
+      "profile_id": "rdp-collaboration",
+      "label": "RDP collaboration",
+      "intended_for": [
+        "Support workflows",
+        "Developers using remote machines",
+        "General desktop remoting"
+      ],
+      "avoid_for": [
+        "Highly restricted environments"
+      ],
+      "states": [
+        {
+          "target_id": "disable-clipboard-redirection",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Explicitly allows clipboard redirection."
+        }
+      ],
+      "good_when": "You want to keep remote work convenient and predictable.",
+      "bad_when": "You need stricter data separation between local and remote systems.",
+      "tradeoffs": [
+        "Clipboard data can move between local and remote sessions.",
+        "This is a convenience-friendly profile, not a hardened one."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-terminalserver-clipboard-policy",
+        "local-terminalserver-admx"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-terminalserver-clipboard-policy",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP ADMX TerminalServer: Disable clipboard redirection",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-terminalserver#ts_disableclipboardredirection",
+      "summary": "Official documentation for the Terminal Services policy that maps to fDisableClip.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-terminalserver-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft TerminalServer.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/TerminalServer.admx",
+      "summary": "The local ADMX file shows TS_CLIENT_CLIPBOARD under SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services with valueName fDisableClip, enabledValue 1, and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes fDisableClip = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-clipboard-redirection",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "Current repo provenance already links this tweak to nohuto references and internal audit output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft TerminalServer.admx file explicitly defines fDisableClip under SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services with enabledValue 1 and disabledValue 0, which matches the app's device-policy write.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T15:25:49.0591858+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/TerminalServer.admx",
+    "exact_quote_or_path": "<policy name=\"TS_CLIENT_CLIPBOARD\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\" valueName=\"fDisableClip\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same policy key and fDisableClip value used by the app, and it confirms the 1/0 mapping."
+  }
+}

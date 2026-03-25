@@ -19,8 +19,8 @@ The ecosystem foundations enable:
 ## 1. Plugin System Architecture
 
 ### Files Created
-- `OpenTraceProject.Core/Plugins/IPlugin.cs`
-- `OpenTraceProject.Core/Plugins/PluginLoader.cs`
+- `core/Plugins/IPlugin.cs`
+- `core/Plugins/PluginLoader.cs`
 
 ### Features
 - **Plugin Interface**: Standard `IPlugin` interface with metadata, initialization, execution, and validation
@@ -48,7 +48,7 @@ The ecosystem foundations enable:
 ## 2. Telemetry Foundation
 
 ### Files Created
-- `OpenTraceProject.Core/Telemetry/TelemetryService.cs`
+- `core/Telemetry/TelemetryService.cs`
 
 ### Features
 - **Opt-In by Default**: Users must explicitly enable telemetry
@@ -83,7 +83,7 @@ The ecosystem foundations enable:
 ## 3. Cryptographic Logging
 
 ### Files Created
-- `OpenTraceProject.Core/Security/CryptographicLogger.cs`
+- `core/Security/CryptographicLogger.cs`
 
 ### Features
 - **Blockchain-Like Chain**: Each log entry hashes the previous entry
@@ -115,7 +115,7 @@ The ecosystem foundations enable:
 ## 4. VSS Snapshot Integration
 
 ### Files Created
-- `OpenTraceProject.Core/Security/VssSnapshotService.cs`
+- `core/Security/VssSnapshotService.cs`
 
 ### Features
 - **System Restore Points**: Create restore points before risky operations
@@ -146,8 +146,8 @@ The ecosystem foundations enable:
 ## 5. Cloud Preset Repository
 
 ### Files Created
-- `OpenTraceProject.Core/Cloud/PresetModels.cs`
-- `OpenTraceProject.Core/Cloud/PresetRepositoryClient.cs`
+- `core/Cloud/PresetModels.cs`
+- `core/Cloud/PresetRepositoryClient.cs`
 
 ### Features
 - **Community Presets**: Download Gaming, Work, Streaming optimization presets
@@ -190,10 +190,10 @@ GET  /api/v1/tweaks/{id}/effectiveness
 ## 6. Scripting Engine Foundation
 
 ### Files Created
-- `OpenTraceProject.Core/Scripting/IScriptEngine.cs`
-- `OpenTraceProject.Core/Scripting/ScriptApi.cs`
-- `OpenTraceProject.Core/Scripting/LuaScriptEngine.cs` (stub)
-- `OpenTraceProject.Core/Scripting/PythonScriptEngine.cs` (stub)
+- `core/Scripting/IScriptEngine.cs`
+- `core/Scripting/ScriptApi.cs`
+- `core/Scripting/LuaScriptEngine.cs` (stub)
+- `core/Scripting/PythonScriptEngine.cs` (stub)
 
 ### Features
 - **Multi-Language Support**: LUA and Python scripting engines
@@ -246,9 +246,9 @@ info = api.GetSystemInfo()
 ## 7. Remote Management Protocol
 
 ### Files Created
-- `OpenTraceProject.Core/Remote/RemoteManagementModels.cs`
-- `OpenTraceProject.Core/Remote/RemoteManagementClient.cs`
-- `OpenTraceProject.Core/Remote/RemoteCommandHandler.cs`
+- `core/Remote/RemoteManagementModels.cs`
+- `core/Remote/RemoteManagementClient.cs`
+- `core/Remote/RemoteCommandHandler.cs`
 
 ### Features
 - **Fleet Management**: Centralized control of multiple Open Trace Project installations
@@ -366,30 +366,30 @@ TweakEngine / PluginLoader / ScriptEngine
 ### Created Files (17 total)
 
 **Plugins** (2 files)
-- `OpenTraceProject.Core/Plugins/IPlugin.cs`
-- `OpenTraceProject.Core/Plugins/PluginLoader.cs`
+- `core/Plugins/IPlugin.cs`
+- `core/Plugins/PluginLoader.cs`
 
 **Telemetry** (1 file)
-- `OpenTraceProject.Core/Telemetry/TelemetryService.cs`
+- `core/Telemetry/TelemetryService.cs`
 
 **Security** (2 files)
-- `OpenTraceProject.Core/Security/CryptographicLogger.cs`
-- `OpenTraceProject.Core/Security/VssSnapshotService.cs`
+- `core/Security/CryptographicLogger.cs`
+- `core/Security/VssSnapshotService.cs`
 
 **Cloud** (2 files)
-- `OpenTraceProject.Core/Cloud/PresetModels.cs`
-- `OpenTraceProject.Core/Cloud/PresetRepositoryClient.cs`
+- `core/Cloud/PresetModels.cs`
+- `core/Cloud/PresetRepositoryClient.cs`
 
 **Scripting** (4 files)
-- `OpenTraceProject.Core/Scripting/IScriptEngine.cs`
-- `OpenTraceProject.Core/Scripting/ScriptApi.cs`
-- `OpenTraceProject.Core/Scripting/LuaScriptEngine.cs`
-- `OpenTraceProject.Core/Scripting/PythonScriptEngine.cs`
+- `core/Scripting/IScriptEngine.cs`
+- `core/Scripting/ScriptApi.cs`
+- `core/Scripting/LuaScriptEngine.cs`
+- `core/Scripting/PythonScriptEngine.cs`
 
 **Remote Management** (3 files)
-- `OpenTraceProject.Core/Remote/RemoteManagementModels.cs`
-- `OpenTraceProject.Core/Remote/RemoteManagementClient.cs`
-- `OpenTraceProject.Core/Remote/RemoteCommandHandler.cs`
+- `core/Remote/RemoteManagementModels.cs`
+- `core/Remote/RemoteManagementClient.cs`
+- `core/Remote/RemoteCommandHandler.cs`
 
 **Documentation** (1 file)
 - `ECOSYSTEM_FOUNDATIONS.md` (this file)

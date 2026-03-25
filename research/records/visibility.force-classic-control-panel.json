@@ -1,0 +1,215 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "visibility.force-classic-control-panel",
+  "tweak_id": "visibility.force-classic-control-panel",
+  "record_status": "validated",
+  "summary": "User policy for the default Control Panel view. Good for people who prefer the classic icon view, but it removes the category view as the default when Control Panel opens.",
+  "setting": {
+    "name": "Control Panel Default View",
+    "category": "Visibility",
+    "area": "Registry Policy",
+    "scope": "user",
+    "casual_explanation": "Control Panel can open in either category view or the classic icons view. This policy chooses which one opens by default for the user.",
+    "why_people_change_it": "People change it when they prefer the classic all-items view and do not want to keep switching away from category view.",
+    "tradeoffs_overview": "Using the classic icon view can be faster for power users, but people who prefer the guided category layout may find it less friendly.",
+    "professional_notes": "ControlPanel.admx maps ForceClassicControlPanel under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer with enabledValue 1 and disabledValue 0.",
+    "targets": [
+      {
+        "target_id": "force-classic-control-panel",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "value_name": "ForceClassicControlPanel",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Control Panel opens using the view from the last Control Panel session.",
+            "evidence_ids": [
+              "local-controlpanel-admx-classic",
+              "local-controlpanel-adml-classic"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Category view",
+            "meaning": "Control Panel opens to the category view.",
+            "evidence_ids": [
+              "local-controlpanel-admx-classic",
+              "local-controlpanel-adml-classic"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Classic icon view",
+            "meaning": "Control Panel opens to the icon view.",
+            "evidence_ids": [
+              "local-controlpanel-admx-classic",
+              "local-controlpanel-adml-classic",
+              "app-visibility-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+    "notes": "The current app writes ForceClassicControlPanel = 1, which matches the documented icon-view state.",
+    "writes": [
+      {
+        "target_id": "force-classic-control-panel",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+        "value_name": "ForceClassicControlPanel",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows user-policy default",
+      "applies_to": "Windows systems exposing the Control Panel view policy",
+      "states": [
+        {
+          "target_id": "force-classic-control-panel",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The user policy is not configured by default."
+        }
+      ],
+      "notes": "If the policy is not configured, Control Panel opens using the view from the last session.",
+      "evidence_ids": [
+        "local-controlpanel-admx-classic",
+        "local-controlpanel-adml-classic"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want Control Panel to remember the last-used view"
+      ],
+      "avoid_for": [
+        "Users who always want the icon view"
+      ],
+      "states": [
+        {
+          "target_id": "force-classic-control-panel",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want Control Panel to keep the last-used behavior.",
+      "bad_when": "You want to force classic icon view every time.",
+      "tradeoffs": [
+        "The last-used view is preserved.",
+        "The experience stays familiar to people who like category view."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-controlpanel-adml-classic"
+      ]
+    },
+    {
+      "profile_id": "classic-icon-view",
+      "label": "Classic icon view",
+      "intended_for": [
+        "Power users",
+        "People who prefer the old all-items layout"
+      ],
+      "avoid_for": [
+        "Users who prefer the category view guidance"
+      ],
+      "states": [
+        {
+          "target_id": "force-classic-control-panel",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Use the documented icon-view state."
+        }
+      ],
+      "good_when": "You want Control Panel to open directly to all items.",
+      "bad_when": "You prefer category grouping.",
+      "tradeoffs": [
+        "Classic icon view becomes the default.",
+        "Category view is no longer the default opening layout."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-controlpanel-admx-classic",
+        "local-controlpanel-adml-classic",
+        "app-visibility-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "local-controlpanel-admx-classic",
+      "kind": "official-doc",
+      "title": "Local Microsoft ControlPanel.admx ForceClassicControlPanel mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanel.admx",
+      "summary": "The local ADMX file maps ForceClassicControlPanel under the Explorer policies key with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-controlpanel-adml-classic",
+      "kind": "official-doc",
+      "title": "Local Microsoft ControlPanel.adml ForceClassicControlPanel help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/ControlPanel.adml",
+      "summary": "The local ADML help text explains that enabling the policy opens Control Panel in icon view, disabling it opens category view, and not configuring it uses the last session's view.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-visibility-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/VisibilityTweakProvider.cs",
+      "summary": "The provider writes ForceClassicControlPanel = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Local Microsoft Control Panel policy files clearly define the exact user-policy surface, allowed values, and behavior for ForceClassicControlPanel. The app writes the documented classic icon view value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T02:52:43+03:00",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanel.admx",
+    "exact_quote_or_path": "<policy name=\"ForceClassicControlPanel\" class=\"User\" displayName=\"$(string.ForceClassicControlPanel)\" explainText=\"$(string.ForceClassicControlPanel_Help)\" key=\"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" valueName=\"ForceClassicControlPanel\">; ControlPanel.adml: If this policy setting is enabled, the Control Panel opens to the icon view. If this policy setting is disabled, the Control Panel opens to the category view. If this policy setting is not configured, the Control Panel opens to the view used in the last Control Panel session.",
+    "key_found_on_page": true,
+    "notes": "Local official ADMX defines the exact user-policy key and value name, and local ADML confirms the classic icon, category view, and not-configured behaviors. The app writes the documented classic icon view state under the same user-policy surface."
+  }
+}

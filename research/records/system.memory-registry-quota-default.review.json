@@ -1,0 +1,206 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.memory-registry-quota-default",
+  "tweak_id": "system.memory-registry-quota-default",
+  "record_status": "validated",
+  "summary": "Resets the legacy registry-size limit control to the documented automatic-sizing state by writing RegistrySizeLimit = 0 under HKLM\\System\\CurrentControlSet\\Control. Microsoft documents RegistrySizeLimit as the published registry-size control surface and recommends deleting the value or setting it to 0 so Windows automatically sizes the registry as needed. The app previously wrote RegistryQuota under Session Manager\\Memory Management; the implementation now matches the documented RegistrySizeLimit surface.",
+  "setting": {
+    "name": "Registry Size Limit / Registry Quota",
+    "category": "System",
+    "area": "Registry Storage Space",
+    "scope": "device",
+    "casual_explanation": "Windows historically exposed a registry size limit tied to paged-pool memory. Modern systems normally manage this automatically, so the safest reset is to return the published control to automatic sizing.",
+    "why_people_change_it": "People only touch it when undoing very old registry-size tweaks or troubleshooting unusual low-registry-space problems on older systems.",
+    "tradeoffs_overview": "This is a niche legacy-facing setting. Resetting it to automatic sizing is safer than carrying a hardcoded legacy quota value on modern systems.",
+    "professional_notes": "Microsoft's published registry-size control is RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control. Microsoft documents that if RegistrySizeLimit is absent or set to 0, Windows automatically sizes the registry limit as needed. The Registry Storage Space documentation explains that RegistrySizeLimit is related to paged-pool usage and to PagedPoolSize under Session Manager\\MemoryManagement. The current validation host does not have RegistrySizeLimit present, which is consistent with the documented automatic-sizing default.",
+    "targets": [
+      {
+        "target_id": "registry-size-limit",
+        "location_kind": "registry",
+        "path": "HKLM\\System\\CurrentControlSet\\Control",
+        "value_name": "RegistrySizeLimit",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Automatic sizing",
+            "meaning": "Windows automatically sets the registry size as needed.",
+            "evidence_ids": [
+              "ms-rsl-functionality",
+              "ms-registry-storage-space",
+              "live-registrysize-missing"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Automatic sizing",
+            "meaning": "Windows automatically sets the registry size as needed.",
+            "evidence_ids": [
+              "ms-rsl-functionality",
+              "ms-registry-storage-space"
+            ]
+          }
+        ],
+        "notes": "Microsoft recommends deleting RegistrySizeLimit or setting it to 0 so Windows automatically sizes the registry as needed."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The app now writes RegistrySizeLimit=0 under HKLM\\System\\CurrentControlSet\\Control, matching the documented Microsoft control surface for automatic registry sizing. The older RegistryQuota write under Session Manager\\Memory Management was removed on 2026-03-13.",
+    "writes": [
+      {
+        "target_id": "registry-size-limit",
+        "path": "HKLM\\System\\CurrentControlSet\\Control",
+        "value_name": "RegistrySizeLimit",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0,
+        "notes": "Current implementation path."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows automatic sizing baseline",
+      "applies_to": "Systems using the official published RegistrySizeLimit control surface",
+      "states": [
+        {
+          "target_id": "registry-size-limit",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "If the key is absent, Windows automatically sizes the registry as needed."
+        }
+      ],
+      "notes": "Microsoft recommends deleting RegistrySizeLimit unless it is specifically required for legacy troubleshooting.",
+      "evidence_ids": [
+        "ms-rsl-functionality",
+        "ms-registry-storage-space",
+        "live-registrysize-missing"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-automatic-sizing",
+      "label": "Windows automatic sizing",
+      "intended_for": [
+        "General users",
+        "Modern systems",
+        "Anything not solving a specific legacy registry-space issue"
+      ],
+      "avoid_for": [
+        "Environments preserving a known legacy registry-size override for a specific reason"
+      ],
+      "states": [
+        {
+          "target_id": "registry-size-limit",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Set the documented control surface to automatic sizing."
+        }
+      ],
+      "good_when": "You want Windows to manage registry size automatically.",
+      "bad_when": "You are deliberately maintaining a legacy nonzero RegistrySizeLimit value for compatibility troubleshooting.",
+      "tradeoffs": [
+        "Windows automatically manages the registry size limit.",
+        "This avoids carrying an unsourced hardcoded RegistryQuota value."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-rsl-functionality",
+        "ms-registry-storage-space"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-registry-storage-space",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Registry Storage Space",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-storage-space",
+      "summary": "Microsoft documents RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control and explains how it relates to PagedPoolSize under Session Manager\\MemoryManagement.",
+      "supports": [
+        "path",
+        "default",
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-rsl-functionality",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Registry Size Limit functionality is still honored if the RegistrySizeLimit registry key is set",
+      "location": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set",
+      "summary": "Microsoft documents that if RegistrySizeLimit exists and is nonzero, older Windows versions still honor it, and recommends deleting the key or setting it to 0 so Windows automatically sets registry size as needed.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-getsystemregistryquota",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: GetSystemRegistryQuota",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getsystemregistryquota",
+      "summary": "Microsoft documents an API that retrieves the current registry size and maximum quota, reinforcing that registry quota is an officially surfaced concept.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "live-registrysize-missing",
+      "kind": "registry-observation",
+      "title": "Validation host observation of missing RegistrySizeLimit",
+      "location": "Local observation - 2026-03-13, HKLM\\System\\CurrentControlSet\\Control",
+      "summary": "RegistrySizeLimit was not present on the validation host, which matches Microsoft's documented automatic-sizing baseline.",
+      "supports": [
+        "default"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes RegistrySizeLimit = 0 under HKLM\\System\\CurrentControlSet\\Control for this tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official Microsoft-published control surface is RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control, and Microsoft explicitly documents that deleting it or setting it to 0 returns Windows to automatic sizing. The app now writes that documented automatic-sizing value instead of an unsourced RegistryQuota path.",
+    "blocking_issues": []
+  },
+  "open_questions": [],
+  "last_reviewed_utc": "2026-03-13T18:44:00+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set",
+    "exact_quote_or_path": "If the RegistrySizeLimit key exists or is set to a value other than 0, delete the key or set it to 0. This will allow the operating system to automatically set the registry size as needed.",
+    "key_found_on_page": true,
+    "notes": "Official Microsoft documentation publishes RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control as the supported registry-size control, and the app now writes the documented automatic-sizing value 0 on that surface."
+  }
+}

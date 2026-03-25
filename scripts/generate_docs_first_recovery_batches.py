@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-RESEARCH_ROOT = REPO_ROOT / "Docs" / "tweaks" / "research"
+RESEARCH_ROOT = REPO_ROOT / "research"
 DOCS_FIRST_BACKLOG = RESEARCH_ROOT / "docs-first-backlog.json"
 WITH_URL_OUTPUT = RESEARCH_ROOT / "docs-first-admx-policy-with-url.json"
 WITHOUT_URL_OUTPUT = RESEARCH_ROOT / "docs-first-admx-policy-without-url.json"
@@ -31,7 +31,7 @@ def extract_url(text: str | None) -> str | None:
 
 
 def load_docs_first_entries() -> list[dict]:
-    data = json.loads(DOCS_FIRST_BACKLOG.read_text(encoding="utf-8"))
+    data = json.loads(DOCS_FIRST_BACKLOG.read_text(encoding="utf-8-sig"))
     return data.get("entries", [])
 
 

@@ -1,0 +1,98 @@
+12:16:28 controller-pid=28792
+12:16:48 phase=RESTART_AFTER_APPLY
+12:16:48 manual-helper=RESTART_AFTER_APPLY
+12:16:55 phase=RESTART_AFTER_APPLY
+12:17:00 phase=RESTART_AFTER_APPLY
+12:17:05 phase=RESTART_AFTER_APPLY
+12:17:10 phase=RESTART_AFTER_APPLY
+12:17:15 phase=RESTART_AFTER_APPLY
+12:17:20 phase=RESTART_AFTER_APPLY
+12:17:25 phase=RESTART_AFTER_APPLY
+12:17:30 phase=RESTART_AFTER_APPLY
+12:17:36 phase=RESTART_AFTER_APPLY
+12:17:41 phase=POST_REBOOT_AFTER_APPLY
+12:17:46 phase=POST_REBOOT_AFTER_APPLY
+12:17:51 phase=POST_REBOOT_AFTER_APPLY
+12:17:56 phase=POST_REBOOT_AFTER_APPLY
+12:18:01 phase=POST_REBOOT_AFTER_APPLY
+12:18:06 phase=POST_REBOOT_AFTER_APPLY
+12:18:11 phase=POST_REBOOT_AFTER_APPLY
+12:18:16 phase=POST_REBOOT_AFTER_APPLY
+12:18:21 phase=POST_REBOOT_AFTER_APPLY
+12:18:26 phase=POST_REBOOT_AFTER_APPLY
+12:18:31 phase=POST_REBOOT_AFTER_APPLY
+12:18:36 phase=POST_REBOOT_AFTER_APPLY
+12:18:41 phase=POST_REBOOT_AFTER_APPLY
+12:18:46 phase=POST_REBOOT_AFTER_APPLY
+12:18:51 phase=POST_REBOOT_AFTER_APPLY
+12:18:56 phase=POST_REBOOT_AFTER_APPLY
+12:19:02 phase=POST_REBOOT_AFTER_APPLY
+12:19:07 phase=POST_REBOOT_AFTER_APPLY
+12:19:12 phase=BENCH_START
+12:19:17 phase=BENCH_START
+12:19:22 phase=BENCH_START
+12:19:27 phase=BENCH_START
+12:19:32 phase=BENCH_START
+12:19:37 phase=BENCH_START
+12:19:42 phase=RESTART_AFTER_RESTORE
+12:19:42 manual-helper=RESTART_AFTER_RESTORE
+12:19:48 phase=RESTART_AFTER_RESTORE
+12:19:53 phase=RESTART_AFTER_RESTORE
+12:19:58 phase=RESTART_AFTER_RESTORE
+12:20:03 phase=RESTART_AFTER_RESTORE
+12:20:08 phase=RESTART_AFTER_RESTORE
+12:20:14 phase=RESTART_AFTER_RESTORE
+12:20:19 phase=RESTART_AFTER_RESTORE
+12:20:24 phase=RESTART_AFTER_RESTORE
+12:20:29 phase=RESTART_AFTER_RESTORE
+12:20:34 phase=RESTART_AFTER_RESTORE
+12:20:39 phase=COMPLETE
+12:20:39 complete
+12:21:09 controller-exit=
+12:21:09 status-json-final
+{
+    "test_id":  "thread-dpc-enable-0-cpu3",
+    "phase":  "COMPLETE",
+    "run_count":  1,
+    "baseline":  {
+                     "exists":  false,
+                     "value":  null
+                 },
+    "benchmark_runs":  [
+                           {
+                               "run_index":  1,
+                               "exit_code":  0,
+                               "duration_seconds":  30.31,
+                               "stdout_path":  {
+                                                   "Length":  104
+                                               },
+                               "stderr_path":  {
+                                                   "Length":  104
+                                               },
+                               "perf_csv":  {
+                                                "Length":  102
+                                            },
+                               "kind":  "measured"
+                           }
+                       ],
+    "restore_complete":  true,
+    "errors":  [
+
+               ],
+    "timings":  {
+                    "boot_started_at":  "2026-03-24T12:16:38.3478475+03:00",
+                    "last_updated_at":  "2026-03-24T12:20:36.4077468+03:00"
+                },
+    "last_detail":  "Validation run finished.",
+    "candidate_applied":  true,
+    "after_apply_reboot_complete":  true,
+    "idle_ready":  true,
+    "idle_snapshot":  {
+                          "cpu":  2.72,
+                          "disk":  0,
+                          "stable_seconds":  30
+                      },
+    "benchmark_complete":  true,
+    "after_restore_reboot_complete":  true
+}
+

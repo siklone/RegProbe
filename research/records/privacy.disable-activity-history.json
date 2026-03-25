@@ -1,0 +1,358 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-activity-history",
+  "tweak_id": "privacy.disable-activity-history",
+  "record_status": "validated",
+  "summary": "Device policies for Windows Activity History. The local Microsoft OSPolicy.admx file explicitly documents the same policy key, value names, and enabled/disabled values that the app uses for the full activity-history bundle.",
+  "setting": {
+    "name": "Windows Activity History",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can keep track of what you did on the device and can upload some of that activity so it can appear across devices. These policy values decide whether that activity feed can exist, be published, and be uploaded.",
+    "why_people_change_it": "Privacy-focused users and managed environments disable these values to stop activity publication and roaming. Convenience-focused users may prefer to leave them at the Windows baseline.",
+    "tradeoffs_overview": "Disabling all three policies stops activity publishing and cloud upload. Leaving them not configured keeps Windows in control.",
+    "professional_notes": "All three values live under HKLM policy scope and use direct 1 or 0 integer values in OSPolicy.admx. The current app writes all three to 0.",
+    "targets": [
+      {
+        "target_id": "enable-activity-feed",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "EnableActivityFeed",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows policy does not force the activity feed state.",
+            "evidence_ids": [
+              "ms-privacy-policy-csp",
+              "local-ospolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Disabled",
+            "meaning": "The activity feed is disabled by policy.",
+            "evidence_ids": [
+              "ms-privacy-policy-csp",
+              "local-ospolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Enabled",
+            "meaning": "The activity feed is allowed by policy.",
+            "evidence_ids": [
+              "ms-privacy-policy-csp",
+              "local-ospolicy-admx"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "publish-user-activities",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "PublishUserActivities",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows policy does not force whether user activities can be published.",
+            "evidence_ids": [
+              "ms-privacy-policy-csp",
+              "local-ospolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Disabled",
+            "meaning": "User activities cannot be published.",
+            "evidence_ids": [
+              "ms-privacy-policy-csp",
+              "local-ospolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Enabled",
+            "meaning": "User activities can be published.",
+            "evidence_ids": [
+              "ms-privacy-policy-csp",
+              "local-ospolicy-admx"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "upload-user-activities",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "UploadUserActivities",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows policy does not force whether user activities can be uploaded.",
+            "evidence_ids": [
+              "ms-privacy-policy-csp",
+              "local-ospolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Disabled",
+            "meaning": "User activities cannot be uploaded.",
+            "evidence_ids": [
+              "ms-privacy-policy-csp",
+              "local-ospolicy-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Enabled",
+            "meaning": "User activities can be uploaded.",
+            "evidence_ids": [
+              "ms-privacy-policy-csp",
+              "local-ospolicy-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes all three values to 0, which matches the privacy-focused disable profile.",
+    "writes": [
+      {
+        "target_id": "enable-activity-feed",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "EnableActivityFeed",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "publish-user-activities",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "PublishUserActivities",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      },
+      {
+        "target_id": "upload-user-activities",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+        "value_name": "UploadUserActivities",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows policy default",
+      "applies_to": "Unmanaged Windows 10 and Windows 11 devices",
+      "states": [
+        {
+          "target_id": "enable-activity-feed",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Policy is not configured by default."
+        },
+        {
+          "target_id": "publish-user-activities",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Policy is not configured by default."
+        },
+        {
+          "target_id": "upload-user-activities",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Policy is not configured by default."
+        }
+      ],
+      "notes": "The CSP page exposes default value metadata, but this record keeps Windows default and policy-not-configured separate on purpose.",
+      "evidence_ids": [
+        "ms-privacy-policy-csp",
+        "local-ospolicy-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want standard Windows behavior"
+      ],
+      "avoid_for": [
+        "Privacy-focused or managed devices"
+      ],
+      "states": [
+        {
+          "target_id": "enable-activity-feed",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave Windows policy unset."
+        },
+        {
+          "target_id": "publish-user-activities",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave Windows policy unset."
+        },
+        {
+          "target_id": "upload-user-activities",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave Windows policy unset."
+        }
+      ],
+      "good_when": "You do not need to force a privacy policy for activity history.",
+      "bad_when": "You explicitly want to stop activity publication and upload.",
+      "tradeoffs": [
+        "Windows keeps normal control over the feature.",
+        "No hard privacy restriction is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-privacy-policy-csp"
+      ]
+    },
+    {
+      "profile_id": "privacy-focused",
+      "label": "Privacy focused",
+      "intended_for": [
+        "Privacy-conscious users",
+        "Managed work devices",
+        "Shared systems"
+      ],
+      "avoid_for": [
+        "People who want cross-device activity features"
+      ],
+      "states": [
+        {
+          "target_id": "enable-activity-feed",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable the activity feed."
+        },
+        {
+          "target_id": "publish-user-activities",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Stop activity publishing."
+        },
+        {
+          "target_id": "upload-user-activities",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Stop activity upload."
+        }
+      ],
+      "good_when": "You want Timeline-style activity publication and upload turned off by policy.",
+      "bad_when": "You rely on Windows activity continuity features across devices.",
+      "tradeoffs": [
+        "Cross-device activity history behavior is reduced or removed.",
+        "The policy is clearer and stricter than leaving Windows at default."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-privacy-policy-csp",
+        "local-ospolicy-admx",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-privacy-policy-csp",
+      "kind": "policy-csp",
+      "title": "Microsoft Privacy Policy CSP",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy",
+      "summary": "Official documentation covering EnableActivityFeed, PublishUserActivities, and UploadUserActivities.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-ospolicy-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft OSPolicy.admx mapping",
+      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx",
+      "summary": "The local ADMX file shows all three policies using enabledValue 1 and disabledValue 0 under Software\\Policies\\Microsoft\\Windows\\System.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes all three policy values to 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-activity-history",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the existing catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft OSPolicy.admx file explicitly defines EnableActivityFeed, PublishUserActivities, and UploadUserActivities under Software\\Policies\\Microsoft\\Windows\\System with enabledValue 1 and disabledValue 0, which matches the app's policy bundle.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T09:15:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx",
+    "exact_quote_or_path": "<policy name=\"EnableActivityFeed\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"EnableActivityFeed\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; <policy name=\"PublishUserActivities\" ... valueName=\"PublishUserActivities\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>; <policy name=\"UploadUserActivities\" ... valueName=\"UploadUserActivities\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same policy key and all three value names used by the app, and it confirms the shared 1/0 mapping."
+  }
+}

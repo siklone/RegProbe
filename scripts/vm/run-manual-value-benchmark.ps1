@@ -35,7 +35,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 if ([string]::IsNullOrWhiteSpace($IncidentLogPath)) {
-    $IncidentLogPath = Join-Path $PSScriptRoot '..\..\Docs\tweaks\research\vm-incidents.json'
+    $IncidentLogPath = Join-Path $PSScriptRoot '..\..\research\vm-incidents.json'
 }
 
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'

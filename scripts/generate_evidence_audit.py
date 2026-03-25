@@ -25,13 +25,13 @@ from evidence_class_lib import (
     restore_story_known,
     sanitize_value,
 )
+from research_path_lib import REPO_ROOT, RESEARCH_ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-RECORDS_DIR = REPO_ROOT / "Docs" / "tweaks" / "research" / "records"
+RECORDS_DIR = RESEARCH_ROOT / "records"
 PROVENANCE_PATH = REPO_ROOT / "Docs" / "tweaks" / "tweak-provenance.json"
-OVERRIDES_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-class-overrides.json"
-INCIDENTS_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "vm-incidents.json"
-OUTPUT_PATH = REPO_ROOT / "Docs" / "tweaks" / "research" / "evidence-audit.json"
+OVERRIDES_PATH = RESEARCH_ROOT / "evidence-class-overrides.json"
+INCIDENTS_PATH = RESEARCH_ROOT / "vm-incidents.json"
+OUTPUT_PATH = RESEARCH_ROOT / "evidence-audit.json"
 
 
 def load_incident_map(path: Path) -> dict[str, list[dict[str, Any]]]:

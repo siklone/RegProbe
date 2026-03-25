@@ -1,0 +1,234 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "notifications.disable-toast",
+  "tweak_id": "notifications.disable-toast",
+  "record_status": "validated",
+  "summary": "Policy-backed control for app toast notifications. The local Microsoft WPN.admx file explicitly documents the same policy key, value name, and enabled/disabled values that the app uses.",
+  "setting": {
+    "name": "Toast Notifications",
+    "category": "Notifications",
+    "area": "Registry Policy",
+    "scope": "user",
+    "casual_explanation": "Toast notifications are the pop-up alerts apps show in Windows. This policy decides whether apps can raise those pop-ups for the current user.",
+    "why_people_change_it": "People disable toast notifications to reduce interruptions, keep the desktop quieter, or lock down notification behavior on managed devices.",
+    "tradeoffs_overview": "Turning this off reduces distractions, but apps can no longer raise normal toast notifications for the current user.",
+    "professional_notes": "Microsoft documents NoToastNotification in ADMX_WPN. The app currently uses the user-side policy path HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoToastApplicationNotification = 1, which matches the documented disable behavior. Microsoft also notes that this policy does not affect taskbar notification balloons and does not automatically disable every Windows system feature toast.",
+    "targets": [
+      {
+        "target_id": "no-toast-application-notification",
+        "location_kind": "registry",
+        "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+        "value_name": "NoToastApplicationNotification",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Toast notifications stay enabled by default and can still be controlled by the administrator or user.",
+            "evidence_ids": [
+              "ms-admx-wpn-no-toast",
+              "local-wpn-admx-no-toast",
+              "local-wpn-adml-no-toast"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Toast notifications allowed",
+            "meaning": "The policy is disabled and apps can still raise toast notifications.",
+            "evidence_ids": [
+              "ms-admx-wpn-no-toast",
+              "local-wpn-admx-no-toast",
+              "local-wpn-adml-no-toast"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Toast notifications turned off",
+            "meaning": "Applications cannot raise toast notifications for the current user.",
+            "evidence_ids": [
+              "ms-admx-wpn-no-toast",
+              "local-wpn-admx-no-toast",
+              "local-wpn-adml-no-toast"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes NoToastApplicationNotification = 1 for the current user, which matches the documented disable behavior.",
+    "writes": [
+      {
+        "target_id": "no-toast-application-notification",
+        "path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+        "value_name": "NoToastApplicationNotification",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows user-policy default",
+      "applies_to": "Supported Windows 10 and Windows 11 editions with WPN policy support",
+      "states": [
+        {
+          "target_id": "no-toast-application-notification",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The user policy is not configured by default."
+        }
+      ],
+      "notes": "Microsoft documents the functional default as toast notifications enabled when the policy is not configured.",
+      "evidence_ids": [
+        "ms-admx-wpn-no-toast",
+        "local-wpn-adml-no-toast"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "People who want normal app notification behavior"
+      ],
+      "avoid_for": [
+        "Quiet or locked-down systems"
+      ],
+      "states": [
+        {
+          "target_id": "no-toast-application-notification",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the user policy unset."
+        }
+      ],
+      "good_when": "You want apps to keep showing normal toast alerts.",
+      "bad_when": "You want a quieter desktop or fewer pop-up interruptions.",
+      "tradeoffs": [
+        "Apps can continue raising toast notifications.",
+        "No policy-based restriction is enforced."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-admx-wpn-no-toast"
+      ]
+    },
+    {
+      "profile_id": "quiet-notifications",
+      "label": "Quiet notifications",
+      "intended_for": [
+        "Managed devices",
+        "Distraction-free setups"
+      ],
+      "avoid_for": [
+        "Users who rely on app toast alerts"
+      ],
+      "states": [
+        {
+          "target_id": "no-toast-application-notification",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Block app toast notifications for the current user."
+        }
+      ],
+      "good_when": "You want app pop-up notifications suppressed.",
+      "bad_when": "You need apps to surface time-sensitive alerts through toasts.",
+      "tradeoffs": [
+        "App toast interruptions stop.",
+        "Some app alerts will no longer surface through the normal toast UI."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-admx-wpn-no-toast",
+        "local-wpn-admx-no-toast",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-admx-wpn-no-toast",
+      "kind": "policy-csp",
+      "title": "Microsoft Policy CSP: ADMX_WPN / NoToastNotification",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification",
+      "summary": "Official Microsoft documentation for the policy that turns off app toast notifications.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-wpn-admx-no-toast",
+      "kind": "official-doc",
+      "title": "Local Microsoft WPN.admx NoToastNotification mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx",
+      "summary": "The local ADMX file maps NoToastNotification to the PushNotifications policy key with enabledValue 1 and disabledValue 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-wpn-adml-no-toast",
+      "kind": "official-doc",
+      "title": "Local Microsoft WPN.adml NoToastNotification help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml",
+      "summary": "The local ADML help text says enabling the policy turns off app toast notifications.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes NoToastApplicationNotification = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft WPN.admx file explicitly defines NoToastNotification at SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications with valueName NoToastApplicationNotification and enabledValue 1 / disabledValue 0, which matches the app's policy surface.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T09:00:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx",
+    "exact_quote_or_path": "<policy name=\"NoToastNotification\" class=\"Both\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\" valueName=\"NoToastApplicationNotification\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the 1/0 mapping."
+  }
+}

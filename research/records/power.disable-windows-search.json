@@ -1,0 +1,211 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.disable-windows-search",
+  "tweak_id": "power.disable-windows-search",
+  "record_status": "validated",
+  "summary": "Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, start-mode baseline, feature behavior, and says it is OK to disable in the service guidance used here. The app disables the service by setting its start mode to Disabled.",
+  "setting": {
+    "name": "Windows Search Service",
+    "category": "Power",
+    "area": "Service Start Mode",
+    "scope": "device",
+    "casual_explanation": "Windows Search builds and maintains an index so Start and Explorer searches can return results faster. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
+    "why_people_change_it": "People disable it when they do not use Windows indexing, prefer third-party search tools, or want to reduce indexing-related background work.",
+    "tradeoffs_overview": "Turning off the service can reduce indexing work, but Windows Search features lose indexed results and some experiences can become slower or unavailable.",
+    "professional_notes": "Microsoft's Windows IoT Enterprise service guidance lists Windows Search `(WSearch)` with a documented start mode baseline and marks it `OK to disable`. Microsoft also documents the Windows Search indexing process and confirms the feature area and its role in indexed search results. The current app disables `WSearch` through a service start-mode tweak.",
+    "targets": [
+      {
+        "target_id": "wsearch-start-mode",
+        "location_kind": "service",
+        "path": "WSearch",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Manual",
+            "label": "Microsoft documented baseline",
+            "meaning": "Windows Search keeps the documented start-mode baseline from the service guidance used in this record.",
+            "evidence_ids": [
+              "ms-iot-services-wsearch",
+              "ms-search-indexing-overview"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Disabled",
+            "label": "Search service disabled",
+            "meaning": "Indexed Windows Search is unavailable until the service start mode is restored.",
+            "evidence_ids": [
+              "ms-iot-services-wsearch",
+              "ms-search-indexing-overview",
+              "app-performance-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+    "notes": "The app disables the WSearch service by setting its start mode to Disabled through the batch service tweak.",
+    "writes": [
+      {
+        "target_id": "wsearch-start-mode",
+        "path": "WSearch",
+        "value_name": "StartMode",
+        "value_type": "ServiceStartMode",
+        "state_kind": "value",
+        "value": "Disabled"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Microsoft documented baseline",
+      "applies_to": "Windows systems using the Windows Search service guidance and feature model captured in this record",
+      "states": [
+        {
+          "target_id": "wsearch-start-mode",
+          "state_kind": "value",
+          "value": "Manual",
+          "rationale": "Keep the documented service baseline from the Microsoft service guidance used in this record."
+        }
+      ],
+      "notes": "This baseline preserves indexed Windows Search behavior.",
+      "evidence_ids": [
+        "ms-iot-services-wsearch",
+        "ms-search-indexing-overview"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems using indexed Windows Search",
+        "Anyone relying on Start or Explorer search"
+      ],
+      "avoid_for": [
+        "Users who intentionally do not want indexing"
+      ],
+      "states": [
+        {
+          "target_id": "wsearch-start-mode",
+          "state_kind": "value",
+          "value": "Manual",
+          "rationale": "Keep the documented service baseline."
+        }
+      ],
+      "good_when": "You use Windows Search and want the normal indexed search experience.",
+      "bad_when": "You prefer third-party search tools and want indexing off.",
+      "tradeoffs": [
+        "Indexed search remains available.",
+        "The service can still do indexing work when needed."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-iot-services-wsearch",
+        "ms-search-indexing-overview"
+      ]
+    },
+    {
+      "profile_id": "no-search-indexing",
+      "label": "No search indexing",
+      "intended_for": [
+        "Users who do not rely on Windows Search",
+        "Systems using Everything or other external search tools",
+        "Stripped-down or lab builds"
+      ],
+      "avoid_for": [
+        "Users who rely on indexed file or mail search",
+        "Systems where Search features must remain available"
+      ],
+      "states": [
+        {
+          "target_id": "wsearch-start-mode",
+          "state_kind": "value",
+          "value": "Disabled",
+          "rationale": "Disable the service to remove indexed search behavior."
+        }
+      ],
+      "good_when": "You intentionally do not want the Windows Search indexing service running.",
+      "bad_when": "You want fast indexed search results in Windows.",
+      "tradeoffs": [
+        "Indexed search activity stops.",
+        "Windows Search features lose the indexed search experience."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-iot-services-wsearch",
+        "ms-search-indexing-overview",
+        "app-performance-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-iot-services-wsearch",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Guidance on configuring system services - Windows Search",
+      "location": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "summary": "Microsoft lists Windows Search `(WSearch)` with start mode `Manual` and marks it `OK to disable`, describing it as providing content indexing, property caching, and search results.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-search-indexing-overview",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Search indexing process overview",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview",
+      "summary": "Microsoft documents the Windows Search indexing system and confirms the feature area and its role in indexed search results.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-performance-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+      "summary": "The provider disables the `WSearch` service through the batch service start-mode tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the WSearch service name, its Manual baseline, its search-indexing behavior, and explicitly marks it OK to disable in the service guidance used here. The app's service-start-mode action matches that documented control surface cleanly.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-25T09:15:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+    "exact_quote_or_path": "Windows Search (WSearch); Manual; Provides content indexing, property caching, and search results for files, e-mail, and other content.; OK to disable: This service provides functionality that is useful to some but not all enterprises, and security-focused enterprises that don't use it can safely disable it.",
+    "key_found_on_page": true,
+    "notes": "The Microsoft services guidance page explicitly lists the WSearch service, documents its Manual baseline and behavior, and marks it OK to disable."
+  }
+}

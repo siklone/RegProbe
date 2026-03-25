@@ -1,0 +1,202 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "network.disable-smb2",
+  "tweak_id": "network.disable-smb2",
+  "record_status": "validated",
+  "summary": "Controls the SMB2 value for LanmanServer. Microsoft directly documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for disabling the SMBv2 and SMBv3 server protocols.",
+  "setting": {
+    "name": "SMBv2 and SMBv3 Server Protocol Support",
+    "category": "Network",
+    "area": "Registry Configuration",
+    "scope": "device",
+    "casual_explanation": "SMBv2 and SMBv3 are the modern Windows file-sharing protocols. Turning them off forces the machine away from the normal modern SMB stack.",
+    "why_people_change_it": "People disable SMBv2 and SMBv3 only for special legacy troubleshooting or when testing very old environments. Modern Windows systems normally should keep them enabled.",
+    "tradeoffs_overview": "Disabling SMBv2 and SMBv3 is officially supported but very risky. Modern file sharing, performance features, encryption, signing improvements, and many Windows workflows can break.",
+    "professional_notes": "Microsoft documents SMB2 under HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters. A value of 0 disables SMBv2 and SMBv3 on the server component. If the value does not exist, the default is enabled.",
+    "targets": [
+      {
+        "target_id": "lanmanserver-smb2",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+        "value_name": "SMB2",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Enabled by default",
+            "meaning": "Windows keeps SMBv2 and SMBv3 enabled when no explicit override exists.",
+            "evidence_ids": [
+              "ms-smb-protocol-toggle"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Disabled",
+            "meaning": "The SMBv2 and SMBv3 server protocols are disabled.",
+            "evidence_ids": [
+              "ms-smb-protocol-toggle"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Enabled",
+            "meaning": "The SMBv2 and SMBv3 server protocols are enabled explicitly.",
+            "evidence_ids": [
+              "ms-smb-protocol-toggle"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+    "notes": "The current app writes SMB2 = 0, which matches Microsoft's documented disable behavior for SMBv2 and SMBv3 on the server component.",
+    "writes": [
+      {
+        "target_id": "lanmanserver-smb2",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+        "value_name": "SMB2",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows SMB server default",
+      "applies_to": "Supported Windows SMB server releases with SMBv2 and SMBv3 support",
+      "states": [
+        {
+          "target_id": "lanmanserver-smb2",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Microsoft documents that the default configuration is enabled and the registry value may not exist."
+        }
+      ],
+      "notes": "This is the normal modern Windows baseline.",
+      "evidence_ids": [
+        "ms-smb-protocol-toggle"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Modern Windows networks",
+        "Business environments",
+        "Almost every normal file-sharing scenario"
+      ],
+      "avoid_for": [
+        "Special legacy troubleshooting where modern SMB must be disabled intentionally"
+      ],
+      "states": [
+        {
+          "target_id": "lanmanserver-smb2",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the explicit override absent and keep modern SMB enabled."
+        }
+      ],
+      "good_when": "You want the normal Windows SMB stack and modern compatibility.",
+      "bad_when": "You are intentionally testing an old legacy-only environment.",
+      "tradeoffs": [
+        "Modern SMB features remain available.",
+        "You are not forcing a legacy-only server mode."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smb-protocol-toggle"
+      ]
+    },
+    {
+      "profile_id": "legacy-only-server",
+      "label": "Legacy-only server",
+      "intended_for": [
+        "Very narrow compatibility testing",
+        "Temporary legacy troubleshooting"
+      ],
+      "avoid_for": [
+        "General Windows usage",
+        "Security-focused systems",
+        "Normal file-sharing environments"
+      ],
+      "states": [
+        {
+          "target_id": "lanmanserver-smb2",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Disable SMBv2 and SMBv3 on the server component."
+        }
+      ],
+      "good_when": "You have a specific and temporary reason to disable the modern SMB server protocols.",
+      "bad_when": "You are doing it as a general optimization or hardening step.",
+      "tradeoffs": [
+        "Modern SMB behavior can break badly.",
+        "This is usually harmful outside very specific troubleshooting."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-smb-protocol-toggle",
+        "app-network-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-smb-protocol-toggle",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: detect, enable, and disable SMBv1, SMBv2, and SMBv3 in Windows",
+      "location": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3",
+      "summary": "Microsoft documents the LanmanServer SMB2 registry value, including 0 for disabled, 1 for enabled, and the default behavior where the value may not exist because SMBv2 and SMBv3 are enabled.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "allowed-values",
+        "behavior",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-network-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+      "summary": "The provider writes SMB2 = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft directly documents HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters -> SMB2, including 0 for Disabled, 1 for Enabled, and the default-enabled behavior when the value is absent. The app writes that same documented value on the documented server-side SMB path.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T03:31:00+03:00",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3",
+    "exact_quote_or_path": "To enable or disable SMBv2 on an SMB server, open Registry Editor and go to HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters. For the name, use SMB2. For the type, use REG_DWORD. For the data, use 0 for Disabled and 1 for Enabled. The default value is 1, or Enabled. In this case, no registry key is created.",
+    "key_found_on_page": true,
+    "notes": "Microsoft documents the same LanmanServer registry path, value name, and 0/1 semantics that the app uses for the server-side SMBv2 and SMBv3 disable override."
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.0",
+  "record_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
+  "legacy_id": "privacy.disable-diagnostic-data",
+  "tweak_id": "privacy.disable-diagnostic-data",
+  "record_status": "validated",
+  "summary": "The app writes AllowTelemetry = 0 and now labels it as setting diagnostic data to the minimum supported level. Microsoft documents that value 0 is only supported on Enterprise, Education, and Server editions, so the renamed UX is edition-aware instead of implying a general-purpose off switch.",
+  "setting": {
+    "name": "Set Diagnostic Data to Minimum Supported Level",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can send different amounts of diagnostic data. This policy sets how much data Windows is allowed to collect and send.",
+    "why_people_change_it": "People lower it when they want less diagnostic data sent from the device, or raise it when they need broader diagnostics for support and troubleshooting.",
+    "tradeoffs_overview": "Lower levels reduce diagnostic data but can reduce insight for support and product diagnostics. The current product problem is that the app names value 0 as a general 'disable' even though Microsoft limits that meaning by edition.",
+    "professional_notes": "DataCollection.admx exposes AllowTelemetry values 0, 1, and 3. Microsoft states that 0 is only supported on Enterprise, Education, and Server editions. If the policy is disabled or not configured, Windows sends required diagnostic data and the user can choose whether to send optional diagnostic data.",
+    "targets": [
+      {
+        "target_id": "allow-telemetry",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+        "value_name": "AllowTelemetry",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows sends required diagnostic data and the user can choose whether to send optional diagnostic data.",
+            "evidence_ids": [
+              "ms-system-allowtelemetry",
+              "local-datacollection-adml",
+              "nohuto-allowtelemetry-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Diagnostic data off (limited edition support)",
+            "meaning": "Microsoft documents this as turning diagnostic data off, but only on Enterprise, Education, and Server editions.",
+            "evidence_ids": [
+              "ms-system-allowtelemetry",
+              "local-datacollection-admx",
+              "local-datacollection-adml",
+              "app-privacy-provider",
+              "nohuto-allowtelemetry-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Required diagnostic data",
+            "meaning": "Windows sends the minimum diagnostic data needed to keep Windows secure, updated, and functioning as expected.",
+            "evidence_ids": [
+              "ms-system-allowtelemetry",
+              "local-datacollection-admx",
+              "local-datacollection-adml",
+              "nohuto-allowtelemetry-admx"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Optional diagnostic data",
+            "meaning": "Windows sends required diagnostic data plus additional diagnostic data such as broader logs and crash data.",
+            "evidence_ids": [
+              "ms-system-allowtelemetry",
+              "local-datacollection-admx",
+              "local-datacollection-adml",
+              "nohuto-allowtelemetry-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes AllowTelemetry = 0 and the provider label now reflects the documented lowest supported diagnostic-data level. The implementation matches the research and stays edition-aware through the documented policy semantics.",
+    "writes": [
+      {
+        "target_id": "allow-telemetry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection",
+        "value_name": "AllowTelemetry",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 10 and Windows 11 systems exposing the diagnostic-data policy",
+      "states": [
+        {
+          "target_id": "allow-telemetry",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "If the policy is disabled or not configured, Windows sends required diagnostic data and the user can choose optional diagnostic data."
+        }
+      ],
+      "notes": "The documented default behavior is not 'off'.",
+      "evidence_ids": [
+        "ms-system-allowtelemetry",
+        "local-datacollection-adml",
+        "nohuto-allowtelemetry-admx"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that should keep the standard Windows diagnostic-data baseline"
+      ],
+      "avoid_for": [
+        "Enterprise or education devices that explicitly want the minimum possible level"
+      ],
+      "states": [
+        {
+          "target_id": "allow-telemetry",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the policy unset."
+        }
+      ],
+      "good_when": "You want the documented default behavior.",
+      "bad_when": "You need an explicit organization-managed diagnostic-data policy.",
+      "tradeoffs": [
+        "Windows sends required diagnostic data.",
+        "The user can still choose optional diagnostic data."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-system-allowtelemetry",
+        "nohuto-allowtelemetry-admx"
+      ]
+    },
+    {
+      "profile_id": "lowest-documented-level",
+      "label": "Lowest documented level",
+      "intended_for": [
+        "Enterprise, Education, and Server systems",
+        "Organizations that want the lowest supported documented level"
+      ],
+      "avoid_for": [
+        "General consumer editions without SKU-aware gating"
+      ],
+      "states": [
+        {
+          "target_id": "allow-telemetry",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Use the lowest documented value only where Microsoft documents it as supported."
+        }
+      ],
+      "good_when": "You have edition-aware logic and know the device supports value 0 as documented.",
+      "bad_when": "You treat all Windows editions as if value 0 always means full diagnostic-data disablement.",
+      "tradeoffs": [
+        "Diagnostic data can be reduced to the lowest documented level on supported editions.",
+        "Without edition-aware gating, the UI can mislead users about the actual result."
+      ],
+      "apply_allowed": false,
+      "notes": "Validated against the renamed UX; keep edition-aware gating in mind because value 0 still has edition-limited semantics.",
+      "evidence_ids": [
+        "ms-system-allowtelemetry",
+        "local-datacollection-adml",
+        "app-privacy-provider",
+        "nohuto-allowtelemetry-admx"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-system-allowtelemetry",
+      "kind": "policy-csp",
+      "title": "Microsoft System Policy CSP: AllowTelemetry",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry",
+      "summary": "Official documentation for the diagnostic data policy, including the allowed values and the edition limit for value 0.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-datacollection-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft DataCollection.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx",
+      "summary": "The local ADMX file defines AllowTelemetry with official values 0, 1, and 3 under Software\\Policies\\Microsoft\\Windows\\DataCollection.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-datacollection-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft DataCollection.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml",
+      "summary": "The local ADML help text explains the three documented levels, notes that value 0 is only supported on Enterprise, Education, and Server editions, and states the not-configured default behavior.",
+      "supports": [
+        "behavior",
+        "default",
+        "version-scope",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes AllowTelemetry = 0 and labels the tweak as disabling diagnostic data.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-allowtelemetry-admx",
+      "kind": "decompilation",
+      "title": "nohuto win-config mirror - AllowTelemetry policy",
+      "location": "research/_source-mirrors/win-config/privacy/desc.md",
+      "summary": "DataCollection.admx shows AllowTelemetry under HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection. The mirrored enum lists 0 as Diagnostic data off, 1 as Send required diagnostic data, and 3 as Send optional diagnostic data. The ExplainText also states that disabling or not configuring the policy leaves required diagnostic data on and optional data user-configurable.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "The official mapping is clear and the provider label now matches the documented lowest supported diagnostic-data level. The tweak remains not recommended for general users because value 0 has edition-limited semantics.",
+    "blocking_issues": []
+  },
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry",
+    "exact_quote_or_path": "research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx (AllowTelemetry values 0, 1, and 3); research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml (value 0 is only supported on Enterprise, Education, and Server editions).",
+    "key_found_on_page": true,
+    "notes": "The app now uses the documented lowest supported diagnostic-data level wording instead of describing value 0 as a general disable switch. Added nohuto mirror corroboration via nohuto-allowtelemetry-admx."
+  },
+  "last_reviewed_utc": "2026-03-20T19:35:00Z"
+}

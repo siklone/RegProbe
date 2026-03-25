@@ -1,0 +1,227 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.hide-username-at-signin",
+  "tweak_id": "privacy.hide-username-at-signin",
+  "record_status": "validated",
+  "summary": "Research record for hiding username information during sign-in. The app writes DontDisplayUserName, and the local Windows security metadata in sceregvl.inf confirms that exact registry surface for the documented security option.",
+  "setting": {
+    "name": "Display of Username During Sign-In",
+    "category": "Privacy",
+    "area": "Security Option",
+    "scope": "device",
+    "casual_explanation": "After someone enters their credentials, Windows can keep showing the username or hide it. This setting decides whether the username stays visible during that sign-in flow.",
+    "why_people_change_it": "People hide the username at sign-in to reduce on-screen identity exposure in shared spaces or environments where shoulder surfing is a concern.",
+    "tradeoffs_overview": "Hiding the username improves privacy during sign-in, but it also removes a small confirmation cue that can help users notice which account is being used.",
+    "professional_notes": "Microsoft documents this as the security option 'Interactive logon: Do not display username at sign-in'. The current app writes HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayUserName = 1, and local Windows security metadata in sceregvl.inf confirms that exact value name for the documented option. The nearby DontDisplayLockedUserId entry is a separate security-option surface and does not change this mapping.",
+    "targets": [
+      {
+        "target_id": "dont-display-user-name",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "DontDisplayUserName",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Keep username visible during sign-in",
+            "meaning": "The security option is not enabled, so the username can remain visible during the sign-in flow.",
+            "evidence_ids": [
+              "ms-security-option-hide-username-signin",
+              "local-security-defaults-hide-username"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Hide username during sign-in",
+            "meaning": "The security option is enabled and the username is not displayed after credentials are entered.",
+            "evidence_ids": [
+              "ms-security-option-hide-username-signin",
+              "local-security-registry-hide-username",
+              "app-privacy-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes DontDisplayUserName = 1, and the guest-side probe on Win25H2Clean confirmed that sceregvl.inf maps the documented security option to DontDisplayUserName. The earlier DontDisplayLockedUserId interpretation was a different nearby security option entry, not the surface used by this tweak.",
+    "writes": [
+      {
+        "target_id": "dont-display-user-name",
+        "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "value_name": "DontDisplayUserName",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows security-option default",
+      "applies_to": "Windows client systems exposing the interactive logon security option",
+      "states": [
+        {
+          "target_id": "dont-display-user-name",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "The local Windows security baseline files list a default of 0."
+        }
+      ],
+      "notes": "By default, Windows does not force the username to be hidden during sign-in.",
+      "evidence_ids": [
+        "local-security-defaults-hide-username"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "Single-user devices",
+        "Users who want normal sign-in confirmation cues"
+      ],
+      "avoid_for": [
+        "Shared or privacy-sensitive sign-in environments"
+      ],
+      "states": [
+        {
+          "target_id": "dont-display-user-name",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the normal identity cue visible during sign-in."
+        }
+      ],
+      "good_when": "You want the username to remain visible during sign-in.",
+      "bad_when": "You want less identity information shown on screen while signing in.",
+      "tradeoffs": [
+        "Users get a clearer confirmation of which account is signing in.",
+        "The sign-in screen exposes more identity information."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-security-option-hide-username-signin",
+        "local-security-defaults-hide-username"
+      ]
+    },
+    {
+      "profile_id": "reduced-shoulder-surfing",
+      "label": "Reduced shoulder surfing",
+      "intended_for": [
+        "Shared desks",
+        "Reception areas",
+        "Privacy-conscious office systems"
+      ],
+      "avoid_for": [
+        "Users who prefer more visible sign-in confirmation"
+      ],
+      "states": [
+        {
+          "target_id": "dont-display-user-name",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Hide the username during the sign-in process."
+        }
+      ],
+      "good_when": "You want less account information visible while credentials are being entered.",
+      "bad_when": "You want the username to stay visible as a confirmation cue.",
+      "tradeoffs": [
+        "Identity exposure during sign-in is reduced.",
+        "Users lose a visible reminder of which account is active in the sign-in flow."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-security-option-hide-username-signin",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-security-option-hide-username-signin",
+      "kind": "official-doc",
+      "title": "Microsoft security policy setting: Interactive logon: Do not display username at sign-in",
+      "location": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852277(v=ws.11)",
+      "summary": "Microsoft documents the purpose of the security option and its enabled and disabled behavior during sign-in.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-security-registry-hide-username",
+      "kind": "official-doc",
+      "title": "Local Windows security option registry mapping",
+      "location": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+      "summary": "The local Windows security registry metadata maps the security option to HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayUserName.",
+      "supports": [
+        "path",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-security-defaults-hide-username",
+      "kind": "official-doc",
+      "title": "Local Windows default security baseline entry",
+      "location": "research/evidence-files/external/c/Windows/inf/defltbase.inf.md",
+      "summary": "The local Windows default security baseline lists DontDisplayUserName with default value 0.",
+      "supports": [
+        "default",
+        "value"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes DontDisplayUserName = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-hide-username-at-signin",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the sign-in privacy behavior and the guest-side VM probe confirmed that sceregvl.inf exposes DontDisplayUserName as the registry surface for this option. The app already writes that exact value, so the record is now validated.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-20T00:00:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+    "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayUserName,4,%DontDisplayUserName%,0",
+    "key_found_on_page": true,
+    "notes": "Guest-side probe on Win25H2Clean confirmed that sceregvl.inf contains the DontDisplayUserName mapping for the documented sign-in privacy option. DontDisplayLockedUserId also appears in the same file, but it is a separate nearby security-option surface."
+  }
+}

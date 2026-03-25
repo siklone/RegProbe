@@ -1,0 +1,275 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.troubleshooter-dont-run",
+  "tweak_id": "privacy.troubleshooter-dont-run",
+  "record_status": "validated",
+  "summary": "Official Microsoft policy for recommended troubleshooting. The app now writes only the documented TroubleshootingAllowRecommendations=0 policy value and no longer carries the extra WindowsMitigation companion write.",
+  "setting": {
+    "name": "Recommended Troubleshooting for Known Problems",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can automatically apply or suggest troubleshooting for known problems. This policy controls how much of that automation is allowed.",
+    "why_people_change_it": "People lock it down when they do not want Windows or Microsoft automatically applying troubleshooting, or when they want a predictable managed-device support policy.",
+    "tradeoffs_overview": "Lower values reduce automatic troubleshooting and notifications. This now maps to the official six-value policy that Microsoft documents.",
+    "professional_notes": "MSDT.admx documents TroubleshootingAllowRecommendations under HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations with values 0 through 5. The app now writes only the documented policy value 0.",
+    "targets": [
+      {
+        "target_id": "troubleshooting-allow-recommendations",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations",
+        "value_name": "TroubleshootingAllowRecommendations",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "The user can configure how troubleshooting is applied.",
+            "evidence_ids": [
+              "ms-troubleshooting-allowrecommendations",
+              "local-msdt-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Do nothing",
+            "meaning": "Do not allow users, system features, or Microsoft to apply troubleshooting.",
+            "evidence_ids": [
+              "ms-troubleshooting-allowrecommendations",
+              "local-msdt-admx",
+              "local-msdt-adml",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Apply critical only",
+            "meaning": "Only automatically apply troubleshooting for critical problems by system features and Microsoft.",
+            "evidence_ids": [
+              "ms-troubleshooting-allowrecommendations",
+              "local-msdt-admx",
+              "local-msdt-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Ask first for other problems",
+            "meaning": "Automatically apply critical troubleshooting and notify users about troubleshooting for other problems.",
+            "evidence_ids": [
+              "ms-troubleshooting-allowrecommendations",
+              "local-msdt-admx",
+              "local-msdt-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 3,
+            "label": "Apply and notify",
+            "meaning": "Automatically apply troubleshooting for critical and other problems and notify users when troubleshooting solved a problem.",
+            "evidence_ids": [
+              "ms-troubleshooting-allowrecommendations",
+              "local-msdt-admx",
+              "local-msdt-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 4,
+            "label": "Apply silently",
+            "meaning": "Automatically apply troubleshooting for critical and other problems without notifying users when it solved a problem.",
+            "evidence_ids": [
+              "ms-troubleshooting-allowrecommendations",
+              "local-msdt-admx",
+              "local-msdt-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 5,
+            "label": "Defer to user",
+            "meaning": "Allow the user to choose their own troubleshooting settings.",
+            "evidence_ids": [
+              "ms-troubleshooting-allowrecommendations",
+              "local-msdt-admx",
+              "local-msdt-adml"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes only the documented policy value 0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations.",
+    "writes": [
+      {
+        "target_id": "troubleshooting-allow-recommendations",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations",
+        "value_name": "TroubleshootingAllowRecommendations",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 10 version 1903 and newer systems exposing recommended troubleshooting policy",
+      "states": [
+        {
+          "target_id": "troubleshooting-allow-recommendations",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Microsoft documents that if the policy is not configured, the user can configure how troubleshooting is applied."
+        }
+      ],
+      "evidence_ids": [
+        "ms-troubleshooting-allowrecommendations",
+        "local-msdt-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that want the normal troubleshooting settings flow"
+      ],
+      "avoid_for": [
+        "Managed environments that want to hard-block recommended troubleshooting"
+      ],
+      "states": [
+        {
+          "target_id": "troubleshooting-allow-recommendations",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the official policy unset."
+        }
+      ],
+      "good_when": "You want users to keep control over recommended troubleshooting behavior.",
+      "bad_when": "You want to force a strict no-troubleshooting policy.",
+      "tradeoffs": [
+        "Users can keep using the normal troubleshooting settings flow.",
+        "No hard managed-policy restriction is applied."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-troubleshooting-allowrecommendations"
+      ]
+    },
+    {
+      "profile_id": "candidate-do-nothing",
+      "label": "Candidate do nothing",
+      "intended_for": [
+        "Managed devices that want troubleshooting blocked"
+      ],
+      "avoid_for": [
+        "Anyone expecting a different troubleshooting mode"
+      ],
+      "states": [
+        {
+          "target_id": "troubleshooting-allow-recommendations",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Officially documented 'Do nothing' policy value."
+        }
+      ],
+      "good_when": "You want to block recommended troubleshooting through the official policy.",
+      "bad_when": "You want a different troubleshooting mode.",
+      "tradeoffs": [
+        "The official policy meaning is clear.",
+        "The app now matches the documented policy surface."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-troubleshooting-allowrecommendations",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-troubleshooting-allowrecommendations",
+      "kind": "policy-csp",
+      "title": "Microsoft Troubleshooting Policy CSP: TroubleshootingAllowRecommendations",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations",
+      "summary": "Official documentation for the recommended troubleshooting policy, including the documented values 0 through 5 and the not-configured behavior.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "default",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-msdt-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft MSDT.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/MSDT.admx",
+      "summary": "The local ADMX file defines TroubleshootingAllowRecommendations under Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations with values 0 through 5.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-msdt-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft MSDT.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/MSDT.adml",
+      "summary": "The local ADML help text explains the six documented troubleshooting modes and says that not configuring the policy leaves the user in control.",
+      "supports": [
+        "behavior",
+        "default",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes TroubleshootingAllowRecommendations = 0 only.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-matches"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The official policy is well documented and the app now writes only the documented policy value 0.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations",
+    "exact_quote_or_path": "TroubleshootingAllowRecommendations under HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations with values 0 through 5.",
+    "key_found_on_page": true,
+    "notes": "The current app now writes only the documented policy value 0."
+  }
+}

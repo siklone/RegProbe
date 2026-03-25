@@ -1,0 +1,245 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-application-telemetry",
+  "tweak_id": "privacy.disable-application-telemetry",
+  "record_status": "validated",
+  "summary": "Machine policy for the Application Telemetry engine used by application compatibility tracking. The local Microsoft AppCompat.admx file explicitly documents the same policy key, value name, and unusual 0/1 mapping that the app uses.",
+  "setting": {
+    "name": "Application Compatibility Telemetry",
+    "category": "Privacy",
+    "area": "Registry Policy",
+    "scope": "device",
+    "casual_explanation": "Windows can collect anonymous telemetry about how applications use certain system components so compatibility systems can learn from it. This policy decides whether that telemetry engine runs.",
+    "why_people_change_it": "People turn it off when they want less telemetry on the device or a tighter enterprise privacy baseline.",
+    "tradeoffs_overview": "Turning it off reduces compatibility telemetry collection, but it also removes a signal Windows can use for compatibility analysis. Microsoft also notes that if CEIP is already off, this telemetry is off regardless of this policy.",
+    "professional_notes": "AppCompat.admx and the ADMX_AppCompat Policy CSP map AITEnable to HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\AITEnable with enabledValue 0 and disabledValue 1. In this policy, enabling the policy means turning telemetry off.",
+    "targets": [
+      {
+        "target_id": "appcompat-ait-enable",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "AITEnable",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Windows does not force the Application Telemetry policy through this registry value.",
+            "evidence_ids": [
+              "ms-admx-appcompat-application-telemetry",
+              "local-appcompat-admx",
+              "local-appcompat-adml"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Application Telemetry turned off",
+            "meaning": "The Application Telemetry engine is turned off for the device.",
+            "evidence_ids": [
+              "ms-admx-appcompat-application-telemetry",
+              "local-appcompat-admx",
+              "local-appcompat-adml",
+              "app-privacy-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Application Telemetry allowed",
+            "meaning": "This policy does not turn the Application Telemetry engine off.",
+            "evidence_ids": [
+              "ms-admx-appcompat-application-telemetry",
+              "local-appcompat-admx"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes AITEnable = 0, which matches the documented policy state that turns Application Telemetry off.",
+    "writes": [
+      {
+        "target_id": "appcompat-ait-enable",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+        "value_name": "AITEnable",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows device-policy default",
+      "applies_to": "Windows 7 and newer systems exposing the AppCompat telemetry policy",
+      "states": [
+        {
+          "target_id": "appcompat-ait-enable",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The policy is not configured by default."
+        }
+      ],
+      "notes": "This is separate from the CEIP baseline. Microsoft states that if CEIP is turned off, Application Telemetry is off regardless of how this policy is set.",
+      "evidence_ids": [
+        "ms-admx-appcompat-application-telemetry",
+        "local-appcompat-adml"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that do not need a hard application-telemetry policy"
+      ],
+      "avoid_for": [
+        "Privacy-focused or tightly managed systems"
+      ],
+      "states": [
+        {
+          "target_id": "appcompat-ait-enable",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the policy unset."
+        }
+      ],
+      "good_when": "You want Windows to keep its ordinary policy baseline for Application Telemetry.",
+      "bad_when": "You explicitly want compatibility telemetry turned off.",
+      "tradeoffs": [
+        "No hard policy block is written.",
+        "Application Telemetry can still operate unless another policy such as CEIP disables it."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-admx-appcompat-application-telemetry"
+      ]
+    },
+    {
+      "profile_id": "privacy-focused",
+      "label": "Privacy focused",
+      "intended_for": [
+        "Privacy-focused users",
+        "Managed desktops",
+        "Systems that want less compatibility telemetry"
+      ],
+      "avoid_for": [
+        "People who want all Windows compatibility telemetry left available"
+      ],
+      "states": [
+        {
+          "target_id": "appcompat-ait-enable",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Enable the policy that turns Application Telemetry off."
+        }
+      ],
+      "good_when": "You want the Application Telemetry engine explicitly turned off.",
+      "bad_when": "You want Windows compatibility telemetry left available.",
+      "tradeoffs": [
+        "Anonymous Application Telemetry collection is turned off.",
+        "Windows loses one compatibility-analysis signal."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-admx-appcompat-application-telemetry",
+        "local-appcompat-adml",
+        "app-privacy-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-admx-appcompat-application-telemetry",
+      "kind": "policy-csp",
+      "title": "Microsoft ADMX_AppCompat Policy CSP: AppCompatTurnOffApplicationImpactTelemetry",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry",
+      "summary": "Official documentation for the policy that turns the Application Telemetry engine off, including the registry mapping.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-appcompat-admx",
+      "kind": "official-doc",
+      "title": "Local Microsoft AppCompat.admx mapping",
+      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
+      "summary": "The local ADMX file maps AITEnable under Software\\Policies\\Microsoft\\Windows\\AppCompat with enabledValue 0 and disabledValue 1.",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-appcompat-adml",
+      "kind": "official-doc",
+      "title": "Local Microsoft AppCompat.adml help text",
+      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml",
+      "summary": "The local ADML help text explains that enabling the policy turns Application Telemetry off and notes that telemetry is also off when CEIP is turned off.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "default"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes AITEnable = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-disable-application-telemetry",
+      "kind": "repo-doc",
+      "title": "Existing tweak source record",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "summary": "The repo already tracks provenance for this tweak in the current catalog output.",
+      "supports": [
+        "ui-mapping",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The local Microsoft AppCompat.admx file explicitly defines AppCompatTurnOffApplicationImpactTelemetry under Software\\Policies\\Microsoft\\Windows\\AppCompat with valueName AITEnable and the enabledValue 0 / disabledValue 1 mapping that the app uses.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-12T09:22:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
+    "exact_quote_or_path": "<policy name=\"AppCompatTurnOffApplicationImpactTelemetry\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"AITEnable\"> <enabledValue><decimal value=\"0\" /></enabledValue> <disabledValue><decimal value=\"1\" /></disabledValue>",
+    "key_found_on_page": true,
+    "notes": "The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the reversed 0/1 semantics for this policy."
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "developer.enable-windows-long-paths",
+  "legacy_id": "developer.git-long-paths",
+  "tweak_id": "developer.enable-windows-long-paths",
+  "record_status": "validated",
+  "summary": "Microsoft officially documents LongPathsEnabled as the Windows long-path switch, and the app writes that documented value. The tweak is now modeled honestly as enabling the Windows long-path prerequisite for compatible applications rather than as a Git-specific configuration change.",
+  "setting": {
+    "name": "Windows Long Paths",
+    "category": "Developer",
+    "area": "Windows Path Handling vs Git Configuration",
+    "scope": "device",
+    "casual_explanation": "Windows can remove the old 260-character path limit. That helps many compatible applications, especially developer tools and projects with very deep folder trees.",
+    "why_people_change_it": "People enable it when repositories, package trees, or generated files hit old Windows path length limits.",
+    "tradeoffs_overview": "Enabling Windows long paths expands path handling for compatible applications. It is a Windows prerequisite, not a product-specific Git configuration change.",
+    "professional_notes": "Microsoft documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem as the Windows long-path control for compatible applications. Git's official documentation remains file-based, but this tweak does not need a Git-specific write because it now intentionally models only the Windows prerequisite. The app writes the exact documented Windows control surface.",
+    "targets": [
+      {
+        "target_id": "windows-long-paths",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "LongPathsEnabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows default long-path behavior",
+            "meaning": "Windows keeps the normal long-path baseline because LongPathsEnabled is not explicitly enabled.",
+            "evidence_ids": [
+              "ms-maximum-path-limitation"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Windows long paths enabled",
+            "meaning": "Windows long-path support is enabled for compatible applications.",
+            "evidence_ids": [
+              "ms-maximum-path-limitation",
+              "app-developer-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+    "notes": "The app writes the exact Microsoft-documented Windows long-path control surface: LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem.",
+    "writes": [
+      {
+        "target_id": "windows-long-paths",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+        "value_name": "LongPathsEnabled",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows default",
+      "applies_to": "Windows devices that have not explicitly enabled LongPathsEnabled",
+      "states": [
+        {
+          "target_id": "windows-long-paths",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the Windows long-path policy at the default baseline."
+        }
+      ],
+      "notes": "This record documents the Windows long-path prerequisite only.",
+      "evidence_ids": [
+        "ms-maximum-path-limitation",
+        "git-config-doc"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Machines that do not hit long-path problems"
+      ],
+      "avoid_for": [
+        "Developer workstations with deep repository trees"
+      ],
+      "states": [
+        {
+          "target_id": "windows-long-paths",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the Windows long-path baseline unchanged."
+        }
+      ],
+      "good_when": "You want to keep the normal Windows path-length baseline.",
+      "bad_when": "Your development tools repeatedly hit long path limits.",
+      "tradeoffs": [
+        "No developer-specific long-path prerequisite is forced.",
+        "Deep repositories can still hit legacy path-length limits."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-maximum-path-limitation"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only",
+        "Developer workstations that need the Windows prerequisite"
+      ],
+      "avoid_for": [
+        "Systems that do not need long-path support"
+      ],
+      "states": [
+        {
+          "target_id": "windows-long-paths",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Enable the Microsoft-documented Windows long-path prerequisite."
+        }
+      ],
+      "good_when": "You need Windows to allow compatible applications to use longer paths.",
+      "bad_when": "You do not need long-path support or prefer to keep the legacy path baseline.",
+      "tradeoffs": [
+        "The documented Windows prerequisite is enabled.",
+        "Applications that are not long-path aware still may not benefit."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-maximum-path-limitation",
+        "app-developer-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-maximum-path-limitation",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Maximum Path Length Limitation",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+      "summary": "Microsoft documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem as the Windows long-path switch for compatible applications.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-developer-long-paths",
+      "kind": "procmon-trace",
+      "title": "Procmon capture - Developer settings page reads LongPathsEnabled",
+      "location": "research/evidence-files/vm-tooling-staging/devmode_longpaths_probe.csv and research/evidence-files/missing/devmode-longpaths-probe-pml.md",
+      "summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. The probe observed the live value on this build and restored the original state afterward.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-developer-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "summary": "The provider writes LongPathsEnabled = 1 under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "The app writes the exact Microsoft-documented Windows long-path control surface. The tweak is now scoped honestly as a Windows prerequisite for compatible applications rather than as a Git-specific configuration change.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+    "exact_quote_or_path": "The registry key allowing long paths is located at HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\FileSystem in the LongPathsEnabled (Type: REG_DWORD) file system registry key. The key will be cached by the system (per process) after the first call to an affected Win32 file or directory function. The registry key will not be reloaded during the lifetime of the process. A value of 1 enables long paths behavior.",
+    "key_found_on_page": true,
+    "notes": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. Guest-side Procmon also captured SystemSettings.exe querying LongPathsEnabled when the developer settings page was opened, which confirms the live UI read path on this build. The record is now scoped to the Windows prerequisite itself."
+  }
+}

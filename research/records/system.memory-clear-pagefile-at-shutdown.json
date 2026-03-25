@@ -1,0 +1,217 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.memory-clear-pagefile-at-shutdown",
+  "tweak_id": "system.memory-clear-pagefile-at-shutdown",
+  "record_status": "validated",
+  "summary": "Official security option for clearing the virtual memory page file at shutdown. Good for privacy-sensitive systems, but it can make shutdown noticeably slower.",
+  "setting": {
+    "name": "Clear Page File at Shutdown",
+    "category": "System",
+    "area": "Security Option / Memory Management",
+    "scope": "device",
+    "casual_explanation": "Windows can wipe the page file when the PC shuts down. This can reduce leftover data on disk, but it also makes shutdown take longer.",
+    "why_people_change_it": "People enable it on privacy-sensitive or shared systems where they want less leftover memory data on disk after shutdown.",
+    "tradeoffs_overview": "Turning it on improves data hygiene for the page file, but it can slow shutdowns, especially on systems with large page files.",
+    "professional_notes": "Microsoft publishes this as the 'Shutdown: Clear virtual memory pagefile' security option. Local security metadata files map the exact registry path to HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\ClearPageFileAtShutdown, and the default security templates set it to 0. The current app writes 1 to turn the behavior on.",
+    "targets": [
+      {
+        "target_id": "clear-pagefile-at-shutdown",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "value_name": "ClearPageFileAtShutdown",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Do not clear page file",
+            "meaning": "Windows does not wipe the page file during shutdown.",
+            "evidence_ids": [
+              "ms-shutdown-clear-virtual-memory-pagefile",
+              "local-sceregvl-inf",
+              "local-defltbase-inf"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Clear page file at shutdown",
+            "meaning": "Windows wipes the page file during shutdown.",
+            "evidence_ids": [
+              "ms-shutdown-clear-virtual-memory-pagefile",
+              "local-sceregvl-inf",
+              "app-system-registry-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+    "notes": "The current app writes ClearPageFileAtShutdown = 1 on the documented security-option path.",
+    "writes": [
+      {
+        "target_id": "clear-pagefile-at-shutdown",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "value_name": "ClearPageFileAtShutdown",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 1
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows security baseline default",
+      "applies_to": "Windows systems using the default local security template values",
+      "states": [
+        {
+          "target_id": "clear-pagefile-at-shutdown",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "The default local security templates set the value to 0."
+        }
+      ],
+      "notes": "The local default security template and security registry metadata both map this setting with a default of 0.",
+      "evidence_ids": [
+        "local-sceregvl-inf",
+        "local-defltbase-inf"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-default",
+      "label": "Windows default",
+      "intended_for": [
+        "General users",
+        "Systems that prioritize faster shutdown"
+      ],
+      "avoid_for": [
+        "Privacy-sensitive or shared systems that need the page file wiped"
+      ],
+      "states": [
+        {
+          "target_id": "clear-pagefile-at-shutdown",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the default local security template behavior."
+        }
+      ],
+      "good_when": "You want normal shutdown speed and do not need extra page-file cleanup.",
+      "bad_when": "You want the page file wiped on shutdown for privacy or policy reasons.",
+      "tradeoffs": [
+        "Shutdown stays faster.",
+        "The page file is not explicitly wiped during shutdown."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "local-defltbase-inf",
+        "ms-shutdown-clear-virtual-memory-pagefile"
+      ]
+    },
+    {
+      "profile_id": "privacy-hardened",
+      "label": "Privacy hardened",
+      "intended_for": [
+        "Shared machines",
+        "Privacy-sensitive endpoints",
+        "Security-conscious environments"
+      ],
+      "avoid_for": [
+        "Machines where shutdown speed matters more than page-file cleanup"
+      ],
+      "states": [
+        {
+          "target_id": "clear-pagefile-at-shutdown",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Enable page-file clearing at shutdown."
+        }
+      ],
+      "good_when": "You want less leftover paging data on disk after shutdown.",
+      "bad_when": "You want the fastest possible shutdown behavior.",
+      "tradeoffs": [
+        "The page file is wiped during shutdown.",
+        "Shutdown can take noticeably longer."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-shutdown-clear-virtual-memory-pagefile",
+        "app-system-registry-provider"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-shutdown-clear-virtual-memory-pagefile",
+      "kind": "official-doc",
+      "title": "Microsoft security policy setting: Shutdown: Clear virtual memory pagefile",
+      "location": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile",
+      "summary": "Microsoft documents the security option that controls whether Windows clears the virtual memory page file during shutdown.",
+      "supports": [
+        "value",
+        "behavior",
+        "side-effects"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-sceregvl-inf",
+      "kind": "official-doc",
+      "title": "Local Microsoft security registry mapping",
+      "location": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+      "summary": "The local security registry metadata maps ClearPageFileAtShutdown to MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\ClearPageFileAtShutdown.",
+      "supports": [
+        "path",
+        "value"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "local-defltbase-inf",
+      "kind": "official-doc",
+      "title": "Local Microsoft default security template",
+      "location": "research/evidence-files/external/c/Windows/inf/defltbase.inf.md",
+      "summary": "The local default security template sets ClearPageFileAtShutdown = 0, establishing the default baseline.",
+      "supports": [
+        "default",
+        "value"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-system-registry-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "summary": "The provider writes ClearPageFileAtShutdown = 1 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft documents the security option behavior, local Windows security metadata maps the exact registry path, and the app writes the documented enabled state with a clean rollback story.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T00:49:00Z",
+  "validation_proof": {
+    "source_url": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+    "exact_quote_or_path": "MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\ClearPageFileAtShutdown,4,%ClearPageFileAtShutdown%,0",
+    "key_found_on_page": true,
+    "notes": "Local Microsoft security registry metadata maps the exact registry path and default state. The matching default value is also present in research/evidence-files/external/c/Windows/inf/defltbase.inf.md as MACHINE/System/CurrentControlSet/Control/Session Manager/Memory Management/ClearPageFileAtShutdown=4,0."
+  }
+}

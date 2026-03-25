@@ -1,0 +1,233 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.enable-hags",
+  "tweak_id": "system.enable-hags",
+  "record_status": "validated",
+  "summary": "The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\HwSchMode = 2 to enable Hardware-Accelerated GPU Scheduling (HAGS). A guest-side reversible probe on Win25H2Clean confirmed the guest baseline is missing and that HwSchMode transitions through 2 and 1 before restoring to missing, so the record is now runtime-validated even though the Microsoft feature documentation captured here does not publish the raw registry contract.",
+  "validation_proof": {
+    "source_url": "research/evidence-files/vm-tooling-staging/hags_toggle_out.txt",
+    "exact_quote_or_path": "hags_toggle_out.txt: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING.",
+    "key_found_on_page": true,
+    "notes": "Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. Normalized for the consolidated evidence report."
+  },
+  "setting": {
+    "name": "Hardware-Accelerated GPU Scheduling",
+    "category": "System",
+    "area": "Graphics Drivers / Scheduling Feature",
+    "scope": "device",
+    "casual_explanation": "HAGS is a Windows graphics feature that lets the GPU take a more direct role in scheduling its work. It can help on some systems, but it can also make no noticeable difference or cause issues on others.",
+    "why_people_change_it": "People enable it when they want to test lower latency or smoother graphics behavior on supported hardware and drivers.",
+    "tradeoffs_overview": "HAGS is an official Windows graphics feature, but support and behavior depend on the GPU driver stack. The feature is official; the exact registry path and values are still repo-observed in this dataset.",
+    "professional_notes": "The repo research notes list HwSchMode under HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers with the app writing 2 as the enable state. A guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence on this build. Microsoft's DirectX team officially documents the HAGS feature and its prerequisites, and the repo docs capture the observed registry contract for HwSchMode.",
+    "targets": [
+      {
+        "target_id": "hw-sch-mode",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "value_name": "HwSchMode",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured",
+            "meaning": "Guest-side reversible probe on Win25H2Clean showed HwSchMode is missing at baseline before the HAGS toggle sequence.",
+            "evidence_ids": [
+              "runtime-hags-registry-diff",
+              "repo-system-doc-hags",
+              "ms-hags-feature"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "HAGS disabled",
+            "meaning": "Guest-side reversible probe confirmed HwSchMode can be set to 1 and restored back to missing after the probe.",
+            "evidence_ids": [
+              "runtime-hags-registry-diff",
+              "repo-system-doc-hags",
+              "app-system-provider"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 2,
+            "label": "Observed app enabled profile",
+            "meaning": "The current app treats 2 as the enabled HAGS profile, and the guest-side reversible probe confirmed that state on this build.",
+            "evidence_ids": [
+              "runtime-hags-registry-diff",
+              "repo-system-doc-hags",
+              "app-system-provider"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The app targets an official graphics feature, and the guest-side reversible probe on Win25H2Clean confirmed the live HwSchMode mapping on this build.",
+    "writes": [
+      {
+        "target_id": "hw-sch-mode",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "value_name": "HwSchMode",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 2
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed guest baseline",
+      "applies_to": "Win25H2Clean guest baseline captured in the reversible probe",
+      "states": [
+        {
+          "target_id": "hw-sch-mode",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Guest-side reversible probe started from a missing HwSchMode value and restored to missing after the probe."
+        }
+      ],
+      "notes": "The guest baseline is missing on this build and was restored after the reversible probe.",
+      "evidence_ids": [
+        "runtime-hags-registry-diff",
+        "repo-system-doc-hags"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Graphics feature comparisons"
+      ],
+      "avoid_for": [
+        "Published presets"
+      ],
+      "states": [
+        {
+          "target_id": "hw-sch-mode",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Do not publish or apply the registry mapping until a primary Microsoft source is captured."
+        }
+      ],
+      "good_when": "You want to document HAGS without overstating registry confidence.",
+      "bad_when": "You need a primary-source Microsoft-backed registry control for HAGS.",
+      "tradeoffs": [
+        "The feature area is documented honestly.",
+        "The registry mapping stays blocked from validated publication."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ms-hags-feature",
+        "repo-system-doc-hags",
+        "runtime-hags-registry-diff"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published validated presets"
+      ],
+      "states": [
+        {
+          "target_id": "hw-sch-mode",
+          "state_kind": "value",
+          "value": 2,
+          "rationale": "Observed app write used as the current HAGS enabled profile."
+        }
+      ],
+      "good_when": "You are documenting what the app currently writes for HAGS.",
+      "bad_when": "You need a validated Microsoft registry mapping.",
+      "tradeoffs": [
+        "The current app behavior is captured.",
+        "The exact registry semantics are now validated by the guest reversible probe on this build."
+      ],
+      "apply_allowed": true,
+      "notes": "Validated by the guest reversible probe on Win25H2Clean.",
+      "evidence_ids": [
+        "repo-system-doc-hags",
+        "app-system-provider",
+        "runtime-hags-registry-diff"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-hags-feature",
+      "kind": "official-doc",
+      "title": "DirectX Developer Blog: Hardware Accelerated GPU Scheduling",
+      "location": "https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/",
+      "summary": "Microsoft's DirectX team documents the HAGS feature, its purpose, and driver support expectations, confirming that this is a real Windows graphics capability even though the post does not publish the raw registry key.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-system-doc-hags",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for HAGS",
+      "location": "Docs/system/system.md",
+      "summary": "The repo documents HwSchMode under GraphicsDrivers and records observed values used for the HAGS tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The provider writes HwSchMode = 2 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "runtime-hags-registry-diff",
+      "kind": "runtime-diff",
+      "title": "Guest reversible probe for HwSchMode",
+      "location": "research/evidence-files/vm-tooling-staging/hags_toggle_out.txt",
+      "summary": "Guest-side reversible probe on Win25H2Clean confirmed HwSchMode transitions through missing, 2, and 1, then restores to missing on this build.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Guest-side reversible probe on Win25H2Clean confirmed HwSchMode transitions through missing, 2, and 1, and then restored the guest baseline back to missing. The app mapping matches the observed enabled profile on this build.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-20T00:00:00Z"
+}

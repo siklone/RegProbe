@@ -1,0 +1,234 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "privacy.disable-app-launch-tracking",
+  "tweak_id": "privacy.disable-app-launch-tracking",
+  "record_status": "validated",
+  "summary": "Microsoft privacy guidance documents the Start_TrackProgs registry value under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and states that setting it to 0 turns off app launch tracking for Start and Search. The current app writes that exact documented value.",
+  "setting": {
+    "name": "App Launch Tracking",
+    "category": "Privacy",
+    "area": "Observed Registry Setting",
+    "scope": "user",
+    "casual_explanation": "Windows can track which apps you launch so Start and Search can personalize some results. People turn it off when they want less app-usage tracking.",
+    "why_people_change_it": "People change it to reduce usage tracking and Start-menu personalization based on what they open.",
+    "tradeoffs_overview": "Turning it off can reduce Start and Search personalization based on app launches, but some users accept that in exchange for less tracking.",
+    "professional_notes": "Microsoft's Windows privacy guidance documents Start_TrackProgs under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and states that setting it to 0 turns off the \"Let Windows track app launches to improve Start and search results\" toggle. The app writes that same documented value.",
+    "targets": [
+      {
+        "target_id": "start-trackprogs-observed",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "value_name": "Start_TrackProgs",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows managed UI state",
+            "meaning": "The preference is not explicitly overridden in the registry and stays under the Windows UI toggle.",
+            "evidence_ids": [
+              "ms-windows-privacy-track-app-launches",
+              "nohuto-start-track-progs-trace"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "App launch tracking disabled",
+            "meaning": "Turns off \"Let Windows track app launches to improve Start and search results.\"",
+            "evidence_ids": [
+              "ms-windows-privacy-track-app-launches",
+              "app-privacy-provider",
+              "nohuto-start-track-progs-trace"
+            ]
+          }
+        ],
+        "notes": "Microsoft documents Start_TrackProgs = 0 as the registry control for turning off app launch tracking."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The current app writes Start_TrackProgs = 0 under Explorer\\Advanced, matching the Microsoft-documented toggle-off value.",
+    "writes": [
+      {
+        "target_id": "start-trackprogs-observed",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "value_name": "Start_TrackProgs",
+        "value_type": "REG_DWORD",
+        "state_kind": "value",
+        "value": 0
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows managed default",
+      "applies_to": "Windows user profiles using the normal Privacy settings UI",
+      "states": [
+        {
+          "target_id": "start-trackprogs-observed",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the preference unset and let the Settings UI manage the tracking toggle."
+        }
+      ],
+      "notes": "The registry value is only needed when forcing the privacy toggle off.",
+      "evidence_ids": [
+        "ms-windows-privacy-track-app-launches",
+        "nohuto-start-track-progs-trace"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "windows-managed-default",
+      "label": "Windows managed default",
+      "intended_for": [
+        "General users"
+      ],
+      "avoid_for": [
+        "Users who want to disable app launch tracking"
+      ],
+      "states": [
+        {
+          "target_id": "start-trackprogs-observed",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Leave the toggle under normal Windows control."
+        }
+      ],
+      "good_when": "You want Windows to manage the app launch tracking setting via the UI.",
+      "bad_when": "You want app launch tracking disabled.",
+      "tradeoffs": [
+        "Start and Search can still use app-launch history for personalization.",
+        "No explicit registry override is applied."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-windows-privacy-track-app-launches",
+        "nohuto-start-track-progs-trace"
+      ]
+    },
+    {
+      "profile_id": "disable-app-launch-tracking",
+      "label": "Disable app launch tracking",
+      "intended_for": [
+        "Privacy-focused users",
+        "Users who do not want Start/Search personalization based on app usage"
+      ],
+      "avoid_for": [
+        "Users who want the most personalized Start and Search experience"
+      ],
+      "states": [
+        {
+          "target_id": "start-trackprogs-observed",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Use the Microsoft-documented registry value to turn the tracking off."
+        }
+      ],
+      "good_when": "You want to stop Windows from tracking app launches for Start/Search personalization.",
+      "bad_when": "You rely on app-launch-based personalization in Start or Search.",
+      "tradeoffs": [
+        "Start/Search personalization is reduced.",
+        "Windows no longer tracks app launches for this feature."
+      ],
+      "apply_allowed": true,
+      "evidence_ids": [
+        "ms-windows-privacy-track-app-launches",
+        "app-privacy-provider",
+        "nohuto-start-track-progs-trace"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ms-windows-privacy-track-app-launches",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Manage connections from Windows operating system components to Microsoft services",
+      "location": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+      "summary": "Microsoft documents Start_TrackProgs under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and states that setting it to 0 turns off app launch tracking for Start and Search.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-gppref-start-trackprogs",
+      "kind": "official-doc",
+      "title": "Microsoft Open Specifications: Start_TrackProgs registry preference item",
+      "location": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5",
+      "summary": "Microsoft Open Specifications document the Start_TrackProgs registry path under Explorer\\Advanced.",
+      "supports": [
+        "path",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "app-privacy-provider",
+      "kind": "repo-code",
+      "title": "Current app implementation",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The provider writes Start_TrackProgs = 0 for the current tweak.",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-start-track-progs-trace",
+      "kind": "registry-observation",
+      "title": "nohuto win-config mirror - Start_TrackProgs trace",
+      "location": "research/_source-mirrors/win-config/privacy/desc.md and research/_source-mirrors/win-registry/records/25H2.txt",
+      "summary": "The mirror trace shows SystemSettings.exe writing HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs with Data 0, and the win-registry records list Start_TrackProgs under Explorer\\Advanced. This is the live search-history tracking toggle for the Start experience.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "procmon-start-track-progs-settings",
+      "kind": "procmon-trace",
+      "title": "VM Procmon trace - Start_TrackProgs settings page reads",
+      "location": "research/evidence-files/host-temp/procmon-start-track-progs-1.pml.md and research/evidence-files/host-temp/procmon-start-track-progs-0.pml.md",
+      "summary": "Win25H2Clean Procmon capture around ms-settings:privacy-general while toggling HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs between 1 and 0. The probe recorded a reversible 1-state run and a matching 0-state run, with the setting restored after each capture.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Microsoft's Windows privacy guidance documents the Start_TrackProgs registry value under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and states that setting it to 0 turns off app launch tracking. The app writes that same documented value.",
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-03-13T07:18:02Z",
+  "validation_proof": {
+    "source_url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+    "exact_quote_or_path": "Start_TrackProgs in HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced with value of 0 (zero).",
+    "key_found_on_page": true,
+    "notes": "The Microsoft privacy guidance lists the exact registry path and value to turn off \"Let Windows track app launches to improve Start and search results.\" Added nohuto mirror corroboration via nohuto-start-track-progs-trace and Win25H2Clean Procmon corroboration via procmon-start-track-progs-settings with reversible 1/0 probe files."
+  }
+}

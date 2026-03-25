@@ -1,0 +1,10 @@
+WRITE=0
+QUERY=HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer
+    ShowLockOption    REG_DWORD    0x0
+WRITE=1
+QUERY=HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer
+    ShowLockOption    REG_DWORD    0x1
+RESTORED=0
+MATCHES=NO
+HAD_VALUE=True
+ORIGINAL=0

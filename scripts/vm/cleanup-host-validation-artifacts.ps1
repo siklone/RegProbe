@@ -21,7 +21,7 @@ if (-not (Test-Path $ArtifactRoot)) {
 }
 
 $scanRoots = @(
-    (Join-Path $RepoRoot 'Docs\tweaks\research'),
+    (Join-Path $RepoRoot 'research'),
     (Join-Path $RepoRoot 'Docs\VM_WORKFLOW.md')
 )
 
