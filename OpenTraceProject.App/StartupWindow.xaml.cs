@@ -1,7 +1,8 @@
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using OpenTraceProject.App.Services;
 using OpenTraceProject.App.ViewModels;
 
@@ -10,18 +11,20 @@ namespace OpenTraceProject.App;
 public partial class StartupWindow : Window
 {
     private readonly TaskCompletionSource<bool> _closeTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly DateTime _shownAtUtc = DateTime.UtcNow;
     private bool _isClosing;
 
     public StartupWindow()
     {
         InitializeComponent();
         Loaded += OnLoaded;
+        Closed += OnClosed;
     }
 
     public void UpdateScanProgress(StartupScanProgress progress)
     {
         var label = string.IsNullOrWhiteSpace(progress.CurrentName)
-            ? "Running startup scan"
+            ? "Scanning system..."
             : progress.CurrentName;
 
         SetProgress(progress.Percent, label);
@@ -33,58 +36,43 @@ public partial class StartupWindow : Window
             ? progress.Message
             : !string.IsNullOrWhiteSpace(progress.CurrentTask)
                 ? progress.CurrentTask
-                : "Loading research data and services";
+                : "Loading services...";
 
         SetProgress(progress.Percentage, label);
     }
 
-    public Task CompleteAndCloseAsync()
+    public async Task CompleteAndCloseAsync()
     {
         if (!Dispatcher.CheckAccess())
         {
-            return Dispatcher.InvokeAsync(CompleteAndCloseAsync).Task.Unwrap();
+            await Dispatcher.InvokeAsync(CompleteAndCloseAsync).Task.Unwrap();
+            return;
         }
 
         if (_isClosing)
         {
-            return _closeTcs.Task;
+            await _closeTcs.Task;
+            return;
         }
 
         _isClosing = true;
-        SetProgress(100, "Ready.");
+        SetProgress(100, "Ready");
 
-        var fadeOut = new DoubleAnimation
+        var remaining = TimeSpan.FromMilliseconds(500) - (DateTime.UtcNow - _shownAtUtc);
+        if (remaining > TimeSpan.Zero)
         {
-            From = 1,
-            To = 0,
-            Duration = TimeSpan.FromMilliseconds(120)
-        };
+            await Task.Delay(remaining);
+        }
 
-        fadeOut.Completed += (_, _) =>
-        {
-            _closeTcs.TrySetResult(true);
-            Close();
-        };
-
-        BeginAnimation(OpacityProperty, fadeOut);
-        return _closeTcs.Task;
+        Close();
+        await _closeTcs.Task;
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         ApplyVersionText();
-        Opacity = 0;
         LoadProgress.Value = 0;
-        LoadLabel.Text = "Loading research data and services";
-
-        var fadeIn = new DoubleAnimation
-        {
-            From = 0,
-            To = 1,
-            Duration = TimeSpan.FromMilliseconds(120)
-        };
-
-        BeginAnimation(OpacityProperty, fadeIn);
+        LoadLabel.Text = "Initializing...";
     }
 
     private void ApplyVersionText()
@@ -96,14 +84,14 @@ public partial class StartupWindow : Window
             ? fallbackVersion
             : productVersion.Split('+')[0];
 
-        VersionText.Text = cleanVersion;
+        VersionText.Text = $"v{cleanVersion}";
     }
 
     private void SetProgress(double percent, string label)
     {
         if (!Dispatcher.CheckAccess())
         {
-            _ = Dispatcher.InvokeAsync(() => SetProgress(percent, label));
+            _ = Dispatcher.InvokeAsync(() => SetProgress(percent, label), DispatcherPriority.Background);
             return;
         }
 
@@ -113,5 +101,10 @@ public partial class StartupWindow : Window
         {
             LoadLabel.Text = label;
         }
+    }
+
+    private void OnClosed(object? sender, EventArgs e)
+    {
+        _closeTcs.TrySetResult(true);
     }
 }

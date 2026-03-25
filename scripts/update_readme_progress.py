@@ -14,11 +14,6 @@ CONFIG_PATH = REPO_ROOT / "scripts" / "progress_config.json"
 DEFAULT_CONFIG = {
     "manual_rows": [
         {
-            "area": "Monitoring",
-            "percent": 30,
-            "notes": "Pipeline updates + logs exist, richer dashboards pending",
-        },
-        {
             "area": "UI/UX shell",
             "percent": 45,
             "notes": "MVVM shell, filters, bulk actions done; polish ongoing",
