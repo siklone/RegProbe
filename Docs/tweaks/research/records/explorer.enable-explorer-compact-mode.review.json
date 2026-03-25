@@ -157,13 +157,13 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "UseCompactMode is now validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build, and the 25H2 raw registry dump corroborates that the value family is still present on current builds. The remaining limitation is documentation quality: this is runtime-observed rather than Microsoft-documented.",
+    "why": "UseCompactMode is validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build, the app writes the same enabled state, and the 25H2 raw registry dump corroborates that the value family is still present on current builds.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",

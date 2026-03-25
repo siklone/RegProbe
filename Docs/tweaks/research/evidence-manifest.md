@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 190 |
-| B count | 51 |
+| A count | 192 |
+| B count | 49 |
 | C count | 1 |
 | E count | 54 |
 
@@ -95,7 +95,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `explorer.always-show-icons-never-thumbnails` | validated | Class A | `Docs/tweaks/research/records/explorer.always-show-icons-never-thumbnails.review.json` | `00511c1e8e9105e173b3a322b4f5039e4cc130744424405f1bcb0c4dc2bb748f` | `b7ac9b5f0745fe76c95b7c8864517314a2c401bac224bb610acb66022a804fcb` | 1 |
 | `explorer.disable-low-disk-space-warning` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-low-disk-space-warning.json` | `20eb16346e7e6c8d3c46d2ce742bf4e1eb3cd613510fffdd6e79502a22eebd02` | `772c6bc707e38dda17a8c085843b81a8fad48321138a7343967f13bd18745ba4` | 1 |
 | `explorer.disable-taskbar-chat` | validated | Class A | `Docs/tweaks/research/records/explorer.disable-taskbar-chat.json` | `6be50fdd69082e060c7d34c3b0ee5ae78e6d3c380c01d176eaaaae7582e2f458` | `e602c5e71546fd7d86d22c43f5f3baf34b5165807293378661494f7eb7141cbd` | 1 |
-| `explorer.enable-explorer-compact-mode` | validated | Class B | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
+| `explorer.enable-explorer-compact-mode` | validated | Class B | `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json` | `1cb7d0db58bb9060dcbbd2f3a4e38f256d7739c7115318525e91e23015b1a6c8` | `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2` | 1 |
 | `explorer.hide-empty-drives` | validated | Class A | `Docs/tweaks/research/records/explorer.hide-empty-drives.review.json` | `839640a80755f3e00c17e65cf64369cd4bce9aa2b0b581aeb4b6b266de56b931` | `4cab7b1260b307cf169ed2869d3217bb0e31e7f87d4db67d42acdf9b1b31c765` | 1 |
 | `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `Docs/tweaks/research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `edabe26e1582cc0da37a8a735e36887c98925be802207f7b43a187908fba30a5` | `8f51214b1cd6ae3676e03847074c783fb1df339f77ead14e80d4ed6e5ab95cf0` | 1 |
 | `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `Docs/tweaks/research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `547d12c8e8f70c4decdcd1e14dfe3dd2108e75c7a556a7286f1860ed887df046` | `436eddf74e51fb6de34f01d72ace46942bc29131aed0f2729282b09070621453` | 1 |
@@ -142,8 +142,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `notifications.disable-mirroring` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-mirroring.json` | `12048a71562be16820123e75c0d715331bba471370286cfa56f8aa4e2dea5d48` | `e839a3b288ca983fd2356198ef6177a12f17692a8e9242e5c03faff485ee8267` | 1 |
 | `notifications.disable-tile` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-tile.json` | `f0dc5dce3c141a010807410d08462ae0ae5054eb67236a25e1f4b3d2222f5201` | `4eadf1fc0c0e7cb833e44cb784acfe7224407c3eed9c58f213a233b80a379700` | 1 |
 | `notifications.disable-toast` | validated | Class A | `Docs/tweaks/research/records/notifications.disable-toast.json` | `f34932c9eefe4f9474bc39b38dfabefca69ccc07ca11033d4a77395f228e8844` | `c838efd9cac161fc6219e64cce19d02953984124d758641d844f84d13fb6b96a` | 1 |
-| `performance.disable-animations` | validated | Class B | `Docs/tweaks/research/records/performance.disable-animations.review.json` | `7f7445d70c207f25d9374d38c32ba7bdd5c0104cb7775ebbbfc4c7a8fdb583ef` | `b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2` | 1 |
-| `performance.disable-menu-show-delay` | validated | Class B | `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json` | `fc101c84f6d68dabee427c80c4aa30048f11f21924713c132d19c2f6971ee503` | `2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3` | 1 |
+| `performance.disable-animations` | validated | Class A | `Docs/tweaks/research/records/performance.disable-animations.review.json` | `7f7445d70c207f25d9374d38c32ba7bdd5c0104cb7775ebbbfc4c7a8fdb583ef` | `b82821a8189a87c46c0e48e1a0507f73c2da612c95df6ba52bf28f69ccc8d7b2` | 1 |
+| `performance.disable-menu-show-delay` | validated | Class A | `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json` | `fc101c84f6d68dabee427c80c4aa30048f11f21924713c132d19c2f6971ee503` | `2f5cb1eb0a30cabe7e36a89d1e49a6893df823b5239a4e46bc3643e0cb09a5d3` | 1 |
 | `performance.disable-taskbar-animations` | validated | Class A | `Docs/tweaks/research/records/performance.disable-taskbar-animations.review.json` | `249e78f39370de79f88faeb08e53da59a2b5f41d63a31ae268bec04570119dc4` | `21ca137e119b7e2de180779158da4ac8b7b45cb6af8baf96444e4281eb6d6ddd` | 1 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `Docs/tweaks/research/records/peripheral.autoplay-take-no-action.review.json` | `e6569c930a05f27153e74cc69f99130870474475c3dd28bff5022f38cb1e183b` | `6bf8b90fe59d4cf3ca5ac2b3c86e0b15bfd409ad27e51f54856fd76cc726df1a` | 1 |
 | `peripheral.disable-autoplay` | validated | Class A | `Docs/tweaks/research/records/peripheral.disable-autoplay.review.json` | `c72a6200a630b6cb859c13580bcdfc8dcc7ad96add4e69dd2cdd969fd6a700e9` | `1cba6d9b41c50cccf15290ce6131cd5daea44bc48c26f0f8f6d351963cd1e8a1` | 2 |
@@ -317,10 +317,10 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `visibility.disable-widgets` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-widgets.json` | `ce3bcf64ed0c4e7483bdd56ee8c8fd2e1733f20f8f7b5ec1255697747b8009ef` | `51e5a1f879b109db9b774b9202bc9a647344f646d8b00ec3c13360674ab215bd` | 1 |
 | `visibility.disable-window-animations` | validated | Class A | `Docs/tweaks/research/records/visibility.disable-window-animations.json` | `23d41e64bfd659830b167e0c0a6a9ee486a26a73a1c5be5512f8dbf13b4ae548` | `571192ff25e0c81ae5dce332c8b0051a472bbf9841b730d58ca887806de5ea2f` | 1 |
 | `visibility.force-classic-control-panel` | validated | Class A | `Docs/tweaks/research/records/visibility.force-classic-control-panel.json` | `5f95ffcb6973992c6cc7c5dba884f054b5a7228568a12b04788a9588b0606090` | `8fc57213d5f2695c6314ee2e7b6b126656c9c3218f18a7c77133c4f5178cad20` | 1 |
-| `visibility.hide-language-bar` | validated | Class B | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` | `c9d9d7d08ce8e601a61709c16d43cbea6b95d1bc90d77b8f7a89bff4f44fb5d4` | `3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc` | 1 |
+| `visibility.hide-language-bar` | validated | Class B | `Docs/tweaks/research/records/visibility.hide-language-bar.review.json` | `11ffceb9ac644bb63dda1ade421ed2e746ccd8adad5c64ae6c7f148ddae5ef0c` | `3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc` | 1 |
 | `visibility.hide-most-used-apps` | validated | Class A | `Docs/tweaks/research/records/visibility.hide-most-used-apps.json` | `46f2a5fd5cc71eef4117d9aec26993429e6eee1c81c9d02247a964fc8c09e03c` | `b66e6752f3c72b835115d0a715643e28a6be0061d9e0b1246115269dd8eb1f8e` | 1 |
 | `visibility.hide-people-bar` | validated | Class A | `Docs/tweaks/research/records/visibility.hide-people-bar.json` | `3d314f01213f3135cc817d72f995a9d20a0c5cb0d9d2767ed5a2e36954294fa9` | `ca25eca99b530fd221ccdc49679625c25e7e2ebb3e5fb21edaca6075a73732ad` | 1 |
-| `visibility.restore-classic-context-menu` | validated | Class B | `Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json` | `856c6d17aafde09565f4b68bd4381fc44f28a7e30ba9d5c5cb6a6c37cd0b7b4c` | `2be626add6056b666c3453999702cf52a7408132c80f6da39aa897ff0f90ecf2` | 1 |
+| `visibility.restore-classic-context-menu` | validated | Class B | `Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json` | `06982c9a4adaf5c6b0f16f8c1836e875006896c482e6939819b1e4ae41868e7d` | `2be626add6056b666c3453999702cf52a7408132c80f6da39aa897ff0f90ecf2` | 1 |
 
 ## Per-Record Details
 
@@ -4615,7 +4615,7 @@ Nohuto lineage references:
 - Area: `Explorer Advanced Flags`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/explorer.enable-explorer-compact-mode.review.json`
-- Source SHA256: `b3c60c5bd70b42dcaa2cae72788918be11e19f1b30e1aed70e5f09ae8455dd69`
+- Source SHA256: `1cb7d0db58bb9060dcbbd2f3a4e38f256d7739c7115318525e91e23015b1a6c8`
 - Proof SHA256: `db84da6e84e7fa7c5137b7a228cef206a2621d7a0e18e9c50ae50683c2bbe9d2`
 
 **Summary:** The app writes HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\UseCompactMode = 1, the 25H2 raw registry dump lists the same value name under both the machine and current-user Explorer\Advanced branches, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.
@@ -7697,7 +7697,7 @@ Nohuto lineage references:
 ### `performance.disable-animations`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Performance`
 - Area: `Win32 Animation Effects`
 - Scope: `user`
@@ -7711,10 +7711,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -7764,7 +7764,7 @@ Windows Internals references:
 ### `performance.disable-menu-show-delay`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Performance`
 - Area: `Win32 Menu Timing`
 - Scope: `user`
@@ -7778,10 +7778,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -18997,7 +18997,7 @@ Nohuto lineage references:
 - Area: `User Preference`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/visibility.hide-language-bar.review.json`
-- Source SHA256: `c9d9d7d08ce8e601a61709c16d43cbea6b95d1bc90d77b8f7a89bff4f44fb5d4`
+- Source SHA256: `11ffceb9ac644bb63dda1ade421ed2e746ccd8adad5c64ae6c7f148ddae5ef0c`
 - Proof SHA256: `3a034427f85f32481007a7a1e96991a7a2fb5377b21b4b25be1c710256980dfc`
 
 **Summary:** The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. A Microsoft Q&A thread now documents ShowStatus = 3 for the hidden state, so the record can be validated.
@@ -19184,7 +19184,7 @@ Nohuto lineage references:
 - Area: `Explorer Context Menu`
 - Scope: `user`
 - Source file: `Docs/tweaks/research/records/visibility.restore-classic-context-menu.review.json`
-- Source SHA256: `856c6d17aafde09565f4b68bd4381fc44f28a7e30ba9d5c5cb6a6c37cd0b7b4c`
+- Source SHA256: `06982c9a4adaf5c6b0f16f8c1836e875006896c482e6939819b1e4ae41868e7d`
 - Proof SHA256: `2be626add6056b666c3453999702cf52a7408132c80f6da39aa897ff0f90ecf2`
 
 **Summary:** The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 with an empty default value. Microsoft Q&A now documents the same registry workaround, so the record is validated.

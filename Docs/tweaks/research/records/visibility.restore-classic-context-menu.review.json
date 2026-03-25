@@ -185,13 +185,13 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft Q&A now documents the same CLSID workaround: create the InprocServer32 key and leave the default value blank to restore the classic Windows 11 context menu. The record matches the app and can be published as validated.",
+    "why": "Microsoft Q&A documents the same CLSID workaround the app writes, and removing the key restores the stock Windows 11 context menu. The record matches the app and has a clean restore story.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-21T00:00:00Z",

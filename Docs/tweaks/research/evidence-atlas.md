@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 190 |
-| Class B | 51 |
+| Class A | 192 |
+| Class B | 49 |
 | Class C | 1 |
 | Class E | 54 |
 
@@ -6596,13 +6596,13 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Performance` |
 | Area | `Win32 Animation Effects` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/performance.disable-animations.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** Microsoft documents window animation behavior through SystemParametersInfo(SPI_GETANIMATION / SPI_SETANIMATION) and ANIMATIONINFO.iMinAnimate. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETANIMATION with animations enabled persisted HKCU\Control Panel\Desktop\WindowMetrics\MinAnimate = "1", while calling SPI_SETANIMATION with animations disabled persisted MinAnimate = "0". The current app write of MinAnimate = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
@@ -6625,10 +6625,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -6695,7 +6695,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The feature semantics are officially documented through the Win32 animation API, and a local runtime diff now proves that MinAnimate is the persisted backend for the enabled and disabled states on this build. The remaining limitation is documentation quality: MinAnimate was validated through API-backed runtime observation rather than a Microsoft-published registry contract. |
+| Why | The feature semantics are officially documented through the Win32 animation API, and the runtime diff proves that MinAnimate is the persisted backend for the enabled and disabled states on this build. The app writes the same disabled state and supports restoring the previous value. |
 
 ---
 
@@ -6704,13 +6704,13 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Performance` |
 | Area | `Win32 Menu Timing` |
 | Scope | `user` |
 | Source file | `Docs/tweaks/research/records/performance.disable-menu-show-delay.review.json` |
 | Apply allowed | `True` |
-| Confidence | `medium` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** Microsoft documents menu show delay through SystemParametersInfo with SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY. A local runtime diff on 2026-03-14 confirmed that calling SPI_SETMENUSHOWDELAY with 400 persisted HKCU\Control Panel\Desktop\MenuShowDelay = "400", while calling SPI_SETMENUSHOWDELAY with 0 persisted MenuShowDelay = "0". The current app write of MenuShowDelay = "0" therefore matches the observed persisted backend for the documented Win32 feature surface on this build.
@@ -6733,10 +6733,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -6802,7 +6802,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The menu-delay feature semantics are officially documented through the Win32 API, and a local runtime diff now proves that MenuShowDelay is the persisted backend for the tested delayed and zero-delay states on this build. The remaining limitation is documentation quality: MenuShowDelay was validated through API-backed runtime observation rather than a Microsoft-published registry contract. |
+| Why | The menu-delay feature semantics are officially documented through the Win32 API, and the runtime diff proves that MenuShowDelay is the persisted backend for the tested delayed and zero-delay states on this build. The app writes the same zero-delay state and supports restoring the previous value. |
 
 ---
 

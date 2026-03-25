@@ -207,13 +207,13 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The feature mapping is corroborated by the repo notes and a Microsoft Q&A thread that shows ShowStatus = 3 as the hidden-state value.",
+    "why": "The feature mapping is backed by the current app write, a Microsoft Q&A thread that shows ShowStatus = 3 for the hidden state, and a Win25H2Clean Procmon trace around a ctfmon.exe restart.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-21T00:00:00Z",
