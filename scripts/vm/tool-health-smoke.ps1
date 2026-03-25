@@ -68,16 +68,29 @@ $toolMap = [ordered]@{
     ghidra_launcher = 'C:\Tools\Scripts\ghidra-headless.cmd'
 }
 
+$optionalToolMap = [ordered]@{
+    ttd = 'C:\Tools\Debuggers\ttd.exe'
+    windbg = 'C:\Tools\Debuggers\windbg.exe'
+}
+
 $result = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
     machine = $env:COMPUTERNAME
     user = $env:USERNAME
     tools = [ordered]@{}
+    optional_tools = [ordered]@{}
     smokes = [ordered]@{}
 }
 
 foreach ($entry in $toolMap.GetEnumerator()) {
     $result.tools[$entry.Key] = [ordered]@{
+        path = $entry.Value
+        exists = [bool](Test-Path $entry.Value)
+    }
+}
+
+foreach ($entry in $optionalToolMap.GetEnumerator()) {
+    $result.optional_tools[$entry.Key] = [ordered]@{
         path = $entry.Value
         exists = [bool](Test-Path $entry.Value)
     }

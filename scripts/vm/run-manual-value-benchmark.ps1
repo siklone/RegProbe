@@ -20,6 +20,10 @@ param(
         'C:\Tools\Scripts\benchmark-winsat-mem-wpr.ps1'
     ),
 
+    [string]$RecordId = '',
+    [string]$SnapshotName = '',
+    [string]$IncidentLogPath = '',
+
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
@@ -29,6 +33,10 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+
+if ([string]::IsNullOrWhiteSpace($IncidentLogPath)) {
+    $IncidentLogPath = Join-Path $PSScriptRoot '..\..\Docs\tweaks\research\vm-incidents.json'
+}
 
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $hostRoot = Join-Path $HostOutputRoot ("{0}-{1}" -f $TestName, $stamp)
@@ -184,6 +192,56 @@ function Wait-Explorer {
     throw 'Explorer did not come back in time.'
 }
 
+function Get-ShellHealth {
+    $processes = Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'listProcessesInGuest', $VmPath)
+    return [ordered]@{
+        explorer = [bool]($processes -match '\bexplorer\.exe\b')
+        sihost = [bool]($processes -match '\bsihost\.exe\b')
+        shellhost = [bool]($processes -match '\bShellHost\.exe\b')
+        app = [bool]($processes -match '\bWindowsOptimizer\.App\.exe\b')
+        process_dump = $processes
+    }
+}
+
+function Write-Incident {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Symptom,
+        [string]$ValueState = ''
+    )
+
+    if ([string]::IsNullOrWhiteSpace($RecordId)) {
+        return
+    }
+
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'log-vm-incident.ps1') `
+        -RecordId $RecordId `
+        -TweakId $RecordId `
+        -TestId $TestName `
+        -Family 'system-benchmark' `
+        -SnapshotName $SnapshotName `
+        -RegistryPath $RegistryPath `
+        -ValueName $ValueName `
+        -ValueState $ValueState `
+        -Symptom $Symptom `
+        -ShellRecovered $false `
+        -NeededSnapshotRevert $false `
+        -IncidentPath $IncidentLogPath | Out-Null
+}
+
+function Assert-ShellHealthy {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Phase
+    )
+
+    $shell = Get-ShellHealth
+    if (-not ($shell.explorer -and $shell.sihost -and $shell.shellhost)) {
+        Write-Incident -Symptom ("Shell health check failed after {0}. explorer={1} sihost={2} shellhost={3}" -f $Phase, $shell.explorer, $shell.sihost, $shell.shellhost) -ValueState $Phase
+        throw "Shell health check failed after $Phase."
+    }
+}
+
 function Get-GuestLastBootUpTime {
     $guestOutputPath = Join-Path $guestRoot 'lastboot.txt'
     $hostOutputPath = Join-Path $hostRoot 'lastboot.txt'
@@ -235,8 +293,14 @@ function Wait-GuestReboot {
 
 function Restart-Guest {
     $previousBoot = Get-GuestLastBootUpTime
-    Invoke-GuestProgram -FilePath 'C:\Windows\System32\shutdown.exe' -ArgumentList @('/r', '/t', '0', '/f')
-    Wait-GuestReboot -PreviousBoot $previousBoot | Out-Null
+    try {
+        Invoke-GuestProgram -FilePath 'C:\Windows\System32\shutdown.exe' -ArgumentList @('/r', '/t', '0', '/f')
+        Wait-GuestReboot -PreviousBoot $previousBoot | Out-Null
+    }
+    catch {
+        Write-Incident -Symptom ("Reboot flow failed: {0}" -f $_.Exception.Message)
+        throw
+    }
 }
 
 function Set-GuestDwordValue {
@@ -342,6 +406,7 @@ Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 
 
 Wait-GuestRunning
 Wait-Explorer
+Assert-ShellHealthy -Phase 'initial'
 
 $summary = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
@@ -350,6 +415,8 @@ $summary = [ordered]@{
     value_name = $ValueName
     baseline_value = $BaselineValue
     candidate_value = $CandidateValue
+    record_id = $RecordId
+    snapshot_name = $SnapshotName
     host_root = $hostRoot
     guest_root = $guestRoot
     phases = [ordered]@{}
@@ -357,30 +424,38 @@ $summary = [ordered]@{
 
 Set-GuestDwordValue -Value $BaselineValue
 Restart-Guest
+Assert-ShellHealthy -Phase 'baseline-reboot'
 $summary.phases['baseline'] = [ordered]@{
     observed_value = Capture-GuestValue -Name 'baseline-after-reboot'
+    shell_health = Get-ShellHealth
     benchmarks = @()
 }
 
 foreach ($benchmarkScript in $BenchmarkScripts) {
     $summary.phases['baseline'].benchmarks += Run-BenchmarkPass -Phase 'baseline' -Value $BaselineValue -BenchmarkScript $benchmarkScript
+    Assert-ShellHealthy -Phase ("baseline-benchmark-{0}" -f ([System.IO.Path]::GetFileName($benchmarkScript)))
 }
 
 Set-GuestDwordValue -Value $CandidateValue
 Restart-Guest
+Assert-ShellHealthy -Phase 'candidate-reboot'
 $summary.phases['candidate'] = [ordered]@{
     observed_value = Capture-GuestValue -Name 'candidate-after-reboot'
+    shell_health = Get-ShellHealth
     benchmarks = @()
 }
 
 foreach ($benchmarkScript in $BenchmarkScripts) {
     $summary.phases['candidate'].benchmarks += Run-BenchmarkPass -Phase 'candidate' -Value $CandidateValue -BenchmarkScript $benchmarkScript
+    Assert-ShellHealthy -Phase ("candidate-benchmark-{0}" -f ([System.IO.Path]::GetFileName($benchmarkScript)))
 }
 
 Set-GuestDwordValue -Value $BaselineValue
 Restart-Guest
+Assert-ShellHealthy -Phase 'restore-reboot'
 $summary.phases['restore'] = [ordered]@{
     observed_value = Capture-GuestValue -Name 'restored-after-reboot'
+    shell_health = Get-ShellHealth
 }
 
 $summary | ConvertTo-Json -Depth 8 | Set-Content -Path $summaryPath -Encoding UTF8

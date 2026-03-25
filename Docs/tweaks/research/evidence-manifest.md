@@ -110,7 +110,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `explorer.taskbar-alignment-left` | validated | Class A | `Docs/tweaks/research/records/explorer.taskbar-alignment-left.review.json` | `37d40c6f1116fcf39df694aaf5c02db750586e953643169bdbb3cd0838999ec0` | `f562581363020ca1171f710494781b4f67c43fc842c9f619fd7c17951de3f390` | 1 |
 | `network.disable-active-probing` | validated | Class A | `Docs/tweaks/research/records/network.disable-active-probing.review.json` | `d8a64a34f17267bedbb0b62d3c0efaa3e8e8b9eaa79f7294c012a7a5b1331faa` | `c466ffb031c0f83e6637d85e679ff87f8fe8cf780f3a2e2a28260a01b1bf62b0` | 1 |
 | `network.disable-default-shares` | validated | Class A | `Docs/tweaks/research/records/network.disable-default-shares.json` | `5940e2ab95a1f622a7bb367cc863648e9612c2e2b261e0a5ed7748fe5ffd37da` | `553ab69f91f0aa70a2ebc4fdb3bfc0456d83ca31db2729be9160c694a07230cb` | 2 |
-| `network.disable-ipv6` | validated | Class B | `Docs/tweaks/research/records/network.disable-ipv6.json` | `024c6f3d596e053e312ee3444561fa5647441f688703fabb36829995c58b1597` | `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa` | 1 |
+| `network.disable-ipv6` | validated | Class B | `Docs/tweaks/research/records/network.disable-ipv6.json` | `9c4f3cd7ee3757e7c51e1a6494cc583b70fa0cc0ae1a30323e4146aac78031b4` | `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa` | 1 |
 | `network.disable-llmnr` | validated | Class A | `Docs/tweaks/research/records/network.disable-llmnr.json` | `d5e97ff812fede46d53962ab8f26bdd0e04d33fe303dd25dabada41ecb8b808c` | `eed09962b64570b68d966d4d13cb149e60d9ac1b4b65b1159d77e3994570e5ff` | 1 |
 | `network.disable-lltd` | validated | Class A | `Docs/tweaks/research/records/network.disable-lltd.review.json` | `147a50cc0134ab85f1f14d21691d23fce788b4c5799540cea3c6d6b0023144b9` | `95621d902169844295e40dc7f4043671933f41cfbbad706d915315fae84b8121` | 2 |
 | `network.disable-mdns` | validated | Class A | `Docs/tweaks/research/records/network.disable-mdns.review.json` | `167200f5eba4f465072285304aa655b20f3f338461e6cfc7e2945cdfcf78a71c` | `1fb961716d805445b8df34459ecd163bc84ff8d7bce259e6c394a31111426da2` | 1 |
@@ -123,7 +123,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `network.disable-wifi-sense` | validated | Class A | `Docs/tweaks/research/records/network.disable-wifi-sense.json` | `276c2ed05cf51928b61461d2dcb9fa6e5c4bd1db0e46463fa052251f80566c8b` | `15f8edf75fa5fe82787894099f7d3bf62989d73555893644d4b7e781b4f39920` | 1 |
 | `network.enable-lltd-responder` | validated | Class A | `Docs/tweaks/research/records/network.enable-lltd-responder.json` | `5073f39f47458dfbdf89041d84e467c441d923a347872b89448204d14654555d` | `151af74ca167733c59c777a58bfda35539d644963bba56da30e75f231ee24db3` | 1 |
 | `network.enable-lltdio` | validated | Class A | `Docs/tweaks/research/records/network.enable-lltdio.json` | `46535b799055f878ebc3dea4ff11b0a29df6bdadc1568bb95431bcc1f66039f0` | `cf1759fcbe2f5d1d8d8ae6c2157572de4b0443ddb558424efe605bef379879be` | 1 |
-| `network.prefer-ipv4` | validated | Class B | `Docs/tweaks/research/records/network.prefer-ipv4.json` | `12a1b9daf05ca7291c64063af013fc697144c19d47ea05ba1e0d7edc770d796f` | `716ad6ac1200efc085880de052a42a79f81af9ad24329f1c6cc07c9553f71644` | 1 |
+| `network.prefer-ipv4` | validated | Class B | `Docs/tweaks/research/records/network.prefer-ipv4.json` | `756fb3849cdd21cf2834716dd29d6243d0ac20a0a3b607031dae5463e1e9e030` | `716ad6ac1200efc085880de052a42a79f81af9ad24329f1c6cc07c9553f71644` | 1 |
 | `network.require-ntlm-ssp-client-session-security` | validated | Class A | `Docs/tweaks/research/records/network.require-ntlm-ssp-client-session-security.review.json` | `f84c709a4d4bbfc0c04575fecb75182b36647c25f9e2088093586042366098c5` | `d04e684793385eaf3ebbcd760af119405ed45de2052792463913a5db19bed55e` | 1 |
 | `network.smb-disable-leasing` | validated | Class A | `Docs/tweaks/research/records/network.smb-disable-leasing.review.json` | `660ff172621f5edbfac2bf1c5b3bf575351ebad1e1ed46db5f08a0ca4b34d80e` | `26ea4fe4709ec1cf26d57e1eff78142f1059076c4df409451264371d8c02f9c9` | 1 |
 | `network.smb-enable-large-mtu` | validated | Class A | `Docs/tweaks/research/records/network.smb-enable-large-mtu.json` | `6b10a9808a7819cff8f7f001da1c460f56223d33b565d1fcdecc94444ca2d76e` | `baeecfe02b08e4e38fdadcbbc3a8c6134c0bc27de55bfaa8f016ff7d7fd5a45f` | 1 |
@@ -236,7 +236,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `security.disable-system-restore` | validated | Class B | `Docs/tweaks/research/records/security.disable-system-restore.review.json` | `c87e2639f9f1c023786a05f6970fbe16bdeff9ba1af71799ac96a8fe1e7c13b3` | `a0b7ed13e93915c4f77f085945159c09a292f2c3cc2e4cd140ce0ea7a98c8df1` | 1 |
 | `security.disable-windows-firewall` | validated | Class B | `Docs/tweaks/research/records/security.disable-windows-firewall.review.json` | `4669ad9f2652dc128d4cdd6123ce6652542887e95801c4e8183dbe93704b52bc` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 2 |
 | `security.disable-windows-update.policy` | validated | Class B | `Docs/tweaks/research/records/security.disable-windows-update.policy.review.json` | `d348a89d3dd278084d0cdc9fbf56c168e99433d42d157b9ebf9cda001e3b21df` | `b1697a5c3feaa9da12b61d23e66a337b9339e4fffeeb2e37d8395d5f461ed060` | 2 |
-| `security.disable-wu-driver-updates` | validated | Class B | `Docs/tweaks/research/records/security.disable-wu-driver-updates.json` | `488a5f5680947b908ba0ba69742a588b0d33a7654cf4d2a1975afac13fa061b8` | `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa` | 3 |
+| `security.disable-wu-driver-updates` | validated | Class B | `Docs/tweaks/research/records/security.disable-wu-driver-updates.json` | `7004eefbe4a34284de3f2aace2a3657873aa5da2b0d80bd7e2dcd86e1cc3d6ca` | `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa` | 3 |
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `Docs/tweaks/research/records/security.enable-defender-maps-advanced-membership.review.json` | `483e9052385085d3120be737683655ec5cfc22ae224f682a1753781ad0630cbe` | `42cc4c40a3161dc76cf3730b1397c4402aa66ae5e625a4ff85962df616ee1324` | 1 |
 | `security.enable-dynamic-lock` | validated | Class A | `Docs/tweaks/research/records/security.enable-dynamic-lock.json` | `ed4ac310ae9d2b5e6e3d53e642cbcd4ab7700097aa1981b8ede4089a23f9854e` | `5674ee77c90634f3802ea25f051bb2842c6720864bb362a7149d38780190b189` | 1 |
 | `security.enable-sudo` | validated | Class A | `Docs/tweaks/research/records/security.enable-sudo.json` | `8934276844f480262072241c97802a305ecc1a5de0eba9ac3b6db811a0594dca` | `b40d613c425e8b4af1762f4074a6f421fdd3ceb869536fbb1a5b7c0ddb66207e` | 1 |
@@ -5627,7 +5627,7 @@ Windows Internals references:
 - Area: `Registry Configuration`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/network.disable-ipv6.json`
-- Source SHA256: `024c6f3d596e053e312ee3444561fa5647441f688703fabb36829995c58b1597`
+- Source SHA256: `9c4f3cd7ee3757e7c51e1a6494cc583b70fa0cc0ae1a30323e4146aac78031b4`
 - Proof SHA256: `ac8fa2d992684153d3a4f822be49800f58d3badd8f20d1f8dd11ad47aa44ecaa`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Sets the official DisabledComponents value to 0xFF, which tells Windows to disable all IPv6 components except the loopback interface. Microsoft warns that disabling IPv6 can break parts of Windows and should be done only when there is a very specific reason.
@@ -6492,7 +6492,7 @@ Windows Internals references:
 - Area: `Registry Configuration`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/network.prefer-ipv4.json`
-- Source SHA256: `12a1b9daf05ca7291c64063af013fc697144c19d47ea05ba1e0d7edc770d796f`
+- Source SHA256: `756fb3849cdd21cf2834716dd29d6243d0ac20a0a3b607031dae5463e1e9e030`
 - Proof SHA256: `716ad6ac1200efc085880de052a42a79f81af9ad24329f1c6cc07c9553f71644`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Sets DisabledComponents to 0x20, which tells Windows to prefer IPv4 over IPv6 without fully disabling the IPv6 stack. This is less disruptive than turning IPv6 off, but it is still an advanced network compatibility override.
@@ -13771,7 +13771,7 @@ _No source block present._
 - Area: `Registry Policy`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/security.disable-wu-driver-updates.json`
-- Source SHA256: `488a5f5680947b908ba0ba69742a588b0d33a7654cf4d2a1975afac13fa061b8`
+- Source SHA256: `7004eefbe4a34284de3f2aace2a3657873aa5da2b0d80bd7e2dcd86e1cc3d6ca`
 - Proof SHA256: `2df473b5a4b639d7ed6f846b402fa60ebe20fa1810fef5c0345112427f8f7daa`
 
 **Summary:** Legacy validated record without machine-checkable validation proof. Policy-backed control for stopping Windows Update from being used as a device-driver source and for excluding driver-classified updates from Windows quality updates. This can reduce unexpected driver changes, but it can also block useful driver delivery when no local or vendor-provided driver is available.

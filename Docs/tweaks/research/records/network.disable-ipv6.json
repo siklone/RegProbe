@@ -188,12 +188,12 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft directly documents the DisabledComponents registry value under HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters, including 0xFF for disabling all IPv6 components except loopback, and explicitly warns that disabling IPv6 is not recommended for general use. The app writes that exact documented value on the documented path.",
+    "why": "Microsoft directly documents the DisabledComponents path and the 0xFF value on the same page the record cites. The app writes that exact value, and the restore path is clear even though this remains a high-impact network override.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T02:32:46.1598415+03:00",

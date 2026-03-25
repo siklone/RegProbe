@@ -5,6 +5,7 @@ This repository is validated in the `Win25H2Clean` VMware VM.
 ## Rule
 
 - Do not run live app validation on the host.
+- Keep the VM visible in VMware Workstation. Do not switch the validation lane to `nogui`.
 - Use the VM for:
   - registry and policy experiments
   - performance testing
@@ -116,6 +117,28 @@ powershell -ExecutionPolicy Bypass -File scripts\vm\run-manual-value-benchmark.p
 
 The active suite avoids EULA-gated third-party stress tools.
 
+## Shell Health And Incidents
+
+Check the shell before and after risky families:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\get-vm-shell-health.ps1
+```
+
+If a test drops the desktop, shell host, input, Store app startup, or app launch path, log it:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\log-vm-incident.ps1 -RecordId system.disable-shortcut-arrow -TestId shortcut-arrow-noarrow-probe -Symptom "Desktop disappeared after Explorer restart"
+```
+
+Incidents are tracked in `Docs\tweaks\research\vm-incidents.json` and folded into `evidence-audit.json`.
+
+Before Explorer, graphics, input, or Defender work, capture a shell-stable snapshot:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\ensure-shell-stable-snapshot.ps1
+```
+
 ## Snapshot Rule For High-Risk Lanes
 
 Before testing high-risk families, create or revert a clean VM snapshot.
@@ -149,6 +172,20 @@ That script exports:
 - `CurrentVersion\Windows`
 
 The exporter will start the VM if it is powered off. Missing keys are written as metadata instead of being treated as a script failure.
+
+## Cleanup
+
+Host cleanup keeps only referenced artifacts and the current offline tool cache:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\cleanup-host-validation-artifacts.ps1 -Apply
+```
+
+Guest cleanup archives desktop clutter, drops old validation output, and removes OCCT leftovers:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\cleanup-guest-validation-artifacts.ps1 -Apply
+```
 
 ## Bootstrapping Notes
 

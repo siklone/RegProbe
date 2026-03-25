@@ -48,6 +48,31 @@ RUNTIME_EVIDENCE_KINDS = {
     "registry-observation",
 }
 
+OFFICIAL_EVIDENCE_KINDS = {
+    "official-doc",
+    "policy-csp",
+    "troubleshoot-doc",
+}
+
+PROCMON_EVIDENCE_KINDS = {
+    "procmon-trace",
+}
+
+GHIDRA_EVIDENCE_KINDS = {
+    "decompilation",
+    "ghidra-headless",
+    "ghidra-trace",
+}
+
+WPR_EVIDENCE_KINDS = {
+    "wpr-trace",
+    "etw-trace",
+}
+
+BENCHMARK_EVIDENCE_KINDS = {
+    "runtime-benchmark",
+}
+
 SEMANTICS_EVIDENCE_KINDS = {
     "official-doc",
     "policy-csp",
@@ -56,6 +81,59 @@ SEMANTICS_EVIDENCE_KINDS = {
     "repo-code",
     "decompilation",
 }
+
+MICROSOFT_SOURCE_HINTS = (
+    "learn.microsoft.com",
+    "support.microsoft.com",
+    "techcommunity.microsoft.com",
+    "C:\\Windows\\PolicyDefinitions\\",
+    "C:/Windows/PolicyDefinitions/",
+)
+
+EARLY_BOOT_PATH_HINTS = (
+    "\\system\\currentcontrolset\\services\\",
+    "\\controlset001\\services\\",
+    "\\control\\session manager\\kernel",
+    "\\control\\prioritycontrol",
+    "\\control\\graphicsdrivers",
+    "\\control\\power",
+    "\\services\\stornvme\\",
+    "\\services\\usbhub3\\",
+)
+
+PERF_HINTS = (
+    "benchmark",
+    "winsat",
+    "diskspd",
+    "aida64",
+    "cinebench",
+    "latency",
+    "throughput",
+    "fps",
+    "dpc",
+    "startup",
+    "fullscreen",
+    "prioritycontrol",
+    "paging executive",
+    "power throttling",
+    "idle states",
+    "mmcss",
+    "kernel",
+    "memory",
+    "graphics",
+    "network",
+    "defender",
+)
+
+REBOOT_HINTS = (
+    "reboot",
+    "restart",
+    "lastbootuptime",
+    "after boot",
+    "after reboot",
+    "boot diff",
+    "booted",
+)
 
 
 def sanitize_text(value: Any) -> Any:
@@ -127,6 +205,69 @@ def evidence_kind(item: dict[str, Any]) -> str:
     return str(item.get("kind") or "").strip()
 
 
+def validation_proof(record: dict[str, Any]) -> dict[str, Any]:
+    proof = record.get("validation_proof")
+    if isinstance(proof, dict):
+        return proof
+    return {}
+
+
+def evidence_items(record: dict[str, Any]) -> list[dict[str, Any]]:
+    return [item for item in record.get("evidence", []) or [] if isinstance(item, dict)]
+
+
+def evidence_kinds(record: dict[str, Any]) -> set[str]:
+    return {evidence_kind(item) for item in evidence_items(record) if evidence_kind(item)}
+
+
+def target_paths(record: dict[str, Any]) -> list[str]:
+    return [
+        str(target.get("path") or "")
+        for target in record.get("setting", {}).get("targets", []) or []
+        if isinstance(target, dict)
+    ]
+
+
+def record_text_blob(record: dict[str, Any]) -> str:
+    values: list[str] = []
+    for key in ("record_id", "summary"):
+        value = record.get(key)
+        if value:
+            values.append(str(value))
+
+    setting = record.get("setting") or {}
+    for key in ("name", "category", "area", "scope", "professional_notes", "tradeoffs_overview"):
+        value = setting.get(key)
+        if value:
+            values.append(str(value))
+
+    decision = record.get("decision") or {}
+    why = decision.get("why")
+    if why:
+        values.append(str(why))
+
+    proof = validation_proof(record)
+    for key in ("source_url", "exact_quote_or_path", "notes"):
+        value = proof.get(key)
+        if value:
+            values.append(str(value))
+
+    for item in evidence_items(record):
+        for key in ("title", "location", "summary"):
+            value = item.get(key)
+            if value:
+                values.append(str(value))
+
+    return " ".join(values).lower()
+
+
+def source_looks_microsoft(source: str) -> bool:
+    normalized = source.strip().lower()
+    if not normalized:
+        return False
+    return any(hint.lower() in normalized for hint in MICROSOFT_SOURCE_HINTS)
+
+
 def has_unknown_state(record: dict[str, Any]) -> bool:
     for target in record.get("setting", {}).get("targets", []) or []:
         for allowed in target.get("allowed_values", []) or []:
@@ -136,11 +277,80 @@ def has_unknown_state(record: dict[str, Any]) -> bool:
 
 
 def has_runtime_evidence(record: dict[str, Any]) -> bool:
-    return any(evidence_kind(item) in RUNTIME_EVIDENCE_KINDS for item in record.get("evidence", []) or [])
+    return any(evidence_kind(item) in RUNTIME_EVIDENCE_KINDS for item in evidence_items(record))
 
 
 def has_semantics_evidence(record: dict[str, Any]) -> bool:
-    return any(evidence_kind(item) in SEMANTICS_EVIDENCE_KINDS for item in record.get("evidence", []) or [])
+    return any(evidence_kind(item) in SEMANTICS_EVIDENCE_KINDS for item in evidence_items(record))
+
+
+def has_official_evidence(record: dict[str, Any]) -> bool:
+    if evidence_kinds(record) & OFFICIAL_EVIDENCE_KINDS:
+        return True
+    return source_looks_microsoft(str(validation_proof(record).get("source_url") or ""))
+
+
+def has_procmon_evidence(record: dict[str, Any]) -> bool:
+    return bool(evidence_kinds(record) & PROCMON_EVIDENCE_KINDS)
+
+
+def has_ghidra_evidence(record: dict[str, Any]) -> bool:
+    return bool(evidence_kinds(record) & GHIDRA_EVIDENCE_KINDS)
+
+
+def has_wpr_evidence(record: dict[str, Any]) -> bool:
+    return bool(evidence_kinds(record) & WPR_EVIDENCE_KINDS)
+
+
+def has_benchmark_evidence(record: dict[str, Any]) -> bool:
+    if evidence_kinds(record) & BENCHMARK_EVIDENCE_KINDS:
+        return True
+    blob = record_text_blob(record)
+    return any(keyword in blob for keyword in ("winsat", "diskspd", "aida64", "cinebench", "benchmark"))
+
+
+def has_reboot_evidence(record: dict[str, Any]) -> bool:
+    blob = record_text_blob(record)
+    return any(keyword in blob for keyword in REBOOT_HINTS)
+
+
+def is_early_boot_record(record: dict[str, Any]) -> bool:
+    paths = " ".join(target_paths(record)).lower()
+    return any(hint in paths for hint in EARLY_BOOT_PATH_HINTS)
+
+
+def is_perf_sensitive_record(record: dict[str, Any]) -> bool:
+    blob = record_text_blob(record)
+    return any(hint in blob for hint in PERF_HINTS)
+
+
+def determine_evidence_lane(record: dict[str, Any]) -> str:
+    if has_official_evidence(record):
+        return "official-policy"
+    if is_early_boot_record(record):
+        return "early-boot"
+    if is_perf_sensitive_record(record):
+        return "system"
+    return "runtime"
+
+
+def has_converged_vm_evidence(record: dict[str, Any]) -> bool:
+    lane = determine_evidence_lane(record)
+    if lane == "early-boot":
+        signals = [
+            has_ghidra_evidence(record),
+            has_reboot_evidence(record),
+            has_wpr_evidence(record),
+        ]
+        return sum(1 for item in signals if item) >= 2
+
+    if not has_procmon_evidence(record):
+        return False
+    if not has_ghidra_evidence(record):
+        return False
+    if lane == "system":
+        return has_wpr_evidence(record) or has_benchmark_evidence(record) or has_reboot_evidence(record)
+    return True
 
 
 def restore_story_known(record: dict[str, Any]) -> bool:
@@ -179,10 +389,10 @@ def summarize_links(items: list[dict[str, Any]], limit: int = 2) -> list[dict[st
 
 
 def build_validated_semantics_block(record: dict[str, Any]) -> dict[str, Any]:
-    proof = record.get("validation_proof") or {}
+    proof = validation_proof(record)
     semantics_evidence = [
         item
-        for item in record.get("evidence", []) or []
+        for item in evidence_items(record)
         if evidence_kind(item) in SEMANTICS_EVIDENCE_KINDS
     ]
 
@@ -223,7 +433,7 @@ def build_validated_semantics_block(record: dict[str, Any]) -> dict[str, Any]:
 def build_runtime_proof_block(record: dict[str, Any]) -> dict[str, Any]:
     runtime_evidence = [
         item
-        for item in record.get("evidence", []) or []
+        for item in evidence_items(record)
         if evidence_kind(item) in RUNTIME_EVIDENCE_KINDS
     ]
     decision = record.get("decision") or {}
@@ -272,16 +482,63 @@ def build_upstream_lineage_block(record: dict[str, Any], provenance_entry: dict[
     )
 
 
+def next_missing_layer(record: dict[str, Any], incident_seen: bool = False) -> str:
+    decision = record.get("decision") or {}
+    app_status = extract_app_status(record)
+    if str(record.get("record_status") or "").strip().lower() == "deprecated":
+        return "archived"
+    if not validation_proof(record):
+        return "validation-proof"
+    if app_status != "matches-research":
+        return "app-mapping"
+    if not restore_story_known(record):
+        return "restore-story"
+    if incident_seen:
+        return "incident-review"
+
+    lane = determine_evidence_lane(record)
+    if lane == "official-policy":
+        if not has_official_evidence(record):
+            return "official-doc"
+        if not bool_value(decision.get("apply_allowed")):
+            return "decision-gate"
+        return "none"
+
+    if lane == "early-boot":
+        if not has_ghidra_evidence(record):
+            return "ghidra"
+        if not has_reboot_evidence(record):
+            return "reboot-diff"
+        if not has_wpr_evidence(record):
+            return "wpr-or-ttd"
+        if not bool_value(decision.get("apply_allowed")):
+            return "decision-gate"
+        return "none"
+
+    if not has_procmon_evidence(record):
+        return "procmon"
+    if not has_ghidra_evidence(record):
+        return "ghidra"
+    if lane == "system" and not (has_wpr_evidence(record) or has_benchmark_evidence(record)):
+        return "wpr-or-benchmark"
+    if not bool_value(decision.get("apply_allowed")):
+        return "decision-gate"
+    return "none"
+
+
 def build_gating_reason(class_id: str, record: dict[str, Any]) -> str:
     decision = record.get("decision") or {}
     app_status = extract_app_status(record)
     if class_id == "A":
         return "This record is app-ready and can stay one-click actionable."
     if class_id == "B":
+        missing = next_missing_layer(record)
         if not bool_value(decision.get("apply_allowed")):
             return "Primary values are understood, but this record is still intentionally gated from one-click apply."
         if not restore_story_known(record):
             return "Semantics are strong, but the restore/default story is still incomplete."
+        if missing not in {"none", "decision-gate"}:
+            return f"This record is strong enough to show, but it still needs a tighter {missing} layer before it becomes Class A."
         return "This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A."
     if class_id == "C":
         if app_status in {"not-mapped", "partially-matches"}:
@@ -298,7 +555,7 @@ def derive_class_id(record: dict[str, Any]) -> str:
         return "E"
 
     decision = record.get("decision") or {}
-    has_validation = bool(record.get("validation_proof"))
+    has_validation = bool(validation_proof(record))
     app_status = extract_app_status(record)
     apply_allowed = bool_value(decision.get("apply_allowed"))
     confidence = str(decision.get("confidence") or "").lower()
@@ -315,13 +572,14 @@ def derive_class_id(record: dict[str, Any]) -> str:
         and not has_blockers
         and not needs_vm
         and not unknown_state
+        and (has_official_evidence(record) or has_converged_vm_evidence(record))
     ):
         return "A"
 
     if unknown_state or app_status in {"unknown", "mismatch-suspected"} or not has_validation:
         return "D"
 
-    if app_status == "matches-research" and not has_blockers and not needs_vm and not unknown_state:
+    if app_status == "matches-research" and restore_story_known(record):
         return "B"
 
     return "C"

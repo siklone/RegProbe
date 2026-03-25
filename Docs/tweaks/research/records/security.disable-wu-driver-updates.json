@@ -400,12 +400,12 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The local Microsoft DeviceSetup, ICM, and WindowsUpdate policy files explicitly define SearchOrderConfig, DontSearchWindowsUpdate, and ExcludeWUDriversInQualityUpdate on the exact policy paths used by the app. The app writes the documented values that keep Windows Update out of driver sourcing and quality-update driver delivery.",
+    "why": "The record uses exact Microsoft policy mappings for all three values, the app writes those same values, and the restore path is clear. The bundle is still high-impact, but that is a risk question rather than a class blocker.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T01:43:20.0000000+03:00",
