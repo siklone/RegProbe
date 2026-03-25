@@ -182,12 +182,12 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "A guest-side reversible probe on Win25H2Clean confirmed the EncryptData mapping through the documented server configuration surface: False -> True -> False -> restored False. The current app write matches the documented global SMB encryption requirement. The apply decision remains conservative because older SMB clients and some environments can lose compatibility or pay a performance cost.",
+    "why": "A guest-side reversible probe on Win25H2Clean confirmed the EncryptData mapping through the documented server configuration surface: False -> True -> False -> restored False. The current app write matches the documented global SMB encryption requirement with a clean rollback story.",
     "blocking_issues": []
   },
   "validation_proof": {

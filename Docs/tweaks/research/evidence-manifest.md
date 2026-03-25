@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| A count | 212 |
-| B count | 30 |
+| A count | 214 |
+| B count | 28 |
 | E count | 54 |
 
 ## Record Index
@@ -129,7 +129,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `network.smb-enable-large-mtu` | validated | Class A | `Docs/tweaks/research/records/network.smb-enable-large-mtu.json` | `6b10a9808a7819cff8f7f001da1c460f56223d33b565d1fcdecc94444ca2d76e` | `baeecfe02b08e4e38fdadcbbc3a8c6134c0bc27de55bfaa8f016ff7d7fd5a45f` | 1 |
 | `network.smb-enable-multichannel` | validated | Class A | `Docs/tweaks/research/records/network.smb-enable-multichannel.review.json` | `e0891e1fd368a2dbcb47cb32680ee9ce6d183d41cfb1883b8e8979893cc535dc` | `1eb225291174f353068d3c6eb8a3016ae4d5fcb2ce7bbd70d7b7b96e7d45db22` | 2 |
 | `network.smb-enable-quic` | validated | Class A | `Docs/tweaks/research/records/network.smb-enable-quic.review.json` | `5cb5d022813f5e90d000006517ecd4bb50b6161af54039679655277702db87a4` | `d0812e9f4c65a1bd0f53b117419613631b049fef49b82b3e12ed594295440e19` | 2 |
-| `network.smb-encrypt-data` | validated | Class B | `Docs/tweaks/research/records/network.smb-encrypt-data.json` | `3c1bf644733e2ab70c664da9d11a98d89063178a2b1a6d047e8ffb83ab16cc66` | `aaa4f8307120426c917f6f2d3db3bcdec1303fb61195bee5e9e7506e3c568544` | 1 |
+| `network.smb-encrypt-data` | validated | Class A | `Docs/tweaks/research/records/network.smb-encrypt-data.json` | `071c59d7e540bfa509529602646c302b38f78ba92b691ff7f2aa92e3c80e913e` | `aaa4f8307120426c917f6f2d3db3bcdec1303fb61195bee5e9e7506e3c568544` | 1 |
 | `network.smb-increase-client-metadata-cache` | validated | Class A | `Docs/tweaks/research/records/network.smb-increase-client-metadata-cache.json` | `e114a501dfb91469fb5ccf01348a9ec652b1b629936c94db467d7938a90e9064` | `aee591cca7f7728315ca264021f9d19637863e7b4e736813a1179ea1a9d33d63` | 4 |
 | `network.smb-reject-unencrypted-access` | validated | Class B | `Docs/tweaks/research/records/network.smb-reject-unencrypted-access.json` | `a1f2e32caac439033bdd96251dfd76d4729a8be8eeae03ecad10873f7fd30988` | `a89ad3a32fda0229a84030b9e9cecf137b14e200f5033f27ac62f70afd2d067e` | 1 |
 | `network.smb-require-dialect-3_1_1` | validated | Class A | `Docs/tweaks/research/records/network.smb-require-dialect-3_1_1.review.json` | `0a65d1f64ae541a2e073148da2c4b9a647e93af69daad19041467fcb56878e4e` | `a68251e184cabd33a60dcbd50a6ceb3d7ad09af039b1a7952a5a5cb85f2c9b49` | 4 |
@@ -275,7 +275,7 @@ Nohuto references only show upstream dump or naming links. Value semantics still
 | `system.graphics-tdr-limit-count` | validated | Class A | `Docs/tweaks/research/records/system.graphics-tdr-limit-count.json` | `7e326f9b13be288d63c7284265f59db31dd73b5b28e6b03aee28fb4c030a3ebe` | `98793161f5d92ef41a5dffb17fe726e653b8bea67bf5fcc00384abd0cf49fdde` | 1 |
 | `system.graphics-tdr-limit-time` | validated | Class A | `Docs/tweaks/research/records/system.graphics-tdr-limit-time.json` | `d39188db934125281ba0b09e53161de1a72a0e61f2592a0d904d36fe1f027947` | `b8db6b0b24bd9b6d64dd8e0ff6088b7079e260f5a620d73e10950a74b6499361` | 1 |
 | `system.kernel-thread-dpc-enable` | validated | Class B | `Docs/tweaks/research/records/system.kernel-thread-dpc-enable.json` | `39b9545f28226227c98927feb4de4623e86b7dc8b18df5d91b8b8cb079c3329a` | `a15a06f3b91cf08536310bd098334ea2859c0ff7ad7d73e2594296a780a73f5e` | 1 |
-| `system.memory-clear-pagefile-at-shutdown` | validated | Class B | `Docs/tweaks/research/records/system.memory-clear-pagefile-at-shutdown.json` | `2717a4299cf44da2dc6cc6db5f9bf70fb81393c1dcfd168532dd03186402e04c` | `410daf2e1ff1285865db5d6768c6f4e852efd5e68d0b6f914845ca98b2dcc97b` | 1 |
+| `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `Docs/tweaks/research/records/system.memory-clear-pagefile-at-shutdown.json` | `64b6d2356361d835eabb855e3199747cededa236bf273ffa4ba3077e76916a65` | `410daf2e1ff1285865db5d6768c6f4e852efd5e68d0b6f914845ca98b2dcc97b` | 1 |
 | `system.memory-disable-paging-executive` | validated | Class B | `Docs/tweaks/research/records/system.memory-disable-paging-executive.json` | `b256f188e0f4912f2aea7227bf89b0ab16c25021de1838466e445c1956b35eea` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 1 |
 | `system.memory-large-system-cache-client` | validated | Class B | `Docs/tweaks/research/records/system.memory-large-system-cache-client.review.json` | `96a2972b0ac49d65125668f25c55a812e180b1aae979c6e2daac7a0e6024c03a` | `0bb05d41e8e9be3cbc9320f5ab39e1261822a39f4b171f38e49f416bb54d05d5` | 1 |
 | `system.memory-nonpaged-pool-dynamic` | validated | Class B | `Docs/tweaks/research/records/system.memory-nonpaged-pool-dynamic.json` | `e3ab3a175bcb3ee0b1f8c1e64d24a28cfcff7f470045d3393ba189357b979b8d` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 1 |
@@ -6890,12 +6890,12 @@ Windows Internals references:
 ### `network.smb-encrypt-data`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `Network`
 - Area: `Registry Security Baseline`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/network.smb-encrypt-data.json`
-- Source SHA256: `3c1bf644733e2ab70c664da9d11a98d89063178a2b1a6d047e8ffb83ab16cc66`
+- Source SHA256: `071c59d7e540bfa509529602646c302b38f78ba92b691ff7f2aa92e3c80e913e`
 - Proof SHA256: `aaa4f8307120426c917f6f2d3db3bcdec1303fb61195bee5e9e7506e3c568544`
 
 **Summary:** Legacy validated record now backed by a machine-checkable guest reversible probe. Controls the global SMB server EncryptData value under LanmanServer. Requiring encryption is a strong hardening step for hosted shares, but older SMB clients and some environments can lose compatibility or pay a performance cost.
@@ -6904,10 +6904,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 
@@ -16366,12 +16366,12 @@ Windows Internals references:
 ### `system.memory-clear-pagefile-at-shutdown`
 
 - Status: `validated`
-- Evidence class: `Class B` - Strong but Partial
+- Evidence class: `Class A` - App Ready
 - Category: `System`
 - Area: `Security Option / Memory Management`
 - Scope: `device`
 - Source file: `Docs/tweaks/research/records/system.memory-clear-pagefile-at-shutdown.json`
-- Source SHA256: `2717a4299cf44da2dc6cc6db5f9bf70fb81393c1dcfd168532dd03186402e04c`
+- Source SHA256: `64b6d2356361d835eabb855e3199747cededa236bf273ffa4ba3077e76916a65`
 - Proof SHA256: `410daf2e1ff1285865db5d6768c6f4e852efd5e68d0b6f914845ca98b2dcc97b`
 
 **Summary:** Official security option for clearing the virtual memory page file at shutdown. Good for privacy-sensitive systems, but it can make shutdown noticeably slower.
@@ -16380,10 +16380,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Class | Class B |
-| Title | Strong but Partial |
-| Action state | research-gated |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Class | Class A |
+| Title | App Ready |
+| Action state | actionable |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Targets**
 

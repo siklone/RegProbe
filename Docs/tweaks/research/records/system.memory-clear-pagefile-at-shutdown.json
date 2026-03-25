@@ -199,12 +199,12 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the security option behavior, local Windows security metadata maps the exact registry path, and the app writes the documented enabled state.",
+    "why": "Microsoft documents the security option behavior, local Windows security metadata maps the exact registry path, and the app writes the documented enabled state with a clean rollback story.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-13T00:49:00Z",

@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics are v
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 212 |
-| Class B | 30 |
+| Class A | 214 |
+| Class B | 28 |
 | Class E | 54 |
 
 ## Category Coverage
@@ -5323,12 +5323,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/network.smb-encrypt-data.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -5352,10 +5352,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -5416,12 +5416,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | A guest-side reversible probe on Win25H2Clean confirmed the EncryptData mapping through the documented server configuration surface: False -> True -> False -> restored False. The current app write matches the documented global SMB encryption requirement. The apply decision remains conservative because older SMB clients and some environments can lose compatibility or pay a performance cost. |
+| Why | A guest-side reversible probe on Win25H2Clean confirmed the EncryptData mapping through the documented server configuration surface: False -> True -> False -> restored False. The current app write matches the documented global SMB encryption requirement with a clean rollback story. |
 
 ---
 
@@ -20673,12 +20673,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Security Option / Memory Management` |
 | Scope | `device` |
 | Source file | `Docs/tweaks/research/records/system.memory-clear-pagefile-at-shutdown.json` |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -20702,10 +20702,10 @@ Current write(s):
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -20768,12 +20768,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the security option behavior, local Windows security metadata maps the exact registry path, and the app writes the documented enabled state. |
+| Why | Microsoft documents the security option behavior, local Windows security metadata maps the exact registry path, and the app writes the documented enabled state with a clean rollback story. |
 
 ---
 
