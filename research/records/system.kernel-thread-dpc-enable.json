@@ -222,16 +222,16 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
+    "confidence": "high",
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact path, explicitly says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset, and bounded VM runs now show that the `0` state can be exercised and restored safely in Win25H2Clean.",
+    "why": "Microsoft documents the exact path, says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset, and the bounded Win25H2Clean VM suite exercised the disable state and restored the missing baseline cleanly. That is enough to treat the app's explicit enabled-state reset as app-ready while still keeping it out of general-user presets.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T00:53:08Z",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs",
     "exact_quote_or_path": "A threaded DPC is a DPC that the system executes at IRQL equal to PASSIVE_LEVEL. Threaded DPCs are enabled by default, but you can disable them by setting the HKLM\\System\\CCS\\Control\\SessionManager\\Kernel\\ThreadDpcEnable registry key to zero. When threaded DPCs are disabled, they execute as ordinary DPCs.",

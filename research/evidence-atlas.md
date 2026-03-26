@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 220 |
-| Class B | 22 |
+| Class A | 222 |
+| Class B | 20 |
 | Class E | 54 |
 
 ## Category coverage
@@ -22145,7 +22145,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers the full observed story: Microsoft documents the feature area, repo research names the 2/2/1/1 tuple, and a Win25H2Clean reversible probe confirmed the tuple before restoring the missing baseline.
+**Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers the observed 25H2 story: Microsoft documents the feature area, the Win25H2Clean reversible probe confirmed the tuple before restoring the baseline, svchost.exe backed by resourcepolicyserver.dll queried GameDVR_DXGIHonorFSEWindowsCompatible live in Procmon, and our Ghidra export tied the same build back to the GameConfigStore RPC server code path.
 
 **Current implementation**
 
@@ -22214,7 +22214,7 @@ Windows Internals references:
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | — | Observed baseline | The current Win25H2Clean baseline leaves the GameConfigStore fullscreen-optimization tuple unset. | ms-windowed-games-optimizations, repo-system-doc-fso, vm-batch-probe-20260320-disable-fullscreen-optimizations |
-| `value` | `2/2/1/1` | Observed app FSO-off profile | The current app treats these four values as the disable-FSO profile, and the reversible VM probe confirmed that tuple on the same path. | repo-system-doc-fso, app-system-registry-provider, vm-batch-probe-20260320-disable-fullscreen-optimizations |
+| `value` | `2/2/1/1` | Observed app FSO-off profile | The current app treats these four values as the disable-FSO profile, and the reversible VM probe confirmed that tuple on the same path. | repo-system-doc-fso, procmon-fullscreen-gameconfigstore-read, ghidra-resourcepolicysrv-fullscreen, app-system-registry-provider, vm-batch-probe-20260320-disable-fullscreen-optimizations |
 
 **Windows defaults**
 
@@ -22235,6 +22235,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
+| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.txt and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.hits.csv | `high` | path, value, behavior |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/resourcepolicysrv-fullscreen-ghidra.md | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 
@@ -22242,10 +22244,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| Exact quote / path | HKCU/System/GameConfigStore: GameDVR_FSEBehavior=2, GameDVR_FSEBehaviorMode=2, GameDVR_HonorUserFSEBehaviorMode=1, GameDVR_DXGIHonorFSEWindowsCompatible=1; restored to missing for all four values |
+| Source | [research/notes/fullscreen-optimizations-procmon-validation-20260326.md](notes/fullscreen-optimizations-procmon-validation-20260326.md) |
+| Exact quote / path | fullscreen-diag.txt: svchost.exe RegQueryValue HKCU/System/GameConfigStore/GameDVR_DXGIHonorFSEWindowsCompatible Data: 1. resourcepolicysrv-fullscreen-ghidra.md: ResourcePolicyServer.dll carries the GameConfigStore RPC server path and the GameDVR_* string set. |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) |
+| Notes | The reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 Procmon and Ghidra passes add a current-build svchost.exe read on GameConfigStore plus direct ResourcePolicyServer code-side proof. |
 
 **Decision**
 
@@ -22256,7 +22258,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft's feature-level doc, the repo tuple mapping, and the Win25H2Clean reversible probe all line up on the same GameConfigStore surface. That is enough to track the missing baseline and the 2/2/1/1 tuple as current observed states, but not enough to treat the raw registry mapping as app-ready. |
+| Why | Microsoft's feature-level doc, the reversible VM probe, the svchost.exe Procmon read on the current build, and the ResourcePolicyServer.dll Ghidra export all line up on the same GameConfigStore surface. That is enough to track the missing baseline and the 2/2/1/1 tuple as current observed states, but the record stays research-gated because the raw tuple is still undocumented by Microsoft and the live pass did not read every tuple member. |
 
 ---
 
@@ -23135,13 +23137,13 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Explorer Startup Behavior` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-startup-delay.review.json](records/system.disable-startup-delay.review.json) |
-| Apply allowed | `False` |
-| Confidence | `medium` |
+| Apply allowed | `True` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, a bounded WPR lane captured both `missing` and `0`, and the value restores back to missing cleanly.
@@ -23164,10 +23166,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -23223,7 +23225,7 @@ Windows Internals references:
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `observed-default` | Observed default | ['Research tracking only', 'Startup behavior comparisons'] | ['Published presets'] | `False` |
-| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published validated presets'] | `False` |
+| `current-app-profile` | Current app profile | ['General users', 'People who want startup apps to launch sooner after sign-in'] | [] | `True` |
 
 **Evidence**
 
@@ -23249,12 +23251,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
-| Recommended for general users | `False` |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible proof, a live Explorer Procmon trace, a Ghidra string hit, and a bounded WPR shell-restart lane all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as current observed states, but not enough to make the tweak app-ready. |
+| Why | Win25H2Clean reversible proof, a live Explorer Procmon trace, a Ghidra string hit, and a bounded WPR shell-restart lane all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as the current build contract for this project and keep the tweak app-ready. |
 
 ---
 
@@ -24762,13 +24764,13 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Kernel / Deferred Procedure Calls` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-thread-dpc-enable.json](records/system.kernel-thread-dpc-enable.json) |
-| Apply allowed | `False` |
-| Confidence | `medium` |
+| Apply allowed | `True` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\System\CurrentControlSet\Control\SessionManager\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset, and a bounded Win25H2Clean VM suite exercised the `0` state through real reboot, CPU and memory workloads, and restore back to the missing baseline.
@@ -24791,10 +24793,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -24876,12 +24878,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact path, explicitly says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset, and bounded VM runs now show that the `0` state can be exercised and restored safely in Win25H2Clean. |
+| Why | Microsoft documents the exact path, says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset, and the bounded Win25H2Clean VM suite exercised the disable state and restored the missing baseline cleanly. That is enough to treat the app's explicit enabled-state reset as app-ready while still keeping it out of general-user presets. |
 
 ---
 

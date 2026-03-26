@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 220 |
-| Class B | 22 |
+| Class A | 222 |
+| Class B | 20 |
 | Class E | 54 |
 
 ## Record index
@@ -251,7 +251,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-background-gp-updates` | validated | Class A | `research/records/system.disable-background-gp-updates.json` | `939462532571dbbd32618d72a35c8be5ea1a96709538420282e1b06efc1d104f` | `d9b2887e86cc3be9878377396d5ef5df25d1b49c8a8d2b17b61223af3753b605` | 4 |
 | `system.disable-clipboard-history` | validated | Class A | `research/records/system.disable-clipboard-history.json` | `13c5d2f3c61f9d29b0a1ea0e45ac398a822c35c6585cfb75695c1e6bba82c9f9` | `e65603715e0aab4997f1ec57d1eb0ec59e40e2bc28e9c5fc5c88714986620923` | 5 |
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | `9ff0033601340e63fe6cdd11cde81056b645efff98abd80fa814f921756639b9` | `87e3b4393968daf49c4ca90f5343ac7b10e8afab12f2f61194e0df491c22083a` | 4 |
-| `system.disable-fullscreen-optimizations` | validated | Class B | `research/records/system.disable-fullscreen-optimizations.review.json` | `496f1b3cbaab1c543392be257a2e0a183c01514e22ef4c3198bf00f6fb916ac2` | `6b4277b07e258d2967b2c20c36a52d601a48af1c9c37ab38542cdbcd78a6c717` | 4 |
+| `system.disable-fullscreen-optimizations` | validated | Class B | `research/records/system.disable-fullscreen-optimizations.review.json` | `3ff8ed288296973452110379b80799eef8c58a0367ae1666d6eed12225d5ddc9` | `0b38f5a9db473691ad21e2594ae5d7db493a12553a1dc0c747cd25b678df5de6` | 6 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | `f8cd916eaac32ecb352ba3d860e62ede4fecda6043e902ef109a5baf9cb94f58` | `5024d7c51812e964c73012685ed6aa5d3e93bfc6bc83099344cf253656ef5901` | 4 |
 | `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | `d58d9d4b2516d8c45742f57ed8e81cd05bd5e7881d38a063e0bc85909ce46ca7` | `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b` | 6 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | `239b954f3ed57b91c6849b79112c012e1fc93b98e2997e268cc62e812b6410d0` | `965dda97da26f0f0572e6d5ecd4e7460377b59c02730d78345ee192f6ddbc803` | 3 |
@@ -259,7 +259,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | `0c5846e343d2009c49d0ee95532155c1c2e54d82ae7aa3716401da0d1ac4867e` | `5e65afa708e18b12b9f829486b8856146c46e9db755aad34ad4e7da317d7cc57` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | `2bde9a9fa7dcd2b74b669e0619815aabea909daa148b0482fe2804443d625e28` | `baf2b84cb20a5549d900fa1d19d0dcea1c89f2e17274d119644e9f60692e09e7` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
-| `system.disable-startup-delay` | validated | Class B | `research/records/system.disable-startup-delay.review.json` | `e34318b6999040a6b9d455310ba4bcf6dd6429a6b174f472636cbbef0548eaaf` | `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658` | 6 |
+| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | `e34318b6999040a6b9d455310ba4bcf6dd6429a6b174f472636cbbef0548eaaf` | `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | `2928a84edc36491332349b1b6f3ea46781b5b06f291ea7e9637518f6eea6c988` | `f6fcec491570654c4ac024edf32ddda8b69c3f20699942c9b3a9c523e6a086ed` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | `7c41be2a3c5ab8c65bb8eddc66af5960dc0b652b387699ac1b5c3393bfd7771a` | `64b00ec7502121f9ba0cf1f178f7eee681d0e2a3cad116938aec15e83189bef0` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | `0852e85453e9854f1bff5af008f1ac6d0b58c1bb87bac664c491ebaf84cb4f9c` | `506e7c06fd133ff089965473816c95fc4c494e6413adc321fb58740eb7462cf0` | 4 |
@@ -272,7 +272,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.graphics-tdr-level` | validated | Class A | `research/records/system.graphics-tdr-level.json` | `3454a8de92973d73409a0a536bedafb5c6870052d8367ce11117f22b7528fdcf` | `51ac3d035a9005a8668aba311d68be1aa3a5f3f45848950ccad2a10ce18ce893` | 2 |
 | `system.graphics-tdr-limit-count` | validated | Class A | `research/records/system.graphics-tdr-limit-count.json` | `320147d2639392fdcb26817c63190a2e9fb2294dd66892a77e56e091774dd360` | `2ee804bb7e64481a5a3773919722ff1ed630908069e4ca7331a0a4241447c3cb` | 2 |
 | `system.graphics-tdr-limit-time` | validated | Class A | `research/records/system.graphics-tdr-limit-time.json` | `516169af387065ddd4619911775b30195290db9aa4ac6b907af2a77777226e0a` | `98cb2125e46af1775baf3f22861d238f5cc80bf0751096d96bcb21a6029cbcb2` | 2 |
-| `system.kernel-thread-dpc-enable` | validated | Class B | `research/records/system.kernel-thread-dpc-enable.json` | `aa92ea7e2e552326e9a3362b9b8ab7698dfd44e770f3fc2900c41949fb414301` | `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf` | 5 |
+| `system.kernel-thread-dpc-enable` | validated | Class A | `research/records/system.kernel-thread-dpc-enable.json` | `b47bf9320e4e2290c82950139fa1fed3d768aca61f6e147621a602e78397d9a7` | `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf` | 5 |
 | `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `research/records/system.memory-clear-pagefile-at-shutdown.json` | `b59ff6127033d6057e3804ce6ff4b9c836497ae64f66a300ae247c5060955697` | `03acbe19591182d2f441ad35b8b99fd3f79593538365d4d0da1dbb6b857331b7` | 4 |
 | `system.memory-disable-paging-executive` | validated | Class B | `research/records/system.memory-disable-paging-executive.json` | `0b2ff252bce47a94090a4f336fb3d5e74d00dbbb07d64bb783fb6f7aa3e9ae79` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 4 |
 | `system.memory-large-system-cache-client` | validated | Class B | `research/records/system.memory-large-system-cache-client.review.json` | `330530b22c81af7f8aff6db79d29f270c585994ec7c50434a784d9a06c8d6279` | `38049996654554e2f9d46418bab1cb87795a15d82f441e8e386fa6b83d2f6d59` | 3 |
@@ -6929,10 +6929,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/system.disable-fullscreen-optimizations.review.json`
-- Source SHA256: `496f1b3cbaab1c543392be257a2e0a183c01514e22ef4c3198bf00f6fb916ac2`
-- Proof SHA256: `6b4277b07e258d2967b2c20c36a52d601a48af1c9c37ab38542cdbcd78a6c717`
+- Source SHA256: `3ff8ed288296973452110379b80799eef8c58a0367ae1666d6eed12225d5ddc9`
+- Proof SHA256: `0b38f5a9db473691ad21e2594ae5d7db493a12553a1dc0c747cd25b678df5de6`
 
-**Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers the full observed story: Microsoft documents the feature area, repo research names the 2/2/1/1 tuple, and a Win25H2Clean reversible probe confirmed the tuple before restoring the missing baseline.
+**Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers the observed 25H2 story: Microsoft documents the feature area, the Win25H2Clean reversible probe confirmed the tuple before restoring the baseline, svchost.exe backed by resourcepolicyserver.dll queried GameDVR_DXGIHonorFSEWindowsCompatible live in Procmon, and our Ghidra export tied the same build back to the GameConfigStore RPC server code path.
 
 **Evidence**
 
@@ -6940,6 +6940,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-windowed-games-optimizations` | `official-doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) |
 | `repo-system-doc-fso` | `repo-doc` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) |
+| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.txt and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.hits.csv |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/resourcepolicysrv-fullscreen-ghidra.md |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 
@@ -6947,9 +6949,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| Exact quote / path | HKCU/System/GameConfigStore: GameDVR_FSEBehavior=2, GameDVR_FSEBehaviorMode=2, GameDVR_HonorUserFSEBehaviorMode=1, GameDVR_DXGIHonorFSEWindowsCompatible=1; restored to missing for all four values |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) |
+| Source | [research/notes/fullscreen-optimizations-procmon-validation-20260326.md](notes/fullscreen-optimizations-procmon-validation-20260326.md) |
+| Exact quote / path | fullscreen-diag.txt: svchost.exe RegQueryValue HKCU/System/GameConfigStore/GameDVR_DXGIHonorFSEWindowsCompatible Data: 1. resourcepolicysrv-fullscreen-ghidra.md: ResourcePolicyServer.dll carries the GameConfigStore RPC server path and the GameDVR_* string set. |
+| Notes | The reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 Procmon and Ghidra passes add a current-build svchost.exe read on GameConfigStore plus direct ResourcePolicyServer code-side proof. |
 
 ---
 
@@ -7157,7 +7159,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.disable-startup-delay`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/system.disable-startup-delay.review.json`
 - Source SHA256: `e34318b6999040a6b9d455310ba4bcf6dd6429a6b174f472636cbbef0548eaaf`
 - Proof SHA256: `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658`
@@ -7524,9 +7526,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.kernel-thread-dpc-enable`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/system.kernel-thread-dpc-enable.json`
-- Source SHA256: `aa92ea7e2e552326e9a3362b9b8ab7698dfd44e770f3fc2900c41949fb414301`
+- Source SHA256: `b47bf9320e4e2290c82950139fa1fed3d768aca61f6e147621a602e78397d9a7`
 - Proof SHA256: `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf`
 
 **Summary:** Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\\System\\CurrentControlSet\\Control\\SessionManager\\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset, and a bounded Win25H2Clean VM suite exercised the `0` state through real reboot, CPU and memory workloads, and restore back to the missing baseline.

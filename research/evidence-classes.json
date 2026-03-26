@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T10:32:15.535782Z",
+  "generated_utc": "2026-03-26T10:55:14.519961Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
-      "A": 221,
-      "B": 21,
+      "A": 222,
+      "B": 20,
       "C": 0,
       "D": 0,
       "E": 54
     },
     "action_state_counts": {
-      "actionable": 221,
+      "actionable": 222,
       "archived": 54,
-      "research-gated": 21
+      "research-gated": 20
     }
   },
   "classes": {
@@ -15210,15 +15210,15 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
+        "summary": "The reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 Procmon and Ghidra passes add a current-build svchost.exe read on GameConfigStore plus direct ResourcePolicyServer code-side proof.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "research/notes/fullscreen-optimizations-procmon-validation-20260326.md",
             "kind": "validation-proof",
-            "summary": "HKCU\\System\\GameConfigStore: GameDVR_FSEBehavior=2, GameDVR_FSEBehaviorMode=2, GameDVR_HonorUserFSEBehaviorMode=1, GameDVR_DXGIHonorFSEWindowsCompatible=1; restored to missing f..."
+            "summary": "fullscreen-diag.txt: svchost.exe RegQueryValue HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible Data: 1. resourcepolicysrv-fullscreen-ghidra.md: ResourcePolicyS..."
           },
           {
             "title": "Microsoft Support: Optimizations for windowed games in Windows",
@@ -15235,10 +15235,16 @@
         ]
       },
       "runtime_proof": {
-        "summary": "Guest reversible probe toggled the GameConfigStore fullscreen-optimization bundle values and restored the original missing state, confirming the current app write set on Win25H2Clean.",
+        "summary": "A Win25H2Clean Procmon pass around Gaming and Advanced Graphics triggers captured svchost.exe querying HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible with Data: 1 while the current tuple was applied.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "Procmon capture - svchost.exe GameConfigStore fullscreen tuple read",
+            "url": "research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt and research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv",
+            "kind": "procmon-trace",
+            "summary": "A Win25H2Clean Procmon pass around Gaming and Advanced Graphics triggers captured svchost.exe querying HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible with Dat..."
+          },
           {
             "title": "Win25H2Clean reversible probe - Fullscreen optimizations override bundle",
             "url": "research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json",
@@ -18019,16 +18025,16 @@
       "record_id": "system.kernel-thread-dpc-enable",
       "tweak_id": "system.kernel-thread-dpc-enable",
       "record_status": "validated",
-      "evidence_class": "B",
-      "class_label": "Class B",
-      "class_title": "Strong but Partial",
-      "class_description": "Key and primary values are known, but the record is still gated from one-click apply or has incomplete edge semantics.",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "App Ready",
+      "class_description": "Key exists, app-exposed values have trusted meanings, validation proof is present, the app mapping matches research, and the restore/default story is known.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "Primary values are understood, but this record is still intentionally gated from one-click apply.",
-      "confidence": "medium",
+      "action_state": "actionable",
+      "gating_reason": "This record is app-ready and can stay one-click actionable.",
+      "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
