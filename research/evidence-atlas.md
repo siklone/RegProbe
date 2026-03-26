@@ -10930,7 +10930,7 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Two AppCompat.admx policy values written by the app under HKLM\Software\Policies\Microsoft\Windows\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.
+**Summary:** Two AppCompat.admx policy values written by the app under HKLM\Software\Policies\Microsoft\Windows\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, then reg.exe reads both values back successfully. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.
 
 **Current implementation**
 
@@ -10978,13 +10978,13 @@ Current writes
 | Path | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` |
 | Value name | `SbEnable` |
 | Value type | `REG_DWORD` |
-| Notes | Windows default is missing (key absent). SbEnable is the cleanest proven value in this record. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 when AppCompatTurnOffSwitchBack policy is enabled via LGPO + gpupdate. Numeric direction is fully proven. Standalone publication guidance now lives in privacy.disable-switchback.policy; this target remains here to document the current combined app bundle. |
+| Notes | Windows default is missing (key absent). SbEnable is the cleanest proven value in this record. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes SbEnable=REG_DWORD 0x0 and reg.exe reads it back. Numeric direction is fully proven. Standalone publication guidance now lives in privacy.disable-switchback.policy; this target remains here to document the current combined app bundle. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | — | Not configured | Windows keeps the normal SwitchBack behavior. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp |
 | `value` | `1` | SwitchBack enabled (policy explicit) | disabledValue in AppCompat.admx. SwitchBack runs normally. Equivalent to missing. | local-appcompat-admx |
-| `value` | `0` | Turn off SwitchBack | enabledValue in AppCompat.admx. SwitchBack is disabled. This is the value the app writes. Numeric direction is explicitly confirmed via the ADMX enabledValue block. Procmon confirmed: svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 during gpupdate /force on 2026-03-13 (Windows 11 Pro 10.0.26200.8037). | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp, app-privacy-provider, procmon-appcompat-engine |
+| `value` | `0` | Turn off SwitchBack | enabledValue in AppCompat.admx. SwitchBack is disabled. This is the value the app writes. Numeric direction is explicitly confirmed via the ADMX enabledValue block. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes SbEnable=REG_DWORD 0x0 and reg.exe reads it back. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp, app-privacy-provider, procmon-appcompat-engine |
 
 #### `disable-engine`
 
@@ -10994,12 +10994,12 @@ Current writes
 | Path | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` |
 | Value name | `DisableEngine` |
 | Value type | `REG_DWORD` |
-| Notes | Windows default is missing (key absent). Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableEngine=REG_DWORD 0x1 when AppCompatTurnOffEngine policy is enabled via LGPO + gpupdate. Numeric direction proven; explicit ADMX enabledValue block absence is no longer a blocker. |
+| Notes | Windows default is missing (key absent). VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableEngine=REG_DWORD 0x1 and reg.exe reads it back. Numeric direction proven; explicit ADMX enabledValue block absence is no longer a blocker. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | — | Not configured | Windows keeps the normal Application Compatibility Engine behavior. The engine checks a compatibility database each time an application starts and may apply run-time fixes, compatibility shims, or display Application Help messages for known incompatible applications. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp |
-| `value` | `1` | Turn off Application Compatibility Engine | Intended to disable the Application Compatibility Engine. Value=1 is consistent with AppCompat.admx policy behavior, and Procmon confirmed svchost.exe (gpsvc) writes DisableEngine=REG_DWORD 0x1 during gpupdate /force on 2026-03-13 (Windows 11 Pro 10.0.26200.8037). Microsoft ADML explicitly states this may cause BSOD if old antivirus software is installed. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp, app-privacy-provider, procmon-appcompat-engine |
+| `value` | `1` | Turn off Application Compatibility Engine | Intended to disable the Application Compatibility Engine. Value=1 is consistent with AppCompat.admx policy behavior, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableEngine=REG_DWORD 0x1 and reg.exe reads it back. Microsoft ADML explicitly states this may cause BSOD if old antivirus software is installed. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp, app-privacy-provider, procmon-appcompat-engine |
 
 **Windows defaults**
 
@@ -11022,7 +11022,7 @@ Current writes
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro) | `high` | value, behavior, version-scope |
+| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-procmon.pml and [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-filtered.hits.csv | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -11031,7 +11031,7 @@ Current writes
 | Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | Exact quote / path | AppCompat.admx: `<policy name="AppCompatTurnOffSwitchBack" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="SbEnable">` with `<enabledValue><decimal value="0" /></enabledValue>` and `<disabledValue><decimal value="1" /></disabledValue>`; AppCompat.admx: `<policy name="AppCompatTurnOffEngine" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="DisableEngine">`; AppCompat.adml: `If you enable this policy setting, Switchback will be turned off.` and `If you enable this policy setting, the Application Compatibility Engine will be turned off.` |
 | Key found on page | `True` |
-| Notes | Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. Procmon then confirmed gpsvc writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037. |
+| Notes | Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. VM Procmon capture on 2026-03-26 in Win25H2Clean then confirmed direct writes and read-backs for SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1. |
 
 **Decision**
 
@@ -11042,7 +11042,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Both values are now proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and Procmon capture showing gpsvc writes DisableEngine=1 and SbEnable=0 under HKLM\Software\Policies\Microsoft\Windows\AppCompat on Windows 11 Pro 10.0.26200.8037. Proof is no longer the blocker; risk is. Microsoft ADML explicitly warns that disabling the Application Compatibility Engine can cause BSOD when old antivirus or other security software is installed, which keeps apply_allowed=false for this combined bundle. |
+| Why | Both values are now proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and VM Procmon capture showing direct writes and read-backs for DisableEngine=1 and SbEnable=0 under HKLM\Software\Policies\Microsoft\Windows\AppCompat in Win25H2Clean. Proof is no longer the blocker; risk is. Microsoft ADML explicitly warns that disabling the Application Compatibility Engine can cause BSOD when old antivirus or other security software is installed, which keeps apply_allowed=false for this combined bundle. |
 
 ---
 
@@ -11060,7 +11060,7 @@ Current writes
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Four AppDeviceInventory policy values written by the app under HKLM\Software\Policies\Microsoft\Windows\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes all four values under HKLM\Software\Policies\Microsoft\Windows\AppCompat on Windows 11 Pro 10.0.26200.8037. Derived from the former mixed application-compatibility policy record on 2026-03-13.
+**Summary:** Four AppDeviceInventory policy values written by the app under HKLM\Software\Policies\Microsoft\Windows\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes all four values under HKLM\Software\Policies\Microsoft\Windows\AppCompat and reg.exe reads them back successfully. Derived from the former mixed application-compatibility policy record on 2026-03-13.
 
 **Current implementation**
 
@@ -11110,13 +11110,13 @@ Current writes
 | Path | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` |
 | Value name | `DisableAPISamping` |
 | Value type | `REG_DWORD` |
-| Notes | Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableAPISamping=REG_DWORD 0x1 during gpupdate /force. |
+| Notes | Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableAPISamping=REG_DWORD 0x1 and reg.exe reads it back. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | — | Not configured | Windows keeps the normal API sampling behavior. The system collects data about API usage patterns. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `0` | API sampling enabled (policy explicit) | disabledValue in AppDeviceInventory.admx. API sampling runs normally. Equivalent to missing. | local-appdeviceinventory-admx, csp-appdeviceinventory |
-| `value` | `1` | Turn off API sampling | enabledValue in AppDeviceInventory.admx. Stops collection of API usage data. Confirmed app write. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableAPISamping=REG_DWORD 0x1 during gpupdate /force. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
+| `value` | `1` | Turn off API sampling | enabledValue in AppDeviceInventory.admx. Stops collection of API usage data. Confirmed app write. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableAPISamping=REG_DWORD 0x1 and reg.exe reads it back. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
 
 #### `disable-application-footprint`
 
@@ -11126,13 +11126,13 @@ Current writes
 | Path | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` |
 | Value name | `DisableApplicationFootprint` |
 | Value type | `REG_DWORD` |
-| Notes | Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableApplicationFootprint=REG_DWORD 0x1 during gpupdate /force. |
+| Notes | Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableApplicationFootprint=REG_DWORD 0x1 and reg.exe reads it back. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | — | Not configured | Windows keeps the normal application footprint collection behavior. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `0` | Application footprint collection enabled (policy explicit) | disabledValue in AppDeviceInventory.admx. Collection runs normally. Equivalent to missing. | local-appdeviceinventory-admx, csp-appdeviceinventory |
-| `value` | `1` | Turn off application footprint collection | enabledValue in AppDeviceInventory.admx. Stops collection of application footprint data. Confirmed app write. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableApplicationFootprint=REG_DWORD 0x1 during gpupdate /force. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
+| `value` | `1` | Turn off application footprint collection | enabledValue in AppDeviceInventory.admx. Stops collection of application footprint data. Confirmed app write. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableApplicationFootprint=REG_DWORD 0x1 and reg.exe reads it back. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
 
 #### `disable-install-tracing`
 
@@ -11142,13 +11142,13 @@ Current writes
 | Path | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` |
 | Value name | `DisableInstallTracing` |
 | Value type | `REG_DWORD` |
-| Notes | Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableInstallTracing=REG_DWORD 0x1 during gpupdate /force. |
+| Notes | Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableInstallTracing=REG_DWORD 0x1 and reg.exe reads it back. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | — | Not configured | Windows keeps the normal install tracing behavior. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `0` | Install tracing enabled (policy explicit) | disabledValue in AppDeviceInventory.admx. Tracing runs normally. Equivalent to missing. | local-appdeviceinventory-admx, csp-appdeviceinventory |
-| `value` | `1` | Turn off install tracing | enabledValue in AppDeviceInventory.admx. Stops tracing of application install events. Confirmed app write. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableInstallTracing=REG_DWORD 0x1 during gpupdate /force. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
+| `value` | `1` | Turn off install tracing | enabledValue in AppDeviceInventory.admx. Stops tracing of application install events. Confirmed app write. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableInstallTracing=REG_DWORD 0x1 and reg.exe reads it back. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
 
 #### `disable-win32-app-backup`
 
@@ -11158,13 +11158,13 @@ Current writes
 | Path | `HKLM\Software\Policies\Microsoft\Windows\AppCompat` |
 | Value name | `DisableWin32AppBackup` |
 | Value type | `REG_DWORD` |
-| Notes | Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableWin32AppBackup=REG_DWORD 0x1 during gpupdate /force. |
+| Notes | Windows default is missing (key absent). Explicit enabledValue=1 confirmed in AppDeviceInventory.admx and the CSP page. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableWin32AppBackup=REG_DWORD 0x1 and reg.exe reads it back. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | — | Not configured | Windows keeps the normal Win32 app backup behavior. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `0` | Win32 app backup enabled (policy explicit) | disabledValue in AppDeviceInventory.admx. Backup runs normally. Equivalent to missing. | local-appdeviceinventory-admx, csp-appdeviceinventory |
-| `value` | `1` | Turn off Win32 app backup | enabledValue in AppDeviceInventory.admx. Stops Win32 application backup collection. Confirmed app write. Procmon confirmed 2026-03-13 on Win11 Pro 10.0.26200.8037: svchost.exe (gpsvc) writes DisableWin32AppBackup=REG_DWORD 0x1 during gpupdate /force. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
+| `value` | `1` | Turn off Win32 app backup | enabledValue in AppDeviceInventory.admx. Stops Win32 application backup collection. Confirmed app write. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableWin32AppBackup=REG_DWORD 0x1 and reg.exe reads it back. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
 
 **Windows defaults**
 
@@ -11186,7 +11186,7 @@ Current writes
 | `local-appdeviceinventory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppDeviceInventory.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) | `high` | path, value, allowed-values, version-scope |
 | `csp-appdeviceinventory` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - AppDeviceInventory | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - four AppDeviceInventory policies | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro, OsVersion: 10.0.26200) | `high` | value, behavior, version-scope |
+| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - four AppDeviceInventory policies | [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy](evidence-files/procmon/privacy.disable-appdeviceinventory.policy)/appdeviceinventory-policy-procmon.pml and [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy](evidence-files/procmon/privacy.disable-appdeviceinventory.policy)/appdeviceinventory-policy-procmon.filtered.hits.csv | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -11195,7 +11195,7 @@ Current writes
 | Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) |
 | Exact quote / path | AppDeviceInventory.admx: `<policy name="TurnOffInstallTracing" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="DisableInstallTracing">`, `<policy name="TurnOffAPISamping" ... valueName="DisableAPISamping">`, `<policy name="TurnOffApplicationFootprint" ... valueName="DisableApplicationFootprint">`, and `<policy name="TurnOffWin32AppBackup" ... valueName="DisableWin32AppBackup">`, each with `<enabledValue><decimal value="1" /></enabledValue>` and `<disabledValue><decimal value="0" /></disabledValue>` and `supportedOn ref="windows:SUPPORTED_Windows_11_0_24H2"`. |
 | Key found on page | `True` |
-| Notes | Local official AppDeviceInventory.admx documents all four values under HKLM/Software/Policies/Microsoft/Windows/AppCompat with explicit enabledValue=1 and disabledValue=0, and Procmon confirmed gpsvc writes all four values on Windows 11 Pro 10.0.26200.8037. |
+| Notes | Local official AppDeviceInventory.admx documents all four values under HKLM/Software/Policies/Microsoft/Windows/AppCompat with explicit enabledValue=1 and disabledValue=0, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed direct writes and read-backs for all four values. |
 
 **Decision**
 
@@ -11206,7 +11206,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | All four values are now confirmed in three layers: local AppDeviceInventory.admx (explicit enabledValue=1), the Microsoft Learn CSP page, and Procmon capture showing gpsvc writes all four values under HKLM\Software\Policies\Microsoft\Windows\AppCompat on Windows 11 Pro 10.0.26200.8037. Risk is low because these policies reduce telemetry collection rather than core application compatibility behavior. Pre-24H2 systems may ignore the keys, but that is a scope caveat rather than a safety blocker. |
+| Why | All four values are now confirmed in three layers: local AppDeviceInventory.admx (explicit enabledValue=1), the Microsoft Learn CSP page, and VM Procmon capture showing direct writes and read-backs for all four values under HKLM\Software\Policies\Microsoft\Windows\AppCompat in Win25H2Clean. Risk is low because these policies reduce telemetry collection rather than core application compatibility behavior. Pre-24H2 systems may ignore the keys, but that is a scope caveat rather than a safety blocker. |
 
 ---
 
@@ -15172,7 +15172,7 @@ Current writes
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | — | Not configured | Windows keeps Program Compatibility Assistant turned on. PCA can monitor applications and offer compatibility solutions when problems are detected. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-turn-off-pca-csp |
-| `value` | `1` | Turn off Program Compatibility Assistant | enabledValue in AppCompat.admx. PCA is turned off, so Windows will not present compatibility solutions for detected application issues. Procmon confirmed svchost.exe (gpsvc) writes DisablePCA=REG_DWORD 0x1 during gpupdate /force on Windows 11 Pro 10.0.26200.8037 (2026-03-13). | local-appcompat-admx, local-appcompat-adml, admx-appcompat-turn-off-pca-csp, procmon-disable-pca, app-privacy-provider |
+| `value` | `1` | Turn off Program Compatibility Assistant | enabledValue in AppCompat.admx. PCA is turned off, so Windows will not present compatibility solutions for detected application issues. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisablePCA=REG_DWORD 0x1 and reg.exe reads it back. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-turn-off-pca-csp, procmon-disable-pca, app-privacy-provider |
 | `value` | `0` | PCA enabled (policy explicit) | disabledValue in AppCompat.admx. Equivalent to missing: PCA remains turned on. | local-appcompat-admx, local-appcompat-adml |
 
 **Windows defaults**
@@ -15195,7 +15195,7 @@ Current writes
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects |
 | `admx-appcompat-turn-off-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
-| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - Turn off Program Compatibility Assistant | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | value, behavior, version-scope |
+| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant](evidence-files/procmon/privacy.disable-program-compatibility-assistant)/disable-pca-policy-procmon.pml and [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant](evidence-files/procmon/privacy.disable-program-compatibility-assistant)/disable-pca-policy-procmon.filtered.hits.csv | `high` | value, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -15216,7 +15216,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft Learn explicitly documents DisablePCA under the AppCompat policy CSP, local AppCompat.admx confirms the 1/0 mapping, the app now writes the same value, and Procmon captured gpsvc applying DisablePCA=1 at the expected machine-policy path. |
+| Why | Microsoft Learn explicitly documents DisablePCA under the AppCompat policy CSP, local AppCompat.admx confirms the 1/0 mapping, the app now writes the same value, and VM Procmon capture confirmed a direct write and read-back for DisablePCA=1 at the expected machine-policy path. |
 
 ---
 
@@ -16245,7 +16245,7 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Controls the SwitchBack policy under HKLM\Software\Policies\Microsoft\Windows\AppCompat. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. SbEnable=0 disables this behavior. Extracted from privacy.disable-appcompat-engine.policy on 2026-03-13 because SbEnable is individually proven and does not carry the Microsoft-documented BSOD risk tied to DisableEngine in the parent bundle. AppCompat.admx has explicit enabledValue=0 and disabledValue=1 for SbEnable, the Microsoft Learn CSP page confirms the policy exists, and Procmon confirmed svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 during gpupdate /force on Windows 11 Pro 10.0.26200.8037.
+**Summary:** Controls the SwitchBack policy under HKLM\Software\Policies\Microsoft\Windows\AppCompat. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. SbEnable=0 disables this behavior. Extracted from privacy.disable-appcompat-engine.policy on 2026-03-13 because SbEnable is individually proven and does not carry the Microsoft-documented BSOD risk tied to DisableEngine in the parent bundle. AppCompat.admx has explicit enabledValue=0 and disabledValue=1 for SbEnable, the Microsoft Learn CSP page confirms the policy exists, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes SbEnable=REG_DWORD 0x0 and reg.exe reads it back.
 
 **Current implementation**
 
@@ -16298,7 +16298,7 @@ Current writes
 | --- | --- | --- | --- | --- |
 | `missing` | — | Not configured | Windows keeps the normal SwitchBack behavior. Applications that detect Windows Vista or later can receive compatibility fixes designed for older OS versions. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp |
 | `value` | `1` | SwitchBack enabled (policy explicit) | disabledValue in AppCompat.admx. SwitchBack runs normally. Equivalent to missing. | local-appcompat-admx |
-| `value` | `0` | Turn off SwitchBack | enabledValue in AppCompat.admx. SwitchBack is disabled. Applications that detect Windows Vista or later no longer receive cross-version compatibility fixes. Procmon confirmed svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 during gpupdate /force on Windows 11 Pro 10.0.26200.8037 (2026-03-13). | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp, procmon-switchback, app-privacy-provider |
+| `value` | `0` | Turn off SwitchBack | enabledValue in AppCompat.admx. SwitchBack is disabled. Applications that detect Windows Vista or later no longer receive cross-version compatibility fixes. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes SbEnable=REG_DWORD 0x0 and reg.exe reads it back. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp, procmon-switchback, app-privacy-provider |
 
 **Windows defaults**
 
@@ -16320,7 +16320,7 @@ Current writes
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
-| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | Procmon + LGPO capture - AppCompatTurnOffSwitchBack | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `high` | value, behavior, version-scope |
+| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-procmon.pml and [research/evidence-files/procmon/privacy.disable-switchback.policy](evidence-files/procmon/privacy.disable-switchback.policy)/switchback-only.hits.csv | `high` | value, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -21080,7 +21080,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings) |
-| Exact quote / path | The registry keys are found under the key: `HKL[research/evidence-files/missing/system-consentpromptbehavioradmin-0-elevate-without-prompting.md](evidence-files/missing/system-consentpromptbehavioradmin-0-elevate-without-prompting.md) 5 (Default) = Prompt for consent for non-Windows binaries. `EnableLUA` 0 = Disabled, 1 (Default) = Enabled. `PromptOnSecureDesktop` 0 = Disabled, 1 (Default) = Enabled. |
+| Exact quote / path | Registry path: HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Policies/System. ConsentPromptBehaviorAdmin 0 = Elevate without prompting, 5 = Prompt for consent for non-Windows binaries (default). EnableLUA 0 = Disabled, 1 = Enabled (default). PromptOnSecureDesktop 0 = Disabled, 1 = Enabled (default). |
 | Key found on page | `True` |
 | Notes | The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open. Normalized for the consolidated evidence report. |
 

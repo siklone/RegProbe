@@ -14,7 +14,7 @@
     "casual_explanation": "Program Compatibility Assistant monitors applications and can suggest compatibility solutions when Windows detects install failures, runtime failures, or blocked drivers. This policy turns PCA off.",
     "why_people_change_it": "People turn PCA off when they want fewer compatibility prompts on systems that run only current software. They leave it on when they regularly run older apps or drivers that may need Windows compatibility help.",
     "tradeoffs_overview": "Turning PCA off removes a Windows fallback that can detect application and driver compatibility problems, then offer compatibility-mode or online-help suggestions. On a modern system that runs only current software the practical impact may be low, but the behavior is still different from the default.",
-    "professional_notes": "The official device policy is AppCompatTurnOffProgramCompatibilityAssistant_2 under AppCompat.admx. Microsoft Learn ADMX_AppCompat documents Registry Key Name Software\\Policies\\Microsoft\\Windows\\AppCompat and Registry Value Name DisablePCA for that policy. Local AppCompat.admx maps enabledValue=1 and disabledValue=0, and local AppCompat.adml states that enabling the policy turns PCA off while disabling or not configuring it leaves PCA on. Procmon capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup writes DisablePCA=1 during policy application on Windows 11 Pro 10.0.26200.8037.",
+    "professional_notes": "The official device policy is AppCompatTurnOffProgramCompatibilityAssistant_2 under AppCompat.admx. Microsoft Learn ADMX_AppCompat documents Registry Key Name Software\\Policies\\Microsoft\\Windows\\AppCompat and Registry Value Name DisablePCA for that policy. Local AppCompat.admx maps enabledValue=1 and disabledValue=0, and local AppCompat.adml states that enabling the policy turns PCA off while disabling or not configuring it leaves PCA on. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisablePCA=1 and reg.exe reads it back.",
     "targets": [
       {
         "target_id": "disable-pca",
@@ -38,7 +38,7 @@
             "state_kind": "value",
             "value": 1,
             "label": "Turn off Program Compatibility Assistant",
-            "meaning": "enabledValue in AppCompat.admx. PCA is turned off, so Windows will not present compatibility solutions for detected application issues. Procmon confirmed svchost.exe (gpsvc) writes DisablePCA=REG_DWORD 0x1 during gpupdate /force on Windows 11 Pro 10.0.26200.8037 (2026-03-13).",
+            "meaning": "enabledValue in AppCompat.admx. PCA is turned off, so Windows will not present compatibility solutions for detected application issues. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisablePCA=REG_DWORD 0x1 and reg.exe reads it back.",
             "evidence_ids": [
               "local-appcompat-admx",
               "local-appcompat-adml",
@@ -202,9 +202,9 @@
     {
       "evidence_id": "procmon-disable-pca",
       "kind": "procmon-trace",
-      "title": "Procmon + LGPO capture - Turn off Program Compatibility Assistant",
-      "location": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037",
-      "summary": "LGPO.exe applied DisablePCA=1 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM/Software/Policies/Microsoft/Windows/AppCompat/DisablePCA=REG_DWORD 0x1 during gpupdate /force. reg query confirmed the value at the expected path. Rollback removed Registry.pol and gpt.ini, deleted DisablePCA, and gpupdate /force returned the key to its baseline state. Capture file: research/evidence-files/missing/disable-pca-capture-20260313-153643-pml.md",
+      "title": "VM Procmon capture - Turn off Program Compatibility Assistant",
+      "location": "research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv",
+      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw files are checked in under research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/.",
       "supports": [
         "value",
         "behavior",
@@ -233,7 +233,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft Learn explicitly documents DisablePCA under the AppCompat policy CSP, local AppCompat.admx confirms the 1/0 mapping, the app now writes the same value, and Procmon captured gpsvc applying DisablePCA=1 at the expected machine-policy path.",
+    "why": "Microsoft Learn explicitly documents DisablePCA under the AppCompat policy CSP, local AppCompat.admx confirms the 1/0 mapping, the app now writes the same value, and VM Procmon capture confirmed a direct write and read-back for DisablePCA=1 at the expected machine-policy path.",
     "blocking_issues": []
   },
   "open_questions": [],

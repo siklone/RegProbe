@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T09:17:56.373249Z",
+  "generated_utc": "2026-03-26T10:03:47.540744Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
@@ -7415,7 +7415,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. Procmon then confirmed gpsvc writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037.",
+        "summary": "Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. VM Procmon capture on 2026-03-26 in Win25H2Clean then confirmed direct writes and read-backs for SbEnable=REG_DWORD 0x0 and DisableEngine=R...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -7440,15 +7440,15 @@
         ]
       },
       "runtime_proof": {
-        "summary": "LGPO.exe applied six AppCompat policy values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM/Software/Policies/Microsoft/Windows/AppCompat during gpupdate /force. RegSetValue confirmed DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0...",
+        "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, and reg.exe queried both values successfully. The probe res...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
           {
-            "title": "Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack",
-            "url": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro)",
+            "title": "VM Procmon capture - AppCompat policy path bundle",
+            "url": "research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
             "kind": "procmon-trace",
-            "summary": "LGPO.exe applied six AppCompat policy values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM/Software/Policies/Microsoft/Windows/AppCompat during gpupdate /f..."
+            "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbE..."
           }
         ]
       },
@@ -7476,7 +7476,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Local official AppDeviceInventory.admx documents all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat with explicit enabledValue=1 and disabledValue=0, and Procmon confirmed gpsvc writes all four values on Windows 11 Pro 10.0.26200.8037.",
+        "summary": "Local official AppDeviceInventory.admx documents all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat with explicit enabledValue=1 and disabledValue=0, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed direct writes and read...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -7501,15 +7501,15 @@
         ]
       },
       "runtime_proof": {
-        "summary": "LGPO.exe applied six AppCompat policy values including all four AppDeviceInventory values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM/Software/Policies/Microsoft/Windows/AppCompat during gpupdate /force. RegSetValue confirmed Disable...",
+        "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisableAPISamping=1, DisableApplicationFootprint=1, DisableInstallTracing=1, and DisableWin32AppBackup=1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat, and reg.exe...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
           {
-            "title": "Procmon + LGPO capture - four AppDeviceInventory policies",
-            "url": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro, OsVersion: 10.0.26200)",
+            "title": "VM Procmon capture - four AppDeviceInventory policies",
+            "url": "research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml and research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv",
             "kind": "procmon-trace",
-            "summary": "LGPO.exe applied six AppCompat policy values including all four AppDeviceInventory values. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing to HKLM/Software/Policies/M..."
+            "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisableAPISamping=1, DisableApplicationFootprint=1, DisableInstallTracing=1, and DisableWin32Ap..."
           }
         ]
       },
@@ -10548,15 +10548,15 @@
         ]
       },
       "runtime_proof": {
-        "summary": "LGPO.exe applied DisablePCA=1 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM/Software/Policies/Microsoft/Windows/AppCompat/DisablePCA=REG_DWORD 0x1 during gpupdate /force. reg query confirmed the value at the expected path...",
+        "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after ca...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
           {
-            "title": "Procmon + LGPO capture - Turn off Program Compatibility Assistant",
-            "url": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037",
+            "title": "VM Procmon capture - Turn off Program Compatibility Assistant",
+            "url": "research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv",
             "kind": "procmon-trace",
-            "summary": "LGPO.exe applied DisablePCA=1 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM/Software/Policies/Microsoft/Windows/AppCompat/DisablePCA=REG_DWOR..."
+            "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe r..."
           }
         ]
       },
@@ -11492,15 +11492,15 @@
         ]
       },
       "runtime_proof": {
-        "summary": "LGPO.exe applied SbEnable=0 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM/Software/Policies/Microsoft/Windows/AppCompat/SbEnable=REG_DWORD 0x0 during gpupdate /force. reg query confirmed the value at the expected path. Ro...",
+        "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capt...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
           {
-            "title": "Procmon + LGPO capture - AppCompatTurnOffSwitchBack",
-            "url": "Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037",
+            "title": "VM Procmon capture - AppCompatTurnOffSwitchBack",
+            "url": "research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and research/evidence-files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv",
             "kind": "procmon-trace",
-            "summary": "LGPO.exe applied SbEnable=0 via local policy. Procmon captured svchost.exe -k GPSvcGroup (gpsvc) writing HKLM/Software/Policies/Microsoft/Windows/AppCompat/SbEnable=REG_DWORD 0x..."
+            "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe rea..."
           }
         ]
       },
@@ -14513,7 +14513,7 @@
             "title": "Validation proof source",
             "url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings",
             "kind": "validation-proof",
-            "summary": "The registry keys are found under the key: `HKLresearch/evidence-files/missing/system-consentpromptbehavioradmin-0-elevate-without-prompting.md 5 (Default) = Prompt for consent..."
+            "summary": "Registry path: HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. ConsentPromptBehaviorAdmin 0 = Elevate without prompting, 5 = Prompt for consent for non-Windows b..."
           },
           {
             "title": "Microsoft Learn: User Account Control registry key entries",

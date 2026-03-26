@@ -162,8 +162,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | `e463ad48f91121554799409cdf0585dceeee35822a616099c5ff8c39ce60702c` | `616bcf8e8cc6752f6907de06ccc9ffb6e6ff9ca9857f96ba9e1b3df124284c40` | 3 |
 | `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | `1efe1013b6c817e33bc645268b1765451d2722f3ba382ffc2a9b1c1e20f29b5f` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
 | `privacy.disable-app-suggestions` | validated | Class A | `research/records/privacy.disable-app-suggestions.review.json` | `ffac331f0d990ede799a24304650b26efbd5c8ab101c07dad6d2a8c765212205` | `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4` | 5 |
-| `privacy.disable-appcompat-engine.policy` | validated | Class B | `research/records/privacy.disable-appcompat-engine.policy.review.json` | `7ccdfec9afd2832ed4ad2d6b3f00d44baf875040c427eb3a098f3d5c5cdc1461` | `9c403b09a339b4e8478d535ba2872f823028a15c6b17effbe2e03175e7aee63e` | 5 |
-| `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | `8a11d08d95c95b169b95c8e9d9bc93ce17a5099a66bd79a23ab6bdca0aef4472` | `80c14b15e3928f4dd42670ed4f8fac69698131f6ae543c825e6c53862de714a1` | 4 |
+| `privacy.disable-appcompat-engine.policy` | validated | Class B | `research/records/privacy.disable-appcompat-engine.policy.review.json` | `6928668c4b13e5e02a8920130b478cc1a857d24ecb4370b9340e3e51064c95f1` | `7aa16d9c6a04a42d93f09dd4053191f3938e85562bf852e023ebbbb18e185bff` | 5 |
+| `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | `8d8c41141726adeb63f24cc8affffcd7afc5fc41e9eb5cb76066b1e014948c3d` | `88142b31c854efab65a73c0f03111501066bfde03bf7b3f3c3c52c403fabc819` | 4 |
 | `privacy.disable-application-telemetry` | validated | Class A | `research/records/privacy.disable-application-telemetry.json` | `bec3bc1e09c7689f6dfa2b0a35204758db0d561b2cba609ed1d82b3ae7cd3856` | `85dc7bfe56746eaed4e94a9d0df5e957b37f942a481cc18c4b3d0733e0f803d7` | 5 |
 | `privacy.disable-background-apps` | validated | Class A | `research/records/privacy.disable-background-apps.json` | `181ceba6c77d0a80dab00e4dd1453f57fd40efa41c9dd3ced96d3872106768d1` | `dd5d4d3caa0f00c8e373742b3bc29f08d9b20d01e1abba0d8791175f7e8bf18a` | 3 |
 | `privacy.disable-biometrics` | validated | Class A | `research/records/privacy.disable-biometrics.json` | `08f9b2f91f6452827706476303544b6c913520c42316b6e94f978298e409e8c2` | `e988cf7702b8c5e55f924eb7d1a415172790f1361231aeb2194958371db3811e` | 3 |
@@ -196,7 +196,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-online-tips` | validated | Class A | `research/records/privacy.disable-online-tips.json` | `1d415b8d0b13447cf3191d1dcf7039f6a8f8eb826e46c86bc70d22553a9722b4` | `cb84c06d9bced1fb1e375c637470ea9fdbd80535128a626b0a6b790a7f3f8c9f` | 5 |
 | `privacy.disable-pca-diagnostics.policy` | validated | Class A | `research/records/privacy.disable-pca-diagnostics.policy.review.json` | `b6d8121ffa1270771ae910f7003808814be1f4029614991ff61329c549778d97` | `d5cf92b6f03198bb93de519ac64f62fc78a33fa0a4456b7a23b3597cef8fc62b` | 4 |
 | `privacy.disable-phone-linking` | validated | Class A | `research/records/privacy.disable-phone-linking.json` | `f87e70f4ffae664532612f53da4696c42b28e40ab05761adf1b4074c8c484552` | `2e18031aa09f851f8105b39a1552f4c7f5a09863a7b3e595768d45777ee22a6a` | 4 |
-| `privacy.disable-program-compatibility-assistant` | validated | Class A | `research/records/privacy.disable-program-compatibility-assistant.review.json` | `7e6b41f28bd82c163f178392ef9e710f9e7d6a7c39c6ca184b8b9790566f64db` | `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d` | 5 |
+| `privacy.disable-program-compatibility-assistant` | validated | Class A | `research/records/privacy.disable-program-compatibility-assistant.review.json` | `906c4868ba603370bc0a2c7a47de421619ddb96a24133c8051dd47ff25b9007c` | `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d` | 5 |
 | `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | `7eb6fcfd4853a8c183c966d3a5fcf32c0269644b21643b6914b5774e782767a0` | `a524f41ffc51f280c89ef008dcfb7ecaed335aea070491dea4bcfb7b7d073c98` | 6 |
 | `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | `6cd8a3adb344bb2f15a1319f5dd8eba67e6ab1a47995de4546d60d9fec0cacc9` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 6 |
 | `privacy.disable-rsop-logging` | validated | Class A | `research/records/privacy.disable-rsop-logging.json` | `1617d0c91f169c155b5ecbedb5e85c9e963604c245c7e6e1b1229899310c8dc8` | `d48956c6cb1b63107bb774f645e6c48be3f53b8bf056c98beb45afa47bd22527` | 4 |
@@ -205,7 +205,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | `698b396a0b686743f0163f07c0c930538e69876cc8811ed373c4f8b39b044908` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
 | `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | `6d034fdca543ddc3db704f6ff58cd0820e143a47701117ab610e942160b2389e` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 5 |
 | `privacy.disable-suggestions.policy` | validated | Class A | `research/records/privacy.disable-suggestions.policy.review.json` | `58a9068cb1309984813d2c397e28cea09d958e59d5d64f40758ff974b5f6160e` | `506f9c6d31286afc79518ac95dbda8b6de1d0de620610c549cefd7afc2bbe738` | 6 |
-| `privacy.disable-switchback.policy` | validated | Class A | `research/records/privacy.disable-switchback.policy.review.json` | `6fb506ec456f2e36bf6d19009fc7a50c34a65a62a1b1d5b5742f73b41daf72aa` | `e0a6ff5f261f5eafcf85a65e3e4af5b37c00d479b7b5ea7385a6142b3d768da8` | 5 |
+| `privacy.disable-switchback.policy` | validated | Class A | `research/records/privacy.disable-switchback.policy.review.json` | `de91093a1f503e992ba8cd57807f5f10276161aa70e92095eeaaebfdc26df5ae` | `e0a6ff5f261f5eafcf85a65e3e4af5b37c00d479b7b5ea7385a6142b3d768da8` | 5 |
 | `privacy.disable-telemetry-change-notifications` | validated | Class A | `research/records/privacy.disable-telemetry-change-notifications.json` | `ef34982ab3334f2316873a7415795f0ddda3751883e579d5d95b18bc9c50e377` | `5cc5a54d2c85bbeeab886c65028a60c073773113fb570689d558e48a5a538f10` | 4 |
 | `privacy.disable-telemetry-optin-ui` | validated | Class A | `research/records/privacy.disable-telemetry-optin-ui.json` | `65d750ee753f1bacda64f84bb1fd152eceaf3b779ee5a9aa16e1fadd160279d9` | `210cd5844db55c76c775be148dd32f0160c6314ebf91a4284f15f3c29c1269fd` | 6 |
 | `privacy.disable-wer` | validated | Class A | `research/records/privacy.disable-wer.json` | `003e70d4046a18a5d8dc494b386a7c05d6ab72ef3e54ce6e161c764435bb24a7` | `a31884e5f86b4be28f4c1dae9cb4c1514f72e86cf0ec79de95f54641f80129e2` | 6 |
@@ -242,7 +242,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.powershell-unrestricted` | validated | Class B | `research/records/security.powershell-unrestricted.review.json` | `5cbc0d6bc316568adcfa4779b8df87c09760c7d517c4a88dca54ed9e92dde656` | `2c26a68091bbcc9aa57978a8c19af6e9e1a985b2c5d083045123c9f8e49ae53a` | 3 |
 | `security.threat-file-hash-logging` | validated | Class B | `research/records/security.threat-file-hash-logging.review.json` | `eed04bf7c5d88f3994831bd5f11b7fc7f1ad7f04245dec24eac25155aa5af294` | `0bfa1bfb7b8ebea20fb5aaef5ccd9a4b7c79dcb02e0647a2c4a83dbf7886ed76` | 16 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | `d29fcf1f83a623942587f349fad2e7cacbb124a22103b5b7f99fba74309c1b91` | `44752f8965aec2b7baa5dd37b9f915cce357ce588ffd3c7b626f7a915e95ace2` | 5 |
-| `security.uac-never-notify` | validated | Class B | `research/records/security.uac-never-notify.json` | `6c6b267df95ad393b91d2c8199430a9127e7cd5e617f8ba8deb131aadbc95a05` | `69977a7c0895280fc48e7817429a9a481a3dca64bd25cac31a1e4b894cbce4e9` | 4 |
+| `security.uac-never-notify` | validated | Class B | `research/records/security.uac-never-notify.json` | `6c6b267df95ad393b91d2c8199430a9127e7cd5e617f8ba8deb131aadbc95a05` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
 | `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | `da81a2e755ea8e548f47ce311e4f9bac89bec49cd2b7f05bcc641afd0d7c11cd` | `bab059a1ae7f373e71967dd1a49732b6a6ae52c003fa38684fd42fe40c947519` | 4 |
 | `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | `e54cdf74149765274efbf6e06ea6b80890422e67bc7d81075c36a84aa2b3ed37` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
 | `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | `7072c24bfb8388dd51b073011b546ac4ae6d065e0cea7b07ee2c1fecc8cc1ff9` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 2 |
@@ -4297,10 +4297,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/privacy.disable-appcompat-engine.policy.review.json`
-- Source SHA256: `7ccdfec9afd2832ed4ad2d6b3f00d44baf875040c427eb3a098f3d5c5cdc1461`
-- Proof SHA256: `9c403b09a339b4e8478d535ba2872f823028a15c6b17effbe2e03175e7aee63e`
+- Source SHA256: `6928668c4b13e5e02a8920130b478cc1a857d24ecb4370b9340e3e51064c95f1`
+- Proof SHA256: `7aa16d9c6a04a42d93f09dd4053191f3938e85562bf852e023ebbbb18e185bff`
 
-**Summary:** Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.
+**Summary:** Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, then reg.exe reads both values back successfully. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.
 
 **Evidence**
 
@@ -4310,7 +4310,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `procmon-appcompat-engine` | `procmon-trace` | Procmon + LGPO capture - AppCompatTurnOffEngine and AppCompatTurnOffSwitchBack | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro) |
+| `procmon-appcompat-engine` | `procmon-trace` | VM Procmon capture - AppCompat policy path bundle | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-procmon.pml and [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-filtered.hits.csv |
 
 **Validation proof**
 
@@ -4318,7 +4318,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | Exact quote / path | AppCompat.admx: `<policy name="AppCompatTurnOffSwitchBack" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="SbEnable">` with `<enabledValue><decimal value="0" /></enabledValue>` and `<disabledValue><decimal value="1" /></disabledValue>`; AppCompat.admx: `<policy name="AppCompatTurnOffEngine" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="DisableEngine">`; AppCompat.adml: `If you enable this policy setting, Switchback will be turned off.` and `If you enable this policy setting, the Application Compatibility Engine will be turned off.` |
-| Notes | Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. Procmon then confirmed gpsvc writes SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1 on Windows 11 Pro 10.0.26200.8037. |
+| Notes | Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. VM Procmon capture on 2026-03-26 in Win25H2Clean then confirmed direct writes and read-backs for SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1. |
 
 ---
 
@@ -4327,10 +4327,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-appdeviceinventory.policy.review.json`
-- Source SHA256: `8a11d08d95c95b169b95c8e9d9bc93ce17a5099a66bd79a23ab6bdca0aef4472`
-- Proof SHA256: `80c14b15e3928f4dd42670ed4f8fac69698131f6ae543c825e6c53862de714a1`
+- Source SHA256: `8d8c41141726adeb63f24cc8affffcd7afc5fc41e9eb5cb76066b1e014948c3d`
+- Proof SHA256: `88142b31c854efab65a73c0f03111501066bfde03bf7b3f3c3c52c403fabc819`
 
-**Summary:** Four AppDeviceInventory policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. Procmon + LGPO capture on 2026-03-13 confirmed svchost.exe -k GPSvcGroup (gpsvc) writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat on Windows 11 Pro 10.0.26200.8037. Derived from the former mixed application-compatibility policy record on 2026-03-13.
+**Summary:** Four AppDeviceInventory policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. All four come from the same policy family (AppDeviceInventory.admx), share the same registry root, and have explicit enabledValue=1 / disabledValue=0 blocks in the local ADMX. Microsoft Learn CSP page (Policy CSP - AppDeviceInventory) confirms these policies exist. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat and reg.exe reads them back successfully. Derived from the former mixed application-compatibility policy record on 2026-03-13.
 
 **Evidence**
 
@@ -4339,7 +4339,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appdeviceinventory-admx` | `official-doc` | Local Microsoft AppDeviceInventory.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) |
 | `csp-appdeviceinventory` | `policy-csp` | Policy CSP - AppDeviceInventory | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `procmon-appdeviceinventory` | `procmon-trace` | Procmon + LGPO capture - four AppDeviceInventory policies | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 (OsName: Microsoft Windows 11 Pro, OsVersion: 10.0.26200) |
+| `procmon-appdeviceinventory` | `procmon-trace` | VM Procmon capture - four AppDeviceInventory policies | [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy](evidence-files/procmon/privacy.disable-appdeviceinventory.policy)/appdeviceinventory-policy-procmon.pml and [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy](evidence-files/procmon/privacy.disable-appdeviceinventory.policy)/appdeviceinventory-policy-procmon.filtered.hits.csv |
 
 **Validation proof**
 
@@ -4347,7 +4347,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) |
 | Exact quote / path | AppDeviceInventory.admx: `<policy name="TurnOffInstallTracing" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="DisableInstallTracing">`, `<policy name="TurnOffAPISamping" ... valueName="DisableAPISamping">`, `<policy name="TurnOffApplicationFootprint" ... valueName="DisableApplicationFootprint">`, and `<policy name="TurnOffWin32AppBackup" ... valueName="DisableWin32AppBackup">`, each with `<enabledValue><decimal value="1" /></enabledValue>` and `<disabledValue><decimal value="0" /></disabledValue>` and `supportedOn ref="windows:SUPPORTED_Windows_11_0_24H2"`. |
-| Notes | Local official AppDeviceInventory.admx documents all four values under HKLM/Software/Policies/Microsoft/Windows/AppCompat with explicit enabledValue=1 and disabledValue=0, and Procmon confirmed gpsvc writes all four values on Windows 11 Pro 10.0.26200.8037. |
+| Notes | Local official AppDeviceInventory.admx documents all four values under HKLM/Software/Policies/Microsoft/Windows/AppCompat with explicit enabledValue=1 and disabledValue=0, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed direct writes and read-backs for all four values. |
 
 ---
 
@@ -5294,7 +5294,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-program-compatibility-assistant.review.json`
-- Source SHA256: `7e6b41f28bd82c163f178392ef9e710f9e7d6a7c39c6ca184b8b9790566f64db`
+- Source SHA256: `906c4868ba603370bc0a2c7a47de421619ddb96a24133c8051dd47ff25b9007c`
 - Proof SHA256: `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d`
 
 **Summary:** Device policy for turning Program Compatibility Assistant (PCA) off. The correct registry value is DisablePCA under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat, documented by Microsoft Learn ADMX_AppCompat and local AppCompat.admx. The app implementation was corrected on 2026-03-13 to use DisablePCA=1 instead of the previously mismatched DisablePcaUI diagnostics policy, and Procmon confirmed the runtime write.
@@ -5306,7 +5306,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-turn-off-pca-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
-| `procmon-disable-pca` | `procmon-trace` | Procmon + LGPO capture - Turn off Program Compatibility Assistant | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 |
+| `procmon-disable-pca` | `procmon-trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant](evidence-files/procmon/privacy.disable-program-compatibility-assistant)/disable-pca-policy-procmon.pml and [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant](evidence-files/procmon/privacy.disable-program-compatibility-assistant)/disable-pca-policy-procmon.filtered.hits.csv |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 
 **Validation proof**
@@ -5567,10 +5567,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-switchback.policy.review.json`
-- Source SHA256: `6fb506ec456f2e36bf6d19009fc7a50c34a65a62a1b1d5b5742f73b41daf72aa`
+- Source SHA256: `de91093a1f503e992ba8cd57807f5f10276161aa70e92095eeaaebfdc26df5ae`
 - Proof SHA256: `e0a6ff5f261f5eafcf85a65e3e4af5b37c00d479b7b5ea7385a6142b3d768da8`
 
-**Summary:** Controls the SwitchBack policy under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. SbEnable=0 disables this behavior. Extracted from privacy.disable-appcompat-engine.policy on 2026-03-13 because SbEnable is individually proven and does not carry the Microsoft-documented BSOD risk tied to DisableEngine in the parent bundle. AppCompat.admx has explicit enabledValue=0 and disabledValue=1 for SbEnable, the Microsoft Learn CSP page confirms the policy exists, and Procmon confirmed svchost.exe (gpsvc) writes SbEnable=REG_DWORD 0x0 during gpupdate /force on Windows 11 Pro 10.0.26200.8037.
+**Summary:** Controls the SwitchBack policy under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. SbEnable=0 disables this behavior. Extracted from privacy.disable-appcompat-engine.policy on 2026-03-13 because SbEnable is individually proven and does not carry the Microsoft-documented BSOD risk tied to DisableEngine in the parent bundle. AppCompat.admx has explicit enabledValue=0 and disabledValue=1 for SbEnable, the Microsoft Learn CSP page confirms the policy exists, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes SbEnable=REG_DWORD 0x0 and reg.exe reads it back.
 
 **Evidence**
 
@@ -5579,7 +5579,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
-| `procmon-switchback` | `procmon-trace` | Procmon + LGPO capture - AppCompatTurnOffSwitchBack | Local capture - 2026-03-13, Windows 11 Pro 10.0.26200.8037 |
+| `procmon-switchback` | `procmon-trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-procmon.pml and [research/evidence-files/procmon/privacy.disable-switchback.policy](evidence-files/procmon/privacy.disable-switchback.policy)/switchback-only.hits.csv |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 
 **Validation proof**
@@ -6669,7 +6669,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/security.uac-never-notify.json`
 - Source SHA256: `6c6b267df95ad393b91d2c8199430a9127e7cd5e617f8ba8deb131aadbc95a05`
-- Proof SHA256: `69977a7c0895280fc48e7817429a9a481a3dca64bd25cac31a1e4b894cbce4e9`
+- Proof SHA256: `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b`
 
 **Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
 
@@ -6687,7 +6687,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings) |
-| Exact quote / path | The registry keys are found under the key: `HKL[research/evidence-files/missing/system-consentpromptbehavioradmin-0-elevate-without-prompting.md](evidence-files/missing/system-consentpromptbehavioradmin-0-elevate-without-prompting.md) 5 (Default) = Prompt for consent for non-Windows binaries. `EnableLUA` 0 = Disabled, 1 (Default) = Enabled. `PromptOnSecureDesktop` 0 = Disabled, 1 (Default) = Enabled. |
+| Exact quote / path | Registry path: HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Policies/System. ConsentPromptBehaviorAdmin 0 = Elevate without prompting, 5 = Prompt for consent for non-Windows binaries (default). EnableLUA 0 = Disabled, 1 = Enabled (default). PromptOnSecureDesktop 0 = Disabled, 1 = Enabled (default). |
 | Notes | The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open. Normalized for the consolidated evidence report. |
 
 ---
