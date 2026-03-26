@@ -11,6 +11,8 @@ REDACTED_USER = "<USER>"
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RESEARCH_ROOT = REPO_ROOT / "research"
 EVIDENCE_FILES_ROOT = RESEARCH_ROOT / "evidence-files"
+V31_EVIDENCE_ROOT = REPO_ROOT / "evidence"
+FRAMEWORK_ROOT = REPO_ROOT / "registry-research-framework"
 
 _HOME = Path.home()
 _ALT_REPO_ROOTS = {
@@ -45,12 +47,16 @@ TEXT_IMPORT_SUFFIXES = {
 }
 
 WINDOWS_PATH_RE = re.compile(r"(?P<path>(?<![A-Za-z0-9])[A-Za-z]:[\\/][^\"\r\n]+?\.[A-Za-z0-9._-]+)")
-REPO_PATH_RE = re.compile(r"(?P<path>(?:Docs|research)[\\/][^\"\r\n;|<>\s]+?\.[A-Za-z0-9._-]+)")
+REPO_PATH_RE = re.compile(r"(?P<path>(?:Docs|research|evidence|registry-research-framework)[\\/][^\"\r\n;|<>\s]+(?:\.[A-Za-z0-9._-]+)?)")
 BROKEN_WEB_PLACEHOLDER_RE = re.compile(
     r"(?P<path>(?:httpresearch|research)/evidence-files/missing/(?P<domain>[^/\s]+?\.md)/(?P<tail>[^\s)\"'>]+))",
     re.IGNORECASE,
 )
 URL_RE = re.compile(r"https?://[^\s)\"'>]+")
+GITHUB_RELEASE_URL_RE = re.compile(
+    r"^https://github\.com/(?P<owner>[^/\s]+)/(?P<repo>[^/\s]+)/releases/download/(?P<tag>[^/\s]+)/(?P<filename>[^/\s]+)$",
+    re.IGNORECASE,
+)
 
 OLD_PREFIXES = (
     "Docs/tweaks/research/",
@@ -82,6 +88,12 @@ def is_web_url(value: str | None) -> bool:
         return False
     lowered = value.strip().lower()
     return lowered.startswith("http://") or lowered.startswith("https://")
+
+
+def is_github_release_url(value: str | None) -> bool:
+    if not value:
+        return False
+    return GITHUB_RELEASE_URL_RE.match(value.strip()) is not None
 
 
 def restore_web_placeholder_url(value: str | None) -> str:
@@ -272,7 +284,7 @@ def normalize_reference(value: str | None, title: str = "") -> str:
         return repo_relative_path(repo_path)
 
     normalized = normalize_repo_relative_path(stripped)
-    if normalized.startswith("research/") or normalized.startswith("Docs/"):
+    if normalized.startswith(("research/", "Docs/", "evidence/", "registry-research-framework/")):
         return normalized
 
     if re.match(r"^[A-Za-z]:[\\/]", stripped):

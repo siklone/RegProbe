@@ -1,0 +1,12 @@
+{
+  "official_doc_exists": {
+    "true": "class_a_without_runtime_reaudit",
+    "false": "route_to_runtime_or_system_lane"
+  },
+  "suspected_layer": {
+    "boot": "kernel_guard_and_boot_trace",
+    "kernel": "kernel_guard_and_etw",
+    "driver": "kernel_guard_and_etw",
+    "user-mode": "etw_plus_procmon_plus_static"
+  }
+}

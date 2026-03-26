@@ -1,0 +1,23 @@
+{
+  "$schema": "registry-evidence-v3.1/classification",
+  "classification": {
+    "class": "A",
+    "pipeline_version": "v3.1",
+    "reason": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "runtime_procmon",
+      "static_ghidra"
+    ],
+    "layer_count": 2,
+    "frida_kernel_guard_applied": false,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "converged-vm",
+    "next_missing_layer": "none"
+  }
+}

@@ -82,6 +82,7 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
         ["Area", md_code(record.get("area"))],
         ["Scope", md_code(record.get("scope"))],
         ["Source file", md_link(str(record.get("source_file") or ""))],
+        ["V3.1 evidence root", md_link(str(record.get("v31_evidence_root") or "")) if record.get("v31_evidence_root") else "â€”"],
         ["Apply allowed", md_code((record.get("decision") or {}).get("apply_allowed"))],
         ["Confidence", md_code((record.get("decision") or {}).get("confidence"))],
         ["Needs VM validation", md_code((record.get("decision") or {}).get("needs_vm_validation"))],
@@ -248,6 +249,24 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
                 md_escape(", ".join(item.get("supports", []) or [])),
             ])
         lines.extend(render_table(["Evidence ID", "Kind", "Origin", "Title", "Location", "Strength", "Supports"], evidence_rows))
+        lines.append("")
+
+    artifact_refs = record.get("artifact_refs") or []
+    if artifact_refs:
+        lines.append("**Artifact refs**")
+        lines.append("")
+        artifact_rows = []
+        for item in artifact_refs:
+            artifact_rows.append(
+                [
+                    md_code(item.get("id")),
+                    md_code(item.get("tool")),
+                    md_escape(item.get("filename")),
+                    md_code(item.get("sha256")),
+                    linkify_reference_text(item.get("release_url"), OUTPUT_PATH),
+                ]
+            )
+        lines.extend(render_table(["ID", "Tool", "Filename", "SHA256", "Release URL"], artifact_rows))
         lines.append("")
 
     proof = record.get("validation_proof")

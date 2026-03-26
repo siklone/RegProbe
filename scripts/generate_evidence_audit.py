@@ -9,8 +9,11 @@ from pathlib import Path
 from typing import Any
 
 from evidence_class_lib import (
+    boot_phase_relevant,
     GHIDRA_EVIDENCE_KINDS,
     build_class_entry,
+    classification_layers,
+    cross_layer_satisfied,
     determine_evidence_lane,
     evidence_items,
     evidence_kind,
@@ -28,8 +31,9 @@ from evidence_class_lib import (
     next_missing_layer,
     restore_story_known,
     sanitize_value,
+    suspected_layer,
 )
-from research_path_lib import REPO_ROOT, RESEARCH_ROOT
+from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, is_github_release_url
 
 RECORDS_DIR = RESEARCH_ROOT / "records"
 PROVENANCE_PATH = REPO_ROOT / "Docs" / "tweaks" / "tweak-provenance.json"
@@ -80,6 +84,111 @@ def has_ghidra_no_function_fallback(record: dict[str, Any]) -> bool:
     return False
 
 
+def v31_full_evidence_path(record_id: str) -> Path:
+    return V31_EVIDENCE_ROOT / record_id / "full-evidence.json"
+
+
+def load_v31_artifact_refs(record_id: str) -> list[dict[str, Any]]:
+    path = v31_full_evidence_path(record_id)
+    if not path.exists():
+        return []
+
+    payload = load_json(path)
+    artifact_refs = payload.get("artifact_refs") or []
+    valid_refs: list[dict[str, Any]] = []
+    for item in artifact_refs:
+        if not isinstance(item, dict):
+            continue
+        storage_kind = str(item.get("storage_kind") or "").strip().lower()
+        release_url = str(item.get("release_url") or "").strip()
+        if storage_kind == "release" and release_url and not is_github_release_url(release_url):
+            continue
+        valid_refs.append(item)
+    return sanitize_value(valid_refs)
+
+
+def etw_executed(record_id: str, record: dict[str, Any]) -> bool:
+    path = v31_full_evidence_path(record_id)
+    if path.exists():
+        payload = load_json(path)
+        runtime = payload.get("runtime") or {}
+        etw = runtime.get("etw") or {}
+        if etw.get("executed") is True:
+            return True
+    return any(evidence_kind(item) == "etw-trace" for item in evidence_items(record))
+
+
+def tools_used(record_id: str, record: dict[str, Any]) -> list[str]:
+    tools: list[str] = []
+    if has_official_evidence(record):
+        tools.append("official-doc")
+    if etw_executed(record_id, record):
+        tools.append("etw")
+    if has_procmon_evidence(record):
+        tools.append("procmon")
+    if has_ghidra_evidence(record):
+        tools.append("ghidra")
+    if has_ghidra_no_function_fallback(record):
+        tools.append("ghidra_no_function_fallback")
+    if has_wpr_evidence(record):
+        tools.append("wpr")
+    if has_benchmark_evidence(record):
+        tools.append("benchmark")
+    if has_reboot_evidence(record):
+        tools.append("reboot")
+    return tools
+
+
+def dead_flag_checks(record_id: str, record: dict[str, Any]) -> dict[str, bool]:
+    layer = suspected_layer(record)
+    used_tools = tools_used(record_id, record)
+    boot_relevant = boot_phase_relevant(record)
+    return {
+        "etw_executed": etw_executed(record_id, record),
+        "boot_phase_included": (not boot_relevant) or has_wpr_evidence(record) or has_reboot_evidence(record),
+        "correct_tool_used": not (layer in {"kernel", "boot", "driver"} and "frida" in used_tools),
+        "trigger_condition_tested": has_procmon_evidence(record) or has_reboot_evidence(record) or has_wpr_evidence(record) or has_benchmark_evidence(record),
+    }
+
+
+def re_audit_reason(class_id: str, official: bool, record: dict[str, Any], record_id: str) -> str:
+    reasons: list[str] = []
+    if class_id == "B":
+        reasons.append("current_blocker")
+    if class_id == "A" and not official:
+        reasons.append("non_official_v31_reaudit")
+    if not cross_layer_satisfied(record):
+        reasons.append("cross_layer_missing")
+    if not etw_executed(record_id, record):
+        reasons.append("etw_not_recorded")
+    checks = dead_flag_checks(record_id, record)
+    if not all(checks.values()):
+        reasons.append("dead_flag_checks_incomplete")
+    if boot_phase_relevant(record) and not checks["boot_phase_included"]:
+        reasons.append("boot_trace_missing")
+    return "; ".join(dict.fromkeys(reasons))
+
+
+def re_audit_priority(class_id: str, official: bool, record: dict[str, Any], record_id: str) -> int:
+    if class_id == "B":
+        return 1
+    if class_id != "A" or official:
+        return 0
+    if suspected_layer(record) in {"kernel", "boot", "driver"}:
+        return 1
+    if not etw_executed(record_id, record):
+        return 2
+    return 3
+
+
+def re_audit_required(class_id: str, official: bool) -> bool:
+    if class_id == "B":
+        return True
+    if class_id == "A" and not official:
+        return True
+    return False
+
+
 def main() -> int:
     provenance_map = load_provenance_map(PROVENANCE_PATH)
     overrides = load_overrides(OVERRIDES_PATH)
@@ -105,6 +214,10 @@ def main() -> int:
         )
         lane = determine_evidence_lane(record)
         next_layer = next_missing_layer(record, incident_seen=incident_seen)
+        official = has_official_evidence(record)
+        class_id = class_entry["evidence_class"]
+        checks = dead_flag_checks(record_id, record)
+        audit_required = re_audit_required(class_id, official)
         class_counts[class_entry["evidence_class"]] += 1
         lane_counts[lane] += 1
         missing_counts[next_layer] += 1
@@ -124,10 +237,11 @@ def main() -> int:
                 {
                     "record_id": record.get("record_id"),
                     "tweak_id": record.get("tweak_id"),
-                    "evidence_class": class_entry["evidence_class"],
+                    "evidence_class": class_id,
                     "lane": lane,
                     "class_ready_basis": basis,
-                    "official": has_official_evidence(record),
+                    "official": official,
+                    "official_doc_exists": official,
                     "procmon": has_procmon_evidence(record),
                     "ghidra": has_ghidra_evidence(record),
                     "ghidra_no_function_fallback": has_ghidra_no_function_fallback(record),
@@ -136,6 +250,20 @@ def main() -> int:
                     "reboot_tested": has_reboot_evidence(record),
                     "incident_seen": incident_seen,
                     "next_missing_layer": next_layer,
+                    "cross_layer_satisfied": cross_layer_satisfied(record),
+                    "layers_used": classification_layers(record),
+                    "tools_used": tools_used(record_id, record),
+                    "boot_phase_relevant": boot_phase_relevant(record),
+                    "suspected_layer": suspected_layer(record),
+                    "frida_kernel_guard_applied": suspected_layer(record) in {"kernel", "boot", "driver"},
+                    "dead_flag_checks": checks,
+                    "re_audit_required": audit_required,
+                    "re_audit_priority": re_audit_priority(class_id, official, record, record_id),
+                    "re_audit_reason": re_audit_reason(class_id, official, record, record_id),
+                    "original_class": class_id if audit_required else None,
+                    "original_pipeline_version": "pre-v3.1" if audit_required else None,
+                    "new_pipeline_version": "v3.1",
+                    "artifact_refs": load_v31_artifact_refs(record_id),
                     "app_mapping_status": extract_app_status(record),
                     "restore_story_known": restore_story_known(record),
                     "apply_allowed": (record.get("decision") or {}).get("apply_allowed"),
@@ -154,6 +282,7 @@ def main() -> int:
             "class_counts": dict(class_counts),
             "lane_counts": dict(lane_counts),
             "next_missing_layer_counts": dict(missing_counts),
+            "re_audit_required_count": sum(1 for entry in entries if entry.get("re_audit_required")),
         },
         "entries": entries,
     }

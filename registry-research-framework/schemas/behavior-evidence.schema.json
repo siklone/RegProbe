@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opentraceproject.local/registry-research-framework/schemas/behavior-evidence.schema.json",
+  "title": "v3.1 Behavior Evidence",
+  "type": "object",
+  "required": ["behavior"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "behavior": { "type": "object" },
+    "source_evidence_ids": { "type": "array", "items": { "type": "string" } }
+  }
+}

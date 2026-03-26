@@ -1,0 +1,39 @@
+{
+  "$schema": "registry-evidence-v3.1/static-evidence",
+  "static": {
+    "bingrep": {
+      "executed": false,
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "hit_files": [],
+      "output_file": null
+    },
+    "floss": {
+      "executed": false,
+      "hits": 0,
+      "output_file": null
+    },
+    "capa": {
+      "executed": false,
+      "registry_read_capability": false,
+      "matched_rules": [],
+      "target_binary": null,
+      "output_file": null
+    },
+    "ghidra": {
+      "executed": true,
+      "trigger": "existing_record_evidence",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "string_xref_found": true,
+      "function_name": null,
+      "decompile_snippet": "Two current-build ntoskrnl.exe probes looked for the registry names and for the internal pseudocode names tracked in the repo notes. Both came back with no matching strings or xrefs, so this pass did not produce a current-build kernel decompilation lead for the bundle.",
+      "call_graph_depth": null,
+      "output_file": "research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
+      "ghidra_no_function_fallback": false
+    }
+  },
+  "source_evidence_ids": [
+    "ghidra-cpu-idle-no-match-20260327"
+  ]
+}

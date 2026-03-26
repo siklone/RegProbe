@@ -145,7 +145,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | `6128b811623173d369438b3ef4efb32ab42425a2325114fac938f72fab218418` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | `9d38a05cd041c6277d42ee906031a56935c9dd551ac5467a3f072f1c0b423a03` | `b9d22b4223ac1b91392945589e59d5c9badd4dd11b62c686b8801a5db80e843b` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | `58405f55aaa3332d62d1fce7f0c881e7aa2038d37f71381b61abfcdfa7233bc2` | `9f3308d21bd277544f1cba2c59a776a2ee7cf4baa9630d1a20ec0742da11503c` | 4 |
-| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | `cbf5cd5a64aebcc264725ee4e149f7d42cddc7d4f6c7c06e132de31b470cbea7` | `2e29091f34239daa7f037e90323e5c9ebe82cb560e97dc77e15855f84f329047` | 5 |
+| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | `cbf5cd5a64aebcc264725ee4e149f7d42cddc7d4f6c7c06e132de31b470cbea7` | `25417f77a46ad546dce3d708c08159d460b42085e88a664fcc9da497a4f7c426` | 7 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | `94e0f7d7302ea1e110ee29df96e06e0ab388f94dd500d2e496a99738f130d97f` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 5 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | `539968582171cbbfde1aa6e02feda17d2fd3118641c615686e331d40bd36f91e` | `44e29d37bb9e8b44313f77307041293d030872438f451cb698ed815556190ae0` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | `01333f3c9ee8de118b4f9474544d7b740de620681a30a333da78b4f51a0065ef` | `17eabdbe9c396f9d546078ff13a0134f005fedfbc5a975cead773f5f6adb1747` | 3 |
@@ -391,7 +391,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | Microsoft Learn: Windows Terminal settings | [https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup) |
-| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | Ghidra headless raw-memory scan of TerminalApp.dll | [https://terminal.1.24.10621.0/TerminalApp.dll;](https://terminal.1.24.10621.0/TerminalApp.dll;) [research/evidence-files/ghidra/developer.terminal-dev-mode](evidence-files/ghidra/developer.terminal-dev-mode)/terminal-ghidra.txt; [research/evidence-files/ghidra/developer.terminal-dev-mode](evidence-files/ghidra/developer.terminal-dev-mode)/terminal-ghidra-enabledebugtap.txt |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | Ghidra headless raw-memory scan of TerminalApp.dll | [https://terminal.1.24.10621.0/TerminalApp.dll;](https://terminal.1.24.10621.0/TerminalApp.dll;) [research/evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [research/evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) |
 | `wpr-terminal-launch-trace` | `wpr-trace` | WPR capture of Windows Terminal launch | [research/evidence-files/host-temp/terminal-launch.etl.md](evidence-files/host-temp/terminal-launch.etl.md) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
 
@@ -501,13 +501,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `duplicate-retirement-audit` | `repo-doc` | Widgets duplicate retirement audit trail | research/records |
+| `duplicate-retirement-audit` | `repo-doc` | Widgets duplicate retirement audit trail | [research/records](records) |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | research/records |
+| Source | [research/records](records) |
 | Exact quote / path | Widgets duplicate retirement audit trail: explorer.disable-taskbar-widgets was retired on 2026-03-13 because the app already ships visibility.disable-widgets for the official Widgets policy surface. The old TaskbarDa parent-key write was removed from VisibilityTweakProvider.cs and this record now remains only as an audit trail. |
 | Notes | Backfilled from evidence_id duplicate-retirement-audit (repo-doc); deprecated audit trail. |
 
@@ -694,13 +694,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `split-audit` | `repo-doc` | Split audit trail | research/records |
+| `split-audit` | `repo-doc` | Split audit trail | [research/records](records) |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | research/records |
+| Source | [research/records](records) |
 | Exact quote / path | Split audit trail: The original mixed application-compatibility policy record was retired on 2026-03-13 and replaced with three focused child records: privacy.disable-appcompat-engine.policy, privacy.disable-appdeviceinventory.policy, and privacy.disable-program-compatibility-assistant. |
 | Notes | Backfilled from evidence_id split-audit (repo-doc); deprecated audit trail. |
 
@@ -965,13 +965,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `duplicate-retirement-audit` | `repo-doc` | Reserved Storage duplicate retirement audit trail | research/records |
+| `duplicate-retirement-audit` | `repo-doc` | Reserved Storage duplicate retirement audit trail | [research/records](records) |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | research/records |
+| Source | [research/records](records) |
 | Exact quote / path | Reserved Storage duplicate retirement audit trail: The privacy.disable-reserved-storage duplicate was retired on 2026-03-13 because the repo already exposes the official DISM-backed cleanup.disable-reserved-storage tweak. The privacy duplicate had written ReserveManager/DisableDeletes directly, while the surviving cleanup tweak uses the documented DISM detect/apply/rollback surface. |
 | Notes | Backfilled from evidence_id duplicate-retirement-audit (repo-doc); deprecated audit trail. |
 
@@ -1615,7 +1615,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| `ghidra-serialize-timer-expiration-gate` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/ghidra-matches.md and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/evidence.json |
+| `ghidra-serialize-timer-expiration-gate` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](evidence-files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration/evidence.json](evidence-files/ghidra/system.kernel-serialize-timer-expiration/evidence.json) |
 
 **Validation proof**
 
@@ -1859,6 +1859,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-disconnected-devices.review.json`
+- V3.1 evidence root: `evidence/audio.show-disconnected-devices`
 - Source SHA256: `269cfb7957f39415fc8b8f6c53b0957c165b108ff950d64a5430779dd4d7f5c6`
 - Proof SHA256: `0789e0f44331dbefb6565c2ed02e05ed6e911cf9b64ce32d8f29c04e7ce2c1f2`
 
@@ -1868,8 +1869,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-20260314-pml.md and [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-zero-20260314-pml.md |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices](evidence-files/ghidra/audio.show-disconnected-devices)/audio-devicecpl-ghidra.md |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
 
 **Validation proof**
@@ -1880,6 +1881,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:0. |
 | Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
 
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | A |
+| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
+| Priority | 2 |
+| New pipeline version | v3.1 |
+
 ---
 
 ### `audio.show-hidden-devices`
@@ -1887,6 +1897,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-hidden-devices.review.json`
+- V3.1 evidence root: `evidence/audio.show-hidden-devices`
 - Source SHA256: `ac0e35feb4d9acaa9a7c001292c51ca5660420be44a14be0a66747c556fec1df`
 - Proof SHA256: `7bf34d113dc32a98101f2c49afd0c939a8c02083ec9c5788fd2b16069e56183a`
 
@@ -1896,8 +1907,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-20260314-pml.md and [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-zero-20260314-pml.md |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices](evidence-files/ghidra/audio.show-disconnected-devices)/audio-devicecpl-ghidra.md |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
 
 **Validation proof**
@@ -1907,6 +1918,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-20260314-pml.md) |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:0. |
 | Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | A |
+| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
+| Priority | 2 |
+| New pipeline version | v3.1 |
 
 ---
 
@@ -2011,7 +2031,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) |
-| `procmon-developer-long-paths` | `procmon-trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [research/evidence-files/procmon/developer.enable-windows-long-paths](evidence-files/procmon/developer.enable-windows-long-paths)/devmode_longpaths_probe.csv and [research/evidence-files/procmon/developer.enable-windows-long-paths](evidence-files/procmon/developer.enable-windows-long-paths)/devmode-longpaths-probe-pml.md |
+| `procmon-developer-long-paths` | `procmon-trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [research/evidence-files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](evidence-files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [research/evidence-files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](evidence-files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
 
 **Validation proof**
@@ -2154,7 +2174,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-enable-device-for-development` | `official-doc` | Microsoft Learn: Enable your device for development | [https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode](https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode) |
-| `procmon-developer-mode-baseline` | `procmon-trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [research/evidence-files/procmon/developer.windows-dev-mode](evidence-files/procmon/developer.windows-dev-mode)/devmode_probe2.csv and [research/evidence-files/procmon/developer.windows-dev-mode](evidence-files/procmon/developer.windows-dev-mode)/devmode_probe2.txt |
+| `procmon-developer-mode-baseline` | `procmon-trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.csv](evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.txt](evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.txt) |
 | `local-appxpackagemanager-admx` | `official-doc` | Local Microsoft AppxPackageManager.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) |
 | `local-appxpackagemanager-adml` | `official-doc` | Local Microsoft AppxPackageManager.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
@@ -2211,7 +2231,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-alwaysshowicons` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista alwaysShowIcons | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-advanced-iconsonly` | `raw-registry-dump` | 25H2 raw registry and default-hive corroboration for IconsOnly | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-iconsonly-runtime` | `procmon-trace` | Procmon capture - Explorer IconsOnly runtime surface | [research/evidence-files/procmon/explorer.always-show-icons-never-thumbnails](evidence-files/procmon/explorer.always-show-icons-never-thumbnails)/iconsonly-result.txt |
+| `procmon-iconsonly-runtime` | `procmon-trace` | Procmon capture - Explorer IconsOnly runtime surface | [research/evidence-files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](evidence-files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) |
 
 **Validation proof**
 
@@ -2285,6 +2305,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.enable-explorer-compact-mode.review.json`
+- V3.1 evidence root: `evidence/explorer.enable-explorer-compact-mode`
 - Source SHA256: `0accb41794f4bbcc55ec07d981ca0d76258a8960e965cf3d89d17c86dee99b5b`
 - Proof SHA256: `ee9c93f2223f14fabbbf1f808914a3ef9c8d2a65af4aa351da05249d7cbe1ef4`
 
@@ -2295,8 +2316,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [research/evidence-files/procmon/explorer.enable-explorer-compact-mode](evidence-files/procmon/explorer.enable-explorer-compact-mode)/explorer-batch-applied-20260314-pml.md and [research/evidence-files/procmon/explorer.enable-explorer-compact-mode](evidence-files/procmon/explorer.enable-explorer-compact-mode)/explorer-compact-zero-20260314-pml.md |
-| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [research/evidence-files/ghidra/explorer.enable-explorer-compact-mode](evidence-files/ghidra/explorer.enable-explorer-compact-mode)/explorerframe-usecompactmode-ghidra.md |
+| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) |
+| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [research/evidence-files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](evidence-files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2306,6 +2327,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [research/evidence-files/missing/explorer-batch-applied-20260314-pml.md](evidence-files/missing/explorer-batch-applied-20260314-pml.md) |
 | Exact quote / path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:0. |
 | Notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | A |
+| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
+| Priority | 2 |
+| New pipeline version | v3.1 |
 
 ---
 
@@ -2325,7 +2355,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) |
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [research/evidence-files/procmon/explorer.hide-empty-drives](evidence-files/procmon/explorer.hide-empty-drives)/hideemptydrives-result.txt |
+| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [research/evidence-files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](evidence-files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) |
 | `app-visibility-provider` | `repo-code` | Current app implementation for HideDrivesWithNoMedia | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2354,7 +2384,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-separateprocess` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista separateProcess | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-separateprocess` | `raw-registry-dump` | 25H2 default hive corroboration for SeparateProcess | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-separateprocess-runtime` | `procmon-trace` | Procmon capture - Explorer SeparateProcess runtime surface | [research/evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process](evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process)/separateprocess-result.txt |
+| `procmon-separateprocess-runtime` | `procmon-trace` | Procmon capture - Explorer SeparateProcess runtime surface | [research/evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) |
 
 **Validation proof**
 
@@ -2382,7 +2412,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showcompcolor` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showCompColor | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-showcompcolor` | `raw-registry-dump` | 25H2 default hive corroboration for ShowCompColor | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showcompcolor-runtime` | `procmon-trace` | Procmon capture - Explorer ShowCompColor runtime surface | [research/evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color](evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color)/showcompcolor-result-txt.md |
+| `procmon-showcompcolor-runtime` | `procmon-trace` | Procmon capture - Explorer ShowCompColor runtime surface | [research/evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) |
 
 **Validation proof**
 
@@ -2410,7 +2440,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showdriveletter` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showDriveLetter | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-showdrivelettersfirst` | `raw-registry-dump` | 25H2 raw registry corroboration for ShowDriveLettersFirst | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [research/evidence-files/procmon/explorer.show-drive-letters-first](evidence-files/procmon/explorer.show-drive-letters-first)/showdrivelettersfirst-result.txt |
+| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [research/evidence-files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](evidence-files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) |
 
 **Validation proof**
 
@@ -2438,7 +2468,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | 25H2 default hive and raw dump corroboration for HideFileExt | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-hidefileext-runtime` | `procmon-trace` | Procmon capture - Explorer file-extension visibility runtime surface | [research/evidence-files/procmon/explorer.show-file-extensions](evidence-files/procmon/explorer.show-file-extensions)/hidefileext-capture-20260313-pml.md |
+| `procmon-hidefileext-runtime` | `procmon-trace` | Procmon capture - Explorer file-extension visibility runtime surface | [research/evidence-files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](evidence-files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2496,7 +2526,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-hidden` | `raw-registry-dump` | 25H2 default hive and raw dump corroboration for Hidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-hidden-runtime` | `procmon-trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [research/evidence-files/procmon/explorer.show-hidden-files](evidence-files/procmon/explorer.show-hidden-files)/hidden-capture-20260313-pml.md |
+| `procmon-hidden-runtime` | `procmon-trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [research/evidence-files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](evidence-files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2525,7 +2555,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showinfotip` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showInfoTip | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-showinfotip` | `raw-registry-dump` | 25H2 default hive corroboration for ShowInfoTip | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showinfotip-runtime` | `procmon-trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [research/evidence-files/procmon/explorer.show-info-tips](evidence-files/procmon/explorer.show-info-tips)/showinfotip-result.txt |
+| `procmon-showinfotip-runtime` | `procmon-trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [research/evidence-files/procmon/explorer.show-info-tips/showinfotip-result.txt](evidence-files/procmon/explorer.show-info-tips/showinfotip-result.txt) |
 
 **Validation proof**
 
@@ -2553,7 +2583,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showsuperhidden` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showSuperHidden | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-advanced-showsuperhidden` | `raw-registry-dump` | 25H2 dump and default hive corroboration for ShowSuperHidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showsuperhidden-runtime` | `procmon-trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [research/evidence-files/procmon/explorer.show-protected-operating-system-files](evidence-files/procmon/explorer.show-protected-operating-system-files)/showsuperhidden-result.txt |
+| `procmon-showsuperhidden-runtime` | `procmon-trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [research/evidence-files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](evidence-files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) |
 
 **Validation proof**
 
@@ -2581,7 +2611,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | Microsoft Learn: settings-common File Explorer general settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) |
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | 25H2 raw registry corroboration for ShowRecent | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-showrecent-runtime` | `procmon-trace` | Procmon capture - Explorer ShowRecent runtime surface | [research/evidence-files/procmon/explorer.show-recent-items](evidence-files/procmon/explorer.show-recent-items)/showrecent-result.txt |
+| `procmon-showrecent-runtime` | `procmon-trace` | Procmon capture - Explorer ShowRecent runtime surface | [research/evidence-files/procmon/explorer.show-recent-items/showrecent-result.txt](evidence-files/procmon/explorer.show-recent-items/showrecent-result.txt) |
 | `app-visibility-provider` | `repo-code` | Current app implementation for ShowRecent | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2610,7 +2640,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) |
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showstatusbar-runtime` | `procmon-trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [research/evidence-files/procmon/explorer.show-status-bar](evidence-files/procmon/explorer.show-status-bar)/showstatusbar-result.txt |
+| `procmon-showstatusbar-runtime` | `procmon-trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [research/evidence-files/procmon/explorer.show-status-bar/showstatusbar-result.txt](evidence-files/procmon/explorer.show-status-bar/showstatusbar-result.txt) |
 | `app-visibility-provider` | `repo-code` | Current app implementation for ShowStatusBar | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2639,7 +2669,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-displayiconthumb` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista displayIconThumb | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-advanced-showtypeoverlay` | `raw-registry-dump` | 25H2 raw registry and default-hive corroboration for ShowTypeOverlay | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showtypeoverlay-runtime` | `procmon-trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [research/evidence-files/procmon/explorer.show-type-overlay](evidence-files/procmon/explorer.show-type-overlay)/showtypeoverlay-result.txt |
+| `procmon-showtypeoverlay-runtime` | `procmon-trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [research/evidence-files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt](evidence-files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt) |
 
 **Validation proof**
 
@@ -2667,7 +2697,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | Microsoft Windows 11 settings reference for taskbar alignment | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11) |
 | `dump-25h2-explorer-advanced-taskbaral` | `raw-registry-dump` | 25H2 raw registry corroboration for TaskbarAl | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-taskbar-alignment` | `procmon-trace` | Procmon capture - Explorer taskbar alignment runtime surface | [research/evidence-files/procmon/explorer.taskbar-alignment-left](evidence-files/procmon/explorer.taskbar-alignment-left)/taskbar-alignment-capture-20260313-pml.md |
+| `procmon-taskbar-alignment` | `procmon-trace` | Procmon capture - Explorer taskbar alignment runtime surface | [research/evidence-files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md](evidence-files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -3685,6 +3715,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/performance.disable-taskbar-animations.review.json`
+- V3.1 evidence root: `evidence/performance.disable-taskbar-animations`
 - Source SHA256: `fda62111575ae9b7a41b50acab87f7c4900a3e5a9940a6957784bc52339f2237`
 - Proof SHA256: `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358`
 
@@ -3696,7 +3727,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | Guest reversible probe - TaskbarAnimations registry mapping | [research/evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt](evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt) |
 | `procmon-taskbar-animations-registry-read` | `procmon-trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) |
-| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [research/evidence-files/ghidra/performance.disable-taskbar-animations](evidence-files/ghidra/performance.disable-taskbar-animations)/taskbar-taskbaranimations-ghidra.md |
+| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [research/evidence-files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](evidence-files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) |
 | `app-performance-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | Repo source note for performance.disable-taskbar-animations | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
@@ -3707,6 +3738,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [research/notes/taskbar-animations-procmon-validation-20260326.md](notes/taskbar-animations-procmon-validation-20260326.md) |
 | Exact quote / path | taskbaranimations-state-0.txt: explorer.exe RegQueryValue .../TaskbarAnimations Data: 0. taskbaranimations-state-1.txt: explorer.exe RegQueryValue .../TaskbarAnimations Data: 1. taskbar-taskbaranimations-ghidra.md: Taskbar.dll reads Explorer//Advanced//TaskbarAnimations through Ordinal_123(..., L/"TaskbarAnimations/", 1). |
 | Notes | The reversible probe confirmed the 0 / 1 mapping, Procmon showed explorer.exe reading both states on Win25H2Clean, and a Ghidra pass on Taskbar.dll exposed a code-side read of TaskbarAnimations from Explorer/Advanced. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | A |
+| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
+| Priority | 2 |
+| New pipeline version | v3.1 |
 
 ---
 
@@ -3804,10 +3844,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/power.disable-cpu-idle-states.json`
+- V3.1 evidence root: `evidence/power.disable-cpu-idle-states`
 - Source SHA256: `cbf5cd5a64aebcc264725ee4e149f7d42cddc7d4f6c7c06e132de31b470cbea7`
-- Proof SHA256: `2e29091f34239daa7f037e90323e5c9ebe82cb560e97dc77e15855f84f329047`
+- Proof SHA256: `25417f77a46ad546dce3d708c08159d460b42085e88a664fcc9da497a4f7c426`
 
-**Summary:** Validated observed implementation only. This record now has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, plus a machine-checkable apply and restore pass for the app's current profile.
+**Summary:** Validated observed implementation only. This record has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, a machine-checkable apply and restore pass for the app's current profile, a current-build Ghidra no-match follow-up on ntoskrnl.exe, and a rebooted benchmark attempt that broke shell availability before workloads started and required a snapshot recovery.
 
 **Evidence**
 
@@ -3818,6 +3859,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | nohuto power trace for DisableIdleStatesAtBoot | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) |
 | `vm-cpu-idle-bundle-probe` | `vm-test` | Win25H2Clean reversible probe for the CPU idle-state bundle | [research/evidence-files/vm-tooling-staging/cpu_idle_probe.json](evidence-files/vm-tooling-staging/cpu_idle_probe.json) |
 | `repo-power-doc` | `repo-doc` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) |
+| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) |
+| `vm-cpu-idle-benchmark-incident-20260327` | `vm-incident` | Win25H2Clean rebooted CPU idle benchmark incident | [research/vm-incidents.json](vm-incidents.json) and [research/notes/cpu-idle-states-follow-up-20260327.md](notes/cpu-idle-states-follow-up-20260327.md) |
 
 **Validation proof**
 
@@ -3825,7 +3868,16 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [research/evidence-files/vm-tooling-staging/cpu_idle_probe.json](evidence-files/vm-tooling-staging/cpu_idle_probe.json) |
 | Exact quote / path | before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null |
-| Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. |
+| Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. A later rebooted benchmark lane failed before any CPU or memory workload started because Explorer did not return after reboot, and the VM had to be recovered from snapshot. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | B |
+| Reason | current_blocker; etw_not_recorded; dead_flag_checks_incomplete |
+| Priority | 1 |
+| New pipeline version | v3.1 |
 
 ---
 
@@ -3962,7 +4014,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | nohuto power trace for hibernation support | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) |
 | `nohuto-showhibernateoption-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowHibernateOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) |
-| `procmon-power-hide-hibernate-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [research/evidence-files/procmon/power.hide-hibernate-option](evidence-files/procmon/power.hide-hibernate-option)/power_hide_hibernate_option_probe.txt |
+| `procmon-power-hide-hibernate-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [research/evidence-files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt](evidence-files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt) |
 
 **Validation proof**
 
@@ -3992,7 +4044,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) |
 | `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `nohuto-showlockoption-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowLockOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) |
-| `procmon-power-hide-lock-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [research/evidence-files/procmon/power.hide-lock-option](evidence-files/procmon/power.hide-lock-option)/power_hide_lock_option_probe.txt |
+| `procmon-power-hide-lock-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [research/evidence-files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt](evidence-files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt) |
 
 **Validation proof**
 
@@ -4022,7 +4074,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) |
 | `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `nohuto-showsleepoption-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowSleepOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) |
-| `procmon-power-hide-sleep-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [research/evidence-files/procmon/power.hide-sleep-option](evidence-files/procmon/power.hide-sleep-option)/power_hide_sleep_option_probe.txt |
+| `procmon-power-hide-sleep-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [research/evidence-files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt](evidence-files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt) |
 
 **Validation proof**
 
@@ -4250,7 +4302,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-gppref-start-trackprogs` | `official-doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `nohuto-start-track-progs-trace` | `registry-observation` | nohuto win-config mirror - Start_TrackProgs trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-start-track-progs-settings` | `procmon-trace` | VM Procmon trace - Start_TrackProgs settings page reads | [research/evidence-files/procmon/privacy.disable-app-launch-tracking](evidence-files/procmon/privacy.disable-app-launch-tracking)/procmon-start-track-progs-1.pml.md and [research/evidence-files/procmon/privacy.disable-app-launch-tracking](evidence-files/procmon/privacy.disable-app-launch-tracking)/procmon-start-track-progs-0.pml.md |
+| `procmon-start-track-progs-settings` | `procmon-trace` | VM Procmon trace - Start_TrackProgs settings page reads | [research/evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [research/evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) |
 
 **Validation proof**
 
@@ -4310,7 +4362,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `procmon-appcompat-engine` | `procmon-trace` | VM Procmon capture - AppCompat policy path bundle | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-procmon.pml and [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-filtered.hits.csv |
+| `procmon-appcompat-engine` | `procmon-trace` | VM Procmon capture - AppCompat policy path bundle | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) |
 
 **Validation proof**
 
@@ -4339,7 +4391,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appdeviceinventory-admx` | `official-doc` | Local Microsoft AppDeviceInventory.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) |
 | `csp-appdeviceinventory` | `policy-csp` | Policy CSP - AppDeviceInventory | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `procmon-appdeviceinventory` | `procmon-trace` | VM Procmon capture - four AppDeviceInventory policies | [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy](evidence-files/procmon/privacy.disable-appdeviceinventory.policy)/appdeviceinventory-policy-procmon.pml and [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy](evidence-files/procmon/privacy.disable-appdeviceinventory.policy)/appdeviceinventory-policy-procmon.filtered.hits.csv |
+| `procmon-appdeviceinventory` | `procmon-trace` | VM Procmon capture - four AppDeviceInventory policies | [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml](evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml) and [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv](evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv) |
 
 **Validation proof**
 
@@ -4779,7 +4831,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DoNotShowFeedbackNotifications policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
-| `procmon-feedback-notifications` | `procmon-trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [research/evidence-files/procmon/privacy.disable-feedback-notifications](evidence-files/procmon/privacy.disable-feedback-notifications)/feedback_notifications_probe.txt |
+| `procmon-feedback-notifications` | `procmon-trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [research/evidence-files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](evidence-files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) |
 
 **Validation proof**
 
@@ -5306,7 +5358,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-turn-off-pca-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
-| `procmon-disable-pca` | `procmon-trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant](evidence-files/procmon/privacy.disable-program-compatibility-assistant)/disable-pca-policy-procmon.pml and [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant](evidence-files/procmon/privacy.disable-program-compatibility-assistant)/disable-pca-policy-procmon.filtered.hits.csv |
+| `procmon-disable-pca` | `procmon-trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 
 **Validation proof**
@@ -5366,9 +5418,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-resume-procmon-notes` | `repo-doc` | Repo Procmon notes for Resume settings | [Docs/privacy/privacy.md](../Docs/privacy/privacy.md) |
 | `local-resume-registry-observation` | `registry-observation` | Local CrossDeviceResume registry observation | HKCU/Software/Microsoft/Windows/CurrentVersion/CrossDeviceResume/Configuration |
-| `vm-resume-policymanager-probe` | `procmon-trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/crossdevice_resume_probe.csv and [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/resume-policymanager-probe.txt |
+| `vm-resume-policymanager-probe` | `procmon-trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [research/evidence-files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](evidence-files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [research/evidence-files/procmon/privacy.disable-resume/resume-policymanager-probe.txt](evidence-files/procmon/privacy.disable-resume/resume-policymanager-probe.txt) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `procmon-crossdevice-resume-probe` | `procmon-trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/privacy_disable_resume_probe.txt and [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/privacy-disable-resume-probe-csv.md |
+| `procmon-crossdevice-resume-probe` | `procmon-trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [research/evidence-files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](evidence-files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [research/evidence-files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](evidence-files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume) |
 
 **Validation proof**
@@ -5459,7 +5511,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-disable-search-history` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchHistory policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
-| `procmon-disable-search-history` | `procmon-trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [research/evidence-files/procmon/privacy.disable-search-history](evidence-files/procmon/privacy.disable-search-history)/search_history_probe.txt |
+| `procmon-disable-search-history` | `procmon-trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [research/evidence-files/procmon/privacy.disable-search-history/search_history_probe.txt](evidence-files/procmon/privacy.disable-search-history/search_history_probe.txt) |
 
 **Validation proof**
 
@@ -5579,7 +5631,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-appcompat-admx` | `official-doc` | Local Microsoft AppCompat.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | `local-appcompat-adml` | `official-doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) |
 | `admx-appcompat-csp` | `policy-csp` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) |
-| `procmon-switchback` | `procmon-trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-procmon.pml and [research/evidence-files/procmon/privacy.disable-switchback.policy](evidence-files/procmon/privacy.disable-switchback.policy)/switchback-only.hits.csv |
+| `procmon-switchback` | `procmon-trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [research/evidence-files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](evidence-files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 
 **Validation proof**
@@ -6083,8 +6135,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-defender-block-at-first-sight-dependency` | `official-doc` | Microsoft Learn: Block at First Sight dependency on sample submission | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) |
 | `repo-defender-submit-samples-lead` | `repo-doc` | Local Defender sample-submission lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) |
 | `repo-defender-submit-samples-dump` | `repo-doc` | Windows Defender dump list includes SubmitSamplesConsent | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) |
-| `vm-defender-submit-samples-baseline` | `procmon-trace` | Win25H2Clean absent-value check for Defender sample submission | [research/evidence-files/procmon/security.disable-defender-sample-submission](evidence-files/procmon/security.disable-defender-sample-submission)/spynet-ui-state2.txt |
-| `vm-defender-submit-samples-state2` | `procmon-trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission](evidence-files/procmon/security.disable-defender-sample-submission)/submitsamples-ui-state2.txt |
+| `vm-defender-submit-samples-baseline` | `procmon-trace` | Win25H2Clean absent-value check for Defender sample submission | [research/evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) |
+| `vm-defender-submit-samples-state2` | `procmon-trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](evidence-files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) |
 | `app-security-provider-disable-defender-sample-submission` | `repo-code` | Current security provider sample-submission write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -6141,9 +6193,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-defender-security-center-disable-enhanced-notifications` | `official-doc` | WindowsDefenderSecurityCenter.admx enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) |
 | `ms-defender-reporting-disable-enhanced-notifications` | `official-doc` | WindowsDefender.admx reporting enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) |
-| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications](evidence-files/procmon/security.disable-enhanced-defender-notifications)/defender-disable-enhanced-baseline-1.txt |
-| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications](evidence-files/procmon/security.disable-enhanced-defender-notifications)/defender-disable-enhanced-securitycenter-1.txt |
-| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | Win25H2Clean Procmon reporting-path alias check | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications](evidence-files/procmon/security.disable-enhanced-defender-notifications)/defender-disable-enhanced-reporting-1.txt |
+| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt](evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt) |
+| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) |
+| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | Win25H2Clean Procmon reporting-path alias check | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) |
 | `app-security-provider-disable-enhanced-notifications` | `repo-code` | Current security provider enhanced notifications write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -6461,8 +6513,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-defender-spynet-reporting` | `official-doc` | Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) |
 | `repo-defender-spynet-lead` | `repo-doc` | Local Defender MAPS lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) |
-| `vm-defender-spynet-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [research/evidence-files/procmon/security.enable-defender-maps-advanced-membership](evidence-files/procmon/security.enable-defender-maps-advanced-membership)/spynet-ui-baseline.txt |
-| `vm-defender-spynet-state2` | `procmon-trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission](evidence-files/procmon/security.disable-defender-sample-submission)/spynet-ui-state2.txt |
+| `vm-defender-spynet-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [research/evidence-files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](evidence-files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) |
+| `vm-defender-spynet-state2` | `procmon-trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) |
 | `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | Current security provider MAPS membership write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -6498,7 +6550,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx](evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx) |
-| Exact quote / path | [research/evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx](evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx): policy name="MSPassport_UseDynamicLock" key="SOFTWARE/Policies/Microsoft/PassportForWork/DynamicLock" valueName="DynamicLock" enabledValue=1; [research/evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml](evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml): "If you enable this policy setting, these signal rules will be evaluated to detect user absence and automatically lock the device." |
+| Exact quote / path | [research/evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx:](evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx:) policy name="MSPassport_UseDynamicLock" key="SOFTWARE/Policies/Microsoft/PassportForWork/DynamicLock" valueName="DynamicLock" enabledValue=1; [research/evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml:](evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml:) "If you enable this policy setting, these signal rules will be evaluated to detect user absence and automatically lock the device." |
 | Notes | The official Dynamic Lock policy surface is machine-checkably documented in the local ADMX and ADML files. |
 
 ---
@@ -6549,9 +6601,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-defender-exclusions-visibility-note` | `official-doc` | Microsoft Learn: Configure exclusions in Defender Antivirus | [https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus](https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus) |
 | `repo-defender-hide-exclusions-dump` | `repo-doc` | Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) |
 | `vm-defender-hide-exclusions-baseline-visibility` | `vm-test` | Win25H2Clean baseline visibility with managed exclusion present | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json](evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json) |
-| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins)/hideexclusions-admins-root-1.txt |
+| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt) |
 | `vm-defender-hide-exclusions-root-visibility` | `vm-test` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) |
-| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins)/hideexclusions-admins-policymanager-1.txt |
+| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) |
 | `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | Current security provider HideExclusionsFromLocalAdmins write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -6614,8 +6666,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | Original high-risk snapshot had Defender disabled | [research/evidence-files/vm-tooling-staging/defender-runtime-repair.json](evidence-files/vm-tooling-staging/defender-runtime-repair.json) |
 | `vm-defender-runtime-enabled-baseline` | `vm-test` | Defender-on 25H2 snapshot baseline | [research/evidence-files/vm-tooling-staging/defender-runtime-repair.json](evidence-files/vm-tooling-staging/defender-runtime-repair.json) |
 | `vm-defender-threat-file-hash-baseline` | `vm-test` | Defender-on baseline EICAR probe | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json) |
-| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging](evidence-files/procmon/security.threat-file-hash-logging)/defender-threat-file-hash-legacyroot-1.txt |
-| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging](evidence-files/procmon/security.threat-file-hash-logging)/defender-threat-file-hash-policymanager-1.txt |
+| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt](evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt) |
+| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt](evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt) |
 | `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | Non-rebooted MpEngine pass did not show a live read | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json) |
 | `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | WinDefend service restart follow-up was blocked | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json) |
 | `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | Rebooted MpEngine pass still did not show a direct policy-path read | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt) |
@@ -6681,7 +6733,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-uac-registry` | `official-doc` | Microsoft Learn: User Account Control registry key entries | [https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
 | `nohuto-uac-bootphase` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto boot-phase UAC value read | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) |
-| `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | [research/evidence-files/procmon/security.uac-never-notify](evidence-files/procmon/security.uac-never-notify)/uac-never-notify-capture-pml.md and [research/evidence-files/procmon/security.uac-never-notify](evidence-files/procmon/security.uac-never-notify)/uac-never-notify-capture-csv.md |
+| `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | [research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) |
 
 **Validation proof**
 
@@ -6941,11 +6993,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-windowed-games-optimizations` | `official-doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) |
 | `repo-system-doc-fso` | `repo-doc` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) |
-| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.txt and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.hits.csv |
-| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/ghidra-matches.md and [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/evidence.json |
+| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](evidence-files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [research/evidence-files/ghidra/system.disable-fullscreen-optimizations/evidence.json](evidence-files/ghidra/system.disable-fullscreen-optimizations/evidence.json) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| `vm-fullscreen-automated-probe-20260326` | `vm-test` | Win25H2Clean automated fullscreen follow-up | [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.txt and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.json and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.hits.csv |
+| `vm-fullscreen-automated-probe-20260326` | `vm-test` | Win25H2Clean automated fullscreen follow-up | [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) |
 
 **Validation proof**
 
@@ -6991,6 +7043,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-jpeg-reduction.review.json`
+- V3.1 evidence root: `evidence/system.disable-jpeg-reduction`
 - Source SHA256: `d58d9d4b2516d8c45742f57ed8e81cd05bd5e7881d38a063e0bc85909ce46ca7`
 - Proof SHA256: `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b`
 
@@ -7003,7 +7056,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-system-doc-jpeg` | `repo-doc` | Repo system research notes for wallpaper JPEG import quality | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-jpegtranscode` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) |
 | `procmon-jpegimportquality-explorer-read` | `procmon-trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) |
-| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [research/evidence-files/ghidra/system.disable-jpeg-reduction](evidence-files/ghidra/system.disable-jpeg-reduction)/shell32-jpegimportquality-ghidra.md |
+| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [research/evidence-files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](evidence-files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 
@@ -7014,6 +7067,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [research/notes/jpeg-import-quality-validation-20260326.md](notes/jpeg-import-quality-validation-20260326.md) |
 | Exact quote / path | jpegimportquality-state-100.txt: Explorer.EXE RegQueryValue HKCU/Control Panel/Desktop/JPEGImportQuality Data: 100. shell32-jpegimportquality-ghidra.md: shell32.dll xref for JPEGImportQuality in FUN_1800bf050. |
 | Notes | The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | A |
+| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
+| Priority | 2 |
+| New pipeline version | v3.1 |
 
 ---
 
@@ -7163,6 +7225,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-startup-delay.review.json`
+- V3.1 evidence root: `evidence/system.disable-startup-delay`
 - Source SHA256: `e34318b6999040a6b9d455310ba4bcf6dd6429a6b174f472636cbbef0548eaaf`
 - Proof SHA256: `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658`
 
@@ -7174,9 +7237,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
-| `ghidra-explorer-serialize-search` | `ghidra-trace` | Ghidra headless search on explorer.exe for Serialize | [research/evidence-files/ghidra/system.disable-startup-delay](evidence-files/ghidra/system.disable-startup-delay)/ghidra_explorer_serialize.txt |
+| `ghidra-explorer-serialize-search` | `ghidra-trace` | Ghidra headless search on explorer.exe for Serialize | [research/evidence-files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](evidence-files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | Win25H2Clean reversible probe - Explorer startup delay | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| `procmon-startup-delay-shell-restart` | `procmon-trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [research/evidence-files/procmon/system.disable-startup-delay](evidence-files/procmon/system.disable-startup-delay)/procmon-startup-delay.pml.md |
+| `procmon-startup-delay-shell-restart` | `procmon-trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [research/evidence-files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](evidence-files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) |
 
 **Validation proof**
@@ -7186,6 +7249,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | Exact quote / path | HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Serialize/StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__ |
 | Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. On 2026-03-26 a bounded WPR lane captured both the missing baseline and value 0 during Explorer restarts, with shell recovery in both states. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | A |
+| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
+| Priority | 2 |
+| New pipeline version | v3.1 |
 
 ---
 
@@ -7318,7 +7390,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-game-mode-feature` | `official-doc` | Xbox Support: Use Game Mode while gaming on your Windows device | [https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc](https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc) |
-| `procmon-gamemode-admin` | `procmon-trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [research/evidence-files/procmon/system.enable-game-mode](evidence-files/procmon/system.enable-game-mode)/gamemode_admin_probe.txt and [research/evidence-files/procmon/system.enable-game-mode](evidence-files/procmon/system.enable-game-mode)/gamemode_admin_zero_probe.txt |
+| `procmon-gamemode-admin` | `procmon-trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [research/evidence-files/procmon/system.enable-game-mode/gamemode_admin_probe.txt](evidence-files/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [research/evidence-files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](evidence-files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) |
 | `repo-system-decomp-game-mode` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) |
 | `repo-system-doc-game-mode` | `repo-doc` | Repo system research notes for Game Mode | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
@@ -7888,7 +7960,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-win32-operatingsystem-priority` | `official-doc` | Microsoft Learn: Win32_OperatingSystem class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) |
 | `repo-system-doc-priority` | `repo-doc` | Repo system research notes for Win32PrioritySeparation | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-prioritycontrol` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) |
-| `procmon-priority-control-wmi-read` | `procmon-trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-2.txt and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-2.hits.csv and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-38.txt and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-38.hits.csv |
+| `procmon-priority-control-wmi-read` | `procmon-trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-2.txt](evidence-files/procmon/system.priority-control/prioritycontrol-state-2.txt) and [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](evidence-files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-38.txt](evidence-files/procmon/system.priority-control/prioritycontrol-state-38.txt) and [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](evidence-files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [research/evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json](evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json) |
@@ -7920,9 +7992,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-admx-reliability-persistent-timestamp` | `official-doc` | Microsoft Learn: Policy CSP - ADMX_Reliability / EE_EnablePersistentTimeStamp | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
-| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/ghidra-matches.md and [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/evidence.json |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](evidence-files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [research/evidence-files/ghidra/system.reliability-timestamp-enabled/evidence.json](evidence-files/ghidra/system.reliability-timestamp-enabled/evidence.json) |
 | `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) |
-| `vm-reliability-follow-up-20260326` | `procmon-trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [research/evidence-files/procmon/system.reliability-timestamp-enabled](evidence-files/procmon/system.reliability-timestamp-enabled)/reliability-timestamp-probe.txt and [research/evidence-files/procmon/system.reliability-timestamp-enabled](evidence-files/procmon/system.reliability-timestamp-enabled)/reliability-timestamp-probe.runtime.hits.csv |
+| `vm-reliability-follow-up-20260326` | `procmon-trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) |
 
 **Validation proof**
 
@@ -8752,7 +8824,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `microsoft-qna-language-bar-showstatus` | `official-doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | [https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter](https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter) |
 | `repo-visibility-language-bar` | `repo-doc` | Repo visibility notes for language bar | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| `procmon-language-bar-showstatus` | `procmon-trace` | VM Procmon trace - ShowStatus language bar restart read | [research/evidence-files/procmon/visibility.hide-language-bar](evidence-files/procmon/visibility.hide-language-bar)/procmon-hide-language-bar-3.pml.md |
+| `procmon-language-bar-showstatus` | `procmon-trace` | VM Procmon trace - ShowStatus language bar restart read | [research/evidence-files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](evidence-files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) |
 
 **Validation proof**
 

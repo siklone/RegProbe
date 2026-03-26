@@ -1,0 +1,15 @@
+{
+  "blocked_prefixes": [
+    "HKLM\\SYSTEM\\CurrentControlSet\\",
+    "HKLM\\SYSTEM\\Setup\\"
+  ],
+  "blocked_substrings": [
+    "\\Services\\",
+    "\\Parameters\\"
+  ],
+  "blocked_layers": [
+    "boot",
+    "kernel",
+    "driver"
+  ]
+}

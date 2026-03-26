@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opentraceproject.local/registry-research-framework/schemas/classification.schema.json",
+  "title": "v3.1 Classification",
+  "type": "object",
+  "required": ["classification"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "classification": {
+      "type": "object",
+      "required": ["class", "pipeline_version", "cross_layer_satisfied", "layers_used"]
+    }
+  }
+}

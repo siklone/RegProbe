@@ -51,6 +51,7 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Area | `Driver Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/audio.disable-beep.review.json](records/audio.disable-beep.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -172,6 +173,7 @@ Nohuto lineage references:
 | Area | `Sound Control Panel DeviceCpl Flags` |
 | Scope | `user` |
 | Source file | [research/records/audio.show-disconnected-devices.review.json](records/audio.show-disconnected-devices.review.json) |
+| V3.1 evidence root | [evidence/audio.show-disconnected-devices](../evidence/audio.show-disconnected-devices) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -255,8 +257,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-20260314-pml.md and [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-zero-20260314-pml.md | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices](evidence-files/ghidra/audio.show-disconnected-devices)/audio-devicecpl-ghidra.md | `high` | path, behavior, ui-mapping |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -291,6 +293,7 @@ Nohuto lineage references:
 | Area | `Sound Control Panel DeviceCpl Flags` |
 | Scope | `user` |
 | Source file | [research/records/audio.show-hidden-devices.review.json](records/audio.show-hidden-devices.review.json) |
+| V3.1 evidence root | [evidence/audio.show-hidden-devices](../evidence/audio.show-hidden-devices) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -374,8 +377,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-20260314-pml.md and [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-zero-20260314-pml.md | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices](evidence-files/ghidra/audio.show-disconnected-devices)/audio-devicecpl-ghidra.md | `high` | path, behavior, ui-mapping |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -412,6 +415,7 @@ Nohuto lineage references:
 | Area | `DISM Command` |
 | Scope | `device` |
 | Source file | [research/records/cleanup.disable-reserved-storage.review.json](records/cleanup.disable-reserved-storage.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -533,6 +537,7 @@ Nohuto lineage references:
 | Area | `Docker Desktop / WSL Integration` |
 | Scope | `user` |
 | Source file | [research/records/developer.docker-performance.review.json](records/developer.docker-performance.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -645,6 +650,7 @@ Current writes
 | Area | `User Environment Variable` |
 | Scope | `user` |
 | Source file | [research/records/developer.dotnet-telemetry-disable.json](records/developer.dotnet-telemetry-disable.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -764,6 +770,7 @@ Nohuto lineage references:
 | Area | `Windows Path Handling vs Git Configuration` |
 | Scope | `device` |
 | Source file | [research/records/developer.enable-windows-long-paths.review.json](records/developer.enable-windows-long-paths.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -847,7 +854,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) | `high` | path, value, behavior |
-| `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [research/evidence-files/procmon/developer.enable-windows-long-paths](evidence-files/procmon/developer.enable-windows-long-paths)/devmode_longpaths_probe.csv and [research/evidence-files/procmon/developer.enable-windows-long-paths](evidence-files/procmon/developer.enable-windows-long-paths)/devmode-longpaths-probe-pml.md | `medium` | path, value, behavior, ui-mapping |
+| `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [research/evidence-files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](evidence-files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [research/evidence-files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](evidence-files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) | `medium` | path, value, behavior, ui-mapping |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -882,6 +889,7 @@ Nohuto lineage references:
 | Area | `System Environment Variable` |
 | Scope | `device` |
 | Source file | [research/records/developer.nodejs-performance.json](records/developer.nodejs-performance.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1002,6 +1010,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/developer.powershell-execution.json](records/developer.powershell-execution.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1122,6 +1131,7 @@ Nohuto lineage references:
 | Area | `Python / Windows Path Handling` |
 | Scope | `device` |
 | Source file | [research/records/developer.python-path-fix.review.json](records/developer.python-path-fix.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1244,6 +1254,7 @@ Nohuto lineage references:
 | Area | `OpenSSH Agent Startup` |
 | Scope | `user` |
 | Source file | [research/records/developer.ssh-agent-autostart.review.json](records/developer.ssh-agent-autostart.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1354,6 +1365,7 @@ Current writes
 | Area | `Registry Enablement` |
 | Scope | `device` |
 | Source file | [research/records/developer.windows-dev-mode.json](records/developer.windows-dev-mode.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1430,7 +1442,7 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-enable-device-for-development` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Enable your device for development | [https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode](https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode) | `high` | path, value, behavior |
-| `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [research/evidence-files/procmon/developer.windows-dev-mode](evidence-files/procmon/developer.windows-dev-mode)/devmode_probe2.csv and [research/evidence-files/procmon/developer.windows-dev-mode](evidence-files/procmon/developer.windows-dev-mode)/devmode_probe2.txt | `medium` | path, behavior, default, ui-mapping |
+| `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.csv](evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.txt](evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.txt) | `medium` | path, behavior, default, ui-mapping |
 | `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) | `high` | behavior, default, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
@@ -1467,6 +1479,7 @@ Current writes
 | Area | `WSL Configuration` |
 | Scope | `user` |
 | Source file | [research/records/developer.wsl2-memory.json](records/developer.wsl2-memory.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1577,6 +1590,7 @@ Current writes
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.always-show-icons-never-thumbnails.review.json](records/explorer.always-show-icons-never-thumbnails.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1662,7 +1676,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-alwaysshowicons` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista alwaysShowIcons | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-iconsonly` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for IconsOnly | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-iconsonly-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer IconsOnly runtime surface | [research/evidence-files/procmon/explorer.always-show-icons-never-thumbnails](evidence-files/procmon/explorer.always-show-icons-never-thumbnails)/iconsonly-result.txt | `high` | path, value, behavior, version-scope |
+| `procmon-iconsonly-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer IconsOnly runtime surface | [research/evidence-files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](evidence-files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
@@ -1696,6 +1710,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/explorer.disable-low-disk-space-warning.json](records/explorer.disable-low-disk-space-warning.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1815,6 +1830,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/explorer.disable-taskbar-chat.json](records/explorer.disable-taskbar-chat.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1937,6 +1953,7 @@ Nohuto lineage references:
 | Area | `Explorer Advanced Flags` |
 | Scope | `user` |
 | Source file | [research/records/explorer.enable-explorer-compact-mode.review.json](records/explorer.enable-explorer-compact-mode.review.json) |
+| V3.1 evidence root | [evidence/explorer.enable-explorer-compact-mode](../evidence/explorer.enable-explorer-compact-mode) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2020,8 +2037,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [research/evidence-files/procmon/explorer.enable-explorer-compact-mode](evidence-files/procmon/explorer.enable-explorer-compact-mode)/explorer-batch-applied-20260314-pml.md and [research/evidence-files/procmon/explorer.enable-explorer-compact-mode](evidence-files/procmon/explorer.enable-explorer-compact-mode)/explorer-compact-zero-20260314-pml.md | `high` | path, value, behavior, ui-mapping |
-| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [research/evidence-files/ghidra/explorer.enable-explorer-compact-mode](evidence-files/ghidra/explorer.enable-explorer-compact-mode)/explorerframe-usecompactmode-ghidra.md | `high` | path, behavior, ui-mapping |
+| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [research/evidence-files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](evidence-files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -2056,6 +2073,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.hide-empty-drives.review.json](records/explorer.hide-empty-drives.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2135,7 +2153,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [research/evidence-files/procmon/explorer.hide-empty-drives](evidence-files/procmon/explorer.hide-empty-drives)/hideemptydrives-result.txt | `high` | path, value, behavior, version-scope |
+| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [research/evidence-files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](evidence-files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for HideDrivesWithNoMedia | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -2170,6 +2188,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.launch-folder-windows-in-a-separate-process.review.json](records/explorer.launch-folder-windows-in-a-separate-process.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2255,7 +2274,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-separateprocess` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista separateProcess | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-separateprocess` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for SeparateProcess | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-separateprocess-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer SeparateProcess runtime surface | [research/evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process](evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process)/separateprocess-result.txt | `high` | path, value, behavior, version-scope |
+| `procmon-separateprocess-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer SeparateProcess runtime surface | [research/evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
@@ -2289,6 +2308,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json](records/explorer.show-compressed-and-encrypted-files-in-color.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2374,7 +2394,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showcompcolor` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showCompColor | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-showcompcolor` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowCompColor | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | [research/evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color](evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color)/showcompcolor-result-txt.md | `high` | path, value, behavior, version-scope |
+| `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | [research/evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
@@ -2408,6 +2428,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-drive-letters-first.review.json](records/explorer.show-drive-letters-first.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2487,7 +2508,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showdriveletter` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showDriveLetter | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-showdrivelettersfirst` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowDriveLettersFirst | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [research/evidence-files/procmon/explorer.show-drive-letters-first](evidence-files/procmon/explorer.show-drive-letters-first)/showdrivelettersfirst-result.txt | `high` | path, value, behavior, version-scope |
+| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [research/evidence-files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](evidence-files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
@@ -2521,6 +2542,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-file-extensions.review.json](records/explorer.show-file-extensions.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2606,7 +2628,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for HideFileExt | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, version-scope |
-| `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | [research/evidence-files/procmon/explorer.show-file-extensions](evidence-files/procmon/explorer.show-file-extensions)/hidefileext-capture-20260313-pml.md | `high` | path, value, behavior, version-scope |
+| `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | [research/evidence-files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](evidence-files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -2641,6 +2663,7 @@ Nohuto lineage references:
 | Area | `Explorer Cabinet State` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-full-path.review.json](records/explorer.show-full-path.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2761,6 +2784,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-hidden-files.review.json](records/explorer.show-hidden-files.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2846,7 +2870,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-hidden` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for Hidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, version-scope |
-| `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [research/evidence-files/procmon/explorer.show-hidden-files](evidence-files/procmon/explorer.show-hidden-files)/hidden-capture-20260313-pml.md | `high` | path, value, behavior, version-scope |
+| `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [research/evidence-files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](evidence-files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -2881,6 +2905,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-info-tips.review.json](records/explorer.show-info-tips.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2966,7 +2991,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showinfotip` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showInfoTip | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-showinfotip` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowInfoTip | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showinfotip-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [research/evidence-files/procmon/explorer.show-info-tips](evidence-files/procmon/explorer.show-info-tips)/showinfotip-result.txt | `high` | path, value, behavior, version-scope |
+| `procmon-showinfotip-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [research/evidence-files/procmon/explorer.show-info-tips/showinfotip-result.txt](evidence-files/procmon/explorer.show-info-tips/showinfotip-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
@@ -3000,6 +3025,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-protected-operating-system-files.review.json](records/explorer.show-protected-operating-system-files.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3085,7 +3111,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showsuperhidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showSuperHidden | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-showsuperhidden` | `raw-registry-dump` | `unspecified` | 25H2 dump and default hive corroboration for ShowSuperHidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [research/evidence-files/procmon/explorer.show-protected-operating-system-files](evidence-files/procmon/explorer.show-protected-operating-system-files)/showsuperhidden-result.txt | `high` | path, value, behavior, version-scope |
+| `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [research/evidence-files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](evidence-files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
@@ -3119,6 +3145,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-recent-items.review.json](records/explorer.show-recent-items.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3198,7 +3225,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer general settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowRecent | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | [research/evidence-files/procmon/explorer.show-recent-items](evidence-files/procmon/explorer.show-recent-items)/showrecent-result.txt | `high` | path, value, behavior, version-scope |
+| `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | [research/evidence-files/procmon/explorer.show-recent-items/showrecent-result.txt](evidence-files/procmon/explorer.show-recent-items/showrecent-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowRecent | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -3233,6 +3260,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-status-bar.review.json](records/explorer.show-status-bar.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3319,7 +3347,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [research/evidence-files/procmon/explorer.show-status-bar](evidence-files/procmon/explorer.show-status-bar)/showstatusbar-result.txt | `high` | path, value, behavior, version-scope |
+| `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [research/evidence-files/procmon/explorer.show-status-bar/showstatusbar-result.txt](evidence-files/procmon/explorer.show-status-bar/showstatusbar-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowStatusBar | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -3354,6 +3382,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-type-overlay.review.json](records/explorer.show-type-overlay.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3439,7 +3468,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-displayiconthumb` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista displayIconThumb | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-showtypeoverlay` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowTypeOverlay | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showtypeoverlay-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [research/evidence-files/procmon/explorer.show-type-overlay](evidence-files/procmon/explorer.show-type-overlay)/showtypeoverlay-result.txt | `high` | path, value, behavior, version-scope |
+| `procmon-showtypeoverlay-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [research/evidence-files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt](evidence-files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
@@ -3473,6 +3502,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.taskbar-alignment-left.review.json](records/explorer.taskbar-alignment-left.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3558,7 +3588,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | `Microsoft official doc` | Microsoft Windows 11 settings reference for taskbar alignment | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11) | `high` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-taskbaral` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for TaskbarAl | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | [research/evidence-files/procmon/explorer.taskbar-alignment-left](evidence-files/procmon/explorer.taskbar-alignment-left)/taskbar-alignment-capture-20260313-pml.md | `high` | path, value, behavior, version-scope |
+| `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | [research/evidence-files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md](evidence-files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -3595,6 +3625,7 @@ Nohuto lineage references:
 | Area | `Group Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-active-probing.review.json](records/network.disable-active-probing.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3721,6 +3752,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-default-shares.json](records/network.disable-default-shares.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3864,6 +3896,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-ipv6.json](records/network.disable-ipv6.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3989,6 +4022,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-llmnr.json](records/network.disable-llmnr.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4115,6 +4149,7 @@ Windows Internals references:
 | Area | `LLTD Policy Semantics` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-lltd.review.json](records/network.disable-lltd.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4260,6 +4295,7 @@ Windows Internals references:
 | Area | `mDNS Policy Semantics` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-mdns.review.json](records/network.disable-mdns.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4385,6 +4421,7 @@ Windows Internals references:
 | Area | `Per-interface Registry Configuration` |
 | Scope | `per-interface` |
 | Source file | [research/records/network.disable-netbios.review.json](records/network.disable-netbios.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4515,6 +4552,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-netbios-resolution.json](records/network.disable-netbios-resolution.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4644,6 +4682,7 @@ Windows Internals references:
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-plaintext-smb-passwords.json](records/network.disable-plaintext-smb-passwords.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4771,6 +4810,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-smart-name-resolution.json](records/network.disable-smart-name-resolution.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4897,6 +4937,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-smb1.json](records/network.disable-smb1.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5024,6 +5065,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-smb2.json](records/network.disable-smb2.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5148,6 +5190,7 @@ Windows Internals references:
 | Area | `Group Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-wifi-sense.json](records/network.disable-wifi-sense.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5273,6 +5316,7 @@ Windows Internals references:
 | Area | `Group Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.enable-lltd-responder.json](records/network.enable-lltd-responder.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5399,6 +5443,7 @@ Windows Internals references:
 | Area | `Group Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.enable-lltdio.json](records/network.enable-lltdio.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5525,6 +5570,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.prefer-ipv4.json](records/network.prefer-ipv4.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5650,6 +5696,7 @@ Windows Internals references:
 | Area | `Registry Security Option` |
 | Scope | `device` |
 | Source file | [research/records/network.require-ntlm-ssp-client-session-security.review.json](records/network.require-ntlm-ssp-client-session-security.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5776,6 +5823,7 @@ Windows Internals references:
 | Area | `SMB Server Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-disable-leasing.review.json](records/network.smb-disable-leasing.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5902,6 +5950,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-enable-large-mtu.json](records/network.smb-enable-large-mtu.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6028,6 +6077,7 @@ Windows Internals references:
 | Area | `SMB Client and Server Configuration` |
 | Scope | `mixed` |
 | Source file | [research/records/network.smb-enable-multichannel.review.json](records/network.smb-enable-multichannel.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6169,6 +6219,7 @@ Windows Internals references:
 | Area | `Policy vs Observed Service Setting` |
 | Scope | `mixed` |
 | Source file | [research/records/network.smb-enable-quic.review.json](records/network.smb-enable-quic.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6313,6 +6364,7 @@ Windows Internals references:
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-encrypt-data.json](records/network.smb-encrypt-data.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6439,6 +6491,7 @@ Windows Internals references:
 | Area | `Registry Optimization Bundle` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-increase-client-metadata-cache.json](records/network.smb-increase-client-metadata-cache.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6596,6 +6649,7 @@ Current writes
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-reject-unencrypted-access.json](records/network.smb-reject-unencrypted-access.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6721,6 +6775,7 @@ Windows Internals references:
 | Area | `Policy vs Observed Service Setting` |
 | Scope | `mixed` |
 | Source file | [research/records/network.smb-require-dialect-3_1_1.review.json](records/network.smb-require-dialect-3_1_1.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6909,6 +6964,7 @@ Windows Internals references:
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-require-signing-client.json](records/network.smb-require-signing-client.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7051,6 +7107,7 @@ Windows Internals references:
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-require-signing-server.json](records/network.smb-require-signing-server.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7193,6 +7250,7 @@ Windows Internals references:
 | Area | `Policy vs Observed Service Setting` |
 | Scope | `mixed` |
 | Source file | [research/records/network.smb-set-cipher-suite-order.review.json](records/network.smb-set-cipher-suite-order.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7339,6 +7397,7 @@ Windows Internals references:
 | Area | `Observed User Preference` |
 | Scope | `user` |
 | Source file | [research/records/notifications.disable-feedback-frequency.review.json](records/notifications.disable-feedback-frequency.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7456,6 +7515,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/notifications.disable-lock-screen.json](records/notifications.disable-lock-screen.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7576,6 +7636,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/notifications.disable-mirroring.json](records/notifications.disable-mirroring.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7696,6 +7757,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/notifications.disable-tile.json](records/notifications.disable-tile.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7816,6 +7878,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/notifications.disable-toast.json](records/notifications.disable-toast.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7938,6 +8001,7 @@ Nohuto lineage references:
 | Area | `Win32 Animation Effects` |
 | Scope | `user` |
 | Source file | [research/records/performance.disable-animations.review.json](records/performance.disable-animations.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8064,6 +8128,7 @@ Windows Internals references:
 | Area | `Win32 Menu Timing` |
 | Scope | `user` |
 | Source file | [research/records/performance.disable-menu-show-delay.review.json](records/performance.disable-menu-show-delay.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8189,6 +8254,7 @@ Windows Internals references:
 | Area | `Explorer Taskbar Animation Flags` |
 | Scope | `user` |
 | Source file | [research/records/performance.disable-taskbar-animations.review.json](records/performance.disable-taskbar-animations.review.json) |
+| V3.1 evidence root | [evidence/performance.disable-taskbar-animations](../evidence/performance.disable-taskbar-animations) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8280,7 +8346,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | [research/evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt](evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt) | `high` | value, behavior, version-scope |
 | `procmon-taskbar-animations-registry-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [research/evidence-files/ghidra/performance.disable-taskbar-animations](evidence-files/ghidra/performance.disable-taskbar-animations)/taskbar-taskbaranimations-ghidra.md | `high` | path, behavior, ui-mapping |
+| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [research/evidence-files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](evidence-files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo source note for performance.disable-taskbar-animations | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 
@@ -8318,6 +8384,7 @@ Windows Internals references:
 | Area | `Observed User Preference` |
 | Scope | `user` |
 | Source file | [research/records/peripheral.autoplay-take-no-action.review.json](records/peripheral.autoplay-take-no-action.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8445,6 +8512,7 @@ Windows Internals references:
 | Area | `User Policy` |
 | Scope | `user` |
 | Source file | [research/records/peripheral.disable-autoplay.review.json](records/peripheral.disable-autoplay.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8591,6 +8659,7 @@ Windows Internals references:
 | Area | `Accessibility Sticky Keys Flags` |
 | Scope | `user` |
 | Source file | [research/records/peripheral.disable-sticky-keys-prompt.review.json](records/peripheral.disable-sticky-keys-prompt.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8719,11 +8788,12 @@ Windows Internals references:
 | Area | `Processor Idle Behavior` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-cpu-idle-states.json](records/power.disable-cpu-idle-states.json) |
+| V3.1 evidence root | [evidence/power.disable-cpu-idle-states](../evidence/power.disable-cpu-idle-states) |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated observed implementation only. This record now has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, plus a machine-checkable apply and restore pass for the app's current profile.
+**Summary:** Validated observed implementation only. This record has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, a machine-checkable apply and restore pass for the app's current profile, a current-build Ghidra no-match follow-up on ntoskrnl.exe, and a rebooted benchmark attempt that broke shell availability before workloads started and required a snapshot recovery.
 
 **Current implementation**
 
@@ -8813,6 +8883,8 @@ Windows Internals references:
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) | `medium` | path, value, behavior |
 | `vm-cpu-idle-bundle-probe` | `vm-test` | `VM test / probe` | Win25H2Clean reversible probe for the CPU idle-state bundle | [research/evidence-files/vm-tooling-staging/cpu_idle_probe.json](evidence-files/vm-tooling-staging/cpu_idle_probe.json) | `high` | path, value, behavior, rollback |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | ui-mapping, app-mismatch |
+| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | `unspecified` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) | `medium` | version-scope, open-question |
+| `vm-cpu-idle-benchmark-incident-20260327` | `vm-incident` | `unspecified` | Win25H2Clean rebooted CPU idle benchmark incident | [research/vm-incidents.json](vm-incidents.json) and [research/notes/cpu-idle-states-follow-up-20260327.md](notes/cpu-idle-states-follow-up-20260327.md) | `high` | incident-review, version-scope, side-effects |
 
 **Validation proof**
 
@@ -8821,7 +8893,7 @@ Windows Internals references:
 | Source | [research/evidence-files/vm-tooling-staging/cpu_idle_probe.json](evidence-files/vm-tooling-staging/cpu_idle_probe.json) |
 | Exact quote / path | before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null |
 | Key found on page | `True` |
-| Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. |
+| Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. A later rebooted benchmark lane failed before any CPU or memory workload started because Explorer did not return after reboot, and the VM had to be recovered from snapshot. |
 
 **Decision**
 
@@ -8832,7 +8904,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The repo power notes and the Win25H2Clean probe now line up on the same raw bundle and show both the current observed baseline and the app profile. That is enough to keep the record active and well-scoped, but not enough to treat the bundle as an app-ready supported control surface. |
+| Why | The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead, and the first rebooted benchmark lane broke shell availability before any workload ran. That keeps the record active and evidence-backed, but it still is not an app-ready supported control surface. |
 
 ---
 
@@ -8846,6 +8918,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-fast-startup.review.json](records/power.disable-fast-startup.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8975,6 +9048,7 @@ Windows Internals references:
 | Area | `TCP/IP offload + MMCSS policy` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-network-power-saving.policy.review.json](records/power.disable-network-power-saving.policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9098,6 +9172,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-power-throttling.json](records/power.disable-power-throttling.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9226,6 +9301,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-windows-search.json](records/power.disable-windows-search.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9351,6 +9427,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/power.hide-hibernate-option.json](records/power.hide-hibernate-option.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9446,7 +9523,7 @@ Windows Internals references:
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for hibernation support | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) | `medium` | path, behavior, dependency |
 | `nohuto-showhibernateoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowHibernateOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [research/evidence-files/procmon/power.hide-hibernate-option](evidence-files/procmon/power.hide-hibernate-option)/power_hide_hibernate_option_probe.txt | `medium` | runtime writes, value semantics, rollback |
+| `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [research/evidence-files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt](evidence-files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -9480,6 +9557,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/power.hide-lock-option.json](records/power.hide-lock-option.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9574,7 +9652,7 @@ Windows Internals references:
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showlockoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowLockOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-lock-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [research/evidence-files/procmon/power.hide-lock-option](evidence-files/procmon/power.hide-lock-option)/power_hide_lock_option_probe.txt | `low` | runtime writes, rollback, trigger attempt |
+| `procmon-power-hide-lock-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [research/evidence-files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt](evidence-files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
 
 **Validation proof**
 
@@ -9608,6 +9686,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/power.hide-sleep-option.json](records/power.hide-sleep-option.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9702,7 +9781,7 @@ Windows Internals references:
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showsleepoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowSleepOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [research/evidence-files/procmon/power.hide-sleep-option](evidence-files/procmon/power.hide-sleep-option)/power_hide_sleep_option_probe.txt | `medium` | runtime writes, value semantics, rollback |
+| `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [research/evidence-files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt](evidence-files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -9736,6 +9815,7 @@ Windows Internals references:
 | Area | `PowerCfg PERFBOOSTMODE` |
 | Scope | `device` |
 | Source file | [research/records/power.optimize-cpu-boost.json](records/power.optimize-cpu-boost.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9863,6 +9943,7 @@ Windows Internals references:
 | Area | `Multimedia Class Scheduler Service` |
 | Scope | `device` |
 | Source file | [research/records/power.optimize-gaming-network.json](records/power.optimize-gaming-network.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10050,6 +10131,7 @@ Windows Internals references:
 | Area | `Security Option Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.block-microsoft-accounts.json](records/privacy.block-microsoft-accounts.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10171,6 +10253,7 @@ Nohuto lineage references:
 | Area | `AppPrivacy policy family` |
 | Scope | `device` |
 | Source file | [research/records/privacy.deny-app-access.policy.review.json](records/privacy.deny-app-access.policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10281,6 +10364,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-activity-history.json](records/privacy.disable-activity-history.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10433,6 +10517,7 @@ Nohuto lineage references:
 | Area | `Machine Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-advertising-id.json](records/privacy.disable-advertising-id.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10552,6 +10637,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-app-diagnostics.json](records/privacy.disable-app-diagnostics.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10670,6 +10756,7 @@ Nohuto lineage references:
 | Area | `Observed Registry Setting` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-app-launch-tracking.review.json](records/privacy.disable-app-launch-tracking.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10757,7 +10844,7 @@ Nohuto lineage references:
 | `ms-gppref-start-trackprogs` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5) | `high` | path, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-start-track-progs-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - Start_TrackProgs trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `high` | path, value, behavior, ui-mapping |
-| `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | [research/evidence-files/procmon/privacy.disable-app-launch-tracking](evidence-files/procmon/privacy.disable-app-launch-tracking)/procmon-start-track-progs-1.pml.md and [research/evidence-files/procmon/privacy.disable-app-launch-tracking](evidence-files/procmon/privacy.disable-app-launch-tracking)/procmon-start-track-progs-0.pml.md | `medium` | path, value, behavior, ui-mapping |
+| `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | [research/evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [research/evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -10791,6 +10878,7 @@ Nohuto lineage references:
 | Area | `Policy vs Observed User Setting` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-app-suggestions.review.json](records/privacy.disable-app-suggestions.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10926,6 +11014,7 @@ Nohuto lineage references:
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-appcompat-engine.policy.review.json](records/privacy.disable-appcompat-engine.policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11022,7 +11111,7 @@ Current writes
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-procmon.pml and [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-filtered.hits.csv | `high` | value, behavior, version-scope |
+| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -11056,6 +11145,7 @@ Current writes
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-appdeviceinventory.policy.review.json](records/privacy.disable-appdeviceinventory.policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11186,7 +11276,7 @@ Current writes
 | `local-appdeviceinventory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppDeviceInventory.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) | `high` | path, value, allowed-values, version-scope |
 | `csp-appdeviceinventory` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - AppDeviceInventory | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - four AppDeviceInventory policies | [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy](evidence-files/procmon/privacy.disable-appdeviceinventory.policy)/appdeviceinventory-policy-procmon.pml and [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy](evidence-files/procmon/privacy.disable-appdeviceinventory.policy)/appdeviceinventory-policy-procmon.filtered.hits.csv | `high` | value, behavior, version-scope |
+| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - four AppDeviceInventory policies | [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml](evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml) and [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv](evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -11220,6 +11310,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-application-telemetry.json](records/privacy.disable-application-telemetry.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11341,6 +11432,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-background-apps.json](records/privacy.disable-background-apps.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11461,6 +11553,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-biometrics.json](records/privacy.disable-biometrics.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11580,6 +11673,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-biometrics-domain-logon.json](records/privacy.disable-biometrics-domain-logon.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11699,6 +11793,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-biometrics-logon.json](records/privacy.disable-biometrics-logon.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11818,6 +11913,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-camera.json](records/privacy.disable-camera.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11938,6 +12034,7 @@ Nohuto lineage references:
 | Area | `User Environment Variables` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-cli-telemetry.json](records/privacy.disable-cli-telemetry.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12077,6 +12174,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-consumer-account-content.json](records/privacy.disable-consumer-account-content.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12195,6 +12293,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-copilot.json](records/privacy.disable-copilot.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12316,6 +12415,7 @@ Nohuto lineage references:
 | Area | `Machine Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-cross-device-experiences.policy.review.json](records/privacy.disable-cross-device-experiences.policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12429,6 +12529,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-device-name-telemetry.json](records/privacy.disable-device-name-telemetry.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12550,6 +12651,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-diagnostic-data-delete.json](records/privacy.disable-diagnostic-data-delete.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12671,6 +12773,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-diagnostic-data-viewer.json](records/privacy.disable-diagnostic-data-viewer.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12792,6 +12895,7 @@ Nohuto lineage references:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-edge-search-suggestions.json](records/privacy.disable-edge-search-suggestions.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12943,6 +13047,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-feedback-notifications.json](records/privacy.disable-feedback-notifications.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13031,7 +13136,7 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DoNotShowFeedbackNotifications policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior |
-| `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [research/evidence-files/procmon/privacy.disable-feedback-notifications](evidence-files/procmon/privacy.disable-feedback-notifications)/feedback_notifications_probe.txt | `medium` | runtime writes, value semantics, rollback |
+| `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [research/evidence-files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](evidence-files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -13065,6 +13170,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-file-history.json](records/privacy.disable-file-history.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13185,6 +13291,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-find-my-device.json](records/privacy.disable-find-my-device.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13306,6 +13413,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-font-providers.json](records/privacy.disable-font-providers.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13427,6 +13535,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-kms-activation-telemetry.json](records/privacy.disable-kms-activation-telemetry.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13549,6 +13658,7 @@ Nohuto lineage references:
 | Area | `Observed User Preference` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-language-list-access.review.json](records/privacy.disable-language-list-access.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13666,6 +13776,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-local-security-questions.json](records/privacy.disable-local-security-questions.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13788,6 +13899,7 @@ Nohuto lineage references:
 | Area | `Runtime Consent Store` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-location-consent.review.json](records/privacy.disable-location-consent.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13922,6 +14034,7 @@ Nohuto lineage references:
 | Area | `Observed Runtime Consent` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-location-consent-system.review.json](records/privacy.disable-location-consent-system.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14040,6 +14153,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-location-scripting.json](records/privacy.disable-location-scripting.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14160,6 +14274,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-location-services.json](records/privacy.disable-location-services.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14279,6 +14394,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-mdm-enrollment.json](records/privacy.disable-mdm-enrollment.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14400,6 +14516,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-message-sync.json](records/privacy.disable-message-sync.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14521,6 +14638,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-offline-files.policy.json](records/privacy.disable-offline-files.policy.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14633,6 +14751,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-onesettings-downloads.json](records/privacy.disable-onesettings-downloads.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14754,6 +14873,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-online-tips.json](records/privacy.disable-online-tips.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14875,6 +14995,7 @@ Nohuto lineage references:
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-pca-diagnostics.policy.review.json](records/privacy.disable-pca-diagnostics.policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14996,6 +15117,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-phone-linking.json](records/privacy.disable-phone-linking.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15116,6 +15238,7 @@ Nohuto lineage references:
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-program-compatibility-assistant.review.json](records/privacy.disable-program-compatibility-assistant.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15195,7 +15318,7 @@ Current writes
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects |
 | `admx-appcompat-turn-off-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
-| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant](evidence-files/procmon/privacy.disable-program-compatibility-assistant)/disable-pca-policy-procmon.pml and [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant](evidence-files/procmon/privacy.disable-program-compatibility-assistant)/disable-pca-policy-procmon.filtered.hits.csv | `high` | value, behavior, version-scope |
+| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -15230,6 +15353,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-recall.json](records/privacy.disable-recall.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15353,6 +15477,7 @@ Nohuto lineage references:
 | Area | `Current-user Resume Setting` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-resume.json](records/privacy.disable-resume.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15438,9 +15563,9 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-resume-procmon-notes` | `repo-doc` | `Current repo docs` | Repo Procmon notes for Resume settings | [Docs/privacy/privacy.md](../Docs/privacy/privacy.md) | `medium` | path, value, behavior |
 | `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | HKCU/Software/Microsoft/Windows/CurrentVersion/CrossDeviceResume/Configuration | `medium` | path, value, version-scope |
-| `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/crossdevice_resume_probe.csv and [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/resume-policymanager-probe.txt | `medium` | path, behavior, version-scope |
+| `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [research/evidence-files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](evidence-files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [research/evidence-files/procmon/privacy.disable-resume/resume-policymanager-probe.txt](evidence-files/procmon/privacy.disable-resume/resume-policymanager-probe.txt) | `medium` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/privacy_disable_resume_probe.txt and [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/privacy-disable-resume-probe-csv.md | `medium` | path, behavior, version-scope |
+| `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [research/evidence-files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](evidence-files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [research/evidence-files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](evidence-files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) | `medium` | path, behavior, version-scope |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume) | `high` | behavior, version-scope |
 
 **Validation proof**
@@ -15475,6 +15600,7 @@ Nohuto lineage references:
 | Area | `Group Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-rsop-logging.json](records/privacy.disable-rsop-logging.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15595,6 +15721,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-search-box-suggestions.json](records/privacy.disable-search-box-suggestions.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15716,6 +15843,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-search-history.json](records/privacy.disable-search-history.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15804,7 +15932,7 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchHistory policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [research/evidence-files/procmon/privacy.disable-search-history](evidence-files/procmon/privacy.disable-search-history)/search_history_probe.txt | `low` | runtime writes, rollback, trigger attempt |
+| `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [research/evidence-files/procmon/privacy.disable-search-history/search_history_probe.txt](evidence-files/procmon/privacy.disable-search-history/search_history_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
 
 **Validation proof**
 
@@ -15838,6 +15966,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-sensors.json](records/privacy.disable-sensors.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15959,6 +16088,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-steps-recorder.json](records/privacy.disable-steps-recorder.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16087,6 +16217,7 @@ Other source references:
 | Area | `CloudContent policy trio` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-suggestions.policy.review.json](records/privacy.disable-suggestions.policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16241,6 +16372,7 @@ Nohuto lineage references:
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-switchback.policy.review.json](records/privacy.disable-switchback.policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16320,7 +16452,7 @@ Current writes
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
-| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy](evidence-files/procmon/privacy.disable-appcompat-engine.policy)/appcompat-policy-bundle-procmon.pml and [research/evidence-files/procmon/privacy.disable-switchback.policy](evidence-files/procmon/privacy.disable-switchback.policy)/switchback-only.hits.csv | `high` | value, behavior, version-scope |
+| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [research/evidence-files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](evidence-files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) | `high` | value, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -16355,6 +16487,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-telemetry-change-notifications.json](records/privacy.disable-telemetry-change-notifications.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16475,6 +16608,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-telemetry-optin-ui.json](records/privacy.disable-telemetry-optin-ui.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16596,6 +16730,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-wer.json](records/privacy.disable-wer.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16718,6 +16853,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-windows-location-provider.json](records/privacy.disable-windows-location-provider.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16839,6 +16975,7 @@ Nohuto lineage references:
 | Area | `CloudContent Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-windows-tips.review.json](records/privacy.disable-windows-tips.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16974,6 +17111,7 @@ Nohuto lineage references:
 | Area | `Security Option` |
 | Scope | `device` |
 | Source file | [research/records/privacy.hide-last-logged-in-user.json](records/privacy.hide-last-logged-in-user.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17094,6 +17232,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.hide-recommended-personalized-sites.json](records/privacy.hide-recommended-personalized-sites.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17212,6 +17351,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.hide-recommended-personalized-sites-user.json](records/privacy.hide-recommended-personalized-sites-user.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17332,6 +17472,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.hide-recommended-section.json](records/privacy.hide-recommended-section.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17450,6 +17591,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.hide-recommended-section-user.json](records/privacy.hide-recommended-section-user.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17570,6 +17712,7 @@ Nohuto lineage references:
 | Area | `Security Option` |
 | Scope | `device` |
 | Source file | [research/records/privacy.hide-username-at-signin.json](records/privacy.hide-username-at-signin.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17690,6 +17833,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.limit-diagnostic-log-collection.json](records/privacy.limit-diagnostic-log-collection.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17810,6 +17954,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.limit-dump-collection.json](records/privacy.limit-dump-collection.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17931,6 +18076,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json](records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18045,6 +18191,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.troubleshooter-dont-run.review.json](records/privacy.troubleshooter-dont-run.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18169,6 +18316,7 @@ Nohuto lineage references:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json](records/privacy.turn-off-sync-by-default-allow-user-override.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18317,6 +18465,7 @@ Current writes
 | Area | `Microsoft Defender MAPS sample submission` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-defender-sample-submission.review.json](records/security.disable-defender-sample-submission.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18413,8 +18562,8 @@ Windows Internals references:
 | `ms-defender-block-at-first-sight-dependency` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Block at First Sight dependency on sample submission | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) | `high` | behavior, tradeoff |
 | `repo-defender-submit-samples-lead` | `repo-doc` | `Current repo docs` | Local Defender sample-submission lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) | `medium` | path, value, allowed-values |
 | `repo-defender-submit-samples-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes SubmitSamplesConsent | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path |
-| `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | [research/evidence-files/procmon/security.disable-defender-sample-submission](evidence-files/procmon/security.disable-defender-sample-submission)/spynet-ui-state2.txt | `medium` | path, runtime-read, default |
-| `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission](evidence-files/procmon/security.disable-defender-sample-submission)/submitsamples-ui-state2.txt | `high` | path, value, runtime-read, behavior |
+| `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | [research/evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `medium` | path, runtime-read, default |
+| `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](evidence-files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-disable-defender-sample-submission` | `repo-code` | `Current repo code` | Current security provider sample-submission write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -18449,6 +18598,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/security.disable-downloads-blocking.json](records/security.disable-downloads-blocking.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18574,6 +18724,7 @@ Windows Internals references:
 | Area | `Windows Security notifications` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-enhanced-defender-notifications.review.json](records/security.disable-enhanced-defender-notifications.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18666,9 +18817,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-defender-security-center-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefenderSecurityCenter.admx enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) | `high` | path, value, allowed-values, behavior |
 | `ms-defender-reporting-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefender.admx reporting enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, allowed-values |
-| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications](evidence-files/procmon/security.disable-enhanced-defender-notifications)/defender-disable-enhanced-baseline-1.txt | `high` | path, runtime-read, default |
-| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications](evidence-files/procmon/security.disable-enhanced-defender-notifications)/defender-disable-enhanced-securitycenter-1.txt | `high` | path, value, runtime-read, behavior |
-| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications](evidence-files/procmon/security.disable-enhanced-defender-notifications)/defender-disable-enhanced-reporting-1.txt | `medium` | path, runtime-read |
+| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt](evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt) | `high` | path, runtime-read, default |
+| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) | `medium` | path, runtime-read |
 | `app-security-provider-disable-enhanced-notifications` | `repo-code` | `Current repo code` | Current security provider enhanced notifications write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | ui-mapping, path, value |
 
 **Validation proof**
@@ -18703,6 +18854,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-ntfs-encryption.json](records/security.disable-ntfs-encryption.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18827,6 +18979,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-p2p-updates.review.json](records/security.disable-p2p-updates.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18956,6 +19109,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-password-reveal.json](records/security.disable-password-reveal.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19081,6 +19235,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-picture-password.json](records/security.disable-picture-password.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19206,6 +19361,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-remote-assistance.json](records/security.disable-remote-assistance.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19332,6 +19488,7 @@ Windows Internals references:
 | Area | `Exploit Protection` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-system-mitigations.review.json](records/security.disable-system-mitigations.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19455,6 +19612,7 @@ Windows Internals references:
 | Area | `System Restore Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-system-restore.review.json](records/security.disable-system-restore.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19581,6 +19739,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-windows-firewall.review.json](records/security.disable-windows-firewall.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19724,6 +19883,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-windows-update.policy.review.json](records/security.disable-windows-update.policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19850,6 +20010,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-wu-driver-updates.json](records/security.disable-wu-driver-updates.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20012,6 +20173,7 @@ Windows Internals references:
 | Area | `Microsoft Defender cloud protection` |
 | Scope | `device` |
 | Source file | [research/records/security.enable-defender-maps-advanced-membership.review.json](records/security.enable-defender-maps-advanced-membership.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20105,8 +20267,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-defender-spynet-reporting` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) | `high` | path, value, allowed-values, behavior |
 | `repo-defender-spynet-lead` | `repo-doc` | `Current repo docs` | Local Defender MAPS lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) | `medium` | path, value, allowed-values |
-| `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [research/evidence-files/procmon/security.enable-defender-maps-advanced-membership](evidence-files/procmon/security.enable-defender-maps-advanced-membership)/spynet-ui-baseline.txt | `high` | path, runtime-read, default |
-| `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission](evidence-files/procmon/security.disable-defender-sample-submission)/spynet-ui-state2.txt | `high` | path, value, runtime-read, behavior |
+| `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [research/evidence-files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](evidence-files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) | `high` | path, runtime-read, default |
+| `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | `Current repo code` | Current security provider MAPS membership write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -20141,6 +20303,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.enable-dynamic-lock.json](records/security.enable-dynamic-lock.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20238,7 +20401,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx](evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx) |
-| Exact quote / path | [research/evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx](evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx): policy name="MSPassport_UseDynamicLock" key="SOFTWARE/Policies/Microsoft/PassportForWork/DynamicLock" valueName="DynamicLock" enabledValue=1; [research/evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml](evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml): "If you enable this policy setting, these signal rules will be evaluated to detect user absence and automatically lock the device." |
+| Exact quote / path | [research/evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx:](evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx:) policy name="MSPassport_UseDynamicLock" key="SOFTWARE/Policies/Microsoft/PassportForWork/DynamicLock" valueName="DynamicLock" enabledValue=1; [research/evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml:](evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml:) "If you enable this policy setting, these signal rules will be evaluated to detect user absence and automatically lock the device." |
 | Key found on page | `True` |
 | Notes | The official Dynamic Lock policy surface is machine-checkably documented in the local ADMX and ADML files. |
 
@@ -20265,6 +20428,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.enable-sudo.json](records/security.enable-sudo.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20392,6 +20556,7 @@ Windows Internals references:
 | Area | `Microsoft Defender exclusions visibility` |
 | Scope | `device` |
 | Source file | [research/records/security.hide-defender-exclusions-from-local-admins.review.json](records/security.hide-defender-exclusions-from-local-admins.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20486,9 +20651,9 @@ Windows Internals references:
 | `ms-defender-exclusions-visibility-note` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure exclusions in Defender Antivirus | [https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus](https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus) | `high` | behavior, tradeoff |
 | `repo-defender-hide-exclusions-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path |
 | `vm-defender-hide-exclusions-baseline-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean baseline visibility with managed exclusion present | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json](evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json) | `high` | default, behavior |
-| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins)/hideexclusions-admins-root-1.txt | `high` | path, value, runtime-read, behavior |
+| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt) | `high` | path, value, runtime-read, behavior |
 | `vm-defender-hide-exclusions-root-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) | `high` | value, behavior |
-| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins)/hideexclusions-admins-policymanager-1.txt | `high` | path, value, runtime-read, behavior |
+| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | `Current repo code` | Current security provider HideExclusionsFromLocalAdmins write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -20523,6 +20688,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.powershell-unrestricted.review.json](records/security.powershell-unrestricted.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20664,6 +20830,7 @@ Windows Internals references:
 | Area | `Microsoft Defender file hash logging` |
 | Scope | `device` |
 | Source file | [research/records/security.threat-file-hash-logging.review.json](records/security.threat-file-hash-logging.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20780,8 +20947,8 @@ Current writes
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | [research/evidence-files/vm-tooling-staging/defender-runtime-repair.json](evidence-files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
 | `vm-defender-runtime-enabled-baseline` | `vm-test` | `VM test / probe` | Defender-on 25H2 snapshot baseline | [research/evidence-files/vm-tooling-staging/defender-runtime-repair.json](evidence-files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
 | `vm-defender-threat-file-hash-baseline` | `vm-test` | `VM test / probe` | Defender-on baseline EICAR probe | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json) | `high` | default, behavior |
-| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging](evidence-files/procmon/security.threat-file-hash-logging)/defender-threat-file-hash-legacyroot-1.txt | `high` | path, value, runtime-read |
-| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging](evidence-files/procmon/security.threat-file-hash-logging)/defender-threat-file-hash-policymanager-1.txt | `high` | path, value, runtime-read |
+| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt](evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt) | `high` | path, value, runtime-read |
+| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt](evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt) | `high` | path, value, runtime-read |
 | `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | `VM test / probe` | Non-rebooted MpEngine pass did not show a live read | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json) | `medium` | path, behavior |
 | `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | `VM test / probe` | WinDefend service restart follow-up was blocked | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json) | `medium` | behavior, runtime-read |
 | `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | `VM test / probe` | Rebooted MpEngine pass still did not show a direct policy-path read | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt) | `high` | path, behavior, runtime-read |
@@ -20822,6 +20989,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.trusted-path-credential-prompting.review.json](records/security.trusted-path-credential-prompting.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20948,6 +21116,7 @@ Windows Internals references:
 | Area | `Registry Security Setting` |
 | Scope | `device` |
 | Source file | [research/records/security.uac-never-notify.json](records/security.uac-never-notify.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21073,7 +21242,7 @@ Windows Internals references:
 | `ms-uac-registry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: User Account Control registry key entries | [https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings) | `high` | path, value, allowed-values, default, behavior |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-uac-bootphase` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto boot-phase UAC value read | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) | `medium` | path, behavior, dependency |
-| `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | [research/evidence-files/procmon/security.uac-never-notify](evidence-files/procmon/security.uac-never-notify)/uac-never-notify-capture-pml.md and [research/evidence-files/procmon/security.uac-never-notify](evidence-files/procmon/security.uac-never-notify)/uac-never-notify-capture-csv.md | `high` | path, value, behavior, ui-mapping |
+| `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | [research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) | `high` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -21109,6 +21278,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/system.aero-shake.json](records/system.aero-shake.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21236,6 +21406,7 @@ Windows Internals references:
 | Area | `Crash Recovery` |
 | Scope | `device` |
 | Source file | [research/records/system.bsod-disable-auto-reboot.json](records/system.bsod-disable-auto-reboot.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21362,6 +21533,7 @@ Windows Internals references:
 | Area | `Crash Recovery / Bug Check Display` |
 | Scope | `device` |
 | Source file | [research/records/system.bsod-display-parameters.review.json](records/system.bsod-display-parameters.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21486,6 +21658,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-app-archiving.json](records/system.disable-app-archiving.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21613,6 +21786,7 @@ Windows Internals references:
 | Area | `Observed Registry Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-auto-maintenance.review.json](records/system.disable-auto-maintenance.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21741,6 +21915,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-background-gp-updates.json](records/system.disable-background-gp-updates.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21868,6 +22043,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-clipboard-history.json](records/system.disable-clipboard-history.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22013,6 +22189,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-clipboard-redirection.json](records/system.disable-clipboard-redirection.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22141,6 +22318,7 @@ Windows Internals references:
 | Area | `GameConfigStore / Compatibility Preference` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-fullscreen-optimizations.review.json](records/system.disable-fullscreen-optimizations.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22235,11 +22413,11 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
-| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.txt and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.hits.csv | `high` | path, value, behavior |
-| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/ghidra-matches.md and [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/evidence.json | `high` | path, value, behavior |
+| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) | `high` | path, value, behavior |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](evidence-files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [research/evidence-files/ghidra/system.disable-fullscreen-optimizations/evidence.json](evidence-files/ghidra/system.disable-fullscreen-optimizations/evidence.json) | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
-| `vm-fullscreen-automated-probe-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean automated fullscreen follow-up | [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.txt and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.json and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.hits.csv | `medium` | version-scope, rollback, open-question |
+| `vm-fullscreen-automated-probe-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean automated fullscreen follow-up | [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) | `medium` | version-scope, rollback, open-question |
 
 **Validation proof**
 
@@ -22273,6 +22451,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-game-recording-broadcasting.json](records/system.disable-game-recording-broadcasting.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22385,6 +22564,7 @@ Current writes
 | Area | `Desktop Wallpaper Import Behavior` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-jpeg-reduction.review.json](records/system.disable-jpeg-reduction.review.json) |
+| V3.1 evidence root | [evidence/system.disable-jpeg-reduction](../evidence/system.disable-jpeg-reduction) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22478,7 +22658,7 @@ Windows Internals references:
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `repo-system-decomp-jpegtranscode` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) | `high` | path, value, behavior |
 | `procmon-jpegimportquality-explorer-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) | `high` | path, value, behavior |
-| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [research/evidence-files/ghidra/system.disable-jpeg-reduction](evidence-files/ghidra/system.disable-jpeg-reduction)/shell32-jpegimportquality-ghidra.md | `high` | path, value, behavior |
+| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [research/evidence-files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](evidence-files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) | `high` | path, value, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 
@@ -22514,6 +22694,7 @@ Windows Internals references:
 | Area | `Feature Setting vs Observed Registry Setting` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-restartable-apps.review.json](records/system.disable-restartable-apps.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22641,6 +22822,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-search-highlights-policy.json](records/system.disable-search-highlights-policy.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22768,6 +22950,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-search-remote-queries.json](records/system.disable-search-remote-queries.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22894,6 +23077,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-search-web-results.review.json](records/system.disable-search-web-results.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23018,6 +23202,7 @@ Windows Internals references:
 | Area | `Explorer Overlay` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-shortcut-arrow.json](records/system.disable-shortcut-arrow.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23143,6 +23328,7 @@ Windows Internals references:
 | Area | `Explorer Startup Behavior` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-startup-delay.review.json](records/system.disable-startup-delay.review.json) |
+| V3.1 evidence root | [evidence/system.disable-startup-delay](../evidence/system.disable-startup-delay) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23234,9 +23420,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | [research/evidence-files/ghidra/system.disable-startup-delay](evidence-files/ghidra/system.disable-startup-delay)/ghidra_explorer_serialize.txt | `medium` | path, string-reference, behavior |
+| `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | [research/evidence-files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](evidence-files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
-| `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [research/evidence-files/procmon/system.disable-startup-delay](evidence-files/procmon/system.disable-startup-delay)/procmon-startup-delay.pml.md | `medium` | path, value, behavior, ui-mapping |
+| `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [research/evidence-files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](evidence-files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | `unspecified` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) | `medium` | behavior, runtime-trace, shell-health |
 
 **Validation proof**
@@ -23271,6 +23457,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-storage-sense.json](records/system.disable-storage-sense.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23398,6 +23585,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-storage-sense-temp-cleanup.json](records/system.disable-storage-sense-temp-cleanup.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23526,6 +23714,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-store-open-with.json](records/system.disable-store-open-with.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23653,6 +23842,7 @@ Windows Internals references:
 | Area | `Desktop Window Manager / Overlay Diagnostics` |
 | Scope | `device` |
 | Source file | [research/records/system.dwm-disable-overlay-min-fps.json](records/system.dwm-disable-overlay-min-fps.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23777,6 +23967,7 @@ Windows Internals references:
 | Area | `Gaming Feature / GameBar Preference` |
 | Scope | `user` |
 | Source file | [research/records/system.enable-game-mode.review.json](records/system.enable-game-mode.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23867,7 +24058,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | [https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc](https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc) | `high` | behavior, side-effects, version-scope |
-| `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [research/evidence-files/procmon/system.enable-game-mode](evidence-files/procmon/system.enable-game-mode)/gamemode_admin_probe.txt and [research/evidence-files/procmon/system.enable-game-mode](evidence-files/procmon/system.enable-game-mode)/gamemode_admin_zero_probe.txt | `high` | path, value, behavior, ui-mapping, version-scope |
+| `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [research/evidence-files/procmon/system.enable-game-mode/gamemode_admin_probe.txt](evidence-files/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [research/evidence-files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](evidence-files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) | `high` | path, value, behavior, ui-mapping, version-scope |
 | `repo-system-decomp-game-mode` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) | `medium` | path, value, behavior, ui-mapping |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
@@ -23904,6 +24095,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / Scheduling Feature` |
 | Scope | `device` |
 | Source file | [research/records/system.enable-hags.review.json](records/system.enable-hags.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24031,6 +24223,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.enable-indexing-encrypted-items.json](records/system.enable-indexing-encrypted-items.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24157,6 +24350,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-tdr-ddi-delay.json](records/system.graphics-tdr-ddi-delay.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24279,6 +24473,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-tdr-delay.json](records/system.graphics-tdr-delay.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24401,6 +24596,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-tdr-level.json](records/system.graphics-tdr-level.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24526,6 +24722,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-tdr-limit-count.json](records/system.graphics-tdr-limit-count.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24648,6 +24845,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-tdr-limit-time.json](records/system.graphics-tdr-limit-time.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24770,6 +24968,7 @@ Windows Internals references:
 | Area | `Kernel / Deferred Procedure Calls` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-thread-dpc-enable.json](records/system.kernel-thread-dpc-enable.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24898,6 +25097,7 @@ Windows Internals references:
 | Area | `Security Option / Memory Management` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-clear-pagefile-at-shutdown.json](records/system.memory-clear-pagefile-at-shutdown.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25024,6 +25224,7 @@ Windows Internals references:
 | Area | `Memory Management` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-disable-paging-executive.json](records/system.memory-disable-paging-executive.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25150,6 +25351,7 @@ Windows Internals references:
 | Area | `Memory Management / Cache Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-large-system-cache-client.review.json](records/system.memory-large-system-cache-client.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25275,6 +25477,7 @@ Windows Internals references:
 | Area | `Memory Management / Legacy Pool Tuning` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-nonpaged-pool-dynamic.json](records/system.memory-nonpaged-pool-dynamic.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25399,6 +25602,7 @@ Windows Internals references:
 | Area | `Memory Management / Legacy Pool Tuning` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-paged-pool-dynamic.json](records/system.memory-paged-pool-dynamic.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25524,6 +25728,7 @@ Windows Internals references:
 | Area | `Registry Storage Space` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-registry-quota-default.review.json](records/system.memory-registry-quota-default.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25649,6 +25854,7 @@ Windows Internals references:
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.ntfs-disable-8dot3.json](records/system.ntfs-disable-8dot3.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25777,6 +25983,7 @@ Windows Internals references:
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.ntfs-disable-last-access.json](records/system.ntfs-disable-last-access.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25903,6 +26110,7 @@ Windows Internals references:
 | Area | `File System Registry Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.ntfs-enable-long-paths.json](records/system.ntfs-enable-long-paths.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26030,6 +26238,7 @@ Windows Internals references:
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.ntfs-reset-memory-usage.json](records/system.ntfs-reset-memory-usage.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26153,6 +26362,7 @@ Windows Internals references:
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.ntfs-reset-mft-zone.json](records/system.ntfs-reset-mft-zone.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26281,6 +26491,7 @@ Windows Internals references:
 | Area | `Scheduler / Priority Control` |
 | Scope | `device` |
 | Source file | [research/records/system.priority-control.review.json](records/system.priority-control.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26374,7 +26585,7 @@ Windows Internals references:
 | `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) | `high` | path, behavior, version-scope, risk |
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
 | `repo-system-decomp-prioritycontrol` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) | `high` | path, value, behavior |
-| `procmon-priority-control-wmi-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-2.txt and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-2.hits.csv and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-38.txt and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-38.hits.csv | `high` | path, value, behavior |
+| `procmon-priority-control-wmi-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-2.txt](evidence-files/procmon/system.priority-control/prioritycontrol-state-2.txt) and [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](evidence-files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-38.txt](evidence-files/procmon/system.priority-control/prioritycontrol-state-38.txt) and [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](evidence-files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [research/evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json](evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json) | `medium` | value, behavior, rollback, performance |
@@ -26411,6 +26622,7 @@ Windows Internals references:
 | Area | `Reliability / Event Timestamps` |
 | Scope | `device` |
 | Source file | [research/records/system.reliability-timestamp-enabled.review.json](records/system.reliability-timestamp-enabled.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26520,9 +26732,9 @@ Windows Internals references:
 | `ms-admx-reliability-persistent-timestamp` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Policy CSP - ADMX_Reliability / EE_EnablePersistentTimeStamp | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) | `high` | path, value, behavior, version-scope |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | `Current repo docs` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) | `high` | path, value, behavior |
-| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/ghidra-matches.md and [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/evidence.json | `medium` | version-scope, string-reference, open-question |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](evidence-files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [research/evidence-files/ghidra/system.reliability-timestamp-enabled/evidence.json](evidence-files/ghidra/system.reliability-timestamp-enabled/evidence.json) | `medium` | version-scope, string-reference, open-question |
 | `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) | `medium` | version-scope, open-question |
-| `vm-reliability-follow-up-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [research/evidence-files/procmon/system.reliability-timestamp-enabled](evidence-files/procmon/system.reliability-timestamp-enabled)/reliability-timestamp-probe.txt and [research/evidence-files/procmon/system.reliability-timestamp-enabled](evidence-files/procmon/system.reliability-timestamp-enabled)/reliability-timestamp-probe.runtime.hits.csv | `medium` | version-scope, open-question |
+| `vm-reliability-follow-up-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) | `medium` | version-scope, open-question |
 
 **Validation proof**
 
@@ -26556,6 +26768,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-bluetooth-audio-gateway.json](records/system.services.disable-bluetooth-audio-gateway.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26678,6 +26891,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-bluetooth-support.json](records/system.services.disable-bluetooth-support.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26800,6 +27014,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `user-session` |
 | Source file | [research/records/system.services.disable-bluetooth-user-service.json](records/system.services.disable-bluetooth-user-service.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26923,6 +27138,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-connected-user-experiences.json](records/system.services.disable-connected-user-experiences.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27045,6 +27261,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-print-notifications.json](records/system.services.disable-print-notifications.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27167,6 +27384,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-print-spooler.json](records/system.services.disable-print-spooler.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27289,6 +27507,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-windows-search.json](records/system.services.disable-windows-search.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27413,6 +27632,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.verbose-status-messages.json](records/system.verbose-status-messages.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27538,6 +27758,7 @@ Windows Internals references:
 | Area | `Service shutdown timing` |
 | Scope | `device` |
 | Source file | [research/records/system.wait-to-kill-service-timeout.review.json](records/system.wait-to-kill-service-timeout.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27665,6 +27886,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.default-account-picture.json](records/visibility.default-account-picture.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27783,6 +28005,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-acrylic-logon.json](records/visibility.disable-acrylic-logon.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27903,6 +28126,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-common-control-animations.json](records/visibility.disable-common-control-animations.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28023,6 +28247,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-first-signin-animation.json](records/visibility.disable-first-signin-animation.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28143,6 +28368,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-lock-screen.json](records/visibility.disable-lock-screen.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28261,6 +28487,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-lock-screen-camera.json](records/visibility.disable-lock-screen-camera.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28380,6 +28607,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-lock-screen-changes.json](records/visibility.disable-lock-screen-changes.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28500,6 +28728,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-lock-screen-motion.json](records/visibility.disable-lock-screen-motion.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28620,6 +28849,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-lock-screen-slideshow.json](records/visibility.disable-lock-screen-slideshow.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28740,6 +28970,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-action-center.json](records/visibility.disable-spotlight-action-center.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28860,6 +29091,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-desktop-collection.json](records/visibility.disable-spotlight-desktop-collection.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28980,6 +29212,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-features.json](records/visibility.disable-spotlight-features.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29100,6 +29333,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-settings.json](records/visibility.disable-spotlight-settings.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29220,6 +29454,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-third-party.json](records/visibility.disable-spotlight-third-party.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29340,6 +29575,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-welcome.json](records/visibility.disable-spotlight-welcome.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29460,6 +29696,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-wcn-wizards.json](records/visibility.disable-wcn-wizards.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29580,6 +29817,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-widgets.json](records/visibility.disable-widgets.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29701,6 +29939,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-window-animations.json](records/visibility.disable-window-animations.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29821,6 +30060,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.force-classic-control-panel.json](records/visibility.force-classic-control-panel.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29940,6 +30180,7 @@ Nohuto lineage references:
 | Area | `User Preference` |
 | Scope | `user` |
 | Source file | [research/records/visibility.hide-language-bar.review.json](records/visibility.hide-language-bar.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -30024,7 +30265,7 @@ Nohuto lineage references:
 | `microsoft-qna-language-bar-showstatus` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | [https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter](https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter) | `medium` | path, value, behavior |
 | `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) | `medium` | path, value, allowed-values, behavior |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | [research/evidence-files/procmon/visibility.hide-language-bar](evidence-files/procmon/visibility.hide-language-bar)/procmon-hide-language-bar-3.pml.md | `medium` | path, value, behavior, ui-mapping |
+| `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | [research/evidence-files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](evidence-files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -30058,6 +30299,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.hide-most-used-apps.json](records/visibility.hide-most-used-apps.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -30179,6 +30421,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.hide-people-bar.json](records/visibility.hide-people-bar.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -30298,6 +30541,7 @@ Nohuto lineage references:
 | Area | `Explorer Context Menu` |
 | Scope | `user` |
 | Source file | [research/records/visibility.restore-classic-context-menu.review.json](records/visibility.restore-classic-context-menu.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -30420,6 +30664,7 @@ Nohuto lineage references:
 | Area | `Audio Engine Flags` |
 | Scope | `device` |
 | Source file | [research/records/audio.disable-spatial-audio.review.json](records/audio.disable-spatial-audio.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -30541,6 +30786,7 @@ Blocking issues:
 | Area | `AppEvents Sound Scheme Entries` |
 | Scope | `user` |
 | Source file | [research/records/audio.disable-system-sounds.review.json](records/audio.disable-system-sounds.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -30664,6 +30910,7 @@ Blocking issues:
 | Area | `Windows Terminal Internal Flags` |
 | Scope | `user` |
 | Source file | [research/records/developer.terminal-dev-mode.review.json](records/developer.terminal-dev-mode.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -30762,7 +31009,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | [https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup) | `medium` | behavior, app-mismatch |
-| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [https://terminal.1.24.10621.0/TerminalApp.dll;](https://terminal.1.24.10621.0/TerminalApp.dll;) [research/evidence-files/ghidra/developer.terminal-dev-mode](evidence-files/ghidra/developer.terminal-dev-mode)/terminal-ghidra.txt; [research/evidence-files/ghidra/developer.terminal-dev-mode](evidence-files/ghidra/developer.terminal-dev-mode)/terminal-ghidra-enabledebugtap.txt | `medium` | negative-evidence, binary-scan |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [https://terminal.1.24.10621.0/TerminalApp.dll;](https://terminal.1.24.10621.0/TerminalApp.dll;) [research/evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [research/evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
 | `wpr-terminal-launch-trace` | `wpr-trace` | `unspecified` | WPR capture of Windows Terminal launch | [research/evidence-files/host-temp/terminal-launch.etl.md](evidence-files/host-temp/terminal-launch.etl.md) | `low` | behavior, process-tree, startup-context |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -30803,6 +31050,7 @@ Blocking issues:
 | Area | `Visual Studio IntelliSense` |
 | Scope | `user` |
 | Source file | [research/records/developer.vs-intellisense-cache.review.json](records/developer.vs-intellisense-cache.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `True` |
@@ -30923,6 +31171,7 @@ Blocking issues:
 | Area | `Visual Studio Solution Loading` |
 | Scope | `user` |
 | Source file | [research/records/developer.vs-solution-load.review.json](records/developer.vs-solution-load.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `True` |
@@ -31043,6 +31292,7 @@ Blocking issues:
 | Area | `VS Code Setting vs Registry Observation` |
 | Scope | `user` |
 | Source file | [research/records/developer.vscode-git-autofetch.json](records/developer.vscode-git-autofetch.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -31183,6 +31433,7 @@ Blocking issues:
 | Area | `Widgets` |
 | Scope | `device` |
 | Source file | [research/records/explorer.disable-taskbar-widgets.json](records/explorer.disable-taskbar-widgets.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -31250,13 +31501,13 @@ Blocking issues:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Widgets duplicate retirement audit trail | research/records | `high` | app-mismatch |
+| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Widgets duplicate retirement audit trail | [research/records](records) | `high` | app-mismatch |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | research/records |
+| Source | [research/records](records) |
 | Exact quote / path | Widgets duplicate retirement audit trail: explorer.disable-taskbar-widgets was retired on 2026-03-13 because the app already ships visibility.disable-widgets for the official Widgets policy surface. The old TaskbarDa parent-key write was removed from VisibilityTweakProvider.cs and this record now remains only as an audit trail. |
 | Key found on page | `True` |
 | Notes | Backfilled from evidence_id duplicate-retirement-audit (repo-doc); deprecated audit trail. |
@@ -31286,6 +31537,7 @@ Blocking issues:
 | Area | `Registry Optimization Bundle` |
 | Scope | `device` |
 | Source file | [research/records/network.optimize-smb.review.json](records/network.optimize-smb.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -31447,6 +31699,7 @@ Blocking issues:
 | Area | `Sleep Model` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-modern-standby.json](records/power.disable-modern-standby.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -31550,6 +31803,7 @@ Blocking issues:
 | Area | `Mixed Network and MMCSS Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-network-power-saving.review.json](records/power.disable-network-power-saving.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -31707,6 +31961,7 @@ Blocking issues:
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.optimize-performance.review.json](records/power.optimize-performance.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -31837,6 +32092,7 @@ Blocking issues:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.deny-app-access.review.json](records/privacy.deny-app-access.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -31958,6 +32214,7 @@ Blocking issues:
 | Area | `Composite` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-application-compatibility.review.json](records/privacy.disable-application-compatibility.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -32077,6 +32334,7 @@ Blocking issues:
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-application-compatibility.policy.review.json](records/privacy.disable-application-compatibility.policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -32144,13 +32402,13 @@ Blocking issues:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `split-audit` | `repo-doc` | `Current repo docs` | Split audit trail | research/records | `high` | app-mismatch |
+| `split-audit` | `repo-doc` | `Current repo docs` | Split audit trail | [research/records](records) | `high` | app-mismatch |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | research/records |
+| Source | [research/records](records) |
 | Exact quote / path | Split audit trail: The original mixed application-compatibility policy record was retired on 2026-03-13 and replaced with three focused child records: privacy.disable-appcompat-engine.policy, privacy.disable-appdeviceinventory.policy, and privacy.disable-program-compatibility-assistant. |
 | Key found on page | `True` |
 | Notes | Backfilled from evidence_id split-audit (repo-doc); deprecated audit trail. |
@@ -32178,6 +32436,7 @@ Blocking issues:
 | Area | `Scheduled Task Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-application-compatibility.tasks.review.json](records/privacy.disable-application-compatibility.tasks.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -32290,6 +32549,7 @@ Blocking issues:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-ceip.review.json](records/privacy.disable-ceip.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -32407,6 +32667,7 @@ Blocking issues:
 | Area | `Mixed Registry Configuration` |
 | Scope | `mixed` |
 | Source file | [research/records/privacy.disable-cross-device-experiences.review.json](records/privacy.disable-cross-device-experiences.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -32549,6 +32810,7 @@ Blocking issues:
 | Area | `File Rename` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-f1-help.review.json](records/privacy.disable-f1-help.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -32666,6 +32928,7 @@ Blocking issues:
 | Area | `Registry Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-inking-typing-personalization.review.json](records/privacy.disable-inking-typing-personalization.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -32786,6 +33049,7 @@ Blocking issues:
 | Area | `Composite` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-offline-files.review.json](records/privacy.disable-offline-files.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -32904,6 +33168,7 @@ Blocking issues:
 | Area | `File Rename` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-offline-files.binary.review.json](records/privacy.disable-offline-files.binary.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33015,6 +33280,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-offline-files.services.review.json](records/privacy.disable-offline-files.services.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33128,6 +33394,7 @@ Blocking issues:
 | Area | `Scheduled Task Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-offline-files.tasks.review.json](records/privacy.disable-offline-files.tasks.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33241,6 +33508,7 @@ Blocking issues:
 | Area | `Deprecated Duplicate Audit Trail` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-reserved-storage.review.json](records/privacy.disable-reserved-storage.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -33308,13 +33576,13 @@ Blocking issues:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Reserved Storage duplicate retirement audit trail | research/records | `high` | app-mismatch |
+| `duplicate-retirement-audit` | `repo-doc` | `Current repo docs` | Reserved Storage duplicate retirement audit trail | [research/records](records) | `high` | app-mismatch |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | research/records |
+| Source | [research/records](records) |
 | Exact quote / path | Reserved Storage duplicate retirement audit trail: The privacy.disable-reserved-storage duplicate was retired on 2026-03-13 because the repo already exposes the official DISM-backed cleanup.disable-reserved-storage tweak. The privacy duplicate had written ReserveManager/DisableDeletes directly, while the surviving cleanup tweak uses the documented DISM detect/apply/rollback surface. |
 | Key found on page | `True` |
 | Notes | Backfilled from evidence_id duplicate-retirement-audit (repo-doc); deprecated audit trail. |
@@ -33342,6 +33610,7 @@ Blocking issues:
 | Area | `Event Channel Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-sleep-study-diagnostics.review.json](records/privacy.disable-sleep-study-diagnostics.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33462,6 +33731,7 @@ Blocking issues:
 | Area | `Observed User Preference Bundle` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-suggestions.review.json](records/privacy.disable-suggestions.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33581,6 +33851,7 @@ Blocking issues:
 | Area | `Observed ContentDeliveryManager Values vs Named CloudContent Policies` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-suggestions-cdm.review.json](records/privacy.disable-suggestions-cdm.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -33755,6 +34026,7 @@ Blocking issues:
 | Area | `Observed App Preference Bundle` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-wmplayer-telemetry.review.json](records/privacy.disable-wmplayer-telemetry.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33876,6 +34148,7 @@ Blocking issues:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-vbs.json](records/security.disable-vbs.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -34042,6 +34315,7 @@ Blocking issues:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-windows-update.review.json](records/security.disable-windows-update.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -34185,6 +34459,7 @@ Blocking issues:
 | Area | `Observed Session Manager Registry Setting` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-wpbt.review.json](records/security.disable-wpbt.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -34317,6 +34592,7 @@ Blocking issues:
 | Area | `Deprecated Duplicate` |
 | Scope | `mixed` |
 | Source file | [research/records/system.disable-game-dvr.json](records/system.disable-game-dvr.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -34392,6 +34668,7 @@ Blocking issues:
 | Area | `Scheduled Tasks` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-scheduled-tasks.review.json](records/system.disable-scheduled-tasks.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -34613,6 +34890,7 @@ Blocking issues:
 | Area | `Deprecated Duplicate` |
 | Scope | `mixed` |
 | Source file | [research/records/system.disable-search-highlights.json](records/system.disable-search-highlights.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -34688,6 +34966,7 @@ Blocking issues:
 | Area | `svchost Process Model` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-service-splitting.review.json](records/system.disable-service-splitting.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -34817,6 +35096,7 @@ Blocking issues:
 | Area | `Desktop Window Manager / Overlay Overrides` |
 | Scope | `device` |
 | Source file | [research/records/system.dwm-disable-mpo.review.json](records/system.dwm-disable-mpo.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -34946,6 +35226,7 @@ Blocking issues:
 | Area | `Graphics Drivers / Overlay Diagnostics` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-disable-overlays.review.json](records/system.graphics-disable-overlays.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35075,6 +35356,7 @@ Blocking issues:
 | Area | `Graphics Drivers / Debug Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-page-fault-debug-mode.review.json](records/system.graphics-page-fault-debug-mode.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35204,6 +35486,7 @@ Blocking issues:
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-adjust-dpc-threshold.review.json](records/system.kernel-adjust-dpc-threshold.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35334,6 +35617,7 @@ Blocking issues:
 | Area | `Kernel / Scheduler Topology` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-cache-aware-scheduling.review.json](records/system.kernel-cache-aware-scheduling.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35464,6 +35748,7 @@ Blocking issues:
 | Area | `Kernel / Heterogeneous Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json](records/system.kernel-default-dynamic-hetero-cpu-policy.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -35598,6 +35883,7 @@ Blocking issues:
 | Area | `Kernel / Timer Resolution Behavior` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-disable-low-qos-timer-resolution.review.json](records/system.kernel-disable-low-qos-timer-resolution.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35730,6 +36016,7 @@ Blocking issues:
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-dpc-queue-depth.review.json](records/system.kernel-dpc-queue-depth.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35860,6 +36147,7 @@ Blocking issues:
 | Area | `Kernel / DPC Watchdog` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-dpc-watchdog-period.review.json](records/system.kernel-dpc-watchdog-period.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35993,6 +36281,7 @@ Blocking issues:
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-ideal-dpc-rate.review.json](records/system.kernel-ideal-dpc-rate.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -36123,6 +36412,7 @@ Blocking issues:
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-minimum-dpc-rate.review.json](records/system.kernel-minimum-dpc-rate.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -36253,6 +36543,7 @@ Blocking issues:
 | Area | `Kernel / Timer Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-serialize-timer-expiration.review.json](records/system.kernel-serialize-timer-expiration.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -36345,7 +36636,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/ghidra-matches.md and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/evidence.json | `high` | path, value, behavior, runtime-gate |
+| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](evidence-files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration/evidence.json](evidence-files/ghidra/system.kernel-serialize-timer-expiration/evidence.json) | `high` | path, value, behavior, runtime-gate |
 
 **Validation proof**
 
@@ -36383,6 +36674,7 @@ Blocking issues:
 | Area | `Shutdown and Logoff Timing` |
 | Scope | `mixed` |
 | Source file | [research/records/system.reduce-shutdown-timeouts.review.json](records/system.reduce-shutdown-timeouts.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -36534,6 +36826,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-print-device-configuration.json](records/system.services.disable-print-device-configuration.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -36661,6 +36954,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-print-scan-broker.json](records/system.services.disable-print-scan-broker.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -36788,6 +37082,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `user-session` |
 | Source file | [research/records/system.services.disable-print-workflow-user-service.json](records/system.services.disable-print-workflow-user-service.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -36915,6 +37210,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-sysmain.review.json](records/system.services.disable-sysmain.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -37041,6 +37337,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-wap-push-routing.review.json](records/system.services.disable-wap-push-routing.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -37167,6 +37464,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-windows-error-reporting.review.json](records/system.services.disable-windows-error-reporting.review.json) |
+| V3.1 evidence root | â€” |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |

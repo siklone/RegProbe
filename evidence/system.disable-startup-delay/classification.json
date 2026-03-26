@@ -1,0 +1,25 @@
+{
+  "$schema": "registry-evidence-v3.1/classification",
+  "classification": {
+    "class": "A",
+    "pipeline_version": "v3.1",
+    "reason": "Win25H2Clean reversible proof, a live Explorer Procmon trace, a Ghidra string hit, and a bounded WPR shell-restart lane all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as the current build contract for this project and keep the tweak app-ready.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr",
+      "runtime_reboot"
+    ],
+    "layer_count": 4,
+    "frida_kernel_guard_applied": false,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "converged-vm",
+    "next_missing_layer": "none"
+  }
+}

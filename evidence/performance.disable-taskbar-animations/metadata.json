@@ -1,0 +1,23 @@
+{
+  "$schema": "registry-evidence-v3.1/metadata",
+  "tweak_id": "performance.disable-taskbar-animations",
+  "key_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "TaskbarAnimations",
+  "value_type": "REG_DWORD",
+  "value_data_before": 0,
+  "value_data_after": 0,
+  "enrichment": {
+    "hive": "HKCU",
+    "suspected_layer": "user-mode",
+    "boot_phase_relevant": false,
+    "acl_owner": null,
+    "acl_sddl": null,
+    "acl_user_readable": null,
+    "source": "repo_research",
+    "official_doc_exists": false,
+    "reactos_reference": false,
+    "geoff_chappell_reference": false,
+    "pdb_symbol_match": null,
+    "source_repositories": []
+  }
+}

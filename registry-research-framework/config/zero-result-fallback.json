@@ -1,0 +1,10 @@
+{
+  "fallback_binaries": [
+    "ntoskrnl.exe",
+    "smss.exe",
+    "winlogon.exe",
+    "services.exe",
+    "csrss.exe"
+  ],
+  "note": "When runtime traces show no events, fall back to these binaries before considering dead-flag status."
+}

@@ -105,6 +105,18 @@ EARLY_BOOT_PATH_HINTS = (
     "\\services\\usbhub3\\",
 )
 
+KERNEL_PATH_HINTS = (
+    "\\system\\currentcontrolset\\control\\",
+    "\\system\\currentcontrolset\\services\\",
+    "\\controlset001\\services\\",
+    "\\system\\setup\\",
+)
+
+DRIVER_PATH_HINTS = (
+    "\\services\\",
+    "\\parameters\\device",
+)
+
 PERF_HINTS = (
     "benchmark",
     "winsat",
@@ -328,6 +340,52 @@ def has_incident_review(record: dict[str, Any]) -> bool:
 def is_early_boot_record(record: dict[str, Any]) -> bool:
     paths = " ".join(target_paths(record)).lower()
     return any(hint in paths for hint in EARLY_BOOT_PATH_HINTS)
+
+
+def suspected_layer(record: dict[str, Any]) -> str:
+    paths = " ".join(target_paths(record)).lower()
+    if "\\system\\setup\\" in paths:
+        return "boot"
+    if any(hint in paths for hint in DRIVER_PATH_HINTS):
+        return "driver"
+    if any(hint in paths for hint in KERNEL_PATH_HINTS):
+        return "kernel"
+    return "user-mode"
+
+
+def boot_phase_relevant(record: dict[str, Any]) -> bool:
+    return is_early_boot_record(record) or suspected_layer(record) in {"boot", "kernel", "driver"}
+
+
+def classification_layers(record: dict[str, Any]) -> list[str]:
+    layers: list[str] = []
+    if has_procmon_evidence(record):
+        layers.append("runtime_procmon")
+    if has_ghidra_evidence(record):
+        layers.append("static_ghidra")
+    if has_wpr_evidence(record):
+        layers.append("behavior_wpr")
+    if has_benchmark_evidence(record):
+        layers.append("behavior_benchmark")
+    if has_reboot_evidence(record):
+        layers.append("runtime_reboot")
+    if has_official_evidence(record):
+        layers.append("official_doc")
+    return layers
+
+
+def cross_layer_satisfied(record: dict[str, Any]) -> bool:
+    buckets: set[str] = set()
+    for layer in classification_layers(record):
+        if layer.startswith("runtime_"):
+            buckets.add("runtime")
+        elif layer.startswith("static_"):
+            buckets.add("static")
+        elif layer.startswith("behavior_"):
+            buckets.add("behavior")
+        elif layer == "official_doc":
+            buckets.add("official")
+    return len(buckets) >= 2 or "official" in buckets
 
 
 def is_perf_sensitive_record(record: dict[str, Any]) -> bool:

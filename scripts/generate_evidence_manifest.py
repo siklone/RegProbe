@@ -71,6 +71,9 @@ def normalize_record(index_record: dict[str, Any]) -> dict[str, Any]:
         "validation_proof": proof,
         "validation_proof_sha256": proof_hash,
         "provenance": index_record.get("provenance"),
+        "v31_evidence_root": index_record.get("v31_evidence_root"),
+        "artifact_refs": index_record.get("artifact_refs", []),
+        "re_audit": index_record.get("re_audit"),
     }
 
 
@@ -122,6 +125,8 @@ def render_md(manifest: dict[str, Any]) -> str:
         lines.append(f"- Status: `{escape_md_cell(record.get('record_status'))}`")
         lines.append(f"- Evidence class: `{escape_md_cell((record.get('evidence_class') or {}).get('class_label'))}`")
         lines.append(f"- Source file: `{escape_md_cell(record.get('source_file'))}`")
+        if record.get("v31_evidence_root"):
+            lines.append(f"- V3.1 evidence root: `{escape_md_cell(record.get('v31_evidence_root'))}`")
         lines.append(f"- Source SHA256: `{escape_md_cell(record.get('source_file_sha256'))}`")
         lines.append(f"- Proof SHA256: `{escape_md_cell(record.get('validation_proof_sha256'))}`")
         lines.append("")
@@ -152,6 +157,39 @@ def render_md(manifest: dict[str, Any]) -> str:
                         ["Source", linkify_reference_text(proof.get("source_url"), MD_OUTPUT_PATH)],
                         ["Exact quote / path", linkify_reference_text(proof.get("exact_quote_or_path"), MD_OUTPUT_PATH)],
                         ["Notes", linkify_reference_text(proof.get("notes"), MD_OUTPUT_PATH)],
+                    ],
+                )
+            )
+            lines.append("")
+        artifact_refs = record.get("artifact_refs") or []
+        if artifact_refs:
+            lines.append("**Artifact refs**")
+            lines.append("")
+            artifact_rows = []
+            for artifact in artifact_refs:
+                artifact_rows.append(
+                    [
+                        f"`{escape_md_cell(artifact.get('id'))}`",
+                        f"`{escape_md_cell(artifact.get('tool'))}`",
+                        escape_md_cell(artifact.get("filename")),
+                        escape_md_cell(artifact.get("sha256")),
+                        linkify_reference_text(artifact.get("release_url"), MD_OUTPUT_PATH),
+                    ]
+                )
+            lines.extend(render_table(["ID", "Tool", "Filename", "SHA256", "Release URL"], artifact_rows))
+            lines.append("")
+        if isinstance(record.get("re_audit"), dict):
+            lines.append("**Re-audit**")
+            lines.append("")
+            reaudit = record["re_audit"]
+            lines.extend(
+                render_table(
+                    ["Field", "Value"],
+                    [
+                        ["Original class", escape_md_cell(reaudit.get("original_class"))],
+                        ["Reason", escape_md_cell(reaudit.get("re_audit_reason"))],
+                        ["Priority", escape_md_cell(reaudit.get("re_audit_priority"))],
+                        ["New pipeline version", escape_md_cell(reaudit.get("new_pipeline_version"))],
                     ],
                 )
             )

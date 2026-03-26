@@ -1,0 +1,35 @@
+{
+  "$schema": "registry-evidence-v3.1/runtime-evidence",
+  "runtime": {
+    "etw": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": false,
+      "trace_file": null
+    },
+    "procmon": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "trace_file": "Local captures - research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md"
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "Not yet executed under v3.1.",
+      "result_valid": null
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "source_evidence_ids": [
+    "procmon-explorer-compact-mode"
+  ]
+}

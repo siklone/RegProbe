@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from evidence_class_lib import build_class_entry, load_provenance_map as load_provenance_entries
-from research_path_lib import REPO_ROOT, RESEARCH_ROOT, normalize_reference, normalize_reference_text
+from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, normalize_reference, normalize_reference_text
 
 RECORDS_DIR = RESEARCH_ROOT / "records"
 PROVENANCE_PATH = REPO_ROOT / "Docs" / "tweaks" / "tweak-provenance.json"
@@ -232,6 +232,14 @@ def compact_validation_proof(record: dict[str, Any]) -> dict[str, Any] | None:
     return normalized
 
 
+def load_v31_companion(record_id: str) -> dict[str, Any] | None:
+    path = V31_EVIDENCE_ROOT / record_id / "full-evidence.json"
+    if not path.exists():
+        return None
+    with path.open("r", encoding="utf-8-sig") as handle:
+        return json.load(handle)
+
+
 def compact_decision(record: dict[str, Any]) -> dict[str, Any] | None:
     decision = record.get("decision")
     if isinstance(decision, dict):
@@ -301,6 +309,7 @@ def main() -> int:
             provenance_entry=provenance_entry,
         )
         class_counts[class_entry["evidence_class"]] += 1
+        v31 = load_v31_companion(record_key)
 
         records.append(
             {
@@ -322,6 +331,14 @@ def main() -> int:
                 "evidence": evidence,
                 "validation_proof": proof,
                 "provenance": compact_provenance(record, provenance_map),
+                "v31_evidence_root": (
+                    str((V31_EVIDENCE_ROOT / record_key).relative_to(REPO_ROOT)).replace("\\", "/")
+                    if (V31_EVIDENCE_ROOT / record_key).exists()
+                    else None
+                ),
+                "v31_pipeline_version": (v31 or {}).get("classification", {}).get("pipeline_version"),
+                "artifact_refs": (v31 or {}).get("artifact_refs", []),
+                "re_audit": (v31 or {}).get("re_audit"),
             }
         )
 

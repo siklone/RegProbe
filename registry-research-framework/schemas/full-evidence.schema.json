@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opentraceproject.local/registry-research-framework/schemas/full-evidence.schema.json",
+  "title": "v3.1 Full Evidence",
+  "type": "object",
+  "required": ["record_id", "tweak_id", "metadata", "runtime", "static", "behavior", "classification", "timeline", "artifact_refs"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "record_id": { "type": "string" },
+    "tweak_id": { "type": "string" },
+    "metadata": { "type": "object" },
+    "runtime": { "type": "object" },
+    "static": { "type": "object" },
+    "behavior": { "type": "object" },
+    "classification": { "type": "object" },
+    "timeline": { "type": "array" },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "filename", "size_mb", "sha256", "tool", "storage_kind"],
+        "properties": {
+          "id": { "type": "string" },
+          "filename": { "type": "string" },
+          "size_mb": { "type": "number" },
+          "sha256": { "type": "string" },
+          "tool": { "type": "string" },
+          "storage_kind": { "type": "string", "enum": ["release"] },
+          "release_tag": { "type": "string" },
+          "release_url": {
+            "type": "string",
+            "pattern": "^https://github\\.com/[^/\\s]+/[^/\\s]+/releases/download/[^/\\s]+/[^/\\s]+$"
+          }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "storage_kind": { "const": "release" } }, "required": ["storage_kind"] },
+            "then": { "required": ["release_tag", "release_url"] }
+          }
+        ]
+      }
+    }
+  }
+}

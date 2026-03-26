@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opentraceproject.local/registry-research-framework/schemas/static-evidence.schema.json",
+  "title": "v3.1 Static Evidence",
+  "type": "object",
+  "required": ["static"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "static": { "type": "object" },
+    "source_evidence_ids": { "type": "array", "items": { "type": "string" } }
+  }
+}
