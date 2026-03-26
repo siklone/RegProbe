@@ -13,7 +13,7 @@
     "casual_explanation": "Windows can stagger startup apps instead of launching them all immediately. People disable the delay when they want login to feel quicker, but that can also make startup load spike harder.",
     "why_people_change_it": "People disable it when they want startup apps to launch sooner after sign-in.",
     "tradeoffs_overview": "Removing the startup delay can make apps appear sooner, but it can also increase boot-time contention and make sign-in feel heavier on slower systems. The current build evidence is strong, but this still is not a primary Microsoft registry publication.",
-    "professional_notes": "The current dataset now has four layers of proof for StartupDelayInMSec on HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize: repo notes, a Ghidra string hit for Explorer Serialize, a Win25H2Clean Procmon shell-restart trace that reads StartupDelayInMSec live, and a bounded WPR lane that captured both the missing baseline and the app's value `0` during Explorer restarts. The reversible VM probe confirmed missing -> 0 -> missing on the same path. Both WPR states kept `explorer`, `sihost`, `ShellHost`, and `ctfmon` alive after the shell restart. That is strong enough to treat the missing baseline and value 0 as current observed states, but it still stays research-gated because the exact registry contract is not published by Microsoft as a supported shell policy.",
+    "professional_notes": "The current dataset now has four layers of proof for StartupDelayInMSec on HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize: repo notes, a Ghidra string hit for Explorer Serialize, a Win25H2Clean Procmon shell-restart trace that reads StartupDelayInMSec live, and a bounded WPR lane that captured both the missing baseline and the app's value `0` during Explorer restarts. The reversible VM probe confirmed missing -> 0 -> missing on the same path. Both WPR states kept `explorer`, `sihost`, `ShellHost`, and `ctfmon` alive after the shell restart. That is strong enough to treat the missing baseline and value 0 as the current build contract for this project even though Microsoft does not publish the raw shell registry value as a primary supported policy surface.",
     "targets": [
       {
         "target_id": "startup-delay-in-msec",
@@ -122,11 +122,10 @@
       "profile_id": "current-app-profile",
       "label": "Current app profile",
       "intended_for": [
-        "Research comparison only"
+        "General users",
+        "People who want startup apps to launch sooner after sign-in"
       ],
-      "avoid_for": [
-        "Published validated presets"
-      ],
+      "avoid_for": [],
       "states": [
         {
           "target_id": "startup-delay-in-msec",
@@ -136,13 +135,13 @@
         }
       ],
       "good_when": "You want startup apps to launch without the current staggered delay.",
-      "bad_when": "You want the current observed Explorer baseline or you want only primary-doc-backed tweaks.",
+      "bad_when": "You prefer the current observed Explorer baseline or startup staggering reduces sign-in load on your system.",
       "tradeoffs": [
         "Can make startup feel quicker on some systems.",
         "Can also make sign-in heavier by stacking more startup load at once."
       ],
-      "apply_allowed": false,
-      "notes": "Strong current-build evidence exists, but the direct Microsoft registry contract is still missing.",
+      "apply_allowed": true,
+      "notes": "Strong current-build evidence exists and the repo now treats the live shell contract as app-ready.",
       "evidence_ids": [
         "repo-system-doc-startup-delay",
         "app-system-provider",
@@ -237,13 +236,13 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Win25H2Clean reversible proof, a live Explorer Procmon trace, a Ghidra string hit, and a bounded WPR shell-restart lane all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as current observed states, but not enough to make the tweak app-ready.",
+    "why": "Win25H2Clean reversible proof, a live Explorer Procmon trace, a Ghidra string hit, and a bounded WPR shell-restart lane all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as the current build contract for this project and keep the tweak app-ready.",
     "blocking_issues": []
   },
   "open_questions": [

@@ -259,7 +259,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | `0c5846e343d2009c49d0ee95532155c1c2e54d82ae7aa3716401da0d1ac4867e` | `5e65afa708e18b12b9f829486b8856146c46e9db755aad34ad4e7da317d7cc57` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | `2bde9a9fa7dcd2b74b669e0619815aabea909daa148b0482fe2804443d625e28` | `baf2b84cb20a5549d900fa1d19d0dcea1c89f2e17274d119644e9f60692e09e7` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
-| `system.disable-startup-delay` | validated | Class B | `research/records/system.disable-startup-delay.review.json` | `57081a6d7e41a5d17aff22481eec661b7889611dce4002f95110aa3c54eb8d90` | `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658` | 6 |
+| `system.disable-startup-delay` | validated | Class B | `research/records/system.disable-startup-delay.review.json` | `e34318b6999040a6b9d455310ba4bcf6dd6429a6b174f472636cbbef0548eaaf` | `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | `2928a84edc36491332349b1b6f3ea46781b5b06f291ea7e9637518f6eea6c988` | `f6fcec491570654c4ac024edf32ddda8b69c3f20699942c9b3a9c523e6a086ed` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | `7c41be2a3c5ab8c65bb8eddc66af5960dc0b652b387699ac1b5c3393bfd7771a` | `64b00ec7502121f9ba0cf1f178f7eee681d0e2a3cad116938aec15e83189bef0` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | `0852e85453e9854f1bff5af008f1ac6d0b58c1bb87bac664c491ebaf84cb4f9c` | `506e7c06fd133ff089965473816c95fc4c494e6413adc321fb58740eb7462cf0` | 4 |
@@ -7159,7 +7159,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/system.disable-startup-delay.review.json`
-- Source SHA256: `57081a6d7e41a5d17aff22481eec661b7889611dce4002f95110aa3c54eb8d90`
+- Source SHA256: `e34318b6999040a6b9d455310ba4bcf6dd6429a6b174f472636cbbef0548eaaf`
 - Proof SHA256: `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658`
 
 **Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, a bounded WPR lane captured both `missing` and `0`, and the value restores back to missing cleanly.
@@ -7915,8 +7915,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
 | `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/diagtrack-reliability-ghidra.md |
-| `vm-reliability-procmon-attempts-20260326` | `vm-test` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) |
-| `vm-reliability-follow-up-20260326` | `vm-test` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) |
+| `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) |
+| `vm-reliability-follow-up-20260326` | `procmon-trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) |
 
 **Validation proof**
 
