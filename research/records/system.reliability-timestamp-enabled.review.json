@@ -4,7 +4,7 @@
   "record_id": "system.reliability-timestamp-enabled",
   "tweak_id": "system.reliability-timestamp-enabled",
   "record_status": "validated",
-  "summary": "Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, and the later hidden structured Procmon pass plus address-seeded Ghidra fallback now keep both the adjacent runtime lead and the unresolved DiagTrack blocks in repo evidence, but the exact target values still have no live Procmon hit.",
+  "summary": "Microsoft's ADMX_Reliability policy page now closes the main contract gap for this record by mapping Enable Persistent Time Stamp directly to Software\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled and documenting the enabled, disabled, and not-configured states. Decompiled OsEventsTimestampInterval still explains the companion TimeStampInterval cadence, the 24-hour cap, and the current-version fallback path, while the 25H2 Procmon and Ghidra follow-up keeps the current-build DiagTrack lead and adjacent Reliability\\PBR runtime read in repo evidence.",
   "setting": {
     "name": "Reliability Event Timestamping",
     "category": "System",
@@ -13,7 +13,7 @@
     "casual_explanation": "Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine.",
     "why_people_change_it": "People only change it when debugging reliability reporting or comparing how often reliability events are timestamped.",
     "tradeoffs_overview": "Disabling timestamping reduces reliability event detail. Leaving it enabled keeps the cadence available through the companion interval setting.",
-    "professional_notes": "The decompiled OsEventsTimestampInterval path reads HKLM/SOFTWARE/Policies/Microsoft/Windows NT/Reliability/TimeStampEnabled first. If the value is 0, the function returns 0 immediately. If the value is non-zero, the function reads TimeStampInterval and caps it at 86400 seconds. It then falls back to HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Reliability/TimeStampInterval, where the value is interpreted in minutes and multiplied by 60. The repo note in Docs/system/system.md is useful provenance, but the decompiled function is the source of the value semantics. On 2026-03-26, initial Procmon trigger attempts on Win25H2Clean (`perfmon /rel`, a bounded WER crash path, and WMI reliability queries) still did not produce live reads for the policy or fallback values inside the capture window. Follow-up work the same day narrowed the live path further: our Ghidra export on diagtrack.dll found the TimeStampInterval string, a DiagTrack service-restart Procmon pass showed an adjacent read on HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Reliability/PBR/LastSuccessfulRefreshTime, and bounded WER QueueReporting plus Problem Reports UI passes still did not show direct reads on TimeStampEnabled or TimeStampInterval. A later hidden structured Procmon pass then set the policy gate plus both interval variants together, ran DiagTrack restart, Consolidator, QueueReporting, perfmon /rel, and the Problem Reports UI in one capture window, and still surfaced only the adjacent Reliability\\PBR read on svchost.exe. A separate address-seeded Ghidra pass then re-opened the unresolved blocks from the first export at 18038fce0 and 18026bfc0, forced temporary function boundaries, and wrote both the match markdown and structured evidence.json back into the repo. Those forced decompiles are noisy, but they keep the unresolved code blocks in evidence instead of dropping them as `<no function>` dead ends. The record therefore stays one step short of converged VM proof because the live target values still do not surface in Procmon.",
+    "professional_notes": "Microsoft's ADMX_Reliability policy page maps Enable Persistent Time Stamp directly to HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled and documents the enabled, disabled, and not-configured states. The decompiled OsEventsTimestampInterval path then explains the companion cadence behavior: it reads TimeStampEnabled first, returns 0 immediately when the value is 0, reads TimeStampInterval when the gate is non-zero, caps the policy-path interval at 86400 seconds, and falls back to HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Reliability\\TimeStampInterval where the value is interpreted in minutes and multiplied by 60. On 2026-03-26, initial Procmon trigger attempts on Win25H2Clean (`perfmon /rel`, a bounded WER crash path, and WMI reliability queries) still did not produce live reads for the policy or fallback values inside the capture window. Follow-up work the same day narrowed the live path further: our Ghidra export on diagtrack.dll found the TimeStampInterval string, a DiagTrack service-restart Procmon pass showed an adjacent read on HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Reliability\\PBR\\LastSuccessfulRefreshTime, and bounded WER QueueReporting plus Problem Reports UI passes still did not show direct reads on TimeStampEnabled or TimeStampInterval. A later hidden structured Procmon pass then set the policy gate plus both interval variants together, ran DiagTrack restart, Consolidator, QueueReporting, perfmon /rel, and the Problem Reports UI in one capture window, and still surfaced only the same adjacent Reliability\\PBR read on svchost.exe. A separate address-seeded Ghidra pass then re-opened the unresolved blocks from the first export at 18038fce0 and 18026bfc0, forced temporary function boundaries, and wrote both the match markdown and structured evidence.json back into the repo. Those forced decompiles are noisy, but they keep the unresolved code blocks in evidence instead of dropping them as `<no function>` dead ends. Between the official policy mapping and the decompiled interval logic, the record is now strong enough to treat the app's gate-plus-cap pair as an app-ready policy mapping even though the live 25H2 Procmon pass still lands on the adjacent Reliability\\PBR branch instead of the exact target values.",
     "targets": [
       {
         "target_id": "reliability-timestamp-enabled",
@@ -28,7 +28,7 @@
             "label": "Not configured",
             "meaning": "No explicit policy is set; the runtime can fall back to the current-version Reliability path if one is present.",
             "evidence_ids": [
-              "repo-system-doc-reliability-timestamp",
+              "ms-admx-reliability-persistent-timestamp",
               "repo-system-decomp-reliability-timestamp"
             ]
           },
@@ -38,6 +38,7 @@
             "label": "Timestamping disabled",
             "meaning": "The decompiled function returns 0 immediately when TimeStampEnabled is 0.",
             "evidence_ids": [
+              "ms-admx-reliability-persistent-timestamp",
               "repo-system-decomp-reliability-timestamp"
             ]
           },
@@ -47,6 +48,7 @@
             "label": "Timestamping enabled",
             "meaning": "The decompiled function continues to read TimeStampInterval when TimeStampEnabled is non-zero.",
             "evidence_ids": [
+              "ms-admx-reliability-persistent-timestamp",
               "repo-system-decomp-reliability-timestamp"
             ]
           }
@@ -66,7 +68,7 @@
             "label": "Not configured",
             "meaning": "No explicit interval policy is set; the runtime can fall back to the current-version Reliability path if one is present.",
             "evidence_ids": [
-              "repo-system-doc-reliability-timestamp",
+              "ms-admx-reliability-persistent-timestamp",
               "repo-system-decomp-reliability-timestamp"
             ]
           },
@@ -76,7 +78,7 @@
             "label": "Maximum documented interval",
             "meaning": "The decompiled function caps the policy interval at 86400 seconds, which the repo note describes as 24h.",
             "evidence_ids": [
-              "repo-system-doc-reliability-timestamp",
+              "ms-admx-reliability-persistent-timestamp",
               "repo-system-decomp-reliability-timestamp"
             ]
           }
@@ -120,46 +122,68 @@
           "rationale": "Leave the policy unset and let Windows use its normal reliability timestamp behavior."
         }
       ],
-      "notes": "The decompiled function reads the policy branch first and falls back to the current-version Reliability path when needed.",
+      "notes": "Microsoft documents the TimeStampEnabled policy path directly. The decompiled function then explains the companion interval and the current-version fallback path.",
       "evidence_ids": [
-        "repo-system-doc-reliability-timestamp",
+        "ms-admx-reliability-persistent-timestamp",
         "repo-system-decomp-reliability-timestamp"
       ]
     }
   ],
   "recommended_profiles": [
     {
-      "profile_id": "hold-for-research",
-      "label": "Hold for research",
+      "profile_id": "current-app-policy",
+      "label": "Current app policy",
       "intended_for": [
-        "Research tracking only",
+        "Systems that need persistent shutdown timestamping",
         "Reliability logging comparisons"
       ],
       "avoid_for": [
-        "Published presets"
+        "Systems where disk power-down behavior must stay untouched"
       ],
       "states": [
         {
           "target_id": "reliability-timestamp-enabled",
-          "state_kind": "missing",
-          "value": null,
-          "rationale": "Do not publish or apply the reliability timestamp gate until the companion cadence is also documented in the preset."
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Enable the documented policy gate."
+        },
+        {
+          "target_id": "reliability-timestamp-interval",
+          "state_kind": "value",
+          "value": 86400,
+          "rationale": "Use the same 24-hour cap tracked in the decompiled reader and the current app mapping."
         }
       ],
-      "good_when": "You want to document the reliability timestamp gate without overstating preset confidence.",
-      "bad_when": "You need a published preset for reliability logging cadence.",
+      "good_when": "You want the app's current persistent timestamp policy pair with the documented gate enabled.",
+      "bad_when": "You want to leave reliability timestamping fully Windows-managed.",
       "tradeoffs": [
-        "The timestamping gate is documented honestly.",
-        "The companion cadence value stays separate from the gate."
+        "Keeps persistent shutdown timestamping enabled through the documented policy gate.",
+        "The companion interval still comes from decompiled runtime behavior instead of a separate Microsoft registry mapping."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
-        "repo-system-doc-reliability-timestamp",
-        "repo-system-decomp-reliability-timestamp"
+        "ms-admx-reliability-persistent-timestamp",
+        "repo-system-decomp-reliability-timestamp",
+        "ghidra-diagtrack-reliability-20260326",
+        "vm-reliability-follow-up-20260326"
       ]
     }
   ],
   "evidence": [
+    {
+      "evidence_id": "ms-admx-reliability-persistent-timestamp",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Policy CSP - ADMX_Reliability / EE_EnablePersistentTimeStamp",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability",
+      "summary": "Microsoft maps Enable Persistent Time Stamp directly to Software\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled and documents the enabled, disabled, and not-configured behavior, including that the schedule is controlled by Timestamp Interval.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
     {
       "evidence_id": "repo-system-doc-reliability-timestamp",
       "kind": "repo-doc",
@@ -225,13 +249,13 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
+    "confidence": "high",
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": false,
     "needs_vm_validation": false,
-      "why": "The decompiled function provides the exact read order and value semantics for the gate value, and the 25H2 follow-up work now includes Procmon narrowing, a hidden structured probe that still lands only on the adjacent Reliability\\PBR path, and address-seeded Ghidra fallback output for the unresolved DiagTrack blocks. The target values still do not have a direct live Procmon hit, so the setting remains research-gated instead of app-ready.",
+      "why": "Microsoft now closes the main contract gap by publishing the exact TimeStampEnabled policy path and enable/disable semantics. The decompiled reader still supplies the companion TimeStampInterval logic and 24-hour cap, and the 25H2 follow-up work keeps the current-build DiagTrack lead in repo evidence. That is enough to treat the app's gate-plus-cap pair as an app-ready policy mapping even though the live Procmon pass still narrows to an adjacent Reliability branch instead of the exact target values.",
     "blocking_issues": []
   },
   "open_questions": [
@@ -242,9 +266,9 @@
   ],
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
-    "source_url": "Docs/system/assets/timestamp-OsEventsTimestampInterval.c",
-    "exact_quote_or_path": "RegOpenKeyExW(HKEY_LOCAL_MACHINE, L\"Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability\", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L\"TimeStampEnabled\", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L\"TimeStampInterval\", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180",
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability",
+    "exact_quote_or_path": "EE_EnablePersistentTimeStamp -> Registry Key Name Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability, Registry Value Name TimeStampEnabled. If you enable this policy setting, you are able to specify how often the Persistent System Timestamp is refreshed and subsequently written to the disk. You can specify the Timestamp Interval in seconds.",
     "key_found_on_page": true,
-      "notes": "The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability\\PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass, but the exact target values still have no live Procmon hit."
+      "notes": "The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability\\PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass."
   }
 }

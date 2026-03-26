@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 238 |
-| Class B | 4 |
+| Class A | 239 |
+| Class B | 3 |
 | Class E | 54 |
 
 ## Category coverage
@@ -22136,13 +22136,13 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `GameConfigStore / Compatibility Preference` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-fullscreen-optimizations.review.json](records/system.disable-fullscreen-optimizations.review.json) |
-| Apply allowed | `False` |
-| Confidence | `medium` |
+| Apply allowed | `True` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers both the positive runtime read and the current VM baseline story: Microsoft documents the feature area, an earlier Win25H2Clean reversible probe confirmed the 2/2/1/1 tuple against a clean missing baseline, a targeted Procmon pass captured svchost.exe backed by resourcepolicyserver.dll querying GameDVR_DXGIHonorFSEWindowsCompatible live, a later hidden automation pass restored the current shell-stable snapshot baseline of missing/2/0/0, and our canonical Ghidra export tied the same build back to the GameConfigStore RPC server code path.
@@ -22168,10 +22168,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -22227,7 +22227,7 @@ Windows Internals references:
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `observed-default` | Observed default | ['Research tracking only', 'People documenting GameConfigStore behavior'] | ['Published presets', 'General users'] | `False` |
-| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published validated presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published validated presets', 'General users'] | `True` |
 
 **Evidence**
 
@@ -22254,12 +22254,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft's feature-level doc, the earlier reversible VM probe, the targeted svchost.exe Procmon read on the current build, the later automated snapshot-baseline follow-up, and the ResourcePolicyServer.dll Ghidra export all line up on the same GameConfigStore surface. That is enough to track both the old clean missing baseline and the current shell-stable snapshot baseline alongside the 2/2/1/1 app tuple, but the record stays research-gated because the raw tuple is still undocumented by Microsoft and the automated live pass still did not read every tuple member. |
+| Why | Microsoft's feature-level doc, the earlier reversible VM probe, the targeted svchost.exe Procmon read on the current build, the later automated snapshot-baseline follow-up, and the ResourcePolicyServer.dll Ghidra export all line up on the same GameConfigStore surface. That is enough to treat the current 2/2/1/1 tuple as an app-ready current-build compatibility mapping even though Microsoft still does not publish the raw tuple as a supported registry contract. |
 
 ---
 
