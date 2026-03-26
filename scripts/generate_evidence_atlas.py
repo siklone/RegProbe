@@ -38,7 +38,7 @@ def md_link(target: str, label: str | None = None) -> str:
 
 def format_value(value: Any) -> str:
     if value is None:
-        return "—"
+        return "-"
     if isinstance(value, bool):
         return "true" if value else "false"
     return md_code(value)
@@ -82,7 +82,7 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
         ["Area", md_code(record.get("area"))],
         ["Scope", md_code(record.get("scope"))],
         ["Source file", md_link(str(record.get("source_file") or ""))],
-        ["V3.1 evidence root", md_link(str(record.get("v31_evidence_root") or "")) if record.get("v31_evidence_root") else "â€”"],
+        ["V3.1 evidence root", md_link(str(record.get("v31_evidence_root") or "")) if record.get("v31_evidence_root") else "-"],
         ["Apply allowed", md_code((record.get("decision") or {}).get("apply_allowed"))],
         ["Confidence", md_code((record.get("decision") or {}).get("confidence"))],
         ["Needs VM validation", md_code((record.get("decision") or {}).get("needs_vm_validation"))],

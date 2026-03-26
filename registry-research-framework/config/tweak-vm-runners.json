@@ -1,0 +1,26 @@
+{
+  "runtime": {
+    "security.threat-file-hash-logging": {
+      "script": "scripts/vm/run-defender-threat-file-hash-probe.ps1",
+      "args": []
+    },
+    "system.disable-fullscreen-optimizations": {
+      "script": "scripts/vm/run-fullscreen-optimizations-probe.ps1",
+      "args": []
+    },
+    "system.reliability-timestamp-enabled": {
+      "script": "scripts/vm/run-reliability-timestamp-probe.ps1",
+      "args": []
+    }
+  },
+  "behavior": {
+    "power.disable-cpu-idle-states": {
+      "script": "scripts/vm/run-cpu-idle-states-benchmark.ps1",
+      "args": []
+    },
+    "system.disable-startup-delay": {
+      "script": "scripts/vm/run-startup-delay-wpr-trace.ps1",
+      "args": []
+    }
+  }
+}

@@ -91,6 +91,7 @@ def render_md(manifest: dict[str, Any]) -> str:
         ["Validated", str(summary.get("validated", 0))],
         ["Deprecated", str(summary.get("deprecated", 0))],
         ["Review required", str(summary.get("review_required", 0))],
+        ["Records with V3.1 evidence roots", str(sum(1 for record in manifest["records"] if record.get("v31_evidence_root")))],
         ["Records with evidence", str(summary.get("records_with_evidence", 0))],
         ["Records without evidence", str(summary.get("records_without_evidence", 0))],
         ["Records missing validation proof", str(summary.get("records_missing_validation_proof", 0))],
@@ -111,11 +112,12 @@ def render_md(manifest: dict[str, Any]) -> str:
             escape_md_cell(record.get("record_status")),
             escape_md_cell((record.get("evidence_class") or {}).get("class_label")),
             f"`{escape_md_cell(record.get('source_file'))}`",
+            linkify_reference_text(record.get("v31_evidence_root"), MD_OUTPUT_PATH) if record.get("v31_evidence_root") else "-",
             f"`{escape_md_cell(record.get('source_file_sha256'))}`" if record.get("source_file_sha256") else "",
             f"`{escape_md_cell(record.get('validation_proof_sha256'))}`" if record.get("validation_proof_sha256") else "",
             str(len(record.get("evidence", []))),
         ])
-    lines.extend(render_table(["Record", "Status", "Class", "Source file", "Source SHA256", "Proof SHA256", "Evidence"], index_rows))
+    lines.extend(render_table(["Record", "Status", "Class", "Source file", "V3.1 root", "Source SHA256", "Proof SHA256", "Evidence"], index_rows))
     lines.append("")
     lines.append("## Per-record details")
     lines.append("")
@@ -126,7 +128,7 @@ def render_md(manifest: dict[str, Any]) -> str:
         lines.append(f"- Evidence class: `{escape_md_cell((record.get('evidence_class') or {}).get('class_label'))}`")
         lines.append(f"- Source file: `{escape_md_cell(record.get('source_file'))}`")
         if record.get("v31_evidence_root"):
-            lines.append(f"- V3.1 evidence root: `{escape_md_cell(record.get('v31_evidence_root'))}`")
+            lines.append(f"- V3.1 evidence root: {linkify_reference_text(record.get('v31_evidence_root'), MD_OUTPUT_PATH)}")
         lines.append(f"- Source SHA256: `{escape_md_cell(record.get('source_file_sha256'))}`")
         lines.append(f"- Proof SHA256: `{escape_md_cell(record.get('validation_proof_sha256'))}`")
         lines.append("")

@@ -51,7 +51,7 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Area | `Driver Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/audio.disable-beep.review.json](records/audio.disable-beep.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -415,7 +415,7 @@ Nohuto lineage references:
 | Area | `DISM Command` |
 | Scope | `device` |
 | Source file | [research/records/cleanup.disable-reserved-storage.review.json](records/cleanup.disable-reserved-storage.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -537,7 +537,7 @@ Nohuto lineage references:
 | Area | `Docker Desktop / WSL Integration` |
 | Scope | `user` |
 | Source file | [research/records/developer.docker-performance.review.json](records/developer.docker-performance.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -593,7 +593,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Docker default | Docker Desktop uses its normal backend behavior because the WSL engine setting is not explicitly configured. | docker-settings-file-doc, docker-wsl-backend-doc |
+| `missing` | - | Docker default | Docker Desktop uses its normal backend behavior because the WSL engine setting is not explicitly configured. | docker-settings-file-doc, docker-wsl-backend-doc |
 | `value` | true | Use WSL 2 backend | Docker Desktop uses the WSL 2 based engine. | docker-settings-file-doc, docker-wsl-backend-doc |
 | `value` | false | Do not use WSL 2 backend | Docker Desktop stays on its non-WSL backend. | docker-settings-file-doc, docker-wsl-backend-doc |
 
@@ -650,7 +650,7 @@ Current writes
 | Area | `User Environment Variable` |
 | Scope | `user` |
 | Source file | [research/records/developer.dotnet-telemetry-disable.json](records/developer.dotnet-telemetry-disable.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -713,7 +713,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default telemetry behavior | The .NET CLI uses its normal telemetry behavior because no persistent opt-out variable is set for the current user. | ms-dotnet-cli-telemetry, ms-win32-environment |
+| `missing` | - | Default telemetry behavior | The .NET CLI uses its normal telemetry behavior because no persistent opt-out variable is set for the current user. | ms-dotnet-cli-telemetry, ms-win32-environment |
 | `value` | `1` | .NET CLI telemetry opted out | The .NET CLI telemetry is opted out for the current user. | ms-dotnet-cli-telemetry, ms-win32-environment, app-developer-provider |
 | `value` | `true` | .NET CLI telemetry opted out | The .NET CLI telemetry is opted out for the current user. | ms-dotnet-cli-telemetry, ms-win32-environment |
 
@@ -770,7 +770,7 @@ Nohuto lineage references:
 | Area | `Windows Path Handling vs Git Configuration` |
 | Scope | `device` |
 | Source file | [research/records/developer.enable-windows-long-paths.review.json](records/developer.enable-windows-long-paths.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -833,7 +833,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default long-path behavior | Windows keeps the normal long-path baseline because LongPathsEnabled is not explicitly enabled. | ms-maximum-path-limitation |
+| `missing` | - | Windows default long-path behavior | Windows keeps the normal long-path baseline because LongPathsEnabled is not explicitly enabled. | ms-maximum-path-limitation |
 | `value` | `1` | Windows long paths enabled | Windows long-path support is enabled for compatible applications. | ms-maximum-path-limitation, app-developer-provider |
 
 **Windows defaults**
@@ -889,7 +889,7 @@ Nohuto lineage references:
 | Area | `System Environment Variable` |
 | Scope | `device` |
 | Source file | [research/records/developer.nodejs-performance.json](records/developer.nodejs-performance.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -953,7 +953,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Node.js default launch behavior | Node.js uses its default memory behavior because no machine-level NODE_OPTIONS override is set. | node-cli-node-options, ms-win32-environment |
+| `missing` | - | Node.js default launch behavior | Node.js uses its default memory behavior because no machine-level NODE_OPTIONS override is set. | node-cli-node-options, ms-win32-environment |
 | `value` | `--max-old-space-size=8192` | 8 GiB old-space limit override | Node.js starts with a larger V8 old-space limit, which can help large builds but raises memory consumption. | node-cli-node-options, node-cli-max-old-space-size, ms-win32-environment, app-developer-provider |
 
 **Windows defaults**
@@ -1010,7 +1010,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/developer.powershell-execution.json](records/developer.powershell-execution.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1073,7 +1073,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows PowerShell keeps its normal effective execution-policy behavior because no machine policy override is set here. | local-powershell-executionpolicy-admx, local-powershell-executionpolicy-adml |
+| `missing` | - | Not configured | Windows PowerShell keeps its normal effective execution-policy behavior because no machine policy override is set here. | local-powershell-executionpolicy-admx, local-powershell-executionpolicy-adml |
 | `value` | `RemoteSigned` | Allow local scripts and remote signed scripts | PowerShell allows local scripts and requires remote scripts to be signed. | local-powershell-executionpolicy-admx, local-powershell-executionpolicy-adml, app-developer-provider |
 | `value` | `AllSigned` | Only signed scripts | PowerShell requires all scripts to be signed. | local-powershell-executionpolicy-admx |
 | `value` | `Unrestricted` | All scripts allowed | PowerShell allows scripts without the RemoteSigned restriction. | local-powershell-executionpolicy-admx |
@@ -1131,7 +1131,7 @@ Nohuto lineage references:
 | Area | `Python / Windows Path Handling` |
 | Scope | `device` |
 | Source file | [research/records/developer.python-path-fix.review.json](records/developer.python-path-fix.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1195,7 +1195,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default long-path behavior | Windows keeps the normal path-length baseline because LongPathsEnabled is not explicitly enabled. | python-using-windows-doc, ms-maximum-path-limitation, local-filesys-adml |
+| `missing` | - | Windows default long-path behavior | Windows keeps the normal path-length baseline because LongPathsEnabled is not explicitly enabled. | python-using-windows-doc, ms-maximum-path-limitation, local-filesys-adml |
 | `value` | `0` | Long paths disabled | Win32 long-path support is not enabled through this registry setting. | local-filesys-admx, local-filesys-adml |
 | `value` | `1` | Long paths enabled | Long-path-aware applications, including Python workflows that rely on the Windows long-path setting, can access paths beyond the normal 260-character limit. | python-using-windows-doc, ms-maximum-path-limitation, local-filesys-admx, local-filesys-adml, app-developer-provider |
 
@@ -1254,7 +1254,7 @@ Nohuto lineage references:
 | Area | `OpenSSH Agent Startup` |
 | Scope | `user` |
 | Source file | [research/records/developer.ssh-agent-autostart.review.json](records/developer.ssh-agent-autostart.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1310,7 +1310,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | No ssh-agent autostart entry is present for the current user. | ms-run-registry-keys, openssh-ssh-agent-doc |
+| `missing` | - | Not configured | No ssh-agent autostart entry is present for the current user. | ms-run-registry-keys, openssh-ssh-agent-doc |
 | `value` | `research/evidence-files/external/c/System32/OpenSSH/ssh-agent.exe.md` | SSH Agent autostart enabled | The current user launches ssh-agent at logon by writing the agent executable into the Windows Run key. | ms-run-registry-keys, openssh-ssh-agent-doc, app-developer-provider |
 
 **Windows defaults**
@@ -1365,7 +1365,7 @@ Current writes
 | Area | `Registry Enablement` |
 | Scope | `device` |
 | Source file | [research/records/developer.windows-dev-mode.json](records/developer.windows-dev-mode.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1421,7 +1421,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not explicitly enabled | Developer Mode is not explicitly enabled through the direct AppModelUnlock registry method. | ms-enable-device-for-development, local-appxpackagemanager-adml |
+| `missing` | - | Not explicitly enabled | Developer Mode is not explicitly enabled through the direct AppModelUnlock registry method. | ms-enable-device-for-development, local-appxpackagemanager-adml |
 | `value` | `1` | Developer Mode enabled | Windows Developer Mode is enabled so packaged Microsoft Store apps can be developed and installed directly from an IDE. | ms-enable-device-for-development, local-appxpackagemanager-admx, local-appxpackagemanager-adml, app-developer-provider |
 
 **Windows defaults**
@@ -1479,7 +1479,7 @@ Current writes
 | Area | `WSL Configuration` |
 | Scope | `user` |
 | Source file | [research/records/developer.wsl2-memory.json](records/developer.wsl2-memory.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1535,8 +1535,8 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | WSL default memory behavior | WSL 2 uses its normal default memory behavior because no explicit memory limit is configured in .wslconfig. | ms-wsl-config |
-| `feature-dependent` | — | Configured memory limit | WSL 2 memory is explicitly limited in .wslconfig using a size value such as 4GB or 8GB. | ms-wsl-config |
+| `missing` | - | WSL default memory behavior | WSL 2 uses its normal default memory behavior because no explicit memory limit is configured in .wslconfig. | ms-wsl-config |
+| `feature-dependent` | - | Configured memory limit | WSL 2 memory is explicitly limited in .wslconfig using a size value such as 4GB or 8GB. | ms-wsl-config |
 
 **Windows defaults**
 
@@ -1590,7 +1590,7 @@ Current writes
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.always-show-icons-never-thumbnails.review.json](records/explorer.always-show-icons-never-thumbnails.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1710,7 +1710,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/explorer.disable-low-disk-space-warning.json](records/explorer.disable-low-disk-space-warning.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1774,7 +1774,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default | Windows follows its normal low disk warning behavior and can display low-disk warnings. | ms-low-disk-warning-article |
+| `missing` | - | Windows default | Windows follows its normal low disk warning behavior and can display low-disk warnings. | ms-low-disk-warning-article |
 | `value` | `1` | Low disk warning disabled | Windows does not check for or display the documented low disk space warnings. | ms-low-disk-warning-article, dump-25h2-policies-explorer-nolowdiskspacechecks, app-visibility-provider |
 
 **Windows defaults**
@@ -1830,7 +1830,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/explorer.disable-taskbar-chat.json](records/explorer.disable-taskbar-chat.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -1894,7 +1894,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The Chat icon follows the defaults for the Windows edition. | ms-experience-configure-chat-icon, local-taskbar-adml-chat |
+| `missing` | - | Not configured | The Chat icon follows the defaults for the Windows edition. | ms-experience-configure-chat-icon, local-taskbar-adml-chat |
 | `value` | `1` | Show | The Chat icon is shown on the taskbar by default, and users can still show or hide it in Settings. | ms-experience-configure-chat-icon, local-taskbar-admx-chat, local-taskbar-adml-chat |
 | `value` | `2` | Hide | The Chat icon is hidden by default, and users can still show or hide it in Settings. This is the state the app now applies. | ms-experience-configure-chat-icon, local-taskbar-admx-chat, local-taskbar-adml-chat, app-visibility-provider |
 | `value` | `3` | Disabled | The Chat icon is not displayed and users cannot show or hide it in Settings. | ms-experience-configure-chat-icon, local-taskbar-admx-chat, local-taskbar-adml-chat |
@@ -2073,7 +2073,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.hide-empty-drives.review.json](records/explorer.hide-empty-drives.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2188,7 +2188,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.launch-folder-windows-in-a-separate-process.review.json](records/explorer.launch-folder-windows-in-a-separate-process.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2308,7 +2308,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json](records/explorer.show-compressed-and-encrypted-files-in-color.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2428,7 +2428,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-drive-letters-first.review.json](records/explorer.show-drive-letters-first.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2542,7 +2542,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-file-extensions.review.json](records/explorer.show-file-extensions.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2663,7 +2663,7 @@ Nohuto lineage references:
 | Area | `Explorer Cabinet State` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-full-path.review.json](records/explorer.show-full-path.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2726,7 +2726,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Explorer default behavior | Explorer keeps its current baseline because no explicit FullPath preference is set by this record. | ms-gppref-global-folder-options, dump-hkcu25h2-explorer-cabinetstate-fullpath |
+| `missing` | - | Explorer default behavior | Explorer keeps its current baseline because no explicit FullPath preference is set by this record. | ms-gppref-global-folder-options, dump-hkcu25h2-explorer-cabinetstate-fullpath |
 | `value` | `0` | Do not show full path | Explorer does not display the full path in the title bar. | ms-gppref-global-folder-options |
 | `value` | `1` | Show full path | Explorer displays the full path in the title bar. | ms-gppref-global-folder-options, dump-hkcu25h2-explorer-cabinetstate-fullpath, app-visibility-provider |
 
@@ -2784,7 +2784,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-hidden-files.review.json](records/explorer.show-hidden-files.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2905,7 +2905,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-info-tips.review.json](records/explorer.show-info-tips.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3025,7 +3025,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-protected-operating-system-files.review.json](records/explorer.show-protected-operating-system-files.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3145,7 +3145,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-recent-items.review.json](records/explorer.show-recent-items.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3260,7 +3260,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-status-bar.review.json](records/explorer.show-status-bar.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3382,7 +3382,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.show-type-overlay.review.json](records/explorer.show-type-overlay.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3502,7 +3502,7 @@ Nohuto lineage references:
 | Area | `Observed Explorer Runtime Setting` |
 | Scope | `user` |
 | Source file | [research/records/explorer.taskbar-alignment-left.review.json](records/explorer.taskbar-alignment-left.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3625,7 +3625,7 @@ Nohuto lineage references:
 | Area | `Group Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-active-probing.review.json](records/network.disable-active-probing.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3694,7 +3694,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default behavior | Windows can continue using the normal NCSI active tests. | ms-ncsi-icm-adml |
+| `missing` | - | Default behavior | Windows can continue using the normal NCSI active tests. | ms-ncsi-icm-adml |
 | `value` | `0` | Policy disabled | The policy is disabled, so the normal active-test behavior remains available. | ms-ncsi-icm-admx, ms-ncsi-icm-adml |
 | `value` | `1` | Disable active probing | NCSI does not run the active tests Microsoft describes. | ms-ncsi-icm-admx, ms-ncsi-icm-adml, app-network-provider |
 
@@ -3752,7 +3752,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-default-shares.json](records/network.disable-default-shares.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3823,7 +3823,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Automatic share creation enabled by default | Windows automatically creates the server administrative shares when no explicit override is present. | ms-remove-admin-shares, ms-admin-shares-missing |
+| `missing` | - | Automatic share creation enabled by default | Windows automatically creates the server administrative shares when no explicit override is present. | ms-remove-admin-shares, ms-admin-shares-missing |
 | `value` | `0` | Do not create server administrative shares | Windows does not automatically create server administrative shares. | ms-remove-admin-shares, ms-admin-shares-missing |
 | `value` | `1` | Create server administrative shares | Windows creates server administrative shares automatically. | ms-admin-shares-missing |
 
@@ -3838,7 +3838,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Automatic share creation enabled by default | Windows automatically creates workstation administrative shares when no explicit override is present. | ms-admin-shares-missing, ms-mss-autosharewks |
+| `missing` | - | Automatic share creation enabled by default | Windows automatically creates workstation administrative shares when no explicit override is present. | ms-admin-shares-missing, ms-mss-autosharewks |
 | `value` | `0` | Do not create workstation administrative shares | Windows does not automatically create workstation administrative shares. | ms-admin-shares-missing, ms-mss-autosharewks |
 | `value` | `1` | Create workstation administrative shares | Windows creates workstation administrative shares automatically. | ms-admin-shares-missing, ms-mss-autosharewks |
 
@@ -3896,7 +3896,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-ipv6.json](records/network.disable-ipv6.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -3965,7 +3965,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default | If the value is absent, Windows uses the normal IPv6 stack behavior. | ms-ipv6-config |
+| `missing` | - | Windows default | If the value is absent, Windows uses the normal IPv6 stack behavior. | ms-ipv6-config |
 | `value` | `0` | IPv6 enabled | All IPv6 components are enabled. | ms-ipv6-config |
 | `value` | `32` | Prefer IPv4 over IPv6 | Windows keeps IPv6 available but prefers IPv4 in prefix policies. | ms-ipv6-config |
 | `value` | `255` | Disable IPv6 except loopback | All IPv6 interfaces except loopback are disabled. | ms-ipv6-config |
@@ -4022,7 +4022,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-llmnr.json](records/network.disable-llmnr.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4091,7 +4091,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | LLMNR stays enabled by default because the policy is not forced. | ms-dnsclient-policy-csp, local-dnsclient-admx |
+| `missing` | - | Not configured | LLMNR stays enabled by default because the policy is not forced. | ms-dnsclient-policy-csp, local-dnsclient-admx |
 | `value` | `0` | LLMNR disabled | The policy is enabled and multicast name resolution is turned off. | ms-dnsclient-policy-csp, local-dnsclient-admx |
 | `value` | `1` | LLMNR enabled | The policy is disabled and multicast name resolution is allowed. | ms-dnsclient-policy-csp, local-dnsclient-admx |
 
@@ -4149,7 +4149,7 @@ Windows Internals references:
 | Area | `LLTD Policy Semantics` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-lltd.review.json](records/network.disable-lltd.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4219,7 +4219,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default behavior | The policy is not configured, so Windows uses the default LLTDIO behavior. | ms-lltd-adml |
+| `missing` | - | Default behavior | The policy is not configured, so Windows uses the default LLTDIO behavior. | ms-lltd-adml |
 | `value` | `0` | Policy disabled | The policy is disabled, which Microsoft says falls back to default LLTDIO behavior. | ms-lltd-admx, ms-lltd-adml |
 | `value` | `1` | Policy enabled | The LLTDIO driver is explicitly turned on by policy. | ms-lltd-admx, ms-lltd-adml |
 
@@ -4234,7 +4234,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default behavior | The policy is not configured, so Windows uses the default Responder behavior. | ms-lltd-responder-adml |
+| `missing` | - | Default behavior | The policy is not configured, so Windows uses the default Responder behavior. | ms-lltd-responder-adml |
 | `value` | `0` | Policy disabled | The policy is disabled, which Microsoft says falls back to default Responder behavior. | ms-lltd-responder-admx, ms-lltd-responder-adml |
 | `value` | `1` | Policy enabled | The Responder driver is explicitly turned on by policy. | ms-lltd-responder-admx, ms-lltd-responder-adml |
 
@@ -4295,7 +4295,7 @@ Windows Internals references:
 | Area | `mDNS Policy Semantics` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-mdns.review.json](records/network.disable-mdns.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4364,7 +4364,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Local settings | Windows uses locally configured mDNS behavior because the policy is not configured. | ms-dnsclient-mdns-adml |
+| `missing` | - | Local settings | Windows uses locally configured mDNS behavior because the policy is not configured. | ms-dnsclient-mdns-adml |
 | `value` | `0` | Policy disabled | The policy is disabled, which Microsoft describes as returning to locally configured settings rather than publishing a hard off state. | ms-dnsclient-mdns-admx, ms-dnsclient-mdns-adml |
 | `value` | `1` | Policy enabled | The DNS client uses mDNS because the policy is enabled. | ms-dnsclient-mdns-admx, ms-dnsclient-mdns-adml |
 
@@ -4421,7 +4421,7 @@ Windows Internals references:
 | Area | `Per-interface Registry Configuration` |
 | Scope | `per-interface` |
 | Source file | [research/records/network.disable-netbios.review.json](records/network.disable-netbios.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4552,7 +4552,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-netbios-resolution.json](records/network.disable-netbios-resolution.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4621,7 +4621,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force a DNS client NetBIOS policy mode. | ms-dnsclient-policy-csp, local-dnsclient-netbios-admx |
+| `missing` | - | Not configured | Windows does not force a DNS client NetBIOS policy mode. | ms-dnsclient-policy-csp, local-dnsclient-netbios-admx |
 | `value` | `0` | Disable | Disable NetBIOS name resolution for the DNS client policy. | local-dnsclient-netbios-admx |
 | `value` | `1` | Allow | Allow NetBIOS name resolution. | local-dnsclient-netbios-admx |
 | `value` | `2` | Disable on public networks | Disable NetBIOS name resolution on public networks only. | local-dnsclient-netbios-admx |
@@ -4682,7 +4682,7 @@ Windows Internals references:
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-plaintext-smb-passwords.json](records/network.disable-plaintext-smb-passwords.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4752,7 +4752,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed baseline | Windows uses its built-in baseline for plaintext SMB password behavior. | ms-plaintext-smb-password-policy |
+| `missing` | - | Windows managed baseline | Windows uses its built-in baseline for plaintext SMB password behavior. | ms-plaintext-smb-password-policy |
 | `value` | `0` | Do not send plaintext passwords | Windows does not send unencrypted passwords to third-party SMB servers. | ms-plaintext-smb-password-policy |
 | `value` | `1` | Allow plaintext passwords | Windows can send unencrypted passwords to third-party SMB servers. | ms-plaintext-smb-password-policy |
 
@@ -4810,7 +4810,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-smart-name-resolution.json](records/network.disable-smart-name-resolution.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -4879,7 +4879,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows policy does not force the feature and normal Windows behavior applies. | ms-dnsclient-policy-csp, local-dnsclient-admx |
+| `missing` | - | Not configured | Windows policy does not force the feature and normal Windows behavior applies. | ms-dnsclient-policy-csp, local-dnsclient-admx |
 | `value` | `0` | Feature enabled | The policy is disabled and smart multi-homed name resolution remains on. | ms-dnsclient-policy-csp, local-dnsclient-admx |
 | `value` | `1` | Feature disabled | The policy is enabled and smart multi-homed name resolution is turned off. | ms-dnsclient-policy-csp, local-dnsclient-admx |
 
@@ -4937,7 +4937,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-smb1.json](records/network.disable-smb1.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5007,7 +5007,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed default | Windows decides behavior based on version, installed features, and component defaults. | ms-smb-disable-enable, repo-provenance-smb1 |
+| `missing` | - | Windows managed default | Windows decides behavior based on version, installed features, and component defaults. | ms-smb-disable-enable, repo-provenance-smb1 |
 | `value` | `0` | Disabled | The SMBv1 server protocol is disabled for LanmanServer. | ms-smb-disable-enable |
 | `value` | `1` | Enabled | The SMBv1 server protocol is enabled for LanmanServer. | ms-smb-disable-enable |
 
@@ -5065,7 +5065,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-smb2.json](records/network.disable-smb2.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5134,7 +5134,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Enabled by default | Windows keeps SMBv2 and SMBv3 enabled when no explicit override exists. | ms-smb-protocol-toggle |
+| `missing` | - | Enabled by default | Windows keeps SMBv2 and SMBv3 enabled when no explicit override exists. | ms-smb-protocol-toggle |
 | `value` | `0` | Disabled | The SMBv2 and SMBv3 server protocols are disabled. | ms-smb-protocol-toggle |
 | `value` | `1` | Enabled | The SMBv2 and SMBv3 server protocols are enabled explicitly. | ms-smb-protocol-toggle |
 
@@ -5190,7 +5190,7 @@ Windows Internals references:
 | Area | `Group Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.disable-wifi-sense.json](records/network.disable-wifi-sense.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5259,7 +5259,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | User choice or Windows default | The policy is not configured, so users can choose whether to enable these hotspot and sharing features. | ms-wifisense-adml |
+| `missing` | - | User choice or Windows default | The policy is not configured, so users can choose whether to enable these hotspot and sharing features. | ms-wifisense-adml |
 | `value` | `0` | Disabled | Suggested hotspot, shared-network, and paid service options are turned off and users cannot enable them. | ms-wifisense-admx, ms-wifisense-adml |
 | `value` | `1` | Enabled or user-allowed | The policy allows users to choose whether to use these features. | ms-wifisense-admx, ms-wifisense-adml |
 
@@ -5316,7 +5316,7 @@ Windows Internals references:
 | Area | `Group Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.enable-lltd-responder.json](records/network.enable-lltd-responder.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5386,7 +5386,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default behavior | Windows uses the default LLTD Responder behavior because the policy is not configured. | ms-lltd-responder-adml |
+| `missing` | - | Default behavior | Windows uses the default LLTD Responder behavior because the policy is not configured. | ms-lltd-responder-adml |
 | `value` | `0` | Policy disabled | The administrative template policy is disabled, which falls back to default LLTD Responder behavior. | ms-lltd-responder-admx, ms-lltd-responder-adml |
 | `value` | `1` | Policy enabled | The LLTD Responder is explicitly turned on by policy. | ms-lltd-responder-admx, ms-lltd-responder-adml |
 
@@ -5443,7 +5443,7 @@ Windows Internals references:
 | Area | `Group Policy` |
 | Scope | `device` |
 | Source file | [research/records/network.enable-lltdio.json](records/network.enable-lltdio.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5513,7 +5513,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default behavior | Windows uses the default LLTD Mapper I/O behavior because the policy is not configured. | ms-lltd-adml |
+| `missing` | - | Default behavior | Windows uses the default LLTD Mapper I/O behavior because the policy is not configured. | ms-lltd-adml |
 | `value` | `0` | Policy disabled | The administrative template policy is disabled, which reverts to default LLTD Mapper I/O behavior rather than publishing a hard feature-off state. | ms-lltd-admx, ms-lltd-adml |
 | `value` | `1` | Policy enabled | The LLTD Mapper I/O driver is explicitly turned on by policy. | ms-lltd-admx, ms-lltd-adml |
 
@@ -5570,7 +5570,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.prefer-ipv4.json](records/network.prefer-ipv4.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5639,7 +5639,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default | Windows uses the normal IPv6 preference behavior. | ms-ipv6-config |
+| `missing` | - | Windows default | Windows uses the normal IPv6 preference behavior. | ms-ipv6-config |
 | `value` | `0` | No preference override | IPv6 is enabled with the normal default preference behavior. | ms-ipv6-config |
 | `value` | `32` | Prefer IPv4 | Windows prefers IPv4 over IPv6 in prefix policies while leaving IPv6 enabled. | ms-ipv6-config |
 | `value` | `255` | Disable IPv6 except loopback | This is a stronger override that disables IPv6 components instead of merely preferring IPv4. | ms-ipv6-config |
@@ -5696,7 +5696,7 @@ Windows Internals references:
 | Area | `Registry Security Option` |
 | Scope | `device` |
 | Source file | [research/records/network.require-ntlm-ssp-client-session-security.review.json](records/network.require-ntlm-ssp-client-session-security.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5764,7 +5764,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed baseline | Windows keeps its default NTLM SSP client security posture when no explicit override is present. | ms-ntlm-client-security-policy, local-sceregvl-ntlm-min-client-sec |
+| `missing` | - | Windows managed baseline | Windows keeps its default NTLM SSP client security posture when no explicit override is present. | ms-ntlm-client-security-policy, local-sceregvl-ntlm-min-client-sec |
 | `value` | `0` | No extra minimum flags | No additional NTLM session security minimum is forced through this value. | ms-ntlm-client-security-policy, local-sceregvl-ntlm-min-client-sec |
 | `value` | `524288` | Require NTLMv2 session security | Require NTLMv2 session security for NTLM SSP based clients. | ms-ntlm-client-security-policy, local-sceregvl-ntlm-min-client-sec |
 | `value` | `536870912` | Require 128-bit encryption | Require 128-bit encryption for NTLM SSP based clients. | ms-ntlm-client-security-policy, local-sceregvl-ntlm-min-client-sec |
@@ -5823,7 +5823,7 @@ Windows Internals references:
 | Area | `SMB Server Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-disable-leasing.review.json](records/network.smb-disable-leasing.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -5950,7 +5950,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-enable-large-mtu.json](records/network.smb-enable-large-mtu.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6020,7 +6020,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed default | Windows uses its built-in SMB client default, which Microsoft documents as large MTU enabled by default. | ms-smb-file-server-performance |
+| `missing` | - | Windows managed default | Windows uses its built-in SMB client default, which Microsoft documents as large MTU enabled by default. | ms-smb-file-server-performance |
 | `value` | `0` | Large MTU enabled | Large MTU support stays enabled for SMB client connections. | ms-smb-file-server-performance |
 | `value` | `1` | Large MTU disabled | Large MTU is turned off and SMB uses smaller request sizing behavior. | ms-smb-file-server-performance |
 
@@ -6077,7 +6077,7 @@ Windows Internals references:
 | Area | `SMB Client and Server Configuration` |
 | Scope | `mixed` |
 | Source file | [research/records/network.smb-enable-multichannel.review.json](records/network.smb-enable-multichannel.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6219,7 +6219,7 @@ Windows Internals references:
 | Area | `Policy vs Observed Service Setting` |
 | Scope | `mixed` |
 | Source file | [research/records/network.smb-enable-quic.review.json](records/network.smb-enable-quic.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6290,7 +6290,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The SMB client may allow initiating SMB over QUIC according to the Windows baseline. | local-lanmanworkstation-admx-quic, local-lanmanworkstation-adml-quic |
+| `missing` | - | Not configured | The SMB client may allow initiating SMB over QUIC according to the Windows baseline. | local-lanmanworkstation-admx-quic, local-lanmanworkstation-adml-quic |
 | `value` | `0` | SMB over QUIC disabled for client | The SMB client will not allow initiating SMB over QUIC and can fall back to TCP. | local-lanmanworkstation-admx-quic, local-lanmanworkstation-adml-quic |
 | `value` | `1` | SMB over QUIC enabled for client | The SMB client is allowed to initiate SMB over QUIC. | local-lanmanworkstation-admx-quic, local-lanmanworkstation-adml-quic |
 
@@ -6305,7 +6305,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The SMB server may accept SMB over QUIC connections according to the Windows baseline. | local-lanmanserver-admx-quic, local-lanmanserver-adml-quic |
+| `missing` | - | Not configured | The SMB server may accept SMB over QUIC connections according to the Windows baseline. | local-lanmanserver-admx-quic, local-lanmanserver-adml-quic |
 | `value` | `0` | SMB over QUIC disabled for server | The SMB server will not accept SMB over QUIC connections. | local-lanmanserver-admx-quic, local-lanmanserver-adml-quic |
 | `value` | `1` | SMB over QUIC enabled for server | The SMB server can accept SMB over QUIC connections. | local-lanmanserver-admx-quic, local-lanmanserver-adml-quic |
 
@@ -6364,7 +6364,7 @@ Windows Internals references:
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-encrypt-data.json](records/network.smb-encrypt-data.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6435,7 +6435,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed baseline | Windows keeps its SMB server encryption baseline without an explicit local override in this registry value. | ms-smb-security-troubleshooting |
+| `missing` | - | Windows managed baseline | Windows keeps its SMB server encryption baseline without an explicit local override in this registry value. | ms-smb-security-troubleshooting |
 | `value` | `0` | Global encryption not required | The server does not force global SMB encryption through this registry override. | ms-smb-security-troubleshooting |
 | `value` | `1` | Global encryption required | The server requires SMB encryption for shared data through this registry override. | ms-smb-security-troubleshooting |
 
@@ -6491,7 +6491,7 @@ Windows Internals references:
 | Area | `Registry Optimization Bundle` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-increase-client-metadata-cache.json](records/network.smb-increase-client-metadata-cache.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6649,7 +6649,7 @@ Current writes
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-reject-unencrypted-access.json](records/network.smb-reject-unencrypted-access.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6719,7 +6719,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed baseline | Windows keeps its SMB server baseline without an explicit local override for this behavior. | ms-smb-security-troubleshooting |
+| `missing` | - | Windows managed baseline | Windows keeps its SMB server baseline without an explicit local override for this behavior. | ms-smb-security-troubleshooting |
 | `value` | `0` | Do not reject unencrypted access | The server does not force this global rejection rule through the registry override. | ms-smb-security-troubleshooting |
 | `value` | `1` | Reject unencrypted access | The server rejects clients that do not use SMB encryption through this registry override. | ms-smb-security-troubleshooting |
 
@@ -6775,7 +6775,7 @@ Windows Internals references:
 | Area | `Policy vs Observed Service Setting` |
 | Scope | `mixed` |
 | Source file | [research/records/network.smb-require-dialect-3_1_1.review.json](records/network.smb-require-dialect-3_1_1.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -6848,7 +6848,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The SMB client keeps the Windows baseline minimum dialect behavior. | local-lanmanworkstation-admx-dialects, local-lanmanworkstation-adml-dialects |
+| `missing` | - | Not configured | The SMB client keeps the Windows baseline minimum dialect behavior. | local-lanmanworkstation-admx-dialects, local-lanmanworkstation-adml-dialects |
 | `value` | `514` | SMB 2.0.2 minimum | Minimum dialect is SMB 2.0.2. | local-lanmanworkstation-admx-dialects, local-lanmanworkstation-adml-dialects |
 | `value` | `528` | SMB 2.1.0 minimum | Minimum dialect is SMB 2.1.0. | local-lanmanworkstation-admx-dialects, local-lanmanworkstation-adml-dialects |
 | `value` | `768` | SMB 3.0.0 minimum | Minimum dialect is SMB 3.0.0. | local-lanmanworkstation-admx-dialects, local-lanmanworkstation-adml-dialects |
@@ -6866,7 +6866,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The SMB client keeps the Windows baseline maximum dialect behavior. | local-lanmanworkstation-admx-dialects, local-lanmanworkstation-adml-dialects |
+| `missing` | - | Not configured | The SMB client keeps the Windows baseline maximum dialect behavior. | local-lanmanworkstation-admx-dialects, local-lanmanworkstation-adml-dialects |
 | `value` | `514` | SMB 2.0.2 maximum | Maximum dialect is SMB 2.0.2. | local-lanmanworkstation-admx-dialects, local-lanmanworkstation-adml-dialects |
 | `value` | `528` | SMB 2.1.0 maximum | Maximum dialect is SMB 2.1.0. | local-lanmanworkstation-admx-dialects, local-lanmanworkstation-adml-dialects |
 | `value` | `768` | SMB 3.0.0 maximum | Maximum dialect is SMB 3.0.0. | local-lanmanworkstation-admx-dialects, local-lanmanworkstation-adml-dialects |
@@ -6884,7 +6884,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The SMB server keeps the Windows baseline minimum dialect behavior. | local-lanmanserver-admx-dialects, local-lanmanserver-adml-dialects |
+| `missing` | - | Not configured | The SMB server keeps the Windows baseline minimum dialect behavior. | local-lanmanserver-admx-dialects, local-lanmanserver-adml-dialects |
 | `value` | `514` | SMB 2.0.2 minimum | Minimum dialect is SMB 2.0.2. | local-lanmanserver-admx-dialects, local-lanmanserver-adml-dialects |
 | `value` | `528` | SMB 2.1.0 minimum | Minimum dialect is SMB 2.1.0. | local-lanmanserver-admx-dialects, local-lanmanserver-adml-dialects |
 | `value` | `768` | SMB 3.0.0 minimum | Minimum dialect is SMB 3.0.0. | local-lanmanserver-admx-dialects, local-lanmanserver-adml-dialects |
@@ -6902,7 +6902,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The SMB server keeps the Windows baseline maximum dialect behavior. | local-lanmanserver-admx-dialects, local-lanmanserver-adml-dialects |
+| `missing` | - | Not configured | The SMB server keeps the Windows baseline maximum dialect behavior. | local-lanmanserver-admx-dialects, local-lanmanserver-adml-dialects |
 | `value` | `514` | SMB 2.0.2 maximum | Maximum dialect is SMB 2.0.2. | local-lanmanserver-admx-dialects, local-lanmanserver-adml-dialects |
 | `value` | `528` | SMB 2.1.0 maximum | Maximum dialect is SMB 2.1.0. | local-lanmanserver-admx-dialects, local-lanmanserver-adml-dialects |
 | `value` | `768` | SMB 3.0.0 maximum | Maximum dialect is SMB 3.0.0. | local-lanmanserver-admx-dialects, local-lanmanserver-adml-dialects |
@@ -6964,7 +6964,7 @@ Windows Internals references:
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-require-signing-client.json](records/network.smb-require-signing-client.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7035,7 +7035,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed baseline | Windows determines the SMB client signing requirement based on its built-in release baseline. | ms-smb-signing-overview, ms-client-signing-policy |
+| `missing` | - | Windows managed baseline | Windows determines the SMB client signing requirement based on its built-in release baseline. | ms-smb-signing-overview, ms-client-signing-policy |
 | `value` | `0` | Signing not required | The SMB client does not require signing for outbound connections. | ms-smb-signing-overview, ms-client-signing-policy |
 | `value` | `1` | Signing required | The SMB client requires signing for outbound connections. | ms-smb-signing-overview, ms-client-signing-policy |
 
@@ -7050,7 +7050,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed baseline | Windows determines whether SMB client signing is enabled by default for compatible connections. | ms-smb-signing-overview, ms-client-signing-policy |
+| `missing` | - | Windows managed baseline | Windows determines whether SMB client signing is enabled by default for compatible connections. | ms-smb-signing-overview, ms-client-signing-policy |
 | `value` | `0` | Signing not enabled | The SMB client does not enable signing for normal negotiated connections. | ms-smb-signing-overview, ms-client-signing-policy |
 | `value` | `1` | Signing enabled | The SMB client enables signing for compatible connections. | ms-smb-signing-overview, ms-client-signing-policy |
 
@@ -7107,7 +7107,7 @@ Windows Internals references:
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-require-signing-server.json](records/network.smb-require-signing-server.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7178,7 +7178,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed baseline | Windows determines the SMB server signing requirement based on its built-in release baseline. | ms-smb-signing-overview, ms-server-signing-policy |
+| `missing` | - | Windows managed baseline | Windows determines the SMB server signing requirement based on its built-in release baseline. | ms-smb-signing-overview, ms-server-signing-policy |
 | `value` | `0` | Signing not required | The SMB server does not require signing for inbound connections. | ms-smb-signing-overview, ms-server-signing-policy |
 | `value` | `1` | Signing required | The SMB server requires signing for inbound connections. | ms-smb-signing-overview, ms-server-signing-policy |
 
@@ -7193,7 +7193,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed baseline | Windows determines whether SMB server signing is enabled for compatible connections. | ms-smb-signing-overview, ms-server-signing-policy |
+| `missing` | - | Windows managed baseline | Windows determines whether SMB server signing is enabled for compatible connections. | ms-smb-signing-overview, ms-server-signing-policy |
 | `value` | `0` | Signing not enabled | The SMB server does not enable signing for normal negotiated connections. | ms-smb-signing-overview, ms-server-signing-policy |
 | `value` | `1` | Signing enabled | The SMB server enables signing for compatible inbound connections. | ms-smb-signing-overview, ms-server-signing-policy |
 
@@ -7250,7 +7250,7 @@ Windows Internals references:
 | Area | `Policy vs Observed Service Setting` |
 | Scope | `mixed` |
 | Source file | [research/records/network.smb-set-cipher-suite-order.review.json](records/network.smb-set-cipher-suite-order.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7322,7 +7322,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default cipher suite order | If the policy is disabled or not configured, the default SMB client cipher suite order is used. | local-lanmanworkstation-admx-cipher-order, local-lanmanworkstation-adml-cipher-order |
+| `missing` | - | Default cipher suite order | If the policy is disabled or not configured, the default SMB client cipher suite order is used. | local-lanmanworkstation-admx-cipher-order, local-lanmanworkstation-adml-cipher-order |
 | `value` | `custom-supported-order` | Custom client cipher suite order | If the policy is enabled with at least one supported suite, the SMB client prioritizes cipher suites in the specified order. | local-lanmanworkstation-admx-cipher-order, local-lanmanworkstation-adml-cipher-order |
 
 #### `server-cipher-suite-order-policy`
@@ -7337,7 +7337,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default cipher suite order | If the policy is disabled or not configured, the default SMB server cipher suite order is used. | local-lanmanserver-admx-cipher-order, local-lanmanserver-adml-cipher-order |
+| `missing` | - | Default cipher suite order | If the policy is disabled or not configured, the default SMB server cipher suite order is used. | local-lanmanserver-admx-cipher-order, local-lanmanserver-adml-cipher-order |
 | `value` | `custom-supported-order` | Custom server cipher suite order | If the policy is enabled with at least one supported suite, the SMB server prioritizes cipher suites in the specified order. | local-lanmanserver-admx-cipher-order, local-lanmanserver-adml-cipher-order |
 
 **Windows defaults**
@@ -7397,7 +7397,7 @@ Windows Internals references:
 | Area | `Observed User Preference` |
 | Scope | `user` |
 | Source file | [research/records/notifications.disable-feedback-frequency.review.json](records/notifications.disable-feedback-frequency.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7460,7 +7460,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows or user default | Windows uses the normal feedback-request behavior for the current user. | ms-feedback-frequency, app-privacy-provider |
+| `missing` | - | Windows or user default | Windows uses the normal feedback-request behavior for the current user. | ms-feedback-frequency, app-privacy-provider |
 | `value` | `0` | Never ask for feedback | Windows feedback requests are disabled for the current user. | ms-feedback-frequency, app-privacy-provider |
 
 **Windows defaults**
@@ -7515,7 +7515,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/notifications.disable-lock-screen.json](records/notifications.disable-lock-screen.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7578,7 +7578,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Applications can still raise toast notifications on the lock screen under normal Windows behavior. | ms-admx-wpn-no-lock-screen-toast, local-wpn-admx-no-lock-screen-toast, local-wpn-adml-no-lock-screen-toast |
+| `missing` | - | Not configured | Applications can still raise toast notifications on the lock screen under normal Windows behavior. | ms-admx-wpn-no-lock-screen-toast, local-wpn-admx-no-lock-screen-toast, local-wpn-adml-no-lock-screen-toast |
 | `value` | `0` | Lock-screen toasts allowed | The policy is disabled and apps can still raise toast notifications on the lock screen. | ms-admx-wpn-no-lock-screen-toast, local-wpn-admx-no-lock-screen-toast, local-wpn-adml-no-lock-screen-toast |
 | `value` | `1` | Lock-screen toasts turned off | Applications cannot raise toast notifications on the lock screen. | ms-admx-wpn-no-lock-screen-toast, local-wpn-admx-no-lock-screen-toast, local-wpn-adml-no-lock-screen-toast |
 
@@ -7636,7 +7636,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/notifications.disable-mirroring.json](records/notifications.disable-mirroring.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7699,7 +7699,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Notification mirroring follows normal Windows behavior. | ms-admx-wpn-no-mirroring, local-wpn-admx-no-mirroring, local-wpn-adml-no-mirroring |
+| `missing` | - | Not configured | Notification mirroring follows normal Windows behavior. | ms-admx-wpn-no-mirroring, local-wpn-admx-no-mirroring, local-wpn-adml-no-mirroring |
 | `value` | `0` | Notification mirroring allowed | The policy is disabled and notifications can still be mirrored to other devices. | ms-admx-wpn-no-mirroring, local-wpn-admx-no-mirroring, local-wpn-adml-no-mirroring |
 | `value` | `1` | Notification mirroring turned off | Notifications are not mirrored to other devices for the current user. | ms-admx-wpn-no-mirroring, local-wpn-admx-no-mirroring, local-wpn-adml-no-mirroring |
 
@@ -7757,7 +7757,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/notifications.disable-tile.json](records/notifications.disable-tile.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7820,7 +7820,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Tile notifications stay enabled by default and can still be controlled normally. | ms-notifications-csp-tile, local-wpn-admx-no-tile, local-wpn-adml-no-tile |
+| `missing` | - | Not configured | Tile notifications stay enabled by default and can still be controlled normally. | ms-notifications-csp-tile, local-wpn-admx-no-tile, local-wpn-adml-no-tile |
 | `value` | `0` | Tile notifications allowed | The policy is disabled and applications can still update tiles and tile badges. | ms-notifications-csp-tile, local-wpn-admx-no-tile, local-wpn-adml-no-tile |
 | `value` | `1` | Tile notifications turned off | Applications and system features cannot update tiles and tile badges for the current user. | ms-notifications-csp-tile, local-wpn-admx-no-tile, local-wpn-adml-no-tile |
 
@@ -7878,7 +7878,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/notifications.disable-toast.json](records/notifications.disable-toast.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -7941,7 +7941,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Toast notifications stay enabled by default and can still be controlled by the administrator or user. | ms-admx-wpn-no-toast, local-wpn-admx-no-toast, local-wpn-adml-no-toast |
+| `missing` | - | Not configured | Toast notifications stay enabled by default and can still be controlled by the administrator or user. | ms-admx-wpn-no-toast, local-wpn-admx-no-toast, local-wpn-adml-no-toast |
 | `value` | `0` | Toast notifications allowed | The policy is disabled and apps can still raise toast notifications. | ms-admx-wpn-no-toast, local-wpn-admx-no-toast, local-wpn-adml-no-toast |
 | `value` | `1` | Toast notifications turned off | Applications cannot raise toast notifications for the current user. | ms-admx-wpn-no-toast, local-wpn-admx-no-toast, local-wpn-adml-no-toast |
 
@@ -8001,7 +8001,7 @@ Nohuto lineage references:
 | Area | `Win32 Animation Effects` |
 | Scope | `user` |
 | Source file | [research/records/performance.disable-animations.review.json](records/performance.disable-animations.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8128,7 +8128,7 @@ Windows Internals references:
 | Area | `Win32 Menu Timing` |
 | Scope | `user` |
 | Source file | [research/records/performance.disable-menu-show-delay.review.json](records/performance.disable-menu-show-delay.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8384,7 +8384,7 @@ Windows Internals references:
 | Area | `Observed User Preference` |
 | Scope | `user` |
 | Source file | [research/records/peripheral.autoplay-take-no-action.review.json](records/peripheral.autoplay-take-no-action.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8456,7 +8456,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | No explicit handler choice stored | Windows falls back to its normal AutoPlay behavior and remembered-choice state. | local-autoplay-adml-remember-choice |
+| `missing` | - | No explicit handler choice stored | Windows falls back to its normal AutoPlay behavior and remembered-choice state. | local-autoplay-adml-remember-choice |
 | `value` | `MSTakeNoAction` | Take no action | Observed app write intended to make the selected AutoPlay event take no action. | app-peripheral-provider |
 
 **Windows defaults**
@@ -8512,7 +8512,7 @@ Windows Internals references:
 | Area | `User Policy` |
 | Scope | `user` |
 | Source file | [research/records/peripheral.disable-autoplay.review.json](records/peripheral.disable-autoplay.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8583,7 +8583,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps its normal AutoPlay behavior for drive types not otherwise changed by policy. | local-autoplay-admx-turnoff, local-autoplay-adml-turnoff |
+| `missing` | - | Not configured | Windows keeps its normal AutoPlay behavior for drive types not otherwise changed by policy. | local-autoplay-admx-turnoff, local-autoplay-adml-turnoff |
 | `value` | `181` | Turn off AutoPlay on CD-ROM and removable media drives | AutoPlay is turned off on CD-ROM and removable media drives only. | local-autoplay-admx-turnoff, local-autoplay-adml-turnoff |
 | `value` | `255` | Turn off AutoPlay on all drives | AutoPlay is turned off on all drives. | local-autoplay-admx-turnoff, local-autoplay-adml-turnoff, app-peripheral-provider |
 
@@ -8598,7 +8598,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps its normal behavior for non-volume devices such as cameras or phones. | ms-autoplay-non-volume, local-autoplay-admx-non-volume, local-autoplay-adml-non-volume |
+| `missing` | - | Not configured | Windows keeps its normal behavior for non-volume devices such as cameras or phones. | ms-autoplay-non-volume, local-autoplay-admx-non-volume, local-autoplay-adml-non-volume |
 | `value` | `0` | Non-volume AutoPlay allowed | The policy is disabled and AutoPlay is enabled for non-volume devices. | ms-autoplay-non-volume, local-autoplay-admx-non-volume, local-autoplay-adml-non-volume |
 | `value` | `1` | Non-volume AutoPlay turned off | AutoPlay is blocked for non-volume devices such as cameras or phones. | ms-autoplay-non-volume, local-autoplay-admx-non-volume, local-autoplay-adml-non-volume, app-peripheral-provider |
 
@@ -8659,7 +8659,7 @@ Windows Internals references:
 | Area | `Accessibility Sticky Keys Flags` |
 | Scope | `user` |
 | Source file | [research/records/peripheral.disable-sticky-keys-prompt.review.json](records/peripheral.disable-sticky-keys-prompt.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8858,7 +8858,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Observed Win25H2Clean baseline | The current 25H2 VM baseline leaves DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled unset. | ms-cpu-idle-states, repo-power-doc, vm-cpu-idle-bundle-probe |
+| `missing` | - | Observed Win25H2Clean baseline | The current 25H2 VM baseline leaves DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled unset. | ms-cpu-idle-states, repo-power-doc, vm-cpu-idle-bundle-probe |
 | `value` | `DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1` | Observed app latency-focused bundle | The current app writes the raw latency-focused bundle that the VM probe applied and restored cleanly. | app-power-provider, nohuto-power-disable-idle-states-trace, repo-power-doc, vm-cpu-idle-bundle-probe |
 
 **Windows defaults**
@@ -8918,7 +8918,7 @@ Windows Internals references:
 | Area | `Registry Configuration` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-fast-startup.review.json](records/power.disable-fast-startup.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8989,7 +8989,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `feature-dependent` | — | Windows managed default | Windows chooses the Fast Startup baseline based on OS configuration and hibernation capability. | ms-fast-startup-doc |
+| `feature-dependent` | - | Windows managed default | Windows chooses the Fast Startup baseline based on OS configuration and hibernation capability. | ms-fast-startup-doc |
 | `value` | `0` | Disabled | Fast Startup is disabled. | ms-fast-startup-doc, nohuto-fast-startup-asset |
 | `value` | `1` | Enabled | Fast Startup is enabled. | ms-fast-startup-doc, nohuto-fast-startup-asset |
 
@@ -9048,7 +9048,7 @@ Windows Internals references:
 | Area | `TCP/IP offload + MMCSS policy` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-network-power-saving.policy.review.json](records/power.disable-network-power-saving.policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9172,7 +9172,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-power-throttling.json](records/power.disable-power-throttling.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9244,7 +9244,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the policy and users control the setting. | local-power-admx, local-power-adml |
+| `missing` | - | Not configured | Windows does not force the policy and users control the setting. | local-power-admx, local-power-adml |
 | `value` | `0` | Power Throttling not forced off | The policy is disabled and users control the setting. | local-power-admx, local-power-adml |
 | `value` | `1` | Power Throttling turned off | Power Throttling is turned off by policy. | local-power-admx, local-power-adml, app-power-provider |
 
@@ -9301,7 +9301,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-windows-search.json](records/power.disable-windows-search.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9427,7 +9427,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/power.hide-hibernate-option.json](records/power.hide-hibernate-option.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9497,7 +9497,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force Hibernate visibility and users can choose through the normal controls. | local-windowsexplorer-admx, local-windowsexplorer-adml, nohuto-showhibernateoption-admx |
+| `missing` | - | Not configured | Windows does not force Hibernate visibility and users can choose through the normal controls. | local-windowsexplorer-admx, local-windowsexplorer-adml, nohuto-showhibernateoption-admx |
 | `value` | `0` | Hibernate option hidden | The Hibernate option is never shown in the power menu. | local-windowsexplorer-admx, local-windowsexplorer-adml, app-power-provider, nohuto-showhibernateoption-admx |
 | `value` | `1` | Hibernate option shown | The Hibernate option is shown in the power menu when the hardware supports it. | local-windowsexplorer-admx, local-windowsexplorer-adml, nohuto-showhibernateoption-admx |
 
@@ -9557,7 +9557,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/power.hide-lock-option.json](records/power.hide-lock-option.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9627,7 +9627,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force Lock visibility and users can choose through the normal controls. | local-windowsexplorer-admx, local-windowsexplorer-adml, nohuto-showlockoption-admx |
+| `missing` | - | Not configured | Windows does not force Lock visibility and users can choose through the normal controls. | local-windowsexplorer-admx, local-windowsexplorer-adml, nohuto-showlockoption-admx |
 | `value` | `0` | Lock option hidden | The Lock option is never shown in the user tile menu. | local-windowsexplorer-admx, local-windowsexplorer-adml, app-power-provider, nohuto-showlockoption-admx |
 | `value` | `1` | Lock option shown | The Lock option is shown in the user tile menu. | local-windowsexplorer-admx, local-windowsexplorer-adml, nohuto-showlockoption-admx |
 
@@ -9686,7 +9686,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/power.hide-sleep-option.json](records/power.hide-sleep-option.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9756,7 +9756,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force Sleep visibility and users can choose through the normal controls. | local-windowsexplorer-admx, local-windowsexplorer-adml, nohuto-showsleepoption-admx |
+| `missing` | - | Not configured | Windows does not force Sleep visibility and users can choose through the normal controls. | local-windowsexplorer-admx, local-windowsexplorer-adml, nohuto-showsleepoption-admx |
 | `value` | `0` | Sleep option hidden | The Sleep option is never shown in the power menu. | local-windowsexplorer-admx, local-windowsexplorer-adml, app-power-provider, nohuto-showsleepoption-admx |
 | `value` | `1` | Sleep option shown | The Sleep option is shown in the power menu when the hardware supports it. | local-windowsexplorer-admx, local-windowsexplorer-adml, nohuto-showsleepoption-admx |
 
@@ -9815,7 +9815,7 @@ Windows Internals references:
 | Area | `PowerCfg PERFBOOSTMODE` |
 | Scope | `device` |
 | Source file | [research/records/power.optimize-cpu-boost.json](records/power.optimize-cpu-boost.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -9943,7 +9943,7 @@ Windows Internals references:
 | Area | `Multimedia Class Scheduler Service` |
 | Scope | `device` |
 | Source file | [research/records/power.optimize-gaming-network.json](records/power.optimize-gaming-network.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10131,7 +10131,7 @@ Windows Internals references:
 | Area | `Security Option Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.block-microsoft-accounts.json](records/privacy.block-microsoft-accounts.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10253,7 +10253,7 @@ Nohuto lineage references:
 | Area | `AppPrivacy policy family` |
 | Scope | `device` |
 | Source file | [research/records/privacy.deny-app-access.policy.review.json](records/privacy.deny-app-access.policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10364,7 +10364,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-activity-history.json](records/privacy.disable-activity-history.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10429,7 +10429,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows policy does not force the activity feed state. | ms-privacy-policy-csp, local-ospolicy-admx |
+| `missing` | - | Not configured | Windows policy does not force the activity feed state. | ms-privacy-policy-csp, local-ospolicy-admx |
 | `value` | `0` | Disabled | The activity feed is disabled by policy. | ms-privacy-policy-csp, local-ospolicy-admx |
 | `value` | `1` | Enabled | The activity feed is allowed by policy. | ms-privacy-policy-csp, local-ospolicy-admx |
 
@@ -10444,7 +10444,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows policy does not force whether user activities can be published. | ms-privacy-policy-csp, local-ospolicy-admx |
+| `missing` | - | Not configured | Windows policy does not force whether user activities can be published. | ms-privacy-policy-csp, local-ospolicy-admx |
 | `value` | `0` | Disabled | User activities cannot be published. | ms-privacy-policy-csp, local-ospolicy-admx |
 | `value` | `1` | Enabled | User activities can be published. | ms-privacy-policy-csp, local-ospolicy-admx |
 
@@ -10459,7 +10459,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows policy does not force whether user activities can be uploaded. | ms-privacy-policy-csp, local-ospolicy-admx |
+| `missing` | - | Not configured | Windows policy does not force whether user activities can be uploaded. | ms-privacy-policy-csp, local-ospolicy-admx |
 | `value` | `0` | Disabled | User activities cannot be uploaded. | ms-privacy-policy-csp, local-ospolicy-admx |
 | `value` | `1` | Enabled | User activities can be uploaded. | ms-privacy-policy-csp, local-ospolicy-admx |
 
@@ -10517,7 +10517,7 @@ Nohuto lineage references:
 | Area | `Machine Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-advertising-id.json](records/privacy.disable-advertising-id.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10580,7 +10580,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Users can control whether apps use the advertising ID for experiences across apps. | local-userprofiles-admx-advertising, local-userprofiles-adml-advertising |
+| `missing` | - | Not configured | Users can control whether apps use the advertising ID for experiences across apps. | local-userprofiles-admx-advertising, local-userprofiles-adml-advertising |
 | `value` | `0` | Policy not turning it off | The policy is disabled and users can still control whether apps use the advertising ID. | local-userprofiles-admx-advertising, local-userprofiles-adml-advertising |
 | `value` | `1` | Advertising ID turned off by policy | Apps cannot use the advertising ID for experiences across apps. | local-userprofiles-admx-advertising, local-userprofiles-adml-advertising, app-privacy-provider |
 
@@ -10637,7 +10637,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-app-diagnostics.json](records/privacy.disable-app-diagnostics.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10698,7 +10698,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force a policy and the user remains in control of app diagnostic-info access. | local-appprivacy-admx-diagnostics, local-appprivacy-adml-diagnostics |
+| `missing` | - | Not configured | Windows does not force a policy and the user remains in control of app diagnostic-info access. | local-appprivacy-admx-diagnostics, local-appprivacy-adml-diagnostics |
 | `value` | `0` | User is in control | The user decides whether Windows apps can access diagnostic information about other apps. | local-appprivacy-admx-diagnostics, local-appprivacy-adml-diagnostics |
 | `value` | `1` | Force allow | Windows apps are allowed to access diagnostic information about other apps and the user cannot change it. | local-appprivacy-admx-diagnostics, local-appprivacy-adml-diagnostics |
 | `value` | `2` | Force deny | Windows apps are not allowed to access diagnostic information about other apps and the user cannot change it. | local-appprivacy-admx-diagnostics, local-appprivacy-adml-diagnostics, app-privacy-provider |
@@ -10756,7 +10756,7 @@ Nohuto lineage references:
 | Area | `Observed Registry Setting` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-app-launch-tracking.review.json](records/privacy.disable-app-launch-tracking.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10820,7 +10820,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed UI state | The preference is not explicitly overridden in the registry and stays under the Windows UI toggle. | ms-windows-privacy-track-app-launches, nohuto-start-track-progs-trace |
+| `missing` | - | Windows managed UI state | The preference is not explicitly overridden in the registry and stays under the Windows UI toggle. | ms-windows-privacy-track-app-launches, nohuto-start-track-progs-trace |
 | `value` | `0` | App launch tracking disabled | Turns off "Let Windows track app launches to improve Start and search results." | ms-windows-privacy-track-app-launches, app-privacy-provider, nohuto-start-track-progs-trace |
 
 **Windows defaults**
@@ -10878,7 +10878,7 @@ Nohuto lineage references:
 | Area | `Policy vs Observed User Setting` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-app-suggestions.review.json](records/privacy.disable-app-suggestions.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -10940,7 +10940,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows Spotlight features may still suggest apps and content from third-party publishers. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
+| `missing` | - | Not configured | Windows Spotlight features may still suggest apps and content from third-party publishers. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
 | `value` | `0` | Third-party suggestions allowed | The policy is disabled and Windows is not being told to block third-party suggestions. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
 | `value` | `1` | Third-party suggestions turned off | Windows Spotlight features such as suggested apps in Start will no longer suggest apps and content from third-party publishers. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
 
@@ -10956,7 +10956,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | No observed user value | No explicit ContentDeliveryManager value is present in this record for Start suggestions. | app-privacy-provider |
+| `missing` | - | No observed user value | No explicit ContentDeliveryManager value is present in this record for Start suggestions. | app-privacy-provider |
 | `value` | `0` | Observed app off preference | The current app writes 0 here, but this record does not yet publish that user path as the official Microsoft control. | app-privacy-provider |
 
 **Windows defaults**
@@ -11014,7 +11014,7 @@ Nohuto lineage references:
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-appcompat-engine.policy.review.json](records/privacy.disable-appcompat-engine.policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11071,7 +11071,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal SwitchBack behavior. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp |
+| `missing` | - | Not configured | Windows keeps the normal SwitchBack behavior. SwitchBack allows applications that detect Windows Vista or later to also receive compatibility fixes normally reserved for older OS versions. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp |
 | `value` | `1` | SwitchBack enabled (policy explicit) | disabledValue in AppCompat.admx. SwitchBack runs normally. Equivalent to missing. | local-appcompat-admx |
 | `value` | `0` | Turn off SwitchBack | enabledValue in AppCompat.admx. SwitchBack is disabled. This is the value the app writes. Numeric direction is explicitly confirmed via the ADMX enabledValue block. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes SbEnable=REG_DWORD 0x0 and reg.exe reads it back. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp, app-privacy-provider, procmon-appcompat-engine |
 
@@ -11087,7 +11087,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal Application Compatibility Engine behavior. The engine checks a compatibility database each time an application starts and may apply run-time fixes, compatibility shims, or display Application Help messages for known incompatible applications. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp |
+| `missing` | - | Not configured | Windows keeps the normal Application Compatibility Engine behavior. The engine checks a compatibility database each time an application starts and may apply run-time fixes, compatibility shims, or display Application Help messages for known incompatible applications. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp |
 | `value` | `1` | Turn off Application Compatibility Engine | Intended to disable the Application Compatibility Engine. Value=1 is consistent with AppCompat.admx policy behavior, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableEngine=REG_DWORD 0x1 and reg.exe reads it back. Microsoft ADML explicitly states this may cause BSOD if old antivirus software is installed. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp, app-privacy-provider, procmon-appcompat-engine |
 
 **Windows defaults**
@@ -11145,7 +11145,7 @@ Current writes
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-appdeviceinventory.policy.review.json](records/privacy.disable-appdeviceinventory.policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11204,7 +11204,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal API sampling behavior. The system collects data about API usage patterns. | local-appdeviceinventory-admx, csp-appdeviceinventory |
+| `missing` | - | Not configured | Windows keeps the normal API sampling behavior. The system collects data about API usage patterns. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `0` | API sampling enabled (policy explicit) | disabledValue in AppDeviceInventory.admx. API sampling runs normally. Equivalent to missing. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `1` | Turn off API sampling | enabledValue in AppDeviceInventory.admx. Stops collection of API usage data. Confirmed app write. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableAPISamping=REG_DWORD 0x1 and reg.exe reads it back. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
 
@@ -11220,7 +11220,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal application footprint collection behavior. | local-appdeviceinventory-admx, csp-appdeviceinventory |
+| `missing` | - | Not configured | Windows keeps the normal application footprint collection behavior. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `0` | Application footprint collection enabled (policy explicit) | disabledValue in AppDeviceInventory.admx. Collection runs normally. Equivalent to missing. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `1` | Turn off application footprint collection | enabledValue in AppDeviceInventory.admx. Stops collection of application footprint data. Confirmed app write. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableApplicationFootprint=REG_DWORD 0x1 and reg.exe reads it back. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
 
@@ -11236,7 +11236,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal install tracing behavior. | local-appdeviceinventory-admx, csp-appdeviceinventory |
+| `missing` | - | Not configured | Windows keeps the normal install tracing behavior. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `0` | Install tracing enabled (policy explicit) | disabledValue in AppDeviceInventory.admx. Tracing runs normally. Equivalent to missing. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `1` | Turn off install tracing | enabledValue in AppDeviceInventory.admx. Stops tracing of application install events. Confirmed app write. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableInstallTracing=REG_DWORD 0x1 and reg.exe reads it back. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
 
@@ -11252,7 +11252,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal Win32 app backup behavior. | local-appdeviceinventory-admx, csp-appdeviceinventory |
+| `missing` | - | Not configured | Windows keeps the normal Win32 app backup behavior. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `0` | Win32 app backup enabled (policy explicit) | disabledValue in AppDeviceInventory.admx. Backup runs normally. Equivalent to missing. | local-appdeviceinventory-admx, csp-appdeviceinventory |
 | `value` | `1` | Turn off Win32 app backup | enabledValue in AppDeviceInventory.admx. Stops Win32 application backup collection. Confirmed app write. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableWin32AppBackup=REG_DWORD 0x1 and reg.exe reads it back. | local-appdeviceinventory-admx, csp-appdeviceinventory, app-privacy-provider, procmon-appdeviceinventory |
 
@@ -11310,7 +11310,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-application-telemetry.json](records/privacy.disable-application-telemetry.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11373,7 +11373,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the Application Telemetry policy through this registry value. | ms-admx-appcompat-application-telemetry, local-appcompat-admx, local-appcompat-adml |
+| `missing` | - | Not configured | Windows does not force the Application Telemetry policy through this registry value. | ms-admx-appcompat-application-telemetry, local-appcompat-admx, local-appcompat-adml |
 | `value` | `0` | Application Telemetry turned off | The Application Telemetry engine is turned off for the device. | ms-admx-appcompat-application-telemetry, local-appcompat-admx, local-appcompat-adml, app-privacy-provider |
 | `value` | `1` | Application Telemetry allowed | This policy does not turn the Application Telemetry engine off. | ms-admx-appcompat-application-telemetry, local-appcompat-admx |
 
@@ -11432,7 +11432,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-background-apps.json](records/privacy.disable-background-apps.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11495,7 +11495,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force a policy and the user remains in control of background app execution. | local-appprivacy-admx-background, local-appprivacy-adml-background |
+| `missing` | - | Not configured | Windows does not force a policy and the user remains in control of background app execution. | local-appprivacy-admx-background, local-appprivacy-adml-background |
 | `value` | `0` | User is in control | The user decides whether Windows apps can run in the background. | local-appprivacy-admx-background, local-appprivacy-adml-background |
 | `value` | `1` | Force allow | Windows apps are allowed to run in the background and the user cannot change it. | local-appprivacy-admx-background, local-appprivacy-adml-background |
 | `value` | `2` | Force deny | Windows apps are not allowed to run in the background and the user cannot change it. | local-appprivacy-admx-background, local-appprivacy-adml-background, app-privacy-provider |
@@ -11553,7 +11553,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-biometrics.json](records/privacy.disable-biometrics.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11616,7 +11616,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The device does not force biometrics on or off through policy. | local-biometrics-admx |
+| `missing` | - | Not configured | The device does not force biometrics on or off through policy. | local-biometrics-admx |
 | `value` | `0` | Biometrics disabled | Biometric features are disabled by policy. | local-biometrics-admx |
 | `value` | `1` | Biometrics enabled | Biometric features are explicitly allowed by policy. | local-biometrics-admx |
 
@@ -11673,7 +11673,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-biometrics-domain-logon.json](records/privacy.disable-biometrics-domain-logon.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11736,7 +11736,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The device does not force the domain-account biometric sign-in policy. | local-biometrics-admx |
+| `missing` | - | Not configured | The device does not force the domain-account biometric sign-in policy. | local-biometrics-admx |
 | `value` | `0` | Domain biometric sign-in disabled | Domain accounts cannot use biometric sign-in through this policy path. | local-biometrics-admx |
 | `value` | `1` | Domain biometric sign-in enabled | Domain accounts are allowed to use biometric sign-in through this policy path. | local-biometrics-admx |
 
@@ -11793,7 +11793,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-biometrics-logon.json](records/privacy.disable-biometrics-logon.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11856,7 +11856,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The device does not force biometric sign-in on or off through this policy. | local-biometrics-admx |
+| `missing` | - | Not configured | The device does not force biometric sign-in on or off through this policy. | local-biometrics-admx |
 | `value` | `0` | Biometric sign-in disabled | Users cannot sign in with biometrics through the credential provider. | local-biometrics-admx |
 | `value` | `1` | Biometric sign-in enabled | Biometric sign-in is allowed through the credential provider. | local-biometrics-admx |
 
@@ -11913,7 +11913,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-camera.json](records/privacy.disable-camera.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -11976,7 +11976,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Camera devices remain enabled because the machine policy is not forcing them off. | local-camera-admx, local-camera-adml |
+| `missing` | - | Not configured | Camera devices remain enabled because the machine policy is not forcing them off. | local-camera-admx, local-camera-adml |
 | `value` | `0` | Camera disabled | Camera devices are disabled by policy. | local-camera-admx, local-camera-adml |
 | `value` | `1` | Camera allowed | Camera devices are explicitly allowed by policy. | local-camera-admx, local-camera-adml |
 
@@ -12034,7 +12034,7 @@ Nohuto lineage references:
 | Area | `User Environment Variables` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-cli-telemetry.json](records/privacy.disable-cli-telemetry.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12099,7 +12099,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default telemetry behavior | PowerShell uses its normal telemetry behavior because no persistent opt-out variable is set for the current user. | ms-powershell-about-environment-variables, ms-win32-environment |
+| `missing` | - | Default telemetry behavior | PowerShell uses its normal telemetry behavior because no persistent opt-out variable is set for the current user. | ms-powershell-about-environment-variables, ms-win32-environment |
 | `value` | `1` | Telemetry opted out | PowerShell telemetry is opted out for the current user. | ms-powershell-about-environment-variables, ms-win32-environment, app-privacy-provider |
 | `value` | `true` | Telemetry opted out | PowerShell telemetry is opted out for the current user. | ms-powershell-about-environment-variables, ms-win32-environment |
 | `value` | `yes` | Telemetry opted out | PowerShell telemetry is opted out for the current user. | ms-powershell-about-environment-variables, ms-win32-environment |
@@ -12116,7 +12116,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default telemetry behavior | The .NET CLI uses its normal telemetry behavior because no persistent opt-out variable is set for the current user. | ms-dotnet-cli-telemetry, ms-win32-environment |
+| `missing` | - | Default telemetry behavior | The .NET CLI uses its normal telemetry behavior because no persistent opt-out variable is set for the current user. | ms-dotnet-cli-telemetry, ms-win32-environment |
 | `value` | `1` | .NET CLI telemetry opted out | The .NET CLI telemetry is opted out for the current user. | ms-dotnet-cli-telemetry, ms-win32-environment, app-privacy-provider |
 | `value` | `true` | .NET CLI telemetry opted out | The .NET CLI telemetry is opted out for the current user. | ms-dotnet-cli-telemetry, ms-win32-environment |
 
@@ -12174,7 +12174,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-consumer-account-content.json](records/privacy.disable-consumer-account-content.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12235,7 +12235,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the cloud consumer account content policy. | ms-experience-csp-disable-consumer-account-state-content, local-cloud-content-admx-consumer |
+| `missing` | - | Not configured | Windows does not force the cloud consumer account content policy. | ms-experience-csp-disable-consumer-account-state-content, local-cloud-content-admx-consumer |
 | `value` | `0` | Cloud consumer content allowed | The policy is disabled and Windows experiences may use cloud consumer account state content. | ms-experience-csp-disable-consumer-account-state-content, local-cloud-content-admx-consumer |
 | `value` | `1` | Cloud consumer content disabled | Windows experiences using this client component fall back to default content instead. | ms-experience-csp-disable-consumer-account-state-content, local-cloud-content-admx-consumer |
 
@@ -12293,7 +12293,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-copilot.json](records/privacy.disable-copilot.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12356,7 +12356,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the Copilot policy for this user, so Copilot remains available when Microsoft exposes it to that user. | ms-admx-windowscopilot-turnoff, local-windowscopilot-admx, local-windowscopilot-adml |
+| `missing` | - | Not configured | Windows does not force the Copilot policy for this user, so Copilot remains available when Microsoft exposes it to that user. | ms-admx-windowscopilot-turnoff, local-windowscopilot-admx, local-windowscopilot-adml |
 | `value` | `1` | Copilot turned off | The user cannot use Windows Copilot, and the Copilot icon does not appear on the taskbar. | ms-admx-windowscopilot-turnoff, local-windowscopilot-admx, local-windowscopilot-adml, app-privacy-provider |
 | `value` | `0` | Copilot allowed | This policy does not turn Copilot off, so the user can use Copilot when it is available to them. | ms-admx-windowscopilot-turnoff, local-windowscopilot-admx, local-windowscopilot-adml |
 
@@ -12415,7 +12415,7 @@ Nohuto lineage references:
 | Area | `Machine Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-cross-device-experiences.policy.review.json](records/privacy.disable-cross-device-experiences.policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12470,7 +12470,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The device follows the Windows edition default for continue experiences. | ms-admx-grouppolicy-enablecdp, local-grouppolicy-adml-enablecdp, nohuto-enablecdp-admx |
+| `missing` | - | Not configured | The device follows the Windows edition default for continue experiences. | ms-admx-grouppolicy-enablecdp, local-grouppolicy-adml-enablecdp, nohuto-enablecdp-admx |
 | `value` | `0` | Continue experiences blocked | The device is not discoverable by other devices and cannot participate in cross-device experiences. | ms-admx-grouppolicy-enablecdp, local-grouppolicy-admx-enablecdp, local-grouppolicy-adml-enablecdp, app-privacy-provider, nohuto-enablecdp-admx |
 | `value` | `1` | Continue experiences allowed | The device can participate in cross-device experiences. | ms-admx-grouppolicy-enablecdp, local-grouppolicy-admx-enablecdp, local-grouppolicy-adml-enablecdp, nohuto-enablecdp-admx |
 
@@ -12529,7 +12529,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-device-name-telemetry.json](records/privacy.disable-device-name-telemetry.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12592,7 +12592,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the diagnostic-data device-name policy. | ms-system-policy-csp-device-name, local-data-collection-admx, nohuto-allow-device-name-telemetry-trace |
+| `missing` | - | Not configured | Windows does not force the diagnostic-data device-name policy. | ms-system-policy-csp-device-name, local-data-collection-admx, nohuto-allow-device-name-telemetry-trace |
 | `value` | `0` | Do not include device name | The device name is blocked from diagnostic data by policy. | ms-system-policy-csp-device-name, local-data-collection-admx, nohuto-allow-device-name-telemetry-trace |
 | `value` | `1` | Include device name | The device name is explicitly allowed in diagnostic data by policy. | ms-system-policy-csp-device-name, local-data-collection-admx, nohuto-allow-device-name-telemetry-trace |
 
@@ -12651,7 +12651,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-diagnostic-data-delete.json](records/privacy.disable-diagnostic-data-delete.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12714,7 +12714,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the diagnostic-data deletion policy. | ms-system-policy-csp-device-delete, local-data-collection-admx, nohuto-datacollection-delete-admx |
+| `missing` | - | Not configured | Windows does not force the diagnostic-data deletion policy. | ms-system-policy-csp-device-delete, local-data-collection-admx, nohuto-datacollection-delete-admx |
 | `value` | `0` | Diagnostic data deletion allowed | The policy is disabled and the delete option remains available. | ms-system-policy-csp-device-delete, local-data-collection-admx, nohuto-datacollection-delete-admx |
 | `value` | `1` | Diagnostic data deletion disabled | The delete option is blocked by policy. | ms-system-policy-csp-device-delete, local-data-collection-admx, nohuto-datacollection-delete-admx |
 
@@ -12773,7 +12773,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-diagnostic-data-viewer.json](records/privacy.disable-diagnostic-data-viewer.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12836,7 +12836,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the Diagnostic Data Viewer policy. | ms-system-policy-csp-ddv, local-data-collection-admx, nohuto-datacollection-viewer-admx |
+| `missing` | - | Not configured | Windows does not force the Diagnostic Data Viewer policy. | ms-system-policy-csp-ddv, local-data-collection-admx, nohuto-datacollection-viewer-admx |
 | `value` | `0` | Diagnostic Data Viewer allowed | The policy is disabled and the viewer remains available. | ms-system-policy-csp-ddv, local-data-collection-admx, nohuto-datacollection-viewer-admx |
 | `value` | `1` | Diagnostic Data Viewer disabled | The viewer is blocked by policy. | ms-system-policy-csp-ddv, local-data-collection-admx, nohuto-datacollection-viewer-admx |
 
@@ -12895,7 +12895,7 @@ Nohuto lineage references:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-edge-search-suggestions.json](records/privacy.disable-edge-search-suggestions.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -12958,7 +12958,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Web search suggestions are enabled by default, but the user can change them. | ms-edge-search-suggest-enabled |
+| `missing` | - | Not configured | Web search suggestions are enabled by default, but the user can change them. | ms-edge-search-suggest-enabled |
 | `value` | `0` | Web search suggestions disabled | Web search suggestions are never used in the address bar, and the typed characters and URLs are not included in telemetry to Microsoft for this feature. | ms-edge-search-suggest-enabled, app-privacy-provider |
 | `value` | `1` | Web search suggestions enabled | Web search suggestions are used in the address bar. | ms-edge-search-suggest-enabled |
 
@@ -12973,7 +12973,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Local providers such as favorites and browsing history are allowed by default, but the user can change the setting. | ms-edge-local-providers-enabled |
+| `missing` | - | Not configured | Local providers such as favorites and browsing history are allowed by default, but the user can change the setting. | ms-edge-local-providers-enabled |
 | `value` | `0` | Local provider suggestions disabled | Suggestions from local providers such as browsing history and favorites are not used. | ms-edge-local-providers-enabled, app-privacy-provider |
 | `value` | `1` | Local provider suggestions enabled | Suggestions from local providers are used in the address bar and auto-suggest list. | ms-edge-local-providers-enabled |
 
@@ -12988,7 +12988,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Legacy Microsoft Edge does not force the search-suggestions setting and the user can choose it. | local-microsoftedge-adml |
+| `missing` | - | Not configured | Legacy Microsoft Edge does not force the search-suggestions setting and the user can choose it. | local-microsoftedge-adml |
 | `value` | `0` | Legacy Edge search suggestions disabled | Search suggestions do not appear in the address bar of legacy Microsoft Edge. | local-microsoftedge-admx, local-microsoftedge-adml, app-privacy-provider |
 | `value` | `1` | Legacy Edge search suggestions enabled | Search suggestions appear in the address bar of legacy Microsoft Edge. | local-microsoftedge-admx, local-microsoftedge-adml |
 
@@ -13047,7 +13047,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-feedback-notifications.json](records/privacy.disable-feedback-notifications.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13110,7 +13110,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the feedback-notification policy. | ms-experience-csp-feedback-notifications, local-feedback-notifications-admx, nohuto-donotshowfeedbacknotifications-admx |
+| `missing` | - | Not configured | Windows does not force the feedback-notification policy. | ms-experience-csp-feedback-notifications, local-feedback-notifications-admx, nohuto-donotshowfeedbacknotifications-admx |
 | `value` | `0` | Feedback notifications allowed | The policy is disabled and Windows feedback prompts may be shown. | ms-experience-csp-feedback-notifications, local-feedback-notifications-admx, nohuto-donotshowfeedbacknotifications-admx |
 | `value` | `1` | Feedback notifications disabled | Windows feedback prompts are blocked by policy. | ms-experience-csp-feedback-notifications, local-feedback-notifications-admx, nohuto-donotshowfeedbacknotifications-admx |
 
@@ -13170,7 +13170,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-file-history.json](records/privacy.disable-file-history.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13233,7 +13233,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the File History policy. | local-filehistory-admx, local-filehistory-adml |
+| `missing` | - | Not configured | Windows does not force the File History policy. | local-filehistory-admx, local-filehistory-adml |
 | `value` | `0` | File History allowed | The policy is disabled and File History can be activated for regular automatic backups. | local-filehistory-admx, local-filehistory-adml |
 | `value` | `1` | File History disabled | File History cannot be activated to create regular automatic backups. | local-filehistory-admx, local-filehistory-adml |
 
@@ -13291,7 +13291,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-find-my-device.json](records/privacy.disable-find-my-device.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13413,7 +13413,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-font-providers.json](records/privacy.disable-font-providers.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13476,7 +13476,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the online font provider policy. | local-grouppolicy-admx-fonts, local-grouppolicy-adml-fonts, nohuto-enablefontproviders-admx |
+| `missing` | - | Not configured | Windows does not force the online font provider policy. | local-grouppolicy-admx-fonts, local-grouppolicy-adml-fonts, nohuto-enablefontproviders-admx |
 | `value` | `0` | Online font providers disabled | Windows does not connect to an online font provider and only enumerates locally installed fonts. | local-grouppolicy-admx-fonts, local-grouppolicy-adml-fonts, nohuto-enablefontproviders-admx |
 | `value` | `1` | Online font providers enabled | Windows can query an online font provider for catalog and font data when needed. | local-grouppolicy-admx-fonts, local-grouppolicy-adml-fonts, nohuto-enablefontproviders-admx |
 
@@ -13535,7 +13535,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-kms-activation-telemetry.json](records/privacy.disable-kms-activation-telemetry.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13598,7 +13598,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | KMS client activation data is automatically sent to Microsoft when the device activates, according to Microsoft's local policy help text. | local-avs-validation-admx, local-avs-validation-adml, nohuto-nogenticket-admx |
+| `missing` | - | Not configured | KMS client activation data is automatically sent to Microsoft when the device activates, according to Microsoft's local policy help text. | local-avs-validation-admx, local-avs-validation-adml, nohuto-nogenticket-admx |
 | `value` | `0` | KMS activation data sent automatically | The policy is disabled and KMS client activation data is automatically sent to Microsoft. | local-avs-validation-admx, local-avs-validation-adml, nohuto-nogenticket-admx |
 | `value` | `1` | KMS activation data not sent automatically | The policy is enabled and the computer opts out of automatically sending KMS client activation data to Microsoft. | local-avs-validation-admx, local-avs-validation-adml, nohuto-nogenticket-admx |
 
@@ -13658,7 +13658,7 @@ Nohuto lineage references:
 | Area | `Observed User Preference` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-language-list-access.review.json](records/privacy.disable-language-list-access.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13721,7 +13721,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows managed UI state | The setting stays under normal Windows UI control with no explicit registry opt-out override. | ms-windows-privacy-language-list |
+| `missing` | - | Windows managed UI state | The setting stays under normal Windows UI control with no explicit registry opt-out override. | ms-windows-privacy-language-list |
 | `value` | `1` | Website access to language list disabled | Websites are prevented from using the user's language list for locally relevant content. | ms-windows-privacy-language-list, app-privacy-provider |
 
 **Windows defaults**
@@ -13776,7 +13776,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-local-security-questions.json](records/privacy.disable-local-security-questions.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13839,7 +13839,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The machine policy is not forcing security questions off. | ms-credui-no-local-password-reset-questions, local-credui-admx, local-credui-adml, nohuto-nolocalpasswordresetquestions-admx |
+| `missing` | - | Not configured | The machine policy is not forcing security questions off. | ms-credui-no-local-password-reset-questions, local-credui-admx, local-credui-adml, nohuto-nolocalpasswordresetquestions-admx |
 | `value` | `0` | Security questions allowed | The policy is disabled and local users can use security questions if the feature is otherwise available. | ms-credui-no-local-password-reset-questions, nohuto-nolocalpasswordresetquestions-admx |
 | `value` | `1` | Security questions blocked | The policy is enabled and local users cannot set up or use security questions to reset their passwords. | ms-credui-no-local-password-reset-questions, local-credui-adml, nohuto-nolocalpasswordresetquestions-admx |
 
@@ -13899,7 +13899,7 @@ Nohuto lineage references:
 | Area | `Runtime Consent Store` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-location-consent.review.json](records/privacy.disable-location-consent.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -13963,7 +13963,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Normal user consent flow | The current user follows the normal Windows consent behavior for location. | ms-location-consent-runtime-user |
+| `missing` | - | Normal user consent flow | The current user follows the normal Windows consent behavior for location. | ms-location-consent-runtime-user |
 | `value` | `Allow` | Allow location access | The current user's location consent store explicitly allows access for packaged apps. | ms-location-consent-runtime-user |
 | `value` | `Deny` | Deny location access | The current user's location consent store explicitly denies access for packaged apps. | ms-location-consent-runtime-user, app-privacy-provider |
 
@@ -13978,7 +13978,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Normal desktop-app consent flow | Desktop apps follow the normal Windows consent behavior for location. | ms-location-consent-runtime-user |
+| `missing` | - | Normal desktop-app consent flow | Desktop apps follow the normal Windows consent behavior for location. | ms-location-consent-runtime-user |
 | `value` | `Allow` | Allow desktop-app location access | The current user's location consent store explicitly allows access for desktop apps. | ms-location-consent-runtime-user |
 | `value` | `Deny` | Deny desktop-app location access | The current user's location consent store explicitly denies access for desktop apps. | ms-location-consent-runtime-user, app-privacy-provider |
 
@@ -14034,7 +14034,7 @@ Nohuto lineage references:
 | Area | `Observed Runtime Consent` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-location-consent-system.review.json](records/privacy.disable-location-consent-system.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14097,7 +14097,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Normal system consent baseline | Windows uses the normal location consent behavior for the device. | ms-location-consent-runtime, app-privacy-provider |
+| `missing` | - | Normal system consent baseline | Windows uses the normal location consent behavior for the device. | ms-location-consent-runtime, app-privacy-provider |
 | `value` | `Allow` | System-level allow | The system-level runtime consent value explicitly allows device location access. | ms-location-consent-runtime |
 | `value` | `Deny` | System-level deny | The current app writes a device-level deny state for location access. | ms-location-consent-runtime, app-privacy-provider |
 
@@ -14153,7 +14153,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-location-scripting.json](records/privacy.disable-location-scripting.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14216,7 +14216,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the machine policy for location scripting. | ms-sensors-policy-csp-disable-location-scripting, local-sensors-admx |
+| `missing` | - | Not configured | Windows does not force the machine policy for location scripting. | ms-sensors-policy-csp-disable-location-scripting, local-sensors-admx |
 | `value` | `0` | Location scripting allowed | The policy is disabled and scripted access to location remains allowed. | ms-sensors-policy-csp-disable-location-scripting, local-sensors-admx |
 | `value` | `1` | Location scripting disabled | Scripted access to location is blocked by policy. | ms-sensors-policy-csp-disable-location-scripting, local-sensors-admx |
 
@@ -14274,7 +14274,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-location-services.json](records/privacy.disable-location-services.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14337,7 +14337,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the location feature off for the computer. | local-sensors-admx-location, local-sensors-adml-location |
+| `missing` | - | Not configured | Windows does not force the location feature off for the computer. | local-sensors-admx-location, local-sensors-adml-location |
 | `value` | `0` | Location allowed | The policy is disabled and programs are not prevented from using location information. | local-sensors-admx-location, local-sensors-adml-location |
 | `value` | `1` | Location turned off | The location feature is turned off and programs on the computer are prevented from using location information from that feature. | local-sensors-admx-location, local-sensors-adml-location, app-privacy-provider |
 
@@ -14394,7 +14394,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-mdm-enrollment.json](records/privacy.disable-mdm-enrollment.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14457,7 +14457,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | MDM enrollment remains enabled because the machine policy is not forcing it off. | local-mdm-admx, local-mdm-adml, nohuto-disableregistration-admx |
+| `missing` | - | Not configured | MDM enrollment remains enabled because the machine policy is not forcing it off. | local-mdm-admx, local-mdm-adml, nohuto-disableregistration-admx |
 | `value` | `0` | MDM enrollment enabled | The policy is disabled and MDM enrollment is allowed for all users. | local-mdm-admx, local-mdm-adml, nohuto-disableregistration-admx |
 | `value` | `1` | MDM enrollment disabled | New MDM enrollment is disabled for all users on the device. Existing MDM enrollments aren't removed by this policy. | local-mdm-admx, local-mdm-adml, nohuto-disableregistration-admx |
 
@@ -14516,7 +14516,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-message-sync.json](records/privacy.disable-message-sync.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14579,7 +14579,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the message cloud-sync policy. | ms-messaging-csp-allow-message-sync, local-messaging-admx, nohuto-allowmessagesync-admx |
+| `missing` | - | Not configured | Windows does not force the message cloud-sync policy. | ms-messaging-csp-allow-message-sync, local-messaging-admx, nohuto-allowmessagesync-admx |
 | `value` | `0` | Message cloud sync disabled | Backup and restore of cellular text messages to Microsoft's cloud services is blocked by policy. | ms-messaging-csp-allow-message-sync, local-messaging-admx, nohuto-allowmessagesync-admx |
 | `value` | `1` | Message cloud sync allowed | The device is allowed to use Microsoft's cloud backup and restore path for cellular messages. | ms-messaging-csp-allow-message-sync, local-messaging-admx, nohuto-allowmessagesync-admx |
 
@@ -14638,7 +14638,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-offline-files.policy.json](records/privacy.disable-offline-files.policy.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14693,7 +14693,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default policy state | Offline Files is enabled on Windows client computers and disabled on Windows Server unless changed by the user. | ms-offlinefiles-csp, local-offlinefiles-adml |
+| `missing` | - | Windows default policy state | Offline Files is enabled on Windows client computers and disabled on Windows Server unless changed by the user. | ms-offlinefiles-csp, local-offlinefiles-adml |
 | `value` | `0` | Offline Files disabled | Offline Files is disabled and users cannot enable it. | ms-offlinefiles-csp, local-offlinefiles-admx, local-offlinefiles-adml |
 | `value` | `1` | Offline Files enabled | Offline Files is enabled and users cannot disable it. | ms-offlinefiles-csp, local-offlinefiles-admx, local-offlinefiles-adml |
 
@@ -14751,7 +14751,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-onesettings-downloads.json](records/privacy.disable-onesettings-downloads.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14873,7 +14873,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-online-tips.json](records/privacy.disable-online-tips.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -14936,7 +14936,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the online-tips policy. | ms-settings-csp-allow-online-tips, local-control-panel-admx, nohuto-allowonlinetips-admx |
+| `missing` | - | Not configured | Windows does not force the online-tips policy. | ms-settings-csp-allow-online-tips, local-control-panel-admx, nohuto-allowonlinetips-admx |
 | `value` | `0` | Online tips disabled | The Settings app won't retrieve online tips and help content. | ms-settings-csp-allow-online-tips, local-control-panel-admx, nohuto-allowonlinetips-admx |
 | `value` | `1` | Online tips allowed | The Settings app is allowed to retrieve online tips and help content. | ms-settings-csp-allow-online-tips, local-control-panel-admx, nohuto-allowonlinetips-admx |
 
@@ -14995,7 +14995,7 @@ Nohuto lineage references:
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-pca-diagnostics.policy.review.json](records/privacy.disable-pca-diagnostics.policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15059,7 +15059,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | PCA detects compatibility issues for applications and drivers. Default Windows behavior. | local-pca-admx, local-pca-adml, nohuto-pca-diagnostics-admx |
+| `missing` | - | Not configured | PCA detects compatibility issues for applications and drivers. Default Windows behavior. | local-pca-admx, local-pca-adml, nohuto-pca-diagnostics-admx |
 | `value` | `0` | Disable PCA diagnostics detection | disabledValue in pca.admx. PCA does not detect compatibility issues. Detection and related diagnostics are suppressed. Note: has no effect if DisablePCA=1 is active. | local-pca-admx, local-pca-adml, admx-pca-csp, nohuto-pca-diagnostics-admx |
 | `value` | `1` | PCA diagnostics detection active (policy explicit) | enabledValue in pca.admx. PCA detects compatibility issues. Equivalent to missing/not configured. | local-pca-admx, nohuto-pca-diagnostics-admx |
 
@@ -15117,7 +15117,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-phone-linking.json](records/privacy.disable-phone-linking.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15180,7 +15180,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force Phone-PC linking behavior through this policy, and the default behavior depends on the Windows edition. | local-grouppolicy-admx, local-grouppolicy-adml, nohuto-enablemmx-admx |
+| `missing` | - | Not configured | Windows does not force Phone-PC linking behavior through this policy, and the default behavior depends on the Windows edition. | local-grouppolicy-admx, local-grouppolicy-adml, nohuto-enablemmx-admx |
 | `value` | `0` | Phone-PC linking disabled | The device is not allowed to be linked to phones, removes itself from linked-phone device lists, and cannot participate in Continue on PC experiences. | local-grouppolicy-admx, local-grouppolicy-adml, app-privacy-provider, nohuto-enablemmx-admx |
 | `value` | `1` | Phone-PC linking enabled | The device can enroll in Phone-PC linking functionality and participate in Continue on PC experiences. | local-grouppolicy-admx, local-grouppolicy-adml, nohuto-enablemmx-admx |
 
@@ -15238,7 +15238,7 @@ Nohuto lineage references:
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-program-compatibility-assistant.review.json](records/privacy.disable-program-compatibility-assistant.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15294,7 +15294,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps Program Compatibility Assistant turned on. PCA can monitor applications and offer compatibility solutions when problems are detected. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-turn-off-pca-csp |
+| `missing` | - | Not configured | Windows keeps Program Compatibility Assistant turned on. PCA can monitor applications and offer compatibility solutions when problems are detected. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-turn-off-pca-csp |
 | `value` | `1` | Turn off Program Compatibility Assistant | enabledValue in AppCompat.admx. PCA is turned off, so Windows will not present compatibility solutions for detected application issues. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisablePCA=REG_DWORD 0x1 and reg.exe reads it back. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-turn-off-pca-csp, procmon-disable-pca, app-privacy-provider |
 | `value` | `0` | PCA enabled (policy explicit) | disabledValue in AppCompat.admx. Equivalent to missing: PCA remains turned on. | local-appcompat-admx, local-appcompat-adml |
 
@@ -15353,7 +15353,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-recall.json](records/privacy.disable-recall.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15416,7 +15416,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | On managed devices, snapshots are not saved for Recall when this policy is not configured. | ms-windowsai-disable-ai-data-analysis, local-windowscopilot-adml-recall, nohuto-disableaidataanalysis-admx |
+| `missing` | - | Not configured | On managed devices, snapshots are not saved for Recall when this policy is not configured. | ms-windowsai-disable-ai-data-analysis, local-windowscopilot-adml-recall, nohuto-disableaidataanalysis-admx |
 | `value` | `1` | Recall snapshots turned off | Snapshots are not saved for Recall, and previously saved snapshots are deleted when this policy is enabled. | ms-windowsai-disable-ai-data-analysis, local-windowscopilot-admx-recall, local-windowscopilot-adml-recall, app-privacy-provider, nohuto-disableaidataanalysis-admx |
 | `value` | `0` | Users can choose to save Recall snapshots | This policy does not block snapshot saving, so the user can choose whether to save snapshots for Recall when the feature is available. | ms-windowsai-disable-ai-data-analysis, local-windowscopilot-admx-recall, local-windowscopilot-adml-recall, nohuto-disableaidataanalysis-admx |
 
@@ -15477,7 +15477,7 @@ Nohuto lineage references:
 | Area | `Current-user Resume Setting` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-resume.json](records/privacy.disable-resume.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15541,7 +15541,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | No explicit user setting | Windows uses its normal current-user Resume behavior. | repo-resume-procmon-notes |
+| `missing` | - | No explicit user setting | Windows uses its normal current-user Resume behavior. | repo-resume-procmon-notes |
 | `value` | `0` | Resume disabled | Observed Settings and app value for turning the current-user Resume setting off. | repo-resume-procmon-notes, local-resume-registry-observation, app-privacy-provider |
 | `value` | `1` | Resume enabled | Observed Settings value for turning the current-user Resume setting on. | repo-resume-procmon-notes |
 
@@ -15600,7 +15600,7 @@ Nohuto lineage references:
 | Area | `Group Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-rsop-logging.json](records/privacy.disable-rsop-logging.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15663,7 +15663,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | RSoP logging stays on by default. | ms-admx-grouppolicy-rsoplogging, local-grouppolicy-adml-rsoplogging |
+| `missing` | - | Not configured | RSoP logging stays on by default. | ms-admx-grouppolicy-rsoplogging, local-grouppolicy-adml-rsoplogging |
 | `value` | `0` | RSoP logging turned off | The policy is enabled and RSoP logging is turned off. | ms-admx-grouppolicy-rsoplogging, local-grouppolicy-admx-rsoplogging, local-grouppolicy-adml-rsoplogging, app-privacy-provider |
 | `value` | `1` | RSoP logging turned on | The policy is disabled and RSoP logging stays on. | ms-admx-grouppolicy-rsoplogging, local-grouppolicy-admx-rsoplogging, local-grouppolicy-adml-rsoplogging |
 
@@ -15721,7 +15721,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-search-box-suggestions.json](records/privacy.disable-search-box-suggestions.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15784,7 +15784,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the File Explorer search-suggestions policy. | ms-windowsexplorer-csp-disable-search-box-suggestions, local-windows-explorer-admx, nohuto-disablesearchboxsuggestions-admx |
+| `missing` | - | Not configured | Windows does not force the File Explorer search-suggestions policy. | ms-windowsexplorer-csp-disable-search-box-suggestions, local-windows-explorer-admx, nohuto-disablesearchboxsuggestions-admx |
 | `value` | `0` | Search suggestions allowed | The policy is disabled and File Explorer can show recent-query suggestions. | ms-windowsexplorer-csp-disable-search-box-suggestions, local-windows-explorer-admx, nohuto-disablesearchboxsuggestions-admx |
 | `value` | `1` | Search suggestions disabled | File Explorer won't show suggestion pop-ups or store search-box entries for future references. | ms-windowsexplorer-csp-disable-search-box-suggestions, local-windows-explorer-admx, nohuto-disablesearchboxsuggestions-admx |
 
@@ -15843,7 +15843,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-search-history.json](records/privacy.disable-search-history.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -15906,7 +15906,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the search-history policy for the current user. | local-search-admx, local-search-adml, nohuto-disablesearchhistory-admx |
+| `missing` | - | Not configured | Windows does not force the search-history policy for the current user. | local-search-admx, local-search-adml, nohuto-disablesearchhistory-admx |
 | `value` | `0` | Search history allowed | Previous searches can be stored and used for later search suggestions. | local-search-admx, local-search-adml, nohuto-disablesearchhistory-admx |
 | `value` | `1` | Search history disabled | Search queries aren't stored in the registry and previous-search suggestions won't appear in the search pane. | local-search-admx, local-search-adml, nohuto-disablesearchhistory-admx |
 
@@ -15966,7 +15966,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-sensors.json](records/privacy.disable-sensors.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16029,7 +16029,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the machine policy for sensors. | ms-sensors-policy-csp-disable-sensors, local-sensors-admx, nohuto-disablesensors-admx |
+| `missing` | - | Not configured | Windows does not force the machine policy for sensors. | ms-sensors-policy-csp-disable-sensors, local-sensors-admx, nohuto-disablesensors-admx |
 | `value` | `0` | Sensors allowed | The policy is disabled and sensors remain available. | ms-sensors-policy-csp-disable-sensors, local-sensors-admx, nohuto-disablesensors-admx |
 | `value` | `1` | Sensors disabled | Sensors are blocked by policy. | ms-sensors-policy-csp-disable-sensors, local-sensors-admx, nohuto-disablesensors-admx |
 
@@ -16088,7 +16088,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-steps-recorder.json](records/privacy.disable-steps-recorder.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16158,7 +16158,7 @@ Other source references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Steps Recorder remains available because the policy is not forcing it off. | ms-appcompat-policy-csp, local-appcompat-admx, nohuto-uar-admx |
+| `missing` | - | Not configured | Steps Recorder remains available because the policy is not forcing it off. | ms-appcompat-policy-csp, local-appcompat-admx, nohuto-uar-admx |
 | `value` | `0` | Steps Recorder allowed | The policy is disabled and Steps Recorder stays enabled. | local-appcompat-admx, nohuto-uar-admx |
 | `value` | `1` | Steps Recorder disabled | The policy is enabled and Steps Recorder is turned off. | ms-appcompat-policy-csp, local-appcompat-admx, nohuto-uar-admx |
 
@@ -16217,7 +16217,7 @@ Other source references:
 | Area | `CloudContent policy trio` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-suggestions.policy.review.json](records/privacy.disable-suggestions.policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16282,7 +16282,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows Spotlight features may still suggest apps and content from third-party publishers. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
+| `missing` | - | Not configured | Windows Spotlight features may still suggest apps and content from third-party publishers. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
 | `value` | `0` | Third-party suggestions allowed | The policy is disabled and Windows is not being told to block third-party suggestions. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
 | `value` | `1` | Third-party suggestions turned off | Windows Spotlight features such as suggested apps in Start will no longer suggest apps and content from third-party publishers. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
 
@@ -16297,7 +16297,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Settings can continue showing Spotlight suggestions. | local-cloudcontent-admx-settings, local-cloudcontent-adml-settings |
+| `missing` | - | Not configured | Settings can continue showing Spotlight suggestions. | local-cloudcontent-admx-settings, local-cloudcontent-adml-settings |
 | `value` | `0` | Settings suggestions allowed | The policy is disabled and Windows is not being told to block Spotlight suggestions in Settings. | local-cloudcontent-admx-settings, local-cloudcontent-adml-settings |
 | `value` | `1` | Settings suggestions turned off | Windows Spotlight suggestions are no longer shown in the Settings app. | local-cloudcontent-admx-settings, local-cloudcontent-adml-settings |
 
@@ -16312,7 +16312,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows Welcome Experience can still run after updates and changes. | local-cloudcontent-admx-welcome, local-cloudcontent-adml-welcome |
+| `missing` | - | Not configured | Windows Welcome Experience can still run after updates and changes. | local-cloudcontent-admx-welcome, local-cloudcontent-adml-welcome |
 | `value` | `0` | Welcome experience allowed | The policy is disabled and Windows is not being told to block the Welcome experience. | local-cloudcontent-admx-welcome, local-cloudcontent-adml-welcome |
 | `value` | `1` | Welcome experience turned off | The Windows Welcome Experience no longer displays when there are updates and changes to Windows and its apps. | local-cloudcontent-admx-welcome, local-cloudcontent-adml-welcome |
 
@@ -16372,7 +16372,7 @@ Nohuto lineage references:
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-switchback.policy.review.json](records/privacy.disable-switchback.policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16428,7 +16428,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal SwitchBack behavior. Applications that detect Windows Vista or later can receive compatibility fixes designed for older OS versions. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp |
+| `missing` | - | Not configured | Windows keeps the normal SwitchBack behavior. Applications that detect Windows Vista or later can receive compatibility fixes designed for older OS versions. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp |
 | `value` | `1` | SwitchBack enabled (policy explicit) | disabledValue in AppCompat.admx. SwitchBack runs normally. Equivalent to missing. | local-appcompat-admx |
 | `value` | `0` | Turn off SwitchBack | enabledValue in AppCompat.admx. SwitchBack is disabled. Applications that detect Windows Vista or later no longer receive cross-version compatibility fixes. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes SbEnable=REG_DWORD 0x0 and reg.exe reads it back. | local-appcompat-admx, local-appcompat-adml, admx-appcompat-csp, procmon-switchback, app-privacy-provider |
 
@@ -16487,7 +16487,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-telemetry-change-notifications.json](records/privacy.disable-telemetry-change-notifications.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16550,7 +16550,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the notification policy. | ms-system-policy-csp-telemetry-change-notification, local-data-collection-admx |
+| `missing` | - | Not configured | Windows does not force the notification policy. | ms-system-policy-csp-telemetry-change-notification, local-data-collection-admx |
 | `value` | `0` | Notification allowed | The policy is disabled and the change notification can be shown. | ms-system-policy-csp-telemetry-change-notification, local-data-collection-admx |
 | `value` | `1` | Notification disabled | The change notification is blocked by policy. | ms-system-policy-csp-telemetry-change-notification, local-data-collection-admx |
 
@@ -16608,7 +16608,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-telemetry-optin-ui.json](records/privacy.disable-telemetry-optin-ui.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16730,7 +16730,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-wer.json](records/privacy.disable-wer.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16793,7 +16793,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | This specific policy does not force Windows Error Reporting off. The broader ICM policy or Control Panel settings can still decide behavior. | ms-admx-errorreporting-disable-wer, local-errorreporting-adml, local-icm-adml |
+| `missing` | - | Not configured | This specific policy does not force Windows Error Reporting off. The broader ICM policy or Control Panel settings can still decide behavior. | ms-admx-errorreporting-disable-wer, local-errorreporting-adml, local-icm-adml |
 | `value` | `1` | Windows Error Reporting disabled | Problem information is not sent through Windows Error Reporting, and solution information is not available in Security and Maintenance. | ms-admx-errorreporting-disable-wer, local-errorreporting-admx, local-errorreporting-adml, app-privacy-provider |
 | `value` | `0` | Policy not forcing Windows Error Reporting off | This specific disable policy is turned off, so the broader ICM policy or Control Panel settings can decide Windows Error Reporting behavior. | ms-admx-errorreporting-disable-wer, local-errorreporting-admx, local-errorreporting-adml, local-icm-adml |
 
@@ -16853,7 +16853,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-windows-location-provider.json](records/privacy.disable-windows-location-provider.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -16916,7 +16916,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the machine policy for the Windows Location Provider. | ms-location-provider-policy-csp, local-location-provider-admx, nohuto-disablewindowslocationprovider-admx |
+| `missing` | - | Not configured | Windows does not force the machine policy for the Windows Location Provider. | ms-location-provider-policy-csp, local-location-provider-admx, nohuto-disablewindowslocationprovider-admx |
 | `value` | `0` | Windows Location Provider allowed | The policy is disabled and the provider remains available. | ms-location-provider-policy-csp, local-location-provider-admx, nohuto-disablewindowslocationprovider-admx |
 | `value` | `1` | Windows Location Provider disabled | The provider is blocked by policy. | ms-location-provider-policy-csp, local-location-provider-admx, nohuto-disablewindowslocationprovider-admx |
 
@@ -16975,7 +16975,7 @@ Nohuto lineage references:
 | Area | `CloudContent Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-windows-tips.review.json](records/privacy.disable-windows-tips.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17038,7 +17038,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows tips may be shown and follow normal Windows behavior. | local-cloudcontent-admx-softlanding, local-cloudcontent-adml-softlanding |
+| `missing` | - | Not configured | Windows tips may be shown and follow normal Windows behavior. | local-cloudcontent-admx-softlanding, local-cloudcontent-adml-softlanding |
 | `value` | `0` | Tips allowed | The policy is disabled and Windows tips are not turned off by this machine policy. | local-cloudcontent-admx-softlanding, local-cloudcontent-adml-softlanding |
 | `value` | `1` | Tips turned off by policy | Users will no longer see Windows tips. | ms-experience-allowwindowstips, local-cloudcontent-admx-softlanding, local-cloudcontent-adml-softlanding |
 
@@ -17054,7 +17054,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | No observed user value | No explicit ContentDeliveryManager value is present for this tip-related entry. | app-privacy-provider |
+| `missing` | - | No observed user value | No explicit ContentDeliveryManager value is present for this tip-related entry. | app-privacy-provider |
 | `value` | `0` | Observed app off preference | The current app writes 0 here, but this record does not yet publish it as the official policy-backed Windows Tips control. | app-privacy-provider |
 
 **Windows defaults**
@@ -17111,7 +17111,7 @@ Nohuto lineage references:
 | Area | `Security Option` |
 | Scope | `device` |
 | Source file | [research/records/privacy.hide-last-logged-in-user.json](records/privacy.hide-last-logged-in-user.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17232,7 +17232,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.hide-recommended-personalized-sites.json](records/privacy.hide-recommended-personalized-sites.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17293,7 +17293,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The device does not force personalized site recommendations off. | ms-start-policy-csp, local-startmenu-admx |
+| `missing` | - | Not configured | The device does not force personalized site recommendations off. | ms-start-policy-csp, local-startmenu-admx |
 | `value` | `0` | Personalized sites shown | Personalized site recommendations remain allowed. | ms-start-policy-csp |
 | `value` | `1` | Personalized sites hidden | Personalized site recommendations are hidden. | ms-start-policy-csp, local-startmenu-admx |
 
@@ -17351,7 +17351,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.hide-recommended-personalized-sites-user.json](records/privacy.hide-recommended-personalized-sites-user.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17414,7 +17414,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The current user is not forced to hide personalized site recommendations. | ms-start-policy-csp, local-startmenu-admx |
+| `missing` | - | Not configured | The current user is not forced to hide personalized site recommendations. | ms-start-policy-csp, local-startmenu-admx |
 | `value` | `0` | Personalized sites shown | Personalized site recommendations remain allowed for the current user. | ms-start-policy-csp |
 | `value` | `1` | Personalized sites hidden | Personalized site recommendations are hidden for the current user. | ms-start-policy-csp, local-startmenu-admx |
 
@@ -17472,7 +17472,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.hide-recommended-section.json](records/privacy.hide-recommended-section.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17533,7 +17533,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The device does not force the Start menu to hide the Recommended section. | ms-start-policy-csp, local-startmenu-admx |
+| `missing` | - | Not configured | The device does not force the Start menu to hide the Recommended section. | ms-start-policy-csp, local-startmenu-admx |
 | `value` | `0` | Recommended section shown | The section remains visible. | ms-start-policy-csp |
 | `value` | `1` | Recommended section hidden | The section is removed from Start. | ms-start-policy-csp, local-startmenu-admx |
 
@@ -17591,7 +17591,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/privacy.hide-recommended-section-user.json](records/privacy.hide-recommended-section-user.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17654,7 +17654,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The current user is not forced to hide the Recommended section. | ms-start-policy-csp, local-startmenu-admx |
+| `missing` | - | Not configured | The current user is not forced to hide the Recommended section. | ms-start-policy-csp, local-startmenu-admx |
 | `value` | `0` | Recommended section shown | The section remains visible for the current user. | ms-start-policy-csp |
 | `value` | `1` | Recommended section hidden | The section is hidden for the current user. | ms-start-policy-csp, local-startmenu-admx |
 
@@ -17712,7 +17712,7 @@ Nohuto lineage references:
 | Area | `Security Option` |
 | Scope | `device` |
 | Source file | [research/records/privacy.hide-username-at-signin.json](records/privacy.hide-username-at-signin.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17833,7 +17833,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.limit-diagnostic-log-collection.json](records/privacy.limit-diagnostic-log-collection.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -17896,7 +17896,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force this diagnostic-log limitation policy. | ms-system-policy-csp-limit-diagnostic-log-collection, local-data-collection-admx |
+| `missing` | - | Not configured | Windows does not force this diagnostic-log limitation policy. | ms-system-policy-csp-limit-diagnostic-log-collection, local-data-collection-admx |
 | `value` | `0` | Do not limit advanced diagnostic logs | The policy is disabled and advanced diagnostic logging is not restricted by this setting. | ms-system-policy-csp-limit-diagnostic-log-collection, local-data-collection-admx |
 | `value` | `1` | Limit advanced diagnostic logs | Advanced diagnostic log collection is limited by policy. | ms-system-policy-csp-limit-diagnostic-log-collection, local-data-collection-admx |
 
@@ -17954,7 +17954,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.limit-dump-collection.json](records/privacy.limit-dump-collection.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18017,7 +18017,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force this dump-collection limitation policy. | ms-system-policy-csp-limit-dump-collection, local-data-collection-admx |
+| `missing` | - | Not configured | Windows does not force this dump-collection limitation policy. | ms-system-policy-csp-limit-dump-collection, local-data-collection-admx |
 | `value` | `0` | Do not limit dump collection | The policy is disabled and dump collection is not restricted by this setting. | ms-system-policy-csp-limit-dump-collection, local-data-collection-admx |
 | `value` | `1` | Limit dump collection | Diagnostic dump collection is limited by policy. | ms-system-policy-csp-limit-dump-collection, local-data-collection-admx |
 
@@ -18076,7 +18076,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json](records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18131,7 +18131,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows sends required diagnostic data and the user can choose whether to send optional diagnostic data. | ms-system-allowtelemetry, local-datacollection-adml, nohuto-allowtelemetry-admx |
+| `missing` | - | Not configured | Windows sends required diagnostic data and the user can choose whether to send optional diagnostic data. | ms-system-allowtelemetry, local-datacollection-adml, nohuto-allowtelemetry-admx |
 | `value` | `0` | Diagnostic data off (limited edition support) | Microsoft documents this as turning diagnostic data off, but only on Enterprise, Education, and Server editions. | ms-system-allowtelemetry, local-datacollection-admx, local-datacollection-adml, app-privacy-provider, nohuto-allowtelemetry-admx |
 | `value` | `1` | Required diagnostic data | Windows sends the minimum diagnostic data needed to keep Windows secure, updated, and functioning as expected. | ms-system-allowtelemetry, local-datacollection-admx, local-datacollection-adml, nohuto-allowtelemetry-admx |
 | `value` | `3` | Optional diagnostic data | Windows sends required diagnostic data plus additional diagnostic data such as broader logs and crash data. | ms-system-allowtelemetry, local-datacollection-admx, local-datacollection-adml, nohuto-allowtelemetry-admx |
@@ -18191,7 +18191,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.troubleshooter-dont-run.review.json](records/privacy.troubleshooter-dont-run.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18254,7 +18254,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The user can configure how troubleshooting is applied. | ms-troubleshooting-allowrecommendations, local-msdt-adml |
+| `missing` | - | Not configured | The user can configure how troubleshooting is applied. | ms-troubleshooting-allowrecommendations, local-msdt-adml |
 | `value` | `0` | Do nothing | Do not allow users, system features, or Microsoft to apply troubleshooting. | ms-troubleshooting-allowrecommendations, local-msdt-admx, local-msdt-adml, app-privacy-provider |
 | `value` | `1` | Apply critical only | Only automatically apply troubleshooting for critical problems by system features and Microsoft. | ms-troubleshooting-allowrecommendations, local-msdt-admx, local-msdt-adml |
 | `value` | `2` | Ask first for other problems | Automatically apply critical troubleshooting and notify users about troubleshooting for other problems. | ms-troubleshooting-allowrecommendations, local-msdt-admx, local-msdt-adml |
@@ -18316,7 +18316,7 @@ Nohuto lineage references:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json](records/privacy.turn-off-sync-by-default-allow-user-override.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18374,7 +18374,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows uses its default per-category sync behavior and lets the user manage sync normally. | ms-admx-settingsync, local-settingsync-adml |
+| `missing` | - | Not configured | Windows uses its default per-category sync behavior and lets the user manage sync normally. | ms-admx-settingsync, local-settingsync-adml |
 | `value` | `0` | Sync category allowed | That sync category is not turned off by policy. | ms-admx-settingsync, local-settingsync-admx |
 | `value` | `2` | Sync category turned off by policy | That category is turned off by policy. | ms-admx-settingsync, local-settingsync-admx, local-settingsync-adml, app-privacy-provider |
 
@@ -18390,7 +18390,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | No explicit user-override rule is being enforced by policy. | ms-admx-settingsync, local-settingsync-adml |
+| `missing` | - | Not configured | No explicit user-override rule is being enforced by policy. | ms-admx-settingsync, local-settingsync-adml |
 | `value` | `0` | User can turn syncing back on | The policy keeps syncing off by default but allows the user to turn that category back on. | ms-admx-settingsync, local-settingsync-admx, local-settingsync-adml, app-privacy-provider |
 | `value` | `1` | User cannot turn syncing back on | The policy keeps that category off and prevents the user from turning it back on. | ms-admx-settingsync, local-settingsync-admx, local-settingsync-adml |
 
@@ -18405,7 +18405,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows uses its ordinary behavior for syncing on metered or paid networks. | ms-admx-settingsync, local-settingsync-adml |
+| `missing` | - | Not configured | Windows uses its ordinary behavior for syncing on metered or paid networks. | ms-admx-settingsync, local-settingsync-adml |
 | `value` | `0` | Sync allowed on paid networks | The policy does not block syncing on paid networks. | ms-admx-settingsync, local-settingsync-admx |
 | `value` | `1` | Sync blocked on paid networks | The policy blocks syncing on paid networks. | ms-admx-settingsync, local-settingsync-admx, local-settingsync-adml, app-privacy-provider |
 
@@ -18465,7 +18465,7 @@ Current writes
 | Area | `Microsoft Defender MAPS sample submission` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-defender-sample-submission.review.json](records/security.disable-defender-sample-submission.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18535,7 +18535,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Leave the sample-submission policy unset and let Defender use its managed baseline. | ms-defender-submit-samples-consent, vm-defender-submit-samples-baseline |
+| `missing` | - | Not configured | Leave the sample-submission policy unset and let Defender use its managed baseline. | ms-defender-submit-samples-consent, vm-defender-submit-samples-baseline |
 | `value` | `0` | Always prompt | Defender prompts before sending samples for cloud analysis. | ms-defender-submit-samples-consent |
 | `value` | `1` | Send safe samples automatically | Defender sends safe samples automatically and keeps the documented default behavior. | ms-defender-submit-samples-consent |
 | `value` | `2` | Never send | Defender does not send samples automatically. Microsoft notes this disables Block at First Sight. | ms-defender-submit-samples-consent, ms-defender-block-at-first-sight-dependency, vm-defender-submit-samples-state2, app-security-provider-disable-defender-sample-submission |
@@ -18598,7 +18598,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/security.disable-downloads-blocking.json](records/security.disable-downloads-blocking.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18667,7 +18667,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default | Windows marks attachments with their zone information. | local-attachmentmanager-adml |
+| `missing` | - | Windows default | Windows marks attachments with their zone information. | local-attachmentmanager-adml |
 | `value` | `1` | Do not preserve zone information | Windows does not mark downloaded attachments with zone-of-origin information. | local-attachmentmanager-admx, local-attachmentmanager-adml, app-security-provider |
 | `value` | `2` | Preserve zone information | Windows marks downloaded attachments with zone-of-origin information. | local-attachmentmanager-admx, local-attachmentmanager-adml |
 
@@ -18724,7 +18724,7 @@ Windows Internals references:
 | Area | `Windows Security notifications` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-enhanced-defender-notifications.review.json](records/security.disable-enhanced-defender-notifications.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18794,7 +18794,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows Security uses its normal notification behavior for this policy surface. | ms-defender-security-center-disable-enhanced-notifications, vm-defender-enhanced-notifications-baseline |
+| `missing` | - | Not configured | Windows Security uses its normal notification behavior for this policy surface. | ms-defender-security-center-disable-enhanced-notifications, vm-defender-enhanced-notifications-baseline |
 | `value` | `0` | Enhanced notifications allowed | The policy is disabled and Windows Security can continue showing non-critical notifications. | ms-defender-security-center-disable-enhanced-notifications |
 | `value` | `1` | Hide non-critical notifications | Windows Security only shows critical notifications on the documented Security Center policy surface. | ms-defender-security-center-disable-enhanced-notifications, vm-defender-enhanced-notifications-enabled, app-security-provider-disable-enhanced-notifications |
 
@@ -18854,7 +18854,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-ntfs-encryption.json](records/security.disable-ntfs-encryption.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -18923,7 +18923,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the NTFS encryption policy through Group Policy. | local-filesys-adml |
+| `missing` | - | Not configured | Windows does not force the NTFS encryption policy through Group Policy. | local-filesys-adml |
 | `value` | `0` | NTFS encryption allowed | The policy is disabled and NTFS encryption is not blocked by this policy. | local-filesys-admx |
 | `value` | `1` | NTFS encryption disabled | Encryption is not allowed on NTFS volumes through the documented policy setting. | local-filesys-admx, local-filesys-adml, app-security-provider |
 
@@ -18979,7 +18979,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-p2p-updates.review.json](records/security.disable-p2p-updates.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19048,7 +19048,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal Delivery Optimization behavior without this policy override. | local-deliveryoptimization-admx, local-deliveryoptimization-adml |
+| `missing` | - | Not configured | Windows keeps the normal Delivery Optimization behavior without this policy override. | local-deliveryoptimization-admx, local-deliveryoptimization-adml |
 | `value` | `0` | HTTP only | Delivery Optimization uses HTTP only and no peering. | local-deliveryoptimization-admx, local-deliveryoptimization-adml |
 | `value` | `1` | LAN peering | Delivery Optimization uses HTTP blended with peering behind the same NAT. | local-deliveryoptimization-admx, local-deliveryoptimization-adml |
 | `value` | `2` | Group peering | Delivery Optimization uses HTTP blended with peering across a private group. | local-deliveryoptimization-admx, local-deliveryoptimization-adml |
@@ -19109,7 +19109,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-password-reveal.json](records/security.disable-password-reveal.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19178,7 +19178,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal password reveal button behavior. | local-credui-adml |
+| `missing` | - | Not configured | Windows keeps the normal password reveal button behavior. | local-credui-adml |
 | `value` | `0` | Password reveal allowed | The policy is disabled and the password reveal button can be shown. | local-credui-admx, local-credui-adml |
 | `value` | `1` | Password reveal disabled | The password reveal button is not displayed in supported password entry experiences. | local-credui-admx, local-credui-adml, app-security-provider |
 
@@ -19235,7 +19235,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-picture-password.json](records/security.disable-picture-password.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19304,7 +19304,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Domain users can use the normal Windows behavior for picture password sign-in. | local-credentialproviders-adml |
+| `missing` | - | Not configured | Domain users can use the normal Windows behavior for picture password sign-in. | local-credentialproviders-adml |
 | `value` | `0` | Picture password allowed | The policy is disabled and domain users can set up and use picture password sign-in. | local-credentialproviders-admx, local-credentialproviders-adml |
 | `value` | `1` | Picture password blocked | Domain users cannot set up or sign in with a picture password. | local-credentialproviders-admx, local-credentialproviders-adml, app-security-provider |
 
@@ -19361,7 +19361,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-remote-assistance.json](records/security.disable-remote-assistance.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19430,7 +19430,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Users can control Solicited Remote Assistance through the normal Windows settings. | ms-remote-assistance-csp, local-remoteassistance-adml |
+| `missing` | - | Not configured | Users can control Solicited Remote Assistance through the normal Windows settings. | ms-remote-assistance-csp, local-remoteassistance-adml |
 | `value` | `0` | Solicited Remote Assistance disabled | Users cannot ask for help by using the built-in Solicited Remote Assistance feature. | ms-remote-assistance-csp, local-remoteassistance-admx, local-remoteassistance-adml |
 | `value` | `1` | Solicited Remote Assistance enabled | Users can ask for help by using the built-in Solicited Remote Assistance feature. | ms-remote-assistance-csp, local-remoteassistance-admx, local-remoteassistance-adml |
 
@@ -19488,7 +19488,7 @@ Windows Internals references:
 | Area | `Exploit Protection` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-system-mitigations.review.json](records/security.disable-system-mitigations.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19555,7 +19555,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Common exploit protection settings are not forced by this Group Policy setting, and local system settings remain in effect. | local-exploitguard-adml, ms-exploit-protection-doc |
+| `missing` | - | Not configured | Common exploit protection settings are not forced by this Group Policy setting, and local system settings remain in effect. | local-exploitguard-adml, ms-exploit-protection-doc |
 | `value` | `<path-or-url-to-config.xml>` | Use common exploit protection XML | The policy is enabled and points to an XML file that defines the common exploit protection settings to apply. | local-exploitguard-admx, local-exploitguard-adml, ms-exploit-protection-doc |
 
 **Windows defaults**
@@ -19612,7 +19612,7 @@ Windows Internals references:
 | Area | `System Restore Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-system-restore.review.json](records/security.disable-system-restore.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19682,7 +19682,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal System Restore policy state. | local-systemrestore-adml |
+| `missing` | - | Not configured | Windows keeps the normal System Restore policy state. | local-systemrestore-adml |
 | `value` | `0` | System Restore allowed | The policy is disabled and System Restore is not turned off by this policy. | local-systemrestore-admx, local-systemrestore-adml |
 | `value` | `1` | Turn off System Restore | System Restore is turned off and the recovery feature is disabled by policy. | local-systemrestore-admx, local-systemrestore-adml, app-security-provider |
 
@@ -19739,7 +19739,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-windows-firewall.review.json](records/security.disable-windows-firewall.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19809,7 +19809,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Administrators can manage the firewall through the normal Windows Defender Firewall controls. | local-windowsfirewall-adml |
+| `missing` | - | Not configured | Administrators can manage the firewall through the normal Windows Defender Firewall controls. | local-windowsfirewall-adml |
 | `value` | `0` | Firewall forced off | The policy disables Windows Defender Firewall for the documented profile. | local-windowsfirewall-admx, local-windowsfirewall-adml |
 | `value` | `1` | Firewall forced on | The policy enables Windows Defender Firewall for the documented profile. | local-windowsfirewall-admx, local-windowsfirewall-adml |
 
@@ -19824,7 +19824,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Administrators can manage the firewall through the normal Windows Defender Firewall controls. | local-windowsfirewall-adml |
+| `missing` | - | Not configured | Administrators can manage the firewall through the normal Windows Defender Firewall controls. | local-windowsfirewall-adml |
 | `value` | `0` | Firewall forced off | The policy disables Windows Defender Firewall for the documented profile. | local-windowsfirewall-admx, local-windowsfirewall-adml |
 | `value` | `1` | Firewall forced on | The policy enables Windows Defender Firewall for the documented profile. | local-windowsfirewall-admx, local-windowsfirewall-adml |
 
@@ -19883,7 +19883,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-windows-update.policy.review.json](records/security.disable-windows-update.policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -19939,7 +19939,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows Update access is not blocked by this specific policy. | local-icm-admx, local-windowsupdate-adml |
+| `missing` | - | Not configured | Windows Update access is not blocked by this specific policy. | local-icm-admx, local-windowsupdate-adml |
 | `value` | `1` | Remove access to Windows Update | Windows Update features and access points are removed by policy. | local-icm-admx, local-windowsupdate-adml, app-security-provider |
 
 #### `no-auto-update`
@@ -20010,7 +20010,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-wu-driver-updates.json](records/security.disable-wu-driver-updates.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20081,7 +20081,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal driver-source search behavior without this explicit policy override. | local-devicesetup-admx, local-devicesetup-adml |
+| `missing` | - | Not configured | Windows keeps the normal driver-source search behavior without this explicit policy override. | local-devicesetup-admx, local-devicesetup-adml |
 | `value` | `0` | Do not search Windows Update | If this policy is enabled, Windows does not search Windows Update for device drivers. | local-devicesetup-admx, local-devicesetup-adml, app-security-provider |
 | `value` | `1` | Always search Windows Update | If this policy is enabled, Windows always searches Windows Update for device drivers. | local-devicesetup-admx, local-devicesetup-adml |
 | `value` | `2` | Search Windows Update only if needed | If this policy is enabled, Windows searches Windows Update for device drivers only when needed. | local-devicesetup-admx, local-devicesetup-adml |
@@ -20097,7 +20097,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps the normal driver-search behavior without this explicit security option override. | local-icm-admx, local-icm-adml |
+| `missing` | - | Not configured | Windows keeps the normal driver-search behavior without this explicit security option override. | local-icm-admx, local-icm-adml |
 | `value` | `0` | Windows Update search allowed | If the policy is disabled, Windows Update can be searched for drivers when no local drivers are present. | local-icm-admx, local-icm-adml |
 | `value` | `1` | Windows Update search blocked | If the policy is enabled, Windows Update is not searched for drivers when no local drivers are present. | local-icm-admx, local-icm-adml, app-security-provider |
 
@@ -20112,7 +20112,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows includes driver-classified updates | Windows Update can include updates that have a Driver classification. | local-windowsupdate-adml |
+| `missing` | - | Windows includes driver-classified updates | Windows Update can include updates that have a Driver classification. | local-windowsupdate-adml |
 | `value` | `0` | Do not exclude driver-classified quality updates | The policy is disabled and Windows Update can include driver-classified updates. | local-windowsupdate-admx, local-windowsupdate-adml |
 | `value` | `1` | Exclude driver-classified quality updates | Windows Update does not include driver-classified updates in Windows quality updates. | local-windowsupdate-admx, local-windowsupdate-adml, app-security-provider |
 
@@ -20173,7 +20173,7 @@ Windows Internals references:
 | Area | `Microsoft Defender cloud protection` |
 | Scope | `device` |
 | Source file | [research/records/security.enable-defender-maps-advanced-membership.review.json](records/security.enable-defender-maps-advanced-membership.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20243,7 +20243,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Leave the MAPS membership policy unset and let Defender use its current managed baseline. | ms-defender-spynet-reporting, vm-defender-spynet-baseline |
+| `missing` | - | Not configured | Leave the MAPS membership policy unset and let Defender use its current managed baseline. | ms-defender-spynet-reporting, vm-defender-spynet-baseline |
 | `value` | `0` | MAPS disabled | Turns off the documented Defender MAPS policy surface. | ms-defender-spynet-reporting |
 | `value` | `1` | Documented membership value 1 | Microsoft documents this as the lower MAPS membership value, but newer builds can collapse 1 and 2 into the same advanced behavior. | ms-defender-spynet-reporting |
 | `value` | `2` | Advanced membership | Uses the documented advanced membership value that SecurityHealthService.exe read directly in the 25H2 VM. | ms-defender-spynet-reporting, vm-defender-spynet-state2, app-security-provider-enable-defender-maps-advanced-membership |
@@ -20303,7 +20303,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.enable-dynamic-lock.json](records/security.enable-dynamic-lock.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20372,7 +20372,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not enforce Dynamic Lock signal rules through this policy. | local-passport-adml |
+| `missing` | - | Not configured | Windows does not enforce Dynamic Lock signal rules through this policy. | local-passport-adml |
 | `value` | `1` | Policy signal rules enabled | Configured signal rules are evaluated to detect user absence and automatically lock the device. | local-passport-admx, local-passport-adml |
 
 **Windows defaults**
@@ -20428,7 +20428,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.enable-sudo.json](records/security.enable-sudo.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20497,7 +20497,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not enforce a policy maximum; the user can run sudo normally after enabling it in Settings. | local-sudo-adml |
+| `missing` | - | Not configured | Windows does not enforce a policy maximum; the user can run sudo normally after enabling it in Settings. | local-sudo-adml |
 | `value` | `0` | Sudo disabled | sudo.exe is disabled on the machine. | local-sudo-admx, local-sudo-adml |
 | `value` | `1` | Force new window | sudo can run only by launching the elevated app in a new console window. | local-sudo-admx, local-sudo-adml |
 | `value` | `2` | Disable input | sudo can run in the current console without interactive input, and also allows the Force new window mode. | local-sudo-admx, local-sudo-adml |
@@ -20556,7 +20556,7 @@ Windows Internals references:
 | Area | `Microsoft Defender exclusions visibility` |
 | Scope | `device` |
 | Source file | [research/records/security.hide-defender-exclusions-from-local-admins.review.json](records/security.hide-defender-exclusions-from-local-admins.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20626,7 +20626,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Leave the policy unset so local admins can view managed exclusions. | ms-defender-hide-exclusions-from-local-admins, vm-defender-hide-exclusions-baseline-visibility |
+| `missing` | - | Not configured | Leave the policy unset so local admins can view managed exclusions. | ms-defender-hide-exclusions-from-local-admins, vm-defender-hide-exclusions-baseline-visibility |
 | `value` | `0` | Exclusions visible to local admins | The policy is disabled and local admins can inspect managed exclusions through the usual Defender surfaces. | ms-defender-hide-exclusions-from-local-admins |
 | `value` | `1` | Hide managed exclusions from local admins | Managed exclusions stay on the policy exclusions branch, but Get-MpPreference hides them from local admin views. | ms-defender-hide-exclusions-from-local-admins, ms-defender-exclusions-visibility-note, vm-defender-hide-exclusions-root-state1, vm-defender-hide-exclusions-root-visibility, app-security-provider-hide-defender-exclusions-from-local-admins |
 
@@ -20688,7 +20688,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.powershell-unrestricted.review.json](records/security.powershell-unrestricted.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20758,7 +20758,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The policy does not override PowerShell script execution through Group Policy. | local-powershellpolicy-adml |
+| `missing` | - | Not configured | The policy does not override PowerShell script execution through Group Policy. | local-powershellpolicy-adml |
 | `value` | `0` | No scripts allowed | If the policy is disabled, no scripts are allowed to run. | local-powershellpolicy-admx, local-powershellpolicy-adml |
 | `value` | `1` | Scripts allowed by selected execution policy | If the policy is enabled, script execution follows the selected ExecutionPolicy string value. | local-powershellpolicy-admx, local-powershellpolicy-adml |
 
@@ -20830,7 +20830,7 @@ Windows Internals references:
 | Area | `Microsoft Defender file hash logging` |
 | Scope | `device` |
 | Source file | [research/records/security.threat-file-hash-logging.review.json](records/security.threat-file-hash-logging.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -20886,7 +20886,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Leave the legacy root surface unset. | vm-defender-threat-file-hash-baseline |
+| `missing` | - | Not configured | Leave the legacy root surface unset. | vm-defender-threat-file-hash-baseline |
 | `value` | `0` | Legacy root disabled | Turns off the legacy root flag on the older ThreatFileHashLogging surface. | repo-defender-threat-file-hash-dumps |
 | `value` | `1` | Legacy root enabled | Makes MsMpEng.exe read ThreatFileHashLogging = 1 directly from the root Defender policy key in the 25H2 VM. | repo-defender-threat-file-hash-dumps, vm-defender-threat-file-hash-root-read |
 
@@ -20902,7 +20902,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Leave the Policy Manager alias unset. | vm-defender-threat-file-hash-baseline |
+| `missing` | - | Not configured | Leave the Policy Manager alias unset. | vm-defender-threat-file-hash-baseline |
 | `value` | `0` | Policy Manager alias disabled | Turns off the Policy Manager alias for file-hash computation. | repo-defender-threat-file-hash-dumps |
 | `value` | `1` | Policy Manager alias enabled | Makes MsMpEng.exe read EnableFileHashComputation = 1 from the Policy Manager alias in the 25H2 VM. | repo-defender-threat-file-hash-dumps, vm-defender-threat-file-hash-policymanager-read |
 
@@ -20918,7 +20918,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Leave the documented modern MpEngine surface unset. | vm-defender-threat-file-hash-baseline |
+| `missing` | - | Not configured | Leave the documented modern MpEngine surface unset. | vm-defender-threat-file-hash-baseline |
 | `value` | `0` | Documented MpEngine path disabled | Turns off the documented modern MpEngine path. | ms-defender-enable-file-hash-computation |
 | `value` | `1` | Documented MpEngine path enabled | Microsoft documents this as the supported file-hash-computation policy state, but the 25H2 probe did not produce a direct read from this path in either the non-rebooted or rebooted capture pass. | ms-defender-enable-file-hash-computation, vm-defender-threat-file-hash-mpengine-no-read, vm-defender-threat-file-hash-mpengine-reboot-no-read |
 
@@ -20989,7 +20989,7 @@ Current writes
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.trusted-path-credential-prompting.review.json](records/security.trusted-path-credential-prompting.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21058,7 +21058,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Users enter credentials within the normal desktop session for supported nonlogon tasks. | local-credui-adml, nohuto-enablesecurecredentialprompting-admx |
+| `missing` | - | Not configured | Users enter credentials within the normal desktop session for supported nonlogon tasks. | local-credui-adml, nohuto-enablesecurecredentialprompting-admx |
 | `value` | `1` | Require trusted path | Observed enabled state for the documented CredUI policy that requires Secure Desktop credential entry for supported nonlogon tasks on this build. | local-credui-admx, local-credui-adml, app-security-provider, vm-batch-probe-20260320-trusted-path-credential-prompting, nohuto-enablesecurecredentialprompting-admx |
 
 **Windows defaults**
@@ -21116,7 +21116,7 @@ Windows Internals references:
 | Area | `Registry Security Setting` |
 | Scope | `device` |
 | Source file | [research/records/security.uac-never-notify.json](records/security.uac-never-notify.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21278,7 +21278,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/system.aero-shake.json](records/system.aero-shake.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21348,7 +21348,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Aero Shake stays available because the user policy is not forcing it off. | ms-admx-desktop-policy, local-desktop-admx |
+| `missing` | - | Not configured | Aero Shake stays available because the user policy is not forcing it off. | ms-admx-desktop-policy, local-desktop-admx |
 | `value` | `0` | Aero Shake allowed | The policy is disabled and the Aero Shake gesture remains available. | local-desktop-admx |
 | `value` | `1` | Aero Shake blocked | The policy is enabled and the Aero Shake gesture is turned off. | ms-admx-desktop-policy, local-desktop-admx |
 
@@ -21406,7 +21406,7 @@ Windows Internals references:
 | Area | `Crash Recovery` |
 | Scope | `device` |
 | Source file | [research/records/system.bsod-disable-auto-reboot.json](records/system.bsod-disable-auto-reboot.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21533,7 +21533,7 @@ Windows Internals references:
 | Area | `Crash Recovery / Bug Check Display` |
 | Scope | `device` |
 | Source file | [research/records/system.bsod-display-parameters.review.json](records/system.bsod-display-parameters.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21658,7 +21658,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-app-archiving.json](records/system.disable-app-archiving.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21728,7 +21728,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows follows its default behavior, periodically checks for infrequently used apps, and lets the user configure the feature. | ms-applicationmanagement-allowautomaticapparchiving, local-appxpackagemanager-adml |
+| `missing` | - | Not configured | Windows follows its default behavior, periodically checks for infrequently used apps, and lets the user configure the feature. | ms-applicationmanagement-allowautomaticapparchiving, local-appxpackagemanager-adml |
 | `value` | `0` | Automatic app archiving disabled | The system will not archive apps automatically. | ms-applicationmanagement-allowautomaticapparchiving, local-appxpackagemanager-admx, local-appxpackagemanager-adml, app-system-provider |
 | `value` | `1` | Automatic app archiving allowed | Windows can periodically check for and archive infrequently used apps. | ms-applicationmanagement-allowautomaticapparchiving, local-appxpackagemanager-admx, local-appxpackagemanager-adml |
 
@@ -21786,7 +21786,7 @@ Windows Internals references:
 | Area | `Observed Registry Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-auto-maintenance.review.json](records/system.disable-auto-maintenance.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21857,7 +21857,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | No explicit maintenance override | Windows follows its ordinary Automatic Maintenance behavior. | ms-automatic-maintenance-overview, ms-uwf-maintenance-disabled |
+| `missing` | - | No explicit maintenance override | Windows follows its ordinary Automatic Maintenance behavior. | ms-automatic-maintenance-overview, ms-uwf-maintenance-disabled |
 | `value` | `1` | Automatic Maintenance disabled | Microsoft's current UWF guidance says Maintenance Hour is disabled by setting MaintenanceDisabled on this path. | ms-automatic-maintenance-overview, ms-uwf-maintenance-disabled, app-system-provider, vm-batch-probe-20260320-disable-auto-maintenance |
 
 **Windows defaults**
@@ -21915,7 +21915,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-background-gp-updates.json](records/system.disable-background-gp-updates.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -21986,7 +21986,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Background Group Policy refresh remains allowed because the policy is not forcing it off. | ms-grouppolicy-policy-csp, local-grouppolicy-admx |
+| `missing` | - | Not configured | Background Group Policy refresh remains allowed because the policy is not forcing it off. | ms-grouppolicy-policy-csp, local-grouppolicy-admx |
 | `value` | `1` | Background refresh disabled | The system waits until logoff before applying computer and user policy updates. | ms-grouppolicy-policy-csp, app-system-provider |
 
 **Windows defaults**
@@ -22043,7 +22043,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-clipboard-history.json](records/system.disable-clipboard-history.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22114,7 +22114,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows policy does not force the feature. The user-facing behavior stays under normal Windows control. | ms-clipboard-history-csp, local-ospolicy-admx |
+| `missing` | - | Not configured | Windows policy does not force the feature. The user-facing behavior stays under normal Windows control. | ms-clipboard-history-csp, local-ospolicy-admx |
 | `value` | `0` | Disabled | Clipboard History is blocked by policy. | ms-clipboard-history-csp, local-ospolicy-admx |
 | `value` | `1` | Enabled | Clipboard History is explicitly allowed by policy. | ms-clipboard-history-csp, local-ospolicy-admx |
 
@@ -22129,7 +22129,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows policy does not force clipboard sync. The final behavior stays under normal Windows control. | ms-cross-device-clipboard-csp, local-ospolicy-admx |
+| `missing` | - | Not configured | Windows policy does not force clipboard sync. The final behavior stays under normal Windows control. | ms-cross-device-clipboard-csp, local-ospolicy-admx |
 | `value` | `0` | Disabled | Cross-device clipboard sync is blocked by policy. | ms-cross-device-clipboard-csp, local-ospolicy-admx |
 | `value` | `1` | Enabled | Cross-device clipboard sync is explicitly allowed by policy. | ms-cross-device-clipboard-csp, local-ospolicy-admx |
 
@@ -22189,7 +22189,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-clipboard-redirection.json](records/system.disable-clipboard-redirection.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22259,7 +22259,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force clipboard redirection behavior through policy. | ms-terminalserver-clipboard-policy, local-terminalserver-admx |
+| `missing` | - | Not configured | Windows does not force clipboard redirection behavior through policy. | ms-terminalserver-clipboard-policy, local-terminalserver-admx |
 | `value` | `0` | Clipboard redirection allowed | Clipboard sharing between local and remote sessions is allowed. | ms-terminalserver-clipboard-policy, local-terminalserver-admx |
 | `value` | `1` | Clipboard redirection blocked | Clipboard sharing between local and remote sessions is blocked. | ms-terminalserver-clipboard-policy, local-terminalserver-admx |
 
@@ -22318,7 +22318,7 @@ Windows Internals references:
 | Area | `GameConfigStore / Compatibility Preference` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-fullscreen-optimizations.review.json](records/system.disable-fullscreen-optimizations.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22391,7 +22391,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Observed baseline | The current Win25H2Clean baseline leaves the GameConfigStore fullscreen-optimization tuple unset. | ms-windowed-games-optimizations, repo-system-doc-fso, vm-batch-probe-20260320-disable-fullscreen-optimizations |
+| `missing` | - | Observed baseline | The current Win25H2Clean baseline leaves the GameConfigStore fullscreen-optimization tuple unset. | ms-windowed-games-optimizations, repo-system-doc-fso, vm-batch-probe-20260320-disable-fullscreen-optimizations |
 | `value` | `2/2/1/1` | Observed app FSO-off profile | The current app treats these four values as the disable-FSO profile, and the reversible VM probe confirmed that tuple on the same path. | repo-system-doc-fso, procmon-fullscreen-gameconfigstore-read, ghidra-resourcepolicysrv-fullscreen, app-system-registry-provider, vm-batch-probe-20260320-disable-fullscreen-optimizations |
 
 **Windows defaults**
@@ -22451,7 +22451,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-game-recording-broadcasting.json](records/system.disable-game-recording-broadcasting.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22506,7 +22506,7 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows keeps its normal game recording and broadcasting baseline. | ms-applicationmanagement-allowgamedvr, local-gamedvr-adml |
+| `missing` | - | Not configured | Windows keeps its normal game recording and broadcasting baseline. | ms-applicationmanagement-allowgamedvr, local-gamedvr-adml |
 | `value` | `0` | Game recording disabled | Windows Game Recording and Broadcasting are not allowed by policy. | ms-applicationmanagement-allowgamedvr, local-gamedvr-admx, local-gamedvr-adml, app-system-registry-provider |
 | `value` | `1` | Game recording allowed | Windows Game Recording and Broadcasting are allowed. | ms-applicationmanagement-allowgamedvr, local-gamedvr-admx, local-gamedvr-adml |
 
@@ -22635,7 +22635,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Observed fallback profile | When JPEGImportQuality is missing, the current repo decomp path falls back to 85 before encoding the wallpaper JPEG. | repo-system-doc-jpeg, repo-system-decomp-jpegtranscode, vm-batch-probe-20260320-disable-jpeg-reduction |
+| `missing` | - | Observed fallback profile | When JPEGImportQuality is missing, the current repo decomp path falls back to 85 before encoding the wallpaper JPEG. | repo-system-doc-jpeg, repo-system-decomp-jpegtranscode, vm-batch-probe-20260320-disable-jpeg-reduction |
 | `value` | `100` | Observed app max-quality profile | The current app writes 100, the shell32 transcode path accepts it as the top of the 60..100 clamp range, and Procmon captured Explorer.EXE reading JPEGImportQuality = 100 during a shell-driven wallpaper apply. | repo-system-doc-jpeg, repo-system-decomp-jpegtranscode, procmon-jpegimportquality-explorer-read, ghidra-shell32-jpegimportquality, app-system-provider, vm-batch-probe-20260320-disable-jpeg-reduction |
 
 **Windows defaults**
@@ -22694,7 +22694,7 @@ Windows Internals references:
 | Area | `Feature Setting vs Observed Registry Setting` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-restartable-apps.review.json](records/system.disable-restartable-apps.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22765,7 +22765,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The registry value is absent and Windows uses the feature's default Restart apps behavior for the current user. | ms-support-restart-apps, runtime-restartapps-registry-diff |
+| `missing` | - | Not configured | The registry value is absent and Windows uses the feature's default Restart apps behavior for the current user. | ms-support-restart-apps, runtime-restartapps-registry-diff |
 | `value` | `0` | Restart apps off | Disables automatic app restart after sign-in. The current app writes 0 here and the guest probe confirmed that 0 is the off state. | ms-support-restart-apps, app-system-provider, runtime-restartapps-registry-diff |
 | `value` | `1` | Restart apps on | Enables automatic app restart after sign-in. The guest probe confirmed that 1 is the on state. | ms-support-restart-apps, runtime-restartapps-registry-diff |
 
@@ -22822,7 +22822,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-search-highlights-policy.json](records/system.disable-search-highlights-policy.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22892,7 +22892,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Search Highlights stay enabled by default because the policy is not forcing them off. | ms-search-policy-csp, local-search-admx |
+| `missing` | - | Not configured | Search Highlights stay enabled by default because the policy is not forcing them off. | ms-search-policy-csp, local-search-admx |
 | `value` | `0` | Disabled | Search Highlights are turned off. | ms-search-policy-csp, local-search-admx |
 | `value` | `1` | Enabled | Search Highlights are explicitly allowed. | ms-search-policy-csp, local-search-admx |
 
@@ -22950,7 +22950,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-search-remote-queries.json](records/system.disable-search-remote-queries.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23020,7 +23020,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the policy, and the default behavior allows client search requests to use this computer's index. | local-search-admx, local-search-adml |
+| `missing` | - | Not configured | Windows does not force the policy, and the default behavior allows client search requests to use this computer's index. | local-search-admx, local-search-adml |
 | `value` | `0` | Remote queries allowed | Client search requests can use this computer's search index. | local-search-admx, local-search-adml |
 | `value` | `1` | Remote queries blocked | Clients cannot query this computer's index remotely. | local-search-admx, local-search-adml, app-system-provider |
 
@@ -23077,7 +23077,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-search-web-results.review.json](records/system.disable-search-web-results.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23145,7 +23145,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Users can choose whether Search performs web queries and shows web results. | local-search-admx, local-search-adml |
+| `missing` | - | Not configured | Users can choose whether Search performs web queries and shows web results. | local-search-admx, local-search-adml |
 | `value` | `0` | Web results disabled | Search does not perform web queries and does not display web results. | local-search-admx, local-search-adml, app-system-provider |
 | `value` | `1` | Web results allowed | Search can perform web queries and display web results. | local-search-admx, local-search-adml |
 
@@ -23202,7 +23202,7 @@ Windows Internals references:
 | Area | `Explorer Overlay` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-shortcut-arrow.json](records/system.disable-shortcut-arrow.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23272,7 +23272,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default arrow | Windows uses its default shortcut-arrow overlay because no custom Shell Icons value is forcing an alternate icon. | ms-shell-icons-shortcut-arrow |
+| `missing` | - | Windows default arrow | Windows uses its default shortcut-arrow overlay because no custom Shell Icons value is forcing an alternate icon. | ms-shell-icons-shortcut-arrow |
 | `value` | `%windir%\System32\shell32.dll,-50` | Shortcut arrow removed | Windows uses the documented alternate icon resource for Shell Icons value 29, removing the normal shortcut arrow overlay. | ms-shell-icons-shortcut-arrow, app-system-provider |
 
 **Windows defaults**
@@ -23398,7 +23398,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Observed Win25H2Clean baseline | The current 25H2 VM baseline leaves StartupDelayInMSec unset and Explorer still reads the Serialize path live. | vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart, wpr-startup-delay-shell-restart |
+| `missing` | - | Observed Win25H2Clean baseline | The current 25H2 VM baseline leaves StartupDelayInMSec unset and Explorer still reads the Serialize path live. | vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart, wpr-startup-delay-shell-restart |
 | `value` | `0` | Observed no-delay profile | The current app and the Win25H2Clean shell trace both support 0 as the no-delay startup profile on the Explorer Serialize path. | repo-system-doc-startup-delay, app-system-provider, vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart, ghidra-explorer-serialize-search, wpr-startup-delay-shell-restart |
 
 **Windows defaults**
@@ -23457,7 +23457,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-storage-sense.json](records/system.disable-storage-sense.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23527,7 +23527,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows policy does not force Storage Sense and normal Windows behavior applies. | ms-storage-policy-csp, local-storagesense-admx |
+| `missing` | - | Not configured | Windows policy does not force Storage Sense and normal Windows behavior applies. | ms-storage-policy-csp, local-storagesense-admx |
 | `value` | `0` | Storage Sense disabled | Storage Sense is blocked by policy. | ms-storage-policy-csp, local-storagesense-admx |
 | `value` | `1` | Storage Sense enabled | Storage Sense is explicitly allowed by policy. | ms-storage-policy-csp, local-storagesense-admx |
 
@@ -23585,7 +23585,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-storage-sense-temp-cleanup.json](records/system.disable-storage-sense-temp-cleanup.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23656,7 +23656,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows policy does not force the temporary files cleanup behavior. | ms-storage-policy-csp, local-storagesense-admx |
+| `missing` | - | Not configured | Windows policy does not force the temporary files cleanup behavior. | ms-storage-policy-csp, local-storagesense-admx |
 | `value` | `0` | Temporary files cleanup disabled | Storage Sense is not allowed to clean temporary files. | ms-storage-policy-csp, local-storagesense-admx |
 | `value` | `1` | Temporary files cleanup enabled | Storage Sense is allowed to clean temporary files. | ms-storage-policy-csp, local-storagesense-admx |
 
@@ -23714,7 +23714,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-store-open-with.json](records/system.disable-store-open-with.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23784,7 +23784,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the Store option off and standard behavior applies. | ms-icm-policy-csp, local-icm-admx |
+| `missing` | - | Not configured | Windows does not force the Store option off and standard behavior applies. | ms-icm-policy-csp, local-icm-admx |
 | `value` | `0` | Store option allowed | The Store service can still appear in Open With. | ms-icm-policy-csp, local-icm-admx |
 | `value` | `1` | Store option blocked | The Store service is not offered in Open With for unknown file associations. | ms-icm-policy-csp, local-icm-admx |
 
@@ -23842,7 +23842,7 @@ Windows Internals references:
 | Area | `Desktop Window Manager / Overlay Diagnostics` |
 | Scope | `device` |
 | Source file | [research/records/system.dwm-disable-overlay-min-fps.json](records/system.dwm-disable-overlay-min-fps.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23912,7 +23912,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Normal DWM baseline | DWM uses its normal built-in overlay minimum-FPS behavior because no override is present. | ms-dwm-registry-settings |
+| `missing` | - | Normal DWM baseline | DWM uses its normal built-in overlay minimum-FPS behavior because no override is present. | ms-dwm-registry-settings |
 | `value` | `0` | Minimum-FPS check disabled | The overlay minimum-FPS check is disabled. | ms-dwm-registry-settings, app-system-registry-provider |
 
 **Windows defaults**
@@ -23967,7 +23967,7 @@ Windows Internals references:
 | Area | `Gaming Feature / GameBar Preference` |
 | Scope | `user` |
 | Source file | [research/records/system.enable-game-mode.review.json](records/system.enable-game-mode.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24095,7 +24095,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / Scheduling Feature` |
 | Scope | `device` |
 | Source file | [research/records/system.enable-hags.review.json](records/system.enable-hags.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24165,7 +24165,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Guest-side reversible probe on Win25H2Clean showed HwSchMode is missing at baseline before the HAGS toggle sequence. | runtime-hags-registry-diff, repo-system-doc-hags, ms-hags-feature |
+| `missing` | - | Not configured | Guest-side reversible probe on Win25H2Clean showed HwSchMode is missing at baseline before the HAGS toggle sequence. | runtime-hags-registry-diff, repo-system-doc-hags, ms-hags-feature |
 | `value` | `1` | HAGS disabled | Guest-side reversible probe confirmed HwSchMode can be set to 1 and restored back to missing after the probe. | runtime-hags-registry-diff, repo-system-doc-hags, app-system-provider |
 | `value` | `2` | Observed app enabled profile | The current app treats 2 as the enabled HAGS profile, and the guest-side reversible probe confirmed that state on this build. | runtime-hags-registry-diff, repo-system-doc-hags, app-system-provider |
 
@@ -24223,7 +24223,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.enable-indexing-encrypted-items.json](records/system.enable-indexing-encrypted-items.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24293,7 +24293,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows uses the local search setting, which by default does not index encrypted content. | local-search-admx, local-search-adml |
+| `missing` | - | Not configured | Windows uses the local search setting, which by default does not index encrypted content. | local-search-admx, local-search-adml |
 | `value` | `0` | Do not index encrypted files | Search components are expected not to index encrypted items or encrypted stores. | local-search-admx, local-search-adml |
 | `value` | `1` | Index encrypted files | Indexing attempts to decrypt and index encrypted content while still respecting access restrictions. | local-search-admx, local-search-adml, app-system-provider |
 
@@ -24350,7 +24350,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-tdr-ddi-delay.json](records/system.graphics-tdr-ddi-delay.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24473,7 +24473,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-tdr-delay.json](records/system.graphics-tdr-delay.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24596,7 +24596,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-tdr-level.json](records/system.graphics-tdr-level.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24722,7 +24722,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-tdr-limit-count.json](records/system.graphics-tdr-limit-count.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24845,7 +24845,7 @@ Windows Internals references:
 | Area | `Graphics Drivers / TDR` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-tdr-limit-time.json](records/system.graphics-tdr-limit-time.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -24968,7 +24968,7 @@ Windows Internals references:
 | Area | `Kernel / Deferred Procedure Calls` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-thread-dpc-enable.json](records/system.kernel-thread-dpc-enable.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25038,7 +25038,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default threaded-DPC behavior | Windows keeps threaded DPCs enabled by default. | ms-threaded-dpcs, vm-thread-dpc-enable-bounded-suite |
+| `missing` | - | Default threaded-DPC behavior | Windows keeps threaded DPCs enabled by default. | ms-threaded-dpcs, vm-thread-dpc-enable-bounded-suite |
 | `value` | `0` | Threaded DPCs disabled | Threaded DPCs run as ordinary DPCs instead. | ms-threaded-dpcs, vm-thread-dpc-enable-bounded-suite |
 | `value` | `1` | Threaded DPCs enabled | Threaded DPCs stay enabled, which is the documented normal behavior. | ms-threaded-dpcs, app-system-registry-provider |
 
@@ -25097,7 +25097,7 @@ Windows Internals references:
 | Area | `Security Option / Memory Management` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-clear-pagefile-at-shutdown.json](records/system.memory-clear-pagefile-at-shutdown.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25224,7 +25224,7 @@ Windows Internals references:
 | Area | `Memory Management` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-disable-paging-executive.json](records/system.memory-disable-paging-executive.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25351,7 +25351,7 @@ Windows Internals references:
 | Area | `Memory Management / Cache Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-large-system-cache-client.review.json](records/system.memory-large-system-cache-client.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25477,7 +25477,7 @@ Windows Internals references:
 | Area | `Memory Management / Legacy Pool Tuning` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-nonpaged-pool-dynamic.json](records/system.memory-nonpaged-pool-dynamic.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25602,7 +25602,7 @@ Windows Internals references:
 | Area | `Memory Management / Legacy Pool Tuning` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-paged-pool-dynamic.json](records/system.memory-paged-pool-dynamic.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25728,7 +25728,7 @@ Windows Internals references:
 | Area | `Registry Storage Space` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-registry-quota-default.review.json](records/system.memory-registry-quota-default.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25797,7 +25797,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Automatic sizing | Windows automatically sets the registry size as needed. | ms-rsl-functionality, ms-registry-storage-space, live-registrysize-missing |
+| `missing` | - | Automatic sizing | Windows automatically sets the registry size as needed. | ms-rsl-functionality, ms-registry-storage-space, live-registrysize-missing |
 | `value` | `0` | Automatic sizing | Windows automatically sets the registry size as needed. | ms-rsl-functionality, ms-registry-storage-space |
 
 **Windows defaults**
@@ -25854,7 +25854,7 @@ Windows Internals references:
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.ntfs-disable-8dot3.json](records/system.ntfs-disable-8dot3.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -25983,7 +25983,7 @@ Windows Internals references:
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.ntfs-disable-last-access.json](records/system.ntfs-disable-last-access.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26110,7 +26110,7 @@ Windows Internals references:
 | Area | `File System Registry Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.ntfs-enable-long-paths.json](records/system.ntfs-enable-long-paths.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26180,7 +26180,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default behavior | Win32 long paths are not explicitly enabled through this registry value. | ms-maximum-file-path-limitation, local-filesys-adml |
+| `missing` | - | Default behavior | Win32 long paths are not explicitly enabled through this registry value. | ms-maximum-file-path-limitation, local-filesys-adml |
 | `value` | `0` | Long paths disabled | Win32 long paths are not enabled through this setting. | local-filesys-admx, local-filesys-adml |
 | `value` | `1` | Long paths enabled | Long-path-aware applications can access paths beyond the normal 260-character limit. | ms-maximum-file-path-limitation, local-filesys-admx, local-filesys-adml, app-system-registry-provider |
 
@@ -26238,7 +26238,7 @@ Windows Internals references:
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.ntfs-reset-memory-usage.json](records/system.ntfs-reset-memory-usage.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26362,7 +26362,7 @@ Windows Internals references:
 | Area | `File System Runtime Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.ntfs-reset-mft-zone.json](records/system.ntfs-reset-mft-zone.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26432,7 +26432,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Default reservation | If the value is not specified, NTFS uses the default MFT zone reservation behavior. | ms-ntfs-reserves-space-for-mft |
+| `missing` | - | Default reservation | If the value is not specified, NTFS uses the default MFT zone reservation behavior. | ms-ntfs-reserves-space-for-mft |
 | `value` | `1` | Default minimum reservation | Use the default minimum MFT zone size. | ms-fsutil-behavior, ms-ntfs-reserves-space-for-mft, app-system-registry-provider |
 | `value` | `2` | Larger reservation | Reserve a larger MFT zone for workloads with many small files. | ms-fsutil-behavior, ms-ntfs-reserves-space-for-mft |
 | `value` | `3` | Much larger reservation | Reserve a much larger MFT zone for more extreme file-count workloads. | ms-ntfs-reserves-space-for-mft |
@@ -26491,7 +26491,7 @@ Windows Internals references:
 | Area | `Scheduler / Priority Control` |
 | Scope | `device` |
 | Source file | [research/records/system.priority-control.review.json](records/system.priority-control.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26622,7 +26622,7 @@ Windows Internals references:
 | Area | `Reliability / Event Timestamps` |
 | Scope | `device` |
 | Source file | [research/records/system.reliability-timestamp-enabled.review.json](records/system.reliability-timestamp-enabled.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26694,7 +26694,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | No explicit policy is set; the runtime can fall back to the current-version Reliability path if one is present. | ms-admx-reliability-persistent-timestamp, repo-system-decomp-reliability-timestamp |
+| `missing` | - | Not configured | No explicit policy is set; the runtime can fall back to the current-version Reliability path if one is present. | ms-admx-reliability-persistent-timestamp, repo-system-decomp-reliability-timestamp |
 | `value` | `0` | Timestamping disabled | The decompiled function returns 0 immediately when TimeStampEnabled is 0. | ms-admx-reliability-persistent-timestamp, repo-system-decomp-reliability-timestamp |
 | `value` | `1` | Timestamping enabled | The decompiled function continues to read TimeStampInterval when TimeStampEnabled is non-zero. | ms-admx-reliability-persistent-timestamp, repo-system-decomp-reliability-timestamp |
 
@@ -26710,7 +26710,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | No explicit interval policy is set; the runtime can fall back to the current-version Reliability path if one is present. | ms-admx-reliability-persistent-timestamp, repo-system-decomp-reliability-timestamp |
+| `missing` | - | Not configured | No explicit interval policy is set; the runtime can fall back to the current-version Reliability path if one is present. | ms-admx-reliability-persistent-timestamp, repo-system-decomp-reliability-timestamp |
 | `value` | `86400` | Maximum documented interval | The decompiled function caps the policy interval at 86400 seconds, which the repo note describes as 24h. | ms-admx-reliability-persistent-timestamp, repo-system-decomp-reliability-timestamp |
 
 **Windows defaults**
@@ -26768,7 +26768,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-bluetooth-audio-gateway.json](records/system.services.disable-bluetooth-audio-gateway.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26891,7 +26891,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-bluetooth-support.json](records/system.services.disable-bluetooth-support.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27014,7 +27014,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `user-session` |
 | Source file | [research/records/system.services.disable-bluetooth-user-service.json](records/system.services.disable-bluetooth-user-service.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27138,7 +27138,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-connected-user-experiences.json](records/system.services.disable-connected-user-experiences.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27261,7 +27261,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-print-notifications.json](records/system.services.disable-print-notifications.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27384,7 +27384,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-print-spooler.json](records/system.services.disable-print-spooler.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27507,7 +27507,7 @@ Windows Internals references:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-windows-search.json](records/system.services.disable-windows-search.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27632,7 +27632,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/system.verbose-status-messages.json](records/system.verbose-status-messages.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27702,7 +27702,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows uses the normal simpler startup, shutdown, logon, and logoff status presentation. | ms-admx-logon-verbose-status |
+| `missing` | - | Not configured | Windows uses the normal simpler startup, shutdown, logon, and logoff status presentation. | ms-admx-logon-verbose-status |
 | `value` | `1` | Show verbose status messages | The policy is enabled and Windows shows detailed system-status text during startup, shutdown, sign-in, and sign-out. | ms-admx-logon-verbose-status |
 
 **Windows defaults**
@@ -27758,7 +27758,7 @@ Windows Internals references:
 | Area | `Service shutdown timing` |
 | Scope | `device` |
 | Source file | [research/records/system.wait-to-kill-service-timeout.review.json](records/system.wait-to-kill-service-timeout.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27886,7 +27886,7 @@ Windows Internals references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.default-account-picture.json](records/visibility.default-account-picture.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -27949,7 +27949,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Users can customize their account pictures because the policy is not being enforced. | ms-admx-cpls-use-default-tile |
+| `missing` | - | Not configured | Users can customize their account pictures because the policy is not being enforced. | ms-admx-cpls-use-default-tile |
 | `value` | `1` | Force the default account picture | The policy is enabled and all users are shown the default account picture with no customization allowed. | ms-admx-cpls-use-default-tile |
 
 **Windows defaults**
@@ -28005,7 +28005,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-acrylic-logon.json](records/visibility.disable-acrylic-logon.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28068,7 +28068,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows uses the normal acrylic blur effect on the logon background image. | ms-admx-logon-page, local-logon-admx-acrylic, local-logon-adml-acrylic |
+| `missing` | - | Not configured | Windows uses the normal acrylic blur effect on the logon background image. | ms-admx-logon-page, local-logon-admx-acrylic, local-logon-adml-acrylic |
 | `value` | `1` | Show a clear logon background | The policy is enabled and the logon background image is shown without acrylic blur. | ms-admx-logon-page, local-logon-admx-acrylic, local-logon-adml-acrylic, app-visibility-provider |
 
 **Windows defaults**
@@ -28126,7 +28126,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-common-control-animations.json](records/visibility.disable-common-control-animations.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28189,7 +28189,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows is not forcing this animation policy for the current user. | local-explorer-admx-animations, local-explorer-adml-animations |
+| `missing` | - | Not configured | Windows is not forcing this animation policy for the current user. | local-explorer-admx-animations, local-explorer-adml-animations |
 | `value` | `0` | Animations allowed | The policy is disabled and common control and window animations remain on. | local-explorer-admx-animations |
 | `value` | `1` | Animations turned off | The policy is enabled and common control and window animations are turned off for the current user. | local-explorer-admx-animations, local-explorer-adml-animations |
 
@@ -28247,7 +28247,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-first-signin-animation.json](records/visibility.disable-first-signin-animation.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28310,7 +28310,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows uses its built-in first-run behavior instead of forcing the animation on or off by policy. | local-logon-admx, local-logon-adml |
+| `missing` | - | Not configured | Windows uses its built-in first-run behavior instead of forcing the animation on or off by policy. | local-logon-admx, local-logon-adml |
 | `value` | `1` | Show the first sign-in animation | The policy is enabled, so users see the first sign-in animation and Microsoft-account users see the services opt-in prompt. | local-logon-admx, local-logon-adml |
 | `value` | `0` | Skip the first sign-in animation | The policy is disabled, so users do not see the animation and Microsoft-account users do not see the services opt-in prompt. | local-logon-admx, local-logon-adml |
 
@@ -28368,7 +28368,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-lock-screen.json](records/visibility.disable-lock-screen.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28431,7 +28431,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows shows the lock screen normally because the policy is not being forced. | ms-admx-controlpaneldisplay-no-lock-screen |
+| `missing` | - | Not configured | Windows shows the lock screen normally because the policy is not being forced. | ms-admx-controlpaneldisplay-no-lock-screen |
 | `value` | `1` | Do not display the lock screen | The policy is enabled and users go straight to the sign-in experience instead of seeing the lock screen first. | ms-admx-controlpaneldisplay-no-lock-screen |
 
 **Windows defaults**
@@ -28487,7 +28487,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-lock-screen-camera.json](records/visibility.disable-lock-screen-camera.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28550,7 +28550,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Users can still enable lock-screen camera access because the device is not forcing this policy. | local-controlpaneldisplay-admx-lock-camera, local-controlpaneldisplay-adml-lock-camera |
+| `missing` | - | Not configured | Users can still enable lock-screen camera access because the device is not forcing this policy. | local-controlpaneldisplay-admx-lock-camera, local-controlpaneldisplay-adml-lock-camera |
 | `value` | `1` | Prevent lock-screen camera access | The policy is enabled and users cannot enable or invoke camera access from the lock screen. | local-controlpaneldisplay-admx-lock-camera, local-controlpaneldisplay-adml-lock-camera, app-visibility-provider |
 
 **Windows defaults**
@@ -28607,7 +28607,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-lock-screen-changes.json](records/visibility.disable-lock-screen-changes.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28670,7 +28670,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Users can still change the lock-screen and logon image because the device is not enforcing the policy. | ms-admx-controlpaneldisplay-lock-screen-page, local-controlpaneldisplay-admx-lock-changes, local-controlpaneldisplay-adml-lock-changes |
+| `missing` | - | Not configured | Users can still change the lock-screen and logon image because the device is not enforcing the policy. | ms-admx-controlpaneldisplay-lock-screen-page, local-controlpaneldisplay-admx-lock-changes, local-controlpaneldisplay-adml-lock-changes |
 | `value` | `1` | Prevent changing the lock screen and logon image | The policy is enabled and users are forced to use the default image instead of changing it. | ms-admx-controlpaneldisplay-lock-screen-page, local-controlpaneldisplay-admx-lock-changes, local-controlpaneldisplay-adml-lock-changes, app-visibility-provider |
 
 **Windows defaults**
@@ -28728,7 +28728,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-lock-screen-motion.json](records/visibility.disable-lock-screen-motion.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28791,7 +28791,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force a lock-screen motion policy and the default visual behavior remains in place. | ms-admx-controlpaneldisplay-lock-screen-page, local-controlpaneldisplay-admx-lock-motion, local-controlpaneldisplay-adml-lock-motion |
+| `missing` | - | Not configured | Windows does not force a lock-screen motion policy and the default visual behavior remains in place. | ms-admx-controlpaneldisplay-lock-screen-page, local-controlpaneldisplay-admx-lock-motion, local-controlpaneldisplay-adml-lock-motion |
 | `value` | `1` | Prevent lock-screen background motion | The policy is enabled and the lock-screen background stays static instead of using the subtle motion effect. | ms-admx-controlpaneldisplay-lock-screen-page, local-controlpaneldisplay-admx-lock-motion, local-controlpaneldisplay-adml-lock-motion, app-visibility-provider |
 
 **Windows defaults**
@@ -28849,7 +28849,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-lock-screen-slideshow.json](records/visibility.disable-lock-screen-slideshow.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -28912,7 +28912,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Users can still enable a lock-screen slideshow because the policy is not being forced. | ms-admx-controlpaneldisplay-lock-screen-page, local-controlpaneldisplay-admx-lock-slideshow, local-controlpaneldisplay-adml-lock-slideshow |
+| `missing` | - | Not configured | Users can still enable a lock-screen slideshow because the policy is not being forced. | ms-admx-controlpaneldisplay-lock-screen-page, local-controlpaneldisplay-admx-lock-slideshow, local-controlpaneldisplay-adml-lock-slideshow |
 | `value` | `1` | Prevent lock-screen slideshow | The policy is enabled and no lock-screen slideshow will ever start. | ms-admx-controlpaneldisplay-lock-screen-page, local-controlpaneldisplay-admx-lock-slideshow, local-controlpaneldisplay-adml-lock-slideshow, app-visibility-provider |
 
 **Windows defaults**
@@ -28970,7 +28970,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-action-center.json](records/visibility.disable-spotlight-action-center.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29033,7 +29033,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the Action Center Spotlight policy for the current user. | ms-experience-csp-allow-spotlight-action-center, local-cloud-content-admx |
+| `missing` | - | Not configured | Windows does not force the Action Center Spotlight policy for the current user. | ms-experience-csp-allow-spotlight-action-center, local-cloud-content-admx |
 | `value` | `0` | Action Center Spotlight allowed | The policy is disabled and Spotlight content can appear in that notification surface. | ms-experience-csp-allow-spotlight-action-center, local-cloud-content-admx |
 | `value` | `1` | Action Center Spotlight disabled | Spotlight content is blocked in that notification surface by policy. | ms-experience-csp-allow-spotlight-action-center, local-cloud-content-admx |
 
@@ -29091,7 +29091,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-desktop-collection.json](records/visibility.disable-spotlight-desktop-collection.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29154,7 +29154,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the desktop Spotlight collection policy for the current user. | ms-experience-csp-allow-spotlight-collection, local-cloud-content-admx |
+| `missing` | - | Not configured | Windows does not force the desktop Spotlight collection policy for the current user. | ms-experience-csp-allow-spotlight-collection, local-cloud-content-admx |
 | `value` | `0` | Desktop Spotlight collection allowed | The policy is disabled and the Spotlight collection wallpaper option remains available. | ms-experience-csp-allow-spotlight-collection, local-cloud-content-admx |
 | `value` | `1` | Desktop Spotlight collection disabled | The Spotlight collection wallpaper option is blocked by policy. | ms-experience-csp-allow-spotlight-collection, local-cloud-content-admx |
 
@@ -29212,7 +29212,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-features.json](records/visibility.disable-spotlight-features.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29275,7 +29275,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the user policy for Windows Spotlight features. | ms-experience-csp-allow-windows-spotlight, local-cloud-content-admx |
+| `missing` | - | Not configured | Windows does not force the user policy for Windows Spotlight features. | ms-experience-csp-allow-windows-spotlight, local-cloud-content-admx |
 | `value` | `0` | Windows Spotlight features allowed | The policy is disabled and Spotlight features remain available. | ms-experience-csp-allow-windows-spotlight, local-cloud-content-admx |
 | `value` | `1` | Windows Spotlight features disabled | Spotlight features are blocked by policy for the current user. | ms-experience-csp-allow-windows-spotlight, local-cloud-content-admx |
 
@@ -29333,7 +29333,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-settings.json](records/visibility.disable-spotlight-settings.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29396,7 +29396,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the Settings Spotlight policy for the current user. | ms-experience-csp-allow-spotlight-settings, local-cloud-content-admx |
+| `missing` | - | Not configured | Windows does not force the Settings Spotlight policy for the current user. | ms-experience-csp-allow-spotlight-settings, local-cloud-content-admx |
 | `value` | `0` | Settings Spotlight allowed | The policy is disabled and Spotlight content can appear in Settings. | ms-experience-csp-allow-spotlight-settings, local-cloud-content-admx |
 | `value` | `1` | Settings Spotlight disabled | Spotlight content is blocked in Settings by policy. | ms-experience-csp-allow-spotlight-settings, local-cloud-content-admx |
 
@@ -29454,7 +29454,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-third-party.json](records/visibility.disable-spotlight-third-party.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29517,7 +29517,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the third-party Spotlight suggestions policy for the current user. | ms-experience-csp-allow-third-party-spotlight, local-cloud-content-admx |
+| `missing` | - | Not configured | Windows does not force the third-party Spotlight suggestions policy for the current user. | ms-experience-csp-allow-third-party-spotlight, local-cloud-content-admx |
 | `value` | `0` | Third-party Spotlight suggestions allowed | The policy is disabled and Windows Spotlight can show third-party suggestions. | ms-experience-csp-allow-third-party-spotlight, local-cloud-content-admx |
 | `value` | `1` | Third-party Spotlight suggestions disabled | Windows Spotlight won't show third-party suggestions for the current user. | ms-experience-csp-allow-third-party-spotlight, local-cloud-content-admx |
 
@@ -29575,7 +29575,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.disable-spotlight-welcome.json](records/visibility.disable-spotlight-welcome.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29638,7 +29638,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the welcome-experience policy for the current user. | ms-experience-csp-allow-spotlight-welcome, local-cloud-content-admx |
+| `missing` | - | Not configured | Windows does not force the welcome-experience policy for the current user. | ms-experience-csp-allow-spotlight-welcome, local-cloud-content-admx |
 | `value` | `0` | Welcome experience allowed | The policy is disabled and Spotlight welcome experiences remain available. | ms-experience-csp-allow-spotlight-welcome, local-cloud-content-admx |
 | `value` | `1` | Welcome experience disabled | Spotlight welcome experiences are blocked by policy. | ms-experience-csp-allow-spotlight-welcome, local-cloud-content-admx |
 
@@ -29696,7 +29696,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-wcn-wizards.json](records/visibility.disable-wcn-wizards.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29759,7 +29759,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The device is not forcing the Windows Connect Now wizard policy. | local-wcn-admx, local-wcn-adml |
+| `missing` | - | Not configured | The device is not forcing the Windows Connect Now wizard policy. | local-wcn-admx, local-wcn-adml |
 | `value` | `0` | WCN wizards allowed | The policy is disabled and users can access the Windows Connect Now wizard tasks. | local-wcn-admx, local-wcn-adml |
 | `value` | `1` | WCN wizards blocked | The policy is enabled and users cannot access the Windows Connect Now wizard tasks. | local-wcn-admx, local-wcn-adml |
 
@@ -29817,7 +29817,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-widgets.json](records/visibility.disable-widgets.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -29880,7 +29880,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The device is not forcing a Widgets policy and Windows keeps its normal default behavior. | ms-news-and-interests-allow-widgets, local-news-and-interests-admx, local-news-and-interests-adml |
+| `missing` | - | Not configured | The device is not forcing a Widgets policy and Windows keeps its normal default behavior. | ms-news-and-interests-allow-widgets, local-news-and-interests-admx, local-news-and-interests-adml |
 | `value` | `1` | Widgets allowed | The policy is enabled in allow-form and the Widgets feature is available on the device. | ms-news-and-interests-allow-widgets, local-news-and-interests-admx |
 | `value` | `0` | Widgets blocked | The policy is disabled in allow-form and the Widgets board and its taskbar entry point are not available. | ms-news-and-interests-allow-widgets, local-news-and-interests-admx, local-news-and-interests-adml |
 
@@ -29939,7 +29939,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.disable-window-animations.json](records/visibility.disable-window-animations.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -30002,7 +30002,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The device is not forcing the DWM window-animation policy. | local-dwm-admx, local-dwm-adml |
+| `missing` | - | Not configured | The device is not forcing the DWM window-animation policy. | local-dwm-admx, local-dwm-adml |
 | `value` | `0` | Window animations allowed | The policy is disabled and normal window animations stay on. | local-dwm-admx, local-dwm-adml |
 | `value` | `1` | Window animations blocked | The policy is enabled and window animations are turned off. | local-dwm-admx, local-dwm-adml |
 
@@ -30060,7 +30060,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.force-classic-control-panel.json](records/visibility.force-classic-control-panel.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -30123,7 +30123,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Control Panel opens using the view from the last Control Panel session. | local-controlpanel-admx-classic, local-controlpanel-adml-classic |
+| `missing` | - | Not configured | Control Panel opens using the view from the last Control Panel session. | local-controlpanel-admx-classic, local-controlpanel-adml-classic |
 | `value` | `0` | Category view | Control Panel opens to the category view. | local-controlpanel-admx-classic, local-controlpanel-adml-classic |
 | `value` | `1` | Classic icon view | Control Panel opens to the icon view. | local-controlpanel-admx-classic, local-controlpanel-adml-classic, app-visibility-provider |
 
@@ -30180,7 +30180,7 @@ Nohuto lineage references:
 | Area | `User Preference` |
 | Scope | `user` |
 | Source file | [research/records/visibility.hide-language-bar.review.json](records/visibility.hide-language-bar.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -30299,7 +30299,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/visibility.hide-most-used-apps.json](records/visibility.hide-most-used-apps.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -30362,7 +30362,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The policy does not force the Most used list, so the user can control it in Settings. | local-startmenu-admx, local-startmenu-adml |
+| `missing` | - | Not configured | The policy does not force the Most used list, so the user can control it in Settings. | local-startmenu-admx, local-startmenu-adml |
 | `value` | `0` | Policy set to not configured behavior | The enum explicitly selects the not-configured behavior, which still leaves the Most used list under user control. | local-startmenu-admx, local-startmenu-adml |
 | `value` | `1` | Force show Most used | The policy forces the Most used list to stay shown and the user cannot hide it in Settings. | local-startmenu-admx, local-startmenu-adml |
 | `value` | `2` | Force hide Most used | The policy forces the Most used list to stay hidden and the user cannot show it in Settings. | local-startmenu-admx, local-startmenu-adml |
@@ -30421,7 +30421,7 @@ Nohuto lineage references:
 | Area | `Registry Policy` |
 | Scope | `user` |
 | Source file | [research/records/visibility.hide-people-bar.json](records/visibility.hide-people-bar.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -30541,7 +30541,7 @@ Nohuto lineage references:
 | Area | `Explorer Context Menu` |
 | Scope | `user` |
 | Source file | [research/records/visibility.restore-classic-context-menu.review.json](records/visibility.restore-classic-context-menu.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -30604,7 +30604,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows 11 default menu | Repo notes say removing the custom CLSID key reverts to the newer Windows 11 context menu. | repo-visibility-classic-context, repo-visibility-classic-context-usecase |
+| `missing` | - | Windows 11 default menu | Repo notes say removing the custom CLSID key reverts to the newer Windows 11 context menu. | repo-visibility-classic-context, repo-visibility-classic-context-usecase |
 | `value` | `` | Classic context menu workaround active | Repo notes say an empty default value under this CLSID path restores the classic Windows 10 style context menu on Windows 11. | repo-visibility-classic-context, repo-visibility-classic-context-usecase, app-visibility-provider |
 
 **Windows defaults**
@@ -30664,7 +30664,7 @@ Nohuto lineage references:
 | Area | `Audio Engine Flags` |
 | Scope | `device` |
 | Source file | [research/records/audio.disable-spatial-audio.review.json](records/audio.disable-spatial-audio.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -30728,7 +30728,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source that publishes DisableSpatialOnLowLatency as a supported registry control. | repo-provenance-audio-disable-spatial-audio |
+| `unknown` | - | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source that publishes DisableSpatialOnLowLatency as a supported registry control. | repo-provenance-audio-disable-spatial-audio |
 | `value` | `1` | Observed app spatial-audio-off profile | The current app writes 1 here to disable spatial audio on low-latency devices, but the value is tracked only as an observed implementation. | repo-provenance-audio-disable-spatial-audio, app-audio-provider |
 
 **Windows defaults**
@@ -30786,7 +30786,7 @@ Blocking issues:
 | Area | `AppEvents Sound Scheme Entries` |
 | Scope | `user` |
 | Source file | [research/records/audio.disable-system-sounds.review.json](records/audio.disable-system-sounds.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -30851,7 +30851,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source that publishes the AppEvents bundle as a supported registry control for disabling system sounds. | repo-provenance-audio-disable-system-sounds |
+| `unknown` | - | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source that publishes the AppEvents bundle as a supported registry control for disabling system sounds. | repo-provenance-audio-disable-system-sounds |
 | `value` | `` | Observed app silent-scheme profile | The current app writes empty strings to many AppEvents sound mappings so the associated Windows events no longer play sounds. | repo-provenance-audio-disable-system-sounds, app-audio-provider |
 
 **Windows defaults**
@@ -30910,7 +30910,7 @@ Blocking issues:
 | Area | `Windows Terminal Internal Flags` |
 | Scope | `user` |
 | Source file | [research/records/developer.terminal-dev-mode.review.json](records/developer.terminal-dev-mode.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -30974,7 +30974,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Terminal mapping not captured | This research pass did not capture a Windows Terminal source that publishes DeveloperMode as a supported registry setting. | windows-terminal-settings-doc |
+| `unknown` | - | Primary Terminal mapping not captured | This research pass did not capture a Windows Terminal source that publishes DeveloperMode as a supported registry setting. | windows-terminal-settings-doc |
 | `value` | `1` | Observed app profile | The current app writes 1 here to enable an internal developer-mode style flag for Windows Terminal. | app-developer-provider |
 
 #### `terminal-enable-debug-tap`
@@ -30988,7 +30988,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Terminal mapping not captured | This research pass did not capture a Windows Terminal source that publishes EnableDebugTap as a supported registry setting. | windows-terminal-settings-doc |
+| `unknown` | - | Primary Terminal mapping not captured | This research pass did not capture a Windows Terminal source that publishes EnableDebugTap as a supported registry setting. | windows-terminal-settings-doc |
 | `value` | `1` | Observed app profile | The current app writes 1 here to enable an internal debug-tap style flag for Windows Terminal. | app-developer-provider |
 
 **Windows defaults**
@@ -31050,7 +31050,7 @@ Blocking issues:
 | Area | `Visual Studio IntelliSense` |
 | Scope | `user` |
 | Source file | [research/records/developer.vs-intellisense-cache.review.json](records/developer.vs-intellisense-cache.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `True` |
@@ -31112,7 +31112,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Visual Studio mapping not captured | This research pass did not capture a primary Microsoft source that publishes DisableAutoUpdating as a supported Visual Studio registry setting. | vs-performance-doc |
+| `unknown` | - | Primary Visual Studio mapping not captured | This research pass did not capture a primary Microsoft source that publishes DisableAutoUpdating as a supported Visual Studio registry setting. | vs-performance-doc |
 | `value` | `0` | Observed app profile | The current app writes 0 here to keep IntelliSense auto-updating enabled for its current optimization profile. | app-developer-provider |
 
 **Windows defaults**
@@ -31171,7 +31171,7 @@ Blocking issues:
 | Area | `Visual Studio Solution Loading` |
 | Scope | `user` |
 | Source file | [research/records/developer.vs-solution-load.review.json](records/developer.vs-solution-load.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `True` |
@@ -31233,7 +31233,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Visual Studio mapping not captured | This research pass did not capture a primary Microsoft source that publishes BackgroundAnalysis as a supported Visual Studio registry setting. | vs-performance-doc |
+| `unknown` | - | Primary Visual Studio mapping not captured | This research pass did not capture a primary Microsoft source that publishes BackgroundAnalysis as a supported Visual Studio registry setting. | vs-performance-doc |
 | `value` | `0` | Observed app profile | The current app writes 0 here to reduce background solution analysis work in its current optimization profile. | app-developer-provider |
 
 **Windows defaults**
@@ -31292,7 +31292,7 @@ Blocking issues:
 | Area | `VS Code Setting vs Registry Observation` |
 | Scope | `user` |
 | Source file | [research/records/developer.vscode-git-autofetch.json](records/developer.vscode-git-autofetch.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -31355,7 +31355,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | VS Code default autofetch behavior | VS Code uses its normal default behavior when git.autofetch is not explicitly set in settings. | vscode-settings-reference |
+| `missing` | - | VS Code default autofetch behavior | VS Code uses its normal default behavior when git.autofetch is not explicitly set in settings. | vscode-settings-reference |
 | `value` | false | Autofetch disabled | VS Code does not automatically fetch Git changes in the background. | vscode-settings-reference |
 | `value` | true | Autofetch enabled | VS Code automatically fetches Git changes in the background. | vscode-settings-reference |
 
@@ -31371,7 +31371,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | VS Code registry mapping not captured | This research pass did not capture a primary VS Code source that publishes DisableGitAutofetch as the supported control surface. | vscode-settings-reference |
+| `unknown` | - | VS Code registry mapping not captured | This research pass did not capture a primary VS Code source that publishes DisableGitAutofetch as the supported control surface. | vscode-settings-reference |
 | `value` | `1` | Observed app profile | The current app writes 1 here to represent disabled Git autofetch, but that registry value is not validated as the official VS Code control. | app-developer-provider |
 
 **Windows defaults**
@@ -31433,7 +31433,7 @@ Blocking issues:
 | Area | `Widgets` |
 | Scope | `device` |
 | Source file | [research/records/explorer.disable-taskbar-widgets.json](records/explorer.disable-taskbar-widgets.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -31537,7 +31537,7 @@ Blocking issues:
 | Area | `Registry Optimization Bundle` |
 | Scope | `device` |
 | Source file | [research/records/network.optimize-smb.review.json](records/network.optimize-smb.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -31609,7 +31609,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default | Windows uses its baseline SMB client behavior. | ms-smb-client-tuning |
+| `missing` | - | Windows default | Windows uses its baseline SMB client behavior. | ms-smb-client-tuning |
 | `value` | `1` | Disable bandwidth throttling | Microsoft's tuning guidance keeps this at 1 in the documented example. | ms-smb-client-tuning |
 
 #### `smb-fileinfo-cache-lifetime`
@@ -31623,7 +31623,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default | Windows uses the default SMB file info cache lifetime. | ms-smb-client-tuning |
+| `missing` | - | Windows default | Windows uses the default SMB file info cache lifetime. | ms-smb-client-tuning |
 | `value` | `10` | Microsoft example value | Microsoft's tuning example keeps the file info cache lifetime at 10 seconds. | ms-smb-client-tuning |
 | `value` | `30` | Current app value | The app uses 30 seconds, which is not the official example value. | app-network-provider |
 
@@ -31638,7 +31638,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Windows default | Windows uses the default SMB directory cache lifetime. | ms-smb-client-tuning |
+| `missing` | - | Windows default | Windows uses the default SMB directory cache lifetime. | ms-smb-client-tuning |
 | `value` | `5` | Microsoft tuning example | Microsoft's tuning example lowers this to 5 seconds. | ms-smb-client-tuning |
 | `value` | `30` | Current app value | The app uses 30 seconds, which is much higher than the official example. | app-network-provider |
 
@@ -31699,7 +31699,7 @@ Blocking issues:
 | Area | `Sleep Model` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-modern-standby.json](records/power.disable-modern-standby.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -31748,7 +31748,7 @@ Blocking issues:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Unsupported Windows-side switch | The official Microsoft guidance used in this review does not support switching between Modern Standby and S3 through a registry setting. | ms-modern-standby, app-power-provider |
+| `unknown` | - | Unsupported Windows-side switch | The official Microsoft guidance used in this review does not support switching between Modern Standby and S3 through a registry setting. | ms-modern-standby, app-power-provider |
 
 **Windows defaults**
 
@@ -31803,7 +31803,7 @@ Blocking issues:
 | Area | `Mixed Network and MMCSS Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-network-power-saving.review.json](records/power.disable-network-power-saving.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -31902,7 +31902,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary-source mapping not yet confirmed | This review did not find a primary Microsoft source documenting the exact NetworkThrottlingIndex registry value. | app-power-provider, repo-power-doc |
+| `unknown` | - | Primary-source mapping not yet confirmed | This review did not find a primary Microsoft source documenting the exact NetworkThrottlingIndex registry value. | app-power-provider, repo-power-doc |
 
 **Windows defaults**
 
@@ -31961,7 +31961,7 @@ Blocking issues:
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.optimize-performance.review.json](records/power.optimize-performance.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -32034,7 +32034,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary-source mapping not confirmed | The bundle is based on low-level power-manager values, but this review did not find a primary Microsoft registry source that validates the exact preset. | app-power-provider, repo-power-doc |
+| `unknown` | - | Primary-source mapping not confirmed | The bundle is based on low-level power-manager values, but this review did not find a primary Microsoft registry source that validates the exact preset. | app-power-provider, repo-power-doc |
 
 **Windows defaults**
 
@@ -32092,7 +32092,7 @@ Blocking issues:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.deny-app-access.review.json](records/privacy.deny-app-access.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -32214,7 +32214,7 @@ Blocking issues:
 | Area | `Composite` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-application-compatibility.review.json](records/privacy.disable-application-compatibility.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -32334,7 +32334,7 @@ Blocking issues:
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-application-compatibility.policy.review.json](records/privacy.disable-application-compatibility.policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -32436,7 +32436,7 @@ Blocking issues:
 | Area | `Scheduled Task Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-application-compatibility.tasks.review.json](records/privacy.disable-application-compatibility.tasks.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -32549,7 +32549,7 @@ Blocking issues:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-ceip.review.json](records/privacy.disable-ceip.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -32667,7 +32667,7 @@ Blocking issues:
 | Area | `Mixed Registry Configuration` |
 | Scope | `mixed` |
 | Source file | [research/records/privacy.disable-cross-device-experiences.review.json](records/privacy.disable-cross-device-experiences.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -32731,7 +32731,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | The device follows the Windows edition default for continue experiences. | ms-admx-grouppolicy-enablecdp, local-grouppolicy-adml-enablecdp |
+| `missing` | - | Not configured | The device follows the Windows edition default for continue experiences. | ms-admx-grouppolicy-enablecdp, local-grouppolicy-adml-enablecdp |
 | `value` | `0` | Continue experiences blocked | The device is not discoverable by other devices and cannot participate in cross-device experiences. | ms-admx-grouppolicy-enablecdp, local-grouppolicy-admx-enablecdp, local-grouppolicy-adml-enablecdp, app-privacy-provider |
 | `value` | `1` | Continue experiences allowed | The device can participate in cross-device experiences. | ms-admx-grouppolicy-enablecdp, local-grouppolicy-admx-enablecdp, local-grouppolicy-adml-enablecdp |
 
@@ -32810,7 +32810,7 @@ Blocking issues:
 | Area | `File Rename` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-f1-help.review.json](records/privacy.disable-f1-help.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -32928,7 +32928,7 @@ Blocking issues:
 | Area | `Registry Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-inking-typing-personalization.review.json](records/privacy.disable-inking-typing-personalization.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33049,7 +33049,7 @@ Blocking issues:
 | Area | `Composite` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-offline-files.review.json](records/privacy.disable-offline-files.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -33168,7 +33168,7 @@ Blocking issues:
 | Area | `File Rename` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-offline-files.binary.review.json](records/privacy.disable-offline-files.binary.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33280,7 +33280,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-offline-files.services.review.json](records/privacy.disable-offline-files.services.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33394,7 +33394,7 @@ Blocking issues:
 | Area | `Scheduled Task Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-offline-files.tasks.review.json](records/privacy.disable-offline-files.tasks.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33508,7 +33508,7 @@ Blocking issues:
 | Area | `Deprecated Duplicate Audit Trail` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-reserved-storage.review.json](records/privacy.disable-reserved-storage.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -33610,7 +33610,7 @@ Blocking issues:
 | Area | `Event Channel Bundle` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-sleep-study-diagnostics.review.json](records/privacy.disable-sleep-study-diagnostics.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33731,7 +33731,7 @@ Blocking issues:
 | Area | `Observed User Preference Bundle` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-suggestions.review.json](records/privacy.disable-suggestions.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -33851,7 +33851,7 @@ Blocking issues:
 | Area | `Observed ContentDeliveryManager Values vs Named CloudContent Policies` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-suggestions-cdm.review.json](records/privacy.disable-suggestions-cdm.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -33916,7 +33916,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows Spotlight features may still suggest apps and content from third-party publishers. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
+| `missing` | - | Not configured | Windows Spotlight features may still suggest apps and content from third-party publishers. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
 | `value` | `0` | Third-party suggestions allowed | The policy is disabled and Windows is not being told to block third-party suggestions. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
 | `value` | `1` | Third-party suggestions turned off | Windows Spotlight features such as suggested apps in Start will no longer suggest apps and content from third-party publishers. | local-cloudcontent-admx-thirdparty, local-cloudcontent-adml-thirdparty |
 
@@ -33931,7 +33931,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Settings can continue showing Spotlight suggestions. | local-cloudcontent-admx-settings, local-cloudcontent-adml-settings |
+| `missing` | - | Not configured | Settings can continue showing Spotlight suggestions. | local-cloudcontent-admx-settings, local-cloudcontent-adml-settings |
 | `value` | `0` | Settings suggestions allowed | The policy is disabled and Windows is not being told to block Spotlight suggestions in Settings. | local-cloudcontent-admx-settings, local-cloudcontent-adml-settings |
 | `value` | `1` | Settings suggestions turned off | Windows Spotlight suggestions are no longer shown in the Settings app. | local-cloudcontent-admx-settings, local-cloudcontent-adml-settings |
 
@@ -33946,7 +33946,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows Welcome Experience can still run after updates and changes. | local-cloudcontent-admx-welcome, local-cloudcontent-adml-welcome |
+| `missing` | - | Not configured | Windows Welcome Experience can still run after updates and changes. | local-cloudcontent-admx-welcome, local-cloudcontent-adml-welcome |
 | `value` | `0` | Welcome experience allowed | The policy is disabled and Windows is not being told to block the Welcome experience. | local-cloudcontent-admx-welcome, local-cloudcontent-adml-welcome |
 | `value` | `1` | Welcome experience turned off | The Windows Welcome Experience no longer displays when there are updates and changes to Windows and its apps. | local-cloudcontent-admx-welcome, local-cloudcontent-adml-welcome |
 
@@ -33962,7 +33962,7 @@ Nohuto lineage references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | No observed user values | No explicit SubscribedContent values are present in this record. | app-privacy-provider |
+| `missing` | - | No observed user values | No explicit SubscribedContent values are present in this record. | app-privacy-provider |
 | `value` | `0` | Observed app off preference family | The current app writes 0 across several SubscribedContent values, but this record does not yet publish those IDs as official equivalents of the named CloudContent policies. | app-privacy-provider |
 
 **Windows defaults**
@@ -34026,7 +34026,7 @@ Blocking issues:
 | Area | `Observed App Preference Bundle` |
 | Scope | `user` |
 | Source file | [research/records/privacy.disable-wmplayer-telemetry.review.json](records/privacy.disable-wmplayer-telemetry.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -34148,7 +34148,7 @@ Blocking issues:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-vbs.json](records/security.disable-vbs.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -34219,7 +34219,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows does not force the main VBS policy through Group Policy. | local-deviceguard-adml |
+| `missing` | - | Not configured | Windows does not force the main VBS policy through Group Policy. | local-deviceguard-adml |
 | `value` | `0` | VBS disabled | The main Virtualization Based Security policy is disabled. | local-deviceguard-admx, app-security-provider |
 | `value` | `1` | VBS enabled | The main Virtualization Based Security policy is enabled. | local-deviceguard-admx |
 
@@ -34234,7 +34234,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | This sub-setting is not explicitly written by policy. | local-deviceguard-adml |
+| `missing` | - | Not configured | This sub-setting is not explicitly written by policy. | local-deviceguard-adml |
 | `value` | `0` | HVCI disabled | Virtualization Based Protection of Code Integrity is disabled. | local-deviceguard-admx, local-deviceguard-adml, app-security-provider |
 | `value` | `1` | HVCI enabled with UEFI lock | HVCI is enabled with UEFI lock. | local-deviceguard-admx, local-deviceguard-adml |
 | `value` | `2` | HVCI enabled without lock | HVCI is enabled without UEFI lock. | local-deviceguard-admx, local-deviceguard-adml |
@@ -34251,7 +34251,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | This sub-setting is not explicitly written by policy. | local-deviceguard-adml |
+| `missing` | - | Not configured | This sub-setting is not explicitly written by policy. | local-deviceguard-adml |
 | `value` | `0` | Credential Guard disabled | Credential Guard is disabled. | local-deviceguard-admx, local-deviceguard-adml, app-security-provider |
 | `value` | `1` | Credential Guard enabled with UEFI lock | Credential Guard is enabled with UEFI lock. | local-deviceguard-admx, local-deviceguard-adml |
 | `value` | `2` | Credential Guard enabled without lock | Credential Guard is enabled without UEFI lock. | local-deviceguard-admx, local-deviceguard-adml |
@@ -34315,7 +34315,7 @@ Blocking issues:
 | Area | `Registry Policy Bundle` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-windows-update.review.json](records/security.disable-windows-update.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -34385,7 +34385,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Not configured | Windows Update access is not blocked by this specific policy. | local-icm-admx, local-windowsupdate-adml |
+| `missing` | - | Not configured | Windows Update access is not blocked by this specific policy. | local-icm-admx, local-windowsupdate-adml |
 | `value` | `1` | Remove access to Windows Update | Windows Update features and access points are removed by policy. | local-icm-admx, local-windowsupdate-adml, app-security-provider |
 
 #### `no-auto-update`
@@ -34459,7 +34459,7 @@ Blocking issues:
 | Area | `Observed Session Manager Registry Setting` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-wpbt.review.json](records/security.disable-wpbt.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -34530,7 +34530,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Default or unmanaged state | This research pass did not capture a primary Microsoft document that defines the default behavior for this registry value. | repo-security-note, ms-dfci-wpbt |
+| `unknown` | - | Default or unmanaged state | This research pass did not capture a primary Microsoft document that defines the default behavior for this registry value. | repo-security-note, ms-dfci-wpbt |
 | `value` | `1` | Observed app profile | The app writes DisableWpbtExecution = 1 and community hardening references plus raw registry traces describe that as blocking WPBT execution, but this registry mapping is not yet backed by a primary Microsoft source in this dataset. | repo-security-note, app-security-provider, regkit-session-manager-trace |
 
 **Windows defaults**
@@ -34592,7 +34592,7 @@ Blocking issues:
 | Area | `Deprecated Duplicate` |
 | Scope | `mixed` |
 | Source file | [research/records/system.disable-game-dvr.json](records/system.disable-game-dvr.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -34668,7 +34668,7 @@ Blocking issues:
 | Area | `Scheduled Tasks` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-scheduled-tasks.review.json](records/system.disable-scheduled-tasks.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -34744,7 +34744,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
+| `unknown` | - | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
 | `value` | `Disabled` | Task disabled by current app bundle | The current app disables this scheduled task when the bundle is applied. | app-system-provider |
 
 #### `compat-appraiser-task`
@@ -34758,7 +34758,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
+| `unknown` | - | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
 | `value` | `Disabled` | Task disabled by current app bundle | The current app disables this scheduled task when the bundle is applied. | app-system-provider |
 
 #### `consolidator-task`
@@ -34772,7 +34772,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
+| `unknown` | - | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
 | `value` | `Disabled` | Task disabled by current app bundle | The current app disables this scheduled task when the bundle is applied. | app-system-provider |
 
 #### `usbceip-task`
@@ -34786,7 +34786,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
+| `unknown` | - | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
 | `value` | `Disabled` | Task disabled by current app bundle | The current app disables this scheduled task when the bundle is applied. | app-system-provider |
 
 #### `silentcleanup-task`
@@ -34800,7 +34800,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
+| `unknown` | - | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
 | `value` | `Disabled` | Task disabled by current app bundle | The current app disables this scheduled task when the bundle is applied. | app-system-provider |
 
 #### `siuf-dmclient-task`
@@ -34814,7 +34814,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
+| `unknown` | - | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
 | `value` | `Disabled` | Task disabled by current app bundle | The current app disables this scheduled task when the bundle is applied. | app-system-provider |
 
 #### `queue-reporting-task`
@@ -34828,7 +34828,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
+| `unknown` | - | Build-dependent baseline | This review record does not publish a Windows-wide default state for the task bundle. | ms-task-scheduler, vm-task-observation, app-system-provider |
 | `value` | `Disabled` | Task disabled by current app bundle | The current app disables this scheduled task when the bundle is applied. | app-system-provider |
 
 **Windows defaults**
@@ -34890,7 +34890,7 @@ Blocking issues:
 | Area | `Deprecated Duplicate` |
 | Scope | `mixed` |
 | Source file | [research/records/system.disable-search-highlights.json](records/system.disable-search-highlights.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -34966,7 +34966,7 @@ Blocking issues:
 | Area | `svchost Process Model` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-service-splitting.review.json](records/system.disable-service-splitting.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -35035,7 +35035,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Official default threshold not fully captured | Microsoft documents the memory-threshold concept for service splitting, but this dataset does not yet publish a fully validated raw default value for all variants. | ms-svchost-service-refactoring, repo-system-doc-service-splitting |
+| `unknown` | - | Official default threshold not fully captured | Microsoft documents the memory-threshold concept for service splitting, but this dataset does not yet publish a fully validated raw default value for all variants. | ms-svchost-service-refactoring, repo-system-doc-service-splitting |
 | `value` | `4294967295` | Observed app no-splitting profile | The current app uses the maximum DWORD threshold so normal systems will not meet the split condition. | repo-system-doc-service-splitting, app-system-provider |
 
 **Windows defaults**
@@ -35096,7 +35096,7 @@ Blocking issues:
 | Area | `Desktop Window Manager / Overlay Overrides` |
 | Scope | `device` |
 | Source file | [research/records/system.dwm-disable-mpo.review.json](records/system.dwm-disable-mpo.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35167,7 +35167,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Normal DWM baseline | No explicit MPO override is published by this record. | ms-dwm-registry-settings |
+| `missing` | - | Normal DWM baseline | No explicit MPO override is published by this record. | ms-dwm-registry-settings |
 | `value` | `5` | Observed app MPO disable override | The current app treats OverlayTestMode = 5 as an MPO disable setting, but this record has not validated that mapping from a primary Microsoft source. | app-system-registry-provider |
 
 **Windows defaults**
@@ -35226,7 +35226,7 @@ Blocking issues:
 | Area | `Graphics Drivers / Overlay Diagnostics` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-disable-overlays.review.json](records/system.graphics-disable-overlays.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35297,7 +35297,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Normal graphics baseline | No explicit overlay-plane override is published by this record. | ms-tdr-registry-keys |
+| `missing` | - | Normal graphics baseline | No explicit overlay-plane override is published by this record. | ms-tdr-registry-keys |
 | `value` | `1` | Observed app overlay disable override | The current app treats DisableOverlays = 1 as an overlay-plane disable setting, but this record has not validated that mapping from a primary Microsoft source. | app-system-registry-provider |
 
 **Windows defaults**
@@ -35356,7 +35356,7 @@ Blocking issues:
 | Area | `Graphics Drivers / Debug Setting` |
 | Scope | `device` |
 | Source file | [research/records/system.graphics-page-fault-debug-mode.review.json](records/system.graphics-page-fault-debug-mode.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35427,7 +35427,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Official value mapping not captured | This research pass did not capture a primary Microsoft source that publishes supported values for PageFaultDebugMode. | ms-tdr-registry-keys |
+| `unknown` | - | Official value mapping not captured | This research pass did not capture a primary Microsoft source that publishes supported values for PageFaultDebugMode. | ms-tdr-registry-keys |
 | `value` | `1` | Observed app value | The current app treats 1 as the graphics page-fault debug mode baseline, but this record has not validated that meaning from a primary Microsoft source. | app-system-registry-provider |
 
 **Windows defaults**
@@ -35486,7 +35486,7 @@ Blocking issues:
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-adjust-dpc-threshold.review.json](records/system.kernel-adjust-dpc-threshold.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35557,7 +35557,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact AdjustDpcThreshold registry semantics. | ghidra-adjust-dpc-threshold-system-info, repo-system-doc-kernel |
+| `unknown` | - | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact AdjustDpcThreshold registry semantics. | ghidra-adjust-dpc-threshold-system-info, repo-system-doc-kernel |
 | `value` | `20` | Observed app profile | The current app treats 20 as the default threshold, based on repo research rather than a captured primary Microsoft source. | ghidra-adjust-dpc-threshold-system-info, repo-system-doc-kernel, app-system-registry-provider |
 
 **Windows defaults**
@@ -35617,7 +35617,7 @@ Blocking issues:
 | Area | `Kernel / Scheduler Topology` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-cache-aware-scheduling.review.json](records/system.kernel-cache-aware-scheduling.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35688,7 +35688,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact CacheAwareScheduling registry semantics. | nohuto-cache-aware-scheduling-mirror, repo-system-doc-kernel |
+| `unknown` | - | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact CacheAwareScheduling registry semantics. | nohuto-cache-aware-scheduling-mirror, repo-system-doc-kernel |
 | `value` | `47` | Observed app profile | The current app treats 47 as the default cache-aware scheduling profile, based on repo research rather than a captured primary Microsoft source. | nohuto-cache-aware-scheduling-mirror, repo-system-doc-kernel, app-system-registry-provider |
 
 **Windows defaults**
@@ -35748,7 +35748,7 @@ Blocking issues:
 | Area | `Kernel / Heterogeneous Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json](records/system.kernel-default-dynamic-hetero-cpu-policy.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -35819,7 +35819,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft kernel mapping not captured | This research pass did not capture a primary Microsoft source for the exact DefaultDynamicHeteroCpuPolicy registry semantics, but the nohuto mirror documents the same value family and decompiled kernel behavior. | ms-scheduling-policy, repo-system-doc-kernel, nohuto-dynamic-hetero-policy-mirror |
+| `unknown` | - | Primary Microsoft kernel mapping not captured | This research pass did not capture a primary Microsoft source for the exact DefaultDynamicHeteroCpuPolicy registry semantics, but the nohuto mirror documents the same value family and decompiled kernel behavior. | ms-scheduling-policy, repo-system-doc-kernel, nohuto-dynamic-hetero-policy-mirror |
 | `value` | `3` | Observed app profile | The current app treats 3 as the default dynamic hetero CPU policy, with repo notes describing it as a 'Small' preference. Official Microsoft power-policy docs describe 3 as an efficient-processors preference for related scheduling controls, and the nohuto mirror records the same 3 value with the 0..7 family while the kernel pseudocode derives KiDefaultHeteroCpuPolicy from KiDesiredHeteroCpuPolicy. | ms-scheduling-policy, repo-system-doc-kernel, app-system-registry-provider, nohuto-dynamic-hetero-policy-mirror |
 
 **Windows defaults**
@@ -35883,7 +35883,7 @@ Blocking issues:
 | Area | `Kernel / Timer Resolution Behavior` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-disable-low-qos-timer-resolution.review.json](records/system.kernel-disable-low-qos-timer-resolution.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -35954,7 +35954,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact DisableLowQosTimerResolution registry semantics. | ms-timebeginperiod, ms-timer-resolution, repo-system-doc-kernel |
+| `unknown` | - | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact DisableLowQosTimerResolution registry semantics. | ms-timebeginperiod, ms-timer-resolution, repo-system-doc-kernel |
 | `value` | `1` | Observed app profile | The current app treats 1 as the default low-QoS timer-resolution behavior, based on repo research rather than a captured primary Microsoft source. | repo-system-doc-kernel, app-system-registry-provider |
 
 **Windows defaults**
@@ -36016,7 +36016,7 @@ Blocking issues:
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-dpc-queue-depth.review.json](records/system.kernel-dpc-queue-depth.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -36087,7 +36087,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact DpcQueueDepth registry semantics. | repo-system-doc-kernel |
+| `unknown` | - | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact DpcQueueDepth registry semantics. | repo-system-doc-kernel |
 | `value` | `4` | Observed app profile | The current app treats 4 as the default DPC queue depth, based on repo research rather than a captured primary Microsoft source. | repo-system-doc-kernel, app-system-registry-provider |
 
 **Windows defaults**
@@ -36147,7 +36147,7 @@ Blocking issues:
 | Area | `Kernel / DPC Watchdog` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-dpc-watchdog-period.review.json](records/system.kernel-dpc-watchdog-period.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -36218,7 +36218,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft registry mapping not captured | This research pass did not capture a primary Microsoft source for the exact DpcWatchdogPeriod registry semantics. | ms-dpc-watchdog-information, ms-avoid-dpc-watchdog-timeouts, repo-system-doc-kernel |
+| `unknown` | - | Primary Microsoft registry mapping not captured | This research pass did not capture a primary Microsoft source for the exact DpcWatchdogPeriod registry semantics. | ms-dpc-watchdog-information, ms-avoid-dpc-watchdog-timeouts, repo-system-doc-kernel |
 | `value` | `120000` | Observed app profile | The current app treats 120000 as the watchdog-period baseline, based on repo research rather than a captured primary Microsoft registry source. | repo-system-doc-kernel, app-system-registry-provider |
 
 **Windows defaults**
@@ -36281,7 +36281,7 @@ Blocking issues:
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-ideal-dpc-rate.review.json](records/system.kernel-ideal-dpc-rate.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -36352,7 +36352,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact IdealDpcRate registry semantics. | nohuto-ideal-dpc-rate-ghidra, repo-system-doc-kernel |
+| `unknown` | - | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact IdealDpcRate registry semantics. | nohuto-ideal-dpc-rate-ghidra, repo-system-doc-kernel |
 | `value` | `20` | Observed app profile | The current app treats 20 as the default DPC rate target, based on repo research rather than a captured primary Microsoft source. | nohuto-ideal-dpc-rate-ghidra, repo-system-doc-kernel, app-system-registry-provider |
 
 **Windows defaults**
@@ -36412,7 +36412,7 @@ Blocking issues:
 | Area | `Kernel / DPC Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-minimum-dpc-rate.review.json](records/system.kernel-minimum-dpc-rate.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -36483,7 +36483,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact MinimumDpcRate registry semantics. | nohuto-minimum-dpc-rate-ghidra, repo-system-doc-kernel |
+| `unknown` | - | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact MinimumDpcRate registry semantics. | nohuto-minimum-dpc-rate-ghidra, repo-system-doc-kernel |
 | `value` | `3` | Observed app profile | The current app treats 3 as the default minimum DPC rate, based on repo research rather than a captured primary Microsoft source. | nohuto-minimum-dpc-rate-ghidra, repo-system-doc-kernel, app-system-registry-provider |
 
 **Windows defaults**
@@ -36543,7 +36543,7 @@ Blocking issues:
 | Area | `Kernel / Timer Scheduling` |
 | Scope | `device` |
 | Source file | [research/records/system.kernel-serialize-timer-expiration.review.json](records/system.kernel-serialize-timer-expiration.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `low` |
 | Needs VM validation | `False` |
@@ -36614,7 +36614,7 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact SerializeTimerExpiration registry semantics. | repo-system-doc-kernel |
+| `unknown` | - | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source for the exact SerializeTimerExpiration registry semantics. | repo-system-doc-kernel |
 | `value` | `1` | Observed app profile | The current app treats 1 as the documented default/forced-serialization state, based on repo research rather than a captured primary Microsoft source. | repo-system-doc-kernel, app-system-registry-provider |
 
 **Windows defaults**
@@ -36674,7 +36674,7 @@ Blocking issues:
 | Area | `Shutdown and Logoff Timing` |
 | Scope | `mixed` |
 | Source file | [research/records/system.reduce-shutdown-timeouts.review.json](records/system.reduce-shutdown-timeouts.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -36753,7 +36753,7 @@ Blocking issues:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft registry mapping not captured | This research pass did not capture a primary Microsoft document that publishes the exact WaitToKillAppTimeout registry value name on the current user path. | ms-systemparametersinfo-timeouts, repo-system-doc-shutdown |
+| `unknown` | - | Primary Microsoft registry mapping not captured | This research pass did not capture a primary Microsoft document that publishes the exact WaitToKillAppTimeout registry value name on the current user path. | ms-systemparametersinfo-timeouts, repo-system-doc-shutdown |
 | `value` | `2500` | Observed app fast-shutdown app-kill timeout | The current app shortens the app shutdown timeout to 2.5 seconds. | app-system-registry-provider |
 
 #### `auto-end-tasks`
@@ -36768,7 +36768,7 @@ Blocking issues:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `unknown` | — | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source that publishes AutoEndTasks as a supported shutdown control in the current dataset. | app-system-registry-provider |
+| `unknown` | - | Primary Microsoft mapping not captured | This research pass did not capture a primary Microsoft source that publishes AutoEndTasks as a supported shutdown control in the current dataset. | app-system-registry-provider |
 | `value` | `1` | Observed app auto-end setting | The current app turns on automatic ending of tasks during shutdown. | app-system-registry-provider, repo-system-doc-shutdown |
 
 **Windows defaults**
@@ -36826,7 +36826,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-print-device-configuration.json](records/system.services.disable-print-device-configuration.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -36954,7 +36954,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-print-scan-broker.json](records/system.services.disable-print-scan-broker.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `medium` |
 | Needs VM validation | `False` |
@@ -37082,7 +37082,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `user-session` |
 | Source file | [research/records/system.services.disable-print-workflow-user-service.json](records/system.services.disable-print-workflow-user-service.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -37210,7 +37210,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-sysmain.review.json](records/system.services.disable-sysmain.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -37337,7 +37337,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-wap-push-routing.review.json](records/system.services.disable-wap-push-routing.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -37464,7 +37464,7 @@ Blocking issues:
 | Area | `Service Start Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.services.disable-windows-error-reporting.review.json](records/system.services.disable-windows-error-reporting.review.json) |
-| V3.1 evidence root | â€” |
+| V3.1 evidence root | - |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |

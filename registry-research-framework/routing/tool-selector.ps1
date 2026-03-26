@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [string]$RegistryPath
+    [string]$RegistryPath,
+    [string]$TweakId
 )
 
 $router = Join-Path $PSScriptRoot "key-type-router.ps1"
@@ -27,10 +28,28 @@ switch ($route.suspected_layer) {
     }
 }
 
+$runtimeRunnerJson = $null
+$behaviorRunnerJson = $null
+if ($TweakId) {
+    $resolver = Join-Path (Split-Path -Parent (Split-Path -Parent $router)) "tools\_resolve-tweak-runner.ps1"
+    $runtimeRunnerJson = & $resolver -Lane runtime -TweakId $TweakId
+    $behaviorRunnerJson = & $resolver -Lane behavior -TweakId $TweakId
+}
+
 [pscustomobject]@{
     registry_path = $RegistryPath
+    tweak_id = $TweakId
     suspected_layer = $route.suspected_layer
     runtime = $runtime
     static = $static
     behavior = $behavior
+    vm_runners = if ($TweakId) {
+        [pscustomobject]@{
+            runtime = if ($runtimeRunnerJson) { $runtimeRunnerJson | ConvertFrom-Json } else { $null }
+            behavior = if ($behaviorRunnerJson) { $behaviorRunnerJson | ConvertFrom-Json } else { $null }
+        }
+    }
+    else {
+        $null
+    }
 } | ConvertTo-Json -Depth 4

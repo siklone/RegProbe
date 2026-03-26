@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -398,6 +399,32 @@ def write_phase_outputs(tweak_id: str, record: dict[str, Any], audit: dict[str, 
     write_text(root / "verdict.md", render_verdict(record, audit, classification, full_evidence.get("artifact_refs") or []))
 
 
+def invoke_phase_tools(tweak_id: str, phase: str) -> None:
+    wrapper_map = {
+        "faz1": ("etw-registry-trace.ps1", "runtime-lane.json"),
+        "faz3": ("wpr-boot-trace.ps1", "behavior-lane.json"),
+    }
+    if phase not in wrapper_map:
+        return
+
+    script_name, output_name = wrapper_map[phase]
+    wrapper_path = REPO_ROOT / "registry-research-framework" / "tools" / script_name
+    output_path = evidence_dir(tweak_id) / output_name
+    command = [
+        "powershell.exe",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        str(wrapper_path),
+        "-OutputFile",
+        str(output_path),
+        "-TweakId",
+        tweak_id,
+    ]
+    subprocess.run(command, cwd=REPO_ROOT, check=True)
+
+
 def load_queue(csv_path: Path) -> list[str]:
     if not csv_path.exists():
         return []
@@ -427,6 +454,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tweak-id")
     parser.add_argument("--queue-only", action="store_true")
     parser.add_argument("--queue-csv", type=Path, default=DEFAULT_QUEUE_PATH)
+    parser.add_argument("--execute-tools", action="store_true")
     return parser.parse_args()
 
 
@@ -447,6 +475,8 @@ def main() -> int:
         record = load_record(tweak_id)
         audit = load_audit_entry(tweak_id)
         write_phase_outputs(tweak_id, record, audit, args.phase)
+        if args.execute_tools:
+            invoke_phase_tools(tweak_id, args.phase)
         print(f"Wrote v3.1 evidence bundle for {tweak_id}")
 
     return 0

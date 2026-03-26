@@ -4,7 +4,8 @@ param(
     [string]$Phase,
     [string]$TweakId,
     [string]$QueueCsv,
-    [switch]$QueueOnly
+    [switch]$QueueOnly,
+    [switch]$ExecuteTools
 )
 
 $python = Get-Command python -ErrorAction SilentlyContinue
@@ -26,6 +27,10 @@ if ($QueueOnly.IsPresent) {
 
 if ($QueueCsv) {
     $args += @("--queue-csv", $QueueCsv)
+}
+
+if ($ExecuteTools.IsPresent) {
+    $args += "--execute-tools"
 }
 
 & $python.Source @args
