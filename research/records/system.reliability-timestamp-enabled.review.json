@@ -4,7 +4,7 @@
   "record_id": "system.reliability-timestamp-enabled",
   "tweak_id": "system.reliability-timestamp-enabled",
   "record_status": "validated",
-  "summary": "Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping, and TimeStampInterval is the companion cadence value capped at 24h.",
+  "summary": "Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, but the exact target values still have no live Procmon hit.",
   "setting": {
     "name": "Reliability Event Timestamping",
     "category": "System",
@@ -13,7 +13,7 @@
     "casual_explanation": "Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine.",
     "why_people_change_it": "People only change it when debugging reliability reporting or comparing how often reliability events are timestamped.",
     "tradeoffs_overview": "Disabling timestamping reduces reliability event detail. Leaving it enabled keeps the cadence available through the companion interval setting.",
-    "professional_notes": "The decompiled OsEventsTimestampInterval path reads HKLM/SOFTWARE/Policies/Microsoft/Windows NT/Reliability/TimeStampEnabled first. If the value is 0, the function returns 0 immediately. If the value is non-zero, the function reads TimeStampInterval and caps it at 86400 seconds. It then falls back to HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Reliability/TimeStampInterval, where the value is interpreted in minutes and multiplied by 60. The repo note in Docs/system/system.md is useful provenance, but the decompiled function is the source of the value semantics. On 2026-03-26, three Procmon trigger attempts on Win25H2Clean (`perfmon /rel`, a bounded WER crash path, and WMI reliability queries) still did not produce live reads for the policy or fallback values inside the capture window, so the record stays one step short of converged VM proof.",
+    "professional_notes": "The decompiled OsEventsTimestampInterval path reads HKLM/SOFTWARE/Policies/Microsoft/Windows NT/Reliability/TimeStampEnabled first. If the value is 0, the function returns 0 immediately. If the value is non-zero, the function reads TimeStampInterval and caps it at 86400 seconds. It then falls back to HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Reliability/TimeStampInterval, where the value is interpreted in minutes and multiplied by 60. The repo note in Docs/system/system.md is useful provenance, but the decompiled function is the source of the value semantics. On 2026-03-26, initial Procmon trigger attempts on Win25H2Clean (`perfmon /rel`, a bounded WER crash path, and WMI reliability queries) still did not produce live reads for the policy or fallback values inside the capture window. Follow-up work the same day narrowed the live path further: our Ghidra export on diagtrack.dll found the TimeStampInterval string, a DiagTrack service-restart Procmon pass showed an adjacent read on HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Reliability/PBR/LastSuccessfulRefreshTime, and bounded WER QueueReporting plus Problem Reports UI passes still did not show direct reads on TimeStampEnabled or TimeStampInterval. The record therefore stays one step short of converged VM proof.",
     "targets": [
       {
         "target_id": "reliability-timestamp-enabled",
@@ -187,11 +187,36 @@
       "strength": "high"
     },
     {
+      "evidence_id": "ghidra-diagtrack-reliability-20260326",
+      "kind": "ghidra-trace",
+      "title": "Our Ghidra decompilation - diagtrack.dll reliability string/xref export",
+      "location": "research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/diagtrack-reliability-ghidra.md",
+      "summary": "Our 25H2 Ghidra export on diagtrack.dll found the TimeStampInterval string and additional Reliability-related strings, which narrows the live stack to DiagTrack even though the target registry read is still not visible in Procmon.",
+      "supports": [
+        "version-scope",
+        "string-reference",
+        "open-question"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "vm-reliability-procmon-attempts-20260326",
       "kind": "vm-test",
       "title": "Win25H2Clean Procmon trigger attempts for Reliability timestamp reads",
       "location": "research/notes/reliability-timestamp-probe-attempts-20260326.md",
       "summary": "Procmon passes around `perfmon /rel`, a bounded WER crash path, and WMI reliability queries all produced captures but did not show reads on the TimeStampEnabled or TimeStampInterval policy/fallback paths during the tested windows.",
+      "supports": [
+        "version-scope",
+        "open-question"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-reliability-follow-up-20260326",
+      "kind": "vm-test",
+      "title": "Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes",
+      "location": "research/notes/reliability-timestamp-follow-up-20260326.md",
+      "summary": "A DiagTrack service-restart Procmon pass showed an adjacent Reliability\\PBR read, and bounded WER QueueReporting plus Problem Reports UI passes still produced no direct reads on TimeStampEnabled or TimeStampInterval.",
       "supports": [
         "version-scope",
         "open-question"
@@ -206,19 +231,20 @@
     "restore_default_supported": true,
     "restore_previous_supported": false,
     "needs_vm_validation": false,
-    "why": "The decompiled function provides the exact read order and value semantics for the gate value, and the repo note gives the surrounding provenance. The setting is documented as research material rather than an app surface.",
+    "why": "The decompiled function provides the exact read order and value semantics for the gate value, and the 25H2 follow-up work narrows the current live stack to DiagTrack and WER-adjacent Reliability paths. The target values still do not have a direct live Procmon hit, so the setting remains research-gated instead of app-ready.",
     "blocking_issues": []
   },
   "open_questions": [
     "Should the companion TimeStampInterval cadence be split into its own record?",
     "Should the app ever let users change the companion interval instead of keeping the 24-hour cap fixed?",
-    "Which live reliability or WER code path on 25H2 still issues the runtime reads seen in the decompiled function?"
+    "Which live reliability or WER code path on 25H2 still issues the runtime reads seen in the decompiled function?",
+    "Is the 25H2 live path limited to adjacent DiagTrack Reliability branches while TimeStampEnabled stays historical or dormant?"
   ],
-  "last_reviewed_utc": "2026-03-24T22:15:00Z",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "Docs/system/assets/timestamp-OsEventsTimestampInterval.c",
     "exact_quote_or_path": "RegOpenKeyExW(HKEY_LOCAL_MACHINE, L\"Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability\", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L\"TimeStampEnabled\", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L\"TimeStampInterval\", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180",
     "key_found_on_page": true,
-    "notes": "The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. The repo note in Docs/system/system.md records the same Reliability path provenance."
+    "notes": "The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll and an adjacent Reliability\\PBR read on DiagTrack restart, but the exact target values still have no live Procmon hit."
   }
 }

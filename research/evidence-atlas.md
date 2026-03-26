@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 219 |
-| Class B | 23 |
+| Class A | 220 |
+| Class B | 22 |
 | Class E | 54 |
 
 ## Category coverage
@@ -6591,13 +6591,13 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Network` |
 | Area | `Registry Security Baseline` |
 | Scope | `device` |
 | Source file | [research/records/network.smb-reject-unencrypted-access.json](records/network.smb-reject-unencrypted-access.json) |
-| Apply allowed | `False` |
-| Confidence | `medium` |
+| Apply allowed | `True` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
 **Summary:** Controls the global SMB server RejectUnencryptedAccess value under LanmanServer. This is a strict hardening step that refuses clients not using SMB encryption, but it can break legacy clients and mixed environments.
@@ -6620,10 +6620,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -6673,7 +6673,7 @@ Windows Internals references:
 
 | Label | Applies to | States |
 | --- | --- | --- |
-| Windows SMB server baseline | Windows SMB server releases that expose the RejectUnencryptedAccess LanmanServer value | server-reject-unencrypted-access: feature-dependent None - The official source documents the control surface, but this record does not claim a single universal default across every Windows SMB server release. |
+| Windows SMB server baseline on supported releases | Windows 8 and later / Windows Server 2012 and later SMB server releases | server-reject-unencrypted-access: missing None - Leave the explicit override absent; Microsoft documents TRUE as the default behavior on supported SMB server releases. |
 
 **Recommended profiles**
 
@@ -6702,12 +6702,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact registry control used by the app for rejecting unencrypted SMB access, even though broader SMB encryption behavior can also be managed through other SMB surfaces. |
+| Why | Microsoft documents the exact registry path, 0/1 behavior, and default TRUE state for supported SMB server releases. The app writes the same documented control surface and the restore story is exact, so this record is app-ready. |
 
 ---
 
@@ -26411,7 +26411,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping, and TimeStampInterval is the companion cadence value capped at 24h.
+**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, but the exact target values still have no live Procmon hit.
 
 **Current implementation**
 
@@ -26515,7 +26515,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | `Current repo docs` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) | `high` | path, value, behavior |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/diagtrack-reliability-ghidra.md](evidence-files/vm-tooling-staging/reliability-follow-up-20260326/diagtrack-reliability-ghidra.md) | `medium` | version-scope, string-reference, open-question |
 | `vm-reliability-procmon-attempts-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) | `medium` | version-scope, open-question |
+| `vm-reliability-follow-up-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) | `medium` | version-scope, open-question |
 
 **Validation proof**
 
@@ -26524,7 +26526,7 @@ Windows Internals references:
 | Source | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
 | Exact quote / path | RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software//Policies//Microsoft//Windows NT//Reliability", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L"TimeStampEnabled", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L"TimeStampInterval", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180 |
 | Key found on page | `True` |
-| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. The repo note in [Docs/system/system.md](../Docs/system/system.md) records the same Reliability path provenance. |
+| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll and an adjacent Reliability/PBR read on DiagTrack restart, but the exact target values still have no live Procmon hit. |
 
 **Decision**
 
@@ -26535,7 +26537,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `False` |
 | Needs VM validation | `False` |
-| Why | The decompiled function provides the exact read order and value semantics for the gate value, and the repo note gives the surrounding provenance. The setting is documented as research material rather than an app surface. |
+| Why | The decompiled function provides the exact read order and value semantics for the gate value, and the 25H2 follow-up work narrows the current live stack to DiagTrack and WER-adjacent Reliability paths. The target values still do not have a direct live Procmon hit, so the setting remains research-gated instead of app-ready. |
 
 ---
 

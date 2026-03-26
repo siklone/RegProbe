@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 219 |
-| Class B | 23 |
+| Class A | 220 |
+| Class B | 22 |
 | Class E | 54 |
 
 ## Record index
@@ -129,7 +129,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.smb-enable-quic` | validated | Class A | `research/records/network.smb-enable-quic.review.json` | `ecfb3f605e6a6f184b9eedd3b409426b8cff0af51d2f9f4361a5d5726a0bb5c0` | `39e0809d102f155fe0740287b15ad4a9dabed2fa233ab886242992cbf3cbb3f3` | 5 |
 | `network.smb-encrypt-data` | validated | Class A | `research/records/network.smb-encrypt-data.json` | `a27a9c2f0837bd54f18ea6a9d8c1c362dbee72f8d07c4e88ed85756cb4a5d390` | `9cb5d0c33770a1de5cf48858ff79886eb02fb56f3dbdbde072dba521ab982e29` | 2 |
 | `network.smb-increase-client-metadata-cache` | validated | Class A | `research/records/network.smb-increase-client-metadata-cache.json` | `5f4f8b64021a261378a3034609096a41d19de0f131e36a000be2a325586610e8` | `9f9c609e7b8a87e5afae50f5f53bfc987abe8d6dd80cf805649cc65ba7299a0d` | 2 |
-| `network.smb-reject-unencrypted-access` | validated | Class B | `research/records/network.smb-reject-unencrypted-access.json` | `78c33f93c448348dd3f522c3c985ca96be3211e72590dea3ad4ba1211146973b` | `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89` | 2 |
+| `network.smb-reject-unencrypted-access` | validated | Class A | `research/records/network.smb-reject-unencrypted-access.json` | `a38c48b390699f845aa0a9aaa79bbd52c52e948be9742d9334cb148b7c4beb52` | `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89` | 2 |
 | `network.smb-require-dialect-3_1_1` | validated | Class A | `research/records/network.smb-require-dialect-3_1_1.review.json` | `d4c2226dd6a0b854e7ff9922df403eeb6521812d346e785b68fbf800335a9005` | `c5060ff9d4d32abf8d42d6cd06d3d63d17a8ab159f34e502c756444fe94b4507` | 5 |
 | `network.smb-require-signing-client` | validated | Class A | `research/records/network.smb-require-signing-client.json` | `6e33cd66219db6c073f33fb4f3a92b087e34ce265216533f44077526b0dfdc28` | `6e88477bd4263722f589f999c03d73982898d92c422511562f190ee909349606` | 3 |
 | `network.smb-require-signing-server` | validated | Class A | `research/records/network.smb-require-signing-server.json` | `d09454ad7704f76e7a3a876566ed64345acc2fc5a81393b1f89d5d64fab7370b` | `aedba91a2fac19d5d3c4feadf919cb1c3b7436a3ccbd794b10efc0bfd8f3f468` | 3 |
@@ -285,7 +285,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | `68b9682efdb74f02caf54ef4853cf0818afbc4d6eb6fd59994e892bb9bab31f7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | `5e265f012e9edd741dc2b9b40796707e7a1417701a7465a5063c8c3084602962` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
 | `system.priority-control` | validated | Class B | `research/records/system.priority-control.review.json` | `05d48e544834acc1dc148578ea26d932977b994a3b54c87853cd19b8d6890b69` | `83a4f957d4f513dfdb91d40ef8188cc08848cd2227da846cd41c77ce5fba3e4c` | 6 |
-| `system.reliability-timestamp-enabled` | validated | Class B | `research/records/system.reliability-timestamp-enabled.review.json` | `554cfc9708ed64132858b43e03fd3dbb12a700b80468d4867feddc7afd7fdd34` | `0f05c8bc823c9745d4104fba322f1ef3e6a2a00db42ccb66a4f16e77c04272e8` | 3 |
+| `system.reliability-timestamp-enabled` | validated | Class B | `research/records/system.reliability-timestamp-enabled.review.json` | `9871a3fcac07f1e016ac39928ae7f3ccaa0f36627b5177f6c57d5e3248c5b696` | `21d322cd4c59adefae690948579f154fbc417a9bc4673757927b30d381146720` | 5 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
 | `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | `73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
@@ -3340,9 +3340,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `network.smb-reject-unencrypted-access`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/network.smb-reject-unencrypted-access.json`
-- Source SHA256: `78c33f93c448348dd3f522c3c985ca96be3211e72590dea3ad4ba1211146973b`
+- Source SHA256: `a38c48b390699f845aa0a9aaa79bbd52c52e948be9742d9334cb148b7c4beb52`
 - Proof SHA256: `ca83702366445fee3eea45e208c7d47cf6c9ed8717d0a2976ab2614a15f8fe89`
 
 **Summary:** Controls the global SMB server RejectUnencryptedAccess value under LanmanServer. This is a strict hardening step that refuses clients not using SMB encryption, but it can break legacy clients and mixed environments.
@@ -7903,10 +7903,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/system.reliability-timestamp-enabled.review.json`
-- Source SHA256: `554cfc9708ed64132858b43e03fd3dbb12a700b80468d4867feddc7afd7fdd34`
-- Proof SHA256: `0f05c8bc823c9745d4104fba322f1ef3e6a2a00db42ccb66a4f16e77c04272e8`
+- Source SHA256: `9871a3fcac07f1e016ac39928ae7f3ccaa0f36627b5177f6c57d5e3248c5b696`
+- Proof SHA256: `21d322cd4c59adefae690948579f154fbc417a9bc4673757927b30d381146720`
 
-**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping, and TimeStampInterval is the companion cadence value capped at 24h.
+**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, but the exact target values still have no live Procmon hit.
 
 **Evidence**
 
@@ -7914,7 +7914,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/diagtrack-reliability-ghidra.md](evidence-files/vm-tooling-staging/reliability-follow-up-20260326/diagtrack-reliability-ghidra.md) |
 | `vm-reliability-procmon-attempts-20260326` | `vm-test` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) |
+| `vm-reliability-follow-up-20260326` | `vm-test` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) |
 
 **Validation proof**
 
@@ -7922,7 +7924,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
 | Exact quote / path | RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software//Policies//Microsoft//Windows NT//Reliability", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L"TimeStampEnabled", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L"TimeStampInterval", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180 |
-| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. The repo note in [Docs/system/system.md](../Docs/system/system.md) records the same Reliability path provenance. |
+| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll and an adjacent Reliability/PBR read on DiagTrack restart, but the exact target values still have no live Procmon hit. |
 
 ---
 

@@ -70,17 +70,17 @@
   },
   "windows_defaults": [
     {
-      "label": "Windows SMB server baseline",
-      "applies_to": "Windows SMB server releases that expose the RejectUnencryptedAccess LanmanServer value",
+      "label": "Windows SMB server baseline on supported releases",
+      "applies_to": "Windows 8 and later / Windows Server 2012 and later SMB server releases",
       "states": [
         {
           "target_id": "server-reject-unencrypted-access",
-          "state_kind": "feature-dependent",
+          "state_kind": "missing",
           "value": null,
-          "rationale": "The official source documents the control surface, but this record does not claim a single universal default across every Windows SMB server release."
+          "rationale": "Leave the explicit override absent; Microsoft documents TRUE as the default behavior on supported SMB server releases."
         }
       ],
-      "notes": "This record validates the control and numeric meaning without flattening all Windows baselines into one number.",
+      "notes": "The explicit registry value can stay absent because Microsoft documents RejectUnencryptedAccess as TRUE by default on supported SMB server releases.",
       "evidence_ids": [
         "ms-smb-security-troubleshooting"
       ]
@@ -180,16 +180,16 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
+    "confidence": "high",
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact registry control used by the app for rejecting unencrypted SMB access, even though broader SMB encryption behavior can also be managed through other SMB surfaces.",
+    "why": "Microsoft documents the exact registry path, 0/1 behavior, and default TRUE state for supported SMB server releases. The app writes the same documented control surface and the restore story is exact, so this record is app-ready.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T01:01:30Z",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/a64e55aa-1152-48e4-8206-edd96444e7f7",
     "exact_quote_or_path": "Windows 8 operating system and later and Windows Server 2012 operating system and later by default, set RejectUnencryptedAccess to TRUE. If the registry value RejectUnencryptedAccess under HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\ is set to zero, RejectUnencryptedAccess is set to FALSE.",
