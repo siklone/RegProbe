@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 232 |
-| Class B | 10 |
+| Class A | 233 |
+| Class B | 9 |
 | Class E | 54 |
 
 ## Category coverage
@@ -9858,12 +9858,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Multimedia Class Scheduler Service` |
 | Scope | `device` |
 | Source file | [research/records/power.optimize-gaming-network.json](records/power.optimize-gaming-network.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -9891,10 +9891,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -10029,12 +10029,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact MMCSS SystemProfile registry path and allowed values, and the Win25H2Clean export now gives a concrete Games-task baseline for this build. That is enough to track the current baseline and the app's custom profile as observed states while keeping the tweak research-gated. |
+| Why | Microsoft documents the exact MMCSS SystemProfile registry path and allowed values, the app writes those same fields, and the Win25H2Clean export gives a concrete Games-task baseline for this build. This is app-ready evidence-wise, but it stays non-default because it applies a custom Games task profile rather than the stock MMCSS baseline. |
 
 ---
 

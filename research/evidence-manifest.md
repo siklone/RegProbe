@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 232 |
-| Class B | 10 |
+| Class A | 233 |
+| Class B | 9 |
 | Class E | 54 |
 
 ## Record index
@@ -154,7 +154,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | `153d378bb0e1503fdea1f72323409fdfae54dc8af01dc5e7fb3bc61b4ebe0791` | `51f2e3092298738a596146b34a8faf5635257cfd5b935ce6423a0a0b7ff2cfb6` | 5 |
 | `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | `769b58bd3f7c23386fad649d59c3f9ff7815ebbcb47e8dcc028bf93549027337` | `75833b1276158886cef355e5448ff181142071a3195dc595ab22bb33f9bd2df0` | 5 |
 | `power.optimize-cpu-boost` | validated | Class A | `research/records/power.optimize-cpu-boost.json` | `f0c4f14a97014e85162c788680a528e2b85c8d3e06ce01a2eb1a2b4957259b7d` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 4 |
-| `power.optimize-gaming-network` | validated | Class B | `research/records/power.optimize-gaming-network.json` | `682ffa0c0c3577877f287793002a0cc6c86fc2806b38efabfafac51707e6d2ad` | `770c08fd157d16d5037aec70f50df6e6f98c7a06018389d6b2aa2173351bba20` | 3 |
+| `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | `a80b9851d86a442c6f8852d3303e0c103714973ee4e1e9f345f03364886bfabd` | `770c08fd157d16d5037aec70f50df6e6f98c7a06018389d6b2aa2173351bba20` | 3 |
 | `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | `7745aca8be89b9579df267d4bcc9d82d398d280e8f6e59dba402eb249c4f6a40` | `180adc4cc66e0cdd82c29dea343476ab0de4c34c071b8683979f4537656e31de` | 4 |
 | `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | `38e8c3d742413f101ab3b82c57ecec367fd281dbe78358a35f353ac704793c16` | `0a059a4bce889239c55a66a6f5b182d46a7f5b7bf4f7f8f9be82fc09938163a6` | 2 |
 | `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | `87b2a2840352733330dcdfde115370ef93d42493de953cb12352601ba983f4d7` | `3827ac232ddaa8ffc8db8f269b1348be8250d89e2a0865a5e898d33cfab3921d` | 4 |
@@ -4066,9 +4066,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.optimize-gaming-network`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/power.optimize-gaming-network.json`
-- Source SHA256: `682ffa0c0c3577877f287793002a0cc6c86fc2806b38efabfafac51707e6d2ad`
+- Source SHA256: `a80b9851d86a442c6f8852d3303e0c103714973ee4e1e9f345f03364886bfabd`
 - Proof SHA256: `770c08fd157d16d5037aec70f50df6e6f98c7a06018389d6b2aa2173351bba20`
 
 **Summary:** Official MMCSS task-profile registry surface for the built-in Games task. The current Win25H2Clean VM now gives a concrete Games-task baseline, and the app's custom profile is narrowed to the exact fields it changes on top of that baseline.

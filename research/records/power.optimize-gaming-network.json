@@ -388,15 +388,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact MMCSS SystemProfile registry path and allowed values, and the Win25H2Clean export now gives a concrete Games-task baseline for this build. That is enough to track the current baseline and the app's custom profile as observed states while keeping the tweak research-gated.",
+    "why": "Microsoft documents the exact MMCSS SystemProfile registry path and allowed values, the app writes those same fields, and the Win25H2Clean export gives a concrete Games-task baseline for this build. This is app-ready evidence-wise, but it stays non-default because it applies a custom Games task profile rather than the stock MMCSS baseline.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T01:19:50Z",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "research/evidence-files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt",
     "exact_quote_or_path": "Affinity=0x0; GPU Priority=0x8; Priority=0x2; Scheduling Category=Medium; SFIO Priority=Normal",
