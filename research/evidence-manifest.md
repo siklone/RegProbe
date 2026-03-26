@@ -251,7 +251,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-background-gp-updates` | validated | Class A | `research/records/system.disable-background-gp-updates.json` | `939462532571dbbd32618d72a35c8be5ea1a96709538420282e1b06efc1d104f` | `d9b2887e86cc3be9878377396d5ef5df25d1b49c8a8d2b17b61223af3753b605` | 4 |
 | `system.disable-clipboard-history` | validated | Class A | `research/records/system.disable-clipboard-history.json` | `13c5d2f3c61f9d29b0a1ea0e45ac398a822c35c6585cfb75695c1e6bba82c9f9` | `e65603715e0aab4997f1ec57d1eb0ec59e40e2bc28e9c5fc5c88714986620923` | 5 |
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | `9ff0033601340e63fe6cdd11cde81056b645efff98abd80fa814f921756639b9` | `87e3b4393968daf49c4ca90f5343ac7b10e8afab12f2f61194e0df491c22083a` | 4 |
-| `system.disable-fullscreen-optimizations` | validated | Class B | `research/records/system.disable-fullscreen-optimizations.review.json` | `3ff8ed288296973452110379b80799eef8c58a0367ae1666d6eed12225d5ddc9` | `0b38f5a9db473691ad21e2594ae5d7db493a12553a1dc0c747cd25b678df5de6` | 6 |
+| `system.disable-fullscreen-optimizations` | validated | Class B | `research/records/system.disable-fullscreen-optimizations.review.json` | `34c80943cd36f795b76424c5a38950b6b0fabd2bab38038e999ef1dd6585facf` | `0b38f5a9db473691ad21e2594ae5d7db493a12553a1dc0c747cd25b678df5de6` | 6 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | `f8cd916eaac32ecb352ba3d860e62ede4fecda6043e902ef109a5baf9cb94f58` | `5024d7c51812e964c73012685ed6aa5d3e93bfc6bc83099344cf253656ef5901` | 4 |
 | `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | `d58d9d4b2516d8c45742f57ed8e81cd05bd5e7881d38a063e0bc85909ce46ca7` | `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b` | 6 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | `239b954f3ed57b91c6849b79112c012e1fc93b98e2997e268cc62e812b6410d0` | `965dda97da26f0f0572e6d5ecd4e7460377b59c02730d78345ee192f6ddbc803` | 3 |
@@ -285,7 +285,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | `68b9682efdb74f02caf54ef4853cf0818afbc4d6eb6fd59994e892bb9bab31f7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | `5e265f012e9edd741dc2b9b40796707e7a1417701a7465a5063c8c3084602962` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
 | `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | `bc4ec8a29daf615b17de5fb9665e60d5f9da339be243aa6929173f4e535542ee` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 7 |
-| `system.reliability-timestamp-enabled` | validated | Class B | `research/records/system.reliability-timestamp-enabled.review.json` | `4645cfd09460b786b92e9f8cc4ac990844234b2ace23150deb20f877bb228397` | `8698fda36064a2b76dc115806663de5c8aa83a0be905c4750413c21a085cfecd` | 5 |
+| `system.reliability-timestamp-enabled` | validated | Class B | `research/records/system.reliability-timestamp-enabled.review.json` | `4645cfd09460b786b92e9f8cc4ac990844234b2ace23150deb20f877bb228397` | `13d1924ef7850aa8bca4e35417cfb2e9e998c4645eaf455f0510643d56f81f8a` | 5 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
 | `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | `73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
@@ -6929,7 +6929,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/system.disable-fullscreen-optimizations.review.json`
-- Source SHA256: `3ff8ed288296973452110379b80799eef8c58a0367ae1666d6eed12225d5ddc9`
+- Source SHA256: `34c80943cd36f795b76424c5a38950b6b0fabd2bab38038e999ef1dd6585facf`
 - Proof SHA256: `0b38f5a9db473691ad21e2594ae5d7db493a12553a1dc0c747cd25b678df5de6`
 
 **Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers the observed 25H2 story: Microsoft documents the feature area, the Win25H2Clean reversible probe confirmed the tuple before restoring the baseline, svchost.exe backed by resourcepolicyserver.dll queried GameDVR_DXGIHonorFSEWindowsCompatible live in Procmon, and our Ghidra export tied the same build back to the GameConfigStore RPC server code path.
@@ -7907,9 +7907,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/system.reliability-timestamp-enabled.review.json`
 - Source SHA256: `4645cfd09460b786b92e9f8cc4ac990844234b2ace23150deb20f877bb228397`
-- Proof SHA256: `8698fda36064a2b76dc115806663de5c8aa83a0be905c4750413c21a085cfecd`
+- Proof SHA256: `13d1924ef7850aa8bca4e35417cfb2e9e998c4645eaf455f0510643d56f81f8a`
 
-**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, and the new address-seeded Ghidra fallback now keeps the unresolved DiagTrack blocks in repo evidence, but the exact target values still have no live Procmon hit.
+**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, and the later hidden structured Procmon pass plus address-seeded Ghidra fallback now keep both the adjacent runtime lead and the unresolved DiagTrack blocks in repo evidence, but the exact target values still have no live Procmon hit.
 
 **Evidence**
 
@@ -7919,7 +7919,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
 | `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/ghidra-matches.md and [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/evidence.json |
 | `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) |
-| `vm-reliability-follow-up-20260326` | `procmon-trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) |
+| `vm-reliability-follow-up-20260326` | `procmon-trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [research/evidence-files/procmon/system.reliability-timestamp-enabled](evidence-files/procmon/system.reliability-timestamp-enabled)/reliability-timestamp-probe.txt and [research/evidence-files/procmon/system.reliability-timestamp-enabled](evidence-files/procmon/system.reliability-timestamp-enabled)/reliability-timestamp-probe.runtime.hits.csv |
 
 **Validation proof**
 
@@ -7927,7 +7927,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
 | Exact quote / path | RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software//Policies//Microsoft//Windows NT//Reliability", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L"TimeStampEnabled", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L"TimeStampInterval", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180 |
-| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured an adjacent Reliability/PBR read on DiagTrack restart, but the exact target values still have no live Procmon hit. |
+| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability/PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass, but the exact target values still have no live Procmon hit. |
 
 ---
 

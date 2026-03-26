@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T18:08:13.332846Z",
+  "generated_utc": "2026-03-26T18:30:09.018208Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
@@ -15210,7 +15210,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 Procmon and Ghidra passes add a current-build svchost.exe read on GameConfigStore plus direct ResourcePolicyServer code-side proof.",
+        "summary": "The older reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 targeted Procmon and canonical Ghidra passes add a current-build svchost.exe read plus direct ResourcePolicyServer code-side proof, and the later automated follow-up no...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -15218,7 +15218,7 @@
             "title": "Validation proof source",
             "url": "research/notes/fullscreen-optimizations-procmon-validation-20260326.md",
             "kind": "validation-proof",
-            "summary": "fullscreen-diag.txt: svchost.exe RegQueryValue HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible Data: 1. resourcepolicysrv-fullscreen-ghidra.md: ResourcePolicyS..."
+            "summary": "fullscreen-diag.txt: svchost.exe RegQueryValue HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible Data: 1. fullscreen-optimizations-probe.txt: ORIGINAL=GameDVR_FS..."
           },
           {
             "title": "Microsoft Support: Optimizations for windowed games in Windows",
@@ -15250,6 +15250,12 @@
             "url": "research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe toggled the GameConfigStore fullscreen-optimization bundle values and restored the original missing state, confirming the current app write set on Win25H2..."
+          },
+          {
+            "title": "Win25H2Clean automated fullscreen follow-up",
+            "url": "research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt and research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json and research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv",
+            "kind": "vm-test",
+            "summary": "A later hidden Settings/Game Bar automation pass restored the current shell-stable snapshot baseline of GameDVR_FSEBehavior missing, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUs..."
           }
         ]
       },

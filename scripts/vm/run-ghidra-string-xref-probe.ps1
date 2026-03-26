@@ -195,6 +195,34 @@ function Invoke-Vmrun {
     return $output.Trim()
 }
 
+function Normalize-TextArtifact {
+    param([string]$Path)
+
+    if (-not (Test-Path $Path)) {
+        return
+    }
+
+    $raw = Get-Content -Path $Path -Raw
+    $raw = $raw -replace "`r`n", "`n"
+    $lines = [System.Collections.Generic.List[string]]::new()
+    foreach ($line in ($raw -split "`n", -1)) {
+        $lines.Add($line.TrimEnd())
+    }
+
+    while ($lines.Count -gt 0 -and [string]::IsNullOrEmpty($lines[$lines.Count - 1])) {
+        $lines.RemoveAt($lines.Count - 1)
+    }
+
+    $normalized = if ($lines.Count -gt 0) {
+        ($lines -join "`n") + "`n"
+    }
+    else {
+        ""
+    }
+
+    [System.IO.File]::WriteAllText($Path, $normalized, [System.Text.UTF8Encoding]::new($false))
+}
+
 function Ensure-VmRunning {
     $running = Invoke-Vmrun -Arguments @('-T', 'ws', 'list')
     if ($running -notmatch [regex]::Escape($VmPath)) {
@@ -285,6 +313,10 @@ $legacyMarkdown = Join-Path $hostRoot ("{0}.md" -f $OutputName)
 if (Test-Path $hostMarkdown) {
     Copy-Item -Path $hostMarkdown -Destination $legacyMarkdown -Force
 }
+
+Normalize-TextArtifact -Path $hostMarkdown
+Normalize-TextArtifact -Path $legacyMarkdown
+Normalize-TextArtifact -Path $hostRunLog
 
 $evidence = if (Test-Path $hostEvidence) {
     Get-Content -Path $hostEvidence -Raw | ConvertFrom-Json
