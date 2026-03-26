@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 216 |
-| Class B | 26 |
+| Class A | 218 |
+| Class B | 24 |
 | Class E | 54 |
 
 ## Category coverage
@@ -8184,7 +8184,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Performance` |
 | Area | `Explorer Taskbar Animation Flags` |
 | Scope | `user` |
@@ -8193,7 +8193,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** A guest-side reversible probe on Win25H2Clean confirmed that HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAnimations = 0 disables taskbar animations and = 1 enables them on this build. The app's current write now matches the observed disabled state.
+**Summary:** A guest-side reversible probe on Win25H2Clean confirmed that HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAnimations = 0 disables taskbar animations and = 1 enables them on this build. Procmon then captured explorer.exe querying the same value with Data:0 and Data:1 in separate reversible passes, and a Ghidra headless pass on Taskbar.dll decompiled a code path that reads TaskbarAnimations from Explorer\Advanced. The app's current write matches the observed disabled state.
 
 **Current implementation**
 
@@ -8213,10 +8213,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter procmon layer before it becomes Class A. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -8259,8 +8259,8 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `value` | `0` | Taskbar animations off | Disables taskbar animations. The current app writes 0 here and the guest probe confirmed that 0 is the off state. | runtime-taskbar-animations-registry-diff, app-performance-provider |
-| `value` | `1` | Taskbar animations on | Enables taskbar animations. The guest probe confirmed that 1 is the on state. | runtime-taskbar-animations-registry-diff |
+| `value` | `0` | Taskbar animations off | Disables taskbar animations. The current app writes 0 here, the reversible guest probe confirmed that 0 is the off state, and Procmon captured explorer.exe reading Data:0 from the same value. | runtime-taskbar-animations-registry-diff, procmon-taskbar-animations-registry-read, app-performance-provider |
+| `value` | `1` | Taskbar animations on | Enables taskbar animations. The guest probe confirmed that 1 is the on state, and Procmon captured explorer.exe reading Data:1 from the same value. | runtime-taskbar-animations-registry-diff, procmon-taskbar-animations-registry-read |
 
 **Windows defaults**
 
@@ -8279,6 +8279,8 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | [research/evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt](evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt) | `high` | value, behavior, version-scope |
+| `procmon-taskbar-animations-registry-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [research/notes/taskbar-animations-procmon-validation-20260326.md](notes/taskbar-animations-procmon-validation-20260326.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [research/evidence-files/vm-tooling-staging/ghidra-probes/taskbar-taskbaranimations-ghidra-20260326-040246/taskbar-taskbaranimations-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/taskbar-taskbaranimations-ghidra-20260326-040246/taskbar-taskbaranimations-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo source note for performance.disable-taskbar-animations | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 
@@ -8286,10 +8288,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt](evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt) |
-| Exact quote / path | taskbar_animations_probe_out.txt: BASELINE=0. AFTER_0=0. AFTER_1=1. RESTORED=0. |
+| Source | [research/notes/taskbar-animations-procmon-validation-20260326.md](notes/taskbar-animations-procmon-validation-20260326.md) |
+| Exact quote / path | taskbaranimations-state-0.txt: explorer.exe RegQueryValue .../TaskbarAnimations Data: 0. taskbaranimations-state-1.txt: explorer.exe RegQueryValue .../TaskbarAnimations Data: 1. taskbar-taskbaranimations-ghidra.md: Taskbar.dll reads Explorer//Advanced//TaskbarAnimations through Ordinal_123(..., L/"TaskbarAnimations/", 1). |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean confirmed the 0 / 1 registry mapping and restored the machine back to the baseline 0 state. |
+| Notes | The reversible probe confirmed the 0 / 1 mapping, Procmon showed explorer.exe reading both states on Win25H2Clean, and a Ghidra pass on Taskbar.dll exposed a code-side read of TaskbarAnimations from Explorer/Advanced. |
 
 **Decision**
 
@@ -8300,7 +8302,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The guest-side reversible probe on Win25H2Clean confirmed the 0 / 1 mapping for TaskbarAnimations, and the current app write matches the observed disabled state. |
+| Why | The guest-side reversible probe on Win25H2Clean confirmed the 0 / 1 mapping for TaskbarAnimations, Procmon captured explorer.exe reading both states from the same value, Taskbar.dll decompiled to a direct TaskbarAnimations read under Explorer\Advanced, and the current app write matches the observed disabled state with a clean restore story. |
 
 ---
 
@@ -23006,12 +23008,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Explorer Overlay` |
 | Scope | `device` |
 | Source file | [research/records/system.disable-shortcut-arrow.json](records/system.disable-shortcut-arrow.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -23035,10 +23037,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -23117,12 +23119,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft guidance shows creating `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons`, adding string value `29`, and setting it to `%windir%\System32\shell32.dll,-50` for the no-arrow shortcut overlay. The app writes that exact Shell Icons override. Incident reviewed: the VM shell dropped briefly during the probe and then recovered, so this record keeps a shell-risk note even though the mapping itself is clear. |
+| Why | Microsoft guidance shows creating `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons`, adding string value `29`, and setting it to `%windir%\System32\shell32.dll,-50` for the no-arrow shortcut overlay. The app writes that exact Shell Icons override. Incident reviewed: the VM shell dropped briefly during the probe and then recovered, so validation for this family should stay snapshot-first, but the mapping itself is clear enough for the live app surface. |
 
 ---
 

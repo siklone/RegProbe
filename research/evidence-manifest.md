@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 216 |
-| Class B | 26 |
+| Class A | 218 |
+| Class B | 24 |
 | Class E | 54 |
 
 ## Record index
@@ -141,7 +141,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `notifications.disable-toast` | validated | Class A | `research/records/notifications.disable-toast.json` | `aa58bf400363c201347b21292c6b9b4bcf65a483b56939ad4e50cfb030308663` | `bf5d84180a8ee72ad2650aab6e00683445129581369a387f63a05a711febfc63` | 4 |
 | `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | `7e861636879eed351198250f2c87dcdbece9ea420ac8c61e004542f197513b46` | `925d1dcf69842bd24fee55e46e9a47a3e2de5425f7aad6a3b931a96ee7605ed1` | 4 |
 | `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | `0c5a68f4b8d64388a3f5f87ecdcc76ac49684976f7244533c4d0c6c5113f01ab` | `519ad973fe6d93b28f13aa963e55f2b90d5488036bf1d55239c1fac591267d32` | 3 |
-| `performance.disable-taskbar-animations` | validated | Class B | `research/records/performance.disable-taskbar-animations.review.json` | `4f129b6da3c6704360a7c29b1c46f4176dde2b1b8c38c6e515febd5ab3939682` | `6ea854055287f3ddd83cef75bd026efcb32c3d11a1aaaa6a761822cf8edcfb07` | 3 |
+| `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | `e0ce75ece507cf288780041e6ddd8a0052d1e9ec8906c3b9d3a11e075eae70bf` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 5 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | `6128b811623173d369438b3ef4efb32ab42425a2325114fac938f72fab218418` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | `9d38a05cd041c6277d42ee906031a56935c9dd551ac5467a3f072f1c0b423a03` | `b9d22b4223ac1b91392945589e59d5c9badd4dd11b62c686b8801a5db80e843b` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | `58405f55aaa3332d62d1fce7f0c881e7aa2038d37f71381b61abfcdfa7233bc2` | `9f3308d21bd277544f1cba2c59a776a2ee7cf4baa9630d1a20ec0742da11503c` | 4 |
@@ -258,7 +258,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | `cbdf1bfbf8eba80ddd3269fbb3e012281a6336af9220996cb14eb7c31a670904` | `261d9d5d4c180b8f9aea9c9c1d1ee43ccceaee48dc097c14db55c6dae6fe6135` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | `0c5846e343d2009c49d0ee95532155c1c2e54d82ae7aa3716401da0d1ac4867e` | `5e65afa708e18b12b9f829486b8856146c46e9db755aad34ad4e7da317d7cc57` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | `2bde9a9fa7dcd2b74b669e0619815aabea909daa148b0482fe2804443d625e28` | `baf2b84cb20a5549d900fa1d19d0dcea1c89f2e17274d119644e9f60692e09e7` | 3 |
-| `system.disable-shortcut-arrow` | validated | Class B | `research/records/system.disable-shortcut-arrow.json` | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
+| `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
 | `system.disable-startup-delay` | validated | Class B | `research/records/system.disable-startup-delay.review.json` | `ed7051dc71944abb8f00301bb44726e51c1f5b02407832fe8f59b0c270c990f5` | `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | `2928a84edc36491332349b1b6f3ea46781b5b06f291ea7e9637518f6eea6c988` | `f6fcec491570654c4ac024edf32ddda8b69c3f20699942c9b3a9c523e6a086ed` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | `7c41be2a3c5ab8c65bb8eddc66af5960dc0b652b387699ac1b5c3393bfd7771a` | `64b00ec7502121f9ba0cf1f178f7eee681d0e2a3cad116938aec15e83189bef0` | 4 |
@@ -3683,18 +3683,20 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `performance.disable-taskbar-animations`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/performance.disable-taskbar-animations.review.json`
-- Source SHA256: `4f129b6da3c6704360a7c29b1c46f4176dde2b1b8c38c6e515febd5ab3939682`
-- Proof SHA256: `6ea854055287f3ddd83cef75bd026efcb32c3d11a1aaaa6a761822cf8edcfb07`
+- Source SHA256: `e0ce75ece507cf288780041e6ddd8a0052d1e9ec8906c3b9d3a11e075eae70bf`
+- Proof SHA256: `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358`
 
-**Summary:** A guest-side reversible probe on Win25H2Clean confirmed that HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations = 0 disables taskbar animations and = 1 enables them on this build. The app's current write now matches the observed disabled state.
+**Summary:** A guest-side reversible probe on Win25H2Clean confirmed that HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations = 0 disables taskbar animations and = 1 enables them on this build. Procmon then captured explorer.exe querying the same value with Data:0 and Data:1 in separate reversible passes, and a Ghidra headless pass on Taskbar.dll decompiled a code path that reads TaskbarAnimations from Explorer\\Advanced. The app's current write matches the observed disabled state.
 
 **Evidence**
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | Guest reversible probe - TaskbarAnimations registry mapping | [research/evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt](evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt) |
+| `procmon-taskbar-animations-registry-read` | `procmon-trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [research/notes/taskbar-animations-procmon-validation-20260326.md](notes/taskbar-animations-procmon-validation-20260326.md) |
+| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [research/evidence-files/vm-tooling-staging/ghidra-probes/taskbar-taskbaranimations-ghidra-20260326-040246/taskbar-taskbaranimations-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/taskbar-taskbaranimations-ghidra-20260326-040246/taskbar-taskbaranimations-ghidra.md) |
 | `app-performance-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | Repo source note for performance.disable-taskbar-animations | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
@@ -3702,9 +3704,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt](evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt) |
-| Exact quote / path | taskbar_animations_probe_out.txt: BASELINE=0. AFTER_0=0. AFTER_1=1. RESTORED=0. |
-| Notes | Guest-side reversible probe on Win25H2Clean confirmed the 0 / 1 registry mapping and restored the machine back to the baseline 0 state. |
+| Source | [research/notes/taskbar-animations-procmon-validation-20260326.md](notes/taskbar-animations-procmon-validation-20260326.md) |
+| Exact quote / path | taskbaranimations-state-0.txt: explorer.exe RegQueryValue .../TaskbarAnimations Data: 0. taskbaranimations-state-1.txt: explorer.exe RegQueryValue .../TaskbarAnimations Data: 1. taskbar-taskbaranimations-ghidra.md: Taskbar.dll reads Explorer//Advanced//TaskbarAnimations through Ordinal_123(..., L/"TaskbarAnimations/", 1). |
+| Notes | The reversible probe confirmed the 0 / 1 mapping, Procmon showed explorer.exe reading both states on Win25H2Clean, and a Ghidra pass on Taskbar.dll exposed a code-side read of TaskbarAnimations from Explorer/Advanced. |
 
 ---
 
@@ -7125,7 +7127,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.disable-shortcut-arrow`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/system.disable-shortcut-arrow.json`
 - Source SHA256: `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd`
 - Proof SHA256: `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc`
