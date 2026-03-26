@@ -1,17 +1,12 @@
 # Evidence
 
-This folder is the v3.1 machine evidence store.
+This is the canonical evidence root.
 
-Each audited record gets its own folder:
+- `files/`
+  normalized repo-tracked artifacts such as Procmon exports, Ghidra markdown, imported text captures, and placeholders
+- `records/`
+  v3.1 per-record machine bundles such as `metadata.json`, `runtime.json`, `static.json`, `behavior.json`, `classification.json`, `timeline.json`, `verdict.md`, `full-evidence.json`, and `re-audit.json`
 
-- `metadata.json`
-- `runtime.json`
-- `static.json`
-- `behavior.json`
-- `classification.json`
-- `timeline.json`
-- `verdict.md`
-- `full-evidence.json`
-- `re-audit.json` when the record comes from the retroactive audit queue
+`research/` stays generated and human-facing. It links into this tree but does not own the canonical files.
 
 Large raw artifacts stay out of git and must be referenced through `artifact_refs.release_url`.

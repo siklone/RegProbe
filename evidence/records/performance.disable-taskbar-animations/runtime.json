@@ -1,0 +1,36 @@
+{
+  "$schema": "registry-evidence-v3.1/runtime-evidence",
+  "runtime": {
+    "etw": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": false,
+      "trace_file": null
+    },
+    "procmon": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "trace_file": "evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv"
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "Not yet executed under v3.1.",
+      "result_valid": null
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "source_evidence_ids": [
+    "runtime-taskbar-animations-registry-diff",
+    "procmon-taskbar-animations-registry-read"
+  ]
+}

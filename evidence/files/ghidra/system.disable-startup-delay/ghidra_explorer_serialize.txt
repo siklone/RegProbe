@@ -1,0 +1,776 @@
+INFO  Using log config file: jar:file:/C:/Tools/Ghidra/ghidra_12.0.4_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\application.log (LoggingInitialization)  
+INFO  Loading user preferences: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1351 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (3657 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 58 extension points (18 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\8051\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\BSim\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\PDB\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    \\vmware-host\Shared Folders\vm-tooling-staging
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Jython\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\FileFormats\ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: C:\Tools\GhidraProjects\WindowsOptimizer\analysis (HeadlessAnalyzer)  
+INFO  Creating project: C:\Tools\GhidraProjects\WindowsOptimizer\analysis (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: C:\Tools\GhidraProjects\WindowsOptimizer\analysis (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///C:/Windows/explorer.exe (HeadlessAnalyzer)  
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)  
+INFO  Using Language/Compiler: x86:LE:64:default:windows (ProgramLoader)  
+INFO  Using Library Search Path: [., C:\Windows\SysWOW64, C:\Tools\Java\jdk-21.0.10+7\bin, C:\Windows\Sun\Java\bin, C:\Windows\system32, C:\Windows, C:\Windows\System32\Wbem, C:\Windows\System32\WindowsPowerShell\v1.0\, C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\, C:\Tools\Scripts, C:\Tools\Sysinternals, C:\Program Files\dotnet\, <user-profile>\AppData\Local\Microsoft\WindowsApps] (ProgramLoader)  
+INFO  TLS callbacks at 1401cc290 (TLSDirectory)  
+INFO  TLS callbacks at 18006cf88 (TLSDirectory)  
+INFO  TLS callbacks at 18007bc48 (TLSDirectory)  
+INFO  TLS callbacks at 1802ac498 (TLSDirectory)  
+INFO  TLS callbacks at 1800a6080 (TLSDirectory)  
+INFO  TLS callbacks at 1800c3990 (TLSDirectory)  
+INFO  TLS callbacks at 18011be08 (TLSDirectory)  
+INFO  TLS callbacks at 1800d6788 (TLSDirectory)  
+INFO  TLS callbacks at 180057dd8 (TLSDirectory)  
+INFO  TLS callbacks at 18008e3d8 (TLSDirectory)  
+WARN  Invalid or missing function at 1800a2220 (ExportDataDirectory)  
+WARN  Invalid or missing function at 18006bde4 (ExportDataDirectory)  
+INFO  TLS callbacks at 1800e3908 (TLSDirectory)  
+INFO  TLS callbacks at 1800ad9c8 (TLSDirectory)  
+WARN  Invalid or missing function at 1800c13d8 (ExportDataDirectory)  
+INFO  TLS callbacks at 1800cb420 (TLSDirectory)  
+WARN  Invalid or missing function at 1800eb8f0 (ExportDataDirectory)  
+INFO  TLS callbacks at 1800b1000 (TLSDirectory)  
+WARN  Invalid or missing function at 1800d556c (ExportDataDirectory)  
+INFO  TLS callbacks at 1805f6200 (TLSDirectory)  
+WARN  Invalid or missing function at 1806d2fb8 (ExportDataDirectory)  
+INFO  TLS callbacks at 18002f6b0 (TLSDirectory)  
+WARN  Invalid or missing function at 1800bd4a8 (ExportDataDirectory)  
+WARN  Invalid or missing function at 18001fad8 (ExportDataDirectory)  
+INFO  TLS callbacks at 180088a50 (TLSDirectory)  
+INFO  TLS callbacks at 180225298 (TLSDirectory)  
+INFO  TLS callbacks at 18001d9e8 (TLSDirectory)  
+INFO  TLS callbacks at 18001cb18 (TLSDirectory)  
+INFO  Additional info:
+There were too many messages to display.
+440 messages have been truncated.
+
+Loading file:///C:/Windows/explorer.exe?MD5=acf9c0a69bc0b369f97a2466a80cb140...
+------------------------------------------------
+
+Searching 12 paths for library AEPIC.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/aepic.dll
+Loading file:///C:/Windows/System32/aepic.dll?MD5=049bd3fe13ad2a5014308b3697da1ffa...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\aepic.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-APPMODEL-RUNTIME-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-APPMODEL-RUNTIME-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-APPMODEL-STATE-L1-2-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-APIQUERY-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-ATOMS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-BIPLMAPI-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-BIPLMAPI-L1-1-4.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-BIPTCLTAPI-L1-1-7.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-COM-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-COM-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-COM-PRIVATE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-COMMANDLINETOARGV-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-DEBUG-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-debug-l1-1-0.dll?MD5=226a5983ae2cbbf0c1bda85d65948abc...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-debug-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-DELAYLOAD-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-DELAYLOAD-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-ERRORHANDLING-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-errorhandling-l1-1-0.dll?MD5=c2f8c03ecce9941492bfbe4b82f7d2d5...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-errorhandling-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-ERRORHANDLING-L1-1-2.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-FILE-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-file-l1-1-0.dll?MD5=9f45a47ebfd9d0629f4935764243dd5a...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-file-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-FILE-L1-2-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-file-l1-2-0.dll?MD5=cc228ff8d86b608e73026b1e9960b2f8...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-file-l1-2-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-FILE-L2-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-file-l2-1-0.dll?MD5=e368a236f5676a3da44e76870cd691c9...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-file-l2-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-FILE-L2-1-2.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-HANDLE-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-handle-l1-1-0.dll?MD5=416aa8314222db6cbb3760856be13d46...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-handle-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-HEAP-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-heap-l1-1-0.dll?MD5=344a09b4be069f86356a89482c156647...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-heap-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-HEAP-L2-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-HEAP-OBSOLETE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-INTERLOCKED-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-interlocked-l1-1-0.dll?MD5=86023497fa48ca2c7705d3f90b76ebc5...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-interlocked-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-IO-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-JOB-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-JOB-L2-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-KERNEL32-LEGACY-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-KERNEL32-LEGACY-L1-1-1.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-kernel32-legacy-l1-1-1.dll?MD5=0c1cc0a54d4b38885e1b250b40a34a84...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-kernel32-legacy-l1-1-1.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-KERNEL32-LEGACY-L1-1-2.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-KERNEL32-PRIVATE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-LARGEINTEGER-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-LIBRARYLOADER-L1-2-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-localization-l1-2-0.dll?MD5=5241df2e95e31e73ccfd6357ad309df0...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-localization-l1-2-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-LOCALIZATION-L1-2-3.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-LOCALIZATION-OBSOLETE-L1-2-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-MEMORY-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-memory-l1-1-0.dll?MD5=8d285430e8bda6d5c9b683579adcb180...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-memory-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-PATH-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-PROCESSENVIRONMENT-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-processenvironment-l1-1-0.dll?MD5=7fd4a71085783ccfe9c289c07bcf9b04...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-processenvironment-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-PROCESSTHREADS-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-processthreads-l1-1-0.dll?MD5=c123f2c161884fbff4f00ef1e1391266...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-processthreads-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-PROCESSTHREADS-L1-1-1.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-processthreads-l1-1-1.dll?MD5=385f562bdc391ccd4f81aca3719f3236...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-processthreads-l1-1-1.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-PROCESSTHREADS-L1-1-3.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-PROFILE-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-profile-l1-1-0.dll?MD5=7a629293eeb0bca5f9bdee8ade477c54...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-profile-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-PSAPI-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-REGISTRY-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-REGISTRY-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-REGISTRY-L2-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-REGISTRYUSERSPECIFIC-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-SHLWAPI-LEGACY-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-SHLWAPI-OBSOLETE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-SIDEBYSIDE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-STRING-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-string-l1-1-0.dll?MD5=28005b20fbef6e1db10912d0fdd6471c...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-string-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-STRING-L2-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-STRING-L2-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-STRING-OBSOLETE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-SYNCH-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-synch-l1-1-0.dll?MD5=436ea0237ed040513ec887046418faaa...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-synch-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-SYNCH-L1-2-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-synch-l1-2-0.dll?MD5=8f107a7bc018227b181a0e7e76e9ca39...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-synch-l1-2-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-sysinfo-l1-1-0.dll?MD5=b65bf5ef316880fd8d21e1b34eb5c8a9...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-sysinfo-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-SYSINFO-L1-2-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-sysinfo-l1-2-0.dll?MD5=fc9fc5f308ffc2d2d71814df8e2ae107...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-sysinfo-l1-2-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-SYSINFO-L1-2-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-THREADPOOL-L1-2-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-THREADPOOL-LEGACY-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-TIMEZONE-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-timezone-l1-1-0.dll?MD5=43d8d2fb8801c5bd90d9482ddf3ea356...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-timezone-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-URL-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-VERSION-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-WINDOWSERRORREPORTING-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-WINDOWSERRORREPORTING-L1-1-3.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-WINRT-ERROR-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-WINRT-ERROR-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-WINRT-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CORE-WINRT-STRING-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-crt-private-l1-1-0.dll?MD5=c830c6447e6de3d6a611702c591831e3...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-crt-private-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-crt-runtime-l1-1-0.dll?MD5=bbaa58e9e1abdf7d8c4c69652d29d789...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-crt-runtime-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CRT-STRING-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-crt-string-l1-1-0.dll?MD5=639b1fb35cb61ba633eb1791b750631f...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-crt-string-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-CRT-TIME-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-crt-time-l1-1-0.dll?MD5=fccce207a34c947f01d3f23a7dd09569...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-crt-time-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-EVENTING-CLASSICPROVIDER-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-EVENTING-CONTROLLER-L1-1-0.DLL...
+Loading file:///C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/api-ms-win-eventing-controller-l1-1-0.dll?MD5=1bc926ac970fcc105ea3725e4b4deb31...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-eventing-controller-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-EVENTING-PROVIDER-L1-1-0.DLL...
+Loading file:///C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/api-ms-win-eventing-provider-l1-1-0.dll?MD5=0a842c231c14c522a280e082851a2346...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-eventing-provider-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-GAMING-EXPERIENCE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-NTUSER-RECTANGLE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-NTUSER-SYSPARAMS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-OOBE-NOTIFICATION-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-POWER-BASE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-RO-TYPERESOLUTION-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-RTCORE-NTUSER-CLIPBOARD-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-RTCORE-NTUSER-POWERMANAGEMENT-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-RTCORE-NTUSER-PRIVATE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-RTCORE-NTUSER-SHELL-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-RTCORE-NTUSER-SYNCH-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-RTCORE-NTUSER-WINEVENT-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-RTCORE-NTUSER-WMPOINTER-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SECURITY-BASE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SECURITY-LSALOOKUP-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SECURITY-LSALOOKUP-L1-1-2.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SECURITY-LSALOOKUP-L2-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SECURITY-LSAPOLICY-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SECURITY-PROVIDER-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SECURITY-SDDL-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SERVICE-MANAGEMENT-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SERVICE-MANAGEMENT-L2-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SERVICE-WINSVC-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHCORE-COMHELPERS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHCORE-REGISTRY-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHCORE-REGISTRY-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHCORE-SCALING-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHCORE-SYSINFO-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHCORE-TASKPOOL-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHCORE-THREAD-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHCORE-UNICODEANSI-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHELL-CHANGENOTIFY-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHELL-DATAOBJECT-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHELL-NAMESPACE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHELL-SHDIRECTORY-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-SHLWAPI-WINRT-STORAGE-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-STATESEPARATION-HELPERS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library API-MS-WIN-STORAGE-EXPORTS-INTERNAL-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library APPRESOLVER.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/AppResolver.dll
+Loading file:///C:/Windows/System32/AppResolver.dll?MD5=78dc0aec3aa297ac1e42fdcea424fc75...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\appresolver.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library BCP47LANGS.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/BCP47Langs.dll
+Loading file:///C:/Windows/System32/BCP47Langs.dll?MD5=e110bb8a01a9b02189b44fc61fd5b0d1...
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\bcp47langs.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library CFGMGR32.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/cfgmgr32.dll
+Loading file:///C:/Windows/System32/cfgmgr32.dll?MD5=eea40c742db8699a11edabe3b082c1db...
+[cfgmgr32.dll]: failed to create WEVTResource at 180054110: Failed to resolve data length for WEVTResource
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\cfgmgr32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library COMBASE.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/combase.dll
+Loading file:///C:/Windows/System32/combase.dll?MD5=7eef356f3edaec1d37d50e7e7031e368...
+[combase.dll]: failed to create WEVTResource at 18035a4b0: Failed to resolve data length for WEVTResource
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\combase.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library COREMESSAGING.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/CoreMessaging.dll
+Loading file:///C:/Windows/System32/CoreMessaging.dll?MD5=cf32df7be5242b40fdfbe07768be35c3...
+[CoreMessaging.dll]: failed to create WEVTResource at 180119c18: Failed to resolve data length for WEVTResource
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\coremessaging.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library DMENROLLENGINE.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/dmenrollengine.dll
+Loading file:///C:/Windows/System32/dmenrollengine.dll?MD5=2dabc7194f37de3b8b75e956dec7622e...
+[dmenrollengine.dll]: failed to create WEVTResource at 1800f2b00: Failed to resolve data length for WEVTResource
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\dmenrollengine.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library DSREG.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/dsreg.dll
+Loading file:///C:/Windows/System32/dsreg.dll?MD5=f3c7c9841526ce56a747c1ec773f53df...
+[dsreg.dll]: failed to create WEVTResource at 18014c4c8: Failed to resolve data length for WEVTResource
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\dsreg.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library DUI70.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/dui70.dll
+Loading file:///C:/Windows/System32/dui70.dll?MD5=876536b2ed5546e2dd8be8f668f77920...
+[dui70.dll]: failed to create WEVTResource at 180198880: Failed to resolve data length for WEVTResource
+[dui70.dll]: failed to create TerminatedCString at 180198230: Conflicting data exists at address 1801984f0 to 18019854b
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\dui70.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library DWMAPI.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/dwmapi.dll
+Loading file:///C:/Windows/System32/dwmapi.dll?MD5=c26a732d0c1e96a16b592b71abbac017...
+[dwmapi.dll]: failed to create WEVTResource at 1800259a0: Failed to resolve data length for WEVTResource
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\dwmapi.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library DXGI.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/dxgi.dll
+Loading file:///C:/Windows/System32/dxgi.dll?MD5=74753c4cf874598b3b04e4c01549a0e7...
+[dxgi.dll]: failed to create WEVTResource at 180121b28: Failed to resolve data length for WEVTResource
+Created exports file: <user-profile>\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\dxgi.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 12 paths for library EXT-MS-WIN-BIOMETRICS-WINBIO-CORE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library EXT-MS-WIN-BIOMETRICS-WINBIO-CORE-L1-1-5.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library EXT-MS-WIN-DEVMGMT-POLICY-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 12 paths for library EXT-MS-WIN-DEVMGMT-POLICY-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+ (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///C:/Windows/explorer.exe (HeadlessAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+INFO  Skipping PDB processing: failed to locate PDB file in configured locations (PdbUniversalAnalyzer)  
+INFO  Use a script to set the PDB file location. I.e.,
+    PdbAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb")); or
+    PdbUniversalAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb"));
+Or set the symbol server search configuration using:    PdbPlugin.saveSymbolServerServiceConfig(...);
+ This must be done using a pre-script (prior to analysis). (PdbUniversalAnalyzer)  
+INFO  Packed database cache: <user-profile>\AppData\Local\ghidra\packed-db-cache (PackedDatabaseCache)  
+INFO  hit non-returning function, restarting decompiler switch analyzer later (DecompilerSwitchAnalyzer)  
+INFO  Unprocessed TypeDescriptor: long (TypeDescriptorModel)  
+INFO  Unprocessed TypeDescriptor: long (TypeDescriptorModel)  
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)  
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)  
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              1.125 secs
+    Apply Data Archives                        0.968 secs
+    Call Convention ID                         0.067 secs
+    Call-Fixup Installer                       0.101 secs
+    Create Address Tables                      0.448 secs
+    Create Address Tables - One Time           1.563 secs
+    Create Function                            0.194 secs
+    Data Reference                             0.635 secs
+    Decompiler Switch Analysis                 7.889 secs
+    Decompiler Switch Analysis - One Time    209.649 secs
+    Demangler Microsoft                        0.278 secs
+    Disassemble Entry Points                  15.452 secs
+    Embedded Media                             0.075 secs
+    External Entry References                  0.000 secs
+    Function ID                               13.797 secs
+    Function Start Search                      0.256 secs
+    Non-Returning Functions - Discovered       3.691 secs
+    Non-Returning Functions - Known            0.024 secs
+    PDB Universal                              0.106 secs
+    Reference                                  0.978 secs
+    Scalar Operand References                  3.272 secs
+    Shared Return Calls                        6.445 secs
+    Stack                                     43.067 secs
+    Subroutine References                      0.754 secs
+    Subroutine References - One Time           0.053 secs
+    Windows x86 PE Exception Handling          2.807 secs
+    Windows x86 PE RTTI Analyzer               0.512 secs
+    Windows x86 Thread Environment Block (TEB) Analyzer     0.205 secs
+    WindowsResourceReference                 781.460 secs
+    x86 Constant Reference Analyzer           37.427 secs
+-----------------------------------------------------
+     Total Time   1133 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///C:/Windows/explorer.exe (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: SearchMemoryForStringsRegExArg.java 'Serialize'  (HeadlessAnalyzer)  
+INFO  SCRIPT: \\vmware-host\Shared Folders\vm-tooling-staging\SearchMemoryForStringsRegExArg.java (HeadlessAnalyzer)  
+INFO  SearchMemoryForStringsRegExArg.java> MATCH 14021f77d (GhidraScript)  
+INFO  SearchMemoryForStringsRegExArg.java> MATCH 14021f7a1 (GhidraScript)  
+INFO  SearchMemoryForStringsRegExArg.java> MATCH 140227edb (GhidraScript)  
+INFO  ANALYZING changes made by post scripts: file:///C:/Windows/explorer.exe (HeadlessAnalyzer)  
+INFO  REPORT: Post-analysis succeeded for file: file:///C:/Windows/explorer.exe (HeadlessAnalyzer)  
+INFO  /explorer.exe: file created (codexvm) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /explorer.exe (analysis:/explorer.exe) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

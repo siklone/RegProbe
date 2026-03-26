@@ -11,10 +11,10 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 RESEARCH_ROOT = REPO_ROOT / "research"
 RECORDS_DIR = RESEARCH_ROOT / "records"
 NOTES_DIR = RESEARCH_ROOT / "notes"
-EVIDENCE_ROOT = RESEARCH_ROOT / "evidence-files"
+EVIDENCE_ROOT = REPO_ROOT / "evidence" / "files"
 
 PATH_PATTERN = re.compile(
-    r"(research/evidence-files/[A-Za-z0-9._/\-]+(?:/[A-Za-z0-9._/\-]+)*)"
+    r"((?:research/evidence-files|evidence/files)/[A-Za-z0-9._/\-]+(?:/[A-Za-z0-9._/\-]+)*)"
 )
 
 GHIDRA_KINDS = {"ghidra-headless", "ghidra-trace"}

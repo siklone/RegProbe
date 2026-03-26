@@ -29,10 +29,12 @@ switch ($route.suspected_layer) {
 }
 
 $runtimeRunnerJson = $null
+$procmonRunnerJson = $null
 $behaviorRunnerJson = $null
 if ($TweakId) {
     $resolver = Join-Path (Split-Path -Parent (Split-Path -Parent $router)) "tools\_resolve-tweak-runner.ps1"
     $runtimeRunnerJson = & $resolver -Lane runtime -TweakId $TweakId
+    $procmonRunnerJson = & $resolver -Lane procmon -TweakId $TweakId
     $behaviorRunnerJson = & $resolver -Lane behavior -TweakId $TweakId
 }
 
@@ -46,6 +48,7 @@ if ($TweakId) {
     vm_runners = if ($TweakId) {
         [pscustomobject]@{
             runtime = if ($runtimeRunnerJson) { $runtimeRunnerJson | ConvertFrom-Json } else { $null }
+            procmon = if ($procmonRunnerJson) { $procmonRunnerJson | ConvertFrom-Json } else { $null }
             behavior = if ($behaviorRunnerJson) { $behaviorRunnerJson | ConvertFrom-Json } else { $null }
         }
     }

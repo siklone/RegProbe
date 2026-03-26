@@ -1,0 +1,145 @@
+{
+    "generated_utc":  "2026-03-24T17:10:18.1735333Z",
+    "test_name":  "priority-control",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+    "value_name":  "Win32PrioritySeparation",
+    "baseline_value":  2,
+    "candidate_value":  38,
+    "host_root":  "evidence/files/vm/priority-control-20260324-201011",
+    "guest_root":  "C:\\Tools\\ValidationController\\manual\\priority-control-20260324-201011",
+    "phases":  {
+                   "baseline":  {
+                                    "observed_value":  "2",
+                                    "benchmarks":  [
+                                                       {
+                                                           "label":  "baseline-cpu",
+                                                           "summary_path":  "evidence/files/vm/priority-control-20260324-201011\\baseline-cpu.summary.json",
+                                                           "summary":  {
+                                                                           "generated_utc":  "2026-03-24T17:12:10.6101833Z",
+                                                                           "benchmark_script":  "C:\\Tools\\Scripts\\benchmark-winsat-cpu-wpr.ps1",
+                                                                           "artifact_root":  "C:\\Tools\\ValidationController\\manual\\priority-control-20260324-201011\\baseline-cpu",
+                                                                           "trace_prefix":  "priority-control-2-cpu",
+                                                                           "duration_seconds":  35.28,
+                                                                           "file_count":  3,
+                                                                           "files":  [
+                                                                                         {
+                                                                                             "Name":  "priority-control-2-cpu-20260324-201135.winsat.txt",
+                                                                                             "Length":  35,
+                                                                                             "LastWriteTime":  "\/Date(1774372299106)\/"
+                                                                                         },
+                                                                                         {
+                                                                                             "Name":  "priority-control-2-cpu-20260324-201135.etl.NGENPDB",
+                                                                                             "Length":  null,
+                                                                                             "LastWriteTime":  "\/Date(1774372328225)\/"
+                                                                                         },
+                                                                                         {
+                                                                                             "Name":  "priority-control-2-cpu-20260324-201135.etl",
+                                                                                             "Length":  24117248,
+                                                                                             "LastWriteTime":  "\/Date(1774372330160)\/"
+                                                                                         }
+                                                                                     ]
+                                                                       },
+                                                           "artifact_zip":  "evidence/files/vm/priority-control-20260324-201011\\baseline-cpu.zip"
+                                                       },
+                                                       {
+                                                           "label":  "baseline-mem",
+                                                           "summary_path":  "evidence/files/vm/priority-control-20260324-201011\\baseline-mem.summary.json",
+                                                           "summary":  {
+                                                                           "generated_utc":  "2026-03-24T17:12:49.7455878Z",
+                                                                           "benchmark_script":  "C:\\Tools\\Scripts\\benchmark-winsat-mem-wpr.ps1",
+                                                                           "artifact_root":  "C:\\Tools\\ValidationController\\manual\\priority-control-20260324-201011\\baseline-mem",
+                                                                           "trace_prefix":  "priority-control-2-mem",
+                                                                           "duration_seconds":  25.05,
+                                                                           "file_count":  3,
+                                                                           "files":  [
+                                                                                         {
+                                                                                             "Name":  "priority-control-2-mem-20260324-201224.winsat.txt",
+                                                                                             "Length":  35,
+                                                                                             "LastWriteTime":  "\/Date(1774372347579)\/"
+                                                                                         },
+                                                                                         {
+                                                                                             "Name":  "priority-control-2-mem-20260324-201224.etl.NGENPDB",
+                                                                                             "Length":  null,
+                                                                                             "LastWriteTime":  "\/Date(1774372369097)\/"
+                                                                                         },
+                                                                                         {
+                                                                                             "Name":  "priority-control-2-mem-20260324-201224.etl",
+                                                                                             "Length":  22020096,
+                                                                                             "LastWriteTime":  "\/Date(1774372369158)\/"
+                                                                                         }
+                                                                                     ]
+                                                                       },
+                                                           "artifact_zip":  "evidence/files/vm/priority-control-20260324-201011\\baseline-mem.zip"
+                                                       }
+                                                   ]
+                                },
+                   "candidate":  {
+                                     "observed_value":  "38",
+                                     "benchmarks":  [
+                                                        {
+                                                            "label":  "candidate-cpu",
+                                                            "summary_path":  "evidence/files/vm/priority-control-20260324-201011\\candidate-cpu.summary.json",
+                                                            "summary":  {
+                                                                            "generated_utc":  "2026-03-24T17:14:46.6317858Z",
+                                                                            "benchmark_script":  "C:\\Tools\\Scripts\\benchmark-winsat-cpu-wpr.ps1",
+                                                                            "artifact_root":  "C:\\Tools\\ValidationController\\manual\\priority-control-20260324-201011\\candidate-cpu",
+                                                                            "trace_prefix":  "priority-control-38-cpu",
+                                                                            "duration_seconds":  26.04,
+                                                                            "file_count":  3,
+                                                                            "files":  [
+                                                                                          {
+                                                                                              "Name":  "priority-control-38-cpu-20260324-201420.winsat.txt",
+                                                                                              "Length":  35,
+                                                                                              "LastWriteTime":  "\/Date(1774372463470)\/"
+                                                                                          },
+                                                                                          {
+                                                                                              "Name":  "priority-control-38-cpu-20260324-201420.etl.NGENPDB",
+                                                                                              "Length":  null,
+                                                                                              "LastWriteTime":  "\/Date(1774372485381)\/"
+                                                                                          },
+                                                                                          {
+                                                                                              "Name":  "priority-control-38-cpu-20260324-201420.etl",
+                                                                                              "Length":  23068672,
+                                                                                              "LastWriteTime":  "\/Date(1774372485504)\/"
+                                                                                          }
+                                                                                      ]
+                                                                        },
+                                                            "artifact_zip":  "evidence/files/vm/priority-control-20260324-201011\\candidate-cpu.zip"
+                                                        },
+                                                        {
+                                                            "label":  "candidate-mem",
+                                                            "summary_path":  "evidence/files/vm/priority-control-20260324-201011\\candidate-mem.summary.json",
+                                                            "summary":  {
+                                                                            "generated_utc":  "2026-03-24T17:15:25.2493471Z",
+                                                                            "benchmark_script":  "C:\\Tools\\Scripts\\benchmark-winsat-mem-wpr.ps1",
+                                                                            "artifact_root":  "C:\\Tools\\ValidationController\\manual\\priority-control-20260324-201011\\candidate-mem",
+                                                                            "trace_prefix":  "priority-control-38-mem",
+                                                                            "duration_seconds":  25.11,
+                                                                            "file_count":  3,
+                                                                            "files":  [
+                                                                                          {
+                                                                                              "Name":  "priority-control-38-mem-20260324-201500.winsat.txt",
+                                                                                              "Length":  35,
+                                                                                              "LastWriteTime":  "\/Date(1774372502777)\/"
+                                                                                          },
+                                                                                          {
+                                                                                              "Name":  "priority-control-38-mem-20260324-201500.etl.NGENPDB",
+                                                                                              "Length":  null,
+                                                                                              "LastWriteTime":  "\/Date(1774372524133)\/"
+                                                                                          },
+                                                                                          {
+                                                                                              "Name":  "priority-control-38-mem-20260324-201500.etl",
+                                                                                              "Length":  22020096,
+                                                                                              "LastWriteTime":  "\/Date(1774372524193)\/"
+                                                                                          }
+                                                                                      ]
+                                                                        },
+                                                            "artifact_zip":  "evidence/files/vm/priority-control-20260324-201011\\candidate-mem.zip"
+                                                        }
+                                                    ]
+                                 },
+                   "restore":  {
+                                   "observed_value":  "2"
+                               }
+               }
+}

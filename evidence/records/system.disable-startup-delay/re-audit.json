@@ -1,0 +1,26 @@
+{
+  "$schema": "registry-evidence-v3.1/re-audit",
+  "re_audit": {
+    "is_re_audit": true,
+    "original_class": "A",
+    "original_evidence_tools": [
+      "procmon",
+      "ghidra",
+      "wpr",
+      "reboot"
+    ],
+    "original_cross_layer": true,
+    "original_pipeline_version": "pre-v3.1",
+    "re_audit_date": "2026-03-26T23:12:55.574363Z",
+    "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
+    "re_audit_priority": 2,
+    "new_tools_applied": [],
+    "new_cross_layer": true,
+    "new_class": "A",
+    "class_changed": false,
+    "frida_kernel_guard_applied": false,
+    "dead_flag_four_conditions_met": false,
+    "notes": "Bootstrapped from the current research record and evidence audit. Replace with fresh v3.1 runtime output after re-audit runs.",
+    "new_pipeline_version": "v3.1"
+  }
+}

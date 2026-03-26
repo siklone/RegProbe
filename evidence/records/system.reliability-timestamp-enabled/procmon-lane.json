@@ -1,0 +1,16 @@
+﻿{
+    "tool":  "Procmon",
+    "prefix":  "OpenTraceProcmon",
+    "tweak_id":  "system.reliability-timestamp-enabled",
+    "output_file":  "evidence/records/system.reliability-timestamp-enabled/procmon-lane.json",
+    "status":  "invoked-runner",
+    "runner":  {
+                   "script":  "scripts/vm/run-reliability-timestamp-probe.ps1",
+                   "args":  [
+
+                            ]
+               },
+    "note":  "Invoked the mapped VM Procmon runner for this tweak. Check the runner output root for concrete capture files.",
+    "exit_code":  0,
+    "log_file":  "evidence/records/system.reliability-timestamp-enabled/procmon-lane.log"
+}

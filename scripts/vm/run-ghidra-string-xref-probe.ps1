@@ -220,6 +220,8 @@ function Normalize-TextArtifact {
         ""
     }
 
+    $normalized = [regex]::Replace($normalized, '(?im)(?<![A-Za-z0-9])[A-Z]:\\[^\r\n]+', '<local-path>')
+
     [System.IO.File]::WriteAllText($Path, $normalized, [System.Text.UTF8Encoding]::new($false))
 }
 
@@ -317,6 +319,8 @@ if (Test-Path $hostMarkdown) {
 Normalize-TextArtifact -Path $hostMarkdown
 Normalize-TextArtifact -Path $legacyMarkdown
 Normalize-TextArtifact -Path $hostRunLog
+Normalize-TextArtifact -Path $hostStdout
+Normalize-TextArtifact -Path $hostStderr
 
 $evidence = if (Test-Path $hostEvidence) {
     Get-Content -Path $hostEvidence -Raw | ConvertFrom-Json

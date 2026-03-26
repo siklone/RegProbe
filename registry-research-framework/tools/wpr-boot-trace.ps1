@@ -25,6 +25,21 @@ function Get-RepoDisplayPath {
     return $Path
 }
 
+function Sanitize-RunnerOutput {
+    param([string]$Text)
+
+    if ([string]::IsNullOrWhiteSpace($Text)) {
+        return ""
+    }
+
+    $sanitized = $Text
+    $repo = [System.IO.Path]::GetFullPath($repoRoot)
+    $repoPattern = [regex]::Escape($repo)
+    $sanitized = [regex]::Replace($sanitized, $repoPattern, "")
+    $sanitized = [regex]::Replace($sanitized, '(?im)(?<![A-Za-z0-9])[A-Z]:\\[^\r\n]+', '<local-path>')
+    return $sanitized.Trim()
+}
+
 if ($TweakId) {
     $resolved = & $resolver -Lane behavior -TweakId $TweakId
     if ($resolved) {
@@ -64,7 +79,8 @@ if ($runner) {
     $output = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $runner.script_path @($runner.args) 2>&1 | Out-String
     $payload | Add-Member -NotePropertyName exit_code -NotePropertyValue $LASTEXITCODE
     $payload | Add-Member -NotePropertyName log_file -NotePropertyValue (Get-RepoDisplayPath -Path $logPath)
-    $output | Set-Content -Path $logPath -Encoding utf8
+    $sanitizedOutput = Sanitize-RunnerOutput -Text $output
+    $sanitizedOutput | Set-Content -Path $logPath -Encoding utf8
 }
 
 $payload | ConvertTo-Json -Depth 4 | Set-Content -Path $OutputFile -Encoding utf8

@@ -1,0 +1,181 @@
+{
+  "$schema": "registry-evidence-v3.1/full-evidence",
+  "record_id": "system.disable-jpeg-reduction",
+  "tweak_id": "system.disable-jpeg-reduction",
+  "metadata": {
+    "$schema": "registry-evidence-v3.1/metadata",
+    "tweak_id": "system.disable-jpeg-reduction",
+    "key_path": "HKCU\\Control Panel\\Desktop",
+    "value_name": "JPEGImportQuality",
+    "value_type": "REG_DWORD",
+    "value_data_before": null,
+    "value_data_after": 100,
+    "enrichment": {
+      "hive": "HKCU",
+      "suspected_layer": "user-mode",
+      "boot_phase_relevant": false,
+      "acl_owner": null,
+      "acl_sddl": null,
+      "acl_user_readable": null,
+      "source": "repo_research",
+      "official_doc_exists": false,
+      "reactos_reference": false,
+      "geoff_chappell_reference": false,
+      "pdb_symbol_match": null,
+      "source_repositories": []
+    }
+  },
+  "runtime": {
+    "etw": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": false,
+      "trace_file": null
+    },
+    "procmon": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "trace_file": "evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt and evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv"
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "Not yet executed under v3.1.",
+      "result_valid": null
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "static": {
+    "bingrep": {
+      "executed": false,
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "hit_files": [],
+      "output_file": null
+    },
+    "floss": {
+      "executed": false,
+      "hits": 0,
+      "output_file": null
+    },
+    "capa": {
+      "executed": false,
+      "registry_read_capability": false,
+      "matched_rules": [],
+      "target_binary": null,
+      "output_file": null
+    },
+    "ghidra": {
+      "executed": true,
+      "trigger": "existing_record_evidence",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "string_xref_found": true,
+      "function_name": null,
+      "decompile_snippet": "The decompiled transcode path reads HKCU\\Control Panel\\Desktop\\JPEGImportQuality, falls back to 85 when missing, clamps the number into the 60..100 range, and passes the final value into the JPEG encoder as ImageQuality.",
+      "call_graph_depth": null,
+      "output_file": "Docs/system/assets/jpeg-TranscodeImage.c",
+      "ghidra_no_function_fallback": false
+    }
+  },
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": false,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": null
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
+  },
+  "classification": {
+    "class": "A",
+    "pipeline_version": "v3.1",
+    "reason": "shell32.dll decompiled to the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 in a shell-driven Procmon pass on Win25H2Clean, the reversible VM probe confirmed missing -> 100 -> missing, and the current app writes the same value with a clean restore story. That is enough to treat the current value 100 profile as app-ready even though the setting is not published by Microsoft as a registry contract.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "runtime_procmon",
+      "static_ghidra"
+    ],
+    "layer_count": 2,
+    "frida_kernel_guard_applied": false,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "converged-vm",
+    "next_missing_layer": "none"
+  },
+  "timeline": [
+    {
+      "step": "bootstrap_record_load",
+      "timestamp": "2026-03-26T23:12:55.414888Z"
+    },
+    {
+      "step": "all",
+      "timestamp": "2026-03-26T23:12:55.414888Z"
+    },
+    {
+      "step": "classification",
+      "timestamp": "2026-03-26T23:12:55.414888Z"
+    },
+    {
+      "step": "last_reviewed",
+      "timestamp": "2026-03-26T00:00:00Z"
+    }
+  ],
+  "artifact_refs": [],
+  "research_record": "research/records/system.disable-jpeg-reduction.json",
+  "research_record_fallback": "research/records/system.disable-jpeg-reduction.review.json",
+  "re_audit": {
+    "is_re_audit": true,
+    "original_class": "A",
+    "original_evidence_tools": [
+      "procmon",
+      "ghidra"
+    ],
+    "original_cross_layer": true,
+    "original_pipeline_version": "pre-v3.1",
+    "re_audit_date": "2026-03-26T23:12:55.414888Z",
+    "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
+    "re_audit_priority": 2,
+    "new_tools_applied": [],
+    "new_cross_layer": true,
+    "new_class": "A",
+    "class_changed": false,
+    "frida_kernel_guard_applied": false,
+    "dead_flag_four_conditions_met": false,
+    "notes": "Bootstrapped from the current research record and evidence audit. Replace with fresh v3.1 runtime output after re-audit runs.",
+    "new_pipeline_version": "v3.1"
+  }
+}

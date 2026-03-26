@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('runtime', 'behavior')]
+    [ValidateSet('runtime', 'procmon', 'behavior')]
     [string]$Lane,
     [Parameter(Mandatory = $true)]
     [string]$TweakId

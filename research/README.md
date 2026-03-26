@@ -332,7 +332,7 @@ From schema version `1.1` onward, every new `validated` or `published` record mu
 ```json
 {
   "validation_proof": {
-    "source_url": "httpresearch/evidence-files/missing/artifact.md",
+    "source_url": "evidence/files/missing/artifact.md",
     "exact_quote_or_path": "The exact phrase, setting name, registry path, or control path captured on the source page",
     "key_found_on_page": true
   }

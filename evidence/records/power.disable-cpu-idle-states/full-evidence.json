@@ -1,0 +1,185 @@
+{
+  "$schema": "registry-evidence-v3.1/full-evidence",
+  "record_id": "power.disable-cpu-idle-states",
+  "tweak_id": "power.disable-cpu-idle-states",
+  "metadata": {
+    "$schema": "registry-evidence-v3.1/metadata",
+    "tweak_id": "power.disable-cpu-idle-states",
+    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+    "value_type": "REG_DWORD bundle",
+    "value_data_before": null,
+    "value_data_after": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1",
+    "enrichment": {
+      "hive": "HKLM",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "acl_owner": null,
+      "acl_sddl": null,
+      "acl_user_readable": null,
+      "source": "official_doc",
+      "official_doc_exists": true,
+      "reactos_reference": false,
+      "geoff_chappell_reference": false,
+      "pdb_symbol_match": null,
+      "source_repositories": []
+    }
+  },
+  "runtime": {
+    "etw": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": true,
+      "trace_file": null
+    },
+    "procmon": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "trace_file": null
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: key is treated as kernel, Frida is not valid for this lane.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "static": {
+    "bingrep": {
+      "executed": false,
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "hit_files": [],
+      "output_file": null
+    },
+    "floss": {
+      "executed": false,
+      "hits": 0,
+      "output_file": null
+    },
+    "capa": {
+      "executed": false,
+      "registry_read_capability": false,
+      "matched_rules": [],
+      "target_binary": null,
+      "output_file": null
+    },
+    "ghidra": {
+      "executed": true,
+      "trigger": "existing_record_evidence",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "string_xref_found": true,
+      "function_name": null,
+      "decompile_snippet": "Two current-build ntoskrnl.exe probes looked for the registry names and for the internal pseudocode names tracked in the repo notes. Both came back with no matching strings or xrefs, so this pass did not produce a current-build kernel decompilation lead for the bundle.",
+      "call_graph_depth": null,
+      "output_file": "evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
+      "ghidra_no_function_fallback": false
+    }
+  },
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": false,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": null
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
+  },
+  "classification": {
+    "class": "B",
+    "pipeline_version": "v3.1",
+    "reason": "The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead, and the first rebooted benchmark lane broke shell availability before any workload ran. That keeps the record active and evidence-backed, but it still is not an app-ready supported control surface.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "static_ghidra",
+      "behavior_benchmark",
+      "runtime_reboot",
+      "official_doc"
+    ],
+    "layer_count": 4,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "pending",
+    "next_missing_layer": "decision-gate"
+  },
+  "timeline": [
+    {
+      "step": "bootstrap_record_load",
+      "timestamp": "2026-03-26T23:12:54.709910Z"
+    },
+    {
+      "step": "all",
+      "timestamp": "2026-03-26T23:12:54.709910Z"
+    },
+    {
+      "step": "classification",
+      "timestamp": "2026-03-26T23:12:54.709910Z"
+    },
+    {
+      "step": "last_reviewed",
+      "timestamp": "2026-03-21T10:10:55+03:00"
+    }
+  ],
+  "artifact_refs": [],
+  "research_record": "research/records/power.disable-cpu-idle-states.json",
+  "research_record_fallback": "research/records/power.disable-cpu-idle-states.review.json",
+  "re_audit": {
+    "is_re_audit": true,
+    "original_class": "B",
+    "original_evidence_tools": [
+      "official-doc",
+      "ghidra",
+      "benchmark",
+      "reboot"
+    ],
+    "original_cross_layer": true,
+    "original_pipeline_version": "pre-v3.1",
+    "re_audit_date": "2026-03-26T23:12:54.709910Z",
+    "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
+    "re_audit_priority": 1,
+    "new_tools_applied": [],
+    "new_cross_layer": true,
+    "new_class": "B",
+    "class_changed": false,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_four_conditions_met": false,
+    "notes": "Bootstrapped from the current research record and evidence audit. Replace with fresh v3.1 runtime output after re-audit runs.",
+    "new_pipeline_version": "v3.1"
+  }
+}

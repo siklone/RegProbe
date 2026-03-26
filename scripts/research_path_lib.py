@@ -10,8 +10,9 @@ from typing import Iterable
 REDACTED_USER = "<USER>"
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RESEARCH_ROOT = REPO_ROOT / "research"
-EVIDENCE_FILES_ROOT = RESEARCH_ROOT / "evidence-files"
-V31_EVIDENCE_ROOT = REPO_ROOT / "evidence"
+EVIDENCE_ROOT = REPO_ROOT / "evidence"
+EVIDENCE_FILES_ROOT = EVIDENCE_ROOT / "files"
+V31_EVIDENCE_ROOT = EVIDENCE_ROOT / "records"
 FRAMEWORK_ROOT = REPO_ROOT / "registry-research-framework"
 
 _HOME = Path.home()
@@ -49,7 +50,7 @@ TEXT_IMPORT_SUFFIXES = {
 WINDOWS_PATH_RE = re.compile(r"(?P<path>(?<![A-Za-z0-9])[A-Za-z]:[\\/][^\"\r\n]+?\.[A-Za-z0-9._-]+)")
 REPO_PATH_RE = re.compile(r"(?P<path>(?:Docs|research|evidence|registry-research-framework)[\\/][^\"\r\n;|<>\s]+(?:\.[A-Za-z0-9._-]+)?)")
 BROKEN_WEB_PLACEHOLDER_RE = re.compile(
-    r"(?P<path>(?:httpresearch|research)/evidence-files/missing/(?P<domain>[^/\s]+?\.md)/(?P<tail>[^\s)\"'>]+))",
+    r"(?P<path>(?:httpresearch/evidence-files|research/evidence-files|evidence/files)/missing/(?P<domain>[^/\s]+?\.md)/(?P<tail>[^\s)\"'>]+))",
     re.IGNORECASE,
 )
 URL_RE = re.compile(r"https?://[^\s)\"'>]+")
@@ -129,11 +130,17 @@ def normalize_repo_relative_path(value: str | None) -> str:
         "Docs/tweaks/research/": "research/",
         "Docs/tweaks/_source-mirrors/": "research/_source-mirrors/",
         "Docs/research/": "research/",
+        "research/evidence-files/": "evidence/files/",
     }
     for old, new in replacements.items():
         if normalized.lower().startswith(old.lower()):
             normalized = new + normalized[len(old) :]
             break
+
+    if normalized.lower().startswith("evidence/"):
+        parts = normalized.split("/")
+        if len(parts) >= 2 and parts[1].lower() not in {"files", "records", "readme.md"}:
+            normalized = "evidence/records/" + normalized[len("evidence/") :]
 
     return normalized
 
@@ -328,7 +335,21 @@ def display_reference_label(target: str) -> str:
         return ""
     if is_web_url(target):
         return target
-    return target.replace("\\", "/")
+    normalized = target.replace("\\", "/")
+    prefixes = {
+        "evidence/files/vm-tooling-staging/": "evidence/files/vm/",
+        "evidence/files/host-temp/": "evidence/files/host/",
+        "evidence/files/local-temp/": "evidence/files/local/",
+        "evidence/files/": "evidence/files/",
+        "research/evidence-files/vm-tooling-staging/": "evidence/files/vm/",
+        "research/evidence-files/host-temp/": "evidence/files/host/",
+        "research/evidence-files/local-temp/": "evidence/files/local/",
+        "research/evidence-files/": "evidence/files/",
+    }
+    for old, new in prefixes.items():
+        if normalized.startswith(old):
+            return new + normalized[len(old) :]
+    return normalized
 
 
 def linkify_reference_text(value: str | None, doc_path: Path) -> str:

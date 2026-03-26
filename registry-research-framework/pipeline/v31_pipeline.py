@@ -15,7 +15,7 @@ SCRIPTS_ROOT = REPO_ROOT / "scripts"
 if str(SCRIPTS_ROOT) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_ROOT))
 
-from research_path_lib import V31_EVIDENCE_ROOT  # noqa: E402
+from research_path_lib import V31_EVIDENCE_ROOT, normalize_reference_text  # noqa: E402
 
 RESEARCH_ROOT = REPO_ROOT / "research"
 RECORDS_DIR = RESEARCH_ROOT / "records"
@@ -63,6 +63,15 @@ def load_audit_entry(tweak_id: str) -> dict[str, Any]:
 
 def evidence_dir(tweak_id: str) -> Path:
     return V31_EVIDENCE_ROOT / tweak_id
+
+
+def normalized_location(item: dict[str, Any] | None, title: str) -> str | None:
+    if not item:
+        return None
+    location = str(item.get("location") or "").strip()
+    if not location:
+        return None
+    return normalize_reference_text(location, title=title)
 
 
 def first_target(record: dict[str, Any]) -> dict[str, Any]:
@@ -150,13 +159,13 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
                 "operation": None,
                 "timestamp": None,
                 "boot_phase_included": audit.get("boot_phase_relevant") and bool(audit.get("wpr") or audit.get("reboot_tested")),
-                "trace_file": etw_item.get("location") if etw_item else None,
+                "trace_file": normalized_location(etw_item, "ETW trace"),
             },
             "procmon": {
                 "executed": procmon_item is not None,
                 "events_found": procmon_item is not None,
                 "reading_process": None,
-                "trace_file": procmon_item.get("location") if procmon_item else None,
+                "trace_file": normalized_location(procmon_item, "Procmon trace"),
             },
             "frida": {
                 "executed": False,
@@ -212,7 +221,7 @@ def build_static(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any
                 "function_name": None,
                 "decompile_snippet": ghidra_item.get("summary") if ghidra_item else None,
                 "call_graph_depth": None,
-                "output_file": ghidra_item.get("location") if ghidra_item else None,
+                "output_file": normalized_location(ghidra_item, "Ghidra output"),
                 "ghidra_no_function_fallback": audit.get("ghidra_no_function_fallback"),
             },
         },
@@ -242,12 +251,12 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
                 "boot_time_before_ms": None,
                 "boot_time_after_ms": None,
                 "cpu_delta": None,
-                "trace_file": wpr_item.get("location") if wpr_item else None,
+                "trace_file": normalized_location(wpr_item, "WPR trace"),
             },
             "benchmark": {
                 "executed": bench_item is not None,
                 "summary": bench_item.get("summary") if bench_item else None,
-                "output_file": bench_item.get("location") if bench_item else None,
+                "output_file": normalized_location(bench_item, "Benchmark output"),
             },
             "registry_sideeffects": {
                 "executed": False,
@@ -291,7 +300,7 @@ def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[
         "classification": {
             "class": audit.get("evidence_class"),
             "pipeline_version": "v3.1",
-            "reason": (record.get("decision") or {}).get("why"),
+            "reason": normalize_reference_text((record.get("decision") or {}).get("why"), title="Classification reason"),
             "cross_layer_satisfied": audit.get("cross_layer_satisfied"),
             "layers_used": audit.get("layers_used") or [],
             "layer_count": len(audit.get("layers_used") or []),
@@ -324,6 +333,8 @@ def build_timeline(record: dict[str, Any], audit: dict[str, Any], phase: str) ->
 
 
 def render_verdict(record: dict[str, Any], audit: dict[str, Any], classification: dict[str, Any], artifact_refs: list[dict[str, Any]]) -> str:
+    summary = normalize_reference_text(record.get("summary"), title=str(record.get("tweak_id") or "Summary"))
+    verdict = normalize_reference_text((record.get("decision") or {}).get("why"), title=str(record.get("tweak_id") or "Verdict"))
     lines = [
         f"# {record.get('tweak_id')}",
         "",
@@ -334,11 +345,11 @@ def render_verdict(record: dict[str, Any], audit: dict[str, Any], classification
         f"- Layer set: `{', '.join(audit.get('layers_used') or []) or 'none'}`",
         f"- Tools: `{', '.join(audit.get('tools_used') or []) or 'none'}`",
         "",
-        record.get("summary") or "",
+        summary or "",
         "",
         "## Current verdict",
         "",
-        (record.get("decision") or {}).get("why") or "No decision summary is attached.",
+        verdict or "No decision summary is attached.",
     ]
     if artifact_refs:
         lines.extend(["", "## Artifact refs", ""])
@@ -401,28 +412,33 @@ def write_phase_outputs(tweak_id: str, record: dict[str, Any], audit: dict[str, 
 
 def invoke_phase_tools(tweak_id: str, phase: str) -> None:
     wrapper_map = {
-        "faz1": ("etw-registry-trace.ps1", "runtime-lane.json"),
-        "faz3": ("wpr-boot-trace.ps1", "behavior-lane.json"),
+        "faz1": [
+            ("etw-registry-trace.ps1", "runtime-lane.json"),
+            ("procmon-registry-trace.ps1", "procmon-lane.json"),
+        ],
+        "faz3": [
+            ("wpr-boot-trace.ps1", "behavior-lane.json"),
+        ],
     }
     if phase not in wrapper_map:
         return
 
-    script_name, output_name = wrapper_map[phase]
-    wrapper_path = REPO_ROOT / "registry-research-framework" / "tools" / script_name
-    output_path = evidence_dir(tweak_id) / output_name
-    command = [
-        "powershell.exe",
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        str(wrapper_path),
-        "-OutputFile",
-        str(output_path),
-        "-TweakId",
-        tweak_id,
-    ]
-    subprocess.run(command, cwd=REPO_ROOT, check=True)
+    for script_name, output_name in wrapper_map[phase]:
+        wrapper_path = REPO_ROOT / "registry-research-framework" / "tools" / script_name
+        output_path = evidence_dir(tweak_id) / output_name
+        command = [
+            "powershell.exe",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            str(wrapper_path),
+            "-OutputFile",
+            str(output_path),
+            "-TweakId",
+            tweak_id,
+        ]
+        subprocess.run(command, cwd=REPO_ROOT, check=True)
 
 
 def load_queue(csv_path: Path) -> list[str]:

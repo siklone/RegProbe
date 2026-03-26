@@ -33,14 +33,14 @@ from evidence_class_lib import (
     sanitize_value,
     suspected_layer,
 )
-from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, is_github_release_url
+from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, is_github_release_url, normalize_reference
 
 RECORDS_DIR = RESEARCH_ROOT / "records"
 PROVENANCE_PATH = REPO_ROOT / "Docs" / "tweaks" / "tweak-provenance.json"
 OVERRIDES_PATH = RESEARCH_ROOT / "evidence-class-overrides.json"
 INCIDENTS_PATH = RESEARCH_ROOT / "vm-incidents.json"
 OUTPUT_PATH = RESEARCH_ROOT / "evidence-audit.json"
-GHIDRA_PATH_RE = re.compile(r"research/evidence-files/ghidra/[^\s);,]+")
+GHIDRA_PATH_RE = re.compile(r"(?:research/evidence-files|evidence/files)/ghidra/[^\s);,]+")
 
 
 def load_incident_map(path: Path) -> dict[str, list[dict[str, Any]]]:
@@ -70,7 +70,7 @@ def has_ghidra_no_function_fallback(record: dict[str, Any]) -> bool:
 
         location = str(item.get("location") or "")
         for match in GHIDRA_PATH_RE.findall(location):
-            candidate = REPO_ROOT / match
+            candidate = REPO_ROOT / normalize_reference(match)
             evidence_path = candidate.parent / "evidence.json" if candidate.suffix else candidate / "evidence.json"
             candidate_files.add(evidence_path)
 

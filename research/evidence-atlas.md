@@ -137,7 +137,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-services-registry-tree` | `official-doc` | `Microsoft official doc` | HKLM\SYSTEM\CurrentControlSet\Services Registry Tree | [https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree) | `high` | path, value, allowed-values, version-scope |
-| `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | [research/evidence-files/vm-tooling-staging/beep_start_toggle_out.txt](evidence-files/vm-tooling-staging/beep_start_toggle_out.txt) | `high` | value, behavior, version-scope |
+| `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | [evidence/files/vm/beep_start_toggle_out.txt](../evidence/files/vm-tooling-staging/beep_start_toggle_out.txt) | `high` | value, behavior, version-scope |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-audio-disable-beep` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-beep | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 
@@ -148,7 +148,7 @@ Nohuto lineage references:
 | Source | [https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree) |
 | Exact quote / path | lines 52-58: The `Start` value specifies when the service should be started. `0x4` (Disabled): The service is disabled and will not be loaded. |
 | Key found on page | `True` |
-| Notes | Guest reversible probe at [research/evidence-files/vm-tooling-staging/beep_start_toggle_out.txt](evidence-files/vm-tooling-staging/beep_start_toggle_out.txt) confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. |
+| Notes | Guest reversible probe at [evidence/files/vm/beep_start_toggle_out.txt](../evidence/files/vm-tooling-staging/beep_start_toggle_out.txt) confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. |
 
 **Decision**
 
@@ -173,7 +173,7 @@ Nohuto lineage references:
 | Area | `Sound Control Panel DeviceCpl Flags` |
 | Scope | `user` |
 | Source file | [research/records/audio.show-disconnected-devices.review.json](records/audio.show-disconnected-devices.review.json) |
-| V3.1 evidence root | [evidence/audio.show-disconnected-devices](../evidence/audio.show-disconnected-devices) |
+| V3.1 evidence root | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -257,15 +257,15 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-20260314-pml.md) |
+| Source | [evidence/files/missing/audio-devicecpl-query-20260314-pml.md](../evidence/files/missing/audio-devicecpl-query-20260314-pml.md) |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
@@ -293,7 +293,7 @@ Nohuto lineage references:
 | Area | `Sound Control Panel DeviceCpl Flags` |
 | Scope | `user` |
 | Source file | [research/records/audio.show-hidden-devices.review.json](records/audio.show-hidden-devices.review.json) |
-| V3.1 evidence root | [evidence/audio.show-hidden-devices](../evidence/audio.show-hidden-devices) |
+| V3.1 evidence root | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -377,15 +377,15 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](evidence-files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-20260314-pml.md) |
+| Source | [evidence/files/missing/audio-devicecpl-query-20260314-pml.md](../evidence/files/missing/audio-devicecpl-query-20260314-pml.md) |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
@@ -854,7 +854,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) | `high` | path, value, behavior |
-| `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [research/evidence-files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](evidence-files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [research/evidence-files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](evidence-files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [evidence/files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](../evidence/files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [evidence/files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](../evidence/files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) | `medium` | path, value, behavior, ui-mapping |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -1095,15 +1095,15 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-powershell-executionpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) | `high` | path, value, allowed-values |
-| `local-powershell-executionpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](evidence-files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) | `high` | behavior, side-effects |
+| `local-powershell-executionpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) | `high` | path, value, allowed-values |
+| `local-powershell-executionpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) | `high` | behavior, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) |
 | Exact quote / path | <policy name="EnableScripts" class="Both" ... key="Software/Policies/Microsoft/Windows/PowerShell" valueName="EnableScripts"> <enum id="ExecutionPolicy" valueName="ExecutionPolicy" required="true">; PowerShellExecutionPolicy.adml: "Turn on Script Execution" and "Allow local scripts and remote signed scripts". |
 | Key found on page | `True` |
 | Notes | Local official Microsoft ADMX/ADML files document the PowerShell policy path and the ExecutionPolicy enum, including RemoteSigned. The app writes ExecutionPolicy = RemoteSigned on the documented policy path, so this record is re-validated under schema 1.1. |
@@ -1218,8 +1218,8 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `python-using-windows-doc` | `official-doc` | `Microsoft official doc` | Python documentation: Using Python on Windows | [https://docs.python.org/3/using/windows.html](https://docs.python.org/3/using/windows.html) | `high` | behavior, side-effects |
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) | `high` | path, value, behavior, version-scope |
-| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx](evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml](evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, default, side-effects |
+| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, default, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -1273,7 +1273,7 @@ Current writes
 
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `ssh-agent-run-key` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` | `SSH Agent` | `research/evidence-files/external/c/System32/OpenSSH/ssh-agent.exe.md` | `value` |  |
+| `ssh-agent-run-key` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` | `SSH Agent` | `evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md` | `value` |  |
 
 **Evidence class**
 
@@ -1311,7 +1311,7 @@ Current writes
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | - | Not configured | No ssh-agent autostart entry is present for the current user. | ms-run-registry-keys, openssh-ssh-agent-doc |
-| `value` | `research/evidence-files/external/c/System32/OpenSSH/ssh-agent.exe.md` | SSH Agent autostart enabled | The current user launches ssh-agent at logon by writing the agent executable into the Windows Run key. | ms-run-registry-keys, openssh-ssh-agent-doc, app-developer-provider |
+| `value` | `evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md` | SSH Agent autostart enabled | The current user launches ssh-agent at logon by writing the agent executable into the Windows Run key. | ms-run-registry-keys, openssh-ssh-agent-doc, app-developer-provider |
 
 **Windows defaults**
 
@@ -1442,9 +1442,9 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-enable-device-for-development` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Enable your device for development | [https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode](https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode) | `high` | path, value, behavior |
-| `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.csv](evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.txt](evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.txt) | `medium` | path, behavior, default, ui-mapping |
-| `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) | `high` | behavior, default, side-effects |
+| `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.csv](../evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.txt](../evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.txt) | `medium` | path, behavior, default, ui-mapping |
+| `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) | `high` | behavior, default, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -1676,13 +1676,13 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-alwaysshowicons` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista alwaysShowIcons | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-iconsonly` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for IconsOnly | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-iconsonly-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer IconsOnly runtime surface | [research/evidence-files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](evidence-files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-iconsonly-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer IconsOnly runtime surface | [evidence/files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](../evidence/files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/iconsonly-result.txt](evidence-files/vm-tooling-staging/iconsonly-result.txt) |
+| Source | [evidence/files/vm/iconsonly-result.txt](../evidence/files/vm-tooling-staging/iconsonly-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/IconsOnly ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/IconsOnly ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=1 |
 | Key found on page | `True` |
 | Notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe. |
@@ -1917,15 +1917,15 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-configure-chat-icon` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Experience / ConfigureChatIcon | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#configurechaticon](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#configurechaticon) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-taskbar-admx-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/Taskbar.admx](evidence-files/external/c/Windows/PolicyDefinitions/Taskbar.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-taskbar-adml-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Taskbar.adml](evidence-files/external/c/PolicyDefinitions/en-US/Taskbar.adml) | `high` | behavior, default, side-effects |
+| `local-taskbar-admx-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-taskbar-adml-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | [evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/Taskbar.admx](evidence-files/external/c/Windows/PolicyDefinitions/Taskbar.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx) |
 | Exact quote / path | <policy name="ConfigureChatIcon" class="Machine" ... key="Software/Policies/Microsoft/Windows/Windows Chat"> ... <enum id="ConfigureChatIcon_Action" valueName="ChatIcon" ...> ... <decimal value="1" /> ... <decimal value="2" /> ... <decimal value="3" />; Taskbar.adml: If you enable this policy setting and set it to Hide, the Chat icon will be hidden by default. Users can show or hide it in Settings. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact device-policy key and ChatIcon enum surface; local ADML confirms the Hide behavior. The app now writes the documented machine-policy path with value 2. |
@@ -1953,7 +1953,7 @@ Nohuto lineage references:
 | Area | `Explorer Advanced Flags` |
 | Scope | `user` |
 | Source file | [research/records/explorer.enable-explorer-compact-mode.review.json](records/explorer.enable-explorer-compact-mode.review.json) |
-| V3.1 evidence root | [evidence/explorer.enable-explorer-compact-mode](../evidence/explorer.enable-explorer-compact-mode) |
+| V3.1 evidence root | [evidence/records/explorer.enable-explorer-compact-mode](../evidence/records/explorer.enable-explorer-compact-mode) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -2037,15 +2037,15 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [research/evidence-files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](evidence-files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/explorer-batch-applied-20260314-pml.md](evidence-files/missing/explorer-batch-applied-20260314-pml.md) |
+| Source | [evidence/files/missing/explorer-batch-applied-20260314-pml.md](../evidence/files/missing/explorer-batch-applied-20260314-pml.md) |
 | Exact quote / path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |
@@ -2153,14 +2153,14 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [research/evidence-files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](evidence-files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [evidence/files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](../evidence/files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for HideDrivesWithNoMedia | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/hideemptydrives-result.txt](evidence-files/vm-tooling-staging/hideemptydrives-result.txt) |
+| Source | [evidence/files/vm/hideemptydrives-result.txt](../evidence/files/vm-tooling-staging/hideemptydrives-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideDrivesWithNoMedia ... Data: 1; RESTORED_EXISTS=False |
 | Key found on page | `True` |
 | Notes | The guest-local result file was copied back to the host scratch area during validation. The baseline value was absent and was restored to the absent state after the probe. |
@@ -2274,13 +2274,13 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-separateprocess` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista separateProcess | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-separateprocess` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for SeparateProcess | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-separateprocess-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer SeparateProcess runtime surface | [research/evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-separateprocess-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer SeparateProcess runtime surface | [evidence/files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](../evidence/files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/separateprocess-result.txt](evidence-files/vm-tooling-staging/separateprocess-result.txt) |
+| Source | [evidence/files/vm/separateprocess-result.txt](../evidence/files/vm-tooling-staging/separateprocess-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/SeparateProcess ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/SeparateProcess ... Data: 1; RESTORED_VALUE=0 |
 | Key found on page | `True` |
 | Notes | The result file was copied back to the host workspace during validation. |
@@ -2394,13 +2394,13 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showcompcolor` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showCompColor | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-showcompcolor` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowCompColor | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | [research/evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) | `high` | path, value, behavior, version-scope |
+| `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | [evidence/files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](../evidence/files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/showcompcolor-result-txt.md](evidence-files/missing/showcompcolor-result-txt.md) |
+| Source | [evidence/files/missing/showcompcolor-result-txt.md](../evidence/files/missing/showcompcolor-result-txt.md) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowCompColor ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowCompColor ... Data: 1; RESTORED_VALUE=1 |
 | Key found on page | `True` |
 | Notes | The guest-local result file was also copied to a host scratch location during validation for review. |
@@ -2508,13 +2508,13 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showdriveletter` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showDriveLetter | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-showdrivelettersfirst` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowDriveLettersFirst | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [research/evidence-files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](evidence-files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [evidence/files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](../evidence/files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/showdrivelettersfirst-result.txt](evidence-files/vm-tooling-staging/showdrivelettersfirst-result.txt) |
+| Source | [evidence/files/vm/showdrivelettersfirst-result.txt](../evidence/files/vm-tooling-staging/showdrivelettersfirst-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/ShowDriveLettersFirst ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/ShowDriveLettersFirst ... Data: 1; RESTORED_EXISTS=False |
 | Key found on page | `True` |
 | Notes | The guest-local result file was copied back to the host scratch area during validation. Baseline absence was restored after the probe. |
@@ -2628,14 +2628,14 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for HideFileExt | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, version-scope |
-| `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | [research/evidence-files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](evidence-files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
+| `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | [evidence/files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](../evidence/files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/hidefileext-capture-20260313-csv.md](evidence-files/missing/hidefileext-capture-20260313-csv.md) |
+| Source | [evidence/files/missing/hidefileext-capture-20260313-csv.md](../evidence/files/missing/hidefileext-capture-20260313-csv.md) |
 | Exact quote / path | powershell.exe RegSetValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideFileExt Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideFileExt Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideFileExt Type: REG_DWORD, Length: 4, Data: 0; Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideFileExt Type: REG_DWORD, Length: 4, Data: 0 |
 | Key found on page | `True` |
 | Notes | In the same reversible runtime session, Shell.Application displayed the test file as alpha when HideFileExt = 1 and alpha.txt when HideFileExt = 0. That resolved the live Explorer semantics for this host. |
@@ -2870,14 +2870,14 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-hidden` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for Hidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, version-scope |
-| `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [research/evidence-files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](evidence-files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
+| `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [evidence/files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](../evidence/files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/hidden-capture-20260313-csv.md](evidence-files/missing/hidden-capture-20260313-csv.md) |
+| Source | [evidence/files/missing/hidden-capture-20260313-csv.md](../evidence/files/missing/hidden-capture-20260313-csv.md) |
 | Exact quote / path | powershell.exe RegSetValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/Hidden Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/Hidden Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/Hidden Type: REG_DWORD, Length: 4, Data: 2; Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/Hidden Type: REG_DWORD, Length: 4, Data: 2 |
 | Key found on page | `True` |
 | Notes | In the same reversible runtime session, the Explorer UI listed ghost.txt and visible.txt when Hidden = 1, but only visible.txt when Hidden = 2. That resolved the live Explorer semantics for this host. |
@@ -2991,16 +2991,16 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showinfotip` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showInfoTip | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-showinfotip` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowInfoTip | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showinfotip-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [research/evidence-files/procmon/explorer.show-info-tips/showinfotip-result.txt](evidence-files/procmon/explorer.show-info-tips/showinfotip-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showinfotip-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [evidence/files/procmon/explorer.show-info-tips/showinfotip-result.txt](../evidence/files/procmon/explorer.show-info-tips/showinfotip-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/showinfotip-result.txt](evidence-files/vm-tooling-staging/showinfotip-result.txt) |
+| Source | [evidence/files/vm/showinfotip-result.txt](../evidence/files/vm-tooling-staging/showinfotip-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowInfoTip ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowInfoTip ... Data: 1; RESTORED_VALUE=1 |
 | Key found on page | `True` |
-| Notes | Raw hit exports were also copied to [research/evidence-files/vm-tooling-staging/showinfotip-0-hits.csv](evidence-files/vm-tooling-staging/showinfotip-0-hits.csv) and [research/evidence-files/vm-tooling-staging/showinfotip-1-hits.csv..md](evidence-files/vm-tooling-staging/showinfotip-1-hits.csv..md) |
+| Notes | Raw hit exports were also copied to [evidence/files/vm/showinfotip-0-hits.csv](../evidence/files/vm-tooling-staging/showinfotip-0-hits.csv) and [evidence/files/vm/showinfotip-1-hits.csv..md](../evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md) |
 
 **Decision**
 
@@ -3111,16 +3111,16 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showsuperhidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showSuperHidden | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-showsuperhidden` | `raw-registry-dump` | `unspecified` | 25H2 dump and default hive corroboration for ShowSuperHidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [research/evidence-files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](evidence-files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [evidence/files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](../evidence/files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/showsuperhidden-result.txt](evidence-files/vm-tooling-staging/showsuperhidden-result.txt) |
+| Source | [evidence/files/vm/showsuperhidden-result.txt](../evidence/files/vm-tooling-staging/showsuperhidden-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1 |
 | Key found on page | `True` |
-| Notes | Raw hit exports were also copied to [research/evidence-files/vm-tooling-staging/showsuperhidden-0-hits.csv](evidence-files/vm-tooling-staging/showsuperhidden-0-hits.csv) and [research/evidence-files/vm-tooling-staging/showsuperhidden-1-hits.csv..md](evidence-files/vm-tooling-staging/showsuperhidden-1-hits.csv..md) |
+| Notes | Raw hit exports were also copied to [evidence/files/vm/showsuperhidden-0-hits.csv](../evidence/files/vm-tooling-staging/showsuperhidden-0-hits.csv) and [evidence/files/vm/showsuperhidden-1-hits.csv..md](../evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md) |
 
 **Decision**
 
@@ -3225,14 +3225,14 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer general settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowRecent | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | [research/evidence-files/procmon/explorer.show-recent-items/showrecent-result.txt](evidence-files/procmon/explorer.show-recent-items/showrecent-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | [evidence/files/procmon/explorer.show-recent-items/showrecent-result.txt](../evidence/files/procmon/explorer.show-recent-items/showrecent-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowRecent | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/showrecent-result.txt](evidence-files/vm-tooling-staging/showrecent-result.txt) |
+| Source | [evidence/files/vm/showrecent-result.txt](../evidence/files/vm-tooling-staging/showrecent-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/ShowRecent ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/ShowRecent ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0 |
 | Key found on page | `True` |
 | Notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe. |
@@ -3347,14 +3347,14 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [research/evidence-files/procmon/explorer.show-status-bar/showstatusbar-result.txt](evidence-files/procmon/explorer.show-status-bar/showstatusbar-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [evidence/files/procmon/explorer.show-status-bar/showstatusbar-result.txt](../evidence/files/procmon/explorer.show-status-bar/showstatusbar-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation for ShowStatusBar | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/showstatusbar-result.txt](evidence-files/vm-tooling-staging/showstatusbar-result.txt) |
+| Source | [evidence/files/vm/showstatusbar-result.txt](../evidence/files/vm-tooling-staging/showstatusbar-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowStatusBar ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowStatusBar ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0 |
 | Key found on page | `True` |
 | Notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe. |
@@ -3468,13 +3468,13 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-displayiconthumb` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista displayIconThumb | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-showtypeoverlay` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowTypeOverlay | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showtypeoverlay-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [research/evidence-files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt](evidence-files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showtypeoverlay-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [evidence/files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt](../evidence/files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/showtypeoverlay-result.txt](evidence-files/vm-tooling-staging/showtypeoverlay-result.txt) |
+| Source | [evidence/files/vm/showtypeoverlay-result.txt](../evidence/files/vm-tooling-staging/showtypeoverlay-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowTypeOverlay ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowTypeOverlay ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=1 |
 | Key found on page | `True` |
 | Notes | The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe. |
@@ -3588,14 +3588,14 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | `Microsoft official doc` | Microsoft Windows 11 settings reference for taskbar alignment | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11) | `high` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-taskbaral` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for TaskbarAl | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | [research/evidence-files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md](evidence-files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
+| `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | [evidence/files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md](../evidence/files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/taskbar-alignment-capture-20260313-csv.md](evidence-files/missing/taskbar-alignment-capture-20260313-csv.md) |
+| Source | [evidence/files/missing/taskbar-alignment-capture-20260313-csv.md](../evidence/files/missing/taskbar-alignment-capture-20260313-csv.md) |
 | Exact quote / path | reg.exe RegSetValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAl Type: REG_DWORD Data: 0; Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAl Type: REG_DWORD Data: 0; reg.exe RegSetValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAl Type: REG_DWORD Data: 1; Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAl Type: REG_DWORD Data: 1 |
 | Key found on page | `True` |
 | Notes | The runtime capture proves the actual Explorer persistence surface used on this host. The documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was not observed in this trace. |
@@ -3715,8 +3715,8 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-ncsi-icm-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for NCSI active probing | [research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx](evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
-| `ms-ncsi-icm-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for NCSI active probing policy | [research/evidence-files/external/c/PolicyDefinitions/en-US/ICM.adml](evidence-files/external/c/PolicyDefinitions/en-US/ICM.adml) | `high` | behavior, risk, default |
+| `ms-ncsi-icm-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for NCSI active probing | [evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
+| `ms-ncsi-icm-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for NCSI active probing policy | [evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml) | `high` | behavior, risk, default |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value, path |
 | `nohuto-ncsi-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - NCSI NoActiveProbe registry evidence | [research/_source-mirrors/win-config/network/desc.md](_source-mirrors/win-config/network/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, behavior |
 
@@ -3724,7 +3724,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx](evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx) |
 | Exact quote / path | <policy name="NoActiveProbe" class="Machine" ... key="Software/Policies/Microsoft/Windows/NetworkConnectivityStatusIndicator" valueName="NoActiveProbe">; ICM.adml: This policy setting turns off the active tests performed by the Windows Network Connectivity Status Indicator (NCSI) to determine whether your computer is connected to the Internet or to a more limited network. |
 | Key found on page | `True` |
 | Notes | Local official ADMX and ADML files document the exact NoActiveProbe policy surface. The app now matches that documented machine-policy surface exactly. The local nohuto mirror independently corroborates the same policy name, value name, and registry path. |
@@ -4113,7 +4113,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient) | `high` | path, behavior, default, ui-mapping |
-| `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
+| `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-llmnr` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -4255,10 +4255,10 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-lltd-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Mapper I/O | [research/evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) | `high` | path, value, allowed-values |
-| `ms-lltd-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Mapper I/O policy | [research/evidence-files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](evidence-files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) | `high` | behavior, default |
-| `ms-lltd-responder-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Responder | [research/evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) | `high` | path, value, allowed-values |
-| `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | [research/evidence-files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](evidence-files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) | `high` | behavior, default |
+| `ms-lltd-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Mapper I/O | [evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) | `high` | path, value, allowed-values |
+| `ms-lltd-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Mapper I/O policy | [evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) | `high` | behavior, default |
+| `ms-lltd-responder-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Responder | [evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) | `high` | path, value, allowed-values |
+| `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | [evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) | `high` | behavior, default |
 | `ms-admx-linklayertopologydiscovery-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_LinkLayerTopologyDiscovery | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery) | `high` | path, behavior, version-scope |
 | `ms-lltd-disconnect-kb` | `official-doc` | `Microsoft official doc` | Microsoft Learn KB: network disconnection after configuring the LLTDIO and RSPNDR group policy objects | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/network-disconnection-after-configuring-lltdio-rspndr-gpos](https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/network-disconnection-after-configuring-lltdio-rspndr-gpos) | `medium` | side-effects, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
@@ -4385,15 +4385,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-dnsclient-mdns-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for mDNS | [research/evidence-files/external/c/Windows/PolicyDefinitions/DnsClient.admx](evidence-files/external/c/Windows/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
-| `ms-dnsclient-mdns-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for mDNS policy | [research/evidence-files/external/c/PolicyDefinitions/en-US/DnsClient.adml](evidence-files/external/c/PolicyDefinitions/en-US/DnsClient.adml) | `high` | behavior, default |
+| `ms-dnsclient-mdns-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for mDNS | [evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
+| `ms-dnsclient-mdns-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for mDNS policy | [evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml) | `high` | behavior, default |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/DnsClient.admx](evidence-files/external/c/Windows/PolicyDefinitions/DnsClient.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx) |
 | Exact quote / path | <policy name="DNS_MDNS" class="Machine" ... key="Software/Policies/Microsoft/Windows NT/DNSClient" valueName="EnableMDNS">; DnsClient.adml: Specifies if the DNS client will perform name resolution over mDNS. If you enable this policy, the DNS client will use mDNS protocol. |
 | Key found on page | `True` |
 | Notes | Local official ADMX and ADML files document the exact EnableMDNS policy surface. The key finding is semantic: value 0 is documented as policy-disabled/local-settings behavior, not as a guaranteed hard-disable state. In the same pass, the app was also confirmed to use EnableMDNS rather than the separate LLMNR value EnableMulticast. |
@@ -4646,7 +4646,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient) | `medium` | path, behavior, ui-mapping |
-| `local-dnsclient-netbios-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values, behavior |
+| `local-dnsclient-netbios-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values, behavior |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-netbios-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -4654,7 +4654,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) |
 | Exact quote / path | <policy name="DNS_Netbios" ... key="Software/Policies/Microsoft/Windows NT/DNSClient"> <enum id="DNS_Netbios_Box" valueName="EnableNetbios" required="true"> <item displayName="$(string.DNS_Netbios_Disable)"><value><decimal value="0" /></value></item> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same registry key and value name that the app writes, and it exposes the enum values 0, 1, 2, and 3. |
@@ -4775,14 +4775,14 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-plaintext-smb-password-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers) | `high` | path, value, allowed-values, behavior, risk |
-| `ms-sceregvl-plaintext-smb-password` | `official-doc` | `Microsoft official doc` | Local Microsoft security metadata: sceregvl.inf | [research/evidence-files/external/c/Windows/inf/sceregvl.inf.md](evidence-files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value |
+| `ms-sceregvl-plaintext-smb-password` | `official-doc` | `Microsoft official doc` | Local Microsoft security metadata: sceregvl.inf | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/inf/sceregvl.inf.md](evidence-files/external/c/Windows/inf/sceregvl.inf.md) |
+| Source | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) |
 | Exact quote / path | MACHINE/System/CurrentControlSet/Services/LanmanWorkstation/Parameters/EnablePlainTextPassword,4,%EnablePlainTextPassword%,0 |
 | Key found on page | `True` |
 | Notes | Local official Microsoft security metadata confirms the exact registry path and value name. The Microsoft Policy CSP page for 'Microsoft network client: Send unencrypted password to connect to third-party SMB servers' provides the numeric semantics: Default Value 0, Allowed values 1 Enable and 0 (Default) Disable. |
@@ -4901,7 +4901,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dnsclient-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_DnsClient Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient) | `high` | path, behavior, default, ui-mapping |
-| `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
+| `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smart-name-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -4909,7 +4909,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) |
 | Exact quote / path | <policy name="DNS_SmartMultiHomedNameResolution" ... key="Software/Policies/Microsoft/Windows NT/DNSClient" valueName="DisableSmartNameResolution"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same registry key and value name that the app writes and confirms the 1/0 mapping. |
@@ -5280,15 +5280,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-wifisense-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for Wi-Fi Sense policy | [research/evidence-files/external/c/Windows/PolicyDefinitions/wlansvc.admx](evidence-files/external/c/Windows/PolicyDefinitions/wlansvc.admx) | `high` | path, value, allowed-values |
-| `ms-wifisense-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for Wi-Fi Sense policy | [research/evidence-files/external/c/PolicyDefinitions/en-US/wlansvc.adml](evidence-files/external/c/PolicyDefinitions/en-US/wlansvc.adml) | `high` | behavior, default, risk |
+| `ms-wifisense-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for Wi-Fi Sense policy | [evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx](../evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx) | `high` | path, value, allowed-values |
+| `ms-wifisense-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for Wi-Fi Sense policy | [evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml](../evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml) | `high` | behavior, default, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/wlansvc.admx](evidence-files/external/c/Windows/PolicyDefinitions/wlansvc.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx](../evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx) |
 | Exact quote / path | <policy name="WiFiSense" class="Machine" ... key="Software/Microsoft/wcmsvc/wifinetworkmanager/config" valueName="AutoConnectAllowedOEM"> ... <enabledValue><decimal value="1" /></enabledValue> ... <disabledValue><decimal value="0" /></disabledValue>; wlansvc.adml: If this policy setting is disabled, both "Connect to suggested open hotspots," "Connect to networks shared by my contacts," and "Enable paid services" will be turned off and users on this device will be prevented from enabling them. |
 | Key found on page | `True` |
 | Notes | The local official Microsoft WLAN administrative template defines the exact path and value name used by the app, and the companion ADML help text explains the disabled behavior in plain language. |
@@ -5407,15 +5407,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-lltd-responder-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Responder | [research/evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) | `high` | path, value, allowed-values |
-| `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | [research/evidence-files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](evidence-files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) | `high` | behavior, default, risk |
+| `ms-lltd-responder-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Responder | [evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) | `high` | path, value, allowed-values |
+| `ms-lltd-responder-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Responder policy | [evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) | `high` | behavior, default, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) |
 | Exact quote / path | <policy name="LLTD_EnableRspndr" class="Machine" ... key="Software/Policies/Microsoft/Windows/LLTD" valueName="EnableRspndr"> ... <enabledValue><decimal value="1" /></enabledValue> ... <disabledValue><decimal value="0" /></disabledValue>; LinkLayerTopologyDiscovery.adml: If you disable or do not configure this policy setting, the default behavior for the Responder will apply. |
 | Key found on page | `True` |
 | Notes | The local official Microsoft administrative template defines the exact LLTD responder policy path and value name used by the app, and the companion ADML help text documents the enable/default behavior. |
@@ -5534,15 +5534,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-lltd-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Mapper I/O | [research/evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) | `high` | path, value, allowed-values |
-| `ms-lltd-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Mapper I/O policy | [research/evidence-files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](evidence-files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) | `high` | behavior, default, risk |
+| `ms-lltd-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for LLTD Mapper I/O | [evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) | `high` | path, value, allowed-values |
+| `ms-lltd-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for LLTD Mapper I/O policy | [evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml) | `high` | behavior, default, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current network tweak provider | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | ui-mapping, value |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx) |
 | Exact quote / path | <policy name="LLTD_EnableLLTDIO" class="Machine" ... key="Software/Policies/Microsoft/Windows/LLTD" valueName="EnableLLTDIO"> ... <enabledValue><decimal value="1" /></enabledValue> ... <disabledValue><decimal value="0" /></disabledValue>; LinkLayerTopologyDiscovery.adml: If you disable or do not configure this policy setting, the default behavior of LLTDIO will apply. |
 | Key found on page | `True` |
 | Notes | The local official Microsoft administrative template defines the exact LLTD policy path and value name used by the app, and the companion ADML help text documents the enable/default behavior. |
@@ -5788,7 +5788,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ntlm-client-security-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / NTLM SSP based clients | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients) | `high` | path, value, allowed-values, behavior, version-scope |
-| `local-sceregvl-ntlm-min-client-sec` | `official-doc` | `Microsoft official doc` | Local Windows sceregvl NTLMMinClientSec metadata | [research/evidence-files/external/c/Windows/inf/sceregvl.inf.md](evidence-files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value, allowed-values, ui-mapping |
+| `local-sceregvl-ntlm-min-client-sec` | `official-doc` | `Microsoft official doc` | Local Windows sceregvl NTLMMinClientSec metadata | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value, allowed-values, ui-mapping |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -6326,17 +6326,17 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-lanmanworkstation-admx-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx SMB over QUIC mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanworkstation-adml-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml SMB over QUIC help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml](evidence-files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml) | `high` | behavior, default, side-effects |
-| `local-lanmanserver-admx-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx SMB over QUIC mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanServer.admx](evidence-files/external/c/Windows/PolicyDefinitions/LanmanServer.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanserver-adml-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml SMB over QUIC help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanServer.adml](evidence-files/external/c/PolicyDefinitions/en-US/LanmanServer.adml) | `high` | behavior, default, side-effects |
+| `local-lanmanworkstation-admx-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx SMB over QUIC mapping | [evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanworkstation-adml-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml SMB over QUIC help text | [evidence/files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml) | `high` | behavior, default, side-effects |
+| `local-lanmanserver-admx-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx SMB over QUIC mapping | [evidence/files/external/c/Windows/PolicyDefinitions/LanmanServer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LanmanServer.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanserver-adml-quic` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml SMB over QUIC help text | [evidence/files/external/c/PolicyDefinitions/en-US/LanmanServer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LanmanServer.adml) | `high` | behavior, default, side-effects |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) |
 | Exact quote / path | LanmanWorkstation.admx: `<policy ... name="Pol_EnableSMBQUIC" ... valueName="EnableSMBQUIC">`; LanmanWorkstation.adml: `This policy setting controls whether the SMB client will enable SMB over QUIC.`; LanmanServer.admx / LanmanServer.adml mirror the same `EnableSMBQUIC` policy for the SMB server. |
 | Key found on page | `True` |
 | Notes | Local official ADMX and ADML files document the exact EnableSMBQUIC policy surfaces for both LanmanWorkstation and LanmanServer, and the app now writes those documented policy keys directly. |
@@ -6463,7 +6463,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/smb_encrypt_data_probe_out.txt](evidence-files/vm-tooling-staging/smb_encrypt_data_probe_out.txt) |
+| Source | [evidence/files/vm/smb_encrypt_data_probe_out.txt](../evidence/files/vm-tooling-staging/smb_encrypt_data_probe_out.txt) |
 | Exact quote / path | smb_encrypt_data_probe_out.txt: BASELINE=False. AFTER_TRUE=True. AFTER_FALSE=False. RESTORED=False. |
 | Key found on page | `True` |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the SMB server EncryptData state transitions and restored the machine back to the baseline False state. |
@@ -6926,17 +6926,17 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-lanmanworkstation-admx-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx SMB dialect mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanworkstation-adml-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml SMB dialect help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml](evidence-files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml) | `high` | behavior, allowed-values, version-scope |
-| `local-lanmanserver-admx-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx SMB dialect mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanServer.admx](evidence-files/external/c/Windows/PolicyDefinitions/LanmanServer.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanserver-adml-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml SMB dialect help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanServer.adml](evidence-files/external/c/PolicyDefinitions/en-US/LanmanServer.adml) | `high` | behavior, allowed-values, version-scope |
+| `local-lanmanworkstation-admx-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx SMB dialect mapping | [evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanworkstation-adml-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml SMB dialect help text | [evidence/files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml) | `high` | behavior, allowed-values, version-scope |
+| `local-lanmanserver-admx-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx SMB dialect mapping | [evidence/files/external/c/Windows/PolicyDefinitions/LanmanServer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LanmanServer.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanserver-adml-dialects` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml SMB dialect help text | [evidence/files/external/c/PolicyDefinitions/en-US/LanmanServer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LanmanServer.adml) | `high` | behavior, allowed-values, version-scope |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) |
 | Exact quote / path | LanmanWorkstation.admx: `<enum id="MinSmb2Dialect" valueName="MinSmb2Dialect" required="true">` and `<enum id="MaxSmb2Dialect" valueName="MaxSmb2Dialect" required="true">`; LanmanWorkstation.adml / LanmanServer.adml label `Dialect_0x311 = SMB 3.1.1`. The official enum list is 514, 528, 768, 770, 785. |
 | Key found on page | `True` |
 | Notes | Local official ADMX and ADML files document the exact MinSmb2Dialect and MaxSmb2Dialect policy surfaces and official dialect enum values. The app now writes the documented LanmanWorkstation and LanmanServer policy keys directly with MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 to require exactly SMB 3.1.1. |
@@ -7357,17 +7357,17 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-lanmanworkstation-admx-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx cipher suite order mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanworkstation-adml-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml cipher suite order help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml](evidence-files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml) | `high` | behavior, default, side-effects |
-| `local-lanmanserver-admx-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx cipher suite order mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanServer.admx](evidence-files/external/c/Windows/PolicyDefinitions/LanmanServer.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-lanmanserver-adml-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml cipher suite order help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanServer.adml](evidence-files/external/c/PolicyDefinitions/en-US/LanmanServer.adml) | `high` | behavior, default, side-effects |
+| `local-lanmanworkstation-admx-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.admx cipher suite order mapping | [evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanworkstation-adml-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanWorkstation.adml cipher suite order help text | [evidence/files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml) | `high` | behavior, default, side-effects |
+| `local-lanmanserver-admx-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.admx cipher suite order mapping | [evidence/files/external/c/Windows/PolicyDefinitions/LanmanServer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LanmanServer.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-lanmanserver-adml-cipher-order` | `official-doc` | `Microsoft official doc` | Local Microsoft LanmanServer.adml cipher suite order help text | [evidence/files/external/c/PolicyDefinitions/en-US/LanmanServer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/LanmanServer.adml) | `high` | behavior, default, side-effects |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx](../evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx) |
 | Exact quote / path | LanmanWorkstation.admx: <policy name="Pol_CipherSuiteOrder" ... key="Software/Policies/Microsoft/Windows/LanmanWorkstation" ... <multiText id="MultiText_CipherSuiteOrder" valueName="CipherSuiteOrder" />; LanmanWorkstation.adml: "If you enable this policy setting, cipher suites are prioritized in the order specified."; LanmanServer.admx: <policy name="Pol_CipherSuiteOrder" ... key="Software/Policies/Microsoft/Windows/LanmanServer" ... <multiText id="MultiText_CipherSuiteOrder" valueName="CipherSuiteOrder" />; LanmanServer.adml: "If you enable this policy setting, cipher suites are prioritized in the order specified." |
 | Key found on page | `True` |
 | Notes | Local official Microsoft ADMX/ADML files document CipherSuiteOrder under the LanmanWorkstation and LanmanServer policy keys as REG_MULTI_SZ multi-text policy values, and the app now writes those documented policy keys directly. |
@@ -7600,15 +7600,15 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-wpn-no-lock-screen-toast` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoLockScreenToastNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-wpn-admx-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoLockScreenToastNotification mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx](evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-wpn-adml-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoLockScreenToastNotification help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml](evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
+| `local-wpn-admx-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoLockScreenToastNotification mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-wpn-adml-no-lock-screen-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoLockScreenToastNotification help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx](evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) |
 | Exact quote / path | <policy name="NoLockScreenToastNotification" class="User" ... key="SOFTWARE/Policies/Microsoft/Windows/CurrentVersion/PushNotifications" valueName="NoToastApplicationNotificationOnLockScreen"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping. |
@@ -7721,15 +7721,15 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-wpn-no-mirroring` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoNotificationMirroring | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nonotificationmirroring](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nonotificationmirroring) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-wpn-admx-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoNotificationMirroring mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx](evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-wpn-adml-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoNotificationMirroring help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml](evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
+| `local-wpn-admx-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoNotificationMirroring mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-wpn-adml-no-mirroring` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoNotificationMirroring help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx](evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) |
 | Exact quote / path | <policy name="NoNotificationMirroring" class="User" ... key="SOFTWARE/Policies/Microsoft/Windows/CurrentVersion/PushNotifications" valueName="DisallowNotificationMirroring"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping. |
@@ -7842,15 +7842,15 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-notifications-csp-tile` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Notifications / DisallowTileNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-notifications#disallowtilenotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-notifications#disallowtilenotification) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-wpn-admx-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoTileNotification mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx](evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-wpn-adml-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoTileNotification help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml](evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
+| `local-wpn-admx-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoTileNotification mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-wpn-adml-no-tile` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoTileNotification help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx](evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) |
 | Exact quote / path | <policy name="NoTileNotification" class="User" ... key="SOFTWARE/Policies/Microsoft/Windows/CurrentVersion/PushNotifications" valueName="NoTileApplicationNotification"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping. |
@@ -7963,15 +7963,15 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-wpn-no-toast` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_WPN / NoToastNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification) | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
-| `local-wpn-admx-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoToastNotification mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx](evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-wpn-adml-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoToastNotification help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml](evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
+| `local-wpn-admx-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.admx NoToastNotification mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-wpn-adml-no-toast` | `official-doc` | `Microsoft official doc` | Local Microsoft WPN.adml NoToastNotification help text | [evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx](evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx) |
 | Exact quote / path | <policy name="NoToastNotification" class="Both" ... key="SOFTWARE/Policies/Microsoft/Windows/CurrentVersion/PushNotifications" valueName="NoToastApplicationNotification"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the 1/0 mapping. |
@@ -8093,14 +8093,14 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-animationinfo` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ANIMATIONINFO structure | [https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-animationinfo](https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-animationinfo) | `high` | value, behavior |
 | `ms-systemparametersinfo-animation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - animation actions | [https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa) | `high` | behavior, allowed-values |
-| `runtime-spi-minanimate-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETANIMATION runtime diff - MinAnimate persistence | [research/evidence-files/missing/minanimate-spi-diff-20260314-json.md](evidence-files/missing/minanimate-spi-diff-20260314-json.md) | `high` | path, value, behavior, ui-mapping |
+| `runtime-spi-minanimate-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETANIMATION runtime diff - MinAnimate persistence | [evidence/files/missing/minanimate-spi-diff-20260314-json.md](../evidence/files/missing/minanimate-spi-diff-20260314-json.md) | `high` | path, value, behavior, ui-mapping |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/minanimate-spi-diff-20260314-json.md](evidence-files/missing/minanimate-spi-diff-20260314-json.md) |
+| Source | [evidence/files/missing/minanimate-spi-diff-20260314-json.md](../evidence/files/missing/minanimate-spi-diff-20260314-json.md) |
 | Exact quote / path | after_disable: API false, registry MinAnimate = "0". after_enable: API true, registry MinAnimate = "1". restored: API false, registry MinAnimate = "0". |
 | Key found on page | `True` |
 | Notes | The local runtime diff used the official SystemParametersInfo animation API to toggle the feature and then read the persisted registry backend. The machine ended in its original state. |
@@ -8219,14 +8219,14 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-systemparametersinfo-menushowdelay` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - menu show delay actions | [https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa) | `high` | value, behavior, allowed-values |
-| `runtime-spi-menushowdelay-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence | [research/evidence-files/missing/menushowdelay-spi-diff-20260314-json.md](evidence-files/missing/menushowdelay-spi-diff-20260314-json.md) | `high` | path, value, behavior, ui-mapping |
+| `runtime-spi-menushowdelay-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence | [evidence/files/missing/menushowdelay-spi-diff-20260314-json.md](../evidence/files/missing/menushowdelay-spi-diff-20260314-json.md) | `high` | path, value, behavior, ui-mapping |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/menushowdelay-spi-diff-20260314-json.md](evidence-files/missing/menushowdelay-spi-diff-20260314-json.md) |
+| Source | [evidence/files/missing/menushowdelay-spi-diff-20260314-json.md](../evidence/files/missing/menushowdelay-spi-diff-20260314-json.md) |
 | Exact quote / path | after_slow: API 400, registry MenuShowDelay = "400". after_fast: API 0, registry MenuShowDelay = "0". restored: API 0, registry MenuShowDelay = "0". |
 | Key found on page | `True` |
 | Notes | The local runtime diff used the official SystemParametersInfo menu-delay API to change the feature and then read the persisted registry backend. The machine ended in its original state. |
@@ -8254,7 +8254,7 @@ Windows Internals references:
 | Area | `Explorer Taskbar Animation Flags` |
 | Scope | `user` |
 | Source file | [research/records/performance.disable-taskbar-animations.review.json](records/performance.disable-taskbar-animations.review.json) |
-| V3.1 evidence root | [evidence/performance.disable-taskbar-animations](../evidence/performance.disable-taskbar-animations) |
+| V3.1 evidence root | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8344,9 +8344,9 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | [research/evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt](evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt) | `high` | value, behavior, version-scope |
-| `procmon-taskbar-animations-registry-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [research/evidence-files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](evidence-files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | [evidence/files/vm/taskbar_animations_probe_out.txt](../evidence/files/vm-tooling-staging/taskbar_animations_probe_out.txt) | `high` | value, behavior, version-scope |
+| `procmon-taskbar-animations-registry-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](../evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](../evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](../evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](../evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [evidence/files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](../evidence/files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo source note for performance.disable-taskbar-animations | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 
@@ -8477,7 +8477,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `microsoft-learn-autoplay-handlers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows settings reference - AutoplayHandlers registry values | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `high` | path, value, allowed-values, behavior |
-| `local-autoplay-adml-remember-choice` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml remembered-choice guidance | [research/evidence-files/external/c/PolicyDefinitions/en-US/AutoPlay.adml](evidence-files/external/c/PolicyDefinitions/en-US/AutoPlay.adml) | `high` | behavior, default, side-effects |
+| `local-autoplay-adml-remember-choice` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml remembered-choice guidance | [evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml) | `high` | behavior, default, side-effects |
 | `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
@@ -8620,18 +8620,18 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-autoplay-turnoff` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AutoPlay / TurnOffAutoPlay | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#turnoffautoplay](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#turnoffautoplay) | `high` | behavior, default, version-scope |
-| `local-autoplay-admx-turnoff` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.admx TurnOffAutoPlay mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AutoPlay.admx](evidence-files/external/c/Windows/PolicyDefinitions/AutoPlay.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-autoplay-adml-turnoff` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml TurnOffAutoPlay help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AutoPlay.adml](evidence-files/external/c/PolicyDefinitions/en-US/AutoPlay.adml) | `high` | behavior, default, side-effects |
+| `local-autoplay-admx-turnoff` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.admx TurnOffAutoPlay mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AutoPlay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AutoPlay.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-autoplay-adml-turnoff` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml TurnOffAutoPlay help text | [evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml) | `high` | behavior, default, side-effects |
 | `ms-autoplay-non-volume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AutoPlay / DisallowAutoplayForNonVolumeDevices | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#disallowautoplayfornonvolumedevices](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#disallowautoplayfornonvolumedevices) | `high` | path, value, allowed-values, behavior, default, version-scope |
-| `local-autoplay-admx-non-volume` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.admx NoAutoplayfornonVolume mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AutoPlay.admx](evidence-files/external/c/Windows/PolicyDefinitions/AutoPlay.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-autoplay-adml-non-volume` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml NoAutoplayfornonVolume help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AutoPlay.adml](evidence-files/external/c/PolicyDefinitions/en-US/AutoPlay.adml) | `high` | behavior, default, side-effects |
+| `local-autoplay-admx-non-volume` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.admx NoAutoplayfornonVolume mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AutoPlay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AutoPlay.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-autoplay-adml-non-volume` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml NoAutoplayfornonVolume help text | [evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml) | `high` | behavior, default, side-effects |
 | `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AutoPlay.admx](evidence-files/external/c/Windows/PolicyDefinitions/AutoPlay.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AutoPlay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AutoPlay.admx) |
 | Exact quote / path | <policy name="Autorun" class="Both" key="Software/Microsoft/Windows/CurrentVersion/Policies/Explorer"> <enum id="Autorun_Box" valueName="NoDriveTypeAutoRun"> <item displayName="$(string.Autorun_None)"><value><decimal value="255" /></value></item>; <policy name="NoAutoplayfornonVolume" class="Both" key="Software/Policies/Microsoft/Windows/Explorer" valueName="NoAutoplayfornonVolume"> <enabledValue><decimal value="1" /></enabledValue><disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | Local official AutoPlay.admx publishes the exact registry paths and numeric states for the two policy surfaces used by this tweak. |
@@ -8751,14 +8751,14 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-systemparametersinfo-stickykeys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: SystemParametersInfo - Sticky Keys actions | [https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa) | `high` | behavior, allowed-values |
 | `ms-stickykeys-struct` | `official-doc` | `Microsoft official doc` | Microsoft Learn: STICKYKEYS structure | [https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-stickykeys](https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-stickykeys) | `high` | value, allowed-values, behavior |
-| `runtime-spi-stickykeys-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence | [research/evidence-files/missing/stickykeys-spi-diff-20260314-json.md](evidence-files/missing/stickykeys-spi-diff-20260314-json.md) | `high` | path, value, behavior, ui-mapping |
+| `runtime-spi-stickykeys-diff` | `runtime-diff` | `VM runtime diff` | Local SPI_SETSTICKYKEYS runtime diff - StickyKeys Flags persistence | [evidence/files/missing/stickykeys-spi-diff-20260314-json.md](../evidence/files/missing/stickykeys-spi-diff-20260314-json.md) | `high` | path, value, behavior, ui-mapping |
 | `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/stickykeys-spi-diff-20260314-json.md](evidence-files/missing/stickykeys-spi-diff-20260314-json.md) |
+| Source | [evidence/files/missing/stickykeys-spi-diff-20260314-json.md](../evidence/files/missing/stickykeys-spi-diff-20260314-json.md) |
 | Exact quote / path | after_hotkey_on: API flags 510, registry Flags = "510". after_hotkey_off: API flags 506, registry Flags = "506". restored: API flags 506, registry Flags = "506". |
 | Key found on page | `True` |
 | Notes | The local runtime diff used the official SystemParametersInfo Sticky Keys API to change the feature flags and then read the persisted registry backend. The machine ended in its original state. |
@@ -8788,7 +8788,7 @@ Windows Internals references:
 | Area | `Processor Idle Behavior` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-cpu-idle-states.json](records/power.disable-cpu-idle-states.json) |
-| V3.1 evidence root | [evidence/power.disable-cpu-idle-states](../evidence/power.disable-cpu-idle-states) |
+| V3.1 evidence root | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) |
 | Apply allowed | `False` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -8881,16 +8881,16 @@ Windows Internals references:
 | `ms-cpu-idle-states` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to Processor Idle States | [https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states) | `high` | behavior, side-effects, version-scope, app-mismatch |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) | `medium` | path, value, behavior |
-| `vm-cpu-idle-bundle-probe` | `vm-test` | `VM test / probe` | Win25H2Clean reversible probe for the CPU idle-state bundle | [research/evidence-files/vm-tooling-staging/cpu_idle_probe.json](evidence-files/vm-tooling-staging/cpu_idle_probe.json) | `high` | path, value, behavior, rollback |
+| `vm-cpu-idle-bundle-probe` | `vm-test` | `VM test / probe` | Win25H2Clean reversible probe for the CPU idle-state bundle | [evidence/files/vm/cpu_idle_probe.json](../evidence/files/vm-tooling-staging/cpu_idle_probe.json) | `high` | path, value, behavior, rollback |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | ui-mapping, app-mismatch |
-| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | `unspecified` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) | `medium` | version-scope, open-question |
+| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | `unspecified` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) | `medium` | version-scope, open-question |
 | `vm-cpu-idle-benchmark-incident-20260327` | `vm-incident` | `unspecified` | Win25H2Clean rebooted CPU idle benchmark incident | [research/vm-incidents.json](vm-incidents.json) and [research/notes/cpu-idle-states-follow-up-20260327.md](notes/cpu-idle-states-follow-up-20260327.md) | `high` | incident-review, version-scope, side-effects |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/cpu_idle_probe.json](evidence-files/vm-tooling-staging/cpu_idle_probe.json) |
+| Source | [evidence/files/vm/cpu_idle_probe.json](../evidence/files/vm-tooling-staging/cpu_idle_probe.json) |
 | Exact quote / path | before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null |
 | Key found on page | `True` |
 | Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. A later rebooted benchmark lane failed before any CPU or memory workload started because Explorer did not return after reboot, and the VM had to be recovered from snapshot. |
@@ -9265,15 +9265,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-power-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/Power.admx](evidence-files/external/c/Windows/PolicyDefinitions/Power.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-power-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Power.adml](evidence-files/external/c/PolicyDefinitions/en-US/Power.adml) | `high` | behavior, default, side-effects |
+| `local-power-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Power.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Power.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-power-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Power.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Power.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/Power.admx](evidence-files/external/c/Windows/PolicyDefinitions/Power.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/Power.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Power.admx) |
 | Exact quote / path | <policy name="PowerThrottlingTurnOff" class="Machine" ... key="System/CurrentControlSet/Control/Power/PowerThrottling" valueName="PowerThrottlingOff"> ... <enabledValue><decimal value="1" /></enabledValue> |
 | Key found on page | `True` |
 | Notes | Local Microsoft Power.admx defines the exact machine policy path and value name. The companion Power.adml help text explains that enabling the policy turns Power Throttling off, while disabled or not configured leaves it under user control. |
@@ -9518,21 +9518,21 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
+| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for hibernation support | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) | `medium` | path, behavior, dependency |
 | `nohuto-showhibernateoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowHibernateOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [research/evidence-files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt](evidence-files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
+| `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [evidence/files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt](../evidence/files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) |
 | Exact quote / path | <policy name="ShowHibernateOption" class="Machine" ... key="Software/Policies/Microsoft/Windows/Explorer" valueName="ShowHibernateOption">; WindowsExplorer.adml: If you disable this policy setting, the hibernate option will never be shown in the Power Options menu. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. Win25H2Clean reversible probe at [research/evidence-files/vm-tooling-staging/power_hide_hibernate_option_probe.txt](evidence-files/vm-tooling-staging/power_hide_hibernate_option_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, Power Options opening in both states, and restoration to the original state. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. Win25H2Clean reversible probe at [evidence/files/vm/power_hide_hibernate_option_probe.txt](../evidence/files/vm-tooling-staging/power_hide_hibernate_option_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, Power Options opening in both states, and restoration to the original state. |
 
 **Decision**
 
@@ -9648,20 +9648,20 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
+| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showlockoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowLockOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-lock-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [research/evidence-files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt](evidence-files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
+| `procmon-power-hide-lock-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [evidence/files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt](../evidence/files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) |
 | Exact quote / path | <policy name="ShowLockOption" class="Machine" ... key="Software/Policies/Microsoft/Windows/Explorer" valueName="ShowLockOption">; WindowsExplorer.adml: If you disable this policy setting, the lock option will never be shown in the User Tile menu. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. Win25H2Clean reversible probe at [research/evidence-files/vm-tooling-staging/power_hide_lock_option_probe.txt](evidence-files/vm-tooling-staging/power_hide_lock_option_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, Start menu opening in both states, and restoration to the original state; no direct read lines were captured in Procmon. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. Win25H2Clean reversible probe at [evidence/files/vm/power_hide_lock_option_probe.txt](../evidence/files/vm-tooling-staging/power_hide_lock_option_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, Start menu opening in both states, and restoration to the original state; no direct read lines were captured in Procmon. |
 
 **Decision**
 
@@ -9777,20 +9777,20 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
+| `local-windowsexplorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showsleepoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowSleepOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [research/evidence-files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt](evidence-files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
+| `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [evidence/files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt](../evidence/files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx) |
 | Exact quote / path | <policy name="ShowSleepOption" class="Machine" ... key="Software/Policies/Microsoft/Windows/Explorer" valueName="ShowSleepOption">; WindowsExplorer.adml: If you disable this policy setting, the sleep option will never be shown in the Power Options menu. |
 | Key found on page | `True` |
-| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at [research/evidence-files/vm-tooling-staging/power_hide_sleep_option_probe.txt](evidence-files/vm-tooling-staging/power_hide_sleep_option_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, Power Options opening in both states, and restoration to the original state. |
+| Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at [evidence/files/vm/power_hide_sleep_option_probe.txt](../evidence/files/vm-tooling-staging/power_hide_sleep_option_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, Power Options opening in both states, and restoration to the original state. |
 
 **Decision**
 
@@ -9909,7 +9909,7 @@ Windows Internals references:
 | `ms-perfboostmode` | `official-doc` | `Microsoft official doc` | Microsoft Learn: PERFBOOSTMODE | [https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode](https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode) | `high` | path, value, behavior, allowed-values, version-scope, app-mapping |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mapping |
 | `engine-power-perfboostmode` | `repo-code` | `Current repo code` | Command-backed CPU boost implementation | engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs | `high` | path, value, behavior, ui-mapping, app-mapping |
-| `runtime-perfboostmode-diff` | `vm-test` | `VM test / probe` | Guest reversible probe for PERFBOOSTMODE | [research/evidence-files/vm-tooling-staging/perfboostmode-transition-probe.txt](evidence-files/vm-tooling-staging/perfboostmode-transition-probe.txt) | `high` | path, value, behavior, version-scope |
+| `runtime-perfboostmode-diff` | `vm-test` | `VM test / probe` | Guest reversible probe for PERFBOOSTMODE | [evidence/files/vm/perfboostmode-transition-probe.txt](../evidence/files/vm-tooling-staging/perfboostmode-transition-probe.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
@@ -10094,14 +10094,14 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | [https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service](https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service) | `high` | path, allowed-values, behavior, version-scope |
-| `vm-games-mmcss-baseline` | `vm-test` | `VM test / probe` | Win25H2Clean export of the built-in Games MMCSS task | [research/evidence-files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt](evidence-files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt) | `high` | path, value, default |
+| `vm-games-mmcss-baseline` | `vm-test` | `VM test / probe` | Win25H2Clean export of the built-in Games MMCSS task | [evidence/files/vm/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt](../evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt) | `high` | path, value, default |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt](evidence-files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt) |
+| Source | [evidence/files/vm/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt](../evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt) |
 | Exact quote / path | Affinity=0x0; GPU Priority=0x8; Priority=0x2; Scheduling Category=Medium; SFIO Priority=Normal |
 | Key found on page | `True` |
 | Notes | The VM export gives the current 25H2 Games-task baseline, while the Microsoft MMCSS page documents the same path and the allowed values for the fields the app writes. |
@@ -10225,7 +10225,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/inf/sceregvl.inf.md](evidence-files/external/c/Windows/inf/sceregvl.inf.md) |
+| Source | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) |
 | Exact quote / path | MACHINE/Software/Microsoft/Windows/CurrentVersion/Policies/System/NoConnectedUser,4,%BlockConnectedUser%,3,0\|%PolicyDisabled%,1\|%BlockAdd%,3\|%BlockLogin% |
 | Key found on page | `True` |
 | Notes | The local official Microsoft security option metadata names the same registry path and value used by the app and exposes the documented 0, 1, and 3 states. Added nohuto mirror corroboration via nohuto-noconnecteduser-trace. |
@@ -10329,14 +10329,14 @@ Current writes
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values |
+| `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
 | Exact quote / path | HKLM/Software/Policies/Microsoft/Windows/AppPrivacy |
 | Key found on page | `True` |
 | Notes | The local AppPrivacy.admx template documents the LetAppsAccess* policy family and its ForceDeny value semantics. The parent audit trail keeps the extra System policy write separate from this child record. |
@@ -10481,7 +10481,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-privacy-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Privacy Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy) | `high` | path, value, allowed-values, default, behavior |
-| `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx) | `high` | path, value, allowed-values |
+| `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx) | `high` | path, value, allowed-values |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-activity-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -10489,7 +10489,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx) |
 | Exact quote / path | <policy name="EnableActivityFeed" ... key="Software/Policies/Microsoft/Windows/System" valueName="EnableActivityFeed"> ... <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; <policy name="PublishUserActivities" ... valueName="PublishUserActivities"> ... <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; <policy name="UploadUserActivities" ... valueName="UploadUserActivities"> ... <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same policy key and all three value names used by the app, and it confirms the shared 1/0 mapping. |
@@ -10601,15 +10601,15 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-userprofiles-admx-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.admx DisableAdvertisingId mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/UserProfiles.admx](evidence-files/external/c/Windows/PolicyDefinitions/UserProfiles.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-userprofiles-adml-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.adml DisableAdvertisingId help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/UserProfiles.adml](evidence-files/external/c/PolicyDefinitions/en-US/UserProfiles.adml) | `high` | behavior, default, side-effects |
+| `local-userprofiles-admx-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.admx DisableAdvertisingId mapping | [evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx](../evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-userprofiles-adml-advertising` | `official-doc` | `Microsoft official doc` | Local Microsoft UserProfiles.adml DisableAdvertisingId help text | [evidence/files/external/c/PolicyDefinitions/en-US/UserProfiles.adml](../evidence/files/external/c/PolicyDefinitions/en-US/UserProfiles.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/UserProfiles.admx](evidence-files/external/c/Windows/PolicyDefinitions/UserProfiles.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx](../evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx) |
 | Exact quote / path | <policy name="DisableAdvertisingId" class="Machine" key="Software/Policies/Microsoft/Windows/AdvertisingInfo" valueName="DisabledByGroupPolicy">; enabledValue = 1; disabledValue = 0; UserProfiles.adml: If you enable this policy setting, the advertising ID is turned off. Apps can't use the ID for experiences across apps. |
 | Key found on page | `True` |
 | Notes | Local official ADMX and ADML files publish the exact machine-policy path, value name, and numeric semantics for disabling the advertising ID. |
@@ -10720,15 +10720,15 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-appprivacy-admx-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-appprivacy-adml-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml) | `high` | behavior, default, side-effects |
+| `local-appprivacy-admx-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-appprivacy-adml-diagnostics` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
 | Exact quote / path | <policy name="LetAppsGetDiagnosticInfo" class="Machine" ... key="Software/Policies/Microsoft/Windows/AppPrivacy"> ... <enum id="LetAppsGetDiagnosticInfo_Enum" valueName="LetAppsGetDiagnosticInfo"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same AppPrivacy machine policy surface used by the app. The paired ADML help text documents the User in control, Force Allow, and Force Deny states for this enum, and the app uses Force Deny (2). |
@@ -10844,7 +10844,7 @@ Nohuto lineage references:
 | `ms-gppref-start-trackprogs` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5) | `high` | path, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-start-track-progs-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - Start_TrackProgs trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `high` | path, value, behavior, ui-mapping |
-| `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | [research/evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [research/evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | [evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](../evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](../evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -10977,8 +10977,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `microsoft-learn-contentdeliverymanager` | `official-doc` | `Microsoft official doc` | Microsoft Learn: VDI optimization guidance - ContentDeliveryManager suggestion setting | [https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration](https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration) | `high` | path, value, behavior |
-| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml](evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-app-suggestions-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - app suggestions registry evidence | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/23H2.txt](_source-mirrors/win-registry/records/23H2.txt) and [research/_source-mirrors/win-registry/records/24H2.txt](_source-mirrors/win-registry/records/24H2.txt) | `medium` | path, value, behavior |
 
@@ -11107,17 +11107,17 @@ Current writes
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
-| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](../evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | Exact quote / path | AppCompat.admx: `<policy name="AppCompatTurnOffSwitchBack" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="SbEnable">` with `<enabledValue><decimal value="0" /></enabledValue>` and `<disabledValue><decimal value="1" /></disabledValue>`; AppCompat.admx: `<policy name="AppCompatTurnOffEngine" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="DisableEngine">`; AppCompat.adml: `If you enable this policy setting, Switchback will be turned off.` and `If you enable this policy setting, the Application Compatibility Engine will be turned off.` |
 | Key found on page | `True` |
 | Notes | Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. VM Procmon capture on 2026-03-26 in Win25H2Clean then confirmed direct writes and read-backs for SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1. |
@@ -11273,16 +11273,16 @@ Current writes
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-appdeviceinventory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppDeviceInventory.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-appdeviceinventory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppDeviceInventory.admx mappings | [evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) | `high` | path, value, allowed-values, version-scope |
 | `csp-appdeviceinventory` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - AppDeviceInventory | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - four AppDeviceInventory policies | [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml](evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml) and [research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv](evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - four AppDeviceInventory policies | [evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml](../evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml) and [evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv](../evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) |
 | Exact quote / path | AppDeviceInventory.admx: `<policy name="TurnOffInstallTracing" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="DisableInstallTracing">`, `<policy name="TurnOffAPISamping" ... valueName="DisableAPISamping">`, `<policy name="TurnOffApplicationFootprint" ... valueName="DisableApplicationFootprint">`, and `<policy name="TurnOffWin32AppBackup" ... valueName="DisableWin32AppBackup">`, each with `<enabledValue><decimal value="1" /></enabledValue>` and `<disabledValue><decimal value="0" /></disabledValue>` and `supportedOn ref="windows:SUPPORTED_Windows_11_0_24H2"`. |
 | Key found on page | `True` |
 | Notes | Local official AppDeviceInventory.admx documents all four values under HKLM/Software/Policies/Microsoft/Windows/AppCompat with explicit enabledValue=1 and disabledValue=0, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed direct writes and read-backs for all four values. |
@@ -11395,8 +11395,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-appcompat-application-telemetry` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP: AppCompatTurnOffApplicationImpactTelemetry | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry) | `high` | path, value, allowed-values, behavior, version-scope |
-| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, default |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, default |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-application-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -11404,7 +11404,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | Exact quote / path | <policy name="AppCompatTurnOffApplicationImpactTelemetry" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="AITEnable"> <enabledValue><decimal value="0" /></enabledValue> <disabledValue><decimal value="1" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the reversed 0/1 semantics for this policy. |
@@ -11517,15 +11517,15 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-appprivacy-admx-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsRunInBackground mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-appprivacy-adml-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsRunInBackground help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml) | `high` | behavior, default, side-effects |
+| `local-appprivacy-admx-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.admx LetAppsRunInBackground mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-appprivacy-adml-background` | `official-doc` | `Microsoft official doc` | Local Microsoft AppPrivacy.adml LetAppsRunInBackground help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
 | Exact quote / path | <policy name="LetAppsRunInBackground" class="Machine" ... key="Software/Policies/Microsoft/Windows/AppPrivacy"> ... <enum id="LetAppsRunInBackground_Enum" valueName="LetAppsRunInBackground"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same AppPrivacy machine policy surface used by the app. The paired ADML help text documents the User in control, Force Allow, and Force Deny states for this enum, and the app uses Force Deny (2). |
@@ -11637,7 +11637,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-biometrics` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -11645,7 +11645,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) |
 | Exact quote / path | <policy name="Biometrics_EnableBio" class="Machine" ... key="SOFTWARE/Policies/Microsoft/Biometrics" valueName="Enabled">; Biometrics.adml: If you disable this policy setting, the Windows Biometric Service is unavailable, and users cannot use any biometric feature in Windows. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy prevents Windows biometric features from being used. |
@@ -11757,7 +11757,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-biometrics-domain-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -11765,7 +11765,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) |
 | Exact quote / path | <policy name="Biometrics_EnableDomainCredProv" class="Machine" ... key="SOFTWARE/Policies/Microsoft/Biometrics/Credential Provider" valueName="Domain Accounts">; Biometrics.adml: If you disable this policy setting, Windows prevents domain users from logging on to a domain-joined computer using biometrics. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks biometric sign-in for domain users. |
@@ -11877,7 +11877,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-biometrics-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Biometrics.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-biometrics-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -11885,7 +11885,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx) |
 | Exact quote / path | <policy name="Biometrics_EnableCredProv" class="Machine" ... key="SOFTWARE/Policies/Microsoft/Biometrics/Credential Provider" valueName="Enabled">; Biometrics.adml: If you disable this policy setting, biometrics cannot be used by any users to log on to a local Windows-based computer. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks biometric sign-in for local computer logon. |
@@ -11997,8 +11997,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-camera-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Camera.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Camera.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-camera-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Camera.adml](evidence-files/external/c/PolicyDefinitions/en-US/Camera.adml) | `high` | behavior, default, side-effects |
+| `local-camera-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Camera.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Camera.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-camera-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Camera.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Camera.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Camera.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-camera` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -12006,7 +12006,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Camera.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Camera.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Camera.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Camera.admx) |
 | Exact quote / path | <policy name="AllowCamera" class="Machine" ... key="Software/Policies/Microsoft/Camera" valueName="AllowCamera"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired Camera.adml help text states that enabling or not configuring the policy leaves camera devices enabled, while disabling the policy disables camera devices. |
@@ -12257,7 +12257,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-disable-consumer-account-state-content` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableConsumerAccountStateContent | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#disableconsumeraccountstatecontent](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#disableconsumeraccountstatecontent) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx-consumer` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-cloud-content-admx-consumer` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-consumer-account-content` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -12265,7 +12265,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
 | Exact quote / path | <policy name="DisableConsumerAccountStateContent" class="Machine" ... key="Software/Policies/Microsoft/Windows/CloudContent" valueName="DisableConsumerAccountStateContent"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the 1/0 mapping. |
@@ -12378,8 +12378,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-windowscopilot-turnoff` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_WindowsCopilot Policy CSP: TurnOffWindowsCopilot | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowscopilot#turnoffwindowscopilot](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowscopilot#turnoffwindowscopilot) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-windowscopilot-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-windowscopilot-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) | `high` | behavior, default, side-effects |
+| `local-windowscopilot-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-windowscopilot-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-copilot` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -12492,8 +12492,8 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-grouppolicy-enablecdp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
+| `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-enablecdp-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableCdp policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -12614,7 +12614,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-device-name` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowDeviceNameInDiagnosticData | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-device-name-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-allow-device-name-telemetry-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - AllowDeviceNameInTelemetry trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `high` | path, value, behavior |
@@ -12736,7 +12736,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-device-delete` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDeviceDelete | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-diagnostic-data-delete` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-delete-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableDeviceDelete policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -12858,7 +12858,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-ddv` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableDiagnosticDataViewer | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-diagnostic-data-viewer` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-viewer-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableDiagnosticDataViewer policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -13011,8 +13011,8 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-edge-search-suggest-enabled` | `official-doc` | `Microsoft official doc` | Microsoft Edge policy documentation: SearchSuggestEnabled | [https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `ms-edge-local-providers-enabled` | `official-doc` | `Microsoft official doc` | Microsoft Edge policy documentation: LocalProvidersEnabled | [https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-microsoftedge-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MicrosoftEdge.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx](evidence-files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-microsoftedge-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MicrosoftEdge.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/MicrosoftEdge.adml](evidence-files/external/c/PolicyDefinitions/en-US/MicrosoftEdge.adml) | `high` | behavior, default, side-effects |
+| `local-microsoftedge-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MicrosoftEdge.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx](../evidence/files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-microsoftedge-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MicrosoftEdge.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/MicrosoftEdge.adml](../evidence/files/external/c/PolicyDefinitions/en-US/MicrosoftEdge.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -13022,7 +13022,7 @@ Nohuto lineage references:
 | Source | [https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled) |
 | Exact quote / path | If you disable this policy, web search suggestions are never used, however local history and local favorites suggestions still appear. ... Registry settings: Path (Mandatory): SOFTWARE/Policies/Microsoft/Edge ... Value name: SearchSuggestEnabled ... Value type: REG_DWORD. |
 | Key found on page | `True` |
-| Notes | Bundle validation completed with three exact surfaces: 1) SearchSuggestEnabled is documented on the linked Microsoft Edge policy page. 2) LocalProvidersEnabled is documented on [https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled) with Path (Mandatory): SOFTWARE/Policies/Microsoft/Edge and Value name: LocalProvidersEnabled. 3) Legacy Edge is confirmed locally in [research/evidence-files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx](evidence-files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx) with key="Software/Policies/Microsoft/MicrosoftEdge/SearchScopes" valueName="ShowSearchSuggestionsGlobal" and disabledValue 0. |
+| Notes | Bundle validation completed with three exact surfaces: 1) SearchSuggestEnabled is documented on the linked Microsoft Edge policy page. 2) LocalProvidersEnabled is documented on [https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled) with Path (Mandatory): SOFTWARE/Policies/Microsoft/Edge and Value name: LocalProvidersEnabled. 3) Legacy Edge is confirmed locally in [evidence/files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx](../evidence/files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx) with key="Software/Policies/Microsoft/MicrosoftEdge/SearchScopes" valueName="ShowSearchSuggestionsGlobal" and disabledValue 0. |
 
 **Decision**
 
@@ -13132,11 +13132,11 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-feedback-notifications` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DoNotShowFeedbackNotifications | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-feedback-notifications-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FeedbackNotifications.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/FeedbackNotifications.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/FeedbackNotifications.admx) | `high` | path, value, allowed-values, behavior |
+| `local-feedback-notifications-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FeedbackNotifications.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/FeedbackNotifications.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/FeedbackNotifications.admx) | `high` | path, value, allowed-values, behavior |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DoNotShowFeedbackNotifications policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior |
-| `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [research/evidence-files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](evidence-files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) | `medium` | runtime writes, value semantics, rollback |
+| `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [evidence/files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](../evidence/files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -13145,7 +13145,7 @@ Nohuto lineage references:
 | Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications) |
 | Exact quote / path | Registry Key Name Software/Policies/Microsoft/Windows/DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled. |
 | Key found on page | `True` |
-| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at [research/evidence-files/vm-tooling-staging/feedback_notifications_probe.txt](evidence-files/vm-tooling-staging/feedback_notifications_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state. |
+| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at [evidence/files/vm/feedback_notifications_probe.txt](../evidence/files/vm-tooling-staging/feedback_notifications_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state. |
 
 **Decision**
 
@@ -13254,8 +13254,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-filehistory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-filehistory-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/FileHistory.adml](evidence-files/external/c/PolicyDefinitions/en-US/FileHistory.adml) | `high` | behavior, default, side-effects |
+| `local-filehistory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-filehistory-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileHistory.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileHistory.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileHistory.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-file-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -13263,7 +13263,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx) |
 | Exact quote / path | <policy name="DisableFileHistory" class="Machine" ... key="Software/Policies/Microsoft/Windows/FileHistory" valueName="Disabled">; FileHistory.adml: If you enable this policy setting, File History cannot be activated to create regular, automatic backups. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy prevents File History from being activated for regular automatic backups. |
@@ -13375,8 +13375,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-allow-find-my-device` | `policy-csp` | `Microsoft policy CSP` | Microsoft Experience Policy CSP: AllowFindMyDevice | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-findmy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/FindMy.admx](evidence-files/external/c/Windows/PolicyDefinitions/FindMy.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-findmy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/FindMy.adml](evidence-files/external/c/PolicyDefinitions/en-US/FindMy.adml) | `high` | behavior, side-effects |
+| `local-findmy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FindMy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FindMy.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-findmy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FindMy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FindMy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FindMy.adml) | `high` | behavior, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-find-my-device` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-findmydevice-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - Find My Device policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -13497,8 +13497,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-grouppolicy-admx-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-grouppolicy-adml-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
+| `local-grouppolicy-admx-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-grouppolicy-adml-fonts` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-font-providers` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-enablefontproviders-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableFontProviders policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -13507,7 +13507,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx) |
 | Exact quote / path | <policy name="EnableFontProviders" class="Machine" ... key="Software/Policies/Microsoft/Windows/System" valueName="EnableFontProviders">; GroupPolicy.adml: If you disable this policy setting, Windows does not connect to an online font provider and only enumerates locally-installed fonts. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts. Added nohuto mirror corroboration via nohuto-enablefontproviders-admx. |
@@ -13619,9 +13619,9 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-avs-validation-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-avs-validation-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AVSValidationGP.adml](evidence-files/external/c/PolicyDefinitions/en-US/AVSValidationGP.adml) | `high` | behavior, default, side-effects |
-| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx reference bundle | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/ICM.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/ICM.admx) | `medium` | path, value |
+| `local-avs-validation-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-avs-validation-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AVSValidationGP.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AVSValidationGP.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AVSValidationGP.adml) | `high` | behavior, default, side-effects |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx reference bundle | [evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx) | `medium` | path, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-kms-activation-telemetry` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-nogenticket-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - NoGenTicket policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -13630,7 +13630,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx) |
 | Exact quote / path | <policy name="NoAcquireGT" class="Machine" ... key="Software/Policies/Microsoft/Windows NT/CurrentVersion/Software Protection Platform" valueName="NoGenTicket"> <enabledValue><decimal value = "1" /></enabledValue> <disabledValue><decimal value = "0" /></disabledValue>; AVSValidationGP.adml: "Enabled (data will not be sent to Microsoft)". |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy opts the device out of automatically sending KMS client activation data to Microsoft. Added nohuto mirror corroboration via nohuto-nogenticket-admx. |
@@ -13861,8 +13861,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-credui-no-local-password-reset-questions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_CredUI / NoLocalPasswordResetQuestions | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx) | `high` | path, ui-mapping, version-scope |
-| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CredUI.adml](evidence-files/external/c/PolicyDefinitions/en-US/CredUI.adml) | `high` | behavior, side-effects |
+| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx) | `high` | path, ui-mapping, version-scope |
+| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml) | `high` | behavior, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-local-security-questions` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-nolocalpasswordresetquestions-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - NoLocalPasswordResetQuestions policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior |
@@ -14238,7 +14238,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-sensors-policy-csp-disable-location-scripting` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableLocationScripting | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-location-scripting` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -14358,15 +14358,15 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-sensors-admx-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx DisableLocation mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/Sensors.admx](evidence-files/external/c/Windows/PolicyDefinitions/Sensors.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-sensors-adml-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.adml DisableLocation help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Sensors.adml](evidence-files/external/c/PolicyDefinitions/en-US/Sensors.adml) | `high` | behavior, default, side-effects |
+| `local-sensors-admx-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx DisableLocation mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-sensors-adml-location` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.adml DisableLocation help text | [evidence/files/external/c/PolicyDefinitions/en-US/Sensors.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Sensors.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/Sensors.admx](evidence-files/external/c/Windows/PolicyDefinitions/Sensors.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx) |
 | Exact quote / path | <policy name="DisableLocation_2" class="Machine" ... key="Software/Policies/Microsoft/Windows/LocationAndSensors" valueName="DisableLocation">; Sensors.adml: If you enable this policy setting, the location feature is turned off, and all programs on this computer are prevented from using location information from the location feature. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy turns off the Windows location feature for the computer. |
@@ -14478,8 +14478,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-mdm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/MDM.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/MDM.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-mdm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/MDM.adml](evidence-files/external/c/PolicyDefinitions/en-US/MDM.adml) | `high` | behavior, default, side-effects |
+| `local-mdm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-mdm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MDM.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/MDM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/MDM.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-mdm-enrollment` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disableregistration-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableRegistration policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -14488,7 +14488,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/MDM.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/MDM.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx) |
 | Exact quote / path | <policy name="MDM_MDM_DisplayName" class="Machine" ... key="Software/Policies/Microsoft/Windows/CurrentVersion/MDM" valueName="DisableRegistration">; MDM.adml: If you enable this policy setting, MDM Enrollment will be disabled for all users. It will not unenroll existing MDM enrollments. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. Added nohuto mirror corroboration via nohuto-disableregistration-admx. |
@@ -14601,7 +14601,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-messaging-csp-allow-message-sync` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: Messaging / AllowMessageSync | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-messaging-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft messaging.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/messaging.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/messaging.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-messaging-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft messaging.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/messaging.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/messaging.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-message-sync` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-allowmessagesync-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - AllowMessageSync policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -14715,15 +14715,15 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-offlinefiles-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_OfflineFiles / Pol_Enabled | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-offlinefiles](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-offlinefiles) | `high` | path, value, default, behavior, ui-mapping, version-scope |
-| `local-offlinefiles-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OfflineFiles.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx](evidence-files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx) | `high` | path, value, allowed-values |
-| `local-offlinefiles-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft OfflineFiles.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/OfflineFiles.adml](evidence-files/external/c/PolicyDefinitions/en-US/OfflineFiles.adml) | `high` | default, behavior, side-effects |
+| `local-offlinefiles-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OfflineFiles.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx](../evidence/files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx) | `high` | path, value, allowed-values |
+| `local-offlinefiles-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft OfflineFiles.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/OfflineFiles.adml](../evidence/files/external/c/PolicyDefinitions/en-US/OfflineFiles.adml) | `high` | default, behavior, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx](evidence-files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx](../evidence/files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx) |
 | Exact quote / path | <policy name="Pol_Enabled" ... key="Software/Policies/Microsoft/Windows/NetCache" valueName="Enabled"> ... <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same NetCache policy key and Enabled value used by the app, and it confirms the 1/0 mapping. |
@@ -14835,8 +14835,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-disable-onesettings-downloads` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: DisableOneSettingsDownloads | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads) | `high` | path, behavior, default, version-scope |
-| `local-datacollection-admx-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-datacollection-adml-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml](evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml) | `high` | behavior, default, side-effects |
+| `local-datacollection-admx-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-datacollection-adml-onesettings` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-onesettings-downloads` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disableonesettingsdownloads-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableOneSettingsDownloads policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -14958,7 +14958,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-csp-allow-online-tips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowOnlineTips | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-control-panel-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/ControlPanel.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/ControlPanel.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-control-panel-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/ControlPanel.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/ControlPanel.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-online-tips` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-allowonlinetips-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - AllowOnlineTips policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior |
@@ -15080,8 +15080,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-pca-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.admx - DisablePcaUIPolicy | [research/evidence-files/external/c/Windows/PolicyDefinitions/pca.admx](evidence-files/external/c/Windows/PolicyDefinitions/pca.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-pca-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.adml - DisablePcaUIPolicy help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/pca.adml](evidence-files/external/c/PolicyDefinitions/en-US/pca.adml) | `high` | behavior, side-effects |
+| `local-pca-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.admx - DisablePcaUIPolicy | [evidence/files/external/c/Windows/PolicyDefinitions/pca.admx](../evidence/files/external/c/Windows/PolicyDefinitions/pca.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-pca-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft pca.adml - DisablePcaUIPolicy help text | [evidence/files/external/c/PolicyDefinitions/en-US/pca.adml](../evidence/files/external/c/PolicyDefinitions/en-US/pca.adml) | `high` | behavior, side-effects |
 | `admx-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_pca | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pca](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pca) | `high` | path, behavior, version-scope |
 | `nohuto-pca-diagnostics-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisablePcaUI policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -15089,7 +15089,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/pca.admx](evidence-files/external/c/Windows/PolicyDefinitions/pca.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/pca.admx](../evidence/files/external/c/Windows/PolicyDefinitions/pca.admx) |
 | Exact quote / path | pca.admx: `<policy name="DisablePcaUIPolicy" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="DisablePcaUI">` with `<enabledValue><decimal value="1" /></enabledValue>` and `<disabledValue><decimal value="0" /></disabledValue>` and `supportedOn ref="windows:SUPPORTED_Windows8"`; pca.adml: `If you enable this policy setting, the PCA is configured to detect failures...` and `If you disable this policy setting, the PCA does not detect compatibility issues for applications and drivers.` |
 | Key found on page | `True` |
 | Notes | Local official pca.admx and pca.adml files document the exact DisablePcaUI policy surface and semantics. The Microsoft Learn ADMX_pca CSP page confirms the same device-scoped policy mapping. Added nohuto mirror corroboration via nohuto-pca-diagnostics-admx. |
@@ -15201,8 +15201,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-grouppolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
+| `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-grouppolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-enablemmx-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableMmx policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -15210,7 +15210,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) |
 | Exact quote / path | <policy name="EnableMMX" class="Machine" ... key="Software/Policies/Microsoft/Windows/System" valueName="EnableMmx"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; GroupPolicy.adml: "If you disable this policy setting, the Windows device is not allowed to be linked to Phones ... and cannot participate in Continue on PC experiences." |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC experiences. Added nohuto mirror corroboration via nohuto-enablemmx-admx. |
@@ -15315,10 +15315,10 @@ Current writes
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
-| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects |
 | `admx-appcompat-turn-off-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
-| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [research/evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](evidence-files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](../evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](../evidence/files/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -15439,8 +15439,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windowsai-disable-ai-data-analysis` | `policy-csp` | `Microsoft policy CSP` | Microsoft WindowsAI Policy CSP: DisableAIDataAnalysis | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis) | `high` | path, value, allowed-values, default, behavior, side-effects, version-scope |
-| `local-windowscopilot-admx-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx Recall mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-windowscopilot-adml-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml Recall help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) | `high` | behavior, default, side-effects |
+| `local-windowscopilot-admx-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx Recall mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-windowscopilot-adml-recall` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml Recall help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-recall` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disableaidataanalysis-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableAIDataAnalysis policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -15449,7 +15449,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) |
 | Exact quote / path | <policy name="DisableAIDataAnalysis" class="Both" ... key="SOFTWARE/Policies/Microsoft/Windows/WindowsAI" valueName="DisableAIDataAnalysis"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots. Added nohuto mirror corroboration via nohuto-disableaidataanalysis-admx. |
@@ -15563,9 +15563,9 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-resume-procmon-notes` | `repo-doc` | `Current repo docs` | Repo Procmon notes for Resume settings | [Docs/privacy/privacy.md](../Docs/privacy/privacy.md) | `medium` | path, value, behavior |
 | `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | HKCU/Software/Microsoft/Windows/CurrentVersion/CrossDeviceResume/Configuration | `medium` | path, value, version-scope |
-| `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [research/evidence-files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](evidence-files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [research/evidence-files/procmon/privacy.disable-resume/resume-policymanager-probe.txt](evidence-files/procmon/privacy.disable-resume/resume-policymanager-probe.txt) | `medium` | path, behavior, version-scope |
+| `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [evidence/files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](../evidence/files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [evidence/files/procmon/privacy.disable-resume/resume-policymanager-probe.txt](../evidence/files/procmon/privacy.disable-resume/resume-policymanager-probe.txt) | `medium` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [research/evidence-files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](evidence-files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [research/evidence-files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](evidence-files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) | `medium` | path, behavior, version-scope |
+| `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [evidence/files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](../evidence/files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [evidence/files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](../evidence/files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) | `medium` | path, behavior, version-scope |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume) | `high` | behavior, version-scope |
 
 **Validation proof**
@@ -15685,15 +15685,15 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-grouppolicy-rsoplogging` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: RSoPLogging | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-grouppolicy-admx-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx RSoPLogging mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-grouppolicy-adml-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml RSoPLogging help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
+| `local-grouppolicy-admx-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx RSoPLogging mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-grouppolicy-adml-rsoplogging` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml RSoPLogging help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) |
 | Exact quote / path | <policy name="RSoPLogging" class="Machine" ... key="Software/Policies/Microsoft/Windows/System" valueName="RSoPLogging"> ... <enabledValue><decimal value="0" /></enabledValue>; GroupPolicy.adml: If you enable this setting, RSoP logging is turned off. If you disable or do not configure this setting, RSoP logging is turned on. By default, RSoP logging is always on. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy turns RSoP logging off. The app now matches that documented surface exactly. |
@@ -15806,7 +15806,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windowsexplorer-csp-disable-search-box-suggestions` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSearchBoxSuggestions | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-windows-explorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/WindowsExplorer.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/WindowsExplorer.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-windows-explorer-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsExplorer.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsExplorer.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-box-suggestions` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchboxsuggestions-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchBoxSuggestions policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -15927,21 +15927,21 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [research/evidence-files/missing/search-admx.md](evidence-files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
-| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Search.adml](evidence-files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Search.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchHistory policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [research/evidence-files/procmon/privacy.disable-search-history/search_history_probe.txt](evidence-files/procmon/privacy.disable-search-history/search_history_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
+| `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [evidence/files/procmon/privacy.disable-search-history/search_history_probe.txt](../evidence/files/procmon/privacy.disable-search-history/search_history_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/search-admx.md](evidence-files/missing/search-admx.md) |
+| Source | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) |
 | Exact quote / path | Search.admx: <policy name="DisableSearchHistory" class="User" ... key="Software/Policies/Microsoft/Windows/Explorer" valueName="DisableSearchHistory"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; Search.adml: "If you enable this policy setting, search queries will not be stored in the registry and users cannot see or use previous searches in the Search pane." |
 | Key found on page | `True` |
-| Notes | The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. Added nohuto mirror corroboration via nohuto-disablesearchhistory-admx. Win25H2Clean reversible probe at [research/evidence-files/vm-tooling-staging/search_history_probe.txt](evidence-files/vm-tooling-staging/search_history_probe.txt) confirmed writes for 0 and 1 into the interactive user policy hive, live registry queries after each write, SearchHost launches in both states, and restoration to the original state; no direct read lines were captured in Procmon. |
+| Notes | The local official Microsoft ADMX file defines the exact user policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy stops storing search history and removes previous-search suggestions. Added nohuto mirror corroboration via nohuto-disablesearchhistory-admx. Win25H2Clean reversible probe at [evidence/files/vm/search_history_probe.txt](../evidence/files/vm-tooling-staging/search_history_probe.txt) confirmed writes for 0 and 1 into the interactive user policy hive, live registry queries after each write, SearchHost launches in both states, and restoration to the original state; no direct read lines were captured in Procmon. |
 
 **Decision**
 
@@ -16051,7 +16051,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-sensors-policy-csp-disable-sensors` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableSensors | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-sensors-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sensors.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Sensors.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-sensors` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disablesensors-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSensors policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -16180,7 +16180,7 @@ Other source references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-appcompat-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_AppCompat Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord) | `high` | path, value, allowed-values, default, behavior |
-| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-steps-recorder` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-uar-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableUAR policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -16333,12 +16333,12 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml](evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
-| `local-cloudcontent-admx-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml](evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
-| `local-cloudcontent-admx-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml](evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
 
 **Validation proof**
 
@@ -16449,17 +16449,17 @@ Current writes
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
-| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
+| `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
+| `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
-| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [research/evidence-files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](evidence-files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) | `high` | value, behavior, version-scope |
+| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](../evidence/files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) | `high` | value, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) |
 | Exact quote / path | AppCompat.admx: `<policy name="AppCompatTurnOffSwitchBack" ... key="Software/Policies/Microsoft/Windows/AppCompat" valueName="SbEnable">`; AppCompat.adml: `If you enable this policy setting, Switchback will be turned off.` and `If you disable or do not configure this policy setting, the Switchback will be turned on.` |
 | Key found on page | `True` |
 | Notes | Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable policy surface and semantics, and Procmon confirmed gpupdate writes SbEnable=REG_DWORD 0x0 on Windows 11 Pro 10.0.26200.8037. |
@@ -16572,7 +16572,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-telemetry-change-notification` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ConfigureTelemetryOptInChangeNotification | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-telemetry-change-notifications` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -16692,8 +16692,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-configure-telemetry-optin-ui` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: ConfigureTelemetryOptInSettingsUx | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-datacollection-admx-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-datacollection-adml-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml](evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml) | `high` | behavior, default, side-effects |
+| `local-datacollection-admx-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-datacollection-adml-optin-ui` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-telemetry-optin-ui` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-datacollection-optin-ui-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableTelemetryOptInSettingsUx policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -16815,9 +16815,9 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-errorreporting-disable-wer` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ErrorReporting Policy CSP: WerDisable_2 | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-errorreporting#werdisable_2](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-errorreporting#werdisable_2) | `high` | path, value, allowed-values, behavior, version-scope |
-| `local-errorreporting-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/ErrorReporting.admx](evidence-files/external/c/Windows/PolicyDefinitions/ErrorReporting.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-errorreporting-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/ErrorReporting.adml](evidence-files/external/c/PolicyDefinitions/en-US/ErrorReporting.adml) | `high` | behavior, side-effects, default |
-| `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/ICM.adml](evidence-files/external/c/PolicyDefinitions/en-US/ICM.adml) | `high` | behavior, default, version-scope |
+| `local-errorreporting-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/ErrorReporting.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ErrorReporting.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-errorreporting-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ErrorReporting.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ErrorReporting.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ErrorReporting.adml) | `high` | behavior, side-effects, default |
+| `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml) | `high` | behavior, default, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-wer` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -16938,7 +16938,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-location-provider-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: DisableWindowsLocationProvider | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-location-provider-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft LocationProviderAdm.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/LocationProviderAdm.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/LocationProviderAdm.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-location-provider-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft LocationProviderAdm.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/LocationProviderAdm.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/LocationProviderAdm.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-windows-location-provider` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disablewindowslocationprovider-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableWindowsLocationProvider policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
@@ -17075,8 +17075,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-allowwindowstips` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsTips | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips) | `high` | behavior, default, version-scope |
-| `local-cloudcontent-admx-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableSoftLanding mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableSoftLanding help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml](evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableSoftLanding mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-softlanding` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableSoftLanding help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -17084,7 +17084,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips) |
-| Exact quote / path | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) (DisableSoftLanding enabledValue=1, disabledValue=0); [research/evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml](evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml) (enabling the policy prevents Windows tips from being shown to users). |
+| Exact quote / path | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) (DisableSoftLanding enabledValue=1, disabledValue=0); [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) (enabling the policy prevents Windows tips from being shown to users). |
 | Key found on page | `True` |
 | Notes | The provider now writes HKLM/Software/Policies/Microsoft/Windows/CloudContent/DisableSoftLanding = 1. The older HKCU ContentDeliveryManager value remains documented only as an observed historical mapping. |
 
@@ -17195,8 +17195,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-security-option-hide-last-user` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display last user name | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852264(v=ws.11](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852264(v=ws.11)) | `high` | behavior, default, side-effects, version-scope |
-| `local-security-registry-last-user` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | [research/evidence-files/external/c/Windows/inf/sceregvl.inf.md](evidence-files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, ui-mapping |
-| `local-security-defaults-last-user` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | [research/evidence-files/external/c/Windows/inf/defltbase.inf.md](evidence-files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
+| `local-security-registry-last-user` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, ui-mapping |
+| `local-security-defaults-last-user` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-last-logged-in-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -17204,10 +17204,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/inf/sceregvl.inf.md](evidence-files/external/c/Windows/inf/sceregvl.inf.md) |
+| Source | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) |
 | Exact quote / path | MACHINE/Software/Microsoft/Windows/CurrentVersion/Policies/System/DontDisplayLastUserName,4,%DontDisplayLastUserName%,0 |
 | Key found on page | `True` |
-| Notes | The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. [research/evidence-files/external/c/Windows/inf/defltbase.inf.md](evidence-files/external/c/Windows/inf/defltbase.inf.md) also confirms the default value 0, and Microsoft documents the enabled behavior as hiding the last signed-in username. |
+| Notes | The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) also confirms the default value 0, and Microsoft documents the enabled behavior as hiding the last signed-in username. |
 
 **Decision**
 
@@ -17315,7 +17315,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) | `high` | path, value, allowed-values, default, behavior |
-| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-personalized-sites` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -17323,7 +17323,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/StartMenu.admx](evidence-files/external/c/Windows/PolicyDefinitions/StartMenu.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx) |
 | Exact quote / path | <policy name="HideRecommendedPersonalizedSites" class="Both" ... key="Software/Policies/Microsoft/Windows/Explorer" valueName="HideRecommendedPersonalizedSites"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedPersonalizedSites value used by the app. The official Start Policy CSP provides the 0/1 shown-versus-hidden semantics for the same policy. |
@@ -17436,7 +17436,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) | `high` | path, value, allowed-values, default, behavior |
-| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-personalized-sites-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -17444,7 +17444,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/StartMenu.admx](evidence-files/external/c/Windows/PolicyDefinitions/StartMenu.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx) |
 | Exact quote / path | <policy name="HideRecommendedPersonalizedSites" class="Both" ... key="Software/Policies/Microsoft/Windows/Explorer" valueName="HideRecommendedPersonalizedSites"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedPersonalizedSites value used by the app. Because the policy is class="Both", the same surface is valid for HKCU as well as HKLM. The official Start Policy CSP provides the 0/1 shown-versus-hidden semantics. |
@@ -17555,7 +17555,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) | `high` | path, value, allowed-values, default, behavior |
-| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-section` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -17676,7 +17676,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-start-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Start Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start) | `high` | path, value, allowed-values, default, behavior |
-| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, ui-mapping, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-recommended-section-user` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -17684,7 +17684,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) |
 | Exact quote / path | <policy name="HideRecommendedSection" class="Both" ... key="Software/Policies/Microsoft/Windows/Explorer" valueName="HideRecommendedSection"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedSection value used by the app, and marks the policy as class="Both", which supports both HKLM and HKCU policy scope. The official Start Policy CSP provides the 0/1 shown/hidden semantics for this same control. |
@@ -17796,8 +17796,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-security-option-hide-username-signin` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display username at sign-in | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852277(v=ws.11](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852277(v=ws.11)) | `high` | behavior, side-effects, version-scope |
-| `local-security-registry-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | [research/evidence-files/external/c/Windows/inf/sceregvl.inf.md](evidence-files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, ui-mapping |
-| `local-security-defaults-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | [research/evidence-files/external/c/Windows/inf/defltbase.inf.md](evidence-files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
+| `local-security-registry-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, ui-mapping |
+| `local-security-defaults-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-username-at-signin` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -17805,7 +17805,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/inf/sceregvl.inf.md](evidence-files/external/c/Windows/inf/sceregvl.inf.md) |
+| Source | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) |
 | Exact quote / path | MACHINE/Software/Microsoft/Windows/CurrentVersion/Policies/System/DontDisplayUserName,4,%DontDisplayUserName%,0 |
 | Key found on page | `True` |
 | Notes | Guest-side probe on Win25H2Clean confirmed that sceregvl.inf contains the DontDisplayUserName mapping for the documented sign-in privacy option. DontDisplayLockedUserId also appears in the same file, but it is a separate nearby security-option surface. |
@@ -17918,7 +17918,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-limit-diagnostic-log-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDiagnosticLogCollection | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-limit-diagnostic-log-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -17926,7 +17926,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) |
 | Exact quote / path | <policy name="LimitDiagnosticLogCollection" class="Machine" ... key="Software/Policies/Microsoft/Windows/DataCollection" valueName="LimitDiagnosticLogCollection"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same DataCollection policy key and LimitDiagnosticLogCollection value used by the app. The paired ADML help text states that enabling the policy prevents additional diagnostic logs from being collected. |
@@ -18039,7 +18039,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-policy-csp-limit-dump-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LimitDumpCollection | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-data-collection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-limit-dump-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-crashdump-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto crash-dump gate trace | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c); [Docs/privacy/assets/crashdmp.c](../Docs/privacy/assets/crashdmp.c) | `medium` | path, behavior, dependency |
@@ -18048,7 +18048,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx) |
 | Exact quote / path | <policy name="LimitDumpCollection" class="Machine" ... key="Software/Policies/Microsoft/Windows/DataCollection" valueName="LimitDumpCollection"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same DataCollection policy key and LimitDumpCollection value used by the app. The paired ADML help text states that enabling the policy limits Windows Error Reporting to kernel mini dumps and user mode triage dumps. |
@@ -18154,8 +18154,8 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-system-allowtelemetry` | `policy-csp` | `Microsoft policy CSP` | Microsoft System Policy CSP: AllowTelemetry | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-datacollection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-datacollection-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml](evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml) | `high` | behavior, default, version-scope, side-effects |
+| `local-datacollection-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-datacollection-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) | `high` | behavior, default, version-scope, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-allowtelemetry-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - AllowTelemetry policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
 
@@ -18164,7 +18164,7 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry) |
-| Exact quote / path | [research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx) (AllowTelemetry values 0, 1, and 3); [research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml](evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml) (value 0 is only supported on Enterprise, Education, and Server editions). |
+| Exact quote / path | [evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx) (AllowTelemetry values 0, 1, and 3); [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) (value 0 is only supported on Enterprise, Education, and Server editions). |
 | Key found on page | `True` |
 | Notes | The app now uses the documented lowest supported diagnostic-data level wording and gates value 0 to the supported edition families instead of treating it as a universal off switch. Added nohuto mirror corroboration via nohuto-allowtelemetry-admx. |
 
@@ -18280,8 +18280,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-troubleshooting-allowrecommendations` | `policy-csp` | `Microsoft policy CSP` | Microsoft Troubleshooting Policy CSP: TroubleshootingAllowRecommendations | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-msdt-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/MSDT.admx](evidence-files/external/c/Windows/PolicyDefinitions/MSDT.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-msdt-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/MSDT.adml](evidence-files/external/c/PolicyDefinitions/en-US/MSDT.adml) | `high` | behavior, default, side-effects |
+| `local-msdt-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/MSDT.admx](../evidence/files/external/c/Windows/PolicyDefinitions/MSDT.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-msdt-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft MSDT.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/MSDT.adml](../evidence/files/external/c/PolicyDefinitions/en-US/MSDT.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
 
 **Validation proof**
@@ -18427,15 +18427,15 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-settingsync` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_SettingSync Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-settingsync](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-settingsync) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-settingsync-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SettingSync.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/SettingSync.admx](evidence-files/external/c/Windows/PolicyDefinitions/SettingSync.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-settingsync-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SettingSync.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/SettingSync.adml](evidence-files/external/c/PolicyDefinitions/en-US/SettingSync.adml) | `high` | behavior, default, side-effects |
+| `local-settingsync-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SettingSync.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/SettingSync.admx](../evidence/files/external/c/Windows/PolicyDefinitions/SettingSync.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-settingsync-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SettingSync.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/SettingSync.adml](../evidence/files/external/c/PolicyDefinitions/en-US/SettingSync.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/SettingSync.admx](evidence-files/external/c/Windows/PolicyDefinitions/SettingSync.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/SettingSync.admx](../evidence/files/external/c/Windows/PolicyDefinitions/SettingSync.admx) |
 | Exact quote / path | SettingSync.admx: DisableSettingSyncUserOverride trueValue=0, falseValue=1. |
 | Key found on page | `True` |
 | Notes | Local SettingSync.admx and SettingSync.adml confirm that the UserOverride values allow syncing to be turned back on, so the current label now matches the documented behavior. |
@@ -18562,15 +18562,15 @@ Windows Internals references:
 | `ms-defender-block-at-first-sight-dependency` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Block at First Sight dependency on sample submission | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) | `high` | behavior, tradeoff |
 | `repo-defender-submit-samples-lead` | `repo-doc` | `Current repo docs` | Local Defender sample-submission lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) | `medium` | path, value, allowed-values |
 | `repo-defender-submit-samples-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes SubmitSamplesConsent | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path |
-| `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | [research/evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `medium` | path, runtime-read, default |
-| `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](evidence-files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | [evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `medium` | path, runtime-read, default |
+| `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [evidence/files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](../evidence/files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-disable-defender-sample-submission` | `repo-code` | `Current repo code` | Current security provider sample-submission write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/submitsamples-ui-state2.txt](evidence-files/vm-tooling-staging/submitsamples-ui-state2.txt) |
+| Source | [evidence/files/vm/submitsamples-ui-state2.txt](../evidence/files/vm-tooling-staging/submitsamples-ui-state2.txt) |
 | Exact quote / path | SecurityHealthService.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/Spynet/SubmitSamplesConsent \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 2 |
 | Key found on page | `True` |
 | Notes | The same clean-snapshot Defender Spynet probe line also showed the sibling SpyNetReporting value as NAME NOT FOUND when SubmitSamplesConsent = 2 was the only policy value on the branch. |
@@ -18688,15 +18688,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-attachmentmanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AttachmentManager.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx](evidence-files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-attachmentmanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AttachmentManager.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AttachmentManager.adml](evidence-files/external/c/PolicyDefinitions/en-US/AttachmentManager.adml) | `high` | behavior, default, side-effects |
+| `local-attachmentmanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AttachmentManager.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-attachmentmanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AttachmentManager.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AttachmentManager.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AttachmentManager.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx](evidence-files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx) |
 | Exact quote / path | <policy name="AM_MarkZoneOnSavedAtttachments" class="User" ... key="Software/Microsoft/Windows/CurrentVersion/Policies/Attachments" valueName="SaveZoneInformation"> ... <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="2" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same Attachments policy key and SaveZoneInformation value used by the app, and it confirms the 1/2 mapping. The paired ADML help text states that enabling the policy stops Windows from marking attachments with zone information. |
@@ -18817,16 +18817,16 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-defender-security-center-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefenderSecurityCenter.admx enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) | `high` | path, value, allowed-values, behavior |
 | `ms-defender-reporting-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefender.admx reporting enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, allowed-values |
-| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt](evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt) | `high` | path, runtime-read, default |
-| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) | `high` | path, value, runtime-read, behavior |
-| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) | `medium` | path, runtime-read |
+| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt](../evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt) | `high` | path, runtime-read, default |
+| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](../evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | [evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](../evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) | `medium` | path, runtime-read |
 | `app-security-provider-disable-enhanced-notifications` | `repo-code` | `Current repo code` | Current security provider enhanced notifications write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | ui-mapping, path, value |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt](evidence-files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt) |
+| Source | [evidence/files/vm/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt](../evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt) |
 | Exact quote / path | SecurityHealthService.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender Security Center/Notifications/DisableEnhancedNotifications \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write. |
 | Key found on page | `True` |
 | Notes | The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, but that sibling policy does not change which path this value is read from. |
@@ -18943,16 +18943,16 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx](evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml](evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, side-effects |
+| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx](evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx) |
-| Exact quote / path | [research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx](evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx) (NtfsDisableEncryption enabledValue=1, disabledValue=0); [research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml](evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml) (enabling the setting prevents access to and creation of encrypted files and requires a reboot to take effect). |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) |
+| Exact quote / path | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) (NtfsDisableEncryption enabledValue=1, disabledValue=0); [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) (enabling the setting prevents access to and creation of encrypted files and requires a reboot to take effect). |
 | Key found on page | `True` |
 | Notes | Validated against the local Microsoft policy files for NTFS encryption. |
 
@@ -19073,15 +19073,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-deliveryoptimization-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeliveryOptimization.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx](evidence-files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-deliveryoptimization-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeliveryOptimization.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/DeliveryOptimization.adml](evidence-files/external/c/PolicyDefinitions/en-US/DeliveryOptimization.adml) | `high` | behavior, allowed-values, side-effects |
+| `local-deliveryoptimization-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeliveryOptimization.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-deliveryoptimization-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeliveryOptimization.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DeliveryOptimization.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DeliveryOptimization.adml) | `high` | behavior, allowed-values, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx](evidence-files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx) |
 | Exact quote / path | DeliveryOptimization.admx: `valueName="DODownloadMode"`; DeliveryOptimization.adml: `Download Mode` / `Specifies the method that Delivery Optimization can use to download content on behalf of various Microsoft products.` The local ADMX/ADML pair documents DODownloadMode under the official policy path and its enum values 0, 1, 2, 3, 99, and 100. |
 | Key found on page | `True` |
 | Notes | Local official ADMX and ADML files document the exact Delivery Optimization policy surface under HKLM/SOFTWARE/Policies/Microsoft/Windows/DeliveryOptimization, and the app now writes that documented path. |
@@ -19199,15 +19199,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CredUI.admx](evidence-files/external/c/Windows/PolicyDefinitions/CredUI.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CredUI.adml](evidence-files/external/c/PolicyDefinitions/en-US/CredUI.adml) | `high` | behavior, default, side-effects |
+| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/CredUI.admx](evidence-files/external/c/Windows/PolicyDefinitions/CredUI.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx) |
 | Exact quote / path | <policy name="DisablePasswordReveal" class="Both" ... key="Software/Policies/Microsoft/Windows/CredUI" valueName="DisablePasswordReveal"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; CredUI.adml: "If you enable this policy setting, the password reveal button will not be displayed..." |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file defines the exact policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy hides the password reveal button. |
@@ -19325,15 +19325,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-credentialproviders-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx](evidence-files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-credentialproviders-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CredentialProviders.adml](evidence-files/external/c/PolicyDefinitions/en-US/CredentialProviders.adml) | `high` | behavior, default, side-effects |
+| `local-credentialproviders-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-credentialproviders-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredentialProviders.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredentialProviders.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx](evidence-files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx) |
 | Exact quote / path | <policy name="BlockDomainPicturePassword" class="Machine" ... key="Software/Policies/Microsoft/Windows/System" valueName="BlockDomainPicturePassword"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; CredentialProviders.adml: "If you enable this policy setting, a domain user can't set up or sign in with a picture password." |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file defines the exact policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy blocks picture password sign-in for domain users. |
@@ -19452,15 +19452,15 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-remote-assistance-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: RemoteAssistance / SolicitedRemoteAssistance | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-remoteassistance](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-remoteassistance) | `high` | path, value, default, behavior, ui-mapping |
-| `local-remoteassistance-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft RemoteAssistance.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/RemoteAssistance.admx](evidence-files/external/c/Windows/PolicyDefinitions/RemoteAssistance.admx) | `high` | path, value, allowed-values |
-| `local-remoteassistance-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft RemoteAssistance.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/RemoteAssistance.adml](evidence-files/external/c/PolicyDefinitions/en-US/RemoteAssistance.adml) | `high` | default, behavior, side-effects |
+| `local-remoteassistance-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft RemoteAssistance.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/RemoteAssistance.admx](../evidence/files/external/c/Windows/PolicyDefinitions/RemoteAssistance.admx) | `high` | path, value, allowed-values |
+| `local-remoteassistance-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft RemoteAssistance.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/RemoteAssistance.adml](../evidence/files/external/c/PolicyDefinitions/en-US/RemoteAssistance.adml) | `high` | default, behavior, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/RemoteAssistance.admx](evidence-files/external/c/Windows/PolicyDefinitions/RemoteAssistance.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/RemoteAssistance.admx](../evidence/files/external/c/Windows/PolicyDefinitions/RemoteAssistance.admx) |
 | Exact quote / path | <policy name="RA_Solicit" class="Machine" ... key="Software/policies/Microsoft/Windows NT/Terminal Services" valueName="fAllowToGetHelp"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same Terminal Services policy key and fAllowToGetHelp value used by the app. The paired ADML help text states that this policy turns Solicited Remote Assistance on or off. |
@@ -19575,8 +19575,8 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-exploitguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/ExploitGuard.admx](evidence-files/external/c/Windows/PolicyDefinitions/ExploitGuard.admx) | `high` | path, value, version-scope |
-| `local-exploitguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml](evidence-files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml) | `high` | behavior, default, side-effects |
+| `local-exploitguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/ExploitGuard.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ExploitGuard.admx) | `high` | path, value, version-scope |
+| `local-exploitguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml) | `high` | behavior, default, side-effects |
 | `ms-exploit-protection-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn exploit protection guidance | [https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection](https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection) | `high` | behavior, allowed-values, risk |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
@@ -19703,15 +19703,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-systemrestore-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/SystemRestore.admx](evidence-files/external/c/Windows/PolicyDefinitions/SystemRestore.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-systemrestore-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/SystemRestore.adml](evidence-files/external/c/PolicyDefinitions/en-US/SystemRestore.adml) | `high` | behavior, default, side-effects, risk |
+| `local-systemrestore-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx](../evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-systemrestore-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/SystemRestore.adml](../evidence/files/external/c/PolicyDefinitions/en-US/SystemRestore.adml) | `high` | behavior, default, side-effects, risk |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/SystemRestore.admx](evidence-files/external/c/Windows/PolicyDefinitions/SystemRestore.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx](../evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx) |
 | Exact quote / path | <policy name="SR_DisableSR" class="Machine" ... key="Software/Policies/Microsoft/Windows NT/SystemRestore" valueName="DisableSR">; SystemRestore.adml: "This policy setting allows you to turn off System Restore." |
 | Key found on page | `True` |
 | Notes | Local official Microsoft ADMX and ADML files document DisableSR as the supported System Restore turn-off policy. The app now writes that exact documented value. |
@@ -19846,8 +19846,8 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-firewall-csp` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Firewall CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp](https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp) | `high` | path, value, allowed-values, behavior, version-scope |
-| `local-windowsfirewall-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsFirewall.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsFirewall.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-windowsfirewall-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml) | `high` | behavior, default, side-effects |
+| `local-windowsfirewall-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsFirewall.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsFirewall.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-windowsfirewall-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml) | `high` | behavior, default, side-effects |
 | `ms-azure-firewall-runtime-paths` | `troubleshoot-doc` | `Microsoft support doc` | Microsoft Learn: Azure VM firewall recovery guidance | [https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows](https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows) | `medium-high` | path, runtime-surface |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matching |
 
@@ -19973,16 +19973,16 @@ Current writes
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | [research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx](evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
-| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml) | `high` | behavior, default, side-effects |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | [evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
+| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) |
 | Exact quote / path | NoAutoUpdate under the AU policy key with the expected 1/0 mapping for Configure Automatic Updates. |
 | Key found on page | `True` |
 | Notes | The deprecated parent retains the pause-timestamp behavior; this child records the official policy half only. |
@@ -20133,19 +20133,19 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-devicesetup-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceSetup.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx](evidence-files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-devicesetup-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceSetup.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/DeviceSetup.adml](evidence-files/external/c/PolicyDefinitions/en-US/DeviceSetup.adml) | `high` | behavior, allowed-values, side-effects |
-| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx](evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
-| `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/ICM.adml](evidence-files/external/c/PolicyDefinitions/en-US/ICM.adml) | `high` | behavior, default, side-effects |
-| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml) | `high` | behavior, default, side-effects |
+| `local-devicesetup-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceSetup.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-devicesetup-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceSetup.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DeviceSetup.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DeviceSetup.adml) | `high` | behavior, allowed-values, side-effects |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
+| `local-icm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml) | `high` | behavior, default, side-effects |
+| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx](evidence-files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx) |
 | Exact quote / path | DeviceSetup.admx: <policy name="DriverSearchPlaces_SearchOrderConfiguration" ... key="Software/Policies/Microsoft/Windows/DriverSearching"> ... <enum ... valueName="SearchOrderConfig"> ... <decimal value="0"/>; ICM.admx: key="Software/Policies/Microsoft/Windows/DriverSearching" valueName="DontSearchWindowsUpdate"; WindowsUpdate.admx: key="Software/Policies/Microsoft/Windows/WindowsUpdate" valueName="ExcludeWUDriversInQualityUpdate"> <enabledValue><decimal value="1" /></enabledValue>. |
 | Key found on page | `True` |
 | Notes | The local official Microsoft policy files define the exact DriverSearching and WindowsUpdate policy paths used by the app. SearchOrderConfig = 0 means do not search Windows Update, DontSearchWindowsUpdate = 1 blocks Windows Update device-driver searching, and ExcludeWUDriversInQualityUpdate = 1 excludes driver-classified updates from Windows quality updates. |
@@ -20267,15 +20267,15 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-defender-spynet-reporting` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) | `high` | path, value, allowed-values, behavior |
 | `repo-defender-spynet-lead` | `repo-doc` | `Current repo docs` | Local Defender MAPS lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) | `medium` | path, value, allowed-values |
-| `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [research/evidence-files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](evidence-files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) | `high` | path, runtime-read, default |
-| `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [evidence/files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](../evidence/files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) | `high` | path, runtime-read, default |
+| `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | `Current repo code` | Current security provider MAPS membership write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/spynet-ui-state2.txt](evidence-files/vm-tooling-staging/spynet-ui-state2.txt) |
+| Source | [evidence/files/vm/spynet-ui-state2.txt](../evidence/files/vm-tooling-staging/spynet-ui-state2.txt) |
 | Exact quote / path | SecurityHealthService.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/Spynet/SpyNetReporting \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 2 |
 | Key found on page | `True` |
 | Notes | The clean baseline first showed the Defender Spynet policy branch as absent and the non-policy live store reading SpyNetReporting = 2. After the policy write, SecurityHealthService.exe read the same value directly from the policy path. |
@@ -20392,16 +20392,16 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-passport-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx](evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-passport-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml](evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml) | `high` | behavior, default, side-effects |
+| `local-passport-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-passport-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx](evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx) |
-| Exact quote / path | [research/evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx:](evidence-files/external/c/Windows/PolicyDefinitions/Passport.admx:) policy name="MSPassport_UseDynamicLock" key="SOFTWARE/Policies/Microsoft/PassportForWork/DynamicLock" valueName="DynamicLock" enabledValue=1; [research/evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml:](evidence-files/external/c/PolicyDefinitions/en-US/Passport.adml:) "If you enable this policy setting, these signal rules will be evaluated to detect user absence and automatically lock the device." |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx) |
+| Exact quote / path | [evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx:](../evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx:) policy name="MSPassport_UseDynamicLock" key="SOFTWARE/Policies/Microsoft/PassportForWork/DynamicLock" valueName="DynamicLock" enabledValue=1; [evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml:](../evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml:) "If you enable this policy setting, these signal rules will be evaluated to detect user absence and automatically lock the device." |
 | Key found on page | `True` |
 | Notes | The official Dynamic Lock policy surface is machine-checkably documented in the local ADMX and ADML files. |
 
@@ -20520,15 +20520,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-sudo-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/Sudo.admx](evidence-files/external/c/Windows/PolicyDefinitions/Sudo.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-sudo-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Sudo.adml](evidence-files/external/c/PolicyDefinitions/en-US/Sudo.adml) | `high` | behavior, default, side-effects |
+| `local-sudo-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Sudo.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Sudo.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-sudo-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Sudo.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Sudo.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/Sudo.admx](evidence-files/external/c/Windows/PolicyDefinitions/Sudo.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/Sudo.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Sudo.admx) |
 | Exact quote / path | <policy name="EnableSudo" class="Machine" ... key="Software/Policies/Microsoft/Windows/Sudo"> ... <enum id="SudoModes" valueName="Enabled"> ... <decimal value="0" /> ... <decimal value="1" /> ... <decimal value="2" /> ... <decimal value="3" />; Sudo.adml: "Normal": When sudo launches a command line application, it will launch the app in the current console window. |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, and enumerates modes 0 through 3. The paired ADML help text explains that value 3 is the Normal mode, matching the app's current write. |
@@ -20650,17 +20650,17 @@ Windows Internals references:
 | `ms-defender-hide-exclusions-from-local-admins` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Defender CSP HideExclusionsFromLocalAdmins | [https://learn.microsoft.com/en-us/windows/client-management/mdm/defender-csp](https://learn.microsoft.com/en-us/windows/client-management/mdm/defender-csp) | `high` | value, allowed-values, behavior |
 | `ms-defender-exclusions-visibility-note` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure exclusions in Defender Antivirus | [https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus](https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus) | `high` | behavior, tradeoff |
 | `repo-defender-hide-exclusions-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path |
-| `vm-defender-hide-exclusions-baseline-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean baseline visibility with managed exclusion present | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json](evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json) | `high` | default, behavior |
-| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt) | `high` | path, value, runtime-read, behavior |
-| `vm-defender-hide-exclusions-root-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) | `high` | value, behavior |
-| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-hide-exclusions-baseline-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean baseline visibility with managed exclusion present | [evidence/files/vm/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json) | `high` | default, behavior |
+| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt](../evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-hide-exclusions-root-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [evidence/files/vm/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) | `high` | value, behavior |
+| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](../evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | `Current repo code` | Current security provider HideExclusionsFromLocalAdmins write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt](evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt) |
+| Source | [evidence/files/vm/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt](../evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt) |
 | Exact quote / path | wmiprvse.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/HideExclusionsFromLocalAdmins \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
 | Key found on page | `True` |
 | Notes | The baseline visibility JSON showed the managed exclusion path in Get-MpPreference while both policy values were unset. The root-path state-1 run then hid that exclusion from Get-MpPreference, and a separate Policy Manager run produced the same behavior after reading the alias path instead. |
@@ -20794,15 +20794,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-powershellpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-powershellpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](evidence-files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) | `high` | behavior, default, side-effects, risk |
+| `local-powershellpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-powershellpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) | `high` | behavior, default, side-effects, risk |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) |
 | Exact quote / path | <policy name="EnableScripts" class="Both" ... key="Software/Policies/Microsoft/Windows/PowerShell" valueName="EnableScripts">; <enum id="ExecutionPolicy" valueName="ExecutionPolicy" required="true">; PowerShellExecutionPolicy.adml: `Turn on Script Execution` / `This policy setting lets you configure the script execution policy, controlling which scripts are allowed to run.` |
 | Key found on page | `True` |
 | Notes | Local official ADMX and ADML files document the exact Group Policy surface under Software/Policies/Microsoft/Windows/PowerShell using EnableScripts and ExecutionPolicy, and the app now writes those documented values. |
@@ -20944,24 +20944,24 @@ Current writes
 | `ms-defender-file-hash-event1120` | `official-doc` | `Microsoft official doc` | Microsoft support: Troubleshoot Microsoft Defender Antivirus settings | [https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d](https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d) | `high` | behavior, value |
 | `ms-defender-cloud-demo-sample` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Demonstrate cloud-delivered protection | [https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection](https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection) | `high` | behavior, path |
 | `repo-defender-threat-file-hash-dumps` | `repo-doc` | `Current repo docs` | Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path, value |
-| `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | [research/evidence-files/vm-tooling-staging/defender-runtime-repair.json](evidence-files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
-| `vm-defender-runtime-enabled-baseline` | `vm-test` | `VM test / probe` | Defender-on 25H2 snapshot baseline | [research/evidence-files/vm-tooling-staging/defender-runtime-repair.json](evidence-files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
-| `vm-defender-threat-file-hash-baseline` | `vm-test` | `VM test / probe` | Defender-on baseline EICAR probe | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json) | `high` | default, behavior |
-| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt](evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt) | `high` | path, value, runtime-read |
-| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt](evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt) | `high` | path, value, runtime-read |
-| `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | `VM test / probe` | Non-rebooted MpEngine pass did not show a live read | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json) | `medium` | path, behavior |
-| `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | `VM test / probe` | WinDefend service restart follow-up was blocked | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json) | `medium` | behavior, runtime-read |
-| `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | `VM test / probe` | Rebooted MpEngine pass still did not show a direct policy-path read | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt) | `high` | path, behavior, runtime-read |
-| `vm-defender-threat-file-hash-pe-baseline` | `vm-test` | `VM test / probe` | Official Microsoft PE sample baseline still produced no event 1120 | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json) | `high` | behavior, default |
-| `vm-defender-threat-file-hash-root-pe-no-hash` | `vm-test` | `VM test / probe` | Legacy root PE pass still produced no event 1120 | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json) | `high` | behavior, runtime-read |
-| `vm-defender-threat-file-hash-policymanager-pe-no-hash` | `vm-test` | `VM test / probe` | Policy Manager PE pass still produced no event 1120 | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json) | `high` | behavior, runtime-read |
-| `vm-defender-threat-file-hash-mpengine-pe-reboot-no-hash` | `vm-test` | `VM test / probe` | Rebooted MpEngine PE pass still produced no event 1120 | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json) | `high` | behavior, runtime-read, path |
+| `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
+| `vm-defender-runtime-enabled-baseline` | `vm-test` | `VM test / probe` | Defender-on 25H2 snapshot baseline | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
+| `vm-defender-threat-file-hash-baseline` | `vm-test` | `VM test / probe` | Defender-on baseline EICAR probe | [evidence/files/vm/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json) | `high` | default, behavior |
+| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [evidence/files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt](../evidence/files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt) | `high` | path, value, runtime-read |
+| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [evidence/files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt](../evidence/files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt) | `high` | path, value, runtime-read |
+| `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | `VM test / probe` | Non-rebooted MpEngine pass did not show a live read | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json) | `medium` | path, behavior |
+| `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | `VM test / probe` | WinDefend service restart follow-up was blocked | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json) | `medium` | behavior, runtime-read |
+| `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | `VM test / probe` | Rebooted MpEngine pass still did not show a direct policy-path read | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt) | `high` | path, behavior, runtime-read |
+| `vm-defender-threat-file-hash-pe-baseline` | `vm-test` | `VM test / probe` | Official Microsoft PE sample baseline still produced no event 1120 | [evidence/files/vm/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json) | `high` | behavior, default |
+| `vm-defender-threat-file-hash-root-pe-no-hash` | `vm-test` | `VM test / probe` | Legacy root PE pass still produced no event 1120 | [evidence/files/vm/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json) | `high` | behavior, runtime-read |
+| `vm-defender-threat-file-hash-policymanager-pe-no-hash` | `vm-test` | `VM test / probe` | Policy Manager PE pass still produced no event 1120 | [evidence/files/vm/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json) | `high` | behavior, runtime-read |
+| `vm-defender-threat-file-hash-mpengine-pe-reboot-no-hash` | `vm-test` | `VM test / probe` | Rebooted MpEngine PE pass still produced no event 1120 | [evidence/files/vm/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json) | `high` | behavior, runtime-read, path |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt](evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt) |
+| Source | [evidence/files/vm/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt](../evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt) |
 | Exact quote / path | MsMpEng.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/ThreatFileHashLogging \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
 | Key found on page | `True` |
 | Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a separate pass. The app now stays on the documented root policy path. The later official Microsoft PE sample follow-up still produced event 1116 with no event 1120, so the hash-event behavior remains an open current-build question rather than part of the app contract. |
@@ -21078,20 +21078,20 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CredUI.admx](evidence-files/external/c/Windows/PolicyDefinitions/CredUI.admx) | `high` | path, ui-mapping, version-scope |
-| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CredUI.adml](evidence-files/external/c/PolicyDefinitions/en-US/CredUI.adml) | `high` | behavior, default, side-effects |
+| `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx) | `high` | path, ui-mapping, version-scope |
+| `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-enablesecurecredentialprompting-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableSecureCredentialPrompting policy | [research/_source-mirrors/win-config/security/desc.md](_source-mirrors/win-config/security/desc.md) | `high` | path, value, behavior |
-| `vm-batch-probe-20260320-trusted-path-credential-prompting` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Trusted path credential prompting | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
+| `vm-batch-probe-20260320-trusted-path-credential-prompting` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Trusted path credential prompting | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| Source | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | Exact quote / path | HKLM/Software/Microsoft/Windows/CurrentVersion/Policies/CredUI/EnableSecureCredentialPrompting: before=__MISSING__, after_apply=1, after_restore=__MISSING__ |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/files/vm/vm-batch-probe-20260320.json..md](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx. |
 
 **Decision**
 
@@ -21242,7 +21242,7 @@ Windows Internals references:
 | `ms-uac-registry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: User Account Control registry key entries | [https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings) | `high` | path, value, allowed-values, default, behavior |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-uac-bootphase` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto boot-phase UAC value read | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) | `medium` | path, behavior, dependency |
-| `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | [research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) | `high` | path, value, behavior, ui-mapping |
+| `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | [evidence/files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](../evidence/files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [evidence/files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](../evidence/files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) | `high` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -21370,7 +21370,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-desktop-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Desktop Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-desktop](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-desktop) | `high` | path, behavior, default, ui-mapping |
-| `local-desktop-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Desktop.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Desktop.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Desktop.admx) | `high` | path, value, allowed-values |
+| `local-desktop-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Desktop.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Desktop.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Desktop.admx) | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-aero-shake` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -21378,7 +21378,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Desktop.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Desktop.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Desktop.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Desktop.admx) |
 | Exact quote / path | <policy name="NoWindowMinimizingShortcuts" class="User" ... key="Software/Policies/Microsoft/Windows/Explorer" valueName="NoWindowMinimizingShortcuts"> ... <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same Explorer policy key and NoWindowMinimizingShortcuts value used by the app, and it confirms the 1/0 mapping. The paired ADML help text states that enabling the policy turns off the Aero Shake gesture. |
@@ -21750,15 +21750,15 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-applicationmanagement-allowautomaticapparchiving` | `policy-csp` | `Microsoft policy CSP` | Microsoft ApplicationManagement Policy CSP: AllowAutomaticAppArchiving | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowautomaticapparchiving](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowautomaticapparchiving) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) | `high` | behavior, default, side-effects |
+| `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) | `high` | behavior, default, side-effects |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) |
 | Exact quote / path | <policy name="AllowAutomaticAppArchiving" class="Machine" ... key="Software/Policies/Microsoft/Windows/Appx" valueName="AllowAutomaticAppArchiving"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same Appx policy key and AllowAutomaticAppArchiving value used by the app. The paired ADML help text states that enabling archives infrequently used apps, disabling prevents app archiving, and not configured follows the default user-configurable behavior. |
@@ -21880,17 +21880,17 @@ Windows Internals references:
 | `ms-automatic-maintenance-overview` | `official-doc` | `Microsoft official doc` | Microsoft Automatic Maintenance overview | [https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance) | `high` | behavior, default, version-scope |
 | `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | [https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable](https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable) | `high` | path, value, behavior, default |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Automatic maintenance override | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
+| `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Automatic maintenance override | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `nohuto-maintenance-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - Automatic Maintenance registry evidence | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| Source | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | Exact quote / path | HKLM/SOFTWARE/Microsoft/Windows NT/CurrentVersion/Schedule/Maintenance/MaintenanceDisabled: before=__MISSING__, after_apply=1, after_restore=__MISSING__ |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) The local nohuto mirror also shows the same MaintenanceDisabled registry path. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/files/vm/vm-batch-probe-20260320.json..md](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md) The local nohuto mirror also shows the same MaintenanceDisabled registry path. |
 
 **Decision**
 
@@ -22007,7 +22007,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-grouppolicy-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#disablebackgroundpolicy](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#disablebackgroundpolicy) | `high` | path, default, behavior, ui-mapping |
-| `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx) | `high` | path, ui-mapping, version-scope |
+| `local-grouppolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx) | `high` | path, ui-mapping, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-background-gp-updates` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -22015,7 +22015,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) |
 | Exact quote / path | <policy name="DisableBackgroundPolicy" class="Machine" ... key="Software/Microsoft/Windows/CurrentVersion/Policies/System" valueName="DisableBkGndGroupPolicy"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same policy key and DisableBkGndGroupPolicy value used by the app. The paired GroupPolicy.adml help text states that enabling the policy prevents Group Policy from being updated while the computer is in use. |
@@ -22153,7 +22153,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-clipboard-history-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowClipboardHistory | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowclipboardhistory](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowclipboardhistory) | `high` | path, value, allowed-values, default, behavior |
 | `ms-cross-device-clipboard-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowCrossDeviceClipboard | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowcrossdeviceclipboard](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowcrossdeviceclipboard) | `high` | path, value, allowed-values, default, behavior |
-| `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx) | `high` | path, value, allowed-values |
+| `local-ospolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft OSPolicy.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx) | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-clipboard-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -22161,7 +22161,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx) |
 | Exact quote / path | <policy name="AllowCrossDeviceClipboard" ... key="Software/Policies/Microsoft/Windows/System" valueName="AllowCrossDeviceClipboard"> ... <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; <policy name="AllowClipboardHistory" ... key="Software/Policies/Microsoft/Windows/System" valueName="AllowClipboardHistory"> ... <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same policy key and both value names used by the app, and it confirms the shared 1/0 mapping. |
@@ -22282,7 +22282,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-terminalserver-clipboard-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP ADMX TerminalServer: Disable clipboard redirection | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-terminalserver#ts_disableclipboardredirection](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-terminalserver#ts_disableclipboardredirection) | `high` | path, value, allowed-values, default, behavior |
-| `local-terminalserver-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft TerminalServer.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/TerminalServer.admx](evidence-files/external/c/Windows/PolicyDefinitions/TerminalServer.admx) | `high` | path, value, allowed-values |
+| `local-terminalserver-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft TerminalServer.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/TerminalServer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/TerminalServer.admx) | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-clipboard-redirection` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -22290,7 +22290,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/TerminalServer.admx](evidence-files/external/c/Windows/PolicyDefinitions/TerminalServer.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/TerminalServer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/TerminalServer.admx) |
 | Exact quote / path | <policy name="TS_CLIENT_CLIPBOARD" ... key="SOFTWARE/Policies/Microsoft/Windows NT/Terminal Services" valueName="fDisableClip"> ... <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same policy key and fDisableClip value used by the app, and it confirms the 1/0 mapping. |
@@ -22413,11 +22413,11 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
-| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) | `high` | path, value, behavior |
-| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](evidence-files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [research/evidence-files/ghidra/system.disable-fullscreen-optimizations/evidence.json](evidence-files/ghidra/system.disable-fullscreen-optimizations/evidence.json) | `high` | path, value, behavior |
+| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](../evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](../evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) | `high` | path, value, behavior |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/files/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/files/ghidra/system.disable-fullscreen-optimizations/evidence.json) | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
-| `vm-fullscreen-automated-probe-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean automated fullscreen follow-up | [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) | `medium` | version-scope, rollback, open-question |
+| `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
+| `vm-fullscreen-automated-probe-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean automated fullscreen follow-up | [evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](../evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](../evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](../evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) | `medium` | version-scope, rollback, open-question |
 
 **Validation proof**
 
@@ -22528,15 +22528,15 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-applicationmanagement-allowgamedvr` | `policy-csp` | `Microsoft policy CSP` | Microsoft ApplicationManagement Policy CSP: AllowGameDVR | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr) | `high` | path, value, allowed-values, behavior, version-scope |
-| `local-gamedvr-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/GameDVR.admx](evidence-files/external/c/Windows/PolicyDefinitions/GameDVR.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-gamedvr-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/GameDVR.adml](evidence-files/external/c/PolicyDefinitions/en-US/GameDVR.adml) | `high` | behavior, default, side-effects |
+| `local-gamedvr-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-gamedvr-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft GameDVR.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/GameDVR.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GameDVR.adml) | `high` | behavior, default, side-effects |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/GameDVR.admx](evidence-files/external/c/Windows/PolicyDefinitions/GameDVR.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx) |
 | Exact quote / path | <policy name="AllowGameDVR" class="Machine" ... key="Software/Policies/Microsoft/Windows/GameDVR" valueName="AllowGameDVR"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same GameDVR policy key and AllowGameDVR value used by the app. The paired ADML help text states that disabling the setting prevents Windows Game Recording, while enabled or not configured allows recording and broadcasting. |
@@ -22564,7 +22564,7 @@ Current writes
 | Area | `Desktop Wallpaper Import Behavior` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-jpeg-reduction.review.json](records/system.disable-jpeg-reduction.review.json) |
-| V3.1 evidence root | [evidence/system.disable-jpeg-reduction](../evidence/system.disable-jpeg-reduction) |
+| V3.1 evidence root | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -22657,10 +22657,10 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `repo-system-decomp-jpegtranscode` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) | `high` | path, value, behavior |
-| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) | `high` | path, value, behavior |
-| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [research/evidence-files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](evidence-files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) | `high` | path, value, behavior |
+| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](../evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](../evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) | `high` | path, value, behavior |
+| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) | `high` | path, value, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
+| `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 
 **Validation proof**
 
@@ -22787,14 +22787,14 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-support-restart-apps` | `official-doc` | `Microsoft official doc` | Microsoft support article for the Restart apps sign-in feature | [https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d](https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d) | `medium` | behavior, default, side-effects, version-scope |
-| `runtime-restartapps-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - RestartApps registry mapping | [research/evidence-files/vm-tooling-staging/restartapps_toggle_out.txt](evidence-files/vm-tooling-staging/restartapps_toggle_out.txt) | `high` | value, behavior, version-scope |
+| `runtime-restartapps-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - RestartApps registry mapping | [evidence/files/vm/restartapps_toggle_out.txt](../evidence/files/vm-tooling-staging/restartapps_toggle_out.txt) | `high` | value, behavior, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/restartapps_toggle_out.txt](evidence-files/vm-tooling-staging/restartapps_toggle_out.txt) |
+| Source | [evidence/files/vm/restartapps_toggle_out.txt](../evidence/files/vm-tooling-staging/restartapps_toggle_out.txt) |
 | Exact quote / path | restartapps_toggle_out.txt: BASELINE=MISSING. AFTER_1=1. AFTER_0=0. RESTORED=MISSING. |
 | Key found on page | `True` |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 1 / 0 toggle sequence, then restored the machine back to missing. |
@@ -22914,7 +22914,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-search-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Search Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#allowsearchhighlights](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#allowsearchhighlights) | `high` | path, value, allowed-values, default, behavior |
-| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [research/evidence-files/missing/search-admx.md](evidence-files/missing/search-admx.md) | `high` | path, value, allowed-values |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-search-highlights` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -22922,7 +22922,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/search-admx.md](evidence-files/missing/search-admx.md) |
+| Source | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) |
 | Exact quote / path | <policy name="AllowSearchHighlights" class="Machine" ... key="SOFTWARE/Policies/Microsoft/Windows/Windows Search" valueName="EnableDynamicContentInWSB">; Search.adml: Disabling this setting turns off search highlights in the start menu search box and in search home. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that disabling the policy turns off Search Highlights in Start search and search home. |
@@ -23041,15 +23041,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [research/evidence-files/missing/search-admx.md](evidence-files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
-| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Search.adml](evidence-files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Search.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/search-admx.md](evidence-files/missing/search-admx.md) |
+| Source | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) |
 | Exact quote / path | <policy name="PreventRemoteQueries" class="Machine" ... key="SOFTWARE/Policies/Microsoft/Windows/Windows Search" valueName="PreventRemoteQueries"> <enabledValue><decimal value="1" /></enabledValue> <disabledValue><decimal value="0" /></disabledValue>; Search.adml: "If enabled, clients will be unable to query this computer's index remotely ... If disabled, client search requests will use this computer's index. Default is disabled." |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy blocks remote index queries and that the default behavior leaves them allowed. |
@@ -23166,15 +23166,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [research/evidence-files/missing/search-admx.md](evidence-files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
-| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Search.adml](evidence-files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Search.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/search-admx.md](evidence-files/missing/search-admx.md) |
+| Source | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) |
 | Exact quote / path | <policy name="DoNotUseWebResults" class="Machine" ... key="SOFTWARE/Policies/Microsoft/Windows/Windows Search" valueName="ConnectedSearchUseWeb">; Search.adml: If you enable this policy setting, queries won't be performed on the web and web results won't be displayed when a user performs a query in Search. |
 | Key found on page | `True` |
 | Notes | Local official ADMX and ADML files document that the policy name is DoNotUseWebResults but the actual registry value name is ConnectedSearchUseWeb. The app now writes the documented value name and disable state exactly. |
@@ -23328,7 +23328,7 @@ Windows Internals references:
 | Area | `Explorer Startup Behavior` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-startup-delay.review.json](records/system.disable-startup-delay.review.json) |
-| V3.1 evidence root | [evidence/system.disable-startup-delay](../evidence/system.disable-startup-delay) |
+| V3.1 evidence root | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -23420,19 +23420,19 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | [research/evidence-files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](evidence-files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
-| `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
-| `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [research/evidence-files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](evidence-files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | [evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
+| `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
+| `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | `unspecified` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) | `medium` | behavior, runtime-trace, shell-health |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| Source | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | Exact quote / path | HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Serialize/StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__ |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. On 2026-03-26 a bounded WPR lane captured both the missing baseline and value 0 during Explorer restarts, with shell recovery in both states. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/files/vm/vm-batch-probe-20260320.json..md](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. On 2026-03-26 a bounded WPR lane captured both the missing baseline and value 0 during Explorer restarts, with shell recovery in both states. |
 
 **Decision**
 
@@ -23549,7 +23549,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-storage-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Storage Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage) | `high` | path, value, allowed-values, default, behavior |
-| `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx) | `high` | path, value, allowed-values |
+| `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx) | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-storage-sense` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -23557,7 +23557,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/StorageSense.admx](evidence-files/external/c/Windows/PolicyDefinitions/StorageSense.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx](../evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx) |
 | Exact quote / path | StorageSense.admx: key="Software/Policies/Microsoft/Windows/StorageSense" valueName="AllowStorageSenseGlobal"; StorageSense.adml: Disabled: Storage Sense is turned off the machine. Users cannot enable Storage Sense. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state turns Storage Sense off for the machine. |
@@ -23678,7 +23678,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-storage-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft Storage Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage#allowstoragesensetemporaryfilescleanup](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage#allowstoragesensetemporaryfilescleanup) | `high` | path, value, allowed-values, default, behavior |
-| `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx) | `high` | path, value, allowed-values |
+| `local-storagesense-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StorageSense.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx) | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-storage-sense-temp-cleanup` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -23686,7 +23686,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/StorageSense.admx](evidence-files/external/c/Windows/PolicyDefinitions/StorageSense.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx](../evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx) |
 | Exact quote / path | StorageSense.admx: key="Software/Policies/Microsoft/Windows/StorageSense" valueName="AllowStorageSenseTemporaryFilesCleanup"; StorageSense.adml: Disabled: Storage Sense will not delete the userâ€™s temporary files. Users cannot enable this setting in Storage settings. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files. |
@@ -23806,7 +23806,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-icm-policy-csp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ICM Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-icm#shellnousestoreopenwith_2](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-icm#shellnousestoreopenwith_2) | `high` | path, behavior, default, ui-mapping |
-| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/ICM.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-store-open-with` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -23814,7 +23814,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx](evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx) |
 | Exact quote / path | <policy name="ShellNoUseStoreOpenWith_2" class="Machine" ... key="Software/Policies/Microsoft/Windows/Explorer" valueName="NoUseStoreOpenWith">; ICM.adml: If you enable this policy setting, the "Look for an app in the Store" item in the Open With dialog is removed. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy removes the Store entry from the Open With dialog. |
@@ -24058,7 +24058,7 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | [https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc](https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc) | `high` | behavior, side-effects, version-scope |
-| `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [research/evidence-files/procmon/system.enable-game-mode/gamemode_admin_probe.txt](evidence-files/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [research/evidence-files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](evidence-files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) | `high` | path, value, behavior, ui-mapping, version-scope |
+| `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [evidence/files/procmon/system.enable-game-mode/gamemode_admin_probe.txt](../evidence/files/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [evidence/files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](../evidence/files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) | `high` | path, value, behavior, ui-mapping, version-scope |
 | `repo-system-decomp-game-mode` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) | `medium` | path, value, behavior, ui-mapping |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
@@ -24067,7 +24067,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/gamemode_admin_probe.txt](evidence-files/vm-tooling-staging/gamemode_admin_probe.txt) |
+| Source | [evidence/files/vm/gamemode_admin_probe.txt](../evidence/files/vm-tooling-staging/gamemode_admin_probe.txt) |
 | Exact quote / path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU/S-1-5-21-3538642439-2106388720-149684979-500/Software/Microsoft/GameBar/AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU/S-1-5-21-3538642439-2106388720-149684979-500/Software/Microsoft/GameBar/AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | Key found on page | `True` |
 | Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report. |
@@ -24189,13 +24189,13 @@ Windows Internals references:
 | `ms-hags-feature` | `official-doc` | `Microsoft official doc` | DirectX Developer Blog: Hardware Accelerated GPU Scheduling | [https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/](https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/) | `high` | behavior, side-effects, version-scope |
 | `repo-system-doc-hags` | `repo-doc` | `Current repo docs` | Repo system research notes for HAGS | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `runtime-hags-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe for HwSchMode | [research/evidence-files/vm-tooling-staging/hags_toggle_out.txt](evidence-files/vm-tooling-staging/hags_toggle_out.txt) | `high` | path, value, behavior, version-scope |
+| `runtime-hags-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe for HwSchMode | [evidence/files/vm/hags_toggle_out.txt](../evidence/files/vm-tooling-staging/hags_toggle_out.txt) | `high` | path, value, behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/hags_toggle_out.txt](evidence-files/vm-tooling-staging/hags_toggle_out.txt) |
+| Source | [evidence/files/vm/hags_toggle_out.txt](../evidence/files/vm-tooling-staging/hags_toggle_out.txt) |
 | Exact quote / path | hags_toggle_out.txt: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING. |
 | Key found on page | `True` |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. Normalized for the consolidated evidence report. |
@@ -24314,15 +24314,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [research/evidence-files/missing/search-admx.md](evidence-files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
-| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Search.adml](evidence-files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects, risk |
+| `local-search-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.admx mapping | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) | `high` | path, value, allowed-values, version-scope |
+| `local-search-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Search.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Search.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Search.adml) | `high` | behavior, default, side-effects, risk |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/missing/search-admx.md](evidence-files/missing/search-admx.md) |
+| Source | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) |
 | Exact quote / path | <policy name="AllowIndexingEncryptedStoresOrItems" class="Machine" ... key="SOFTWARE/Policies/Microsoft/Windows/Windows Search" valueName="AllowIndexingEncryptedStoresOrItems"> ... <enabledValue><decimal value="1" /></enabledValue> |
 | Key found on page | `True` |
 | Notes | Local Microsoft Search.admx defines the exact machine policy path and value name. The companion Search.adml help text explains that enabling the policy indexes encrypted content, disabling it blocks encrypted indexing, and not configuring it falls back to the local setting. |
@@ -25062,8 +25062,8 @@ Windows Internals references:
 | `ms-threaded-dpcs` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to threaded DPCs | [https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-thread-dpc-enable-bounded-suite` | `vm-test` | `VM test / probe` | Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0 | [research/notes/thread-dpc-enable-vm-suite-20260324.md](notes/thread-dpc-enable-vm-suite-20260324.md) | `medium` | value, default, behavior, version-scope |
-| `etw-thread-dpc-enable-cpu3` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable CPU bounded run | [research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md](evidence-files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md) | `medium` | behavior, version-scope |
-| `etw-thread-dpc-enable-mem2` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable memory bounded run | [research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md](evidence-files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md) | `medium` | behavior, version-scope |
+| `etw-thread-dpc-enable-cpu3` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable CPU bounded run | [evidence/files/vm/thread-dpc-enable-0-cpu3.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md) | `medium` | behavior, version-scope |
+| `etw-thread-dpc-enable-mem2` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable memory bounded run | [evidence/files/vm/thread-dpc-enable-0-mem2.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md) | `medium` | behavior, version-scope |
 
 **Validation proof**
 
@@ -25188,18 +25188,18 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-shutdown-clear-virtual-memory-pagefile` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Shutdown: Clear virtual memory pagefile | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile) | `high` | value, behavior, side-effects |
-| `local-sceregvl-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft security registry mapping | [research/evidence-files/external/c/Windows/inf/sceregvl.inf.md](evidence-files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value |
-| `local-defltbase-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft default security template | [research/evidence-files/external/c/Windows/inf/defltbase.inf.md](evidence-files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
+| `local-sceregvl-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft security registry mapping | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value |
+| `local-defltbase-inf` | `official-doc` | `Microsoft official doc` | Local Microsoft default security template | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/inf/sceregvl.inf.md](evidence-files/external/c/Windows/inf/sceregvl.inf.md) |
+| Source | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) |
 | Exact quote / path | MACHINE/System/CurrentControlSet/Control/Session Manager/Memory Management/ClearPageFileAtShutdown,4,%ClearPageFileAtShutdown%,0 |
 | Key found on page | `True` |
-| Notes | Local Microsoft security registry metadata maps the exact registry path and default state. The matching default value is also present in [research/evidence-files/external/c/Windows/inf/defltbase.inf.md](evidence-files/external/c/Windows/inf/defltbase.inf.md) as MACHINE/System/CurrentControlSet/Control/Session Manager/Memory Management/ClearPageFileAtShutdown=4,0. |
+| Notes | Local Microsoft security registry metadata maps the exact registry path and default state. The matching default value is also present in [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) as MACHINE/System/CurrentControlSet/Control/Session Manager/Memory Management/ClearPageFileAtShutdown=4,0. |
 
 **Decision**
 
@@ -25449,10 +25449,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| Source | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | Exact quote / path | HKLM/SYSTEM/CurrentControlSet/Control/Session Manager/Memory Management/LargeSystemCache: before=0, after_apply=0, after_restore=0 |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/files/vm/vm-batch-probe-20260320.json..md](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md) |
 
 **Decision**
 
@@ -25947,8 +25947,8 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-fsutil-8dot3name` | `official-doc` | `Microsoft official doc` | Microsoft Learn: fsutil 8dot3name | [https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name) | `high` | path, value, allowed-values, default, behavior |
-| `local-filesys-admx-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx short-name mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx](evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | value, allowed-values, version-scope |
-| `local-filesys-adml-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml short-name help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml](evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | allowed-values, default, behavior, side-effects |
+| `local-filesys-admx-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx short-name mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | value, allowed-values, version-scope |
+| `local-filesys-adml-shortnames` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml short-name help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | allowed-values, default, behavior, side-effects |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -26202,15 +26202,15 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-maximum-file-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) | `high` | path, value, behavior, version-scope |
-| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx](evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml](evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, default, side-effects |
+| `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, default, side-effects |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx](evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) |
 | Exact quote / path | <policy name="LongPathsEnabled" class="Machine" ... key="System/CurrentControlSet/Control/FileSystem" valueName="LongPathsEnabled">; FileSys.adml: Enabling Win32 long paths will allow manifested win32 applications and packaged Microsoft Store applications to access paths beyond the normal 260 character limit. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact machine key and value name; local ADML confirms that enabling the policy allows long-path-aware Win32 and packaged apps to access paths beyond the normal 260-character limit. |
@@ -26585,10 +26585,10 @@ Windows Internals references:
 | `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) | `high` | path, behavior, version-scope, risk |
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
 | `repo-system-decomp-prioritycontrol` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) | `high` | path, value, behavior |
-| `procmon-priority-control-wmi-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-2.txt](evidence-files/procmon/system.priority-control/prioritycontrol-state-2.txt) and [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](evidence-files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-38.txt](evidence-files/procmon/system.priority-control/prioritycontrol-state-38.txt) and [research/evidence-files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](evidence-files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) | `high` | path, value, behavior |
+| `procmon-priority-control-wmi-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [evidence/files/procmon/system.priority-control/prioritycontrol-state-2.txt](../evidence/files/procmon/system.priority-control/prioritycontrol-state-2.txt) and [evidence/files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](../evidence/files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [evidence/files/procmon/system.priority-control/prioritycontrol-state-38.txt](../evidence/files/procmon/system.priority-control/prioritycontrol-state-38.txt) and [evidence/files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](../evidence/files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
-| `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [research/evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json](evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json) | `medium` | value, behavior, rollback, performance |
+| `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
+| `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [evidence/files/vm/priority-control-20260324-201011/summary.json](../evidence/files/vm-tooling-staging/priority-control-20260324-201011/summary.json) | `medium` | value, behavior, rollback, performance |
 
 **Validation proof**
 
@@ -26622,7 +26622,7 @@ Windows Internals references:
 | Area | `Reliability / Event Timestamps` |
 | Scope | `device` |
 | Source file | [research/records/system.reliability-timestamp-enabled.review.json](records/system.reliability-timestamp-enabled.review.json) |
-| V3.1 evidence root | - |
+| V3.1 evidence root | [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
@@ -26732,9 +26732,9 @@ Windows Internals references:
 | `ms-admx-reliability-persistent-timestamp` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Policy CSP - ADMX_Reliability / EE_EnablePersistentTimeStamp | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) | `high` | path, value, behavior, version-scope |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | `Current repo docs` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) | `high` | path, value, behavior |
-| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](evidence-files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [research/evidence-files/ghidra/system.reliability-timestamp-enabled/evidence.json](evidence-files/ghidra/system.reliability-timestamp-enabled/evidence.json) | `medium` | version-scope, string-reference, open-question |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [evidence/files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](../evidence/files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [evidence/files/ghidra/system.reliability-timestamp-enabled/evidence.json](../evidence/files/ghidra/system.reliability-timestamp-enabled/evidence.json) | `medium` | version-scope, string-reference, open-question |
 | `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) | `medium` | version-scope, open-question |
-| `vm-reliability-follow-up-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) | `medium` | version-scope, open-question |
+| `vm-reliability-follow-up-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [evidence/files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](../evidence/files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [evidence/files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](../evidence/files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) | `medium` | version-scope, open-question |
 
 **Validation proof**
 
@@ -27730,7 +27730,7 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/Logon.admx](evidence-files/external/c/Windows/PolicyDefinitions/Logon.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/Logon.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Logon.admx) |
 | Exact quote / path | <policy name="VerboseStatus" class="Machine" ... key="Software/Microsoft/Windows/CurrentVersion/Policies/System" valueName="VerboseStatus">; Logon.adml: This policy setting directs the system to display highly detailed status messages. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that the policy enables highly detailed status messages during system transitions. |
@@ -27849,14 +27849,14 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-service-control-handler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Service Control Handler Function | [https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function](https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function) | `high` | path, behavior, risk |
 | `repo-system-doc-shutdown` | `repo-doc` | `Current repo docs` | Repo shutdown timing notes | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, default |
-| `vm-wait-to-kill-service-timeout-probe` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe for WaitToKillServiceTimeout | [research/evidence-files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt](evidence-files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt) | `high` | path, value, runtime-read, restore |
+| `vm-wait-to-kill-service-timeout-probe` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe for WaitToKillServiceTimeout | [evidence/files/vm/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt](../evidence/files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt) | `high` | path, value, runtime-read, restore |
 | `app-system-registry-provider-service-timeout` | `repo-code` | `Current repo code` | Current app implementation for service shutdown timeout | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | ui-mapping, path, value |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt](evidence-files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt) |
+| Source | [evidence/files/vm/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt](../evidence/files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt) |
 | Exact quote / path | ORIGINAL={"path_exists":true,"value_exists":true,"value":"5000"}; AFTER={"path_exists":true,"value_exists":true,"value":"2500"}; RESTORED={"path_exists":true,"value_exists":true,"value":"5000"} |
 | Key found on page | `True` |
 | Notes | The reversible VM probe confirmed the current baseline, the app write, and a clean restore. |
@@ -27977,7 +27977,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/Cpls.admx](evidence-files/external/c/Windows/PolicyDefinitions/Cpls.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/Cpls.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Cpls.admx) |
 | Exact quote / path | <policy name="UseDefaultTile" class="Machine" ... key="Software/Microsoft/Windows/CurrentVersion/Policies/Explorer" valueName="UseDefaultTile"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired Cpls.adml help text states that enabling the policy forces the default account picture for all users with no customization allowed. |
@@ -28089,8 +28089,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-logon-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_Logon Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon) | `high` | path, behavior, default, version-scope |
-| `local-logon-admx-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/Logon.admx](evidence-files/external/c/Windows/PolicyDefinitions/Logon.admx) | `high` | path, ui-mapping, version-scope |
-| `local-logon-adml-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Logon.adml](evidence-files/external/c/PolicyDefinitions/en-US/Logon.adml) | `high` | behavior, default, side-effects |
+| `local-logon-admx-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Logon.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Logon.admx) | `high` | path, ui-mapping, version-scope |
+| `local-logon-adml-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-acrylic-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -28098,7 +28098,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Logon.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Logon.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx) |
 | Exact quote / path | <policy name="DisableAcrylicBackgroundOnLogon" class="Machine" ... key="Software/Policies/Microsoft/Windows/System" valueName="DisableAcrylicBackgroundOnLogon"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the policy shows the logon background image without blur, while disabling or not configuring it keeps the acrylic blur effect. |
@@ -28210,8 +28210,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-explorer-admx-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/Explorer.admx](evidence-files/external/c/Windows/PolicyDefinitions/Explorer.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-explorer-adml-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Explorer.adml](evidence-files/external/c/PolicyDefinitions/en-US/Explorer.adml) | `high` | behavior, side-effects |
+| `local-explorer-admx-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Explorer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Explorer.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-explorer-adml-animations` | `official-doc` | `Microsoft official doc` | Local Microsoft Explorer.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Explorer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Explorer.adml) | `high` | behavior, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-common-control-animations` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -28219,7 +28219,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/Explorer.admx](evidence-files/external/c/Windows/PolicyDefinitions/Explorer.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/Explorer.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Explorer.admx) |
 | Exact quote / path | <policy name="TurnOffSPIAnimations" class="User" displayName="$(string.TurnOffSPIAnimations)" explainText="$(string.TurnOffSPIAnimations_Help)" key="Software/Microsoft/Windows/CurrentVersion/Policies/Explorer" valueName="TurnOffSPIAnimations">; Explorer.adml: This policy is similar to settings directly available to computer users. Disabling animations can improve usability for users with some visual disabilities as well as improving performance and battery life in some scenarios. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact user-policy key and value name, and local ADML confirms the reduced-motion, accessibility, and performance/battery tradeoffs. The app writes the documented enabled state under the same user-policy surface. |
@@ -28331,8 +28331,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-logon-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Logon.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Logon.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-logon-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/Logon.adml](evidence-files/external/c/PolicyDefinitions/en-US/Logon.adml) | `high` | behavior, default, side-effects |
+| `local-logon-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-logon-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-first-signin-animation` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -28340,7 +28340,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Logon.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/Logon.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx) |
 | Exact quote / path | <policy name="EnableFirstLogonAnimation" class="Machine" ... key="Software/Microsoft/Windows/CurrentVersion/Policies/System" valueName="EnableFirstLogonAnimation"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same policy key and EnableFirstLogonAnimation value used by the app. The paired ADML help text documents the first sign-in animation and Microsoft-account opt-in prompt behavior. |
@@ -28459,7 +28459,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) |
 | Exact quote / path | <policy name="CPL_Personalization_NoLockScreen" class="Machine" ... key="Software/Policies/Microsoft/Windows/Personalization" valueName="NoLockScreen"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same machine policy surface used by the app. The official ADMX_ControlPanelDisplay policy documentation describes the enabled state as bypassing the lock screen. |
@@ -28570,8 +28570,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-controlpaneldisplay-admx-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) | `high` | path, ui-mapping, version-scope |
-| `local-controlpaneldisplay-adml-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml](evidence-files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml) | `high` | behavior, default, side-effects |
+| `local-controlpaneldisplay-admx-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) | `high` | path, ui-mapping, version-scope |
+| `local-controlpaneldisplay-adml-lock-camera` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-lock-screen-camera` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -28579,7 +28579,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) |
 | Exact quote / path | <policy name="CPL_Personalization_NoLockScreenCamera" class="Machine" ... valueName="NoLockScreenCamera"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents a camera from being invoked on the lock screen. |
@@ -28691,8 +28691,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay) | `high` | path, behavior, default, version-scope |
-| `local-controlpaneldisplay-admx-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) | `high` | path, ui-mapping, version-scope |
-| `local-controlpaneldisplay-adml-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml](evidence-files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml) | `high` | behavior, default, side-effects |
+| `local-controlpaneldisplay-admx-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) | `high` | path, ui-mapping, version-scope |
+| `local-controlpaneldisplay-adml-lock-changes` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-lock-screen-changes` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -28700,7 +28700,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) |
 | Exact quote / path | <policy name="CPL_Personalization_NoChangingLockScreen" class="Machine" ... valueName="NoChangingLockScreen"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents users from changing the lock-screen and logon image and forces the default image. |
@@ -28812,8 +28812,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay) | `high` | path, behavior, default, version-scope |
-| `local-controlpaneldisplay-admx-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) | `high` | path, ui-mapping, version-scope |
-| `local-controlpaneldisplay-adml-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml](evidence-files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml) | `high` | behavior, default, side-effects |
+| `local-controlpaneldisplay-admx-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) | `high` | path, ui-mapping, version-scope |
+| `local-controlpaneldisplay-adml-lock-motion` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-lock-screen-motion` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -28821,7 +28821,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) |
 | Exact quote / path | <policy name="CPL_Personalization_AnimateLockScreenBackground" class="Machine" ... key="Software/Policies/Microsoft/Windows/Personalization" valueName="AnimateLockScreenBackground"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents lock-screen motion and shows the traditional static background image. |
@@ -28933,8 +28933,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-controlpaneldisplay-lock-screen-page` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_ControlPanelDisplay Policy CSP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay) | `high` | path, behavior, default, version-scope |
-| `local-controlpaneldisplay-admx-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) | `high` | path, ui-mapping, version-scope |
-| `local-controlpaneldisplay-adml-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml](evidence-files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml) | `high` | behavior, default, side-effects |
+| `local-controlpaneldisplay-admx-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) | `high` | path, ui-mapping, version-scope |
+| `local-controlpaneldisplay-adml-lock-slideshow` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanelDisplay.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ControlPanelDisplay.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-lock-screen-slideshow` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -28942,7 +28942,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx) |
 | Exact quote / path | <policy name="CPL_Personalization_NoLockScreenSlideshow" class="Machine" ... valueName="NoLockScreenSlideshow"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents a slide show from playing on the lock screen. |
@@ -29055,7 +29055,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-spotlight-action-center` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightOnActionCenter | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonactioncenter](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonactioncenter) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-action-center` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -29063,7 +29063,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
 | Exact quote / path | <policy name="DisableWindowsSpotlightOnActionCenter" class="User" ... key="Software/Policies/Microsoft/Windows/CloudContent" valueName="DisableWindowsSpotlightOnActionCenter">; CloudContent.adml: If you enable this policy, Windows Spotlight notifications will no longer be shown on Action Center. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes Windows Spotlight notifications from Action Center. |
@@ -29176,7 +29176,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-spotlight-collection` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowSpotlightCollection | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowspotlightcollection](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowspotlightcollection) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-desktop-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -29184,7 +29184,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
 | Exact quote / path | <policy name="DisableSpotlightCollectionOnDesktop" class="User" ... key="Software/Policies/Microsoft/Windows/CloudContent" valueName="DisableSpotlightCollectionOnDesktop">; CloudContent.adml: If you enable this policy, "Spotlight collection" will not be available as an option in Personalization settings. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the Spotlight collection desktop option from Personalization settings. |
@@ -29297,7 +29297,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-windows-spotlight` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlight | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlight](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlight) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-features` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -29305,7 +29305,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
 | Exact quote / path | <policy name="DisableWindowsSpotlightFeatures" class="User" ... key="Software/Policies/Microsoft/Windows/CloudContent" valueName="DisableWindowsSpotlightFeatures">; CloudContent.adml: If you enable this policy setting, Windows spotlight on lock screen, Windows tips, Microsoft consumer features and other related features will be turned off. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy turns off Windows Spotlight features as a whole. |
@@ -29418,7 +29418,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-spotlight-settings` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightOnSettings | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonsettings](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonsettings) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-settings` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -29426,7 +29426,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
 | Exact quote / path | <policy name="DisableWindowsSpotlightOnSettings" class="User" ... key="Software/Policies/Microsoft/Windows/CloudContent" valueName="DisableWindowsSpotlightOnSettings">; CloudContent.adml: If you enable this policy, Windows Spotlight suggestions will no longer be shown in Settings app. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes Windows Spotlight suggestions from the Settings app. |
@@ -29539,7 +29539,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-third-party-spotlight` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowThirdPartySuggestionsInWindowsSpotlight | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-third-party` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -29547,7 +29547,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
 | Exact quote / path | <policy name="DisableThirdPartySuggestions" class="User" ... key="Software/Policies/Microsoft/Windows/CloudContent" valueName="DisableThirdPartySuggestions">; CloudContent.adml: If you enable this policy, Windows spotlight features like lock screen spotlight, suggested apps in Start menu or Windows tips will no longer suggest apps and content from third-party software publishers. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy stops Windows Spotlight from suggesting third-party apps and content. |
@@ -29660,7 +29660,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-experience-csp-allow-spotlight-welcome` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: AllowWindowsSpotlightWindowsWelcomeExperience | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightwindowswelcomeexperience](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightwindowswelcomeexperience) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
+| `local-cloud-content-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-spotlight-welcome` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -29668,7 +29668,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) |
 | Exact quote / path | <policy name="DisableWindowsSpotlightWindowsWelcomeExperience" class="User" ... key="Software/Policies/Microsoft/Windows/CloudContent" valueName="DisableWindowsSpotlightWindowsWelcomeExperience">; CloudContent.adml: If you enable this policy, the Windows Welcome Experience will no longer display when there are updates and changes to Windows and its apps. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy suppresses the Windows Welcome Experience. |
@@ -29780,8 +29780,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-wcn-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-wcn-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsConnectNow.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsConnectNow.adml) | `high` | behavior, default, side-effects |
+| `local-wcn-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-wcn-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsConnectNow.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsConnectNow.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsConnectNow.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-wcn-wizards` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -29789,7 +29789,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx) |
 | Exact quote / path | <policy name="WCN_DisableWcnUi_2" class="Machine" ... key="Software/Policies/Microsoft/Windows/WCN/UI" valueName="DisableWcnUi"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting turns off the Windows Connect Now wizards and disables related wizard tasks. |
@@ -29902,8 +29902,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-news-and-interests-allow-widgets` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: NewsAndInterests / AllowWidgets | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-newsandinterests#allowwidgets](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-newsandinterests#allowwidgets) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-news-and-interests-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/NewsAndInterests.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/NewsAndInterests.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-news-and-interests-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/NewsAndInterests.adml](evidence-files/external/c/PolicyDefinitions/en-US/NewsAndInterests.adml) | `high` | behavior, default, side-effects |
+| `local-news-and-interests-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/NewsAndInterests.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/NewsAndInterests.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-news-and-interests-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft NewsAndInterests.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/NewsAndInterests.adml](../evidence/files/external/c/PolicyDefinitions/en-US/NewsAndInterests.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-widgets` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -29911,7 +29911,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/NewsAndInterests.admx](evidence-files/external/c/Windows/PolicyDefinitions/NewsAndInterests.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/NewsAndInterests.admx](../evidence/files/external/c/Windows/PolicyDefinitions/NewsAndInterests.admx) |
 | Exact quote / path | <policy name="AllowNewsAndInterests" class="Machine" ... key="SOFTWARE/Policies/Microsoft/Dsh" valueName="AllowNewsAndInterests"> ... <enabledValue><decimal value="1" /></enabledValue> ... <disabledValue><decimal value="0" /></disabledValue>; NewsAndInterests.adml: This policy specifies whether the widgets feature is allowed on the device. Widgets will be turned on by default unless you change this in your settings. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact machine-policy key, value name, and 1/0 mapping; local ADML confirms this is the Widgets allow-form policy and documents its default behavior. |
@@ -30023,8 +30023,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-dwm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DWM.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DWM.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-dwm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/DWM.adml](evidence-files/external/c/PolicyDefinitions/en-US/DWM.adml) | `high` | behavior, default, side-effects |
+| `local-dwm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DWM.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DWM.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-dwm-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DWM.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DWM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DWM.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-window-animations` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -30032,7 +30032,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DWM.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/DWM.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DWM.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DWM.admx) |
 | Exact quote / path | <policy name="DwmDisallowAnimations_2" class="Machine" ... key="SOFTWARE/Policies/Microsoft/Windows/DWM" valueName="DisallowAnimations"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file names the same DWM machine policy surface used by the app. The paired ADML help text documents that enabling the policy turns window animations off and disabling or not configuring it keeps them on. |
@@ -30144,15 +30144,15 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-controlpanel-admx-classic` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx ForceClassicControlPanel mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanel.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanel.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-controlpanel-adml-classic` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.adml ForceClassicControlPanel help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/ControlPanel.adml](evidence-files/external/c/PolicyDefinitions/en-US/ControlPanel.adml) | `high` | behavior, default, side-effects |
+| `local-controlpanel-admx-classic` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.admx ForceClassicControlPanel mapping | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanel.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanel.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-controlpanel-adml-classic` | `official-doc` | `Microsoft official doc` | Local Microsoft ControlPanel.adml ForceClassicControlPanel help text | [evidence/files/external/c/PolicyDefinitions/en-US/ControlPanel.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ControlPanel.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanel.admx](evidence-files/external/c/Windows/PolicyDefinitions/ControlPanel.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/ControlPanel.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ControlPanel.admx) |
 | Exact quote / path | <policy name="ForceClassicControlPanel" class="User" displayName="$(string.ForceClassicControlPanel)" explainText="$(string.ForceClassicControlPanel_Help)" key="Software/Microsoft/Windows/CurrentVersion/Policies/Explorer" valueName="ForceClassicControlPanel">; ControlPanel.adml: If this policy setting is enabled, the Control Panel opens to the icon view. If this policy setting is disabled, the Control Panel opens to the category view. If this policy setting is not configured, the Control Panel opens to the view used in the last Control Panel session. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact user-policy key and value name, and local ADML confirms the classic icon, category view, and not-configured behaviors. The app writes the documented classic icon view state under the same user-policy surface. |
@@ -30265,7 +30265,7 @@ Nohuto lineage references:
 | `microsoft-qna-language-bar-showstatus` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | [https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter](https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter) | `medium` | path, value, behavior |
 | `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) | `medium` | path, value, allowed-values, behavior |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | [research/evidence-files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](evidence-files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | [evidence/files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](../evidence/files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -30384,8 +30384,8 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-startmenu-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/StartMenu.adml](evidence-files/external/c/PolicyDefinitions/en-US/StartMenu.adml) | `high` | behavior, default, side-effects |
+| `local-startmenu-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-startmenu-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft StartMenu.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/StartMenu.adml](../evidence/files/external/c/PolicyDefinitions/en-US/StartMenu.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-most-used-apps` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 
@@ -30393,7 +30393,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) |
+| Source | [evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx) |
 | Exact quote / path | <policy name="ShowOrHideMostUsedApps" class="Both" ... key="Software/Policies/Microsoft/Windows/Explorer"> ... <enum id="ShowOrHideMostUsedAppsDropdown" valueName="ShowOrHideMostUsedApps" required="true"> |
 | Key found on page | `True` |
 | Notes | The local official Microsoft ADMX file defines the same Explorer policy key and ShowOrHideMostUsedApps enum surface used by the app. The paired ADML help text documents the force-show, force-hide, and user-control behavior for the enum values. |
@@ -30513,7 +30513,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/StartMenu.admx](evidence-files/external/c/Windows/PolicyDefinitions/StartMenu.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx](../evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx) |
 | Exact quote / path | <policy name="HidePeopleBar" class="User" ... key="Software/Policies/Microsoft/Windows/Explorer" valueName="HidePeopleBar">; StartMenu.adml: This policy allows you to remove the People Bar from the taskbar and disables the My People experience. |
 | Key found on page | `True` |
 | Notes | Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience. Added nohuto mirror corroboration via nohuto-hidepeoplebar-admx. |
@@ -30749,7 +30749,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-spatial-audio | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
-| `guest-audio-string-scan` | `vm-test` | `VM test / probe` | Guest string scan for spatial-audio registry contract | [research/evidence-files/vm-tooling-staging/spatial_audio_string_search.txt](evidence-files/vm-tooling-staging/spatial_audio_string_search.txt) | `low` | behavior, app-mismatch |
+| `guest-audio-string-scan` | `vm-test` | `VM test / probe` | Guest string scan for spatial-audio registry contract | [evidence/files/vm/spatial_audio_string_search.txt](../evidence/files/vm-tooling-staging/spatial_audio_string_search.txt) | `low` | behavior, app-mismatch |
 
 **Validation proof**
 
@@ -31009,8 +31009,8 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | [https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup) | `medium` | behavior, app-mismatch |
-| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [https://terminal.1.24.10621.0/TerminalApp.dll;](https://terminal.1.24.10621.0/TerminalApp.dll;) [research/evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [research/evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
-| `wpr-terminal-launch-trace` | `wpr-trace` | `unspecified` | WPR capture of Windows Terminal launch | [research/evidence-files/host-temp/terminal-launch.etl.md](evidence-files/host-temp/terminal-launch.etl.md) | `low` | behavior, process-tree, startup-context |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [https://terminal.1.24.10621.0/TerminalApp.dll;](https://terminal.1.24.10621.0/TerminalApp.dll;) [evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
+| `wpr-terminal-launch-trace` | `wpr-trace` | `unspecified` | WPR capture of Windows Terminal launch | [evidence/files/host/terminal-launch.etl.md](../evidence/files/host-temp/terminal-launch.etl.md) | `low` | behavior, process-tree, startup-context |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -32175,14 +32175,14 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values |
+| `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) |
 | Exact quote / path | policy name="LetAppsAccessCamera" class="Machine" key="Software/Policies/Microsoft/Windows/AppPrivacy" valueName="LetAppsAccessCamera"; policy name="LetAppsAccessMicrophone" class="Machine" key="Software/Policies/Microsoft/Windows/AppPrivacy" valueName="LetAppsAccessMicrophone"; policy name="LetAppsAccessLocation" class="Machine" key="Software/Policies/Microsoft/Windows/AppPrivacy" valueName="LetAppsAccessLocation". |
 | Key found on page | `True` |
 | Notes | Composite AppPrivacy deny bundle. The proof anchors the official AppPrivacy family and its per-capability policy names. |
@@ -32769,17 +32769,17 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-grouppolicy-enablecdp` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp) | `high` | path, value, allowed-values, default, behavior, version-scope |
-| `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
+| `local-grouppolicy-admx-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.admx EnableCDP mapping | [evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | `Nohuto upstream pseudocode` | Decompiled Shared Experiences singleton | [Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c](../Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c) | `medium` | path, value, behavior |
-| `guest-crossdevice-launch` | `vm-test` | `VM test / probe` | Guest launch of CrossDeviceResume | [research/evidence-files/vm-tooling-staging/crossdevice_resume_probe.csv](evidence-files/vm-tooling-staging/crossdevice_resume_probe.csv) | `low` | behavior, version-scope |
+| `guest-crossdevice-launch` | `vm-test` | `VM test / probe` | Guest launch of CrossDeviceResume | [evidence/files/vm/crossdevice_resume_probe.csv](../evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv) | `low` | behavior, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) |
+| Source | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) |
 | Exact quote / path | Local Microsoft GroupPolicy.adml EnableCDP help text: The local ADML help text explains that enabling the policy allows continue experiences, disabling it blocks them, and the not-configured default depends on the Windows edition. |
 | Key found on page | `True` |
 | Notes | Backfilled from evidence_id local-grouppolicy-adml-enablecdp (official-doc); deprecated audit trail. |
@@ -32829,7 +32829,7 @@ Current writes
 
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `helppane-binary` | `research/evidence-files/missing/helppane-exe.md` | `RenameState` | `renamed-disabled` | `value` |  |
+| `helppane-binary` | `evidence/files/missing/helppane-exe.md` | `RenameState` | `renamed-disabled` | `value` |  |
 
 **Evidence class**
 
@@ -32865,7 +32865,7 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Location kind | `file` |
-| Path | `research/evidence-files/missing/helppane-exe.md` |
+| Path | `evidence/files/missing/helppane-exe.md` |
 | Value name | `RenameState` |
 | Value type | `FILE_RENAME_STATE` |
 
@@ -32900,7 +32900,7 @@ Nohuto lineage references:
 | Source | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
 | Exact quote / path | Works via renaming HelpPane.exe (Help and Support Windows desktop application) which was the help component in W8/W8.1. Note that HelpPane still handles the F1 shortcut. |
 | Key found on page | `True` |
-| Notes | Backfilled from nohuto mirror evidence. The same HelpPane rename behavior is described upstream in the mirror, and the current app implementation still renames [research/evidence-files/missing/helppane-exe.md](evidence-files/missing/helppane-exe.md) to HelpPane.exe.disabled. This remains a deprecated audit trail rather than an official policy surface. |
+| Notes | Backfilled from nohuto mirror evidence. The same HelpPane rename behavior is described upstream in the mirror, and the current app implementation still renames [evidence/files/missing/helppane-exe.md](../evidence/files/missing/helppane-exe.md) to HelpPane.exe.disabled. This remains a deprecated audit trail rather than an official policy surface. |
 
 **Decision**
 
@@ -33187,7 +33187,7 @@ Current writes
 
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `mobsync-binary` | `research/evidence-files/external/c/Windows/System32/mobsync.exe.md` | `RenameState` | `renamed-disabled` | `value` |  |
+| `mobsync-binary` | `evidence/files/external/c/Windows/System32/mobsync.exe.md` | `RenameState` | `renamed-disabled` | `value` |  |
 
 **Evidence class**
 
@@ -33217,7 +33217,7 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Location kind | `file` |
-| Path | `research/evidence-files/external/c/Windows/System32/mobsync.exe.md` |
+| Path | `evidence/files/external/c/Windows/System32/mobsync.exe.md` |
 | Value name | `RenameState` |
 | Value type | `FILE_RENAME_STATE` |
 
@@ -33982,12 +33982,12 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml](evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
-| `local-cloudcontent-admx-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml](evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
-| `local-cloudcontent-admx-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx](evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml](evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-thirdparty` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightOnSettings mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
+| `local-cloudcontent-admx-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `repo-privacy-verified-suggestions-cdm` | `repo-doc` | `Current repo docs` | Repo privacy docs for Content Delivery Manager suggestions | [Docs/privacy/privacy-verified.md](../Docs/privacy/privacy-verified.md) | `high` | path, value, behavior |
 
@@ -34274,15 +34274,15 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-deviceguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx](evidence-files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-deviceguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml](evidence-files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml) | `high` | behavior, default, side-effects |
+| `local-deviceguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-deviceguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx](evidence-files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx) |
 | Exact quote / path | <policy name="VirtualizationBasedSecurity" key="SOFTWARE//Policies//Microsoft//Windows//DeviceGuard" valueName="EnableVirtualizationBasedSecurity"><enabledValue><decimal value="1" /></enabledValue><disabledValue><decimal value="0" /></disabledValue> |
 | Key found on page | `True` |
 | Notes | Official Device Guard policy mapping. The record is deprecated, but the proof is now machine-checkable against the local ADMX. |
@@ -34418,16 +34418,16 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | [research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx](evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
-| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) | `high` | path, value, allowed-values, version-scope |
-| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml) | `high` | behavior, default, side-effects |
+| `local-icm-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess | [evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx) | `high` | path, value, allowed-values |
+| `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) | `high` | path, value, allowed-values, version-scope |
+| `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx](evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx) |
+| Source | [evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx](../evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx) |
 | Exact quote / path | Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess: The local ADMX file maps DisableWindowsUpdateAccess with enabledValue 1 and disabledValue 0. |
 | Key found on page | `True` |
 | Notes | Backfilled from evidence_id local-icm-admx (official-doc); deprecated audit trail. |
@@ -35844,7 +35844,7 @@ Windows Internals references:
 | `nohuto-dynamic-hetero-policy-mirror` | `decompiled-pseudocode` | `Nohuto upstream pseudocode` | nohuto mirror: dynamic heterogeneous CPU policy notes and kernel pseudocode | [research/_source-mirrors/win-config/system/desc.md](_source-mirrors/win-config/system/desc.md); [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeConfigureHeteroProcessors.c) | `medium` | value, behavior, kernel-derivation, version-scope |
 | `nohuto-session-manager-quota` | `registry-observation` | `VM registry observation` | nohuto Session Manager quota-system trace | [research/_source-mirrors/win-registry/records/Session-Manager.txt](_source-mirrors/win-registry/records/Session-Manager.txt) | `medium` | path, dependency, behavior |
 | `regkit-default-dynamic-hetero-cpu-policy-trace` | `registry-observation` | `VM registry observation` | nohuto trace for DefaultDynamicHeteroCpuPolicy | [research/_source-mirrors/regkit/assets/traces/23H2.txt](_source-mirrors/regkit/assets/traces/23H2.txt); [research/_source-mirrors/regkit/assets/traces/24H2.txt](_source-mirrors/regkit/assets/traces/24H2.txt); [research/_source-mirrors/regkit/assets/traces/25H2.txt](_source-mirrors/regkit/assets/traces/25H2.txt) | `high` | path, value, behavior |
-| `vm-hetero-policy-strict-sweep-20260322` | `runtime-benchmark` | `unspecified` | Strict VM sweep of DefaultDynamicHeteroCpuPolicy values 0..7 | [research/notes/hetero-dynamic-policy-strict-sweep-20260322.md](notes/hetero-dynamic-policy-strict-sweep-20260322.md); [research/evidence-files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-summary.csv](evidence-files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-summary.csv); [research/evidence-files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-detail.json](evidence-files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-detail.json) | `medium` | value, behavior, performance, version-scope |
+| `vm-hetero-policy-strict-sweep-20260322` | `runtime-benchmark` | `unspecified` | Strict VM sweep of DefaultDynamicHeteroCpuPolicy values 0..7 | [research/notes/hetero-dynamic-policy-strict-sweep-20260322.md](notes/hetero-dynamic-policy-strict-sweep-20260322.md); [evidence/files/vm/hetero-sweep-strict/hetero-sweep-strict-summary.csv](../evidence/files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-summary.csv); [evidence/files/vm/hetero-sweep-strict/hetero-sweep-strict-detail.json](../evidence/files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-detail.json) | `medium` | value, behavior, performance, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -36636,7 +36636,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](evidence-files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration/evidence.json](evidence-files/ghidra/system.kernel-serialize-timer-expiration/evidence.json) | `high` | path, value, behavior, runtime-gate |
+| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [evidence/files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](../evidence/files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [evidence/files/ghidra/system.kernel-serialize-timer-expiration/evidence.json](../evidence/files/ghidra/system.kernel-serialize-timer-expiration/evidence.json) | `high` | path, value, behavior, runtime-gate |
 
 **Validation proof**
 
@@ -36923,7 +36923,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source | [research/notes/service-snapshots/printdeviceconfigurationservice-sc-qc-2026-03-14.txt](notes/service-snapshots/printdeviceconfigurationservice-sc-qc-2026-03-14.txt) |
-| Exact quote / path | SERVICE_NAME: PrintDeviceConfigurationService \| START_TYPE : 3 DEMAND_START \| DISPLAY_NAME: Print Device Configuration Service \| BINARY_PATH_NAME: [research/evidence-files/external/c/WINDOWS/System32/svchost.exe.md](evidence-files/external/c/WINDOWS/System32/svchost.exe.md) -k LocalSystemNetworkRestricted -p |
+| Exact quote / path | SERVICE_NAME: PrintDeviceConfigurationService \| START_TYPE : 3 DEMAND_START \| DISPLAY_NAME: Print Device Configuration Service \| BINARY_PATH_NAME: [evidence/files/external/c/WINDOWS/System32/svchost.exe.md](../evidence/files/external/c/WINDOWS/System32/svchost.exe.md) -k LocalSystemNetworkRestricted -p |
 | Key found on page | `True` |
 | Notes | The local SCM snapshot proves the exact service identity and control surface on the review host. This does not restore validated status by itself because the Microsoft services page still needs an exact guidance row re-captured in a later pass. |
 
@@ -37051,7 +37051,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source | [research/notes/service-snapshots/printscanbrokerservice-sc-qc-2026-03-14.txt](notes/service-snapshots/printscanbrokerservice-sc-qc-2026-03-14.txt) |
-| Exact quote / path | SERVICE_NAME: PrintScanBrokerService \| START_TYPE : 3 DEMAND_START \| DISPLAY_NAME: PrintScanBrokerService \| BINARY_PATH_NAME: [research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md](evidence-files/external/c/WINDOWS/system32/svchost.exe.md) -k PrintScanBrokerService -p |
+| Exact quote / path | SERVICE_NAME: PrintScanBrokerService \| START_TYPE : 3 DEMAND_START \| DISPLAY_NAME: PrintScanBrokerService \| BINARY_PATH_NAME: [evidence/files/external/c/WINDOWS/system32/svchost.exe.md](../evidence/files/external/c/WINDOWS/system32/svchost.exe.md) -k PrintScanBrokerService -p |
 | Key found on page | `True` |
 | Notes | The local SCM snapshot proves the exact service identity and control surface on the review host. This does not restore validated status by itself because the Microsoft services page still needs an exact guidance row re-captured in a later pass. |
 
@@ -37307,7 +37307,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source | [research/notes/service-snapshots/sysmain-sc-qc-2026-03-14.txt](notes/service-snapshots/sysmain-sc-qc-2026-03-14.txt) |
-| Exact quote / path | SERVICE_NAME: SysMain \| START_TYPE : 4 DISABLED \| DISPLAY_NAME: SysMain \| BINARY_PATH_NAME: [research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md](evidence-files/external/c/WINDOWS/system32/svchost.exe.md) -k LocalSystemNetworkRestricted -p |
+| Exact quote / path | SERVICE_NAME: SysMain \| START_TYPE : 4 DISABLED \| DISPLAY_NAME: SysMain \| BINARY_PATH_NAME: [evidence/files/external/c/WINDOWS/system32/svchost.exe.md](../evidence/files/external/c/WINDOWS/system32/svchost.exe.md) -k LocalSystemNetworkRestricted -p |
 | Key found on page | `True` |
 | Notes | The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker. |
 
@@ -37434,7 +37434,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source | [research/notes/service-snapshots/dmwappushservice-sc-qc-2026-03-14.txt](notes/service-snapshots/dmwappushservice-sc-qc-2026-03-14.txt) |
-| Exact quote / path | SERVICE_NAME: dmwappushservice \| START_TYPE : 3 DEMAND_START \| DISPLAY_NAME: Device Management Wireless Application Protocol (WAP) Push message Routing Service \| BINARY_PATH_NAME: [research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md](evidence-files/external/c/WINDOWS/system32/svchost.exe.md) -k netsvcs -p |
+| Exact quote / path | SERVICE_NAME: dmwappushservice \| START_TYPE : 3 DEMAND_START \| DISPLAY_NAME: Device Management Wireless Application Protocol (WAP) Push message Routing Service \| BINARY_PATH_NAME: [evidence/files/external/c/WINDOWS/system32/svchost.exe.md](../evidence/files/external/c/WINDOWS/system32/svchost.exe.md) -k netsvcs -p |
 | Key found on page | `True` |
 | Notes | The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `No guidance` blocker. |
 
@@ -37561,7 +37561,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Source | [research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt](notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt) |
-| Exact quote / path | SERVICE_NAME: WerSvc \| START_TYPE : 4 DISABLED \| DISPLAY_NAME: Windows Error Reporting Service \| BINARY_PATH_NAME: [research/evidence-files/external/c/WINDOWS/System32/svchost.exe.md](evidence-files/external/c/WINDOWS/System32/svchost.exe.md) -k WerSvcGroup |
+| Exact quote / path | SERVICE_NAME: WerSvc \| START_TYPE : 4 DISABLED \| DISPLAY_NAME: Windows Error Reporting Service \| BINARY_PATH_NAME: [evidence/files/external/c/WINDOWS/System32/svchost.exe.md](../evidence/files/external/c/WINDOWS/System32/svchost.exe.md) -k WerSvcGroup |
 | Key found on page | `True` |
 | Notes | The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker. |
 
