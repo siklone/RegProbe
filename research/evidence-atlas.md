@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 229 |
-| Class B | 13 |
+| Class A | 232 |
+| Class B | 10 |
 | Class E | 54 |
 
 ## Category coverage
@@ -10166,12 +10166,12 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `AppPrivacy policy family` |
 | Scope | `device` |
 | Source file | [research/records/privacy.deny-app-access.policy.review.json](records/privacy.deny-app-access.policy.review.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -10195,10 +10195,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -10262,12 +10262,12 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The AppPrivacy policy family is official and machine-checkable, but the broad deny posture remains too opinionated for general users. |
+| Why | The AppPrivacy policy family is official, the app writes the same ForceDeny bundle, and the restore path is exact. This is app-ready evidence-wise, but it stays non-default because the broad deny posture is too opinionated for general users. |
 
 ---
 
@@ -10921,12 +10921,12 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Application Compatibility` |
 | Scope | `device` |
 | Source file | [research/records/privacy.disable-appcompat-engine.policy.review.json](records/privacy.disable-appcompat-engine.policy.review.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -10951,10 +10951,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -11037,12 +11037,12 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Both values are now proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and VM Procmon capture showing direct writes and read-backs for DisableEngine=1 and SbEnable=0 under HKLM\Software\Policies\Microsoft\Windows\AppCompat in Win25H2Clean. Proof is no longer the blocker; risk is. Microsoft ADML explicitly warns that disabling the Application Compatibility Engine can cause BSOD when old antivirus or other security software is installed, which keeps apply_allowed=false for this combined bundle. |
+| Why | Both values are proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and VM Procmon capture showing direct writes and read-backs for DisableEngine=1 and SbEnable=0 under HKLM\Software\Policies\Microsoft\Windows\AppCompat in Win25H2Clean. This is app-ready evidence-wise, but it stays non-default because Microsoft ADML warns that disabling the Application Compatibility Engine can cause BSOD with old antivirus or other security software. |
 
 ---
 
@@ -25018,12 +25018,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Memory Management` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-disable-paging-executive.json](records/system.memory-disable-paging-executive.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -25047,10 +25047,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -25130,12 +25130,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft documents the exact path and values, but the same primary source also says Windows 8 and higher do not need this registry change. Keep it as a documented legacy tracing surface, not as a normal Windows 11 tuning recommendation. |
+| Why | Microsoft documents the exact path and values, the app writes that exact control surface, and the restore path is exact. This is app-ready evidence-wise, but it stays non-default because Microsoft also says Windows 8 and higher do not need this change outside tracing and diagnosis scenarios. |
 
 ---
 

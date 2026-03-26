@@ -209,15 +209,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft documents the exact path and values, but the same primary source also says Windows 8 and higher do not need this registry change. Keep it as a documented legacy tracing surface, not as a normal Windows 11 tuning recommendation.",
+    "why": "Microsoft documents the exact path and values, the app writes that exact control surface, and the restore path is exact. This is app-ready evidence-wise, but it stays non-default because Microsoft also says Windows 8 and higher do not need this change outside tracing and diagnosis scenarios.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference",
     "exact_quote_or_path": "DisablePagingExecutive = 1. Systems with Windows 8 and higher do not need this registry change.",

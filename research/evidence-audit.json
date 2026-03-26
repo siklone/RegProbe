@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T11:19:55.681180Z",
+  "generated_utc": "2026-03-26T11:23:16.409766Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
-      "A": 229,
-      "B": 13
+      "A": 232,
+      "B": 10
     },
     "lane_counts": {
       "official-policy": 235,
@@ -13,8 +13,8 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 229,
-      "decision-gate": 13
+      "none": 232,
+      "decision-gate": 10
     }
   },
   "entries": [
@@ -1701,9 +1701,9 @@
     {
       "record_id": "privacy.deny-app-access.policy",
       "tweak_id": "privacy.deny-app-access.policy",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": false,
       "ghidra": false,
@@ -1711,10 +1711,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/privacy.deny-app-access.policy.review.json",
       "incident_ids": []
@@ -1827,9 +1827,9 @@
     {
       "record_id": "privacy.disable-appcompat-engine.policy",
       "tweak_id": "privacy.disable-appcompat-engine.policy",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": true,
       "ghidra": false,
@@ -1837,10 +1837,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/privacy.disable-appcompat-engine.policy.review.json",
       "incident_ids": []
@@ -4182,9 +4182,9 @@
     {
       "record_id": "system.memory-disable-paging-executive",
       "tweak_id": "system.memory-disable-paging-executive",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": false,
       "ghidra": false,
@@ -4192,10 +4192,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/system.memory-disable-paging-executive.json",
       "incident_ids": []

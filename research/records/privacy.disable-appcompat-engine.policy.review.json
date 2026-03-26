@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-appcompat-engine.policy",
   "tweak_id": "privacy.disable-appcompat-engine.policy",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "summary": "Two AppCompat.admx policy values written by the app under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat: SbEnable (SwitchBack) and DisableEngine (Application Compatibility Engine). Both come from the same policy family and the same registry root. VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed powershell.exe writes DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, then reg.exe reads both values back successfully. Microsoft Learn CSP page (Policy CSP - ADMX_AppCompat) confirms both policies exist on Windows 11 21H2+. SbEnable is now also published as a standalone record in privacy.disable-switchback.policy; this record keeps it for bundle-audit context because the current app still writes both values together.",
   "setting": {
     "name": "Disable Application Compatibility Engine and SwitchBack",
@@ -286,12 +286,12 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Both values are now proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and VM Procmon capture showing direct writes and read-backs for DisableEngine=1 and SbEnable=0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat in Win25H2Clean. Proof is no longer the blocker; risk is. Microsoft ADML explicitly warns that disabling the Application Compatibility Engine can cause BSOD when old antivirus or other security software is installed, which keeps apply_allowed=false for this combined bundle.",
+    "why": "Both values are proven in three layers: local ADMX semantics, the Microsoft Learn ADMX_AppCompat CSP page, and VM Procmon capture showing direct writes and read-backs for DisableEngine=1 and SbEnable=0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat in Win25H2Clean. This is app-ready evidence-wise, but it stays non-default because Microsoft ADML warns that disabling the Application Compatibility Engine can cause BSOD with old antivirus or other security software.",
     "blocking_issues": []
   },
   "open_questions": [],
