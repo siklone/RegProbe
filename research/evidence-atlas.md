@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 237 |
-| Class B | 5 |
+| Class A | 238 |
+| Class B | 4 |
 | Class E | 54 |
 
 ## Category coverage
@@ -25144,16 +25144,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Memory Management / Cache Mode` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-large-system-cache-client.review.json](records/system.memory-large-system-cache-client.review.json) |
-| Apply allowed | `False` |
-| Confidence | `medium` |
+| Apply allowed | `True` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.
+**Summary:** Validated legacy LargeSystemCache reset. Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.
 
 **Current implementation**
 
@@ -25173,10 +25173,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -25225,14 +25225,14 @@ Windows Internals references:
 
 | Label | Applies to | States |
 | --- | --- | --- |
-| Conservative publication baseline | Modern systems where this dataset does not yet publish LargeSystemCache as a supported tuning surface | large-system-cache: unknown None - Do not publish a validated default until a modern Microsoft registry source is captured. |
+| Conservative publication baseline | Modern systems where this dataset does not yet publish LargeSystemCache as a supported tuning surface | large-system-cache: unknown None - Keep the legacy client value 0 used by the current app and confirmed by the VM probe. |
 
 **Recommended profiles**
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `hold-for-research` | Hold for research | ['Research tracking only'] | ['Published validated presets', 'General users'] | `False` |
-| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published validated presets', 'General users'] | `False` |
+| `hold-for-research` | Hold for research | ['Systems undoing an old server-style cache tweak', 'Research tracking only'] | ['Published validated presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Systems undoing an old server-style cache tweak', 'Research comparison only'] | ['Published validated presets', 'General users'] | `True` |
 
 **Evidence**
 
@@ -25255,12 +25255,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
-| Recommended for general users | `False` |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible probe confirmed LargeSystemCache is already at the client baseline 0; the write is idempotent, and the surface remains obsolete/unsupported. |
+| Why | Microsoft still publishes the legacy 0/1 semantics, the current app writes only the client reset value 0, and the Win25H2Clean probe confirmed that write is idempotent and reversible. The property stays obsolete, but the current app action is narrow enough to expose as an exact reset-to-client-baseline mapping. |
 
 ---
 

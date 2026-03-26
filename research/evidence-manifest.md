@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 237 |
-| Class B | 5 |
+| Class A | 238 |
+| Class B | 4 |
 | Class E | 54 |
 
 ## Record index
@@ -275,7 +275,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.kernel-thread-dpc-enable` | validated | Class A | `research/records/system.kernel-thread-dpc-enable.json` | `b47bf9320e4e2290c82950139fa1fed3d768aca61f6e147621a602e78397d9a7` | `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf` | 5 |
 | `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `research/records/system.memory-clear-pagefile-at-shutdown.json` | `b59ff6127033d6057e3804ce6ff4b9c836497ae64f66a300ae247c5060955697` | `03acbe19591182d2f441ad35b8b99fd3f79593538365d4d0da1dbb6b857331b7` | 4 |
 | `system.memory-disable-paging-executive` | validated | Class A | `research/records/system.memory-disable-paging-executive.json` | `c3264375895ff2b56e3b4d2a5bad0cc30d8ee95170bd2ddc133a8c80619a9de3` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 4 |
-| `system.memory-large-system-cache-client` | validated | Class B | `research/records/system.memory-large-system-cache-client.review.json` | `330530b22c81af7f8aff6db79d29f270c585994ec7c50434a784d9a06c8d6279` | `38049996654554e2f9d46418bab1cb87795a15d82f441e8e386fa6b83d2f6d59` | 3 |
+| `system.memory-large-system-cache-client` | validated | Class A | `research/records/system.memory-large-system-cache-client.review.json` | `aa5f1ad78b097db1bce9b443500120eedbcd6f28bce133d920a78d4851c7d286` | `38049996654554e2f9d46418bab1cb87795a15d82f441e8e386fa6b83d2f6d59` | 3 |
 | `system.memory-nonpaged-pool-dynamic` | validated | Class A | `research/records/system.memory-nonpaged-pool-dynamic.json` | `db9b51fb1a7ae7c0d4862f7d7c5d28825fe5f70b8bd023f8a37741f5955fe69c` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 4 |
 | `system.memory-paged-pool-dynamic` | validated | Class A | `research/records/system.memory-paged-pool-dynamic.json` | `ed4c44c6994be0a51ccf4c64de82298ee6417c257929957243ff07add34b6fea` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 4 |
 | `system.memory-registry-quota-default` | validated | Class A | `research/records/system.memory-registry-quota-default.review.json` | `e7c6f4e517f94b64c4524d42dbf2c58e9a79a3f0ad3494786cccb356f3125b7b` | `166cb5b5e4cd4ce3f3131471609b9e9577d1fdd32a6d9f33fd32286a25753a72` | 5 |
@@ -7614,12 +7614,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.memory-large-system-cache-client`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/system.memory-large-system-cache-client.review.json`
-- Source SHA256: `330530b22c81af7f8aff6db79d29f270c585994ec7c50434a784d9a06c8d6279`
+- Source SHA256: `aa5f1ad78b097db1bce9b443500120eedbcd6f28bce133d920a78d4851c7d286`
 - Proof SHA256: `38049996654554e2f9d46418bab1cb87795a15d82f441e8e386fa6b83d2f6d59`
 
-**Summary:** Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.
+**Summary:** Validated legacy LargeSystemCache reset. Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.
 
 **Evidence**
 

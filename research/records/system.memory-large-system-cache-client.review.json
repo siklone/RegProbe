@@ -4,7 +4,7 @@
   "record_id": "system.memory-large-system-cache-client",
   "tweak_id": "system.memory-large-system-cache-client",
   "record_status": "validated",
-  "summary": "Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.",
+  "summary": "Validated legacy LargeSystemCache reset. Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.",
   "setting": {
     "name": "Large System Cache",
     "category": "System",
@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "Windows historically had a switch between favoring normal applications and favoring a larger system cache. Most normal users should leave this alone on modern systems.",
     "why_people_change_it": "People only change it when they are undoing very old file-server or memory-cache tuning and want to restore an application-focused client baseline.",
-    "tradeoffs_overview": "The app intent is understandable, but Microsoft's modern documentation marks the property as obsolete and does not publish this as a supported current tuning surface. That makes the setting too uncertain to validate for normal publication.",
-    "professional_notes": "Microsoft's Win32_OperatingSystem class still describes LargeSystemCache with 0 meaning 'Optimize for Applications' and 1 meaning 'Optimize for System Performance', but the same property is marked obsolete and not supported. The current Memory Limits page only mentions that old Windows XP/Server 2003 memory limits changed when the LargeSystemCache registry key was set. This research pass did not find a modern primary Microsoft registry page that publishes the exact path and current support status of LargeSystemCache as a recommended control surface.",
+    "tradeoffs_overview": "The app only writes the legacy client value 0. Microsoft still marks the property obsolete, so this should be read as a reset-to-client-baseline action, not as a modern performance recommendation.",
+    "professional_notes": "Microsoft's Win32_OperatingSystem class still describes LargeSystemCache with 0 meaning 'Optimize for Applications' and 1 meaning 'Optimize for System Performance', but the same property is marked obsolete and not supported. The current Memory Limits page only mentions that old Windows XP and Windows Server 2003 limits changed when the LargeSystemCache registry key was set. That means this is not a modern recommended tuning surface, but the current app behavior is still exact and narrow: it writes the legacy client reset value LargeSystemCache = 0, and the Win25H2Clean reversible probe showed the value was already 0 and restored cleanly.",
     "targets": [
       {
         "target_id": "large-system-cache",
@@ -71,10 +71,10 @@
           "target_id": "large-system-cache",
           "state_kind": "unknown",
           "value": null,
-          "rationale": "Do not publish a validated default until a modern Microsoft registry source is captured."
+          "rationale": "Keep the legacy client value 0 used by the current app and confirmed by the VM probe."
         }
       ],
-      "notes": "The published Microsoft evidence is partly historical and partly deprecated, so the dataset stays conservative.",
+      "notes": "This remains a legacy surface, but the current app action is an exact reset to the client baseline.",
       "evidence_ids": [
         "ms-win32-operatingsystem-largesystemcache",
         "ms-memory-limits-large-system-cache"
@@ -86,6 +86,7 @@
       "profile_id": "hold-for-research",
       "label": "Hold for research",
       "intended_for": [
+        "Systems undoing an old server-style cache tweak",
         "Research tracking only"
       ],
       "avoid_for": [
@@ -97,14 +98,14 @@
           "target_id": "large-system-cache",
           "state_kind": "unknown",
           "value": null,
-          "rationale": "Do not publish or apply until a stronger modern Microsoft registry source is captured."
+          "rationale": "Do not treat this as a modern tuning control; only use it as a legacy reset reference."
         }
       ],
       "good_when": "You want to document the setting without overstating confidence.",
-      "bad_when": "You need a fully modern Microsoft-backed memory-cache tuning record.",
+      "bad_when": "You want the app to actively reset the legacy client value.",
       "tradeoffs": [
         "The app behavior is documented honestly.",
-        "The setting stays blocked from validated publication."
+        "The setting remains obsolete and stays out of one-click apply."
       ],
       "apply_allowed": false,
       "evidence_ids": [
@@ -115,6 +116,7 @@
       "profile_id": "current-app-profile",
       "label": "Current app profile",
       "intended_for": [
+        "Systems undoing an old server-style cache tweak",
         "Research comparison only"
       ],
       "avoid_for": [
@@ -129,13 +131,13 @@
           "rationale": "Observed app write representing the client/application-focused mode."
         }
       ],
-      "good_when": "You are documenting the app's current behavior for follow-up review.",
-      "bad_when": "You need a modern, fully supported Microsoft registry control.",
+      "good_when": "You want the app to restore the legacy client/applications value 0.",
+      "bad_when": "You want a modern, fully supported Microsoft registry control.",
       "tradeoffs": [
         "The historical semantics are captured.",
         "The control remains marked obsolete and unsupported by Microsoft."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "app-system-registry-provider"
       ]
@@ -182,13 +184,13 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Win25H2Clean reversible probe confirmed LargeSystemCache is already at the client baseline 0; the write is idempotent, and the surface remains obsolete/unsupported.",
+    "why": "Microsoft still publishes the legacy 0/1 semantics, the current app writes only the client reset value 0, and the Win25H2Clean probe confirmed that write is idempotent and reversible. The property stays obsolete, but the current app action is narrow enough to expose as an exact reset-to-client-baseline mapping.",
     "blocking_issues": []
   },
   "last_reviewed_utc": "2026-03-12T00:00:00Z",
