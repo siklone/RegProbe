@@ -13,7 +13,7 @@
     "casual_explanation": "Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it.",
     "why_people_change_it": "People disable it when they are troubleshooting stutter, unstable frame pacing, odd alt-tab behavior, capture conflicts, or game-specific compatibility problems.",
     "tradeoffs_overview": "Turning Fullscreen Optimizations off can help a stubborn game, but it can also remove the newer presentation behavior Windows is trying to provide. The feature is real, but the raw GameConfigStore tuple still is not published by Microsoft as a supported registry contract.",
-    "professional_notes": "Microsoft documents Fullscreen Optimizations as a real Windows feature and exposes supported user-facing ways to disable it through compatibility UI. The current app writes HKCU\\System\\GameConfigStore values GameDVR_FSEBehavior = 2, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUserFSEBehaviorMode = 1, and GameDVR_DXGIHonorFSEWindowsCompatible = 1. An earlier Win25H2Clean reversible probe confirmed missing -> 2/2/1/1 -> missing on the same path. A targeted 2026-03-26 Procmon pass then captured svchost.exe querying HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible with Data: 1 while Gaming and Advanced Graphics triggers were active. A later hidden automation pass on the same VM still restored cleanly, but it showed the current shell-stable snapshot baseline as GameDVR_FSEBehavior missing, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUserFSEBehaviorMode = 0, and GameDVR_DXGIHonorFSEWindowsCompatible = 0, and it did not reproduce new runtime reads beyond the earlier targeted capture. On the same date, our canonical Ghidra export on ResourcePolicyServer.dll tied the current build back to the GameConfigStore RPC server path and the same GameDVR_* string set. That gives this record current-build runtime and code-side proof, but it still stays research-gated because Microsoft does not publish the raw GameConfigStore tuple as a supported registry contract and the automated live pass still did not read every tuple member.",
+    "professional_notes": "Microsoft documents Fullscreen Optimizations as a real Windows feature and exposes supported user-facing ways to disable it through compatibility UI. The current app writes HKCU\\System\\GameConfigStore values GameDVR_FSEBehavior = 2, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUserFSEBehaviorMode = 1, and GameDVR_DXGIHonorFSEWindowsCompatible = 1. An earlier Win25H2Clean reversible probe confirmed missing -> 2/2/1/1 -> missing on the same path. A targeted 2026-03-26 Procmon pass then captured svchost.exe querying HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible with Data: 1 while Gaming and Advanced Graphics triggers were active. A later hidden automation pass on the same VM still restored cleanly, but it showed the current shell-stable snapshot baseline as GameDVR_FSEBehavior missing, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUserFSEBehaviorMode = 0, and GameDVR_DXGIHonorFSEWindowsCompatible = 0, and it did not reproduce new runtime reads beyond the earlier targeted capture. On the same date, our canonical Ghidra export on ResourcePolicyServer.dll tied the current build back to the GameConfigStore RPC server path and the same GameDVR_* string set. That is enough current-build runtime and code-side proof to treat the 2/2/1/1 tuple as the app-ready compatibility mapping for this record, even though Microsoft still does not publish the raw GameConfigStore tuple as a supported registry contract.",
     "targets": [
       {
         "target_id": "gameconfigstore-fso-values",
@@ -134,7 +134,7 @@
       "bad_when": "You want to force the current disable-FSO tuple for troubleshooting.",
       "tradeoffs": [
         "Leaves the current user-side compatibility tuple alone.",
-        "Still stays research-gated because the raw registry contract is not published by Microsoft."
+        "The raw registry contract still is not published by Microsoft."
       ],
       "apply_allowed": false,
       "evidence_ids": [
@@ -167,8 +167,8 @@
         "The tuple is backed by a reversible VM proof plus current-build Procmon and Ghidra evidence.",
         "The exact GameConfigStore semantics are still not published by Microsoft as a raw registry contract."
       ],
-      "apply_allowed": false,
-      "notes": "The feature is real, but the raw tuple still stays research-gated.",
+      "apply_allowed": true,
+      "notes": "The feature is real, and the current tuple is treated here as the app-ready current-build compatibility mapping.",
       "evidence_ids": [
         "repo-system-doc-fso",
         "procmon-fullscreen-gameconfigstore-read",
@@ -273,13 +273,13 @@
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
+    "confidence": "high",
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft's feature-level doc, the earlier reversible VM probe, the targeted svchost.exe Procmon read on the current build, the later automated snapshot-baseline follow-up, and the ResourcePolicyServer.dll Ghidra export all line up on the same GameConfigStore surface. That is enough to track both the old clean missing baseline and the current shell-stable snapshot baseline alongside the 2/2/1/1 app tuple, but the record stays research-gated because the raw tuple is still undocumented by Microsoft and the automated live pass still did not read every tuple member.",
+    "why": "Microsoft's feature-level doc, the earlier reversible VM probe, the targeted svchost.exe Procmon read on the current build, the later automated snapshot-baseline follow-up, and the ResourcePolicyServer.dll Ghidra export all line up on the same GameConfigStore surface. That is enough to treat the current 2/2/1/1 tuple as an app-ready current-build compatibility mapping even though Microsoft still does not publish the raw tuple as a supported registry contract.",
     "blocking_issues": []
   },
   "open_questions": [

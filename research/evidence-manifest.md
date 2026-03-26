@@ -251,7 +251,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-background-gp-updates` | validated | Class A | `research/records/system.disable-background-gp-updates.json` | `939462532571dbbd32618d72a35c8be5ea1a96709538420282e1b06efc1d104f` | `d9b2887e86cc3be9878377396d5ef5df25d1b49c8a8d2b17b61223af3753b605` | 4 |
 | `system.disable-clipboard-history` | validated | Class A | `research/records/system.disable-clipboard-history.json` | `13c5d2f3c61f9d29b0a1ea0e45ac398a822c35c6585cfb75695c1e6bba82c9f9` | `e65603715e0aab4997f1ec57d1eb0ec59e40e2bc28e9c5fc5c88714986620923` | 5 |
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | `9ff0033601340e63fe6cdd11cde81056b645efff98abd80fa814f921756639b9` | `87e3b4393968daf49c4ca90f5343ac7b10e8afab12f2f61194e0df491c22083a` | 4 |
-| `system.disable-fullscreen-optimizations` | validated | Class B | `research/records/system.disable-fullscreen-optimizations.review.json` | `34c80943cd36f795b76424c5a38950b6b0fabd2bab38038e999ef1dd6585facf` | `0b38f5a9db473691ad21e2594ae5d7db493a12553a1dc0c747cd25b678df5de6` | 6 |
+| `system.disable-fullscreen-optimizations` | validated | Class B | `research/records/system.disable-fullscreen-optimizations.review.json` | `86bd038295a1c7a6da046de9c59a8c3e7da8da8cad6105aeddd6fc2a89b974fa` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | `f8cd916eaac32ecb352ba3d860e62ede4fecda6043e902ef109a5baf9cb94f58` | `5024d7c51812e964c73012685ed6aa5d3e93bfc6bc83099344cf253656ef5901` | 4 |
 | `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | `d58d9d4b2516d8c45742f57ed8e81cd05bd5e7881d38a063e0bc85909ce46ca7` | `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b` | 6 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | `239b954f3ed57b91c6849b79112c012e1fc93b98e2997e268cc62e812b6410d0` | `965dda97da26f0f0572e6d5ecd4e7460377b59c02730d78345ee192f6ddbc803` | 3 |
@@ -6929,10 +6929,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/system.disable-fullscreen-optimizations.review.json`
-- Source SHA256: `34c80943cd36f795b76424c5a38950b6b0fabd2bab38038e999ef1dd6585facf`
-- Proof SHA256: `0b38f5a9db473691ad21e2594ae5d7db493a12553a1dc0c747cd25b678df5de6`
+- Source SHA256: `86bd038295a1c7a6da046de9c59a8c3e7da8da8cad6105aeddd6fc2a89b974fa`
+- Proof SHA256: `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4`
 
-**Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers the observed 25H2 story: Microsoft documents the feature area, the Win25H2Clean reversible probe confirmed the tuple before restoring the baseline, svchost.exe backed by resourcepolicyserver.dll queried GameDVR_DXGIHonorFSEWindowsCompatible live in Procmon, and our Ghidra export tied the same build back to the GameConfigStore RPC server code path.
+**Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers both the positive runtime read and the current VM baseline story: Microsoft documents the feature area, an earlier Win25H2Clean reversible probe confirmed the 2/2/1/1 tuple against a clean missing baseline, a targeted Procmon pass captured svchost.exe backed by resourcepolicyserver.dll querying GameDVR_DXGIHonorFSEWindowsCompatible live, a later hidden automation pass restored the current shell-stable snapshot baseline of missing/2/0/0, and our canonical Ghidra export tied the same build back to the GameConfigStore RPC server code path.
 
 **Evidence**
 
@@ -6941,17 +6941,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-windowed-games-optimizations` | `official-doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) |
 | `repo-system-doc-fso` | `repo-doc` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) |
 | `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.txt and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.hits.csv |
-| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/resourcepolicysrv-fullscreen-ghidra.md |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/ghidra-matches.md and [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/evidence.json |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| `vm-fullscreen-automated-probe-20260326` | `vm-test` | Win25H2Clean automated fullscreen follow-up | [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.txt and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.json and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.hits.csv |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
 | Source | [research/notes/fullscreen-optimizations-procmon-validation-20260326.md](notes/fullscreen-optimizations-procmon-validation-20260326.md) |
-| Exact quote / path | fullscreen-diag.txt: svchost.exe RegQueryValue HKCU/System/GameConfigStore/GameDVR_DXGIHonorFSEWindowsCompatible Data: 1. resourcepolicysrv-fullscreen-ghidra.md: ResourcePolicyServer.dll carries the GameConfigStore RPC server path and the GameDVR_* string set. |
-| Notes | The reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 Procmon and Ghidra passes add a current-build svchost.exe read on GameConfigStore plus direct ResourcePolicyServer code-side proof. |
+| Exact quote / path | fullscreen-diag.txt: svchost.exe RegQueryValue HKCU/System/GameConfigStore/GameDVR_DXGIHonorFSEWindowsCompatible Data: 1. fullscreen-optimizations-probe.txt: ORIGINAL=GameDVR_FSEBehavior missing; GameDVR_FSEBehaviorMode=2; GameDVR_HonorUserFSEBehaviorMode=0; GameDVR_DXGIHonorFSEWindowsCompatible=0. ghidra-matches.md: ResourcePolicyServer.dll carries the GameConfigStore RPC server path and the GameDVR_* string set. |
+| Notes | The older reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 targeted Procmon and canonical Ghidra passes add a current-build svchost.exe read plus direct ResourcePolicyServer code-side proof, and the later automated follow-up now documents the current shell-stable snapshot baseline even though it did not reproduce a new runtime read. |
 
 ---
 

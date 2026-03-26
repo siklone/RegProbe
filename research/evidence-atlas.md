@@ -22145,7 +22145,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers the observed 25H2 story: Microsoft documents the feature area, the Win25H2Clean reversible probe confirmed the tuple before restoring the baseline, svchost.exe backed by resourcepolicyserver.dll queried GameDVR_DXGIHonorFSEWindowsCompatible live in Procmon, and our Ghidra export tied the same build back to the GameConfigStore RPC server code path.
+**Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers both the positive runtime read and the current VM baseline story: Microsoft documents the feature area, an earlier Win25H2Clean reversible probe confirmed the 2/2/1/1 tuple against a clean missing baseline, a targeted Procmon pass captured svchost.exe backed by resourcepolicyserver.dll querying GameDVR_DXGIHonorFSEWindowsCompatible live, a later hidden automation pass restored the current shell-stable snapshot baseline of missing/2/0/0, and our canonical Ghidra export tied the same build back to the GameConfigStore RPC server code path.
 
 **Current implementation**
 
@@ -22236,18 +22236,19 @@ Windows Internals references:
 | `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
 | `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.txt and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-diag.hits.csv | `high` | path, value, behavior |
-| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/resourcepolicysrv-fullscreen-ghidra.md | `high` | path, value, behavior |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/ghidra-matches.md and [research/evidence-files/ghidra/system.disable-fullscreen-optimizations](evidence-files/ghidra/system.disable-fullscreen-optimizations)/evidence.json | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
+| `vm-fullscreen-automated-probe-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean automated fullscreen follow-up | [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.txt and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.json and [research/evidence-files/procmon/system.disable-fullscreen-optimizations](evidence-files/procmon/system.disable-fullscreen-optimizations)/fullscreen-optimizations-probe.hits.csv | `medium` | version-scope, rollback, open-question |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
 | Source | [research/notes/fullscreen-optimizations-procmon-validation-20260326.md](notes/fullscreen-optimizations-procmon-validation-20260326.md) |
-| Exact quote / path | fullscreen-diag.txt: svchost.exe RegQueryValue HKCU/System/GameConfigStore/GameDVR_DXGIHonorFSEWindowsCompatible Data: 1. resourcepolicysrv-fullscreen-ghidra.md: ResourcePolicyServer.dll carries the GameConfigStore RPC server path and the GameDVR_* string set. |
+| Exact quote / path | fullscreen-diag.txt: svchost.exe RegQueryValue HKCU/System/GameConfigStore/GameDVR_DXGIHonorFSEWindowsCompatible Data: 1. fullscreen-optimizations-probe.txt: ORIGINAL=GameDVR_FSEBehavior missing; GameDVR_FSEBehaviorMode=2; GameDVR_HonorUserFSEBehaviorMode=0; GameDVR_DXGIHonorFSEWindowsCompatible=0. ghidra-matches.md: ResourcePolicyServer.dll carries the GameConfigStore RPC server path and the GameDVR_* string set. |
 | Key found on page | `True` |
-| Notes | The reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 Procmon and Ghidra passes add a current-build svchost.exe read on GameConfigStore plus direct ResourcePolicyServer code-side proof. |
+| Notes | The older reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 targeted Procmon and canonical Ghidra passes add a current-build svchost.exe read plus direct ResourcePolicyServer code-side proof, and the later automated follow-up now documents the current shell-stable snapshot baseline even though it did not reproduce a new runtime read. |
 
 **Decision**
 
@@ -22258,7 +22259,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft's feature-level doc, the reversible VM probe, the svchost.exe Procmon read on the current build, and the ResourcePolicyServer.dll Ghidra export all line up on the same GameConfigStore surface. That is enough to track the missing baseline and the 2/2/1/1 tuple as current observed states, but the record stays research-gated because the raw tuple is still undocumented by Microsoft and the live pass did not read every tuple member. |
+| Why | Microsoft's feature-level doc, the earlier reversible VM probe, the targeted svchost.exe Procmon read on the current build, the later automated snapshot-baseline follow-up, and the ResourcePolicyServer.dll Ghidra export all line up on the same GameConfigStore surface. That is enough to track both the old clean missing baseline and the current shell-stable snapshot baseline alongside the 2/2/1/1 app tuple, but the record stays research-gated because the raw tuple is still undocumented by Microsoft and the automated live pass still did not read every tuple member. |
 
 ---
 
