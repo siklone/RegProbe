@@ -201,7 +201,7 @@
     },
     {
       "evidence_id": "vm-reliability-procmon-attempts-20260326",
-      "kind": "vm-test",
+      "kind": "procmon-trace",
       "title": "Win25H2Clean Procmon trigger attempts for Reliability timestamp reads",
       "location": "research/notes/reliability-timestamp-probe-attempts-20260326.md",
       "summary": "Procmon passes around `perfmon /rel`, a bounded WER crash path, and WMI reliability queries all produced captures but did not show reads on the TimeStampEnabled or TimeStampInterval policy/fallback paths during the tested windows.",
@@ -213,7 +213,7 @@
     },
     {
       "evidence_id": "vm-reliability-follow-up-20260326",
-      "kind": "vm-test",
+      "kind": "procmon-trace",
       "title": "Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes",
       "location": "research/notes/reliability-timestamp-follow-up-20260326.md",
       "summary": "A DiagTrack service-restart Procmon pass showed an adjacent Reliability\\PBR read, and bounded WER QueueReporting plus Problem Reports UI passes still produced no direct reads on TimeStampEnabled or TimeStampInterval.",

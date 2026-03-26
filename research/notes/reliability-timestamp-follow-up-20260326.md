@@ -33,11 +33,9 @@ runtime read is still not surfaced in Procmon.
 
 Evidence files:
 
-- `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/diagtrack-service.txt`
-- `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/reliability-diagtrack-restart-1.txt`
-- `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/reliability-diagtrack-restart-1.csv`
-- `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/reliability-werqueue-1.txt`
-- `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/reliability-werqueue-1.csv`
-- `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/reliability-wercpl-1.txt`
-- `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/reliability-wercpl-1.csv`
-- `research/evidence-files/ghidra/reliability-timestamp-follow-up-20260326/diagtrack-reliability-ghidra.md`
+- `research/evidence-files/procmon/system.reliability-timestamp-enabled/diagtrack-service.txt`
+- `research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-diagtrack-restart-1.txt`
+- `research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-diagtrack-restart-1.hits.csv`
+- `research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-werqueue-1.txt`
+- `research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-wercpl-1.txt`
+- `research/evidence-files/ghidra/system.reliability-timestamp-enabled/diagtrack-reliability-ghidra.md`

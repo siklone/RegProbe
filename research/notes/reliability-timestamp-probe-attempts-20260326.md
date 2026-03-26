@@ -21,6 +21,6 @@ Reliability policy or fallback values inside the capture window.
 
 Evidence files:
 
-- `research/evidence-files/procmon/reliability-timestamp-probe-attempts-20260326/perfmon-rel.txt`
-- `research/evidence-files/procmon/reliability-timestamp-probe-attempts-20260326/wer-crash.txt`
-- `research/evidence-files/procmon/reliability-timestamp-probe-attempts-20260326/wmi-reliability.txt`
+- `research/evidence-files/procmon/system.reliability-timestamp-enabled/perfmon-rel.txt`
+- `research/evidence-files/procmon/system.reliability-timestamp-enabled/wer-crash.txt`
+- `research/evidence-files/procmon/system.reliability-timestamp-enabled/wmi-reliability.txt`
