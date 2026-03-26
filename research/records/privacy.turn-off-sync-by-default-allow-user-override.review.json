@@ -315,7 +315,7 @@
       "evidence_id": "local-settingsync-admx",
       "kind": "official-doc",
       "title": "Local Microsoft SettingSync.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/SettingSync.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/SettingSync.admx",
       "summary": "The local ADMX file defines the SettingSync policy family with enabledValue 2, disabledValue 0, UserOverride trueValue 0, UserOverride falseValue 1, and DisableSyncOnPaidNetwork enabledValue 1.",
       "supports": [
         "path",
@@ -329,7 +329,7 @@
       "evidence_id": "local-settingsync-adml",
       "kind": "official-doc",
       "title": "Local Microsoft SettingSync.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/SettingSync.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/SettingSync.adml",
       "summary": "The local ADML help text states that the UserOverride checkbox means users are allowed to turn syncing on, which makes the current app bundle softer than a strict disable.",
       "supports": [
         "behavior",
@@ -364,7 +364,7 @@
     "blocking_issues": []
   },
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/SettingSync.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/SettingSync.admx",
     "exact_quote_or_path": "SettingSync.admx: DisableSettingSyncUserOverride trueValue=0, falseValue=1.",
     "key_found_on_page": true,
     "notes": "Local SettingSync.admx and SettingSync.adml confirm that the UserOverride values allow syncing to be turned back on, so the current label now matches the documented behavior."

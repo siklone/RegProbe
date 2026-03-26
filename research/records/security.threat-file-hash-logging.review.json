@@ -321,7 +321,7 @@
       "evidence_id": "vm-defender-runtime-disabled-baseline",
       "kind": "vm-test",
       "title": "Original high-risk snapshot had Defender disabled",
-      "location": "research/evidence-files/vm-tooling-staging/defender-runtime-repair.json",
+      "location": "evidence/files/vm-tooling-staging/defender-runtime-repair.json",
       "summary": "The original high-risk snapshot had WinDefend and WdNisSvc set to Disabled and Get-MpComputerStatus reported 'Not running', which would have made Defender policy validation misleading until the VM was repaired.",
       "supports": [
         "default",
@@ -333,7 +333,7 @@
       "evidence_id": "vm-defender-runtime-enabled-baseline",
       "kind": "vm-test",
       "title": "Defender-on 25H2 snapshot baseline",
-      "location": "research/evidence-files/vm-tooling-staging/defender-runtime-repair.json",
+      "location": "evidence/files/vm-tooling-staging/defender-runtime-repair.json",
       "summary": "After re-enabling WinDefend and waiting for the service to settle, Get-MpComputerStatus reported Normal with real-time protection, behavior monitoring, and IOAV protection enabled. A dedicated Defender-on snapshot was then created for this lane.",
       "supports": [
         "default",
@@ -345,7 +345,7 @@
       "evidence_id": "vm-defender-threat-file-hash-baseline",
       "kind": "vm-test",
       "title": "Defender-on baseline EICAR probe",
-      "location": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json",
+      "location": "evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json",
       "summary": "With all known file-hash-computation policy surfaces unset, the Defender-on 25H2 VM produced event 1116 for the EICAR text-file probe and no event 1120.",
       "supports": [
         "default",
@@ -357,7 +357,7 @@
       "evidence_id": "vm-defender-threat-file-hash-root-read",
       "kind": "procmon-trace",
       "title": "MsMpEng.exe direct read of ThreatFileHashLogging = 1",
-      "location": "research/evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
+      "location": "evidence/files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
       "summary": "With ThreatFileHashLogging = 1 on the root Defender policy path, MsMpEng.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging and read Data: 1 directly.",
       "supports": [
         "path",
@@ -370,7 +370,7 @@
       "evidence_id": "vm-defender-threat-file-hash-policymanager-read",
       "kind": "procmon-trace",
       "title": "MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1",
-      "location": "research/evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt",
+      "location": "evidence/files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt",
       "summary": "With EnableFileHashComputation = 1 on the Policy Manager alias, MsMpEng.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager\\EnableFileHashComputation and read Data: 1 directly while the legacy root value stayed NAME NOT FOUND.",
       "supports": [
         "path",
@@ -383,7 +383,7 @@
       "evidence_id": "vm-defender-threat-file-hash-mpengine-no-read",
       "kind": "vm-test",
       "title": "Non-rebooted MpEngine pass did not show a live read",
-      "location": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json",
+      "location": "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json",
       "summary": "Setting HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\MpEngine\\EnableFileHashComputation = 1 did not produce a live registry read or event 1120 in the same non-rebooted EICAR text-file pass.",
       "supports": [
         "path",
@@ -395,7 +395,7 @@
       "evidence_id": "vm-defender-threat-file-hash-mpengine-restart-blocked",
       "kind": "vm-test",
       "title": "WinDefend service restart follow-up was blocked",
-      "location": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json",
+      "location": "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json",
       "summary": "A follow-up pass requested a WinDefend restart before the EICAR probe, but Defender service control was blocked in the guest and the capture still produced event 1116 with no event 1120.",
       "supports": [
         "behavior",
@@ -407,7 +407,7 @@
       "evidence_id": "vm-defender-threat-file-hash-mpengine-reboot-no-read",
       "kind": "vm-test",
       "title": "Rebooted MpEngine pass still did not show a direct policy-path read",
-      "location": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt",
+      "location": "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt",
       "summary": "After pre-writing HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\MpEngine\\EnableFileHashComputation = 1 and rebooting the guest, the capture still showed MATCH_COUNT=0 for EnableFileHashComputation or ThreatFileHashLogging while MsMpEng.exe continued reading the non-policy HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\MpEngine branch for ring values.",
       "supports": [
         "path",
@@ -420,7 +420,7 @@
       "evidence_id": "vm-defender-threat-file-hash-pe-baseline",
       "kind": "vm-test",
       "title": "Official Microsoft PE sample baseline still produced no event 1120",
-      "location": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json",
+      "location": "evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json",
       "summary": "Using Microsoft's BaFS Sample PE file on the Defender-on 25H2 baseline produced event 1116 for Trojan:Win32/Clengtst.A!plock and still produced no event 1120.",
       "supports": [
         "behavior",
@@ -432,7 +432,7 @@
       "evidence_id": "vm-defender-threat-file-hash-root-pe-no-hash",
       "kind": "vm-test",
       "title": "Legacy root PE pass still produced no event 1120",
-      "location": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json",
+      "location": "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json",
       "summary": "With ThreatFileHashLogging = 1 and the official Microsoft PE sample, the 25H2 VM still produced event 1116 and no event 1120. The filtered Procmon summary did not show a fresh direct read of ThreatFileHashLogging in the same PE detection window.",
       "supports": [
         "behavior",
@@ -444,7 +444,7 @@
       "evidence_id": "vm-defender-threat-file-hash-policymanager-pe-no-hash",
       "kind": "vm-test",
       "title": "Policy Manager PE pass still produced no event 1120",
-      "location": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json",
+      "location": "evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json",
       "summary": "With Policy Manager\\EnableFileHashComputation = 1 and the official Microsoft PE sample, the 25H2 VM still produced event 1116 and no event 1120. The filtered Procmon summary did not show a fresh direct read of EnableFileHashComputation in the same PE detection window.",
       "supports": [
         "behavior",
@@ -456,7 +456,7 @@
       "evidence_id": "vm-defender-threat-file-hash-mpengine-pe-reboot-no-hash",
       "kind": "vm-test",
       "title": "Rebooted MpEngine PE pass still produced no event 1120",
-      "location": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json",
+      "location": "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json",
       "summary": "After pre-writing the documented MpEngine value, rebooting, and using the official Microsoft PE sample, the 25H2 VM still showed MATCH_COUNT=0, event 1120 stayed absent, and the copied sample was already gone by the time the activity collector checked FILE_EXISTS_AFTER.",
       "supports": [
         "behavior",
@@ -483,7 +483,7 @@
   ],
   "last_reviewed_utc": "2026-03-25T11:30:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt",
+    "source_url": "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt",
     "exact_quote_or_path": "MsMpEng.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1",
     "key_found_on_page": true,
     "notes": "The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a separate pass. The app now stays on the documented root policy path. The later official Microsoft PE sample follow-up still produced event 1116 with no event 1120, so the hash-event behavior remains an open current-build question rather than part of the app contract."

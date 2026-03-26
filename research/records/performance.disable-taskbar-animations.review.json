@@ -127,7 +127,7 @@
       "evidence_id": "runtime-taskbar-animations-registry-diff",
       "kind": "runtime-diff",
       "title": "Guest reversible probe - TaskbarAnimations registry mapping",
-      "location": "research/evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt",
+      "location": "evidence/files/vm-tooling-staging/taskbar_animations_probe_out.txt",
       "summary": "Guest reversible probe on Win25H2Clean confirmed TaskbarAnimations transitions through 0 and 1 before restoring to 0.",
       "supports": [
         "value",
@@ -140,8 +140,8 @@
       "evidence_id": "procmon-taskbar-animations-registry-read",
       "kind": "procmon-trace",
       "title": "Procmon capture - explorer.exe TaskbarAnimations runtime reads",
-      "location": "research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv",
-      "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations with Data:0 and Data:1 after Explorer restarts. The repo now keeps the filtered capture files directly under research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/.",
+      "location": "evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv",
+      "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAnimations with Data:0 and Data:1 after Explorer restarts. The repo now keeps the filtered capture files directly under evidence/files/procmon/taskbar-animations-procmon-validation-20260326",
       "supports": [
         "path",
         "value",
@@ -154,7 +154,7 @@
       "evidence_id": "ghidra-taskbar-taskbaranimations",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path",
-      "location": "research/evidence-files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
+      "location": "evidence/files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
       "summary": "A headless Ghidra pass on Taskbar.dll found the TaskbarAnimations string and decompiled a function that reads SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations through Ordinal_123 after checking taskbar animation state with SystemParametersInfoW. That gives direct code-side proof that the taskbar consumes this flag on this build.",
       "supports": [
         "path",

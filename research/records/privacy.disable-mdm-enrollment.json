@@ -163,7 +163,7 @@
       "evidence_id": "local-mdm-admx",
       "kind": "official-doc",
       "title": "Local Microsoft MDM.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/MDM.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx",
       "summary": "The local ADMX file maps the machine policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -177,7 +177,7 @@
       "evidence_id": "local-mdm-adml",
       "kind": "official-doc",
       "title": "Local Microsoft MDM.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/MDM.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/MDM.adml",
       "summary": "The local ADML help text says enabling the policy disables MDM enrollment for all users and does not unenroll existing MDM enrollments, while disabled or not configured leaves MDM enrollment enabled.",
       "supports": [
         "behavior",
@@ -238,7 +238,7 @@
   },
   "last_reviewed_utc": "2026-03-12T21:00:59.6788102+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/MDM.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx",
     "exact_quote_or_path": "<policy name=\"MDM_MDM_DisplayName\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\" valueName=\"DisableRegistration\">; MDM.adml: If you enable this policy setting, MDM Enrollment will be disabled for all users. It will not unenroll existing MDM enrollments.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. Added nohuto mirror corroboration via nohuto-disableregistration-admx."

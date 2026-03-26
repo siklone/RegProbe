@@ -255,7 +255,7 @@
   },
   "last_reviewed_utc": "2026-03-12T09:10:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+    "source_url": "evidence/files/external/c/Windows/inf/sceregvl.inf.md",
     "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser,4,%BlockConnectedUser%,3,0|%PolicyDisabled%,1|%BlockAdd%,3|%BlockLogin%",
     "key_found_on_page": true,
     "notes": "The local official Microsoft security option metadata names the same registry path and value used by the app and exposes the documented 0, 1, and 3 states. Added nohuto mirror corroboration via nohuto-noconnecteduser-trace."

@@ -151,7 +151,7 @@
       "evidence_id": "local-biometrics-admx",
       "kind": "official-doc",
       "title": "Local Microsoft Biometrics.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
       "summary": "The local ADMX file defines the domain account biometric policy and shows Domain Accounts with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider.",
       "supports": [
         "path",
@@ -200,7 +200,7 @@
   },
   "last_reviewed_utc": "2026-03-12T20:59:12.4633283+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
     "exact_quote_or_path": "<policy name=\"Biometrics_EnableDomainCredProv\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\" valueName=\"Domain Accounts\">; Biometrics.adml: If you disable this policy setting, Windows prevents domain users from logging on to a domain-joined computer using biometrics.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks biometric sign-in for domain users."

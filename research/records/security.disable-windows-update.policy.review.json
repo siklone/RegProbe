@@ -192,7 +192,7 @@
       "evidence_id": "local-icm-admx",
       "kind": "official-doc",
       "title": "Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx",
       "summary": "The local ADMX file maps DisableWindowsUpdateAccess with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -205,7 +205,7 @@
       "evidence_id": "local-windowsupdate-admx",
       "kind": "official-doc",
       "title": "Local Microsoft WindowsUpdate.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx",
       "summary": "The local ADMX file documents NoAutoUpdate under the AU policy key and shows the official Enable/Disable mapping for Configure Automatic Updates.",
       "supports": [
         "path",
@@ -219,7 +219,7 @@
       "evidence_id": "local-windowsupdate-adml",
       "kind": "official-doc",
       "title": "Local Microsoft WindowsUpdate.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml",
       "summary": "The local ADML help text explains DisableWindowsUpdateAccess, NoAutoUpdate, and the driver-exclusion policy, and clarifies that NoAutoUpdate = 1 prohibits Windows from searching for updates.",
       "supports": [
         "behavior",
@@ -255,7 +255,7 @@
   },
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx",
     "exact_quote_or_path": "NoAutoUpdate under the AU policy key with the expected 1/0 mapping for Configure Automatic Updates.",
     "key_found_on_page": true,
     "notes": "The deprecated parent retains the pause-timestamp behavior; this child records the official policy half only."

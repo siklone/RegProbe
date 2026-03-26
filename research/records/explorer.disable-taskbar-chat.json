@@ -189,7 +189,7 @@
       "evidence_id": "local-taskbar-admx-chat",
       "kind": "official-doc",
       "title": "Local Microsoft Taskbar.admx ConfigureChatIcon mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/Taskbar.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx",
       "summary": "The local ADMX file maps ConfigureChatIcon to Software\\Policies\\Microsoft\\Windows\\Windows Chat and defines enum values 1 Show, 2 Hide, and 3 Disabled.",
       "supports": [
         "path",
@@ -203,7 +203,7 @@
       "evidence_id": "local-taskbar-adml-chat",
       "kind": "official-doc",
       "title": "Local Microsoft Taskbar.adml ConfigureChatIcon help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/Taskbar.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml",
       "summary": "The local ADML help text explains the Show, Hide, and Disabled Chat icon policy states and the user experience for each.",
       "supports": [
         "behavior",
@@ -239,7 +239,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-13T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/Taskbar.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx",
     "exact_quote_or_path": "<policy name=\"ConfigureChatIcon\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Windows Chat\"> ... <enum id=\"ConfigureChatIcon_Action\" valueName=\"ChatIcon\" ...> ... <decimal value=\"1\" /> ... <decimal value=\"2\" /> ... <decimal value=\"3\" />; Taskbar.adml: If you enable this policy setting and set it to Hide, the Chat icon will be hidden by default. Users can show or hide it in Settings.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact device-policy key and ChatIcon enum surface; local ADML confirms the Hide behavior. The app now writes the documented machine-policy path with value 2."

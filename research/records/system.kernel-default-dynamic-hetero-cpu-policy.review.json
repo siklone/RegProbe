@@ -221,7 +221,7 @@
       "evidence_id": "vm-hetero-policy-strict-sweep-20260322",
       "kind": "runtime-benchmark",
       "title": "Strict VM sweep of DefaultDynamicHeteroCpuPolicy values 0..7",
-      "location": "research/notes/hetero-dynamic-policy-strict-sweep-20260322.md; research/evidence-files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-summary.csv; research/evidence-files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-detail.json",
+      "location": "research/notes/hetero-dynamic-policy-strict-sweep-20260322.md; evidence/files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-summary.csv; evidence/files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-detail.json",
       "summary": "The Win25H2Clean VM was swept through requested values 0..7 with two clean reboot cycles per sample. After each reboot the guest settled before a readback, and the benchmark value matched the requested value on boot 1, boot 2, and the benchmark pass for every sample. CPU timings stayed in a tight band and disk throughput varied without a monotonic trend across the requested values. The VM was restored to DefaultDynamicHeteroCpuPolicy = 3 after the sweep.",
       "supports": [
         "value",

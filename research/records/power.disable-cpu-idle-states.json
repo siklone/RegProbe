@@ -197,7 +197,7 @@
       "evidence_id": "vm-cpu-idle-bundle-probe",
       "kind": "vm-test",
       "title": "Win25H2Clean reversible probe for the CPU idle-state bundle",
-      "location": "research/evidence-files/vm-tooling-staging/cpu_idle_probe.json",
+      "location": "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
       "summary": "The current 25H2 VM baseline had all three values missing, the app bundle wrote DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1, and the probe restored all three back to missing.",
       "supports": [
         "path",
@@ -223,7 +223,7 @@
       "evidence_id": "ghidra-cpu-idle-no-match-20260327",
       "kind": "ghidra-trace",
       "title": "Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes",
-      "location": "research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
+      "location": "evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
       "summary": "Two current-build ntoskrnl.exe probes looked for the registry names and for the internal pseudocode names tracked in the repo notes. Both came back with no matching strings or xrefs, so this pass did not produce a current-build kernel decompilation lead for the bundle.",
       "supports": [
         "version-scope",
@@ -257,7 +257,7 @@
   },
   "last_reviewed_utc": "2026-03-21T10:10:55+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/cpu_idle_probe.json",
+    "source_url": "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
     "exact_quote_or_path": "before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null",
     "key_found_on_page": true,
     "notes": "Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. A later rebooted benchmark lane failed before any CPU or memory workload started because Explorer did not return after reboot, and the VM had to be recovered from snapshot."

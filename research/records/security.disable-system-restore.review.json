@@ -160,7 +160,7 @@
       "evidence_id": "local-systemrestore-admx",
       "kind": "official-doc",
       "title": "Local Microsoft SystemRestore.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/SystemRestore.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx",
       "summary": "The local ADMX file documents DisableSR under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -174,7 +174,7 @@
       "evidence_id": "local-systemrestore-adml",
       "kind": "official-doc",
       "title": "Local Microsoft SystemRestore.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/SystemRestore.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/SystemRestore.adml",
       "summary": "The local ADML help text explains that enabling Turn off System Restore disables the feature and that this policy overrides the separate Turn off Configuration policy.",
       "supports": [
         "behavior",
@@ -210,7 +210,7 @@
   },
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/SystemRestore.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx",
     "exact_quote_or_path": "<policy name=\"SR_DisableSR\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\SystemRestore\" valueName=\"DisableSR\">; SystemRestore.adml: \"This policy setting allows you to turn off System Restore.\"",
     "key_found_on_page": true,
     "notes": "Local official Microsoft ADMX and ADML files document DisableSR as the supported System Restore turn-off policy. The app now writes that exact documented value."

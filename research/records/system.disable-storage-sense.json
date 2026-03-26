@@ -172,7 +172,7 @@
       "evidence_id": "local-storagesense-admx",
       "kind": "official-doc",
       "title": "Local Microsoft StorageSense.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/StorageSense.admx",
       "summary": "The local ADMX file shows enabledValue 1 and disabledValue 0 for AllowStorageSenseGlobal.",
       "supports": [
         "path",
@@ -219,7 +219,7 @@
   },
   "last_reviewed_utc": "2026-03-12T21:08:26.6324695+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/StorageSense.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx",
     "exact_quote_or_path": "StorageSense.admx: key=\"Software\\Policies\\Microsoft\\Windows\\StorageSense\" valueName=\"AllowStorageSenseGlobal\"; StorageSense.adml: Disabled: Storage Sense is turned off the machine. Users cannot enable Storage Sense.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state turns Storage Sense off for the machine."

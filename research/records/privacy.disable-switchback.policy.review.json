@@ -160,7 +160,7 @@
       "evidence_id": "local-appcompat-admx",
       "kind": "official-doc",
       "title": "Local Microsoft AppCompat.admx mappings",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
       "summary": "Maps SbEnable with explicit enabledValue=0 and disabledValue=1 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat in AppCompatTurnOffSwitchBack. Numeric direction is fully proven without context inference.",
       "supports": [
         "path",
@@ -173,7 +173,7 @@
       "evidence_id": "local-appcompat-adml",
       "kind": "official-doc",
       "title": "Local Microsoft AppCompat.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml",
       "summary": "Describes SwitchBack behavior as allowing apps that detect Vista or later to receive compatibility fixes for older OS versions. No BSOD warning is attached to SbEnable; the risk text in this file is specific to DisableEngine.",
       "supports": [
         "behavior",
@@ -199,8 +199,8 @@
       "evidence_id": "procmon-switchback",
       "kind": "procmon-trace",
       "title": "VM Procmon capture - AppCompatTurnOffSwitchBack",
-      "location": "research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and research/evidence-files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv",
-      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw bundle files are checked in under research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/ and the SwitchBack-only filtered hits are under research/evidence-files/procmon/privacy.disable-switchback.policy/.",
+      "location": "evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/files/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv",
+      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capture. Raw bundle files are checked in under evidence/files/procmon/privacy.disable-appcompat-engine.policy and the SwitchBack-only filtered hits are under evidence/files/procmon/privacy.disable-switchback.policy",
       "supports": [
         "value",
         "behavior",
@@ -234,7 +234,7 @@
   },
   "open_questions": [],
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
     "exact_quote_or_path": "AppCompat.admx: `<policy name=\"AppCompatTurnOffSwitchBack\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"SbEnable\">`; AppCompat.adml: `If you enable this policy setting, Switchback will be turned off.` and `If you disable or do not configure this policy setting, the Switchback will be turned on.`",
     "key_found_on_page": true,
     "notes": "Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable policy surface and semantics, and Procmon confirmed gpupdate writes SbEnable=REG_DWORD 0x0 on Windows 11 Pro 10.0.26200.8037."

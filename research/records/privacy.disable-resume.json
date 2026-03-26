@@ -153,7 +153,7 @@
       "evidence_id": "vm-resume-policymanager-probe",
       "kind": "procmon-trace",
       "title": "Guest Procmon and PolicyManager probe for CrossDeviceResume",
-      "location": "research/evidence-files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv and research/evidence-files/procmon/privacy.disable-resume/resume-policymanager-probe.txt",
+      "location": "evidence/files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv and evidence/files/procmon/privacy.disable-resume/resume-policymanager-probe.txt",
       "summary": "Guest-side Procmon capture shows CrossDeviceResume.exe launching while PolicyManager DLL loads. The companion registry probe confirms the managed policy default branch at HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\Connectivity\\DisableCrossDeviceResume with value 0 and no current-user PolicyManager Connectivity path on this build.",
       "supports": [
         "path",
@@ -179,7 +179,7 @@
       "evidence_id": "procmon-crossdevice-resume-probe",
       "kind": "procmon-trace",
       "title": "Guest Procmon probe for CrossDeviceResume resume toggle",
-      "location": "research/evidence-files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt and research/evidence-files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md",
+      "location": "evidence/files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt and evidence/files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md",
       "summary": "Guest-side reversible probe toggled IsResumeAllowed between 0 and 1 while opening the CrossDeviceResume settings surface. Procmon captured Explorer, ShellHost, SearchHost, and StartMenuExperienceHost activity around the toggle.",
       "supports": [
         "path",

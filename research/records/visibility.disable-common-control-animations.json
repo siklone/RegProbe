@@ -157,7 +157,7 @@
       "evidence_id": "local-explorer-admx-animations",
       "kind": "official-doc",
       "title": "Local Microsoft Explorer.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/Explorer.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/Explorer.admx",
       "summary": "The local ADMX file maps the user policy to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\TurnOffSPIAnimations with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -171,7 +171,7 @@
       "evidence_id": "local-explorer-adml-animations",
       "kind": "official-doc",
       "title": "Local Microsoft Explorer.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/Explorer.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/Explorer.adml",
       "summary": "The local ADML help text says disabling animations can improve usability for some visual disabilities as well as performance and battery life in some scenarios.",
       "supports": [
         "behavior",
@@ -217,7 +217,7 @@
   },
   "last_reviewed_utc": "2026-03-13T02:50:43+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/Explorer.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Explorer.admx",
     "exact_quote_or_path": "<policy name=\"TurnOffSPIAnimations\" class=\"User\" displayName=\"$(string.TurnOffSPIAnimations)\" explainText=\"$(string.TurnOffSPIAnimations_Help)\" key=\"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" valueName=\"TurnOffSPIAnimations\">; Explorer.adml: This policy is similar to settings directly available to computer users. Disabling animations can improve usability for users with some visual disabilities as well as improving performance and battery life in some scenarios.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact user-policy key and value name, and local ADML confirms the reduced-motion, accessibility, and performance/battery tradeoffs. The app writes the documented enabled state under the same user-policy surface."

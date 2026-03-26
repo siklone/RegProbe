@@ -245,7 +245,7 @@
       "evidence_id": "local-autoplay-admx-turnoff",
       "kind": "official-doc",
       "title": "Local Microsoft AutoPlay.admx TurnOffAutoPlay mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AutoPlay.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/AutoPlay.admx",
       "summary": "The local ADMX file maps Turn off Autoplay to HKCU or HKLM Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoDriveTypeAutoRun, with enum value 181 for CD-ROM and removable media drives and 255 for All drives.",
       "supports": [
         "path",
@@ -259,7 +259,7 @@
       "evidence_id": "local-autoplay-adml-turnoff",
       "kind": "official-doc",
       "title": "Local Microsoft AutoPlay.adml TurnOffAutoPlay help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/AutoPlay.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml",
       "summary": "The local ADML help text says the policy allows turning off AutoPlay on CD-ROM and removable media drives or on all drives.",
       "supports": [
         "behavior",
@@ -288,7 +288,7 @@
       "evidence_id": "local-autoplay-admx-non-volume",
       "kind": "official-doc",
       "title": "Local Microsoft AutoPlay.admx NoAutoplayfornonVolume mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AutoPlay.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/AutoPlay.admx",
       "summary": "The local ADMX file maps NoAutoplayfornonVolume to Software\\Policies\\Microsoft\\Windows\\Explorer with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -302,7 +302,7 @@
       "evidence_id": "local-autoplay-adml-non-volume",
       "kind": "official-doc",
       "title": "Local Microsoft AutoPlay.adml NoAutoplayfornonVolume help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/AutoPlay.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml",
       "summary": "The local ADML help text says enabling the policy disallows AutoPlay for MTP devices like cameras or phones.",
       "supports": [
         "behavior",
@@ -338,7 +338,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-13T18:10:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AutoPlay.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AutoPlay.admx",
     "exact_quote_or_path": "<policy name=\"Autorun\" class=\"Both\" key=\"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\"> <enum id=\"Autorun_Box\" valueName=\"NoDriveTypeAutoRun\"> <item displayName=\"$(string.Autorun_None)\"><value><decimal value=\"255\" /></value></item>; <policy name=\"NoAutoplayfornonVolume\" class=\"Both\" key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"NoAutoplayfornonVolume\"> <enabledValue><decimal value=\"1\" /></enabledValue><disabledValue><decimal value=\"0\" /></disabledValue>",
     "key_found_on_page": true,
     "notes": "Local official AutoPlay.admx publishes the exact registry paths and numeric states for the two policy surfaces used by this tweak."

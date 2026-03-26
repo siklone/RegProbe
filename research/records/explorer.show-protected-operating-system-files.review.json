@@ -176,7 +176,7 @@
       "evidence_id": "procmon-showsuperhidden-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer ShowSuperHidden runtime surface",
-      "location": "research/evidence-files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt",
+      "location": "evidence/files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowSuperHidden = 0 and ShowSuperHidden = 1 with Hidden held at 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",
@@ -200,9 +200,9 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-24T22:45:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/showsuperhidden-result.txt",
+    "source_url": "evidence/files/vm-tooling-staging/showsuperhidden-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1",
     "key_found_on_page": true,
-    "notes": "Raw hit exports were also copied to research/evidence-files/vm-tooling-staging/showsuperhidden-0-hits.csv and research/evidence-files/vm-tooling-staging/showsuperhidden-1-hits.csv..md"
+    "notes": "Raw hit exports were also copied to evidence/files/vm-tooling-staging/showsuperhidden-0-hits.csv and evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md"
   }
 }

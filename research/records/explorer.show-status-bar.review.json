@@ -175,7 +175,7 @@
       "evidence_id": "procmon-showstatusbar-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer ShowStatusBar runtime surface",
-      "location": "research/evidence-files/procmon/explorer.show-status-bar/showstatusbar-result.txt",
+      "location": "evidence/files/procmon/explorer.show-status-bar/showstatusbar-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowStatusBar = 0 and ShowStatusBar = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",
@@ -212,7 +212,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-24T09:10:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/showstatusbar-result.txt",
+    "source_url": "evidence/files/vm-tooling-staging/showstatusbar-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar ... Data: 1; RESTORED_EXISTS=True RESTORED_VALUE=0",
     "key_found_on_page": true,
     "notes": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe."

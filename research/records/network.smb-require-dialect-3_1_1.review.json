@@ -481,7 +481,7 @@
       "evidence_id": "local-lanmanworkstation-admx-dialects",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanWorkstation.admx SMB dialect mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
       "summary": "The local ADMX file documents MinSmb2Dialect and MaxSmb2Dialect under the LanmanWorkstation policy key with official enum values 514, 528, 768, 770, and 785.",
       "supports": [
         "path",
@@ -495,7 +495,7 @@
       "evidence_id": "local-lanmanworkstation-adml-dialects",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanWorkstation.adml SMB dialect help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml",
       "summary": "The local ADML help text explains that the client policies control the minimum and maximum SMB protocol versions and labels the documented enum values through SMB 3.1.1.",
       "supports": [
         "behavior",
@@ -508,7 +508,7 @@
       "evidence_id": "local-lanmanserver-admx-dialects",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanServer.admx SMB dialect mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanServer.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanServer.admx",
       "summary": "The local ADMX file documents MinSmb2Dialect and MaxSmb2Dialect under the LanmanServer policy key with official enum values 514, 528, 768, 770, and 785.",
       "supports": [
         "path",
@@ -522,7 +522,7 @@
       "evidence_id": "local-lanmanserver-adml-dialects",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanServer.adml SMB dialect help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanServer.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/LanmanServer.adml",
       "summary": "The local ADML help text explains that the server policies control the minimum and maximum SMB protocol versions and labels the documented enum values through SMB 3.1.1.",
       "supports": [
         "behavior",
@@ -558,7 +558,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-14T00:00:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
     "exact_quote_or_path": "LanmanWorkstation.admx: `<enum id=\"MinSmb2Dialect\" valueName=\"MinSmb2Dialect\" required=\"true\">` and `<enum id=\"MaxSmb2Dialect\" valueName=\"MaxSmb2Dialect\" required=\"true\">`; LanmanWorkstation.adml / LanmanServer.adml label `Dialect_0x311 = SMB 3.1.1`. The official enum list is 514, 528, 768, 770, 785.",
     "key_found_on_page": true,
     "notes": "Local official ADMX and ADML files document the exact MinSmb2Dialect and MaxSmb2Dialect policy surfaces and official dialect enum values. The app now writes the documented LanmanWorkstation and LanmanServer policy keys directly with MinSmb2Dialect = 785 and MaxSmb2Dialect = 785 to require exactly SMB 3.1.1."

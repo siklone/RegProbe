@@ -141,7 +141,7 @@
       "evidence_id": "guest-audio-string-scan",
       "kind": "vm-test",
       "title": "Guest string scan for spatial-audio registry contract",
-      "location": "research/evidence-files/vm-tooling-staging/spatial_audio_string_search.txt",
+      "location": "evidence/files/vm-tooling-staging/spatial_audio_string_search.txt",
       "summary": "Win25H2Clean guest string scan of audiodg.exe, AudioEng.dll, AudioSes.dll, mmdevapi.dll, audiosrv.dll, and AudioEndpointBuilder.dll did not find DisableSpatialOnLowLatency. A Ghidra headless attempt was started but did not produce a usable result in this session.",
       "supports": [
         "behavior",

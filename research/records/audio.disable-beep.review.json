@@ -9,7 +9,7 @@
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree",
     "exact_quote_or_path": "lines 52-58: The `Start` value specifies when the service should be started. `0x4` (Disabled): The service is disabled and will not be loaded.",
     "key_found_on_page": true,
-    "notes": "Guest reversible probe at research/evidence-files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1."
+    "notes": "Guest reversible probe at evidence/files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1."
   },
   "setting": {
     "name": "System Beep Driver",
@@ -166,7 +166,7 @@
       "evidence_id": "runtime-beep-registry-diff",
       "kind": "runtime-diff",
       "title": "Guest reversible probe - Beep driver start mode",
-      "location": "research/evidence-files/vm-tooling-staging/beep_start_toggle_out.txt",
+      "location": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
       "summary": "Guest reversible probe on Win25H2Clean confirmed Start transitions through 1 and 4 before restoring to 1.",
       "supports": [
         "value",

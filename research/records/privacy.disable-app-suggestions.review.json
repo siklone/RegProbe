@@ -204,7 +204,7 @@
       "evidence_id": "local-cloudcontent-admx-thirdparty",
       "kind": "official-doc",
       "title": "Local Microsoft CloudContent.admx DisableThirdPartySuggestions mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx",
       "summary": "The local ADMX file maps DisableThirdPartySuggestions to HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -218,7 +218,7 @@
       "evidence_id": "local-cloudcontent-adml-thirdparty",
       "kind": "official-doc",
       "title": "Local Microsoft CloudContent.adml DisableThirdPartySuggestions help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/CloudContent.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml",
       "summary": "The local ADML help text says enabling the policy stops Windows Spotlight features such as suggested apps in Start from suggesting apps and content from third-party publishers.",
       "supports": [
         "behavior",

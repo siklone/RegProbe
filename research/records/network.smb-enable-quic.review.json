@@ -227,7 +227,7 @@
       "evidence_id": "local-lanmanworkstation-admx-quic",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanWorkstation.admx SMB over QUIC mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
       "summary": "The local ADMX file documents the client-side EnableSMBQUIC policy under Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -241,7 +241,7 @@
       "evidence_id": "local-lanmanworkstation-adml-quic",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanWorkstation.adml SMB over QUIC help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml",
       "summary": "The local ADML help text explains that disabling the policy prevents the SMB client from initiating QUIC connections and that not configured leaves the baseline behavior in place.",
       "supports": [
         "behavior",
@@ -254,7 +254,7 @@
       "evidence_id": "local-lanmanserver-admx-quic",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanServer.admx SMB over QUIC mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanServer.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanServer.admx",
       "summary": "The local ADMX file documents the server-side EnableSMBQUIC policy under Software\\Policies\\Microsoft\\Windows\\LanmanServer with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -268,7 +268,7 @@
       "evidence_id": "local-lanmanserver-adml-quic",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanServer.adml SMB over QUIC help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanServer.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/LanmanServer.adml",
       "summary": "The local ADML help text explains that disabling the policy prevents the SMB server from accepting QUIC connections and that not configured leaves the baseline behavior in place.",
       "supports": [
         "behavior",
@@ -304,7 +304,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-14T00:00:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
     "exact_quote_or_path": "LanmanWorkstation.admx: `<policy ... name=\"Pol_EnableSMBQUIC\" ... valueName=\"EnableSMBQUIC\">`; LanmanWorkstation.adml: `This policy setting controls whether the SMB client will enable SMB over QUIC.`; LanmanServer.admx / LanmanServer.adml mirror the same `EnableSMBQUIC` policy for the SMB server.",
     "key_found_on_page": true,
     "notes": "Local official ADMX and ADML files document the exact EnableSMBQUIC policy surfaces for both LanmanWorkstation and LanmanServer, and the app now writes those documented policy keys directly."

@@ -186,7 +186,7 @@
       "evidence_id": "vm-defender-enhanced-notifications-baseline",
       "kind": "procmon-trace",
       "title": "Win25H2Clean Procmon baseline for Security Center notifications policy",
-      "location": "research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt",
+      "location": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt",
       "summary": "On a clean snapshot, SecurityHealthService.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications and got NAME NOT FOUND. The same capture showed DisableNotifications = 1 already present on that branch.",
       "supports": [
         "path",
@@ -199,7 +199,7 @@
       "evidence_id": "vm-defender-enhanced-notifications-enabled",
       "kind": "procmon-trace",
       "title": "Win25H2Clean Procmon enabled-state read for Security Center notifications policy",
-      "location": "research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt",
+      "location": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt",
       "summary": "After writing DisableEnhancedNotifications = 1 on the Security Center Notifications policy path, SecurityHealthService.exe queried the same path and read Data: 1.",
       "supports": [
         "path",
@@ -213,7 +213,7 @@
       "evidence_id": "vm-defender-enhanced-notifications-reporting-alias-check",
       "kind": "procmon-trace",
       "title": "Win25H2Clean Procmon reporting-path alias check",
-      "location": "research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt",
+      "location": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt",
       "summary": "When only HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting\\DisableEnhancedNotifications was set to 1, the Windows Security launch probe still showed SecurityHealthService.exe querying the Security Center Notifications policy path. This capture did not show a matching read from the Reporting path.",
       "supports": [
         "path",
@@ -251,7 +251,7 @@
   ],
   "last_reviewed_utc": "2026-03-25T08:55:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt",
+    "source_url": "evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt",
     "exact_quote_or_path": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write.",
     "key_found_on_page": true,
     "notes": "The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, but that sibling policy does not change which path this value is read from."

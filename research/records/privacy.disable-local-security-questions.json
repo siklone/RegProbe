@@ -181,7 +181,7 @@
       "evidence_id": "local-credui-admx",
       "kind": "official-doc",
       "title": "Local Microsoft CredUI.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/CredUI.admx",
       "summary": "The local ADMX file maps the machine policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\NoLocalPasswordResetQuestions.",
       "supports": [
         "path",
@@ -194,7 +194,7 @@
       "evidence_id": "local-credui-adml",
       "kind": "official-doc",
       "title": "Local Microsoft CredUI.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/CredUI.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml",
       "summary": "The local ADML help text says enabling the policy prevents local users from setting up and using security questions to reset their passwords.",
       "supports": [
         "behavior",

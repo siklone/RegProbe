@@ -175,7 +175,7 @@
       "evidence_id": "local-offlinefiles-admx",
       "kind": "official-doc",
       "title": "Local Microsoft OfflineFiles.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx",
       "summary": "The local ADMX file maps Pol_Enabled to NetCache\\Enabled with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -188,7 +188,7 @@
       "evidence_id": "local-offlinefiles-adml",
       "kind": "official-doc",
       "title": "Local Microsoft OfflineFiles.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/OfflineFiles.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/OfflineFiles.adml",
       "summary": "The local ADML help text explains the enabled, disabled, and not configured behavior for the Offline Files feature.",
       "supports": [
         "default",
@@ -223,7 +223,7 @@
   },
   "last_reviewed_utc": "2026-03-12T19:10:41.8261076+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx",
     "exact_quote_or_path": "<policy name=\"Pol_Enabled\" ... key=\"Software\\Policies\\Microsoft\\Windows\\NetCache\" valueName=\"Enabled\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same NetCache policy key and Enabled value used by the app, and it confirms the 1/0 mapping."

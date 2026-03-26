@@ -152,7 +152,7 @@
       "evidence_id": "local-biometrics-admx",
       "kind": "official-doc",
       "title": "Local Microsoft Biometrics.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
       "summary": "The local ADMX file defines the biometrics policy and shows Enabled with enabledValue 1 and disabledValue 0 under SOFTWARE\\Policies\\Microsoft\\Biometrics.",
       "supports": [
         "path",
@@ -201,7 +201,7 @@
   },
   "last_reviewed_utc": "2026-03-12T20:55:44.8915752+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx",
     "exact_quote_or_path": "<policy name=\"Biometrics_EnableBio\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Biometrics\" valueName=\"Enabled\">; Biometrics.adml: If you disable this policy setting, the Windows Biometric Service is unavailable, and users cannot use any biometric feature in Windows.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy prevents Windows biometric features from being used."

@@ -209,7 +209,7 @@
       "evidence_id": "local-powershellpolicy-admx",
       "kind": "official-doc",
       "title": "Local Microsoft PowerShellExecutionPolicy.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
       "summary": "The local ADMX file maps the official script execution policy to HKLM or HKCU Software\\Policies\\Microsoft\\Windows\\PowerShell using EnableScripts and ExecutionPolicy values such as AllSigned, RemoteSigned, and Unrestricted.",
       "supports": [
         "path",
@@ -223,7 +223,7 @@
       "evidence_id": "local-powershellpolicy-adml",
       "kind": "official-doc",
       "title": "Local Microsoft PowerShellExecutionPolicy.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml",
       "summary": "The local ADML help text says enabling the policy allows the selected script type, disabling it allows no scripts, and if the policy is disabled or not configured it reverts to the per-machine preference setting whose default is no scripts allowed.",
       "supports": [
         "behavior",
@@ -260,7 +260,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\">; <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: `Turn on Script Execution` / `This policy setting lets you configure the script execution policy, controlling which scripts are allowed to run.`",
     "key_found_on_page": true,
     "notes": "Local official ADMX and ADML files document the exact Group Policy surface under Software\\Policies\\Microsoft\\Windows\\PowerShell using EnableScripts and ExecutionPolicy, and the app now writes those documented values."

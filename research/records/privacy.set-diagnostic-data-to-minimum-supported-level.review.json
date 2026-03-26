@@ -196,7 +196,7 @@
       "evidence_id": "local-datacollection-admx",
       "kind": "official-doc",
       "title": "Local Microsoft DataCollection.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx",
       "summary": "The local ADMX file defines AllowTelemetry with official values 0, 1, and 3 under Software\\Policies\\Microsoft\\Windows\\DataCollection.",
       "supports": [
         "path",
@@ -210,7 +210,7 @@
       "evidence_id": "local-datacollection-adml",
       "kind": "official-doc",
       "title": "Local Microsoft DataCollection.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml",
       "summary": "The local ADML help text explains the three documented levels, notes that value 0 is only supported on Enterprise, Education, and Server editions, and states the not-configured default behavior.",
       "supports": [
         "behavior",
@@ -261,7 +261,7 @@
   },
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry",
-    "exact_quote_or_path": "research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx (AllowTelemetry values 0, 1, and 3); research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml (value 0 is only supported on Enterprise, Education, and Server editions).",
+    "exact_quote_or_path": "evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx (AllowTelemetry values 0, 1, and 3); evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml (value 0 is only supported on Enterprise, Education, and Server editions).",
     "key_found_on_page": true,
     "notes": "The app now uses the documented lowest supported diagnostic-data level wording and gates value 0 to the supported edition families instead of treating it as a universal off switch. Added nohuto mirror corroboration via nohuto-allowtelemetry-admx."
   },

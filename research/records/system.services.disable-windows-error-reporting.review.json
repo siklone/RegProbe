@@ -13,7 +13,7 @@
     "casual_explanation": "Windows Error Reporting collects crash and failure details so Windows can report problems and sometimes suggest or surface fixes.",
     "why_people_change_it": "People disable it when they want fewer background diagnostics or do not want Windows to send error reports.",
     "tradeoffs_overview": "Turning it off reduces error-reporting activity, but Microsoft does not recommend disabling it and diagnostics or repair experiences may stop working correctly.",
-    "professional_notes": "Microsoft's Windows IoT Enterprise service guidance lists Windows Error Reporting Service `(WerSvc)` with a default start mode of `Manual` and marks it `Don't disable`. Microsoft describes it as allowing errors to be reported and allowing diagnostic and repair services to generate and surface results. A local SCM snapshot confirms the exact WerSvc identity on the review host: display name `Windows Error Reporting Service`, binary path `research/evidence-files/external/c/WINDOWS/System32/svchost.exe.md -k WerSvcGroup`, and current start type `4 DISABLED`. The app currently disables the service through a service start-mode tweak.",
+    "professional_notes": "Microsoft's Windows IoT Enterprise service guidance lists Windows Error Reporting Service `(WerSvc)` with a default start mode of `Manual` and marks it `Don't disable`. Microsoft describes it as allowing errors to be reported and allowing diagnostic and repair services to generate and surface results. A local SCM snapshot confirms the exact WerSvc identity on the review host: display name `Windows Error Reporting Service`, binary path `evidence/files/external/c/WINDOWS/System32/svchost.exe.md -k WerSvcGroup`, and current start type `4 DISABLED`. The app currently disables the service through a service start-mode tweak.",
     "targets": [
       {
         "target_id": "wersvc-start-mode",
@@ -198,7 +198,7 @@
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "validation_proof": {
     "source_url": "research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt",
-    "exact_quote_or_path": "SERVICE_NAME: WerSvc | START_TYPE : 4 DISABLED | DISPLAY_NAME: Windows Error Reporting Service | BINARY_PATH_NAME: research/evidence-files/external/c/WINDOWS/System32/svchost.exe.md -k WerSvcGroup",
+    "exact_quote_or_path": "SERVICE_NAME: WerSvc | START_TYPE : 4 DISABLED | DISPLAY_NAME: Windows Error Reporting Service | BINARY_PATH_NAME: evidence/files/external/c/WINDOWS/System32/svchost.exe.md -k WerSvcGroup",
     "key_found_on_page": true,
     "notes": "The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker."
   }

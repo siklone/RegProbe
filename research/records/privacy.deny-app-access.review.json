@@ -143,7 +143,7 @@
       "evidence_id": "ms-appprivacy-admx",
       "kind": "official-doc",
       "title": "Microsoft AppPrivacy administrative template",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
       "summary": "The local AppPrivacy administrative template documents many LetAppsAccess* policy values, including 2 for ForceDeny and 0 for user control.",
       "supports": [
         "path",
@@ -180,7 +180,7 @@
   },
   "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
     "exact_quote_or_path": "policy name=\"LetAppsAccessCamera\" class=\"Machine\" key=\"Software\\Policies\\Microsoft\\Windows\\AppPrivacy\" valueName=\"LetAppsAccessCamera\"; policy name=\"LetAppsAccessMicrophone\" class=\"Machine\" key=\"Software\\Policies\\Microsoft\\Windows\\AppPrivacy\" valueName=\"LetAppsAccessMicrophone\"; policy name=\"LetAppsAccessLocation\" class=\"Machine\" key=\"Software\\Policies\\Microsoft\\Windows\\AppPrivacy\" valueName=\"LetAppsAccessLocation\".",
     "key_found_on_page": true,
     "notes": "Composite AppPrivacy deny bundle. The proof anchors the official AppPrivacy family and its per-capability policy names."

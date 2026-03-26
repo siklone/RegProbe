@@ -173,7 +173,7 @@
       "evidence_id": "local-cloud-content-admx",
       "kind": "official-doc",
       "title": "Local Microsoft CloudContent.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx",
       "summary": "The local ADMX file maps the user Group Policy to DisableWindowsSpotlightFeatures with enabledValue 1 and disabledValue 0 under the CloudContent policy key.",
       "supports": [
         "path",
@@ -222,7 +222,7 @@
   },
   "last_reviewed_utc": "2026-03-12T21:20:26.6158930+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx",
     "exact_quote_or_path": "<policy name=\"DisableWindowsSpotlightFeatures\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\CloudContent\" valueName=\"DisableWindowsSpotlightFeatures\">; CloudContent.adml: If you enable this policy setting, Windows spotlight on lock screen, Windows tips, Microsoft consumer features and other related features will be turned off.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy turns off Windows Spotlight features as a whole."

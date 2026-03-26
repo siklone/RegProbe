@@ -157,7 +157,7 @@
       "evidence_id": "local-camera-admx",
       "kind": "official-doc",
       "title": "Local Microsoft Camera.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Camera.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Camera.admx",
       "summary": "The local ADMX file maps the machine policy to HKLM\\Software\\Policies\\Microsoft\\Camera\\AllowCamera with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -171,7 +171,7 @@
       "evidence_id": "local-camera-adml",
       "kind": "official-doc",
       "title": "Local Microsoft Camera.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/Camera.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/Camera.adml",
       "summary": "The local ADML help text says enabling or not configuring the policy leaves camera devices enabled, while disabling the policy disables camera devices.",
       "supports": [
         "behavior",
@@ -218,7 +218,7 @@
   },
   "last_reviewed_utc": "2026-03-12T20:46:47.8894113+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Camera.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Camera.admx",
     "exact_quote_or_path": "<policy name=\"AllowCamera\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Camera\" valueName=\"AllowCamera\">",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired Camera.adml help text states that enabling or not configuring the policy leaves camera devices enabled, while disabling the policy disables camera devices."

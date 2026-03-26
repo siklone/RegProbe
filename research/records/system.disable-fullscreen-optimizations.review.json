@@ -209,7 +209,7 @@
       "evidence_id": "procmon-fullscreen-gameconfigstore-read",
       "kind": "procmon-trace",
       "title": "Procmon capture - svchost.exe GameConfigStore fullscreen tuple read",
-      "location": "research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt and research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv",
+      "location": "evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt and evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv",
       "summary": "A Win25H2Clean Procmon pass around Gaming and Advanced Graphics triggers captured svchost.exe querying HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible with Data: 1 while the current tuple was applied.",
       "supports": [
         "path",
@@ -222,7 +222,7 @@
       "evidence_id": "ghidra-resourcepolicysrv-fullscreen",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path",
-      "location": "research/evidence-files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md and research/evidence-files/ghidra/system.disable-fullscreen-optimizations/evidence.json",
+      "location": "evidence/files/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md and evidence/files/ghidra/system.disable-fullscreen-optimizations/evidence.json",
       "summary": "Our canonical 25H2 Ghidra export on ResourcePolicyServer.dll found the GameDVR_FSEBehavior string set, the GameConfigStore RPC server source paths, and registry helpers that open and validate GameConfigStore values on the current build.",
       "supports": [
         "path",
@@ -248,7 +248,7 @@
       "evidence_id": "vm-batch-probe-20260320-disable-fullscreen-optimizations",
       "kind": "runtime-diff",
       "title": "Win25H2Clean reversible probe - Fullscreen optimizations override bundle",
-      "location": "research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json",
+      "location": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
       "summary": "Guest reversible probe toggled the GameConfigStore fullscreen-optimization bundle values and restored the original missing state, confirming the current app write set on Win25H2Clean.",
       "supports": [
         "path",
@@ -262,7 +262,7 @@
       "evidence_id": "vm-fullscreen-automated-probe-20260326",
       "kind": "vm-test",
       "title": "Win25H2Clean automated fullscreen follow-up",
-      "location": "research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt and research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json and research/evidence-files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv",
+      "location": "evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt and evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json and evidence/files/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv",
       "summary": "A later hidden Settings/Game Bar automation pass restored the current shell-stable snapshot baseline of GameDVR_FSEBehavior missing, GameDVR_FSEBehaviorMode = 2, GameDVR_HonorUserFSEBehaviorMode = 0, and GameDVR_DXGIHonorFSEWindowsCompatible = 0 before and after the app tuple, but it did not reproduce the earlier targeted svchost.exe read in the same window.",
       "supports": [
         "version-scope",

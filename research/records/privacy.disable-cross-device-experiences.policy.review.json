@@ -185,7 +185,7 @@
       "evidence_id": "local-grouppolicy-admx-enablecdp",
       "kind": "official-doc",
       "title": "Local Microsoft GroupPolicy.admx EnableCDP mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx",
       "summary": "The local ADMX file maps EnableCdp to Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -199,7 +199,7 @@
       "evidence_id": "local-grouppolicy-adml-enablecdp",
       "kind": "official-doc",
       "title": "Local Microsoft GroupPolicy.adml EnableCDP help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
       "summary": "The local ADML help text explains that enabling the policy allows continue experiences, disabling it blocks them, and the not-configured default depends on the Windows edition.",
       "supports": [
         "behavior",

@@ -163,7 +163,7 @@
       "evidence_id": "local-grouppolicy-admx-fonts",
       "kind": "official-doc",
       "title": "Local Microsoft GroupPolicy.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx",
       "summary": "The local ADMX file shows EnableFontProviders with enabledValue 1 and disabledValue 0 under the Windows System policy key.",
       "supports": [
         "path",
@@ -177,7 +177,7 @@
       "evidence_id": "local-grouppolicy-adml-fonts",
       "kind": "official-doc",
       "title": "Local Microsoft GroupPolicy.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
       "summary": "The local ADML help text says disabling the policy prevents Windows from connecting to an online font provider and leaves it enumerating only locally installed fonts; not configured is edition-dependent.",
       "supports": [
         "behavior",
@@ -238,7 +238,7 @@
   },
   "last_reviewed_utc": "2026-03-12T21:06:31.7575056+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableFontProviders\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"EnableFontProviders\">; GroupPolicy.adml: If you disable this policy setting, Windows does not connect to an online font provider and only enumerates locally-installed fonts.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts. Added nohuto mirror corroboration via nohuto-enablefontproviders-admx."

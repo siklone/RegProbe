@@ -364,7 +364,7 @@
       "evidence_id": "local-appdeviceinventory-admx",
       "kind": "official-doc",
       "title": "Local Microsoft AppDeviceInventory.admx mappings",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx",
       "summary": "Maps all four values (DisableAPISamping, DisableApplicationFootprint, DisableInstallTracing, DisableWin32AppBackup) with explicit enabledValue=1 and disabledValue=0 under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat. Marked as supported on Windows 11 24H2.",
       "supports": [
         "path",
@@ -404,8 +404,8 @@
       "evidence_id": "procmon-appdeviceinventory",
       "kind": "procmon-trace",
       "title": "VM Procmon capture - four AppDeviceInventory policies",
-      "location": "research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml and research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv",
-      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisableAPISamping=1, DisableApplicationFootprint=1, DisableInstallTracing=1, and DisableWin32AppBackup=1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat, and reg.exe read them back successfully. The probe restored the original missing state after capture. Raw files are checked in under research/evidence-files/procmon/privacy.disable-appdeviceinventory.policy/.",
+      "location": "evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml and evidence/files/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv",
+      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisableAPISamping=1, DisableApplicationFootprint=1, DisableInstallTracing=1, and DisableWin32AppBackup=1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat, and reg.exe read them back successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/files/procmon/privacy.disable-appdeviceinventory.policy",
       "supports": [
         "value",
         "behavior",
@@ -426,7 +426,7 @@
   },
   "open_questions": [],
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx",
     "exact_quote_or_path": "AppDeviceInventory.admx: `<policy name=\"TurnOffInstallTracing\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisableInstallTracing\">`, `<policy name=\"TurnOffAPISamping\" ... valueName=\"DisableAPISamping\">`, `<policy name=\"TurnOffApplicationFootprint\" ... valueName=\"DisableApplicationFootprint\">`, and `<policy name=\"TurnOffWin32AppBackup\" ... valueName=\"DisableWin32AppBackup\">`, each with `<enabledValue><decimal value=\"1\" /></enabledValue>` and `<disabledValue><decimal value=\"0\" /></disabledValue>` and `supportedOn ref=\"windows:SUPPORTED_Windows_11_0_24H2\"`.",
     "key_found_on_page": true,
     "notes": "Local official AppDeviceInventory.admx documents all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat with explicit enabledValue=1 and disabledValue=0, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed direct writes and read-backs for all four values."

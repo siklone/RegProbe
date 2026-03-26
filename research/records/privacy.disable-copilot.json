@@ -178,7 +178,7 @@
       "evidence_id": "local-windowscopilot-admx",
       "kind": "official-doc",
       "title": "Local Microsoft WindowsCopilot.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx",
       "summary": "The local ADMX file maps TurnOffWindowsCopilot to SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -192,7 +192,7 @@
       "evidence_id": "local-windowscopilot-adml",
       "kind": "official-doc",
       "title": "Local Microsoft WindowsCopilot.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml",
       "summary": "The local ADML help text says enabling the policy prevents users from using Copilot and removes the Copilot icon from the taskbar, while disabling or not configuring it allows Copilot when available.",
       "supports": [
         "behavior",

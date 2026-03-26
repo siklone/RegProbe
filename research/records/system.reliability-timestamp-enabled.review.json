@@ -214,7 +214,7 @@
       "evidence_id": "ghidra-diagtrack-reliability-20260326",
       "kind": "ghidra-trace",
       "title": "Our Ghidra decompilation - diagtrack.dll reliability string/xref export",
-      "location": "research/evidence-files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md and research/evidence-files/ghidra/system.reliability-timestamp-enabled/evidence.json",
+      "location": "evidence/files/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md and evidence/files/ghidra/system.reliability-timestamp-enabled/evidence.json",
       "summary": "Our 25H2 Ghidra exports on diagtrack.dll now include the original string/xref lead plus an address-seeded fallback pass for the unresolved blocks at 18038fce0 and 18026bfc0, which keeps the current-build DiagTrack path in repo evidence even though the exact registry read is still not visible in Procmon.",
       "supports": [
         "version-scope",
@@ -239,7 +239,7 @@
       "evidence_id": "vm-reliability-follow-up-20260326",
       "kind": "procmon-trace",
       "title": "Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes",
-      "location": "research/notes/reliability-timestamp-follow-up-20260326.md and research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt and research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv",
+      "location": "research/notes/reliability-timestamp-follow-up-20260326.md and evidence/files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt and evidence/files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv",
       "summary": "A DiagTrack service-restart Procmon pass showed an adjacent Reliability\\PBR read, and a later hidden structured probe that bundled DiagTrack restart, Consolidator, QueueReporting, perfmon /rel, and Problem Reports UI still produced only the same adjacent svchost.exe Reliability\\PBR read instead of direct reads on TimeStampEnabled or TimeStampInterval.",
       "supports": [
         "version-scope",
@@ -255,7 +255,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": false,
     "needs_vm_validation": false,
-      "why": "Microsoft now closes the main contract gap by publishing the exact TimeStampEnabled policy path and enable/disable semantics. The decompiled reader still supplies the companion TimeStampInterval logic and 24-hour cap, and the 25H2 follow-up work keeps the current-build DiagTrack lead in repo evidence. That is enough to treat the app's gate-plus-cap pair as an app-ready policy mapping even though the live Procmon pass still narrows to an adjacent Reliability branch instead of the exact target values.",
+    "why": "Microsoft now closes the main contract gap by publishing the exact TimeStampEnabled policy path and enable/disable semantics. The decompiled reader still supplies the companion TimeStampInterval logic and 24-hour cap, and the 25H2 follow-up work keeps the current-build DiagTrack lead in repo evidence. That is enough to treat the app's gate-plus-cap pair as an app-ready policy mapping even though the live Procmon pass still narrows to an adjacent Reliability branch instead of the exact target values.",
     "blocking_issues": []
   },
   "open_questions": [
@@ -269,6 +269,6 @@
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability",
     "exact_quote_or_path": "EE_EnablePersistentTimeStamp -> Registry Key Name Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability, Registry Value Name TimeStampEnabled. If you enable this policy setting, you are able to specify how often the Persistent System Timestamp is refreshed and subsequently written to the disk. You can specify the Timestamp Interval in seconds.",
     "key_found_on_page": true,
-      "notes": "The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability\\PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass."
+    "notes": "The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability\\PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass."
   }
 }

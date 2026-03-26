@@ -158,7 +158,7 @@
       "evidence_id": "local-logon-admx",
       "kind": "official-doc",
       "title": "Local Microsoft Logon.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Logon.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx",
       "summary": "The local ADMX file maps the machine policy to HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableFirstLogonAnimation with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -172,7 +172,7 @@
       "evidence_id": "local-logon-adml",
       "kind": "official-doc",
       "title": "Local Microsoft Logon.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/Logon.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml",
       "summary": "The local ADML help text explains the enabled, disabled, and not-configured behavior for the first sign-in animation and the Microsoft-account services opt-in prompt.",
       "supports": [
         "behavior",
@@ -219,7 +219,7 @@
   },
   "last_reviewed_utc": "2026-03-12T20:28:07.0501445+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/Logon.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx",
     "exact_quote_or_path": "<policy name=\"EnableFirstLogonAnimation\" class=\"Machine\" ... key=\"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" valueName=\"EnableFirstLogonAnimation\">",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same policy key and EnableFirstLogonAnimation value used by the app. The paired ADML help text documents the first sign-in animation and Microsoft-account opt-in prompt behavior."

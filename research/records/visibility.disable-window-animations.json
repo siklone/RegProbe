@@ -157,7 +157,7 @@
       "evidence_id": "local-dwm-admx",
       "kind": "official-doc",
       "title": "Local Microsoft DWM.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DWM.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DWM.admx",
       "summary": "The local ADMX file defines both user and machine DisallowAnimations policies with enabledValue 1 and disabledValue 0 at the DWM policy path.",
       "supports": [
         "path",
@@ -171,7 +171,7 @@
       "evidence_id": "local-dwm-adml",
       "kind": "official-doc",
       "title": "Local Microsoft DWM.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DWM.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/DWM.adml",
       "summary": "The local ADML help text says enabling the policy turns window animations off, disabling or not configuring it keeps them on, and logoff is required to apply the change.",
       "supports": [
         "behavior",
@@ -218,7 +218,7 @@
   },
   "last_reviewed_utc": "2026-03-12T20:29:22.7863493+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DWM.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DWM.admx",
     "exact_quote_or_path": "<policy name=\"DwmDisallowAnimations_2\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\" valueName=\"DisallowAnimations\">",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same DWM machine policy surface used by the app. The paired ADML help text documents that enabling the policy turns window animations off and disabling or not configuring it keeps them on."

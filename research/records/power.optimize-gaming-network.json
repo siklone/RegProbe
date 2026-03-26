@@ -363,7 +363,7 @@
       "evidence_id": "vm-games-mmcss-baseline",
       "kind": "vm-test",
       "title": "Win25H2Clean export of the built-in Games MMCSS task",
-      "location": "research/evidence-files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt",
+      "location": "evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt",
       "summary": "The current 25H2 VM baseline reads Priority=2, Scheduling Category=Medium, SFIO Priority=Normal, GPU Priority=8, and Affinity=0 under the built-in Games task.",
       "supports": [
         "path",
@@ -398,7 +398,7 @@
   },
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt",
+    "source_url": "evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt",
     "exact_quote_or_path": "Affinity=0x0; GPU Priority=0x8; Priority=0x2; Scheduling Category=Medium; SFIO Priority=Normal",
     "key_found_on_page": true,
     "notes": "The VM export gives the current 25H2 Games-task baseline, while the Microsoft MMCSS page documents the same path and the allowed values for the fields the app writes."

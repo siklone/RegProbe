@@ -173,7 +173,7 @@
       "evidence_id": "local-data-collection-admx",
       "kind": "official-doc",
       "title": "Local Microsoft DataCollection.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx",
       "summary": "The local ADMX file shows LimitDiagnosticLogCollection with enabledValue 1 and disabledValue 0 under the DataCollection policy key.",
       "supports": [
         "path",
@@ -222,7 +222,7 @@
   },
   "last_reviewed_utc": "2026-03-12T19:59:10.6720406+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DataCollection.admx",
     "exact_quote_or_path": "<policy name=\"LimitDiagnosticLogCollection\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\DataCollection\" valueName=\"LimitDiagnosticLogCollection\">",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same DataCollection policy key and LimitDiagnosticLogCollection value used by the app. The paired ADML help text states that enabling the policy prevents additional diagnostic logs from being collected."

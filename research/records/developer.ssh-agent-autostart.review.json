@@ -40,7 +40,7 @@
           },
           {
             "state_kind": "value",
-            "value": "research/evidence-files/external/c/System32/OpenSSH/ssh-agent.exe.md",
+            "value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md",
             "label": "SSH Agent autostart enabled",
             "meaning": "The current user launches ssh-agent at logon by writing the agent executable into the Windows Run key.",
             "evidence_ids": [
@@ -65,7 +65,7 @@
         "value_name": "SSH Agent",
         "value_type": "REG_SZ",
         "state_kind": "value",
-        "value": "research/evidence-files/external/c/System32/OpenSSH/ssh-agent.exe.md"
+        "value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md"
       }
     ]
   },
@@ -103,7 +103,7 @@
         {
           "target_id": "ssh-agent-run-key",
           "state_kind": "value",
-          "value": "research/evidence-files/external/c/System32/OpenSSH/ssh-agent.exe.md",
+          "value": "evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md",
           "rationale": "The Run key is a supported autostart surface and this command starts ssh-agent at logon."
         }
       ],
@@ -152,7 +152,7 @@
       "kind": "repo-code",
       "title": "Current app implementation",
       "location": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
-      "summary": "The provider writes SSH Agent = research/evidence-files/external/c/System32/OpenSSH/ssh-agent.exe.md under HKCU/Software/Microsoft/Windows/CurrentVersion/Run.",
+      "summary": "The provider writes SSH Agent = evidence/files/external/c/System32/OpenSSH/ssh-agent.exe.md under HKCU/Software/Microsoft/Windows/CurrentVersion/Run.",
       "supports": [
         "path",
         "value",

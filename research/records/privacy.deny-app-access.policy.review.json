@@ -146,7 +146,7 @@
       "evidence_id": "ms-appprivacy-admx",
       "kind": "official-doc",
       "title": "Microsoft AppPrivacy administrative template",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
       "summary": "The local AppPrivacy administrative template documents many LetAppsAccess* policy values, including 2 for ForceDeny and 0 for user control.",
       "supports": [
         "path",
@@ -169,7 +169,7 @@
     }
   ],
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
     "exact_quote_or_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
     "key_found_on_page": true,
     "notes": "The local AppPrivacy.admx template documents the LetAppsAccess* policy family and its ForceDeny value semantics. The parent audit trail keeps the extra System policy write separate from this child record."

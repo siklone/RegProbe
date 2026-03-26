@@ -199,7 +199,7 @@
       "evidence_id": "vm-defender-hide-exclusions-baseline-visibility",
       "kind": "vm-test",
       "title": "Win25H2Clean baseline visibility with managed exclusion present",
-      "location": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json",
+      "location": "evidence/files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json",
       "summary": "With both HideExclusionsFromLocalAdmins surfaces unset, a managed exclusion under the policy exclusions branch still appeared in Get-MpPreference and remained present in the managed policy hive.",
       "supports": [
         "default",
@@ -211,7 +211,7 @@
       "evidence_id": "vm-defender-hide-exclusions-root-state1",
       "kind": "procmon-trace",
       "title": "Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1",
-      "location": "research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
+      "location": "evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
       "summary": "After writing HideExclusionsFromLocalAdmins = 1 on the root Defender policy path, wmiprvse.exe and powershell.exe both queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins and read Data: 1.",
       "supports": [
         "path",
@@ -225,7 +225,7 @@
       "evidence_id": "vm-defender-hide-exclusions-root-visibility",
       "kind": "vm-test",
       "title": "Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1",
-      "location": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json",
+      "location": "evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json",
       "summary": "With the root policy path set to 1, the managed exclusion still existed on the policy exclusions branch, but Get-MpPreference returned 'N/A: Administrators are not allowed to view exclusions'.",
       "supports": [
         "value",
@@ -237,7 +237,7 @@
       "evidence_id": "vm-defender-hide-exclusions-policymanager-alias",
       "kind": "procmon-trace",
       "title": "Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1",
-      "location": "research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt",
+      "location": "evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt",
       "summary": "With only the Policy Manager surface set to 1, wmiprvse.exe first saw the root value as NAME NOT FOUND and then read HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager\\HideExclusionsFromLocalAdmins = 1. The paired visibility JSON showed the same hidden-exclusions behavior.",
       "supports": [
         "path",
@@ -277,7 +277,7 @@
   ],
   "last_reviewed_utc": "2026-03-25T09:05:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt",
+    "source_url": "evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt",
     "exact_quote_or_path": "wmiprvse.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1",
     "key_found_on_page": true,
     "notes": "The baseline visibility JSON showed the managed exclusion path in Get-MpPreference while both policy values were unset. The root-path state-1 run then hid that exclusion from Get-MpPreference, and a separate Policy Manager run produced the same behavior after reading the alias path instead."

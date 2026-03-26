@@ -173,7 +173,7 @@
       "evidence_id": "procmon-hidden-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer hidden-file visibility runtime surface",
-      "location": "research/evidence-files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md",
+      "location": "evidence/files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md",
       "summary": "A reversible Procmon capture on 2026-03-13 wrote Hidden = 1, restarted Explorer, wrote Hidden = 2, and restarted Explorer again. PowerShell issued the RegSetValue operations, Explorer.EXE queried HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden after each restart, and a direct Explorer UI automation check listed ghost.txt plus visible.txt when Hidden = 1 but only visible.txt when Hidden = 2.",
       "supports": [
         "path",
@@ -210,7 +210,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-13T17:35:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/missing/hidden-capture-20260313-csv.md",
+    "source_url": "evidence/files/missing/hidden-capture-20260313-csv.md",
     "exact_quote_or_path": "powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 1; powershell.exe RegSetValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2; Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden Type: REG_DWORD, Length: 4, Data: 2",
     "key_found_on_page": true,
     "notes": "In the same reversible runtime session, the Explorer UI listed ghost.txt and visible.txt when Hidden = 1, but only visible.txt when Hidden = 2. That resolved the live Explorer semantics for this host."

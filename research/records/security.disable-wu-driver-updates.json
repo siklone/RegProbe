@@ -308,7 +308,7 @@
       "evidence_id": "local-devicesetup-admx",
       "kind": "official-doc",
       "title": "Local Microsoft DeviceSetup.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx",
       "summary": "The local ADMX file maps SearchOrderConfig under DriverSearching and defines enum values 1 for always search Windows Update, 2 for search only if needed, and 0 for do not search Windows Update.",
       "supports": [
         "path",
@@ -322,7 +322,7 @@
       "evidence_id": "local-devicesetup-adml",
       "kind": "official-doc",
       "title": "Local Microsoft DeviceSetup.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DeviceSetup.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/DeviceSetup.adml",
       "summary": "The local ADML help text explains the three search-order choices and their effect on Windows Update driver searching.",
       "supports": [
         "behavior",
@@ -335,7 +335,7 @@
       "evidence_id": "local-icm-admx",
       "kind": "official-doc",
       "title": "Local Microsoft ICM.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx",
       "summary": "The local ADMX file maps DontSearchWindowsUpdate under DriverSearching with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -348,7 +348,7 @@
       "evidence_id": "local-icm-adml",
       "kind": "official-doc",
       "title": "Local Microsoft ICM.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/ICM.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml",
       "summary": "The local ADML help text says enabling the policy stops Windows Update driver searching when no local driver is present, while disabling it always searches Windows Update in that scenario.",
       "supports": [
         "behavior",
@@ -361,7 +361,7 @@
       "evidence_id": "local-windowsupdate-admx",
       "kind": "official-doc",
       "title": "Local Microsoft WindowsUpdate.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx",
       "summary": "The local ADMX file maps ExcludeWUDriversInQualityUpdate under HKLM\\Software\\Policies\\Microsoft\\Windows\\WindowsUpdate with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -375,7 +375,7 @@
       "evidence_id": "local-windowsupdate-adml",
       "kind": "official-doc",
       "title": "Local Microsoft WindowsUpdate.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml",
       "summary": "The local ADML help text says enabling the policy excludes driver-classified updates from Windows quality updates, while disabling or not configuring it allows those updates to be included.",
       "supports": [
         "behavior",
@@ -410,7 +410,7 @@
   },
   "last_reviewed_utc": "2026-03-13T01:43:20.0000000+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx",
     "exact_quote_or_path": "DeviceSetup.admx: <policy name=\"DriverSearchPlaces_SearchOrderConfiguration\" ... key=\"Software\\Policies\\Microsoft\\Windows\\DriverSearching\"> ... <enum ... valueName=\"SearchOrderConfig\"> ... <decimal value=\"0\"/>; ICM.admx: key=\"Software\\Policies\\Microsoft\\Windows\\DriverSearching\" valueName=\"DontSearchWindowsUpdate\"; WindowsUpdate.admx: key=\"Software\\Policies\\Microsoft\\Windows\\WindowsUpdate\" valueName=\"ExcludeWUDriversInQualityUpdate\"> <enabledValue><decimal value=\"1\" /></enabledValue>.",
     "key_found_on_page": true,
     "notes": "The local official Microsoft policy files define the exact DriverSearching and WindowsUpdate policy paths used by the app. SearchOrderConfig = 0 means do not search Windows Update, DontSearchWindowsUpdate = 1 blocks Windows Update device-driver searching, and ExcludeWUDriversInQualityUpdate = 1 excludes driver-classified updates from Windows quality updates."

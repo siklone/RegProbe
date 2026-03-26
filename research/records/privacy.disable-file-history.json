@@ -157,7 +157,7 @@
       "evidence_id": "local-filehistory-admx",
       "kind": "official-doc",
       "title": "Local Microsoft FileHistory.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx",
       "summary": "The local ADMX file maps the policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\FileHistory\\Disabled with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -171,7 +171,7 @@
       "evidence_id": "local-filehistory-adml",
       "kind": "official-doc",
       "title": "Local Microsoft FileHistory.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/FileHistory.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/FileHistory.adml",
       "summary": "The local ADML help text says enabling the policy prevents File History from being activated for regular automatic backups, while disabled or not configured leaves it available.",
       "supports": [
         "behavior",
@@ -218,7 +218,7 @@
   },
   "last_reviewed_utc": "2026-03-12T21:04:56.8703898+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx",
     "exact_quote_or_path": "<policy name=\"DisableFileHistory\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\FileHistory\" valueName=\"Disabled\">; FileHistory.adml: If you enable this policy setting, File History cannot be activated to create regular, automatic backups.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy prevents File History from being activated for regular automatic backups."

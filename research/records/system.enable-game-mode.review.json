@@ -6,7 +6,7 @@
   "record_status": "validated",
   "summary": "The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/gamemode_admin_probe.txt",
+    "source_url": "evidence/files/vm-tooling-staging/gamemode_admin_probe.txt",
     "exact_quote_or_path": "gamemode_admin_probe.txt: \"7:52:45.6879293 PM\",\"SystemSettings.exe\",\"5512\",\"RegQueryValue\",\"HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled\",\"SUCCESS\",\"Type: REG_DWORD, Length: 4, Data: 1\". gamemode_admin_zero_probe.txt: \"7:54:41.9130012 PM\",\"SystemSettings.exe\",\"5512\",\"RegQueryValue\",\"HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled\",\"SUCCESS\",\"Type: REG_DWORD, Length: 4, Data: 0\".",
     "key_found_on_page": true,
     "notes": "The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report."
@@ -168,7 +168,7 @@
       "evidence_id": "procmon-gamemode-admin",
       "kind": "procmon-trace",
       "title": "Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile",
-      "location": "research/evidence-files/procmon/system.enable-game-mode/gamemode_admin_probe.txt and research/evidence-files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt",
+      "location": "evidence/files/procmon/system.enable-game-mode/gamemode_admin_probe.txt and evidence/files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt",
       "summary": "Guest-side Procmon captures against the interactive Administrator hive showed SystemSettings.exe querying HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled with Data:1 and with Data:0 in separate reversible captures. The value was restored to 1 after the 0-state probe.",
       "supports": [
         "path",

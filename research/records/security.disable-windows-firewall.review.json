@@ -236,7 +236,7 @@
       "evidence_id": "local-windowsfirewall-admx",
       "kind": "official-doc",
       "title": "Local Microsoft WindowsFirewall.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsFirewall.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsFirewall.admx",
       "summary": "The local ADMX file maps EnableFirewall under HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile and HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile, with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -250,7 +250,7 @@
       "evidence_id": "local-windowsfirewall-adml",
       "kind": "official-doc",
       "title": "Local Microsoft WindowsFirewall.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml",
       "summary": "The local ADML help text says enabling the policy makes Windows Defender Firewall run, disabling it ensures the firewall does not run, and not configuring it leaves local administrators able to turn it on or off.",
       "supports": [
         "behavior",

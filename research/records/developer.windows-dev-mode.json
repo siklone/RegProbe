@@ -167,7 +167,7 @@
       "evidence_id": "procmon-developer-mode-baseline",
       "kind": "procmon-trace",
       "title": "Procmon capture - Developer settings search reads AppModelUnlock baseline",
-      "location": "research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.csv and research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.txt",
+      "location": "evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.csv and evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.txt",
       "summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving NAME NOT FOUND while the developer settings page was open. The same capture also confirmed the LongPathsEnabled read path on this build.",
       "supports": [
         "path",
@@ -181,7 +181,7 @@
       "evidence_id": "local-appxpackagemanager-admx",
       "kind": "official-doc",
       "title": "Local Microsoft AppxPackageManager.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx",
       "summary": "The local ADMX file maps the managed policy counterpart under Software\\Policies\\Microsoft\\Windows\\Appx with enabledValue 1 and disabledValue 0 for AllowDevelopmentWithoutDevLicense.",
       "supports": [
         "path",
@@ -195,7 +195,7 @@
       "evidence_id": "local-appxpackagemanager-adml",
       "kind": "official-doc",
       "title": "Local Microsoft AppxPackageManager.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml",
       "summary": "The local ADML help text says enabling the setting allows development of packaged Microsoft Store apps and installing them directly from an IDE, and notes it works together with the 'Allow all trusted apps to install' policy.",
       "supports": [
         "behavior",

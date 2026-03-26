@@ -174,7 +174,7 @@
       "evidence_id": "local-filesys-admx",
       "kind": "official-doc",
       "title": "Local Microsoft FileSys.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx",
       "summary": "The local ADMX file maps LongPathsEnabled to System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -188,7 +188,7 @@
       "evidence_id": "local-filesys-adml",
       "kind": "official-doc",
       "title": "Local Microsoft FileSys.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml",
       "summary": "The local ADML help text says enabling the setting allows manifested Win32 applications and packaged Microsoft Store applications to access paths beyond the normal 260-character limit.",
       "supports": [
         "behavior",
@@ -223,7 +223,7 @@
   },
   "last_reviewed_utc": "2026-03-12T21:34:02.4377701+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx",
     "exact_quote_or_path": "<policy name=\"LongPathsEnabled\" class=\"Machine\" ... key=\"System\\CurrentControlSet\\Control\\FileSystem\" valueName=\"LongPathsEnabled\">; FileSys.adml: Enabling Win32 long paths will allow manifested win32 applications and packaged Microsoft Store applications to access paths beyond the normal 260 character limit.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact machine key and value name; local ADML confirms that enabling the policy allows long-path-aware Win32 and packaged apps to access paths beyond the normal 260-character limit."

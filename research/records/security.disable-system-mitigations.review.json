@@ -149,7 +149,7 @@
       "evidence_id": "local-exploitguard-admx",
       "kind": "official-doc",
       "title": "Local Microsoft ExploitGuard.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/ExploitGuard.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/ExploitGuard.admx",
       "summary": "The local ADMX file maps the Exploit Protection policy under HKLM\\Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection and stores the configured XML path in ExploitProtectionSettings.",
       "supports": [
         "path",
@@ -162,7 +162,7 @@
       "evidence_id": "local-exploitguard-adml",
       "kind": "official-doc",
       "title": "Local Microsoft ExploitGuard.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml",
       "summary": "The local ADML help text says administrators should configure a device's system and application mitigation settings, export them as XML, and then point the policy to that XML file.",
       "supports": [
         "behavior",

@@ -169,7 +169,7 @@
       "evidence_id": "local-startmenu-admx",
       "kind": "official-doc",
       "title": "Local Microsoft StartMenu.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
       "summary": "The local ADMX file maps HideRecommendedSection and HideRecommendedPersonalizedSites to the Explorer policy key with both user and machine scope.",
       "supports": [
         "path",
@@ -216,7 +216,7 @@
   },
   "last_reviewed_utc": "2026-03-12T20:13:30.1052626+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
     "exact_quote_or_path": "<policy name=\"HideRecommendedSection\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"HideRecommendedSection\">",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedSection value used by the app, and marks the policy as class=\"Both\", which supports both HKLM and HKCU policy scope. The official Start Policy CSP provides the 0/1 shown/hidden semantics for this same control."

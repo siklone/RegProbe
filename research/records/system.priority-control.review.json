@@ -199,7 +199,7 @@
       "evidence_id": "procmon-priority-control-wmi-read",
       "kind": "procmon-trace",
       "title": "Procmon capture - wmiprvse.exe Win32PrioritySeparation reads",
-      "location": "research/evidence-files/procmon/system.priority-control/prioritycontrol-state-2.txt and research/evidence-files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and research/evidence-files/procmon/system.priority-control/prioritycontrol-state-38.txt and research/evidence-files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv",
+      "location": "evidence/files/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv",
       "summary": "Separate Win25H2Clean Procmon passes around `Get-CimInstance Win32_OperatingSystem` captured wmiprvse.exe reading HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation with Data: 2 and Data: 38 in reversible runs.",
       "supports": [
         "path",
@@ -225,7 +225,7 @@
       "evidence_id": "vm-batch-probe-20260320-priority-control",
       "kind": "runtime-diff",
       "title": "Win25H2Clean reversible probe - Win32PrioritySeparation tuning",
-      "location": "research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json",
+      "location": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
       "summary": "Guest reversible probe changed Win32PrioritySeparation from 2 to 38 and restored 2, confirming the tuning value transitions on the PriorityControl path.",
       "supports": [
         "path",
@@ -239,7 +239,7 @@
       "evidence_id": "vm-manual-benchmark-20260324-priority-control",
       "kind": "vm-test",
       "title": "Win25H2Clean manual benchmark pass - Win32PrioritySeparation",
-      "location": "research/evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json",
+      "location": "evidence/files/vm-tooling-staging/priority-control-20260324-201011/summary.json",
       "summary": "Manual VM pass confirmed baseline 2, candidate 38, and restored 2 after real reboots. The same guest then ran bounded WinSAT CPU + WPR and WinSAT mem + WPR passes for both states. The measured wall-clock durations were baseline CPU 35.28s vs candidate CPU 26.04s, and baseline mem 25.05s vs candidate mem 25.11s.",
       "supports": [
         "value",

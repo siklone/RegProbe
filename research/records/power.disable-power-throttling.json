@@ -158,7 +158,7 @@
       "evidence_id": "local-power-admx",
       "kind": "official-doc",
       "title": "Local Microsoft Power.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/Power.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/Power.admx",
       "summary": "The local ADMX file maps the Turn off Power Throttling policy to HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling\\PowerThrottlingOff with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -172,7 +172,7 @@
       "evidence_id": "local-power-adml",
       "kind": "official-doc",
       "title": "Local Microsoft Power.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/Power.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/Power.adml",
       "summary": "The local ADML help text says enabling the policy turns off Power Throttling, while disabled or not configured leaves the setting under user control.",
       "supports": [
         "behavior",
@@ -207,7 +207,7 @@
   },
   "last_reviewed_utc": "2026-03-25T09:15:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/Power.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Power.admx",
     "exact_quote_or_path": "<policy name=\"PowerThrottlingTurnOff\" class=\"Machine\" ... key=\"System\\CurrentControlSet\\Control\\Power\\PowerThrottling\" valueName=\"PowerThrottlingOff\"> ... <enabledValue><decimal value=\"1\" /></enabledValue>",
     "key_found_on_page": true,
     "notes": "Local Microsoft Power.admx defines the exact machine policy path and value name. The companion Power.adml help text explains that enabling the policy turns Power Throttling off, while disabled or not configured leaves it under user control."

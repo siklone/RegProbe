@@ -189,7 +189,7 @@
       "evidence_id": "local-filesys-admx-shortnames",
       "kind": "official-doc",
       "title": "Local Microsoft FileSys.admx short-name mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx",
       "summary": "The local ADMX file exposes NtfsDisable8dot3NameCreation as an enum-backed short-name policy surface with the same 0 through 3 numeric modes.",
       "supports": [
         "value",
@@ -202,7 +202,7 @@
       "evidence_id": "local-filesys-adml-shortnames",
       "kind": "official-doc",
       "title": "Local Microsoft FileSys.adml short-name help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml",
       "summary": "The local ADML help text explains the meanings of the 0, 1, 2, and 3 modes and shows the per-volume option as the default item.",
       "supports": [
         "allowed-values",

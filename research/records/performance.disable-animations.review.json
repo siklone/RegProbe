@@ -146,7 +146,7 @@
       "evidence_id": "runtime-spi-minanimate-diff",
       "kind": "runtime-diff",
       "title": "Local SPI_SETANIMATION runtime diff - MinAnimate persistence",
-      "location": "research/evidence-files/missing/minanimate-spi-diff-20260314-json.md",
+      "location": "evidence/files/missing/minanimate-spi-diff-20260314-json.md",
       "summary": "A local runtime diff called SPI_SETANIMATION with animations disabled and enabled, then read both SPI_GETANIMATION and HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate after each change. Disabled stayed at API false with MinAnimate = \"0\". Enabled switched to API true with MinAnimate = \"1\". The original local state was restored at the end.",
       "supports": [
         "path",
@@ -182,7 +182,7 @@
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/missing/minanimate-spi-diff-20260314-json.md",
+    "source_url": "evidence/files/missing/minanimate-spi-diff-20260314-json.md",
     "exact_quote_or_path": "after_disable: API false, registry MinAnimate = \"0\". after_enable: API true, registry MinAnimate = \"1\". restored: API false, registry MinAnimate = \"0\".",
     "key_found_on_page": true,
     "notes": "The local runtime diff used the official SystemParametersInfo animation API to toggle the feature and then read the persisted registry backend. The machine ended in its original state."

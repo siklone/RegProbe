@@ -322,7 +322,7 @@
       "evidence_id": "local-microsoftedge-admx",
       "kind": "official-doc",
       "title": "Local Microsoft MicrosoftEdge.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx",
       "summary": "The local ADMX file maps the legacy Edge search-suggestion policy to HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes\\ShowSearchSuggestionsGlobal with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -336,7 +336,7 @@
       "evidence_id": "local-microsoftedge-adml",
       "kind": "official-doc",
       "title": "Local Microsoft MicrosoftEdge.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/MicrosoftEdge.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/MicrosoftEdge.adml",
       "summary": "The local ADML help text says disabling the legacy policy prevents search suggestions in the Microsoft Edge address bar, while not configuring it lets the user choose.",
       "supports": [
         "behavior",
@@ -374,6 +374,6 @@
     "source_url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled",
     "exact_quote_or_path": "If you disable this policy, web search suggestions are never used, however local history and local favorites suggestions still appear. ... Registry settings: Path (Mandatory): SOFTWARE\\Policies\\Microsoft\\Edge ... Value name: SearchSuggestEnabled ... Value type: REG_DWORD.",
     "key_found_on_page": true,
-    "notes": "Bundle validation completed with three exact surfaces: 1) SearchSuggestEnabled is documented on the linked Microsoft Edge policy page. 2) LocalProvidersEnabled is documented on https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled with Path (Mandatory): SOFTWARE/Policies/Microsoft/Edge and Value name: LocalProvidersEnabled. 3) Legacy Edge is confirmed locally in research/evidence-files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx with key=\"Software/Policies/Microsoft/MicrosoftEdge/SearchScopes\" valueName=\"ShowSearchSuggestionsGlobal\" and disabledValue 0."
+    "notes": "Bundle validation completed with three exact surfaces: 1) SearchSuggestEnabled is documented on the linked Microsoft Edge policy page. 2) LocalProvidersEnabled is documented on https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled with Path (Mandatory): SOFTWARE/Policies/Microsoft/Edge and Value name: LocalProvidersEnabled. 3) Legacy Edge is confirmed locally in evidence/files/external/c/Windows/PolicyDefinitions/MicrosoftEdge.admx with key=\"Software/Policies/Microsoft/MicrosoftEdge/SearchScopes\" valueName=\"ShowSearchSuggestionsGlobal\" and disabledValue 0."
   }
 }

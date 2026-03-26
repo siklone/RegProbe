@@ -154,7 +154,7 @@
       "evidence_id": "ms-dnsclient-mdns-admx",
       "kind": "official-doc",
       "title": "Microsoft administrative template for mDNS",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/DnsClient.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx",
       "summary": "Microsoft documents EnableMDNS under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient with enabled value 1 and disabled value 0.",
       "supports": [
         "path",
@@ -167,7 +167,7 @@
       "evidence_id": "ms-dnsclient-mdns-adml",
       "kind": "official-doc",
       "title": "Microsoft help text for mDNS policy",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DnsClient.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml",
       "summary": "Microsoft says enabling the policy makes the DNS client use mDNS, while disabling or not configuring the policy returns to locally configured settings.",
       "supports": [
         "behavior",
@@ -200,7 +200,7 @@
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/DnsClient.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx",
     "exact_quote_or_path": "<policy name=\"DNS_MDNS\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\" valueName=\"EnableMDNS\">; DnsClient.adml: Specifies if the DNS client will perform name resolution over mDNS. If you enable this policy, the DNS client will use mDNS protocol.",
     "key_found_on_page": true,
     "notes": "Local official ADMX and ADML files document the exact EnableMDNS policy surface. The key finding is semantic: value 0 is documented as policy-disabled/local-settings behavior, not as a guaranteed hard-disable state. In the same pass, the app was also confirmed to use EnableMDNS rather than the separate LLMNR value EnableMulticast."

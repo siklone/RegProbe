@@ -333,7 +333,7 @@
       "evidence_id": "procmon-uac-never-notify",
       "kind": "procmon-trace",
       "title": "Procmon capture - UAC policy value reads",
-      "location": "research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md and research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md",
+      "location": "evidence/files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md and evidence/files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md",
       "summary": "Win25H2Clean Procmon captured DllHost.exe reading EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop while the UAC settings surface was open. The guest probe restored the original registry state after the capture.",
       "supports": [
         "path",

@@ -13,7 +13,7 @@
     "casual_explanation": "SysMain helps Windows improve responsiveness over time by learning usage patterns and managing performance-related preloading behavior.",
     "why_people_change_it": "People disable it when troubleshooting stutter, disk activity, or when following old performance-tuning guides.",
     "tradeoffs_overview": "Turning it off can reduce one source of background activity, but Microsoft does not recommend disabling it and some systems can lose intended performance behavior.",
-    "professional_notes": "Microsoft's Windows IoT Enterprise service guidance lists SysMain `(SysMain)` with a default start mode of `Automatic` and marks it `Don't disable`, describing it as a service that maintains and improves system performance over time. A local SCM snapshot confirms the exact SysMain service identity on the review host: display name `SysMain`, binary path `research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md -k LocalSystemNetworkRestricted -p`, and current start type `4 DISABLED`. The app currently disables the service through a service start-mode tweak, so the control surface is real but the recommendation conflicts with Microsoft's guidance.",
+    "professional_notes": "Microsoft's Windows IoT Enterprise service guidance lists SysMain `(SysMain)` with a default start mode of `Automatic` and marks it `Don't disable`, describing it as a service that maintains and improves system performance over time. A local SCM snapshot confirms the exact SysMain service identity on the review host: display name `SysMain`, binary path `evidence/files/external/c/WINDOWS/system32/svchost.exe.md -k LocalSystemNetworkRestricted -p`, and current start type `4 DISABLED`. The app currently disables the service through a service start-mode tweak, so the control surface is real but the recommendation conflicts with Microsoft's guidance.",
     "targets": [
       {
         "target_id": "sysmain-start-mode",
@@ -198,7 +198,7 @@
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "validation_proof": {
     "source_url": "research/notes/service-snapshots/sysmain-sc-qc-2026-03-14.txt",
-    "exact_quote_or_path": "SERVICE_NAME: SysMain | START_TYPE : 4 DISABLED | DISPLAY_NAME: SysMain | BINARY_PATH_NAME: research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md -k LocalSystemNetworkRestricted -p",
+    "exact_quote_or_path": "SERVICE_NAME: SysMain | START_TYPE : 4 DISABLED | DISPLAY_NAME: SysMain | BINARY_PATH_NAME: evidence/files/external/c/WINDOWS/system32/svchost.exe.md -k LocalSystemNetworkRestricted -p",
     "key_found_on_page": true,
     "notes": "The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker."
   }

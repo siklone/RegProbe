@@ -222,7 +222,7 @@
       "evidence_id": "local-appcompat-admx",
       "kind": "official-doc",
       "title": "Local Microsoft AppCompat.admx mappings",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
       "summary": "Maps SbEnable with explicit enabledValue=0 and disabledValue=1. Maps DisableEngine under AppCompatTurnOffEngine without an explicit numeric block, so the local ADMX alone leaves numeric direction implicit. VM Procmon capture now complements that gap by confirming direct writes to DisableEngine=1 and SbEnable=0 under the documented policy path.",
       "supports": [
         "path",
@@ -235,7 +235,7 @@
       "evidence_id": "local-appcompat-adml",
       "kind": "official-doc",
       "title": "Local Microsoft AppCompat.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/AppCompat.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml",
       "summary": "Describes Application Compatibility Engine and SwitchBack behavior. Provides semantic direction for both values. Microsoft explicitly warns in this text that disabling the engine may cause BSOD if old antivirus software is installed.",
       "supports": [
         "behavior",
@@ -274,8 +274,8 @@
       "evidence_id": "procmon-appcompat-engine",
       "kind": "procmon-trace",
       "title": "VM Procmon capture - AppCompat policy path bundle",
-      "location": "research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
-      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, and reg.exe queried both values successfully. The probe restored the original missing state after capture. Raw files are checked in under research/evidence-files/procmon/privacy.disable-appcompat-engine.policy/.",
+      "location": "evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/files/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv",
+      "summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, and reg.exe queried both values successfully. The probe restored the original missing state after capture. Raw files are checked in under evidence/files/procmon/privacy.disable-appcompat-engine.policy",
       "supports": [
         "value",
         "behavior",
@@ -296,7 +296,7 @@
   },
   "open_questions": [],
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx",
     "exact_quote_or_path": "AppCompat.admx: `<policy name=\"AppCompatTurnOffSwitchBack\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"SbEnable\">` with `<enabledValue><decimal value=\"0\" /></enabledValue>` and `<disabledValue><decimal value=\"1\" /></disabledValue>`; AppCompat.admx: `<policy name=\"AppCompatTurnOffEngine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisableEngine\">`; AppCompat.adml: `If you enable this policy setting, Switchback will be turned off.` and `If you enable this policy setting, the Application Compatibility Engine will be turned off.`",
     "key_found_on_page": true,
     "notes": "Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. VM Procmon capture on 2026-03-26 in Win25H2Clean then confirmed direct writes and read-backs for SbEnable=REG_DWORD 0x0 and DisableEngine=REG_DWORD 0x1."

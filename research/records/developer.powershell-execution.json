@@ -166,7 +166,7 @@
       "evidence_id": "local-powershell-executionpolicy-admx",
       "kind": "official-doc",
       "title": "Local Microsoft PowerShellExecutionPolicy.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
       "summary": "The local ADMX file maps ExecutionPolicy under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell and includes RemoteSigned as one of the allowed values.",
       "supports": [
         "path",
@@ -179,7 +179,7 @@
       "evidence_id": "local-powershell-executionpolicy-adml",
       "kind": "official-doc",
       "title": "Local Microsoft PowerShellExecutionPolicy.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml",
       "summary": "The local ADML help text labels RemoteSigned as allowing local scripts and remote signed scripts.",
       "supports": [
         "behavior",
@@ -213,7 +213,7 @@
   },
   "last_reviewed_utc": "2026-03-24T22:15:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\"> <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: \"Turn on Script Execution\" and \"Allow local scripts and remote signed scripts\".",
     "key_found_on_page": true,
     "notes": "Local official Microsoft ADMX/ADML files document the PowerShell policy path and the ExecutionPolicy enum, including RemoteSigned. The app writes ExecutionPolicy = RemoteSigned on the documented policy path, so this record is re-validated under schema 1.1."

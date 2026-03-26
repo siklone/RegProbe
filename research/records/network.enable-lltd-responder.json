@@ -155,7 +155,7 @@
       "evidence_id": "ms-lltd-responder-admx",
       "kind": "official-doc",
       "title": "Microsoft administrative template for LLTD Responder",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx",
       "summary": "The LinkLayerTopologyDiscovery administrative template documents EnableRspndr at HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD with enabled value 1 and disabled value 0.",
       "supports": [
         "path",
@@ -168,7 +168,7 @@
       "evidence_id": "ms-lltd-responder-adml",
       "kind": "official-doc",
       "title": "Microsoft help text for LLTD Responder policy",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/LinkLayerTopologyDiscovery.adml",
       "summary": "Microsoft explains that enabling the policy changes Responder behavior and that disabling or not configuring the policy leaves the default behavior in place.",
       "supports": [
         "behavior",
@@ -202,7 +202,7 @@
   },
   "last_reviewed_utc": "2026-03-13T03:43:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx",
     "exact_quote_or_path": "<policy name=\"LLTD_EnableRspndr\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LLTD\" valueName=\"EnableRspndr\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; LinkLayerTopologyDiscovery.adml: If you disable or do not configure this policy setting, the default behavior for the Responder will apply.",
     "key_found_on_page": true,
     "notes": "The local official Microsoft administrative template defines the exact LLTD responder policy path and value name used by the app, and the companion ADML help text documents the enable/default behavior."

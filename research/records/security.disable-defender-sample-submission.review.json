@@ -229,7 +229,7 @@
       "evidence_id": "vm-defender-submit-samples-baseline",
       "kind": "procmon-trace",
       "title": "Win25H2Clean absent-value check for Defender sample submission",
-      "location": "research/evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
+      "location": "evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
       "summary": "In the clean high-risk snapshot run where only SpyNetReporting = 2 was written on the same Defender Spynet policy branch, SecurityHealthService.exe queried SubmitSamplesConsent and got NAME NOT FOUND.",
       "supports": [
         "path",
@@ -242,7 +242,7 @@
       "evidence_id": "vm-defender-submit-samples-state2",
       "kind": "procmon-trace",
       "title": "Win25H2Clean Procmon read for SubmitSamplesConsent = 2",
-      "location": "research/evidence-files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt",
+      "location": "evidence/files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt",
       "summary": "After writing SubmitSamplesConsent = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch.",
       "supports": [
         "path",
@@ -282,7 +282,7 @@
   ],
   "last_reviewed_utc": "2026-03-25T08:40:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/submitsamples-ui-state2.txt",
+    "source_url": "evidence/files/vm-tooling-staging/submitsamples-ui-state2.txt",
     "exact_quote_or_path": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent | SUCCESS | Type: REG_DWORD, Length: 4, Data: 2",
     "key_found_on_page": true,
     "notes": "The same clean-snapshot Defender Spynet probe line also showed the sibling SpyNetReporting value as NAME NOT FOUND when SubmitSamplesConsent = 2 was the only policy value on the branch."

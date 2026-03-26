@@ -170,7 +170,7 @@
       "evidence_id": "local-findmy-admx",
       "kind": "official-doc",
       "title": "Local Microsoft FindMy.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/FindMy.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/FindMy.admx",
       "summary": "The local ADMX file maps the policy to HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice\\AllowFindMyDevice with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -184,7 +184,7 @@
       "evidence_id": "local-findmy-adml",
       "kind": "official-doc",
       "title": "Local Microsoft FindMy.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/FindMy.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/FindMy.adml",
       "summary": "The local ADML help text explains that enabling the feature allows cloud registration for device-location recovery, while turning it off stops registration and the feature from working.",
       "supports": [
         "behavior",

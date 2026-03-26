@@ -13,12 +13,12 @@
     "casual_explanation": "This sub-tweak renames the Sync Center executable so the Offline Files user interface is harder to launch through that entry point.",
     "why_people_change_it": "People do this when they want a hard shutdown of Sync Center behavior after already deciding to disable Offline Files.",
     "tradeoffs_overview": "Renaming the binary can reduce access to the Sync Center entry point, but it is much more invasive than using only the documented feature policy.",
-    "professional_notes": "The provider renames research/evidence-files/external/c/Windows/System32/mobsync.exe.md to mobsync.exe.disabled. This is tracked as an observed implementation detail rather than an official Microsoft feature-control surface.",
+    "professional_notes": "The provider renames evidence/files/external/c/Windows/System32/mobsync.exe.md to mobsync.exe.disabled. This is tracked as an observed implementation detail rather than an official Microsoft feature-control surface.",
     "targets": [
       {
         "target_id": "mobsync-binary",
         "location_kind": "file",
-        "path": "research/evidence-files/external/c/Windows/System32/mobsync.exe.md",
+        "path": "evidence/files/external/c/Windows/System32/mobsync.exe.md",
         "value_name": "RenameState",
         "value_type": "FILE_RENAME_STATE",
         "allowed_values": [
@@ -51,7 +51,7 @@
     "writes": [
       {
         "target_id": "mobsync-binary",
-        "path": "research/evidence-files/external/c/Windows/System32/mobsync.exe.md",
+        "path": "evidence/files/external/c/Windows/System32/mobsync.exe.md",
         "value_name": "RenameState",
         "value_type": "FILE_RENAME_STATE",
         "state_kind": "value",

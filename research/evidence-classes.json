@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T23:22:08.614253Z",
+  "generated_utc": "2026-03-26T23:38:24.951991Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
@@ -5522,7 +5522,7 @@
             "title": "Procmon capture - explorer.exe TaskbarAnimations runtime reads",
             "url": "evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and evidence/files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv",
             "kind": "procmon-trace",
-            "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations with Data:0..."
+            "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAnimations with Data:0..."
           }
         ]
       },
@@ -6327,7 +6327,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. Win25H2Clean reversible probe at rese...",
+        "summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. Win25H2Clean reversible probe at evid...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -6416,7 +6416,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. Win25H2Clean reversible probe at evidence/files...",
+        "summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. Win25H2Clean reversible probe at evidence/files/vm-tooli...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -6499,7 +6499,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at research/evi...",
+        "summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at evidence/fil...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -8835,7 +8835,7 @@
       "app_mapping_status": "partially-matches",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Backfilled from nohuto mirror evidence. The same HelpPane rename behavior is described upstream in the mirror, and the current app implementation still renames evidence/files/missing/helppane-exe.md to HelpPane.exe.disabled. This remains a deprecat...",
+        "summary": "Backfilled from nohuto mirror evidence. The same HelpPane rename behavior is described upstream in the mirror, and the current app implementation still renames evidence/files/missing/helppane-exe.md to HelpPane.exe.disabled. This remains a deprecated audit...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -8892,7 +8892,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at res...",
+        "summary": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at evi...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -11836,7 +11836,7 @@
             "title": "Validation proof source",
             "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips",
             "kind": "validation-proof",
-            "summary": "evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx (DisableSoftLanding enabledValue=1, disabledValue=0); evidence/files/external/c/PolicyDef..."
+            "summary": "evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx (DisableSoftLanding enabledValue=1, disabledValue=0); evidence/files/external/c/PolicyDefinitions/en-US/Clo..."
           },
           {
             "title": "Microsoft Policy CSP: AllowWindowsTips",
@@ -11973,7 +11973,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. evidence/files/external/c/Windows/inf/defltbase.inf.md also confirms the default value 0, and Microsoft documents the enabled...",
+        "summary": "The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. evidence/files/external/c/Windows/inf/defltbase.inf.md also confirms the default value 0, and Microsoft documents the enabled behavior...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -12557,7 +12557,7 @@
             "title": "Validation proof source",
             "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry",
             "kind": "validation-proof",
-            "summary": "evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx (AllowTelemetry values 0, 1, and 3); evidence/files/external/c/PolicyDefinitions/en-US/..."
+            "summary": "evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx (AllowTelemetry values 0, 1, and 3); evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adm..."
           },
           {
             "title": "Microsoft System Policy CSP: AllowTelemetry",
@@ -12998,7 +12998,7 @@
             "title": "Validation proof source",
             "url": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx",
             "kind": "validation-proof",
-            "summary": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx (NtfsDisableEncryption enabledValue=1, disabledValue=0); evidence/files/external/c/PolicyDefin..."
+            "summary": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx (NtfsDisableEncryption enabledValue=1, disabledValue=0); evidence/files/external/c/PolicyDefinitions/en-US/FileS..."
           },
           {
             "title": "Local Microsoft FileSys.admx mapping",
@@ -14038,7 +14038,7 @@
             "title": "Validation proof source",
             "url": "evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx",
             "kind": "validation-proof",
-            "summary": "evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx: policy name=\"MSPassport_UseDynamicLock\" key=\"SOFTWARE/Policies/Microsoft/PassportForWork/DynamicLock\"..."
+            "summary": "evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx: policy name=\"MSPassport_UseDynamicLock\" key=\"SOFTWARE/Policies/Microsoft/PassportForWork/DynamicLock\" valueNam..."
           },
           {
             "title": "Local Microsoft Passport.admx mapping",
@@ -15432,7 +15432,7 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU\\Control Panel\\Desktop\\JPEGImportQuality with Data:100. The repo now keeps the filtered capture files directly...",
+        "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU/Control Panel/Desktop/JPEGImportQuality with Data:100. The repo now keeps the filtered capture files directly...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
@@ -15440,7 +15440,7 @@
             "title": "Procmon capture - Explorer JPEGImportQuality runtime read",
             "url": "evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt and evidence/files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv",
             "kind": "procmon-trace",
-            "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU\\Control Panel\\Desktop\\JPEGImp..."
+            "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU/Control Panel/Desktop/JPEGImp..."
           },
           {
             "title": "Win25H2Clean reversible probe - Wallpaper JPEG import quality",
@@ -16084,7 +16084,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explor...",
+        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serial...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -18128,7 +18128,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Local Microsoft security registry metadata maps the exact registry path and default state. The matching default value is also present in evidence/files/external/c/Windows/inf/defltbase.inf.md as MACHINE/System/CurrentControlSet/Control/Session Mana...",
+        "summary": "Local Microsoft security registry metadata maps the exact registry path and default state. The matching default value is also present in evidence/files/external/c/Windows/inf/defltbase.inf.md as MACHINE/System/CurrentControlSet/Control/Session Manager/Memor...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -19495,7 +19495,7 @@
             "title": "Validation proof source",
             "url": "research/notes/service-snapshots/printdeviceconfigurationservice-sc-qc-2026-03-14.txt",
             "kind": "validation-proof",
-            "summary": "SERVICE_NAME: PrintDeviceConfigurationService | START_TYPE : 3 DEMAND_START | DISPLAY_NAME: Print Device Configuration Service | BINARY_PATH_NAME: evidence/files/extern..."
+            "summary": "SERVICE_NAME: PrintDeviceConfigurationService | START_TYPE : 3 DEMAND_START | DISPLAY_NAME: Print Device Configuration Service | BINARY_PATH_NAME: evidence/files/external/c/WIND..."
           },
           {
             "title": "Microsoft Learn: Guidance on configuring system services - Print Device Configuration Service",
@@ -19635,7 +19635,7 @@
             "title": "Validation proof source",
             "url": "research/notes/service-snapshots/printscanbrokerservice-sc-qc-2026-03-14.txt",
             "kind": "validation-proof",
-            "summary": "SERVICE_NAME: PrintScanBrokerService | START_TYPE : 3 DEMAND_START | DISPLAY_NAME: PrintScanBrokerService | BINARY_PATH_NAME: evidence/files/external/c/WINDOWS/system32..."
+            "summary": "SERVICE_NAME: PrintScanBrokerService | START_TYPE : 3 DEMAND_START | DISPLAY_NAME: PrintScanBrokerService | BINARY_PATH_NAME: evidence/files/external/c/WINDOWS/system32/svchost...."
           },
           {
             "title": "Microsoft Learn: Guidance on configuring system services - Print Scan Broker Service",
@@ -19845,7 +19845,7 @@
             "title": "Validation proof source",
             "url": "research/notes/service-snapshots/sysmain-sc-qc-2026-03-14.txt",
             "kind": "validation-proof",
-            "summary": "SERVICE_NAME: SysMain | START_TYPE : 4 DISABLED | DISPLAY_NAME: SysMain | BINARY_PATH_NAME: evidence/files/external/c/WINDOWS/system32/svchost.exe.md -k LocalSystemNetw..."
+            "summary": "SERVICE_NAME: SysMain | START_TYPE : 4 DISABLED | DISPLAY_NAME: SysMain | BINARY_PATH_NAME: evidence/files/external/c/WINDOWS/system32/svchost.exe.md -k LocalSystemNetworkRestri..."
           },
           {
             "title": "Microsoft Learn: Guidance on configuring system services - SysMain",
@@ -19985,7 +19985,7 @@
             "title": "Validation proof source",
             "url": "research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt",
             "kind": "validation-proof",
-            "summary": "SERVICE_NAME: WerSvc | START_TYPE : 4 DISABLED | DISPLAY_NAME: Windows Error Reporting Service | BINARY_PATH_NAME: evidence/files/external/c/WINDOWS/System32/svchost.ex..."
+            "summary": "SERVICE_NAME: WerSvc | START_TYPE : 4 DISABLED | DISPLAY_NAME: Windows Error Reporting Service | BINARY_PATH_NAME: evidence/files/external/c/WINDOWS/System32/svchost.exe.md -k W..."
           },
           {
             "title": "Microsoft Learn: Guidance on configuring system services - Windows Error Reporting Service",

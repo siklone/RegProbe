@@ -6,7 +6,7 @@
   "record_status": "validated",
   "summary": "Microsoft documents the Restart apps sign-in feature, and a guest-side reversible probe on Win25H2Clean confirmed the raw RestartApps registry mapping under HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon. The current app writes 0 there, which the probe confirmed disables automatic app restart after sign-in on this build.",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/restartapps_toggle_out.txt",
+    "source_url": "evidence/files/vm-tooling-staging/restartapps_toggle_out.txt",
     "exact_quote_or_path": "restartapps_toggle_out.txt: BASELINE=MISSING. AFTER_1=1. AFTER_0=0. RESTORED=MISSING.",
     "key_found_on_page": true,
     "notes": "Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 1 / 0 toggle sequence, then restored the machine back to missing."
@@ -177,7 +177,7 @@
       "evidence_id": "runtime-restartapps-registry-diff",
       "kind": "runtime-diff",
       "title": "Guest reversible probe - RestartApps registry mapping",
-      "location": "research/evidence-files/vm-tooling-staging/restartapps_toggle_out.txt",
+      "location": "evidence/files/vm-tooling-staging/restartapps_toggle_out.txt",
       "summary": "Guest reversible probe on Win25H2Clean confirmed RestartApps transitions through missing, 1, and 0 before restoring to missing.",
       "supports": [
         "value",

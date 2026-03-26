@@ -170,7 +170,7 @@
       "evidence_id": "local-datacollection-admx-optin-ui",
       "kind": "official-doc",
       "title": "Local Microsoft DataCollection.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/DataCollection.admx",
       "summary": "The local ADMX file maps the policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -184,7 +184,7 @@
       "evidence_id": "local-datacollection-adml-optin-ui",
       "kind": "official-doc",
       "title": "Local Microsoft DataCollection.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml",
       "summary": "The local ADML help text says users can change diagnostic settings by default, while setting the policy to disable the opt-in UI removes that control from Settings.",
       "supports": [
         "behavior",

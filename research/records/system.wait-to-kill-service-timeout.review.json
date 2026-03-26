@@ -173,7 +173,7 @@
       "evidence_id": "vm-wait-to-kill-service-timeout-probe",
       "kind": "runtime-diff",
       "title": "Win25H2Clean reversible probe for WaitToKillServiceTimeout",
-      "location": "research/evidence-files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt",
+      "location": "evidence/files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt",
       "summary": "The VM probe captured ORIGINAL=5000, AFTER=2500, and RESTORED=5000 for HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout.",
       "supports": [
         "path",
@@ -208,7 +208,7 @@
     "blocking_issues": []
   },
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt",
+    "source_url": "evidence/files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt",
     "exact_quote_or_path": "ORIGINAL={\"path_exists\":true,\"value_exists\":true,\"value\":\"5000\"}; AFTER={\"path_exists\":true,\"value_exists\":true,\"value\":\"2500\"}; RESTORED={\"path_exists\":true,\"value_exists\":true,\"value\":\"5000\"}",
     "key_found_on_page": true,
     "notes": "The reversible VM probe confirmed the current baseline, the app write, and a clean restore."

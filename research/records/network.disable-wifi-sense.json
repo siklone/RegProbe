@@ -153,7 +153,7 @@
       "evidence_id": "ms-wifisense-admx",
       "kind": "official-doc",
       "title": "Microsoft administrative template for Wi-Fi Sense policy",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/wlansvc.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx",
       "summary": "The wlansvc administrative template documents AutoConnectAllowedOEM under HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config with enabled value 1 and disabled value 0.",
       "supports": [
         "path",
@@ -166,7 +166,7 @@
       "evidence_id": "ms-wifisense-adml",
       "kind": "official-doc",
       "title": "Microsoft help text for Wi-Fi Sense policy",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/wlansvc.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml",
       "summary": "Microsoft explains that disabling the policy turns off the hotspot suggestion and sharing options and prevents users from enabling them, while enabled or not configured leaves choice available.",
       "supports": [
         "behavior",
@@ -200,7 +200,7 @@
   },
   "last_reviewed_utc": "2026-03-13T03:37:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/wlansvc.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx",
     "exact_quote_or_path": "<policy name=\"WiFiSense\" class=\"Machine\" ... key=\"Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\" valueName=\"AutoConnectAllowedOEM\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; wlansvc.adml: If this policy setting is disabled, both \"Connect to suggested open hotspots,\" \"Connect to networks shared by my contacts,\" and \"Enable paid services\" will be turned off and users on this device will be prevented from enabling them.",
     "key_found_on_page": true,
     "notes": "The local official Microsoft WLAN administrative template defines the exact path and value name used by the app, and the companion ADML help text explains the disabled behavior in plain language."

@@ -214,7 +214,7 @@
       "evidence_id": "local-windowscopilot-admx-recall",
       "kind": "official-doc",
       "title": "Local Microsoft WindowsCopilot.admx Recall mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx",
       "summary": "The local ADMX file maps DisableAIDataAnalysis to SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\\DisableAIDataAnalysis with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -228,7 +228,7 @@
       "evidence_id": "local-windowscopilot-adml-recall",
       "kind": "official-doc",
       "title": "Local Microsoft WindowsCopilot.adml Recall help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml",
       "summary": "The local ADML help text explains that not configuring the policy keeps snapshots off on managed devices, enabling it blocks snapshot saving and deletes saved snapshots, and disabling it lets users choose to save snapshots.",
       "supports": [
         "behavior",
@@ -289,7 +289,7 @@
   },
   "last_reviewed_utc": "2026-03-12T19:36:19.8449566+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx",
     "exact_quote_or_path": "<policy name=\"DisableAIDataAnalysis\" class=\"Both\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\" valueName=\"DisableAIDataAnalysis\">",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot saving and deletes previously saved snapshots. Added nohuto mirror corroboration via nohuto-disableaidataanalysis-admx."

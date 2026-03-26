@@ -171,7 +171,7 @@
       "evidence_id": "local-dnsclient-admx",
       "kind": "official-doc",
       "title": "Local Microsoft DnsClient.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
       "summary": "The local ADMX file shows enabledValue 1 and disabledValue 0 for DisableSmartNameResolution.",
       "supports": [
         "path",
@@ -218,7 +218,7 @@
   },
   "last_reviewed_utc": "2026-03-12T08:28:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
     "exact_quote_or_path": "<policy name=\"DNS_SmartMultiHomedNameResolution\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\" valueName=\"DisableSmartNameResolution\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same registry key and value name that the app writes and confirms the 1/0 mapping."

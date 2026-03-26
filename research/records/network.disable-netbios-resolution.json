@@ -215,7 +215,7 @@
       "evidence_id": "local-dnsclient-netbios-admx",
       "kind": "official-doc",
       "title": "Local Microsoft DnsClient.admx NetBIOS enum mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
       "summary": "The local ADMX file defines DNS_Netbios as an enum that writes EnableNetbios with values 0, 1, 2, and 3.",
       "supports": [
         "path",
@@ -263,7 +263,7 @@
   },
   "last_reviewed_utc": "2026-03-12T08:24:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
     "exact_quote_or_path": "<policy name=\"DNS_Netbios\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\"> <enum id=\"DNS_Netbios_Box\" valueName=\"EnableNetbios\" required=\"true\"> <item displayName=\"$(string.DNS_Netbios_Disable)\"><value><decimal value=\"0\" /></value></item>",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same registry key and value name that the app writes, and it exposes the enum values 0, 1, 2, and 3."

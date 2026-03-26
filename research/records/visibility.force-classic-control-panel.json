@@ -158,7 +158,7 @@
       "evidence_id": "local-controlpanel-admx-classic",
       "kind": "official-doc",
       "title": "Local Microsoft ControlPanel.admx ForceClassicControlPanel mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanel.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/ControlPanel.admx",
       "summary": "The local ADMX file maps ForceClassicControlPanel under the Explorer policies key with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -172,7 +172,7 @@
       "evidence_id": "local-controlpanel-adml-classic",
       "kind": "official-doc",
       "title": "Local Microsoft ControlPanel.adml ForceClassicControlPanel help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/ControlPanel.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/ControlPanel.adml",
       "summary": "The local ADML help text explains that enabling the policy opens Control Panel in icon view, disabling it opens category view, and not configuring it uses the last session's view.",
       "supports": [
         "behavior",
@@ -207,7 +207,7 @@
   },
   "last_reviewed_utc": "2026-03-13T02:52:43+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/ControlPanel.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/ControlPanel.admx",
     "exact_quote_or_path": "<policy name=\"ForceClassicControlPanel\" class=\"User\" displayName=\"$(string.ForceClassicControlPanel)\" explainText=\"$(string.ForceClassicControlPanel_Help)\" key=\"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\" valueName=\"ForceClassicControlPanel\">; ControlPanel.adml: If this policy setting is enabled, the Control Panel opens to the icon view. If this policy setting is disabled, the Control Panel opens to the category view. If this policy setting is not configured, the Control Panel opens to the view used in the last Control Panel session.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact user-policy key and value name, and local ADML confirms the classic icon, category view, and not-configured behaviors. The app writes the documented classic icon view state under the same user-policy surface."

@@ -162,7 +162,7 @@
       "evidence_id": "local-security-registry-last-user",
       "kind": "official-doc",
       "title": "Local Windows security option registry mapping",
-      "location": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+      "location": "evidence/files/external/c/Windows/inf/sceregvl.inf.md",
       "summary": "The local Windows security registry metadata maps the security option to HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName.",
       "supports": [
         "path",
@@ -174,7 +174,7 @@
       "evidence_id": "local-security-defaults-last-user",
       "kind": "official-doc",
       "title": "Local Windows default security baseline entry",
-      "location": "research/evidence-files/external/c/Windows/inf/defltbase.inf.md",
+      "location": "evidence/files/external/c/Windows/inf/defltbase.inf.md",
       "summary": "The local Windows default security baseline lists DontDisplayLastUserName with default value 0.",
       "supports": [
         "default",
@@ -220,9 +220,9 @@
   },
   "last_reviewed_utc": "2026-03-12T20:21:59.0000000+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+    "source_url": "evidence/files/external/c/Windows/inf/sceregvl.inf.md",
     "exact_quote_or_path": "MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName,4,%DontDisplayLastUserName%,0",
     "key_found_on_page": true,
-    "notes": "The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. research/evidence-files/external/c/Windows/inf/defltbase.inf.md also confirms the default value 0, and Microsoft documents the enabled behavior as hiding the last signed-in username."
+    "notes": "The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. evidence/files/external/c/Windows/inf/defltbase.inf.md also confirms the default value 0, and Microsoft documents the enabled behavior as hiding the last signed-in username."
   }
 }

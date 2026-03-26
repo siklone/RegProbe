@@ -167,7 +167,7 @@
       "evidence_id": "local-startmenu-admx",
       "kind": "official-doc",
       "title": "Local Microsoft StartMenu.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
       "summary": "The local ADMX file defines ShowOrHideMostUsedApps as an enum policy with values 0, 1, and 2 under the Explorer policy key.",
       "supports": [
         "path",
@@ -181,7 +181,7 @@
       "evidence_id": "local-startmenu-adml",
       "kind": "official-doc",
       "title": "Local Microsoft StartMenu.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/StartMenu.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/StartMenu.adml",
       "summary": "The local ADML help text explains that Show forces the Most used list visible, Hide forces it hidden, and disabled, not configured, or enum value 0 all leave the behavior under user control.",
       "supports": [
         "behavior",
@@ -228,7 +228,7 @@
   },
   "last_reviewed_utc": "2026-03-12T20:26:54.8725742+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
+    "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
     "exact_quote_or_path": "<policy name=\"ShowOrHideMostUsedApps\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\"> ... <enum id=\"ShowOrHideMostUsedAppsDropdown\" valueName=\"ShowOrHideMostUsedApps\" required=\"true\">",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file defines the same Explorer policy key and ShowOrHideMostUsedApps enum surface used by the app. The paired ADML help text documents the force-show, force-hide, and user-control behavior for the enum values."

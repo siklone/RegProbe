@@ -176,7 +176,7 @@
       "evidence_id": "local-gamedvr-admx",
       "kind": "official-doc",
       "title": "Local Microsoft GameDVR.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/GameDVR.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx",
       "summary": "The local ADMX file maps AllowGameDVR to Software\\Policies\\Microsoft\\Windows\\GameDVR\\AllowGameDVR with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -190,7 +190,7 @@
       "evidence_id": "local-gamedvr-adml",
       "kind": "official-doc",
       "title": "Local Microsoft GameDVR.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/GameDVR.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/GameDVR.adml",
       "summary": "The local ADML help text says disabling the policy prevents Windows Game Recording, while enabling it or leaving it not configured allows recording and broadcasting.",
       "supports": [
         "behavior",
@@ -225,7 +225,7 @@
   },
   "last_reviewed_utc": "2026-03-12T19:54:30.6213142+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/GameDVR.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx",
     "exact_quote_or_path": "<policy name=\"AllowGameDVR\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\GameDVR\" valueName=\"AllowGameDVR\">",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same GameDVR policy key and AllowGameDVR value used by the app. The paired ADML help text states that disabling the setting prevents Windows Game Recording, while enabled or not configured allows recording and broadcasting."

@@ -160,7 +160,7 @@
       "evidence_id": "local-search-admx",
       "kind": "official-doc",
       "title": "Local Microsoft Search.admx mapping",
-      "location": "research/evidence-files/missing/search-admx.md",
+      "location": "evidence/files/missing/search-admx.md",
       "summary": "The local ADMX file maps AllowIndexingEncryptedStoresOrItems under the Windows Search policy key with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -174,7 +174,7 @@
       "evidence_id": "local-search-adml",
       "kind": "official-doc",
       "title": "Local Microsoft Search.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/Search.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/Search.adml",
       "summary": "The local ADML help text explains that enabling the policy indexes encrypted content, disabling it blocks encrypted indexing, not configuring it uses the local setting, and the default local behavior is to not index encrypted content.",
       "supports": [
         "behavior",
@@ -210,7 +210,7 @@
   },
   "last_reviewed_utc": "2026-03-13T00:55:30Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/missing/search-admx.md",
+    "source_url": "evidence/files/missing/search-admx.md",
     "exact_quote_or_path": "<policy name=\"AllowIndexingEncryptedStoresOrItems\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" valueName=\"AllowIndexingEncryptedStoresOrItems\"> ... <enabledValue><decimal value=\"1\" /></enabledValue>",
     "key_found_on_page": true,
     "notes": "Local Microsoft Search.admx defines the exact machine policy path and value name. The companion Search.adml help text explains that enabling the policy indexes encrypted content, disabling it blocks encrypted indexing, and not configuring it falls back to the local setting."

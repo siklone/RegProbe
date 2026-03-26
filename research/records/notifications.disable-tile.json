@@ -176,7 +176,7 @@
       "evidence_id": "local-wpn-admx-no-tile",
       "kind": "official-doc",
       "title": "Local Microsoft WPN.admx NoTileNotification mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx",
       "summary": "The local ADMX file maps NoTileNotification to the PushNotifications policy key with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -190,7 +190,7 @@
       "evidence_id": "local-wpn-adml-no-tile",
       "kind": "official-doc",
       "title": "Local Microsoft WPN.adml NoTileNotification help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/WPN.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/WPN.adml",
       "summary": "The local ADML help text says enabling the policy turns off tile notifications and prevents applications and system features from updating tiles and tile badges.",
       "supports": [
         "behavior",
@@ -225,7 +225,7 @@
   },
   "last_reviewed_utc": "2026-03-12T08:42:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/WPN.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx",
     "exact_quote_or_path": "<policy name=\"NoTileNotification\" class=\"User\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\" valueName=\"NoTileApplicationNotification\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping."

@@ -209,7 +209,7 @@
       "evidence_id": "local-lanmanworkstation-admx-cipher-order",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanWorkstation.admx cipher suite order mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
       "summary": "The local ADMX file documents CipherSuiteOrder under the LanmanWorkstation policy key as a multi-text policy value.",
       "supports": [
         "path",
@@ -223,7 +223,7 @@
       "evidence_id": "local-lanmanworkstation-adml-cipher-order",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanWorkstation.adml cipher suite order help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/LanmanWorkstation.adml",
       "summary": "The local ADML help text says the SMB client uses the default cipher suite order when the policy is disabled or not configured, and uses the specified order when enabled with supported suites.",
       "supports": [
         "behavior",
@@ -236,7 +236,7 @@
       "evidence_id": "local-lanmanserver-admx-cipher-order",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanServer.admx cipher suite order mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanServer.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanServer.admx",
       "summary": "The local ADMX file documents CipherSuiteOrder under the LanmanServer policy key as a multi-text policy value.",
       "supports": [
         "path",
@@ -250,7 +250,7 @@
       "evidence_id": "local-lanmanserver-adml-cipher-order",
       "kind": "official-doc",
       "title": "Local Microsoft LanmanServer.adml cipher suite order help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/LanmanServer.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/LanmanServer.adml",
       "summary": "The local ADML help text says the SMB server uses the default cipher suite order when the policy is disabled or not configured, and uses the specified order when enabled with supported suites.",
       "supports": [
         "behavior",
@@ -286,7 +286,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-14T00:00:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx",
     "exact_quote_or_path": "LanmanWorkstation.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanWorkstation.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"; LanmanServer.admx: <policy name=\"Pol_CipherSuiteOrder\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LanmanServer\" ... <multiText id=\"MultiText_CipherSuiteOrder\" valueName=\"CipherSuiteOrder\" />; LanmanServer.adml: \"If you enable this policy setting, cipher suites are prioritized in the order specified.\"",
     "key_found_on_page": true,
     "notes": "Local official Microsoft ADMX/ADML files document CipherSuiteOrder under the LanmanWorkstation and LanmanServer policy keys as REG_MULTI_SZ multi-text policy values, and the app now writes those documented policy keys directly."

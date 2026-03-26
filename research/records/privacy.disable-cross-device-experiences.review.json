@@ -243,7 +243,7 @@
       "evidence_id": "local-grouppolicy-admx-enablecdp",
       "kind": "official-doc",
       "title": "Local Microsoft GroupPolicy.admx EnableCDP mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx",
       "summary": "The local ADMX file maps EnableCdp to Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -257,7 +257,7 @@
       "evidence_id": "local-grouppolicy-adml-enablecdp",
       "kind": "official-doc",
       "title": "Local Microsoft GroupPolicy.adml EnableCDP help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
       "summary": "The local ADML help text explains that enabling the policy allows continue experiences, disabling it blocks them, and the not-configured default depends on the Windows edition.",
       "supports": [
         "behavior",
@@ -297,7 +297,7 @@
       "evidence_id": "guest-crossdevice-launch",
       "kind": "vm-test",
       "title": "Guest launch of CrossDeviceResume",
-      "location": "research/evidence-files/vm-tooling-staging/crossdevice_resume_probe.csv",
+      "location": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
       "summary": "Win25H2Clean guest Procmon capture shows CrossDeviceResume.exe launching from the MicrosoftWindows.Client.CBS app tile, confirming the runtime surface is present. This trigger did not surface the expected policy value names in the captured run, so it remains supporting evidence rather than a direct key-read proof.",
       "supports": [
         "behavior",
@@ -324,7 +324,7 @@
   ],
   "last_reviewed_utc": "2026-03-21T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
+    "source_url": "evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
     "exact_quote_or_path": "Local Microsoft GroupPolicy.adml EnableCDP help text: The local ADML help text explains that enabling the policy allows continue experiences, disabling it blocks them, and the not-configured default depends on the Windows edition.",
     "key_found_on_page": true,
     "notes": "Backfilled from evidence_id local-grouppolicy-adml-enablecdp (official-doc); deprecated audit trail."

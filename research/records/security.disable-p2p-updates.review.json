@@ -195,7 +195,7 @@
       "evidence_id": "local-deliveryoptimization-admx",
       "kind": "official-doc",
       "title": "Local Microsoft DeliveryOptimization.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx",
       "summary": "The local ADMX file maps DODownloadMode under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization and defines enum values 0, 1, 2, 3, 99, and 100.",
       "supports": [
         "path",
@@ -209,7 +209,7 @@
       "evidence_id": "local-deliveryoptimization-adml",
       "kind": "official-doc",
       "title": "Local Microsoft DeliveryOptimization.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DeliveryOptimization.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/DeliveryOptimization.adml",
       "summary": "The local ADML help text explains that value 0 means HTTP only with no peering, and documents the other Delivery Optimization modes.",
       "supports": [
         "behavior",
@@ -245,7 +245,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-13T18:52:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx",
     "exact_quote_or_path": "DeliveryOptimization.admx: `valueName=\"DODownloadMode\"`; DeliveryOptimization.adml: `Download Mode` / `Specifies the method that Delivery Optimization can use to download content on behalf of various Microsoft products.` The local ADMX/ADML pair documents DODownloadMode under the official policy path and its enum values 0, 1, 2, 3, 99, and 100.",
     "key_found_on_page": true,
     "notes": "Local official ADMX and ADML files document the exact Delivery Optimization policy surface under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization, and the app now writes that documented path."

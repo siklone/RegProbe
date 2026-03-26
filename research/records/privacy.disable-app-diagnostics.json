@@ -168,7 +168,7 @@
       "evidence_id": "local-appprivacy-admx-diagnostics",
       "kind": "official-doc",
       "title": "Local Microsoft AppPrivacy.admx LetAppsGetDiagnosticInfo mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
       "summary": "The local ADMX file maps LetAppsGetDiagnosticInfo under the AppPrivacy policy key and defines values 0, 1, and 2 for User is in control, Force Allow, and Force Deny.",
       "supports": [
         "path",
@@ -182,7 +182,7 @@
       "evidence_id": "local-appprivacy-adml-diagnostics",
       "kind": "official-doc",
       "title": "Local Microsoft AppPrivacy.adml LetAppsGetDiagnosticInfo help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/AppPrivacy.adml",
       "summary": "The local ADML help text explains that the user can be in control, apps can be force allowed, or apps can be force denied from accessing diagnostic information about other apps.",
       "supports": [
         "behavior",
@@ -217,7 +217,7 @@
   },
   "last_reviewed_utc": "2026-03-12T20:45:22.0860678+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx",
     "exact_quote_or_path": "<policy name=\"LetAppsGetDiagnosticInfo\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppPrivacy\"> ... <enum id=\"LetAppsGetDiagnosticInfo_Enum\" valueName=\"LetAppsGetDiagnosticInfo\">",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same AppPrivacy machine policy surface used by the app. The paired ADML help text documents the User in control, Force Allow, and Force Deny states for this enum, and the app uses Force Deny (2)."

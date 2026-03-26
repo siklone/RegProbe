@@ -175,7 +175,7 @@
       "evidence_id": "local-appxpackagemanager-admx",
       "kind": "official-doc",
       "title": "Local Microsoft AppxPackageManager.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx",
       "summary": "The local ADMX file maps AllowAutomaticAppArchiving to Software\\Policies\\Microsoft\\Windows\\Appx\\AllowAutomaticAppArchiving with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -189,7 +189,7 @@
       "evidence_id": "local-appxpackagemanager-adml",
       "kind": "official-doc",
       "title": "Local Microsoft AppxPackageManager.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml",
       "summary": "The local ADML help text explains that disabling the policy stops automatic archiving and that not configuring it keeps the default behavior and user control.",
       "supports": [
         "behavior",
@@ -224,7 +224,7 @@
   },
   "last_reviewed_utc": "2026-03-12T19:51:42.0176899+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx",
     "exact_quote_or_path": "<policy name=\"AllowAutomaticAppArchiving\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Appx\" valueName=\"AllowAutomaticAppArchiving\">",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same Appx policy key and AllowAutomaticAppArchiving value used by the app. The paired ADML help text states that enabling archives infrequently used apps, disabling prevents app archiving, and not configured follows the default user-configurable behavior."

@@ -163,7 +163,7 @@
       "evidence_id": "local-sceregvl-inf",
       "kind": "official-doc",
       "title": "Local Microsoft security registry mapping",
-      "location": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+      "location": "evidence/files/external/c/Windows/inf/sceregvl.inf.md",
       "summary": "The local security registry metadata maps ClearPageFileAtShutdown to MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\ClearPageFileAtShutdown.",
       "supports": [
         "path",
@@ -175,7 +175,7 @@
       "evidence_id": "local-defltbase-inf",
       "kind": "official-doc",
       "title": "Local Microsoft default security template",
-      "location": "research/evidence-files/external/c/Windows/inf/defltbase.inf.md",
+      "location": "evidence/files/external/c/Windows/inf/defltbase.inf.md",
       "summary": "The local default security template sets ClearPageFileAtShutdown = 0, establishing the default baseline.",
       "supports": [
         "default",
@@ -209,9 +209,9 @@
   },
   "last_reviewed_utc": "2026-03-13T00:49:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/inf/sceregvl.inf.md",
+    "source_url": "evidence/files/external/c/Windows/inf/sceregvl.inf.md",
     "exact_quote_or_path": "MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\ClearPageFileAtShutdown,4,%ClearPageFileAtShutdown%,0",
     "key_found_on_page": true,
-    "notes": "Local Microsoft security registry metadata maps the exact registry path and default state. The matching default value is also present in research/evidence-files/external/c/Windows/inf/defltbase.inf.md as MACHINE/System/CurrentControlSet/Control/Session Manager/Memory Management/ClearPageFileAtShutdown=4,0."
+    "notes": "Local Microsoft security registry metadata maps the exact registry path and default state. The matching default value is also present in evidence/files/external/c/Windows/inf/defltbase.inf.md as MACHINE/System/CurrentControlSet/Control/Session Manager/Memory Management/ClearPageFileAtShutdown=4,0."
   }
 }

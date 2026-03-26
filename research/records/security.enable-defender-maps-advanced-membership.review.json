@@ -195,7 +195,7 @@
       "evidence_id": "vm-defender-spynet-baseline",
       "kind": "procmon-trace",
       "title": "Win25H2Clean Procmon baseline for Defender MAPS policy path",
-      "location": "research/evidence-files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt",
+      "location": "evidence/files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt",
       "summary": "On the clean high-risk snapshot, SecurityHealthService.exe opened HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and got NAME NOT FOUND, then fell back to HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting and read Data: 2.",
       "supports": [
         "path",
@@ -208,7 +208,7 @@
       "evidence_id": "vm-defender-spynet-state2",
       "kind": "procmon-trace",
       "title": "Win25H2Clean Procmon read for SpyNetReporting = 2",
-      "location": "research/evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
+      "location": "evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
       "summary": "After writing SpyNetReporting = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch.",
       "supports": [
         "path",
@@ -248,7 +248,7 @@
   ],
   "last_reviewed_utc": "2026-03-25T08:40:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/spynet-ui-state2.txt",
+    "source_url": "evidence/files/vm-tooling-staging/spynet-ui-state2.txt",
     "exact_quote_or_path": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting | SUCCESS | Type: REG_DWORD, Length: 4, Data: 2",
     "key_found_on_page": true,
     "notes": "The clean baseline first showed the Defender Spynet policy branch as absent and the non-policy live store reading SpyNetReporting = 2. After the policy write, SecurityHealthService.exe read the same value directly from the policy path."

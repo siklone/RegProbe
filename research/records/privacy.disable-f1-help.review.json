@@ -13,12 +13,12 @@
     "casual_explanation": "Pressing F1 in some old Windows contexts can open HelpPane. This tweak blocks that by renaming the executable.",
     "why_people_change_it": "People do this when they never use legacy F1 help and want to stop accidental help popups.",
     "tradeoffs_overview": "It is effective as a blunt tool, but it is more invasive than a policy or preference change.",
-    "professional_notes": "The provider renames research/evidence-files/missing/helppane-exe.md to HelpPane.exe.disabled. That is tracked as an observed implementation detail rather than an official Microsoft management surface.",
+    "professional_notes": "The provider renames evidence/files/missing/helppane-exe.md to HelpPane.exe.disabled. That is tracked as an observed implementation detail rather than an official Microsoft management surface.",
     "targets": [
       {
         "target_id": "helppane-binary",
         "location_kind": "file",
-        "path": "research/evidence-files/missing/helppane-exe.md",
+        "path": "evidence/files/missing/helppane-exe.md",
         "value_name": "RenameState",
         "value_type": "FILE_RENAME_STATE",
         "allowed_values": [
@@ -51,7 +51,7 @@
     "writes": [
       {
         "target_id": "helppane-binary",
-        "path": "research/evidence-files/missing/helppane-exe.md",
+        "path": "evidence/files/missing/helppane-exe.md",
         "value_name": "RenameState",
         "value_type": "FILE_RENAME_STATE",
         "state_kind": "value",
@@ -140,7 +140,7 @@
       "kind": "repo-code",
       "title": "Current privacy provider file rename",
       "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-      "summary": "The provider renames research/evidence-files/missing/helppane-exe.md to HelpPane.exe.disabled.",
+      "summary": "The provider renames evidence/files/missing/helppane-exe.md to HelpPane.exe.disabled.",
       "supports": [
         "path",
         "value",
@@ -166,6 +166,6 @@
     "source_url": "research/_source-mirrors/win-config/privacy/desc.md",
     "exact_quote_or_path": "Works via renaming HelpPane.exe (Help and Support Windows desktop application) which was the help component in W8/W8.1. Note that HelpPane still handles the F1 shortcut.",
     "key_found_on_page": true,
-    "notes": "Backfilled from nohuto mirror evidence. The same HelpPane rename behavior is described upstream in the mirror, and the current app implementation still renames research/evidence-files/missing/helppane-exe.md to HelpPane.exe.disabled. This remains a deprecated audit trail rather than an official policy surface."
+    "notes": "Backfilled from nohuto mirror evidence. The same HelpPane rename behavior is described upstream in the mirror, and the current app implementation still renames evidence/files/missing/helppane-exe.md to HelpPane.exe.disabled. This remains a deprecated audit trail rather than an official policy surface."
   }
 }

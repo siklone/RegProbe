@@ -176,7 +176,7 @@
       "evidence_id": "local-news-and-interests-admx",
       "kind": "official-doc",
       "title": "Local Microsoft NewsAndInterests.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/NewsAndInterests.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/NewsAndInterests.admx",
       "summary": "The local ADMX file maps the machine policy to HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -190,7 +190,7 @@
       "evidence_id": "local-news-and-interests-adml",
       "kind": "official-doc",
       "title": "Local Microsoft NewsAndInterests.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/NewsAndInterests.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/NewsAndInterests.adml",
       "summary": "The local ADML help text says Widgets are on by default unless changed in settings, and enabling the block removes the board and taskbar entry point.",
       "supports": [
         "behavior",
@@ -237,7 +237,7 @@
   },
   "last_reviewed_utc": "2026-03-12T21:14:43.5557490+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/NewsAndInterests.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/NewsAndInterests.admx",
     "exact_quote_or_path": "<policy name=\"AllowNewsAndInterests\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Dsh\" valueName=\"AllowNewsAndInterests\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; NewsAndInterests.adml: This policy specifies whether the widgets feature is allowed on the device. Widgets will be turned on by default unless you change this in your settings.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact machine-policy key, value name, and 1/0 mapping; local ADML confirms this is the Widgets allow-form policy and documents its default behavior."

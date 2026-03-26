@@ -178,7 +178,7 @@
       "evidence_id": "local-errorreporting-admx",
       "kind": "official-doc",
       "title": "Local Microsoft ErrorReporting.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/ErrorReporting.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/ErrorReporting.admx",
       "summary": "The local ADMX file maps the machine policy to SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -192,7 +192,7 @@
       "evidence_id": "local-errorreporting-adml",
       "kind": "official-doc",
       "title": "Local Microsoft ErrorReporting.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/ErrorReporting.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/ErrorReporting.adml",
       "summary": "The local ADML help text says enabling the policy stops problem information from being sent and removes solution information, while disabling or not configuring it defers to broader policy precedence.",
       "supports": [
         "behavior",
@@ -205,7 +205,7 @@
       "evidence_id": "local-icm-adml",
       "kind": "official-doc",
       "title": "Local Microsoft ICM.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/ICM.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml",
       "summary": "The local ICM help text documents the broader 'Turn off Windows Error Reporting' policy and confirms that it overrides Control Panel settings.",
       "supports": [
         "behavior",

@@ -155,7 +155,7 @@
       "evidence_id": "ms-ncsi-icm-admx",
       "kind": "official-doc",
       "title": "Microsoft administrative template for NCSI active probing",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx",
       "summary": "Microsoft documents NoActiveProbe under HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator with enabled value 1 and disabled value 0.",
       "supports": [
         "path",
@@ -168,7 +168,7 @@
       "evidence_id": "ms-ncsi-icm-adml",
       "kind": "official-doc",
       "title": "Microsoft help text for NCSI active probing policy",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/ICM.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml",
       "summary": "Microsoft explains that enabling the policy turns off active NCSI tests and warns that other components may become less able to determine internet access.",
       "supports": [
         "behavior",
@@ -216,7 +216,7 @@
   },
   "last_reviewed_utc": "2026-03-13T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/ICM.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx",
     "exact_quote_or_path": "<policy name=\"NoActiveProbe\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\" valueName=\"NoActiveProbe\">; ICM.adml: This policy setting turns off the active tests performed by the Windows Network Connectivity Status Indicator (NCSI) to determine whether your computer is connected to the Internet or to a more limited network.",
     "key_found_on_page": true,
     "notes": "Local official ADMX and ADML files document the exact NoActiveProbe policy surface. The app now matches that documented machine-policy surface exactly. The local nohuto mirror independently corroborates the same policy name, value name, and registry path."

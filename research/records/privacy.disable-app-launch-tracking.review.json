@@ -203,7 +203,7 @@
       "evidence_id": "procmon-start-track-progs-settings",
       "kind": "procmon-trace",
       "title": "VM Procmon trace - Start_TrackProgs settings page reads",
-      "location": "research/evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md and research/evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md",
+      "location": "evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md and evidence/files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md",
       "summary": "Win25H2Clean Procmon capture around ms-settings:privacy-general while toggling HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs between 1 and 0. The probe recorded a reversible 1-state run and a matching 0-state run, with the setting restored after each capture.",
       "supports": [
         "path",

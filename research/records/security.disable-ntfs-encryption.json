@@ -125,7 +125,7 @@
       "evidence_id": "local-filesys-admx",
       "kind": "official-doc",
       "title": "Local Microsoft FileSys.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx",
       "summary": "The local ADMX file maps the NTFS encryption policy to HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -139,7 +139,7 @@
       "evidence_id": "local-filesys-adml",
       "kind": "official-doc",
       "title": "Local Microsoft FileSys.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml",
       "summary": "The local ADML help text says enabling the setting prevents access to and creation of encrypted files and requires a reboot to take effect.",
       "supports": [
         "behavior",
@@ -173,8 +173,8 @@
   },
   "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx",
-    "exact_quote_or_path": "research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx (NtfsDisableEncryption enabledValue=1, disabledValue=0); research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml (enabling the setting prevents access to and creation of encrypted files and requires a reboot to take effect).",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx",
+    "exact_quote_or_path": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx (NtfsDisableEncryption enabledValue=1, disabledValue=0); evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml (enabling the setting prevents access to and creation of encrypted files and requires a reboot to take effect).",
     "key_found_on_page": true,
     "notes": "Validated against the local Microsoft policy files for NTFS encryption."
   }

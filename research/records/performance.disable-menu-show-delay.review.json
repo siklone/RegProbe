@@ -132,7 +132,7 @@
       "evidence_id": "runtime-spi-menushowdelay-diff",
       "kind": "runtime-diff",
       "title": "Local SPI_SETMENUSHOWDELAY runtime diff - MenuShowDelay persistence",
-      "location": "research/evidence-files/missing/menushowdelay-spi-diff-20260314-json.md",
+      "location": "evidence/files/missing/menushowdelay-spi-diff-20260314-json.md",
       "summary": "A local runtime diff called SPI_SETMENUSHOWDELAY with 400 and 0, then read both SPI_GETMENUSHOWDELAY and HKCU\\Control Panel\\Desktop\\MenuShowDelay after each change. Setting 400 produced API 400 with registry value \"400\". Setting 0 produced API 0 with registry value \"0\". The original local state was restored at the end.",
       "supports": [
         "path",
@@ -168,7 +168,7 @@
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/missing/menushowdelay-spi-diff-20260314-json.md",
+    "source_url": "evidence/files/missing/menushowdelay-spi-diff-20260314-json.md",
     "exact_quote_or_path": "after_slow: API 400, registry MenuShowDelay = \"400\". after_fast: API 0, registry MenuShowDelay = \"0\". restored: API 0, registry MenuShowDelay = \"0\".",
     "key_found_on_page": true,
     "notes": "The local runtime diff used the official SystemParametersInfo menu-delay API to change the feature and then read the persisted registry backend. The machine ended in its original state."

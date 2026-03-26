@@ -156,7 +156,7 @@
       "evidence_id": "local-search-admx",
       "kind": "official-doc",
       "title": "Local Microsoft Search.admx mapping",
-      "location": "research/evidence-files/missing/search-admx.md",
+      "location": "evidence/files/missing/search-admx.md",
       "summary": "The local ADMX file defines the DoNotUseWebResults policy under the Windows Search key, but maps it to the registry value name ConnectedSearchUseWeb with enabledValue 0 and disabledValue 1.",
       "supports": [
         "path",
@@ -170,7 +170,7 @@
       "evidence_id": "local-search-adml",
       "kind": "official-doc",
       "title": "Local Microsoft Search.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/Search.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/Search.adml",
       "summary": "The local ADML help text says enabling the policy prevents Search from querying the web and displaying web results, while not configuring it leaves the choice to the user.",
       "supports": [
         "behavior",
@@ -205,7 +205,7 @@
   },
   "last_reviewed_utc": "2026-03-13T00:00:00Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/missing/search-admx.md",
+    "source_url": "evidence/files/missing/search-admx.md",
     "exact_quote_or_path": "<policy name=\"DoNotUseWebResults\" class=\"Machine\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" valueName=\"ConnectedSearchUseWeb\">; Search.adml: If you enable this policy setting, queries won't be performed on the web and web results won't be displayed when a user performs a query in Search.",
     "key_found_on_page": true,
     "notes": "Local official ADMX and ADML files document that the policy name is DoNotUseWebResults but the actual registry value name is ConnectedSearchUseWeb. The app now writes the documented value name and disable state exactly."

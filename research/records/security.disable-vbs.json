@@ -326,7 +326,7 @@
       "evidence_id": "local-deviceguard-admx",
       "kind": "official-doc",
       "title": "Local Microsoft DeviceGuard.admx mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx",
       "summary": "The local ADMX file maps EnableVirtualizationBasedSecurity, HypervisorEnforcedCodeIntegrity, and LsaCfgFlags under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard and documents the numeric values the app uses.",
       "supports": [
         "path",
@@ -340,7 +340,7 @@
       "evidence_id": "local-deviceguard-adml",
       "kind": "official-doc",
       "title": "Local Microsoft DeviceGuard.adml help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml",
       "summary": "The local ADML help text explains the disabled, enabled with UEFI lock, enabled without lock, and not configured behavior for HVCI and Credential Guard, including caveats about clearing persisted UEFI state.",
       "supports": [
         "behavior",
@@ -379,7 +379,7 @@
   },
   "last_reviewed_utc": "2026-03-12T07:23:19Z",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx",
     "exact_quote_or_path": "<policy name=\"VirtualizationBasedSecurity\" key=\"SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\DeviceGuard\" valueName=\"EnableVirtualizationBasedSecurity\"><enabledValue><decimal value=\"1\" /></enabledValue><disabledValue><decimal value=\"0\" /></disabledValue>",
     "key_found_on_page": true,
     "notes": "Official Device Guard policy mapping. The record is deprecated, but the proof is now machine-checkable against the local ADMX."

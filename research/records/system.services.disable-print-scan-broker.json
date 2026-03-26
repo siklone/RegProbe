@@ -13,7 +13,7 @@
     "casual_explanation": "This service supports secure privileged operations needed by the lower-privilege print spooler components. Disabling it removes that support path.",
     "why_people_change_it": "People disable it on systems that do not print or scan and where printing-related broker services are being stripped down.",
     "tradeoffs_overview": "Disabling it can trim unused printing infrastructure, but print and scan operations relying on this broker may stop working correctly.",
-    "professional_notes": "A local SCM snapshot confirms the exact PrintScanBrokerService service identity on the review host: display name `PrintScanBrokerService`, binary path `research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md -k PrintScanBrokerService -p`, and current start type `3 DEMAND_START`. The app uses a service start-mode tweak that disables `PrintScanBrokerService`. Earlier research summarized the Microsoft Windows IoT Enterprise services page as documenting this service with a Manual default and `OK to disable`, but this review pass did not re-capture a machine-checkable exact row from the live page. Under the service-proof methodology, local SCM identity proof is strong but not enough by itself to restore validated status.",
+    "professional_notes": "A local SCM snapshot confirms the exact PrintScanBrokerService service identity on the review host: display name `PrintScanBrokerService`, binary path `evidence/files/external/c/WINDOWS/system32/svchost.exe.md -k PrintScanBrokerService -p`, and current start type `3 DEMAND_START`. The app uses a service start-mode tweak that disables `PrintScanBrokerService`. Earlier research summarized the Microsoft Windows IoT Enterprise services page as documenting this service with a Manual default and `OK to disable`, but this review pass did not re-capture a machine-checkable exact row from the live page. Under the service-proof methodology, local SCM identity proof is strong but not enough by itself to restore validated status.",
     "targets": [
       {
         "target_id": "printscanbrokerservice-start-mode",
@@ -195,7 +195,7 @@
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "validation_proof": {
     "source_url": "research/notes/service-snapshots/printscanbrokerservice-sc-qc-2026-03-14.txt",
-    "exact_quote_or_path": "SERVICE_NAME: PrintScanBrokerService | START_TYPE : 3 DEMAND_START | DISPLAY_NAME: PrintScanBrokerService | BINARY_PATH_NAME: research/evidence-files/external/c/WINDOWS/system32/svchost.exe.md -k PrintScanBrokerService -p",
+    "exact_quote_or_path": "SERVICE_NAME: PrintScanBrokerService | START_TYPE : 3 DEMAND_START | DISPLAY_NAME: PrintScanBrokerService | BINARY_PATH_NAME: evidence/files/external/c/WINDOWS/system32/svchost.exe.md -k PrintScanBrokerService -p",
     "key_found_on_page": true,
     "notes": "The local SCM snapshot proves the exact service identity and control surface on the review host. This does not restore validated status by itself because the Microsoft services page still needs an exact guidance row re-captured in a later pass."
   }

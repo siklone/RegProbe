@@ -6,7 +6,7 @@
   "record_status": "validated",
   "summary": "The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\HwSchMode = 2 to enable Hardware-Accelerated GPU Scheduling (HAGS). A guest-side reversible probe on Win25H2Clean confirmed the guest baseline is missing and that HwSchMode transitions through 2 and 1 before restoring to missing, so the record is now runtime-validated even though the Microsoft feature documentation captured here does not publish the raw registry contract.",
   "validation_proof": {
-    "source_url": "research/evidence-files/vm-tooling-staging/hags_toggle_out.txt",
+    "source_url": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
     "exact_quote_or_path": "hags_toggle_out.txt: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING.",
     "key_found_on_page": true,
     "notes": "Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. Normalized for the consolidated evidence report."
@@ -208,7 +208,7 @@
       "evidence_id": "runtime-hags-registry-diff",
       "kind": "runtime-diff",
       "title": "Guest reversible probe for HwSchMode",
-      "location": "research/evidence-files/vm-tooling-staging/hags_toggle_out.txt",
+      "location": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
       "summary": "Guest-side reversible probe on Win25H2Clean confirmed HwSchMode transitions through missing, 2, and 1, then restores to missing on this build.",
       "supports": [
         "path",

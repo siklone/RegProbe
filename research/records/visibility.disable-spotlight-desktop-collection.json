@@ -173,7 +173,7 @@
       "evidence_id": "local-cloud-content-admx",
       "kind": "official-doc",
       "title": "Local Microsoft CloudContent.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx",
       "summary": "The local ADMX file maps the user Group Policy to DisableSpotlightCollectionOnDesktop with enabledValue 1 and disabledValue 0 under the CloudContent policy key.",
       "supports": [
         "path",
@@ -222,7 +222,7 @@
   },
   "last_reviewed_utc": "2026-03-12T21:23:21.9705499+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx",
     "exact_quote_or_path": "<policy name=\"DisableSpotlightCollectionOnDesktop\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\CloudContent\" valueName=\"DisableSpotlightCollectionOnDesktop\">; CloudContent.adml: If you enable this policy, \"Spotlight collection\" will not be available as an option in Personalization settings.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the Spotlight collection desktop option from Personalization settings."

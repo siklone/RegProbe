@@ -164,7 +164,7 @@
       "evidence_id": "local-pca-admx",
       "kind": "official-doc",
       "title": "Local Microsoft pca.admx - DisablePcaUIPolicy",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/pca.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/pca.admx",
       "summary": "DisablePcaUIPolicy block: key=Software\\Policies\\Microsoft\\Windows\\AppCompat, valueName=DisablePcaUI, enabledValue=1 (detection active), disabledValue=0 (detection disabled). supportedOn Windows 8 or later. Explicit numeric direction - no context inference required.",
       "supports": [
         "path",
@@ -178,7 +178,7 @@
       "evidence_id": "local-pca-adml",
       "kind": "official-doc",
       "title": "Local Microsoft pca.adml - DisablePcaUIPolicy help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/pca.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/pca.adml",
       "summary": "Policy display name: 'Detect compatibility issues for applications and drivers'. Enabled: PCA detects issues. Disabled: PCA does not detect issues. Not configured: PCA detects issues. Additional note: if 'Turn off Program Compatibility Assistant' is enabled, this policy has no effect.",
       "supports": [
         "behavior",
@@ -229,7 +229,7 @@
     "DisablePCA still overrides this child policy when both are set."
   ],
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/pca.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/pca.admx",
     "exact_quote_or_path": "pca.admx: `<policy name=\"DisablePcaUIPolicy\" ... key=\"Software\\Policies\\Microsoft\\Windows\\AppCompat\" valueName=\"DisablePcaUI\">` with `<enabledValue><decimal value=\"1\" /></enabledValue>` and `<disabledValue><decimal value=\"0\" /></disabledValue>` and `supportedOn ref=\"windows:SUPPORTED_Windows8\"`; pca.adml: `If you enable this policy setting, the PCA is configured to detect failures...` and `If you disable this policy setting, the PCA does not detect compatibility issues for applications and drivers.`",
     "key_found_on_page": true,
     "notes": "Local official pca.admx and pca.adml files document the exact DisablePcaUI policy surface and semantics. The Microsoft Learn ADMX_pca CSP page confirms the same device-scoped policy mapping. Added nohuto mirror corroboration via nohuto-pca-diagnostics-admx."

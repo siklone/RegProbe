@@ -173,7 +173,7 @@
       "evidence_id": "local-cloud-content-admx-consumer",
       "kind": "official-doc",
       "title": "Local Microsoft CloudContent.admx mapping",
-      "location": "research/evidence-files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx",
+      "location": "evidence/files/external/c/WINDOWS/PolicyDefinitions/CloudContent.admx",
       "summary": "The local ADMX file shows DisableConsumerAccountStateContent with enabledValue 1 and disabledValue 0 under the CloudContent policy key.",
       "supports": [
         "path",
@@ -222,7 +222,7 @@
   },
   "last_reviewed_utc": "2026-03-12T12:42:34.7172784+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/CloudContent.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx",
     "exact_quote_or_path": "<policy name=\"DisableConsumerAccountStateContent\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\CloudContent\" valueName=\"DisableConsumerAccountStateContent\"> <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",
     "key_found_on_page": true,
     "notes": "The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the 1/0 mapping."

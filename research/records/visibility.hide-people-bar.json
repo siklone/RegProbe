@@ -211,7 +211,7 @@
   },
   "last_reviewed_utc": "2026-03-12T21:28:41.5872918+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/StartMenu.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx",
     "exact_quote_or_path": "<policy name=\"HidePeopleBar\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"HidePeopleBar\">; StartMenu.adml: This policy allows you to remove the People Bar from the taskbar and disables the My People experience.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience. Added nohuto mirror corroboration via nohuto-hidepeoplebar-admx."

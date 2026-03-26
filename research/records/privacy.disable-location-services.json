@@ -158,7 +158,7 @@
       "evidence_id": "local-sensors-admx-location",
       "kind": "official-doc",
       "title": "Local Microsoft Sensors.admx DisableLocation mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/Sensors.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx",
       "summary": "The local ADMX file defines both user and machine DisableLocation policies under Software\\Policies\\Microsoft\\Windows\\LocationAndSensors with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -172,7 +172,7 @@
       "evidence_id": "local-sensors-adml-location",
       "kind": "official-doc",
       "title": "Local Microsoft Sensors.adml DisableLocation help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/Sensors.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/Sensors.adml",
       "summary": "The local ADML help text says enabling the policy turns off the location feature and prevents all programs on the computer from using location information from that feature.",
       "supports": [
         "behavior",
@@ -207,7 +207,7 @@
   },
   "last_reviewed_utc": "2026-03-12T21:00:59.6788102+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/Sensors.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx",
     "exact_quote_or_path": "<policy name=\"DisableLocation_2\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\" valueName=\"DisableLocation\">; Sensors.adml: If you enable this policy setting, the location feature is turned off, and all programs on this computer are prevented from using location information from the location feature.",
     "key_found_on_page": true,
     "notes": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy turns off the Windows location feature for the computer."

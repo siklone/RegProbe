@@ -159,7 +159,7 @@
       "evidence_id": "local-userprofiles-admx-advertising",
       "kind": "official-doc",
       "title": "Local Microsoft UserProfiles.admx DisableAdvertisingId mapping",
-      "location": "research/evidence-files/external/c/Windows/PolicyDefinitions/UserProfiles.admx",
+      "location": "evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx",
       "summary": "The local ADMX file maps the advertising-ID policy to HKLM\\Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\\DisabledByGroupPolicy with enabledValue 1 and disabledValue 0.",
       "supports": [
         "path",
@@ -173,7 +173,7 @@
       "evidence_id": "local-userprofiles-adml-advertising",
       "kind": "official-doc",
       "title": "Local Microsoft UserProfiles.adml DisableAdvertisingId help text",
-      "location": "research/evidence-files/external/c/PolicyDefinitions/en-US/UserProfiles.adml",
+      "location": "evidence/files/external/c/PolicyDefinitions/en-US/UserProfiles.adml",
       "summary": "The local ADML help text says enabling the policy turns off the advertising ID, while disabling or not configuring it leaves users in control of whether apps can use the advertising ID.",
       "supports": [
         "behavior",
@@ -209,7 +209,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-13T17:50:00+03:00",
   "validation_proof": {
-    "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/UserProfiles.admx",
+    "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/UserProfiles.admx",
     "exact_quote_or_path": "<policy name=\"DisableAdvertisingId\" class=\"Machine\" key=\"Software\\Policies\\Microsoft\\Windows\\AdvertisingInfo\" valueName=\"DisabledByGroupPolicy\">; enabledValue = 1; disabledValue = 0; UserProfiles.adml: If you enable this policy setting, the advertising ID is turned off. Apps can't use the ID for experiences across apps.",
     "key_found_on_page": true,
     "notes": "Local official ADMX and ADML files publish the exact machine-policy path, value name, and numeric semantics for disabling the advertising ID."
