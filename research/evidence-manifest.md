@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 234 |
-| Class B | 8 |
+| Class A | 235 |
+| Class B | 7 |
 | Class E | 54 |
 
 ## Record index
@@ -219,7 +219,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.hide-username-at-signin` | validated | Class A | `research/records/privacy.hide-username-at-signin.json` | `a74f63d829769b42dca170a8a1910fff2a16a4e67a20637e0351c78ff89b03a6` | `0da4970a42504e36dd6c7f954a3618b0a3a2d23c620b98f193c0b06053c69e11` | 5 |
 | `privacy.limit-diagnostic-log-collection` | validated | Class A | `research/records/privacy.limit-diagnostic-log-collection.json` | `ca263086470b888a893addb4ca74e5c42e2eaf684338f4de47eb9542caeb0d7c` | `e38bc3a5c605b1c8bec3123f21851bba5ee3edabbafd82e3b97a281484dae962` | 4 |
 | `privacy.limit-dump-collection` | validated | Class A | `research/records/privacy.limit-dump-collection.json` | `0ffc5b5153859ccf20ba3eef6f09fb409effcf713cebd4dd45e6253d9dc77710` | `89c679f1f7093d5a0ed5bcb7d1f40d106e33e2e8f9a47bfeb63e6206c33abaf3` | 5 |
-| `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class B | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | `d0dd4716641e8870d2c75907d005fb6bf304dc7c308d75689a4d320eedd488d4` | `874fb5629d86b938d3ddb497d31b5a63922bb4c2340b795079eb1115049f9384` | 5 |
+| `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class A | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | `a0217f8aae227ecf493baeee303ab3609db74d19064b1370b8395d4f15d1b787` | `f08ad93dc645512f95add295866b516324c27cbbf35e78a08255a965e4f4bd04` | 5 |
 | `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | `7854b14828dd2e0445e85b6aa4f9bda47e9fe9573e442303b64ed554fe6e607d` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | `04f22c8b6ecef7cd87dcafe09a77d692c27519a139801b740286938b35e52c2e` | `d4a068d963a7e434538276870e799b23c54e0009447cb12f3de375bcbd506211` | 4 |
 | `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | `8374e8dd9861f1560bd06dcb771c148ada060215a84df63ef0b8e7fda1910bcc` | `925541f217a1d4c60a7246351a333f64066baacbfd67704c40048e23d0014171` | 7 |
@@ -5980,12 +5980,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `privacy.set-diagnostic-data-to-minimum-supported-level`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json`
-- Source SHA256: `d0dd4716641e8870d2c75907d005fb6bf304dc7c308d75689a4d320eedd488d4`
-- Proof SHA256: `874fb5629d86b938d3ddb497d31b5a63922bb4c2340b795079eb1115049f9384`
+- Source SHA256: `a0217f8aae227ecf493baeee303ab3609db74d19064b1370b8395d4f15d1b787`
+- Proof SHA256: `f08ad93dc645512f95add295866b516324c27cbbf35e78a08255a965e4f4bd04`
 
-**Summary:** The app writes AllowTelemetry = 0 and now labels it as setting diagnostic data to the minimum supported level. Microsoft documents that value 0 is only supported on Enterprise, Education, and Server editions, so the renamed UX is edition-aware instead of implying a general-purpose off switch.
+**Summary:** The app writes AllowTelemetry = 0 on the documented policy path and now gates the tweak to Enterprise, Education, IoT Enterprise, and Server-class editions. Microsoft documents that value 0 is only supported on those edition families, so the app no longer offers it as a general-purpose one-click switch on unsupported SKUs.
 
 **Evidence**
 
@@ -6003,7 +6003,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry) |
 | Exact quote / path | [research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx) (AllowTelemetry values 0, 1, and 3); [research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml](evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml) (value 0 is only supported on Enterprise, Education, and Server editions). |
-| Notes | The app now uses the documented lowest supported diagnostic-data level wording instead of describing value 0 as a general disable switch. Added nohuto mirror corroboration via nohuto-allowtelemetry-admx. |
+| Notes | The app now uses the documented lowest supported diagnostic-data level wording and gates value 0 to the supported edition families instead of treating it as a universal off switch. Added nohuto mirror corroboration via nohuto-allowtelemetry-admx. |
 
 ---
 

@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 234 |
-| Class B | 8 |
+| Class A | 235 |
+| Class B | 7 |
 | Class E | 54 |
 
 ## Category coverage
@@ -17926,16 +17926,16 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Privacy` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json](records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** The app writes AllowTelemetry = 0 and now labels it as setting diagnostic data to the minimum supported level. Microsoft documents that value 0 is only supported on Enterprise, Education, and Server editions, so the renamed UX is edition-aware instead of implying a general-purpose off switch.
+**Summary:** The app writes AllowTelemetry = 0 on the documented policy path and now gates the tweak to Enterprise, Education, IoT Enterprise, and Server-class editions. Microsoft documents that value 0 is only supported on those edition families, so the app no longer offers it as a general-purpose one-click switch on unsupported SKUs.
 
 **Current implementation**
 
@@ -17943,7 +17943,7 @@ Nohuto lineage references:
 | --- | --- |
 | Status | `matches-research` |
 | Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| Notes | The current app writes AllowTelemetry = 0 and the provider label now reflects the documented lowest supported diagnostic-data level. The implementation matches the research and stays edition-aware through the documented policy semantics. |
+| Notes | The current app writes AllowTelemetry = 0 only when the local edition matches the documented supported families. Unsupported editions now return NotApplicable instead of applying the value. |
 
 Current writes
 
@@ -17955,10 +17955,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -18020,18 +18020,18 @@ Current writes
 | Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry) |
 | Exact quote / path | [research/evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx](evidence-files/external/c/Windows/PolicyDefinitions/DataCollection.admx) (AllowTelemetry values 0, 1, and 3); [research/evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml](evidence-files/external/c/PolicyDefinitions/en-US/DataCollection.adml) (value 0 is only supported on Enterprise, Education, and Server editions). |
 | Key found on page | `True` |
-| Notes | The app now uses the documented lowest supported diagnostic-data level wording instead of describing value 0 as a general disable switch. Added nohuto mirror corroboration via nohuto-allowtelemetry-admx. |
+| Notes | The app now uses the documented lowest supported diagnostic-data level wording and gates value 0 to the supported edition families instead of treating it as a universal off switch. Added nohuto mirror corroboration via nohuto-allowtelemetry-admx. |
 
 **Decision**
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
-| Restore default supported | `False` |
-| Restore previous supported | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The official mapping is clear and the provider label now matches the documented lowest supported diagnostic-data level. The tweak remains not recommended for general users because value 0 has edition-limited semantics. |
+| Why | The official mapping is clear, the app writes the documented policy path, and unsupported editions now return NotApplicable instead of applying value 0 blindly. This makes the tweak app-ready while still keeping it non-default because the supported meaning is edition-limited. |
 
 ---
 

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Win32;
 using OpenTraceProject.Core;
 using OpenTraceProject.Core.Registry;
@@ -14,12 +16,20 @@ namespace OpenTraceProject.App.Services.TweakProviders;
 
 public sealed class PrivacyTweakProvider : BaseTweakProvider
 {
+    private const string AllowTelemetryEditionMessage =
+        "This tweak only applies on Enterprise, Education, or Server-class editions where AllowTelemetry=0 is documented as supported.";
+    private static readonly RegistryValueReference WindowsEditionIdReference = new(
+        RegistryHive.LocalMachine,
+        RegistryView.Default,
+        @"SOFTWARE\Microsoft\Windows NT\CurrentVersion",
+        "EditionID");
+
     public override string CategoryName => "Privacy & Notifications";
 
     public override IEnumerable<ITweak> CreateTweaks(TweakExecutionPipeline pipeline, TweakContext context, bool isElevated)
     {
         // Data Collection & Telemetry
-        yield return CreateRegistryTweak(
+        var allowTelemetryTweak = CreateRegistryTweak(
             context,
             "privacy.disable-diagnostic-data",
             "Set Diagnostic Data to Minimum Supported Level",
@@ -30,6 +40,9 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             "AllowTelemetry",
             RegistryValueKind.DWord,
             0);
+        yield return new ConditionalTweak(
+            allowTelemetryTweak,
+            ct => EvaluateAllowTelemetryEditionAsync(context.LocalRegistry, ct));
 
         yield return CreateRegistryTweak(
             context,
@@ -1113,5 +1126,53 @@ public sealed class PrivacyTweakProvider : BaseTweakProvider
             "Domain Accounts",
             RegistryValueKind.DWord,
             0);
+    }
+
+    private static async Task<TweakResult?> EvaluateAllowTelemetryEditionAsync(
+        IRegistryAccessor registryAccessor,
+        CancellationToken ct)
+    {
+        var editionId = await ReadRegistryStringAsync(registryAccessor, WindowsEditionIdReference, ct);
+        if (string.IsNullOrWhiteSpace(editionId))
+        {
+            return new TweakResult(
+                TweakStatus.Failed,
+                "Unable to determine the Windows edition for the diagnostic data policy gate.",
+                DateTimeOffset.UtcNow);
+        }
+
+        if (SupportsAllowTelemetryMinimumLevel(editionId))
+        {
+            return null;
+        }
+
+        return new TweakResult(
+            TweakStatus.NotApplicable,
+            $"{AllowTelemetryEditionMessage} Current edition: {editionId.Trim()}.",
+            DateTimeOffset.UtcNow);
+    }
+
+    private static async Task<string?> ReadRegistryStringAsync(
+        IRegistryAccessor registryAccessor,
+        RegistryValueReference reference,
+        CancellationToken ct)
+    {
+        var result = await registryAccessor.ReadValueAsync(reference, ct);
+        if (!result.Exists || result.Value is null)
+        {
+            return null;
+        }
+
+        return result.Value.Kind is RegistryValueKind.String or RegistryValueKind.ExpandString
+            ? result.Value.StringValue
+            : result.Value.ToObject().ToString();
+    }
+
+    private static bool SupportsAllowTelemetryMinimumLevel(string editionId)
+    {
+        var normalized = editionId.Trim();
+        return normalized.Contains("Enterprise", StringComparison.OrdinalIgnoreCase)
+            || normalized.StartsWith("Education", StringComparison.OrdinalIgnoreCase)
+            || normalized.Contains("Server", StringComparison.OrdinalIgnoreCase);
     }
 }

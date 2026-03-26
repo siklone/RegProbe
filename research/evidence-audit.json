@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T11:46:53.251501Z",
+  "generated_utc": "2026-03-26T12:19:05.244085Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
-      "A": 234,
-      "B": 8
+      "A": 235,
+      "B": 7
     },
     "lane_counts": {
       "official-policy": 235,
@@ -13,8 +13,8 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 234,
-      "decision-gate": 8
+      "none": 235,
+      "decision-gate": 7
     }
   },
   "entries": [
@@ -3024,9 +3024,9 @@
     {
       "record_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
       "tweak_id": "privacy.disable-diagnostic-data",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": false,
       "ghidra": true,
@@ -3034,10 +3034,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json",
       "incident_ids": []
