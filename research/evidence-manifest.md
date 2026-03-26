@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 222 |
-| Class B | 20 |
+| Class A | 223 |
+| Class B | 19 |
 | Class E | 54 |
 
 ## Record index
@@ -284,7 +284,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-enable-long-paths` | validated | Class A | `research/records/system.ntfs-enable-long-paths.json` | `fb0724c6bdc84726279e8749e9f29e97ac0344ab762fcf5be1ff88d5cae284f3` | `7e2f73c18b12a8d8fe1ea9926e385145130001a68cf2effab839d604c705d645` | 4 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | `68b9682efdb74f02caf54ef4853cf0818afbc4d6eb6fd59994e892bb9bab31f7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | `5e265f012e9edd741dc2b9b40796707e7a1417701a7465a5063c8c3084602962` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
-| `system.priority-control` | validated | Class B | `research/records/system.priority-control.review.json` | `05d48e544834acc1dc148578ea26d932977b994a3b54c87853cd19b8d6890b69` | `83a4f957d4f513dfdb91d40ef8188cc08848cd2227da846cd41c77ce5fba3e4c` | 6 |
+| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | `bc4ec8a29daf615b17de5fb9665e60d5f9da339be243aa6929173f4e535542ee` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 7 |
 | `system.reliability-timestamp-enabled` | validated | Class B | `research/records/system.reliability-timestamp-enabled.review.json` | `679e6a7204f80ebd08ac7e03007fa1b516ee39b37eacc9bc6cbf7337dd50921d` | `21d322cd4c59adefae690948579f154fbc417a9bc4673757927b30d381146720` | 5 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
@@ -7872,12 +7872,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.priority-control`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/system.priority-control.review.json`
-- Source SHA256: `05d48e544834acc1dc148578ea26d932977b994a3b54c87853cd19b8d6890b69`
-- Proof SHA256: `83a4f957d4f513dfdb91d40ef8188cc08848cd2227da846cd41c77ce5fba3e4c`
+- Source SHA256: `bc4ec8a29daf615b17de5fb9665e60d5f9da339be243aa6929173f4e535542ee`
+- Proof SHA256: `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345`
 
-**Summary:** Win25H2Clean now has a full current-build evidence chain for Win32PrioritySeparation: live read/write code paths, reversible 2 -> 38 -> 2 VM proof, and bounded CPU/memory benchmark runs after real reboots.
+**Summary:** Win25H2Clean now has a full current-build evidence chain for Win32PrioritySeparation: current-build read/write code paths, reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, and bounded CPU/memory benchmark runs after real reboots.
 
 **Evidence**
 
@@ -7886,6 +7886,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-win32-operatingsystem-priority` | `official-doc` | Microsoft Learn: Win32_OperatingSystem class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) |
 | `repo-system-doc-priority` | `repo-doc` | Repo system research notes for Win32PrioritySeparation | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-prioritycontrol` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) |
+| `procmon-priority-control-wmi-read` | `procmon-trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-2.txt and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-2.hits.csv and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-38.txt and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-38.hits.csv |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [research/evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json](evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json) |
@@ -7894,9 +7895,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json](evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json) |
-| Exact quote / path | baseline observed_value=2; candidate observed_value=38; restore observed_value=2; baseline CPU duration=35.28s; candidate CPU duration=26.04s; baseline mem duration=25.05s; candidate mem duration=25.11s |
-| Notes | Guest-side manual VM pass on Win25H2Clean; see [research/evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json](evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json) and the paired CPU/memory artifact zips. Decompiled PriorityControl logic in [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) confirms the read/write path for Win32PrioritySeparation, and [Docs/system/system.md](../Docs/system/system.md) documents the AABBCC bitmask interpretation. |
+| Source | [research/notes/priority-control-procmon-validation-20260326.md](notes/priority-control-procmon-validation-20260326.md) |
+| Exact quote / path | prioritycontrol-state-2.txt: wmiprvse.exe RegQueryValue ... Win32PrioritySeparation Data: 2. prioritycontrol-state-38.txt: wmiprvse.exe RegQueryValue ... Win32PrioritySeparation Data: 38. priority-control-20260324-201011/summary.json: baseline=2, candidate=38, restore=2 with bounded CPU and memory runs. |
+| Notes | The 2026-03-26 Procmon pass adds direct wmiprvse.exe reads for both observed states. The earlier rebooted VM benchmark pass still covers baseline 2, candidate 38, restore 2, and bounded CPU/memory measurements on the same build. |
 
 ---
 

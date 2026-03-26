@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 222 |
-| Class B | 20 |
+| Class A | 223 |
+| Class B | 19 |
 | Class E | 54 |
 
 ## Category coverage
@@ -26275,16 +26275,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Scheduler / Priority Control` |
 | Scope | `device` |
 | Source file | [research/records/system.priority-control.review.json](records/system.priority-control.review.json) |
-| Apply allowed | `False` |
-| Confidence | `medium` |
+| Apply allowed | `True` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean now has a full current-build evidence chain for Win32PrioritySeparation: live read/write code paths, reversible 2 -> 38 -> 2 VM proof, and bounded CPU/memory benchmark runs after real reboots.
+**Summary:** Win25H2Clean now has a full current-build evidence chain for Win32PrioritySeparation: current-build read/write code paths, reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, and bounded CPU/memory benchmark runs after real reboots.
 
 **Current implementation**
 
@@ -26304,10 +26304,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -26350,8 +26350,8 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `value` | `2` | Observed Win25H2Clean baseline | The current 25H2 VM baseline read back Win32PrioritySeparation = 2 before the app profile was applied. | vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
-| `value` | `38` | Observed app profile | The current app treats 0x26 as its balanced foreground scheduling profile, and the Win25H2Clean VM confirmed that write under real rebooted runs. | app-system-registry-provider, repo-system-doc-priority, repo-system-decomp-prioritycontrol, vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
+| `value` | `2` | Observed Win25H2Clean baseline | The current 25H2 VM baseline read back Win32PrioritySeparation = 2 before the app profile was applied. | procmon-priority-control-wmi-read, vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
+| `value` | `38` | Observed app profile | The current app treats 0x26 as its balanced foreground scheduling profile, and the Win25H2Clean VM confirmed that write under real rebooted runs. | app-system-registry-provider, repo-system-doc-priority, repo-system-decomp-prioritycontrol, procmon-priority-control-wmi-read, vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
 
 **Windows defaults**
 
@@ -26364,7 +26364,7 @@ Windows Internals references:
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `observed-default` | Observed default | ['Research tracking only', 'Users documenting scheduler experiments'] | ['Published presets', 'General users'] | `False` |
-| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published validated presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published validated presets', 'General users'] | `True` |
 
 **Evidence**
 
@@ -26373,6 +26373,7 @@ Windows Internals references:
 | `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) | `high` | path, behavior, version-scope, risk |
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
 | `repo-system-decomp-prioritycontrol` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) | `high` | path, value, behavior |
+| `procmon-priority-control-wmi-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-2.txt and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-2.hits.csv and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-38.txt and [research/evidence-files/procmon/system.priority-control](evidence-files/procmon/system.priority-control)/prioritycontrol-state-38.hits.csv | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [research/evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json](evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json) | `medium` | value, behavior, rollback, performance |
@@ -26381,21 +26382,21 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json](evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json) |
-| Exact quote / path | baseline observed_value=2; candidate observed_value=38; restore observed_value=2; baseline CPU duration=35.28s; candidate CPU duration=26.04s; baseline mem duration=25.05s; candidate mem duration=25.11s |
+| Source | [research/notes/priority-control-procmon-validation-20260326.md](notes/priority-control-procmon-validation-20260326.md) |
+| Exact quote / path | prioritycontrol-state-2.txt: wmiprvse.exe RegQueryValue ... Win32PrioritySeparation Data: 2. prioritycontrol-state-38.txt: wmiprvse.exe RegQueryValue ... Win32PrioritySeparation Data: 38. priority-control-20260324-201011/summary.json: baseline=2, candidate=38, restore=2 with bounded CPU and memory runs. |
 | Key found on page | `True` |
-| Notes | Guest-side manual VM pass on Win25H2Clean; see [research/evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json](evidence-files/vm-tooling-staging/priority-control-20260324-201011/summary.json) and the paired CPU/memory artifact zips. Decompiled PriorityControl logic in [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) confirms the read/write path for Win32PrioritySeparation, and [Docs/system/system.md](../Docs/system/system.md) documents the AABBCC bitmask interpretation. |
+| Notes | The 2026-03-26 Procmon pass adds direct wmiprvse.exe reads for both observed states. The earlier rebooted VM benchmark pass still covers baseline 2, candidate 38, restore 2, and bounded CPU/memory measurements on the same build. |
 
 **Decision**
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible proof, the later rebooted VM benchmark pass, and the repo decompiled read/write path all line up on Win32PrioritySeparation. That is enough to track the observed baseline value 2 and the app profile 38 as current-build states, but not enough to treat 0x26 as a published Microsoft default. |
+| Why | Win25H2Clean reversible proof, the later rebooted VM benchmark pass, the wmiprvse.exe Procmon reads for both states, and the repo decompiled read/write path all line up on Win32PrioritySeparation. That is enough to treat the observed baseline value 2 and the app profile 38 as current-build app-ready states, even though 0x26 still is not a published Microsoft default. |
 
 ---
 
