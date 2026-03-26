@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T01:06:59.924281Z",
+  "generated_utc": "2026-03-26T04:27:24.838719Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
-      "A": 218,
-      "B": 24
+      "A": 219,
+      "B": 23
     },
     "lane_counts": {
       "official-policy": 235,
@@ -13,9 +13,9 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 218,
+      "none": 219,
       "decision-gate": 22,
-      "procmon": 2
+      "procmon": 1
     }
   },
   "entries": [
@@ -3739,21 +3739,21 @@
     {
       "record_id": "system.disable-jpeg-reduction",
       "tweak_id": "system.disable-jpeg-reduction",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
-      "procmon": false,
+      "procmon": true,
       "ghidra": true,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "procmon",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
+      "apply_allowed": true,
+      "confidence": "high",
       "source_file": "research/records/system.disable-jpeg-reduction.review.json",
       "incident_ids": []
     },

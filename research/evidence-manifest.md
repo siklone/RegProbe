@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 218 |
-| Class B | 24 |
+| Class A | 219 |
+| Class B | 23 |
 | Class E | 54 |
 
 ## Record index
@@ -253,7 +253,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | `9ff0033601340e63fe6cdd11cde81056b645efff98abd80fa814f921756639b9` | `87e3b4393968daf49c4ca90f5343ac7b10e8afab12f2f61194e0df491c22083a` | 4 |
 | `system.disable-fullscreen-optimizations` | validated | Class B | `research/records/system.disable-fullscreen-optimizations.review.json` | `496f1b3cbaab1c543392be257a2e0a183c01514e22ef4c3198bf00f6fb916ac2` | `6b4277b07e258d2967b2c20c36a52d601a48af1c9c37ab38542cdbcd78a6c717` | 4 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | `f8cd916eaac32ecb352ba3d860e62ede4fecda6043e902ef109a5baf9cb94f58` | `5024d7c51812e964c73012685ed6aa5d3e93bfc6bc83099344cf253656ef5901` | 4 |
-| `system.disable-jpeg-reduction` | validated | Class B | `research/records/system.disable-jpeg-reduction.review.json` | `2b8176f2e650625e3695cbf9f251562c9bbd8992f32e211535f112a6674be614` | `a34ec30a25b4571fa851cb1715e05f965030529c61cdc7c85c9dce9b2a7512db` | 4 |
+| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | `e5a2e659add3a8ec5e7fddfa68db8e6c0da07b5eb16a17dfd57476acf33eff0e` | `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b` | 6 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | `239b954f3ed57b91c6849b79112c012e1fc93b98e2997e268cc62e812b6410d0` | `965dda97da26f0f0572e6d5ecd4e7460377b59c02730d78345ee192f6ddbc803` | 3 |
 | `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | `cbdf1bfbf8eba80ddd3269fbb3e012281a6336af9220996cb14eb7c31a670904` | `261d9d5d4c180b8f9aea9c9c1d1ee43ccceaee48dc097c14db55c6dae6fe6135` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | `0c5846e343d2009c49d0ee95532155c1c2e54d82ae7aa3716401da0d1ac4867e` | `5e65afa708e18b12b9f829486b8856146c46e9db755aad34ad4e7da317d7cc57` | 3 |
@@ -6985,12 +6985,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.disable-jpeg-reduction`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/system.disable-jpeg-reduction.review.json`
-- Source SHA256: `2b8176f2e650625e3695cbf9f251562c9bbd8992f32e211535f112a6674be614`
-- Proof SHA256: `a34ec30a25b4571fa851cb1715e05f965030529c61cdc7c85c9dce9b2a7512db`
+- Source SHA256: `e5a2e659add3a8ec5e7fddfa68db8e6c0da07b5eb16a17dfd57476acf33eff0e`
+- Proof SHA256: `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b`
 
-**Summary:** The current build evidence for JPEGImportQuality now lines up across repo decomp notes and a Win25H2Clean reversible probe: the wallpaper transcode path falls back to 85 when the value is missing, clamps the user value into the 60..100 range, and the current app writes 100 before restoring the missing baseline cleanly.
+**Summary:** The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and a Win25H2Clean reversible probe: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the missing baseline restores cleanly, and the current app writes the same 100 state.
 
 **Evidence**
 
@@ -6998,6 +6998,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | Repo system research notes for wallpaper JPEG import quality | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-jpegtranscode` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) |
+| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [research/notes/jpeg-import-quality-validation-20260326.md](notes/jpeg-import-quality-validation-20260326.md) |
+| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [research/evidence-files/vm-tooling-staging/ghidra-probes/shell32-jpegimportquality-ghidra-20260326-070959/shell32-jpegimportquality-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/shell32-jpegimportquality-ghidra-20260326-070959/shell32-jpegimportquality-ghidra.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 
@@ -7005,9 +7007,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| Exact quote / path | HKCU/Control Panel/Desktop/JPEGImportQuality: before=__MISSING__, after_apply=100, after_restore=__MISSING__ |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) The repo decomp path in [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) also shows the missing-value fallback of 85 and the 60..100 clamp. |
+| Source | [research/notes/jpeg-import-quality-validation-20260326.md](notes/jpeg-import-quality-validation-20260326.md) |
+| Exact quote / path | jpegimportquality-state-100.txt: Explorer.EXE RegQueryValue HKCU/Control Panel/Desktop/JPEGImportQuality Data: 100. shell32-jpegimportquality-ghidra.md: shell32.dll xref for JPEGImportQuality in FUN_1800bf050. |
+| Notes | The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof. |
 
 ---
 

@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 218 |
-| Class B | 24 |
+| Class A | 219 |
+| Class B | 23 |
 | Class E | 54 |
 
 ## Category coverage
@@ -22377,16 +22377,16 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Desktop Wallpaper Import Behavior` |
 | Scope | `user` |
 | Source file | [research/records/system.disable-jpeg-reduction.review.json](records/system.disable-jpeg-reduction.review.json) |
-| Apply allowed | `False` |
-| Confidence | `medium` |
+| Apply allowed | `True` |
+| Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** The current build evidence for JPEGImportQuality now lines up across repo decomp notes and a Win25H2Clean reversible probe: the wallpaper transcode path falls back to 85 when the value is missing, clamps the user value into the 60..100 range, and the current app writes 100 before restoring the missing baseline cleanly.
+**Summary:** The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and a Win25H2Clean reversible probe: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the missing baseline restores cleanly, and the current app writes the same 100 state.
 
 **Current implementation**
 
@@ -22406,10 +22406,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -22448,12 +22448,12 @@ Windows Internals references:
 | Path | `HKCU\Control Panel\Desktop` |
 | Value name | `JPEGImportQuality` |
 | Value type | `REG_DWORD` |
-| Notes | The repo decomp path also shows a 60..100 clamp range with a missing-value fallback of 85. |
+| Notes | The decomp path shows a 60..100 clamp range with a missing-value fallback of 85. Runtime Procmon proof was captured for the value 100 path. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | — | Observed fallback profile | When JPEGImportQuality is missing, the current repo decomp path falls back to 85 before encoding the wallpaper JPEG. | repo-system-doc-jpeg, repo-system-decomp-jpegtranscode, vm-batch-probe-20260320-disable-jpeg-reduction |
-| `value` | `100` | Observed app max-quality profile | The current app writes 100, which the repo decomp path accepts as the top of the 60..100 clamp range. | repo-system-doc-jpeg, repo-system-decomp-jpegtranscode, app-system-provider, vm-batch-probe-20260320-disable-jpeg-reduction |
+| `value` | `100` | Observed app max-quality profile | The current app writes 100, the shell32 transcode path accepts it as the top of the 60..100 clamp range, and Procmon captured Explorer.EXE reading JPEGImportQuality = 100 during a shell-driven wallpaper apply. | repo-system-doc-jpeg, repo-system-decomp-jpegtranscode, procmon-jpegimportquality-explorer-read, ghidra-shell32-jpegimportquality, app-system-provider, vm-batch-probe-20260320-disable-jpeg-reduction |
 
 **Windows defaults**
 
@@ -22465,8 +22465,8 @@ Windows Internals references:
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `observed-default` | Observed default | ['Research tracking only', 'Wallpaper quality comparisons'] | ['Published presets'] | `False` |
-| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published validated presets'] | `False` |
+| `observed-default` | Observed default | ['Research tracking only', 'Wallpaper quality comparisons'] | ['Users who want only Microsoft-published registry surfaces'] | `False` |
+| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published validated presets'] | `True` |
 
 **Evidence**
 
@@ -22474,6 +22474,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `repo-system-decomp-jpegtranscode` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) | `high` | path, value, behavior |
+| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [research/notes/jpeg-import-quality-validation-20260326.md](notes/jpeg-import-quality-validation-20260326.md) | `high` | path, value, behavior |
+| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [research/evidence-files/vm-tooling-staging/ghidra-probes/shell32-jpegimportquality-ghidra-20260326-070959/shell32-jpegimportquality-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/shell32-jpegimportquality-ghidra-20260326-070959/shell32-jpegimportquality-ghidra.md) | `high` | path, value, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 
@@ -22481,21 +22483,21 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| Exact quote / path | HKCU/Control Panel/Desktop/JPEGImportQuality: before=__MISSING__, after_apply=100, after_restore=__MISSING__ |
+| Source | [research/notes/jpeg-import-quality-validation-20260326.md](notes/jpeg-import-quality-validation-20260326.md) |
+| Exact quote / path | jpegimportquality-state-100.txt: Explorer.EXE RegQueryValue HKCU/Control Panel/Desktop/JPEGImportQuality Data: 100. shell32-jpegimportquality-ghidra.md: shell32.dll xref for JPEGImportQuality in FUN_1800bf050. |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) The repo decomp path in [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) also shows the missing-value fallback of 85 and the 60..100 clamp. |
+| Notes | The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof. |
 
 **Decision**
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The repo decomp path and the Win25H2Clean reversible probe both line up on JPEGImportQuality. That is enough to track the missing fallback path and the value 100 app profile as current observed states, but not enough to treat the shell surface as app-ready. |
+| Why | shell32.dll decompiled to the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 in a shell-driven Procmon pass on Win25H2Clean, the reversible VM probe confirmed missing -> 100 -> missing, and the current app writes the same value with a clean restore story. That is enough to treat the current value 100 profile as app-ready even though the setting is not published by Microsoft as a registry contract. |
 
 ---
 
