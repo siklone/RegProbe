@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T11:01:22.331001Z",
+  "generated_utc": "2026-03-26T11:14:41.062631Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
-      "A": 223,
-      "B": 19
+      "A": 227,
+      "B": 15
     },
     "lane_counts": {
       "official-policy": 235,
@@ -13,8 +13,8 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 223,
-      "decision-gate": 19
+      "none": 227,
+      "decision-gate": 15
     }
   },
   "entries": [
@@ -3276,9 +3276,9 @@
     {
       "record_id": "security.disable-system-restore",
       "tweak_id": "security.disable-system-restore",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": false,
       "ghidra": false,
@@ -3286,10 +3286,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/security.disable-system-restore.review.json",
       "incident_ids": []
@@ -3318,9 +3318,9 @@
     {
       "record_id": "security.disable-windows-update.policy",
       "tweak_id": "security.disable-windows-update.policy",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": false,
       "ghidra": false,
@@ -3328,10 +3328,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/security.disable-windows-update.policy.review.json",
       "incident_ids": []
@@ -3444,9 +3444,9 @@
     {
       "record_id": "security.powershell-unrestricted",
       "tweak_id": "security.powershell-unrestricted",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": false,
       "ghidra": false,
@@ -3454,10 +3454,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/security.powershell-unrestricted.review.json",
       "incident_ids": []
@@ -3507,9 +3507,9 @@
     {
       "record_id": "security.uac-never-notify",
       "tweak_id": "security.uac-never-notify",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": true,
       "ghidra": true,
@@ -3517,10 +3517,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/security.uac-never-notify.json",
       "incident_ids": []

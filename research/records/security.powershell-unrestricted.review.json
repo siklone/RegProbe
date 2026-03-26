@@ -249,16 +249,16 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The official PowerShell Group Policy surface is clear, and the app now writes both required policy values. The record remains non-publishable for general apply because Unrestricted materially weakens script-execution protections.",
+    "why": "The official PowerShell Group Policy surface is clear, the app writes both documented values, and the restore path is exact. This is app-ready evidence-wise, but it still stays non-default because Unrestricted materially weakens script-execution protections.",
     "blocking_issues": []
   },
   "open_questions": [],
-  "last_reviewed_utc": "2026-03-13T19:02:00+03:00",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\">; <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: `Turn on Script Execution` / `This policy setting lets you configure the script execution policy, controlling which scripts are allowed to run.`",

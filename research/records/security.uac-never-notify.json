@@ -346,15 +346,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft explicitly documents the UAC registry path, default values, and numeric meanings for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System, and the app writes that exact control surface. A Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values. This is still not a casual-safe profile, so the record remains non-default even though validation is complete.",
+    "why": "Microsoft explicitly documents the UAC registry path and numeric meanings for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop, and the app writes that exact control surface. The Win25H2Clean Procmon capture confirmed live reads on the same values, so this is app-ready evidence-wise even though it stays non-default for general users.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings",
     "exact_quote_or_path": "Registry path: HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. ConsentPromptBehaviorAdmin 0 = Elevate without prompting, 5 = Prompt for consent for non-Windows binaries (default). EnableLUA 0 = Disabled, 1 = Enabled (default). PromptOnSecureDesktop 0 = Disabled, 1 = Enabled (default).",

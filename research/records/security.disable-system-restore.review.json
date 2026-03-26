@@ -200,15 +200,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The official System Restore policy surface is clear and the app now writes that exact documented value. Apply remains blocked for general publishing because the tweak removes a built-in recovery option.",
+    "why": "The official System Restore policy surface is clear, the app writes that exact documented value, and the restore path is exact. This is app-ready evidence-wise, but it stays non-default because it removes a built-in recovery option.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T18:32:00+03:00",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/SystemRestore.admx",
     "exact_quote_or_path": "<policy name=\"SR_DisableSR\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\SystemRestore\" valueName=\"DisableSR\">; SystemRestore.adml: \"This policy setting allows you to turn off System Restore.\"",

@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 223 |
-| Class B | 19 |
+| Class A | 227 |
+| Class B | 15 |
 | Class E | 54 |
 
 ## Category coverage
@@ -19450,12 +19450,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `System Restore Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-system-restore.review.json](records/security.disable-system-restore.review.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -19479,10 +19479,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -19562,12 +19562,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The official System Restore policy surface is clear and the app now writes that exact documented value. Apply remains blocked for general publishing because the tweak removes a built-in recovery option. |
+| Why | The official System Restore policy surface is clear, the app writes that exact documented value, and the restore path is exact. This is app-ready evidence-wise, but it stays non-default because it removes a built-in recovery option. |
 
 ---
 
@@ -19719,12 +19719,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-windows-update.policy.review.json](records/security.disable-windows-update.policy.review.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -19749,10 +19749,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -19831,12 +19831,12 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The official policy controls are documented and the app now writes only the policy values in this child record. |
+| Why | The official policy controls are documented, the app writes the exact child policy values, and the restore path is exact. This is app-ready evidence-wise even though it stays non-default because it turns off core Windows Update behavior. |
 
 ---
 
@@ -20518,12 +20518,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.powershell-unrestricted.review.json](records/security.powershell-unrestricted.review.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -20548,10 +20548,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -20645,12 +20645,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The official PowerShell Group Policy surface is clear, and the app now writes both required policy values. The record remains non-publishable for general apply because Unrestricted materially weakens script-execution protections. |
+| Why | The official PowerShell Group Policy surface is clear, the app writes both documented values, and the restore path is exact. This is app-ready evidence-wise, but it still stays non-default because Unrestricted materially weakens script-execution protections. |
 
 ---
 
@@ -20943,12 +20943,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Security Setting` |
 | Scope | `device` |
 | Source file | [research/records/security.uac-never-notify.json](records/security.uac-never-notify.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -20974,10 +20974,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -21088,12 +21088,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft explicitly documents the UAC registry path, default values, and numeric meanings for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop under HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System, and the app writes that exact control surface. A Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values. This is still not a casual-safe profile, so the record remains non-default even though validation is complete. |
+| Why | Microsoft explicitly documents the UAC registry path and numeric meanings for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop, and the app writes that exact control surface. The Win25H2Clean Procmon capture confirmed live reads on the same values, so this is app-ready evidence-wise even though it stays non-default for general users. |
 
 ---
 

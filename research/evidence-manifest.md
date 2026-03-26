@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 223 |
-| Class B | 19 |
+| Class A | 227 |
+| Class B | 15 |
 | Class E | 54 |
 
 ## Record index
@@ -231,18 +231,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | `57b53e92ffc85e79164ab3ee47ec29baee693ad8d121ac8442687f48e30e5f22` | `6a7cb611bd2ed6274529a6d9fddc4d9869fad2dbc9566fd585cbafcc1bc58d09` | 3 |
 | `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | `176d2e3f81c5efba41cea92abf00c4decc76c3b726f6aa07ba76701315d4f6ff` | `b52d35b2f62e6fa3444fcbce71f2be155f69f92033a170832eaceac918b9a05d` | 4 |
 | `security.disable-system-mitigations` | validated | Class B | `research/records/security.disable-system-mitigations.review.json` | `910958aa8d784547df9eb413cd8f44a72305a1d96c78e7ad81b37b1a518915f7` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
-| `security.disable-system-restore` | validated | Class B | `research/records/security.disable-system-restore.review.json` | `dee56bbef45572c507b1277d57cf5d8dbb88d0e9a96f23ded4b2b72f9ae6a69f` | `1acc5faa89bf7fcf0a8aec840be259cb1d7e54c7ebcadf22938bea57da9b891a` | 3 |
+| `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | `455e9a5d4dc7d1e5fa1fae7e7b2b8cd809ae7e48c05353c7c243c5f8c7204f22` | `1acc5faa89bf7fcf0a8aec840be259cb1d7e54c7ebcadf22938bea57da9b891a` | 3 |
 | `security.disable-windows-firewall` | validated | Class B | `research/records/security.disable-windows-firewall.review.json` | `4590977091fcac1fa90efd3b491af4e6b1c0fadaa287f94e4cf6ab1623a12c95` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
-| `security.disable-windows-update.policy` | validated | Class B | `research/records/security.disable-windows-update.policy.review.json` | `934957743b8bb4fd7cad1b936ddf4bc1007f69e369ea2640c13f6e3c9380f209` | `4f53b0c7e30cc0466e386ac3257615c8ee3e7f8ce7de9009ad21fd604791f54b` | 4 |
+| `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | `6100712f6dcc813d46e9a43ba572a7a6ab272e06db26c8713aaf0ed76176d055` | `4f53b0c7e30cc0466e386ac3257615c8ee3e7f8ce7de9009ad21fd604791f54b` | 4 |
 | `security.disable-wu-driver-updates` | validated | Class A | `research/records/security.disable-wu-driver-updates.json` | `14fab97e41929cc4bc5b4cf59db0b541e35bcb8efeea51f3993ab4f851f330a0` | `e55a55852fd2758cca754dc81b9d45aabadcf46981d3567776b6961654153445` | 7 |
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | `64dc376ed4a64722f59acfc38b5a5afd521ba50289e906cdb5c2d27521a7c95b` | `fa03eefa6888f42ae0aece69eb56fe827f0b4ff374d239229346b7ab817a4667` | 5 |
 | `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | `cd6df69a13081886ccc98ba82fd7a49d27677638f2c51ad6a860b4712dad3c53` | `d7015501355ad169aa07fe245ebb1ca148fadf5da35598a3da951748fea813c7` | 3 |
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | `8a3ba266db8e75eb4106c2198b7ace9432b670b7d54852a14567d3585a805892` | `715a1e28f38954af6414a53ea2f759af420ba2ce06a30e5cb6c133636a79a77d` | 3 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `2473542e43f88fd995cc7d5008e5a411c445c3ee5ad0b874199981a660d1f6f6` | `e9c48186565702ee535cd4f3367e55cb2578a6d628a850bfce093a6c3bed0001` | 8 |
-| `security.powershell-unrestricted` | validated | Class B | `research/records/security.powershell-unrestricted.review.json` | `5cbc0d6bc316568adcfa4779b8df87c09760c7d517c4a88dca54ed9e92dde656` | `2c26a68091bbcc9aa57978a8c19af6e9e1a985b2c5d083045123c9f8e49ae53a` | 3 |
+| `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | `8465600e3429230eea615618be12a921f94a8541a60c8c8449c38a38cfb8d949` | `2c26a68091bbcc9aa57978a8c19af6e9e1a985b2c5d083045123c9f8e49ae53a` | 3 |
 | `security.threat-file-hash-logging` | validated | Class B | `research/records/security.threat-file-hash-logging.review.json` | `eed04bf7c5d88f3994831bd5f11b7fc7f1ad7f04245dec24eac25155aa5af294` | `0bfa1bfb7b8ebea20fb5aaef5ccd9a4b7c79dcb02e0647a2c4a83dbf7886ed76` | 16 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | `d29fcf1f83a623942587f349fad2e7cacbb124a22103b5b7f99fba74309c1b91` | `44752f8965aec2b7baa5dd37b9f915cce357ce588ffd3c7b626f7a915e95ace2` | 5 |
-| `security.uac-never-notify` | validated | Class B | `research/records/security.uac-never-notify.json` | `6c6b267df95ad393b91d2c8199430a9127e7cd5e617f8ba8deb131aadbc95a05` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
+| `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | `9969f1fa8a93b42c77c78a1fd31b7f313581972fcb94e67e00e7124bfc0065ec` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
 | `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | `da81a2e755ea8e548f47ce311e4f9bac89bec49cd2b7f05bcc641afd0d7c11cd` | `bab059a1ae7f373e71967dd1a49732b6a6ae52c003fa38684fd42fe40c947519` | 4 |
 | `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | `e54cdf74149765274efbf6e06ea6b80890422e67bc7d81075c36a84aa2b3ed37` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
 | `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | `7072c24bfb8388dd51b073011b546ac4ae6d065e0cea7b07ee2c1fecc8cc1ff9` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 2 |
@@ -6329,9 +6329,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `security.disable-system-restore`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/security.disable-system-restore.review.json`
-- Source SHA256: `dee56bbef45572c507b1277d57cf5d8dbb88d0e9a96f23ded4b2b72f9ae6a69f`
+- Source SHA256: `455e9a5d4dc7d1e5fa1fae7e7b2b8cd809ae7e48c05353c7c243c5f8c7204f22`
 - Proof SHA256: `1acc5faa89bf7fcf0a8aec840be259cb1d7e54c7ebcadf22938bea57da9b891a`
 
 **Summary:** Official System Restore policy control. The app now uses DisableSR under HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore, which is the documented machine policy for turning System Restore off.
@@ -6387,9 +6387,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `security.disable-windows-update.policy`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/security.disable-windows-update.policy.review.json`
-- Source SHA256: `934957743b8bb4fd7cad1b936ddf4bc1007f69e369ea2640c13f6e3c9380f209`
+- Source SHA256: `6100712f6dcc813d46e9a43ba572a7a6ab272e06db26c8713aaf0ed76176d055`
 - Proof SHA256: `4f53b0c7e30cc0466e386ac3257615c8ee3e7f8ce7de9009ad21fd604791f54b`
 
 **Summary:** Policy-backed Windows Update disable control. The app writes the documented DisableWindowsUpdateAccess and NoAutoUpdate policy values; the older pause-timestamp behavior remains in the deprecated parent audit trail.
@@ -6567,9 +6567,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `security.powershell-unrestricted`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/security.powershell-unrestricted.review.json`
-- Source SHA256: `5cbc0d6bc316568adcfa4779b8df87c09760c7d517c4a88dca54ed9e92dde656`
+- Source SHA256: `8465600e3429230eea615618be12a921f94a8541a60c8c8449c38a38cfb8d949`
 - Proof SHA256: `2c26a68091bbcc9aa57978a8c19af6e9e1a985b2c5d083045123c9f8e49ae53a`
 
 **Summary:** Sets the official Windows PowerShell Group Policy execution surface to allow all scripts by writing EnableScripts = 1 and ExecutionPolicy = Unrestricted under HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell. The app previously wrote only the legacy shell preference value under HKLM\\SOFTWARE\\Microsoft\\PowerShell\\1\\ShellIds\\Microsoft.PowerShell; it now writes the documented Group Policy path instead.
@@ -6666,9 +6666,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `security.uac-never-notify`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/security.uac-never-notify.json`
-- Source SHA256: `6c6b267df95ad393b91d2c8199430a9127e7cd5e617f8ba8deb131aadbc95a05`
+- Source SHA256: `9969f1fa8a93b42c77c78a1fd31b7f313581972fcb94e67e00e7124bfc0065ec`
 - Proof SHA256: `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b`
 
 **Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
