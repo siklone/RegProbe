@@ -1,43 +1,59 @@
-{
-  "schema_version": "1.0",
-  "generated_utc": "2026-03-25T22:30:00Z",
-  "summary": {
-    "total_incidents": 2,
-    "shell_recovered": 2,
-    "needed_snapshot_revert": 1
-  },
-  "incidents": [
-    {
-      "incident_id": "20260325-shortcut-arrow-shell-drop",
-      "record_id": "system.disable-shortcut-arrow",
-      "tweak_id": "system.disable-shortcut-arrow",
-      "test_id": "shortcut-arrow-noarrow-probe",
-      "family": "Explorer shell",
-      "snapshot_name": "not-recorded",
-      "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons",
-      "value_name": "29",
-      "value_state": "override probe",
-      "symptom": "Explorer restart during the shortcut-arrow probe caused the desktop to disappear briefly until the shell came back.",
-      "shell_recovered": true,
-      "needed_snapshot_revert": false,
-      "recorded_utc": "2026-03-25T15:30:00Z",
-      "notes": "Later guest process checks showed explorer.exe, sihost.exe, and ShellHost.exe running again. This incident should keep future shell-touching probes snapshot-first and shell-checked."
-    },
-    {
-      "incident_id": "20260326000000-vm-display-black-screen",
-      "record_id": "vm.display-black-screen",
-      "tweak_id": "vm.display-black-screen",
-      "test_id": "display-black-screen-20260326",
-      "family": "graphics",
-      "snapshot_name": "baseline-20260325-shell-stable",
-      "registry_path": "",
-      "value_name": "",
-      "value_state": "",
-      "symptom": "Desktop stayed black while Task Manager, explorer, dwm, sihost, ShellHost, and ctfmon were present.",
-      "shell_recovered": true,
-      "needed_snapshot_revert": true,
-      "recorded_utc": "2026-03-25T22:30:00Z",
-      "notes": "Recovered by closing Workstation, reverting to baseline-20260325-shell-stable, and reopening the VM. Host capture showed the guest desktop alive again."
-    }
-  ]
+﻿{
+    "schema_version":  "1.0",
+    "generated_utc":  "2026-03-26T21:46:38.6571564Z",
+    "summary":  {
+                    "total_incidents":  3,
+                    "shell_recovered":  3,
+                    "needed_snapshot_revert":  2
+                },
+    "incidents":  [
+                      {
+                          "incident_id":  "20260325-shortcut-arrow-shell-drop",
+                          "record_id":  "system.disable-shortcut-arrow",
+                          "tweak_id":  "system.disable-shortcut-arrow",
+                          "test_id":  "shortcut-arrow-noarrow-probe",
+                          "family":  "Explorer shell",
+                          "snapshot_name":  "not-recorded",
+                          "registry_path":  "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons",
+                          "value_name":  "29",
+                          "value_state":  "override probe",
+                          "symptom":  "Explorer restart during the shortcut-arrow probe caused the desktop to disappear briefly until the shell came back.",
+                          "shell_recovered":  true,
+                          "needed_snapshot_revert":  false,
+                          "recorded_utc":  "2026-03-25T15:30:00Z",
+                          "notes":  "Later guest process checks showed explorer.exe, sihost.exe, and ShellHost.exe running again. This incident should keep future shell-touching probes snapshot-first and shell-checked."
+                      },
+                      {
+                          "incident_id":  "20260326000000-vm-display-black-screen",
+                          "record_id":  "vm.display-black-screen",
+                          "tweak_id":  "vm.display-black-screen",
+                          "test_id":  "display-black-screen-20260326",
+                          "family":  "graphics",
+                          "snapshot_name":  "baseline-20260325-shell-stable",
+                          "registry_path":  "",
+                          "value_name":  "",
+                          "value_state":  "",
+                          "symptom":  "Desktop stayed black while Task Manager, explorer, dwm, sihost, ShellHost, and ctfmon were present.",
+                          "shell_recovered":  true,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-25T22:30:00Z",
+                          "notes":  "Recovered by closing Workstation, reverting to baseline-20260325-shell-stable, and reopening the VM. Host capture showed the guest desktop alive again."
+                      },
+                      {
+                          "incident_id":  "20260327004638-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-states-20260327-002948",
+                          "family":  "power-benchmark",
+                          "snapshot_name":  "baseline-20260325-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "baseline-reboot",
+                          "symptom":  "Explorer did not return after reboot during CPU idle states benchmark lane; guest later dropped to not-running.",
+                          "shell_recovered":  true,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-26T21:46:38.6082368Z",
+                          "notes":  "Recovered by reverting to baseline-20260325-shell-stable and starting the VM again. Partial benchmark folder only contains setup scripts because the run failed before CPU or memory workloads started."
+                      }
+                  ]
 }

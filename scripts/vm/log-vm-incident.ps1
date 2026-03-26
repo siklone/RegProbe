@@ -33,7 +33,7 @@ if (-not (Test-Path $incidentDirectory)) {
 }
 
 if (Test-Path $IncidentPath) {
-    $payload = Get-Content $IncidentPath -Raw | ConvertFrom-Json -Depth 10
+    $payload = Get-Content $IncidentPath -Raw | ConvertFrom-Json
 }
 else {
     $payload = [ordered]@{

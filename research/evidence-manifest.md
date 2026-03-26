@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 240 |
-| Class B | 2 |
+| Class A | 241 |
+| Class B | 1 |
 | Class E | 54 |
 
 ## Record index
@@ -145,7 +145,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | `6128b811623173d369438b3ef4efb32ab42425a2325114fac938f72fab218418` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | `9d38a05cd041c6277d42ee906031a56935c9dd551ac5467a3f072f1c0b423a03` | `b9d22b4223ac1b91392945589e59d5c9badd4dd11b62c686b8801a5db80e843b` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | `58405f55aaa3332d62d1fce7f0c881e7aa2038d37f71381b61abfcdfa7233bc2` | `9f3308d21bd277544f1cba2c59a776a2ee7cf4baa9630d1a20ec0742da11503c` | 4 |
-| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | `0b24999c8760ed3a76220d0fad6d167e6ea107b3230e1994da6ae666b4310b12` | `2e29091f34239daa7f037e90323e5c9ebe82cb560e97dc77e15855f84f329047` | 5 |
+| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | `cbf5cd5a64aebcc264725ee4e149f7d42cddc7d4f6c7c06e132de31b470cbea7` | `2e29091f34239daa7f037e90323e5c9ebe82cb560e97dc77e15855f84f329047` | 5 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | `94e0f7d7302ea1e110ee29df96e06e0ab388f94dd500d2e496a99738f130d97f` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 5 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | `539968582171cbbfde1aa6e02feda17d2fd3118641c615686e331d40bd36f91e` | `44e29d37bb9e8b44313f77307041293d030872438f451cb698ed815556190ae0` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | `01333f3c9ee8de118b4f9474544d7b740de620681a30a333da78b4f51a0065ef` | `17eabdbe9c396f9d546078ff13a0134f005fedfbc5a975cead773f5f6adb1747` | 3 |
@@ -240,7 +240,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | `8a3ba266db8e75eb4106c2198b7ace9432b670b7d54852a14567d3585a805892` | `715a1e28f38954af6414a53ea2f759af420ba2ce06a30e5cb6c133636a79a77d` | 3 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `2473542e43f88fd995cc7d5008e5a411c445c3ee5ad0b874199981a660d1f6f6` | `e9c48186565702ee535cd4f3367e55cb2578a6d628a850bfce093a6c3bed0001` | 8 |
 | `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | `8465600e3429230eea615618be12a921f94a8541a60c8c8449c38a38cfb8d949` | `2c26a68091bbcc9aa57978a8c19af6e9e1a985b2c5d083045123c9f8e49ae53a` | 3 |
-| `security.threat-file-hash-logging` | validated | Class B | `research/records/security.threat-file-hash-logging.review.json` | `f80f0ec5d437b2cf003c960a34ae9201c557a02f38486e7300a87aafe0a46c72` | `0bfa1bfb7b8ebea20fb5aaef5ccd9a4b7c79dcb02e0647a2c4a83dbf7886ed76` | 16 |
+| `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | `f80f0ec5d437b2cf003c960a34ae9201c557a02f38486e7300a87aafe0a46c72` | `43ad1360923af972c304b24898ab6ba6f38ffcefaf1a7217a177e09d40823c99` | 17 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | `d29fcf1f83a623942587f349fad2e7cacbb124a22103b5b7f99fba74309c1b91` | `44752f8965aec2b7baa5dd37b9f915cce357ce588ffd3c7b626f7a915e95ace2` | 5 |
 | `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | `9969f1fa8a93b42c77c78a1fd31b7f313581972fcb94e67e00e7124bfc0065ec` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
 | `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | `da81a2e755ea8e548f47ce311e4f9bac89bec49cd2b7f05bcc641afd0d7c11cd` | `bab059a1ae7f373e71967dd1a49732b6a6ae52c003fa38684fd42fe40c947519` | 4 |
@@ -3804,7 +3804,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/power.disable-cpu-idle-states.json`
-- Source SHA256: `0b24999c8760ed3a76220d0fad6d167e6ea107b3230e1994da6ae666b4310b12`
+- Source SHA256: `cbf5cd5a64aebcc264725ee4e149f7d42cddc7d4f6c7c06e132de31b470cbea7`
 - Proof SHA256: `2e29091f34239daa7f037e90323e5c9ebe82cb560e97dc77e15855f84f329047`
 
 **Summary:** Validated observed implementation only. This record now has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, plus a machine-checkable apply and restore pass for the app's current profile.
@@ -6595,17 +6595,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `security.threat-file-hash-logging`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/security.threat-file-hash-logging.review.json`
 - Source SHA256: `f80f0ec5d437b2cf003c960a34ae9201c557a02f38486e7300a87aafe0a46c72`
-- Proof SHA256: `0bfa1bfb7b8ebea20fb5aaef5ccd9a4b7c79dcb02e0647a2c4a83dbf7886ed76`
+- Proof SHA256: `43ad1360923af972c304b24898ab6ba6f38ffcefaf1a7217a177e09d40823c99`
 
-**Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. The live 25H2 engine still reads the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias directly, so the app now tracks those two live surfaces as a research-gated batch instead of exposing a one-click supported toggle.
+**Summary:** Microsoft Support publishes ThreatFileHashLogging = 1 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender as the Windows Defender Antivirus root policy for file-hash logging, and the Defender-on 25H2 VM shows MsMpEng.exe reading that root value directly. The current build still has extra live aliases and the PE follow-up still did not surface event 1120, but the app can now stay on the documented root path instead of shipping a research batch.
 
 **Evidence**
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
+| `ms-defender-file-hash-root-registry` | `official-doc` | Microsoft Support: March 2016 anti-malware platform update for Endpoint Protection clients | [https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa](https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa) |
 | `ms-defender-enable-file-hash-computation` | `official-doc` | Microsoft Learn: Create indicators for files | [https://learn.microsoft.com/en-us/defender-endpoint/indicator-file](https://learn.microsoft.com/en-us/defender-endpoint/indicator-file) |
 | `ms-defender-file-hash-event1120` | `official-doc` | Microsoft support: Troubleshoot Microsoft Defender Antivirus settings | [https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d](https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d) |
 | `ms-defender-cloud-demo-sample` | `official-doc` | Microsoft Learn: Demonstrate cloud-delivered protection | [https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection](https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection) |
@@ -6629,7 +6630,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt](evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt) |
 | Exact quote / path | MsMpEng.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/ThreatFileHashLogging \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
-| Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a separate pass. A later official Microsoft PE sample follow-up still produced event 1116 with no event 1120, and the documented policy MpEngine path still did not produce a direct read in the non-rebooted or rebooted follow-up. |
+| Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a separate pass. The app now stays on the documented root policy path. The later official Microsoft PE sample follow-up still produced event 1116 with no event 1120, so the hash-event behavior remains an open current-build question rather than part of the app contract. |
 
 ---
 
