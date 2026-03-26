@@ -288,15 +288,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The official Windows Defender Firewall policy mapping is clear from Firewall CSP and the local ADMX files. The current app now writes the official policy surface directly, but this remains a risky security setting that is not suitable for general users.",
+    "why": "The official Windows Defender Firewall policy mapping is clear from Firewall CSP and the local ADMX files, and the app writes that same policy surface with an exact restore story. This is app-ready evidence-wise, but it stays non-default because it turns off a core security control.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-20T00:00:00+03:00",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp",
     "exact_quote_or_path": "./Vendor/MSFT/Firewall/MdmStore/DomainProfile/EnableFirewall; ./Vendor/MSFT/Firewall/MdmStore/StandardProfile/EnableFirewall",

@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 233 |
-| Class B | 9 |
+| Class A | 234 |
+| Class B | 8 |
 | Class E | 54 |
 
 ## Record index
@@ -232,7 +232,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | `176d2e3f81c5efba41cea92abf00c4decc76c3b726f6aa07ba76701315d4f6ff` | `b52d35b2f62e6fa3444fcbce71f2be155f69f92033a170832eaceac918b9a05d` | 4 |
 | `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | `d7d9c00810fa405392636a8c358fb780a9cc70e56d5059e48c791df258830cf1` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
 | `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | `455e9a5d4dc7d1e5fa1fae7e7b2b8cd809ae7e48c05353c7c243c5f8c7204f22` | `1acc5faa89bf7fcf0a8aec840be259cb1d7e54c7ebcadf22938bea57da9b891a` | 3 |
-| `security.disable-windows-firewall` | validated | Class B | `research/records/security.disable-windows-firewall.review.json` | `4590977091fcac1fa90efd3b491af4e6b1c0fadaa287f94e4cf6ab1623a12c95` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
+| `security.disable-windows-firewall` | validated | Class A | `research/records/security.disable-windows-firewall.review.json` | `fae59cd23fd80ab54dab52660dd641295d13c5c33fbb96574b13d46d16d81bf6` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
 | `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | `6100712f6dcc813d46e9a43ba572a7a6ab272e06db26c8713aaf0ed76176d055` | `4f53b0c7e30cc0466e386ac3257615c8ee3e7f8ce7de9009ad21fd604791f54b` | 4 |
 | `security.disable-wu-driver-updates` | validated | Class A | `research/records/security.disable-wu-driver-updates.json` | `14fab97e41929cc4bc5b4cf59db0b541e35bcb8efeea51f3993ab4f851f330a0` | `e55a55852fd2758cca754dc81b9d45aabadcf46981d3567776b6961654153445` | 7 |
 | `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | `64dc376ed4a64722f59acfc38b5a5afd521ba50289e906cdb5c2d27521a7c95b` | `fa03eefa6888f42ae0aece69eb56fe827f0b4ff374d239229346b7ab817a4667` | 5 |
@@ -6357,9 +6357,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `security.disable-windows-firewall`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/security.disable-windows-firewall.review.json`
-- Source SHA256: `4590977091fcac1fa90efd3b491af4e6b1c0fadaa287f94e4cf6ab1623a12c95`
+- Source SHA256: `fae59cd23fd80ab54dab52660dd641295d13c5c33fbb96574b13d46d16d81bf6`
 - Proof SHA256: `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21`
 
 **Summary:** The official Windows Defender Firewall policy surface is documented in Firewall CSP under HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall, while the app now writes EnableFirewall = 0 under that policy path for DomainProfile and StandardProfile. The runtime SharedAccess paths remain real troubleshooting surfaces, but the app no longer uses them.

@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 233 |
-| Class B | 9 |
+| Class A | 234 |
+| Class B | 8 |
 | Class E | 54 |
 
 ## Category coverage
@@ -19576,12 +19576,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-windows-firewall.review.json](records/security.disable-windows-firewall.review.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -19606,10 +19606,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -19705,12 +19705,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The official Windows Defender Firewall policy mapping is clear from Firewall CSP and the local ADMX files. The current app now writes the official policy surface directly, but this remains a risky security setting that is not suitable for general users. |
+| Why | The official Windows Defender Firewall policy mapping is clear from Firewall CSP and the local ADMX files, and the app writes that same policy surface with an exact restore story. This is app-ready evidence-wise, but it stays non-default because it turns off a core security control. |
 
 ---
 
