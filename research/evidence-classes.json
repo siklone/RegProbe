@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T04:27:24.384312Z",
+  "generated_utc": "2026-03-26T04:32:13.064090Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
@@ -19125,10 +19125,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Procmon passes around `perfmon /rel`, a bounded WER crash path, and WMI reliability queries all produced captures but did not show reads on the TimeStampEnabled or TimeStampInterval policy/fallback paths during the tested windows.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean Procmon trigger attempts for Reliability timestamp reads",
+            "url": "research/notes/reliability-timestamp-probe-attempts-20260326.md",
+            "kind": "vm-test",
+            "summary": "Procmon passes around `perfmon /rel`, a bounded WER crash path, and WMI reliability queries all produced captures but did not show reads on the TimeStampEnabled or TimeStampInte..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",

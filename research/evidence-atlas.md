@@ -26515,6 +26515,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | `Current repo docs` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) | `high` | path, value, behavior |
+| `vm-reliability-procmon-attempts-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) | `medium` | version-scope, open-question |
 
 **Validation proof**
 

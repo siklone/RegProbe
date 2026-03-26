@@ -13,7 +13,7 @@
     "casual_explanation": "Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine.",
     "why_people_change_it": "People only change it when debugging reliability reporting or comparing how often reliability events are timestamped.",
     "tradeoffs_overview": "Disabling timestamping reduces reliability event detail. Leaving it enabled keeps the cadence available through the companion interval setting.",
-    "professional_notes": "The decompiled OsEventsTimestampInterval path reads HKLM/SOFTWARE/Policies/Microsoft/Windows NT/Reliability/TimeStampEnabled first. If the value is 0, the function returns 0 immediately. If the value is non-zero, the function reads TimeStampInterval and caps it at 86400 seconds. It then falls back to HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Reliability/TimeStampInterval, where the value is interpreted in minutes and multiplied by 60. The repo note in Docs/system/system.md is useful provenance, but the decompiled function is the source of the value semantics.",
+    "professional_notes": "The decompiled OsEventsTimestampInterval path reads HKLM/SOFTWARE/Policies/Microsoft/Windows NT/Reliability/TimeStampEnabled first. If the value is 0, the function returns 0 immediately. If the value is non-zero, the function reads TimeStampInterval and caps it at 86400 seconds. It then falls back to HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Reliability/TimeStampInterval, where the value is interpreted in minutes and multiplied by 60. The repo note in Docs/system/system.md is useful provenance, but the decompiled function is the source of the value semantics. On 2026-03-26, three Procmon trigger attempts on Win25H2Clean (`perfmon /rel`, a bounded WER crash path, and WMI reliability queries) still did not produce live reads for the policy or fallback values inside the capture window, so the record stays one step short of converged VM proof.",
     "targets": [
       {
         "target_id": "reliability-timestamp-enabled",
@@ -185,6 +185,18 @@
         "behavior"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-reliability-procmon-attempts-20260326",
+      "kind": "vm-test",
+      "title": "Win25H2Clean Procmon trigger attempts for Reliability timestamp reads",
+      "location": "research/notes/reliability-timestamp-probe-attempts-20260326.md",
+      "summary": "Procmon passes around `perfmon /rel`, a bounded WER crash path, and WMI reliability queries all produced captures but did not show reads on the TimeStampEnabled or TimeStampInterval policy/fallback paths during the tested windows.",
+      "supports": [
+        "version-scope",
+        "open-question"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -199,7 +211,8 @@
   },
   "open_questions": [
     "Should the companion TimeStampInterval cadence be split into its own record?",
-    "Should the app ever let users change the companion interval instead of keeping the 24-hour cap fixed?"
+    "Should the app ever let users change the companion interval instead of keeping the 24-hour cap fixed?",
+    "Which live reliability or WER code path on 25H2 still issues the runtime reads seen in the decompiled function?"
   ],
   "last_reviewed_utc": "2026-03-24T22:15:00Z",
   "validation_proof": {
