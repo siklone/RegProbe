@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 235 |
-| Class B | 7 |
+| Class A | 237 |
+| Class B | 5 |
 | Class E | 54 |
 
 ## Record index
@@ -276,8 +276,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `research/records/system.memory-clear-pagefile-at-shutdown.json` | `b59ff6127033d6057e3804ce6ff4b9c836497ae64f66a300ae247c5060955697` | `03acbe19591182d2f441ad35b8b99fd3f79593538365d4d0da1dbb6b857331b7` | 4 |
 | `system.memory-disable-paging-executive` | validated | Class A | `research/records/system.memory-disable-paging-executive.json` | `c3264375895ff2b56e3b4d2a5bad0cc30d8ee95170bd2ddc133a8c80619a9de3` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 4 |
 | `system.memory-large-system-cache-client` | validated | Class B | `research/records/system.memory-large-system-cache-client.review.json` | `330530b22c81af7f8aff6db79d29f270c585994ec7c50434a784d9a06c8d6279` | `38049996654554e2f9d46418bab1cb87795a15d82f441e8e386fa6b83d2f6d59` | 3 |
-| `system.memory-nonpaged-pool-dynamic` | validated | Class B | `research/records/system.memory-nonpaged-pool-dynamic.json` | `e3eacbfe955ec138e2f7617b3fb48aa658ee422ce41afa72c4306dfbb1984805` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 4 |
-| `system.memory-paged-pool-dynamic` | validated | Class B | `research/records/system.memory-paged-pool-dynamic.json` | `6b15059672e59c9b13ce1bc8cb06ff120a0aeadd41c84d040969a22ed2f7d693` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 4 |
+| `system.memory-nonpaged-pool-dynamic` | validated | Class A | `research/records/system.memory-nonpaged-pool-dynamic.json` | `db9b51fb1a7ae7c0d4862f7d7c5d28825fe5f70b8bd023f8a37741f5955fe69c` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 4 |
+| `system.memory-paged-pool-dynamic` | validated | Class A | `research/records/system.memory-paged-pool-dynamic.json` | `ed4c44c6994be0a51ccf4c64de82298ee6417c257929957243ff07add34b6fea` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 4 |
 | `system.memory-registry-quota-default` | validated | Class A | `research/records/system.memory-registry-quota-default.review.json` | `e7c6f4e517f94b64c4524d42dbf2c58e9a79a3f0ad3494786cccb356f3125b7b` | `166cb5b5e4cd4ce3f3131471609b9e9577d1fdd32a6d9f33fd32286a25753a72` | 5 |
 | `system.ntfs-disable-8dot3` | validated | Class A | `research/records/system.ntfs-disable-8dot3.json` | `087fed24d32513b143307fd9fe0a154913784d4fb812564e8013d42f58dcac1a` | `3c6ccc6845301a0bb8669c999f7a6b103a926afdab55b5d87f12a76ab1360d26` | 4 |
 | `system.ntfs-disable-last-access` | validated | Class A | `research/records/system.ntfs-disable-last-access.json` | `18f60c332450a347655d300302041c55eeecb337bc3d9b8b6971dee2235f20a6` | `f980461db7e1dc2d4e42ee422a890418e0333770106e6cd0e6f632f6d829329c` | 4 |
@@ -7642,12 +7642,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.memory-nonpaged-pool-dynamic`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/system.memory-nonpaged-pool-dynamic.json`
-- Source SHA256: `e3eacbfe955ec138e2f7617b3fb48aa658ee422ce41afa72c4306dfbb1984805`
+- Source SHA256: `db9b51fb1a7ae7c0d4862f7d7c5d28825fe5f70b8bd023f8a37741f5955fe69c`
 - Proof SHA256: `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc`
 
-**Summary:** Validated legacy nonpaged-pool size control. Microsoft Q&A captures NonPagedPoolSize = 0 as the default value, and the app writes that same reset value.
+**Summary:** Validated legacy nonpaged-pool reset. Microsoft Q&A captures NonPagedPoolSize = 0 as the default value, and the app writes that same reset value with restore support.
 
 **Evidence**
 
@@ -7671,12 +7671,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.memory-paged-pool-dynamic`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/system.memory-paged-pool-dynamic.json`
-- Source SHA256: `6b15059672e59c9b13ce1bc8cb06ff120a0aeadd41c84d040969a22ed2f7d693`
+- Source SHA256: `ed4c44c6994be0a51ccf4c64de82298ee6417c257929957243ff07add34b6fea`
 - Proof SHA256: `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9`
 
-**Summary:** Validated legacy paged-pool size control. Microsoft Q&A captures PagedPoolSize = 0 as the default value, and the app writes that same reset value.
+**Summary:** Validated legacy paged-pool reset. Microsoft Q&A captures PagedPoolSize = 0 as the default value, and the app writes that same reset value with restore support.
 
 **Evidence**
 

@@ -24,6 +24,11 @@ import ghidra.program.model.symbol.ReferenceIterator;
 import ghidra.program.model.symbol.ReferenceManager;
 
 public class ExportStringXrefs extends GhidraScript {
+    private static final int MAX_STRINGS_PER_PATTERN = 4;
+    private static final int MAX_FUNCTIONS_PER_STRING = 3;
+    private static final int MAX_REFERENCES_PER_STRING = 12;
+    private static final int DECOMPILE_TIMEOUT_SECONDS = 20;
+    private static final int MAX_DECOMPILE_LINES = 60;
 
     @Override
     public void run() throws Exception {
@@ -60,6 +65,7 @@ public class ExportStringXrefs extends GhidraScript {
                 writer.printf("## Pattern: `%s`%n%n", pattern);
 
                 boolean found = false;
+                int matchedStrings = 0;
                 DataIterator dataIterator = listing.getDefinedData(true);
                 while (dataIterator.hasNext()) {
                     Data data = dataIterator.next();
@@ -77,6 +83,7 @@ public class ExportStringXrefs extends GhidraScript {
                     }
 
                     found = true;
+                    matchedStrings++;
                     writer.printf("### String @ `%s`%n%n", data.getAddress());
                     writer.printf("`%s`%n%n", escapeInlineCode(text));
 
@@ -86,9 +93,11 @@ public class ExportStringXrefs extends GhidraScript {
                     while (refs.hasNext()) {
                         Reference ref = refs.next();
                         refList.add(ref);
-                        Function function = listing.getFunctionContaining(ref.getFromAddress());
-                        if (function != null) {
-                            functionEntries.add(function.getEntryPoint());
+                        if (refList.size() <= MAX_REFERENCES_PER_STRING) {
+                            Function function = listing.getFunctionContaining(ref.getFromAddress());
+                            if (function != null && functionEntries.size() < MAX_FUNCTIONS_PER_STRING) {
+                                functionEntries.add(function.getEntryPoint());
+                            }
                         }
                     }
 
@@ -99,10 +108,18 @@ public class ExportStringXrefs extends GhidraScript {
                     }
 
                     writer.printf("- References:%n");
+                    int emittedReferences = 0;
                     for (Reference ref : refList) {
+                        if (emittedReferences >= MAX_REFERENCES_PER_STRING) {
+                            break;
+                        }
                         Function function = listing.getFunctionContaining(ref.getFromAddress());
                         String functionLabel = function == null ? "<no function>" : function.getName();
                         writer.printf("  - `%s` in `%s`%n", ref.getFromAddress(), functionLabel);
+                        emittedReferences++;
+                    }
+                    if (refList.size() > emittedReferences) {
+                        writer.printf("  - `... %d more references omitted ...`%n", refList.size() - emittedReferences);
                     }
                     writer.printf("%n");
 
@@ -114,6 +131,13 @@ public class ExportStringXrefs extends GhidraScript {
 
                         writer.printf("#### Function `%s` @ `%s`%n%n", function.getName(), function.getEntryPoint());
                         writer.printf("```c%n%s%n```%n%n", decompileSnippet(decompiler, function));
+                    }
+
+                    if (matchedStrings >= MAX_STRINGS_PER_PATTERN) {
+                        writer.printf("_Stopped after `%d` matching strings for `%s` to keep the export bounded._%n%n",
+                            MAX_STRINGS_PER_PATTERN,
+                            pattern);
+                        break;
                     }
                 }
 
@@ -144,7 +168,7 @@ public class ExportStringXrefs extends GhidraScript {
 
     private String decompileSnippet(DecompInterface decompiler, Function function) {
         try {
-            DecompileResults results = decompiler.decompileFunction(function, 90, monitor);
+            DecompileResults results = decompiler.decompileFunction(function, DECOMPILE_TIMEOUT_SECONDS, monitor);
             if (!results.decompileCompleted() || results.getDecompiledFunction() == null) {
                 return "// decompilation not available";
             }
@@ -155,7 +179,7 @@ public class ExportStringXrefs extends GhidraScript {
             }
 
             String[] lines = c.replace("\r", "").split("\n");
-            int maxLines = Math.min(lines.length, 80);
+            int maxLines = Math.min(lines.length, MAX_DECOMPILE_LINES);
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < maxLines; i++) {
                 builder.append(lines[i]).append(System.lineSeparator());

@@ -3,61 +3,95 @@ using System.Threading;
 using System.Threading.Tasks;
 using OpenTraceProject.Core;
 using OpenTraceProject.Engine.Tweaks;
-using Xunit;
 
 namespace OpenTraceProject.Tests;
 
 public sealed class ConditionalTweakTests
 {
     [Fact]
-    public async Task Detect_WhenConditionIsFalse_ReturnsNotApplicable()
+    public async Task AllSteps_WhenConditionReturnsNotApplicable_ShortCircuitWithoutInvokingInner()
     {
         var inner = new TrackingTweak();
-        var tweak = new ConditionalTweak(inner, () => false, "Blocked on this SKU.");
+        var tweak = new ConditionalTweak(
+            inner,
+            _ => Task.FromResult<TweakResult?>(new TweakResult(TweakStatus.NotApplicable, "Not supported here.", DateTimeOffset.UtcNow)));
+
+        var detect = await tweak.DetectAsync(CancellationToken.None);
+        var apply = await tweak.ApplyAsync(CancellationToken.None);
+        var verify = await tweak.VerifyAsync(CancellationToken.None);
+        var rollback = await tweak.RollbackAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.NotApplicable, detect.Status);
+        Assert.Equal(TweakStatus.NotApplicable, apply.Status);
+        Assert.Equal(TweakStatus.NotApplicable, verify.Status);
+        Assert.Equal(TweakStatus.NotApplicable, rollback.Status);
+        Assert.Equal(0, inner.DetectCalls);
+        Assert.Equal(0, inner.ApplyCalls);
+        Assert.Equal(0, inner.VerifyCalls);
+        Assert.Equal(0, inner.RollbackCalls);
+    }
+
+    [Fact]
+    public async Task ConditionPassing_PreservesInnerBehaviorAndMetadataDelegation()
+    {
+        var inner = new TrackingTweak();
+        var tweak = new ConditionalTweak(inner, _ => Task.FromResult<TweakResult?>(null));
+
+        var detect = await tweak.DetectAsync(CancellationToken.None);
+        var apply = await tweak.ApplyAsync(CancellationToken.None);
+        var verify = await tweak.VerifyAsync(CancellationToken.None);
+        var rollback = await tweak.RollbackAsync(CancellationToken.None);
+        var snapshot = tweak.GetRollbackSnapshot();
+
+        Assert.Equal(TweakStatus.Detected, detect.Status);
+        Assert.Equal(TweakStatus.Applied, apply.Status);
+        Assert.Equal(TweakStatus.Verified, verify.Status);
+        Assert.Equal(TweakStatus.RolledBack, rollback.Status);
+        Assert.Equal(TimeSpan.FromSeconds(7), ((ITweakStepTimeouts)tweak).GetStepTimeout(TweakAction.Apply));
+        Assert.NotNull(snapshot);
+
+        tweak.RestoreFromSnapshot(snapshot!);
+
+        Assert.True(inner.HasCapturedState);
+        Assert.True(inner.RestoreCalled);
+        Assert.Equal(1, inner.DetectCalls);
+        Assert.Equal(1, inner.ApplyCalls);
+        Assert.Equal(1, inner.VerifyCalls);
+        Assert.Equal(1, inner.RollbackCalls);
+    }
+
+    [Fact]
+    public async Task ConditionFailure_ReturnsFailedResult()
+    {
+        var tweak = new ConditionalTweak(
+            new TrackingTweak(),
+            _ => throw new InvalidOperationException("boom"));
 
         var result = await tweak.DetectAsync(CancellationToken.None);
 
-        Assert.Equal(TweakStatus.NotApplicable, result.Status);
-        Assert.Equal("Blocked on this SKU.", result.Message);
-        Assert.Equal(0, inner.DetectCalls);
+        Assert.Equal(TweakStatus.Failed, result.Status);
+        Assert.Contains("condition failed", result.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.IsType<InvalidOperationException>(result.Error);
     }
 
-    [Fact]
-    public async Task Apply_WhenConditionIsTrue_DelegatesToInnerTweak()
+    private sealed class TrackingTweak : ITweak, IRollbackAwareTweak, ITweakStepTimeouts
     {
-        var inner = new TrackingTweak();
-        var tweak = new ConditionalTweak(inner, () => true, "Blocked on this SKU.");
-
-        var result = await tweak.ApplyAsync(CancellationToken.None);
-
-        Assert.Equal(TweakStatus.Applied, result.Status);
-        Assert.Equal(1, inner.ApplyCalls);
-    }
-
-    [Fact]
-    public void RollbackSnapshot_WhenInnerIsRollbackAware_DelegatesState()
-    {
-        var inner = new RollbackAwareTrackingTweak();
-        var tweak = new ConditionalTweak(inner, () => true, "Blocked on this SKU.");
-
-        Assert.True(tweak.HasCapturedState);
-        Assert.NotNull(tweak.GetRollbackSnapshot());
-    }
-
-    private class TrackingTweak : ITweak
-    {
-        public int DetectCalls { get; private set; }
-        public int ApplyCalls { get; private set; }
-
         public string Id => "test.conditional";
-        public string Name => "Conditional";
-        public string Description => "Conditional test tweak";
+        public string Name => "Conditional Test";
+        public string Description => "Tracks delegated calls.";
         public TweakRiskLevel Risk => TweakRiskLevel.Safe;
         public bool RequiresElevation => false;
+        public bool HasCapturedState { get; private set; }
+        public bool RestoreCalled { get; private set; }
+        public int DetectCalls { get; private set; }
+        public int ApplyCalls { get; private set; }
+        public int VerifyCalls { get; private set; }
+        public int RollbackCalls { get; private set; }
 
         public Task<TweakResult> DetectAsync(CancellationToken ct)
         {
             DetectCalls++;
+            HasCapturedState = true;
             return Task.FromResult(new TweakResult(TweakStatus.Detected, "Detected", DateTimeOffset.UtcNow));
         }
 
@@ -68,26 +102,42 @@ public sealed class ConditionalTweakTests
         }
 
         public Task<TweakResult> VerifyAsync(CancellationToken ct)
-            => Task.FromResult(new TweakResult(TweakStatus.Verified, "Verified", DateTimeOffset.UtcNow));
+        {
+            VerifyCalls++;
+            return Task.FromResult(new TweakResult(TweakStatus.Verified, "Verified", DateTimeOffset.UtcNow));
+        }
 
         public Task<TweakResult> RollbackAsync(CancellationToken ct)
-            => Task.FromResult(new TweakResult(TweakStatus.RolledBack, "Rolled back", DateTimeOffset.UtcNow));
-    }
-
-    private sealed class RollbackAwareTrackingTweak : TrackingTweak, IRollbackAwareTweak
-    {
-        public bool HasCapturedState => true;
+        {
+            RollbackCalls++;
+            return Task.FromResult(new TweakResult(TweakStatus.RolledBack, "Rolled back", DateTimeOffset.UtcNow));
+        }
 
         public TweakRollbackSnapshot? GetRollbackSnapshot()
-            => new()
+        {
+            if (!HasCapturedState)
             {
-                TweakId = "test.conditional.rollback",
-                TweakName = "Conditional rollback",
-                SnapshotType = TweakSnapshotType.Registry,
+                return null;
+            }
+
+            return new TweakRollbackSnapshot
+            {
+                TweakId = Id,
+                TweakName = Name,
+                SnapshotType = TweakSnapshotType.Other
             };
+        }
 
         public void RestoreFromSnapshot(TweakRollbackSnapshot snapshot)
         {
+            if (snapshot.TweakId == Id)
+            {
+                RestoreCalled = true;
+                HasCapturedState = true;
+            }
         }
+
+        public TimeSpan? GetStepTimeout(TweakAction action)
+            => action == TweakAction.Apply ? TimeSpan.FromSeconds(7) : null;
     }
 }

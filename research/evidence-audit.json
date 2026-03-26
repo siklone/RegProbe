@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T12:19:05.244085Z",
+  "generated_utc": "2026-03-26T14:48:28.425033Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
-      "A": 235,
-      "B": 7
+      "A": 237,
+      "B": 5
     },
     "lane_counts": {
       "official-policy": 235,
@@ -13,8 +13,8 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 235,
-      "decision-gate": 7
+      "none": 237,
+      "decision-gate": 5
     }
   },
   "entries": [
@@ -4224,9 +4224,9 @@
     {
       "record_id": "system.memory-nonpaged-pool-dynamic",
       "tweak_id": "system.memory-nonpaged-pool-dynamic",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": false,
       "ghidra": false,
@@ -4234,10 +4234,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/system.memory-nonpaged-pool-dynamic.json",
       "incident_ids": []
@@ -4245,9 +4245,9 @@
     {
       "record_id": "system.memory-paged-pool-dynamic",
       "tweak_id": "system.memory-paged-pool-dynamic",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": false,
       "ghidra": false,
@@ -4255,10 +4255,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/system.memory-paged-pool-dynamic.json",
       "incident_ids": []

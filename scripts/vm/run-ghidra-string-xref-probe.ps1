@@ -16,7 +16,8 @@ param(
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging\ghidra-probes',
     [string]$GuestOutputRoot = 'C:\Tools\GhidraProbes',
     [string]$GuestProjectRoot = 'C:\Tools\GhidraProjects',
-    [string]$GuestGhidraRoot = 'C:\Tools\Ghidra'
+    [string]$GuestGhidraRoot = 'C:\Tools\Ghidra',
+    [switch]$NoAnalysis
 )
 
 $ErrorActionPreference = 'Stop'
@@ -74,7 +75,9 @@ param(
     [string]$MetadataPath,
 
     [Parameter(Mandatory = $true)]
-    [string]$PatternPayload
+    [string]$PatternPayload,
+
+    [switch]$NoAnalysis
 )
 
 $Patterns = @($PatternPayload -split '\|\|\|' | Where-Object { $_ })
@@ -85,6 +88,25 @@ New-Item -ItemType Directory -Path (Split-Path -Parent $MarkdownPath) -Force | O
 New-Item -ItemType Directory -Path $ProjectRoot -Force | Out-Null
 $proc = $null
 $failure = $null
+$meta = [ordered]@{
+    generated_utc = [DateTime]::UtcNow.ToString('o')
+    target_binary = $TargetBinary
+    project_root = $ProjectRoot
+    project_name = $ProjectName
+    script_path = $ScriptPath
+    markdown_path = $MarkdownPath
+    stdout_path = $StdoutPath
+    stderr_path = $StderrPath
+    exit_code = $null
+    markdown_exists = [bool](Test-Path $MarkdownPath)
+    stdout_exists = [bool](Test-Path $StdoutPath)
+    stderr_exists = [bool](Test-Path $StderrPath)
+    patterns = $Patterns
+    failure = $null
+    status = 'started'
+}
+
+$meta | ConvertTo-Json -Depth 6 | Set-Content -Path $MetadataPath -Encoding UTF8
 
 try {
     $analyzeHeadless = Get-ChildItem -Path 'C:\Tools\Ghidra' -Recurse -Filter 'analyzeHeadless.bat' -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -96,7 +118,14 @@ try {
         $ProjectRoot,
         $ProjectName,
         '-import', $TargetBinary,
-        '-overwrite',
+        '-overwrite'
+    )
+
+    if ($NoAnalysis) {
+        $args += '-noanalysis'
+    }
+
+    $args += @(
         '-scriptPath', (Split-Path -Parent $ScriptPath),
         '-postScript', (Split-Path -Leaf $ScriptPath), $MarkdownPath
     ) + $Patterns + @('-deleteProject')
@@ -112,22 +141,13 @@ catch {
 }
 
 $exitCode = if ($proc) { $proc.ExitCode } else { 1 }
-$meta = [ordered]@{
-    generated_utc = [DateTime]::UtcNow.ToString('o')
-    target_binary = $TargetBinary
-    project_root = $ProjectRoot
-    project_name = $ProjectName
-    script_path = $ScriptPath
-    markdown_path = $MarkdownPath
-    stdout_path = $StdoutPath
-    stderr_path = $StderrPath
-    exit_code = $exitCode
-    markdown_exists = [bool](Test-Path $MarkdownPath)
-    stdout_exists = [bool](Test-Path $StdoutPath)
-    stderr_exists = [bool](Test-Path $StderrPath)
-    patterns = $Patterns
-    failure = $failure
-}
+$meta.generated_utc = [DateTime]::UtcNow.ToString('o')
+$meta.exit_code = $exitCode
+$meta.markdown_exists = [bool](Test-Path $MarkdownPath)
+$meta.stdout_exists = [bool](Test-Path $StdoutPath)
+$meta.stderr_exists = [bool](Test-Path $StderrPath)
+$meta.failure = $failure
+$meta.status = if ($exitCode -eq 0) { 'completed' } else { 'failed' }
 
 $meta | ConvertTo-Json -Depth 6 | Set-Content -Path $MetadataPath -Encoding UTF8
 if ($exitCode -ne 0) {
@@ -214,6 +234,10 @@ $vmrunArgs = @(
     $patternPayload
 )
 
+if ($NoAnalysis) {
+    $vmrunArgs += '-NoAnalysis'
+}
+
 Invoke-Vmrun -Arguments $vmrunArgs -IgnoreExitCode | Out-Null
 
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestMeta, $hostMeta) -IgnoreExitCode | Out-Null
@@ -226,6 +250,10 @@ $meta = if (Test-Path $hostMeta) {
 }
 else {
     $null
+}
+
+if (-not $meta -or $null -eq $meta.exit_code) {
+    throw "Guest Ghidra probe did not complete cleanly. See $hostRoot"
 }
 
 [ordered]@{

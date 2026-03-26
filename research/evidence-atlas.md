@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 235 |
-| Class B | 7 |
+| Class A | 237 |
+| Class B | 5 |
 | Class E | 54 |
 
 ## Category coverage
@@ -25269,16 +25269,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Memory Management / Legacy Pool Tuning` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-nonpaged-pool-dynamic.json](records/system.memory-nonpaged-pool-dynamic.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated legacy nonpaged-pool size control. Microsoft Q&A captures NonPagedPoolSize = 0 as the default value, and the app writes that same reset value.
+**Summary:** Validated legacy nonpaged-pool reset. Microsoft Q&A captures NonPagedPoolSize = 0 as the default value, and the app writes that same reset value with restore support.
 
 **Current implementation**
 
@@ -25298,10 +25298,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -25355,7 +25355,7 @@ Windows Internals references:
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `windows-default` | Windows default | ['General users', 'Typical desktops and laptops'] | ['Research comparisons against the current app write'] | `False` |
+| `windows-default` | Windows default | ['General users', 'Typical desktops and laptops'] | ['Research comparisons against the current app write'] | `True` |
 
 **Evidence**
 
@@ -25379,12 +25379,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
-| Recommended for general users | `False` |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft Q&A now captures NonPagedPoolSize = 0 as part of the default Memory Management registry snapshot. The record matches the app and is validated for research, but it remains a low-level legacy tuning rather than a general Windows performance tweak. |
+| Why | Microsoft Q&A captures NonPagedPoolSize = 0 as the default Memory Management value, the app writes that same reset value exactly, and restore support is already in place. This stays legacy and low-level, but the current app action is an exact reset-to-default mapping and is safe to expose. |
 
 ---
 
@@ -25393,16 +25393,16 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `System` |
 | Area | `Memory Management / Legacy Pool Tuning` |
 | Scope | `device` |
 | Source file | [research/records/system.memory-paged-pool-dynamic.json](records/system.memory-paged-pool-dynamic.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated legacy paged-pool size control. Microsoft Q&A captures PagedPoolSize = 0 as the default value, and the app writes that same reset value.
+**Summary:** Validated legacy paged-pool reset. Microsoft Q&A captures PagedPoolSize = 0 as the default value, and the app writes that same reset value with restore support.
 
 **Current implementation**
 
@@ -25422,10 +25422,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -25480,7 +25480,7 @@ Windows Internals references:
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `windows-default` | Windows default | ['General users', 'Typical desktops and laptops'] | ['Research comparisons against the current app write'] | `False` |
+| `windows-default` | Windows default | ['General users', 'Typical desktops and laptops'] | ['Research comparisons against the current app write'] | `True` |
 
 **Evidence**
 
@@ -25504,12 +25504,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
-| Recommended for general users | `False` |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft Q&A now captures PagedPoolSize = 0 as part of the default Memory Management registry snapshot. The record matches the app and is validated for research, but it remains a low-level legacy tuning rather than a general Windows performance tweak. |
+| Why | Microsoft Q&A captures PagedPoolSize = 0 as the default Memory Management value, the app writes that same reset value exactly, and restore support is already in place. This stays legacy and low-level, but the current app action is an exact reset-to-default mapping and is safe to expose. |
 
 ---
 
