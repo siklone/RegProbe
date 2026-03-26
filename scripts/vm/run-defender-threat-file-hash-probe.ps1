@@ -125,6 +125,24 @@ function Invoke-GuestProgram {
         [string[]]$ArgumentList = @()
     )
 
+    if ($FilePath -ieq 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe') {
+        $hasNoProfile = $ArgumentList -contains '-NoProfile'
+        $hasWindowStyle = $ArgumentList -contains '-WindowStyle'
+        $hasNonInteractive = $ArgumentList -contains '-NonInteractive'
+
+        if (-not $hasNonInteractive) {
+            $ArgumentList = @('-NonInteractive') + $ArgumentList
+        }
+
+        if (-not $hasNoProfile) {
+            $ArgumentList = @('-NoProfile') + $ArgumentList
+        }
+
+        if (-not $hasWindowStyle) {
+            $ArgumentList = @('-WindowStyle', 'Hidden') + $ArgumentList
+        }
+    }
+
     Invoke-Vmrun -Arguments (@(
         '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
         'runProgramInGuest', $VmPath, $FilePath

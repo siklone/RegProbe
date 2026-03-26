@@ -1,0 +1,31 @@
+﻿{
+    "binary":  "diagtrack.dll",
+    "probe":  "diagtrack-reliability-ghidra",
+    "timestamp":  "2026-03-26T17:37:34.225204900Z",
+    "ghidra_no_function_fallback":  true,
+    "matches":  [
+                    {
+                        "address":  "18038fce0",
+                        "function":  "FUN_18038fce0",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  60,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "18026bfc0",
+                        "function":  "FUN_18026bfc0",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  60,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    }
+                ],
+    "exit_code":  0,
+    "status":  "completed",
+    "failure":  null,
+    "markdown_exists":  true,
+    "run_log_exists":  true
+}

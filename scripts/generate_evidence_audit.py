@@ -2,14 +2,18 @@
 from __future__ import annotations
 
 import json
+import re
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 from evidence_class_lib import (
+    GHIDRA_EVIDENCE_KINDS,
     build_class_entry,
     determine_evidence_lane,
+    evidence_items,
+    evidence_kind,
     extract_app_status,
     has_benchmark_evidence,
     has_converged_vm_evidence,
@@ -32,6 +36,7 @@ PROVENANCE_PATH = REPO_ROOT / "Docs" / "tweaks" / "tweak-provenance.json"
 OVERRIDES_PATH = RESEARCH_ROOT / "evidence-class-overrides.json"
 INCIDENTS_PATH = RESEARCH_ROOT / "vm-incidents.json"
 OUTPUT_PATH = RESEARCH_ROOT / "evidence-audit.json"
+GHIDRA_PATH_RE = re.compile(r"research/evidence-files/ghidra/[^\s);,]+")
 
 
 def load_incident_map(path: Path) -> dict[str, list[dict[str, Any]]]:
@@ -50,6 +55,29 @@ def load_incident_map(path: Path) -> dict[str, list[dict[str, Any]]]:
                 continue
             result.setdefault(key, []).append(incident)
     return result
+
+
+def has_ghidra_no_function_fallback(record: dict[str, Any]) -> bool:
+    candidate_files: set[Path] = set()
+
+    for item in evidence_items(record):
+        if evidence_kind(item) not in GHIDRA_EVIDENCE_KINDS:
+            continue
+
+        location = str(item.get("location") or "")
+        for match in GHIDRA_PATH_RE.findall(location):
+            candidate = REPO_ROOT / match
+            evidence_path = candidate.parent / "evidence.json" if candidate.suffix else candidate / "evidence.json"
+            candidate_files.add(evidence_path)
+
+    for path in candidate_files:
+        if not path.exists():
+            continue
+        payload = load_json(path)
+        if payload.get("ghidra_no_function_fallback") is True:
+            return True
+
+    return False
 
 
 def main() -> int:
@@ -102,6 +130,7 @@ def main() -> int:
                     "official": has_official_evidence(record),
                     "procmon": has_procmon_evidence(record),
                     "ghidra": has_ghidra_evidence(record),
+                    "ghidra_no_function_fallback": has_ghidra_no_function_fallback(record),
                     "wpr": has_wpr_evidence(record),
                     "benchmark": has_benchmark_evidence(record),
                     "reboot_tested": has_reboot_evidence(record),

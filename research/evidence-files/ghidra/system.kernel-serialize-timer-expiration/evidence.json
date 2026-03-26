@@ -1,0 +1,22 @@
+﻿{
+    "binary":  "ntoskrnl.exe",
+    "probe":  "kernel-serialize-timer-expiration-ghidra",
+    "timestamp":  "2026-03-26T17:34:40.257729Z",
+    "ghidra_no_function_fallback":  true,
+    "matches":  [
+                    {
+                        "address":  "140c63068",
+                        "function":  "FUN_140c63068",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  60,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    }
+                ],
+    "exit_code":  0,
+    "status":  "completed",
+    "failure":  null,
+    "markdown_exists":  true,
+    "run_log_exists":  true
+}

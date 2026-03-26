@@ -22,11 +22,27 @@ function Invoke-Vmrun {
 
 $runningList = Invoke-Vmrun -Arguments @('-T', 'ws', 'list')
 $vmRunning = $runningList -match [regex]::Escape($VmPath)
-$toolsState = if ($vmRunning) { Invoke-Vmrun -Arguments @('-T', 'ws', 'checkToolsState', $VmPath) } else { 'not-running' }
+$toolsState = if ($vmRunning) {
+    try {
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'checkToolsState', $VmPath)
+    }
+    catch {
+        'query-failed'
+    }
+}
+else {
+    'not-running'
+}
 $processText = ''
+$processQueryError = $null
 
 if ($vmRunning -and $toolsState -match 'running|installed') {
-    $processText = Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'listProcessesInGuest', $VmPath)
+    try {
+        $processText = Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'listProcessesInGuest', $VmPath)
+    }
+    catch {
+        $processQueryError = $_.Exception.Message
+    }
 }
 
 $checks = [ordered]@{
@@ -42,6 +58,7 @@ $result = [ordered]@{
     vm_path = $VmPath
     vm_running = $vmRunning
     tools_state = $toolsState
+    process_query_error = $processQueryError
     shell_healthy = ($checks.explorer -and $checks.sihost -and $checks.shellhost)
     checks = $checks
 }

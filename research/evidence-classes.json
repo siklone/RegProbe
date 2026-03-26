@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T14:53:36.807116Z",
+  "generated_utc": "2026-03-26T18:08:13.332846Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
@@ -19112,7 +19112,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll and an adjacent Reliability\\PBR read on DiagTrack restart, but the exact target values...",
+        "summary": "The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -19149,9 +19149,9 @@
           },
           {
             "title": "Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes",
-            "url": "research/notes/reliability-timestamp-follow-up-20260326.md",
+            "url": "research/notes/reliability-timestamp-follow-up-20260326.md and research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt and research/evidence-files/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv",
             "kind": "procmon-trace",
-            "summary": "A DiagTrack service-restart Procmon pass showed an adjacent Reliability\\PBR read, and bounded WER QueueReporting plus Problem Reports UI passes still produced no direct reads on..."
+            "summary": "A DiagTrack service-restart Procmon pass showed an adjacent Reliability\\PBR read, and a later hidden structured probe that bundled DiagTrack restart, Consolidator, QueueReportin..."
           }
         ]
       },

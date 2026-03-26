@@ -1,0 +1,63 @@
+﻿{
+    "generated_utc":  "2026-03-26T18:03:35.7506683Z",
+    "policy_path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+    "fallback_path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Reliability",
+    "original":  [
+                     {
+                         "path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+                         "name":  "TimeStampEnabled",
+                         "path_exists":  true,
+                         "value_exists":  false,
+                         "value":  null,
+                         "value_type":  null
+                     },
+                     {
+                         "path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+                         "name":  "TimeStampInterval",
+                         "path_exists":  true,
+                         "value_exists":  false,
+                         "value":  null,
+                         "value_type":  null
+                     },
+                     {
+                         "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Reliability",
+                         "name":  "TimeStampInterval",
+                         "path_exists":  true,
+                         "value_exists":  true,
+                         "value":  1,
+                         "value_type":  "System.Int32"
+                     }
+                 ],
+    "restored":  [
+                     {
+                         "path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+                         "name":  "TimeStampEnabled",
+                         "path_exists":  true,
+                         "value_exists":  false,
+                         "value":  null,
+                         "value_type":  null
+                     },
+                     {
+                         "path":  "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+                         "name":  "TimeStampInterval",
+                         "path_exists":  true,
+                         "value_exists":  false,
+                         "value":  null,
+                         "value_type":  null
+                     },
+                     {
+                         "path":  "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Reliability",
+                         "name":  "TimeStampInterval",
+                         "path_exists":  true,
+                         "value_exists":  true,
+                         "value":  1,
+                         "value_type":  "System.Int32"
+                     }
+                 ],
+    "pml_exists":  true,
+    "csv_exists":  true,
+    "hits_csv_exists":  true,
+    "runtime_hits_csv_exists":  true,
+    "match_count":  360,
+    "runtime_match_count":  3
+}

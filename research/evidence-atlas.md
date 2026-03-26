@@ -26414,7 +26414,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, but the exact target values still have no live Procmon hit.
+**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, and the new address-seeded Ghidra fallback now keeps the unresolved DiagTrack blocks in repo evidence, but the exact target values still have no live Procmon hit.
 
 **Current implementation**
 
@@ -26518,7 +26518,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | `Current repo docs` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) | `high` | path, value, behavior |
-| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/diagtrack-reliability-ghidra.md | `medium` | version-scope, string-reference, open-question |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/ghidra-matches.md and [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/evidence.json | `medium` | version-scope, string-reference, open-question |
 | `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) | `medium` | version-scope, open-question |
 | `vm-reliability-follow-up-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) | `medium` | version-scope, open-question |
 
@@ -26529,7 +26529,7 @@ Windows Internals references:
 | Source | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
 | Exact quote / path | RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software//Policies//Microsoft//Windows NT//Reliability", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L"TimeStampEnabled", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L"TimeStampInterval", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180 |
 | Key found on page | `True` |
-| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll and an adjacent Reliability/PBR read on DiagTrack restart, but the exact target values still have no live Procmon hit. |
+| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured an adjacent Reliability/PBR read on DiagTrack restart, but the exact target values still have no live Procmon hit. |
 
 **Decision**
 
@@ -26540,7 +26540,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `False` |
 | Needs VM validation | `False` |
-| Why | The decompiled function provides the exact read order and value semantics for the gate value, and the 25H2 follow-up work narrows the current live stack to DiagTrack and WER-adjacent Reliability paths. The target values still do not have a direct live Procmon hit, so the setting remains research-gated instead of app-ready. |
+| Why | The decompiled function provides the exact read order and value semantics for the gate value, and the 25H2 follow-up work now includes both Procmon narrowing and address-seeded Ghidra fallback output for the unresolved DiagTrack blocks. The target values still do not have a direct live Procmon hit, so the setting remains research-gated instead of app-ready. |
 
 ---
 
@@ -36343,7 +36343,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/kernel-serialize-timer-expiration-ghidra.md | `high` | path, value, behavior, runtime-gate |
+| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/ghidra-matches.md and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/evidence.json | `high` | path, value, behavior, runtime-gate |
 
 **Validation proof**
 

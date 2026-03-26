@@ -68,7 +68,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.kernel-dpc-watchdog-period` | deprecated | Class E | `research/records/system.kernel-dpc-watchdog-period.review.json` | `968305346ef6df3f84494711ae38d007f00c6c8b7b202d884967f5ed3b415944` | `50918c9775cf230fcfb42bd1b4fbdf60619c9870e00912e798dc04b9300be894` | 6 |
 | `system.kernel-ideal-dpc-rate` | deprecated | Class E | `research/records/system.kernel-ideal-dpc-rate.review.json` | `595a46c611fbc1a48c1b327d08f937f898d711fff3174c7a8299709a92aa6a6a` | `d01a67b9895785d163758d28753068ab0659ef56dfee572e23e8e53c426648d2` | 3 |
 | `system.kernel-minimum-dpc-rate` | deprecated | Class E | `research/records/system.kernel-minimum-dpc-rate.review.json` | `d7853f873e4c78f061bd0d6a07d2b6c27c77b9e6518740b09ab1b68822fb523c` | `1b4057c538c7e5d6fa6933ab7db5c9e6173a88b304e276203c1b54fad8b9e467` | 3 |
-| `system.kernel-serialize-timer-expiration` | deprecated | Class E | `research/records/system.kernel-serialize-timer-expiration.review.json` | `57299faf109f4fcd878b63208bb5b4c889403e5989180be25d6cafecf131e3f5` | `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b` | 3 |
+| `system.kernel-serialize-timer-expiration` | deprecated | Class E | `research/records/system.kernel-serialize-timer-expiration.review.json` | `6539d4616a45ad9a2c37a5052895ecd3773e829b5ce47fe24c567a3b9c96e640` | `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b` | 3 |
 | `system.reduce-shutdown-timeouts` | deprecated | Class E | `research/records/system.reduce-shutdown-timeouts.review.json` | `d89016240373d5977ebd49970f76765b78f87f8348952e10470811106b9c8f56` | `8d3bb590278c6e34733c21ab517e01a727f9f05c35f7d51103adf37362b3b297` | 5 |
 | `system.services.disable-print-device-configuration` | deprecated | Class E | `research/records/system.services.disable-print-device-configuration.json` | `8147de1c9627c0bc88a854aef8cf463f21a2c5b9255832a5f60ad28805b1d06c` | `f333c4468e17fd19179a33e846763dc5a68b34097d957eaf8e77063a40fd0dfe` | 3 |
 | `system.services.disable-print-scan-broker` | deprecated | Class E | `research/records/system.services.disable-print-scan-broker.json` | `6ea8502da9afaa4d38568a8163dd8129d16aaf565d6a6106b15a80bc645bea98` | `39fb6e1b1beb04801e076834aa1290ffe1685554fc3841a198026b8d61588f70` | 3 |
@@ -285,7 +285,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | `68b9682efdb74f02caf54ef4853cf0818afbc4d6eb6fd59994e892bb9bab31f7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | `5e265f012e9edd741dc2b9b40796707e7a1417701a7465a5063c8c3084602962` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
 | `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | `bc4ec8a29daf615b17de5fb9665e60d5f9da339be243aa6929173f4e535542ee` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 7 |
-| `system.reliability-timestamp-enabled` | validated | Class B | `research/records/system.reliability-timestamp-enabled.review.json` | `679e6a7204f80ebd08ac7e03007fa1b516ee39b37eacc9bc6cbf7337dd50921d` | `21d322cd4c59adefae690948579f154fbc417a9bc4673757927b30d381146720` | 5 |
+| `system.reliability-timestamp-enabled` | validated | Class B | `research/records/system.reliability-timestamp-enabled.review.json` | `4645cfd09460b786b92e9f8cc4ac990844234b2ace23150deb20f877bb228397` | `8698fda36064a2b76dc115806663de5c8aa83a0be905c4750413c21a085cfecd` | 5 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
 | `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | `73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
@@ -1604,7 +1604,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-serialize-timer-expiration.review.json`
-- Source SHA256: `57299faf109f4fcd878b63208bb5b4c889403e5989180be25d6cafecf131e3f5`
+- Source SHA256: `6539d4616a45ad9a2c37a5052895ecd3773e829b5ce47fe24c567a3b9c96e640`
 - Proof SHA256: `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b`
 
 **Summary:** Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\SerializeTimerExpiration = 1, and the decompiled kernel timer-table initialization path now shows the raw gate and fallback behavior, but this research pass did not capture a primary Microsoft source for the exact registry setting.
@@ -1615,7 +1615,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| `ghidra-serialize-timer-expiration-gate` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/kernel-serialize-timer-expiration-ghidra.md |
+| `ghidra-serialize-timer-expiration-gate` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/ghidra-matches.md and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/evidence.json |
 
 **Validation proof**
 
@@ -7906,10 +7906,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/system.reliability-timestamp-enabled.review.json`
-- Source SHA256: `679e6a7204f80ebd08ac7e03007fa1b516ee39b37eacc9bc6cbf7337dd50921d`
-- Proof SHA256: `21d322cd4c59adefae690948579f154fbc417a9bc4673757927b30d381146720`
+- Source SHA256: `4645cfd09460b786b92e9f8cc4ac990844234b2ace23150deb20f877bb228397`
+- Proof SHA256: `8698fda36064a2b76dc115806663de5c8aa83a0be905c4750413c21a085cfecd`
 
-**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, but the exact target values still have no live Procmon hit.
+**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, and the new address-seeded Ghidra fallback now keeps the unresolved DiagTrack blocks in repo evidence, but the exact target values still have no live Procmon hit.
 
 **Evidence**
 
@@ -7917,7 +7917,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
-| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/diagtrack-reliability-ghidra.md |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/ghidra-matches.md and [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/evidence.json |
 | `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) |
 | `vm-reliability-follow-up-20260326` | `procmon-trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) |
 
@@ -7927,7 +7927,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
 | Exact quote / path | RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software//Policies//Microsoft//Windows NT//Reliability", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L"TimeStampEnabled", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L"TimeStampInterval", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180 |
-| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll and an adjacent Reliability/PBR read on DiagTrack restart, but the exact target values still have no live Procmon hit. |
+| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured an adjacent Reliability/PBR read on DiagTrack restart, but the exact target values still have no live Procmon hit. |
 
 ---
 

@@ -16,7 +16,6 @@ param(
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging\ghidra-probes',
     [string]$GuestOutputRoot = 'C:\Tools\GhidraProbes',
     [string]$GuestProjectRoot = 'C:\Tools\GhidraProjects',
-    [string]$GuestGhidraRoot = 'C:\Tools\Ghidra',
     [switch]$NoAnalysis
 )
 
@@ -35,14 +34,16 @@ $hostRunner = Join-Path $hostRoot 'run-ghidra-probe-inner.ps1'
 $guestRunner = Join-Path $guestRoot 'run-ghidra-probe-inner.ps1'
 $hostScript = Join-Path $hostRoot 'ExportStringXrefs.java'
 $guestScript = Join-Path $guestRoot 'ExportStringXrefs.java'
-$hostMarkdown = Join-Path $hostRoot "$OutputName.md"
-$guestMarkdown = Join-Path $guestRoot "$OutputName.md"
-$hostStdout = Join-Path $hostRoot "$OutputName.stdout.txt"
-$guestStdout = Join-Path $guestRoot "$OutputName.stdout.txt"
-$hostStderr = Join-Path $hostRoot "$OutputName.stderr.txt"
-$guestStderr = Join-Path $guestRoot "$OutputName.stderr.txt"
-$hostMeta = Join-Path $hostRoot 'metadata.json'
-$guestMeta = Join-Path $guestRoot 'metadata.json'
+$hostMarkdown = Join-Path $hostRoot 'ghidra-matches.md'
+$guestMarkdown = Join-Path $guestRoot 'ghidra-matches.md'
+$hostEvidence = Join-Path $hostRoot 'evidence.json'
+$guestEvidence = Join-Path $guestRoot 'evidence.json'
+$hostRunLog = Join-Path $hostRoot 'ghidra-run.log'
+$guestRunLog = Join-Path $guestRoot 'ghidra-run.log'
+$hostStdout = Join-Path $hostRoot 'ghidra-stdout.txt'
+$guestStdout = Join-Path $guestRoot 'ghidra-stdout.txt'
+$hostStderr = Join-Path $hostRoot 'ghidra-stderr.txt'
+$guestStderr = Join-Path $guestRoot 'ghidra-stderr.txt'
 $patternPayload = ($Patterns | ForEach-Object { $_.Trim() } | Where-Object { $_ }) -join '|||'
 
 New-Item -ItemType Directory -Path $hostRoot -Force | Out-Null
@@ -66,13 +67,19 @@ param(
     [string]$MarkdownPath,
 
     [Parameter(Mandatory = $true)]
+    [string]$EvidencePath,
+
+    [Parameter(Mandatory = $true)]
+    [string]$RunLogPath,
+
+    [Parameter(Mandatory = $true)]
     [string]$StdoutPath,
 
     [Parameter(Mandatory = $true)]
     [string]$StderrPath,
 
     [Parameter(Mandatory = $true)]
-    [string]$MetadataPath,
+    [string]$ProbeName,
 
     [Parameter(Mandatory = $true)]
     [string]$PatternPayload,
@@ -81,32 +88,25 @@ param(
 )
 
 $Patterns = @($PatternPayload -split '\|\|\|' | Where-Object { $_ })
-
 $ErrorActionPreference = 'Stop'
 
 New-Item -ItemType Directory -Path (Split-Path -Parent $MarkdownPath) -Force | Out-Null
 New-Item -ItemType Directory -Path $ProjectRoot -Force | Out-Null
+
 $proc = $null
 $failure = $null
-$meta = [ordered]@{
-    generated_utc = [DateTime]::UtcNow.ToString('o')
-    target_binary = $TargetBinary
-    project_root = $ProjectRoot
-    project_name = $ProjectName
-    script_path = $ScriptPath
-    markdown_path = $MarkdownPath
-    stdout_path = $StdoutPath
-    stderr_path = $StderrPath
-    exit_code = $null
-    markdown_exists = [bool](Test-Path $MarkdownPath)
-    stdout_exists = [bool](Test-Path $StdoutPath)
-    stderr_exists = [bool](Test-Path $StderrPath)
-    patterns = $Patterns
-    failure = $null
-    status = 'started'
-}
 
-$meta | ConvertTo-Json -Depth 6 | Set-Content -Path $MetadataPath -Encoding UTF8
+$initialEvidence = [ordered]@{
+    binary = [System.IO.Path]::GetFileName($TargetBinary)
+    probe = $ProbeName
+    timestamp = [DateTime]::UtcNow.ToString('o')
+    ghidra_no_function_fallback = $false
+    matches = @()
+    exit_code = $null
+    status = 'started'
+    failure = $null
+}
+$initialEvidence | ConvertTo-Json -Depth 6 | Set-Content -Path $EvidencePath -Encoding UTF8
 
 try {
     $analyzeHeadless = Get-ChildItem -Path 'C:\Tools\Ghidra' -Recurse -Filter 'analyzeHeadless.bat' -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -127,7 +127,7 @@ try {
 
     $args += @(
         '-scriptPath', (Split-Path -Parent $ScriptPath),
-        '-postScript', (Split-Path -Leaf $ScriptPath), $MarkdownPath
+        '-postScript', (Split-Path -Leaf $ScriptPath), $MarkdownPath, $EvidencePath, $ProbeName
     ) + $Patterns + @('-deleteProject')
 
     $proc = Start-Process -FilePath $analyzeHeadless.FullName `
@@ -141,15 +141,39 @@ catch {
 }
 
 $exitCode = if ($proc) { $proc.ExitCode } else { 1 }
-$meta.generated_utc = [DateTime]::UtcNow.ToString('o')
-$meta.exit_code = $exitCode
-$meta.markdown_exists = [bool](Test-Path $MarkdownPath)
-$meta.stdout_exists = [bool](Test-Path $StdoutPath)
-$meta.stderr_exists = [bool](Test-Path $StderrPath)
-$meta.failure = $failure
-$meta.status = if ($exitCode -eq 0) { 'completed' } else { 'failed' }
+$logParts = @()
+if (Test-Path $StdoutPath) {
+    $logParts += Get-Content -Path $StdoutPath -Raw
+}
+if (Test-Path $StderrPath) {
+    $stderrText = Get-Content -Path $StderrPath -Raw
+    if (-not [string]::IsNullOrWhiteSpace($stderrText)) {
+        $logParts += $stderrText
+    }
+}
+$logText = ($logParts -join [Environment]::NewLine).Trim()
+Set-Content -Path $RunLogPath -Value $logText -Encoding UTF8
 
-$meta | ConvertTo-Json -Depth 6 | Set-Content -Path $MetadataPath -Encoding UTF8
+$evidence = if (Test-Path $EvidencePath) {
+    Get-Content -Path $EvidencePath -Raw | ConvertFrom-Json
+}
+else {
+    [pscustomobject]@{
+        binary = [System.IO.Path]::GetFileName($TargetBinary)
+        probe = $ProbeName
+        timestamp = [DateTime]::UtcNow.ToString('o')
+        ghidra_no_function_fallback = $false
+        matches = @()
+    }
+}
+
+$evidence | Add-Member -NotePropertyName exit_code -NotePropertyValue $exitCode -Force
+$evidence | Add-Member -NotePropertyName status -NotePropertyValue (if ($exitCode -eq 0) { 'completed' } else { 'failed' }) -Force
+$evidence | Add-Member -NotePropertyName failure -NotePropertyValue $failure -Force
+$evidence | Add-Member -NotePropertyName markdown_exists -NotePropertyValue ([bool](Test-Path $MarkdownPath)) -Force
+$evidence | Add-Member -NotePropertyName run_log_exists -NotePropertyValue ([bool](Test-Path $RunLogPath)) -Force
+$evidence | ConvertTo-Json -Depth 8 | Set-Content -Path $EvidencePath -Encoding UTF8
+
 if ($exitCode -ne 0) {
     exit $exitCode
 }
@@ -209,7 +233,10 @@ $vmrunArgs = @(
     '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
     'runProgramInGuest', $VmPath,
     'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',
+    '-NonInteractive',
     '-NoProfile',
+    '-WindowStyle',
+    'Hidden',
     '-ExecutionPolicy',
     'Bypass',
     '-File',
@@ -224,12 +251,16 @@ $vmrunArgs = @(
     $guestScript,
     '-MarkdownPath',
     $guestMarkdown,
+    '-EvidencePath',
+    $guestEvidence,
+    '-RunLogPath',
+    $guestRunLog,
     '-StdoutPath',
     $guestStdout,
     '-StderrPath',
     $guestStderr,
-    '-MetadataPath',
-    $guestMeta,
+    '-ProbeName',
+    $OutputName,
     '-PatternPayload',
     $patternPayload
 )
@@ -240,20 +271,39 @@ if ($NoAnalysis) {
 
 Invoke-Vmrun -Arguments $vmrunArgs -IgnoreExitCode | Out-Null
 
-Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestMeta, $hostMeta) -IgnoreExitCode | Out-Null
-Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestStdout, $hostStdout) -IgnoreExitCode | Out-Null
-Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestStderr, $hostStderr) -IgnoreExitCode | Out-Null
-Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestMarkdown, $hostMarkdown) -IgnoreExitCode | Out-Null
+foreach ($pair in @(
+    @{ Guest = $guestEvidence; Host = $hostEvidence },
+    @{ Guest = $guestRunLog; Host = $hostRunLog },
+    @{ Guest = $guestMarkdown; Host = $hostMarkdown },
+    @{ Guest = $guestStdout; Host = $hostStdout },
+    @{ Guest = $guestStderr; Host = $hostStderr }
+)) {
+    Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $pair.Guest, $pair.Host) -IgnoreExitCode | Out-Null
+}
 
-$meta = if (Test-Path $hostMeta) {
-    Get-Content -Path $hostMeta -Raw | ConvertFrom-Json
+$legacyMarkdown = Join-Path $hostRoot ("{0}.md" -f $OutputName)
+if (Test-Path $hostMarkdown) {
+    Copy-Item -Path $hostMarkdown -Destination $legacyMarkdown -Force
+}
+
+$evidence = if (Test-Path $hostEvidence) {
+    Get-Content -Path $hostEvidence -Raw | ConvertFrom-Json
 }
 else {
     $null
 }
 
-if (-not $meta -or $null -eq $meta.exit_code) {
+if (-not $evidence) {
     throw "Guest Ghidra probe did not complete cleanly. See $hostRoot"
+}
+
+if ($null -eq $evidence.exit_code) {
+    $evidence | Add-Member -NotePropertyName exit_code -NotePropertyValue 0 -Force
+    $evidence | Add-Member -NotePropertyName status -NotePropertyValue 'completed' -Force
+    $evidence | Add-Member -NotePropertyName failure -NotePropertyValue $null -Force
+    $evidence | Add-Member -NotePropertyName markdown_exists -NotePropertyValue ([bool](Test-Path $hostMarkdown)) -Force
+    $evidence | Add-Member -NotePropertyName run_log_exists -NotePropertyValue ([bool](Test-Path $hostRunLog)) -Force
+    $evidence | ConvertTo-Json -Depth 8 | Set-Content -Path $hostEvidence -Encoding UTF8
 }
 
 [ordered]@{
@@ -261,12 +311,13 @@ if (-not $meta -or $null -eq $meta.exit_code) {
     output_name = $OutputName
     host_output_root = $hostRoot
     markdown = if (Test-Path $hostMarkdown) { $hostMarkdown } else { $null }
+    evidence = $hostEvidence
+    run_log = if (Test-Path $hostRunLog) { $hostRunLog } else { $null }
     stdout = if (Test-Path $hostStdout) { $hostStdout } else { $null }
     stderr = if (Test-Path $hostStderr) { $hostStderr } else { $null }
-    metadata = $hostMeta
     patterns = $Patterns
 } | ConvertTo-Json -Depth 6
 
-if ($meta -and $meta.exit_code -ne 0) {
-    throw "Guest Ghidra probe failed with exit code $($meta.exit_code). See $hostStdout and $hostStderr."
+if ($evidence -and $evidence.exit_code -ne 0) {
+    throw "Guest Ghidra probe failed with exit code $($evidence.exit_code). See $hostRunLog."
 }
