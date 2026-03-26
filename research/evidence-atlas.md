@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 227 |
-| Class B | 15 |
+| Class A | 229 |
+| Class B | 13 |
 | Class E | 54 |
 
 ## Category coverage
@@ -18698,12 +18698,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Registry Policy` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-ntfs-encryption.json](records/security.disable-ntfs-encryption.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -18727,10 +18727,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -18808,12 +18808,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
 | Needs VM validation | `False` |
-| Why | The official EFS policy surface is now validated and the app writes only the documented policy path. The setting remains high-impact and is not recommended for general users because it disables EFS on NTFS volumes. |
+| Why | The official EFS policy surface is validated, the app writes the documented policy path, and the unset baseline is known. This is app-ready evidence-wise, but it stays non-default because it disables EFS on NTFS volumes and needs a reboot to take effect. |
 
 ---
 
@@ -19327,12 +19327,12 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Security` |
 | Area | `Exploit Protection` |
 | Scope | `device` |
 | Source file | [research/records/security.disable-system-mitigations.review.json](records/security.disable-system-mitigations.review.json) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -19356,10 +19356,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Partial |
-| Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Label | `Class A` |
+| Title | App Ready |
+| Action state | `actionable` |
+| Gating reason | This record is app-ready and can stay one-click actionable. |
 
 **Sources**
 
@@ -19436,12 +19436,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft's documented exploit protection surface is XML, Windows Security, and the ProcessMitigation cmdlets. The app now imports the documented XML baseline and restores from a captured backup XML via the same command surface. The tweak remains risky for general users because exploit protection changes can affect application compatibility. |
+| Why | Microsoft's documented exploit protection surface is XML, Windows Security, and the ProcessMitigation cmdlets. The app imports the documented XML baseline and restores from a captured backup XML through the same command surface, so this is app-ready evidence-wise. It still stays non-default because exploit protection changes can affect application compatibility. |
 
 ---
 

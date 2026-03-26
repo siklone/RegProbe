@@ -163,15 +163,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": false,
     "needs_vm_validation": false,
-    "why": "The official EFS policy surface is now validated and the app writes only the documented policy path. The setting remains high-impact and is not recommended for general users because it disables EFS on NTFS volumes.",
+    "why": "The official EFS policy surface is validated, the app writes the documented policy path, and the unset baseline is known. This is app-ready evidence-wise, but it stays non-default because it disables EFS on NTFS volumes and needs a reboot to take effect.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-20T20:10:00Z",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx",
     "exact_quote_or_path": "research/evidence-files/external/c/Windows/PolicyDefinitions/FileSys.admx (NtfsDisableEncryption enabledValue=1, disabledValue=0); research/evidence-files/external/c/PolicyDefinitions/en-US/FileSys.adml (enabling the setting prevents access to and creation of encrypted files and requires a reboot to take effect).",

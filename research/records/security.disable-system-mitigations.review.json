@@ -201,15 +201,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft's documented exploit protection surface is XML, Windows Security, and the ProcessMitigation cmdlets. The app now imports the documented XML baseline and restores from a captured backup XML via the same command surface. The tweak remains risky for general users because exploit protection changes can affect application compatibility.",
+    "why": "Microsoft's documented exploit protection surface is XML, Windows Security, and the ProcessMitigation cmdlets. The app imports the documented XML baseline and restores from a captured backup XML through the same command surface, so this is app-ready evidence-wise. It still stays non-default because exploit protection changes can affect application compatibility.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T03:02:00+03:00",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/import-export-exploit-protection-emet-xml?view=o365-worldwide",
     "exact_quote_or_path": "Get-ProcessMitigation -RegistryConfigFilePath filename.xml; Set-ProcessMitigation -PolicyFilePath filename.xml; ExploitGuard.admx policy key: HKLM\\Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection, value ExploitProtectionSettings",

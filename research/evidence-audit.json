@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T11:14:41.062631Z",
+  "generated_utc": "2026-03-26T11:19:55.681180Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
-      "A": 227,
-      "B": 15
+      "A": 229,
+      "B": 13
     },
     "lane_counts": {
       "official-policy": 235,
@@ -13,8 +13,8 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 227,
-      "decision-gate": 15
+      "none": 229,
+      "decision-gate": 13
     }
   },
   "entries": [
@@ -3150,9 +3150,9 @@
     {
       "record_id": "security.disable-ntfs-encryption",
       "tweak_id": "security.disable-ntfs-encryption",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": false,
       "ghidra": false,
@@ -3160,10 +3160,10 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/security.disable-ntfs-encryption.json",
       "incident_ids": []
@@ -3255,9 +3255,9 @@
     {
       "record_id": "security.disable-system-mitigations",
       "tweak_id": "security.disable-system-mitigations",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "official-doc",
       "official": true,
       "procmon": false,
       "ghidra": false,
@@ -3265,10 +3265,10 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/security.disable-system-mitigations.review.json",
       "incident_ids": []

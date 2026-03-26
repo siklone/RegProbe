@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 227 |
-| Class B | 15 |
+| Class A | 229 |
+| Class B | 13 |
 | Class E | 54 |
 
 ## Record index
@@ -225,12 +225,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | `8374e8dd9861f1560bd06dcb771c148ada060215a84df63ef0b8e7fda1910bcc` | `925541f217a1d4c60a7246351a333f64066baacbfd67704c40048e23d0014171` | 7 |
 | `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | `aad660037e4f89c2479eb4c19357a6908ff981a97aea03e2b4fa2fa4f8c570b7` | `386e129dd48d98630296f350e39aacb92fe6eee49ef2002a109f7b63548ac738` | 3 |
 | `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | `5956cb5646d395f04a7eca5a6d5c76de681724c9ebaaa209b608529c587efe8e` | `e288d7bf00c18ec28e6e3f6386c1726691644448ec53686b33c7df05b67b2f23` | 6 |
-| `security.disable-ntfs-encryption` | validated | Class B | `research/records/security.disable-ntfs-encryption.json` | `ee1b72697d3f18eff1401e8268401e3c0b6c1e0e1919edbaac39ee638e9a8b65` | `b287871882734b330aa3c02b82ab84c99a0bbada1e231142ef89e06ea591e2fb` | 3 |
+| `security.disable-ntfs-encryption` | validated | Class A | `research/records/security.disable-ntfs-encryption.json` | `c055194850f16ca518e9036d1e18551bb40afecc48f4b74499defe53dcdb3ff9` | `b287871882734b330aa3c02b82ab84c99a0bbada1e231142ef89e06ea591e2fb` | 3 |
 | `security.disable-p2p-updates` | validated | Class A | `research/records/security.disable-p2p-updates.review.json` | `65b93f1ab297ff02c71139c4d63ad116c169aaa2b80e285cce64c59b435bea28` | `d03ea5e3fbbc1b7c4ef30c8f191194a775e041cf90c011c49bec42fd107976f4` | 3 |
 | `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | `80746d47f97114d1db9a127bc2498f391d6cb2a502170f0189d0c5dbbb5f146a` | `6909396177533ec231249292c296a5924d7a407d3c2361d964b2ff9176400f91` | 3 |
 | `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | `57b53e92ffc85e79164ab3ee47ec29baee693ad8d121ac8442687f48e30e5f22` | `6a7cb611bd2ed6274529a6d9fddc4d9869fad2dbc9566fd585cbafcc1bc58d09` | 3 |
 | `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | `176d2e3f81c5efba41cea92abf00c4decc76c3b726f6aa07ba76701315d4f6ff` | `b52d35b2f62e6fa3444fcbce71f2be155f69f92033a170832eaceac918b9a05d` | 4 |
-| `security.disable-system-mitigations` | validated | Class B | `research/records/security.disable-system-mitigations.review.json` | `910958aa8d784547df9eb413cd8f44a72305a1d96c78e7ad81b37b1a518915f7` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
+| `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | `d7d9c00810fa405392636a8c358fb780a9cc70e56d5059e48c791df258830cf1` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
 | `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | `455e9a5d4dc7d1e5fa1fae7e7b2b8cd809ae7e48c05353c7c243c5f8c7204f22` | `1acc5faa89bf7fcf0a8aec840be259cb1d7e54c7ebcadf22938bea57da9b891a` | 3 |
 | `security.disable-windows-firewall` | validated | Class B | `research/records/security.disable-windows-firewall.review.json` | `4590977091fcac1fa90efd3b491af4e6b1c0fadaa287f94e4cf6ab1623a12c95` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
 | `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | `6100712f6dcc813d46e9a43ba572a7a6ab272e06db26c8713aaf0ed76176d055` | `4f53b0c7e30cc0466e386ac3257615c8ee3e7f8ce7de9009ad21fd604791f54b` | 4 |
@@ -6159,9 +6159,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `security.disable-ntfs-encryption`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/security.disable-ntfs-encryption.json`
-- Source SHA256: `ee1b72697d3f18eff1401e8268401e3c0b6c1e0e1919edbaac39ee638e9a8b65`
+- Source SHA256: `c055194850f16ca518e9036d1e18551bb40afecc48f4b74499defe53dcdb3ff9`
 - Proof SHA256: `b287871882734b330aa3c02b82ab84c99a0bbada1e231142ef89e06ea591e2fb`
 
 **Summary:** Validated record with machine-checkable proof for the official NTFS encryption policy surface. The app now writes only the documented policy path.
@@ -6300,9 +6300,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `security.disable-system-mitigations`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/security.disable-system-mitigations.review.json`
-- Source SHA256: `910958aa8d784547df9eb413cd8f44a72305a1d96c78e7ad81b37b1a518915f7`
+- Source SHA256: `d7d9c00810fa405392636a8c358fb780a9cc70e56d5059e48c791df258830cf1`
 - Proof SHA256: `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4`
 
 **Summary:** Microsoft documents exploit protection system mitigations through the Windows Security app, the ProcessMitigation PowerShell cmdlets, and an Exploit Guard policy that points to an XML configuration file. The app now imports the documented XML policy surface instead of writing raw MitigationOptions and MitigationAuditOptions blobs directly under the kernel registry path.
