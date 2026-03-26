@@ -61,21 +61,17 @@ function Restore-ValueState {
         [hashtable]$State
     )
 
-    if (-not $State.path_exists) {
-        if (Test-Path $Path) {
-            Remove-Item -Path $Path -Recurse -Force -ErrorAction SilentlyContinue
-        }
-        return
-    }
-
-    New-Item -Path $Path -Force | Out-Null
-
     if ($State.value_exists) {
+        if (-not (Test-Path $Path)) {
+            New-Item -Path $Path -Force | Out-Null
+        }
         $propertyType = if ($State.value -is [int] -or $State.value -is [long]) { 'DWord' } else { 'String' }
         New-ItemProperty -Path $Path -Name $Name -PropertyType $propertyType -Value $State.value -Force | Out-Null
     }
     else {
-        Remove-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue
+        if (Test-Path $Path) {
+            Remove-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue
+        }
     }
 }
 
@@ -123,7 +119,9 @@ try {
         Remove-ItemProperty -Path $RegistryPath -Name $ValueName -ErrorAction SilentlyContinue
     }
     elseif ($Mode -eq 'set') {
-        New-Item -Path $RegistryPath -Force | Out-Null
+        if (-not (Test-Path $RegistryPath)) {
+            New-Item -Path $RegistryPath -Force | Out-Null
+        }
         New-ItemProperty -Path $RegistryPath -Name $ValueName -PropertyType DWord -Value $State -Force | Out-Null
     }
 
