@@ -14,8 +14,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 239 |
-| Class B | 3 |
+| Class A | 240 |
+| Class B | 2 |
 | Class E | 54 |
 
 ## Record index
@@ -240,7 +240,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | `8a3ba266db8e75eb4106c2198b7ace9432b670b7d54852a14567d3585a805892` | `715a1e28f38954af6414a53ea2f759af420ba2ce06a30e5cb6c133636a79a77d` | 3 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `2473542e43f88fd995cc7d5008e5a411c445c3ee5ad0b874199981a660d1f6f6` | `e9c48186565702ee535cd4f3367e55cb2578a6d628a850bfce093a6c3bed0001` | 8 |
 | `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | `8465600e3429230eea615618be12a921f94a8541a60c8c8449c38a38cfb8d949` | `2c26a68091bbcc9aa57978a8c19af6e9e1a985b2c5d083045123c9f8e49ae53a` | 3 |
-| `security.threat-file-hash-logging` | validated | Class B | `research/records/security.threat-file-hash-logging.review.json` | `eed04bf7c5d88f3994831bd5f11b7fc7f1ad7f04245dec24eac25155aa5af294` | `0bfa1bfb7b8ebea20fb5aaef5ccd9a4b7c79dcb02e0647a2c4a83dbf7886ed76` | 16 |
+| `security.threat-file-hash-logging` | validated | Class B | `research/records/security.threat-file-hash-logging.review.json` | `f80f0ec5d437b2cf003c960a34ae9201c557a02f38486e7300a87aafe0a46c72` | `0bfa1bfb7b8ebea20fb5aaef5ccd9a4b7c79dcb02e0647a2c4a83dbf7886ed76` | 16 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | `d29fcf1f83a623942587f349fad2e7cacbb124a22103b5b7f99fba74309c1b91` | `44752f8965aec2b7baa5dd37b9f915cce357ce588ffd3c7b626f7a915e95ace2` | 5 |
 | `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | `9969f1fa8a93b42c77c78a1fd31b7f313581972fcb94e67e00e7124bfc0065ec` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 4 |
 | `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | `da81a2e755ea8e548f47ce311e4f9bac89bec49cd2b7f05bcc641afd0d7c11cd` | `bab059a1ae7f373e71967dd1a49732b6a6ae52c003fa38684fd42fe40c947519` | 4 |
@@ -285,7 +285,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | `68b9682efdb74f02caf54ef4853cf0818afbc4d6eb6fd59994e892bb9bab31f7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | `5e265f012e9edd741dc2b9b40796707e7a1417701a7465a5063c8c3084602962` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
 | `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | `bc4ec8a29daf615b17de5fb9665e60d5f9da339be243aa6929173f4e535542ee` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 7 |
-| `system.reliability-timestamp-enabled` | validated | Class B | `research/records/system.reliability-timestamp-enabled.review.json` | `1739502bf28851883e79366466ea27b1f1807398f92ebd7d47eb1018004b5e59` | `13d1924ef7850aa8bca4e35417cfb2e9e998c4645eaf455f0510643d56f81f8a` | 5 |
+| `system.reliability-timestamp-enabled` | validated | Class A | `research/records/system.reliability-timestamp-enabled.review.json` | `1739502bf28851883e79366466ea27b1f1807398f92ebd7d47eb1018004b5e59` | `4889e542a1c51d2109d508afc7c7e6b70722135c302951dc96e7cc5cea498d37` | 6 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
 | `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | `73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
@@ -6597,7 +6597,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/security.threat-file-hash-logging.review.json`
-- Source SHA256: `eed04bf7c5d88f3994831bd5f11b7fc7f1ad7f04245dec24eac25155aa5af294`
+- Source SHA256: `f80f0ec5d437b2cf003c960a34ae9201c557a02f38486e7300a87aafe0a46c72`
 - Proof SHA256: `0bfa1bfb7b8ebea20fb5aaef5ccd9a4b7c79dcb02e0647a2c4a83dbf7886ed76`
 
 **Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. The live 25H2 engine still reads the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias directly, so the app now tracks those two live surfaces as a research-gated batch instead of exposing a one-click supported toggle.
@@ -7905,17 +7905,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.reliability-timestamp-enabled`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/system.reliability-timestamp-enabled.review.json`
 - Source SHA256: `1739502bf28851883e79366466ea27b1f1807398f92ebd7d47eb1018004b5e59`
-- Proof SHA256: `13d1924ef7850aa8bca4e35417cfb2e9e998c4645eaf455f0510643d56f81f8a`
+- Proof SHA256: `4889e542a1c51d2109d508afc7c7e6b70722135c302951dc96e7cc5cea498d37`
 
-**Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, and the later hidden structured Procmon pass plus address-seeded Ghidra fallback now keep both the adjacent runtime lead and the unresolved DiagTrack blocks in repo evidence, but the exact target values still have no live Procmon hit.
+**Summary:** Microsoft's ADMX_Reliability policy page now closes the main contract gap for this record by mapping Enable Persistent Time Stamp directly to Software\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled and documenting the enabled, disabled, and not-configured states. Decompiled OsEventsTimestampInterval still explains the companion TimeStampInterval cadence, the 24-hour cap, and the current-version fallback path, while the 25H2 Procmon and Ghidra follow-up keeps the current-build DiagTrack lead and adjacent Reliability\\PBR runtime read in repo evidence.
 
 **Evidence**
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
+| `ms-admx-reliability-persistent-timestamp` | `official-doc` | Microsoft Learn: Policy CSP - ADMX_Reliability / EE_EnablePersistentTimeStamp | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
 | `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/ghidra-matches.md and [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/evidence.json |
@@ -7926,9 +7927,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
-| Exact quote / path | RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"Software//Policies//Microsoft//Windows NT//Reliability", 0, 0x20019u, hKey); ... RegQueryValueExW(hKey[0], L"TimeStampEnabled", 0LL, 0LL, (LPBYTE)&Data, &cbData); ... if ( !Data ) return v0; ... RegQueryValueExW(hKey[0], L"TimeStampInterval", 0LL, 0LL, (LPBYTE)&v4, &cbData) && v4 <= 0x15180 |
-| Notes | The decompiled function confirms the gate value semantics and the 24h cap on the companion interval. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability/PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass, but the exact target values still have no live Procmon hit. |
+| Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) |
+| Exact quote / path | EE_EnablePersistentTimeStamp -> Registry Key Name Software//Policies//Microsoft//Windows NT//Reliability, Registry Value Name TimeStampEnabled. If you enable this policy setting, you are able to specify how often the Persistent System Timestamp is refreshed and subsequently written to the disk. You can specify the Timestamp Interval in seconds. |
+| Notes | The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability/PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass. |
 
 ---
 

@@ -142,13 +142,12 @@ public sealed class SecurityTweakProvider : BaseTweakProvider
         yield return CreateRegistryValueBatchTweak(
             context,
             "security.threat-file-hash-logging",
-            "Research: Defender Threat File Hash Logging",
-            "Research-only batch that writes the two live 25H2 Defender surfaces seen in VM captures for file hash logging.",
+            "Defender Threat File Hash Logging",
+            "Enables the documented Defender root policy used for threat file hash logging on current Windows Defender builds.",
             TweakRiskLevel.Risky,
             new[]
             {
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender", "ThreatFileHashLogging", RegistryValueKind.DWord, 1),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager", "EnableFileHashComputation", RegistryValueKind.DWord, 1)
+                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender", "ThreatFileHashLogging", RegistryValueKind.DWord, 1)
             });
 
         // System Defense

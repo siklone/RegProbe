@@ -366,10 +366,10 @@ What is still unresolved:
 Current state:
 
 - validated
-- not app-mapped
-- research-gated
-- `Class C`
+- app-mapped to the documented root policy
+- one-click allowed
+- `Class A`
 
-That is the right class for now.
+That is the right class now.
 
-The key exists, the values are partly understood, and the live runtime story is much tighter now. But the active current-build control surface is still split, so this stays research-gated instead of moving into a one-click app write.
+The important line is the app contract, not every alias. Microsoft Support publishes `ThreatFileHashLogging = 1` on the Defender root policy path for Windows Defender Antivirus, and the 25H2 VM showed `MsMpEng.exe` reading that exact value directly. The app now stays on that documented root path. The Policy Manager alias and the quiet `MpEngine` path remain current-build research notes, and the missing `1120` event on the PE follow-up stays an open behavior question rather than a blocker for the root policy surface.
