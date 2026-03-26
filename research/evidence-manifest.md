@@ -258,8 +258,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | `cbdf1bfbf8eba80ddd3269fbb3e012281a6336af9220996cb14eb7c31a670904` | `261d9d5d4c180b8f9aea9c9c1d1ee43ccceaee48dc097c14db55c6dae6fe6135` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | `0c5846e343d2009c49d0ee95532155c1c2e54d82ae7aa3716401da0d1ac4867e` | `5e65afa708e18b12b9f829486b8856146c46e9db755aad34ad4e7da317d7cc57` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | `2bde9a9fa7dcd2b74b669e0619815aabea909daa148b0482fe2804443d625e28` | `baf2b84cb20a5549d900fa1d19d0dcea1c89f2e17274d119644e9f60692e09e7` | 3 |
-| `system.disable-shortcut-arrow` | validated | Class B | `research/records/system.disable-shortcut-arrow.json` | `ba8c65528dbe6b14d8107a61175f7f56fc0f934601f26841db0e1ab88da99444` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
-| `system.disable-startup-delay` | validated | Class B | `research/records/system.disable-startup-delay.review.json` | `ed7051dc71944abb8f00301bb44726e51c1f5b02407832fe8f59b0c270c990f5` | `68c0363eea1cb8553e67e1eab19f3a0372b54623164ca43c53ea285eb96bcd87` | 5 |
+| `system.disable-shortcut-arrow` | validated | Class B | `research/records/system.disable-shortcut-arrow.json` | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
+| `system.disable-startup-delay` | validated | Class B | `research/records/system.disable-startup-delay.review.json` | `ed7051dc71944abb8f00301bb44726e51c1f5b02407832fe8f59b0c270c990f5` | `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | `2928a84edc36491332349b1b6f3ea46781b5b06f291ea7e9637518f6eea6c988` | `f6fcec491570654c4ac024edf32ddda8b69c3f20699942c9b3a9c523e6a086ed` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | `7c41be2a3c5ab8c65bb8eddc66af5960dc0b652b387699ac1b5c3393bfd7771a` | `64b00ec7502121f9ba0cf1f178f7eee681d0e2a3cad116938aec15e83189bef0` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | `0852e85453e9854f1bff5af008f1ac6d0b58c1bb87bac664c491ebaf84cb4f9c` | `506e7c06fd133ff089965473816c95fc4c494e6413adc321fb58740eb7462cf0` | 4 |
@@ -7127,7 +7127,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/system.disable-shortcut-arrow.json`
-- Source SHA256: `ba8c65528dbe6b14d8107a61175f7f56fc0f934601f26841db0e1ab88da99444`
+- Source SHA256: `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd`
 - Proof SHA256: `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc`
 
 **Summary:** Documented Shell Icons registry mapping for the shortcut-arrow overlay. Microsoft guidance shows that Shell Icons value `29` can be pointed at `%windir%\\System32\\shell32.dll,-50` to remove shortcut arrows, and removing the custom Shell Icons value restores the default overlay behavior. The app writes that exact value. A VM shell incident during the shortcut-arrow probe was reviewed and folded into the record: Explorer dropped briefly during restart, then recovered without snapshot revert.
@@ -7156,9 +7156,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/system.disable-startup-delay.review.json`
 - Source SHA256: `ed7051dc71944abb8f00301bb44726e51c1f5b02407832fe8f59b0c270c990f5`
-- Proof SHA256: `68c0363eea1cb8553e67e1eab19f3a0372b54623164ca43c53ea285eb96bcd87`
+- Proof SHA256: `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658`
 
-**Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, and the value restores back to missing cleanly.
+**Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, a bounded WPR lane captured both `missing` and `0`, and the value restores back to missing cleanly.
 
 **Evidence**
 
@@ -7169,6 +7169,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ghidra-explorer-serialize-search` | `ghidra-trace` | Ghidra headless search on explorer.exe for Serialize | [research/evidence-files/vm-tooling-staging/ghidra_explorer_serialize.txt](evidence-files/vm-tooling-staging/ghidra_explorer_serialize.txt) |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | Win25H2Clean reversible probe - Explorer startup delay | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | `procmon-startup-delay-shell-restart` | `procmon-trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [research/evidence-files/host-temp/procmon-startup-delay.pml.md](evidence-files/host-temp/procmon-startup-delay.pml.md) |
+| `wpr-startup-delay-shell-restart` | `wpr-trace` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) |
 
 **Validation proof**
 
@@ -7176,7 +7177,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | Exact quote / path | HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Serialize/StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__ |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. On 2026-03-26 a bounded WPR lane captured both the missing baseline and value 0 during Explorer restarts, with shell recovery in both states. |
 
 ---
 

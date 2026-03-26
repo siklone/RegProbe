@@ -23140,7 +23140,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, and the value restores back to missing cleanly.
+**Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, a bounded WPR lane captured both `missing` and `0`, and the value restores back to missing cleanly.
 
 **Current implementation**
 
@@ -23205,8 +23205,8 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | — | Observed Win25H2Clean baseline | The current 25H2 VM baseline leaves StartupDelayInMSec unset and Explorer still reads the Serialize path live. | vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart |
-| `value` | `0` | Observed no-delay profile | The current app and the Win25H2Clean shell trace both support 0 as the no-delay startup profile on the Explorer Serialize path. | repo-system-doc-startup-delay, app-system-provider, vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart, ghidra-explorer-serialize-search |
+| `missing` | — | Observed Win25H2Clean baseline | The current 25H2 VM baseline leaves StartupDelayInMSec unset and Explorer still reads the Serialize path live. | vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart, wpr-startup-delay-shell-restart |
+| `value` | `0` | Observed no-delay profile | The current app and the Win25H2Clean shell trace both support 0 as the no-delay startup profile on the Explorer Serialize path. | repo-system-doc-startup-delay, app-system-provider, vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart, ghidra-explorer-serialize-search, wpr-startup-delay-shell-restart |
 
 **Windows defaults**
 
@@ -23230,6 +23230,7 @@ Windows Internals references:
 | `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | [research/evidence-files/vm-tooling-staging/ghidra_explorer_serialize.txt](evidence-files/vm-tooling-staging/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [research/evidence-files/host-temp/procmon-startup-delay.pml.md](evidence-files/host-temp/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `wpr-startup-delay-shell-restart` | `wpr-trace` | `unspecified` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) | `medium` | behavior, runtime-trace, shell-health |
 
 **Validation proof**
 
@@ -23238,7 +23239,7 @@ Windows Internals references:
 | Source | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | Exact quote / path | HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Serialize/StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__ |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. On 2026-03-26 a bounded WPR lane captured both the missing baseline and value 0 during Explorer restarts, with shell recovery in both states. |
 
 **Decision**
 
@@ -23249,7 +23250,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible proof, a live Explorer Procmon trace, and a Ghidra string hit all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as current observed states, but not enough to make the tweak app-ready. |
+| Why | Win25H2Clean reversible proof, a live Explorer Procmon trace, a Ghidra string hit, and a bounded WPR shell-restart lane all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as current observed states, but not enough to make the tweak app-ready. |
 
 ---
 

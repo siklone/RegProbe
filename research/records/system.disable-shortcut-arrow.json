@@ -183,15 +183,15 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft guidance shows creating `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons`, adding string value `29`, and setting it to `%windir%\\System32\\shell32.dll,-50` for the no-arrow shortcut overlay. The app writes that exact Shell Icons override. Incident reviewed: the VM shell dropped briefly during the probe and then recovered, so this record keeps a shell-risk note even though the mapping itself is clear.",
+    "why": "Microsoft guidance shows creating `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons`, adding string value `29`, and setting it to `%windir%\\System32\\shell32.dll,-50` for the no-arrow shortcut overlay. The app writes that exact Shell Icons override. Incident reviewed: the VM shell dropped briefly during the probe and then recovered, so validation for this family should stay snapshot-first, but the mapping itself is clear enough for the live app surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T01:34:00Z",
+  "last_reviewed_utc": "2026-03-26T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p",
     "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer; create key Shell Icons; create String Value 29; set it to %windir%\\System32\\shell32.dll,-50.",
