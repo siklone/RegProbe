@@ -29,7 +29,7 @@ research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg
 
 ```text
 Source file:
-research/evidence-files/vm-tooling-staging/showtypeoverlay-result.txt
+research/evidence-files/procmon/explorer-show-type-overlay-validation-20260324/showtypeoverlay-result.txt
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowTypeOverlay
@@ -46,8 +46,8 @@ RESTORED_EXISTS=True RESTORED_VALUE=1
 ## Raw Hit Files
 
 ```text
-research/evidence-files/vm-tooling-staging/showtypeoverlay-0-hits.csv
-research/evidence-files/vm-tooling-staging/showtypeoverlay-1-hits.csv
+research/evidence-files/procmon/explorer-show-type-overlay-validation-20260324/showtypeoverlay-0-hits.csv
+research/evidence-files/procmon/explorer-show-type-overlay-validation-20260324/showtypeoverlay-1-hits.csv
 ```
 
 ## Notes

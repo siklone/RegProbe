@@ -218,7 +218,7 @@
       "evidence_id": "procmon-power-hide-lock-option",
       "kind": "procmon-trace",
       "title": "Win25H2Clean reversible probe - ShowLockOption 0/1 toggle",
-      "location": "research/evidence-files/vm-tooling-staging/power_hide_lock_option_probe.txt",
+      "location": "research/evidence-files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt",
       "summary": "The guest probe wrote ShowLockOption=0 and ShowLockOption=1, queried the live registry after each write, opened the Start menu surface twice, and restored the original state; no direct registry read lines were captured in Procmon in this capture.",
       "supports": [
         "runtime writes",

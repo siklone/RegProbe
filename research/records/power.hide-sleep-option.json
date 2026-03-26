@@ -218,7 +218,7 @@
       "evidence_id": "procmon-power-hide-sleep-option",
       "kind": "procmon-trace",
       "title": "Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle",
-      "location": "research/evidence-files/vm-tooling-staging/power_hide_sleep_option_probe.txt",
+      "location": "research/evidence-files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt",
       "summary": "The guest probe wrote ShowSleepOption=0 and ShowSleepOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the original state.",
       "supports": [
         "runtime writes",

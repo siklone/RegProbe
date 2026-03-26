@@ -167,7 +167,7 @@
       "evidence_id": "procmon-developer-mode-baseline",
       "kind": "procmon-trace",
       "title": "Procmon capture - Developer settings search reads AppModelUnlock baseline",
-      "location": "research/evidence-files/vm-tooling-staging/devmode_probe2.csv and research/evidence-files/vm-tooling-staging/devmode_probe2.txt",
+      "location": "research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.csv and research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.txt",
       "summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving NAME NOT FOUND while the developer settings page was open. The same capture also confirmed the LongPathsEnabled read path on this build.",
       "supports": [
         "path",

@@ -229,7 +229,7 @@
       "evidence_id": "procmon-disable-search-history",
       "kind": "procmon-trace",
       "title": "Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle",
-      "location": "research/evidence-files/vm-tooling-staging/search_history_probe.txt",
+      "location": "research/evidence-files/procmon/privacy.disable-search-history/search_history_probe.txt",
       "summary": "The guest probe wrote DisableSearchHistory=0 and DisableSearchHistory=1 into the interactive user policy hive, queried the live registry after each write, launched the SearchHost surface for each state, and restored the original state; no direct registry read lines were captured by Procmon in this capture.",
       "supports": [
         "runtime writes",

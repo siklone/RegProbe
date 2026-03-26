@@ -24,7 +24,7 @@ research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg
 
 ```text
 Source file:
-research/evidence-files/vm-tooling-staging/showinfotip-result.txt
+research/evidence-files/procmon/explorer-show-info-tips-validation-20260324/showinfotip-result.txt
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowInfoTip
@@ -41,8 +41,8 @@ RESTORED_VALUE=1
 ## Raw Hit Files
 
 ```text
-research/evidence-files/vm-tooling-staging/showinfotip-0-hits.csv
-research/evidence-files/vm-tooling-staging/showinfotip-1-hits.csv
+research/evidence-files/procmon/explorer-show-info-tips-validation-20260324/showinfotip-0-hits.csv
+research/evidence-files/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv
 ```
 
 ## Notes

@@ -190,7 +190,7 @@
       "evidence_id": "ghidra-diagtrack-reliability-20260326",
       "kind": "ghidra-trace",
       "title": "Our Ghidra decompilation - diagtrack.dll reliability string/xref export",
-      "location": "research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/diagtrack-reliability-ghidra.md",
+      "location": "research/evidence-files/ghidra/system.reliability-timestamp-enabled/diagtrack-reliability-ghidra.md",
       "summary": "Our 25H2 Ghidra export on diagtrack.dll found the TimeStampInterval string and additional Reliability-related strings, which narrows the live stack to DiagTrack even though the target registry read is still not visible in Procmon.",
       "supports": [
         "version-scope",

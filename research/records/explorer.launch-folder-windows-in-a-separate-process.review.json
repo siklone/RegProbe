@@ -175,7 +175,7 @@
       "evidence_id": "procmon-separateprocess-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer SeparateProcess runtime surface",
-      "location": "research/evidence-files/vm-tooling-staging/separateprocess-result.txt",
+      "location": "research/evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote SeparateProcess = 0 and SeparateProcess = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",

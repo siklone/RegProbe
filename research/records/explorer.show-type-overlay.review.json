@@ -175,7 +175,7 @@
       "evidence_id": "procmon-showtypeoverlay-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer ShowTypeOverlay runtime surface",
-      "location": "research/evidence-files/vm-tooling-staging/showtypeoverlay-result.txt",
+      "location": "research/evidence-files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowTypeOverlay = 0 and ShowTypeOverlay = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",

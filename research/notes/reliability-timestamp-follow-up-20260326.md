@@ -1,12 +1,12 @@
 Reliability timestamp follow-up on Win25H2Clean
 
 - Targeted values:
-  - `HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability\TimeStampEnabled`
-  - `HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability\TimeStampInterval`
-  - `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Reliability\TimeStampInterval`
+  - `HKLM/SOFTWARE/Policies/Microsoft/Windows NT/Reliability/TimeStampEnabled`
+  - `HKLM/SOFTWARE/Policies/Microsoft/Windows NT/Reliability/TimeStampInterval`
+  - `HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Reliability/TimeStampInterval`
 - New live leads:
   - `DiagTrack` runs as its own `svchost.exe -k utcsvc -p`
-  - `QueueReporting` runs `%windir%\system32\wermgr.exe -upload`
+  - `QueueReporting` runs `%windir%/system32/wermgr.exe -upload`
   - `wercplsupport` is demand-start for the Problem Reports control-panel surface
 
 Observed follow-up results:
@@ -14,7 +14,7 @@ Observed follow-up results:
 ```text
 Our Ghidra export on diagtrack.dll found the TimeStampInterval string on 25H2.
 Restarting DiagTrack produced an adjacent Reliability read:
-HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Reliability\PBR\LastSuccessfulRefreshTime
+HKLM/SOFTWARE/Microsoft/Windows/CurrentVersion/Reliability/PBR/LastSuccessfulRefreshTime
 ```
 
 ```text
@@ -40,4 +40,4 @@ Evidence files:
 - `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/reliability-werqueue-1.csv`
 - `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/reliability-wercpl-1.txt`
 - `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/reliability-wercpl-1.csv`
-- `research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/diagtrack-reliability-ghidra.md`
+- `research/evidence-files/ghidra/reliability-timestamp-follow-up-20260326/diagtrack-reliability-ghidra.md`

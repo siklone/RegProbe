@@ -140,8 +140,8 @@
       "evidence_id": "procmon-taskbar-animations-registry-read",
       "kind": "procmon-trace",
       "title": "Procmon capture - explorer.exe TaskbarAnimations runtime reads",
-      "location": "research/notes/taskbar-animations-procmon-validation-20260326.md",
-      "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations with Data:0 and Data:1 after Explorer restarts. The raw filtered capture files are stored under research/evidence-files/vm-tooling-staging/taskbaranimations-procmon-20260326/.",
+      "location": "research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv",
+      "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations with Data:0 and Data:1 after Explorer restarts. The repo now keeps the filtered capture files directly under research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/.",
       "supports": [
         "path",
         "value",
@@ -154,7 +154,7 @@
       "evidence_id": "ghidra-taskbar-taskbaranimations",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path",
-      "location": "research/evidence-files/vm-tooling-staging/ghidra-probes/taskbar-taskbaranimations-ghidra-20260326-040246/taskbar-taskbaranimations-ghidra.md",
+      "location": "research/evidence-files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
       "summary": "A headless Ghidra pass on Taskbar.dll found the TaskbarAnimations string and decompiled a function that reads SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations through Ordinal_123 after checking taskbar animation state with SystemParametersInfoW. That gives direct code-side proof that the taskbar consumes this flag on this build.",
       "supports": [
         "path",

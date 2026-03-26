@@ -31,9 +31,9 @@ Snapshot:
 Artifacts:
 
 - state `2`:
-  - `research/evidence-files/vm-tooling-staging/submitsamples-ui-state2.txt`
+  - `research/evidence-files/procmon/security-disable-defender-sample-submission-validation-20260324/submitsamples-ui-state2.txt`
 - absent-value check on the same branch:
-  - `research/evidence-files/vm-tooling-staging/spynet-ui-state2.txt`
+  - `research/evidence-files/procmon/security-disable-defender-sample-submission-validation-20260324/spynet-ui-state2.txt`
 
 The state-`2` run showed a direct policy-path read:
 

@@ -1,0 +1,16 @@
+WRITE=0
+QUERY=HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer
+    ShowSleepOption    REG_DWORD    0x0
+OPEN_POWER_OPTIONS=YES
+WRITE=1
+QUERY=HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer
+    ShowSleepOption    REG_DWORD    0x1
+OPEN_POWER_OPTIONS=YES
+RESTORED=ABSENT
+MATCHES=YES
+"8:24:35.3182507 PM","SystemSettings.exe","5220","Process Profiling","","SUCCESS","User Time: 57.8906250 seconds, Kernel Time: 82.4687500 seconds, Private Bytes: 46,100,480, Working Set: 127,389,696"
+"8:24:35.3183874 PM","SystemSettingsAdminFlows.exe","4240","Process Profiling","","SUCCESS","User Time: 1.0937500 seconds, Kernel Time: 1.9375000 seconds, Private Bytes: 3,743,744, Working Set: 22,167,552"
+"8:24:36.3240686 PM","SystemSettings.exe","5220","Process Profiling","","SUCCESS","User Time: 57.8906250 seconds, Kernel Time: 82.4687500 seconds, Private Bytes: 46,100,480, Working Set: 127,389,696"
+"8:24:36.3241089 PM","SystemSettingsAdminFlows.exe","4240","Process Profiling","","SUCCESS","User Time: 1.0937500 seconds, Kernel Time: 1.9375000 seconds, Private Bytes: 3,743,744, Working Set: 22,167,552"
+HAD_VALUE=False
+ORIGINAL=

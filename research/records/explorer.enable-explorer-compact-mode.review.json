@@ -132,7 +132,7 @@
       "evidence_id": "procmon-explorer-compact-mode",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer UseCompactMode runtime reads",
-      "location": "Local captures - research/evidence-files/missing/explorer-batch-applied-20260314-pml.md and research/evidence-files/missing/explorer-compact-zero-20260314-pml.md",
+      "location": "Local captures - research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md",
       "summary": "Procmon captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode with Data:1 and Data:0 in separate reversible captures after Explorer restart. That proves Explorer consumes this registry value on this build.",
       "supports": [
         "path",
@@ -146,7 +146,7 @@
       "evidence_id": "ghidra-explorerframe-usecompactmode",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers",
-      "location": "research/evidence-files/vm-tooling-staging/ghidra-probes/explorerframe-usecompactmode-ghidra-20260326-022015/explorerframe-usecompactmode-ghidra.md",
+      "location": "research/evidence-files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md",
       "summary": "A headless Ghidra pass on ExplorerFrame.dll decompiled the code paths that call RegGetValueW for UseCompactMode under SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced, including HKCU-first and HKLM fallback reads. That gives direct code-side proof that the Explorer shell consumes this flag.",
       "supports": [
         "path",

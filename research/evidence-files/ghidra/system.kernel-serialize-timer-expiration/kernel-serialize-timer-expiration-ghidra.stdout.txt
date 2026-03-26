@@ -1,0 +1,235 @@
+INFO  Using log config file: jar:file:/C:/Tools/Ghidra/ghidra_12.0.4_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\application.log (LoggingInitialization)  
+INFO  Loading user preferences: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1173 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (6418 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 58 extension points (18 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\8051\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\BSim\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Tools\GhidraProbes\kernel-serialize-timer-expiration-ghidra-20260326-114343
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\PDB\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Jython\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\FileFormats\ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating temporary project: C:\Tools\GhidraProjects\Probe_kernel_serialize_timer_expiration_ghidra (HeadlessAnalyzer)  
+INFO  Creating project: C:\Tools\GhidraProjects\Probe_kernel_serialize_timer_expiration_ghidra (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: C:\Tools\GhidraProjects\Probe_kernel_serialize_timer_expiration_ghidra (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)  
+INFO  Using Language/Compiler: x86:LE:64:default:windows (ProgramLoader)  
+INFO  Using Library Search Path: [., C:\Windows\SysWOW64, C:\Tools\Java\jdk-21.0.10+7\bin, C:\Windows\Sun\Java\bin, C:\Windows\system32, C:\Windows, C:\Windows\System32\Wbem, C:\Windows\System32\WindowsPowerShell\v1.0\, C:\Tools\Scripts, C:\Tools\Sysinternals, C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit, C:\Tools\DotNetSDK\8.0.416, C:\Tools\WindowsTerminal\terminal-1.24.10621.0, C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\, C:\Program Files\dotnet\, C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps, C:\Users\Administrator\.dotnet\tools] (ProgramLoader)  
+INFO  Additional info:
+Loading file:///C:/Windows/System32/ntoskrnl.exe?MD5=b37e6e677de4e6412c2020ab35be2322...
+------------------------------------------------
+
+Searching 15 paths for library BOOTVID.DLL...
+Loading file:///C:/Windows/System32/BOOTVID.DLL?MD5=583f1fac9ba692ccf70bcd87d25f7dad...
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\bootvid.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library CI.DLL...
+Loading file:///C:/Windows/System32/ci.dll?MD5=b4b65a3c19251eb589050f6a6857763c...
+[ci.dll]: failed to create WEVTResource at 1800f37c8: Failed to resolve data length for WEVTResource
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\ci.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library CNG.SYS...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-ACCEL-API-KM-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-FS-CLFS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-CLIPSP-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-GLOBMERGER-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-KCMINITCFG-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-KSECURITY-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-KSR-L1-1-5.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-PROCESSPARAMETERS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-RUNLEVELS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-STATESEPARATION-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-TM-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-TRACE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-UCODE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-WERKERNEL-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-WIN32K-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library KDCOM.DLL...
+Loading file:///C:/Windows/System32/kdcom.dll?MD5=23a7e41fe80788922ed4acab18ecd9e7...
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\kdcom.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library MSRPC.SYS...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library PSHED.DLL...
+Loading file:///C:/Windows/System32/PSHED.DLL?MD5=467d490720309451176caf5e0268a731...
+Index 5 out of bounds for length 5
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\pshed.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library SYMCRYPTK.DLL...
+Loading file:///C:/Windows/System32/symcryptk.dll?MD5=499c6a4eaba6b0e07ea3f0b6612cf7d2...
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\symcryptk.exports
+Library not saved to project.
+------------------------------------------------
+
+Applying cached symbols from SYMCRYPTK.DLL
+Applying cached symbols from PSHED.DLL
+Applying cached symbols from BOOTVID.DLL
+Applying cached symbols from KDCOM.DLL
+Applying cached symbols from CI.DLL
+Linking the External Programs of 'ntoskrnl.exe' to imported libraries...
+  [EXT-MS-WIN-NTOS-PROCESSPARAMETERS-L1-1-0.DLL] -> not found in project
+  [SYMCRYPTK.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-TM-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-ACCEL-API-KM-L1-1-0.DLL] -> not found in project
+  [PSHED.DLL] -> not found in project
+  [BOOTVID.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-CLIPSP-L1-1-0.DLL] -> not found in project
+  [KDCOM.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-KCMINITCFG-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-KSR-L1-1-5.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-TRACE-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-KSECURITY-L1-1-1.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-WERKERNEL-L1-1-1.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-UCODE-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-WIN32K-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-RUNLEVELS-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-STATESEPARATION-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-FS-CLFS-L1-1-0.DLL] -> not found in project
+  [CI.DLL] -> not found in project
+  [MSRPC.SYS] -> not found in project
+  [CNG.SYS] -> not found in project
+  [EXT-MS-WIN-NTOS-GLOBMERGER-L1-1-0.DLL] -> not found in project
+------------------------------------------------
+
+ (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+INFO  Skipping PDB processing: failed to locate PDB file in configured locations (PdbUniversalAnalyzer)  
+INFO  Use a script to set the PDB file location. I.e.,
+    PdbAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb")); or
+    PdbUniversalAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb"));
+Or set the symbol server search configuration using:    PdbPlugin.saveSymbolServerServiceConfig(...);
+ This must be done using a pre-script (prior to analysis). (PdbUniversalAnalyzer)  
+INFO  Packed database cache: C:\Users\Administrator\AppData\Local\ghidra\packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              1.844 secs
+    Apply Data Archives                       20.394 secs
+    Call Convention ID                         0.934 secs
+    Call-Fixup Installer                       0.490 secs
+    Create Address Tables                      2.203 secs
+    Create Address Tables - One Time           8.336 secs
+    Create Function                            2.165 secs
+    Data Reference                             5.239 secs
+    Decompiler Switch Analysis               140.148 secs
+    Demangler Microsoft                        0.515 secs
+    Disassemble                                0.129 secs
+    Disassemble Entry Points                  61.466 secs
+    Embedded Media                             0.231 secs
+    External Entry References                  0.067 secs
+    Function ID                               68.698 secs
+    Function Start Search                      0.506 secs
+    Non-Returning Functions - Discovered     593.907 secs
+    Non-Returning Functions - Known            0.087 secs
+    PDB Universal                              0.075 secs
+    Reference                                  5.771 secs
+    Scalar Operand References                 20.776 secs
+    Shared Return Calls                        5.375 secs
+    Stack                                    301.458 secs
+    Subroutine References                      3.327 secs
+    Subroutine References - One Time           0.020 secs
+    Windows x86 PE Exception Handling          0.033 secs
+    Windows x86 PE RTTI Analyzer               0.160 secs
+    Windows x86 Thread Environment Block (TEB) Analyzer     0.013 secs
+    WindowsResourceReference                   5.187 secs
+    x86 Constant Reference Analyzer          216.399 secs
+-----------------------------------------------------
+     Total Time   1465 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: ExportStringXrefs.java 'C:\Tools\GhidraProbes\kernel-serialize-timer-expiration-ghidra-20260326-114343\kernel-serialize-timer-expiration-ghidra.md' 'SerializeTimerExpiration' 'KiSerializeTimerExpiration' 'KeInitializeTimerTable'  (HeadlessAnalyzer)  
+INFO  SCRIPT: C:\Tools\GhidraProbes\kernel-serialize-timer-expiration-ghidra-20260326-114343\ExportStringXrefs.java (HeadlessAnalyzer)  
+INFO  ANALYZING changes made by post scripts: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  REPORT: Post-analysis succeeded for file: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  /ntoskrnl.exe: file created (Administrator) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /ntoskrnl.exe (Probe_kernel_serialize_timer_expiration_ghidra:/ntoskrnl.exe) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

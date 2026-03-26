@@ -33,11 +33,11 @@ Snapshot:
 Artifacts:
 
 - baseline:
-  - `research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-baseline-1-20260324-214343/defender-disable-enhanced-baseline-1.txt`
+  - `research/evidence-files/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-baseline-1.txt`
 - Security Center `1`:
-  - `research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt`
+  - `research/evidence-files/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt`
 - Reporting `1` alias check:
-  - `research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-reporting-1-20260324-213700/defender-disable-enhanced-reporting-1.txt`
+  - `research/evidence-files/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-reporting-1.txt`
 
 Baseline showed the live policy read and the existing sibling policy on the same branch:
 

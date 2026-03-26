@@ -1,0 +1,18 @@
+﻿{
+    "generated_utc":  "2026-03-26T09:09:33.4936324Z",
+    "target_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
+    "project_root":  "C:\\Tools\\GhidraProjects",
+    "project_name":  "Probe_kernel_serialize_timer_expiration_ghidra",
+    "script_path":  "C:\\Tools\\GhidraProbes\\kernel-serialize-timer-expiration-ghidra-20260326-114343\\ExportStringXrefs.java",
+    "markdown_path":  "C:\\Tools\\GhidraProbes\\kernel-serialize-timer-expiration-ghidra-20260326-114343\\kernel-serialize-timer-expiration-ghidra.md",
+    "stdout_path":  "C:\\Tools\\GhidraProbes\\kernel-serialize-timer-expiration-ghidra-20260326-114343\\kernel-serialize-timer-expiration-ghidra.stdout.txt",
+    "stderr_path":  "C:\\Tools\\GhidraProbes\\kernel-serialize-timer-expiration-ghidra-20260326-114343\\kernel-serialize-timer-expiration-ghidra.stderr.txt",
+    "exit_code":  0,
+    "markdown_exists":  true,
+    "stdout_exists":  true,
+    "stderr_exists":  true,
+    "patterns":  [
+                     "SerializeTimerExpiration,KiSerializeTimerExpiration,KeInitializeTimerTable"
+                 ],
+    "failure":  null
+}

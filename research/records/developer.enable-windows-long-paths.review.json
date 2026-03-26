@@ -159,7 +159,7 @@
       "evidence_id": "procmon-developer-long-paths",
       "kind": "procmon-trace",
       "title": "Procmon capture - Developer settings page reads LongPathsEnabled",
-      "location": "research/evidence-files/vm-tooling-staging/devmode_longpaths_probe.csv and research/evidence-files/missing/devmode-longpaths-probe-pml.md",
+      "location": "research/evidence-files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv and research/evidence-files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
       "summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. The probe observed the live value on this build and restored the original state afterward.",
       "supports": [
         "path",

@@ -171,7 +171,7 @@
       "evidence_id": "procmon-taskbar-alignment",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer taskbar alignment runtime surface",
-      "location": "research/evidence-files/missing/taskbar-alignment-capture-20260313-pml.md",
+      "location": "research/evidence-files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md",
       "summary": "A reversible Procmon capture on 2026-03-13 wrote TaskbarAl = 0, restarted Explorer, restored TaskbarAl = 1, and restarted Explorer again. reg.exe wrote HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as REG_DWORD 0 and 1, and Explorer.EXE queried the same value immediately after each restart. No runtime traffic for the documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was observed in this capture.",
       "supports": [
         "path",

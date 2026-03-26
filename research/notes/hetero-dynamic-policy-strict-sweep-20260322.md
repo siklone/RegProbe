@@ -41,6 +41,6 @@ This pass deliberately used two reboot cycles per sample because the earlier qui
 
 ## Artifacts
 
-- `research/evidence-files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-summary.csv`
+- `research/evidence-files/procmon/hetero-dynamic-policy-strict-sweep-20260322/hetero-sweep-strict-summary.csv`
 - `research/evidence-files/vm-tooling-staging/hetero-sweep-strict/hetero-sweep-strict-detail.json`
 - `research/evidence-files/vm-tooling-staging/hetero-restore-3.json`

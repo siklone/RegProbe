@@ -360,7 +360,7 @@
       "evidence_id": "vm-defender-threat-file-hash-root-read",
       "kind": "procmon-trace",
       "title": "MsMpEng.exe direct read of ThreatFileHashLogging = 1",
-      "location": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt",
+      "location": "research/evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
       "summary": "With ThreatFileHashLogging = 1 on the root Defender policy path, MsMpEng.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging and read Data: 1 directly.",
       "supports": [
         "path",
@@ -373,7 +373,7 @@
       "evidence_id": "vm-defender-threat-file-hash-policymanager-read",
       "kind": "procmon-trace",
       "title": "MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1",
-      "location": "research/evidence-files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333/defender-threat-file-hash-policymanager-1.txt",
+      "location": "research/evidence-files/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt",
       "summary": "With EnableFileHashComputation = 1 on the Policy Manager alias, MsMpEng.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager\\EnableFileHashComputation and read Data: 1 directly while the legacy root value stayed NAME NOT FOUND.",
       "supports": [
         "path",

@@ -29,7 +29,7 @@ research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg
 
 ```text
 Source file:
-research/evidence-files/vm-tooling-staging/iconsonly-result.txt
+research/evidence-files/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-result.txt
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/IconsOnly
@@ -46,8 +46,8 @@ RESTORED_EXISTS=True RESTORED_VALUE=1
 ## Raw Hit Files
 
 ```text
-research/evidence-files/vm-tooling-staging/iconsonly-0-hits.csv
-research/evidence-files/vm-tooling-staging/iconsonly-1-hits.csv
+research/evidence-files/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-0-hits.csv
+research/evidence-files/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-1-hits.csv
 ```
 
 ## Notes

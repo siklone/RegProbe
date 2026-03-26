@@ -187,8 +187,8 @@
       "evidence_id": "procmon-jpegimportquality-explorer-read",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer JPEGImportQuality runtime read",
-      "location": "research/notes/jpeg-import-quality-validation-20260326.md",
-      "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU\\Control Panel\\Desktop\\JPEGImportQuality with Data:100. The raw filtered capture is stored under research/evidence-files/vm-tooling-staging/jpegimportquality-procmon-20260326/.",
+      "location": "research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt and research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv",
+      "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU\\Control Panel\\Desktop\\JPEGImportQuality with Data:100. The repo now keeps the filtered capture files directly under research/evidence-files/procmon/jpeg-import-quality-validation-20260326/.",
       "supports": [
         "path",
         "value",
@@ -200,7 +200,7 @@
       "evidence_id": "ghidra-shell32-jpegimportquality",
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - shell32 JPEGImportQuality transcode path",
-      "location": "research/evidence-files/vm-tooling-staging/ghidra-probes/shell32-jpegimportquality-ghidra-20260326-070959/shell32-jpegimportquality-ghidra.md",
+      "location": "research/evidence-files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md",
       "summary": "A headless Ghidra pass on shell32.dll found the JPEGImportQuality string and exported the xref into FUN_1800bf050, the shell transcode path that handles JPEG wallpaper import quality. That gives direct code-side proof on this build.",
       "supports": [
         "path",

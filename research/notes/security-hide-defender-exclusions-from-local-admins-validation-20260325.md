@@ -35,10 +35,10 @@ Artifacts:
   - `research/evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline.txt`
 - root path `1`:
   - `research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json`
-  - `research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt`
+  - `research/evidence-files/procmon/security-hide-defender-exclusions-from-local-admins-validation-20260325/hideexclusions-admins-root-1.txt`
 - Policy Manager alias `1`:
   - `research/evidence-files/vm-tooling-staging/hideexclusions-admins-policymanager-1-20260325-002004/hideexclusions-admins-policymanager-1-visibility.json`
-  - `research/evidence-files/vm-tooling-staging/hideexclusions-admins-policymanager-1-20260325-002004/hideexclusions-admins-policymanager-1.txt`
+  - `research/evidence-files/procmon/security-hide-defender-exclusions-from-local-admins-validation-20260325/hideexclusions-admins-policymanager-1.txt`
 
 The baseline run created a managed exclusion under the policy exclusions branch and left both `HideExclusionsFromLocalAdmins` surfaces unset. In that state, `Get-MpPreference` still showed the exclusion:
 

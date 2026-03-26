@@ -157,7 +157,7 @@
       "evidence_id": "procmon-showdrivelettersfirst-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer ShowDriveLettersFirst runtime surface",
-      "location": "research/evidence-files/vm-tooling-staging/showdrivelettersfirst-result.txt",
+      "location": "research/evidence-files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowDriveLettersFirst = 0 and ShowDriveLettersFirst = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",

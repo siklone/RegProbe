@@ -1,0 +1,89 @@
+﻿MODE=set
+REGISTRY_PATH=HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager
+VALUE_NAME=EnableFileHashComputation
+STATE=1
+PML_EXISTS=True
+CSV_EXISTS=True
+MATCH_COUNT=80
+1:23:50.4966975 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.4968244 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.4968454 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.4969972 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DisableLocalAdminMerge | KEY DELETED | Length: 16
+1:23:50.4973810 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.4973939 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.4974035 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.4979994 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DisableLocalAdminMerge | KEY DELETED | Length: 16
+1:23:50.4982492 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Desired Access: Read
+1:23:50.4982904 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.4983024 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DisableLocalAdminMerge | NAME NOT FOUND | Length: 16
+1:23:50.4986660 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\EngineRing | NAME NOT FOUND | Length: 16
+1:23:50.4987942 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\HideExclusionsFromLocalAdmins | NAME NOT FOUND | Length: 16
+1:23:50.4989010 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\HideExclusionsFromLocalAdmins | NAME NOT FOUND | Length: 16
+1:23:50.4989929 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\HideExclusionsFromLocalUsers | NAME NOT FOUND | Length: 16
+1:23:50.4997912 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\PlatformRing | NAME NOT FOUND | Length: 14
+1:23:50.4998146 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\PlatformRing | NAME NOT FOUND | Length: 16
+1:23:50.5001244 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\PUAProtection | NAME NOT FOUND | Length: 12
+1:23:50.5001476 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\PUAProtection | NAME NOT FOUND | Length: 16
+1:23:50.5001714 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\RandomizeScheduleTaskTimes | NAME NOT FOUND | Length: 16
+1:23:50.5001944 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\RandomizeScheduleTaskTimes | NAME NOT FOUND | Length: 16
+1:23:50.5004922 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SchedulerRandomizationTime | NAME NOT FOUND | Length: 16
+1:23:50.5005159 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SchedulerRandomizationTime | NAME NOT FOUND | Length: 16
+1:23:50.5008148 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SignaturesRing | NAME NOT FOUND | Length: 16
+1:23:50.5008994 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SupportLogEventIds | NAME NOT FOUND | Length: 12
+1:23:50.5009236 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SupportLogLocation | NAME NOT FOUND | Length: 12
+1:23:50.5009412 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\ThreatFileHashLogging | NAME NOT FOUND | Length: 12
+1:23:50.5009576 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\ThreatFileHashLogging | NAME NOT FOUND | Length: 16
+1:23:50.5013298 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.5013391 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.5013762 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.5016887 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.5017003 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.5017084 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.5019317 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.5019442 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.5019532 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.5021729 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.5021854 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.5021943 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.5023726 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.5023846 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.5023933 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.5025244 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.5025333 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.5025404 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.5025943 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AzureAdRefreshInterval | NAME NOT FOUND | Length: 12
+1:23:50.5026144 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\AzureAdRefreshInterval | NAME NOT FOUND | Length: 16
+1:23:50.5026638 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\BitlockerSupportState | NAME NOT FOUND | Length: 16
+1:23:50.5027331 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\CustomSupportLink | NAME NOT FOUND | Length: 16
+1:23:50.5027619 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DataDuplicationDirectory | NAME NOT FOUND | Length: 12
+1:23:50.5027800 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DataDuplicationDirectory | NAME NOT FOUND | Length: 116
+1:23:50.5028000 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DataDuplicationLocalRetentionPeriod | NAME NOT FOUND | Length: 116
+1:23:50.5028183 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DataDuplicationLocalRetentionPeriod | NAME NOT FOUND | Length: 16
+1:23:50.5028372 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DataDuplicationMaximumQuota | NAME NOT FOUND | Length: 16
+1:23:50.5028551 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DataDuplicationRemoteLocation | NAME NOT FOUND | Length: 16
+1:23:50.5028717 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DataDuplicationRemoteLocation | NAME NOT FOUND | Length: 12
+1:23:50.5028898 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DefaultEnforcement | NAME NOT FOUND | Length: 12
+1:23:50.5029065 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\DefaultEnforcement | NAME NOT FOUND | Length: 16
+1:23:50.5029240 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\NotificationThrottleMax | NAME NOT FOUND | Length: 16
+1:23:50.5029882 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\NotificationThrottleMax | NAME NOT FOUND | Length: 16
+1:23:50.5030085 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\NotificationThrottleMin | NAME NOT FOUND | Length: 16
+1:23:50.5030383 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\PolicyRefreshFailureInterval | NAME NOT FOUND | Length: 12
+1:23:50.5030564 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\PolicyRefreshFailureInterval | NAME NOT FOUND | Length: 16
+1:23:50.5030968 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SecuredDevicesConfiguration | NAME NOT FOUND | Length: 16
+1:23:50.5031161 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\SecuredDevicesConfiguration | NAME NOT FOUND | Length: 12
+1:23:50.5032938 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.5033111 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.5033233 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.5033989 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\PolicyGroups | NAME NOT FOUND | Length: 12
+1:23:50.5034279 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\PolicyGroups | NAME NOT FOUND | Length: 12
+1:23:50.5034900 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.5035010 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.5035102 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.5035720 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\PolicyRules | NAME NOT FOUND | Length: 12
+1:23:50.5035959 AM | MsMpEng.exe | RegQueryValue | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\PolicyRules | NAME NOT FOUND | Length: 12
+1:23:50.5036914 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+1:23:50.5037065 AM | MsMpEng.exe | RegQueryKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | Query: Cached, SubKeys: 0, Values: 1
+1:23:50.5037498 AM | MsMpEng.exe | RegCloseKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager | SUCCESS | 
+1:23:50.5045053 AM | MsMpEng.exe | RegOpenKey | HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager\ | SUCCESS | Desired Access: Query Value
+ORIGINAL={"path_exists":true,"value_exists":false,"value":null}
+RESTORED={"path_exists":true,"value_exists":false,"value":null}

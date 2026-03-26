@@ -231,7 +231,7 @@
       "evidence_id": "procmon-power-hide-hibernate-option",
       "kind": "procmon-trace",
       "title": "Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle",
-      "location": "research/evidence-files/vm-tooling-staging/power_hide_hibernate_option_probe.txt",
+      "location": "research/evidence-files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt",
       "summary": "The guest probe wrote ShowHibernateOption=0 and ShowHibernateOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the original state.",
       "supports": [
         "runtime writes",

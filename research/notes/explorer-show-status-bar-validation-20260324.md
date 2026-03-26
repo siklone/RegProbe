@@ -32,7 +32,7 @@ research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg
 
 ```text
 Source file:
-research/evidence-files/vm-tooling-staging/showstatusbar-result.txt
+research/evidence-files/procmon/explorer-show-status-bar-validation-20260324/showstatusbar-result.txt
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowStatusBar
@@ -49,8 +49,8 @@ RESTORED_EXISTS=True RESTORED_VALUE=0
 ## Raw Hit Files
 
 ```text
-research/evidence-files/vm-tooling-staging/showstatusbar-0-hits.csv
-research/evidence-files/vm-tooling-staging/showstatusbar-1-hits.csv
+research/evidence-files/procmon/explorer-show-status-bar-validation-20260324/showstatusbar-0-hits.csv
+research/evidence-files/procmon/explorer-show-status-bar-validation-20260324/showstatusbar-1-hits.csv
 ```
 
 ## Notes

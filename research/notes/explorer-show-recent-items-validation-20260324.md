@@ -28,7 +28,7 @@ research/_source-mirrors/win-registry/records/25H2.txt
 
 ```text
 Source file:
-research/evidence-files/vm-tooling-staging/showrecent-result.txt
+research/evidence-files/procmon/explorer-show-recent-items-validation-20260324/showrecent-result.txt
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/ShowRecent
@@ -45,8 +45,8 @@ RESTORED_EXISTS=True RESTORED_VALUE=0
 ## Raw Hit Files
 
 ```text
-research/evidence-files/vm-tooling-staging/showrecent-0-hits.csv
-research/evidence-files/vm-tooling-staging/showrecent-1-hits.csv
+research/evidence-files/procmon/explorer-show-recent-items-validation-20260324/showrecent-0-hits.csv
+research/evidence-files/procmon/explorer-show-recent-items-validation-20260324/showrecent-1-hits.csv
 ```
 
 ## Notes

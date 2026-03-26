@@ -24,7 +24,7 @@ research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg
 
 ```text
 Source file:
-research/evidence-files/missing/showcompcolor-result-txt.md
+research/evidence-files/procmon/explorer-show-comp-color-validation-20260324/showcompcolor-result-txt.md
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowCompColor

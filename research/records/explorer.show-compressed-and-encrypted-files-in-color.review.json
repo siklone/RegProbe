@@ -173,7 +173,7 @@
       "evidence_id": "procmon-showcompcolor-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer ShowCompColor runtime surface",
-      "location": "research/evidence-files/missing/showcompcolor-result-txt.md",
+      "location": "research/evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowCompColor = 0 and ShowCompColor = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",

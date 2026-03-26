@@ -1,0 +1,14 @@
+﻿REGISTRY_PATH=HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+VALUE_NAME=TaskbarAnimations
+STATE=1
+PML_EXISTS=True
+CSV_EXISTS=True
+HITSCSV_EXISTS=True
+HIT_COUNT=4
+APPLIED={"path_exists":true,"value_exists":true,"value":1}
+3:55:42.9088746 AM | explorer.exe | RegQueryValue | HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAnimations | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1
+3:55:42.9394585 AM | explorer.exe | RegQueryValue | HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAnimations | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1
+3:55:42.9683352 AM | explorer.exe | RegQueryValue | HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAnimations | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1
+3:55:43.5317678 AM | explorer.exe | RegQueryValue | HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarAnimations | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1
+ORIGINAL={"path_exists":true,"value_exists":true,"value":0}
+RESTORED={"path_exists":true,"value_exists":true,"value":0}

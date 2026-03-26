@@ -175,7 +175,7 @@
       "evidence_id": "procmon-iconsonly-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer IconsOnly runtime surface",
-      "location": "research/evidence-files/vm-tooling-staging/iconsonly-result.txt",
+      "location": "research/evidence-files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote IconsOnly = 0 and IconsOnly = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",

@@ -9,7 +9,7 @@ States exercised:
 
 What the VM did:
 
-- applied the requested state on `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize\StartupDelayInMSec`
+- applied the requested state on `HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Serialize/StartupDelayInMSec`
 - started `wpr -start GeneralProfile -filemode`
 - restarted `explorer.exe`
 - waited for the shell to settle

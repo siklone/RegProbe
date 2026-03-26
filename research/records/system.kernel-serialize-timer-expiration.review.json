@@ -174,9 +174,9 @@
     {
       "evidence_id": "ghidra-serialize-timer-expiration-gate",
       "kind": "decompilation",
-      "title": "Decompiled timer-serialization gate",
-      "location": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c",
-      "summary": "The decompiled timer-table initializer checks KiSerializeTimerExpiration, coerces any non-1 cached value back to 0, and reads the registry-backed callback when the kernel state is uninitialized, proving the value controls timer serialization behavior.",
+      "title": "Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate",
+      "location": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c and research/evidence-files/ghidra/system.kernel-serialize-timer-expiration/kernel-serialize-timer-expiration-ghidra.md",
+      "summary": "Nohuto's decompiled KeInitializeTimerTable mirror and our 25H2 Ghidra export both point at the timer-serialization gate. Our export on ntoskrnl.exe found the SerializeTimerExpiration string at 140c69fc8 with an xref at 140c63068, which gives current-build code-side corroboration for the same gate.",
       "supports": [
         "path",
         "value",

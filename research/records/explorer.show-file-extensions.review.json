@@ -173,7 +173,7 @@
       "evidence_id": "procmon-hidefileext-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer file-extension visibility runtime surface",
-      "location": "research/evidence-files/missing/hidefileext-capture-20260313-pml.md",
+      "location": "research/evidence-files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md",
       "summary": "A reversible Procmon capture on 2026-03-13 wrote HideFileExt = 1, restarted Explorer, wrote HideFileExt = 0, and restarted Explorer again. PowerShell issued the RegSetValue operations, Explorer.EXE queried HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt after each restart, and a shell display check resolved the same test file as alpha when HideFileExt = 1 and alpha.txt when HideFileExt = 0.",
       "supports": [
         "path",

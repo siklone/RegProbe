@@ -211,7 +211,7 @@
       "evidence_id": "vm-defender-hide-exclusions-root-state1",
       "kind": "procmon-trace",
       "title": "Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1",
-      "location": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt",
+      "location": "research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
       "summary": "After writing HideExclusionsFromLocalAdmins = 1 on the root Defender policy path, wmiprvse.exe and powershell.exe both queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins and read Data: 1.",
       "supports": [
         "path",
@@ -237,7 +237,7 @@
       "evidence_id": "vm-defender-hide-exclusions-policymanager-alias",
       "kind": "procmon-trace",
       "title": "Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1",
-      "location": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-policymanager-1-20260325-002004/hideexclusions-admins-policymanager-1.txt",
+      "location": "research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt",
       "summary": "With only the Policy Manager surface set to 1, wmiprvse.exe first saw the root value as NAME NOT FOUND and then read HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager\\HideExclusionsFromLocalAdmins = 1. The paired visibility JSON showed the same hidden-exclusions behavior.",
       "supports": [
         "path",

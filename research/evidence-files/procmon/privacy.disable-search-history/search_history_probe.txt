@@ -1,0 +1,14 @@
+WRITE=0
+QUERY=HKEY_USERS\S-1-5-21-3538642439-2106388720-149684979-500\Software\Policies\Microsoft\Windows\Explorer
+    DisableSearchHistory    REG_DWORD    0x0
+SEARCH_PROCESSES=SearchHost
+WRITE=1
+QUERY=HKEY_USERS\S-1-5-21-3538642439-2106388720-149684979-500\Software\Policies\Microsoft\Windows\Explorer
+    DisableSearchHistory    REG_DWORD    0x1
+SEARCH_PROCESSES=SearchHost
+RESTORED=ABSENT
+MATCHES=YES
+"8:37:06.5626586 PM","SearchHost.exe","5224","Process Profiling","","SUCCESS","User Time: 4.4375000 seconds, Kernel Time: 4.2187500 seconds, Private Bytes: 39,989,248, Working Set: 126,554,112"
+"8:37:07.5629408 PM","SearchHost.exe","5224","Process Profiling","","SUCCESS","User Time: 4.4375000 seconds, Kernel Time: 4.2187500 seconds, Private Bytes: 39,989,248, Working Set: 126,554,112"
+HAD_VALUE=False
+ORIGINAL=

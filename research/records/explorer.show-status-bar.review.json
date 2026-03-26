@@ -175,7 +175,7 @@
       "evidence_id": "procmon-showstatusbar-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer ShowStatusBar runtime surface",
-      "location": "research/evidence-files/vm-tooling-staging/showstatusbar-result.txt",
+      "location": "research/evidence-files/procmon/explorer.show-status-bar/showstatusbar-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowStatusBar = 0 and ShowStatusBar = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",

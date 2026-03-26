@@ -173,7 +173,7 @@
       "evidence_id": "procmon-hidden-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer hidden-file visibility runtime surface",
-      "location": "research/evidence-files/missing/hidden-capture-20260313-pml.md",
+      "location": "research/evidence-files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md",
       "summary": "A reversible Procmon capture on 2026-03-13 wrote Hidden = 1, restarted Explorer, wrote Hidden = 2, and restarted Explorer again. PowerShell issued the RegSetValue operations, Explorer.EXE queried HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden after each restart, and a direct Explorer UI automation check listed ghost.txt plus visible.txt when Hidden = 1 but only visible.txt when Hidden = 2.",
       "supports": [
         "path",

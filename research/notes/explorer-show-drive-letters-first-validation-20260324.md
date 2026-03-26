@@ -25,7 +25,7 @@ research/_source-mirrors/win-registry/records/25H2.txt
 
 ```text
 Source file:
-research/evidence-files/vm-tooling-staging/showdrivelettersfirst-result.txt
+research/evidence-files/procmon/explorer-show-drive-letters-first-validation-20260324/showdrivelettersfirst-result.txt
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/ShowDriveLettersFirst
@@ -42,8 +42,8 @@ RESTORED_EXISTS=False
 ## Raw Hit Files
 
 ```text
-research/evidence-files/vm-tooling-staging/showdrivelettersfirst-0-hits.csv
-research/evidence-files/vm-tooling-staging/showdrivelettersfirst-1-hits.csv
+research/evidence-files/procmon/explorer-show-drive-letters-first-validation-20260324/showdrivelettersfirst-0-hits.csv
+research/evidence-files/procmon/explorer-show-drive-letters-first-validation-20260324/showdrivelettersfirst-1-hits.csv
 ```
 
 ## Notes

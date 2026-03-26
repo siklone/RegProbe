@@ -157,7 +157,7 @@
       "evidence_id": "procmon-showrecent-runtime",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer ShowRecent runtime surface",
-      "location": "research/evidence-files/vm-tooling-staging/showrecent-result.txt",
+      "location": "research/evidence-files/procmon/explorer.show-recent-items/showrecent-result.txt",
       "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowRecent = 0 and ShowRecent = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent with matching Data: 0 and Data: 1 values.",
       "supports": [
         "path",

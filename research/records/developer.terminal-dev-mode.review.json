@@ -210,7 +210,7 @@
       "evidence_id": "ghidra-terminalapp-memory-scan",
       "kind": "ghidra-headless",
       "title": "Ghidra headless raw-memory scan of TerminalApp.dll",
-      "location": "https://terminal.1.24.10621.0/TerminalApp.dll; research/evidence-files/host-temp/terminal-ghidra.txt; research/evidence-files/host-temp/terminal-ghidra-enabledebugtap.txt",
+      "location": "https://terminal.1.24.10621.0/TerminalApp.dll; research/evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt; research/evidence-files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt",
       "summary": "Headless Ghidra raw-memory scans of TerminalApp.dll wrote NO_MATCH for DeveloperMode and EnableDebugTap, so the flags are not present as plain strings in the imported binary.",
       "supports": [
         "negative-evidence",

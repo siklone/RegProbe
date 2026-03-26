@@ -24,7 +24,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- | --- | --- | --- |
 | `audio.disable-spatial-audio` | deprecated | Class E | `research/records/audio.disable-spatial-audio.review.json` | `d98f537a38d2c9f13c9f7e9c521625678f5657bc579b0237f7f4ef98c8285b8d` | `4040aa7349c6686133cd32ff685d01521bd1e75ea6e571c1a07fdb317ed267bf` | 3 |
 | `audio.disable-system-sounds` | deprecated | Class E | `research/records/audio.disable-system-sounds.review.json` | `f2e5db365aac0b8698fdc6ddc538d546ba88b62bd6d4716a4e9ec3b96044d6d7` | `06a1e4b4952f98195f4caec1090ccdc61370bfe21708fdf3fba46e40f294fe2b` | 2 |
-| `developer.terminal-dev-mode` | deprecated | Class E | `research/records/developer.terminal-dev-mode.review.json` | `c03b491bea23d0d9e407250a2c610a9134fca247588101105404eb51291e9d6e` | `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a` | 4 |
+| `developer.terminal-dev-mode` | deprecated | Class E | `research/records/developer.terminal-dev-mode.review.json` | `8ee19666dacdcd15d127e16559bfb918fd3ea596c37977e12a15ab3f7d2f786a` | `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a` | 4 |
 | `developer.vs-intellisense-cache` | deprecated | Class E | `research/records/developer.vs-intellisense-cache.review.json` | `329d0313a489d850be0721bcc8a935dcdd5548c3b2a2b8cbcde54fb702e0f48e` | `7594c93530c2f21078f1038412922a58ad2eb57b477f498e084adb3d66722225` | 2 |
 | `developer.vs-solution-load` | deprecated | Class E | `research/records/developer.vs-solution-load.review.json` | `c59f8f5dc148d574897928748f7c10d84960dda57f3bdc1476a3997e58dbadc4` | `f3d5094dc691664127f8b7cff7d1500ec045ea83e83fdfefa30d3569d90f06ae` | 2 |
 | `developer.vscode-git-autofetch` | deprecated | Class E | `research/records/developer.vscode-git-autofetch.json` | `6f456e8f5a1c326985eea937e224c4d9b306e4b6feb6e3d4ef74df5a1e9c3f3c` | `2566c7ca6681d428c8231a778368502d85ac2e8dd64571ad114629303c925a0e` | 3 |
@@ -68,7 +68,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.kernel-dpc-watchdog-period` | deprecated | Class E | `research/records/system.kernel-dpc-watchdog-period.review.json` | `968305346ef6df3f84494711ae38d007f00c6c8b7b202d884967f5ed3b415944` | `50918c9775cf230fcfb42bd1b4fbdf60619c9870e00912e798dc04b9300be894` | 6 |
 | `system.kernel-ideal-dpc-rate` | deprecated | Class E | `research/records/system.kernel-ideal-dpc-rate.review.json` | `595a46c611fbc1a48c1b327d08f937f898d711fff3174c7a8299709a92aa6a6a` | `d01a67b9895785d163758d28753068ab0659ef56dfee572e23e8e53c426648d2` | 3 |
 | `system.kernel-minimum-dpc-rate` | deprecated | Class E | `research/records/system.kernel-minimum-dpc-rate.review.json` | `d7853f873e4c78f061bd0d6a07d2b6c27c77b9e6518740b09ab1b68822fb523c` | `1b4057c538c7e5d6fa6933ab7db5c9e6173a88b304e276203c1b54fad8b9e467` | 3 |
-| `system.kernel-serialize-timer-expiration` | deprecated | Class E | `research/records/system.kernel-serialize-timer-expiration.review.json` | `0d882f68598cdbef1d203f0caea87dbf59fabf67d307c31e2e5b64d13b584dcd` | `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b` | 3 |
+| `system.kernel-serialize-timer-expiration` | deprecated | Class E | `research/records/system.kernel-serialize-timer-expiration.review.json` | `57299faf109f4fcd878b63208bb5b4c889403e5989180be25d6cafecf131e3f5` | `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b` | 3 |
 | `system.reduce-shutdown-timeouts` | deprecated | Class E | `research/records/system.reduce-shutdown-timeouts.review.json` | `d89016240373d5977ebd49970f76765b78f87f8348952e10470811106b9c8f56` | `8d3bb590278c6e34733c21ab517e01a727f9f05c35f7d51103adf37362b3b297` | 5 |
 | `system.services.disable-print-device-configuration` | deprecated | Class E | `research/records/system.services.disable-print-device-configuration.json` | `8147de1c9627c0bc88a854aef8cf463f21a2c5b9255832a5f60ad28805b1d06c` | `f333c4468e17fd19179a33e846763dc5a68b34097d957eaf8e77063a40fd0dfe` | 3 |
 | `system.services.disable-print-scan-broker` | deprecated | Class E | `research/records/system.services.disable-print-scan-broker.json` | `6ea8502da9afaa4d38568a8163dd8129d16aaf565d6a6106b15a80bc645bea98` | `39fb6e1b1beb04801e076834aa1290ffe1685554fc3841a198026b8d61588f70` | 3 |
@@ -77,35 +77,35 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | `5d8c962d5e2b471608f1bdbe264d8ab6eca856bf20b224bd9599e35e9764dd5e` | `4fe986a1bdc11fe46ecbd67001062f436aca821cec4b4b0e169c35c21c7ea9f2` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | `1133d91928de60137720af475a567ab89093fe10bc44bee138a1be1a5f86ff4e` | `b754ee544d2aad3ed3f1cb20c667010767333b9160ca37aaed790a7362f257ae` | 3 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | `72745b7f1525198ac27f8a6e57355491708c85b9f8582e792a8804d2b32d1160` | `da7921354bdc72fdef891e3d896a3783db707cb52cc7e5db1ce061812ea196bd` | 4 |
-| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | `145a124f9643077d910f9ba9a7a5a61ececee5528367d66c066a35b3332bd1c8` | `0789e0f44331dbefb6565c2ed02e05ed6e911cf9b64ce32d8f29c04e7ce2c1f2` | 3 |
-| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | `57a4075e12a27cfce79ad5d058acfcc57f69e44ab3fae748a272f98157fd817f` | `7bf34d113dc32a98101f2c49afd0c939a8c02083ec9c5788fd2b16069e56183a` | 3 |
+| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | `269cfb7957f39415fc8b8f6c53b0957c165b108ff950d64a5430779dd4d7f5c6` | `0789e0f44331dbefb6565c2ed02e05ed6e911cf9b64ce32d8f29c04e7ce2c1f2` | 3 |
+| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | `ac0e35feb4d9acaa9a7c001292c51ca5660420be44a14be0a66747c556fec1df` | `7bf34d113dc32a98101f2c49afd0c939a8c02083ec9c5788fd2b16069e56183a` | 3 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `research/records/cleanup.disable-reserved-storage.review.json` | `a31748762eb2e2ead6ebeb0e82f50b80577cd13df1ab3b045df20c495e305113` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 5 |
 | `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | `a538b7842bd07beb7e1db1a4472c88d07fd2c17ce9e74d8fc551bfb46a740c36` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
 | `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | `f82c8389bb9c2c5ea6f8bb4edb4f8432d16dcd2d14d1823cb88d9c1b6eeb97f4` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 3 |
-| `developer.enable-windows-long-paths` | validated | Class A | `research/records/developer.enable-windows-long-paths.review.json` | `7fdfbbb9782f9b6e4a4d202f64050424c7d09b0063109b9b95d3fe2ea9924344` | `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d` | 3 |
+| `developer.enable-windows-long-paths` | validated | Class A | `research/records/developer.enable-windows-long-paths.review.json` | `c22689f9d4dc6354dd7d005c892138dfaf8adfefc0fa279fb6cf81af2fc2b4bc` | `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d` | 3 |
 | `developer.nodejs-performance` | validated | Class A | `research/records/developer.nodejs-performance.json` | `d5ba83d55fb87f3af5ed733dc9af5ff7b1bcbd3ea904879270f2afe2c2f0c5fd` | `af253cfdcd4dc39f454bcbd5e83bf02e9e24f247591367bf3c05f3627a59d2d4` | 4 |
 | `developer.powershell-execution` | validated | Class A | `research/records/developer.powershell-execution.json` | `37a9924c63e96184630be5313c3b84328e440b94c0dbbf98dd7efaaf42939c91` | `85ea7dbec37c70695f1b27d9824c390bbbadc4c48ffe722566dfaa35bad390a1` | 3 |
 | `developer.python-path-fix` | validated | Class A | `research/records/developer.python-path-fix.review.json` | `23b76af209de8bff11cadcc0e02bfebd19484222bf84301dd5769b983c64e306` | `d92ed03079ebdfff31da625d63e03fb4d721bfeb2433f77bff7c8bd75c4d3327` | 5 |
 | `developer.ssh-agent-autostart` | validated | Class A | `research/records/developer.ssh-agent-autostart.review.json` | `52dadbeb344c11ce03c803556e78c23aa2f31e8b38e871ce82d70686502cac9a` | `5405cf4b2c4fabbbe663c01ab7adfb3ce2235fd74b921031a11d7176b0d2f352` | 3 |
-| `developer.windows-dev-mode` | validated | Class A | `research/records/developer.windows-dev-mode.json` | `bc5997e88d5cad3707794fff7f35e6039dd866c290224ca7b7311ea2f281bcb7` | `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5` | 5 |
+| `developer.windows-dev-mode` | validated | Class A | `research/records/developer.windows-dev-mode.json` | `b7f813331b08741ff9569477b19a3cb037dec1d6f0d7ab4bcc4bead4acb76ca2` | `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5` | 5 |
 | `developer.wsl2-memory` | validated | Class A | `research/records/developer.wsl2-memory.json` | `41f6a7ebf3e545aab59ffbfa583df88036ff7f7969cb7bdec650226d8810479a` | `cbd33a2a02b05e8261ccd3a1534fdc17cc55d6e18e51ee6eee4a32f766a7298f` | 1 |
-| `explorer.always-show-icons-never-thumbnails` | validated | Class A | `research/records/explorer.always-show-icons-never-thumbnails.review.json` | `737a0327124b343b2d1e502a9f5056f143e1d6b9f9b1fc188945baacf40dccd1` | `d3ff2acaee3a582445b3311d899c1d41f4134323f73864ba18d85280c4a78f71` | 3 |
+| `explorer.always-show-icons-never-thumbnails` | validated | Class A | `research/records/explorer.always-show-icons-never-thumbnails.review.json` | `f05aa746abeb3f54e13cec4e38dfb95562cb336ec48a21d8e307d72f2e992f08` | `d3ff2acaee3a582445b3311d899c1d41f4134323f73864ba18d85280c4a78f71` | 3 |
 | `explorer.disable-low-disk-space-warning` | validated | Class A | `research/records/explorer.disable-low-disk-space-warning.json` | `e7c3b918961c1ef450b86967954809a6bd7d6b7f5a6ea0ab0c109f396df72788` | `862a1280ae5b7b88c161664df3545ddc27cd2e2de2d1a36fa5273c96086deb8e` | 3 |
 | `explorer.disable-taskbar-chat` | validated | Class A | `research/records/explorer.disable-taskbar-chat.json` | `6bb5018cb9aa7a809e989991b46d607917b4604c9ea9dab389ec27840964c509` | `d94fcdaed6dd700461a07a03005ada7c3ec5a14b7d31ab35967744183b9d90b6` | 4 |
-| `explorer.enable-explorer-compact-mode` | validated | Class A | `research/records/explorer.enable-explorer-compact-mode.review.json` | `e2242dd747e097f3f5bb90bc65e47e6fb504902edcd1bb037db90caad75d36fa` | `ee9c93f2223f14fabbbf1f808914a3ef9c8d2a65af4aa351da05249d7cbe1ef4` | 4 |
-| `explorer.hide-empty-drives` | validated | Class A | `research/records/explorer.hide-empty-drives.review.json` | `6a3957d72ded455148224a1ed948e1b8840daeda363723c1cfe6ae38734924a0` | `4cf29dc8aeabe2545d3db43aa5fa4f21743bc2d357f15dc70027808d88ddc072` | 4 |
-| `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `7b7fd3a1f9971b046bf6d5df50bf6c9315a871f8dd2fcc29886ae5aff0d1610c` | `2ca8e9ccb55c6f0b9a541d734ba85ff8db89faff7cf9f0659b650c0325181341` | 3 |
-| `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `66c5fac8430bdc223d134c10ff885a4ec89e0f7025f86673459bfb4c95961839` | `d0a836326dc93702ff9e105cd20f9a19573972b3ccb9b995fc30cf0b94b79f24` | 3 |
-| `explorer.show-drive-letters-first` | validated | Class A | `research/records/explorer.show-drive-letters-first.review.json` | `3506c6cbb412404ae4f566f8d9f9b674d9cf0b285b93bcdf3bf7878bb34a1042` | `783579abf72405760476c4a25ae14c0fba03630055791adca5196d3b91c86371` | 3 |
-| `explorer.show-file-extensions` | validated | Class A | `research/records/explorer.show-file-extensions.review.json` | `efb4eaecdc1f70805f3be5f7b1e049a56c2dfa3a8e29551f872f180c2725b097` | `19188566e6fd8363d76f527ed7c32c88cc64bce830a53e89b6af2287e9ebc988` | 4 |
+| `explorer.enable-explorer-compact-mode` | validated | Class A | `research/records/explorer.enable-explorer-compact-mode.review.json` | `0accb41794f4bbcc55ec07d981ca0d76258a8960e965cf3d89d17c86dee99b5b` | `ee9c93f2223f14fabbbf1f808914a3ef9c8d2a65af4aa351da05249d7cbe1ef4` | 4 |
+| `explorer.hide-empty-drives` | validated | Class A | `research/records/explorer.hide-empty-drives.review.json` | `6b85e75a3d8fd6a22b8616c539ab8a124fd4d52f845735418fa560d091a9592d` | `4cf29dc8aeabe2545d3db43aa5fa4f21743bc2d357f15dc70027808d88ddc072` | 4 |
+| `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | `b2c8bd913f42cb4204957510cd5f9d886b1e17f1ab7e56166b3a5e585e0e0405` | `2ca8e9ccb55c6f0b9a541d734ba85ff8db89faff7cf9f0659b650c0325181341` | 3 |
+| `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | `1424a0adc1af232892d60691cf4d7e674f5c57181192ec716c1dd96f5ef19611` | `d0a836326dc93702ff9e105cd20f9a19573972b3ccb9b995fc30cf0b94b79f24` | 3 |
+| `explorer.show-drive-letters-first` | validated | Class A | `research/records/explorer.show-drive-letters-first.review.json` | `226a8738097f9cb8fc7b90ba9f154f9185783be6732848c767f85bdc1b5ff3d9` | `783579abf72405760476c4a25ae14c0fba03630055791adca5196d3b91c86371` | 3 |
+| `explorer.show-file-extensions` | validated | Class A | `research/records/explorer.show-file-extensions.review.json` | `20aaf2c5aae753730d0c891ebe620e6ad84c6152dd2fd2e2f2df0612d4a3871a` | `19188566e6fd8363d76f527ed7c32c88cc64bce830a53e89b6af2287e9ebc988` | 4 |
 | `explorer.show-full-path` | validated | Class A | `research/records/explorer.show-full-path.review.json` | `195d096af8ed266ac228b79be184751f68f80c59ebb9621eb11cf90bce944321` | `3cd7c8b144e1f9e98974254619045e8178697293815a1d9df43502400fe99fc4` | 4 |
-| `explorer.show-hidden-files` | validated | Class A | `research/records/explorer.show-hidden-files.review.json` | `56f50b17bc79f87c9c5513ab07d5060e0841baac5175ae5efeb7fa4bc16a4f26` | `5dd345bb07b6f4101f819773a4b9f8a0e01acaffb13be8cb6468a21d94340313` | 4 |
-| `explorer.show-info-tips` | validated | Class A | `research/records/explorer.show-info-tips.review.json` | `ac25c11554dd61ed5ff153583bf306ef4d52a5c97c959999ccbdacb8a0d1b9d5` | `6616fa729d7439bb822884a12ad3346b82e0499eec65e211f821698dab141e41` | 3 |
-| `explorer.show-protected-operating-system-files` | validated | Class A | `research/records/explorer.show-protected-operating-system-files.review.json` | `f6bae5b93ca016a91933da9b1131b53897ead57bc986b286b99cfccb9c2ba43e` | `e2c5c74420b9c544bf159bbf4a3debd550b65cb8ac3a03324f28d5fbf1cb51fb` | 3 |
-| `explorer.show-recent-items` | validated | Class A | `research/records/explorer.show-recent-items.review.json` | `736da1f817bbd686f91b247abf1dea62d191e2b3a0f5f96579a74ef69eafcdde` | `9ad902ef4e38fee0b44cad050a26504c1ba760471ae22723b2a7af48ba483362` | 4 |
-| `explorer.show-status-bar` | validated | Class A | `research/records/explorer.show-status-bar.review.json` | `64b8e98ef3a53f0fb0bb44a7b457938eeeaa59ad77dc2eab198f192c12dfd00f` | `ac13670e90fc5c6772c1ab340d0ae1a5c80b07ee3ff391bd8b0ff550572d082f` | 4 |
-| `explorer.show-type-overlay` | validated | Class A | `research/records/explorer.show-type-overlay.review.json` | `3eae31f72f47913caaef325339c8878ae8c981c199efebe92e6fce754f7670f4` | `9cbb0afd2a0353b49b615da811c20d0ca8ec3858910332fa27156a49e9a7e94a` | 3 |
-| `explorer.taskbar-alignment-left` | validated | Class A | `research/records/explorer.taskbar-alignment-left.review.json` | `2d218f21081540642de689f217eafe9e9ceebd89e1d0f0be1c200f08680dd46f` | `cdc7e3b0d3fd5bb4c96458d680fc45bb6758323489f5b814dd5c2f0ef3cc8923` | 4 |
+| `explorer.show-hidden-files` | validated | Class A | `research/records/explorer.show-hidden-files.review.json` | `f1dced355b661f88fee7381cb3389fc0dbf89a55ce725dcfe10e04fee4852da4` | `5dd345bb07b6f4101f819773a4b9f8a0e01acaffb13be8cb6468a21d94340313` | 4 |
+| `explorer.show-info-tips` | validated | Class A | `research/records/explorer.show-info-tips.review.json` | `7298a8409a9d325b1abc966154ddcc4caf395da4b4066a529de0a82769b71114` | `6616fa729d7439bb822884a12ad3346b82e0499eec65e211f821698dab141e41` | 3 |
+| `explorer.show-protected-operating-system-files` | validated | Class A | `research/records/explorer.show-protected-operating-system-files.review.json` | `89b18763e3baf8208d6599c5d1e24d2cf0803fa918220f893c8fcfcd23f0019b` | `e2c5c74420b9c544bf159bbf4a3debd550b65cb8ac3a03324f28d5fbf1cb51fb` | 3 |
+| `explorer.show-recent-items` | validated | Class A | `research/records/explorer.show-recent-items.review.json` | `d0a677562133d5bf324203bebd33c5c4e2e46cad46731972e505ae19aa631132` | `9ad902ef4e38fee0b44cad050a26504c1ba760471ae22723b2a7af48ba483362` | 4 |
+| `explorer.show-status-bar` | validated | Class A | `research/records/explorer.show-status-bar.review.json` | `945fe8ad9e7f3d56baac9ae263d6da9677c7b3f63fc06d9e7343fa57c675f512` | `ac13670e90fc5c6772c1ab340d0ae1a5c80b07ee3ff391bd8b0ff550572d082f` | 4 |
+| `explorer.show-type-overlay` | validated | Class A | `research/records/explorer.show-type-overlay.review.json` | `4cd4c8ceb75b1c4e2b8c86d8d27e2f5ced59b30986c818c524fb08cb5b8b28cd` | `9cbb0afd2a0353b49b615da811c20d0ca8ec3858910332fa27156a49e9a7e94a` | 3 |
+| `explorer.taskbar-alignment-left` | validated | Class A | `research/records/explorer.taskbar-alignment-left.review.json` | `7820a9e395cc56f578b3449e03fa0a3f5fde4b3dc4dad285d995075c462ce446` | `cdc7e3b0d3fd5bb4c96458d680fc45bb6758323489f5b814dd5c2f0ef3cc8923` | 4 |
 | `network.disable-active-probing` | validated | Class A | `research/records/network.disable-active-probing.review.json` | `574b295e60e1258ef85da3d5ff9e5993c0abbd11eb68be4e5a3e536ca97c1928` | `8d47bc253bac76e62c6a38c0c7a8ac31e99c52cbad7415da640bad887ffd9f9b` | 4 |
 | `network.disable-default-shares` | validated | Class A | `research/records/network.disable-default-shares.json` | `02d5a2d5637857b6736fd4ff6d06bafde58d87d3f85decf9377b63240a7b18c5` | `3ec439dc9625b28652f5cd5b554d23c1eadf10977d19fbdf951d24008bc3e78a` | 4 |
 | `network.disable-ipv6` | validated | Class A | `research/records/network.disable-ipv6.json` | `8d252068adf0e2f227d5c36b7ecd5190553cdc0937e3befc89a86f6e7942d0ce` | `9615626d9e4327c855322dd0905d7d29cf6180a54a256b05811ff2124e76af93` | 2 |
@@ -141,7 +141,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `notifications.disable-toast` | validated | Class A | `research/records/notifications.disable-toast.json` | `aa58bf400363c201347b21292c6b9b4bcf65a483b56939ad4e50cfb030308663` | `bf5d84180a8ee72ad2650aab6e00683445129581369a387f63a05a711febfc63` | 4 |
 | `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | `7e861636879eed351198250f2c87dcdbece9ea420ac8c61e004542f197513b46` | `925d1dcf69842bd24fee55e46e9a47a3e2de5425f7aad6a3b931a96ee7605ed1` | 4 |
 | `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | `0c5a68f4b8d64388a3f5f87ecdcc76ac49684976f7244533c4d0c6c5113f01ab` | `519ad973fe6d93b28f13aa963e55f2b90d5488036bf1d55239c1fac591267d32` | 3 |
-| `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | `e0ce75ece507cf288780041e6ddd8a0052d1e9ec8906c3b9d3a11e075eae70bf` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 5 |
+| `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | `fda62111575ae9b7a41b50acab87f7c4900a3e5a9940a6957784bc52339f2237` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 5 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | `6128b811623173d369438b3ef4efb32ab42425a2325114fac938f72fab218418` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | `9d38a05cd041c6277d42ee906031a56935c9dd551ac5467a3f072f1c0b423a03` | `b9d22b4223ac1b91392945589e59d5c9badd4dd11b62c686b8801a5db80e843b` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | `58405f55aaa3332d62d1fce7f0c881e7aa2038d37f71381b61abfcdfa7233bc2` | `9f3308d21bd277544f1cba2c59a776a2ee7cf4baa9630d1a20ec0742da11503c` | 4 |
@@ -150,9 +150,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | `539968582171cbbfde1aa6e02feda17d2fd3118641c615686e331d40bd36f91e` | `44e29d37bb9e8b44313f77307041293d030872438f451cb698ed815556190ae0` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | `01333f3c9ee8de118b4f9474544d7b740de620681a30a333da78b4f51a0065ef` | `17eabdbe9c396f9d546078ff13a0134f005fedfbc5a975cead773f5f6adb1747` | 3 |
 | `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | `f7f2dd886abb9c060e4f849b07980031fec18fe4ae87f8c72d9bc94d655a87a8` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 3 |
-| `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | `5321aabec18a50cf8ecdee319d36bb6a865e3d70361e17f41a4a5037db24efa9` | `52282e4fba1da5150c67ac6c36490b915300f8d4ce0db88235bb95a0b2c124ba` | 6 |
-| `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | `3f8d78e6f31c645f42031299d30f9f81dbac815f6bdc1e3acc1a9aef3bd2594d` | `51f2e3092298738a596146b34a8faf5635257cfd5b935ce6423a0a0b7ff2cfb6` | 5 |
-| `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | `82e0c0cb151f52b44c4636f57a3b1c1932dc75564c98c8e15b7b3af6c6dd5ff9` | `75833b1276158886cef355e5448ff181142071a3195dc595ab22bb33f9bd2df0` | 5 |
+| `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | `5ce533a33057aa1e222eba85002005eebd80e4c8cd7fd3984197de44fd0594c6` | `52282e4fba1da5150c67ac6c36490b915300f8d4ce0db88235bb95a0b2c124ba` | 6 |
+| `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | `153d378bb0e1503fdea1f72323409fdfae54dc8af01dc5e7fb3bc61b4ebe0791` | `51f2e3092298738a596146b34a8faf5635257cfd5b935ce6423a0a0b7ff2cfb6` | 5 |
+| `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | `769b58bd3f7c23386fad649d59c3f9ff7815ebbcb47e8dcc028bf93549027337` | `75833b1276158886cef355e5448ff181142071a3195dc595ab22bb33f9bd2df0` | 5 |
 | `power.optimize-cpu-boost` | validated | Class A | `research/records/power.optimize-cpu-boost.json` | `f0c4f14a97014e85162c788680a528e2b85c8d3e06ce01a2eb1a2b4957259b7d` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 4 |
 | `power.optimize-gaming-network` | validated | Class B | `research/records/power.optimize-gaming-network.json` | `682ffa0c0c3577877f287793002a0cc6c86fc2806b38efabfafac51707e6d2ad` | `770c08fd157d16d5037aec70f50df6e6f98c7a06018389d6b2aa2173351bba20` | 3 |
 | `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | `7745aca8be89b9579df267d4bcc9d82d398d280e8f6e59dba402eb249c4f6a40` | `180adc4cc66e0cdd82c29dea343476ab0de4c34c071b8683979f4537656e31de` | 4 |
@@ -160,7 +160,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | `87b2a2840352733330dcdfde115370ef93d42493de953cb12352601ba983f4d7` | `3827ac232ddaa8ffc8db8f269b1348be8250d89e2a0865a5e898d33cfab3921d` | 4 |
 | `privacy.disable-advertising-id` | validated | Class A | `research/records/privacy.disable-advertising-id.json` | `7a73a9a4389fb2f4163ca296d01b1cb63f6d809224aec97527e71098ebe2b6f3` | `843c45fba3e1450dfa21db8d83eb28d05f2d0b56990f5d547097e996b37d5197` | 3 |
 | `privacy.disable-app-diagnostics` | validated | Class A | `research/records/privacy.disable-app-diagnostics.json` | `e463ad48f91121554799409cdf0585dceeee35822a616099c5ff8c39ce60702c` | `616bcf8e8cc6752f6907de06ccc9ffb6e6ff9ca9857f96ba9e1b3df124284c40` | 3 |
-| `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | `3fa256c10bcb2cf63d494ff841c514ebeef86fec883a1763257deef1bfd9aae7` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
+| `privacy.disable-app-launch-tracking` | validated | Class A | `research/records/privacy.disable-app-launch-tracking.review.json` | `1efe1013b6c817e33bc645268b1765451d2722f3ba382ffc2a9b1c1e20f29b5f` | `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457` | 5 |
 | `privacy.disable-app-suggestions` | validated | Class A | `research/records/privacy.disable-app-suggestions.review.json` | `ffac331f0d990ede799a24304650b26efbd5c8ab101c07dad6d2a8c765212205` | `c1b7a9d9a598a25944e96a2e83056c198e4ede4610d8783ccb32eb05bb0210b4` | 5 |
 | `privacy.disable-appcompat-engine.policy` | validated | Class B | `research/records/privacy.disable-appcompat-engine.policy.review.json` | `7ccdfec9afd2832ed4ad2d6b3f00d44baf875040c427eb3a098f3d5c5cdc1461` | `9c403b09a339b4e8478d535ba2872f823028a15c6b17effbe2e03175e7aee63e` | 5 |
 | `privacy.disable-appdeviceinventory.policy` | validated | Class A | `research/records/privacy.disable-appdeviceinventory.policy.review.json` | `8a11d08d95c95b169b95c8e9d9bc93ce17a5099a66bd79a23ab6bdca0aef4472` | `80c14b15e3928f4dd42670ed4f8fac69698131f6ae543c825e6c53862de714a1` | 4 |
@@ -178,7 +178,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | `dc28153b4d10e400f0f5fab68fde2c4ae7075b418388109791f15d089ae47957` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
 | `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | `f3ecd4976770c410c70863affb0a9c4e5a1be67437aad05ac8e37346ebdff8c3` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
 | `privacy.disable-edge-search-suggestions` | validated | Class A | `research/records/privacy.disable-edge-search-suggestions.json` | `ef7fa1bae50bb6ccc7cae02ecb9d94c9e3ef29af03ad9a51c622cc6fba1c8393` | `da2e371739bbdbd12b536085c6398a4e4dd90ef8e0ff7573c766e3c83c9aecb7` | 5 |
-| `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | `53ae3d2b2c050ab33bb271d6c4c3178f71335f37a4ddeb0f28beb84079b99b24` | `0bacb3540f0705fb6a710b734b38c017731184d3d1a3aa02df622bde2df9a017` | 6 |
+| `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | `949cba835979f79e3304e1ee768a28c90b8b60faf20291ff6f99dbadd6524826` | `0bacb3540f0705fb6a710b734b38c017731184d3d1a3aa02df622bde2df9a017` | 6 |
 | `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | `fa2e59579366714ab8b7bcfd9282d7b5a0b0d38121ca45f7adbaeaa0ed8b1cc3` | `5061435bc76290af8ddc28d665d9da2463f41dd314cbc26222b2e3fafa20b926` | 4 |
 | `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | `b85414db3ad575ffef04378d710000a042af8bb74e6589b6b8251063b56d0995` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 6 |
 | `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | `f7bc768223922e8686b3241fef8482fb302dcc691679848e01b3e6eec7139d18` | `42e7d416280a759defce0b253888c6371d080292ffdb9d4fe5d8a16e1f63fcdc` | 5 |
@@ -198,10 +198,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-phone-linking` | validated | Class A | `research/records/privacy.disable-phone-linking.json` | `f87e70f4ffae664532612f53da4696c42b28e40ab05761adf1b4074c8c484552` | `2e18031aa09f851f8105b39a1552f4c7f5a09863a7b3e595768d45777ee22a6a` | 4 |
 | `privacy.disable-program-compatibility-assistant` | validated | Class A | `research/records/privacy.disable-program-compatibility-assistant.review.json` | `7e6b41f28bd82c163f178392ef9e710f9e7d6a7c39c6ca184b8b9790566f64db` | `eebf68e9cde78164fd3f025c32580b631a5745568eb560d9b178ac5c602a130d` | 5 |
 | `privacy.disable-recall` | validated | Class A | `research/records/privacy.disable-recall.json` | `7eb6fcfd4853a8c183c966d3a5fcf32c0269644b21643b6914b5774e782767a0` | `a524f41ffc51f280c89ef008dcfb7ecaed335aea070491dea4bcfb7b7d073c98` | 6 |
-| `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | `18baf3e66dafead2ad4939578d178535ef3cd7bffbe6d0a4cad554672549fb96` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 6 |
+| `privacy.disable-resume` | validated | Class A | `research/records/privacy.disable-resume.json` | `6cd8a3adb344bb2f15a1319f5dd8eba67e6ab1a47995de4546d60d9fec0cacc9` | `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f` | 6 |
 | `privacy.disable-rsop-logging` | validated | Class A | `research/records/privacy.disable-rsop-logging.json` | `1617d0c91f169c155b5ecbedb5e85c9e963604c245c7e6e1b1229899310c8dc8` | `d48956c6cb1b63107bb774f645e6c48be3f53b8bf056c98beb45afa47bd22527` | 4 |
 | `privacy.disable-search-box-suggestions` | validated | Class A | `research/records/privacy.disable-search-box-suggestions.json` | `3a8bc8abd0b4282b43673f00de45f9a7af196263425342198e9083d7426f6304` | `e8c5662e18f31bce20e2bef9e94c777a90dab5337651f4f72d3b6056791d3a14` | 5 |
-| `privacy.disable-search-history` | validated | Class A | `research/records/privacy.disable-search-history.json` | `331000563df130c456089db4a5cc446c2f295c53760812f19613bfeef55897b8` | `8edceb166c4b29918ffe4087b1fbb7b24f0ea650046fb40185de25d10080ddb9` | 6 |
+| `privacy.disable-search-history` | validated | Class A | `research/records/privacy.disable-search-history.json` | `ca961da568ee980ce304fcd812b2269cb529fc5bdba8e1266f702140dbc28481` | `8edceb166c4b29918ffe4087b1fbb7b24f0ea650046fb40185de25d10080ddb9` | 6 |
 | `privacy.disable-sensors` | validated | Class A | `research/records/privacy.disable-sensors.json` | `698b396a0b686743f0163f07c0c930538e69876cc8811ed373c4f8b39b044908` | `3cc3ff00fca797edfe001cc3c547272f484befaf1c56639ec80e4946ef3b6619` | 5 |
 | `privacy.disable-steps-recorder` | validated | Class A | `research/records/privacy.disable-steps-recorder.json` | `6d034fdca543ddc3db704f6ff58cd0820e143a47701117ab610e942160b2389e` | `260e8068b0547e4a648323eec0024d02915f8ab358811a98f4f59ab7d24fe7d7` | 5 |
 | `privacy.disable-suggestions.policy` | validated | Class A | `research/records/privacy.disable-suggestions.policy.review.json` | `58a9068cb1309984813d2c397e28cea09d958e59d5d64f40758ff974b5f6160e` | `506f9c6d31286afc79518ac95dbda8b6de1d0de620610c549cefd7afc2bbe738` | 6 |
@@ -222,9 +222,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.set-diagnostic-data-to-minimum-supported-level` | validated | Class B | `research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json` | `d0dd4716641e8870d2c75907d005fb6bf304dc7c308d75689a4d320eedd488d4` | `874fb5629d86b938d3ddb497d31b5a63922bb4c2340b795079eb1115049f9384` | 5 |
 | `privacy.troubleshooter-dont-run` | validated | Class A | `research/records/privacy.troubleshooter-dont-run.review.json` | `7854b14828dd2e0445e85b6aa4f9bda47e9fe9573e442303b64ed554fe6e607d` | `82277d1547b7f08ccde3b7c8db877524c9575896459415f34dade6612436b7f8` | 4 |
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | `04f22c8b6ecef7cd87dcafe09a77d692c27519a139801b740286938b35e52c2e` | `d4a068d963a7e434538276870e799b23c54e0009447cb12f3de375bcbd506211` | 4 |
-| `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | `9e61fc99ff41d5c7499b3c0a184b60cd485357d50f301201b24df05f4f3734f3` | `925541f217a1d4c60a7246351a333f64066baacbfd67704c40048e23d0014171` | 7 |
+| `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | `8374e8dd9861f1560bd06dcb771c148ada060215a84df63ef0b8e7fda1910bcc` | `925541f217a1d4c60a7246351a333f64066baacbfd67704c40048e23d0014171` | 7 |
 | `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | `aad660037e4f89c2479eb4c19357a6908ff981a97aea03e2b4fa2fa4f8c570b7` | `386e129dd48d98630296f350e39aacb92fe6eee49ef2002a109f7b63548ac738` | 3 |
-| `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | `03d013946bd34efc05e5e4824e372bb3f8959de767c05cfdb18c075f09837360` | `e288d7bf00c18ec28e6e3f6386c1726691644448ec53686b33c7df05b67b2f23` | 6 |
+| `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | `5956cb5646d395f04a7eca5a6d5c76de681724c9ebaaa209b608529c587efe8e` | `e288d7bf00c18ec28e6e3f6386c1726691644448ec53686b33c7df05b67b2f23` | 6 |
 | `security.disable-ntfs-encryption` | validated | Class B | `research/records/security.disable-ntfs-encryption.json` | `ee1b72697d3f18eff1401e8268401e3c0b6c1e0e1919edbaac39ee638e9a8b65` | `b287871882734b330aa3c02b82ab84c99a0bbada1e231142ef89e06ea591e2fb` | 3 |
 | `security.disable-p2p-updates` | validated | Class A | `research/records/security.disable-p2p-updates.review.json` | `65b93f1ab297ff02c71139c4d63ad116c169aaa2b80e285cce64c59b435bea28` | `d03ea5e3fbbc1b7c4ef30c8f191194a775e041cf90c011c49bec42fd107976f4` | 3 |
 | `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | `80746d47f97114d1db9a127bc2498f391d6cb2a502170f0189d0c5dbbb5f146a` | `6909396177533ec231249292c296a5924d7a407d3c2361d964b2ff9176400f91` | 3 |
@@ -235,14 +235,14 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.disable-windows-firewall` | validated | Class B | `research/records/security.disable-windows-firewall.review.json` | `4590977091fcac1fa90efd3b491af4e6b1c0fadaa287f94e4cf6ab1623a12c95` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
 | `security.disable-windows-update.policy` | validated | Class B | `research/records/security.disable-windows-update.policy.review.json` | `934957743b8bb4fd7cad1b936ddf4bc1007f69e369ea2640c13f6e3c9380f209` | `4f53b0c7e30cc0466e386ac3257615c8ee3e7f8ce7de9009ad21fd604791f54b` | 4 |
 | `security.disable-wu-driver-updates` | validated | Class A | `research/records/security.disable-wu-driver-updates.json` | `14fab97e41929cc4bc5b4cf59db0b541e35bcb8efeea51f3993ab4f851f330a0` | `e55a55852fd2758cca754dc81b9d45aabadcf46981d3567776b6961654153445` | 7 |
-| `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | `3b3cb98bfe53d3783b53de6805c0a357fc4238514e7cf23c40b43f49419855eb` | `fa03eefa6888f42ae0aece69eb56fe827f0b4ff374d239229346b7ab817a4667` | 5 |
+| `security.enable-defender-maps-advanced-membership` | validated | Class A | `research/records/security.enable-defender-maps-advanced-membership.review.json` | `64dc376ed4a64722f59acfc38b5a5afd521ba50289e906cdb5c2d27521a7c95b` | `fa03eefa6888f42ae0aece69eb56fe827f0b4ff374d239229346b7ab817a4667` | 5 |
 | `security.enable-dynamic-lock` | validated | Class A | `research/records/security.enable-dynamic-lock.json` | `cd6df69a13081886ccc98ba82fd7a49d27677638f2c51ad6a860b4712dad3c53` | `d7015501355ad169aa07fe245ebb1ca148fadf5da35598a3da951748fea813c7` | 3 |
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | `8a3ba266db8e75eb4106c2198b7ace9432b670b7d54852a14567d3585a805892` | `715a1e28f38954af6414a53ea2f759af420ba2ce06a30e5cb6c133636a79a77d` | 3 |
-| `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `25a2a3dbc0c5cd4690b993856c77598910e84fea9d60a912a35e9c26c06fd4d0` | `e9c48186565702ee535cd4f3367e55cb2578a6d628a850bfce093a6c3bed0001` | 8 |
+| `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | `2473542e43f88fd995cc7d5008e5a411c445c3ee5ad0b874199981a660d1f6f6` | `e9c48186565702ee535cd4f3367e55cb2578a6d628a850bfce093a6c3bed0001` | 8 |
 | `security.powershell-unrestricted` | validated | Class B | `research/records/security.powershell-unrestricted.review.json` | `5cbc0d6bc316568adcfa4779b8df87c09760c7d517c4a88dca54ed9e92dde656` | `2c26a68091bbcc9aa57978a8c19af6e9e1a985b2c5d083045123c9f8e49ae53a` | 3 |
-| `security.threat-file-hash-logging` | validated | Class B | `research/records/security.threat-file-hash-logging.review.json` | `7472699bf1556c785145ba39e16c8d5ddddc8569aeca51ff9258dcd309f3ceb2` | `0bfa1bfb7b8ebea20fb5aaef5ccd9a4b7c79dcb02e0647a2c4a83dbf7886ed76` | 16 |
+| `security.threat-file-hash-logging` | validated | Class B | `research/records/security.threat-file-hash-logging.review.json` | `eed04bf7c5d88f3994831bd5f11b7fc7f1ad7f04245dec24eac25155aa5af294` | `0bfa1bfb7b8ebea20fb5aaef5ccd9a4b7c79dcb02e0647a2c4a83dbf7886ed76` | 16 |
 | `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | `d29fcf1f83a623942587f349fad2e7cacbb124a22103b5b7f99fba74309c1b91` | `44752f8965aec2b7baa5dd37b9f915cce357ce588ffd3c7b626f7a915e95ace2` | 5 |
-| `security.uac-never-notify` | validated | Class B | `research/records/security.uac-never-notify.json` | `453cc05a60b0d416d769c060663aecdf25775067435d0bd682c32314ec39b8ec` | `69977a7c0895280fc48e7817429a9a481a3dca64bd25cac31a1e4b894cbce4e9` | 4 |
+| `security.uac-never-notify` | validated | Class B | `research/records/security.uac-never-notify.json` | `6c6b267df95ad393b91d2c8199430a9127e7cd5e617f8ba8deb131aadbc95a05` | `69977a7c0895280fc48e7817429a9a481a3dca64bd25cac31a1e4b894cbce4e9` | 4 |
 | `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | `da81a2e755ea8e548f47ce311e4f9bac89bec49cd2b7f05bcc641afd0d7c11cd` | `bab059a1ae7f373e71967dd1a49732b6a6ae52c003fa38684fd42fe40c947519` | 4 |
 | `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | `e54cdf74149765274efbf6e06ea6b80890422e67bc7d81075c36a84aa2b3ed37` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
 | `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | `7072c24bfb8388dd51b073011b546ac4ae6d065e0cea7b07ee2c1fecc8cc1ff9` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 2 |
@@ -253,18 +253,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | `9ff0033601340e63fe6cdd11cde81056b645efff98abd80fa814f921756639b9` | `87e3b4393968daf49c4ca90f5343ac7b10e8afab12f2f61194e0df491c22083a` | 4 |
 | `system.disable-fullscreen-optimizations` | validated | Class B | `research/records/system.disable-fullscreen-optimizations.review.json` | `496f1b3cbaab1c543392be257a2e0a183c01514e22ef4c3198bf00f6fb916ac2` | `6b4277b07e258d2967b2c20c36a52d601a48af1c9c37ab38542cdbcd78a6c717` | 4 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | `f8cd916eaac32ecb352ba3d860e62ede4fecda6043e902ef109a5baf9cb94f58` | `5024d7c51812e964c73012685ed6aa5d3e93bfc6bc83099344cf253656ef5901` | 4 |
-| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | `e5a2e659add3a8ec5e7fddfa68db8e6c0da07b5eb16a17dfd57476acf33eff0e` | `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b` | 6 |
+| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | `d58d9d4b2516d8c45742f57ed8e81cd05bd5e7881d38a063e0bc85909ce46ca7` | `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b` | 6 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | `239b954f3ed57b91c6849b79112c012e1fc93b98e2997e268cc62e812b6410d0` | `965dda97da26f0f0572e6d5ecd4e7460377b59c02730d78345ee192f6ddbc803` | 3 |
 | `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | `cbdf1bfbf8eba80ddd3269fbb3e012281a6336af9220996cb14eb7c31a670904` | `261d9d5d4c180b8f9aea9c9c1d1ee43ccceaee48dc097c14db55c6dae6fe6135` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | `0c5846e343d2009c49d0ee95532155c1c2e54d82ae7aa3716401da0d1ac4867e` | `5e65afa708e18b12b9f829486b8856146c46e9db755aad34ad4e7da317d7cc57` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | `2bde9a9fa7dcd2b74b669e0619815aabea909daa148b0482fe2804443d625e28` | `baf2b84cb20a5549d900fa1d19d0dcea1c89f2e17274d119644e9f60692e09e7` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
-| `system.disable-startup-delay` | validated | Class B | `research/records/system.disable-startup-delay.review.json` | `ed7051dc71944abb8f00301bb44726e51c1f5b02407832fe8f59b0c270c990f5` | `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658` | 6 |
+| `system.disable-startup-delay` | validated | Class B | `research/records/system.disable-startup-delay.review.json` | `57081a6d7e41a5d17aff22481eec661b7889611dce4002f95110aa3c54eb8d90` | `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | `2928a84edc36491332349b1b6f3ea46781b5b06f291ea7e9637518f6eea6c988` | `f6fcec491570654c4ac024edf32ddda8b69c3f20699942c9b3a9c523e6a086ed` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | `7c41be2a3c5ab8c65bb8eddc66af5960dc0b652b387699ac1b5c3393bfd7771a` | `64b00ec7502121f9ba0cf1f178f7eee681d0e2a3cad116938aec15e83189bef0` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | `0852e85453e9854f1bff5af008f1ac6d0b58c1bb87bac664c491ebaf84cb4f9c` | `506e7c06fd133ff089965473816c95fc4c494e6413adc321fb58740eb7462cf0` | 4 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | `61cfa400a941fd9dae89a25009a94c4560d6b7a9fd4ffdad56e702c031925b61` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
-| `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | `72f5bbe1523467d6419ba72659c3f71ffe376de2da3da4d146ab5e0cc713f384` | `4022e699de288bc32e47cb4a619a67a8489cebfcdfd0ca519c7df180589b35a6` | 5 |
+| `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | `3e251219fb540b4f68cab6e1d3e7f0d74b523dccba2c9e325bafc6133e12ce07` | `4022e699de288bc32e47cb4a619a67a8489cebfcdfd0ca519c7df180589b35a6` | 5 |
 | `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | `ecaf043533e0a782972622a62d8dbffcdba077a24c721d8964df8f408ffceb0e` | `3dfeb1de4c5bce050fc4cafd700e1f5f27d8f6e4ad395ce555f667bb2ee84bb9` | 4 |
 | `system.enable-indexing-encrypted-items` | validated | Class A | `research/records/system.enable-indexing-encrypted-items.json` | `e4b849504c45b344c21f31795c4311a286ccd532e53d4e50d3eb1a96afb74437` | `860b8af1ea8ead98787f4a4a8f56b211cf6c71153a984d05746c5330ad5cacf6` | 3 |
 | `system.graphics-tdr-ddi-delay` | validated | Class A | `research/records/system.graphics-tdr-ddi-delay.json` | `f4320d96efe7936839d403d3177fa15635014952e25332a6fd31c151e99d3d2b` | `4da5d6e01596bef7305846933e89c7e400510e7d321079dff7d499ed24c500ba` | 2 |
@@ -285,7 +285,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | `68b9682efdb74f02caf54ef4853cf0818afbc4d6eb6fd59994e892bb9bab31f7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | `5e265f012e9edd741dc2b9b40796707e7a1417701a7465a5063c8c3084602962` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
 | `system.priority-control` | validated | Class B | `research/records/system.priority-control.review.json` | `05d48e544834acc1dc148578ea26d932977b994a3b54c87853cd19b8d6890b69` | `83a4f957d4f513dfdb91d40ef8188cc08848cd2227da846cd41c77ce5fba3e4c` | 6 |
-| `system.reliability-timestamp-enabled` | validated | Class B | `research/records/system.reliability-timestamp-enabled.review.json` | `9871a3fcac07f1e016ac39928ae7f3ccaa0f36627b5177f6c57d5e3248c5b696` | `21d322cd4c59adefae690948579f154fbc417a9bc4673757927b30d381146720` | 5 |
+| `system.reliability-timestamp-enabled` | validated | Class B | `research/records/system.reliability-timestamp-enabled.review.json` | `90d76fdac35192dd921586f465c4fd865ecd7e1664864d3ef95d2cae594362d1` | `21d322cd4c59adefae690948579f154fbc417a9bc4673757927b30d381146720` | 5 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | `245f999062f676c3c31b4ea9167470d7e27f96df1c9ebf344998a727ee5fa00c` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | `5a07289bded55c5c28bdc23eba8ec1b5a4e009c6f57e94db5ba9718af4e2a364` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
 | `system.services.disable-bluetooth-user-service` | validated | Class A | `research/records/system.services.disable-bluetooth-user-service.json` | `73668747467a111ba71b3312ff0b2032001afe2b3c8dd19a56acd0716e212798` | `3e166d114e0921dae81d5758edf41e20a614537e2cc337a10e8272742c57da64` | 2 |
@@ -314,7 +314,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `visibility.disable-widgets` | validated | Class A | `research/records/visibility.disable-widgets.json` | `18fac88b6fd15803ff0383d2317f7519c06bbe7e4f1169be2a406d31317ccbd0` | `f2b8b2f5be69c1aaad3267d3fa50c1ed6e5f367727ae63626b696a0aebfcd647` | 5 |
 | `visibility.disable-window-animations` | validated | Class A | `research/records/visibility.disable-window-animations.json` | `65b8e4e6722c96b0fb5ca8f14686c23cef58331acaa89a65b6f0cb01b1c8937e` | `6084a4f51a5b4734e348548b6a76e5e97ce6302fb77a67387a2077ee1f36bde1` | 4 |
 | `visibility.force-classic-control-panel` | validated | Class A | `research/records/visibility.force-classic-control-panel.json` | `c52c4e4fcf75b17b668d1fd662b1062102e1986be678e354f739c72b8e88f874` | `45ecad7a4f954cd8c4e5bc1462be3a39db65177fd4081bb6ed8f2cdfd9eb665e` | 3 |
-| `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | `be73c3b271294a6cedd2ab7fd9d3e39cf66295d158febda0e620cf72c173d30e` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
+| `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | `128bda2d9bf854854a801c73fe35bc3f7266da363e922cb18c43b162ec7ea1fd` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
 | `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | `2a7e0de3291d559f607667cf9819718d0a3f0fb05e96f6d3b5d881a2ade8493a` | `c561884f9cf6d7afa342f99b7a4c685bb062f98c08441cf9eec471e34f8c289d` | 4 |
 | `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | `599a5ba8ab85bcc788f902cb72fc0710dae8154ebf61a96b7a53593ba25ca6c1` | `8efd23c6acd9fe87c8998dd4922715b6f18b7d7cec2cf6b83991877342dffbb3` | 4 |
 | `visibility.restore-classic-context-menu` | validated | Class A | `research/records/visibility.restore-classic-context-menu.review.json` | `113672de6f1bd7b6410b870661d6afd19c246724b57ace350c9e756b3f33b3c9` | `d8ca9ced3261de946be33b84796c1b91898604f9166ac527a38dce0b0b010863` | 3 |
@@ -381,7 +381,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/developer.terminal-dev-mode.review.json`
-- Source SHA256: `c03b491bea23d0d9e407250a2c610a9134fca247588101105404eb51291e9d6e`
+- Source SHA256: `8ee19666dacdcd15d127e16559bfb918fd3ea596c37977e12a15ab3f7d2f786a`
 - Proof SHA256: `497b959b5650784c5a6f0cd12ac8f825d9cc4a283ce4be7d073f09a458523c1a`
 
 **Summary:** Deprecated audit trail for the Windows Terminal internal-flag bundle. The current app writes HKCU\\Software\\Microsoft\\Windows Terminal\\DeveloperMode and EnableDebugTap, but this research pass did not capture a published registry contract for either value.
@@ -391,7 +391,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | Microsoft Learn: Windows Terminal settings | [https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup) |
-| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | Ghidra headless raw-memory scan of TerminalApp.dll | [https://terminal.1.24.10621.0/TerminalApp.dll;](https://terminal.1.24.10621.0/TerminalApp.dll;) [research/evidence-files/host-temp/terminal-ghidra.txt](evidence-files/host-temp/terminal-ghidra.txt); [research/evidence-files/host-temp/terminal-ghidra-enabledebugtap.txt](evidence-files/host-temp/terminal-ghidra-enabledebugtap.txt) |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | Ghidra headless raw-memory scan of TerminalApp.dll | [https://terminal.1.24.10621.0/TerminalApp.dll;](https://terminal.1.24.10621.0/TerminalApp.dll;) [research/evidence-files/ghidra/developer.terminal-dev-mode](evidence-files/ghidra/developer.terminal-dev-mode)/terminal-ghidra.txt; [research/evidence-files/ghidra/developer.terminal-dev-mode](evidence-files/ghidra/developer.terminal-dev-mode)/terminal-ghidra-enabledebugtap.txt |
 | `wpr-terminal-launch-trace` | `wpr-trace` | WPR capture of Windows Terminal launch | [research/evidence-files/host-temp/terminal-launch.etl.md](evidence-files/host-temp/terminal-launch.etl.md) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
 
@@ -1604,7 +1604,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-serialize-timer-expiration.review.json`
-- Source SHA256: `0d882f68598cdbef1d203f0caea87dbf59fabf67d307c31e2e5b64d13b584dcd`
+- Source SHA256: `57299faf109f4fcd878b63208bb5b4c889403e5989180be25d6cafecf131e3f5`
 - Proof SHA256: `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b`
 
 **Summary:** Deprecated audit trail for SerializeTimerExpiration. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\SerializeTimerExpiration = 1, and the decompiled kernel timer-table initialization path now shows the raw gate and fallback behavior, but this research pass did not capture a primary Microsoft source for the exact registry setting.
@@ -1615,7 +1615,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| `ghidra-serialize-timer-expiration-gate` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) |
+| `ghidra-serialize-timer-expiration-gate` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [research/evidence-files/ghidra/system.kernel-serialize-timer-expiration](evidence-files/ghidra/system.kernel-serialize-timer-expiration)/kernel-serialize-timer-expiration-ghidra.md |
 
 **Validation proof**
 
@@ -1859,7 +1859,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-disconnected-devices.review.json`
-- Source SHA256: `145a124f9643077d910f9ba9a7a5a61ececee5528367d66c066a35b3332bd1c8`
+- Source SHA256: `269cfb7957f39415fc8b8f6c53b0957c165b108ff950d64a5430779dd4d7f5c6`
 - Proof SHA256: `0789e0f44331dbefb6565c2ed02e05ed6e911cf9b64ce32d8f29c04e7ce2c1f2`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
@@ -1868,8 +1868,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-20260314-pml.md) and [research/evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md) |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/vm-tooling-staging/ghidra-probes/audio-devicecpl-ghidra-20260326-015910/audio-devicecpl-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/audio-devicecpl-ghidra-20260326-015910/audio-devicecpl-ghidra.md) |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-20260314-pml.md and [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-zero-20260314-pml.md |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices](evidence-files/ghidra/audio.show-disconnected-devices)/audio-devicecpl-ghidra.md |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
 
 **Validation proof**
@@ -1887,7 +1887,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-hidden-devices.review.json`
-- Source SHA256: `57a4075e12a27cfce79ad5d058acfcc57f69e44ab3fae748a272f98157fd817f`
+- Source SHA256: `ac0e35feb4d9acaa9a7c001292c51ca5660420be44a14be0a66747c556fec1df`
 - Proof SHA256: `7bf34d113dc32a98101f2c49afd0c939a8c02083ec9c5788fd2b16069e56183a`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowHiddenDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
@@ -1896,8 +1896,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-20260314-pml.md) and [research/evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md](evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md) |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/vm-tooling-staging/ghidra-probes/audio-devicecpl-ghidra-20260326-015910/audio-devicecpl-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/audio-devicecpl-ghidra-20260326-015910/audio-devicecpl-ghidra.md) |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-20260314-pml.md and [research/evidence-files/procmon/audio.show-disconnected-devices](evidence-files/procmon/audio.show-disconnected-devices)/audio-devicecpl-query-zero-20260314-pml.md |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [research/evidence-files/ghidra/audio.show-disconnected-devices](evidence-files/ghidra/audio.show-disconnected-devices)/audio-devicecpl-ghidra.md |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
 
 **Validation proof**
@@ -2001,7 +2001,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.enable-windows-long-paths.review.json`
-- Source SHA256: `7fdfbbb9782f9b6e4a4d202f64050424c7d09b0063109b9b95d3fe2ea9924344`
+- Source SHA256: `c22689f9d4dc6354dd7d005c892138dfaf8adfefc0fa279fb6cf81af2fc2b4bc`
 - Proof SHA256: `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d`
 
 **Summary:** Microsoft officially documents LongPathsEnabled as the Windows long-path switch, and the app writes that documented value. The tweak is now modeled honestly as enabling the Windows long-path prerequisite for compatible applications rather than as a Git-specific configuration change.
@@ -2011,7 +2011,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) |
-| `procmon-developer-long-paths` | `procmon-trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [research/evidence-files/vm-tooling-staging/devmode_longpaths_probe.csv](evidence-files/vm-tooling-staging/devmode_longpaths_probe.csv) and [research/evidence-files/missing/devmode-longpaths-probe-pml.md](evidence-files/missing/devmode-longpaths-probe-pml.md) |
+| `procmon-developer-long-paths` | `procmon-trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [research/evidence-files/procmon/developer.enable-windows-long-paths](evidence-files/procmon/developer.enable-windows-long-paths)/devmode_longpaths_probe.csv and [research/evidence-files/procmon/developer.enable-windows-long-paths](evidence-files/procmon/developer.enable-windows-long-paths)/devmode-longpaths-probe-pml.md |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
 
 **Validation proof**
@@ -2144,7 +2144,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.windows-dev-mode.json`
-- Source SHA256: `bc5997e88d5cad3707794fff7f35e6039dd866c290224ca7b7311ea2f281bcb7`
+- Source SHA256: `b7f813331b08741ff9569477b19a3cb037dec1d6f0d7ab4bcc4bead4acb76ca2`
 - Proof SHA256: `44181c1fa4e2667be7177b89483cc84eb40ebb76abcd2a7081a4c10f9f1753e5`
 
 **Summary:** Microsoft directly documents the AppModelUnlock registry method for enabling Windows Developer Mode, and the current app writes that same documented value. This record is now validated with machine-checkable proof.
@@ -2154,7 +2154,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-enable-device-for-development` | `official-doc` | Microsoft Learn: Enable your device for development | [https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode](https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode) |
-| `procmon-developer-mode-baseline` | `procmon-trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [research/evidence-files/vm-tooling-staging/devmode_probe2.csv](evidence-files/vm-tooling-staging/devmode_probe2.csv) and [research/evidence-files/vm-tooling-staging/devmode_probe2.txt](evidence-files/vm-tooling-staging/devmode_probe2.txt) |
+| `procmon-developer-mode-baseline` | `procmon-trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [research/evidence-files/procmon/developer.windows-dev-mode](evidence-files/procmon/developer.windows-dev-mode)/devmode_probe2.csv and [research/evidence-files/procmon/developer.windows-dev-mode](evidence-files/procmon/developer.windows-dev-mode)/devmode_probe2.txt |
 | `local-appxpackagemanager-admx` | `official-doc` | Local Microsoft AppxPackageManager.admx mapping | [research/evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](evidence-files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) |
 | `local-appxpackagemanager-adml` | `official-doc` | Local Microsoft AppxPackageManager.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](evidence-files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) |
 | `app-developer-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs |
@@ -2200,7 +2200,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.always-show-icons-never-thumbnails.review.json`
-- Source SHA256: `737a0327124b343b2d1e502a9f5056f143e1d6b9f9b1fc188945baacf40dccd1`
+- Source SHA256: `f05aa746abeb3f54e13cec4e38dfb95562cb336ec48a21d8e307d72f2e992f08`
 - Proof SHA256: `d3ff2acaee3a582445b3311d899c1d41f4134323f73864ba18d85280c4a78f71`
 
 **Summary:** Observed Explorer runtime setting for always showing icons instead of thumbnails. Microsoft Open Specifications maps alwaysShowIcons to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly with both Data: 0 and Data: 1 after Explorer restart.
@@ -2211,7 +2211,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-alwaysshowicons` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista alwaysShowIcons | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-advanced-iconsonly` | `raw-registry-dump` | 25H2 raw registry and default-hive corroboration for IconsOnly | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-iconsonly-runtime` | `procmon-trace` | Procmon capture - Explorer IconsOnly runtime surface | [research/evidence-files/vm-tooling-staging/iconsonly-result.txt](evidence-files/vm-tooling-staging/iconsonly-result.txt) |
+| `procmon-iconsonly-runtime` | `procmon-trace` | Procmon capture - Explorer IconsOnly runtime surface | [research/evidence-files/procmon/explorer.always-show-icons-never-thumbnails](evidence-files/procmon/explorer.always-show-icons-never-thumbnails)/iconsonly-result.txt |
 
 **Validation proof**
 
@@ -2285,7 +2285,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.enable-explorer-compact-mode.review.json`
-- Source SHA256: `e2242dd747e097f3f5bb90bc65e47e6fb504902edcd1bb037db90caad75d36fa`
+- Source SHA256: `0accb41794f4bbcc55ec07d981ca0d76258a8960e965cf3d89d17c86dee99b5b`
 - Proof SHA256: `ee9c93f2223f14fabbbf1f808914a3ef9c8d2a65af4aa351da05249d7cbe1ef4`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode = 1, the 25H2 raw registry dump lists the same value name under both the machine and current-user Explorer\\Advanced branches, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against ExplorerFrame.dll also decompiled the code path that calls RegGetValueW for UseCompactMode from both HKCU and HKLM Explorer\\Advanced. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.
@@ -2295,8 +2295,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [research/evidence-files/missing/explorer-batch-applied-20260314-pml.md](evidence-files/missing/explorer-batch-applied-20260314-pml.md) and [research/evidence-files/missing/explorer-compact-zero-20260314-pml.md](evidence-files/missing/explorer-compact-zero-20260314-pml.md) |
-| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [research/evidence-files/vm-tooling-staging/ghidra-probes/explorerframe-usecompactmode-ghidra-20260326-022015/explorerframe-usecompactmode-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/explorerframe-usecompactmode-ghidra-20260326-022015/explorerframe-usecompactmode-ghidra.md) |
+| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [research/evidence-files/procmon/explorer.enable-explorer-compact-mode](evidence-files/procmon/explorer.enable-explorer-compact-mode)/explorer-batch-applied-20260314-pml.md and [research/evidence-files/procmon/explorer.enable-explorer-compact-mode](evidence-files/procmon/explorer.enable-explorer-compact-mode)/explorer-compact-zero-20260314-pml.md |
+| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [research/evidence-files/ghidra/explorer.enable-explorer-compact-mode](evidence-files/ghidra/explorer.enable-explorer-compact-mode)/explorerframe-usecompactmode-ghidra.md |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2314,7 +2314,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.hide-empty-drives.review.json`
-- Source SHA256: `6a3957d72ded455148224a1ed948e1b8840daeda363723c1cfe6ae38734924a0`
+- Source SHA256: `6b85e75a3d8fd6a22b8616c539ab8a124fd4d52f845735418fa560d091a9592d`
 - Proof SHA256: `4cf29dc8aeabe2545d3db43aa5fa4f21743bc2d357f15dc70027808d88ddc072`
 
 **Summary:** Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\\Advanced branch, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.
@@ -2325,7 +2325,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) |
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [research/evidence-files/vm-tooling-staging/hideemptydrives-result.txt](evidence-files/vm-tooling-staging/hideemptydrives-result.txt) |
+| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [research/evidence-files/procmon/explorer.hide-empty-drives](evidence-files/procmon/explorer.hide-empty-drives)/hideemptydrives-result.txt |
 | `app-visibility-provider` | `repo-code` | Current app implementation for HideDrivesWithNoMedia | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2343,7 +2343,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.launch-folder-windows-in-a-separate-process.review.json`
-- Source SHA256: `7b7fd3a1f9971b046bf6d5df50bf6c9315a871f8dd2fcc29886ae5aff0d1610c`
+- Source SHA256: `b2c8bd913f42cb4204957510cd5f9d886b1e17f1ab7e56166b3a5e585e0e0405`
 - Proof SHA256: `2ca8e9ccb55c6f0b9a541d734ba85ff8db89faff7cf9f0659b650c0325181341`
 
 **Summary:** Observed Explorer runtime setting for launching folder windows in a separate process. Microsoft Open Specifications documents SeparateProcess under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 0, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess with both Data:0 and Data:1 after Explorer restart.
@@ -2354,7 +2354,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-separateprocess` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista separateProcess | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-separateprocess` | `raw-registry-dump` | 25H2 default hive corroboration for SeparateProcess | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-separateprocess-runtime` | `procmon-trace` | Procmon capture - Explorer SeparateProcess runtime surface | [research/evidence-files/vm-tooling-staging/separateprocess-result.txt](evidence-files/vm-tooling-staging/separateprocess-result.txt) |
+| `procmon-separateprocess-runtime` | `procmon-trace` | Procmon capture - Explorer SeparateProcess runtime surface | [research/evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process](evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process)/separateprocess-result.txt |
 
 **Validation proof**
 
@@ -2371,7 +2371,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json`
-- Source SHA256: `66c5fac8430bdc223d134c10ff885a4ec89e0f7025f86673459bfb4c95961839`
+- Source SHA256: `1424a0adc1af232892d60691cf4d7e674f5c57181192ec716c1dd96f5ef19611`
 - Proof SHA256: `d0a836326dc93702ff9e105cd20f9a19573972b3ccb9b995fc30cf0b94b79f24`
 
 **Summary:** Observed Explorer runtime setting for colored display of compressed and encrypted NTFS files. Microsoft Open Specifications documents ShowCompColor under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor with both Data:0 and Data:1 after Explorer restart.
@@ -2382,7 +2382,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showcompcolor` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showCompColor | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-showcompcolor` | `raw-registry-dump` | 25H2 default hive corroboration for ShowCompColor | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showcompcolor-runtime` | `procmon-trace` | Procmon capture - Explorer ShowCompColor runtime surface | [research/evidence-files/missing/showcompcolor-result-txt.md](evidence-files/missing/showcompcolor-result-txt.md) |
+| `procmon-showcompcolor-runtime` | `procmon-trace` | Procmon capture - Explorer ShowCompColor runtime surface | [research/evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color](evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color)/showcompcolor-result-txt.md |
 
 **Validation proof**
 
@@ -2399,7 +2399,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-drive-letters-first.review.json`
-- Source SHA256: `3506c6cbb412404ae4f566f8d9f9b674d9cf0b285b93bcdf3bf7878bb34a1042`
+- Source SHA256: `226a8738097f9cb8fc7b90ba9f154f9185783be6732848c767f85bdc1b5ff3d9`
 - Proof SHA256: `783579abf72405760476c4a25ae14c0fba03630055791adca5196d3b91c86371`
 
 **Summary:** Observed Explorer runtime setting for showing drive letters first. Microsoft Open Specifications documents showDriveLetter under Explorer\\ShowDriveLettersFirst with 1 = enable and 0 = disable, the 25H2 raw registry dump lists the same value under both machine and default-user Explorer branches, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst with both Data:0 and Data:1 after Explorer restart.
@@ -2410,7 +2410,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showdriveletter` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showDriveLetter | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-showdrivelettersfirst` | `raw-registry-dump` | 25H2 raw registry corroboration for ShowDriveLettersFirst | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [research/evidence-files/vm-tooling-staging/showdrivelettersfirst-result.txt](evidence-files/vm-tooling-staging/showdrivelettersfirst-result.txt) |
+| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [research/evidence-files/procmon/explorer.show-drive-letters-first](evidence-files/procmon/explorer.show-drive-letters-first)/showdrivelettersfirst-result.txt |
 
 **Validation proof**
 
@@ -2427,7 +2427,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-file-extensions.review.json`
-- Source SHA256: `efb4eaecdc1f70805f3be5f7b1e049a56c2dfa3a8e29551f872f180c2725b097`
+- Source SHA256: `20aaf2c5aae753730d0c891ebe620e6ad84c6152dd2fd2e2f2df0612d4a3871a`
 - Proof SHA256: `19188566e6fd8363d76f527ed7c32c88cc64bce830a53e89b6af2287e9ebc988`
 
 **Summary:** Observed Explorer runtime setting for file-extension visibility. Microsoft Open Specifications documents HideFileExt under Explorer\\Advanced, the 25H2 default hive exports the same value as 1, the 25H2 raw registry dump lists the same value name under the current-user Explorer\\Advanced branch, and a reversible Procmon and shell-runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideFileExt as REG_DWORD with 0 = show file extensions and 1 = hide them. The app writes that same runtime surface directly.
@@ -2438,7 +2438,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | 25H2 default hive and raw dump corroboration for HideFileExt | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-hidefileext-runtime` | `procmon-trace` | Procmon capture - Explorer file-extension visibility runtime surface | [research/evidence-files/missing/hidefileext-capture-20260313-pml.md](evidence-files/missing/hidefileext-capture-20260313-pml.md) |
+| `procmon-hidefileext-runtime` | `procmon-trace` | Procmon capture - Explorer file-extension visibility runtime surface | [research/evidence-files/procmon/explorer.show-file-extensions](evidence-files/procmon/explorer.show-file-extensions)/hidefileext-capture-20260313-pml.md |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2485,7 +2485,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-hidden-files.review.json`
-- Source SHA256: `56f50b17bc79f87c9c5513ab07d5060e0841baac5175ae5efeb7fa4bc16a4f26`
+- Source SHA256: `f1dced355b661f88fee7381cb3389fc0dbf89a55ce725dcfe10e04fee4852da4`
 - Proof SHA256: `5dd345bb07b6f4101f819773a4b9f8a0e01acaffb13be8cb6468a21d94340313`
 
 **Summary:** Observed Explorer runtime setting for hidden-file visibility. Microsoft Open Specifications documents Hidden under Explorer\\Advanced with symbolic SHOW and HIDE semantics, the 25H2 default hive exports the same value as 2, the 25H2 raw registry dump lists the same value name under the current-user Explorer\\Advanced branch, and a reversible Procmon and Explorer UI runtime capture on Windows 11 Pro 10.0.26200.8037 shows Explorer consuming HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden as REG_DWORD with 1 = show hidden items and 2 = hide them. The app writes that same runtime surface directly.
@@ -2496,7 +2496,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-hidden` | `raw-registry-dump` | 25H2 default hive and raw dump corroboration for Hidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-hidden-runtime` | `procmon-trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [research/evidence-files/missing/hidden-capture-20260313-pml.md](evidence-files/missing/hidden-capture-20260313-pml.md) |
+| `procmon-hidden-runtime` | `procmon-trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [research/evidence-files/procmon/explorer.show-hidden-files](evidence-files/procmon/explorer.show-hidden-files)/hidden-capture-20260313-pml.md |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2514,7 +2514,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-info-tips.review.json`
-- Source SHA256: `ac25c11554dd61ed5ff153583bf306ef4d52a5c97c959999ccbdacb8a0d1b9d5`
+- Source SHA256: `7298a8409a9d325b1abc966154ddcc4caf395da4b4066a529de0a82769b71114`
 - Proof SHA256: `6616fa729d7439bb822884a12ad3346b82e0499eec65e211f821698dab141e41`
 
 **Summary:** Observed Explorer runtime setting for folder and desktop item info tips. Microsoft Open Specifications documents ShowInfoTip under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip with both Data:0 and Data:1 after Explorer restart.
@@ -2525,7 +2525,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showinfotip` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showInfoTip | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-hkcu25h2-explorer-advanced-showinfotip` | `raw-registry-dump` | 25H2 default hive corroboration for ShowInfoTip | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showinfotip-runtime` | `procmon-trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [research/evidence-files/vm-tooling-staging/showinfotip-result.txt](evidence-files/vm-tooling-staging/showinfotip-result.txt) |
+| `procmon-showinfotip-runtime` | `procmon-trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [research/evidence-files/procmon/explorer.show-info-tips](evidence-files/procmon/explorer.show-info-tips)/showinfotip-result.txt |
 
 **Validation proof**
 
@@ -2542,7 +2542,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-protected-operating-system-files.review.json`
-- Source SHA256: `f6bae5b93ca016a91933da9b1131b53897ead57bc986b286b99cfccb9c2ba43e`
+- Source SHA256: `89b18763e3baf8208d6599c5d1e24d2cf0803fa918220f893c8fcfcd23f0019b`
 - Proof SHA256: `e2c5c74420b9c544bf159bbf4a3debd550b65cb8ac3a03324f28d5fbf1cb51fb`
 
 **Summary:** Observed Explorer runtime setting for protected operating system file visibility. Microsoft Open Specifications documents ShowSuperHidden under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 dump/default hive shows the same value on current builds, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden with both Data:0 and Data:1 after Explorer restart.
@@ -2553,7 +2553,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showsuperhidden` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showSuperHidden | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-advanced-showsuperhidden` | `raw-registry-dump` | 25H2 dump and default hive corroboration for ShowSuperHidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showsuperhidden-runtime` | `procmon-trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [research/evidence-files/vm-tooling-staging/showsuperhidden-result.txt](evidence-files/vm-tooling-staging/showsuperhidden-result.txt) |
+| `procmon-showsuperhidden-runtime` | `procmon-trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [research/evidence-files/procmon/explorer.show-protected-operating-system-files](evidence-files/procmon/explorer.show-protected-operating-system-files)/showsuperhidden-result.txt |
 
 **Validation proof**
 
@@ -2570,7 +2570,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-recent-items.review.json`
-- Source SHA256: `736da1f817bbd686f91b247abf1dea62d191e2b3a0f5f96579a74ef69eafcdde`
+- Source SHA256: `d0a677562133d5bf324203bebd33c5c4e2e46cad46731972e505ae19aa631132`
 - Proof SHA256: `9ad902ef4e38fee0b44cad050a26504c1ba760471ae22723b2a7af48ba483362`
 
 **Summary:** Observed Explorer runtime setting for showing recent items. Microsoft Learn describes showRecentlyUsedFiles as a File Explorer general setting, the 25H2 raw registry dump lists ShowRecent under both machine and current-user Explorer branches, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent with both Data: 0 and Data: 1 after Explorer restart.
@@ -2581,7 +2581,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | Microsoft Learn: settings-common File Explorer general settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) |
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | 25H2 raw registry corroboration for ShowRecent | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-showrecent-runtime` | `procmon-trace` | Procmon capture - Explorer ShowRecent runtime surface | [research/evidence-files/vm-tooling-staging/showrecent-result.txt](evidence-files/vm-tooling-staging/showrecent-result.txt) |
+| `procmon-showrecent-runtime` | `procmon-trace` | Procmon capture - Explorer ShowRecent runtime surface | [research/evidence-files/procmon/explorer.show-recent-items](evidence-files/procmon/explorer.show-recent-items)/showrecent-result.txt |
 | `app-visibility-provider` | `repo-code` | Current app implementation for ShowRecent | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2599,7 +2599,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-status-bar.review.json`
-- Source SHA256: `64b8e98ef3a53f0fb0bb44a7b457938eeeaa59ad77dc2eab198f192c12dfd00f`
+- Source SHA256: `945fe8ad9e7f3d56baac9ae263d6da9677c7b3f63fc06d9e7343fa57c675f512`
 - Proof SHA256: `ac13670e90fc5c6772c1ab340d0ae1a5c80b07ee3ff391bd8b0ff550572d082f`
 
 **Summary:** Observed Explorer runtime setting for the File Explorer status bar. Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the 25H2 raw registry dump and 25H2 default-user hive both corroborate the ShowStatusBar value family, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowStatusBar with both Data: 0 and Data: 1 after Explorer restart.
@@ -2610,7 +2610,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) |
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showstatusbar-runtime` | `procmon-trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [research/evidence-files/vm-tooling-staging/showstatusbar-result.txt](evidence-files/vm-tooling-staging/showstatusbar-result.txt) |
+| `procmon-showstatusbar-runtime` | `procmon-trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [research/evidence-files/procmon/explorer.show-status-bar](evidence-files/procmon/explorer.show-status-bar)/showstatusbar-result.txt |
 | `app-visibility-provider` | `repo-code` | Current app implementation for ShowStatusBar | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -2628,7 +2628,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-type-overlay.review.json`
-- Source SHA256: `3eae31f72f47913caaef325339c8878ae8c981c199efebe92e6fce754f7670f4`
+- Source SHA256: `4cd4c8ceb75b1c4e2b8c86d8d27e2f5ced59b30986c818c524fb08cb5b8b28cd`
 - Proof SHA256: `9cbb0afd2a0353b49b615da811c20d0ca8ec3858910332fa27156a49e9a7e94a`
 
 **Summary:** Observed Explorer runtime setting for ShowTypeOverlay. Microsoft Open Specifications maps displayIconThumb to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay and defines 1 as enabled and 0 as disabled, the 25H2 raw registry dump and 25H2 default-user hive corroborate the same value family, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay with both Data: 0 and Data: 1 after Explorer restart.
@@ -2639,7 +2639,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-displayiconthumb` | `official-doc` | Microsoft Open Specifications: GlobalFolderOptionsVista displayIconThumb | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) |
 | `dump-25h2-explorer-advanced-showtypeoverlay` | `raw-registry-dump` | 25H2 raw registry and default-hive corroboration for ShowTypeOverlay | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) |
-| `procmon-showtypeoverlay-runtime` | `procmon-trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [research/evidence-files/vm-tooling-staging/showtypeoverlay-result.txt](evidence-files/vm-tooling-staging/showtypeoverlay-result.txt) |
+| `procmon-showtypeoverlay-runtime` | `procmon-trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [research/evidence-files/procmon/explorer.show-type-overlay](evidence-files/procmon/explorer.show-type-overlay)/showtypeoverlay-result.txt |
 
 **Validation proof**
 
@@ -2656,7 +2656,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.taskbar-alignment-left.review.json`
-- Source SHA256: `2d218f21081540642de689f217eafe9e9ceebd89e1d0f0be1c200f08680dd46f`
+- Source SHA256: `7820a9e395cc56f578b3449e03fa0a3f5fde4b3dc4dad285d995075c462ce446`
 - Proof SHA256: `cdc7e3b0d3fd5bb4c96458d680fc45bb6758323489f5b814dd5c2f0ef3cc8923`
 
 **Summary:** Observed Explorer runtime setting for Windows 11 taskbar alignment. Microsoft's Windows 11 settings reference documents the TaskbarAl setting family, the 25H2 raw registry dump lists the same value name under the current-user Explorer\\Advanced branch, and a Procmon capture on Windows 11 Pro 10.0.26200.8037 shows Explorer reading HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAl as REG_DWORD 0/1 during shell startup. The app writes that same runtime surface directly.
@@ -2667,7 +2667,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | Microsoft Windows 11 settings reference for taskbar alignment | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11) |
 | `dump-25h2-explorer-advanced-taskbaral` | `raw-registry-dump` | 25H2 raw registry corroboration for TaskbarAl | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-taskbar-alignment` | `procmon-trace` | Procmon capture - Explorer taskbar alignment runtime surface | [research/evidence-files/missing/taskbar-alignment-capture-20260313-pml.md](evidence-files/missing/taskbar-alignment-capture-20260313-pml.md) |
+| `procmon-taskbar-alignment` | `procmon-trace` | Procmon capture - Explorer taskbar alignment runtime surface | [research/evidence-files/procmon/explorer.taskbar-alignment-left](evidence-files/procmon/explorer.taskbar-alignment-left)/taskbar-alignment-capture-20260313-pml.md |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
 **Validation proof**
@@ -3685,7 +3685,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/performance.disable-taskbar-animations.review.json`
-- Source SHA256: `e0ce75ece507cf288780041e6ddd8a0052d1e9ec8906c3b9d3a11e075eae70bf`
+- Source SHA256: `fda62111575ae9b7a41b50acab87f7c4900a3e5a9940a6957784bc52339f2237`
 - Proof SHA256: `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358`
 
 **Summary:** A guest-side reversible probe on Win25H2Clean confirmed that HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations = 0 disables taskbar animations and = 1 enables them on this build. Procmon then captured explorer.exe querying the same value with Data:0 and Data:1 in separate reversible passes, and a Ghidra headless pass on Taskbar.dll decompiled a code path that reads TaskbarAnimations from Explorer\\Advanced. The app's current write matches the observed disabled state.
@@ -3695,8 +3695,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | Guest reversible probe - TaskbarAnimations registry mapping | [research/evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt](evidence-files/vm-tooling-staging/taskbar_animations_probe_out.txt) |
-| `procmon-taskbar-animations-registry-read` | `procmon-trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [research/notes/taskbar-animations-procmon-validation-20260326.md](notes/taskbar-animations-procmon-validation-20260326.md) |
-| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [research/evidence-files/vm-tooling-staging/ghidra-probes/taskbar-taskbaranimations-ghidra-20260326-040246/taskbar-taskbaranimations-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/taskbar-taskbaranimations-ghidra-20260326-040246/taskbar-taskbaranimations-ghidra.md) |
+| `procmon-taskbar-animations-registry-read` | `procmon-trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) |
+| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [research/evidence-files/ghidra/performance.disable-taskbar-animations](evidence-files/ghidra/performance.disable-taskbar-animations)/taskbar-taskbaranimations-ghidra.md |
 | `app-performance-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | Repo source note for performance.disable-taskbar-animations | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 
@@ -3948,7 +3948,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.hide-hibernate-option.json`
-- Source SHA256: `5321aabec18a50cf8ecdee319d36bb6a865e3d70361e17f41a4a5037db24efa9`
+- Source SHA256: `5ce533a33057aa1e222eba85002005eebd80e4c8cd7fd3984197de44fd0594c6`
 - Proof SHA256: `52282e4fba1da5150c67ac6c36490b915300f8d4ce0db88235bb95a0b2c124ba`
 
 **Summary:** Policy-backed control for whether the Hibernate option is shown in the power menu. Useful for managed or simplified menus, but it removes a visible path to hibernation.
@@ -3962,7 +3962,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | nohuto power trace for hibernation support | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) |
 | `nohuto-showhibernateoption-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowHibernateOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) |
-| `procmon-power-hide-hibernate-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [research/evidence-files/vm-tooling-staging/power_hide_hibernate_option_probe.txt](evidence-files/vm-tooling-staging/power_hide_hibernate_option_probe.txt) |
+| `procmon-power-hide-hibernate-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [research/evidence-files/procmon/power.hide-hibernate-option](evidence-files/procmon/power.hide-hibernate-option)/power_hide_hibernate_option_probe.txt |
 
 **Validation proof**
 
@@ -3979,7 +3979,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.hide-lock-option.json`
-- Source SHA256: `3f8d78e6f31c645f42031299d30f9f81dbac815f6bdc1e3acc1a9aef3bd2594d`
+- Source SHA256: `153d378bb0e1503fdea1f72323409fdfae54dc8af01dc5e7fb3bc61b4ebe0791`
 - Proof SHA256: `51f2e3092298738a596146b34a8faf5635257cfd5b935ce6423a0a0b7ff2cfb6`
 
 **Summary:** Policy-backed control for whether the Lock option is shown in the user tile menu. Useful for locked-down or simplified menus, but it removes one quick route to locking the session.
@@ -3992,7 +3992,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) |
 | `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `nohuto-showlockoption-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowLockOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) |
-| `procmon-power-hide-lock-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [research/evidence-files/vm-tooling-staging/power_hide_lock_option_probe.txt](evidence-files/vm-tooling-staging/power_hide_lock_option_probe.txt) |
+| `procmon-power-hide-lock-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [research/evidence-files/procmon/power.hide-lock-option](evidence-files/procmon/power.hide-lock-option)/power_hide_lock_option_probe.txt |
 
 **Validation proof**
 
@@ -4009,7 +4009,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.hide-sleep-option.json`
-- Source SHA256: `82e0c0cb151f52b44c4636f57a3b1c1932dc75564c98c8e15b7b3af6c6dd5ff9`
+- Source SHA256: `769b58bd3f7c23386fad649d59c3f9ff7815ebbcb47e8dcc028bf93549027337`
 - Proof SHA256: `75833b1276158886cef355e5448ff181142071a3195dc595ab22bb33f9bd2df0`
 
 **Summary:** Policy-backed control for whether the Sleep option is shown in the power menu. Useful for managed or simplified menus, but it removes a common quick-sleep shortcut.
@@ -4022,7 +4022,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-windowsexplorer-adml` | `official-doc` | Local Microsoft WindowsExplorer.adml help text | [research/evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](evidence-files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) |
 | `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `nohuto-showsleepoption-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowSleepOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) |
-| `procmon-power-hide-sleep-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [research/evidence-files/vm-tooling-staging/power_hide_sleep_option_probe.txt](evidence-files/vm-tooling-staging/power_hide_sleep_option_probe.txt) |
+| `procmon-power-hide-sleep-option` | `procmon-trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [research/evidence-files/procmon/power.hide-sleep-option](evidence-files/procmon/power.hide-sleep-option)/power_hide_sleep_option_probe.txt |
 
 **Validation proof**
 
@@ -4237,7 +4237,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-app-launch-tracking.review.json`
-- Source SHA256: `3fa256c10bcb2cf63d494ff841c514ebeef86fec883a1763257deef1bfd9aae7`
+- Source SHA256: `1efe1013b6c817e33bc645268b1765451d2722f3ba382ffc2a9b1c1e20f29b5f`
 - Proof SHA256: `1bf3c6a10dda5258451b1e5c03816b868bba9f8b0997a701b3a87d450368f457`
 
 **Summary:** Microsoft privacy guidance documents the Start_TrackProgs registry value under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced and states that setting it to 0 turns off app launch tracking for Start and Search. The current app writes that exact documented value.
@@ -4250,7 +4250,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-gppref-start-trackprogs` | `official-doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `nohuto-start-track-progs-trace` | `registry-observation` | nohuto win-config mirror - Start_TrackProgs trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-start-track-progs-settings` | `procmon-trace` | VM Procmon trace - Start_TrackProgs settings page reads | [research/evidence-files/host-temp/procmon-start-track-progs-1.pml.md](evidence-files/host-temp/procmon-start-track-progs-1.pml.md) and [research/evidence-files/host-temp/procmon-start-track-progs-0.pml.md](evidence-files/host-temp/procmon-start-track-progs-0.pml.md) |
+| `procmon-start-track-progs-settings` | `procmon-trace` | VM Procmon trace - Start_TrackProgs settings page reads | [research/evidence-files/procmon/privacy.disable-app-launch-tracking](evidence-files/procmon/privacy.disable-app-launch-tracking)/procmon-start-track-progs-1.pml.md and [research/evidence-files/procmon/privacy.disable-app-launch-tracking](evidence-files/procmon/privacy.disable-app-launch-tracking)/procmon-start-track-progs-0.pml.md |
 
 **Validation proof**
 
@@ -4765,7 +4765,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-feedback-notifications.json`
-- Source SHA256: `53ae3d2b2c050ab33bb271d6c4c3178f71335f37a4ddeb0f28beb84079b99b24`
+- Source SHA256: `949cba835979f79e3304e1ee768a28c90b8b60faf20291ff6f99dbadd6524826`
 - Proof SHA256: `0bacb3540f0705fb6a710b734b38c017731184d3d1a3aa02df622bde2df9a017`
 
 **Summary:** Machine policy for Microsoft feedback prompts. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
@@ -4779,7 +4779,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DoNotShowFeedbackNotifications policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
-| `procmon-feedback-notifications` | `procmon-trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [research/evidence-files/vm-tooling-staging/feedback_notifications_probe.txt](evidence-files/vm-tooling-staging/feedback_notifications_probe.txt) |
+| `procmon-feedback-notifications` | `procmon-trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [research/evidence-files/procmon/privacy.disable-feedback-notifications](evidence-files/procmon/privacy.disable-feedback-notifications)/feedback_notifications_probe.txt |
 
 **Validation proof**
 
@@ -5355,7 +5355,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-resume.json`
-- Source SHA256: `18baf3e66dafead2ad4939578d178535ef3cd7bffbe6d0a4cad554672549fb96`
+- Source SHA256: `6cd8a3adb344bb2f15a1319f5dd8eba67e6ab1a47995de4546d60d9fec0cacc9`
 - Proof SHA256: `c1807b367872111f87888fd0875bb0be499675e96e1c1d01b9a78277f4ffc81f`
 
 **Summary:** The current app writes the current-user Resume setting HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed = 0. Repo notes and local registry observations confirm that this runtime user setting is real and behaves as expected on this build.
@@ -5366,9 +5366,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-resume-procmon-notes` | `repo-doc` | Repo Procmon notes for Resume settings | [Docs/privacy/privacy.md](../Docs/privacy/privacy.md) |
 | `local-resume-registry-observation` | `registry-observation` | Local CrossDeviceResume registry observation | HKCU/Software/Microsoft/Windows/CurrentVersion/CrossDeviceResume/Configuration |
-| `vm-resume-policymanager-probe` | `procmon-trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [research/evidence-files/vm-tooling-staging/crossdevice_resume_probe.csv](evidence-files/vm-tooling-staging/crossdevice_resume_probe.csv) and [research/evidence-files/vm-tooling-staging/resume-policymanager-probe.txt](evidence-files/vm-tooling-staging/resume-policymanager-probe.txt) |
+| `vm-resume-policymanager-probe` | `procmon-trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/crossdevice_resume_probe.csv and [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/resume-policymanager-probe.txt |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `procmon-crossdevice-resume-probe` | `procmon-trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [research/evidence-files/vm-tooling-staging/privacy_disable_resume_probe.txt](evidence-files/vm-tooling-staging/privacy_disable_resume_probe.txt) and [research/evidence-files/missing/privacy-disable-resume-probe-csv.md](evidence-files/missing/privacy-disable-resume-probe-csv.md) |
+| `procmon-crossdevice-resume-probe` | `procmon-trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/privacy_disable_resume_probe.txt and [research/evidence-files/procmon/privacy.disable-resume](evidence-files/procmon/privacy.disable-resume)/privacy-disable-resume-probe-csv.md |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume) |
 
 **Validation proof**
@@ -5445,7 +5445,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-search-history.json`
-- Source SHA256: `331000563df130c456089db4a5cc446c2f295c53760812f19613bfeef55897b8`
+- Source SHA256: `ca961da568ee980ce304fcd812b2269cb529fc5bdba8e1266f702140dbc28481`
 - Proof SHA256: `8edceb166c4b29918ffe4087b1fbb7b24f0ea650046fb40185de25d10080ddb9`
 
 **Summary:** User policy for storing and showing search history. Good for privacy and a cleaner search pane, but it removes suggestions based on previous searches.
@@ -5459,7 +5459,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `repo-provenance-disable-search-history` | `repo-doc` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchHistory policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) |
-| `procmon-disable-search-history` | `procmon-trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [research/evidence-files/vm-tooling-staging/search_history_probe.txt](evidence-files/vm-tooling-staging/search_history_probe.txt) |
+| `procmon-disable-search-history` | `procmon-trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [research/evidence-files/procmon/privacy.disable-search-history](evidence-files/procmon/privacy.disable-search-history)/search_history_probe.txt |
 
 **Validation proof**
 
@@ -6070,7 +6070,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-defender-sample-submission.review.json`
-- Source SHA256: `9e61fc99ff41d5c7499b3c0a184b60cd485357d50f301201b24df05f4f3734f3`
+- Source SHA256: `8374e8dd9861f1560bd06dcb771c148ada060215a84df63ef0b8e7fda1910bcc`
 - Proof SHA256: `925541f217a1d4c60a7246351a333f64066baacbfd67704c40048e23d0014171`
 
 **Summary:** Microsoft documents SubmitSamplesConsent on the Defender Spynet policy path. In Win25H2Clean, SecurityHealthService.exe read SubmitSamplesConsent = 2 directly from the policy path after the write.
@@ -6083,8 +6083,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-defender-block-at-first-sight-dependency` | `official-doc` | Microsoft Learn: Block at First Sight dependency on sample submission | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) |
 | `repo-defender-submit-samples-lead` | `repo-doc` | Local Defender sample-submission lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) |
 | `repo-defender-submit-samples-dump` | `repo-doc` | Windows Defender dump list includes SubmitSamplesConsent | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) |
-| `vm-defender-submit-samples-baseline` | `procmon-trace` | Win25H2Clean absent-value check for Defender sample submission | [research/evidence-files/vm-tooling-staging/spynet-ui-state2.txt](evidence-files/vm-tooling-staging/spynet-ui-state2.txt) |
-| `vm-defender-submit-samples-state2` | `procmon-trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [research/evidence-files/vm-tooling-staging/submitsamples-ui-state2.txt](evidence-files/vm-tooling-staging/submitsamples-ui-state2.txt) |
+| `vm-defender-submit-samples-baseline` | `procmon-trace` | Win25H2Clean absent-value check for Defender sample submission | [research/evidence-files/procmon/security.disable-defender-sample-submission](evidence-files/procmon/security.disable-defender-sample-submission)/spynet-ui-state2.txt |
+| `vm-defender-submit-samples-state2` | `procmon-trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission](evidence-files/procmon/security.disable-defender-sample-submission)/submitsamples-ui-state2.txt |
 | `app-security-provider-disable-defender-sample-submission` | `repo-code` | Current security provider sample-submission write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -6130,7 +6130,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-enhanced-defender-notifications.review.json`
-- Source SHA256: `03d013946bd34efc05e5e4824e372bb3f8959de767c05cfdb18c075f09837360`
+- Source SHA256: `5956cb5646d395f04a7eca5a6d5c76de681724c9ebaaa209b608529c587efe8e`
 - Proof SHA256: `e288d7bf00c18ec28e6e3f6386c1726691644448ec53686b33c7df05b67b2f23`
 
 **Summary:** Microsoft documents DisableEnhancedNotifications on two Defender policy paths. In a clean Win25H2Clean trace, SecurityHealthService.exe read the Security Center Notifications path and consumed DisableEnhancedNotifications = 1.
@@ -6141,9 +6141,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-defender-security-center-disable-enhanced-notifications` | `official-doc` | WindowsDefenderSecurityCenter.admx enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) |
 | `ms-defender-reporting-disable-enhanced-notifications` | `official-doc` | WindowsDefender.admx reporting enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) |
-| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-baseline-1-20260324-214343/defender-disable-enhanced-baseline-1.txt](evidence-files/vm-tooling-staging/defender-enhanced-notifications-baseline-1-20260324-214343/defender-disable-enhanced-baseline-1.txt) |
-| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt](evidence-files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt) |
-| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | Win25H2Clean Procmon reporting-path alias check | [research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-reporting-1-20260324-213700/defender-disable-enhanced-reporting-1.txt](evidence-files/vm-tooling-staging/defender-enhanced-notifications-reporting-1-20260324-213700/defender-disable-enhanced-reporting-1.txt) |
+| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications](evidence-files/procmon/security.disable-enhanced-defender-notifications)/defender-disable-enhanced-baseline-1.txt |
+| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications](evidence-files/procmon/security.disable-enhanced-defender-notifications)/defender-disable-enhanced-securitycenter-1.txt |
+| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | Win25H2Clean Procmon reporting-path alias check | [research/evidence-files/procmon/security.disable-enhanced-defender-notifications](evidence-files/procmon/security.disable-enhanced-defender-notifications)/defender-disable-enhanced-reporting-1.txt |
 | `app-security-provider-disable-enhanced-notifications` | `repo-code` | Current security provider enhanced notifications write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -6450,7 +6450,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.enable-defender-maps-advanced-membership.review.json`
-- Source SHA256: `3b3cb98bfe53d3783b53de6805c0a357fc4238514e7cf23c40b43f49419855eb`
+- Source SHA256: `64dc376ed4a64722f59acfc38b5a5afd521ba50289e906cdb5c2d27521a7c95b`
 - Proof SHA256: `fa03eefa6888f42ae0aece69eb56fe827f0b4ff374d239229346b7ab817a4667`
 
 **Summary:** Microsoft documents SpyNetReporting on the Defender Spynet policy path. In a clean Win25H2Clean trace, SecurityHealthService.exe first saw the policy path as absent, then read SpyNetReporting = 2 directly from the policy path after the write.
@@ -6461,8 +6461,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-defender-spynet-reporting` | `official-doc` | Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) |
 | `repo-defender-spynet-lead` | `repo-doc` | Local Defender MAPS lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) |
-| `vm-defender-spynet-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [research/evidence-files/vm-tooling-staging/spynet-ui-baseline.txt](evidence-files/vm-tooling-staging/spynet-ui-baseline.txt) |
-| `vm-defender-spynet-state2` | `procmon-trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [research/evidence-files/vm-tooling-staging/spynet-ui-state2.txt](evidence-files/vm-tooling-staging/spynet-ui-state2.txt) |
+| `vm-defender-spynet-baseline` | `procmon-trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [research/evidence-files/procmon/security.enable-defender-maps-advanced-membership](evidence-files/procmon/security.enable-defender-maps-advanced-membership)/spynet-ui-baseline.txt |
+| `vm-defender-spynet-state2` | `procmon-trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [research/evidence-files/procmon/security.disable-defender-sample-submission](evidence-files/procmon/security.disable-defender-sample-submission)/spynet-ui-state2.txt |
 | `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | Current security provider MAPS membership write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -6536,7 +6536,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.hide-defender-exclusions-from-local-admins.review.json`
-- Source SHA256: `25a2a3dbc0c5cd4690b993856c77598910e84fea9d60a912a35e9c26c06fd4d0`
+- Source SHA256: `2473542e43f88fd995cc7d5008e5a411c445c3ee5ad0b874199981a660d1f6f6`
 - Proof SHA256: `e9c48186565702ee535cd4f3367e55cb2578a6d628a850bfce093a6c3bed0001`
 
 **Summary:** Microsoft documents HideExclusionsFromLocalAdmins as the Defender policy that hides exclusions from local admins. In Win25H2Clean, a managed exclusion stayed present on the policy exclusions branch, but Get-MpPreference stopped showing it when the documented root policy path was set to 1. Current 25H2 builds also honor a Policy Manager alias for the same behavior.
@@ -6549,9 +6549,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-defender-exclusions-visibility-note` | `official-doc` | Microsoft Learn: Configure exclusions in Defender Antivirus | [https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus](https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus) |
 | `repo-defender-hide-exclusions-dump` | `repo-doc` | Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) |
 | `vm-defender-hide-exclusions-baseline-visibility` | `vm-test` | Win25H2Clean baseline visibility with managed exclusion present | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json](evidence-files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json) |
-| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt](evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt) |
+| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins)/hideexclusions-admins-root-1.txt |
 | `vm-defender-hide-exclusions-root-visibility` | `vm-test` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) |
-| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/vm-tooling-staging/hideexclusions-admins-policymanager-1-20260325-002004/hideexclusions-admins-policymanager-1.txt](evidence-files/vm-tooling-staging/hideexclusions-admins-policymanager-1-20260325-002004/hideexclusions-admins-policymanager-1.txt) |
+| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins](evidence-files/procmon/security.hide-defender-exclusions-from-local-admins)/hideexclusions-admins-policymanager-1.txt |
 | `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | Current security provider HideExclusionsFromLocalAdmins write | app/Services/TweakProviders/SecurityTweakProvider.cs |
 
 **Validation proof**
@@ -6597,7 +6597,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/security.threat-file-hash-logging.review.json`
-- Source SHA256: `7472699bf1556c785145ba39e16c8d5ddddc8569aeca51ff9258dcd309f3ceb2`
+- Source SHA256: `eed04bf7c5d88f3994831bd5f11b7fc7f1ad7f04245dec24eac25155aa5af294`
 - Proof SHA256: `0bfa1bfb7b8ebea20fb5aaef5ccd9a4b7c79dcb02e0647a2c4a83dbf7886ed76`
 
 **Summary:** Microsoft documents the file-hash-computation feature for Defender on the MpEngine policy surface and says the feature applies to PE files. In the Defender-on 25H2 VM, both the text EICAR probe and an official Microsoft PE demo sample produced event 1116 but no event 1120. The live 25H2 engine still reads the legacy root ThreatFileHashLogging value and the Policy Manager EnableFileHashComputation alias directly, so the app now tracks those two live surfaces as a research-gated batch instead of exposing a one-click supported toggle.
@@ -6613,8 +6613,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | Original high-risk snapshot had Defender disabled | [research/evidence-files/vm-tooling-staging/defender-runtime-repair.json](evidence-files/vm-tooling-staging/defender-runtime-repair.json) |
 | `vm-defender-runtime-enabled-baseline` | `vm-test` | Defender-on 25H2 snapshot baseline | [research/evidence-files/vm-tooling-staging/defender-runtime-repair.json](evidence-files/vm-tooling-staging/defender-runtime-repair.json) |
 | `vm-defender-threat-file-hash-baseline` | `vm-test` | Defender-on baseline EICAR probe | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json) |
-| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt](evidence-files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt) |
-| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333/defender-threat-file-hash-policymanager-1.txt](evidence-files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333/defender-threat-file-hash-policymanager-1.txt) |
+| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging](evidence-files/procmon/security.threat-file-hash-logging)/defender-threat-file-hash-legacyroot-1.txt |
+| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [research/evidence-files/procmon/security.threat-file-hash-logging](evidence-files/procmon/security.threat-file-hash-logging)/defender-threat-file-hash-policymanager-1.txt |
 | `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | Non-rebooted MpEngine pass did not show a live read | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json) |
 | `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | WinDefend service restart follow-up was blocked | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json) |
 | `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | Rebooted MpEngine pass still did not show a direct policy-path read | [research/evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt](evidence-files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt) |
@@ -6668,7 +6668,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/security.uac-never-notify.json`
-- Source SHA256: `453cc05a60b0d416d769c060663aecdf25775067435d0bd682c32314ec39b8ec`
+- Source SHA256: `6c6b267df95ad393b91d2c8199430a9127e7cd5e617f8ba8deb131aadbc95a05`
 - Proof SHA256: `69977a7c0895280fc48e7817429a9a481a3dca64bd25cac31a1e4b894cbce4e9`
 
 **Summary:** Official UAC registry values for the least restrictive administrator prompt behavior while User Account Control remains enabled. Microsoft documents the same path, value names, defaults, and numeric meanings that the app writes, and a Win25H2Clean Procmon capture on 2026-03-21 confirmed the UAC settings surface reads those same values.
@@ -6680,7 +6680,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-uac-registry` | `official-doc` | Microsoft Learn: User Account Control registry key entries | [https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
 | `nohuto-uac-bootphase` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto boot-phase UAC value read | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) |
-| `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | Local capture - [research/evidence-files/missing/uac-never-notify-capture-pml.md](evidence-files/missing/uac-never-notify-capture-pml.md) and [research/evidence-files/missing/uac-never-notify-capture-csv.md](evidence-files/missing/uac-never-notify-capture-csv.md) |
+| `procmon-uac-never-notify` | `procmon-trace` | Procmon capture - UAC policy value reads | [research/evidence-files/procmon/security.uac-never-notify](evidence-files/procmon/security.uac-never-notify)/uac-never-notify-capture-pml.md and [research/evidence-files/procmon/security.uac-never-notify](evidence-files/procmon/security.uac-never-notify)/uac-never-notify-capture-csv.md |
 
 **Validation proof**
 
@@ -6987,7 +6987,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-jpeg-reduction.review.json`
-- Source SHA256: `e5a2e659add3a8ec5e7fddfa68db8e6c0da07b5eb16a17dfd57476acf33eff0e`
+- Source SHA256: `d58d9d4b2516d8c45742f57ed8e81cd05bd5e7881d38a063e0bc85909ce46ca7`
 - Proof SHA256: `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b`
 
 **Summary:** The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and a Win25H2Clean reversible probe: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the missing baseline restores cleanly, and the current app writes the same 100 state.
@@ -6998,8 +6998,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | Repo system research notes for wallpaper JPEG import quality | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-jpegtranscode` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) |
-| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [research/notes/jpeg-import-quality-validation-20260326.md](notes/jpeg-import-quality-validation-20260326.md) |
-| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [research/evidence-files/vm-tooling-staging/ghidra-probes/shell32-jpegimportquality-ghidra-20260326-070959/shell32-jpegimportquality-ghidra.md](evidence-files/vm-tooling-staging/ghidra-probes/shell32-jpegimportquality-ghidra-20260326-070959/shell32-jpegimportquality-ghidra.md) |
+| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) |
+| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [research/evidence-files/ghidra/system.disable-jpeg-reduction](evidence-files/ghidra/system.disable-jpeg-reduction)/shell32-jpegimportquality-ghidra.md |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 
@@ -7159,7 +7159,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/system.disable-startup-delay.review.json`
-- Source SHA256: `ed7051dc71944abb8f00301bb44726e51c1f5b02407832fe8f59b0c270c990f5`
+- Source SHA256: `57081a6d7e41a5d17aff22481eec661b7889611dce4002f95110aa3c54eb8d90`
 - Proof SHA256: `d318283dab120fe267dbb5c569ec9a0a775a20b69f238ce9fba11fb3acab9658`
 
 **Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, a bounded WPR lane captured both `missing` and `0`, and the value restores back to missing cleanly.
@@ -7170,9 +7170,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
-| `ghidra-explorer-serialize-search` | `ghidra-trace` | Ghidra headless search on explorer.exe for Serialize | [research/evidence-files/vm-tooling-staging/ghidra_explorer_serialize.txt](evidence-files/vm-tooling-staging/ghidra_explorer_serialize.txt) |
+| `ghidra-explorer-serialize-search` | `ghidra-trace` | Ghidra headless search on explorer.exe for Serialize | [research/evidence-files/ghidra/system.disable-startup-delay](evidence-files/ghidra/system.disable-startup-delay)/ghidra_explorer_serialize.txt |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | Win25H2Clean reversible probe - Explorer startup delay | [research/evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json](evidence-files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| `procmon-startup-delay-shell-restart` | `procmon-trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [research/evidence-files/host-temp/procmon-startup-delay.pml.md](evidence-files/host-temp/procmon-startup-delay.pml.md) |
+| `procmon-startup-delay-shell-restart` | `procmon-trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [research/evidence-files/procmon/system.disable-startup-delay](evidence-files/procmon/system.disable-startup-delay)/procmon-startup-delay.pml.md |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) |
 
 **Validation proof**
@@ -7304,7 +7304,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.enable-game-mode.review.json`
-- Source SHA256: `72f5bbe1523467d6419ba72659c3f71ffe376de2da3da4d146ab5e0cc713f384`
+- Source SHA256: `3e251219fb540b4f68cab6e1d3e7f0d74b523dccba2c9e325bafc6133e12ce07`
 - Proof SHA256: `4022e699de288bc32e47cb4a619a67a8489cebfcdfd0ca519c7df180589b35a6`
 
 **Summary:** The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
@@ -7314,7 +7314,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-game-mode-feature` | `official-doc` | Xbox Support: Use Game Mode while gaming on your Windows device | [https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc](https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc) |
-| `procmon-gamemode-admin` | `procmon-trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [research/evidence-files/vm-tooling-staging/gamemode_admin_probe.txt](evidence-files/vm-tooling-staging/gamemode_admin_probe.txt) and [research/evidence-files/vm-tooling-staging/gamemode_admin_zero_probe.txt](evidence-files/vm-tooling-staging/gamemode_admin_zero_probe.txt) |
+| `procmon-gamemode-admin` | `procmon-trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [research/evidence-files/procmon/system.enable-game-mode](evidence-files/procmon/system.enable-game-mode)/gamemode_admin_probe.txt and [research/evidence-files/procmon/system.enable-game-mode](evidence-files/procmon/system.enable-game-mode)/gamemode_admin_zero_probe.txt |
 | `repo-system-decomp-game-mode` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) |
 | `repo-system-doc-game-mode` | `repo-doc` | Repo system research notes for Game Mode | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
@@ -7903,7 +7903,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/system.reliability-timestamp-enabled.review.json`
-- Source SHA256: `9871a3fcac07f1e016ac39928ae7f3ccaa0f36627b5177f6c57d5e3248c5b696`
+- Source SHA256: `90d76fdac35192dd921586f465c4fd865ecd7e1664864d3ef95d2cae594362d1`
 - Proof SHA256: `21d322cd4c59adefae690948579f154fbc417a9bc4673757927b30d381146720`
 
 **Summary:** Decompiled OsEventsTimestampInterval shows that TimeStampEnabled gates reliability event timestamping and that TimeStampInterval is the companion cadence value capped at 24h. Follow-up 25H2 work narrowed the live stack to DiagTrack and WER-adjacent Reliability paths, but the exact target values still have no live Procmon hit.
@@ -7914,7 +7914,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) |
-| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/vm-tooling-staging/reliability-follow-up-20260326/diagtrack-reliability-ghidra.md](evidence-files/vm-tooling-staging/reliability-follow-up-20260326/diagtrack-reliability-ghidra.md) |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [research/evidence-files/ghidra/system.reliability-timestamp-enabled](evidence-files/ghidra/system.reliability-timestamp-enabled)/diagtrack-reliability-ghidra.md |
 | `vm-reliability-procmon-attempts-20260326` | `vm-test` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) |
 | `vm-reliability-follow-up-20260326` | `vm-test` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) |
 
@@ -8734,7 +8734,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/visibility.hide-language-bar.review.json`
-- Source SHA256: `be73c3b271294a6cedd2ab7fd9d3e39cf66295d158febda0e620cf72c173d30e`
+- Source SHA256: `128bda2d9bf854854a801c73fe35bc3f7266da363e922cb18c43b162ec7ea1fd`
 - Proof SHA256: `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888`
 
 **Summary:** The current app uses the long-standing CTF language-bar user preference path and writes ShowStatus = 3 to hide the language bar. A Microsoft Q&A thread now documents ShowStatus = 3 for the hidden state, so the record can be validated.
@@ -8746,7 +8746,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `microsoft-qna-language-bar-showstatus` | `official-doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | [https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter](https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter) |
 | `repo-visibility-language-bar` | `repo-doc` | Repo visibility notes for language bar | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
-| `procmon-language-bar-showstatus` | `procmon-trace` | VM Procmon trace - ShowStatus language bar restart read | [research/evidence-files/host-temp/procmon-hide-language-bar-3.pml.md](evidence-files/host-temp/procmon-hide-language-bar-3.pml.md) |
+| `procmon-language-bar-showstatus` | `procmon-trace` | VM Procmon trace - ShowStatus language bar restart read | [research/evidence-files/procmon/visibility.hide-language-bar](evidence-files/procmon/visibility.hide-language-bar)/procmon-hide-language-bar-3.pml.md |
 
 **Validation proof**
 

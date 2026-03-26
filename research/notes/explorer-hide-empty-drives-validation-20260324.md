@@ -27,7 +27,7 @@ research/_source-mirrors/win-registry/records/25H2.txt
 
 ```text
 Source file:
-research/evidence-files/vm-tooling-staging/hideemptydrives-result.txt
+research/evidence-files/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-result.txt
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideDrivesWithNoMedia
@@ -44,8 +44,8 @@ RESTORED_EXISTS=False
 ## Raw Hit Files
 
 ```text
-research/evidence-files/vm-tooling-staging/hideemptydrives-0-hits.csv
-research/evidence-files/vm-tooling-staging/hideemptydrives-1-hits.csv
+research/evidence-files/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-0-hits.csv
+research/evidence-files/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-1-hits.csv
 ```
 
 ## Notes

@@ -27,7 +27,7 @@ research/_source-mirrors/win-registry/records/25H2.txt
 
 ```text
 Source file:
-research/evidence-files/vm-tooling-staging/showsuperhidden-result.txt
+research/evidence-files/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-result.txt
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowSuperHidden
@@ -45,8 +45,8 @@ RESTORED_HIDDEN_VALUE=1
 ## Raw Hit Files
 
 ```text
-research/evidence-files/vm-tooling-staging/showsuperhidden-0-hits.csv
-research/evidence-files/vm-tooling-staging/showsuperhidden-1-hits.csv
+research/evidence-files/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-0-hits.csv
+research/evidence-files/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv
 ```
 
 ## Notes

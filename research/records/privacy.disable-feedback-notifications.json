@@ -231,7 +231,7 @@
       "evidence_id": "procmon-feedback-notifications",
       "kind": "procmon-trace",
       "title": "Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle",
-      "location": "research/evidence-files/vm-tooling-staging/feedback_notifications_probe.txt",
+      "location": "research/evidence-files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt",
       "summary": "The guest probe wrote DoNotShowFeedbackNotifications=0 and DoNotShowFeedbackNotifications=1, queried the live registry after each write, opened the feedback settings surface in both states, and restored the original state.",
       "supports": [
         "runtime writes",

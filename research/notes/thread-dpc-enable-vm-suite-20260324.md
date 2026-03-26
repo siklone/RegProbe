@@ -26,7 +26,7 @@ Artifacts:
 - research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-cpu3.watch.txt
 - research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md
 - research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-cpu3.winsat.txt
-- research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-cpu3.perf.csv
+- research/evidence-files/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv
 ```
 
 ```text
@@ -40,7 +40,7 @@ Artifacts:
 - research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-mem2.watch.txt
 - research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md
 - research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-mem2.winsat.txt
-- research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-mem2.perf.csv
+- research/evidence-files/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv
 ```
 
 ## Findings

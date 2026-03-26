@@ -31,9 +31,9 @@ Snapshot:
 Artifacts:
 
 - baseline:
-  - `research/evidence-files/vm-tooling-staging/spynet-ui-baseline.txt`
+  - `research/evidence-files/procmon/security-enable-defender-maps-advanced-membership-validation-20260324/spynet-ui-baseline.txt`
 - state `2`:
-  - `research/evidence-files/vm-tooling-staging/spynet-ui-state2.txt`
+  - `research/evidence-files/procmon/security-enable-defender-maps-advanced-membership-validation-20260324/spynet-ui-state2.txt`
 
 Baseline showed the policy branch absent and the live non-policy store reading `2`:
 

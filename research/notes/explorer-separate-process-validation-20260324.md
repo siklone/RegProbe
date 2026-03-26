@@ -27,7 +27,7 @@ research/_source-mirrors/win-registry/records/25H2.txt
 
 ```text
 Source file:
-research/evidence-files/vm-tooling-staging/separateprocess-result.txt
+research/evidence-files/procmon/explorer-separate-process-validation-20260324/separateprocess-result.txt
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/SeparateProcess

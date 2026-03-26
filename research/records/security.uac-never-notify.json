@@ -333,7 +333,7 @@
       "evidence_id": "procmon-uac-never-notify",
       "kind": "procmon-trace",
       "title": "Procmon capture - UAC policy value reads",
-      "location": "Local capture - research/evidence-files/missing/uac-never-notify-capture-pml.md and research/evidence-files/missing/uac-never-notify-capture-csv.md",
+      "location": "research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md and research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md",
       "summary": "Win25H2Clean Procmon captured DllHost.exe reading EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop while the UAC settings surface was open. The guest probe restored the original registry state after the capture.",
       "supports": [
         "path",
@@ -357,7 +357,7 @@
   "last_reviewed_utc": "2026-03-21T00:00:00Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings",
-    "exact_quote_or_path": "The registry keys are found under the key: `HKLresearch/evidence-files/missing/system-consentpromptbehavioradmin-0-elevate-without-prompting.md 5 (Default) = Prompt for consent for non-Windows binaries. `EnableLUA` 0 = Disabled, 1 (Default) = Enabled. `PromptOnSecureDesktop` 0 = Disabled, 1 (Default) = Enabled.",
+    "exact_quote_or_path": "Registry path: HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. ConsentPromptBehaviorAdmin 0 = Elevate without prompting, 5 = Prompt for consent for non-Windows binaries (default). EnableLUA 0 = Disabled, 1 = Enabled (default). PromptOnSecureDesktop 0 = Disabled, 1 = Enabled (default).",
     "key_found_on_page": true,
     "notes": "The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC settings surface was open. Normalized for the consolidated evidence report."
   }

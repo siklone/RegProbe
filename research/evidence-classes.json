@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-26T08:31:20.570357Z",
+  "generated_utc": "2026-03-26T09:17:56.373249Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
@@ -330,7 +330,7 @@
         "links": [
           {
             "title": "Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads",
-            "url": "Local captures - research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md and research/evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md",
+            "url": "Local captures - research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
             "kind": "procmon-trace",
             "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices with Data..."
           }
@@ -407,7 +407,7 @@
         "links": [
           {
             "title": "Procmon capture - Sound control panel ShowHiddenDevices runtime reads",
-            "url": "Local captures - research/evidence-files/missing/audio-devicecpl-query-20260314-pml.md and research/evidence-files/missing/audio-devicecpl-query-zero-20260314-pml.md",
+            "url": "Local captures - research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and research/evidence-files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
             "kind": "procmon-trace",
             "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and..."
           }
@@ -689,7 +689,7 @@
         "links": [
           {
             "title": "Procmon capture - Developer settings page reads LongPathsEnabled",
-            "url": "research/evidence-files/vm-tooling-staging/devmode_longpaths_probe.csv and research/evidence-files/missing/devmode-longpaths-probe-pml.md",
+            "url": "research/evidence-files/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv and research/evidence-files/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
             "kind": "procmon-trace",
             "summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. T..."
           }
@@ -1329,7 +1329,7 @@
         "links": [
           {
             "title": "Procmon capture - Developer settings search reads AppModelUnlock baseline",
-            "url": "research/evidence-files/vm-tooling-staging/devmode_probe2.csv and research/evidence-files/vm-tooling-staging/devmode_probe2.txt",
+            "url": "research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.csv and research/evidence-files/procmon/developer.windows-dev-mode/devmode_probe2.txt",
             "kind": "procmon-trace",
             "summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving N..."
           }
@@ -1432,7 +1432,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer IconsOnly runtime surface",
-            "url": "research/evidence-files/vm-tooling-staging/iconsonly-result.txt",
+            "url": "research/evidence-files/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote IconsOnly = 0 and IconsOnly = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Softw..."
           }
@@ -1707,7 +1707,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer UseCompactMode runtime reads",
-            "url": "Local captures - research/evidence-files/missing/explorer-batch-applied-20260314-pml.md and research/evidence-files/missing/explorer-compact-zero-20260314-pml.md",
+            "url": "Local captures - research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and research/evidence-files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md",
             "kind": "procmon-trace",
             "summary": "Procmon captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode with Data:1 and Data:0 in separate reversible captures aft..."
           }
@@ -1790,7 +1790,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer HideDrivesWithNoMedia runtime surface",
-            "url": "research/evidence-files/vm-tooling-staging/hideemptydrives-result.txt",
+            "url": "research/evidence-files/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote HideDrivesWithNoMedia = 0 and HideDrivesWithNoMedia = 1, restarted Explorer into This PC after each write, and capt..."
           }
@@ -1866,7 +1866,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer SeparateProcess runtime surface",
-            "url": "research/evidence-files/vm-tooling-staging/separateprocess-result.txt",
+            "url": "research/evidence-files/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote SeparateProcess = 0 and SeparateProcess = 1, restarted Explorer after each write, and captured Explorer.EXE queryin..."
           }
@@ -1942,7 +1942,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer ShowCompColor runtime surface",
-            "url": "research/evidence-files/missing/showcompcolor-result-txt.md",
+            "url": "research/evidence-files/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowCompColor = 0 and ShowCompColor = 1, restarted Explorer after each write, and captured Explorer.EXE querying HK..."
           }
@@ -2018,7 +2018,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer ShowDriveLettersFirst runtime surface",
-            "url": "research/evidence-files/vm-tooling-staging/showdrivelettersfirst-result.txt",
+            "url": "research/evidence-files/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowDriveLettersFirst = 0 and ShowDriveLettersFirst = 1, restarted Explorer after each write, and captured Explorer..."
           }
@@ -2100,7 +2100,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer file-extension visibility runtime surface",
-            "url": "research/evidence-files/missing/hidefileext-capture-20260313-pml.md",
+            "url": "research/evidence-files/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md",
             "kind": "procmon-trace",
             "summary": "A reversible Procmon capture on 2026-03-13 wrote HideFileExt = 1, restarted Explorer, wrote HideFileExt = 0, and restarted Explorer again. PowerShell issued the RegSetValue oper..."
           }
@@ -2257,7 +2257,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer hidden-file visibility runtime surface",
-            "url": "research/evidence-files/missing/hidden-capture-20260313-pml.md",
+            "url": "research/evidence-files/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md",
             "kind": "procmon-trace",
             "summary": "A reversible Procmon capture on 2026-03-13 wrote Hidden = 1, restarted Explorer, wrote Hidden = 2, and restarted Explorer again. PowerShell issued the RegSetValue operations, Ex..."
           }
@@ -2333,7 +2333,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer ShowInfoTip runtime surface",
-            "url": "research/evidence-files/vm-tooling-staging/showinfotip-result.txt",
+            "url": "research/evidence-files/procmon/explorer.show-info-tips/showinfotip-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowInfoTip = 0 and ShowInfoTip = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\S..."
           }
@@ -2409,7 +2409,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer ShowSuperHidden runtime surface",
-            "url": "research/evidence-files/vm-tooling-staging/showsuperhidden-result.txt",
+            "url": "research/evidence-files/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowSuperHidden = 0 and ShowSuperHidden = 1 with Hidden held at 1, restarted Explorer after each write, and capture..."
           }
@@ -2491,7 +2491,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer ShowRecent runtime surface",
-            "url": "research/evidence-files/vm-tooling-staging/showrecent-result.txt",
+            "url": "research/evidence-files/procmon/explorer.show-recent-items/showrecent-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowRecent = 0 and ShowRecent = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Sof..."
           }
@@ -2573,7 +2573,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer ShowStatusBar runtime surface",
-            "url": "research/evidence-files/vm-tooling-staging/showstatusbar-result.txt",
+            "url": "research/evidence-files/procmon/explorer.show-status-bar/showstatusbar-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowStatusBar = 0 and ShowStatusBar = 1, restarted Explorer after each write, and captured Explorer.EXE querying HK..."
           }
@@ -2650,7 +2650,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer ShowTypeOverlay runtime surface",
-            "url": "research/evidence-files/vm-tooling-staging/showtypeoverlay-result.txt",
+            "url": "research/evidence-files/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt",
             "kind": "procmon-trace",
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowTypeOverlay = 0 and ShowTypeOverlay = 1, restarted Explorer after each write, and captured Explorer.EXE queryin..."
           }
@@ -2732,7 +2732,7 @@
         "links": [
           {
             "title": "Procmon capture - Explorer taskbar alignment runtime surface",
-            "url": "research/evidence-files/missing/taskbar-alignment-capture-20260313-pml.md",
+            "url": "research/evidence-files/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md",
             "kind": "procmon-trace",
             "summary": "A reversible Procmon capture on 2026-03-13 wrote TaskbarAl = 0, restarted Explorer, restored TaskbarAl = 1, and restarted Explorer again. reg.exe wrote HKCU\\Software\\Microsoft\\W..."
           }
@@ -5520,7 +5520,7 @@
           },
           {
             "title": "Procmon capture - explorer.exe TaskbarAnimations runtime reads",
-            "url": "research/notes/taskbar-animations-procmon-validation-20260326.md",
+            "url": "research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and research/evidence-files/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv",
             "kind": "procmon-trace",
             "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations with Data:0..."
           }
@@ -6364,7 +6364,7 @@
           },
           {
             "title": "Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle",
-            "url": "research/evidence-files/vm-tooling-staging/power_hide_hibernate_option_probe.txt",
+            "url": "research/evidence-files/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt",
             "kind": "procmon-trace",
             "summary": "The guest probe wrote ShowHibernateOption=0 and ShowHibernateOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the origi..."
           }
@@ -6447,7 +6447,7 @@
         "links": [
           {
             "title": "Win25H2Clean reversible probe - ShowLockOption 0/1 toggle",
-            "url": "research/evidence-files/vm-tooling-staging/power_hide_lock_option_probe.txt",
+            "url": "research/evidence-files/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt",
             "kind": "procmon-trace",
             "summary": "The guest probe wrote ShowLockOption=0 and ShowLockOption=1, queried the live registry after each write, opened the Start menu surface twice, and restored the original state; no..."
           }
@@ -6530,7 +6530,7 @@
         "links": [
           {
             "title": "Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle",
-            "url": "research/evidence-files/vm-tooling-staging/power_hide_sleep_option_probe.txt",
+            "url": "research/evidence-files/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt",
             "kind": "procmon-trace",
             "summary": "The guest probe wrote ShowSleepOption=0 and ShowSleepOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the original state."
           }
@@ -7288,7 +7288,7 @@
           },
           {
             "title": "VM Procmon trace - Start_TrackProgs settings page reads",
-            "url": "research/evidence-files/host-temp/procmon-start-track-progs-1.pml.md and research/evidence-files/host-temp/procmon-start-track-progs-0.pml.md",
+            "url": "research/evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md and research/evidence-files/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md",
             "kind": "procmon-trace",
             "summary": "Win25H2Clean Procmon capture around ms-settings:privacy-general while toggling HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Start_TrackProgs between 1 and 0...."
           }
@@ -8923,7 +8923,7 @@
         "links": [
           {
             "title": "Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle",
-            "url": "research/evidence-files/vm-tooling-staging/feedback_notifications_probe.txt",
+            "url": "research/evidence-files/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt",
             "kind": "procmon-trace",
             "summary": "The guest probe wrote DoNotShowFeedbackNotifications=0 and DoNotShowFeedbackNotifications=1, queried the live registry after each write, opened the feedback settings surface in..."
           }
@@ -10744,13 +10744,13 @@
           },
           {
             "title": "Guest Procmon and PolicyManager probe for CrossDeviceResume",
-            "url": "research/evidence-files/vm-tooling-staging/crossdevice_resume_probe.csv and research/evidence-files/vm-tooling-staging/resume-policymanager-probe.txt",
+            "url": "research/evidence-files/procmon/privacy.disable-resume/crossdevice_resume_probe.csv and research/evidence-files/procmon/privacy.disable-resume/resume-policymanager-probe.txt",
             "kind": "procmon-trace",
             "summary": "Guest-side Procmon capture shows CrossDeviceResume.exe launching while PolicyManager DLL loads. The companion registry probe confirms the managed policy default branch at HKLM\\S..."
           },
           {
             "title": "Guest Procmon probe for CrossDeviceResume resume toggle",
-            "url": "research/evidence-files/vm-tooling-staging/privacy_disable_resume_probe.txt and research/evidence-files/missing/privacy-disable-resume-probe-csv.md",
+            "url": "research/evidence-files/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt and research/evidence-files/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md",
             "kind": "procmon-trace",
             "summary": "Guest-side reversible probe toggled IsResumeAllowed between 0 and 1 while opening the CrossDeviceResume settings surface. Procmon captured Explorer, ShellHost, SearchHost, and S..."
           }
@@ -10982,7 +10982,7 @@
         "links": [
           {
             "title": "Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle",
-            "url": "research/evidence-files/vm-tooling-staging/search_history_probe.txt",
+            "url": "research/evidence-files/procmon/privacy.disable-search-history/search_history_probe.txt",
             "kind": "procmon-trace",
             "summary": "The guest probe wrote DisableSearchHistory=0 and DisableSearchHistory=1 into the interactive user policy hive, queried the live registry after each write, launched the SearchHos..."
           }
@@ -12763,13 +12763,13 @@
         "links": [
           {
             "title": "Win25H2Clean absent-value check for Defender sample submission",
-            "url": "research/evidence-files/vm-tooling-staging/spynet-ui-state2.txt",
+            "url": "research/evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
             "kind": "procmon-trace",
             "summary": "In the clean high-risk snapshot run where only SpyNetReporting = 2 was written on the same Defender Spynet policy branch, SecurityHealthService.exe queried SubmitSamplesConsent..."
           },
           {
             "title": "Win25H2Clean Procmon read for SubmitSamplesConsent = 2",
-            "url": "research/evidence-files/vm-tooling-staging/submitsamples-ui-state2.txt",
+            "url": "research/evidence-files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt",
             "kind": "procmon-trace",
             "summary": "After writing SubmitSamplesConsent = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
           }
@@ -12927,19 +12927,19 @@
         "links": [
           {
             "title": "Win25H2Clean Procmon baseline for Security Center notifications policy",
-            "url": "research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-baseline-1-20260324-214343/defender-disable-enhanced-baseline-1.txt",
+            "url": "research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt",
             "kind": "procmon-trace",
             "summary": "On a clean snapshot, SecurityHealthService.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications and got NAME..."
           },
           {
             "title": "Win25H2Clean Procmon enabled-state read for Security Center notifications policy",
-            "url": "research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt",
+            "url": "research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt",
             "kind": "procmon-trace",
             "summary": "After writing DisableEnhancedNotifications = 1 on the Security Center Notifications policy path, SecurityHealthService.exe queried the same path and read Data: 1."
           },
           {
             "title": "Win25H2Clean Procmon reporting-path alias check",
-            "url": "research/evidence-files/vm-tooling-staging/defender-enhanced-notifications-reporting-1-20260324-213700/defender-disable-enhanced-reporting-1.txt",
+            "url": "research/evidence-files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt",
             "kind": "procmon-trace",
             "summary": "When only HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting\\DisableEnhancedNotifications was set to 1, the Windows Security launch probe still showed SecurityHealthSer..."
           }
@@ -13973,13 +13973,13 @@
         "links": [
           {
             "title": "Win25H2Clean Procmon baseline for Defender MAPS policy path",
-            "url": "research/evidence-files/vm-tooling-staging/spynet-ui-baseline.txt",
+            "url": "research/evidence-files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt",
             "kind": "procmon-trace",
             "summary": "On the clean high-risk snapshot, SecurityHealthService.exe opened HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and got NAME NOT FOUND, then fell back to HKLM\\SOFTWAR..."
           },
           {
             "title": "Win25H2Clean Procmon read for SpyNetReporting = 2",
-            "url": "research/evidence-files/vm-tooling-staging/spynet-ui-state2.txt",
+            "url": "research/evidence-files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
             "kind": "procmon-trace",
             "summary": "After writing SpyNetReporting = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
           }
@@ -14217,7 +14217,7 @@
           },
           {
             "title": "Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1",
-            "url": "research/evidence-files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt",
+            "url": "research/evidence-files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
             "kind": "procmon-trace",
             "summary": "After writing HideExclusionsFromLocalAdmins = 1 on the root Defender policy path, wmiprvse.exe and powershell.exe both queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\..."
           },
@@ -14536,7 +14536,7 @@
         "links": [
           {
             "title": "Procmon capture - UAC policy value reads",
-            "url": "Local capture - research/evidence-files/missing/uac-never-notify-capture-pml.md and research/evidence-files/missing/uac-never-notify-capture-csv.md",
+            "url": "research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md and research/evidence-files/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md",
             "kind": "procmon-trace",
             "summary": "Win25H2Clean Procmon captured DllHost.exe reading EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop while the UAC settings surface was open. The guest probe resto..."
           }
@@ -15420,13 +15420,13 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU\\Control Panel\\Desktop\\JPEGImportQuality with Data:100. The raw filtered capture is stored under research/evid...",
+        "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU\\Control Panel\\Desktop\\JPEGImportQuality with Data:100. The repo now keeps the filtered capture files directly...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
           {
             "title": "Procmon capture - Explorer JPEGImportQuality runtime read",
-            "url": "research/notes/jpeg-import-quality-validation-20260326.md",
+            "url": "research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt and research/evidence-files/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv",
             "kind": "procmon-trace",
             "summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU\\Control Panel\\Desktop\\JPEGImp..."
           },
@@ -16109,7 +16109,7 @@
           },
           {
             "title": "VM Procmon trace - Explorer shell restart reads StartupDelayInMSec",
-            "url": "research/evidence-files/host-temp/procmon-startup-delay.pml.md",
+            "url": "research/evidence-files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md",
             "kind": "procmon-trace",
             "summary": "Win25H2Clean Procmon capture during an Explorer restart while StartupDelayInMSec was toggled to 0 and restored. The trace backs the live shell startup-delay surface on this build."
           }
@@ -16575,7 +16575,7 @@
         "links": [
           {
             "title": "Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile",
-            "url": "research/evidence-files/vm-tooling-staging/gamemode_admin_probe.txt and research/evidence-files/vm-tooling-staging/gamemode_admin_zero_probe.txt",
+            "url": "research/evidence-files/procmon/system.enable-game-mode/gamemode_admin_probe.txt and research/evidence-files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt",
             "kind": "procmon-trace",
             "summary": "Guest-side Procmon captures against the interactive Administrator hive showed SystemSettings.exe querying HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\Gam..."
           }
@@ -21712,7 +21712,7 @@
         "links": [
           {
             "title": "VM Procmon trace - ShowStatus language bar restart read",
-            "url": "research/evidence-files/host-temp/procmon-hide-language-bar-3.pml.md",
+            "url": "research/evidence-files/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md",
             "kind": "procmon-trace",
             "summary": "Win25H2Clean Procmon capture around a ctfmon.exe restart while ShowStatus was set to 3. The trace backs the live CTF language-bar preference surface for the hidden state on this..."
           }
