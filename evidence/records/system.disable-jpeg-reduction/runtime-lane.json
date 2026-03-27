@@ -1,0 +1,20 @@
+﻿{
+    "tool":  "ETW",
+    "session_name":  "OpenTraceRegistry",
+    "tweak_id":  "system.disable-jpeg-reduction",
+    "output_file":  "evidence/records/system.disable-jpeg-reduction/runtime-lane.json",
+    "status":  "runner-ok",
+    "runner":  {
+                   "script":  "scripts/vm/run-jpeg-import-quality-runtime-probe.ps1",
+                   "args":  [
+                                "-RecordId",
+                                "system.disable-jpeg-reduction",
+                                "-SnapshotName",
+                                "baseline-20260327-shell-stable"
+                            ]
+               },
+    "note":  "Invoked the mapped VM runtime runner for this tweak. Check the runner output root for concrete capture files.",
+    "exit_code":  0,
+    "log_file":  "evidence/records/system.disable-jpeg-reduction/runtime-lane.log",
+    "result_ref":  "evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json"
+}

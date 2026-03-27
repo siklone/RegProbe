@@ -1,0 +1,83 @@
+﻿{
+    "generated_utc":  "2026-03-27T09:43:49.6700097Z",
+    "probe_name":  "jpeg-import-quality-runtime-20260327-124349",
+    "record_id":  "system.disable-jpeg-reduction",
+    "snapshot_name":  "baseline-20260327-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349",
+    "status":  "ok",
+    "value_name":  "JPEGImportQuality",
+    "value_data":  100,
+    "shell_after":  {
+                        "explorer":  true,
+                        "sihost":  true,
+                        "shellhost":  true,
+                        "ctfmon":  true,
+                        "process_dump":  "Process list: 119\r\npid=0, owner=, cmd=[System Process]\r\npid=4, owner=NT AUTHORITY\\SYSTEM, cmd=System\r\npid=124, owner=NT AUTHORITY\\SYSTEM, cmd=Registry\r\npid=412, owner=NT AUTHORITY\\SYSTEM, cmd=smss.exe\r\npid=556, owner=NT AUTHORITY\\SYSTEM, cmd=csrss.exe\r\npid=660, owner=NT AUTHORITY\\SYSTEM, cmd=csrss.exe\r\npid=684, owner=NT AUTHORITY\\SYSTEM, cmd=wininit.exe\r\npid=720, owner=NT AUTHORITY\\SYSTEM, cmd=winlogon.exe\r\npid=808, owner=NT AUTHORITY\\SYSTEM, cmd=services.exe\r\npid=828, owner=NT AUTHORITY\\SYSTEM, cmd=lsass.exe\r\npid=960, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=992, owner=Font Driver Host\\UMFD-0, cmd=fontdrvhost.exe\r\npid=1000, owner=Font Driver Host\\UMFD-1, cmd=fontdrvhost.exe\r\npid=392, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=svchost.exe\r\npid=384, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1048, owner=Window Manager\\DWM-1, cmd=dwm.exe\r\npid=1164, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1296, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1416, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1452, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1480, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=svchost.exe\r\npid=1524, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1572, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1612, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1692, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1724, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1732, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1812, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1840, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1848, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=540, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1380, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2204, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2196, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=svchost.exe\r\npid=2212, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2332, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2404, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2468, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2504, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2624, owner=NT AUTHORITY\\SYSTEM, cmd=spoolsv.exe\r\npid=2676, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2716, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=svchost.exe\r\npid=2976, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2984, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2992, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=svchost.exe\r\npid=3008, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3016, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=3024, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=3032, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3064, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2280, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=3184, owner=NT AUTHORITY\\SYSTEM, cmd=vmtoolsd.exe\r\npid=3228, owner=NT AUTHORITY\\SYSTEM, cmd=MsMpEng.exe\r\npid=3256, owner=NT AUTHORITY\\SYSTEM, cmd=vm3dservice.exe\r\npid=3276, owner=NT AUTHORITY\\SYSTEM, cmd=VGAuthService.exe\r\npid=3300, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3408, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3560, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3676, owner=NT AUTHORITY\\SYSTEM, cmd=vm3dservice.exe\r\npid=1760, owner=NT AUTHORITY\\SYSTEM, cmd=dllhost.exe\r\npid=2412, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=msdtc.exe\r\npid=3648, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2824, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=4156, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=4284, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=4500, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=sihost.exe\r\npid=4536, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=svchost.exe\r\npid=4564, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=svchost.exe\r\npid=4592, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=svchost.exe\r\npid=4624, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=taskhostw.exe\r\npid=4764, owner=NT AUTHORITY\\SYSTEM, cmd=MicrosoftEdgeUpdate.exe\r\npid=4832, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5108, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=3572, owner=NT AUTHORITY\\SYSTEM, cmd=SecurityHealthService.exe\r\npid=4480, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=NisSrv.exe\r\npid=2184, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=ShellHost.exe\r\npid=3600, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=ctfmon.exe\r\npid=2808, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=WmiPrvSE.exe\r\npid=3484, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=4728, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=CrossDeviceResume.exe\r\npid=3592, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=5272, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=svchost.exe\r\npid=5988, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=svchost.exe\r\npid=2100, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5932, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5820, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=6484, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5668, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=vmtoolsd.exe\r\npid=6364, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2084, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=4168, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=936, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=WindowsOptimizer.App.exe\r\npid=2596, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=WindowsOptimizer.ElevatedHost.exe\r\npid=6152, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=WindowsOptimizer.ElevatedHost.exe\r\npid=6452, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=WindowsOptimizer.ElevatedHost.exe\r\npid=1888, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=WindowsOptimizer.ElevatedHost.exe\r\npid=3388, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=WindowsOptimizer.ElevatedHost.exe\r\npid=1948, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=WindowsOptimizer.ElevatedHost.exe\r\npid=3292, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=explorer.exe\r\npid=5456, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=rundll32.exe\r\npid=740, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=rundll32.exe\r\npid=4672, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=WmiPrvSE.exe\r\npid=5924, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1256, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=6596, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=Taskmgr.exe\r\npid=4904, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=explorer.exe\r\npid=5792, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1928, owner=NT AUTHORITY\\SYSTEM, cmd=AggregatorHost.exe\r\npid=4388, owner=NT AUTHORITY\\SYSTEM, cmd=MicrosoftEdgeUpdate.exe\r\npid=5680, owner=NT AUTHORITY\\SYSTEM, cmd=MoUsoCoreWorker.exe\r\npid=4356, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2148, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=4468, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2024, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5552, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2376, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2056, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1148, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3128, owner=NT AUTHORITY\\SYSTEM, cmd=MicrosoftEdgeUpdate.exe"
+                    },
+    "wallpaper_apply":  {
+                            "source_jpeg":  "%SystemRoot%/Web/Wallpaper/Windows/img0.jpg",
+                            "working_copy":  "%ValidationController%/jpeg-import-quality-runtime/jpeg-import-quality-runtime-20260327-124349/wallpaper-probe.jpg",
+                            "original_wallpaper":  "%SystemRoot%/web/wallpaper/Windows/img0.jpg",
+                            "current_wallpaper":  "%SystemRoot%/web/wallpaper/Windows/img0.jpg",
+                            "final_wallpaper":  "%SystemRoot%/web/wallpaper/Windows/img0.jpg",
+                            "candidate_invoked":  true,
+                            "restore_invoked":  true,
+                            "restored_original_exists":  true
+                        },
+    "wpr":  {
+                "started":  true,
+                "stopped":  true,
+                "profile":  "GeneralProfile",
+                "guest_etl":  "jpeg-import-quality-runtime.etl",
+                "repo_etl_placeholder":  "evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md"
+            },
+    "recovery":  {
+                     "performed":  false,
+                     "shell_healthy_after_recovery":  false
+                 },
+    "errors":  [
+
+               ],
+    "summary":  {
+                    "generated_utc":  "2026-03-27T09:52:32.0686768Z",
+                    "registry_path":  "HKCU:\\Control Panel\\Desktop",
+                    "value_name":  "JPEGImportQuality",
+                    "value_data":  100,
+                    "before":  {
+                                   "path_exists":  true,
+                                   "value_exists":  false,
+                                   "value":  null
+                               },
+                    "applied":  {
+                                    "path_exists":  true,
+                                    "value_exists":  true,
+                                    "value":  100
+                                },
+                    "restored":  {
+                                     "path_exists":  true,
+                                     "value_exists":  false,
+                                     "value":  null
+                                 },
+                    "shell_after":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "ShellHost":  true,
+                                        "ctfmon":  true
+                                    },
+                    "wallpaper_apply":  {
+                                            "source_jpeg":  "%SystemRoot%/Web/Wallpaper/Windows/img0.jpg",
+                                            "working_copy":  "%ValidationController%/jpeg-import-quality-runtime/jpeg-import-quality-runtime-20260327-124349/wallpaper-probe.jpg",
+                                            "original_wallpaper":  "%SystemRoot%/web/wallpaper/Windows/img0.jpg",
+                                            "current_wallpaper":  "%SystemRoot%/web/wallpaper/Windows/img0.jpg",
+                                            "final_wallpaper":  "%SystemRoot%/web/wallpaper/Windows/img0.jpg",
+                                            "candidate_invoked":  true,
+                                            "restore_invoked":  true,
+                                            "restored_original_exists":  true
+                                        },
+                    "etl_exists":  true,
+                    "etl_path":  "jpeg-import-quality-runtime.etl",
+                    "errors":  [
+
+                               ]
+                }
+}

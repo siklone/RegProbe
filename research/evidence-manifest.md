@@ -78,8 +78,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `a9c1bf72aff1344998c40660114164bd9cd227532b71596add3199eeaf2b4045` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `e920c554f7b4add5325a179d2df511c65d7cf12140e051b712dd7bb504ee2d18` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
-| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `eb36c6a2ff4017d6b17530f7362c0ccab7fda13d65a2072bf696b3660fa283a1` | `e3b782d9f3e4b71176be6e21b4a361edefb58eee47ac4305e9352879618d47d7` | 3 |
-| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `040955e78b1e4643ed50d68491b45fe36f77724fd46dc037772165156381e833` | `ba526286c0a40c2d95c7f855f3d8fca2f4060112a9bf4ce848f6b266d81b0cb4` | 3 |
+| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460` | `e3b782d9f3e4b71176be6e21b4a361edefb58eee47ac4305e9352879618d47d7` | 3 |
+| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `43edcdbd0c4ea253fc61461681abc0fba6fd2a6654827d06d505f293078a14c9` | `ba526286c0a40c2d95c7f855f3d8fca2f4060112a9bf4ce848f6b266d81b0cb4` | 3 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `research/records/cleanup.disable-reserved-storage.review.json` | - | `a31748762eb2e2ead6ebeb0e82f50b80577cd13df1ab3b045df20c495e305113` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 5 |
 | `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `a538b7842bd07beb7e1db1a4472c88d07fd2c17ce9e74d8fc551bfb46a740c36` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
 | `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | - | `f82c8389bb9c2c5ea6f8bb4edb4f8432d16dcd2d14d1823cb88d9c1b6eeb97f4` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 3 |
@@ -254,13 +254,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | - | `88f014337f2ea58c162a76daaaa2aded61600dc09e719c70a69b7b0cc823fae8` | `5f0a6893f778a04c34ad446c4eeaf6c0cf923c13d49a7de6d0995fa3027af6f2` | 4 |
 | `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `88ecb24b27b6641230a60e70a9fdb27800ce744b2f9ef0ad468f0408dac415d1` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | - | `4a8f5d3205a70bf8b77960392771f946095fd486c5fbd769674ff8603f8ad7d4` | `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af` | 4 |
-| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `16dd89f569ad990d040e482d9fb60e3b1ba9ab96ad121a1df0c511c1362ca2e2` | `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b` | 6 |
+| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `a1652b5c649436d119a3a669345c8817315b18f0a4b07128c1a919e0a3a05c35` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 7 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | - | `f0228c6db1ea77df4babd90828f1afc0a4fdf61f0b51885343ede2b777609416` | `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee` | 3 |
 | `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `8be99e94ec4badc6b606ea73364d8a6c7e33b871287301c8f24066b41bc333c3` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `131731880587c5416aefedd485d112d858ea6ac870bc67ae6dff5acdbdc8a531` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `f4fe0e8cc083c82eaff45e2496ab0e9c58f217a5f06043148d1823f9ada6f64b` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
-| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `c0ece712afc1387aad8c4838152bbe674c55bc379fec1ac1b3cf1145ebdc1a7f` | `fdd88291f6199bacf2fe29135f1037ddcea4342acadb044d5149b66bf7a987e0` | 6 |
+| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `fffd294fa3a8440bdb1faeca055b5c23f7d6ef451a4c6fdb0c6a829d663a0353` | `fdd88291f6199bacf2fe29135f1037ddcea4342acadb044d5149b66bf7a987e0` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `62874ddcdd7497f17bf4481b53eb48d10af34538e1574c0c9ff8de43efeb3a13` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `1671a1b2b7c64d6b32d62ff74ebffc184e495fff6725a751bd99d324512ab808` | `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `c0367c5516442aa2d568bbe2c6da2c1e8df8df6ae511a7e676b924698df45988` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
@@ -1861,7 +1861,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-disconnected-devices.review.json`
 - V3.1 evidence root: [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices)
-- Source SHA256: `eb36c6a2ff4017d6b17530f7362c0ccab7fda13d65a2072bf696b3660fa283a1`
+- Source SHA256: `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460`
 - Proof SHA256: `e3b782d9f3e4b71176be6e21b4a361edefb58eee47ac4305e9352879618d47d7`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
@@ -1899,7 +1899,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-hidden-devices.review.json`
 - V3.1 evidence root: [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices)
-- Source SHA256: `040955e78b1e4643ed50d68491b45fe36f77724fd46dc037772165156381e833`
+- Source SHA256: `43edcdbd0c4ea253fc61461681abc0fba6fd2a6654827d06d505f293078a14c9`
 - Proof SHA256: `ba526286c0a40c2d95c7f855f3d8fca2f4060112a9bf4ce848f6b266d81b0cb4`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowHiddenDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
@@ -2334,8 +2334,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Original class | A |
-| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
-| Priority | 2 |
+| Reason | non_official_v31_reaudit |
+| Priority | 3 |
 | New pipeline version | v3.1 |
 
 ---
@@ -7046,10 +7046,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-jpeg-reduction.review.json`
 - V3.1 evidence root: [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction)
-- Source SHA256: `16dd89f569ad990d040e482d9fb60e3b1ba9ab96ad121a1df0c511c1362ca2e2`
-- Proof SHA256: `c456ccbc00d3baeb188bc8377906954ed13177df49f84e539027a6964cafaa8b`
+- Source SHA256: `a1652b5c649436d119a3a669345c8817315b18f0a4b07128c1a919e0a3a05c35`
+- Proof SHA256: `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69`
 
-**Summary:** The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and a Win25H2Clean reversible probe: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the missing baseline restores cleanly, and the current app writes the same 100 state.
+**Summary:** The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and repeated Win25H2Clean runtime probes: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the v3.1 runtime lane re-applied a JPEG wallpaper with a fresh WPR capture and restored the original wallpaper, the missing baseline restores cleanly, and the current app writes the same 100 state.
 
 **Evidence**
 
@@ -7061,22 +7061,23 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ghidra-shell32-jpegimportquality` | `ghidra-headless` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| `runtime-jpegimportquality-v31-20260327` | `etw-trace` | Win25H2Clean v3.1 runtime lane - JPEG wallpaper apply | [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/summary.json](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json) and [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md) |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
 | Source | [research/notes/jpeg-import-quality-validation-20260326.md](notes/jpeg-import-quality-validation-20260326.md) |
-| Exact quote / path | jpegimportquality-state-100.txt: Explorer.EXE RegQueryValue HKCU/Control Panel/Desktop/JPEGImportQuality Data: 100. shell32-jpegimportquality-ghidra.md: shell32.dll xref for JPEGImportQuality in FUN_1800bf050. |
-| Notes | The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof. |
+| Exact quote / path | jpegimportquality-state-100.txt: Explorer.EXE RegQueryValue HKCU/Control Panel/Desktop/JPEGImportQuality Data: 100. shell32-jpegimportquality-ghidra.md: shell32.dll xref for JPEGImportQuality in FUN_1800bf050. jpeg-import-quality-runtime-20260327-124349/summary.json: before missing, applied 100, restored missing, wallpaper apply invoked, shell healthy. |
+| Notes | The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof, and the 2026-03-27 v3.1 runtime lane adds a fresh wallpaper-apply trace with clean shell recovery. |
 
 **Re-audit**
 
 | Field | Value |
 | --- | --- |
 | Original class | A |
-| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
-| Priority | 2 |
+| Reason | non_official_v31_reaudit |
+| Priority | 3 |
 | New pipeline version | v3.1 |
 
 ---
@@ -7228,7 +7229,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-startup-delay.review.json`
 - V3.1 evidence root: [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay)
-- Source SHA256: `c0ece712afc1387aad8c4838152bbe674c55bc379fec1ac1b3cf1145ebdc1a7f`
+- Source SHA256: `fffd294fa3a8440bdb1faeca055b5c23f7d6ef451a4c6fdb0c6a829d663a0353`
 - Proof SHA256: `fdd88291f6199bacf2fe29135f1037ddcea4342acadb044d5149b66bf7a987e0`
 
 **Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, a bounded WPR lane captured both `missing` and `0`, and the value restores back to missing cleanly.

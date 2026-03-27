@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T09:10:42.689564Z",
+  "generated_utc": "2026-03-27T13:28:07.067257Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
@@ -305,15 +305,15 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report.",
+        "summary": "The record-specific v3.1 re-audit note consolidates the existing Procmon and Ghidra proof with the 2026-03-27 runtime-runner summary. The class-driving proof remains the Procmon plus Ghidra convergence; the runtime lane is recorded as supplemental rollback...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md",
+            "url": "research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md",
             "kind": "validation-proof",
-            "summary": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_2026..."
+            "summary": "Procmon: audio-devicecpl-query-20260314-pml.md and audio-devicecpl-query-zero-20260314-pml.md captured rundll32.exe reading ShowDisconnectedDevices with Data:1 and Data:0. Ghidr..."
           },
           {
             "title": "Current app implementation",
@@ -382,13 +382,13 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report.",
+        "summary": "This v3.1 re-audit keeps the normalized Procmon hit summary in a record-scoped note because the checked-in Procmon markdown files are only placeholders for the off-git raw PML. The same note also ties the runtime summary and Ghidra export back to the record.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md",
+            "url": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md",
             "kind": "validation-proof",
             "summary": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.p..."
           },
@@ -401,15 +401,15 @@
         ]
       },
       "runtime_proof": {
-        "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and Data:0 in separate reversible captures. That proves the classic Sound control p...",
+        "summary": "The raw Procmon PML is off-git, but the repo preserves a normalized summary of the 2026-03-14 capture showing rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices wi...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
           {
             "title": "Procmon capture - Sound control panel ShowHiddenDevices runtime reads",
-            "url": "evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
+            "url": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
             "kind": "procmon-trace",
-            "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and..."
+            "summary": "The raw Procmon PML is off-git, but the repo preserves a normalized summary of the 2026-03-14 capture showing rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and..."
           }
         ]
       },
@@ -15413,7 +15413,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof.",
+        "summary": "The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof, and the 2026-03-27 v3.1 runtime lane adds a fresh wallpaper-apply trace with cle...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -16090,7 +16090,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serial...",
+        "summary": "Retroactive v3.1 pass relies on the checked-in reversible probe, the startup-delay WPR summaries for both missing and 0, the explorer.exe Ghidra string-search output, and the repo-friendly Procmon placeholder note for the original shell-restart capture. Mic...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -16098,7 +16098,7 @@
             "title": "Validation proof source",
             "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
             "kind": "validation-proof",
-            "summary": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__"
+            "summary": "vm-batch-probe-20260320.json: system.disable-startup-delay before=__MISSING__, after_apply=0, after_restore=__MISSING__; startup-delay-0.summary.json: before missing, applied 0,..."
           },
           {
             "title": "Repo system research notes for startup delay",
@@ -16129,7 +16129,7 @@
             "title": "VM Procmon trace - Explorer shell restart reads StartupDelayInMSec",
             "url": "evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md",
             "kind": "procmon-trace",
-            "summary": "Win25H2Clean Procmon capture during an Explorer restart while StartupDelayInMSec was toggled to 0 and restored. The trace backs the live shell startup-delay surface on this build."
+            "summary": "The record keeps the Procmon layer as the repo-friendly placeholder for the original Win25H2Clean Explorer shell-restart capture while StartupDelayInMSec was toggled to 0 and re..."
           }
         ]
       },

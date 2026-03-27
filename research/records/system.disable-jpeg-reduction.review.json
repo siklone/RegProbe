@@ -4,7 +4,7 @@
   "record_id": "system.disable-jpeg-reduction",
   "tweak_id": "system.disable-jpeg-reduction",
   "record_status": "validated",
-  "summary": "The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and a Win25H2Clean reversible probe: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the missing baseline restores cleanly, and the current app writes the same 100 state.",
+  "summary": "The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and repeated Win25H2Clean runtime probes: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the v3.1 runtime lane re-applied a JPEG wallpaper with a fresh WPR capture and restored the original wallpaper, the missing baseline restores cleanly, and the current app writes the same 100 state.",
   "setting": {
     "name": "Wallpaper JPEG Import Quality",
     "category": "System",
@@ -13,7 +13,7 @@
     "casual_explanation": "Windows can reduce the quality of JPEG images when you set them as wallpaper. People change this when they want the wallpaper to stay as sharp as possible.",
     "why_people_change_it": "People set it to 100 when they notice wallpaper compression artifacts or want the imported wallpaper to match the original image quality more closely.",
     "tradeoffs_overview": "Raising JPEG import quality can improve wallpaper image fidelity, but it can also increase wallpaper storage size and it still rests on shell runtime evidence rather than a Microsoft-published registry contract.",
-    "professional_notes": "The repo has a decompiled `TranscodeImage` path that reads HKCU\\Control Panel\\Desktop\\JPEGImportQuality, uses 85 when the value is missing, clamps the configured number into the 60..100 range, and passes the final value into the WIC JPEG encoder as ImageQuality. A 2026-03-26 Ghidra headless pass on shell32.dll found the JPEGImportQuality string and exported the xref into the same transcode function family. On the same date, a Win25H2Clean Procmon pass using the Explorer shell verb `setdesktopwallpaper` captured Explorer.EXE querying JPEGImportQuality with Data:100. The reversible VM probe still confirms missing -> 100 -> missing. That gives this record code-side proof, runtime proof, and a clean restore story for the app's current value 100 profile.",
+    "professional_notes": "The repo has a decompiled `TranscodeImage` path that reads HKCU\\Control Panel\\Desktop\\JPEGImportQuality, uses 85 when the value is missing, clamps the configured number into the 60..100 range, and passes the final value into the WIC JPEG encoder as ImageQuality. A 2026-03-26 Ghidra headless pass on shell32.dll found the JPEGImportQuality string and exported the xref into the same transcode function family. On the same date, a Win25H2Clean Procmon pass using the Explorer shell verb `setdesktopwallpaper` captured Explorer.EXE querying JPEGImportQuality with Data:100. A 2026-03-27 v3.1 runtime lane set JPEGImportQuality=100, invoked a JPEG wallpaper apply against a working copy, captured a WPR placeholder trace, restored the missing baseline, restored the original wallpaper path, and kept shell health clean. The reversible VM probe still confirms missing -> 100 -> missing. That gives this record code-side proof, runtime proof, and a clean restore story for the app's current value 100 profile.",
     "targets": [
       {
         "target_id": "jpeg-import-quality",
@@ -30,7 +30,8 @@
             "evidence_ids": [
               "repo-system-doc-jpeg",
               "repo-system-decomp-jpegtranscode",
-              "vm-batch-probe-20260320-disable-jpeg-reduction"
+              "vm-batch-probe-20260320-disable-jpeg-reduction",
+              "runtime-jpegimportquality-v31-20260327"
             ]
           },
           {
@@ -44,7 +45,8 @@
               "procmon-jpegimportquality-explorer-read",
               "ghidra-shell32-jpegimportquality",
               "app-system-provider",
-              "vm-batch-probe-20260320-disable-jpeg-reduction"
+              "vm-batch-probe-20260320-disable-jpeg-reduction",
+              "runtime-jpegimportquality-v31-20260327"
             ]
           }
         ],
@@ -83,7 +85,8 @@
       "evidence_ids": [
         "repo-system-doc-jpeg",
         "repo-system-decomp-jpegtranscode",
-        "vm-batch-probe-20260320-disable-jpeg-reduction"
+        "vm-batch-probe-20260320-disable-jpeg-reduction",
+        "runtime-jpegimportquality-v31-20260327"
       ]
     }
   ],
@@ -150,7 +153,8 @@
         "procmon-jpegimportquality-explorer-read",
         "ghidra-shell32-jpegimportquality",
         "app-system-provider",
-        "vm-batch-probe-20260320-disable-jpeg-reduction"
+        "vm-batch-probe-20260320-disable-jpeg-reduction",
+        "runtime-jpegimportquality-v31-20260327"
       ]
     }
   ],
@@ -235,6 +239,20 @@
         "rollback"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "runtime-jpegimportquality-v31-20260327",
+      "kind": "etw-trace",
+      "title": "Win25H2Clean v3.1 runtime lane - JPEG wallpaper apply",
+      "location": "evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json and evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md",
+      "summary": "A v3.1 runtime lane set JPEGImportQuality = 100, invoked the shell wallpaper apply path on a JPEG working copy, captured a WPR GeneralProfile trace placeholder, restored the missing baseline, restored the original wallpaper, and ended with healthy shell state.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "rollback"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -244,18 +262,18 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "shell32.dll decompiled to the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 in a shell-driven Procmon pass on Win25H2Clean, the reversible VM probe confirmed missing -> 100 -> missing, and the current app writes the same value with a clean restore story. That is enough to treat the current value 100 profile as app-ready even though the setting is not published by Microsoft as a registry contract.",
+    "why": "shell32.dll decompiled to the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 in a shell-driven Procmon pass on Win25H2Clean, the v3.1 runtime lane re-applied a JPEG wallpaper with a fresh WPR capture and clean shell health, the reversible VM probe confirmed missing -> 100 -> missing, and the current app writes the same value with a clean restore story. That is enough to treat the current value 100 profile as app-ready even though the setting is not published by Microsoft as a registry contract.",
     "blocking_issues": []
   },
   "open_questions": [
     "Can a primary Microsoft source for JPEGImportQuality be captured?",
     "Should this setting be treated only as an advanced wallpaper preference?"
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-03-27T00:00:00Z",
   "validation_proof": {
     "source_url": "research/notes/jpeg-import-quality-validation-20260326.md",
-    "exact_quote_or_path": "jpegimportquality-state-100.txt: Explorer.EXE RegQueryValue HKCU\\Control Panel\\Desktop\\JPEGImportQuality Data: 100. shell32-jpegimportquality-ghidra.md: shell32.dll xref for JPEGImportQuality in FUN_1800bf050.",
+    "exact_quote_or_path": "jpegimportquality-state-100.txt: Explorer.EXE RegQueryValue HKCU\\Control Panel\\Desktop\\JPEGImportQuality Data: 100. shell32-jpegimportquality-ghidra.md: shell32.dll xref for JPEGImportQuality in FUN_1800bf050. jpeg-import-quality-runtime-20260327-124349/summary.json: before missing, applied 100, restored missing, wallpaper apply invoked, shell healthy.",
     "key_found_on_page": true,
-    "notes": "The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof."
+    "notes": "The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof, and the 2026-03-27 v3.1 runtime lane adds a fresh wallpaper-apply trace with clean shell recovery."
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T09:10:42.992647Z",
+  "generated_utc": "2026-03-27T13:29:30.440633Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
@@ -13,11 +13,11 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 240,
-      "incident-review": 1,
+      "none": 239,
+      "incident-review": 2,
       "decision-gate": 1
     },
-    "re_audit_required_count": 7
+    "re_audit_required_count": 1
   },
   "entries": [
     {
@@ -77,7 +77,7 @@
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
@@ -85,12 +85,14 @@
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "behavior_wpr"
       ],
       "tools_used": [
         "etw",
         "procmon",
-        "ghidra"
+        "ghidra",
+        "wpr"
       ],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -101,13 +103,38 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": true,
-      "re_audit_priority": 3,
-      "re_audit_reason": "non_official_v31_reaudit",
-      "original_class": "A",
-      "original_pipeline_version": "pre-v3.1",
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "",
+      "original_class": null,
+      "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
-      "artifact_refs": [],
+      "artifact_refs": [
+        {
+          "id": "audio-devicecpl-query-20260314-pml.md",
+          "filename": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md"
+        },
+        {
+          "id": "audio-devicecpl-query-zero-20260314-pml.md",
+          "filename": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
+        },
+        {
+          "id": "audio-devicecpl-ghidra.md",
+          "filename": "evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md"
+        },
+        {
+          "id": "summary.json",
+          "filename": "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json"
+        },
+        {
+          "id": "audio-devicecpl.etl.md",
+          "filename": "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md"
+        },
+        {
+          "id": "audio-show-disconnected-devices-v31-reaudit-20260327.md",
+          "filename": "research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md"
+        }
+      ],
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "apply_allowed": true,
@@ -150,11 +177,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": true,
-      "re_audit_priority": 3,
-      "re_audit_reason": "non_official_v31_reaudit",
-      "original_class": "A",
-      "original_pipeline_version": "pre-v3.1",
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "",
+      "original_class": null,
+      "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "matches-research",
@@ -809,11 +836,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": true,
-      "re_audit_priority": 3,
-      "re_audit_reason": "non_official_v31_reaudit",
-      "original_class": "A",
-      "original_pipeline_version": "pre-v3.1",
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "",
+      "original_class": null,
+      "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "matches-research",
@@ -3097,8 +3124,8 @@
       "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
-      "incident_seen": false,
-      "next_missing_layer": "none",
+      "incident_seen": true,
+      "next_missing_layer": "incident-review",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -3106,6 +3133,7 @@
         "runtime_reboot"
       ],
       "tools_used": [
+        "etw",
         "procmon",
         "ghidra",
         "reboot"
@@ -3114,16 +3142,16 @@
       "suspected_layer": "user-mode",
       "frida_kernel_guard_applied": false,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": true,
-      "re_audit_priority": 2,
-      "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": "A",
-      "original_pipeline_version": "pre-v3.1",
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "",
+      "original_class": null,
+      "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "matches-research",
@@ -3131,7 +3159,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/performance.disable-taskbar-animations.review.json",
-      "incident_ids": []
+      "incident_ids": [
+        "20260327142205-performance-disable-taskbar-animations",
+        "20260327145726-performance-disable-taskbar-animations",
+        "20260327153609-performance-disable-taskbar-animations",
+        "20260327161107-performance-disable-taskbar-animations"
+      ]
     },
     {
       "record_id": "peripheral.autoplay-take-no-action",
@@ -8365,7 +8398,7 @@
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
@@ -8373,26 +8406,29 @@
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "behavior_wpr"
       ],
       "tools_used": [
+        "etw",
         "procmon",
-        "ghidra"
+        "ghidra",
+        "wpr"
       ],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
       "frida_kernel_guard_applied": false,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": true,
-      "re_audit_priority": 2,
-      "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": "A",
-      "original_pipeline_version": "pre-v3.1",
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "",
+      "original_class": null,
+      "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "matches-research",
@@ -8652,7 +8688,7 @@
       "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
-      "incident_seen": false,
+      "incident_seen": true,
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
@@ -8662,6 +8698,7 @@
         "runtime_reboot"
       ],
       "tools_used": [
+        "etw",
         "procmon",
         "ghidra",
         "wpr",
@@ -8671,24 +8708,53 @@
       "suspected_layer": "user-mode",
       "frida_kernel_guard_applied": false,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": true,
-      "re_audit_priority": 2,
-      "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": "A",
-      "original_pipeline_version": "pre-v3.1",
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "",
+      "original_class": null,
+      "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
-      "artifact_refs": [],
+      "artifact_refs": [
+        {
+          "id": "vm-batch-probe-20260320.json",
+          "filename": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
+        },
+        {
+          "id": "procmon-startup-delay.pml.md",
+          "filename": "evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md"
+        },
+        {
+          "id": "ghidra_explorer_serialize.txt",
+          "filename": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt"
+        },
+        {
+          "id": "startup-delay-wpr-summary.json",
+          "filename": "evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/startup-delay-wpr-summary.json"
+        },
+        {
+          "id": "startup-delay-0.summary.json",
+          "filename": "evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/0/startup-delay-0.summary.json"
+        },
+        {
+          "id": "startup-delay-wpr-trace-20260326.md",
+          "filename": "research/notes/startup-delay-wpr-trace-20260326.md"
+        }
+      ],
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/system.disable-startup-delay.review.json",
-      "incident_ids": []
+      "incident_ids": [
+        "20260327143733-system-disable-startup-delay",
+        "20260327151624-system-disable-startup-delay",
+        "20260327155307-system-disable-startup-delay"
+      ]
     },
     {
       "record_id": "system.disable-storage-sense-temp-cleanup",

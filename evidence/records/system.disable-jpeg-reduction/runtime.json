@@ -2,14 +2,14 @@
   "$schema": "registry-evidence-v3.1/runtime-evidence",
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-wallpaper-apply-probe",
+      "timestamp": "2026-03-27T09:43:49.6700097Z",
       "boot_phase_included": false,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md"
     },
     "procmon": {
       "executed": true,
@@ -31,6 +31,7 @@
   },
   "source_evidence_ids": [
     "procmon-jpegimportquality-explorer-read",
-    "vm-batch-probe-20260320-disable-jpeg-reduction"
+    "vm-batch-probe-20260320-disable-jpeg-reduction",
+    "runtime-jpegimportquality-v31-20260327"
   ]
 }

@@ -27,14 +27,14 @@
   },
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-wallpaper-apply-probe",
+      "timestamp": "2026-03-27T09:43:49.6700097Z",
       "boot_phase_included": false,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md"
     },
     "procmon": {
       "executed": true,
@@ -99,11 +99,11 @@
       "after_file": null
     },
     "wpr": {
-      "executed": false,
+      "executed": true,
       "boot_time_before_ms": null,
       "boot_time_after_ms": null,
       "cpu_delta": null,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json and evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md"
     },
     "benchmark": {
       "executed": false,
@@ -119,16 +119,17 @@
   "classification": {
     "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "shell32.dll decompiled to the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 in a shell-driven Procmon pass on Win25H2Clean, the reversible VM probe confirmed missing -> 100 -> missing, and the current app writes the same value with a clean restore story. That is enough to treat the current value 100 profile as app-ready even though the setting is not published by Microsoft as a registry contract.",
+    "reason": "shell32.dll decompiled to the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 in a shell-driven Procmon pass on Win25H2Clean, the v3.1 runtime lane re-applied a JPEG wallpaper with a fresh WPR capture and clean shell health, the reversible VM probe confirmed missing -> 100 -> missing, and the current app writes the same value with a clean restore story. That is enough to treat the current value 100 profile as app-ready even though the setting is not published by Microsoft as a registry contract.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
-      "static_ghidra"
+      "static_ghidra",
+      "behavior_wpr"
     ],
-    "layer_count": 2,
+    "layer_count": 3,
     "frida_kernel_guard_applied": false,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
@@ -139,19 +140,19 @@
   "timeline": [
     {
       "step": "bootstrap_record_load",
-      "timestamp": "2026-03-26T23:12:55.414888Z"
+      "timestamp": "2026-03-27T09:54:07.056637Z"
     },
     {
-      "step": "all",
-      "timestamp": "2026-03-26T23:12:55.414888Z"
+      "step": "faz1",
+      "timestamp": "2026-03-27T09:54:07.056637Z"
     },
     {
       "step": "classification",
-      "timestamp": "2026-03-26T23:12:55.414888Z"
+      "timestamp": "2026-03-27T09:54:07.056637Z"
     },
     {
       "step": "last_reviewed",
-      "timestamp": "2026-03-26T00:00:00Z"
+      "timestamp": "2026-03-27T00:00:00Z"
     }
   ],
   "artifact_refs": [],
@@ -166,16 +167,19 @@
     ],
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
-    "re_audit_date": "2026-03-26T23:12:55.414888Z",
-    "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
-    "re_audit_priority": 2,
-    "new_tools_applied": [],
+    "re_audit_date": "2026-03-27T09:54:07.056637Z",
+    "re_audit_reason": "non_official_v31_reaudit",
+    "re_audit_priority": 3,
+    "new_tools_applied": [
+      "etw",
+      "vm-runtime-runner"
+    ],
     "new_cross_layer": true,
     "new_class": "A",
     "class_changed": false,
     "frida_kernel_guard_applied": false,
-    "dead_flag_four_conditions_met": false,
-    "notes": "Bootstrapped from the current research record and evidence audit. Replace with fresh v3.1 runtime output after re-audit runs.",
+    "dead_flag_four_conditions_met": true,
+    "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json)",
     "new_pipeline_version": "v3.1"
   }
 }

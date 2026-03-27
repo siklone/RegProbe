@@ -3,16 +3,17 @@
   "classification": {
     "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "shell32.dll decompiled to the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 in a shell-driven Procmon pass on Win25H2Clean, the reversible VM probe confirmed missing -> 100 -> missing, and the current app writes the same value with a clean restore story. That is enough to treat the current value 100 profile as app-ready even though the setting is not published by Microsoft as a registry contract.",
+    "reason": "shell32.dll decompiled to the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 in a shell-driven Procmon pass on Win25H2Clean, the v3.1 runtime lane re-applied a JPEG wallpaper with a fresh WPR capture and clean shell health, the reversible VM probe confirmed missing -> 100 -> missing, and the current app writes the same value with a clean restore story. That is enough to treat the current value 100 profile as app-ready even though the setting is not published by Microsoft as a registry contract.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
-      "static_ghidra"
+      "static_ghidra",
+      "behavior_wpr"
     ],
-    "layer_count": 2,
+    "layer_count": 3,
     "frida_kernel_guard_applied": false,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true

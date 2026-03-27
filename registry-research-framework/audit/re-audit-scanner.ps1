@@ -25,9 +25,11 @@ if ([string]::IsNullOrWhiteSpace($ReportPath)) {
 
 $audit = Get-Content -Raw $AuditPath | ConvertFrom-Json
 $entries = @($audit.entries | Where-Object { $_.re_audit_required -eq $true })
-$queue = $entries |
-    Sort-Object @{Expression = { $_.re_audit_priority }}, @{Expression = { $_.tweak_id }} |
-    Select-Object tweak_id, evidence_class, official_doc_exists, lane, suspected_layer, re_audit_priority, re_audit_reason, cross_layer_satisfied, next_missing_layer, source_file
+$queue = @(
+    $entries |
+        Sort-Object @{Expression = { $_.re_audit_priority }}, @{Expression = { $_.tweak_id }} |
+        Select-Object tweak_id, evidence_class, official_doc_exists, lane, suspected_layer, re_audit_priority, re_audit_reason, cross_layer_satisfied, next_missing_layer, source_file
+)
 
 $queue | Export-Csv -Path $QueueCsv -NoTypeInformation -Encoding utf8
 
@@ -55,7 +57,6 @@ $lines += "| --- | --- | --- | --- | --- | --- | --- |"
 foreach ($item in $queue) {
     $lines += "| $($item.tweak_id) | $($item.evidence_class) | $($item.official_doc_exists) | $($item.lane) | $($item.suspected_layer) | $($item.re_audit_priority) | $($item.re_audit_reason) |"
 }
-$lines += ""
 
 Set-Content -Path $ReportPath -Value ($lines -join "`n") -Encoding utf8
 Write-Host "Wrote $QueueCsv"
