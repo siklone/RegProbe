@@ -67,7 +67,7 @@ public static class AppDiagnostics
                         if (Directory.Exists(testDir))
                         {
                             // Attempt a quick write to validate permissions
-                            var testFile = Path.Combine(testDir, "__opentraceproject_tmp_write_test.txt");
+                            var testFile = Path.Combine(testDir, "__regprobe_tmp_write_test.txt");
                             try
                             {
                                 File.AppendAllText(testFile, "test");

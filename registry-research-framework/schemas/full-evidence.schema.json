@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://opentraceproject.local/registry-research-framework/schemas/full-evidence.schema.json",
+  "$id": "https://regprobe.local/registry-research-framework/schemas/full-evidence.schema.json",
   "title": "v3.1 Full Evidence",
   "type": "object",
   "required": ["record_id", "tweak_id", "metadata", "runtime", "static", "behavior", "classification", "timeline", "artifact_refs"],
