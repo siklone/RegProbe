@@ -19,6 +19,21 @@ def escape_md_cell(value: Any) -> str:
     return text.replace("\\", "\\\\").replace("|", "\\|").replace("\n", " ").replace("\r", " ")
 
 
+def normalize_row_item(value: Any) -> dict[str, Any]:
+    if isinstance(value, dict):
+        return value
+    if value is None:
+        return {}
+    text = str(value)
+    return {
+        "id": text,
+        "tool": "",
+        "filename": text,
+        "sha256": "",
+        "release_url": "",
+    }
+
+
 def render_table(headers: list[str], rows: list[list[str]]) -> list[str]:
     out = [
         "| " + " | ".join(headers) + " |",
@@ -169,6 +184,7 @@ def render_md(manifest: dict[str, Any]) -> str:
             lines.append("")
             artifact_rows = []
             for artifact in artifact_refs:
+                artifact = normalize_row_item(artifact)
                 artifact_rows.append(
                     [
                         f"`{escape_md_cell(artifact.get('id'))}`",

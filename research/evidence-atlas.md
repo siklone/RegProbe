@@ -178,7 +178,7 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
+**Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. A focused v3.1 runtime lane on 2026-03-27 then re-ran the missing -> 1 -> missing cycle in Win25H2Clean, launched the classic Sound control panel, captured a WPR GeneralProfile placeholder trace, and ended with healthy shell state. That keeps the record aligned with the v3.1 contract without changing the underlying class basis: Procmon plus Ghidra remain the class-driving proof, and the runtime lane adds explicit rollback and VM-safe runner coverage.
 
 **Current implementation**
 
@@ -259,16 +259,28 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
 | `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `runtime-audio-show-disconnected-devices-v31` | `wpr-trace` | `unspecified` | Win25H2Clean v3.1 runtime lane - Audio DeviceCpl ShowDisconnectedDevices | [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json) and [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md) | `medium` | path, value, behavior, rollback |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
+
+**Artifact refs**
+
+| ID | Tool | Filename | SHA256 | Release URL |
+| --- | --- | --- | --- | --- |
+| `audio-devicecpl-query-20260314-pml.md` | `` | evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md | `` |  |
+| `audio-devicecpl-query-zero-20260314-pml.md` | `` | evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md | `` |  |
+| `audio-devicecpl-ghidra.md` | `` | evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md | `` |  |
+| `summary.json` | `` | evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json | `` |  |
+| `audio-devicecpl.etl.md` | `` | evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md | `` |  |
+| `audio-show-disconnected-devices-v31-reaudit-20260327.md` | `` | research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md | `` |  |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) |
-| Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:0. |
+| Source | [research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md](notes/audio-show-disconnected-devices-v31-reaudit-20260327.md) |
+| Exact quote / path | Procmon: audio-devicecpl-query-20260314-pml.md and audio-devicecpl-query-zero-20260314-pml.md captured rundll32.exe reading ShowDisconnectedDevices with Data:1 and Data:0. Ghidra: audio-devicecpl-ghidra.md decompiled the mmsys.cpl SHGetValueW/SHSetValueW handlers for ShowDisconnectedDevices. Runtime lane: audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json preserved missing -> 1 -> missing, launched the control panel, and ended with healthy shell state. |
 | Key found on page | `True` |
-| Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
+| Notes | The record-specific v3.1 re-audit note consolidates the existing Procmon and Ghidra proof with the 2026-03-27 runtime-runner summary. The class-driving proof remains the Procmon plus Ghidra convergence; the runtime lane is recorded as supplemental rollback and VM-safety evidence. |
 
 **Decision**
 
@@ -279,7 +291,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story. |
+| Why | The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story. The 2026-03-27 v3.1 runtime lane adds an explicit missing -> 1 -> missing VM cycle with a control-panel launch, WPR placeholder trace, and healthy shell recovery, but the class basis still rests on the Procmon plus Ghidra convergence rather than on the runtime lane alone. |
 
 ---
 
@@ -298,7 +310,7 @@ Nohuto lineage references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowHiddenDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
+**Summary:** The app writes HKCU\Software\Microsoft\Multimedia\Audio\DeviceCpl\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the current v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.
 
 **Current implementation**
 
@@ -377,7 +389,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md); [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md); [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
 | `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -385,10 +397,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md) |
+| Source | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md) |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:0. |
 | Key found on page | `True` |
-| Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
+| Notes | This v3.1 re-audit keeps the normalized Procmon hit summary in a record-scoped note because the checked-in Procmon markdown files are only placeholders for the off-git raw PML. The same note also ties the runtime summary and Ghidra export back to the record. |
 
 **Decision**
 
@@ -399,7 +411,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-hidden state with a clean restore story. |
+| Why | The record keeps Class A under the current v3.1 matrix because the repo still preserves converged runtime and static proof: a normalized Procmon summary from the 2026-03-14 Sound control panel capture shows rundll32.exe querying ShowHiddenDevices with both 1 and 0, the checked-in Ghidra export decompiles the mmsys.cpl handlers that read and write the same DeviceCpl flag, the 2026-03-27 runtime lane cleanly applied and restored the value on Win25H2Clean, and the app writes the same show-hidden state with a clean restore story. This remains a runtime-observed preference rather than a Microsoft-documented contract. |
 
 ---
 
@@ -19502,13 +19514,13 @@ Windows Internals references:
 | --- | --- |
 | Status | `matches-research` |
 | Provider source | app/Services/TweakProviders/SecurityTweakProvider.cs |
-| Notes | The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\OpenTraceProject\ExploitProtection\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider. |
+| Notes | The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\RegProbe\ExploitProtection\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider. |
 
 Current writes
 
 | Target | Path | Value | State | Kind | Notes |
 | --- | --- | --- | --- | --- | --- |
-| `exploit-protection-policy` | `%TEMP%\OpenTraceProject\ExploitProtection\security-disable-system-mitigations.xml` | `Set-ProcessMitigation -PolicyFilePath` | `ExploitProtection XML baseline` | `value` | The app stages the checked-in XML resource to a temp file and imports it through the documented ProcessMitigation surface. |
+| `exploit-protection-policy` | `%TEMP%\RegProbe\ExploitProtection\security-disable-system-mitigations.xml` | `Set-ProcessMitigation -PolicyFilePath` | `ExploitProtection XML baseline` | `value` | The app stages the checked-in XML resource to a temp file and imports it through the documented ProcessMitigation surface. |
 
 **Evidence class**
 
@@ -23335,7 +23347,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, a bounded WPR lane captured both `missing` and `0`, and the value restores back to missing cleanly.
+**Summary:** Win25H2Clean reversible proof still anchors the current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, the record retains Procmon shell-restart corroboration for Explorer\Serialize, a bounded WPR lane exercised both `missing` and `0`, and the value restores back to missing cleanly.
 
 **Current implementation**
 
@@ -23400,8 +23412,8 @@ Windows Internals references:
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `missing` | - | Observed Win25H2Clean baseline | The current 25H2 VM baseline leaves StartupDelayInMSec unset and Explorer still reads the Serialize path live. | vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart, wpr-startup-delay-shell-restart |
-| `value` | `0` | Observed no-delay profile | The current app and the Win25H2Clean shell trace both support 0 as the no-delay startup profile on the Explorer Serialize path. | repo-system-doc-startup-delay, app-system-provider, vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart, ghidra-explorer-serialize-search, wpr-startup-delay-shell-restart |
+| `missing` | - | Observed Win25H2Clean baseline | The current 25H2 VM baseline leaves StartupDelayInMSec unset, and the reversible probe plus shell-restart evidence keep that missing state consistent on this build. | vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart, wpr-startup-delay-shell-restart |
+| `value` | `0` | Observed no-delay profile | The current app, reversible probe, and shell-restart evidence all align on 0 as the no-delay startup profile for the Explorer Serialize path. | repo-system-doc-startup-delay, app-system-provider, vm-batch-probe-20260320-disable-startup-delay, procmon-startup-delay-shell-restart, ghidra-explorer-serialize-search, wpr-startup-delay-shell-restart |
 
 **Windows defaults**
 
@@ -23422,19 +23434,30 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-explorer-serialize-search` | `ghidra-trace` | `unspecified` | Ghidra headless search on explorer.exe for Serialize | [evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
+| `ghidra-explorer-serialize-search` | `ghidra-headless` | `unspecified` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | `unspecified` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) | `medium` | behavior, runtime-trace, shell-health |
+
+**Artifact refs**
+
+| ID | Tool | Filename | SHA256 | Release URL |
+| --- | --- | --- | --- | --- |
+| `vm-batch-probe-20260320.json` | `` | evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json | `` |  |
+| `procmon-startup-delay.pml.md` | `` | evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md | `` |  |
+| `ghidra_explorer_serialize.txt` | `` | evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt | `` |  |
+| `startup-delay-wpr-summary.json` | `` | evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/startup-delay-wpr-summary.json | `` |  |
+| `startup-delay-0.summary.json` | `` | evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/0/startup-delay-0.summary.json | `` |  |
+| `startup-delay-wpr-trace-20260326.md` | `` | research/notes/startup-delay-wpr-trace-20260326.md | `` |  |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
 | Source | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| Exact quote / path | HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Serialize/StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__ |
+| Exact quote / path | vm-batch-probe-20260320.json: system.disable-startup-delay before=__MISSING__, after_apply=0, after_restore=__MISSING__; startup-delay-0.summary.json: before missing, applied 0, restored missing, shell_after explorer/sihost/ShellHost/ctfmon true |
 | Key found on page | `True` |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/files/vm/vm-batch-probe-20260320.json..md](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. On 2026-03-26 a bounded WPR lane captured both the missing baseline and value 0 during Explorer restarts, with shell recovery in both states. |
+| Notes | Retroactive v3.1 pass relies on the checked-in reversible probe, the startup-delay WPR summaries for both missing and 0, the explorer.exe Ghidra string-search output, and the repo-friendly Procmon placeholder note for the original shell-restart capture. Microsoft still does not publish StartupDelayInMSec as a primary registry contract. |
 
 **Decision**
 
@@ -23445,7 +23468,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible proof, a live Explorer Procmon trace, a Ghidra string hit, and a bounded WPR shell-restart lane all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as the current build contract for this project and keep the tweak app-ready. |
+| Why | The current v3.1 record stays Class A on a converged-vm basis: the reversible probe confirms missing -> 0 -> missing, the record still carries Procmon shell-restart corroboration for the same path, the Ghidra search confirms the Explorer Serialize string path, and the bounded WPR lane exercised both missing and 0 with clean shell recovery. Microsoft still does not publish the raw registry contract, so this is build-specific runtime evidence rather than official-policy evidence. |
 
 ---
 

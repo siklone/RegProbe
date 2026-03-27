@@ -23,6 +23,28 @@ def md_code(value: Any) -> str:
     return "`" + text.replace("`", "\\`") + "`"
 
 
+def normalize_row_item(value: Any) -> dict[str, Any]:
+    if isinstance(value, dict):
+        return value
+    if value is None:
+        return {}
+    text = str(value)
+    return {
+        "evidence_id": text,
+        "kind": "",
+        "origin": "",
+        "title": text,
+        "location": text,
+        "strength": "",
+        "supports": [],
+        "id": text,
+        "tool": "",
+        "filename": text,
+        "sha256": "",
+        "release_url": "",
+    }
+
+
 def md_link(target: str, label: str | None = None) -> str:
     normalized = normalize_reference(target)
     if not normalized:
@@ -239,6 +261,7 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
         lines.append("")
         evidence_rows = []
         for item in evidence:
+            item = normalize_row_item(item)
             evidence_rows.append([
                 md_code(item.get("evidence_id")),
                 md_code(item.get("kind")),
@@ -257,6 +280,7 @@ def write_record(lines: list[str], record: dict[str, Any]) -> None:
         lines.append("")
         artifact_rows = []
         for item in artifact_refs:
+            item = normalize_row_item(item)
             artifact_rows.append(
                 [
                     md_code(item.get("id")),

@@ -78,8 +78,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `a9c1bf72aff1344998c40660114164bd9cd227532b71596add3199eeaf2b4045` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `e920c554f7b4add5325a179d2df511c65d7cf12140e051b712dd7bb504ee2d18` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
-| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460` | `e3b782d9f3e4b71176be6e21b4a361edefb58eee47ac4305e9352879618d47d7` | 3 |
-| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `43edcdbd0c4ea253fc61461681abc0fba6fd2a6654827d06d505f293078a14c9` | `ba526286c0a40c2d95c7f855f3d8fca2f4060112a9bf4ce848f6b266d81b0cb4` | 3 |
+| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
+| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `43edcdbd0c4ea253fc61461681abc0fba6fd2a6654827d06d505f293078a14c9` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 3 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `research/records/cleanup.disable-reserved-storage.review.json` | - | `a31748762eb2e2ead6ebeb0e82f50b80577cd13df1ab3b045df20c495e305113` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 5 |
 | `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `a538b7842bd07beb7e1db1a4472c88d07fd2c17ce9e74d8fc551bfb46a740c36` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
 | `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | - | `f82c8389bb9c2c5ea6f8bb4edb4f8432d16dcd2d14d1823cb88d9c1b6eeb97f4` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 3 |
@@ -231,7 +231,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `e757ccb8700a67a885959661cc00d256dedb10c8acf9bb5c150c0c65458b8e9d` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 3 |
 | `security.disable-picture-password` | validated | Class A | `research/records/security.disable-picture-password.json` | - | `0b3cca9a9e755c78e4489d85aad8cff3314416f79b34d2bdbe607f6ae2005c5d` | `2ddc66f3f2e48157dc1f8d80a7cd0c3919cb4aa5d1bf6b638c2958240a01e75a` | 3 |
 | `security.disable-remote-assistance` | validated | Class A | `research/records/security.disable-remote-assistance.json` | - | `41306b1fad112ca3475f31639e19d715916011b78bf5ba19cd2b0223cae08cec` | `cbdbafad0fd112f596265967c33dc12da0527c156116a6add248f8eb47bb3900` | 4 |
-| `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `89c9263b9cfb1a4c5a4e3d6e35b5897f881237f774edb4c462adeefbdb0adbed` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
+| `security.disable-system-mitigations` | validated | Class A | `research/records/security.disable-system-mitigations.review.json` | - | `c2dba68564b649e94c934f7de851656b3b70520f3cf35192c69913538784918a` | `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4` | 4 |
 | `security.disable-system-restore` | validated | Class A | `research/records/security.disable-system-restore.review.json` | - | `81c816f9e99965428a1b17588e29d72b4ade8da185dd0fb0f9047ecfbc1cd45f` | `fce81020e929a3d340df8e4d6ac409e903c608150ddf337f3c42e48733964339` | 3 |
 | `security.disable-windows-firewall` | validated | Class A | `research/records/security.disable-windows-firewall.review.json` | - | `4c2de64985033bd0475b35f862c7ec9dde12fd302a5809aa0cc538b2712a848b` | `1c6f34ef87e24cb61f53362c8139bb8677abd4fdd8da894e6c4870866e557c21` | 5 |
 | `security.disable-windows-update.policy` | validated | Class A | `research/records/security.disable-windows-update.policy.review.json` | - | `8040d009724a7868269389e17e67aef785e50e621cf10fa0b4305ff46f75ec04` | `73d25a04c0c5f221bffd317a69fedac5d2f84c89932133b488821a9083af501a` | 4 |
@@ -260,7 +260,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `131731880587c5416aefedd485d112d858ea6ac870bc67ae6dff5acdbdc8a531` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `f4fe0e8cc083c82eaff45e2496ab0e9c58f217a5f06043148d1823f9ada6f64b` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `dc9583f9a9a685cde8a4d5d63b5bf79675c74c69849a8cb42277828bea4c87fd` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 3 |
-| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `fffd294fa3a8440bdb1faeca055b5c23f7d6ef451a4c6fdb0c6a829d663a0353` | `fdd88291f6199bacf2fe29135f1037ddcea4342acadb044d5149b66bf7a987e0` | 6 |
+| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `fffd294fa3a8440bdb1faeca055b5c23f7d6ef451a4c6fdb0c6a829d663a0353` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 6 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `62874ddcdd7497f17bf4481b53eb48d10af34538e1574c0c9ff8de43efeb3a13` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `1671a1b2b7c64d6b32d62ff74ebffc184e495fff6725a751bd99d324512ab808` | `fc1b40c9bc7908056ce3cb626b720528fa1711c6bce3d4bb03f6b54309410723` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `c0367c5516442aa2d568bbe2c6da2c1e8df8df6ae511a7e676b924698df45988` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
@@ -1862,9 +1862,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Source file: `research/records/audio.show-disconnected-devices.review.json`
 - V3.1 evidence root: [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices)
 - Source SHA256: `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460`
-- Proof SHA256: `e3b782d9f3e4b71176be6e21b4a361edefb58eee47ac4305e9352879618d47d7`
+- Proof SHA256: `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa`
 
-**Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
+**Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. A focused v3.1 runtime lane on 2026-03-27 then re-ran the missing -> 1 -> missing cycle in Win25H2Clean, launched the classic Sound control panel, captured a WPR GeneralProfile placeholder trace, and ended with healthy shell state. That keeps the record aligned with the v3.1 contract without changing the underlying class basis: Procmon plus Ghidra remain the class-driving proof, and the runtime lane adds explicit rollback and VM-safe runner coverage.
 
 **Evidence**
 
@@ -1872,15 +1872,27 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) |
 | `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) |
+| `runtime-audio-show-disconnected-devices-v31` | `wpr-trace` | Win25H2Clean v3.1 runtime lane - Audio DeviceCpl ShowDisconnectedDevices | [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json) and [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md) |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) |
-| Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:0. |
-| Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
+| Source | [research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md](notes/audio-show-disconnected-devices-v31-reaudit-20260327.md) |
+| Exact quote / path | Procmon: audio-devicecpl-query-20260314-pml.md and audio-devicecpl-query-zero-20260314-pml.md captured rundll32.exe reading ShowDisconnectedDevices with Data:1 and Data:0. Ghidra: audio-devicecpl-ghidra.md decompiled the mmsys.cpl SHGetValueW/SHSetValueW handlers for ShowDisconnectedDevices. Runtime lane: audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json preserved missing -> 1 -> missing, launched the control panel, and ended with healthy shell state. |
+| Notes | The record-specific v3.1 re-audit note consolidates the existing Procmon and Ghidra proof with the 2026-03-27 runtime-runner summary. The class-driving proof remains the Procmon plus Ghidra convergence; the runtime lane is recorded as supplemental rollback and VM-safety evidence. |
+
+**Artifact refs**
+
+| ID | Tool | Filename | SHA256 | Release URL |
+| --- | --- | --- | --- | --- |
+| `audio-devicecpl-query-20260314-pml.md` | `` | evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md |  |  |
+| `audio-devicecpl-query-zero-20260314-pml.md` | `` | evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md |  |  |
+| `audio-devicecpl-ghidra.md` | `` | evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md |  |  |
+| `summary.json` | `` | evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json |  |  |
+| `audio-devicecpl.etl.md` | `` | evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md |  |  |
+| `audio-show-disconnected-devices-v31-reaudit-20260327.md` | `` | research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md |  |  |
 
 **Re-audit**
 
@@ -1900,15 +1912,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Source file: `research/records/audio.show-hidden-devices.review.json`
 - V3.1 evidence root: [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices)
 - Source SHA256: `43edcdbd0c4ea253fc61461681abc0fba6fd2a6654827d06d505f293078a14c9`
-- Proof SHA256: `ba526286c0a40c2d95c7f855f3d8fca2f4060112a9bf4ce848f6b266d81b0cb4`
+- Proof SHA256: `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379`
 
-**Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowHiddenDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
+**Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the current v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.
 
 **Evidence**
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md); [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md); [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) |
 | `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
 
@@ -1916,9 +1928,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md) |
+| Source | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md) |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:0. |
-| Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
+| Notes | This v3.1 re-audit keeps the normalized Procmon hit summary in a record-scoped note because the checked-in Procmon markdown files are only placeholders for the off-git raw PML. The same note also ties the runtime summary and Ghidra export back to the record. |
 
 **Re-audit**
 
@@ -3745,7 +3757,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Original class | A |
-| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
+| Reason | non_official_v31_reaudit |
 | Priority | 2 |
 | New pipeline version | v3.1 |
 
@@ -3877,8 +3889,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Original class | B |
-| Reason | current_blocker; etw_not_recorded; dead_flag_checks_incomplete |
-| Priority | 1 |
+| Reason |  |
+| Priority | 0 |
 | New pipeline version | v3.1 |
 
 ---
@@ -6356,7 +6368,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-system-mitigations.review.json`
-- Source SHA256: `89c9263b9cfb1a4c5a4e3d6e35b5897f881237f774edb4c462adeefbdb0adbed`
+- Source SHA256: `c2dba68564b649e94c934f7de851656b3b70520f3cf35192c69913538784918a`
 - Proof SHA256: `46586ce57790ddf060958f04d586b5cea8d5b07d2dfbf1656a887ea62e1a9db4`
 
 **Summary:** Microsoft documents exploit protection system mitigations through the Windows Security app, the ProcessMitigation PowerShell cmdlets, and an Exploit Guard policy that points to an XML configuration file. The app now imports the documented XML policy surface instead of writing raw MitigationOptions and MitigationAuditOptions blobs directly under the kernel registry path.
@@ -7230,9 +7242,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Source file: `research/records/system.disable-startup-delay.review.json`
 - V3.1 evidence root: [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay)
 - Source SHA256: `fffd294fa3a8440bdb1faeca055b5c23f7d6ef451a4c6fdb0c6a829d663a0353`
-- Proof SHA256: `fdd88291f6199bacf2fe29135f1037ddcea4342acadb044d5149b66bf7a987e0`
+- Proof SHA256: `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6`
 
-**Summary:** Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, a bounded WPR lane captured both `missing` and `0`, and the value restores back to missing cleanly.
+**Summary:** Win25H2Clean reversible proof still anchors the current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, the record retains Procmon shell-restart corroboration for Explorer\\Serialize, a bounded WPR lane exercised both `missing` and `0`, and the value restores back to missing cleanly.
 
 **Evidence**
 
@@ -7240,7 +7252,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
-| `ghidra-explorer-serialize-search` | `ghidra-trace` | Ghidra headless search on explorer.exe for Serialize | [evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) |
+| `ghidra-explorer-serialize-search` | `ghidra-headless` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | Win25H2Clean reversible probe - Explorer startup delay | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
 | `procmon-startup-delay-shell-restart` | `procmon-trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) |
@@ -7250,15 +7262,26 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Source | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
-| Exact quote / path | HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Serialize/StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__ |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/files/vm/vm-batch-probe-20260320.json..md](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. On 2026-03-26 a bounded WPR lane captured both the missing baseline and value 0 during Explorer restarts, with shell recovery in both states. |
+| Exact quote / path | vm-batch-probe-20260320.json: system.disable-startup-delay before=__MISSING__, after_apply=0, after_restore=__MISSING__; startup-delay-0.summary.json: before missing, applied 0, restored missing, shell_after explorer/sihost/ShellHost/ctfmon true |
+| Notes | Retroactive v3.1 pass relies on the checked-in reversible probe, the startup-delay WPR summaries for both missing and 0, the explorer.exe Ghidra string-search output, and the repo-friendly Procmon placeholder note for the original shell-restart capture. Microsoft still does not publish StartupDelayInMSec as a primary registry contract. |
+
+**Artifact refs**
+
+| ID | Tool | Filename | SHA256 | Release URL |
+| --- | --- | --- | --- | --- |
+| `vm-batch-probe-20260320.json` | `` | evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json |  |  |
+| `procmon-startup-delay.pml.md` | `` | evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md |  |  |
+| `ghidra_explorer_serialize.txt` | `` | evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt |  |  |
+| `startup-delay-wpr-summary.json` | `` | evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/startup-delay-wpr-summary.json |  |  |
+| `startup-delay-0.summary.json` | `` | evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/0/startup-delay-0.summary.json |  |  |
+| `startup-delay-wpr-trace-20260326.md` | `` | research/notes/startup-delay-wpr-trace-20260326.md |  |  |
 
 **Re-audit**
 
 | Field | Value |
 | --- | --- |
 | Original class | A |
-| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
+| Reason | non_official_v31_reaudit |
 | Priority | 2 |
 | New pipeline version | v3.1 |
 

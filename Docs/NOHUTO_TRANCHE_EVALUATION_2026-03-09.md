@@ -1,6 +1,6 @@
 # Nohuto Tranche Evaluation (2026-03-09)
 
-This note reviews the latest nohuto-derived registry/configuration tranche against the current Open Trace Project configuration surface.
+This note reviews the latest nohuto-derived registry/configuration tranche against the current RegProbe configuration surface.
 
 The goal is not to mirror every upstream key 1:1. The goal is to decide:
 

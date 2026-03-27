@@ -7,7 +7,7 @@ Generated: 2026-03-27
 - `dotnet test tests/tests.csproj -c Release --no-build -v minimal`: passed (`191/191`)
 
 ## Residual scans
-- `OpenTraceProject` residuals outside protected roots/build artifacts: `0`
+- `RegProbe` residuals outside protected roots/build artifacts: `0`
 - hardware/dashboard residuals outside protected roots/build artifacts: `0`
 - excluded historical/build roots: `evidence/`, `research/`, `Docs/`, `.git/`, `publish/`, `publish_final/`, `registry-research-framework/audit/`, `**/bin/**`, `**/obj/**`, `DEVELOPMENT_ROADMAP.md`, `DEVELOPMENT_STATUS.md`
 
