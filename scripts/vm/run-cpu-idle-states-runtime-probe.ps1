@@ -293,6 +293,8 @@ $summary = [ordered]@{
     snapshot_name = $SnapshotName
     host_output_root = "evidence/files/vm-tooling-staging/$probeName"
     status = 'started'
+    last_stage = 'initializing'
+    failed_stage = $null
     baseline = $null
     candidate_applied = $null
     post_boot = $null
@@ -316,38 +318,54 @@ $incidentNotes = ''
 
 try {
     if (-not [string]::IsNullOrWhiteSpace($SnapshotName)) {
+        $summary.last_stage = 'revert-snapshot'
         Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $VmPath, $SnapshotName) | Out-Null
     }
 
+    $summary.last_stage = 'start-vm'
     Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath) -IgnoreExitCode | Out-Null
+    $summary.last_stage = 'wait-tools'
     Wait-GuestReady
+    $summary.last_stage = 'initial-shell-check'
     $initialShell = Get-ShellHealth
     if (-not ($initialShell.explorer -and $initialShell.sihost -and $initialShell.shellhost)) {
         throw 'Shell health check failed before the runtime probe started.'
     }
 
+    $summary.last_stage = 'prepare-guest-root'
     Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'createDirectoryInGuest', $VmPath, $guestRoot) -IgnoreExitCode | Out-Null
+    $summary.last_stage = 'copy-payload'
     Copy-ToGuest -HostPath $hostPayloadPath -GuestPath $guestPayloadPath
 
+    $summary.last_stage = 'set-baseline'
     $summary.baseline = Invoke-GuestAction -Action 'set-baseline'
+    $summary.last_stage = 'start-wpr'
     $summary.wpr.start = Invoke-GuestAction -Action 'start-wpr' -HostOutputPath (Join-Path $hostRoot 'wpr-start.json')
     $summary.wpr.started = $true
+    $summary.last_stage = 'set-candidate'
     $summary.candidate_applied = Invoke-GuestAction -Action 'set-candidate'
 
+    $summary.last_stage = 'restart-guest'
     Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'restartGuest', $VmPath) | Out-Null
+    $summary.last_stage = 'wait-tools-post-reboot'
     Wait-GuestReady
+    $summary.last_stage = 'settle-post-reboot'
     Start-Sleep -Seconds $SettleSeconds
 
     $guestEtlPath = Join-Path $guestRoot 'cpu-idle-runtime.etl'
+    $summary.last_stage = 'read-post-boot'
     $summary.post_boot = Invoke-GuestAction -Action 'read-state' -HostOutputPath (Join-Path $hostRoot 'post-boot.json')
+    $summary.last_stage = 'stop-wpr'
     $summary.wpr.stop = Invoke-GuestAction -Action 'stop-wpr' -EtlPath $guestEtlPath -HostOutputPath (Join-Path $hostRoot 'wpr-stop.json')
     $summary.wpr.stopped = [bool]$summary.wpr.stop.stopped
+    $summary.last_stage = 'final-shell-check'
     $summary.shell_after = Get-ShellHealth
 
     if (-not ($summary.shell_after.explorer -and $summary.shell_after.sihost -and $summary.shell_after.shellhost)) {
         $probeFailed = $true
         $needsRecovery = $true
-        $incidentNotes = 'Tools returned after reboot, but shell health stayed degraded. Recovered by snapshot revert.'
+        $summary.failed_stage = $summary.last_stage
+        $incidentNotes = "Tools returned after reboot, but shell health stayed degraded during stage $($summary.last_stage). Recovered by snapshot revert."
         Log-Incident -TestId $probeName -ValueState 'runtime-lane-post-boot' -Symptom 'Shell health was degraded after the CPU idle runtime probe reboot.' -ShellRecovered:$false -NeededSnapshotRevert:$true -Notes $incidentNotes
         $summary.errors += 'Shell health was degraded after reboot.'
     }
@@ -355,13 +373,15 @@ try {
 catch {
     $probeFailed = $true
     $needsRecovery = $true
+    $summary.failed_stage = $summary.last_stage
     $summary.errors += $_.Exception.Message
-    $incidentNotes = 'Runtime lane failed before a healthy post-boot shell was confirmed. Recovered by snapshot revert.'
+    $incidentNotes = "Runtime lane failed during stage $($summary.last_stage) before a healthy post-boot shell was confirmed. Recovered by snapshot revert."
     Log-Incident -TestId $probeName -ValueState 'runtime-lane-failure' -Symptom $_.Exception.Message -ShellRecovered:$false -NeededSnapshotRevert:$true -Notes $incidentNotes
 }
 finally {
     if ($needsRecovery -and -not [string]::IsNullOrWhiteSpace($SnapshotName)) {
         try {
+            $summary.last_stage = 'recovery'
             Restore-HealthySnapshot
             $recoveredShell = Get-ShellHealth
             $summary.recovery.performed = $true
@@ -373,6 +393,7 @@ finally {
     }
 }
 
+$summary.last_stage = 'completed'
 $summary.status = if ($probeFailed) { 'failed' } else { 'ok' }
 $summary | ConvertTo-Json -Depth 8 | Set-Content -Path $hostSummaryPath -Encoding UTF8
 $summary | ConvertTo-Json -Depth 8 | Set-Content -Path $repoSummaryPath -Encoding UTF8

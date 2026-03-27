@@ -1,10 +1,10 @@
 ﻿{
     "schema_version":  "1.0",
-    "generated_utc":  "2026-03-27T13:11:07.9283434Z",
+    "generated_utc":  "2026-03-27T20:40:43.7929132Z",
     "summary":  {
-                    "total_incidents":  15,
+                    "total_incidents":  18,
                     "shell_recovered":  4,
-                    "needed_snapshot_revert":  14
+                    "needed_snapshot_revert":  17
                 },
     "incidents":  [
                       {
@@ -246,6 +246,54 @@
                           "needed_snapshot_revert":  true,
                           "recorded_utc":  "2026-03-27T13:11:07.9078809Z",
                           "notes":  "Runtime lane failed before the taskbar-animations-runtime summary completed. Recovered by snapshot revert."
+                      },
+                      {
+                          "incident_id":  "20260327231442-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-runtime-20260327-230353",
+                          "family":  "power-runtime",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "runtime-lane-failure",
+                          "symptom":  "vmrun failed (1): Guest program exited with non-zero exit code: 1",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T20:14:42.9441175Z",
+                          "notes":  "Runtime lane failed before a healthy post-boot shell was confirmed. Recovered by snapshot revert."
+                      },
+                      {
+                          "incident_id":  "20260327232523-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-runtime-20260327-232151",
+                          "family":  "power-runtime",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "runtime-lane-failure",
+                          "symptom":  "vmrun failed (1): Guest program exited with non-zero exit code: 1",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T20:25:23.7245330Z",
+                          "notes":  "Runtime lane failed during stage set-candidate before a healthy post-boot shell was confirmed. Recovered by snapshot revert."
+                      },
+                      {
+                          "incident_id":  "20260327234043-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-states-20260327-233538",
+                          "family":  "power-benchmark",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "behavior-lane-reboot",
+                          "symptom":  "Explorer did not come back in time.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T20:40:43.7727166Z",
+                          "notes":  "Behavior lane failed during stage revert-snapshot. Recovered by snapshot revert."
                       }
                   ]
 }

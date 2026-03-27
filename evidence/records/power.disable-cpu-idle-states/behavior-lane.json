@@ -3,12 +3,14 @@
     "trace_kind":  "boot",
     "tweak_id":  "power.disable-cpu-idle-states",
     "output_file":  "evidence/records/power.disable-cpu-idle-states/behavior-lane.json",
-    "status":  "invoked-runner",
+    "status":  "runner-failed",
     "runner":  {
                    "script":  "scripts/vm/run-cpu-idle-states-benchmark.ps1",
                    "args":  [
+                                "-RecordId",
+                                "power.disable-cpu-idle-states",
                                 "-SnapshotName",
-                                "baseline-20260327-shell-stable"
+                                "baseline-20260327-regprobe-visible-shell-stable"
                             ]
                },
     "note":  "Invoked the mapped VM behavior runner for this tweak. Check the runner output root for concrete boot trace files.",

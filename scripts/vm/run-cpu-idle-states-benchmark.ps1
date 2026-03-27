@@ -6,10 +6,16 @@ param(
     [string]$GuestPassword = 'CodexVm2026!',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\cpu-idle-benchmark',
-    [string]$SnapshotName = 'baseline-20260325-shell-stable'
+    [string]$RecordId = 'power.disable-cpu-idle-states',
+    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
+    [string]$IncidentLogPath = ''
 )
 
 $ErrorActionPreference = 'Stop'
+
+if ([string]::IsNullOrWhiteSpace($IncidentLogPath)) {
+    $IncidentLogPath = Join-Path $PSScriptRoot '..\..\research\vm-incidents.json'
+}
 
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $testName = "cpu-idle-states-$stamp"
@@ -251,84 +257,189 @@ function Restart-Guest {
     Wait-Explorer
 }
 
-if (-not [string]::IsNullOrWhiteSpace($SnapshotName)) {
+function Get-ShellHealth {
+    $processes = Invoke-Vmrun -Arguments @(
+        '-T', 'ws',
+        '-gu', $GuestUser,
+        '-gp', $GuestPassword,
+        'listProcessesInGuest',
+        $VmPath
+    )
+
+    return [ordered]@{
+        explorer = [bool]($processes -match '\bexplorer\.exe\b')
+        sihost = [bool]($processes -match '\bsihost\.exe\b')
+        shellhost = [bool]($processes -match '\bShellHost\.exe\b')
+        ctfmon = [bool]($processes -match '\bctfmon\.exe\b')
+        process_dump = $processes
+    }
+}
+
+function Restore-HealthySnapshot {
+    if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
+        return
+    }
+
     Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $VmPath, $SnapshotName) | Out-Null
+    Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath) -IgnoreExitCode | Out-Null
     Wait-GuestReady
     Wait-Explorer
 }
 
-Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'createDirectoryInGuest', $VmPath, $guestRoot) -IgnoreExitCode | Out-Null
-Copy-ToGuest -HostPath $hostRegistryScript -GuestPath $guestRegistryScript
-Copy-ToGuest -HostPath $hostReadScript -GuestPath $guestReadScript
-Copy-ToGuest -HostPath $hostMeasureScript -GuestPath $guestMeasureScript
+function Log-Incident {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$TestId,
+        [Parameter(Mandatory = $true)]
+        [string]$Symptom,
+        [string]$Notes = ''
+    )
 
-$baselineWrite = Set-BundleState -Mode baseline
-$baselineRead = Read-BundleState -Tag 'baseline'
-Restart-Guest
-$baselineAfterBoot = Read-BundleState -Tag 'baseline-after-boot'
-
-$candidateWrite = Set-BundleState -Mode candidate
-Restart-Guest
-$candidateAfterBoot = Read-BundleState -Tag 'candidate-after-boot'
-
-$cpuArtifactRoot = Join-Path $guestRoot 'cpu'
-$cpuZip = Join-Path $guestRoot 'cpu.zip'
-$cpuSummary = Join-Path $guestRoot 'cpu-summary.json'
-Invoke-GuestPowerShell -ArgumentList @(
-    '-NoProfile',
-    '-ExecutionPolicy', 'Bypass',
-    '-File', $guestMeasureScript,
-    '-BenchmarkScript', 'C:\Tools\Scripts\benchmark-winsat-cpu-wpr.ps1',
-    '-ArtifactRoot', $cpuArtifactRoot,
-    '-TracePrefix', 'cpu-idle-cpu',
-    '-SummaryPath', $cpuSummary,
-    '-ZipPath', $cpuZip
-)
-
-$hostCpuZip = Join-Path $hostRoot 'cpu.zip'
-$hostCpuSummary = Join-Path $hostRoot 'cpu-summary.json'
-Copy-FromGuest -GuestPath $cpuZip -HostPath $hostCpuZip
-Copy-FromGuest -GuestPath $cpuSummary -HostPath $hostCpuSummary
-Expand-Archive -Path $hostCpuZip -DestinationPath (Join-Path $hostRoot 'cpu') -Force
-
-$memArtifactRoot = Join-Path $guestRoot 'mem'
-$memZip = Join-Path $guestRoot 'mem.zip'
-$memSummary = Join-Path $guestRoot 'mem-summary.json'
-Invoke-GuestPowerShell -ArgumentList @(
-    '-NoProfile',
-    '-ExecutionPolicy', 'Bypass',
-    '-File', $guestMeasureScript,
-    '-BenchmarkScript', 'C:\Tools\Scripts\benchmark-winsat-mem-wpr.ps1',
-    '-ArtifactRoot', $memArtifactRoot,
-    '-TracePrefix', 'cpu-idle-mem',
-    '-SummaryPath', $memSummary,
-    '-ZipPath', $memZip
-)
-
-$hostMemZip = Join-Path $hostRoot 'mem.zip'
-$hostMemSummary = Join-Path $hostRoot 'mem-summary.json'
-Copy-FromGuest -GuestPath $memZip -HostPath $hostMemZip
-Copy-FromGuest -GuestPath $memSummary -HostPath $hostMemSummary
-Expand-Archive -Path $hostMemZip -DestinationPath (Join-Path $hostRoot 'mem') -Force
-
-$restoreWrite = Set-BundleState -Mode restore
-Restart-Guest
-$restoreAfterBoot = Read-BundleState -Tag 'restore-after-boot'
+    & (Join-Path $PSScriptRoot 'log-vm-incident.ps1') `
+        -RecordId $RecordId `
+        -TweakId $RecordId `
+        -TestId $TestId `
+        -Family 'power-benchmark' `
+        -SnapshotName $SnapshotName `
+        -RegistryPath 'HKLM\SYSTEM\CurrentControlSet\Control\Power' `
+        -ValueName 'DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled' `
+        -ValueState 'behavior-lane-reboot' `
+        -Symptom $Symptom `
+        -ShellRecovered:$false `
+        -NeededSnapshotRevert:$true `
+        -Notes $Notes `
+        -IncidentPath $IncidentLogPath | Out-Null
+}
 
 $summary = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
+    record_id = $RecordId
     snapshot_name = $SnapshotName
     test_name = $testName
-    baseline_write = $baselineWrite
-    baseline_read = $baselineRead
-    baseline_after_boot = $baselineAfterBoot
-    candidate_write = $candidateWrite
-    candidate_after_boot = $candidateAfterBoot
-    cpu_summary = (Get-Content -Path $hostCpuSummary -Raw | ConvertFrom-Json)
-    mem_summary = (Get-Content -Path $hostMemSummary -Raw | ConvertFrom-Json)
-    restore_write = $restoreWrite
-    restore_after_boot = $restoreAfterBoot
+    status = 'started'
+    failed_stage = $null
+    baseline_write = $null
+    baseline_read = $null
+    baseline_after_boot = $null
+    candidate_write = $null
+    candidate_after_boot = $null
+    cpu_summary = $null
+    mem_summary = $null
+    restore_write = $null
+    restore_after_boot = $null
+    recovery = [ordered]@{
+        performed = $false
+        shell_healthy_after_recovery = $false
+    }
+    errors = @()
 }
 
-$summary | ConvertTo-Json -Depth 8 | Set-Content -Path $summaryPath -Encoding UTF8
+$needsRecovery = $false
+
+try {
+    if (-not [string]::IsNullOrWhiteSpace($SnapshotName)) {
+        $summary.failed_stage = 'revert-snapshot'
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $VmPath, $SnapshotName) | Out-Null
+        Wait-GuestReady
+        Wait-Explorer
+    }
+
+    $summary.failed_stage = 'prepare-guest-root'
+    Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'createDirectoryInGuest', $VmPath, $guestRoot) -IgnoreExitCode | Out-Null
+    Copy-ToGuest -HostPath $hostRegistryScript -GuestPath $guestRegistryScript
+    Copy-ToGuest -HostPath $hostReadScript -GuestPath $guestReadScript
+    Copy-ToGuest -HostPath $hostMeasureScript -GuestPath $guestMeasureScript
+
+    $summary.failed_stage = 'baseline-write'
+    $summary.baseline_write = Set-BundleState -Mode baseline
+    $summary.baseline_read = Read-BundleState -Tag 'baseline'
+    $summary.failed_stage = 'baseline-reboot'
+    Restart-Guest
+    $summary.baseline_after_boot = Read-BundleState -Tag 'baseline-after-boot'
+
+    $summary.failed_stage = 'candidate-write'
+    $summary.candidate_write = Set-BundleState -Mode candidate
+    $summary.failed_stage = 'candidate-reboot'
+    Restart-Guest
+    $summary.candidate_after_boot = Read-BundleState -Tag 'candidate-after-boot'
+
+    $cpuArtifactRoot = Join-Path $guestRoot 'cpu'
+    $cpuZip = Join-Path $guestRoot 'cpu.zip'
+    $cpuSummary = Join-Path $guestRoot 'cpu-summary.json'
+    $summary.failed_stage = 'cpu-benchmark'
+    Invoke-GuestPowerShell -ArgumentList @(
+        '-NoProfile',
+        '-ExecutionPolicy', 'Bypass',
+        '-File', $guestMeasureScript,
+        '-BenchmarkScript', 'C:\Tools\Scripts\benchmark-winsat-cpu-wpr.ps1',
+        '-ArtifactRoot', $cpuArtifactRoot,
+        '-TracePrefix', 'cpu-idle-cpu',
+        '-SummaryPath', $cpuSummary,
+        '-ZipPath', $cpuZip
+    )
+
+    $hostCpuZip = Join-Path $hostRoot 'cpu.zip'
+    $hostCpuSummary = Join-Path $hostRoot 'cpu-summary.json'
+    Copy-FromGuest -GuestPath $cpuZip -HostPath $hostCpuZip
+    Copy-FromGuest -GuestPath $cpuSummary -HostPath $hostCpuSummary
+    Expand-Archive -Path $hostCpuZip -DestinationPath (Join-Path $hostRoot 'cpu') -Force
+    $summary.cpu_summary = (Get-Content -Path $hostCpuSummary -Raw | ConvertFrom-Json)
+
+    $memArtifactRoot = Join-Path $guestRoot 'mem'
+    $memZip = Join-Path $guestRoot 'mem.zip'
+    $memSummary = Join-Path $guestRoot 'mem-summary.json'
+    $summary.failed_stage = 'memory-benchmark'
+    Invoke-GuestPowerShell -ArgumentList @(
+        '-NoProfile',
+        '-ExecutionPolicy', 'Bypass',
+        '-File', $guestMeasureScript,
+        '-BenchmarkScript', 'C:\Tools\Scripts\benchmark-winsat-mem-wpr.ps1',
+        '-ArtifactRoot', $memArtifactRoot,
+        '-TracePrefix', 'cpu-idle-mem',
+        '-SummaryPath', $memSummary,
+        '-ZipPath', $memZip
+    )
+
+    $hostMemZip = Join-Path $hostRoot 'mem.zip'
+    $hostMemSummary = Join-Path $hostRoot 'mem-summary.json'
+    Copy-FromGuest -GuestPath $memZip -HostPath $hostMemZip
+    Copy-FromGuest -GuestPath $memSummary -HostPath $hostMemSummary
+    Expand-Archive -Path $hostMemZip -DestinationPath (Join-Path $hostRoot 'mem') -Force
+    $summary.mem_summary = (Get-Content -Path $hostMemSummary -Raw | ConvertFrom-Json)
+
+    $summary.failed_stage = 'restore-write'
+    $summary.restore_write = Set-BundleState -Mode restore
+    $summary.failed_stage = 'restore-reboot'
+    Restart-Guest
+    $summary.restore_after_boot = Read-BundleState -Tag 'restore-after-boot'
+
+    $summary.status = 'ok'
+    $summary.failed_stage = $null
+}
+catch {
+    $summary.status = 'failed'
+    $needsRecovery = $true
+    $summary.errors += $_.Exception.Message
+    Log-Incident -TestId $testName -Symptom $_.Exception.Message -Notes "Behavior lane failed during stage $($summary.failed_stage). Recovered by snapshot revert."
+}
+finally {
+    if ($needsRecovery -and -not [string]::IsNullOrWhiteSpace($SnapshotName)) {
+        try {
+            Restore-HealthySnapshot
+            $recoveredShell = Get-ShellHealth
+            $summary.recovery.performed = $true
+            $summary.recovery.shell_healthy_after_recovery = [bool]($recoveredShell.explorer -and $recoveredShell.sihost -and $recoveredShell.shellhost)
+        }
+        catch {
+            $summary.errors += "Recovery failed: $($_.Exception.Message)"
+        }
+    }
+
+    $summary.generated_utc = [DateTime]::UtcNow.ToString('o')
+    $summary | ConvertTo-Json -Depth 8 | Set-Content -Path $summaryPath -Encoding UTF8
+}
+
 $summary | ConvertTo-Json -Depth 8
+if ($summary.status -ne 'ok') {
+    exit 1
+}

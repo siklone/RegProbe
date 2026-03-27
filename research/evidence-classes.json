@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T20:00:05.601550Z",
+  "generated_utc": "2026-03-27T20:42:56.164372Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
@@ -5851,9 +5851,9 @@
           },
           {
             "title": "Win25H2Clean v3.1 runtime lane for the CPU idle-state bundle",
-            "url": "evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md",
+            "url": "evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/summary.json and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md",
             "kind": "vm-test",
-            "summary": "The v3.1 runtime lane captured the baseline state with all three values missing and started a WPR GeneralProfile trace, but the guest program returned non-zero before the candid..."
+            "summary": "The original v3.1 runtime lane captured the baseline state with all three values missing and started a WPR GeneralProfile trace, but the guest program returned non-zero before t..."
           }
         ]
       },
