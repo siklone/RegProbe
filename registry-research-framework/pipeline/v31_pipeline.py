@@ -44,6 +44,12 @@ def write_text(path: Path, content: str) -> None:
     path.write_text(content.rstrip() + "\n", encoding="utf-8", newline="\n")
 
 
+def load_text_if_exists(path: Path) -> str | None:
+    if not path.exists():
+        return None
+    return path.read_text(encoding="utf-8-sig")
+
+
 def load_record(tweak_id: str) -> dict[str, Any]:
     exact = RECORDS_DIR / f"{tweak_id}.json"
     review = RECORDS_DIR / f"{tweak_id}.review.json"
@@ -63,6 +69,78 @@ def load_audit_entry(tweak_id: str) -> dict[str, Any]:
 
 def evidence_dir(tweak_id: str) -> Path:
     return V31_EVIDENCE_ROOT / tweak_id
+
+
+def load_json_if_exists(path: Path) -> Any | None:
+    if not path.exists():
+        return None
+    return load_json(path)
+
+
+def repo_relative_text(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    text = value.strip()
+    if not text:
+        return None
+    normalized = text.replace("\\", "/").lstrip("/")
+    if normalized.startswith(("evidence/", "research/", "registry-research-framework/")):
+        return normalized
+    return None
+
+
+def extract_repo_ref_from_text(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    for line in reversed(value.splitlines()):
+        candidate = repo_relative_text(line.strip())
+        if candidate:
+            return candidate
+    return None
+
+
+def repo_path_from_ref(value: Any) -> Path | None:
+    repo_ref = repo_relative_text(value)
+    if not repo_ref:
+        return None
+    return REPO_ROOT / Path(repo_ref)
+
+
+def load_lane_manifest(tweak_id: str, filename: str) -> dict[str, Any] | None:
+    payload = load_json_if_exists(evidence_dir(tweak_id) / filename)
+    return payload if isinstance(payload, dict) else None
+
+
+def load_lane_result(manifest: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not manifest:
+        return None
+    result_ref = repo_relative_text(manifest.get("result_ref"))
+    if result_ref is None:
+        log_path = repo_path_from_ref(manifest.get("log_file"))
+        log_text = load_text_if_exists(log_path) if log_path else None
+        result_ref = extract_repo_ref_from_text(log_text)
+    result_path = repo_path_from_ref(result_ref)
+    if result_path is None:
+        return None
+    payload = load_json_if_exists(result_path)
+    return payload if isinstance(payload, dict) else None
+
+
+def lane_executed(manifest: dict[str, Any] | None) -> bool:
+    if not manifest:
+        return False
+    status = str(manifest.get("status") or "").strip().lower()
+    return status not in {"", "staged"}
+
+
+def lane_repo_ref(manifest: dict[str, Any] | None) -> str | None:
+    if not manifest:
+        return None
+    for key in ("result_ref", "log_file"):
+        candidate = repo_relative_text(manifest.get(key))
+        if candidate:
+            return candidate
+    return None
 
 
 def normalized_location(item: dict[str, Any] | None, title: str) -> str | None:
@@ -144,28 +222,45 @@ def build_metadata(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
 
 
 def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
+    tweak_id = str(record.get("tweak_id") or "")
     runtime_items = collect_evidence(record, {"procmon-trace", "runtime-diff", "runtime-trace", "vm-test", "registry-observation", "etw-trace"})
     kernelish = audit.get("suspected_layer") in {"kernel", "boot", "driver"}
     procmon_item = next((item for item in runtime_items if item.get("kind") == "procmon-trace"), None)
     etw_item = next((item for item in runtime_items if item.get("kind") == "etw-trace"), None)
+    runtime_lane = load_lane_manifest(tweak_id, "runtime-lane.json")
+    runtime_result = load_lane_result(runtime_lane)
+    procmon_lane = load_lane_manifest(tweak_id, "procmon-lane.json")
+
+    etw_trace_file = normalized_location(etw_item, "ETW trace")
+    if isinstance(runtime_result, dict):
+        etw_trace_file = (
+            repo_relative_text(((runtime_result.get("wpr") or {}).get("repo_etl_placeholder")))
+            or repo_relative_text(runtime_lane.get("result_ref") if runtime_lane else None)
+            or etw_trace_file
+        )
+    else:
+        etw_trace_file = lane_repo_ref(runtime_lane) or etw_trace_file
+
+    procmon_trace_file = normalized_location(procmon_item, "Procmon trace") or lane_repo_ref(procmon_lane)
+
     return {
         "$schema": "registry-evidence-v3.1/runtime-evidence",
         "runtime": {
             "etw": {
-                "executed": etw_item is not None,
-                "events_found": etw_item is not None,
+                "executed": etw_item is not None or lane_executed(runtime_lane),
+                "events_found": etw_item is not None or bool(runtime_result and (runtime_result.get("post_boot") or (runtime_result.get("wpr") or {}).get("stopped"))),
                 "reading_process": None,
                 "reading_pid": None,
-                "operation": None,
-                "timestamp": None,
-                "boot_phase_included": audit.get("boot_phase_relevant") and bool(audit.get("wpr") or audit.get("reboot_tested")),
-                "trace_file": normalized_location(etw_item, "ETW trace"),
+                "operation": "runtime-reboot-probe" if runtime_result else None,
+                "timestamp": (runtime_result or {}).get("generated_utc"),
+                "boot_phase_included": bool((runtime_result or {}).get("post_boot")) or (audit.get("boot_phase_relevant") and bool(audit.get("wpr") or audit.get("reboot_tested"))),
+                "trace_file": etw_trace_file,
             },
             "procmon": {
-                "executed": procmon_item is not None,
-                "events_found": procmon_item is not None,
+                "executed": procmon_item is not None or lane_executed(procmon_lane),
+                "events_found": procmon_item is not None or bool(procmon_lane and procmon_lane.get("exit_code") == 0),
                 "reading_process": None,
-                "trace_file": normalized_location(procmon_item, "Procmon trace"),
+                "trace_file": procmon_trace_file,
             },
             "frida": {
                 "executed": False,
@@ -230,9 +325,16 @@ def build_static(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any
 
 
 def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
+    tweak_id = str(record.get("tweak_id") or "")
     behavior_items = collect_evidence(record, {"wpr-trace", "etw-trace", "runtime-benchmark"})
     wpr_item = next((item for item in behavior_items if item.get("kind") in {"wpr-trace", "etw-trace"}), None)
     bench_item = next((item for item in behavior_items if item.get("kind") == "runtime-benchmark"), None)
+    behavior_lane = load_lane_manifest(tweak_id, "behavior-lane.json")
+    behavior_ref = lane_repo_ref(behavior_lane)
+    behavior_summary = bench_item.get("summary") if bench_item else None
+    if behavior_summary is None and behavior_lane and behavior_lane.get("exit_code") not in (None, 0):
+        behavior_summary = f"Runner failed with exit code {behavior_lane.get('exit_code')}. See {behavior_lane.get('log_file') or behavior_lane.get('output_file')}."
+
     return {
         "$schema": "registry-evidence-v3.1/behavior-evidence",
         "behavior": {
@@ -247,16 +349,16 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
                 "after_file": None,
             },
             "wpr": {
-                "executed": wpr_item is not None,
+                "executed": wpr_item is not None or lane_executed(behavior_lane),
                 "boot_time_before_ms": None,
                 "boot_time_after_ms": None,
                 "cpu_delta": None,
-                "trace_file": normalized_location(wpr_item, "WPR trace"),
+                "trace_file": normalized_location(wpr_item, "WPR trace") or behavior_ref,
             },
             "benchmark": {
-                "executed": bench_item is not None,
-                "summary": bench_item.get("summary") if bench_item else None,
-                "output_file": normalized_location(bench_item, "Benchmark output"),
+                "executed": bench_item is not None or lane_executed(behavior_lane),
+                "summary": behavior_summary,
+                "output_file": normalized_location(bench_item, "Benchmark output") or behavior_ref,
             },
             "registry_sideeffects": {
                 "executed": False,
@@ -271,6 +373,30 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
 def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any] | None:
     if not audit.get("re_audit_required"):
         return None
+    tweak_id = str(record.get("tweak_id") or "")
+    runtime_lane = load_lane_manifest(tweak_id, "runtime-lane.json")
+    procmon_lane = load_lane_manifest(tweak_id, "procmon-lane.json")
+    behavior_lane = load_lane_manifest(tweak_id, "behavior-lane.json")
+
+    new_tools_applied: list[str] = []
+    notes: list[str] = []
+    if lane_executed(runtime_lane):
+        new_tools_applied.extend(["etw", "vm-runtime-runner"])
+        runtime_state = "succeeded" if runtime_lane and runtime_lane.get("exit_code") == 0 else "failed"
+        runtime_ref = repo_relative_text(runtime_lane.get("result_ref") if runtime_lane else None) or repo_relative_text(runtime_lane.get("log_file") if runtime_lane else None)
+        notes.append(f"Runtime lane {runtime_state}" + (f" ({runtime_ref})" if runtime_ref else ""))
+    if lane_executed(procmon_lane):
+        new_tools_applied.append("procmon")
+        procmon_state = "succeeded" if procmon_lane and procmon_lane.get("exit_code") == 0 else "failed"
+        procmon_ref = repo_relative_text(procmon_lane.get("result_ref") if procmon_lane else None) or repo_relative_text(procmon_lane.get("log_file") if procmon_lane else None)
+        notes.append(f"Procmon lane {procmon_state}" + (f" ({procmon_ref})" if procmon_ref else ""))
+    if lane_executed(behavior_lane):
+        new_tools_applied.extend(["wpr", "vm-benchmark-runner"])
+        behavior_state = "succeeded" if behavior_lane and behavior_lane.get("exit_code") == 0 else "failed"
+        behavior_ref = repo_relative_text(behavior_lane.get("result_ref") if behavior_lane else None) or repo_relative_text(behavior_lane.get("log_file") if behavior_lane else None)
+        notes.append(f"Behavior lane {behavior_state}" + (f" ({behavior_ref})" if behavior_ref else ""))
+
+    re_audit_note = "; ".join(notes) if notes else "Bootstrapped from the current research record and evidence audit."
     return {
         "$schema": "registry-evidence-v3.1/re-audit",
         "re_audit": {
@@ -282,13 +408,13 @@ def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
             "re_audit_date": now_utc(),
             "re_audit_reason": audit.get("re_audit_reason"),
             "re_audit_priority": audit.get("re_audit_priority"),
-            "new_tools_applied": [],
+            "new_tools_applied": new_tools_applied,
             "new_cross_layer": audit.get("cross_layer_satisfied"),
             "new_class": audit.get("evidence_class"),
             "class_changed": False,
             "frida_kernel_guard_applied": audit.get("frida_kernel_guard_applied"),
             "dead_flag_four_conditions_met": all((audit.get("dead_flag_checks") or {}).values()),
-            "notes": "Bootstrapped from the current research record and evidence audit. Replace with fresh v3.1 runtime output after re-audit runs.",
+            "notes": re_audit_note,
             "new_pipeline_version": "v3.1",
         },
     }
@@ -488,11 +614,11 @@ def main() -> int:
         raise SystemExit("No tweak ids selected.")
 
     for tweak_id in tweak_ids:
+        if args.execute_tools:
+            invoke_phase_tools(tweak_id, args.phase)
         record = load_record(tweak_id)
         audit = load_audit_entry(tweak_id)
         write_phase_outputs(tweak_id, record, audit, args.phase)
-        if args.execute_tools:
-            invoke_phase_tools(tweak_id, args.phase)
         print(f"Wrote v3.1 evidence bundle for {tweak_id}")
 
     return 0

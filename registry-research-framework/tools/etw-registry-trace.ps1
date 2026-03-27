@@ -41,6 +41,25 @@ function Sanitize-RunnerOutput {
     return $sanitized.Trim()
 }
 
+function Get-RunnerResultRef {
+    param([string]$Text)
+
+    if ([string]::IsNullOrWhiteSpace($Text)) {
+        return $null
+    }
+
+    $lines = $Text -split "`r?`n" | ForEach-Object { $_.Trim() } | Where-Object { $_ }
+    [array]::Reverse($lines)
+    foreach ($line in $lines) {
+        $normalized = $line.TrimStart('\', '/') -replace '\\', '/'
+        if ($normalized -match '^(evidence|research|registry-research-framework)/') {
+            return $normalized
+        }
+    }
+
+    return $null
+}
+
 if ($TweakId) {
     $resolved = & $resolver -Lane runtime -TweakId $TweakId
     if ($resolved) {
@@ -78,8 +97,13 @@ if ($runner) {
 
     $logPath = [System.IO.Path]::ChangeExtension($OutputFile, '.log')
     $output = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $runner.script_path @($runner.args) 2>&1 | Out-String
+    $payload.status = if ($LASTEXITCODE -eq 0) { "runner-ok" } else { "runner-failed" }
     $payload | Add-Member -NotePropertyName exit_code -NotePropertyValue $LASTEXITCODE
     $payload | Add-Member -NotePropertyName log_file -NotePropertyValue (Get-RepoDisplayPath -Path $logPath)
+    $resultRef = Get-RunnerResultRef -Text $output
+    if ($resultRef) {
+        $payload | Add-Member -NotePropertyName result_ref -NotePropertyValue $resultRef
+    }
     $sanitizedOutput = Sanitize-RunnerOutput -Text $output
     $sanitizedOutput | Set-Content -Path $logPath -Encoding utf8
 }

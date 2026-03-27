@@ -1,5 +1,15 @@
 {
-  "runtime": {},
+  "runtime": {
+    "power.disable-cpu-idle-states": {
+      "script": "scripts/vm/run-cpu-idle-states-runtime-probe.ps1",
+      "args": [
+        "-RecordId",
+        "power.disable-cpu-idle-states",
+        "-SnapshotName",
+        "baseline-20260327-shell-stable"
+      ]
+    }
+  },
   "procmon": {
     "security.threat-file-hash-logging": {
       "script": "scripts/vm/run-defender-threat-file-hash-probe.ps1",

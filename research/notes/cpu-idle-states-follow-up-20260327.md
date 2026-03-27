@@ -56,3 +56,26 @@ Incident log:
 - `research/vm-incidents.json`
 
 This means the first rebooted benchmark attempt did not reach the `WinSAT CPU + WPR` or `WinSAT mem + WPR` workload phases. The useful result from this pass is not a benchmark score. It is the incident itself: on this VM, the raw CPU idle-state bundle is risky enough that the first rebooted benchmark lane broke shell availability and required a snapshot recovery.
+
+## V3.1 runtime lane
+
+Framework manifest:
+
+- `evidence/records/power.disable-cpu-idle-states/runtime-lane.json`
+
+Repo-tracked runtime summary:
+
+- `evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json`
+- `evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md`
+
+What happened:
+
+- the v3.1 faz1 runtime lane reverted to `baseline-20260327-shell-stable`
+- baseline state was captured with all three bundle values still missing
+- the lane started a `WPR GeneralProfile` capture
+- the candidate write did not complete; guest execution returned non-zero before any post-boot state was captured
+- the ETW placeholder was still written, but the trace did not reach a clean stop/result stage
+- the VM was recovered by snapshot revert
+- post-recovery shell health was clean again
+
+So the runtime lane improved the evidence shape because it now produced a repo-tracked summary and ETW placeholder under the canonical evidence root, but it still did not produce a positive kernel read or a successful candidate/post-boot capture. The useful result from this pass is again the failure mode itself: on this VM, this raw power bundle is unstable early enough that even the runtime-lane write/reboot sequence can fail before the candidate state is confirmed after reboot.

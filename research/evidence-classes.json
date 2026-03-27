@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T04:07:18.699202Z",
+  "generated_utc": "2026-03-27T04:40:24.405620Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
@@ -5808,7 +5808,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. A later rebooted benchmark lan...",
+        "summary": "Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. Later rebooted benchmark lanes...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -5848,6 +5848,12 @@
             "url": "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
             "kind": "vm-test",
             "summary": "The current 25H2 VM baseline had all three values missing, the app bundle wrote DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1, and the probe resto..."
+          },
+          {
+            "title": "Win25H2Clean v3.1 runtime lane for the CPU idle-state bundle",
+            "url": "evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md",
+            "kind": "vm-test",
+            "summary": "The v3.1 runtime lane captured the baseline state with all three values missing and started a WPR GeneralProfile trace, but the guest program returned non-zero before the candid..."
           }
         ]
       },

@@ -8793,7 +8793,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated observed implementation only. This record has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, a machine-checkable apply and restore pass for the app's current profile, a current-build Ghidra no-match follow-up on ntoskrnl.exe, and a rebooted benchmark attempt that broke shell availability before workloads started and required a snapshot recovery.
+**Summary:** Validated observed implementation only. This record has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, a machine-checkable apply and restore pass for the app's current profile, a current-build Ghidra no-match follow-up on ntoskrnl.exe, failed rebooted benchmark attempts that broke shell availability before workloads started, and a v3.1 runtime lane that captured baseline plus ETW start but still failed before candidate or post-boot confirmation.
 
 **Current implementation**
 
@@ -8885,6 +8885,7 @@ Windows Internals references:
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | ui-mapping, app-mismatch |
 | `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | `unspecified` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) | `medium` | version-scope, open-question |
 | `vm-cpu-idle-benchmark-incident-20260327` | `vm-incident` | `unspecified` | Win25H2Clean rebooted CPU idle benchmark incident | [research/vm-incidents.json](vm-incidents.json) and [research/notes/cpu-idle-states-follow-up-20260327.md](notes/cpu-idle-states-follow-up-20260327.md) | `high` | incident-review, version-scope, side-effects |
+| `vm-cpu-idle-runtime-lane-20260327` | `vm-test` | `VM test / probe` | Win25H2Clean v3.1 runtime lane for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-runtime-20260327-072057/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json) and [evidence/files/vm/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md) | `high` | version-scope, incident-review, side-effects |
 
 **Validation proof**
 
@@ -8893,7 +8894,7 @@ Windows Internals references:
 | Source | [evidence/files/vm/cpu_idle_probe.json](../evidence/files/vm-tooling-staging/cpu_idle_probe.json) |
 | Exact quote / path | before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null |
 | Key found on page | `True` |
-| Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. A later rebooted benchmark lane failed before any CPU or memory workload started because Explorer did not return after reboot, and the VM had to be recovered from snapshot. |
+| Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. Later rebooted benchmark lanes failed before any CPU or memory workload started because Explorer did not return after reboot, and the VM had to be recovered from snapshot. The v3.1 runtime lane then captured baseline plus ETW start under the canonical evidence root, but the guest program exited non-zero before the candidate/post-boot stage completed and again required snapshot recovery. |
 
 **Decision**
 
@@ -8904,7 +8905,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead, and the first rebooted benchmark lane broke shell availability before any workload ran. That keeps the record active and evidence-backed, but it still is not an app-ready supported control surface. |
+| Why | The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead. Rebooted benchmark lanes and the later v3.1 runtime lane both failed before a clean candidate/post-boot phase completed and required snapshot recovery. That keeps the record active and evidence-backed, but it still is not an app-ready supported control surface. |
 
 ---
 

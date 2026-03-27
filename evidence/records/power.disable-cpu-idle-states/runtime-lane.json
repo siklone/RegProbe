@@ -1,9 +1,20 @@
-{
-  "tool": "ETW",
-  "session_name": "OpenTraceRegistry",
-  "tweak_id": "power.disable-cpu-idle-states",
-  "output_file": "evidence/records/power.disable-cpu-idle-states/runtime-lane.json",
-  "status": "staged",
-  "runner": null,
-  "note": "No tweak-specific ETW runner is mapped yet. Wire this wrapper to an existing VM capture script before using it for live validation."
+﻿{
+    "tool":  "ETW",
+    "session_name":  "OpenTraceRegistry",
+    "tweak_id":  "power.disable-cpu-idle-states",
+    "output_file":  "evidence/records/power.disable-cpu-idle-states/runtime-lane.json",
+    "status":  "runner-failed",
+    "runner":  {
+                   "script":  "scripts/vm/run-cpu-idle-states-runtime-probe.ps1",
+                   "args":  [
+                                "-RecordId",
+                                "power.disable-cpu-idle-states",
+                                "-SnapshotName",
+                                "baseline-20260327-shell-stable"
+                            ]
+               },
+    "note":  "Invoked the mapped VM runtime runner for this tweak. Check the runner output root for concrete capture files.",
+    "exit_code":  1,
+    "log_file":  "evidence/records/power.disable-cpu-idle-states/runtime-lane.log",
+    "result_ref":  "evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json"
 }

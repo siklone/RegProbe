@@ -146,7 +146,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `f76c8b47419031d8a5ec15d182b2f5376817e141d95e4c739060717e44a9bbec` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `c69644372ded1bbf278f5a4a25182baeafcb554c00688db1b4c7517f3769d4eb` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `19c023afe55a69e9853f641dcb9f6dfc1d7b0bec8755621430fabb3bf3ffc433` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
-| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `c8f09c76bdcc784451be56c3fbce788675d22fc99eaac6a36fa996491fcc766b` | `70fdad5f3838c20c2595f3486eef267f9bdb4821af708f48d214f6b23816b572` | 7 |
+| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `894b92ec0f6b87d8709fff88c928ce6638c310b9577a2108b0b1ff7622359a40` | `63f80e78c17ad851f8044cf12dcdfc0c0bf6f8e5e0c5f97a23a020d36448fbc0` | 8 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `94e0f7d7302ea1e110ee29df96e06e0ab388f94dd500d2e496a99738f130d97f` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 5 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | - | `539968582171cbbfde1aa6e02feda17d2fd3118641c615686e331d40bd36f91e` | `44e29d37bb9e8b44313f77307041293d030872438f451cb698ed815556190ae0` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `80eba1bdd08bab50ba72a05a10a9fe1317202f2614efdbb9df2de41c778028f4` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
@@ -3846,10 +3846,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/power.disable-cpu-idle-states.json`
 - V3.1 evidence root: [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states)
-- Source SHA256: `c8f09c76bdcc784451be56c3fbce788675d22fc99eaac6a36fa996491fcc766b`
-- Proof SHA256: `70fdad5f3838c20c2595f3486eef267f9bdb4821af708f48d214f6b23816b572`
+- Source SHA256: `894b92ec0f6b87d8709fff88c928ce6638c310b9577a2108b0b1ff7622359a40`
+- Proof SHA256: `63f80e78c17ad851f8044cf12dcdfc0c0bf6f8e5e0c5f97a23a020d36448fbc0`
 
-**Summary:** Validated observed implementation only. This record has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, a machine-checkable apply and restore pass for the app's current profile, a current-build Ghidra no-match follow-up on ntoskrnl.exe, and a rebooted benchmark attempt that broke shell availability before workloads started and required a snapshot recovery.
+**Summary:** Validated observed implementation only. This record has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, a machine-checkable apply and restore pass for the app's current profile, a current-build Ghidra no-match follow-up on ntoskrnl.exe, failed rebooted benchmark attempts that broke shell availability before workloads started, and a v3.1 runtime lane that captured baseline plus ETW start but still failed before candidate or post-boot confirmation.
 
 **Evidence**
 
@@ -3862,6 +3862,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-power-doc` | `repo-doc` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) |
 | `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) |
 | `vm-cpu-idle-benchmark-incident-20260327` | `vm-incident` | Win25H2Clean rebooted CPU idle benchmark incident | [research/vm-incidents.json](vm-incidents.json) and [research/notes/cpu-idle-states-follow-up-20260327.md](notes/cpu-idle-states-follow-up-20260327.md) |
+| `vm-cpu-idle-runtime-lane-20260327` | `vm-test` | Win25H2Clean v3.1 runtime lane for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-runtime-20260327-072057/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json) and [evidence/files/vm/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md) |
 
 **Validation proof**
 
@@ -3869,7 +3870,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [evidence/files/vm/cpu_idle_probe.json](../evidence/files/vm-tooling-staging/cpu_idle_probe.json) |
 | Exact quote / path | before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null |
-| Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. A later rebooted benchmark lane failed before any CPU or memory workload started because Explorer did not return after reboot, and the VM had to be recovered from snapshot. |
+| Notes | Guest VM probe captured the exact before/after/restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. Later rebooted benchmark lanes failed before any CPU or memory workload started because Explorer did not return after reboot, and the VM had to be recovered from snapshot. The v3.1 runtime lane then captured baseline plus ETW start under the canonical evidence root, but the guest program exited non-zero before the candidate/post-boot stage completed and again required snapshot recovery. |
 
 **Re-audit**
 

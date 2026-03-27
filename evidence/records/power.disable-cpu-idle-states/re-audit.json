@@ -11,12 +11,13 @@
     ],
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
-    "re_audit_date": "2026-03-26T23:43:48.143095Z",
+    "re_audit_date": "2026-03-27T04:39:50.950794Z",
     "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
     "re_audit_priority": 1,
     "new_tools_applied": [
+      "etw",
+      "vm-runtime-runner",
       "wpr",
-      "vm-reboot",
       "vm-benchmark-runner"
     ],
     "new_cross_layer": true,
@@ -24,7 +25,7 @@
     "class_changed": false,
     "frida_kernel_guard_applied": true,
     "dead_flag_four_conditions_met": false,
-    "notes": "Ran the v3.1 faz3 behavior lane from baseline-20260327-shell-stable. The runner reached the reboot point, but Explorer did not return and no CPU or memory workload artifacts were produced. The VM was recovered by snapshot revert and the incident is logged in research/vm-incidents.json.",
+    "notes": "Runtime lane failed (evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json); Behavior lane failed (evidence/records/power.disable-cpu-idle-states/behavior-lane.log)",
     "new_pipeline_version": "v3.1"
   }
 }

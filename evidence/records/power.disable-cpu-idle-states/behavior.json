@@ -12,16 +12,16 @@
       "after_file": null
     },
     "wpr": {
-      "executed": false,
+      "executed": true,
       "boot_time_before_ms": null,
       "boot_time_after_ms": null,
       "cpu_delta": null,
-      "trace_file": null
+      "trace_file": "evidence/records/power.disable-cpu-idle-states/behavior-lane.log"
     },
     "benchmark": {
-      "executed": false,
-      "summary": null,
-      "output_file": null
+      "executed": true,
+      "summary": "Runner failed with exit code 1. See evidence/records/power.disable-cpu-idle-states/behavior-lane.log.",
+      "output_file": "evidence/records/power.disable-cpu-idle-states/behavior-lane.log"
     },
     "registry_sideeffects": {
       "executed": false,

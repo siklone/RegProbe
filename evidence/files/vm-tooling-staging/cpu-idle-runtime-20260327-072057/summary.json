@@ -1,0 +1,38 @@
+﻿{
+    "generated_utc":  "2026-03-27T04:20:57.5306209Z",
+    "probe_name":  "cpu-idle-runtime-20260327-072057",
+    "record_id":  "power.disable-cpu-idle-states",
+    "snapshot_name":  "baseline-20260327-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057",
+    "status":  "failed",
+    "baseline":  {
+                     "last_boot_utc":  "2026-03-25T11:14:21.5000000Z",
+                     "generated_utc":  "2026-03-27T04:29:10.1196416Z",
+                     "values":  {
+                                    "DisableIdleStatesAtBoot":  null,
+                                    "IdleStateTimeout":  null,
+                                    "ExitLatencyCheckEnabled":  null
+                                }
+                 },
+    "candidate_applied":  null,
+    "post_boot":  null,
+    "shell_after":  null,
+    "wpr":  {
+                "started":  true,
+                "stopped":  false,
+                "guest_etl":  "cpu-idle-runtime.etl",
+                "repo_etl_placeholder":  "evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md",
+                "start":  {
+                              "action":  "start-wpr",
+                              "started":  true,
+                              "generated_utc":  "2026-03-27T04:30:17.6448065Z"
+                          }
+            },
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "errors":  [
+                   "vmrun failed (1): Guest program exited with non-zero exit code: 1"
+               ]
+}

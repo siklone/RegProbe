@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T04:07:18.913323Z",
+  "generated_utc": "2026-03-27T04:40:24.887908Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
@@ -3288,6 +3288,7 @@
       ],
       "tools_used": [
         "official-doc",
+        "etw",
         "ghidra",
         "benchmark",
         "reboot"
@@ -3296,14 +3297,14 @@
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
+      "re_audit_reason": "current_blocker",
       "original_class": "B",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.1",
@@ -3317,7 +3318,9 @@
         "20260327004638-power-disable-cpu-idle-states",
         "20260327004638-power-disable-cpu-idle-states",
         "20260327031227-power-disable-cpu-idle-states",
-        "20260327031227-power-disable-cpu-idle-states"
+        "20260327031227-power-disable-cpu-idle-states",
+        "20260327073024-power-disable-cpu-idle-states",
+        "20260327073024-power-disable-cpu-idle-states"
       ]
     },
     {

@@ -2,14 +2,14 @@
   "$schema": "registry-evidence-v3.1/runtime-evidence",
   "runtime": {
     "etw": {
-      "executed": false,
+      "executed": true,
       "events_found": false,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-reboot-probe",
+      "timestamp": "2026-03-27T04:20:57.5306209Z",
       "boot_phase_included": true,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md"
     },
     "procmon": {
       "executed": false,
@@ -31,6 +31,7 @@
   },
   "source_evidence_ids": [
     "nohuto-power-disable-idle-states-trace",
-    "vm-cpu-idle-bundle-probe"
+    "vm-cpu-idle-bundle-probe",
+    "vm-cpu-idle-runtime-lane-20260327"
   ]
 }
