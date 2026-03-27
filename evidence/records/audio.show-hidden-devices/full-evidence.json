@@ -28,7 +28,7 @@
   "runtime": {
     "etw": {
       "executed": true,
-      "events_found": true,
+      "events_found": false,
       "reading_process": null,
       "reading_pid": null,
       "operation": "runtime-control-panel-probe",
@@ -39,8 +39,8 @@
     "procmon": {
       "executed": true,
       "events_found": true,
-      "reading_process": null,
-      "trace_file": "evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md"
+      "reading_process": "rundll32.exe",
+      "trace_file": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md"
     },
     "frida": {
       "executed": false,
@@ -80,8 +80,8 @@
       "pdb_loaded": false,
       "pdb_source": null,
       "string_xref_found": true,
-      "function_name": null,
-      "decompile_snippet": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
+      "function_name": "FUN_18000a004; FUN_180008eb0",
+      "decompile_snippet": "The checked-in Ghidra export shows FUN_18000a004 calling SHGetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and FUN_180008eb0 calling SHSetValueW for the same value in mmsys.cpl.",
       "call_graph_depth": null,
       "output_file": "evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
       "ghidra_no_function_fallback": false
@@ -119,7 +119,7 @@
   "classification": {
     "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-hidden state with a clean restore story.",
+    "reason": "The record keeps Class A under the current v3.1 matrix because the repo still preserves converged runtime and static proof: a normalized Procmon summary from the 2026-03-14 Sound control panel capture shows rundll32.exe querying ShowHiddenDevices with both 1 and 0, the checked-in Ghidra export decompiles the mmsys.cpl handlers that read and write the same DeviceCpl flag, the 2026-03-27 runtime lane cleanly applied and restored the value on Win25H2Clean, and the app writes the same show-hidden state with a clean restore story. This remains a runtime-observed preference rather than a Microsoft-documented contract.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
@@ -139,23 +139,23 @@
   "timeline": [
     {
       "step": "bootstrap_record_load",
-      "timestamp": "2026-03-27T08:10:22.421434Z"
+      "timestamp": "2026-03-27T11:06:26Z"
     },
     {
       "step": "faz1",
-      "timestamp": "2026-03-27T08:10:22.421434Z"
+      "timestamp": "2026-03-27T11:06:26Z"
     },
     {
       "step": "classification",
-      "timestamp": "2026-03-27T08:10:22.421434Z"
+      "timestamp": "2026-03-27T11:06:26Z"
     },
     {
       "step": "last_reviewed",
-      "timestamp": "2026-03-14T00:00:00Z"
+      "timestamp": "2026-03-27T11:06:26Z"
     }
   ],
   "artifact_refs": [],
-  "research_record": "research/records/audio.show-hidden-devices.json",
+  "research_record": "research/records/audio.show-hidden-devices.review.json",
   "research_record_fallback": "research/records/audio.show-hidden-devices.review.json",
   "re_audit": {
     "is_re_audit": true,
@@ -166,7 +166,7 @@
     ],
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
-    "re_audit_date": "2026-03-27T08:10:22.421434Z",
+    "re_audit_date": "2026-03-27T11:06:26Z",
     "re_audit_reason": "non_official_v31_reaudit",
     "re_audit_priority": 3,
     "new_tools_applied": [
@@ -178,7 +178,7 @@
     "class_changed": false,
     "frida_kernel_guard_applied": false,
     "dead_flag_four_conditions_met": true,
-    "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showhiddendevices-20260327-103758/summary.json)",
+    "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showhiddendevices-20260327-103758/summary.json). Procmon proof remains carry-forward evidence summarized in research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md because the raw PML is off-git.",
     "new_pipeline_version": "v3.1"
   }
 }

@@ -3,7 +3,7 @@
   "runtime": {
     "etw": {
       "executed": true,
-      "events_found": true,
+      "events_found": false,
       "reading_process": null,
       "reading_pid": null,
       "operation": "runtime-control-panel-probe",
@@ -14,8 +14,8 @@
     "procmon": {
       "executed": true,
       "events_found": true,
-      "reading_process": null,
-      "trace_file": "evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md"
+      "reading_process": "rundll32.exe",
+      "trace_file": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md"
     },
     "frida": {
       "executed": false,

@@ -1,0 +1,34 @@
+﻿{
+    "tool":  "ETW",
+    "session_name":  "OpenTraceRegistry",
+    "tweak_id":  "system.disable-startup-delay",
+    "output_file":  "evidence/records/system.disable-startup-delay/runtime-lane.json",
+    "status":  "runner-failed",
+    "runner":  {
+                   "script":  "scripts/vm/run-explorer-shell-registry-runtime-probe.ps1",
+                   "args":  [
+                                "-RecordId",
+                                "system.disable-startup-delay",
+                                "-ProbePrefix",
+                                "startup-delay-runtime",
+                                "-Family",
+                                "startup-delay-runtime",
+                                "-RegistryPath",
+                                "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+                                "-RegistryPathNative",
+                                "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+                                "-ValueName",
+                                "StartupDelayInMSec",
+                                "-ValueData",
+                                "0",
+                                "-SnapshotName",
+                                "baseline-20260327-shell-stable",
+                                "-SettleSeconds",
+                                "20"
+                            ]
+               },
+    "note":  "Invoked the mapped VM runtime runner for this tweak. Check the runner output root for concrete capture files.",
+    "exit_code":  1,
+    "log_file":  "evidence/records/system.disable-startup-delay/runtime-lane.log",
+    "result_ref":  "evidence/files/vm-tooling-staging/startup-delay-runtime-20260327-154404/summary.json"
+}

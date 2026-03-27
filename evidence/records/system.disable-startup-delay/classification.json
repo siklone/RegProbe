@@ -3,7 +3,7 @@
   "classification": {
     "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "Win25H2Clean reversible proof, a live Explorer Procmon trace, a Ghidra string hit, and a bounded WPR shell-restart lane all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as the current build contract for this project and keep the tweak app-ready.",
+    "reason": "The current v3.1 record stays Class A on a converged-vm basis: the reversible probe confirms missing -> 0 -> missing, the record still carries Procmon shell-restart corroboration for the same path, the Ghidra search confirms the Explorer Serialize string path, and the bounded WPR lane exercised both missing and 0 with clean shell recovery. Microsoft still does not publish the raw registry contract, so this is build-specific runtime evidence rather than official-policy evidence.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
@@ -14,7 +14,7 @@
     "layer_count": 4,
     "frida_kernel_guard_applied": false,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true

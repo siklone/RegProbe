@@ -28,18 +28,18 @@
   "runtime": {
     "etw": {
       "executed": true,
-      "events_found": true,
+      "events_found": false,
       "reading_process": null,
       "reading_pid": null,
-      "operation": "runtime-control-panel-probe",
+      "operation": "wpr-generalprofile-control-panel-launch",
       "timestamp": "2026-03-27T07:47:36.1947121Z",
       "boot_phase_included": false,
-      "trace_file": "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md"
+      "trace_file": "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json and evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md"
     },
     "procmon": {
       "executed": true,
       "events_found": true,
-      "reading_process": null,
+      "reading_process": "rundll32.exe",
       "trace_file": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
     },
     "frida": {
@@ -119,7 +119,7 @@
   "classification": {
     "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story.",
+    "reason": "Procmon on 2026-03-14 captured rundll32.exe launching mmsys.cpl and reading ShowDisconnectedDevices with both 1 and 0, Ghidra on 2026-03-26 decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story. The 2026-03-27 v3.1 runtime lane adds an explicit missing -> 1 -> missing VM cycle with a control-panel launch, WPR placeholder trace, and healthy shell recovery, but the class basis still rests on the existing Procmon plus Ghidra convergence.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
@@ -129,7 +129,7 @@
     "frida_kernel_guard_applied": false,
     "dead_flag_checks": {
       "etw_executed": true,
-      "boot_phase_included": true,
+      "boot_phase_included": false,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },
@@ -146,16 +146,27 @@
       "timestamp": "2026-03-27T08:10:22.425061Z"
     },
     {
+      "step": "runtime_runner_wpr",
+      "timestamp": "2026-03-27T07:47:36.1947121Z"
+    },
+    {
       "step": "classification",
       "timestamp": "2026-03-27T08:10:22.425061Z"
     },
     {
       "step": "last_reviewed",
-      "timestamp": "2026-03-14T00:00:00Z"
+      "timestamp": "2026-03-27T00:00:00Z"
     }
   ],
-  "artifact_refs": [],
-  "research_record": "research/records/audio.show-disconnected-devices.json",
+  "artifact_refs": [
+    "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md",
+    "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
+    "evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
+    "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json",
+    "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md",
+    "research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md"
+  ],
+  "research_record": "research/records/audio.show-disconnected-devices.review.json",
   "research_record_fallback": "research/records/audio.show-disconnected-devices.review.json",
   "re_audit": {
     "is_re_audit": true,
@@ -167,18 +178,18 @@
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
     "re_audit_date": "2026-03-27T08:10:22.425061Z",
-    "re_audit_reason": "non_official_v31_reaudit",
+    "re_audit_reason": "non_official_v31_reaudit; runtime_runner_wpr_shell_safe; dead_flag_checks_incomplete",
     "re_audit_priority": 3,
     "new_tools_applied": [
-      "etw",
+      "wpr",
       "vm-runtime-runner"
     ],
     "new_cross_layer": true,
     "new_class": "A",
     "class_changed": false,
     "frida_kernel_guard_applied": false,
-    "dead_flag_four_conditions_met": true,
-    "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json)",
+    "dead_flag_four_conditions_met": false,
+    "notes": "Existing Class A stands on Procmon plus Ghidra. The 2026-03-27 runtime runner added a WPR-backed missing -> 1 -> missing cycle with a control-panel launch and healthy shell state (evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json), but it did not replace the Procmon consumer proof.",
     "new_pipeline_version": "v3.1"
   }
 }

@@ -2,14 +2,14 @@
   "$schema": "registry-evidence-v3.1/runtime-evidence",
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-explorer-restart-probe",
+      "timestamp": "2026-03-27T12:44:04.7178455Z",
       "boot_phase_included": false,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/startup-delay-runtime-20260327-154404/startup-delay-runtime.etl.md"
     },
     "procmon": {
       "executed": true,

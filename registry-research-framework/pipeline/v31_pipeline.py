@@ -258,6 +258,8 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
             operation = "runtime-control-panel-probe"
         elif isinstance(runtime_result.get("summary"), dict) and runtime_result["summary"].get("explorer_restart"):
             operation = "runtime-explorer-restart-probe"
+        elif isinstance(runtime_result.get("summary"), dict) and runtime_result["summary"].get("wallpaper_apply"):
+            operation = "runtime-wallpaper-apply-probe"
         elif runtime_result.get("post_boot") or runtime_result.get("wpr"):
             operation = "runtime-reboot-probe"
 
@@ -388,6 +390,34 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
     }
 
 
+def live_dead_flag_checks(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, bool]:
+    tweak_id = str(record.get("tweak_id") or "")
+    runtime_lane = load_lane_manifest(tweak_id, "runtime-lane.json")
+    procmon_lane = load_lane_manifest(tweak_id, "procmon-lane.json")
+    behavior_lane = load_lane_manifest(tweak_id, "behavior-lane.json")
+    full_path = evidence_dir(tweak_id) / "full-evidence.json"
+    payload = load_json_if_exists(full_path) if full_path.exists() else {}
+    runtime = payload.get("runtime") or {}
+    etw = runtime.get("etw") or {}
+    boot_relevant = bool(audit.get("boot_phase_relevant"))
+    etw_done = bool(etw.get("executed")) or any(evidence_kind(item) == "etw-trace" for item in evidence_items(record)) or lane_executed(runtime_lane)
+    trigger_tested = (
+        has_procmon_evidence(record)
+        or has_reboot_evidence(record)
+        or has_wpr_evidence(record)
+        or has_benchmark_evidence(record)
+        or lane_executed(procmon_lane)
+        or lane_executed(behavior_lane)
+        or lane_executed(runtime_lane)
+    )
+    return {
+        "etw_executed": etw_done,
+        "boot_phase_included": (not boot_relevant) or has_wpr_evidence(record) or has_reboot_evidence(record) or lane_executed(behavior_lane),
+        "correct_tool_used": not (audit.get("suspected_layer") in {"kernel", "boot", "driver"} and "frida" in (audit.get("tools_used") or [])),
+        "trigger_condition_tested": trigger_tested,
+    }
+
+
 def original_record_tools(record: dict[str, Any]) -> list[str]:
     tools: list[str] = []
     if has_official_evidence(record):
@@ -437,6 +467,13 @@ def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
         behavior_ref = repo_relative_text(behavior_lane.get("result_ref") if behavior_lane else None) or repo_relative_text(behavior_lane.get("log_file") if behavior_lane else None)
         notes.append(f"Behavior lane {behavior_state}" + (f" ({behavior_ref})" if behavior_ref else ""))
 
+    checks = live_dead_flag_checks(record, audit)
+    reason_parts = [part.strip() for part in str(audit.get("re_audit_reason") or "").split(";") if part.strip()]
+    if checks["etw_executed"]:
+        reason_parts = [part for part in reason_parts if part != "etw_not_recorded"]
+    if all(checks.values()):
+        reason_parts = [part for part in reason_parts if part != "dead_flag_checks_incomplete"]
+    re_audit_reason = "; ".join(reason_parts)
     re_audit_note = "; ".join(notes) if notes else "Bootstrapped from the current research record and evidence audit."
     return {
         "$schema": "registry-evidence-v3.1/re-audit",
@@ -447,14 +484,14 @@ def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
             "original_cross_layer": existing_re_audit.get("original_cross_layer") if "original_cross_layer" in existing_re_audit else audit.get("cross_layer_satisfied"),
             "original_pipeline_version": existing_re_audit.get("original_pipeline_version") or audit.get("original_pipeline_version") or "pre-v3.1",
             "re_audit_date": now_utc(),
-            "re_audit_reason": audit.get("re_audit_reason"),
+            "re_audit_reason": re_audit_reason,
             "re_audit_priority": audit.get("re_audit_priority"),
             "new_tools_applied": new_tools_applied,
             "new_cross_layer": audit.get("cross_layer_satisfied"),
             "new_class": audit.get("evidence_class"),
             "class_changed": False,
             "frida_kernel_guard_applied": audit.get("frida_kernel_guard_applied"),
-            "dead_flag_four_conditions_met": all((audit.get("dead_flag_checks") or {}).values()),
+            "dead_flag_four_conditions_met": all(checks.values()),
             "notes": re_audit_note,
             "new_pipeline_version": "v3.1",
         },
@@ -462,6 +499,7 @@ def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
 
 
 def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
+    checks = live_dead_flag_checks(record, audit)
     return {
         "$schema": "registry-evidence-v3.1/classification",
         "classification": {
@@ -472,7 +510,7 @@ def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[
             "layers_used": audit.get("layers_used") or [],
             "layer_count": len(audit.get("layers_used") or []),
             "frida_kernel_guard_applied": audit.get("frida_kernel_guard_applied"),
-            "dead_flag_checks": audit.get("dead_flag_checks") or {},
+            "dead_flag_checks": checks,
             "class_ready_basis": audit.get("class_ready_basis"),
             "next_missing_layer": audit.get("next_missing_layer"),
         },
@@ -484,7 +522,19 @@ def current_artifact_refs(tweak_id: str) -> list[dict[str, Any]]:
     if not full_path.exists():
         return []
     payload = load_json(full_path)
-    return payload.get("artifact_refs") or []
+    raw_refs = payload.get("artifact_refs") or []
+    normalized: list[dict[str, Any]] = []
+    for item in raw_refs:
+        if isinstance(item, dict):
+            normalized.append(item)
+        elif isinstance(item, str) and item.strip():
+            normalized.append(
+                {
+                    "id": Path(item).name,
+                    "filename": item,
+                }
+            )
+    return normalized
 
 
 def build_timeline(record: dict[str, Any], audit: dict[str, Any], phase: str) -> dict[str, Any]:
@@ -521,7 +571,10 @@ def render_verdict(record: dict[str, Any], audit: dict[str, Any], classification
     if artifact_refs:
         lines.extend(["", "## Artifact refs", ""])
         for item in artifact_refs:
-            lines.append(f"- `{item.get('id')}` -> {item.get('release_url') or item.get('filename')}")
+            if isinstance(item, dict):
+                lines.append(f"- `{item.get('id')}` -> {item.get('release_url') or item.get('filename')}")
+            else:
+                lines.append(f"- `{item}`")
     return "\n".join(lines)
 
 

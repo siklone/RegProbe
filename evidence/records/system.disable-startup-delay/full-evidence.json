@@ -27,14 +27,14 @@
   },
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-explorer-restart-probe",
+      "timestamp": "2026-03-27T12:44:04.7178455Z",
       "boot_phase_included": false,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/startup-delay-runtime-20260327-154404/startup-delay-runtime.etl.md"
     },
     "procmon": {
       "executed": true,
@@ -81,7 +81,7 @@
       "pdb_source": null,
       "string_xref_found": true,
       "function_name": null,
-      "decompile_snippet": "Headless Ghidra analysis of explorer.exe with SearchMemoryForStringsRegExArg.java 'Serialize' produced three matches, confirming the Explorer Serialize string path in the binary.",
+      "decompile_snippet": "A headless Ghidra string search on explorer.exe for `Serialize` produced three matches. This is string-reference support for the Explorer Serialize path on the current build, not a decompiled registry-read function for StartupDelayInMSec.",
       "call_graph_depth": null,
       "output_file": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
       "ghidra_no_function_fallback": false
@@ -119,7 +119,7 @@
   "classification": {
     "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "Win25H2Clean reversible proof, a live Explorer Procmon trace, a Ghidra string hit, and a bounded WPR shell-restart lane all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as the current build contract for this project and keep the tweak app-ready.",
+    "reason": "The current v3.1 record stays Class A on a converged-vm basis: the reversible probe confirms missing -> 0 -> missing, the record still carries Procmon shell-restart corroboration for the same path, the Ghidra search confirms the Explorer Serialize string path, and the bounded WPR lane exercised both missing and 0 with clean shell recovery. Microsoft still does not publish the raw registry contract, so this is build-specific runtime evidence rather than official-policy evidence.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
@@ -130,7 +130,7 @@
     "layer_count": 4,
     "frida_kernel_guard_applied": false,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
@@ -141,22 +141,47 @@
   "timeline": [
     {
       "step": "bootstrap_record_load",
-      "timestamp": "2026-03-26T23:12:55.574898Z"
+      "timestamp": "2026-03-27T13:18:53.229528Z"
     },
     {
-      "step": "all",
-      "timestamp": "2026-03-26T23:12:55.574898Z"
+      "step": "faz1",
+      "timestamp": "2026-03-27T13:18:53.229528Z"
     },
     {
       "step": "classification",
-      "timestamp": "2026-03-26T23:12:55.574898Z"
+      "timestamp": "2026-03-27T13:18:53.229528Z"
     },
     {
       "step": "last_reviewed",
-      "timestamp": "2026-03-26T00:00:00Z"
+      "timestamp": "2026-03-27T00:00:00Z"
     }
   ],
-  "artifact_refs": [],
+  "artifact_refs": [
+    {
+      "id": "vm-batch-probe-20260320.json",
+      "filename": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
+    },
+    {
+      "id": "procmon-startup-delay.pml.md",
+      "filename": "evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md"
+    },
+    {
+      "id": "ghidra_explorer_serialize.txt",
+      "filename": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt"
+    },
+    {
+      "id": "startup-delay-wpr-summary.json",
+      "filename": "evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/startup-delay-wpr-summary.json"
+    },
+    {
+      "id": "startup-delay-0.summary.json",
+      "filename": "evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/0/startup-delay-0.summary.json"
+    },
+    {
+      "id": "startup-delay-wpr-trace-20260326.md",
+      "filename": "research/notes/startup-delay-wpr-trace-20260326.md"
+    }
+  ],
   "research_record": "research/records/system.disable-startup-delay.json",
   "research_record_fallback": "research/records/system.disable-startup-delay.review.json",
   "re_audit": {
@@ -170,16 +195,19 @@
     ],
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
-    "re_audit_date": "2026-03-26T23:12:55.574898Z",
-    "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
+    "re_audit_date": "2026-03-27T13:18:53.229528Z",
+    "re_audit_reason": "non_official_v31_reaudit",
     "re_audit_priority": 2,
-    "new_tools_applied": [],
+    "new_tools_applied": [
+      "etw",
+      "vm-runtime-runner"
+    ],
     "new_cross_layer": true,
     "new_class": "A",
     "class_changed": false,
     "frida_kernel_guard_applied": false,
-    "dead_flag_four_conditions_met": false,
-    "notes": "Bootstrapped from the current research record and evidence audit. Replace with fresh v3.1 runtime output after re-audit runs.",
+    "dead_flag_four_conditions_met": true,
+    "notes": "Runtime lane failed (evidence/files/vm-tooling-staging/startup-delay-runtime-20260327-154404/summary.json)",
     "new_pipeline_version": "v3.1"
   }
 }

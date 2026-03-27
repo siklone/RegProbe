@@ -27,7 +27,7 @@
       "pdb_source": null,
       "string_xref_found": true,
       "function_name": null,
-      "decompile_snippet": "Headless Ghidra analysis of explorer.exe with SearchMemoryForStringsRegExArg.java 'Serialize' produced three matches, confirming the Explorer Serialize string path in the binary.",
+      "decompile_snippet": "A headless Ghidra string search on explorer.exe for `Serialize` produced three matches. This is string-reference support for the Explorer Serialize path on the current build, not a decompiled registry-read function for StartupDelayInMSec.",
       "call_graph_depth": null,
       "output_file": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
       "ghidra_no_function_fallback": false

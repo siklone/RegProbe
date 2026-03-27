@@ -1,10 +1,10 @@
 ﻿{
     "schema_version":  "1.0",
-    "generated_utc":  "2026-03-27T09:00:33.3715773Z",
+    "generated_utc":  "2026-03-27T13:11:07.9283434Z",
     "summary":  {
-                    "total_incidents":  8,
+                    "total_incidents":  15,
                     "shell_recovered":  4,
-                    "needed_snapshot_revert":  7
+                    "needed_snapshot_revert":  14
                 },
     "incidents":  [
                       {
@@ -134,6 +134,118 @@
                           "needed_snapshot_revert":  true,
                           "recorded_utc":  "2026-03-27T09:00:33.3527894Z",
                           "notes":  "Recovered by snapshot revert after the Explorer compact runtime lane."
+                      },
+                      {
+                          "incident_id":  "20260327142205-performance-disable-taskbar-animations",
+                          "record_id":  "performance.disable-taskbar-animations",
+                          "tweak_id":  "performance.disable-taskbar-animations",
+                          "test_id":  "taskbar-animations-runtime-20260327-141157",
+                          "family":  "taskbar-animations-runtime",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                          "value_name":  "TaskbarAnimations",
+                          "value_state":  "TaskbarAnimations=0",
+                          "symptom":  "Shell health was degraded after the taskbar-animations-runtime runtime probe.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T11:22:05.9126608Z",
+                          "notes":  "Recovered by snapshot revert after the taskbar-animations-runtime runtime lane."
+                      },
+                      {
+                          "incident_id":  "20260327143733-system-disable-startup-delay",
+                          "record_id":  "system.disable-startup-delay",
+                          "tweak_id":  "system.disable-startup-delay",
+                          "test_id":  "startup-delay-runtime-20260327-142837",
+                          "family":  "startup-delay-runtime",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+                          "value_name":  "StartupDelayInMSec",
+                          "value_state":  "StartupDelayInMSec=0",
+                          "symptom":  "Shell health was degraded after the startup-delay-runtime runtime probe.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T11:37:33.0265742Z",
+                          "notes":  "Recovered by snapshot revert after the startup-delay-runtime runtime lane."
+                      },
+                      {
+                          "incident_id":  "20260327145726-performance-disable-taskbar-animations",
+                          "record_id":  "performance.disable-taskbar-animations",
+                          "tweak_id":  "performance.disable-taskbar-animations",
+                          "test_id":  "taskbar-animations-runtime-20260327-144819",
+                          "family":  "taskbar-animations-runtime",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                          "value_name":  "TaskbarAnimations",
+                          "value_state":  "TaskbarAnimations=0",
+                          "symptom":  "Shell health was degraded after the taskbar-animations-runtime runtime probe.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T11:57:26.2462903Z",
+                          "notes":  "Recovered by snapshot revert after the taskbar-animations-runtime runtime lane."
+                      },
+                      {
+                          "incident_id":  "20260327151624-system-disable-startup-delay",
+                          "record_id":  "system.disable-startup-delay",
+                          "tweak_id":  "system.disable-startup-delay",
+                          "test_id":  "startup-delay-runtime-20260327-150628",
+                          "family":  "startup-delay-runtime",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+                          "value_name":  "StartupDelayInMSec",
+                          "value_state":  "StartupDelayInMSec=0",
+                          "symptom":  "Shell health was degraded after the startup-delay-runtime runtime probe.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T12:16:24.3322270Z",
+                          "notes":  "Recovered by snapshot revert after the startup-delay-runtime runtime lane."
+                      },
+                      {
+                          "incident_id":  "20260327153609-performance-disable-taskbar-animations",
+                          "record_id":  "performance.disable-taskbar-animations",
+                          "tweak_id":  "performance.disable-taskbar-animations",
+                          "test_id":  "taskbar-animations-runtime-20260327-152609",
+                          "family":  "taskbar-animations-runtime",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                          "value_name":  "TaskbarAnimations",
+                          "value_state":  "TaskbarAnimations=0",
+                          "symptom":  "Shell health was degraded after the taskbar-animations-runtime runtime probe.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T12:36:09.7857158Z",
+                          "notes":  "Recovered by snapshot revert after the taskbar-animations-runtime runtime lane."
+                      },
+                      {
+                          "incident_id":  "20260327155307-system-disable-startup-delay",
+                          "record_id":  "system.disable-startup-delay",
+                          "tweak_id":  "system.disable-startup-delay",
+                          "test_id":  "startup-delay-runtime-20260327-154404",
+                          "family":  "startup-delay-runtime",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+                          "value_name":  "StartupDelayInMSec",
+                          "value_state":  "StartupDelayInMSec=0",
+                          "symptom":  "Shell health was degraded after the startup-delay-runtime runtime probe.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T12:53:07.0967260Z",
+                          "notes":  "Recovered by snapshot revert after the startup-delay-runtime runtime lane."
+                      },
+                      {
+                          "incident_id":  "20260327161107-performance-disable-taskbar-animations",
+                          "record_id":  "performance.disable-taskbar-animations",
+                          "tweak_id":  "performance.disable-taskbar-animations",
+                          "test_id":  "taskbar-animations-runtime-20260327-160354",
+                          "family":  "taskbar-animations-runtime",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                          "value_name":  "TaskbarAnimations",
+                          "value_state":  "TaskbarAnimations=0",
+                          "symptom":  "vmrun failed (-1): Error: VMware Tools are not running in the guest",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T13:11:07.9078809Z",
+                          "notes":  "Runtime lane failed before the taskbar-animations-runtime summary completed. Recovered by snapshot revert."
                       }
                   ]
 }

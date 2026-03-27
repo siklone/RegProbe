@@ -1,0 +1,9 @@
+﻿{
+    "tool":  "Procmon",
+    "prefix":  "OpenTraceProcmon",
+    "tweak_id":  "system.disable-startup-delay",
+    "output_file":  "evidence/records/system.disable-startup-delay/procmon-lane.json",
+    "status":  "staged",
+    "runner":  null,
+    "note":  "No tweak-specific Procmon runner is mapped yet. Wire this wrapper to an existing VM Procmon capture script before using it for live validation."
+}

@@ -107,6 +107,36 @@ def load_v31_artifact_refs(record_id: str) -> list[dict[str, Any]]:
     return sanitize_value(valid_refs)
 
 
+def load_v31_full_evidence(record_id: str) -> dict[str, Any] | None:
+    path = v31_full_evidence_path(record_id)
+    if not path.exists():
+        return None
+    payload = load_json(path)
+    return payload if isinstance(payload, dict) else None
+
+
+def re_audit_completed(record_id: str, class_id: str, official: bool) -> bool:
+    if official or class_id != "A":
+        return False
+
+    payload = load_v31_full_evidence(record_id)
+    if not payload:
+        return False
+
+    re_audit = payload.get("re_audit") or {}
+    classification = payload.get("classification") or {}
+    runtime = payload.get("runtime") or {}
+    etw = runtime.get("etw") or {}
+    return (
+        re_audit.get("is_re_audit") is True
+        and str(re_audit.get("new_pipeline_version") or "") == "v3.1"
+        and bool(re_audit.get("new_cross_layer"))
+        and bool(re_audit.get("dead_flag_four_conditions_met"))
+        and (bool(re_audit.get("new_tools_applied")) or bool(etw.get("executed")))
+        and str(classification.get("class") or "") == "A"
+    )
+
+
 def etw_executed(record_id: str, record: dict[str, Any]) -> bool:
     path = v31_full_evidence_path(record_id)
     if path.exists():
@@ -152,6 +182,8 @@ def dead_flag_checks(record_id: str, record: dict[str, Any]) -> dict[str, bool]:
 
 
 def re_audit_reason(class_id: str, official: bool, record: dict[str, Any], record_id: str) -> str:
+    if re_audit_completed(record_id, class_id, official):
+        return ""
     reasons: list[str] = []
     if class_id == "B":
         reasons.append("current_blocker")
@@ -170,6 +202,8 @@ def re_audit_reason(class_id: str, official: bool, record: dict[str, Any], recor
 
 
 def re_audit_priority(class_id: str, official: bool, record: dict[str, Any], record_id: str) -> int:
+    if re_audit_completed(record_id, class_id, official):
+        return 0
     if class_id == "B":
         return 1
     if class_id != "A" or official:
@@ -181,7 +215,9 @@ def re_audit_priority(class_id: str, official: bool, record: dict[str, Any], rec
     return 3
 
 
-def re_audit_required(class_id: str, official: bool) -> bool:
+def re_audit_required(class_id: str, official: bool, record_id: str) -> bool:
+    if re_audit_completed(record_id, class_id, official):
+        return False
     if class_id == "B":
         return True
     if class_id == "A" and not official:
@@ -217,7 +253,7 @@ def main() -> int:
         official = has_official_evidence(record)
         class_id = class_entry["evidence_class"]
         checks = dead_flag_checks(record_id, record)
-        audit_required = re_audit_required(class_id, official)
+        audit_required = re_audit_required(class_id, official, record_id)
         class_counts[class_entry["evidence_class"]] += 1
         lane_counts[lane] += 1
         missing_counts[next_layer] += 1

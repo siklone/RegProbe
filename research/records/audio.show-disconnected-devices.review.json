@@ -4,7 +4,7 @@
   "record_id": "audio.show-disconnected-devices",
   "tweak_id": "audio.show-disconnected-devices",
   "record_status": "validated",
-  "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.",
+  "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. A focused v3.1 runtime lane on 2026-03-27 then re-ran the missing -> 1 -> missing cycle in Win25H2Clean, launched the classic Sound control panel, captured a WPR GeneralProfile placeholder trace, and ended with healthy shell state. That keeps the record aligned with the v3.1 contract without changing the underlying class basis: Procmon plus Ghidra remain the class-driving proof, and the runtime lane adds explicit rollback and VM-safe runner coverage.",
   "setting": {
     "name": "Show Disconnected Audio Devices",
     "category": "Audio",
@@ -13,7 +13,7 @@
     "casual_explanation": "This makes disconnected audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or cleaning up stale devices.",
     "why_people_change_it": "People enable it when they need to inspect endpoints that are currently unplugged or otherwise not active.",
     "tradeoffs_overview": "Showing disconnected devices can help debugging, but it can also expose stale or confusing entries that most users never need to see. This is a runtime-observed control-panel preference rather than a Microsoft-documented policy surface.",
-    "professional_notes": "The app writes ShowDisconnectedDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl. On 2026-03-14, Procmon captures of rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 showed RegQueryValue reads for ShowDisconnectedDevices with Data:1 and Data:0 when the value was toggled and restored. On 2026-03-26, a Ghidra headless pass against mmsys.cpl decompiled the DeviceCpl flag handlers and showed SHGetValueW and SHSetValueW calls for ShowDisconnectedDevices and the same DeviceCpl branch. That proves the classic Sound control panel both consumes and persists this registry value on this build. No primary Microsoft Learn or ADMX source for the DeviceCpl contract was captured in this pass, so the record is validated as a runtime-observed preference rather than as a fully documented Microsoft contract.",
+    "professional_notes": "The app writes ShowDisconnectedDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl. On 2026-03-14, Procmon captures of rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 showed RegQueryValue reads for ShowDisconnectedDevices with Data:1 and Data:0 when the value was toggled and restored. On 2026-03-26, a Ghidra headless pass against mmsys.cpl decompiled the DeviceCpl flag handlers and showed SHGetValueW and SHSetValueW calls for ShowDisconnectedDevices and the same DeviceCpl branch. On 2026-03-27, the mapped v3.1 runtime runner re-ran the missing -> 1 -> missing cycle in Win25H2Clean, launched the classic Sound control panel, captured a WPR GeneralProfile placeholder trace, and preserved healthy shell state. That tightens the reversible-cycle and VM-safe-runner coverage, but the class-driving consumer proof still comes from the Procmon reads and the code-side proof still comes from the Ghidra pass. No primary Microsoft Learn or ADMX source for the DeviceCpl contract was captured in this pass, so the record remains a runtime-observed preference rather than a fully documented Microsoft contract.",
     "targets": [
       {
         "target_id": "audio-devicecpl-show-disconnected",
@@ -73,9 +73,10 @@
           "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default."
         }
       ],
-      "notes": "Use this record as a validated runtime preference map for 0 and 1, not as a complete Microsoft-documented default model.",
+      "notes": "Use this record as a validated runtime preference map for 0 and 1, not as a complete Microsoft-documented default model. The 2026-03-27 v3.1 runtime lane preserved a missing-value baseline and restored it cleanly, but it did not capture how the Sound control panel interprets the missing state.",
       "evidence_ids": [
-        "procmon-audio-show-disconnected-devices"
+        "procmon-audio-show-disconnected-devices",
+        "runtime-audio-show-disconnected-devices-v31"
       ]
     }
   ],
@@ -108,7 +109,8 @@
       "apply_allowed": true,
       "evidence_ids": [
         "procmon-audio-show-disconnected-devices",
-        "app-audio-provider"
+        "app-audio-provider",
+        "runtime-audio-show-disconnected-devices-v31"
       ]
     }
   ],
@@ -141,6 +143,20 @@
       "strength": "high"
     },
     {
+      "evidence_id": "runtime-audio-show-disconnected-devices-v31",
+      "kind": "wpr-trace",
+      "title": "Win25H2Clean v3.1 runtime lane - Audio DeviceCpl ShowDisconnectedDevices",
+      "location": "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json and evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md",
+      "summary": "A v3.1 runtime runner on Win25H2Clean started from a missing-value baseline, wrote ShowDisconnectedDevices = 1, launched the classic Sound control panel via rundll32.exe, captured a WPR GeneralProfile placeholder trace, restored the missing baseline, and ended with healthy shell state. This strengthens the reversible-cycle and VM-safe-runner coverage, but it does not replace the Procmon consumer proof.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "rollback"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "app-audio-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
@@ -161,14 +177,14 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story.",
+    "why": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story. The 2026-03-27 v3.1 runtime lane adds an explicit missing -> 1 -> missing VM cycle with a control-panel launch, WPR placeholder trace, and healthy shell recovery, but the class basis still rests on the Procmon plus Ghidra convergence rather than on the runtime lane alone.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "last_reviewed_utc": "2026-03-27T00:00:00Z",
   "validation_proof": {
-    "source_url": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md",
-    "exact_quote_or_path": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:0.",
+    "source_url": "research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md",
+    "exact_quote_or_path": "Procmon: audio-devicecpl-query-20260314-pml.md and audio-devicecpl-query-zero-20260314-pml.md captured rundll32.exe reading ShowDisconnectedDevices with Data:1 and Data:0. Ghidra: audio-devicecpl-ghidra.md decompiled the mmsys.cpl SHGetValueW/SHSetValueW handlers for ShowDisconnectedDevices. Runtime lane: audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json preserved missing -> 1 -> missing, launched the control panel, and ended with healthy shell state.",
     "key_found_on_page": true,
-    "notes": "The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report."
+    "notes": "The record-specific v3.1 re-audit note consolidates the existing Procmon and Ghidra proof with the 2026-03-27 runtime-runner summary. The class-driving proof remains the Procmon plus Ghidra convergence; the runtime lane is recorded as supplemental rollback and VM-safety evidence."
   }
 }

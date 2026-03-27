@@ -1,0 +1,32 @@
+﻿{
+    "tool":  "ETW",
+    "session_name":  "OpenTraceRegistry",
+    "tweak_id":  "performance.disable-taskbar-animations",
+    "output_file":  "evidence/records/performance.disable-taskbar-animations/runtime-lane.json",
+    "status":  "runner-failed",
+    "runner":  {
+                   "script":  "scripts/vm/run-explorer-shell-registry-runtime-probe.ps1",
+                   "args":  [
+                                "-RecordId",
+                                "performance.disable-taskbar-animations",
+                                "-ProbePrefix",
+                                "taskbar-animations-runtime",
+                                "-Family",
+                                "taskbar-animations-runtime",
+                                "-RegistryPath",
+                                "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                "-RegistryPathNative",
+                                "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                                "-ValueName",
+                                "TaskbarAnimations",
+                                "-ValueData",
+                                "0",
+                                "-SnapshotName",
+                                "baseline-20260327-shell-stable"
+                            ]
+               },
+    "note":  "Invoked the mapped VM runtime runner for this tweak. Check the runner output root for concrete capture files.",
+    "exit_code":  1,
+    "log_file":  "evidence/records/performance.disable-taskbar-animations/runtime-lane.log",
+    "result_ref":  "evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-160354/summary.json"
+}

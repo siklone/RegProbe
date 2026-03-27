@@ -3,7 +3,7 @@
   "classification": {
     "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story.",
+    "reason": "Procmon on 2026-03-14 captured rundll32.exe launching mmsys.cpl and reading ShowDisconnectedDevices with both 1 and 0, Ghidra on 2026-03-26 decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story. The 2026-03-27 v3.1 runtime lane adds an explicit missing -> 1 -> missing VM cycle with a control-panel launch, WPR placeholder trace, and healthy shell recovery, but the class basis still rests on the existing Procmon plus Ghidra convergence.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
@@ -13,7 +13,7 @@
     "frida_kernel_guard_applied": false,
     "dead_flag_checks": {
       "etw_executed": true,
-      "boot_phase_included": true,
+      "boot_phase_included": false,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },

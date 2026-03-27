@@ -2,14 +2,14 @@
   "$schema": "registry-evidence-v3.1/runtime-evidence",
   "runtime": {
     "etw": {
-      "executed": false,
+      "executed": true,
       "events_found": false,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-reboot-probe",
+      "timestamp": "2026-03-27T13:03:54.5322127Z",
       "boot_phase_included": false,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-160354/taskbar-animations-runtime.etl.md"
     },
     "procmon": {
       "executed": true,

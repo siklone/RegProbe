@@ -26,8 +26,8 @@
       "pdb_loaded": false,
       "pdb_source": null,
       "string_xref_found": true,
-      "function_name": null,
-      "decompile_snippet": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
+      "function_name": "FUN_18000a004; FUN_180008eb0",
+      "decompile_snippet": "The checked-in Ghidra export shows FUN_18000a004 calling SHGetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and FUN_180008eb0 calling SHSetValueW for the same value in mmsys.cpl.",
       "call_graph_depth": null,
       "output_file": "evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
       "ghidra_no_function_fallback": false

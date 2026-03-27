@@ -1,5 +1,26 @@
 {
   "runtime": {
+    "performance.disable-taskbar-animations": {
+      "script": "scripts/vm/run-explorer-shell-registry-runtime-probe.ps1",
+      "args": [
+        "-RecordId",
+        "performance.disable-taskbar-animations",
+        "-ProbePrefix",
+        "taskbar-animations-runtime",
+        "-Family",
+        "taskbar-animations-runtime",
+        "-RegistryPath",
+        "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "-RegistryPathNative",
+        "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "-ValueName",
+        "TaskbarAnimations",
+        "-ValueData",
+        "0",
+        "-SnapshotName",
+        "baseline-20260327-shell-stable"
+      ]
+    },
     "audio.show-disconnected-devices": {
       "script": "scripts/vm/run-audio-devicecpl-runtime-probe.ps1",
       "args": [
@@ -35,6 +56,15 @@
         "baseline-20260327-shell-stable"
       ]
     },
+    "system.disable-jpeg-reduction": {
+      "script": "scripts/vm/run-jpeg-import-quality-runtime-probe.ps1",
+      "args": [
+        "-RecordId",
+        "system.disable-jpeg-reduction",
+        "-SnapshotName",
+        "baseline-20260327-shell-stable"
+      ]
+    },
     "power.disable-cpu-idle-states": {
       "script": "scripts/vm/run-cpu-idle-states-runtime-probe.ps1",
       "args": [
@@ -42,6 +72,29 @@
         "power.disable-cpu-idle-states",
         "-SnapshotName",
         "baseline-20260327-shell-stable"
+      ]
+    },
+    "system.disable-startup-delay": {
+      "script": "scripts/vm/run-explorer-shell-registry-runtime-probe.ps1",
+      "args": [
+        "-RecordId",
+        "system.disable-startup-delay",
+        "-ProbePrefix",
+        "startup-delay-runtime",
+        "-Family",
+        "startup-delay-runtime",
+        "-RegistryPath",
+        "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+        "-RegistryPathNative",
+        "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+        "-ValueName",
+        "StartupDelayInMSec",
+        "-ValueData",
+        "0",
+        "-SnapshotName",
+        "baseline-20260327-shell-stable",
+        "-SettleSeconds",
+        "20"
       ]
     }
   },

@@ -3,7 +3,7 @@
   "classification": {
     "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-hidden state with a clean restore story.",
+    "reason": "The record keeps Class A under the current v3.1 matrix because the repo still preserves converged runtime and static proof: a normalized Procmon summary from the 2026-03-14 Sound control panel capture shows rundll32.exe querying ShowHiddenDevices with both 1 and 0, the checked-in Ghidra export decompiles the mmsys.cpl handlers that read and write the same DeviceCpl flag, the 2026-03-27 runtime lane cleanly applied and restored the value on Win25H2Clean, and the app writes the same show-hidden state with a clean restore story. This remains a runtime-observed preference rather than a Microsoft-documented contract.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",

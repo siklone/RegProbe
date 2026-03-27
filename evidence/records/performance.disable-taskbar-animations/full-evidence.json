@@ -27,14 +27,14 @@
   },
   "runtime": {
     "etw": {
-      "executed": false,
+      "executed": true,
       "events_found": false,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-reboot-probe",
+      "timestamp": "2026-03-27T13:03:54.5322127Z",
       "boot_phase_included": false,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-160354/taskbar-animations-runtime.etl.md"
     },
     "procmon": {
       "executed": true,
@@ -129,7 +129,7 @@
     "layer_count": 3,
     "frida_kernel_guard_applied": false,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
@@ -140,15 +140,15 @@
   "timeline": [
     {
       "step": "bootstrap_record_load",
-      "timestamp": "2026-03-26T23:12:55.258203Z"
+      "timestamp": "2026-03-27T13:18:53.235546Z"
     },
     {
-      "step": "all",
-      "timestamp": "2026-03-26T23:12:55.258203Z"
+      "step": "faz1",
+      "timestamp": "2026-03-27T13:18:53.235546Z"
     },
     {
       "step": "classification",
-      "timestamp": "2026-03-26T23:12:55.258203Z"
+      "timestamp": "2026-03-27T13:18:53.235546Z"
     },
     {
       "step": "last_reviewed",
@@ -168,16 +168,19 @@
     ],
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
-    "re_audit_date": "2026-03-26T23:12:55.258203Z",
-    "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
+    "re_audit_date": "2026-03-27T13:18:53.234542Z",
+    "re_audit_reason": "non_official_v31_reaudit",
     "re_audit_priority": 2,
-    "new_tools_applied": [],
+    "new_tools_applied": [
+      "etw",
+      "vm-runtime-runner"
+    ],
     "new_cross_layer": true,
     "new_class": "A",
     "class_changed": false,
     "frida_kernel_guard_applied": false,
-    "dead_flag_four_conditions_met": false,
-    "notes": "Bootstrapped from the current research record and evidence audit. Replace with fresh v3.1 runtime output after re-audit runs.",
+    "dead_flag_four_conditions_met": true,
+    "notes": "Runtime lane failed (evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-160354/summary.json)",
     "new_pipeline_version": "v3.1"
   }
 }

@@ -10,18 +10,18 @@
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
     "re_audit_date": "2026-03-27T08:10:22.424552Z",
-    "re_audit_reason": "non_official_v31_reaudit",
+    "re_audit_reason": "non_official_v31_reaudit; runtime_runner_wpr_shell_safe; dead_flag_checks_incomplete",
     "re_audit_priority": 3,
     "new_tools_applied": [
-      "etw",
+      "wpr",
       "vm-runtime-runner"
     ],
     "new_cross_layer": true,
     "new_class": "A",
     "class_changed": false,
     "frida_kernel_guard_applied": false,
-    "dead_flag_four_conditions_met": true,
-    "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json)",
+    "dead_flag_four_conditions_met": false,
+    "notes": "Existing Class A stands on Procmon plus Ghidra. The 2026-03-27 runtime runner added a WPR-backed missing -> 1 -> missing cycle with a control-panel launch and healthy shell state (evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json), but it did not replace the Procmon consumer proof.",
     "new_pipeline_version": "v3.1"
   }
 }

@@ -4,7 +4,7 @@
   "record_id": "system.disable-startup-delay",
   "tweak_id": "system.disable-startup-delay",
   "record_status": "validated",
-  "summary": "Win25H2Clean reversible proof now covers the full current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, Explorer shell restart traces read that path live, a bounded WPR lane captured both `missing` and `0`, and the value restores back to missing cleanly.",
+  "summary": "Win25H2Clean reversible proof still anchors the current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, the record retains Procmon shell-restart corroboration for Explorer\\Serialize, a bounded WPR lane exercised both `missing` and `0`, and the value restores back to missing cleanly.",
   "setting": {
     "name": "Startup Program Delay",
     "category": "System",
@@ -13,7 +13,7 @@
     "casual_explanation": "Windows can stagger startup apps instead of launching them all immediately. People disable the delay when they want login to feel quicker, but that can also make startup load spike harder.",
     "why_people_change_it": "People disable it when they want startup apps to launch sooner after sign-in.",
     "tradeoffs_overview": "Removing the startup delay can make apps appear sooner, but it can also increase boot-time contention and make sign-in feel heavier on slower systems. The current build evidence is strong, but this still is not a primary Microsoft registry publication.",
-    "professional_notes": "The current dataset now has four layers of proof for StartupDelayInMSec on HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize: repo notes, a Ghidra string hit for Explorer Serialize, a Win25H2Clean Procmon shell-restart trace that reads StartupDelayInMSec live, and a bounded WPR lane that captured both the missing baseline and the app's value `0` during Explorer restarts. The reversible VM probe confirmed missing -> 0 -> missing on the same path. Both WPR states kept `explorer`, `sihost`, `ShellHost`, and `ctfmon` alive after the shell restart. That is strong enough to treat the missing baseline and value 0 as the current build contract for this project even though Microsoft does not publish the raw shell registry value as a primary supported policy surface.",
+    "professional_notes": "The current dataset now has four layers of proof for StartupDelayInMSec on HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize: repo notes, a Ghidra string-search hit for Explorer Serialize, a Win25H2Clean Procmon shell-restart capture reference for StartupDelayInMSec, and a bounded WPR lane that exercised both the missing baseline and the app's value `0` during Explorer restarts. The checked-in Procmon artifact is the repo-friendly `.pml` placeholder rather than a text export, and the Ghidra artifact is string-reference support rather than a decompiled registry-read function. The reversible VM probe still confirms missing -> 0 -> missing on the same path. Both WPR states kept `explorer`, `sihost`, `ShellHost`, and `ctfmon` alive after the shell restart. Under the current v3.1 contract that is still enough to keep the record on the converged-vm lane even though Microsoft does not publish the raw shell registry value as a primary supported policy surface.",
     "targets": [
       {
         "target_id": "startup-delay-in-msec",
@@ -26,7 +26,7 @@
             "state_kind": "missing",
             "value": null,
             "label": "Observed Win25H2Clean baseline",
-            "meaning": "The current 25H2 VM baseline leaves StartupDelayInMSec unset and Explorer still reads the Serialize path live.",
+            "meaning": "The current 25H2 VM baseline leaves StartupDelayInMSec unset, and the reversible probe plus shell-restart evidence keep that missing state consistent on this build.",
             "evidence_ids": [
               "vm-batch-probe-20260320-disable-startup-delay",
               "procmon-startup-delay-shell-restart",
@@ -37,7 +37,7 @@
             "state_kind": "value",
             "value": 0,
             "label": "Observed no-delay profile",
-            "meaning": "The current app and the Win25H2Clean shell trace both support 0 as the no-delay startup profile on the Explorer Serialize path.",
+            "meaning": "The current app, reversible probe, and shell-restart evidence all align on 0 as the no-delay startup profile for the Explorer Serialize path.",
             "evidence_ids": [
               "repo-system-doc-startup-delay",
               "app-system-provider",
@@ -141,7 +141,7 @@
         "Can also make sign-in heavier by stacking more startup load at once."
       ],
       "apply_allowed": true,
-      "notes": "Strong current-build evidence exists and the repo now treats the live shell contract as app-ready.",
+      "notes": "App-ready under the current v3.1 converged-vm lane rather than an official-policy lane.",
       "evidence_ids": [
         "repo-system-doc-startup-delay",
         "app-system-provider",
@@ -182,10 +182,10 @@
     },
     {
       "evidence_id": "ghidra-explorer-serialize-search",
-      "kind": "ghidra-trace",
-      "title": "Ghidra headless search on explorer.exe for Serialize",
+      "kind": "ghidra-headless",
+      "title": "Our Ghidra headless string search on explorer.exe for Serialize",
       "location": "evidence/files/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt",
-      "summary": "Headless Ghidra analysis of explorer.exe with SearchMemoryForStringsRegExArg.java 'Serialize' produced three matches, confirming the Explorer Serialize string path in the binary.",
+      "summary": "A headless Ghidra string search on explorer.exe for `Serialize` produced three matches. This is string-reference support for the Explorer Serialize path on the current build, not a decompiled registry-read function for StartupDelayInMSec.",
       "supports": [
         "path",
         "string-reference",
@@ -212,7 +212,7 @@
       "kind": "procmon-trace",
       "title": "VM Procmon trace - Explorer shell restart reads StartupDelayInMSec",
       "location": "evidence/files/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md",
-      "summary": "Win25H2Clean Procmon capture during an Explorer restart while StartupDelayInMSec was toggled to 0 and restored. The trace backs the live shell startup-delay surface on this build.",
+      "summary": "The record keeps the Procmon layer as the repo-friendly placeholder for the original Win25H2Clean Explorer shell-restart capture while StartupDelayInMSec was toggled to 0 and restored. That preserves runtime corroboration for the live startup-delay surface on this build without checking in a text export of the raw `.pml`.",
       "supports": [
         "path",
         "value",
@@ -242,18 +242,18 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Win25H2Clean reversible proof, a live Explorer Procmon trace, a Ghidra string hit, and a bounded WPR shell-restart lane all line up on StartupDelayInMSec. That is enough to treat the missing baseline and value 0 as the current build contract for this project and keep the tweak app-ready.",
+    "why": "The current v3.1 record stays Class A on a converged-vm basis: the reversible probe confirms missing -> 0 -> missing, the record still carries Procmon shell-restart corroboration for the same path, the Ghidra search confirms the Explorer Serialize string path, and the bounded WPR lane exercised both missing and 0 with clean shell recovery. Microsoft still does not publish the raw registry contract, so this is build-specific runtime evidence rather than official-policy evidence.",
     "blocking_issues": []
   },
   "open_questions": [
     "Can a primary Microsoft source for StartupDelayInMSec be captured?",
-    "Should this setting be treated only as an advanced Explorer preference?"
+    "Should the Procmon shell-restart lane be re-exported into a checked-in text artifact later?"
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-03-27T00:00:00Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
-    "exact_quote_or_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize\\StartupDelayInMSec: before=__MISSING__, after_apply=0, after_restore=__MISSING__",
+    "exact_quote_or_path": "vm-batch-probe-20260320.json: system.disable-startup-delay before=__MISSING__, after_apply=0, after_restore=__MISSING__; startup-delay-0.summary.json: before missing, applied 0, restored missing, shell_after explorer/sihost/ShellHost/ctfmon true",
     "key_found_on_page": true,
-    "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md Ghidra headless analysis of explorer.exe also found three matches for Serialize, which supports the Explorer Serialize path used by the record. Added Win25H2Clean Procmon corroboration via procmon-startup-delay.pml during an Explorer shell restart. On 2026-03-26 a bounded WPR lane captured both the missing baseline and value 0 during Explorer restarts, with shell recovery in both states."
+    "notes": "Retroactive v3.1 pass relies on the checked-in reversible probe, the startup-delay WPR summaries for both missing and 0, the explorer.exe Ghidra string-search output, and the repo-friendly Procmon placeholder note for the original shell-restart capture. Microsoft still does not publish StartupDelayInMSec as a primary registry contract."
   }
 }

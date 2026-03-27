@@ -3,18 +3,18 @@
   "runtime": {
     "etw": {
       "executed": true,
-      "events_found": true,
+      "events_found": false,
       "reading_process": null,
       "reading_pid": null,
-      "operation": "runtime-control-panel-probe",
+      "operation": "wpr-generalprofile-control-panel-launch",
       "timestamp": "2026-03-27T07:47:36.1947121Z",
       "boot_phase_included": false,
-      "trace_file": "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md"
+      "trace_file": "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json and evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md"
     },
     "procmon": {
       "executed": true,
       "events_found": true,
-      "reading_process": null,
+      "reading_process": "rundll32.exe",
       "trace_file": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
     },
     "frida": {
@@ -30,6 +30,7 @@
     }
   },
   "source_evidence_ids": [
-    "procmon-audio-show-disconnected-devices"
+    "procmon-audio-show-disconnected-devices",
+    "runtime-audio-show-disconnected-devices-v31"
   ]
 }

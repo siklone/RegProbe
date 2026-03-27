@@ -1,6 +1,6 @@
 ﻿{
-    "tool":  "ETW",
-    "session_name":  "OpenTraceRegistry",
+    "tool":  "WPR",
+    "profile":  "GeneralProfile",
     "tweak_id":  "audio.show-disconnected-devices",
     "output_file":  "evidence/records/audio.show-disconnected-devices/runtime-lane.json",
     "status":  "runner-ok",
@@ -17,7 +17,7 @@
                                 "baseline-20260327-shell-stable"
                             ]
                },
-    "note":  "Invoked the mapped VM runtime runner for this tweak. Check the runner output root for concrete capture files.",
+    "note":  "Invoked the mapped VM runtime runner for this tweak. This lane re-ran the missing -> 1 -> missing cycle with a WPR GeneralProfile placeholder trace and shell-health checks. It supplements rollback and runner coverage, but the class-driving consumer proof remains the existing Procmon capture.",
     "exit_code":  0,
     "log_file":  "evidence/records/audio.show-disconnected-devices/runtime-lane.log",
     "result_ref":  "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json"

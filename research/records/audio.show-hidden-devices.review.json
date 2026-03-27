@@ -4,7 +4,7 @@
   "record_id": "audio.show-hidden-devices",
   "tweak_id": "audio.show-hidden-devices",
   "record_status": "validated",
-  "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowHiddenDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.",
+  "summary": "The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the current v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.",
   "setting": {
     "name": "Show Hidden Audio Devices",
     "category": "Audio",
@@ -13,7 +13,7 @@
     "casual_explanation": "This makes hidden audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or driver cleanup.",
     "why_people_change_it": "People enable it when they need to inspect or troubleshoot devices that the normal sound list does not show.",
     "tradeoffs_overview": "Showing hidden devices can help debugging, but it can also expose stale or confusing audio entries that most users never need to see. This is a runtime-observed control-panel preference rather than a Microsoft-documented policy surface.",
-    "professional_notes": "The app writes ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl. On 2026-03-14, Procmon captures of rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 showed RegQueryValue reads for ShowHiddenDevices with Data:1 and Data:0 when the value was toggled and restored. On 2026-03-26, a Ghidra headless pass against mmsys.cpl decompiled the DeviceCpl flag handlers and showed SHGetValueW and SHSetValueW calls for ShowHiddenDevices and the same DeviceCpl branch. That proves the classic Sound control panel both consumes and persists this registry value on this build. No primary Microsoft Learn or ADMX source for the DeviceCpl contract was captured in this pass, so the record is validated as a runtime-observed preference rather than as a fully documented Microsoft contract.",
+    "professional_notes": "The app writes ShowHiddenDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl. The checked-in Procmon markdown files for the 2026-03-14 capture are placeholders because the raw PML is off-git, but the record still preserves a normalized hit summary showing rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and issuing RegQueryValue reads for ShowHiddenDevices with Data:1 and Data:0. On 2026-03-26, a Ghidra headless pass against mmsys.cpl decompiled the DeviceCpl flag handlers and showed SHGetValueW and SHSetValueW calls for ShowHiddenDevices on the same branch. On 2026-03-27, the v3.1 runtime lane cleanly applied the value, launched the Sound control panel, and restored the original missing state on Win25H2Clean. That is enough to keep the record validated as a runtime-observed preference under the current v3.1 cross-layer rule, but not as a fully documented Microsoft contract.",
     "targets": [
       {
         "target_id": "audio-devicecpl-show-hidden",
@@ -117,8 +117,8 @@
       "evidence_id": "procmon-audio-show-hidden-devices",
       "kind": "procmon-trace",
       "title": "Procmon capture - Sound control panel ShowHiddenDevices runtime reads",
-      "location": "evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
-      "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and Data:0 in separate reversible captures. That proves the classic Sound control panel consumes this registry value on this build.",
+      "location": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
+      "summary": "The raw Procmon PML is off-git, but the repo preserves a normalized summary of the 2026-03-14 capture showing rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and Data:0 in separate reversible passes. The checked-in Procmon markdown files are placeholders for those off-git captures.",
       "supports": [
         "path",
         "value",
@@ -161,14 +161,14 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowHiddenDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-hidden state with a clean restore story.",
+    "why": "The record keeps Class A under the current v3.1 matrix because the repo still preserves converged runtime and static proof: a normalized Procmon summary from the 2026-03-14 Sound control panel capture shows rundll32.exe querying ShowHiddenDevices with both 1 and 0, the checked-in Ghidra export decompiles the mmsys.cpl handlers that read and write the same DeviceCpl flag, the 2026-03-27 runtime lane cleanly applied and restored the value on Win25H2Clean, and the app writes the same show-hidden state with a clean restore story. This remains a runtime-observed preference rather than a Microsoft-documented contract.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "last_reviewed_utc": "2026-03-27T11:06:26Z",
   "validation_proof": {
-    "source_url": "evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md",
+    "source_url": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md",
     "exact_quote_or_path": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:0.",
     "key_found_on_page": true,
-    "notes": "The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report."
+    "notes": "This v3.1 re-audit keeps the normalized Procmon hit summary in a record-scoped note because the checked-in Procmon markdown files are only placeholders for the off-git raw PML. The same note also ties the runtime summary and Ghidra export back to the record."
   }
 }
