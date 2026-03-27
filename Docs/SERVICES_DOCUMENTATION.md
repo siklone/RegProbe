@@ -1,138 +1,124 @@
-# Open Trace Project - Servis YÃ¶netimi DokÃ¼mantasyonu
+# RegProbe Service and Task Reference
 
-Bu belge, uygulamanÄ±n yÃ¶nettiÄŸi tÃ¼m Windows servislerini, zamanlanmÄ±ÅŸ gÃ¶revleri ve sistem bileÅŸenlerini detaylÄ± olarak aÃ§Ä±klar.
+This document explains the Windows services, scheduled tasks, and supporting system components that RegProbe touches in the shipped product surface.
 
----
+## Services Commonly Managed By The App
 
-## ðŸ”§ Devre DÄ±ÅŸÄ± BÄ±rakÄ±labilir Servisler
+### Telemetry and data collection
 
-### Telemetri ve Veri Toplama
+| Service | Display name | Risk | Notes |
+| --- | --- | --- | --- |
+| `DiagTrack` | Connected User Experiences and Telemetry | Safe | Sends telemetry data to Microsoft. |
+| `dmwappushservice` | WAP Push Message Routing Service | Safe | Routes push-related messages and notifications. |
+| `WerSvc` | Windows Error Reporting Service | Safe | Uploads crash and diagnostic reports. |
 
-| Servis | GÃ¶rÃ¼nen Ad | Risk | AÃ§Ä±klama |
-|--------|-----------|------|----------|
-| `DiagTrack` | Connected User Experiences and Telemetry | Safe | Microsoft'a telemetri gÃ¶nderir |
-| `dmwappushservice` | WAP Push Message Routing | Safe | Push bildirim yÃ¶nlendirme |
-| `WerSvc` | Windows Error Reporting Service | Safe | Hata raporlarÄ± gÃ¶nderir |
+### Performance and search
 
-### Performans ve Arama
+| Service | Display name | Risk | Notes |
+| --- | --- | --- | --- |
+| `SysMain` | SysMain | Advanced | Prefetches application data; benefits vary on SSD-heavy systems. |
+| `WSearch` | Windows Search | Advanced | Maintains the file/content index for search. |
 
-| Servis | GÃ¶rÃ¼nen Ad | Risk | AÃ§Ä±klama |
-|--------|-----------|------|----------|
-| `SysMain` | Superfetch | Advanced | Uygulama Ã¶n yÃ¼kleme (SSD'lerde gereksiz) |
-| `WSearch` | Windows Search | Advanced | Dosya indeksleme (SSD'de hÄ±z farkÄ± az) |
+### Printing
 
-### YazdÄ±rma
-
-| Servis | GÃ¶rÃ¼nen Ad | Risk | AÃ§Ä±klama |
-|--------|-----------|------|----------|
-| `Spooler` | Print Spooler | Risky | YazÄ±cÄ± yoksa devre dÄ±ÅŸÄ± bÄ±rakÄ±labilir |
-| `PrintNotify` | Printer Notifications | Safe | YazÄ±cÄ± bildirimleri |
-| `PrintWorkflowUserSvc_*` | Per-user Print Workflow | Safe | KullanÄ±cÄ± bazlÄ± yazdÄ±rma |
-| `PrintDeviceConfigurationService` | Printer Device Configuration | Safe | YazÄ±cÄ± yapÄ±landÄ±rma |
-| `PrintScanBrokerService` | Print/Scan Broker | Safe | YazdÄ±rma/tarama aracÄ± |
+| Service | Display name | Risk | Notes |
+| --- | --- | --- | --- |
+| `Spooler` | Print Spooler | Risky | Only disable when the machine does not need local or network printing. |
+| `PrintNotify` | Printer Extensions and Notifications | Safe | Handles print-related notifications. |
+| `PrintWorkflowUserSvc_*` | Print Workflow User Service | Safe | Per-user print pipeline helper. |
+| `PrintDeviceConfigurationService` | Printer Device Configuration Service | Safe | Applies printer-specific configuration. |
+| `PrintScanBrokerService` | Print/Scan Broker Service | Safe | Brokering layer for print and scan flows. |
 
 ### Bluetooth
 
-| Servis | GÃ¶rÃ¼nen Ad | Risk | AÃ§Ä±klama |
-|--------|-----------|------|----------|
-| `bthserv` | Bluetooth Support Service | Risky | BT kullanmÄ±yorsanÄ±z kapatÄ±n |
-| `BluetoothUserService_*` | Per-user Bluetooth | Safe | KullanÄ±cÄ± bazlÄ± BT |
-| `BTAGService` | Bluetooth Audio Gateway | Advanced | BT ses geÃ§idi |
+| Service | Display name | Risk | Notes |
+| --- | --- | --- | --- |
+| `bthserv` | Bluetooth Support Service | Risky | Reasonable to disable only when Bluetooth is not used at all. |
+| `BluetoothUserService_*` | Bluetooth User Support Service | Safe | Per-user Bluetooth service instance. |
+| `BTAGService` | Bluetooth Audio Gateway Service | Advanced | Supports Bluetooth audio gateway scenarios. |
 
----
+## Scheduled Tasks Commonly Managed By The App
 
-## â° Devre DÄ±ÅŸÄ± BÄ±rakÄ±labilir ZamanlanmÄ±ÅŸ GÃ¶revler
+### Telemetry tasks
 
-### Telemetri GÃ¶revleri
+| Task path | Notes |
+| --- | --- |
+| `\Microsoft\Windows\Application Experience\MareBackup` | Application compatibility backup task. |
+| `\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser` | Compatibility assessment task. |
+| `\Microsoft\Windows\Customer Experience Improvement Program\Consolidator` | CEIP data consolidation task. |
+| `\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip` | USB CEIP data task. |
+| `\Microsoft\Windows\Feedback\Siuf\DmClient` | Feedback prompt task. |
+| `\Microsoft\Windows\Windows Error Reporting\QueueReporting` | Error report queue processing. |
 
-| GÃ¶rev Yolu | AÃ§Ä±klama |
-|------------|----------|
-| `\Microsoft\Windows\Application Experience\MareBackup` | Uygulama uyumluluÄŸu yedekleme |
-| `\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser` | Uyumluluk deÄŸerlendirmesi |
-| `\Microsoft\Windows\Customer Experience Improvement Program\Consolidator` | CEIP veri birleÅŸtirme |
-| `\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip` | USB CEIP |
-| `\Microsoft\Windows\Feedback\Siuf\DmClient` | Geri bildirim istemcisi |
-| `\Microsoft\Windows\Windows Error Reporting\QueueReporting` | Hata raporu kuyruÄŸu |
+### Maintenance tasks
 
-### BakÄ±m GÃ¶revleri
+| Task path | Risk | Notes |
+| --- | --- | --- |
+| `\Microsoft\Windows\DiskCleanup\SilentCleanup` | Safe | Automated disk cleanup run. |
+| `\Microsoft\Windows\Diagnosis\Scheduled` | Safe | Scheduled diagnostics collection. |
+| `\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector` | Safe | Disk diagnostic collector. |
+| `\Microsoft\Windows\Maintenance\WinSAT` | Safe | Windows System Assessment Tool maintenance task. |
+| `\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem` | Safe | Power-efficiency analysis task. |
 
-| GÃ¶rev Yolu | Risk | AÃ§Ä±klama |
-|------------|------|----------|
-| `\Microsoft\Windows\DiskCleanup\SilentCleanup` | Safe | Otomatik disk temizleme |
-| `\Microsoft\Windows\Diagnosis\Scheduled` | Safe | ZamanlanmÄ±ÅŸ tanÄ±lama |
-| `\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector` | Safe | Disk tanÄ±lama |
-| `\Microsoft\Windows\Maintenance\WinSAT` | Safe | Windows Sistem DeÄŸerlendirmesi |
-| `\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem` | Safe | GÃ¼Ã§ verimliliÄŸi analizi |
+### Device information tasks
 
-### Cihaz Bilgi GÃ¶revleri
+| Task path | Notes |
+| --- | --- |
+| `\Microsoft\Windows\Device Information\Device` | Collects system device information. |
+| `\Microsoft\Windows\Device Information\Device User` | Collects per-user device information. |
 
-| GÃ¶rev Yolu | AÃ§Ä±klama |
-|------------|----------|
-| `\Microsoft\Windows\Device Information\Device` | Cihaz bilgisi toplama |
-| `\Microsoft\Windows\Device Information\Device User` | KullanÄ±cÄ± cihaz bilgisi |
+## Tweak Provider Coverage
 
----
+| Category | Source file | Scope | Notes |
+| --- | --- | --- | --- |
+| System | `SystemTweakProvider.cs` | Curated UI surface | Game Mode, startup delay, and service-backed actions. |
+| System Registry | `SystemRegistryTweakProvider.cs` | Advanced registry catalog | Kernel, NTFS, DWM, and low-level system values. |
+| Privacy | `PrivacyTweakProvider.cs` | Curated UI surface | Telemetry, location, activity history, and policy-backed privacy settings. |
+| Security | `SecurityTweakProvider.cs` | Curated UI surface | UAC, firewall, Defender-related, and policy-backed security settings. |
+| Network | `NetworkTweakProvider.cs` | Curated UI surface | SMB, IPv6, adapter, and network stack values. |
+| Performance | `PerformanceTweakProvider.cs` | Curated UI surface | Animations, throttling, and responsiveness settings. |
+| Peripheral | `PeripheralTweakProvider.cs` | Curated UI surface | Mouse, keyboard, and input behavior settings. |
+| Audio | `AudioTweakProvider.cs` | Curated UI surface | Beep, ducking, and audio device presentation settings. |
+| Visibility | `VisibilityTweakProvider.cs` | Curated UI surface | Explorer/UI visibility and presentation options. |
+| Misc | `MiscTweakProvider.cs` | Curated UI surface | Small non-core convenience actions. |
+| Legacy | `LegacyTweakProvider.cs` | Research/back-compat catalog | Historical or compatibility-focused tweak mappings. |
 
-## ðŸ“Š Tweak Kategorileri ve SayÄ±larÄ±
+## Permission Model
 
-| Kategori | Dosya | Tweak SayÄ±sÄ± | AÃ§Ä±klama |
-|----------|-------|--------------|----------|
-| System | `SystemTweakProvider.cs` | 9 | Game Mode, Startup Delay, Services |
-| System Registry | `SystemRegistryTweakProvider.cs` | 30+ | Kernel, NTFS, DWM |
-| Privacy | `PrivacyTweakProvider.cs` | 70+ | Telemetri, Konum, Aktivite |
-| Security | `SecurityTweakProvider.cs` | 15 | UAC, Firewall, VBS |
-| Network | `NetworkTweakProvider.cs` | 30+ | SMB, IPv6, AdaptÃ¶rler |
-| Performance | `PerformanceTweakProvider.cs` | 8 | Animasyonlar, Throttling |
-| Peripheral | `PeripheralTweakProvider.cs` | 10 | Mouse, Keyboard |
-| Audio | `AudioTweakProvider.cs` | 6 | Beep, Ducking |
-| Visibility | `VisibilityTweakProvider.cs` | 25 | UI Ã¶ÄŸeleri, Spotlight |
-| Misc | `MiscTweakProvider.cs` | 5 | 3rd party apps |
-| Legacy | `LegacyTweakProvider.cs` | 100+ | Eski tweak kataloÄŸu |
+### Operations that require elevation
 
-**Toplam: 278+ tweak** (`Docs/tweaks/tweak-catalog.csv` kaynaÄŸÄ±)
+- Writing to `HKLM`
+- Changing service startup types
+- Disabling scheduled tasks
+- Editing protected system locations
+- Applying BCD changes
 
----
+### Operations that can stay user-scoped
 
-## ðŸ”’ Yetki Gereksinimleri
+- Writing to `HKCU`
+- Updating per-user profile settings
+- Applying theme and appearance changes
 
-### Admin Gerektiren Ä°ÅŸlemler
+## Related Files
 
-- `HKLM` registry yazma
-- Servis baÅŸlangÄ±Ã§ modunu deÄŸiÅŸtirme
-- ZamanlanmÄ±ÅŸ gÃ¶rev devre dÄ±ÅŸÄ± bÄ±rakma
-- Sistem dosyasÄ± iÅŸlemleri
-- BCD (Boot Configuration Data) deÄŸiÅŸiklikleri
-
-### KullanÄ±cÄ± Seviyesi Ä°ÅŸlemler
-
-- `HKCU` registry yazma
-- KullanÄ±cÄ± profil ayarlarÄ±
-- Tema ve gÃ¶rÃ¼nÃ¼m deÄŸiÅŸiklikleri
-
----
-
-## ðŸ“ Ä°lgili Dosyalar
-
-```
+```text
 app/Services/TweakProviders/
-â”œâ”€â”€ AudioTweakProvider.cs
-â”œâ”€â”€ BaseTweakProvider.cs     # Abstract base class
-â”œâ”€â”€ LegacyTweakProvider.cs   # 100+ eski tweak
-â”œâ”€â”€ MiscTweakProvider.cs
-â”œâ”€â”€ NetworkTweakProvider.cs
-â”œâ”€â”€ PerformanceTweakProvider.cs
-â”œâ”€â”€ PeripheralTweakProvider.cs
-â”œâ”€â”€ PrivacyTweakProvider.cs
-â”œâ”€â”€ SecurityTweakProvider.cs
-â”œâ”€â”€ SystemRegistryTweakProvider.cs
-â”œâ”€â”€ SystemTweakProvider.cs
-â””â”€â”€ VisibilityTweakProvider.cs
+|- AudioTweakProvider.cs
+|- BaseTweakProvider.cs
+|- LegacyTweakProvider.cs
+|- MiscTweakProvider.cs
+|- NetworkTweakProvider.cs
+|- PerformanceTweakProvider.cs
+|- PeripheralTweakProvider.cs
+|- PrivacyTweakProvider.cs
+|- SecurityTweakProvider.cs
+|- SystemRegistryTweakProvider.cs
+|- SystemTweakProvider.cs
+`- VisibilityTweakProvider.cs
 ```
 
----
+## References
 
-## ðŸ”— Referanslar
-
-- [Windows Services Reference](https://learn.microsoft.com/en-us/windows/application-management/per-user-services-in-windows)
-- [Task Scheduler Reference](https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page)
-- [Service Control Manager](https://learn.microsoft.com/en-us/windows/win32/services/service-control-manager)
+- [Windows services and per-user services](https://learn.microsoft.com/en-us/windows/application-management/per-user-services-in-windows)
+- [Task Scheduler start page](https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page)
+- [Service Control Manager overview](https://learn.microsoft.com/en-us/windows/win32/services/service-control-manager)

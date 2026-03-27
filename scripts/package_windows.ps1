@@ -45,19 +45,22 @@ $readyToRunValue = if ($ReadyToRun.IsPresent) { "true" } else { "false" }
 Write-Host "Publishing RegProbe.App ($Configuration, $Runtime)..."
 Write-Host "PublishReadyToRun=$readyToRunValue"
 dotnet publish $projectPath -c $Configuration -r $Runtime --self-contained:$SelfContained /p:PublishReadyToRun=$readyToRunValue
-
 if (!(Test-Path $publishDir)) {
     throw "Publish output not found at $publishDir"
 }
-
 # Ensure Docs are available in publish output
 $docsSource = Join-Path $repoRoot "Docs"
 $docsTarget = Join-Path $publishDir "Docs"
 if (Test-Path $docsSource) {
-    if (Test-Path $docsTarget) {
-        Remove-Item -Recurse -Force $docsTarget
-    }
-    Copy-Item -Recurse -Force $docsSource $docsTarget
+    New-Item -ItemType Directory -Path $docsTarget -Force | Out-Null
+    Copy-Item -Recurse -Force (Join-Path $docsSource "*") $docsTarget
+}
+
+$evidenceClassesSource = Join-Path $repoRoot "research\evidence-classes.json"
+$evidenceClassesTargetDir = Join-Path $docsTarget "research"
+if (Test-Path $evidenceClassesSource) {
+    New-Item -ItemType Directory -Path $evidenceClassesTargetDir -Force | Out-Null
+    Copy-Item -Force $evidenceClassesSource (Join-Path $evidenceClassesTargetDir "evidence-classes.json")
 }
 
 # Ensure ElevatedHost is present in publish output
@@ -73,6 +76,13 @@ if (!(Test-Path $hostTargetExe)) {
         New-Item -ItemType Directory -Path $hostTargetDir -Force | Out-Null
         Copy-Item -Force $candidates[0] $hostTargetExe
     }
+}
+
+# Remove legacy renamed artifacts if they are still present in the published host folder.
+if (Test-Path $hostTargetDir) {
+    Get-ChildItem -Path $hostTargetDir -Recurse -File |
+        Where-Object { $_.Name -like 'WindowsOptimizer*' -or $_.Name -like 'OpenTraceProject*' } |
+        Remove-Item -Force
 }
 
 # Create a zip package in dist/

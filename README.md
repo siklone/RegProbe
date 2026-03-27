@@ -135,5 +135,4 @@ $env:REGPROBE_ELEVATED_HOST_PATH = "C:\path\to\RegProbe.ElevatedHost.exe"
 - [research/evidence-atlas.md](research/evidence-atlas.md)
 - [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
 - [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
-- [Docs/RESEARCH_CREDITS.md](Docs/RESEARCH_CREDITS.md)
 - [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)

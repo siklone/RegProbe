@@ -1,6 +1,6 @@
-﻿# Nohuto Configuration Sources
+# Upstream Configuration Sources
 
-This document says how the app should use the four nohuto repositories that now feed the configuration work.
+This document explains how the app should use the four upstream repositories that now feed the configuration work. The nohuto repos remain part of that upstream source set and are referenced directly where relevant.
 
 ## Source Roles
 
@@ -14,7 +14,7 @@ This document says how the app should use the four nohuto repositories that now 
 - `win-config` can seed options, but every shipped action must still be wrapped in `Detect -> Apply -> Verify -> Rollback`.
 - `win-registry` and `decompiled-pseudocode` are research inputs. They should strengthen confidence, explain behavior, and surface defaults, but they do not automatically qualify a tweak as SAFE.
 - `regkit` should remain an advanced inspection surface. We can deep-link into it or export data compatible with it, but we should not mirror its elevated editing behavior as one-click SAFE actions.
-- Security-reducing actions stay out of SAFE defaults unless they are explicitly marked advanced/unsafe elsewhere in the product.
+- Security-reducing actions stay out of SAFE defaults unless they are explicitly marked advanced or unsafe elsewhere in the product.
 
 ## How Each Repo Maps To The App
 
@@ -30,8 +30,8 @@ Best source for:
 Product work that should come from it:
 
 - configuration catalog
-- per-option "current state" badges
-- "what this changes" summaries
+- per-option current-state badges
+- what-this-changes summaries
 - curated one-click actions after SAFE wrappers are implemented
 
 ### win-registry
@@ -47,8 +47,8 @@ Product work that should come from it:
 
 - detection probes
 - defaults/reference panels
-- source/evidence links beside options
-- "why this knob exists" explanations
+- source and evidence links beside options
+- why-this-knob-exists explanations
 
 ### decompiled-pseudocode
 
@@ -82,31 +82,31 @@ Product work that should come from it:
 
 ## Recommended Expansion Order
 
-### Source Feed and Documentation
+### Source feed and documentation
 
 - Track upstream changes for all four repos.
 - Save a local machine-readable report and a readable markdown briefing.
 - Show tracked repos, last check time, and top impacted domains on the dashboard.
 
-### Configuration Catalog Ingestion
+### Configuration catalog ingestion
 
 - Build a curated local option catalog from `win-config`.
 - Keep repo metadata attached to each option: source repo, source path, category, and evidence links.
-- Add read-only "current state" detection before enabling any action buttons.
+- Add read-only current-state detection before enabling any action buttons.
 
-### Evidence-Backed State Model
+### Evidence-backed state model
 
 - Use `win-registry` to display defaults, observed-read paths, and trace notes.
 - Use `decompiled-pseudocode` to annotate advanced values with ranges, coercion behavior, and caveats.
 - Expose these in compact detail drawers rather than crowding the main dashboard.
 
-### SAFE One-Click Actions
+### SAFE one-click actions
 
 - Promote only curated options into one-click actions.
 - Every action must stay reversible and logged.
 - When a tweak is partially matched, show exactly which expected values differ.
 
-### Advanced Inspection Bridge
+### Advanced inspection bridge
 
 - Add optional deep links or exported context for `regkit`.
 - Support troubleshooting bundles that include current state, defaults, and evidence references.

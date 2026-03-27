@@ -1,19 +1,17 @@
-﻿# Tweak DokÃ¼mantasyon Åžablonu
+# Tweak Documentation Template
 
-Bu ÅŸablon, yeni tweak ekleme veya mevcut tweak'leri belgeleme iÃ§in kullanÄ±lÄ±r.
+Use this template when documenting a new tweak or refreshing an existing one.
 
----
-
-## Tweak Bilgi KartÄ±
+## Tweak card
 
 ```yaml
 id: tweak.category.name
-name: Ä°nsan Okunabilir Ä°sim
+name: Human-readable name
 description: |
-  Tweak'in ne yaptÄ±ÄŸÄ±nÄ±n aÃ§Ä±klamasÄ±.
-  Bir cÃ¼mlede Ã¶zet.
+  Short explanation of what the tweak changes.
+  Keep the summary readable in one or two sentences.
 risk: Safe | Advanced | Risky
-category: Privacy | System | Network | Power | etc.
+category: Privacy | System | Network | Power | Security | Visibility | etc.
 area: Registry | Service | Task | Command | Composite
 requires_elevation: true | false
 reversible: true | false
@@ -22,61 +20,58 @@ windows_versions:
   - Windows 11
 ```
 
----
+## Detailed explanation
 
-## DetaylÄ± AÃ§Ä±klama
+### What it does
 
-### Ne Yapar?
-Tweak'in teknik aÃ§Ä±klamasÄ±. Hangi registry anahtarlarÄ±nÄ± deÄŸiÅŸtiriyor, hangi servisleri durduruyor, vb.
+Explain the technical behavior clearly. Call out which registry keys, services, scheduled tasks, commands, or policy surfaces are affected.
 
-### Neden KullanÄ±lÄ±r?
-KullanÄ±m senaryolarÄ± ve faydalarÄ±.
+### Why people change it
 
-### Potansiyel Yan Etkiler
-- Liste halinde olasÄ± yan etkiler
-- Hangi uygulamalar etkilenebilir
-- Uyumluluk sorunlarÄ±
+Describe the main use cases, expected benefit, and who the change is meant for.
 
----
+### Potential side effects
 
-## Teknik Detaylar
+- List the most likely downsides or tradeoffs.
+- Note which apps, services, or workflows can be affected.
+- Call out compatibility or recovery concerns.
 
-### Registry DeÄŸiÅŸiklikleri
-```
+## Technical details
+
+### Registry changes
+
+```text
 HKEY_CURRENT_USER\Software\...
-  ValueName (REG_DWORD): OldValue â†’ NewValue
+  ValueName (REG_DWORD): OldValue -> NewValue
 ```
 
-### Servis DeÄŸiÅŸiklikleri
-| Servis | Orijinal | Yeni |
-|--------|----------|------|
+### Service changes
+
+| Service | Original | New |
+| --- | --- | --- |
 | ServiceName | Automatic | Disabled |
 
-### ZamanlanmÄ±ÅŸ GÃ¶revler
-| GÃ¶rev Yolu | Durum |
-|------------|-------|
+### Scheduled task changes
+
+| Task path | New state |
+| --- | --- |
 | \Microsoft\Windows\... | Disabled |
 
----
+## Validation steps
 
-## DoÄŸrulama AdÄ±mlarÄ±
+1. Check the target state in Registry Editor or with a scripted registry query.
+2. Confirm service changes in `services.msc` or with `sc.exe`.
+3. Confirm scheduled task changes in Task Scheduler or with `schtasks.exe`.
+4. When applicable, confirm runtime behavior in the `Win25H2Clean` VM.
 
-1. Registry Editor ile deÄŸerleri kontrol edin
-2. `services.msc` ile servis durumunu kontrol edin
-3. Task Scheduler ile gÃ¶rev durumunu kontrol edin
+## Rollback procedure
 
----
+Tweaks should be automatically reversible. If a manual rollback note is still needed, document the exact steps here:
 
-## Geri Alma ProsedÃ¼rÃ¼
+1. Step 1
+2. Step 2
 
-Tweak otomatik olarak geri alÄ±nabilir. Manuel geri alma iÃ§in:
+## References
 
-1. AdÄ±m 1
-2. AdÄ±m 2
-
----
-
-## Referanslar
-
-- [Microsoft Docs: Ä°lgili Sayfa](https://docs.microsoft.com/...)
-- [Windows Security Baseline](https://docs.microsoft.com/...)
+- [Microsoft documentation: relevant page](https://learn.microsoft.com/)
+- [Security or policy baseline reference](https://learn.microsoft.com/)

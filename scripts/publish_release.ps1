@@ -6,12 +6,18 @@ Param(
 
 Write-Output "Cleaning solution and creating Release publish for runtime: $Runtime"
 
-dotnet clean
+$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$projectPath = Join-Path $repoRoot 'app\app.csproj'
+if (-not (Test-Path $projectPath)) {
+    throw "Project not found at $projectPath"
+}
+
+dotnet clean $projectPath
 
 # Use a deterministic publish folder under repo root
-$out = Join-Path -Path (Get-Location) -ChildPath 'publish_final'
+$out = Join-Path -Path $repoRoot -ChildPath 'publish_final'
 if (Test-Path $out) { Remove-Item -LiteralPath $out -Recurse -Force -ErrorAction SilentlyContinue }
 
-dotnet publish -c Release -r $Runtime -o $out --self-contained false
+dotnet publish $projectPath -c Release -r $Runtime -o $out --self-contained false
 
 Write-Output "Published to: $out"

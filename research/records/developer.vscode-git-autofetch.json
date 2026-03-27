@@ -239,7 +239,7 @@
     "needs_vm_validation": false,
     "why": "VS Code's git.autofetch setting is validated at the feature level, but the app's Explorer\\\\Advanced\\\\DisableGitAutofetch registry path is still not validated by a primary source.",
     "blocking_issues": [
-      "VS Code'un git.autofetch ayarÄ± doÄŸrulandÄ± ancak uygulamanÄ±n yazdÄ±ÄŸÄ± Explorer\\Advanced\\DisableGitAutofetch registry path'i iÃ§in birincil Microsoft kaynaÄŸÄ± bulunamadÄ±.",
+      "The git.autofetch setting is documented by VS Code, but this research pass did not find a primary Microsoft or VS Code source that validates the app's Explorer\\\\Advanced\\\\DisableGitAutofetch registry path.",
       "The app writes an Explorer registry value instead of the documented git.autofetch setting."
     ]
   },

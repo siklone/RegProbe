@@ -158,8 +158,13 @@
     </PropertyGroup>
     <ItemGroup>
       <ElevatedHostFilesAfterBuild Include="$(ElevatedHostOutputDir)**\\*.*" />
+      <ElevatedHostFilesAfterBuild Remove="$(ElevatedHostOutputDir)**\\WindowsOptimizer*.*" />
+      <ElevatedHostFilesAfterBuild Remove="$(ElevatedHostOutputDir)**\\OpenTraceProject*.*" />
+      <StaleElevatedHostFilesAfterBuild Include="$(ElevatedHostDestinationDir)**\\WindowsOptimizer*.*" />
+      <StaleElevatedHostFilesAfterBuild Include="$(ElevatedHostDestinationDir)**\\OpenTraceProject*.*" />
     </ItemGroup>
 
+    <Delete Files="@(StaleElevatedHostFilesAfterBuild)" TreatErrorsAsWarnings="true" />
     <Copy SourceFiles="@(ElevatedHostFilesAfterBuild)" DestinationFiles="@(ElevatedHostFilesAfterBuild->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
 
@@ -176,8 +181,13 @@
     </PropertyGroup>
     <ItemGroup>
       <ElevatedHostFilesAfterPublish Include="$(ElevatedHostOutputDir)**\\*.*" />
+      <ElevatedHostFilesAfterPublish Remove="$(ElevatedHostOutputDir)**\\WindowsOptimizer*.*" />
+      <ElevatedHostFilesAfterPublish Remove="$(ElevatedHostOutputDir)**\\OpenTraceProject*.*" />
+      <StaleElevatedHostFilesAfterPublish Include="$(ElevatedHostDestinationDir)**\\WindowsOptimizer*.*" />
+      <StaleElevatedHostFilesAfterPublish Include="$(ElevatedHostDestinationDir)**\\OpenTraceProject*.*" />
     </ItemGroup>
 
+    <Delete Files="@(StaleElevatedHostFilesAfterPublish)" TreatErrorsAsWarnings="true" />
     <Copy SourceFiles="@(ElevatedHostFilesAfterPublish)" DestinationFiles="@(ElevatedHostFilesAfterPublish->'$(ElevatedHostDestinationDir)%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
 

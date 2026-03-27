@@ -8,7 +8,8 @@ param(
     [string]$GuestPublishZipPath = 'C:\Tools\Inbound\app-publish.zip',
     [string]$GuestScriptPath = 'C:\Tools\Scripts\app-launch-smoke.ps1',
     [string]$GuestResultPath = 'C:\Tools\ValidationController\smoke\app-launch-smoke.json',
-    [string]$OutputPath = 'H:\Temp\vm-tooling-staging\app-launch-smoke.json'
+    [string]$OutputPath = 'H:\Temp\vm-tooling-staging\app-launch-smoke.json',
+    [bool]$RefreshPackage = $true
 )
 
 $ErrorActionPreference = 'Stop'
@@ -22,6 +23,31 @@ function Invoke-Vmrun {
     }
 
     return $output.Trim()
+}
+
+if ($RefreshPackage) {
+    $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
+    $packageScriptPath = Join-Path $repoRoot 'scripts\package_windows.ps1'
+    if (-not (Test-Path $packageScriptPath)) {
+        throw "Package script not found at $packageScriptPath"
+    }
+
+    & $packageScriptPath -Configuration 'Release' -Runtime 'win-x64' -SelfContained:$false
+
+    $freshPackage = Get-ChildItem -Path (Join-Path $repoRoot 'dist') -Filter 'RegProbe-*-win-x64-Release-*.zip' |
+        Sort-Object LastWriteTime -Descending |
+        Select-Object -First 1
+
+    if (-not $freshPackage) {
+        throw "Failed to produce a fresh RegProbe package in $repoRoot\\dist"
+    }
+
+    $publishZipDir = Split-Path -Parent $PublishZipPath
+    if ($publishZipDir) {
+        New-Item -ItemType Directory -Path $publishZipDir -Force | Out-Null
+    }
+
+    Copy-Item -LiteralPath $freshPackage.FullName -Destination $PublishZipPath -Force
 }
 
 if (-not (Test-Path $PublishZipPath)) {

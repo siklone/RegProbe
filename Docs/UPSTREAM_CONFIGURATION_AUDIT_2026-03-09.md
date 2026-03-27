@@ -1,8 +1,8 @@
-﻿# Nohuto Configuration Audit
+# Upstream Configuration Audit
 
 Date: 2026-03-09
 
-This note summarizes the current gap between the app's configuration surface and the upstream nohuto research repos that we use as the main source set.
+This note summarizes the current gap between the app's configuration surface and the upstream research repos, including the nohuto source set that still acts as a major discovery input.
 
 ## Verified Current State
 
@@ -48,7 +48,7 @@ The current in-app tweak catalog groups user-facing items into:
 
 ### 1. Missing upstream domains
 
-The app does not currently expose dedicated user-facing areas for these nohuto domains:
+The app does not currently expose dedicated user-facing areas for these upstream domains:
 
 - `affinities`
 - `nvidia`
@@ -68,7 +68,7 @@ Recommended handling:
 
 - keep friendly labels for end users
 - attach a hidden upstream domain mapping behind every option
-- preserve strict nohuto-style state detection per option
+- preserve strict upstream-style state detection per option
 
 ### 3. Cleanup is mixed with configuration
 
@@ -99,7 +99,7 @@ Recommended handling:
   - `External installs`
 - avoid presenting tool installation as if it were a native Windows registry or policy setting
 
-### 5. Advanced nohuto research is deeper than the current UI surface
+### 5. Advanced upstream research is deeper than the current UI surface
 
 The current app already covers many power, system, network, privacy, and visibility values. The bigger gap is not raw count, it is the quality of presentation:
 
@@ -128,7 +128,7 @@ Recommended handling:
 
 - `cleanup`: keep as maintenance, not as configuration.
 - `misc`: keep only the actual Windows-facing settings in the main configuration surface. Move tool installs and companion utilities elsewhere.
-- `security`: keep in a conservative explain-first mode. Do not let the upstream research pressure SAFE defaults into unsafe territory.
+- `security`: keep in a conservative explain-first mode. Do not let upstream research pressure SAFE defaults into unsafe territory.
 
 ### Missing and should be added carefully
 
@@ -140,7 +140,7 @@ Recommended handling:
 
 ### Add next
 
-- policy-backed configuration browser sourced from nohuto `policies`
+- policy-backed configuration browser sourced from upstream `policies`
 - vendor-aware NVIDIA section for supported machines
 - exact match and partial-match state reporting per configuration
 - per-setting evidence text that explains what was detected locally
@@ -161,7 +161,7 @@ Recommended handling:
 
 ## What Looks Correct Today
 
-- the shipped configuration surface is already strongly backed by nohuto sources
+- the shipped configuration surface is already strongly backed by upstream sources
 - the source pipeline is doing its job
 - the biggest quality gap is product modeling, not lack of upstream research
 - one remaining review-only operation (`network.reset-winsock`) is correctly being held back
@@ -185,7 +185,7 @@ Recommended handling:
 ## Recommended Productization Order
 
 1. Add hidden upstream mapping metadata for every user-facing configuration.
-2. Create a read-only `Policies` browser from nohuto `policies`.
+2. Create a read-only `Policies` browser from upstream `policies`.
 3. Build an expert-only `NVIDIA` area for supported NVIDIA systems.
 4. Build an expert-only `Interrupt Affinity` area with validation guidance, not blind one-click actions.
 5. Reclassify cleanup actions outside the main configuration workflow.
@@ -217,4 +217,3 @@ Primary upstream references used for this audit:
 - `research/_source-mirrors/win-registry/README.md`
 - `Docs/tweaks/tweak-provenance.csv`
 - `Docs/tweaks/tweak-provenance-missing.csv`
-
