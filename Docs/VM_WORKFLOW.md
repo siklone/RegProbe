@@ -1,4 +1,4 @@
-# VM Workflow
+﻿# VM Workflow
 
 This repository is validated in the `Win25H2Clean` VMware VM.
 
@@ -85,7 +85,7 @@ C:\Tools\Scripts\wpa.cmd C:\Tools\Perf\capture.etl
 Example:
 
 ```cmd
-C:\Tools\Scripts\ghidra-headless.cmd C:\Tools\GhidraProjects\OpenTraceProject analysis -import C:\Path\To\Binary.exe
+C:\Tools\Scripts\ghidra-headless.cmd C:\Tools\GhidraProjects\RegProbe analysis -import C:\Path\To\Binary.exe
 ```
 
 ## Validation Smokes
@@ -192,3 +192,4 @@ powershell -ExecutionPolicy Bypass -File scripts\vm\cleanup-guest-validation-art
 - The tooling is staged through the VM shared folder during setup.
 - `JAVA_HOME` and `GHIDRA_HOME` are set in the VM machine environment.
 - Procmon EULA is pre-accepted in the guest profile used for validation.
+

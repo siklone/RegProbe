@@ -22,3 +22,4 @@ Generated: 2026-03-27
 - shell health after smoke: healthy
 - smoke executable: `C:\Tools\AppSmoke\RegProbe.App.exe`
 - smoke main window title: `RegProbe`
+

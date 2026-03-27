@@ -1,4 +1,4 @@
-# VM Validation Controller
+﻿# VM Validation Controller
 
 This document defines the controller/agent validation loop for runtime registry experiments in the `Win25H2Clean` VM.
 
@@ -87,7 +87,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\vm\install-guest-validation-a
 This:
 
 - copies the guest agent to `C:\Tools\Scripts\guest-validation-agent.ps1`
-- registers the `OpenTraceProjectValidationAgent` startup task
+- registers the `RegProbeValidationAgent` startup task
 
 ## Run A Test
 
@@ -110,3 +110,4 @@ powershell -ExecutionPolicy Bypass -File .\scripts\vm\host-validation-controller
 - The guest agent is responsible for applying the value, waiting for idle, benchmarking, and restoring the baseline.
 - VM results are a discovery signal, not final truth for hardware-sensitive settings.
 - Promising candidates should still be rechecked on bare metal.
+

@@ -1,10 +1,10 @@
-# Tweak Implementation Guide
+﻿# Tweak Implementation Guide
 > Update (2025-12-30): LegacyTweakProvider restored missing tweaks; verify this doc against the current catalog.
 
 ## Overview
 Tweaks implement `ITweak` and expose four actions: Detect, Apply, Verify, and Rollback. The execution pipeline is handled by `TweakExecutionPipeline`, which logs every step and supports DryRun/Preview by default.
 
-> **Note (2025-12-30):** Durable rollback state is persisted to `%AppData%\\OpenTraceProject\\rollback-state.json` for crash recovery and cross-session rollback.
+> **Note (2025-12-30):** Durable rollback state is persisted to `%AppData%\\RegProbe\\rollback-state.json` for crash recovery and cross-session rollback.
 
 ## Safety guarantees (Detect -> Apply -> Verify -> Rollback)
 - Detect always runs first to capture current configuration.
@@ -58,7 +58,7 @@ Do not edit manually.
 
 ### ElevatedHost discovery (dev runs)
 When running via `dotnet run`, you can override the elevated host location with:
-`OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH=C:\\path\\to\\OpenTraceProject.ElevatedHost.exe`.
+`REGPROBE_ELEVATED_HOST_PATH=C:\\path\\to\\RegProbe.ElevatedHost.exe`.
 
 ## Execution logging
 
@@ -78,3 +78,4 @@ When running via `dotnet run`, you can override the elevated host location with:
 - Apply: run the pipeline with `DryRun = false`.
 - Verify: keep `VerifyAfterApply = true` or call `ITweak.VerifyAsync` explicitly.
 - Rollback: restores values captured by the last Detect (same app session) and is also used automatically when Apply/Verify fails.
+

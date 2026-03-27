@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "../setting-research.schema.json",
   "schema_version": "1.1",
   "record_id": "security.disable-system-mitigations",
@@ -50,11 +50,11 @@
   "app_current_implementation": {
     "status": "matches-research",
     "provider_source": "app/Services/TweakProviders/SecurityTweakProvider.cs",
-    "notes": "The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\\OpenTraceProject\\ExploitProtection\\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider.",
+    "notes": "The app now stages the checked-in Exploit Protection XML baseline to %TEMP%\\RegProbe\\ExploitProtection\\security-disable-system-mitigations.xml and imports it via Set-ProcessMitigation -PolicyFilePath. Rollback restores the exported backup XML via the same documented import path. The raw MitigationOptions and MitigationAuditOptions kernel blobs were removed from the provider.",
     "writes": [
       {
         "target_id": "exploit-protection-policy",
-        "path": "%TEMP%\\OpenTraceProject\\ExploitProtection\\security-disable-system-mitigations.xml",
+        "path": "%TEMP%\\RegProbe\\ExploitProtection\\security-disable-system-mitigations.xml",
         "value_name": "Set-ProcessMitigation -PolicyFilePath",
         "value_type": "XML",
         "state_kind": "value",
@@ -217,3 +217,4 @@
     "notes": "Local official Microsoft ADMX/ADML files and Microsoft Learn document Exploit Protection through the XML import/export surface. Guest validation confirmed that a raw export, an imported XML policy file, and the restored export all round-trip cleanly when the default Fonts Audit=\"false\" normalization is ignored. The app now uses the documented XML import path instead of raw kernel mitigation blobs."
   }
 }
+

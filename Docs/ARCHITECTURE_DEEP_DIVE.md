@@ -1,122 +1,122 @@
-# Open Trace Project - KapsamlÄ± Teknik Mimari DokÃ¼mantasyonu
+﻿# RegProbe - KapsamlÃ„Â± Teknik Mimari DokÃƒÂ¼mantasyonu
 
-Bu belge, uygulamanÄ±n tÃ¼m teknik bileÅŸenlerini, sensÃ¶r fallback mekanizmalarÄ±nÄ±, thread yÃ¶netimini, UI/UX yapÄ±sÄ±nÄ± ve servis mimarisini detaylÄ± olarak aÃ§Ä±klar.
-
----
-
-## ðŸ“ Dosya YapÄ±sÄ± Ã–zeti
-
-```
-OpenTraceProject/
-â”œâ”€â”€ core/           # Temel arayÃ¼zler ve modeller
-â”œâ”€â”€ engine/         # Tweak iÅŸleme motoru
-â”‚   â””â”€â”€ Tweaks/                      # 9 tweak tÃ¼rÃ¼
-â”œâ”€â”€ infrastructure/ # AltyapÄ± servisleri
-â”‚   â””â”€â”€ Metrics/                     # 11 metrik dosyasÄ± (102KB+)
-â”œâ”€â”€ app/            # Masaustu UI uygulamasi
-â”‚   â”œâ”€â”€ Views/                       # XAML gÃ¶rÃ¼nÃ¼mleri
-â”‚   â”œâ”€â”€ ViewModels/                  # MVVM ViewModelleri
-â”‚   â””â”€â”€ Services/                    # Uygulama servisleri
-â””â”€â”€ elevated-host/   # YÃ¼kseltilmiÅŸ iÅŸlem sunucusu
-```
+Bu belge, uygulamanÃ„Â±n tÃƒÂ¼m teknik bileÃ…Å¸enlerini, sensÃƒÂ¶r fallback mekanizmalarÃ„Â±nÃ„Â±, thread yÃƒÂ¶netimini, UI/UX yapÃ„Â±sÃ„Â±nÃ„Â± ve servis mimarisini detaylÃ„Â± olarak aÃƒÂ§Ã„Â±klar.
 
 ---
 
-## ðŸ”§ Servis Mimarisi
+## Ã°Å¸â€œÂ Dosya YapÃ„Â±sÃ„Â± Ãƒâ€“zeti
+
+```
+RegProbe/
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ core/           # Temel arayÃƒÂ¼zler ve modeller
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ engine/         # Tweak iÃ…Å¸leme motoru
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ Tweaks/                      # 9 tweak tÃƒÂ¼rÃƒÂ¼
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ infrastructure/ # AltyapÃ„Â± servisleri
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ Metrics/                     # 11 metrik dosyasÃ„Â± (102KB+)
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ app/            # Masaustu UI uygulamasi
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Views/                       # XAML gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼mleri
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ViewModels/                  # MVVM ViewModelleri
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ Services/                    # Uygulama servisleri
+Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ elevated-host/   # YÃƒÂ¼kseltilmiÃ…Å¸ iÃ…Å¸lem sunucusu
+```
+
+---
+
+## Ã°Å¸â€Â§ Servis Mimarisi
 
 ### 1. TweakProvider Sistemi (13 dosya)
 
 Provider'lar `app/Services/TweakProviders/` dizininde bulunur:
 
-| Provider | Sorumluluk | Tweak SayÄ±sÄ± |
+| Provider | Sorumluluk | Tweak SayÃ„Â±sÃ„Â± |
 |----------|------------|--------------|
-| `AudioTweakProvider` | Ses ayarlarÄ± (beep, ducking) | ~6 |
-| `NetworkTweakProvider` | AÄŸ optimizasyonu (IPv6, SMB) | ~30+ |
+| `AudioTweakProvider` | Ses ayarlarÃ„Â± (beep, ducking) | ~6 |
+| `NetworkTweakProvider` | AÃ„Å¸ optimizasyonu (IPv6, SMB) | ~30+ |
 | `PerformanceTweakProvider` | Animasyonlar, throttling | ~8 |
 | `PeripheralTweakProvider` | Mouse, keyboard | ~10 |
 | `PrivacyTweakProvider` | Telemetri, konum | ~70+ |
 | `SecurityTweakProvider` | UAC, firewall, VBS | ~15 |
-| `SystemTweakProvider` | Servisler, gÃ¶revler | ~25 |
+| `SystemTweakProvider` | Servisler, gÃƒÂ¶revler | ~25 |
 | `SystemRegistryTweakProvider` | Kernel, NTFS, DWM | ~30 |
-| `VisibilityTweakProvider` | UI Ã¶ÄŸeleri, spotlight | ~25 |
-| `MiscTweakProvider` | DiÄŸer uygulamalar | ~5 |
-| `LegacyTweakProvider` | Eski tweak kataloÄŸu | ~100+ |
+| `VisibilityTweakProvider` | UI ÃƒÂ¶Ã„Å¸eleri, spotlight | ~25 |
+| `MiscTweakProvider` | DiÃ„Å¸er uygulamalar | ~5 |
+| `LegacyTweakProvider` | Eski tweak kataloÃ„Å¸u | ~100+ |
 
 ### 2. Metrik Servisleri (11 dosya, 180KB+)
 
 **Dosyalar:**
-- `MetricProvider.cs` (102KB, 3053 satÄ±r) - Ana sensÃ¶r saÄŸlayÄ±cÄ±
-- `ProcessMonitor.cs` (26KB, 908 satÄ±r) - Ä°ÅŸlem izleme
-- `NetworkMonitor.cs` (12KB, 340 satÄ±r) - AÄŸ adaptÃ¶rleri
+- `MetricProvider.cs` (102KB, 3053 satÃ„Â±r) - Ana sensÃƒÂ¶r saÃ„Å¸layÃ„Â±cÃ„Â±
+- `ProcessMonitor.cs` (26KB, 908 satÃ„Â±r) - Ã„Â°Ã…Å¸lem izleme
+- `NetworkMonitor.cs` (12KB, 340 satÃ„Â±r) - AÃ„Å¸ adaptÃƒÂ¶rleri
 - `DiskMonitor.cs` (5.7KB) - Disk I/O
-- `NetworkEtwSampler.cs` (3.9KB) - ETW aÄŸ Ã¶rnekleme
+- `NetworkEtwSampler.cs` (3.9KB) - ETW aÃ„Å¸ ÃƒÂ¶rnekleme
 - `NetworkLatencyMonitor.cs` (3.4KB) - Ping/latency
-- `WifiSignalMonitor.cs` (9.5KB) - WiFi sinyal gÃ¼cÃ¼
-- `GpuEngineMonitor.cs` (4KB) - GPU motor kullanÄ±mÄ±
-- `BootTimeTracker.cs` (9.2KB) - Boot sÃ¼resi analizi
-- `KernelImpactAnalyzer.cs` (1.5KB) - Ã‡ekirdek etkisi
-- `PerformanceSnapshots.cs` (1.7KB) - AnlÄ±k snapshot modelleri
+- `WifiSignalMonitor.cs` (9.5KB) - WiFi sinyal gÃƒÂ¼cÃƒÂ¼
+- `GpuEngineMonitor.cs` (4KB) - GPU motor kullanÃ„Â±mÃ„Â±
+- `BootTimeTracker.cs` (9.2KB) - Boot sÃƒÂ¼resi analizi
+- `KernelImpactAnalyzer.cs` (1.5KB) - Ãƒâ€¡ekirdek etkisi
+- `PerformanceSnapshots.cs` (1.7KB) - AnlÃ„Â±k snapshot modelleri
 
 ---
 
-## ðŸ”Œ SensÃ¶r ve Fallback MekanizmalarÄ±
+## Ã°Å¸â€Å’ SensÃƒÂ¶r ve Fallback MekanizmalarÃ„Â±
 
-### CPU SÄ±caklÄ±k Fallback Zinciri
-
-```mermaid
-graph TD
-    A[LibreHardwareMonitor SensÃ¶rleri] -->|BaÅŸarÄ±sÄ±z| B[WMI MSAcpi_ThermalZoneTemperature]
-    B -->|BaÅŸarÄ±sÄ±z| C["N/A" dÃ¶ndÃ¼r]
-```
-
-**Kod:** `MetricProvider.GetCpuTemperature()` (satÄ±r 210-263)
-
-### CPU HÄ±z Fallback Zinciri
+### CPU SÃ„Â±caklÃ„Â±k Fallback Zinciri
 
 ```mermaid
 graph TD
-    A[LibreHardwareMonitor Clock SensÃ¶rleri] -->|BaÅŸarÄ±sÄ±z| B[WMI Win32_Processor.CurrentClockSpeed]
-    B -->|BaÅŸarÄ±sÄ±z| C[WMI Win32_PerfFormattedData_Counters]
-    C -->|BaÅŸarÄ±sÄ±z| D[Base Clock dÃ¶ndÃ¼r]
+    A[LibreHardwareMonitor SensÃƒÂ¶rleri] -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| B[WMI MSAcpi_ThermalZoneTemperature]
+    B -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| C["N/A" dÃƒÂ¶ndÃƒÂ¼r]
 ```
 
-**Kod:** `MetricProvider.TryGetCpuCurrentSpeedMhz()` (satÄ±r 1678-1826)
+**Kod:** `MetricProvider.GetCpuTemperature()` (satÃ„Â±r 210-263)
+
+### CPU HÃ„Â±z Fallback Zinciri
+
+```mermaid
+graph TD
+    A[LibreHardwareMonitor Clock SensÃƒÂ¶rleri] -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| B[WMI Win32_Processor.CurrentClockSpeed]
+    B -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| C[WMI Win32_PerfFormattedData_Counters]
+    C -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| D[Base Clock dÃƒÂ¶ndÃƒÂ¼r]
+```
+
+**Kod:** `MetricProvider.TryGetCpuCurrentSpeedMhz()` (satÃ„Â±r 1678-1826)
 
 ### GPU Bellek Fallback Zinciri
 
 ```mermaid
 graph TD
-    A[LibreHardwareMonitor GPU Memory SensÃ¶rleri] -->|BaÅŸarÄ±sÄ±z| B[PerformanceCounter GPU Dedicated Memory]
-    B -->|BaÅŸarÄ±sÄ±z| C[Registry DirectX Version + WMI]
-    C -->|BaÅŸarÄ±sÄ±z| D["N/A" dÃ¶ndÃ¼r]
+    A[LibreHardwareMonitor GPU Memory SensÃƒÂ¶rleri] -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| B[PerformanceCounter GPU Dedicated Memory]
+    B -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| C[Registry DirectX Version + WMI]
+    C -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| D["N/A" dÃƒÂ¶ndÃƒÂ¼r]
 ```
 
-**Kod:** `MetricProvider.TryGetGpuMemoryTotalMb()` (satÄ±r 2524-2620)
+**Kod:** `MetricProvider.TryGetGpuMemoryTotalMb()` (satÃ„Â±r 2524-2620)
 
-### AÄŸ Ä°ÅŸlem TrafiÄŸi Fallback Zinciri
+### AÃ„Å¸ Ã„Â°Ã…Å¸lem TrafiÃ„Å¸i Fallback Zinciri
 
 ```mermaid
 graph TD
-    A[ETW Network Sampler] -->|BaÅŸarÄ±sÄ±z veya Admin deÄŸil| B[TCP EStats API]
-    B -->|BaÅŸarÄ±sÄ±z| C[Process I/O Counters Approximate]
+    A[ETW Network Sampler] -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z veya Admin deÃ„Å¸il| B[TCP EStats API]
+    B -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| C[Process I/O Counters Approximate]
 ```
 
-**Kod:** `ProcessMonitor.GetTopProcessesByNetwork()` (satÄ±r 160-218)
+**Kod:** `ProcessMonitor.GetTopProcessesByNetwork()` (satÃ„Â±r 160-218)
 
 ```csharp
 public List<ProcessInfo> GetTopProcessesByNetwork(int count = 10)
 {
-    // 1. ETW (en doÄŸru, admin gerektirir)
+    // 1. ETW (en doÃ„Å¸ru, admin gerektirir)
     if (TryGetEtwBytesByPid(out var etwBytes))
     {
         mode = NetworkProcessMode.TcpUdpEtw;
     }
-    // 2. TCP EStats (orta doÄŸruluk)
+    // 2. TCP EStats (orta doÃ„Å¸ruluk)
     else if (TryGetTcpBytesByPid(out var tcpBytes))
     {
         mode = NetworkProcessMode.TcpOnly;
     }
-    // 3. YaklaÅŸÄ±k I/O (dÃ¼ÅŸÃ¼k doÄŸruluk)
+    // 3. YaklaÃ…Å¸Ã„Â±k I/O (dÃƒÂ¼Ã…Å¸ÃƒÂ¼k doÃ„Å¸ruluk)
     else
     {
         return GetTopProcessesByIo(count); // Fallback
@@ -124,55 +124,55 @@ public List<ProcessInfo> GetTopProcessesByNetwork(int count = 10)
 }
 ```
 
-### Disk SaÄŸlÄ±ÄŸÄ± Fallback Zinciri
+### Disk SaÃ„Å¸lÃ„Â±Ã„Å¸Ã„Â± Fallback Zinciri
 
 ```mermaid
 graph TD
-    A[LibreHardwareMonitor Storage SensÃ¶rleri] -->|BaÅŸarÄ±sÄ±z| B[WMI MSStorageDriver_FailurePredictStatus]
-    B -->|BaÅŸarÄ±sÄ±z| C[WMI MSFT_PhysicalDisk.HealthStatus]
-    C -->|BaÅŸarÄ±sÄ±z| D[WMI Win32_DiskDrive.Status]
-    D -->|BaÅŸarÄ±sÄ±z| E["Unknown" dÃ¶ndÃ¼r]
+    A[LibreHardwareMonitor Storage SensÃƒÂ¶rleri] -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| B[WMI MSStorageDriver_FailurePredictStatus]
+    B -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| C[WMI MSFT_PhysicalDisk.HealthStatus]
+    C -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| D[WMI Win32_DiskDrive.Status]
+    D -->|BaÃ…Å¸arÃ„Â±sÃ„Â±z| E["Unknown" dÃƒÂ¶ndÃƒÂ¼r]
 ```
 
-**Kod:** `MetricProvider.GetDiskHealthSnapshot()` (satÄ±r 654-716)
+**Kod:** `MetricProvider.GetDiskHealthSnapshot()` (satÃ„Â±r 654-716)
 
 ---
 
-## ðŸ§µ Thread ve Performans YÃ¶netimi
+## Ã°Å¸Â§Âµ Thread ve Performans YÃƒÂ¶netimi
 
-### DispatcherTimer KullanÄ±mÄ±
+### DispatcherTimer KullanÃ„Â±mÃ„Â±
 
-`MonitorViewModel.cs` ana timer'Ä± kontrol eder:
+`MonitorViewModel.cs` ana timer'Ã„Â± kontrol eder:
 
 ```csharp
-// Timer aralÄ±ÄŸÄ±: 1 saniye
+// Timer aralÃ„Â±Ã„Å¸Ã„Â±: 1 saniye
 private readonly DispatcherTimer _timer = new()
 {
     Interval = TimeSpan.FromSeconds(1)
 };
 
-// UI thread'inde Ã§alÄ±ÅŸÄ±r
+// UI thread'inde ÃƒÂ§alÃ„Â±Ã…Å¸Ã„Â±r
 private void Timer_Tick(object? sender, EventArgs e)
 {
     UpdateMetrics();
 }
 ```
 
-### Background Thread KullanÄ±mÄ±
+### Background Thread KullanÃ„Â±mÃ„Â±
 
-**I/O yoÄŸun iÅŸlemler Task.Run ile arka planda:**
+**I/O yoÃ„Å¸un iÃ…Å¸lemler Task.Run ile arka planda:**
 
 ```csharp
-// SensÃ¶r gÃ¼ncellemeleri
+// SensÃƒÂ¶r gÃƒÂ¼ncellemeleri
 await Task.Run(() => _metricProvider.UpdateHardware());
 
-// Ä°ÅŸlem listesi
+// Ã„Â°Ã…Å¸lem listesi
 var processes = await Task.Run(() => _processMonitor.GetTopProcessesByCpu());
 ```
 
-### CollectionView Thread GÃ¼venliÄŸi
+### CollectionView Thread GÃƒÂ¼venliÃ„Å¸i
 
-**UI thread'ine deferral ile gÃ¼ncelleme:**
+**UI thread'ine deferral ile gÃƒÂ¼ncelleme:**
 
 ```csharp
 await _dispatcherService.RunOnUIThreadAsync(() =>
@@ -181,7 +181,7 @@ await _dispatcherService.RunOnUIThreadAsync(() =>
 });
 ```
 
-### WMI Scope BaÄŸlantÄ± YÃ¶netimi
+### WMI Scope BaÃ„Å¸lantÃ„Â± YÃƒÂ¶netimi
 
 **Lazy initialization pattern:**
 
@@ -200,20 +200,20 @@ private bool TryConnectStorageScope()
 
 ---
 
-## ðŸŽ¨ UI/UX Mimarisi
+## Ã°Å¸Å½Â¨ UI/UX Mimarisi
 
-### MonitorView.xaml YapÄ±sÄ± (2734 satÄ±r)
+### MonitorView.xaml YapÃ„Â±sÃ„Â± (2734 satÃ„Â±r)
 
-**Ana BÃ¶lÃ¼mler:**
+**Ana BÃƒÂ¶lÃƒÂ¼mler:**
 
-| BÃ¶lÃ¼m | SatÄ±r AralÄ±ÄŸÄ± | Ä°Ã§erik |
+| BÃƒÂ¶lÃƒÂ¼m | SatÃ„Â±r AralÃ„Â±Ã„Å¸Ã„Â± | Ã„Â°ÃƒÂ§erik |
 |-------|---------------|--------|
 | Resources | 1-620 | Styles, Converters, Gradients |
-| MonitorSystemInfoTemplate | 561-620 | Sistem bilgisi kartÄ± |
+| MonitorSystemInfoTemplate | 561-620 | Sistem bilgisi kartÃ„Â± |
 | MonitorPerformanceTemplate | 622-785 | Performans grafikleri |
-| MonitorStatCardsTemplate | 787-1200 | CPU/RAM/Disk/Network kartlarÄ± |
-| Process Lists | 1200-2200 | Ä°ÅŸlem tablolarÄ± |
-| Network/Disk Sections | 2200-2734 | AdaptÃ¶r ve disk listeleri |
+| MonitorStatCardsTemplate | 787-1200 | CPU/RAM/Disk/Network kartlarÃ„Â± |
+| Process Lists | 1200-2200 | Ã„Â°Ã…Å¸lem tablolarÃ„Â± |
+| Network/Disk Sections | 2200-2734 | AdaptÃƒÂ¶r ve disk listeleri |
 
 ### Animasyon Sistemi
 
@@ -235,32 +235,32 @@ private bool TryConnectStorageScope()
 
 ### Gradient Sistemleri
 
-| Gradient | Renk | KullanÄ±m |
+| Gradient | Renk | KullanÃ„Â±m |
 |----------|------|----------|
-| `CpuAreaGradient` | Cyan | CPU grafik alanÄ± |
-| `RamAreaGradient` | Green | RAM grafik alanÄ± |
-| `DownloadAreaGradient` | Green | Ä°ndirme Ã§izgisi |
-| `UploadAreaGradient` | Cyan | YÃ¼kleme Ã§izgisi |
+| `CpuAreaGradient` | Cyan | CPU grafik alanÃ„Â± |
+| `RamAreaGradient` | Green | RAM grafik alanÃ„Â± |
+| `DownloadAreaGradient` | Green | Ã„Â°ndirme ÃƒÂ§izgisi |
+| `UploadAreaGradient` | Cyan | YÃƒÂ¼kleme ÃƒÂ§izgisi |
 | `DiskReadAreaGradient` | Green | Disk okuma |
 | `DiskWriteAreaGradient` | Red | Disk yazma |
 
-### Tema DesteÄŸi
+### Tema DesteÃ„Å¸i
 
-**DynamicResource kullanÄ±mÄ±:**
+**DynamicResource kullanÃ„Â±mÃ„Â±:**
 ```xml
 Background="{DynamicResource BackgroundDarkestBrush}"
 Foreground="{DynamicResource ForegroundBrightestBrush}"
 ```
 
-**Tema dosyalarÄ±:**
+**Tema dosyalarÃ„Â±:**
 - `Resources/Colors.xaml` - Dark theme
 - `Resources/Colors.Light.xaml` - Light theme
 
 ---
 
-## ðŸ“Š Veri AkÄ±ÅŸÄ±
+## Ã°Å¸â€œÅ  Veri AkÃ„Â±Ã…Å¸Ã„Â±
 
-### Monitor Veri AkÄ±ÅŸÄ±
+### Monitor Veri AkÃ„Â±Ã…Å¸Ã„Â±
 
 ```mermaid
 sequenceDiagram
@@ -281,11 +281,11 @@ sequenceDiagram
     UI->>UI: Binding Update
 ```
 
-### Tweak Uygulama AkÄ±ÅŸÄ±
+### Tweak Uygulama AkÃ„Â±Ã…Å¸Ã„Â±
 
 ```mermaid
 sequenceDiagram
-    participant User as KullanÄ±cÄ±
+    participant User as KullanÃ„Â±cÃ„Â±
     participant VM as TweaksViewModel
     participant Pipe as TweakExecutionPipeline
     participant Tweak as ITweak
@@ -308,23 +308,23 @@ sequenceDiagram
 
 ---
 
-## ðŸ”’ GÃ¼venlik ve Yetkilendirme
+## Ã°Å¸â€â€™ GÃƒÂ¼venlik ve Yetkilendirme
 
 ### ElevatedHost Mimarisi
 
-**Named Pipe Ä°letiÅŸimi:**
+**Named Pipe Ã„Â°letiÃ…Å¸imi:**
 ```
-Pipe Name: OpenTraceProjectElevatedPipe
+Pipe Name: RegProbeElevatedPipe
 Security: Admin only access
 ```
 
-**Ä°stek TÃ¼rleri:**
+**Ã„Â°stek TÃƒÂ¼rleri:**
 - Registry yazma (HKLM, HKCR)
-- Servis yÃ¶netimi
-- ZamanlanmÄ±ÅŸ gÃ¶rev yÃ¶netimi
-- Sistem komutlarÄ± (bcdedit, powercfg)
+- Servis yÃƒÂ¶netimi
+- ZamanlanmÃ„Â±Ã…Å¸ gÃƒÂ¶rev yÃƒÂ¶netimi
+- Sistem komutlarÃ„Â± (bcdedit, powercfg)
 
-### Process YÃ¶netimi P/Invoke
+### Process YÃƒÂ¶netimi P/Invoke
 
 ```csharp
 // Thread durdurma/devam ettirme
@@ -334,11 +334,11 @@ private static extern IntPtr OpenThread(ThreadAccess dwDesiredAccess, ...);
 [DllImport("kernel32.dll")]
 private static extern uint SuspendThread(IntPtr hThread);
 
-// I/O sayaÃ§larÄ±
+// I/O sayaÃƒÂ§larÃ„Â±
 [DllImport("kernel32.dll")]
 private static extern bool GetProcessIoCounters(IntPtr hProcess, out IoCounters ioCounters);
 
-// TCP baÄŸlantÄ± istatistikleri
+// TCP baÃ„Å¸lantÃ„Â± istatistikleri
 [DllImport("iphlpapi.dll")]
 private static extern uint GetExtendedTcpTable(...);
 
@@ -348,40 +348,40 @@ private static extern uint GetPerTcpConnectionEStats(...);
 
 ---
 
-## ðŸ“ˆ Performans OptimizasyonlarÄ±
+## Ã°Å¸â€œË† Performans OptimizasyonlarÃ„Â±
 
-### Bellek YÃ¶netimi
+### Bellek YÃƒÂ¶netimi
 
-| Ã–zellik | Uygulama |
+| Ãƒâ€“zellik | Uygulama |
 |---------|----------|
-| Dictionary temizleme | `ProcessMonitor.Cleanup()` Ã¶lÃ¼ PID'leri kaldÄ±rÄ±r |
-| Lazy loading | WMI scope'larÄ± lazy init |
-| Dispose pattern | TÃ¼m monitor'lar IDisposable |
+| Dictionary temizleme | `ProcessMonitor.Cleanup()` ÃƒÂ¶lÃƒÂ¼ PID'leri kaldÃ„Â±rÃ„Â±r |
+| Lazy loading | WMI scope'larÃ„Â± lazy init |
+| Dispose pattern | TÃƒÂ¼m monitor'lar IDisposable |
 | Object pooling | PerformanceCounter reuse |
 
 ### CPU Optimizasyonu
 
-| Teknik | AÃ§Ä±klama |
+| Teknik | AÃƒÂ§Ã„Â±klama |
 |--------|----------|
-| Delta hesaplama | CPU/IO iÃ§in Ã¶nceki deÄŸerle karÅŸÄ±laÅŸtÄ±rma |
-| Batch processing | TÃ¼m process'leri tek sorguda al |
-| Caching | WMI sonuÃ§larÄ±nÄ± cache'le |
-| Throttling | 1 saniye minimum gÃ¼ncelleme aralÄ±ÄŸÄ± |
+| Delta hesaplama | CPU/IO iÃƒÂ§in ÃƒÂ¶nceki deÃ„Å¸erle karÃ…Å¸Ã„Â±laÃ…Å¸tÃ„Â±rma |
+| Batch processing | TÃƒÂ¼m process'leri tek sorguda al |
+| Caching | WMI sonuÃƒÂ§larÃ„Â±nÃ„Â± cache'le |
+| Throttling | 1 saniye minimum gÃƒÂ¼ncelleme aralÃ„Â±Ã„Å¸Ã„Â± |
 
 ---
 
-## ðŸ› Bilinen Sorunlar ve Ã‡Ã¶zÃ¼mler
+## Ã°Å¸Ââ€º Bilinen Sorunlar ve Ãƒâ€¡ÃƒÂ¶zÃƒÂ¼mler
 
-| Sorun | Sebep | Ã‡Ã¶zÃ¼m |
+| Sorun | Sebep | Ãƒâ€¡ÃƒÂ¶zÃƒÂ¼m |
 |-------|-------|-------|
 | GPU temp N/A | LibreHardwareMonitor driver eksik | Fallback WMI kullan |
-| Network list boÅŸ | Adapter adÄ± eÅŸleÅŸmiyor | Instance name normalization |
-| CPU speed 0 | WMI sorgu hatasÄ± | Multiple fallback zinciri |
+| Network list boÃ…Å¸ | Adapter adÃ„Â± eÃ…Å¸leÃ…Å¸miyor | Instance name normalization |
+| CPU speed 0 | WMI sorgu hatasÃ„Â± | Multiple fallback zinciri |
 | High memory | Timer leak | Dispose pattern uygula |
 
 ---
 
-## ðŸ“š Referanslar
+## Ã°Å¸â€œÅ¡ Referanslar
 
 - [LibreHardwareMonitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor)
 - [WMI Classes Reference](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov)
@@ -389,3 +389,4 @@ private static extern uint GetPerTcpConnectionEStats(...);
 - [GetProcessIoCounters](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getprocessiocounters)
 - [GetExtendedTcpTable](https://learn.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getextendedtcptable)
 - [Desktop animation](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/graphics-multimedia/animation-overview)
+
