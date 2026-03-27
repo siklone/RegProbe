@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T13:29:30.440633Z",
+  "generated_utc": "2026-03-27T13:39:35.247335Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
@@ -17,7 +17,7 @@
       "incident-review": 2,
       "decision-gate": 1
     },
-    "re_audit_required_count": 1
+    "re_audit_required_count": 0
   },
   "entries": [
     {
@@ -3309,7 +3309,7 @@
       "tweak_id": "power.disable-cpu-idle-states",
       "evidence_class": "B",
       "lane": "official-policy",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "final-decision-gate",
       "official": true,
       "official_doc_exists": true,
       "procmon": false,
@@ -3343,11 +3343,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": true,
-      "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker",
-      "original_class": "B",
-      "original_pipeline_version": "pre-v3.1",
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "",
+      "original_class": null,
+      "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "matches-research",

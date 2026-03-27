@@ -79,7 +79,7 @@
       "trigger": "existing_record_evidence",
       "pdb_loaded": false,
       "pdb_source": null,
-      "string_xref_found": true,
+      "string_xref_found": false,
       "function_name": null,
       "decompile_snippet": "Two current-build ntoskrnl.exe probes looked for the registry names and for the internal pseudocode names tracked in the repo notes. Both came back with no matching strings or xrefs, so this pass did not produce a current-build kernel decompilation lead for the bundle.",
       "call_graph_depth": null,
@@ -130,12 +130,12 @@
     "layer_count": 4,
     "frida_kernel_guard_applied": true,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },
-    "class_ready_basis": "pending",
+    "class_ready_basis": "final-decision-gate",
     "next_missing_layer": "decision-gate"
   },
   "timeline": [
@@ -171,8 +171,8 @@
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
     "re_audit_date": "2026-03-27T04:39:50.952378Z",
-    "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
-    "re_audit_priority": 1,
+    "re_audit_reason": "",
+    "re_audit_priority": 0,
     "new_tools_applied": [
       "etw",
       "vm-runtime-runner",
@@ -183,8 +183,8 @@
     "new_class": "B",
     "class_changed": false,
     "frida_kernel_guard_applied": true,
-    "dead_flag_four_conditions_met": false,
-    "notes": "Runtime lane failed (evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json); Behavior lane failed (evidence/records/power.disable-cpu-idle-states/behavior-lane.log)",
+    "dead_flag_four_conditions_met": true,
+    "notes": "Runtime lane failed before candidate/post-boot confirmation (evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json); behavior lane failed before workload start (evidence/records/power.disable-cpu-idle-states/behavior-lane.log). The record remains a final decision-gate B because the raw bundle is still not an app-ready supported control surface.",
     "new_pipeline_version": "v3.1"
   }
 }

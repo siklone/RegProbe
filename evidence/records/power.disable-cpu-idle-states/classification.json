@@ -14,12 +14,12 @@
     "layer_count": 4,
     "frida_kernel_guard_applied": true,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },
-    "class_ready_basis": "pending",
+    "class_ready_basis": "final-decision-gate",
     "next_missing_layer": "decision-gate"
   }
 }

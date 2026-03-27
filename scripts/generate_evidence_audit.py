@@ -137,6 +137,18 @@ def re_audit_completed(record_id: str, class_id: str, official: bool) -> bool:
     )
 
 
+def is_final_decision_gate(record: dict[str, Any], class_id: str, incident_seen: bool) -> bool:
+    if class_id != "B":
+        return False
+
+    decision = record.get("decision") or {}
+    blocking_issues = decision.get("blocking_issues") or []
+    if blocking_issues:
+        return False
+
+    return next_missing_layer(record, incident_seen=incident_seen) == "decision-gate"
+
+
 def etw_executed(record_id: str, record: dict[str, Any]) -> bool:
     path = v31_full_evidence_path(record_id)
     if path.exists():
@@ -181,8 +193,10 @@ def dead_flag_checks(record_id: str, record: dict[str, Any]) -> dict[str, bool]:
     }
 
 
-def re_audit_reason(class_id: str, official: bool, record: dict[str, Any], record_id: str) -> str:
+def re_audit_reason(class_id: str, official: bool, record: dict[str, Any], record_id: str, incident_seen: bool) -> str:
     if re_audit_completed(record_id, class_id, official):
+        return ""
+    if is_final_decision_gate(record, class_id, incident_seen):
         return ""
     reasons: list[str] = []
     if class_id == "B":
@@ -201,8 +215,10 @@ def re_audit_reason(class_id: str, official: bool, record: dict[str, Any], recor
     return "; ".join(dict.fromkeys(reasons))
 
 
-def re_audit_priority(class_id: str, official: bool, record: dict[str, Any], record_id: str) -> int:
+def re_audit_priority(class_id: str, official: bool, record: dict[str, Any], record_id: str, incident_seen: bool) -> int:
     if re_audit_completed(record_id, class_id, official):
+        return 0
+    if is_final_decision_gate(record, class_id, incident_seen):
         return 0
     if class_id == "B":
         return 1
@@ -215,8 +231,10 @@ def re_audit_priority(class_id: str, official: bool, record: dict[str, Any], rec
     return 3
 
 
-def re_audit_required(class_id: str, official: bool, record_id: str) -> bool:
+def re_audit_required(class_id: str, official: bool, record_id: str, record: dict[str, Any], incident_seen: bool) -> bool:
     if re_audit_completed(record_id, class_id, official):
+        return False
+    if is_final_decision_gate(record, class_id, incident_seen):
         return False
     if class_id == "B":
         return True
@@ -253,7 +271,7 @@ def main() -> int:
         official = has_official_evidence(record)
         class_id = class_entry["evidence_class"]
         checks = dead_flag_checks(record_id, record)
-        audit_required = re_audit_required(class_id, official, record_id)
+        audit_required = re_audit_required(class_id, official, record_id, record, incident_seen)
         class_counts[class_entry["evidence_class"]] += 1
         lane_counts[lane] += 1
         missing_counts[next_layer] += 1
@@ -265,6 +283,8 @@ def main() -> int:
                 basis = "converged-vm"
             else:
                 basis = "unknown"
+        elif is_final_decision_gate(record, class_id, incident_seen):
+            basis = "final-decision-gate"
         else:
             basis = "pending"
 
@@ -294,8 +314,8 @@ def main() -> int:
                     "frida_kernel_guard_applied": suspected_layer(record) in {"kernel", "boot", "driver"},
                     "dead_flag_checks": checks,
                     "re_audit_required": audit_required,
-                    "re_audit_priority": re_audit_priority(class_id, official, record, record_id),
-                    "re_audit_reason": re_audit_reason(class_id, official, record, record_id),
+                    "re_audit_priority": re_audit_priority(class_id, official, record, record_id, incident_seen),
+                    "re_audit_reason": re_audit_reason(class_id, official, record, record_id, incident_seen),
                     "original_class": class_id if audit_required else None,
                     "original_pipeline_version": "pre-v3.1" if audit_required else None,
                     "new_pipeline_version": "v3.1",
