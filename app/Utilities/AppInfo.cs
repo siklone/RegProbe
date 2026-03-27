@@ -41,7 +41,7 @@ public static class AppInfo
         _ => RuntimeInformation.ProcessArchitecture.ToString()
     };
 
-    public static string CopyrightLabel => $"Â© {CurrentYear} {ProductName}";
+    public static string CopyrightLabel => $"(c) {CurrentYear} {ProductName}";
 
     private static string GetVersionString()
     {
@@ -67,7 +67,6 @@ public static class AppInfo
 
     private static string GetFrameworkLabel()
     {
-        // Typically: ".NET 8.0.12" -> ".NET 8.0"
         var framework = RuntimeInformation.FrameworkDescription;
         var parts = framework.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (parts.Length >= 2 && string.Equals(parts[0], ".NET", StringComparison.Ordinal))

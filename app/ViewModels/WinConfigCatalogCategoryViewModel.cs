@@ -24,7 +24,7 @@ public sealed class WinConfigCatalogCategoryViewModel
         DensityLabel = BuildDensityLabel(category);
         TopicPreview = category.Topics.Count == 0
             ? "Topic headings will appear after the next refresh."
-            : string.Join(" Â· ", category.Topics.Take(3));
+            : string.Join(" | ", category.Topics.Take(3));
         SourceUrl = category.SourceUrl;
         DescriptionUrl = category.DescriptionUrl;
         OpenCategoryCommand = new RelayCommand(_ => OpenUrl(SourceUrl));
@@ -53,7 +53,7 @@ public sealed class WinConfigCatalogCategoryViewModel
             category.AssetFileCount > 0 ? $"{category.AssetFileCount} assets" : null
         }.Where(static part => !string.IsNullOrWhiteSpace(part));
 
-        return string.Join(" Â· ", parts);
+        return string.Join(" | ", parts);
     }
 
     private static void OpenUrl(string url)

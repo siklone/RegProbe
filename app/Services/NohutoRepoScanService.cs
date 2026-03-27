@@ -584,7 +584,7 @@ public sealed class NohutoRepoScanService : IDisposable
             : value.Replace('\r', ' ').Replace('\n', ' ').Trim();
 
     private static string FormatSuffix(string topImpact)
-        => string.IsNullOrWhiteSpace(topImpact) ? string.Empty : $" Â· top impact {topImpact}";
+        => string.IsNullOrWhiteSpace(topImpact) ? string.Empty : $" | top impact {topImpact}";
 
     private static string ShortSha(string? sha)
     {

@@ -155,7 +155,7 @@ public sealed class PolicyReferenceCatalogBuilder
             parts.Add($"{riskyCount} risky");
         }
 
-        return parts.Count == 0 ? "No risk data" : string.Join(" Â· ", parts);
+        return parts.Count == 0 ? "No risk data" : string.Join(" | ", parts);
     }
 
     private static string BuildExampleSummary(IReadOnlyCollection<PolicyReferenceSourceItem> items)
@@ -172,7 +172,7 @@ public sealed class PolicyReferenceCatalogBuilder
             return "Examples will appear after the next refresh.";
         }
 
-        return $"Examples: {string.Join(" Â· ", examples)}";
+        return $"Examples: {string.Join(" | ", examples)}";
     }
 
     private static string BuildReadPathLabel(IReadOnlyCollection<PolicyReferenceSourceItem> items, string searchFragment)
@@ -240,8 +240,7 @@ public sealed class PolicyReferenceCatalogBuilder
 
         var preview = names.Take(3).ToArray();
         return names.Length > preview.Length
-            ? $"{string.Join(" Â· ", preview)} +{names.Length - preview.Length} more"
-            : string.Join(" Â· ", preview);
+            ? $"{string.Join(" | ", preview)} +{names.Length - preview.Length} more" : string.Join(" | ", preview);
     }
 
     private static string BuildComponentKey(string registryPath)

@@ -1676,7 +1676,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 var subGroup = parent.SubGroups.FirstOrDefault(g => g.CategoryName == subName);
                 if (subGroup == null)
                 {
-                    subGroup = new CategoryGroupViewModel(subName, "â””â”€â”€") { IsNested = true, IsExpanded = true, Parent = parent };
+                    subGroup = new CategoryGroupViewModel(subName, "--") { IsNested = true, IsExpanded = true, Parent = parent };
                     parent.SubGroups.Add(subGroup);
                 }
                 parent = subGroup;

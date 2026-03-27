@@ -83,7 +83,7 @@ public sealed class CategoryGroupViewModel : ViewModelBase
         }
     }
 
-    public string ExpanderIcon => IsExpanded ? "â–¼" : "â–¶";
+    public string ExpanderIcon => IsExpanded ? "v" : ">";
 
     public ICommand ToggleExpandCommand { get; }
 

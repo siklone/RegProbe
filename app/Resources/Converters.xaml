@@ -10,11 +10,10 @@
     <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
     <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
 
-
     <!-- Null to Visibility Converter -->
     <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
 
-    <!-- Null to Collapsed Converter (null â†’ Collapsed, non-null â†’ Visible) -->
+    <!-- Null to Collapsed Converter (null -> Collapsed, non-null -> Visible) -->
     <converters:NullToCollapsedConverter x:Key="NullToCollapsedConverter"/>
 
     <!-- String Empty to Visibility Converter -->

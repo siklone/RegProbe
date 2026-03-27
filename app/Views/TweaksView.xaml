@@ -1230,7 +1230,7 @@
                                        TextTrimming="CharacterEllipsis"
                                        ToolTip="{Binding CompactInfoTooltip}">
                                 <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0} Â· {1} Â· {2}">
+                                    <MultiBinding StringFormat="{}{0} | {1} | {2}">
                                         <Binding Path="ImpactAreaLabel"/>
                                         <Binding Path="CompactInfoLine"/>
                                         <Binding Path="InventoryFreshnessText"/>

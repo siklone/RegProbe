@@ -194,7 +194,7 @@ public sealed class WinConfigCatalogPanelViewModel : ViewModelBase
         }
 
         parts.Add(liveOrCache);
-        return string.Join(" Â· ", parts);
+        return string.Join(" | ", parts);
     }
 
     private void OpenReport()

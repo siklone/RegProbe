@@ -17,9 +17,9 @@ public sealed class BloatwareViewModel : ViewModelBase
     public BloatwareViewModel()
     {
         _bloatwareService = new BloatwareService();
-        
+
         RefreshCommand = new RelayCommand(async _ => await LoadAppsAsync());
-        
+
         _ = LoadAppsAsync();
     }
 
@@ -124,16 +124,16 @@ public sealed class BloatwareViewModel : ViewModelBase
             if (result.Success)
             {
                 Apps.Remove(appVm);
-                StatusMessage = $"âœ“ Successfully uninstalled {appVm.DisplayName}";
+                StatusMessage = $"OK Successfully uninstalled {appVm.DisplayName}";
             }
             else
             {
-                StatusMessage = $"âœ— Failed: {result.ErrorMessage}";
+                StatusMessage = $"X Failed: {result.ErrorMessage}";
             }
         }
         catch (Exception ex)
         {
-            StatusMessage = $"âœ— Error: {ex.Message}";
+            StatusMessage = $"X Error: {ex.Message}";
         }
         finally
         {
@@ -196,11 +196,11 @@ public class AppxPackageViewModel : ViewModelBase
     private string FormatBytes(long bytes)
     {
         if (bytes == 0) return "Unknown";
-        
+
         string[] sizes = { "B", "KB", "MB", "GB" };
         int order = 0;
         double size = bytes;
-        
+
         while (size >= 1024 && order < sizes.Length - 1)
         {
             order++;

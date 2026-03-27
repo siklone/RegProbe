@@ -66,7 +66,7 @@ public sealed class NohutoSourceItemViewModel
             ? state.LastSeenCommitSha
             : state.LastSeenCommitSha[..8];
 
-        return $"{sha} Â· {state.LastSeenCommitDateUtc.Value:yyyy-MM-dd}";
+        return $"{sha} | {state.LastSeenCommitDateUtc.Value:yyyy-MM-dd}";
     }
 
     private static string FirstNonEmpty(params string?[] values)

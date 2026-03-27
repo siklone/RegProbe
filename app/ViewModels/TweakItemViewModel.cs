@@ -298,20 +298,20 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private static string GetCategoryIcon(string category) => category.ToLowerInvariant() switch
     {
-        "system" => "Ã¢Å¡â„¢Ã¯Â¸Â",
-        "security" => "Ã°Å¸â€â€™",
-        "privacy" => "Ã°Å¸â€˜ÂÃ¯Â¸Â",
-        "network" => "Ã°Å¸Å’Â",
-        "visibility" => "Ã°Å¸â€˜â‚¬",
-        "audio" => "Ã°Å¸â€Å ",
-        "peripheral" => "Ã°Å¸â€“Â±Ã¯Â¸Â",
-        "power" => "Ã¢Å¡Â¡",
-        "performance" => "Ã°Å¸Å¡â‚¬",
-        "cleanup" => "Ã°Å¸Â§Â¹",
-        "explorer" => "Ã°Å¸â€œÂ",
-        "notifications" => "Ã°Å¸â€â€",
-        "devtools" => "Ã°Å¸Â§Â°",
-        _ => "Ã°Å¸â€œÂ¦"
+        "system" => "SYS",
+        "security" => "SEC",
+        "privacy" => "PRV",
+        "network" => "NET",
+        "visibility" => "UI",
+        "audio" => "AUD",
+        "peripheral" => "DEV",
+        "power" => "PWR",
+        "performance" => "PERF",
+        "cleanup" => "CLN",
+        "explorer" => "EXP",
+        "notifications" => "NTF",
+        "devtools" => "DEV",
+        _ => "CFG"
     };
 
     private static string DetermineImpactAreaLabel(ITweak tweak)
@@ -659,7 +659,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     /// Formatted comparison text for UI display.
     /// </summary>
     public string ComparisonText => HasStateChange
-        ? $"Before: {BeforeState} Ã¢â€ â€™ After: {AfterState}"
+        ? $"Before: {BeforeState} -> After: {AfterState}"
         : "No changes detected";
 
     public string ImpactAreaLabel => _impactAreaLabel;
@@ -731,7 +731,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             var current = string.IsNullOrWhiteSpace(CurrentValue) ? "Unknown" : CurrentValue;
             var target = string.IsNullOrWhiteSpace(TargetValue) ? "Optimized" : TargetValue;
-            return $"{current} Ã¢â€ â€™ {target}";
+            return $"{current} -> {target}";
         }
     }
 
@@ -1210,7 +1210,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    public string FavoriteIcon => _isFavorite ? "Ã¢Ëœâ€¦" : "Ã¢Ëœâ€ ";
+    public string FavoriteIcon => _isFavorite ? "*" : "+";
 
     public ICommand ToggleFavoriteCommand => _toggleFavoriteCommand;
 
@@ -2725,45 +2725,42 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         var implications = new List<string>();
 
-        // Risk-based implications
         switch (Risk)
         {
             case TweakRiskLevel.Safe:
-                implications.Add("Ã¢Å“â€œ Safe to apply - minimal system impact");
+                implications.Add("SAFE: Safe to apply with minimal system impact.");
                 break;
             case TweakRiskLevel.Advanced:
-                implications.Add("Ã¢Å¡Â  Advanced - may affect some features");
+                implications.Add("NOTE: Advanced setting that may affect some features.");
                 break;
             case TweakRiskLevel.Risky:
-                implications.Add("Ã¢Å¡Â Ã¯Â¸Â Risky - could impact system stability");
+                implications.Add("WARN: Risky setting that could impact system stability.");
                 break;
         }
 
-        // Category-based implications
         var category = Category.ToLowerInvariant();
         switch (category)
         {
             case "privacy":
-                implications.Add("Ã°Å¸â€â€™ Affects: Privacy & data collection");
+                implications.Add("Affects: Privacy and data collection.");
                 break;
             case "performance":
-                implications.Add("Ã°Å¸Å¡â‚¬ Affects: System responsiveness");
+                implications.Add("Affects: System responsiveness.");
                 break;
             case "security":
-                implications.Add("Ã°Å¸â€ºÂ¡Ã¯Â¸Â Affects: System security posture");
+                implications.Add("Affects: System security posture.");
                 break;
             case "network":
-                implications.Add("Ã°Å¸Å’Â Affects: Network connectivity");
+                implications.Add("Affects: Network connectivity.");
                 break;
             case "visibility":
-                implications.Add("Ã°Å¸â€˜â‚¬ Affects: UI elements & visual features");
+                implications.Add("Affects: UI elements and visual features.");
                 break;
         }
 
-        // Elevation implications
         if (RequiresElevation)
         {
-            implications.Add("Ã°Å¸â€â€˜ Requires administrator privileges");
+            implications.Add("Requires administrator privileges.");
         }
 
         return string.Join("\n", implications);
@@ -2802,11 +2799,11 @@ public sealed class ReferenceLink
     public ReferenceLinkKind Kind { get; }
     public string Icon => Kind switch
     {
-        ReferenceLinkKind.Catalog => "Ã°Å¸â€œÅ¡",
-        ReferenceLinkKind.Details => "Ã°Å¸Â§Â©",
-        ReferenceLinkKind.Docs => "Ã°Å¸â€œËœ",
-        ReferenceLinkKind.Source => "Ã°Å¸â€œâ€ž",
-        _ => "Ã°Å¸â€â€”"
+        ReferenceLinkKind.Catalog => "CAT",
+        ReferenceLinkKind.Details => "DET",
+        ReferenceLinkKind.Docs => "DOC",
+        ReferenceLinkKind.Source => "SRC",
+        _ => "REF"
     };
 }
 

@@ -10,7 +10,7 @@ namespace RegProbe.App.Services;
 public class DnsService
 {
     private const string BackupFileName = "dns_backup.json";
-    
+
     /// <summary>
     /// Gets predefined DNS providers.
     /// </summary>
@@ -23,35 +23,35 @@ public class DnsService
                 Description: "Fast and privacy-focused DNS (1.1.1.1)",
                 PrimaryDns: "1.1.1.1",
                 SecondaryDns: "1.0.0.1",
-                Icon: "â˜ï¸"
+                Icon: "CF"
             ),
             new DnsProvider(
                 Name: "Google",
                 Description: "Reliable and fast DNS (8.8.8.8)",
                 PrimaryDns: "8.8.8.8",
                 SecondaryDns: "8.8.4.4",
-                Icon: "ðŸ”"
+                Icon: "GO"
             ),
             new DnsProvider(
                 Name: "Quad9",
                 Description: "Security-focused DNS with malware blocking (9.9.9.9)",
                 PrimaryDns: "9.9.9.9",
                 SecondaryDns: "149.112.112.112",
-                Icon: "ðŸ›¡ï¸"
+                Icon: "Q9"
             ),
             new DnsProvider(
                 Name: "OpenDNS",
                 Description: "Family-safe DNS with content filtering (208.67.222.222)",
                 PrimaryDns: "208.67.222.222",
                 SecondaryDns: "208.67.220.220",
-                Icon: "ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦"
+                Icon: "OD"
             ),
             new DnsProvider(
                 Name: "Automatic",
                 Description: "Use DNS from DHCP (router default)",
                 PrimaryDns: "",
                 SecondaryDns: "",
-                Icon: "ðŸ”„"
+                Icon: "DH"
             )
         };
     }
@@ -109,7 +109,6 @@ public class DnsService
 
                 foreach (ManagementObject adapter in searcher.Get())
                 {
-                    // If provider is "Automatic", set to DHCP
                     if (string.IsNullOrEmpty(provider.PrimaryDns))
                     {
                         adapter.InvokeMethod("SetDNSServerSearchOrder", new object[] { null! });
@@ -170,7 +169,6 @@ public class DnsService
             return GetProviders().FirstOrDefault(p => p.Name == "Automatic");
         }
 
-        return GetProviders().FirstOrDefault(p => 
-            p.PrimaryDns == config.PrimaryDns);
+        return GetProviders().FirstOrDefault(p => p.PrimaryDns == config.PrimaryDns);
     }
 }

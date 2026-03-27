@@ -72,15 +72,15 @@ public class ToastNotification
     public TimeSpan? Duration { get; init; } = TimeSpan.FromSeconds(3);
 
     /// <summary>
-    /// Icon to display (emoji or text).
+    /// Icon to display.
     /// </summary>
     public string Icon => Type switch
     {
-        NotificationType.Success => "âœ“",
-        NotificationType.Warning => "âš ",
-        NotificationType.Error => "âœ•",
-        NotificationType.Info => "â„¹",
-        _ => "â€¢"
+        NotificationType.Success => "OK",
+        NotificationType.Warning => "!",
+        NotificationType.Error => "X",
+        NotificationType.Info => "i",
+        _ => "*"
     };
 
     /// <summary>
