@@ -1,0 +1,81 @@
+{
+  "generated_utc": "2026-03-28T00:15:00Z",
+  "source_manifest": "registry-research-framework/audit/kernel-power-net-new-candidates-20260328.json",
+  "source_results": "evidence/files/vm-tooling-staging/registry-batch-existence-20260328-000828/results.json",
+  "source_summary": "evidence/files/vm-tooling-staging/registry-batch-existence-20260328-000828/summary.json",
+  "status": "ready-for-next-pass",
+  "totals": {
+    "total_candidates": 20,
+    "path_exists_count": 20,
+    "value_exists_count": 9,
+    "path_only_count": 11
+  },
+  "value_exists": [
+    "power.customize-during-setup",
+    "power.source-settings-version",
+    "system.executive-additional-critical-worker-threads",
+    "system.executive-additional-delayed-worker-threads",
+    "system.executive-uuid-sequence-number",
+    "system.io-allow-remote-dasd",
+    "power.session-power-setting-profile",
+    "power.session-watchdog-resume-timeout",
+    "power.session-watchdog-sleep-timeout"
+  ],
+  "path_only": [
+    "policy.enable-local-logon-sid",
+    "system.executive-force-enable-mutant-autoboost",
+    "system.executive-kernel-worker-test-flags",
+    "system.executive-maximum-kernel-worker-threads",
+    "system.executive-tickcount-rollover-delay",
+    "system.io-disable-disk-counters",
+    "system.io-allow-load-crash-dump-driver",
+    "system.io-enable-session-zero-access-check",
+    "power.session-idle-scan-interval",
+    "power.session-skip-tick-override",
+    "power.session-win32-callout-watchdog-bugcheck-enabled"
+  ],
+  "recommended_next_queue": [
+    {
+      "candidate_id": "power.customize-during-setup",
+      "reason": "Value exists on the clean baseline and lives under Control\\Power, so docs/static triage can start immediately."
+    },
+    {
+      "candidate_id": "power.source-settings-version",
+      "reason": "Value exists on the clean baseline and appears to be a durable platform knob rather than a one-off policy write."
+    },
+    {
+      "candidate_id": "power.session-power-setting-profile",
+      "reason": "Value exists under Session Manager\\Power and should be easy to route into a kernel/static documentation pass."
+    },
+    {
+      "candidate_id": "power.session-watchdog-resume-timeout",
+      "reason": "Value exists and has an obvious timeout semantic that is likely documentable or statically traceable."
+    },
+    {
+      "candidate_id": "power.session-watchdog-sleep-timeout",
+      "reason": "Value exists and pairs naturally with WatchdogResumeTimeout for a shared follow-up lane."
+    },
+    {
+      "candidate_id": "system.executive-additional-critical-worker-threads",
+      "reason": "Value exists and shares a family with AdditionalDelayedWorkerThreads, making it a good Executive batch lane."
+    },
+    {
+      "candidate_id": "system.executive-additional-delayed-worker-threads",
+      "reason": "Value exists and shares a family with AdditionalCriticalWorkerThreads, making it a good Executive batch lane."
+    },
+    {
+      "candidate_id": "system.executive-uuid-sequence-number",
+      "reason": "Value exists but may be an implementation detail; it still merits a static-only sanity pass before deeper runtime work."
+    },
+    {
+      "candidate_id": "system.io-allow-remote-dasd",
+      "reason": "Value exists and is the only live I/O System value in the net-new set, so it is a strong candidate for isolated follow-up."
+    }
+  ],
+  "notes": [
+    "All 20 parent paths exist on the clean baseline.",
+    "No read errors occurred during the batch existence pass.",
+    "Shell health remained stable before and after the read-only lane.",
+    "Frida remains disallowed for every HKLM\\SYSTEM candidate in this batch."
+  ]
+}

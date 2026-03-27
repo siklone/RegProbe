@@ -1,0 +1,189 @@
+{
+  "generated_utc": "2026-03-28T00:00:00Z",
+  "source_note": "research/notes/kernel-power-96-key-routing-20260327.md",
+  "route": "net-new",
+  "probe_kind": "existence-first",
+  "snapshot_name": "baseline-20260327-regprobe-visible-shell-stable",
+  "candidates": [
+    {
+      "candidate_id": "policy.enable-local-logon-sid",
+      "family": "policy-system",
+      "suspected_layer": "policy",
+      "boot_phase_relevant": false,
+      "frida_allowed": true,
+      "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "value_name": "EnableLocalLogonSid"
+    },
+    {
+      "candidate_id": "power.customize-during-setup",
+      "family": "power-control",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "CustomizeDuringSetup"
+    },
+    {
+      "candidate_id": "power.source-settings-version",
+      "family": "power-control",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SourceSettingsVersion"
+    },
+    {
+      "candidate_id": "system.executive-additional-critical-worker-threads",
+      "family": "session-manager-executive",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalCriticalWorkerThreads"
+    },
+    {
+      "candidate_id": "system.executive-additional-delayed-worker-threads",
+      "family": "session-manager-executive",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalDelayedWorkerThreads"
+    },
+    {
+      "candidate_id": "system.executive-force-enable-mutant-autoboost",
+      "family": "session-manager-executive",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "ForceEnableMutantAutoboost"
+    },
+    {
+      "candidate_id": "system.executive-kernel-worker-test-flags",
+      "family": "session-manager-executive",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "KernelWorkerTestFlags"
+    },
+    {
+      "candidate_id": "system.executive-maximum-kernel-worker-threads",
+      "family": "session-manager-executive",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "MaximumKernelWorkerThreads"
+    },
+    {
+      "candidate_id": "system.executive-tickcount-rollover-delay",
+      "family": "session-manager-executive",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "TickcountRolloverDelay"
+    },
+    {
+      "candidate_id": "system.executive-uuid-sequence-number",
+      "family": "session-manager-executive",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber"
+    },
+    {
+      "candidate_id": "system.io-allow-remote-dasd",
+      "family": "session-manager-io",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "AllowRemoteDASD"
+    },
+    {
+      "candidate_id": "system.io-disable-disk-counters",
+      "family": "session-manager-io",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "DisableDiskCounters"
+    },
+    {
+      "candidate_id": "system.io-allow-load-crash-dump-driver",
+      "family": "session-manager-io",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "IoAllowLoadCrashDumpDriver"
+    },
+    {
+      "candidate_id": "system.io-enable-session-zero-access-check",
+      "family": "session-manager-io",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "IoEnableSessionZeroAccessCheck"
+    },
+    {
+      "candidate_id": "power.session-idle-scan-interval",
+      "family": "session-manager-power",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "IdleScanInterval"
+    },
+    {
+      "candidate_id": "power.session-power-setting-profile",
+      "family": "session-manager-power",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "PowerSettingProfile"
+    },
+    {
+      "candidate_id": "power.session-skip-tick-override",
+      "family": "session-manager-power",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "SkipTickOverride"
+    },
+    {
+      "candidate_id": "power.session-watchdog-resume-timeout",
+      "family": "session-manager-power",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogResumeTimeout"
+    },
+    {
+      "candidate_id": "power.session-watchdog-sleep-timeout",
+      "family": "session-manager-power",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogSleepTimeout"
+    },
+    {
+      "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+      "family": "session-manager-power",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "frida_allowed": false,
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "Win32CalloutWatchdogBugcheckEnabled"
+    }
+  ]
+}
