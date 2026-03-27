@@ -126,6 +126,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private bool _hasVisibleTweaks;
     private bool _hasVisibleDiskHealthTweaks;
     private bool _isFlatView;
+    private readonly bool _showContributorEvidenceUi = ContributorMode.IsEnabled;
     private readonly IFavoritesStore _favoritesStore;
     private readonly ITweakInventoryStateStore _inventoryStateStore;
     private CancellationTokenSource? _searchCts;
@@ -1065,6 +1066,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
+    public bool ShowContributorEvidenceUi => _showContributorEvidenceUi;
+
     public bool ShowClassA
     {
         get => _showClassA;
@@ -1531,24 +1534,27 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             return false;
         }
 
-        if (item.EvidenceClassId == "A" && !_showClassA)
+        if (_showContributorEvidenceUi)
         {
-            return false;
-        }
+            if (item.EvidenceClassId == "A" && !_showClassA)
+            {
+                return false;
+            }
 
-        if (item.EvidenceClassId == "B" && !_showClassB)
-        {
-            return false;
-        }
+            if (item.EvidenceClassId == "B" && !_showClassB)
+            {
+                return false;
+            }
 
-        if (item.EvidenceClassId == "C" && !_showClassC)
-        {
-            return false;
-        }
+            if (item.EvidenceClassId == "C" && !_showClassC)
+            {
+                return false;
+            }
 
-        if (item.EvidenceClassId == "D" && !_showClassD)
-        {
-            return false;
+            if (item.EvidenceClassId == "D" && !_showClassD)
+            {
+                return false;
+            }
         }
 
         if (string.IsNullOrWhiteSpace(_searchText))

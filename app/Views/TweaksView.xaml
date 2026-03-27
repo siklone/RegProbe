@@ -1205,6 +1205,7 @@
                                         CornerRadius="10"
                                         Padding="8,2"
                                         Margin="8,0,0,0"
+                                        Visibility="{Binding ElementName=TweaksRoot, Path=DataContext.ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"
                                         ToolTip="{Binding EvidenceClassTooltip}">
                                     <TextBlock Text="{Binding EvidenceClassBadgeText}"
                                                Foreground="{Binding EvidenceClassBrush}"
@@ -2271,18 +2272,21 @@
                                                    Foreground="{DynamicResource MutedForegroundBrush}"/>
                                     </StackPanel>
                                 </CheckBox>
-                                <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
-                                    <TextBlock Text="Class A"/>
-                                </CheckBox>
-                                <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
-                                    <TextBlock Text="Class B"/>
-                                </CheckBox>
-                                <CheckBox Tag="ClassC" IsChecked="{Binding ShowClassC}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
-                                    <TextBlock Text="Class C"/>
-                                </CheckBox>
-                                <CheckBox Tag="ClassD" IsChecked="{Binding ShowClassD}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
-                                    <TextBlock Text="Class D"/>
-                                </CheckBox>
+                                <StackPanel Orientation="Horizontal"
+                                            Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}">
+                                    <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                        <TextBlock Text="Class A"/>
+                                    </CheckBox>
+                                    <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                        <TextBlock Text="Class B"/>
+                                    </CheckBox>
+                                    <CheckBox Tag="ClassC" IsChecked="{Binding ShowClassC}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                        <TextBlock Text="Class C"/>
+                                    </CheckBox>
+                                    <CheckBox Tag="ClassD" IsChecked="{Binding ShowClassD}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                        <TextBlock Text="Class D"/>
+                                    </CheckBox>
+                                </StackPanel>
                                 <Button Content="Reset"
                                         Command="{Binding ResetFiltersCommand}"
                                         Style="{StaticResource CompactButton}"

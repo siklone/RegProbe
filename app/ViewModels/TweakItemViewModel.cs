@@ -25,6 +25,7 @@ namespace RegProbe.App.ViewModels;
 
 public sealed class TweakItemViewModel : ViewModelBase
 {
+    private const string PublicResearchGateExplanation = "This setting is still under evidence review and is not available as a one-click action yet.";
     private static readonly SolidColorBrush AppliedStatusBrush = CreateFrozenBrush("#A3BE8C");
     private static readonly SolidColorBrush NotAppliedStatusBrush = CreateFrozenBrush("#EBCB8B");
     private static readonly SolidColorBrush MixedStatusBrush = CreateFrozenBrush("#D08770");
@@ -784,6 +785,10 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string EvidenceClassGatingReason => _evidenceClassGatingReason;
 
+    public string PublicEvidenceClassGatingReason => ContributorMode.IsEnabled
+        ? EvidenceClassGatingReason
+        : PublicResearchGateExplanation;
+
     public bool IsEvidenceClassActionable => _isEvidenceClassActionable;
 
     public bool ShowInApp => _showInApp;
@@ -812,13 +817,13 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string PrimaryActionTooltip => IsEvidenceClassActionable
         ? "Apply this setting without opening details."
-        : EvidenceClassGatingReason;
+        : PublicEvidenceClassGatingReason;
 
     public string RollbackActionTooltip => IsEvidenceClassActionable
         ? "Restore the previous value captured before Apply."
-        : EvidenceClassGatingReason;
+        : PublicEvidenceClassGatingReason;
 
-    public string ResearchGateMessage => IsEvidenceClassActionable ? string.Empty : EvidenceClassGatingReason;
+    public string ResearchGateMessage => IsEvidenceClassActionable ? string.Empty : PublicEvidenceClassGatingReason;
 
     public bool HasResearchGateMessage => !string.IsNullOrWhiteSpace(ResearchGateMessage);
 
