@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media.Animation;
+using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Threading;
 using RegProbe.App.Diagnostics;
 using RegProbe.App.Services;
@@ -36,9 +38,6 @@ public partial class App : Application
 
         base.OnStartup(e);
 
-        // GPU hardware acceleration settings for smoother UI
-        // Render settings configured later after MainWindow is created
-
         SplashWindowHost? splashHost = null;
         try
         {
@@ -51,6 +50,7 @@ public partial class App : Application
             ApplyTheme(settings);
             UiPreferences.Current.EnableCardShadows = false;
             UiPreferences.Current.IsCompactMode = false;
+            ConfigureProcessRenderSettings();
 
             var showSplash = true;
             if (showSplash)
@@ -70,34 +70,18 @@ public partial class App : Application
             await Task.Run(() => preloader.RunAllAsync(CancellationToken.None));
             AppDiagnostics.Log("[APP] PreloadAllAsync done.");
 
-            var mainWindow = new MainWindow
-            {
-                Opacity = 0
-            };
+            var mainWindow = new MainWindow();
             MainWindow = mainWindow;
-
-            // GPU hardware acceleration settings
-            ConfigureRenderSettings();
+            ConfigureWindowRenderSettings(mainWindow);
 
             mainWindow.Show();
             await Dispatcher.Yield(DispatcherPriority.Render);
+            mainWindow.Activate();
 
             if (splashHost != null)
             {
                 await splashHost.CompleteAndCloseAsync();
             }
-
-            var revealAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = TimeSpan.FromMilliseconds(180),
-                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
-            };
-
-            mainWindow.BeginAnimation(UIElement.OpacityProperty, revealAnimation);
-            mainWindow.Opacity = 1;
-            mainWindow.Activate();
 
             QueueDeferredStartupWork(settings, mainWindow);
         }
@@ -261,22 +245,17 @@ public partial class App : Application
         e.SetObserved();
     }
 
-    /// <summary>
-    /// Configures desktop rendering settings for consistent GPU acceleration and smooth animations.
-    /// </summary>
-    private static void ConfigureRenderSettings()
+    private static void ConfigureProcessRenderSettings()
     {
         try
         {
-            // Use high-quality but efficient bitmap scaling for images
-            if (Current.MainWindow != null)
+            if (ShouldForceSoftwareRendering())
             {
-                System.Windows.Media.RenderOptions.SetBitmapScalingMode(
-                    Current.MainWindow, 
-                    System.Windows.Media.BitmapScalingMode.LowQuality);
+                RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+                AppDiagnostics.Log("[APP] Software rendering enabled for compatibility.");
             }
 
-            // Set animation frame rate (default is 60fps, adjust for performance)
+            // Keep animation timing predictable across host and VM renderers.
             System.Windows.Media.Animation.Timeline.DesiredFrameRateProperty.OverrideMetadata(
                 typeof(System.Windows.Media.Animation.Timeline),
                 new FrameworkPropertyMetadata { DefaultValue = 60 });
@@ -285,6 +264,41 @@ public partial class App : Application
         {
             // Non-critical, continue without optimization
             AppDiagnostics.LogException("Render settings configuration failed", ex);
+        }
+    }
+
+    private static void ConfigureWindowRenderSettings(Window window)
+    {
+        try
+        {
+            System.Windows.Media.RenderOptions.SetBitmapScalingMode(
+                window,
+                System.Windows.Media.BitmapScalingMode.LowQuality);
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException("Window render settings configuration failed", ex);
+        }
+    }
+
+    private static bool ShouldForceSoftwareRendering()
+    {
+        var overrideValue = Environment.GetEnvironmentVariable("REGPROBE_FORCE_SOFTWARE_RENDERING");
+        if (!string.IsNullOrWhiteSpace(overrideValue))
+        {
+            return overrideValue.Equals("1", StringComparison.OrdinalIgnoreCase)
+                   || overrideValue.Equals("true", StringComparison.OrdinalIgnoreCase);
+        }
+
+        try
+        {
+            return Process.GetProcessesByName("vmtoolsd").Length > 0
+                   || Process.GetProcessesByName("vm3dservice").Length > 0;
+        }
+        catch (Exception ex)
+        {
+            AppDiagnostics.LogException("VM compatibility detection failed", ex);
+            return false;
         }
     }
 
