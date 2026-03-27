@@ -10,17 +10,56 @@ $ErrorActionPreference = 'Continue'
 New-Item -ItemType Directory -Path $OutputRoot -Force | Out-Null
 New-Item -ItemType Directory -Path 'C:\Tools\Inbound' -Force | Out-Null
 
+function Stop-LegacyAppProcesses {
+    $targetNames = @(
+        'RegProbe.App',
+        'RegProbe.ElevatedHost',
+        'WindowsOptimizer.App',
+        'WindowsOptimizer.ElevatedHost',
+        'OpenTraceProject.App',
+        'OpenTraceProject.ElevatedHost'
+    )
+
+    $stopped = @()
+
+    foreach ($proc in Get-Process -ErrorAction SilentlyContinue | Where-Object { $targetNames -contains $_.ProcessName }) {
+        try {
+            Stop-Process -Id $proc.Id -Force -ErrorAction Stop
+            $stopped += "$($proc.ProcessName):$($proc.Id)"
+        }
+        catch {
+        }
+    }
+
+    if ($stopped.Count -gt 0) {
+        Start-Sleep -Seconds 2
+    }
+
+    return $stopped
+}
+
 $result = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
 }
 
 try {
+    $result.stopped_processes = Stop-LegacyAppProcesses
+
     if (Test-Path $AppRoot) {
         Remove-Item -Path $AppRoot -Recurse -Force
     }
 
     New-Item -ItemType Directory -Path $AppRoot -Force | Out-Null
     Expand-Archive -Path $PublishZipPath -DestinationPath $AppRoot -Force
+
+    $legacyArtifacts = Get-ChildItem -Path $AppRoot -Recurse -File -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -like 'WindowsOptimizer*' -or $_.Name -like 'OpenTraceProject*' }
+
+    foreach ($artifact in $legacyArtifacts) {
+        Remove-Item -LiteralPath $artifact.FullName -Force -ErrorAction SilentlyContinue
+    }
+
+    $result.legacy_artifacts_removed = @($legacyArtifacts | Select-Object -ExpandProperty FullName)
 
     $exe = Join-Path $AppRoot 'RegProbe.App.exe'
     $docsRoot = Join-Path $AppRoot 'Docs'
