@@ -7,7 +7,7 @@ param(
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\explorer-compact-runtime',
     [string]$RecordId = 'explorer.enable-explorer-compact-mode',
-    [string]$SnapshotName = 'baseline-20260327-shell-stable',
+    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
     [string]$IncidentLogPath = '',
     [int]$SettleSeconds = 10
 )

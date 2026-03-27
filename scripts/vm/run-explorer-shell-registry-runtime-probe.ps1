@@ -20,7 +20,7 @@ param(
     [string]$ValueName,
     [Parameter(Mandatory = $true)]
     [int]$ValueData,
-    [string]$SnapshotName = 'baseline-20260327-shell-stable',
+    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
     [string]$IncidentLogPath = '',
     [int]$SettleSeconds = 10
 )

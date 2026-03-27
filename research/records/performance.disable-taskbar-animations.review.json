@@ -4,7 +4,7 @@
   "record_id": "performance.disable-taskbar-animations",
   "tweak_id": "performance.disable-taskbar-animations",
   "record_status": "validated",
-  "summary": "A guest-side reversible probe on Win25H2Clean confirmed that HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations = 0 disables taskbar animations and = 1 enables them on this build. Procmon then captured explorer.exe querying the same value with Data:0 and Data:1 in separate reversible passes, and a Ghidra headless pass on Taskbar.dll decompiled a code path that reads TaskbarAnimations from Explorer\\Advanced. The app's current write matches the observed disabled state.",
+  "summary": "A guest-side reversible probe on Win25H2Clean confirmed that HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations = 0 disables taskbar animations and = 1 enables them on this build. Procmon then captured explorer.exe querying the same value with Data:0 and Data:1 in separate reversible passes, and a Ghidra headless pass on Taskbar.dll decompiled a code path that reads TaskbarAnimations from Explorer\\Advanced. The app's current write matches the observed disabled state. A rerun on 2026-03-27 against baseline-20260327-regprobe-visible-shell-stable completed with status ok, stopped WPR cleanly, and kept Explorer, sihost, ShellHost, and ctfmon healthy through both candidate and restore restarts, closing the earlier incident-review concern from the older shell-stable baseline.",
   "validation_proof": {
     "source_url": "research/notes/taskbar-animations-procmon-validation-20260326.md",
     "exact_quote_or_path": "taskbaranimations-state-0.txt: explorer.exe RegQueryValue ...\\TaskbarAnimations Data: 0. taskbaranimations-state-1.txt: explorer.exe RegQueryValue ...\\TaskbarAnimations Data: 1. taskbar-taskbaranimations-ghidra.md: Taskbar.dll reads Explorer\\\\Advanced\\\\TaskbarAnimations through Ordinal_123(..., L\\\"TaskbarAnimations\\\", 1).",
@@ -19,7 +19,7 @@
     "casual_explanation": "This controls whether Windows animates taskbar transitions. People turn it off when they want a snappier, less animated desktop.",
     "why_people_change_it": "People disable taskbar animations to reduce visual motion and make the shell feel a little faster.",
     "tradeoffs_overview": "Disabling taskbar animations reduces visual motion, but it can make the shell feel less polished to users who prefer animations.",
-    "professional_notes": "The current app writes TaskbarAnimations = 0 under Explorer\\Advanced. A reversible guest probe on Win25H2Clean confirmed that 0 disables the setting and 1 enables it. Procmon then captured explorer.exe querying the same value with Data:0 and Data:1 after Explorer restarts, which gives direct runtime proof that the shell consumes this flag on this build. A Ghidra headless pass on Taskbar.dll found the TaskbarAnimations string and decompiled a function that routes to Explorer\\Advanced and reads TaskbarAnimations through Ordinal_123 after checking taskbar animation state through SystemParametersInfoW.",
+    "professional_notes": "The current app writes TaskbarAnimations = 0 under Explorer\\Advanced. A reversible guest probe on Win25H2Clean confirmed that 0 disables the setting and 1 enables it. Procmon then captured explorer.exe querying the same value with Data:0 and Data:1 after Explorer restarts, which gives direct runtime proof that the shell consumes this flag on this build. A Ghidra headless pass on Taskbar.dll found the TaskbarAnimations string and decompiled a function that routes to Explorer\\Advanced and reads TaskbarAnimations through Ordinal_123 after checking taskbar animation state through SystemParametersInfoW. On 2026-03-27, the runtime lane was rerun against baseline-20260327-regprobe-visible-shell-stable and completed with status ok, WPR stop succeeded, both candidate and restore restarts completed, and explorer, sihost, ShellHost, and ctfmon remained healthy without snapshot recovery. That closes the earlier incident-review concern as a baseline issue rather than a value-specific risk.",
     "targets": [
       {
         "target_id": "taskbar-animations-registry",
@@ -160,6 +160,18 @@
         "path",
         "behavior",
         "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "runtime-taskbar-animations-incident-review-20260327",
+      "kind": "vm-incident",
+      "title": "Incident reviewed - Taskbar animations runtime rerun on visible-shell baseline",
+      "location": "research/notes/taskbar-animations-runtime-incident-review-20260327.md and evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-224704/summary.json",
+      "summary": "Incident reviewed on 2026-03-27. The runtime lane was rerun on baseline-20260327-regprobe-visible-shell-stable and completed with status ok. WPR stopped cleanly, both candidate and restore Explorer restarts completed, and explorer, sihost, ShellHost, and ctfmon remained healthy without recovery or snapshot revert. This closes the prior incident-review concern from the older baseline.",
+      "supports": [
+        "behavior",
+        "version-scope"
       ],
       "strength": "high"
     },

@@ -9,7 +9,7 @@ param(
     [string]$RecordId = 'audio.show-hidden-devices',
     [string]$ValueName = 'ShowHiddenDevices',
     [int]$ValueData = 1,
-    [string]$SnapshotName = 'baseline-20260327-shell-stable',
+    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
     [string]$IncidentLogPath = '',
     [int]$SettleSeconds = 8
 )

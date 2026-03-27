@@ -7,7 +7,7 @@ param(
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\cpu-idle-runtime',
     [string]$RecordId = 'power.disable-cpu-idle-states',
-    [string]$SnapshotName = 'baseline-20260327-shell-stable',
+    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
     [string]$IncidentLogPath = '',
     [int]$SettleSeconds = 20
 )

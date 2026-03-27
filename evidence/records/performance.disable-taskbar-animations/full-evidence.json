@@ -28,13 +28,13 @@
   "runtime": {
     "etw": {
       "executed": true,
-      "events_found": false,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
       "operation": "runtime-reboot-probe",
-      "timestamp": "2026-03-27T13:03:54.5322127Z",
+      "timestamp": "2026-03-27T19:47:04.5926739Z",
       "boot_phase_included": false,
-      "trace_file": "evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-160354/taskbar-animations-runtime.etl.md"
+      "trace_file": "evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-224704/taskbar-animations-runtime.etl.md"
     },
     "procmon": {
       "executed": true,
@@ -180,7 +180,7 @@
     "class_changed": false,
     "frida_kernel_guard_applied": false,
     "dead_flag_four_conditions_met": true,
-    "notes": "Runtime lane failed (evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-160354/summary.json)",
+    "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-224704/summary.json); incident reviewed and cleared on baseline-20260327-regprobe-visible-shell-stable.",
     "new_pipeline_version": "v3.1"
   }
 }

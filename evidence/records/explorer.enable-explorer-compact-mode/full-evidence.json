@@ -32,9 +32,9 @@
       "reading_process": null,
       "reading_pid": null,
       "operation": "runtime-explorer-restart-probe",
-      "timestamp": "2026-03-27T08:52:08.8415200Z",
+      "timestamp": "2026-03-27T19:35:36.8548241Z",
       "boot_phase_included": false,
-      "trace_file": "evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-115208/explorer-compact-runtime.etl.md"
+      "trace_file": "evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-223536/explorer-compact-runtime.etl.md"
     },
     "procmon": {
       "executed": true,
@@ -135,7 +135,7 @@
       "trigger_condition_tested": true
     },
     "class_ready_basis": "converged-vm",
-    "next_missing_layer": "incident-review"
+    "next_missing_layer": "none"
   },
   "timeline": [
     {
@@ -180,7 +180,7 @@
     "class_changed": false,
     "frida_kernel_guard_applied": false,
     "dead_flag_four_conditions_met": true,
-    "notes": "Runtime lane failed (evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-115208/summary.json)",
+    "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-223536/summary.json); incident reviewed and cleared on baseline-20260327-regprobe-visible-shell-stable.",
     "new_pipeline_version": "v3.1"
   }
 }

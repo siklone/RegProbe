@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T15:08:17.516504Z",
+  "generated_utc": "2026-03-27T20:00:05.408774Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
@@ -13,8 +13,7 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 239,
-      "incident-review": 2,
+      "none": 241,
       "decision-gate": 1
     },
     "re_audit_required_count": 0
@@ -814,7 +813,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": true,
-      "next_missing_layer": "incident-review",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -3125,7 +3124,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": true,
-      "next_missing_layer": "incident-review",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",

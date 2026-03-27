@@ -7,7 +7,7 @@ param(
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\jpeg-import-quality-runtime',
     [string]$RecordId = 'system.disable-jpeg-reduction',
-    [string]$SnapshotName = 'baseline-20260327-shell-stable',
+    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
     [string]$IncidentLogPath = '',
     [string]$SourceJpeg = '',
     [int]$ValueData = 100,

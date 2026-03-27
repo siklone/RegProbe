@@ -1,0 +1,78 @@
+﻿{
+    "generated_utc":  "2026-03-27T19:47:04.5926739Z",
+    "probe_name":  "taskbar-animations-runtime-20260327-224704",
+    "record_id":  "performance.disable-taskbar-animations",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-224704",
+    "status":  "ok",
+    "value_name":  "TaskbarAnimations",
+    "value_data":  0,
+    "shell_after":  {
+                        "explorer":  true,
+                        "sihost":  true,
+                        "shellhost":  true,
+                        "ctfmon":  true,
+                        "process_dump":  "Process list: 123\r\npid=0, owner=, cmd=[System Process]\r\npid=4, owner=NT AUTHORITY\\SYSTEM, cmd=System\r\npid=124, owner=NT AUTHORITY\\SYSTEM, cmd=Registry\r\npid=412, owner=NT AUTHORITY\\SYSTEM, cmd=smss.exe\r\npid=556, owner=NT AUTHORITY\\SYSTEM, cmd=csrss.exe\r\npid=660, owner=NT AUTHORITY\\SYSTEM, cmd=csrss.exe\r\npid=684, owner=NT AUTHORITY\\SYSTEM, cmd=wininit.exe\r\npid=720, owner=NT AUTHORITY\\SYSTEM, cmd=winlogon.exe\r\npid=808, owner=NT AUTHORITY\\SYSTEM, cmd=services.exe\r\npid=828, owner=NT AUTHORITY\\SYSTEM, cmd=lsass.exe\r\npid=960, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=992, owner=Font Driver Host\\UMFD-0, cmd=fontdrvhost.exe\r\npid=1000, owner=Font Driver Host\\UMFD-1, cmd=fontdrvhost.exe\r\npid=392, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=svchost.exe\r\npid=384, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1048, owner=Window Manager\\DWM-1, cmd=dwm.exe\r\npid=1164, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1296, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1416, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1452, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1480, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=svchost.exe\r\npid=1524, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1572, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1612, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1692, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1724, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1732, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1812, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1840, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=1848, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=540, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=1380, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2204, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2196, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=svchost.exe\r\npid=2212, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2332, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2404, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2468, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2504, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2624, owner=NT AUTHORITY\\SYSTEM, cmd=spoolsv.exe\r\npid=2676, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2716, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=svchost.exe\r\npid=2976, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2984, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2992, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=svchost.exe\r\npid=3000, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3008, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3016, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=3024, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=3032, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3064, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2280, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=3184, owner=NT AUTHORITY\\SYSTEM, cmd=vmtoolsd.exe\r\npid=3228, owner=NT AUTHORITY\\SYSTEM, cmd=MsMpEng.exe\r\npid=3256, owner=NT AUTHORITY\\SYSTEM, cmd=vm3dservice.exe\r\npid=3276, owner=NT AUTHORITY\\SYSTEM, cmd=VGAuthService.exe\r\npid=3300, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3408, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3560, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3676, owner=NT AUTHORITY\\SYSTEM, cmd=vm3dservice.exe\r\npid=1760, owner=NT AUTHORITY\\SYSTEM, cmd=dllhost.exe\r\npid=2412, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=msdtc.exe\r\npid=3648, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=2824, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=4156, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=4284, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=4416, owner=NT AUTHORITY\\SYSTEM, cmd=AggregatorHost.exe\r\npid=4500, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=sihost.exe\r\npid=4536, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=svchost.exe\r\npid=4564, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=svchost.exe\r\npid=4592, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=svchost.exe\r\npid=4624, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=taskhostw.exe\r\npid=4764, owner=NT AUTHORITY\\SYSTEM, cmd=MicrosoftEdgeUpdate.exe\r\npid=4832, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5108, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=3572, owner=NT AUTHORITY\\SYSTEM, cmd=SecurityHealthService.exe\r\npid=4480, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=NisSrv.exe\r\npid=2184, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=ShellHost.exe\r\npid=3600, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=ctfmon.exe\r\npid=2808, owner=NT AUTHORITY\\NETWORK SERVICE, cmd=WmiPrvSE.exe\r\npid=3484, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=4728, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=CrossDeviceResume.exe\r\npid=3592, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=5272, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=svchost.exe\r\npid=5988, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=svchost.exe\r\npid=2100, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5932, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5820, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=6484, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5668, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=vmtoolsd.exe\r\npid=6364, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2084, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=svchost.exe\r\npid=4168, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5456, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=rundll32.exe\r\npid=740, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=rundll32.exe\r\npid=5924, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=3076, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2772, owner=NT AUTHORITY\\LOCAL SERVICE, cmd=WmiPrvSE.exe\r\npid=2188, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=RuntimeBroker.exe\r\npid=3904, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=RuntimeBroker.exe\r\npid=6692, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2872, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5576, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=SnippingTool.exe\r\npid=1820, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=RegProbe.App.exe\r\npid=6288, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5084, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=RegProbe.ElevatedHost.exe\r\npid=1116, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=7084, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=2596, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=4676, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=4248, owner=NT AUTHORITY\\SYSTEM, cmd=svchost.exe\r\npid=5912, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=userinit.exe\r\npid=2700, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=Explorer.EXE\r\npid=2784, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=explorer.exe\r\npid=3900, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=StartMenuExperienceHost.exe\r\npid=6636, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=SearchHost.exe\r\npid=3780, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=msedgewebview2.exe\r\npid=4860, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=msedgewebview2.exe\r\npid=2228, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=msedgewebview2.exe\r\npid=1068, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=msedgewebview2.exe\r\npid=2848, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=msedgewebview2.exe\r\npid=4344, owner=DESKTOP-CMQ8DB2\\Administrator, cmd=msedgewebview2.exe\r\npid=5816, owner=, cmd=mobsync.exe"
+                    },
+    "wpr":  {
+                "started":  true,
+                "stopped":  true,
+                "profile":  "GeneralProfile",
+                "guest_etl":  "taskbar-animations-runtime.etl",
+                "repo_etl_placeholder":  "evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-224704/taskbar-animations-runtime.etl.md"
+            },
+    "recovery":  {
+                     "performed":  false,
+                     "shell_healthy_after_recovery":  false
+                 },
+    "errors":  [
+
+               ],
+    "summary":  {
+                    "generated_utc":  "2026-03-27T19:55:51.0541766Z",
+                    "registry_path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                    "value_name":  "TaskbarAnimations",
+                    "value_data":  0,
+                    "before":  {
+                                   "path_exists":  true,
+                                   "value_exists":  true,
+                                   "value":  0
+                               },
+                    "applied":  {
+                                    "path_exists":  true,
+                                    "value_exists":  true,
+                                    "value":  0
+                                },
+                    "after_candidate_restart":  {
+                                                    "path_exists":  true,
+                                                    "value_exists":  true,
+                                                    "value":  0
+                                                },
+                    "restored":  {
+                                     "path_exists":  true,
+                                     "value_exists":  true,
+                                     "value":  0
+                                 },
+                    "after_restore_restart":  {
+                                                  "explorer":  true,
+                                                  "sihost":  true,
+                                                  "ShellHost":  true,
+                                                  "ctfmon":  true
+                                              },
+                    "shell_after":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "ShellHost":  true,
+                                        "ctfmon":  true
+                                    },
+                    "explorer_restart":  {
+                                             "candidate_restart":  true,
+                                             "restore_restart":  true
+                                         },
+                    "etl_exists":  true,
+                    "etl_path":  "taskbar-animations-runtime.etl",
+                    "errors":  [
+
+                               ]
+                }
+}
