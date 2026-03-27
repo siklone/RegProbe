@@ -1,144 +1,86 @@
 # RegProbe
 
-RegProbe is a .NET 8 desktop app for Windows 10/11. It focuses on safe, reversible tweaks, hardware details, and documented system research.
-
-The project is for people who want more than a random "FPS boost" script:
-
-- every SAFE tweak follows `Detect -> Apply -> Verify -> Rollback`
-- the app reads the PC it is running on
-- tweaks are tied to source notes and local validation
-- elevated work runs through a separate host instead of forcing the whole app to run as admin
+RegProbe is a .NET 8 desktop app and research workspace for evidence-backed Windows configuration work. It focuses on safe, reversible tweaks and a registry research pipeline that ties each shipped setting back to source notes, VM validation, and captured evidence.
 
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4)
 ![App](https://img.shields.io/badge/app-desktop-1f2937)
-![Status](https://img.shields.io/badge/status-active%20development-ff5a5f)
+![Status](https://img.shields.io/badge/status-active-ff5a5f)
 ![License](https://img.shields.io/badge/license-TBD-yellow)
 
-## What It Does
+## What RegProbe Does
 
-### Configuration workspace
+- exposes a Windows desktop UI for reviewing and applying reversible tweaks
+- keeps tweak execution inside a `Detect -> Apply -> Verify -> Rollback` safety model
+- routes admin-required actions through a separate elevated host instead of forcing the whole app to run as admin
+- publishes research records, evidence manifests, audits, and captured artifacts alongside the app
+- validates runtime behavior inside the `Win25H2Clean` VM with Procmon, WPR/WPA, ETW, and Ghidra headless workflows
 
-- browse tweak categories with search, filters, live status, and batch selection
-- apply one tweak from the row or queue several for batch work
-- use policy-aware and registry-aware entries instead of opaque one-line scripts
-- work in dedicated sections for `Configuration`, `Policy Reference`, `Services`, `Bloatware`, and `Startup`
+## App Surface
 
-### Dashboard and hardware details
+The live product surface is configuration-focused:
 
-- hardware-first dashboard for OS, motherboard, CPU, GPU, memory, storage, displays, network, USB, and audio
-- hardware detail sheets with charts, adapter details, and grouped summaries
-- device detail windows with cleaner specs and grouped metadata
+- `Configuration`
+- `Policy Reference`
+- `Services`
+- `Bloatware`
+- `Startup`
+- `Settings`
+- `About`
 
-### Tweak engine
+The old hardware dashboard and hardware detail surface are no longer part of the shipped app.
 
-- SAFE pipeline: `Detect -> Apply -> Verify -> Rollback`
-- risk levels: `Safe`, `Advanced`, `Risky`
-- local logging and exportable tweak history
-- preset-backed tweaks and registry-backed multi-value actions
-- elevated registry and command execution through `elevated-host`
+## Research Surface
 
-### Research and sources
+RegProbe ships with a parallel research stack:
 
-- research records, evidence, and captured artifacts under `research/`
-- supporting docs under `Docs/`
-- uses Nohuto's research (`win-config`, `win-registry`) and cross-checks it against live builds
-- Microsoft-backed and repo-backed coverage tests for tweak providers
+- [research](research)
+  human-facing records, generated audits, evidence atlas, and notes
+- [evidence](evidence)
+  normalized evidence bundles and imported artifacts
+- [registry-research-framework](registry-research-framework)
+  the v3.1 pipeline, schemas, audit queue, routing rules, and tool wrappers
 
-## VM Validation Environment
+This repo cross-checks official Microsoft sources, repo evidence, and VM runtime captures instead of relying on one-line tweak folklore.
 
-Runtime validation happens in a VMware VM, not on the host machine.
+## VM Validation
+
+Runtime validation happens in the VMware guest, not on the host machine.
 
 - supported VM: `Win25H2Clean`
-- use the VM for live app runs, registry experiments, performance testing, Procmon captures, WPR/WPA traces, and Ghidra headless analysis
-- use the host only for source editing and offline prep
-- tooling and wrapper paths are in [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
-
-Available in the VM:
-
-- WPR / WPA / xperf
-- Procmon with a safe capture wrapper
-- Ghidra headless
-- Java 21 for Ghidra
-
-## Why It Exists
-
-Most Windows tweak tools stop at "click button, hope for the best."
-
-This project does not.
-
-- the UI is readable instead of a script dump
-- the behavior is reversible instead of blind mutation
-- the shell is Windows-native instead of a web wrapper
-- the hardware view shows real device context instead of generic labels
-- the docs point back to sources instead of forum folklore
-
-## Current Sections
-
-### Dashboard
-
-- system hero card
-- quick actions
-- hardware grid
-- drivers and recommended installs
-
-### Configuration
-
-- searchable tweak workspace
-- category rail
-- inline apply actions
-- batch queue / batch actions
-- policy browser
-- services browser
-- bloatware remover
-- startup manager
-
-### Hardware Details
-
-- detail sheets
-- trend charts
-- adapter / disk / GPU breakdowns
-- hardware summary cards
-
-### Settings
-
-- theme and behavior preferences
-- startup scan behavior
-- preview hints and shell preferences
+- use the VM for live app runs, registry experiments, performance tests, Procmon captures, WPR/WPA traces, ETW, and Ghidra headless analysis
+- use the host only for source edits, docs, and offline artifact prep
+- workflow details live in [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
 
 ## Solution Layout
 
 ```text
-app/              Desktop UI, view models, startup, assets, views
-core/             Contracts, models, plugin and tweak abstractions
-engine/           Tweak execution pipeline and concrete tweak types
-infrastructure/   Registry, elevation, files, hardware info
-elevated-host/    Elevated helper process for admin-required actions
-cli/              CLI entry point for non-UI scenarios
-plugins-devtools/ Bundled example/support plugin
-tests/            Unit tests
-research/         Records, evidence, captured files, generated audit outputs
-Docs/             Supporting docs, workflows, and longer notes
-Tools/            One-off developer utilities
-scripts/          Build, publish, cleanup, asset generation
+app/                        Desktop UI, views, view models, startup
+core/                       Contracts, models, and abstractions
+engine/                     Tweak execution pipeline and tweak implementations
+infrastructure/             Registry, elevation, files, and adapters
+elevated-host/              Elevated helper process for admin-required actions
+cli/                        CLI entry point
+plugins-devtools/           Example/support plugin assembly
+tests/                      Unit tests
+research/                   Published research records and generated outputs
+evidence/                   Evidence bundles and imported artifacts
+registry-research-framework/ Pipeline v3.1 orchestration and schemas
+Docs/                       Supporting docs and workflows
+Tools/                      Developer utilities
+scripts/                    Build, publish, cleanup, and validation scripts
 ```
 
 ## Safety Model
 
-SAFE tweak work is expected to stay reversible and logged.
+SAFE tweak work stays preview-first, reversible, and logged.
 
 - `Detect -> Apply -> Verify -> Rollback`
-- no automatic system changes on startup
-- elevated work stays out of the main app process
-- tweak activity is logged
-- the workflow stays preview-first
+- no automatic system mutations on startup
+- elevated work stays outside the main app process
+- tweak activity is logged and exportable
 
-Things this project does not do under SAFE:
-
-- disable Defender
-- disable Firewall
-- disable SmartScreen
-- ship irreversible "trust me bro" system mutations
+Under SAFE, RegProbe does not add one-click flows that disable Defender, Firewall, or SmartScreen.
 
 ## Getting Started
 
@@ -158,19 +100,19 @@ cd RegProbe
 ### Build
 
 ```powershell
-dotnet build RegProbe.sln
+dotnet build RegProbe.sln -c Release
 ```
 
-### Run the app
+### Run
 
 ```powershell
 dotnet run --project app/app.csproj
 ```
 
-### Run tests
+### Test
 
 ```powershell
-dotnet test tests/tests.csproj -v minimal
+dotnet test tests/tests.csproj -c Release --no-build -v minimal
 ```
 
 ### Publish
@@ -179,36 +121,15 @@ dotnet test tests/tests.csproj -v minimal
 pwsh -File scripts/publish_release.ps1
 ```
 
-### Clean build artifacts
+## Elevated Host Override
 
-```powershell
-pwsh -File scripts/clean_build_outputs.ps1 -WhatIfMode:$false
-```
-
-## Elevated Host Notes
-
-The app is not always-admin.
-
-Admin-required operations are delegated to `elevated-host`, which is resolved by:
-
-- normal publish layout
-- app discovery logic
-- optional override through:
+If the app cannot discover the elevated host automatically, use:
 
 ```powershell
 $env:REGPROBE_ELEVATED_HOST_PATH = "C:\path\to\RegProbe.ElevatedHost.exe"
 ```
 
-## Utility Scripts
-
-Useful scripts:
-
-- `scripts/publish_release.ps1`
-- `scripts/clean_build_outputs.ps1`
-
-## Documentation
-
-Good starting points:
+## Useful Entry Points
 
 - [research/README.md](research/README.md)
 - [research/evidence-atlas.md](research/evidence-atlas.md)
