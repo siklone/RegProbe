@@ -1,10 +1,10 @@
 ﻿{
     "schema_version":  "1.0",
-    "generated_utc":  "2026-03-27T04:30:25.0024943Z",
+    "generated_utc":  "2026-03-27T09:00:33.3715773Z",
     "summary":  {
-                    "total_incidents":  5,
+                    "total_incidents":  8,
                     "shell_recovered":  4,
-                    "needed_snapshot_revert":  4
+                    "needed_snapshot_revert":  7
                 },
     "incidents":  [
                       {
@@ -86,6 +86,54 @@
                           "needed_snapshot_revert":  true,
                           "recorded_utc":  "2026-03-27T04:30:24.9759883Z",
                           "notes":  "Runtime lane failed before a healthy post-boot shell was confirmed. Recovered by snapshot revert."
+                      },
+                      {
+                          "incident_id":  "20260327112617-explorer-enable-explorer-compact-mode",
+                          "record_id":  "explorer.enable-explorer-compact-mode",
+                          "tweak_id":  "explorer.enable-explorer-compact-mode",
+                          "test_id":  "explorer-compact-runtime-20260327-111803",
+                          "family":  "explorer-compact-runtime",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                          "value_name":  "UseCompactMode",
+                          "value_state":  "UseCompactMode=1",
+                          "symptom":  "vmrun failed (1): Guest program exited with non-zero exit code: 1",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T08:26:17.8002885Z",
+                          "notes":  "Runtime lane failed before the explorer compact summary completed. Recovered by snapshot revert."
+                      },
+                      {
+                          "incident_id":  "20260327114406-explorer-enable-explorer-compact-mode",
+                          "record_id":  "explorer.enable-explorer-compact-mode",
+                          "tweak_id":  "explorer.enable-explorer-compact-mode",
+                          "test_id":  "explorer-compact-runtime-20260327-113620",
+                          "family":  "explorer-compact-runtime",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                          "value_name":  "UseCompactMode",
+                          "value_state":  "UseCompactMode=1",
+                          "symptom":  "vmrun failed (1): Guest program exited with non-zero exit code: 1",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T08:44:06.7879004Z",
+                          "notes":  "Runtime lane failed before the explorer compact summary completed. Recovered by snapshot revert."
+                      },
+                      {
+                          "incident_id":  "20260327120033-explorer-enable-explorer-compact-mode",
+                          "record_id":  "explorer.enable-explorer-compact-mode",
+                          "tweak_id":  "explorer.enable-explorer-compact-mode",
+                          "test_id":  "explorer-compact-runtime-20260327-115208",
+                          "family":  "explorer-compact-runtime",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                          "value_name":  "UseCompactMode",
+                          "value_state":  "UseCompactMode=1",
+                          "symptom":  "Shell health was degraded after the explorer compact runtime probe.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T09:00:33.3527894Z",
+                          "notes":  "Recovered by snapshot revert after the Explorer compact runtime lane."
                       }
                   ]
 }

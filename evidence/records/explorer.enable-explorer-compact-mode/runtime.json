@@ -2,20 +2,20 @@
   "$schema": "registry-evidence-v3.1/runtime-evidence",
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-explorer-restart-probe",
+      "timestamp": "2026-03-27T08:52:08.8415200Z",
       "boot_phase_included": false,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-115208/explorer-compact-runtime.etl.md"
     },
     "procmon": {
       "executed": true,
       "events_found": true,
       "reading_process": null,
-      "trace_file": "Local captures - evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md"
+      "trace_file": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md"
     },
     "frida": {
       "executed": false,

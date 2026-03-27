@@ -132,7 +132,7 @@
       "evidence_id": "procmon-explorer-compact-mode",
       "kind": "procmon-trace",
       "title": "Procmon capture - Explorer UseCompactMode runtime reads",
-      "location": "Local captures - evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md",
+      "location": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md",
       "summary": "Procmon captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode with Data:1 and Data:0 in separate reversible captures after Explorer restart. That proves Explorer consumes this registry value on this build.",
       "supports": [
         "path",
@@ -181,7 +181,7 @@
   },
   "last_reviewed_utc": "2026-03-14T00:00:00Z",
   "validation_proof": {
-    "source_url": "evidence/files/missing/explorer-batch-applied-20260314-pml.md",
+    "source_url": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md",
     "exact_quote_or_path": "explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode Data:0.",
     "key_found_on_page": true,
     "notes": "The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart."

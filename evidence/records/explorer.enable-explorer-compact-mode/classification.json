@@ -13,12 +13,12 @@
     "layer_count": 3,
     "frida_kernel_guard_applied": false,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },
     "class_ready_basis": "converged-vm",
-    "next_missing_layer": "none"
+    "next_missing_layer": "incident-review"
   }
 }

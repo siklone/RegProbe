@@ -1,0 +1,59 @@
+﻿{
+    "generated_utc":  "2026-03-27T08:36:20.1464103Z",
+    "probe_name":  "explorer-compact-runtime-20260327-113620",
+    "record_id":  "explorer.enable-explorer-compact-mode",
+    "snapshot_name":  "baseline-20260327-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-113620",
+    "status":  "failed",
+    "value_name":  "UseCompactMode",
+    "value_data":  1,
+    "shell_after":  null,
+    "wpr":  {
+                "started":  false,
+                "stopped":  false,
+                "profile":  "GeneralProfile",
+                "guest_etl":  "explorer-compact-runtime.etl",
+                "repo_etl_placeholder":  "evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-113620/explorer-compact-runtime.etl.md"
+            },
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "errors":  [
+                   "vmrun failed (1): Guest program exited with non-zero exit code: 1"
+               ],
+    "summary":  {
+                    "generated_utc":  "2026-03-27T08:43:56.1520398Z",
+                    "registry_path":  "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+                    "value_name":  "UseCompactMode",
+                    "value_data":  1,
+                    "before":  {
+                                   "path_exists":  true,
+                                   "value_exists":  false,
+                                   "value":  null
+                               },
+                    "applied":  null,
+                    "after_candidate_restart":  null,
+                    "restored":  {
+                                     "path_exists":  true,
+                                     "value_exists":  false,
+                                     "value":  null
+                                 },
+                    "after_restore_restart":  {
+                                                  "explorer":  true,
+                                                  "sihost":  true,
+                                                  "ShellHost":  true,
+                                                  "ctfmon":  true
+                                              },
+                    "shell_after":  null,
+                    "explorer_restart":  {
+                                             "candidate_restart":  false,
+                                             "restore_restart":  true
+                                         },
+                    "etl_exists":  false,
+                    "etl_path":  "explorer-compact-runtime.etl",
+                    "errors":  [
+                                   "Attempted to perform an unauthorized operation."
+                               ]
+                }
+}

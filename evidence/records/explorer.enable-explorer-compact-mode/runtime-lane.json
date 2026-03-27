@@ -1,0 +1,20 @@
+﻿{
+    "tool":  "ETW",
+    "session_name":  "OpenTraceRegistry",
+    "tweak_id":  "explorer.enable-explorer-compact-mode",
+    "output_file":  "evidence/records/explorer.enable-explorer-compact-mode/runtime-lane.json",
+    "status":  "runner-failed",
+    "runner":  {
+                   "script":  "scripts/vm/run-explorer-compact-mode-runtime-probe.ps1",
+                   "args":  [
+                                "-RecordId",
+                                "explorer.enable-explorer-compact-mode",
+                                "-SnapshotName",
+                                "baseline-20260327-shell-stable"
+                            ]
+               },
+    "note":  "Invoked the mapped VM runtime runner for this tweak. Check the runner output root for concrete capture files.",
+    "exit_code":  1,
+    "log_file":  "evidence/records/explorer.enable-explorer-compact-mode/runtime-lane.log",
+    "result_ref":  "evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-115208/summary.json"
+}

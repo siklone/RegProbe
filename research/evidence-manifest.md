@@ -93,7 +93,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `explorer.always-show-icons-never-thumbnails` | validated | Class A | `research/records/explorer.always-show-icons-never-thumbnails.review.json` | - | `cffd381555cb54818deee73fe20f44211643ce326465ba0538459956635a5a2d` | `60ab45bc818638a58ecbf71fc472d53ea783b218b176e32a88fd5ffdf1cc0d84` | 3 |
 | `explorer.disable-low-disk-space-warning` | validated | Class A | `research/records/explorer.disable-low-disk-space-warning.json` | - | `e7c3b918961c1ef450b86967954809a6bd7d6b7f5a6ea0ab0c109f396df72788` | `862a1280ae5b7b88c161664df3545ddc27cd2e2de2d1a36fa5273c96086deb8e` | 3 |
 | `explorer.disable-taskbar-chat` | validated | Class A | `research/records/explorer.disable-taskbar-chat.json` | - | `bdf42c837baf915374b082d070f7c1963d005aaa9de665045cfe4465b0a7bf04` | `ed61439963864e6db81c6009f6c195b5d0b24c89637536b6bf1a58891909b375` | 4 |
-| `explorer.enable-explorer-compact-mode` | validated | Class A | `research/records/explorer.enable-explorer-compact-mode.review.json` | [evidence/records/explorer.enable-explorer-compact-mode](../evidence/records/explorer.enable-explorer-compact-mode) | `4e486d3e2ee6b56566d813bbf8abd73f28bf3d8f98cccc6e1c8fcf18927d9f5b` | `54d5e962f7d4b6b2475979d23d293cfc449c43a26d94078b170dba733ea5273b` | 4 |
+| `explorer.enable-explorer-compact-mode` | validated | Class A | `research/records/explorer.enable-explorer-compact-mode.review.json` | [evidence/records/explorer.enable-explorer-compact-mode](../evidence/records/explorer.enable-explorer-compact-mode) | `a9ba7d1c11521e049b46f52959a5bf3e46e0ca5989ab5445d54b459dea1e4aa3` | `42ebb8c1be1c901d81e1930503d81762c5df0c31723f8b0de752f12282e0f9cf` | 4 |
 | `explorer.hide-empty-drives` | validated | Class A | `research/records/explorer.hide-empty-drives.review.json` | - | `eb7d24b53a624e0edc0d9ffa63f178ff4331630b74c938b3fad3449af639a1b8` | `e79b104805dbb1108ba956f7f4d027298052bc0d6111696788d3f6a655211c8e` | 4 |
 | `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | - | `74a4f1f018f77b5a83c0635f898f3712bcd202e450a90141ae8fe401da417886` | `859946a184d0123a416da470ec985fc6fdc0b5fa396c21b7397d8b3adcbe26a9` | 3 |
 | `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | - | `b54745bfc280230418b31832d27829797ab45d269012d768d960ade98397ea7b` | `c77356cf86f54a6860b1937eb2ae6810dea916350a203431210badeaf939dea9` | 3 |
@@ -1887,8 +1887,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Original class | A |
-| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
-| Priority | 2 |
+| Reason | non_official_v31_reaudit |
+| Priority | 3 |
 | New pipeline version | v3.1 |
 
 ---
@@ -1925,8 +1925,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Original class | A |
-| Reason | non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete |
-| Priority | 2 |
+| Reason | non_official_v31_reaudit |
+| Priority | 3 |
 | New pipeline version | v3.1 |
 
 ---
@@ -2307,8 +2307,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.enable-explorer-compact-mode.review.json`
 - V3.1 evidence root: [evidence/records/explorer.enable-explorer-compact-mode](../evidence/records/explorer.enable-explorer-compact-mode)
-- Source SHA256: `4e486d3e2ee6b56566d813bbf8abd73f28bf3d8f98cccc6e1c8fcf18927d9f5b`
-- Proof SHA256: `54d5e962f7d4b6b2475979d23d293cfc449c43a26d94078b170dba733ea5273b`
+- Source SHA256: `a9ba7d1c11521e049b46f52959a5bf3e46e0ca5989ab5445d54b459dea1e4aa3`
+- Proof SHA256: `42ebb8c1be1c901d81e1930503d81762c5df0c31723f8b0de752f12282e0f9cf`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode = 1, the 25H2 raw registry dump lists the same value name under both the machine and current-user Explorer\\Advanced branches, and Procmon captures on 2026-03-14 confirmed that Explorer.EXE queries this exact value on shell restart with both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against ExplorerFrame.dll also decompiled the code path that calls RegGetValueW for UseCompactMode from both HKCU and HKLM Explorer\\Advanced. That validates UseCompactMode as a live runtime Explorer preference on this build and resolves the old direction mismatch: the control enables compact view rather than disabling it.
 
@@ -2317,7 +2317,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
-| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) |
+| `procmon-explorer-compact-mode` | `procmon-trace` | Procmon capture - Explorer UseCompactMode runtime reads | [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) |
 | `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) |
 | `app-visibility-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs |
 
@@ -2325,7 +2325,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/missing/explorer-batch-applied-20260314-pml.md](../evidence/files/missing/explorer-batch-applied-20260314-pml.md) |
+| Source | [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) |
 | Exact quote / path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:0. |
 | Notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |
 

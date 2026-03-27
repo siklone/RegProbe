@@ -26,6 +26,15 @@
         "baseline-20260327-shell-stable"
       ]
     },
+    "explorer.enable-explorer-compact-mode": {
+      "script": "scripts/vm/run-explorer-compact-mode-runtime-probe.ps1",
+      "args": [
+        "-RecordId",
+        "explorer.enable-explorer-compact-mode",
+        "-SnapshotName",
+        "baseline-20260327-shell-stable"
+      ]
+    },
     "power.disable-cpu-idle-states": {
       "script": "scripts/vm/run-cpu-idle-states-runtime-probe.ps1",
       "args": [

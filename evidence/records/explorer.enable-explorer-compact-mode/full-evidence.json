@@ -27,20 +27,20 @@
   },
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-explorer-restart-probe",
+      "timestamp": "2026-03-27T08:52:08.8415200Z",
       "boot_phase_included": false,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-115208/explorer-compact-runtime.etl.md"
     },
     "procmon": {
       "executed": true,
       "events_found": true,
       "reading_process": null,
-      "trace_file": "Local captures - evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md"
+      "trace_file": "evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md"
     },
     "frida": {
       "executed": false,
@@ -129,26 +129,26 @@
     "layer_count": 3,
     "frida_kernel_guard_applied": false,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },
     "class_ready_basis": "converged-vm",
-    "next_missing_layer": "none"
+    "next_missing_layer": "incident-review"
   },
   "timeline": [
     {
       "step": "bootstrap_record_load",
-      "timestamp": "2026-03-26T23:12:55.111972Z"
+      "timestamp": "2026-03-27T09:08:37.570658Z"
     },
     {
-      "step": "all",
-      "timestamp": "2026-03-26T23:12:55.111972Z"
+      "step": "faz1",
+      "timestamp": "2026-03-27T09:08:37.570658Z"
     },
     {
       "step": "classification",
-      "timestamp": "2026-03-26T23:12:55.111972Z"
+      "timestamp": "2026-03-27T09:08:37.570658Z"
     },
     {
       "step": "last_reviewed",
@@ -168,16 +168,19 @@
     ],
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
-    "re_audit_date": "2026-03-26T23:12:55.111972Z",
-    "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
-    "re_audit_priority": 2,
-    "new_tools_applied": [],
+    "re_audit_date": "2026-03-27T09:08:37.570658Z",
+    "re_audit_reason": "non_official_v31_reaudit",
+    "re_audit_priority": 3,
+    "new_tools_applied": [
+      "etw",
+      "vm-runtime-runner"
+    ],
     "new_cross_layer": true,
     "new_class": "A",
     "class_changed": false,
     "frida_kernel_guard_applied": false,
-    "dead_flag_four_conditions_met": false,
-    "notes": "Bootstrapped from the current research record and evidence audit. Replace with fresh v3.1 runtime output after re-audit runs.",
+    "dead_flag_four_conditions_met": true,
+    "notes": "Runtime lane failed (evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-115208/summary.json)",
     "new_pipeline_version": "v3.1"
   }
 }

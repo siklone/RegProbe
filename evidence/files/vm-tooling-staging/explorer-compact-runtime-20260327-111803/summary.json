@@ -1,0 +1,25 @@
+﻿{
+    "generated_utc":  "2026-03-27T08:18:03.2037791Z",
+    "probe_name":  "explorer-compact-runtime-20260327-111803",
+    "record_id":  "explorer.enable-explorer-compact-mode",
+    "snapshot_name":  "baseline-20260327-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-111803",
+    "status":  "failed",
+    "value_name":  "UseCompactMode",
+    "value_data":  1,
+    "shell_after":  null,
+    "wpr":  {
+                "started":  false,
+                "stopped":  false,
+                "profile":  "GeneralProfile",
+                "guest_etl":  "explorer-compact-runtime.etl",
+                "repo_etl_placeholder":  "evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-111803/explorer-compact-runtime.etl.md"
+            },
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "errors":  [
+                   "vmrun failed (1): Guest program exited with non-zero exit code: 1"
+               ]
+}

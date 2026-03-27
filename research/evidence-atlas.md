@@ -2037,7 +2037,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | Local captures - [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
 | `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/files/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -2045,7 +2045,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/missing/explorer-batch-applied-20260314-pml.md](../evidence/files/missing/explorer-batch-applied-20260314-pml.md) |
+| Source | [evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/files/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) |
 | Exact quote / path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |

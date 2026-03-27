@@ -256,6 +256,8 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
     if isinstance(runtime_result, dict):
         if isinstance(runtime_result.get("summary"), dict) and runtime_result["summary"].get("control_panel"):
             operation = "runtime-control-panel-probe"
+        elif isinstance(runtime_result.get("summary"), dict) and runtime_result["summary"].get("explorer_restart"):
+            operation = "runtime-explorer-restart-probe"
         elif runtime_result.get("post_boot") or runtime_result.get("wpr"):
             operation = "runtime-reboot-probe"
 

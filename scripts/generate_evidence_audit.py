@@ -269,7 +269,13 @@ def main() -> int:
                     "apply_allowed": (record.get("decision") or {}).get("apply_allowed"),
                     "confidence": (record.get("decision") or {}).get("confidence"),
                     "source_file": str(path.relative_to(REPO_ROOT)).replace("\\", "/"),
-                    "incident_ids": [incident.get("incident_id") for incident in incidents if incident.get("incident_id")],
+                    "incident_ids": list(
+                        dict.fromkeys(
+                            incident.get("incident_id")
+                            for incident in incidents
+                            if incident.get("incident_id")
+                        )
+                    ),
                 }
             )
         )

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T08:11:29.805726Z",
+  "generated_utc": "2026-03-27T09:10:42.992647Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
@@ -13,7 +13,8 @@
       "system": 1
     },
     "next_missing_layer_counts": {
-      "none": 241,
+      "none": 240,
+      "incident-review": 1,
       "decision-gate": 1
     },
     "re_audit_required_count": 7
@@ -785,8 +786,8 @@
       "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
-      "incident_seen": false,
-      "next_missing_layer": "none",
+      "incident_seen": true,
+      "next_missing_layer": "incident-review",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -794,6 +795,7 @@
         "runtime_reboot"
       ],
       "tools_used": [
+        "etw",
         "procmon",
         "ghidra",
         "reboot"
@@ -802,14 +804,14 @@
       "suspected_layer": "user-mode",
       "frida_kernel_guard_applied": false,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
       "re_audit_required": true,
-      "re_audit_priority": 2,
-      "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
+      "re_audit_priority": 3,
+      "re_audit_reason": "non_official_v31_reaudit",
       "original_class": "A",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.1",
@@ -819,7 +821,11 @@
       "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/explorer.enable-explorer-compact-mode.review.json",
-      "incident_ids": []
+      "incident_ids": [
+        "20260327112617-explorer-enable-explorer-compact-mode",
+        "20260327114406-explorer-enable-explorer-compact-mode",
+        "20260327120033-explorer-enable-explorer-compact-mode"
+      ]
     },
     {
       "record_id": "explorer.hide-empty-drives",
@@ -3318,10 +3324,7 @@
       "source_file": "research/records/power.disable-cpu-idle-states.json",
       "incident_ids": [
         "20260327004638-power-disable-cpu-idle-states",
-        "20260327004638-power-disable-cpu-idle-states",
         "20260327031227-power-disable-cpu-idle-states",
-        "20260327031227-power-disable-cpu-idle-states",
-        "20260327073024-power-disable-cpu-idle-states",
         "20260327073024-power-disable-cpu-idle-states"
       ]
     },
@@ -8632,7 +8635,6 @@
       "confidence": "high",
       "source_file": "research/records/system.disable-shortcut-arrow.json",
       "incident_ids": [
-        "20260325-shortcut-arrow-shell-drop",
         "20260325-shortcut-arrow-shell-drop"
       ]
     },
