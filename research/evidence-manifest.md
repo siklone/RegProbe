@@ -146,7 +146,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `f76c8b47419031d8a5ec15d182b2f5376817e141d95e4c739060717e44a9bbec` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `c69644372ded1bbf278f5a4a25182baeafcb554c00688db1b4c7517f3769d4eb` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `19c023afe55a69e9853f641dcb9f6dfc1d7b0bec8755621430fabb3bf3ffc433` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
-| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `476d808e990c613e64f066b0a7d804ed556572259761c177168f6769a69988fd` | `70fdad5f3838c20c2595f3486eef267f9bdb4821af708f48d214f6b23816b572` | 7 |
+| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `c8f09c76bdcc784451be56c3fbce788675d22fc99eaac6a36fa996491fcc766b` | `70fdad5f3838c20c2595f3486eef267f9bdb4821af708f48d214f6b23816b572` | 7 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `94e0f7d7302ea1e110ee29df96e06e0ab388f94dd500d2e496a99738f130d97f` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 5 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | - | `539968582171cbbfde1aa6e02feda17d2fd3118641c615686e331d40bd36f91e` | `44e29d37bb9e8b44313f77307041293d030872438f451cb698ed815556190ae0` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `80eba1bdd08bab50ba72a05a10a9fe1317202f2614efdbb9df2de41c778028f4` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
@@ -3846,7 +3846,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/power.disable-cpu-idle-states.json`
 - V3.1 evidence root: [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states)
-- Source SHA256: `476d808e990c613e64f066b0a7d804ed556572259761c177168f6769a69988fd`
+- Source SHA256: `c8f09c76bdcc784451be56c3fbce788675d22fc99eaac6a36fa996491fcc766b`
 - Proof SHA256: `70fdad5f3838c20c2595f3486eef267f9bdb4821af708f48d214f6b23816b572`
 
 **Summary:** Validated observed implementation only. This record has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, a machine-checkable apply and restore pass for the app's current profile, a current-build Ghidra no-match follow-up on ntoskrnl.exe, and a rebooted benchmark attempt that broke shell availability before workloads started and required a snapshot recovery.
