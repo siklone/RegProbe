@@ -3,60 +3,43 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 using System.Windows.Input;
-using RegProbe.Core.Services;
-using RegProbe.Engine.Intelligence;
-using RegProbe.Engine.Services;
-using RegProbe.Infrastructure;
-using RegProbe.Infrastructure.Services;
+using System.Windows.Threading;
 using RegProbe.App.Services;
 using RegProbe.App.Services.TweakProviders;
 using RegProbe.App.Utilities;
-
+using RegProbe.Engine.Services;
+using RegProbe.Infrastructure;
 
 namespace RegProbe.App.ViewModels;
 
 public sealed class MainViewModel : ViewModelBase, IDisposable
 {
-    private const string DashboardQuickActionScanKey = "scan";
-    private const string DashboardQuickActionFastCleanKey = "fast-clean";
-    private const string DashboardQuickActionMaintenanceKey = "maintenance";
-
     private NavigationItem? _selectedNavigationItem;
     private ViewModelBase? _currentViewModel;
     private string _searchText = string.Empty;
     private readonly RelayCommand _clearSearchCommand;
-    private readonly IHardwareDiscoveryService _hardwareDiscovery = new HardwareDiscoveryService();
-    private readonly IRecommendationEngine _recommendationEngine = new RecommendationEngine();
     private readonly IRollbackStateStore _rollbackStore;
     private readonly IBusyService _busyService = new BusyService();
     private TweaksViewModel? _tweaksViewModel;
     private System.ComponentModel.PropertyChangedEventHandler? _tweaksPropertyChangedHandler;
 
-    // Crash recovery properties
     private bool _hasPendingRollbacks;
     private int _pendingRollbackCount;
     private string _pendingRollbackMessage = string.Empty;
     private bool _isRecovering;
     private bool _isStartupScanActive;
-    private bool _isDashboardQuickActionRunning;
-    private string _dashboardQuickActionKey = string.Empty;
-    private string _dashboardQuickActionStatus = "Run a quick settings scan or a lightweight cleanup pass right from the dashboard.";
 
     public MainViewModel()
     {
         LogToFile("========== APPLICATION STARTED ==========");
 
-        // Initialize rollback store for crash recovery
         var paths = AppPaths.FromEnvironment();
         _rollbackStore = new RollbackStateStore(paths);
 
-        // Initialize crash recovery commands
         RecoverPendingRollbacksCommand = new RelayCommand(_ => _ = RecoverPendingRollbacksAsync(), _ => HasPendingRollbacks && !IsRecovering);
         DismissPendingRollbacksCommand = new RelayCommand(_ => _ = DismissPendingRollbacksAsync(), _ => HasPendingRollbacks && !IsRecovering);
 
-        // Initialize all tweak providers
         var providers = new ITweakProvider[]
         {
             new SystemTweakProvider(),
@@ -79,57 +62,27 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
         var settings = new SettingsViewModel();
         var about = new AboutViewModel();
-        var dashboard = new DashboardViewModel();
 
         NavigationItems = new ObservableCollection<NavigationItem>
         {
-            new NavigationItem("dashboard", "Dashboard", dashboard),
             new NavigationItem("tweaks", "Configuration", tweaks),
             new NavigationItem("settings", "Settings", settings),
             new NavigationItem("about", "About", about)
         };
 
-        // Named handler for proper unsubscription
-        _tweaksPropertyChangedHandler = (s, e) =>
-        {
-            if (e.PropertyName is nameof(TweaksViewModel.IsBulkRunning))
-            {
-                RaiseDashboardQuickActionCanExecuteChanged();
-            }
-        };
+        _tweaksPropertyChangedHandler = (_, _) => { };
         tweaks.PropertyChanged += _tweaksPropertyChangedHandler;
 
         SelectedNavigationItem = NavigationItems[0];
 
         _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
 
-        // Keyboard navigation commands
-        NavigateToDashboardCommand = new RelayCommand(_ => NavigateToTab(0));
-        NavigateToTweaksCommand = new RelayCommand(_ => NavigateToTab(1));
-        NavigateToBloatwareCommand = new RelayCommand(_ => NavigateToTab(1)); // Redirect to Configuration
-        NavigateToStartupCommand = new RelayCommand(_ => NavigateToTab(1));   // Redirect to Configuration
-        NavigateToSettingsCommand = new RelayCommand(_ => NavigateToTab(2));
-        NavigateToAboutCommand = new RelayCommand(_ => NavigateToTab(3));
+        NavigateToTweaksCommand = new RelayCommand(_ => NavigateToTab(0));
+        NavigateToSettingsCommand = new RelayCommand(_ => NavigateToTab(1));
+        NavigateToAboutCommand = new RelayCommand(_ => NavigateToTab(2));
         FocusSearchCommand = new RelayCommand(_ => OnFocusSearchRequested());
         ClearFiltersCommand = new RelayCommand(_ => OnClearFilters());
-        RunDashboardScanCommand = new RelayCommand(_ => _ = RunDashboardScanAsync(), _ => CanRunDashboardQuickAction());
-        RunFastCleanCommand = new RelayCommand(_ => _ = RunFastCleanAsync(), _ => CanRunDashboardQuickAction());
-        OpenMaintenanceWorkspaceCommand = new RelayCommand(_ => OpenMaintenanceWorkspace(), _ => CanRunDashboardQuickAction());
 
-        // Initialize Intelligence with error handling
-        _ = Task.Run(async () =>
-        {
-            try
-            {
-                await InitializeIntelligenceAsync();
-            }
-            catch (Exception ex)
-            {
-                LogToFile($"Intelligence initialization failed: {ex.Message}");
-            }
-        });
-
-        // Check for pending rollbacks from previous crashes with error handling
         _ = Task.Run(async () =>
         {
             try
@@ -141,110 +94,92 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
                 LogToFile($"Pending rollback check failed: {ex.Message}");
             }
         });
-
-    }
-
-    public void Dispose()
-    {
-        // Unsubscribe event handlers to prevent memory leaks
-        if (_tweaksViewModel != null && _tweaksPropertyChangedHandler != null)
-        {
-            _tweaksViewModel.PropertyChanged -= _tweaksPropertyChangedHandler;
-        }
-
-        // Dispose all view models
-        foreach (var item in NavigationItems)
-        {
-            if (item.ViewModel is IDisposable disposable)
-            {
-                disposable.Dispose();
-            }
-        }
-    }
-
-    public IBusyService BusyService => _busyService;
-
-    public async Task RunStartupScanAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)
-    {
-        if (_tweaksViewModel == null || IsStartupScanActive)
-        {
-            return;
-        }
-
-        IsStartupScanActive = true;
-        try
-        {
-            // Perform initial status check for all tweaks
-            await _tweaksViewModel.DetectAllTweaksAsync(progress, ct, isStartupScan: true, forceRedetect: true, skipElevationPrompts: true, skipExpensiveOperations: true);
-            QueueBackgroundInventoryRefresh();
-        }
-        catch (Exception ex)
-        {
-            LogToFile($"Startup scan failed: {ex.Message}");
-        }
-        finally
-        {
-            IsStartupScanActive = false;
-        }
-    }
-
-    private void QueueBackgroundInventoryRefresh()
-    {
-        if (_tweaksViewModel == null)
-        {
-            return;
-        }
-
-        var dispatcher = Application.Current?.Dispatcher;
-        if (dispatcher == null)
-        {
-            _ = _tweaksViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
-            return;
-        }
-
-        _ = dispatcher.InvokeAsync(async () =>
-        {
-            try
-            {
-                await Task.Delay(250);
-                await _tweaksViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
-            }
-            catch (Exception ex)
-            {
-                LogToFile($"Background inventory refresh failed: {ex.Message}");
-            }
-        }, DispatcherPriority.ContextIdle);
-    }
-
-
-    private async Task InitializeIntelligenceAsync()
-    {
-        try
-        {
-            var profile = await _hardwareDiscovery.GetHardwareProfileAsync();
-            var recommendations = _recommendationEngine.GetRecommendations(profile);
-
-            foreach (var item in NavigationItems)
-            {
-                if (item.ViewModel is TweaksViewModel tweaks)
-                {
-                    tweaks.ApplyRecommendations(recommendations);
-                }
-            }
-        }
-        catch
-        {
-            // Fail silently or log
-        }
     }
 
     public ObservableCollection<NavigationItem> NavigationItems { get; }
+
+    public IBusyService BusyService => _busyService;
 
     public string AppVersionLabel => AppInfo.VersionLabel;
 
     public string AppCopyrightLabel => AppInfo.CopyrightLabel;
 
-    // Crash recovery properties
+    public ICommand RecoverPendingRollbacksCommand { get; }
+
+    public ICommand DismissPendingRollbacksCommand { get; }
+
+    public RelayCommand NavigateToTweaksCommand { get; }
+
+    public RelayCommand NavigateToSettingsCommand { get; }
+
+    public RelayCommand NavigateToAboutCommand { get; }
+
+    public RelayCommand FocusSearchCommand { get; }
+
+    public RelayCommand ClearFiltersCommand { get; }
+
+    public event Action? FocusSearchRequested;
+
+    public NavigationItem? SelectedNavigationItem
+    {
+        get => _selectedNavigationItem;
+        set
+        {
+            try
+            {
+                LogToFile($"SelectedNavigationItem setter: New value = {value?.Id}");
+                if (SetProperty(ref _selectedNavigationItem, value))
+                {
+                    LogToFile($"SelectedNavigationItem: Setting CurrentViewModel to {_selectedNavigationItem?.Id}");
+                    CurrentViewModel = _selectedNavigationItem?.ViewModel;
+                    LogToFile("SelectedNavigationItem: CurrentViewModel set successfully");
+                    SyncSearchText();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogToFile($"CRASH in SelectedNavigationItem setter: {ex.Message}");
+                LogToFile($"Stack: {ex.StackTrace}");
+                throw;
+            }
+        }
+    }
+
+    public ViewModelBase? CurrentViewModel
+    {
+        get => _currentViewModel;
+        private set
+        {
+            try
+            {
+                LogToFile($"CurrentViewModel setter: Setting to {value?.GetType().Name}");
+                SetProperty(ref _currentViewModel, value);
+                LogToFile("CurrentViewModel setter: Set complete");
+            }
+            catch (Exception ex)
+            {
+                LogToFile($"CRASH in CurrentViewModel setter: {ex.Message}");
+                LogToFile($"Stack: {ex.StackTrace}");
+                throw;
+            }
+        }
+    }
+
+    public string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            if (SetProperty(ref _searchText, value))
+            {
+                SyncSearchText();
+                _clearSearchCommand.RaiseCanExecuteChanged();
+            }
+        }
+    }
+
+    public RelayCommand ClearSearchCommand => _clearSearchCommand;
+
     public bool HasPendingRollbacks
     {
         get => _hasPendingRollbacks;
@@ -286,134 +221,75 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     public bool IsStartupScanActive
     {
         get => _isStartupScanActive;
-        private set
+        private set => SetProperty(ref _isStartupScanActive, value);
+    }
+
+    public async Task RunStartupScanAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)
+    {
+        if (_tweaksViewModel == null || IsStartupScanActive)
         {
-            if (SetProperty(ref _isStartupScanActive, value))
+            return;
+        }
+
+        IsStartupScanActive = true;
+        try
+        {
+            await _tweaksViewModel.DetectAllTweaksAsync(progress, ct, isStartupScan: true, forceRedetect: true, skipElevationPrompts: true, skipExpensiveOperations: true);
+            QueueBackgroundInventoryRefresh();
+        }
+        catch (Exception ex)
+        {
+            LogToFile($"Startup scan failed: {ex.Message}");
+        }
+        finally
+        {
+            IsStartupScanActive = false;
+        }
+    }
+
+    public void Dispose()
+    {
+        if (_tweaksViewModel != null && _tweaksPropertyChangedHandler != null)
+        {
+            _tweaksViewModel.PropertyChanged -= _tweaksPropertyChangedHandler;
+        }
+
+        foreach (var item in NavigationItems)
+        {
+            if (item.ViewModel is IDisposable disposable)
             {
-                RaiseDashboardQuickActionCanExecuteChanged();
+                disposable.Dispose();
             }
         }
     }
 
-    public bool IsDashboardQuickActionRunning
+    private void QueueBackgroundInventoryRefresh()
     {
-        get => _isDashboardQuickActionRunning;
-        private set
+        if (_tweaksViewModel == null)
         {
-            if (SetProperty(ref _isDashboardQuickActionRunning, value))
-            {
-                RaiseDashboardQuickActionCanExecuteChanged();
-            }
+            return;
         }
-    }
 
-    public string DashboardQuickActionStatus
-    {
-        get => _dashboardQuickActionStatus;
-        private set => SetProperty(ref _dashboardQuickActionStatus, value);
-    }
-
-    public string DashboardQuickActionKey
-    {
-        get => _dashboardQuickActionKey;
-        private set
+        var dispatcher = Application.Current?.Dispatcher;
+        if (dispatcher == null)
         {
-            if (SetProperty(ref _dashboardQuickActionKey, value))
-            {
-                OnPropertyChanged(nameof(IsDashboardScanSelected));
-                OnPropertyChanged(nameof(IsDashboardFastCleanSelected));
-                OnPropertyChanged(nameof(IsDashboardMaintenanceSelected));
-            }
+            _ = _tweaksViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
+            return;
         }
-    }
 
-    public bool IsDashboardScanSelected =>
-        string.Equals(DashboardQuickActionKey, DashboardQuickActionScanKey, StringComparison.OrdinalIgnoreCase);
-
-    public bool IsDashboardFastCleanSelected =>
-        string.Equals(DashboardQuickActionKey, DashboardQuickActionFastCleanKey, StringComparison.OrdinalIgnoreCase);
-
-    public bool IsDashboardMaintenanceSelected =>
-        string.Equals(DashboardQuickActionKey, DashboardQuickActionMaintenanceKey, StringComparison.OrdinalIgnoreCase);
-
-    public ICommand RecoverPendingRollbacksCommand { get; }
-
-    public ICommand DismissPendingRollbacksCommand { get; }
-
-    public NavigationItem? SelectedNavigationItem
-    {
-        get => _selectedNavigationItem;
-        set
-        {
-            try
-            {
-                LogToFile($"SelectedNavigationItem setter: New value = {value?.Id}");
-                if (SetProperty(ref _selectedNavigationItem, value))
-                {
-                    LogToFile($"SelectedNavigationItem: Setting CurrentViewModel to {_selectedNavigationItem?.Id}");
-                    CurrentViewModel = _selectedNavigationItem?.ViewModel;
-                    LogToFile($"SelectedNavigationItem: CurrentViewModel set successfully");
-                    SyncSearchText();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogToFile($"CRASH in SelectedNavigationItem setter: {ex.Message}");
-                LogToFile($"Stack: {ex.StackTrace}");
-                throw;
-            }
-        }
-    }
-
-    public ViewModelBase? CurrentViewModel
-    {
-        get => _currentViewModel;
-        private set
+        _ = dispatcher.InvokeAsync(async () =>
         {
             try
             {
-                LogToFile($"CurrentViewModel setter: Setting to {value?.GetType().Name}");
-                SetProperty(ref _currentViewModel, value);
-                LogToFile($"CurrentViewModel setter: Set complete");
+                await Task.Delay(250);
+                await _tweaksViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
             }
             catch (Exception ex)
             {
-                LogToFile($"CRASH in CurrentViewModel setter: {ex.Message}");
-                LogToFile($"Stack: {ex.StackTrace}");
-                throw;
+                LogToFile($"Background inventory refresh failed: {ex.Message}");
             }
-        }
+        }, DispatcherPriority.ContextIdle);
     }
-
-    public string SearchText
-    {
-        get => _searchText;
-        set
-        {
-            if (SetProperty(ref _searchText, value))
-            {
-                SyncSearchText();
-                _clearSearchCommand.RaiseCanExecuteChanged();
-            }
-        }
-    }
-
-    public RelayCommand ClearSearchCommand => _clearSearchCommand;
-
-    // Keyboard Navigation Commands
-    public RelayCommand NavigateToDashboardCommand { get; }
-    public RelayCommand NavigateToTweaksCommand { get; }
-    public RelayCommand NavigateToBloatwareCommand { get; }
-    public RelayCommand NavigateToStartupCommand { get; }
-    public RelayCommand NavigateToSettingsCommand { get; }
-    public RelayCommand NavigateToAboutCommand { get; }
-    public RelayCommand FocusSearchCommand { get; }
-    public RelayCommand ClearFiltersCommand { get; }
-    public RelayCommand RunDashboardScanCommand { get; }
-    public RelayCommand RunFastCleanCommand { get; }
-    public RelayCommand OpenMaintenanceWorkspaceCommand { get; }
-
-    public event Action? FocusSearchRequested;
 
     private void NavigateToTab(int index)
     {
@@ -425,8 +301,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     private void OnFocusSearchRequested()
     {
-        // Navigate to Tweaks tab where search is available
-        NavigateToTab(1);
+        NavigateToTab(0);
         FocusSearchRequested?.Invoke();
     }
 
@@ -445,90 +320,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         if (_currentViewModel is TweaksViewModel tweaksViewModel)
         {
             tweaksViewModel.SearchText = _searchText;
-        }
-    }
-
-    private bool CanRunDashboardQuickAction()
-    {
-        return _tweaksViewModel != null
-            && !IsStartupScanActive
-            && !IsDashboardQuickActionRunning
-            && !_tweaksViewModel.IsBulkRunning;
-    }
-
-    private void RaiseDashboardQuickActionCanExecuteChanged()
-    {
-        RunDashboardScanCommand?.RaiseCanExecuteChanged();
-        RunFastCleanCommand?.RaiseCanExecuteChanged();
-        OpenMaintenanceWorkspaceCommand?.RaiseCanExecuteChanged();
-    }
-
-    private void OpenMaintenanceWorkspace()
-    {
-        if (_tweaksViewModel == null || !CanRunDashboardQuickAction())
-        {
-            return;
-        }
-
-        DashboardQuickActionKey = DashboardQuickActionMaintenanceKey;
-        NavigateToTab(1);
-        _tweaksViewModel.ShowMaintenanceCleanupWorkspace();
-        DashboardQuickActionStatus = "Opened Maintenance with cleanup tasks front and center.";
-    }
-
-    private async Task RunDashboardScanAsync()
-    {
-        if (_tweaksViewModel == null || !CanRunDashboardQuickAction())
-        {
-            return;
-        }
-
-        DashboardQuickActionKey = DashboardQuickActionScanKey;
-        IsDashboardQuickActionRunning = true;
-        DashboardQuickActionStatus = "Scanning Windows settings and live tweak states...";
-
-        try
-        {
-            using var busy = _busyService.Busy("Scanning Windows settings...");
-            await _tweaksViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
-            DashboardQuickActionStatus = "Quick scan finished. Current states are refreshed.";
-        }
-        catch (Exception ex)
-        {
-            DashboardQuickActionStatus = $"Quick scan could not finish: {ex.Message}";
-            LogToFile($"Dashboard quick scan failed: {ex.Message}");
-        }
-        finally
-        {
-            IsDashboardQuickActionRunning = false;
-        }
-    }
-
-    private async Task RunFastCleanAsync()
-    {
-        if (_tweaksViewModel == null || !CanRunDashboardQuickAction())
-        {
-            return;
-        }
-
-        DashboardQuickActionKey = DashboardQuickActionFastCleanKey;
-        IsDashboardQuickActionRunning = true;
-        DashboardQuickActionStatus = "Running Fast Clean on lightweight caches and cleanup tasks...";
-
-        try
-        {
-            using var busy = _busyService.Busy("Running Fast Clean...");
-            await _tweaksViewModel.RunFastCleanAsync(CancellationToken.None);
-            DashboardQuickActionStatus = "Fast Clean completed. Lightweight cleanup tasks finished successfully.";
-        }
-        catch (Exception ex)
-        {
-            DashboardQuickActionStatus = $"Fast Clean could not finish: {ex.Message}";
-            LogToFile($"Dashboard Fast Clean failed: {ex.Message}");
-        }
-        finally
-        {
-            IsDashboardQuickActionRunning = false;
         }
     }
 
@@ -555,7 +346,10 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     private async Task RecoverPendingRollbacksAsync()
     {
-        if (_tweaksViewModel == null) return;
+        if (_tweaksViewModel == null)
+        {
+            return;
+        }
 
         IsRecovering = true;
         LogToFile("Crash recovery: Starting rollback recovery...");
@@ -569,7 +363,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             {
                 try
                 {
-                    // Find the tweak in the view model and trigger rollback
                     var tweakVm = _tweaksViewModel.Tweaks.FirstOrDefault(t => t.Id == entry.TweakId);
                     if (tweakVm != null && tweakVm.IsApplied)
                     {
@@ -579,7 +372,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
                     }
                     else
                     {
-                        // Tweak not found or already rolled back, mark as recovered
                         await _rollbackStore.MarkRolledBackAsync(entry.TweakId, CancellationToken.None);
                         successCount++;
                         LogToFile($"Crash recovery: Marked {entry.TweakId} as recovered (not found or already rolled back)");
@@ -641,7 +433,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         }
         catch
         {
-            // Ignore logging errors
         }
     }
 }

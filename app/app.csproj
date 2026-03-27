@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
     <PackageReference Include="TaskScheduler" Version="2.11.0" />
   </ItemGroup>
@@ -35,9 +36,6 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\**\*.png" />
     <Resource Include="Resources\Fonts\*.ttf" />
-    <Content Include="Assets\HardwareDb\hardware_db_*.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Fonts\*-OFL.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

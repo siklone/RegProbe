@@ -28,9 +28,6 @@
             </Style>
 
             <!-- View-ViewModel Mapping -->
-            <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
-                <views:DashboardView />
-            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:TweaksViewModel}">
                 <views:TweaksView />
             </DataTemplate>

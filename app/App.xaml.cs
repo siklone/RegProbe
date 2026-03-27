@@ -6,11 +6,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using RegProbe.App.Diagnostics;
 using RegProbe.App.Services;
-using RegProbe.App.Services.Hardware;
-using RegProbe.App.Services.OsDetection;
 using RegProbe.App.ViewModels;
 using RegProbe.Infrastructure;
-using RegProbe.Infrastructure.Hardware;
 
 namespace RegProbe.App;
 
@@ -132,29 +129,6 @@ public partial class App : Application
     private static PreloadManager CreateDeferredPreloader()
     {
         var preloader = new PreloadManager(new Progress<PreloadProgress>(_ => { }));
-        preloader.RegisterTask("Warm hardware details store", async ct =>
-        {
-            await HardwareDatabase.InitializeAsync(ct);
-        }, isCritical: false, priority: 90);
-
-        preloader.RegisterTask("Start hardware metric cache", async ct =>
-        {
-            await HardwarePreloadService.Instance.PreloadAsync(ct);
-        }, isCritical: false, priority: 70);
-
-        preloader.RegisterTask("Parallel hardware preloader", async ct =>
-        {
-            try
-            {
-                var hd = new HardwareDataPreloader(MetricCacheService.Instance, AppServices.OsDetectionService, AppServices.MotherboardProvider);
-                await hd.PreloadAllAsync(new Progress<PreloadProgress>(_ => { }));
-            }
-            catch (Exception ex)
-            {
-                AppDiagnostics.LogException("Parallel hardware preloader failed", ex);
-            }
-        }, isCritical: false, priority: 68);
-
         preloader.RegisterTask("Analyze nohuto updates", async ct =>
         {
             using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
@@ -336,7 +310,6 @@ public partial class App : Application
     protected override void OnExit(ExitEventArgs e)
     {
         _singleInstance?.Dispose();
-        AppServices.Dispose();
         base.OnExit(e);
     }
 }

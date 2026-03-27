@@ -65,7 +65,7 @@ public interface ITweakProvider
 **MVVM Pattern**:
 - `MainViewModel`: Navigation and top-level state
 - `TweaksViewModel`: Tweak management (4200+ lines)
-- `DashboardViewModel`: Overview and hardware summary
+- `MainViewModel`: Shell navigation, configuration-first startup, and crash-recovery state
 
 **Key Features**:
 - ObservableCollection-based data binding

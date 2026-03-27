@@ -32,11 +32,10 @@
 
     <!-- Keyboard Shortcuts -->
     <Window.InputBindings>
-        <!-- Navigation: Ctrl+1 to Ctrl+4 -->
-        <KeyBinding Key="D1" Modifiers="Control" Command="{Binding NavigateToDashboardCommand}"/>
-        <KeyBinding Key="D2" Modifiers="Control" Command="{Binding NavigateToTweaksCommand}"/>
-        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding NavigateToSettingsCommand}"/>
-        <KeyBinding Key="D4" Modifiers="Control" Command="{Binding NavigateToAboutCommand}"/>
+        <!-- Navigation: Ctrl+1 to Ctrl+3 -->
+        <KeyBinding Key="D1" Modifiers="Control" Command="{Binding NavigateToTweaksCommand}"/>
+        <KeyBinding Key="D2" Modifiers="Control" Command="{Binding NavigateToSettingsCommand}"/>
+        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding NavigateToAboutCommand}"/>
         <!-- Search: Ctrl+F -->
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
         <!-- Clear filters: Escape -->

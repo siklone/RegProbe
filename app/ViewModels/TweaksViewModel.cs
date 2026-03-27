@@ -12,7 +12,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Win32;
 using RegProbe.Core;
-using RegProbe.Core.Intelligence;
 using RegProbe.Core.Models;
 using RegProbe.Core.Services;
 using RegProbe.Infrastructure.Elevation;
@@ -2450,22 +2449,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         catch (Exception ex)
         {
             _appLogger.Log(LogLevel.Error, "Plugin system error", ex);
-        }
-    }
-
-    public void ApplyRecommendations(IEnumerable<TweakRecommendation> recommendations)
-    {
-        if (recommendations == null) return;
-
-        foreach (var recommendation in recommendations)
-        {
-            var tweak = Tweaks.FirstOrDefault(t => t.Id == recommendation.TweakId);
-            if (tweak != null)
-            {
-                tweak.IsRecommended = true;
-                tweak.RecommendationReason = recommendation.Reason;
-                tweak.RecommendationConfidence = recommendation.ConfidenceScore;
-            }
         }
     }
 

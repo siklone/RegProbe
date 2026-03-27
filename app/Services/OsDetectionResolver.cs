@@ -2,7 +2,6 @@ using System;
 using System.Management;
 using Microsoft.Win32;
 using RegProbe.App.Diagnostics;
-using RegProbe.App.HardwareDb;
 
 namespace RegProbe.App.Services;
 
@@ -188,7 +187,7 @@ public static class OsDetectionResolver
         }
 
         var normalizedName = NormalizeName(buildNumber, editionId, displayVersion, releaseId);
-        var iconKey = HardwareIconResolver.ResolveOsIconKey(normalizedName);
+        var iconKey = buildNumber >= 22000 ? "os/windows11" : "os/windows10";
 
         AppDiagnostics.Log($"[OsDetectionResolver] BuildNumber={buildNumber}, ProductName={productName}, DisplayVersion={displayVersion}, FinalNormalizedName={normalizedName}, ChosenIcon={iconKey}");
 

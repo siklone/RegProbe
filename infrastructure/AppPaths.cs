@@ -33,8 +33,6 @@ public sealed class AppPaths
 
     public string PresetsDirectory => Path.Combine(AppDataRoot, "presets");
 
-    public string HardwareDatabasePath => Path.Combine(AppDataRoot, "hardware.db");
-
     public string NohutoScanStateFilePath => Path.Combine(AppDataRoot, "nohuto-scan-state.json");
 
     public string NohutoAnalysisReportPath => Path.Combine(LogDirectory, "nohuto-analysis.json");
