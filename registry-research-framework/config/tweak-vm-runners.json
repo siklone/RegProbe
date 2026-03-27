@@ -1,5 +1,31 @@
 {
   "runtime": {
+    "audio.show-disconnected-devices": {
+      "script": "scripts/vm/run-audio-devicecpl-runtime-probe.ps1",
+      "args": [
+        "-RecordId",
+        "audio.show-disconnected-devices",
+        "-ValueName",
+        "ShowDisconnectedDevices",
+        "-ValueData",
+        "1",
+        "-SnapshotName",
+        "baseline-20260327-shell-stable"
+      ]
+    },
+    "audio.show-hidden-devices": {
+      "script": "scripts/vm/run-audio-devicecpl-runtime-probe.ps1",
+      "args": [
+        "-RecordId",
+        "audio.show-hidden-devices",
+        "-ValueName",
+        "ShowHiddenDevices",
+        "-ValueData",
+        "1",
+        "-SnapshotName",
+        "baseline-20260327-shell-stable"
+      ]
+    },
     "power.disable-cpu-idle-states": {
       "script": "scripts/vm/run-cpu-idle-states-runtime-probe.ps1",
       "args": [

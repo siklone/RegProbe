@@ -16,6 +16,14 @@ if str(SCRIPTS_ROOT) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_ROOT))
 
 from research_path_lib import V31_EVIDENCE_ROOT, normalize_reference_text  # noqa: E402
+from evidence_class_lib import (  # noqa: E402
+    has_benchmark_evidence,
+    has_ghidra_evidence,
+    has_official_evidence,
+    has_procmon_evidence,
+    has_reboot_evidence,
+    has_wpr_evidence,
+)
 
 RESEARCH_ROOT = REPO_ROOT / "research"
 RECORDS_DIR = RESEARCH_ROOT / "records"
@@ -233,8 +241,10 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
 
     etw_trace_file = normalized_location(etw_item, "ETW trace")
     if isinstance(runtime_result, dict):
+        runtime_summary = runtime_result.get("summary") or {}
         etw_trace_file = (
             repo_relative_text(((runtime_result.get("wpr") or {}).get("repo_etl_placeholder")))
+            or repo_relative_text(runtime_summary.get("repo_etl_placeholder"))
             or repo_relative_text(runtime_lane.get("result_ref") if runtime_lane else None)
             or etw_trace_file
         )
@@ -242,6 +252,12 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
         etw_trace_file = lane_repo_ref(runtime_lane) or etw_trace_file
 
     procmon_trace_file = normalized_location(procmon_item, "Procmon trace") or lane_repo_ref(procmon_lane)
+    operation = None
+    if isinstance(runtime_result, dict):
+        if isinstance(runtime_result.get("summary"), dict) and runtime_result["summary"].get("control_panel"):
+            operation = "runtime-control-panel-probe"
+        elif runtime_result.get("post_boot") or runtime_result.get("wpr"):
+            operation = "runtime-reboot-probe"
 
     return {
         "$schema": "registry-evidence-v3.1/runtime-evidence",
@@ -251,7 +267,7 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
                 "events_found": etw_item is not None or bool(runtime_result and (runtime_result.get("post_boot") or (runtime_result.get("wpr") or {}).get("stopped"))),
                 "reading_process": None,
                 "reading_pid": None,
-                "operation": "runtime-reboot-probe" if runtime_result else None,
+                "operation": operation,
                 "timestamp": (runtime_result or {}).get("generated_utc"),
                 "boot_phase_included": bool((runtime_result or {}).get("post_boot")) or (audit.get("boot_phase_relevant") and bool(audit.get("wpr") or audit.get("reboot_tested"))),
                 "trace_file": etw_trace_file,
@@ -370,6 +386,23 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
     }
 
 
+def original_record_tools(record: dict[str, Any]) -> list[str]:
+    tools: list[str] = []
+    if has_official_evidence(record):
+        tools.append("official-doc")
+    if has_procmon_evidence(record):
+        tools.append("procmon")
+    if has_ghidra_evidence(record):
+        tools.append("ghidra")
+    if has_wpr_evidence(record):
+        tools.append("wpr")
+    if has_benchmark_evidence(record):
+        tools.append("benchmark")
+    if has_reboot_evidence(record):
+        tools.append("reboot")
+    return tools
+
+
 def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any] | None:
     if not audit.get("re_audit_required"):
         return None
@@ -377,6 +410,12 @@ def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
     runtime_lane = load_lane_manifest(tweak_id, "runtime-lane.json")
     procmon_lane = load_lane_manifest(tweak_id, "procmon-lane.json")
     behavior_lane = load_lane_manifest(tweak_id, "behavior-lane.json")
+    existing_re_audit_payload = load_json_if_exists(evidence_dir(tweak_id) / "re-audit.json")
+    existing_re_audit = existing_re_audit_payload.get("re_audit") if isinstance(existing_re_audit_payload, dict) else {}
+    inferred_original_tools = original_record_tools(record)
+    original_tools = existing_re_audit.get("original_evidence_tools") or inferred_original_tools or audit.get("tools_used") or []
+    if existing_re_audit.get("original_pipeline_version") == "pre-v3.1" and "etw" in original_tools and "etw" not in inferred_original_tools:
+        original_tools = inferred_original_tools
 
     new_tools_applied: list[str] = []
     notes: list[str] = []
@@ -401,10 +440,10 @@ def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
         "$schema": "registry-evidence-v3.1/re-audit",
         "re_audit": {
             "is_re_audit": True,
-            "original_class": audit.get("original_class") or audit.get("evidence_class"),
-            "original_evidence_tools": audit.get("tools_used") or [],
-            "original_cross_layer": audit.get("cross_layer_satisfied"),
-            "original_pipeline_version": audit.get("original_pipeline_version") or "pre-v3.1",
+            "original_class": existing_re_audit.get("original_class") or audit.get("original_class") or audit.get("evidence_class"),
+            "original_evidence_tools": original_tools,
+            "original_cross_layer": existing_re_audit.get("original_cross_layer") if "original_cross_layer" in existing_re_audit else audit.get("cross_layer_satisfied"),
+            "original_pipeline_version": existing_re_audit.get("original_pipeline_version") or audit.get("original_pipeline_version") or "pre-v3.1",
             "re_audit_date": now_utc(),
             "re_audit_reason": audit.get("re_audit_reason"),
             "re_audit_priority": audit.get("re_audit_priority"),

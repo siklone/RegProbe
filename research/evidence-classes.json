@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T04:40:24.405620Z",
+  "generated_utc": "2026-03-27T08:11:29.549969Z",
   "summary": {
     "total_records": 296,
     "class_counts": {
@@ -311,7 +311,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/missing/audio-devicecpl-query-20260314-pml.md",
+            "url": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md",
             "kind": "validation-proof",
             "summary": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_2026..."
           },
@@ -330,7 +330,7 @@
         "links": [
           {
             "title": "Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads",
-            "url": "Local captures - evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
+            "url": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
             "kind": "procmon-trace",
             "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices with Data..."
           }
@@ -388,7 +388,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/missing/audio-devicecpl-query-20260314-pml.md",
+            "url": "evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md",
             "kind": "validation-proof",
             "summary": "audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.p..."
           },
@@ -407,7 +407,7 @@
         "links": [
           {
             "title": "Procmon capture - Sound control panel ShowHiddenDevices runtime reads",
-            "url": "Local captures - evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
+            "url": "evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
             "kind": "procmon-trace",
             "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices with Data:1 and..."
           }

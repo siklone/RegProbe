@@ -27,20 +27,20 @@
   },
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-control-panel-probe",
+      "timestamp": "2026-03-27T07:47:36.1947121Z",
       "boot_phase_included": false,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md"
     },
     "procmon": {
       "executed": true,
       "events_found": true,
       "reading_process": null,
-      "trace_file": "Local captures - evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
+      "trace_file": "evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
     },
     "frida": {
       "executed": false,
@@ -128,7 +128,7 @@
     "layer_count": 2,
     "frida_kernel_guard_applied": false,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
@@ -139,15 +139,15 @@
   "timeline": [
     {
       "step": "bootstrap_record_load",
-      "timestamp": "2026-03-26T23:12:54.798298Z"
+      "timestamp": "2026-03-27T08:10:22.425061Z"
     },
     {
-      "step": "all",
-      "timestamp": "2026-03-26T23:12:54.798298Z"
+      "step": "faz1",
+      "timestamp": "2026-03-27T08:10:22.425061Z"
     },
     {
       "step": "classification",
-      "timestamp": "2026-03-26T23:12:54.798298Z"
+      "timestamp": "2026-03-27T08:10:22.425061Z"
     },
     {
       "step": "last_reviewed",
@@ -166,16 +166,19 @@
     ],
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
-    "re_audit_date": "2026-03-26T23:12:54.798298Z",
-    "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
-    "re_audit_priority": 2,
-    "new_tools_applied": [],
+    "re_audit_date": "2026-03-27T08:10:22.425061Z",
+    "re_audit_reason": "non_official_v31_reaudit",
+    "re_audit_priority": 3,
+    "new_tools_applied": [
+      "etw",
+      "vm-runtime-runner"
+    ],
     "new_cross_layer": true,
     "new_class": "A",
     "class_changed": false,
     "frida_kernel_guard_applied": false,
-    "dead_flag_four_conditions_met": false,
-    "notes": "Bootstrapped from the current research record and evidence audit. Replace with fresh v3.1 runtime output after re-audit runs.",
+    "dead_flag_four_conditions_met": true,
+    "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json)",
     "new_pipeline_version": "v3.1"
   }
 }

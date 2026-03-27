@@ -78,8 +78,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `a9c1bf72aff1344998c40660114164bd9cd227532b71596add3199eeaf2b4045` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `e920c554f7b4add5325a179d2df511c65d7cf12140e051b712dd7bb504ee2d18` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
-| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `a780447e1e9028b3fc70a6a7ba3af94a3296a01b2aace24baa678fe3cf9d6e06` | `20839d8644c45e7ae743ebddef683b1d1acf9fb5a530906bacd06729599c5f21` | 3 |
-| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `d6ba8f21cd60dc0fd20f8f384c95b08af32c7a83ed0d8fdab587556b4ee97502` | `f4a759de5d6a9d387680b888db57bc47b63e19bcffdf8088d016009e56db37e4` | 3 |
+| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `eb36c6a2ff4017d6b17530f7362c0ccab7fda13d65a2072bf696b3660fa283a1` | `e3b782d9f3e4b71176be6e21b4a361edefb58eee47ac4305e9352879618d47d7` | 3 |
+| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `040955e78b1e4643ed50d68491b45fe36f77724fd46dc037772165156381e833` | `ba526286c0a40c2d95c7f855f3d8fca2f4060112a9bf4ce848f6b266d81b0cb4` | 3 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `research/records/cleanup.disable-reserved-storage.review.json` | - | `a31748762eb2e2ead6ebeb0e82f50b80577cd13df1ab3b045df20c495e305113` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 5 |
 | `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `a538b7842bd07beb7e1db1a4472c88d07fd2c17ce9e74d8fc551bfb46a740c36` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
 | `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | - | `f82c8389bb9c2c5ea6f8bb4edb4f8432d16dcd2d14d1823cb88d9c1b6eeb97f4` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 3 |
@@ -1861,8 +1861,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-disconnected-devices.review.json`
 - V3.1 evidence root: [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices)
-- Source SHA256: `a780447e1e9028b3fc70a6a7ba3af94a3296a01b2aace24baa678fe3cf9d6e06`
-- Proof SHA256: `20839d8644c45e7ae743ebddef683b1d1acf9fb5a530906bacd06729599c5f21`
+- Source SHA256: `eb36c6a2ff4017d6b17530f7362c0ccab7fda13d65a2072bf696b3660fa283a1`
+- Proof SHA256: `e3b782d9f3e4b71176be6e21b4a361edefb58eee47ac4305e9352879618d47d7`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
 
@@ -1870,7 +1870,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) |
 | `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
 
@@ -1878,7 +1878,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/missing/audio-devicecpl-query-20260314-pml.md](../evidence/files/missing/audio-devicecpl-query-20260314-pml.md) |
+| Source | [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:0. |
 | Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
 
@@ -1899,8 +1899,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-hidden-devices.review.json`
 - V3.1 evidence root: [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices)
-- Source SHA256: `d6ba8f21cd60dc0fd20f8f384c95b08af32c7a83ed0d8fdab587556b4ee97502`
-- Proof SHA256: `f4a759de5d6a9d387680b888db57bc47b63e19bcffdf8088d016009e56db37e4`
+- Source SHA256: `040955e78b1e4643ed50d68491b45fe36f77724fd46dc037772165156381e833`
+- Proof SHA256: `ba526286c0a40c2d95c7f855f3d8fca2f4060112a9bf4ce848f6b266d81b0cb4`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowHiddenDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
 
@@ -1908,15 +1908,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) |
 | `app-audio-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/missing/audio-devicecpl-query-20260314-pml.md](../evidence/files/missing/audio-devicecpl-query-20260314-pml.md) |
+| Source | [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md) |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:0. |
 | Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
 

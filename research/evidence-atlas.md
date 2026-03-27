@@ -257,7 +257,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | Local captures - [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
 | `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -265,7 +265,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/missing/audio-devicecpl-query-20260314-pml.md](../evidence/files/missing/audio-devicecpl-query-20260314-pml.md) |
+| Source | [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |
@@ -377,15 +377,15 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | Local captures - [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/missing/audio-devicecpl-query-20260314-pml.md](../evidence/files/missing/audio-devicecpl-query-20260314-pml.md) |
+| Source | [evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md) |
 | Exact quote / path | audio_devicecpl_query_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:1. audio_devicecpl_query_zero_20260314.pml: rundll32.exe RegQueryValue HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowHiddenDevices Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and restored to 1 in reversible local captures. Both states were read by the classic Sound control panel on this build. Normalized for the consolidated evidence report. |

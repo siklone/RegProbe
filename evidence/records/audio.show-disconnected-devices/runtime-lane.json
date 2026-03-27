@@ -1,0 +1,24 @@
+﻿{
+    "tool":  "ETW",
+    "session_name":  "OpenTraceRegistry",
+    "tweak_id":  "audio.show-disconnected-devices",
+    "output_file":  "evidence/records/audio.show-disconnected-devices/runtime-lane.json",
+    "status":  "runner-ok",
+    "runner":  {
+                   "script":  "scripts/vm/run-audio-devicecpl-runtime-probe.ps1",
+                   "args":  [
+                                "-RecordId",
+                                "audio.show-disconnected-devices",
+                                "-ValueName",
+                                "ShowDisconnectedDevices",
+                                "-ValueData",
+                                "1",
+                                "-SnapshotName",
+                                "baseline-20260327-shell-stable"
+                            ]
+               },
+    "note":  "Invoked the mapped VM runtime runner for this tweak. Check the runner output root for concrete capture files.",
+    "exit_code":  0,
+    "log_file":  "evidence/records/audio.show-disconnected-devices/runtime-lane.log",
+    "result_ref":  "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json"
+}

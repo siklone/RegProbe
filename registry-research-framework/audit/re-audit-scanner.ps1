@@ -1,9 +1,27 @@
 [CmdletBinding()]
 param(
     [string]$AuditPath = (Join-Path $PWD "research\evidence-audit.json"),
-    [string]$QueueCsv = (Join-Path $PSScriptRoot "re-audit-queue.csv"),
-    [string]$ReportPath = (Join-Path $PSScriptRoot "re-audit-report.md")
+    [string]$QueueCsv = '',
+    [string]$ReportPath = ''
 )
+
+$auditRoot = if (-not [string]::IsNullOrWhiteSpace($PSScriptRoot)) {
+    $PSScriptRoot
+}
+elseif (-not [string]::IsNullOrWhiteSpace($PSCommandPath)) {
+    Split-Path -Parent $PSCommandPath
+}
+else {
+    Join-Path $PWD 'registry-research-framework\audit'
+}
+
+if ([string]::IsNullOrWhiteSpace($QueueCsv)) {
+    $QueueCsv = Join-Path $auditRoot 're-audit-queue.csv'
+}
+
+if ([string]::IsNullOrWhiteSpace($ReportPath)) {
+    $ReportPath = Join-Path $auditRoot 're-audit-report.md'
+}
 
 $audit = Get-Content -Raw $AuditPath | ConvertFrom-Json
 $entries = @($audit.entries | Where-Object { $_.re_audit_required -eq $true })

@@ -48,7 +48,10 @@ function Get-RunnerResultRef {
         return $null
     }
 
-    $lines = $Text -split "`r?`n" | ForEach-Object { $_.Trim() } | Where-Object { $_ }
+    $repo = [System.IO.Path]::GetFullPath($repoRoot)
+    $repoPattern = [regex]::Escape($repo)
+    $normalizedText = [regex]::Replace($Text, $repoPattern, "")
+    $lines = $normalizedText -split "`r?`n" | ForEach-Object { $_.Trim() } | Where-Object { $_ }
     [array]::Reverse($lines)
     foreach ($line in $lines) {
         $normalized = $line.TrimStart('\', '/') -replace '\\', '/'

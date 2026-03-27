@@ -5,7 +5,7 @@
 - Official doc: `false`
 - Cross-layer: `true`
 - Layer set: `runtime_procmon, static_ghidra`
-- Tools: `procmon, ghidra`
+- Tools: `etw, procmon, ghidra`
 
 The app writes HKCU/Software/Microsoft/Multimedia/Audio/DeviceCpl/ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. That gives this record both runtime and code-side proof on this build even though a primary Microsoft documentation page for the DeviceCpl contract was not captured.
 

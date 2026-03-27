@@ -2,20 +2,20 @@
   "$schema": "registry-evidence-v3.1/runtime-evidence",
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
-      "timestamp": null,
+      "operation": "runtime-control-panel-probe",
+      "timestamp": "2026-03-27T07:37:58.2511309Z",
       "boot_phase_included": false,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showhiddendevices-20260327-103758/audio-devicecpl.etl.md"
     },
     "procmon": {
       "executed": true,
       "events_found": true,
       "reading_process": null,
-      "trace_file": "Local captures - evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md"
+      "trace_file": "evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md and evidence/files/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md"
     },
     "frida": {
       "executed": false,

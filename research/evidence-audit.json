@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T04:40:24.887908Z",
+  "generated_utc": "2026-03-27T08:11:29.805726Z",
   "summary": {
     "total_active_records": 242,
     "class_counts": {
@@ -87,6 +87,7 @@
         "static_ghidra"
       ],
       "tools_used": [
+        "etw",
         "procmon",
         "ghidra"
       ],
@@ -94,14 +95,14 @@
       "suspected_layer": "user-mode",
       "frida_kernel_guard_applied": false,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
       "re_audit_required": true,
-      "re_audit_priority": 2,
-      "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
+      "re_audit_priority": 3,
+      "re_audit_reason": "non_official_v31_reaudit",
       "original_class": "A",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.1",
@@ -135,6 +136,7 @@
         "static_ghidra"
       ],
       "tools_used": [
+        "etw",
         "procmon",
         "ghidra"
       ],
@@ -142,14 +144,14 @@
       "suspected_layer": "user-mode",
       "frida_kernel_guard_applied": false,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
       "re_audit_required": true,
-      "re_audit_priority": 2,
-      "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
+      "re_audit_priority": 3,
+      "re_audit_reason": "non_official_v31_reaudit",
       "original_class": "A",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.1",
