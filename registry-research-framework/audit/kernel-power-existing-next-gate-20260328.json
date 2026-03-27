@@ -1,0 +1,55 @@
+{
+  "generated_utc": "2026-03-28T01:10:00Z",
+  "source_existence_summary": "evidence/files/vm-tooling-staging/registry-batch-existence-20260328-000828/summary.json",
+  "source_static_summary": "evidence/files/vm-tooling-staging/registry-batch-string-20260328-003236/summary.json",
+  "source_ghidra_markdown": "evidence/files/ghidra/kernel-power-existing-ntoskrnl/ghidra-matches.md",
+  "status": "ready-for-deeper-lanes",
+  "promote_to_ghidra_runtime_queue": [
+    {
+      "candidate_id": "power.session-watchdog-resume-timeout",
+      "reason": "Value exists on the clean baseline, exact ntoskrnl string hit exists, and Ghidra produced an unresolved xref block worth targeted fallback work."
+    },
+    {
+      "candidate_id": "power.session-watchdog-sleep-timeout",
+      "reason": "Value exists on the clean baseline, exact ntoskrnl string hit exists, and Ghidra produced an unresolved xref block worth targeted fallback work."
+    },
+    {
+      "candidate_id": "system.executive-additional-critical-worker-threads",
+      "reason": "Value exists on the clean baseline, exact ntoskrnl string hit exists, and Ghidra produced an unresolved xref block worth targeted fallback work."
+    },
+    {
+      "candidate_id": "system.executive-additional-delayed-worker-threads",
+      "reason": "Value exists on the clean baseline, exact ntoskrnl string hit exists, and Ghidra produced an unresolved xref block worth targeted fallback work."
+    }
+  ],
+  "static_only_hold": [
+    {
+      "candidate_id": "power.customize-during-setup",
+      "reason": "Value exists, but no exact repo-doc hit and no exact string hit in the first ntoskrnl/powrprof pass."
+    },
+    {
+      "candidate_id": "power.source-settings-version",
+      "reason": "Value exists, but no exact repo-doc hit and no exact string hit in the first ntoskrnl/powrprof pass."
+    },
+    {
+      "candidate_id": "power.session-power-setting-profile",
+      "reason": "Value exists, but no exact repo-doc hit and no exact string hit in the first ntoskrnl/powrprof pass."
+    },
+    {
+      "candidate_id": "system.executive-uuid-sequence-number",
+      "reason": "Value exists and the string appears in ntoskrnl, but Ghidra resolved zero direct xrefs in the first pass."
+    }
+  ],
+  "reroute_or_demote": [
+    {
+      "candidate_id": "system.io-allow-remote-dasd",
+      "reason": "The ntoskrnl Ghidra xref resolves to a policy path under SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices rather than the Session Manager I/O candidate path, so this is currently a string collision, not support for the Session Manager value."
+    }
+  ],
+  "notes": [
+    "Exact repo-doc hits for the 9 baseline-existing values remain effectively zero outside the new intake notes.",
+    "The first static string pass found exact binary hits for 6 of 9 values, all in ntoskrnl.exe.",
+    "AllowRemoteDASD should not be promoted as Session Manager I/O coverage based on the current Ghidra output.",
+    "Frida remains disallowed for all HKLM\\SYSTEM candidates in this set."
+  ]
+}

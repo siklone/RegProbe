@@ -1,0 +1,67 @@
+﻿{
+    "binary":  "ntoskrnl.exe",
+    "probe":  "kernel-power-existing-ntoskrnl",
+    "timestamp":  "2026-03-27T21:54:48.090218500Z",
+    "ghidra_no_function_fallback":  true,
+    "matches":  [
+                    {
+                        "address":  "140c63608",
+                        "function":  "\u003cno function\u003e",
+                        "forced_boundary":  false,
+                        "decompile_success":  false,
+                        "output_lines":  1,
+                        "naturally_resolved":  false,
+                        "output_kind":  "disassembly"
+                    },
+                    {
+                        "address":  "140c635d8",
+                        "function":  "\u003cno function\u003e",
+                        "forced_boundary":  false,
+                        "decompile_success":  false,
+                        "output_lines":  1,
+                        "naturally_resolved":  false,
+                        "output_kind":  "disassembly"
+                    },
+                    {
+                        "address":  "140c62b88",
+                        "function":  "\u003cno function\u003e",
+                        "forced_boundary":  false,
+                        "decompile_success":  false,
+                        "output_lines":  1,
+                        "naturally_resolved":  false,
+                        "output_kind":  "disassembly"
+                    },
+                    {
+                        "address":  "140c62bb8",
+                        "function":  "\u003cno function\u003e",
+                        "forced_boundary":  false,
+                        "decompile_success":  false,
+                        "output_lines":  1,
+                        "naturally_resolved":  false,
+                        "output_kind":  "disassembly"
+                    },
+                    {
+                        "address":  "1404cb643",
+                        "function":  "FUN_1404cb634",
+                        "forced_boundary":  false,
+                        "decompile_success":  true,
+                        "output_lines":  43,
+                        "naturally_resolved":  true,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "1404cb6b0",
+                        "function":  "FUN_1404cb634",
+                        "forced_boundary":  false,
+                        "decompile_success":  true,
+                        "output_lines":  43,
+                        "naturally_resolved":  true,
+                        "output_kind":  "decompile"
+                    }
+                ],
+    "exit_code":  0,
+    "status":  "completed",
+    "failure":  null,
+    "markdown_exists":  true,
+    "run_log_exists":  true
+}

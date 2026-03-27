@@ -1,0 +1,90 @@
+{
+  "generated_utc": "2026-03-28T00:25:00Z",
+  "source_follow_up": "registry-research-framework/audit/kernel-power-net-new-follow-up-20260328.json",
+  "probe_kind": "static-string-first",
+  "snapshot_name": "baseline-20260327-regprobe-visible-shell-stable",
+  "candidates": [
+    {
+      "candidate_id": "power.customize-during-setup",
+      "needle": "CustomizeDuringSetup",
+      "family": "power-control",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ]
+    },
+    {
+      "candidate_id": "power.source-settings-version",
+      "needle": "SourceSettingsVersion",
+      "family": "power-control",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ]
+    },
+    {
+      "candidate_id": "power.session-power-setting-profile",
+      "needle": "PowerSettingProfile",
+      "family": "session-manager-power",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ]
+    },
+    {
+      "candidate_id": "power.session-watchdog-resume-timeout",
+      "needle": "WatchdogResumeTimeout",
+      "family": "session-manager-power",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ]
+    },
+    {
+      "candidate_id": "power.session-watchdog-sleep-timeout",
+      "needle": "WatchdogSleepTimeout",
+      "family": "session-manager-power",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ]
+    },
+    {
+      "candidate_id": "system.executive-additional-critical-worker-threads",
+      "needle": "AdditionalCriticalWorkerThreads",
+      "family": "session-manager-executive",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\smss.exe"
+      ]
+    },
+    {
+      "candidate_id": "system.executive-additional-delayed-worker-threads",
+      "needle": "AdditionalDelayedWorkerThreads",
+      "family": "session-manager-executive",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\smss.exe"
+      ]
+    },
+    {
+      "candidate_id": "system.executive-uuid-sequence-number",
+      "needle": "UuidSequenceNumber",
+      "family": "session-manager-executive",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\smss.exe"
+      ]
+    },
+    {
+      "candidate_id": "system.io-allow-remote-dasd",
+      "needle": "AllowRemoteDASD",
+      "family": "session-manager-io",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\smss.exe",
+        "C:\\Windows\\System32\\drivers\\ntfs.sys"
+      ]
+    }
+  ]
+}
