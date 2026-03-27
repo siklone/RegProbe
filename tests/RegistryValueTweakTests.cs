@@ -2,10 +2,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Infrastructure.Registry;
+using RegProbe.Core;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Core.Registry;
+using RegProbe.Infrastructure.Registry;
 using Xunit;
 
 public sealed class RegistryValueTweakTests
@@ -114,6 +114,6 @@ public sealed class RegistryValueTweakTests
 
     private static string BuildKeyPath()
     {
-        return $"Software\\OpenTraceProject\\Tests\\RegistryValueTweak\\{Guid.NewGuid():N}";
+        return $"Software\\RegProbe\\Tests\\RegistryValueTweak\\{Guid.NewGuid():N}";
     }
 }

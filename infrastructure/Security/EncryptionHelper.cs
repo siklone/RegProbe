@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace OpenTraceProject.Infrastructure.Security;
+namespace RegProbe.Infrastructure.Security;
 
 public static class EncryptionHelper
 {

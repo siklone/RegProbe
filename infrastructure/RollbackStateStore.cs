@@ -6,13 +6,13 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Infrastructure;
+namespace RegProbe.Infrastructure;
 
 /// <summary>
 /// Persists original tweak values before Apply for crash recovery.
-/// Stores data in JSON format at %AppData%\OpenTraceProject\rollback-state.json
+/// Stores data in JSON format at %AppData%\RegProbe\rollback-state.json
 /// </summary>
 public sealed class RollbackStateStore : IRollbackStateStore
 {
@@ -271,7 +271,7 @@ public sealed class RollbackStateStore : IRollbackStateStore
     {
         try
         {
-            var logPath = Path.Combine(Path.GetTempPath(), "OpenTraceProject_Diagnostics.log");
+            var logPath = Path.Combine(Path.GetTempPath(), "RegProbe_Diagnostics.log");
             var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
             File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
         }

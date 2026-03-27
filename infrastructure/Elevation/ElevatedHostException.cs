@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public class ElevatedHostException : Exception
 {

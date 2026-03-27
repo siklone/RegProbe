@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public enum ConfigurationWorkspaceKind
 {

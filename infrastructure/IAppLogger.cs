@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.Infrastructure;
+namespace RegProbe.Infrastructure;
 
 public interface IAppLogger
 {

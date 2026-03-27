@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Commands;
+using RegProbe.Core.Commands;
 
-namespace OpenTraceProject.Infrastructure.Commands;
+namespace RegProbe.Infrastructure.Commands;
 
 public sealed class LocalCommandRunner : ICommandRunner
 {

@@ -1,5 +1,5 @@
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.ViewModels;
+using RegProbe.App.Services;
+using RegProbe.App.ViewModels;
 
 public sealed class TweakInsightFormatterTests
 {

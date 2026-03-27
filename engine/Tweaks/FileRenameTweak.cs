@@ -1,10 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Files;
+using RegProbe.Core;
+using RegProbe.Core.Files;
 
-namespace OpenTraceProject.Engine.Tweaks;
+namespace RegProbe.Engine.Tweaks;
 
 public sealed class FileRenameTweak : ITweak
 {

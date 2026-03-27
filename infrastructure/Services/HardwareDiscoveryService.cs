@@ -2,10 +2,10 @@ using System;
 using System.Management;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Intelligence;
-using OpenTraceProject.Core.Services;
+using RegProbe.Core.Intelligence;
+using RegProbe.Core.Services;
 
-namespace OpenTraceProject.Infrastructure.Services;
+namespace RegProbe.Infrastructure.Services;
 
 [SupportedOSPlatform("windows")]
 public sealed class HardwareDiscoveryService : IHardwareDiscoveryService

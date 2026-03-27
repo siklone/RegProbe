@@ -2,9 +2,9 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Plugins.DevTools;
+namespace RegProbe.Plugins.DevTools;
 
 /// <summary>
 /// Configures Git credential helper for secure and convenient authentication.

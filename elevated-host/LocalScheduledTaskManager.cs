@@ -4,9 +4,9 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Tasks;
+using RegProbe.Core.Tasks;
 
-namespace OpenTraceProject.ElevatedHost;
+namespace RegProbe.ElevatedHost;
 
 internal sealed class LocalScheduledTaskManager : IScheduledTaskManager
 {

@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Infrastructure;
+namespace RegProbe.Infrastructure;
 
 public sealed class SettingsStore : ISettingsStore
 {

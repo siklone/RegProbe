@@ -8,12 +8,12 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Plugins;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Engine.Tweaks;
+using RegProbe.Core;
+using RegProbe.Core.Plugins;
+using RegProbe.Core.Registry;
+using RegProbe.Engine.Tweaks;
 
-namespace OpenTraceProject.App.Services.TweakProviders;
+namespace RegProbe.App.Services.TweakProviders;
 
 /// <summary>
 /// Loads tweak definitions from JSON files with hot-reload support.

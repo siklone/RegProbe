@@ -1,10 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Commands;
+using RegProbe.Core;
+using RegProbe.Core.Commands;
 
-namespace OpenTraceProject.Engine.Tweaks.Commands;
+namespace RegProbe.Engine.Tweaks.Commands;
 
 public abstract class CommandTweak : ITweak
 {

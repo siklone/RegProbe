@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.App.Services.Hardware;
+namespace RegProbe.App.Services.Hardware;
 
 public sealed class MotherboardInfo
 {

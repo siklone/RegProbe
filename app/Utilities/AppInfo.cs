@@ -2,13 +2,13 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace OpenTraceProject.App.Utilities;
+namespace RegProbe.App.Utilities;
 
 public static class AppInfo
 {
-    public const string ProductName = "Open Trace Project";
-    public const string SuiteName = "Open Trace Project";
-    public const string RepositoryUrl = "https://github.com/siklone/Open-Trace-Project";
+    public const string ProductName = "RegProbe";
+    public const string SuiteName = "RegProbe";
+    public const string RepositoryUrl = "https://github.com/siklone/RegProbe";
 
     public static int CurrentYear => DateTime.Now.Year;
 

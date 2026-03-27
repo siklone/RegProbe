@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.App.HardwareDb;
-using OpenTraceProject.App.HardwareDb.Models;
+using RegProbe.App.HardwareDb;
+using RegProbe.App.HardwareDb.Models;
 
 public sealed class HardwareMatchingTests
 {

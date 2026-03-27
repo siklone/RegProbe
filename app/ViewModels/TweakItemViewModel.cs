@@ -11,17 +11,17 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Services;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Engine.Tweaks.Commands;
-using OpenTraceProject.Engine.Tweaks.Commands.Cleanup;
-using OpenTraceProject.Infrastructure;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.Utilities;
+using RegProbe.Core;
+using RegProbe.Core.Services;
+using RegProbe.Engine;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Commands;
+using RegProbe.Engine.Tweaks.Commands.Cleanup;
+using RegProbe.Infrastructure;
+using RegProbe.App.Services;
+using RegProbe.App.Utilities;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class TweakItemViewModel : ViewModelBase
 {
@@ -2090,13 +2090,13 @@ public sealed class TweakItemViewModel : ViewModelBase
             : startMode.ToString();
     }
 
-    private static string FormatRegistryValuePath(OpenTraceProject.Core.Registry.RegistryValueReference reference)
+    private static string FormatRegistryValuePath(RegProbe.Core.Registry.RegistryValueReference reference)
     {
         var key = FormatRegistryKey(reference);
         return $"{key}\\{reference.ValueName}";
     }
 
-    private static string FormatRegistryKey(OpenTraceProject.Core.Registry.RegistryValueReference reference)
+    private static string FormatRegistryKey(RegProbe.Core.Registry.RegistryValueReference reference)
     {
         var keyPath = (reference.KeyPath ?? string.Empty).Trim().TrimStart('\\').TrimEnd('\\');
         if (keyPath.StartsWith("HKEY_", StringComparison.OrdinalIgnoreCase)
@@ -2123,7 +2123,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     }
 
     private static string BuildRegistryCommandPreview(
-        OpenTraceProject.Core.Registry.RegistryValueReference reference,
+        RegProbe.Core.Registry.RegistryValueReference reference,
         RegistryValueKind valueKind,
         object targetValue)
     {
@@ -2687,7 +2687,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         try
         {
             var logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "OpenTraceProject", "Logs", "tweak-vm.log");
+                "RegProbe", "Logs", "tweak-vm.log");
             Directory.CreateDirectory(Path.GetDirectoryName(logPath)!);
             File.AppendAllText(logPath, $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}{Environment.NewLine}");
         }

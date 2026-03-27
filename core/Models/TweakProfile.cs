@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OpenTraceProject.Core.Models;
+namespace RegProbe.Core.Models;
 
 public sealed class TweakProfile
 {

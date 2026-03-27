@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace OpenTraceProject.Infrastructure;
+namespace RegProbe.Infrastructure;
 
 public sealed class AppSettings
 {

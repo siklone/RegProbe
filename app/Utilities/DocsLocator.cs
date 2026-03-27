@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace OpenTraceProject.App.Utilities;
+namespace RegProbe.App.Utilities;
 
 public static class DocsLocator
 {

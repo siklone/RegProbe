@@ -6,9 +6,9 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Engine.Tweaks.Misc;
+namespace RegProbe.Engine.Tweaks.Misc;
 
 /// <summary>
 /// Configures a small set of VS Code user settings related to telemetry and online behavior.

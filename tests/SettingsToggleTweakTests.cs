@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Infrastructure;
+using RegProbe.Core;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Infrastructure;
 using Xunit;
 
 public sealed class SettingsToggleTweakTests

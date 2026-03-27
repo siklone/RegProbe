@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace OpenTraceProject.App.Views.Controls;
+namespace RegProbe.App.Views.Controls;
 
 public partial class LoadingOverlay : UserControl
 {

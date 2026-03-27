@@ -1,8 +1,8 @@
 using System.IO;
 using Microsoft.Win32;
-using OpenTraceProject.App.Models;
+using RegProbe.App.Models;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Service for managing Windows startup items.

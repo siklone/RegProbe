@@ -1,4 +1,4 @@
-namespace OpenTraceProject.Core.Tasks;
+namespace RegProbe.Core.Tasks;
 
 public sealed record ScheduledTaskInfo(
     bool Exists,

@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.ServiceProcess;
 using Microsoft.Win32;
-using OpenTraceProject.App.Utilities;
-using CoreServiceStartMode = OpenTraceProject.Core.Services.ServiceStartMode;
+using RegProbe.App.Utilities;
+using CoreServiceStartMode = RegProbe.Core.Services.ServiceStartMode;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public sealed class WindowsServiceCatalogService
 {

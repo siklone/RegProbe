@@ -2,11 +2,11 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using OpenTraceProject.App.HardwareDb;
-using OpenTraceProject.App.Models;
-using OpenTraceProject.App.Services;
+using RegProbe.App.HardwareDb;
+using RegProbe.App.Models;
+using RegProbe.App.Services;
 
-namespace OpenTraceProject.App.ViewModels.Base;
+namespace RegProbe.App.ViewModels.Base;
 
 public abstract class HardwareDetailViewModelBase : ViewModelBase
 {

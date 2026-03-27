@@ -1,6 +1,6 @@
 using System.Security.Principal;
 
-namespace OpenTraceProject.App.Utilities;
+namespace RegProbe.App.Utilities;
 
 public static class ProcessElevation
 {

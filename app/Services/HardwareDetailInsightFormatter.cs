@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenTraceProject.App.HardwareDb;
+using RegProbe.App.HardwareDb;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public sealed class HardwareDetailInsightFormatter
 {

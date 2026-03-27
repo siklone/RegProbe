@@ -1,10 +1,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine.Tweaks;
+using RegProbe.Core;
+using RegProbe.Engine.Tweaks;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class ConditionalTweakTests
 {

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Services;
+using RegProbe.Core.Services;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public sealed class ElevatedServiceManager : IServiceManager
 {

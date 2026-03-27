@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WinTask = Microsoft.Win32.TaskScheduler;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Service for managing Windows Scheduled Tasks.

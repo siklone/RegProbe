@@ -3,12 +3,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Moq;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Commands;
-using OpenTraceProject.Engine.Tweaks.Commands.Power;
+using RegProbe.Core;
+using RegProbe.Core.Commands;
+using RegProbe.Engine.Tweaks.Commands.Power;
 using Xunit;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class SetCpuBoostPerfModeTweakTests
 {

@@ -1,5 +1,5 @@
-using OpenTraceProject.App.Services;
-using OpenTraceProject.Core;
+using RegProbe.App.Services;
+using RegProbe.Core;
 
 public sealed class PolicyReferenceCatalogBuilderTests
 {

@@ -2,7 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public record ThemePalette(
     string Name,
@@ -132,7 +132,7 @@ public class ThemeManager
         try
         {
             var dictName = isDark ? "Colors.xaml" : "Colors.Light.xaml";
-            var uri = new Uri($"/OpenTraceProject.App;component/Resources/{dictName}", UriKind.Relative);
+            var uri = new Uri($"/RegProbe.App;component/Resources/{dictName}", UriKind.Relative);
             
             var newDict = new ResourceDictionary { Source = uri };
 

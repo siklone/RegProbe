@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Infrastructure.Data;
+using RegProbe.Infrastructure.Data;
 
-namespace OpenTraceProject.Infrastructure.Hardware;
+namespace RegProbe.Infrastructure.Hardware;
 
 public sealed class HardwareSpecsService
 {

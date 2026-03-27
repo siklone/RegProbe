@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Input;
-using OpenTraceProject.Core.Services;
-using OpenTraceProject.Engine.Intelligence;
-using OpenTraceProject.Engine.Services;
-using OpenTraceProject.Infrastructure;
-using OpenTraceProject.Infrastructure.Services;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.Services.TweakProviders;
-using OpenTraceProject.App.Utilities;
+using RegProbe.Core.Services;
+using RegProbe.Engine.Intelligence;
+using RegProbe.Engine.Services;
+using RegProbe.Infrastructure;
+using RegProbe.Infrastructure.Services;
+using RegProbe.App.Services;
+using RegProbe.App.Services.TweakProviders;
+using RegProbe.App.Utilities;
 
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class MainViewModel : ViewModelBase, IDisposable
 {
@@ -635,7 +635,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     {
         try
         {
-            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "OpenTraceProject_Diagnostics.log");
+            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "RegProbe_Diagnostics.log");
             var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
             System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
         }

@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 internal sealed class CacheEntry
 {

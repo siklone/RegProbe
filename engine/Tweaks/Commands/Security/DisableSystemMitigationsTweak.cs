@@ -5,10 +5,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Commands;
+using RegProbe.Core;
+using RegProbe.Core.Commands;
 
-namespace OpenTraceProject.Engine.Tweaks.Commands.Security;
+namespace RegProbe.Engine.Tweaks.Commands.Security;
 
 public sealed class DisableSystemMitigationsTweak : CommandTweak
 {
@@ -34,7 +34,7 @@ public sealed class DisableSystemMitigationsTweak : CommandTweak
             risk: TweakRiskLevel.Risky,
             commandRunner: commandRunner)
     {
-        _workspaceDirectory = Path.Combine(Path.GetTempPath(), "OpenTraceProject", "ExploitProtection");
+        _workspaceDirectory = Path.Combine(Path.GetTempPath(), "RegProbe", "ExploitProtection");
         _desiredPolicyPath = Path.Combine(_workspaceDirectory, "security-disable-system-mitigations.xml");
         EnsureDesiredPolicyFile();
     }

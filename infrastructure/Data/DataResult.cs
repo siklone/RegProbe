@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OpenTraceProject.Infrastructure.Data;
+namespace RegProbe.Infrastructure.Data;
 
 /// <summary>
 /// Represents the result of a data fetch operation.

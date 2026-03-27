@@ -5,16 +5,16 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Commands;
-using OpenTraceProject.Infrastructure.Commands;
-using OpenTraceProject.Infrastructure.Elevation;
-using OpenTraceProject.Infrastructure.Registry;
-using OpenTraceProject.Core.Files;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Core.Services;
-using OpenTraceProject.Core.Tasks;
+using RegProbe.Core.Commands;
+using RegProbe.Infrastructure.Commands;
+using RegProbe.Infrastructure.Elevation;
+using RegProbe.Infrastructure.Registry;
+using RegProbe.Core.Files;
+using RegProbe.Core.Registry;
+using RegProbe.Core.Services;
+using RegProbe.Core.Tasks;
 
-namespace OpenTraceProject.ElevatedHost;
+namespace RegProbe.ElevatedHost;
 
 public static class Program
 {
@@ -299,7 +299,7 @@ public static class Program
     {
         try
         {
-            var path = Path.Combine(Path.GetTempPath(), "OpenTraceProject_ElevatedHost.log");
+            var path = Path.Combine(Path.GetTempPath(), "RegProbe_ElevatedHost.log");
             var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
             File.AppendAllText(path, $"[{timestamp}] {message}{Environment.NewLine}");
         }

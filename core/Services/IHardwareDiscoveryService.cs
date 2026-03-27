@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Intelligence;
+using RegProbe.Core.Intelligence;
 
-namespace OpenTraceProject.Core.Services;
+namespace RegProbe.Core.Services;
 
 public interface IHardwareDiscoveryService
 {

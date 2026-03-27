@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Core;
+namespace RegProbe.Core;
 
 public enum TweakRiskLevel
 {

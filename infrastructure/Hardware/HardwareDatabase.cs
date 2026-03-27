@@ -6,9 +6,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
-using OpenTraceProject.Infrastructure;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.Infrastructure.Hardware;
+namespace RegProbe.Infrastructure.Hardware;
 
 public sealed class HardwareDatabase
 {
@@ -16,7 +16,7 @@ public sealed class HardwareDatabase
     private static bool _schemaReady;
     private static HardwareDatabase? _instance;
     private static readonly JsonSerializerOptions SeedJsonOptions = new() { PropertyNameCaseInsensitive = true };
-    private const string SeedResourceName = "OpenTraceProject.Infrastructure.Hardware.hardware-seed.json";
+    private const string SeedResourceName = "RegProbe.Infrastructure.Hardware.hardware-seed.json";
     private const string SeedVersionKey = "seed_version";
     private const string SeedAppliedKey = "seed_applied";
 

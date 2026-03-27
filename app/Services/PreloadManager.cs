@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Manages preloading of app resources during splash screen.

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management;
 using System.Text.RegularExpressions;
-using OpenTraceProject.App.Diagnostics;
+using RegProbe.App.Diagnostics;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 internal static class HardwarePeripheralDataCollector
 {

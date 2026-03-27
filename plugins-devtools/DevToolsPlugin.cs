@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Plugins;
+using RegProbe.Core;
+using RegProbe.Core.Plugins;
 
-namespace OpenTraceProject.Plugins.DevTools;
+namespace RegProbe.Plugins.DevTools;
 
 public sealed class DevToolsPlugin : ITweakPlugin
 {
     public string PluginName => "Developer Tools Plugin";
-    public string Author => "Open Trace Project Team";
+    public string Author => "RegProbe Team";
     public string Version => "1.0.0";
 
     public IEnumerable<ITweak> GetTweaks()

@@ -1,4 +1,4 @@
-# Open Trace Project CI/CD Pipeline
+# RegProbe CI/CD Pipeline
 # Comprehensive build, test, and publish workflow
 # Source: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
@@ -17,7 +17,7 @@ env:
   DOTNET_VERSION: "8.0.x"
   CONFIGURATION: Release
   RUNTIME: win-x64
-  SOLUTION: OpenTraceProject.sln
+  SOLUTION: RegProbe.sln
   TEST_PROJECT: tests/tests.csproj
   APP_PROJECT: app/app.csproj
   ELEVATED_HOST_PROJECT: elevated-host/elevated-host.csproj
@@ -101,7 +101,7 @@ jobs:
 
       - name: Verify ElevatedHost packaging
         run: |
-          $hostPath = "publish/ElevatedHost/OpenTraceProject.ElevatedHost.exe"
+          $hostPath = "publish/ElevatedHost/RegProbe.ElevatedHost.exe"
           if (!(Test-Path $hostPath)) {
             Write-Error "CRITICAL: ElevatedHost.exe not found at $hostPath"
             exit 1
@@ -110,17 +110,17 @@ jobs:
 
       - name: Verify main application
         run: |
-          $appPath = "publish/OpenTraceProject.App.exe"
+          $appPath = "publish/RegProbe.App.exe"
           if (!(Test-Path $appPath)) {
             Write-Error "CRITICAL: Main application not found at $appPath"
             exit 1
           }
-          Write-Host "OpenTraceProject.App.exe verified at $appPath"
+          Write-Host "RegProbe.App.exe verified at $appPath"
 
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4
         with:
-          name: OpenTraceProject-${{ github.sha }}
+          name: RegProbe-${{ github.sha }}
           path: publish/
           retention-days: 30
 
@@ -156,12 +156,12 @@ jobs:
 
       - name: Create release archive
         run: |
-          Compress-Archive -Path release/* -DestinationPath OpenTraceProject-${{ github.event.release.tag_name }}.zip
+          Compress-Archive -Path release/* -DestinationPath RegProbe-${{ github.event.release.tag_name }}.zip
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
-          files: OpenTraceProject-${{ github.event.release.tag_name }}.zip
+          files: RegProbe-${{ github.event.release.tag_name }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -1,11 +1,11 @@
 using System;
 using System.IO;
 
-namespace OpenTraceProject.Infrastructure;
+namespace RegProbe.Infrastructure;
 
 public sealed class AppPaths
 {
-    public const string AppFolderName = "OpenTraceProject";
+    public const string AppFolderName = "RegProbe";
 
     public AppPaths(string baseAppDataPath)
     {

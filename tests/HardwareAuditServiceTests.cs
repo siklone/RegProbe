@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading;
-using OpenTraceProject.App.Services;
+using RegProbe.App.Services;
 
 public sealed class HardwareAuditServiceTests
 {
@@ -93,7 +93,7 @@ public sealed class HardwareAuditServiceTests
     [Fact]
     public async Task CreateReport_ProducesHighConfidenceCpuComponent_ForKnownDatabaseModel()
     {
-        await OpenTraceProject.App.HardwareDb.HardwareKnowledgeDbService.Instance.InitializeAsync(CancellationToken.None);
+        await RegProbe.App.HardwareDb.HardwareKnowledgeDbService.Instance.InitializeAsync(CancellationToken.None);
 
         var snapshot = new HardwareDetailSnapshot
         {

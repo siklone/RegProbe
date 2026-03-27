@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.Core.Commands;
-using OpenTraceProject.Infrastructure.Elevation;
-using OpenTraceProject.Core.Registry;
+using RegProbe.Core.Commands;
+using RegProbe.Infrastructure.Elevation;
+using RegProbe.Core.Registry;
 using Xunit;
 
 public sealed class ElevatedRegistryAccessorTests
@@ -25,7 +25,7 @@ public sealed class ElevatedRegistryAccessorTests
         var reference = new RegistryValueReference(
             RegistryHive.CurrentUser,
             RegistryView.Default,
-            "Software\\OpenTraceProject",
+            "Software\\RegProbe",
             "TestValue");
 
         var result = await accessor.ReadValueAsync(reference, CancellationToken.None);
@@ -46,7 +46,7 @@ public sealed class ElevatedRegistryAccessorTests
         var reference = new RegistryValueReference(
             RegistryHive.CurrentUser,
             RegistryView.Default,
-            "Software\\OpenTraceProject",
+            "Software\\RegProbe",
             "TestValue");
 
         await Assert.ThrowsAsync<ElevatedHostException>(() => accessor.SetValueAsync(
@@ -91,7 +91,7 @@ public sealed class ElevatedRegistryAccessorTests
         var reference = new RegistryValueReference(
             RegistryHive.CurrentUser,
             RegistryView.Default,
-            "Software\\OpenTraceProject",
+            "Software\\RegProbe",
             "TestValue");
 
         await accessor.DeleteValueAsync(reference, CancellationToken.None);
@@ -140,7 +140,7 @@ public sealed class ElevatedRegistryAccessorTests
         var reference = new RegistryValueReference(
             RegistryHive.CurrentUser,
             RegistryView.Default,
-            @"Software\OpenTraceProject",
+            @"Software\RegProbe",
             "TestValue");
 
         await accessor.SetValueAsync(
@@ -169,7 +169,7 @@ public sealed class ElevatedRegistryAccessorTests
         var reference = new RegistryValueReference(
             RegistryHive.CurrentUser,
             RegistryView.Default,
-            @"Software\OpenTraceProject",
+            @"Software\RegProbe",
             "TestValue");
 
         await accessor.DeleteValueAsync(reference, CancellationToken.None);

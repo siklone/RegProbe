@@ -19,7 +19,7 @@ _HOME = Path.home()
 _ALT_REPO_ROOTS = {
     REPO_ROOT,
     REPO_ROOT.resolve(),
-    REPO_ROOT.parent / "Open-Trace-Project",
+    REPO_ROOT.parent / "RegProbe",
 }
 KNOWN_REPO_ROOTS = [root for root in _ALT_REPO_ROOTS if root.exists()]
 

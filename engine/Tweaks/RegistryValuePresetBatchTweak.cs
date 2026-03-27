@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Registry;
+using RegProbe.Core;
+using RegProbe.Core.Registry;
 
-namespace OpenTraceProject.Engine.Tweaks;
+namespace RegProbe.Engine.Tweaks;
 
 public sealed class RegistryValuePresetBatchTweak : ITweak, IChoiceTweak
 {

@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.App.HardwareDb;
+namespace RegProbe.App.HardwareDb;
 
 public sealed class HardwareDbUpdater
 {

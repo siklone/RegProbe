@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
 
-namespace OpenTraceProject.Infrastructure.Hardware;
+namespace RegProbe.Infrastructure.Hardware;
 
 /// <summary>
 /// Identifies hardware components using multiple methods.

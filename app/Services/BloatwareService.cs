@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
-using OpenTraceProject.App.Models;
+using RegProbe.App.Models;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Service for managing UWP/AppX packages with PowerShell and safety checks.

@@ -1,4 +1,4 @@
-namespace OpenTraceProject.Infrastructure;
+namespace RegProbe.Infrastructure;
 
 public enum LogLevel
 {

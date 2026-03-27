@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Plugins.DevTools;
+namespace RegProbe.Plugins.DevTools;
 
 /// <summary>
 /// Checks SSH key configuration and provides recommendations.

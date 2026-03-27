@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 
-namespace OpenTraceProject.Infrastructure.Processes;
+namespace RegProbe.Infrastructure.Processes;
 
 /// <summary>
 /// Manages CPU affinity for processes.

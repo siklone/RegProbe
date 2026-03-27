@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Core.Services;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Engine.Tweaks.Commands.Cleanup;
-using OpenTraceProject.Engine.Tweaks.Misc;
+using RegProbe.Core;
+using RegProbe.Core.Registry;
+using RegProbe.Core.Services;
+using RegProbe.Engine;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Commands.Cleanup;
+using RegProbe.Engine.Tweaks.Misc;
 
-namespace OpenTraceProject.App.Services.TweakProviders;
+namespace RegProbe.App.Services.TweakProviders;
 
 public sealed class MiscTweakProvider : BaseTweakProvider
 {

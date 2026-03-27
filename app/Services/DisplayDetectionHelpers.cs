@@ -4,10 +4,10 @@ using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
-using OpenTraceProject.App.HardwareDb;
-using OpenTraceProject.App.ViewModels;
+using RegProbe.App.HardwareDb;
+using RegProbe.App.ViewModels;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 internal static class DisplayDetectionHelpers
 {

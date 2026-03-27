@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Files;
+using RegProbe.Core.Files;
 
-namespace OpenTraceProject.ElevatedHost;
+namespace RegProbe.ElevatedHost;
 
 internal sealed class LocalFileSystemAccessor : IFileSystemAccessor
 {

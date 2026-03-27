@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.Infrastructure;
-using OpenTraceProject.Infrastructure.Elevation;
-using CoreServiceStartMode = OpenTraceProject.Core.Services.ServiceStartMode;
-using IServiceManager = OpenTraceProject.Core.Services.IServiceManager;
+using RegProbe.App.Services;
+using RegProbe.Infrastructure;
+using RegProbe.Infrastructure.Elevation;
+using CoreServiceStartMode = RegProbe.Core.Services.ServiceStartMode;
+using IServiceManager = RegProbe.Core.Services.IServiceManager;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class ServiceManagementPanelViewModel : ViewModelBase
 {

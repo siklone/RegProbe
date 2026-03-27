@@ -1,6 +1,6 @@
-# Open Trace Project
+# RegProbe
 
-Open Trace Project is a .NET 8 desktop app for Windows 10/11. It focuses on safe, reversible tweaks, hardware details, and documented system research.
+RegProbe is a .NET 8 desktop app for Windows 10/11. It focuses on safe, reversible tweaks, hardware details, and documented system research.
 
 The project is for people who want more than a random "FPS boost" script:
 
@@ -151,14 +151,14 @@ Things this project does not do under SAFE:
 ### Clone
 
 ```powershell
-git clone https://github.com/siklone/Open-Trace-Project.git
-cd Open-Trace-Project
+git clone https://github.com/siklone/RegProbe.git
+cd RegProbe
 ```
 
 ### Build
 
 ```powershell
-dotnet build OpenTraceProject.sln
+dotnet build RegProbe.sln
 ```
 
 ### Run the app
@@ -196,7 +196,7 @@ Admin-required operations are delegated to `elevated-host`, which is resolved by
 - optional override through:
 
 ```powershell
-$env:OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH = "C:\path\to\OpenTraceProject.ElevatedHost.exe"
+$env:REGPROBE_ELEVATED_HOST_PATH = "C:\path\to\RegProbe.ElevatedHost.exe"
 ```
 
 ## Utility Scripts

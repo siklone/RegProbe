@@ -1,9 +1,9 @@
 using System;
 using System.Windows.Input;
 using System.Windows.Media;
-using OpenTraceProject.App.Services;
+using RegProbe.App.Services;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class InstallRecommendationItemViewModel
 {

@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using OpenTraceProject.App.Models;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.Utilities;
+using RegProbe.App.Models;
+using RegProbe.App.Services;
+using RegProbe.App.Utilities;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class BloatwareViewModel : ViewModelBase
 {

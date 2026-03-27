@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.Core.Commands;
+namespace RegProbe.Core.Commands;
 
 public sealed record CommandResult(
     int ExitCode,

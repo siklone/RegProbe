@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public class BusyService : IBusyService
 {

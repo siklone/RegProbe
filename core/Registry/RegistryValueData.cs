@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using Microsoft.Win32;
 
-namespace OpenTraceProject.Core.Registry;
+namespace RegProbe.Core.Registry;
 
 public sealed record RegistryValueData(
     RegistryValueKind Kind,

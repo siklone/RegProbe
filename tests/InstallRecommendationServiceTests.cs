@@ -1,5 +1,5 @@
 using System.Linq;
-using OpenTraceProject.App.Services;
+using RegProbe.App.Services;
 
 public sealed class InstallRecommendationServiceTests
 {

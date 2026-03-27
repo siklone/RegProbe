@@ -1,7 +1,7 @@
 using System;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Infrastructure;
+namespace RegProbe.Infrastructure;
 
 public sealed record TweakLogEntry(
     DateTimeOffset Timestamp,

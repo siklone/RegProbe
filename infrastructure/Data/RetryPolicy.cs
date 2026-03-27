@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.Infrastructure.Data;
+namespace RegProbe.Infrastructure.Data;
 
 /// <summary>
 /// Defines retry behavior for data fetching operations.

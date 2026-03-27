@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Ensures only one instance of the application can run at a time.
@@ -18,8 +18,8 @@ namespace OpenTraceProject.App.Services;
 /// </summary>
 public sealed class SingleInstanceManager : IDisposable
 {
-    private const string MutexPrefix = "Global\\OpenTraceProject_SingleInstance";
-    private const string PipePrefix = "OpenTraceProject_IPC";
+    private const string MutexPrefix = "Global\\RegProbe_SingleInstance";
+    private const string PipePrefix = "RegProbe_IPC";
     private const int PipeConnectTimeoutMs = 3000;
     private const int MaxRetries = 3;
 
@@ -208,10 +208,10 @@ public sealed class SingleInstanceManager : IDisposable
     private static void ShowInstanceWarning()
     {
         MessageBox.Show(
-            "Open Trace Project is already running but not responding.\n\n" +
+            "RegProbe is already running but not responding.\n\n" +
             "Please close the existing instance using Task Manager,\n" +
             "or restart your computer if the problem persists.",
-            "Open Trace Project",
+            "RegProbe",
             MessageBoxButton.OK,
             MessageBoxImage.Warning);
     }

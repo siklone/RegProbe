@@ -1,9 +1,9 @@
 using System;
 using System.Collections.ObjectModel;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Commands;
+using RegProbe.Core;
+using RegProbe.Core.Commands;
 
-namespace OpenTraceProject.Engine.Tweaks.Commands.Performance;
+namespace RegProbe.Engine.Tweaks.Commands.Performance;
 
 public sealed class DisableSuperfetchTweak : CommandTweak
 {

@@ -1,7 +1,7 @@
 using System;
-using OpenTraceProject.Core.Registry;
+using RegProbe.Core.Registry;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public sealed record ElevatedRegistryRequest(
     Guid RequestId,

@@ -1,5 +1,5 @@
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Engine;
+namespace RegProbe.Engine;
 
 public sealed record TweakExecutionStep(TweakAction Action, TweakResult Result);

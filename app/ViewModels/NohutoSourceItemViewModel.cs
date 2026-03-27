@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using OpenTraceProject.App.Services;
+using RegProbe.App.Services;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class NohutoSourceItemViewModel
 {

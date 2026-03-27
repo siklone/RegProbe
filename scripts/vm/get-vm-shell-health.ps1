@@ -50,7 +50,7 @@ $checks = [ordered]@{
     sihost = [bool]($processText -match '\bsihost\.exe\b')
     shellhost = [bool]($processText -match '\bShellHost\.exe\b')
     ctfmon = [bool]($processText -match '\bctfmon\.exe\b')
-    app = [bool]($processText -match '\bOpenTraceProject\.App\.exe\b')
+    app = [bool]($processText -match '\bRegProbe\.App\.exe\b')
 }
 
 $result = [ordered]@{

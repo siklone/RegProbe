@@ -1,6 +1,6 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:services="clr-namespace:OpenTraceProject.App.Services">
+                    xmlns:services="clr-namespace:RegProbe.App.Services">
 
     <!-- Freezable helpers: make transforms non-shared so animations never hit frozen/shared instances -->
     <ScaleTransform x:Key="UiScaleTransform" x:Shared="False" ScaleX="1" ScaleY="1"/>

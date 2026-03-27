@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace OpenTraceProject.App.Converters;
+namespace RegProbe.App.Converters;
 
 /// <summary>
 /// Converts null to Collapsed, non-null to Visible.

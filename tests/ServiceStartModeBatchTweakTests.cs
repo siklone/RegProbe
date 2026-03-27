@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Core.Services;
+using RegProbe.Core;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Core.Services;
 using Xunit;
 
 public sealed class ServiceStartModeBatchTweakTests

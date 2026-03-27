@@ -1,7 +1,7 @@
-<Window x:Class="OpenTraceProject.App.StartupWindow"
+<Window x:Class="RegProbe.App.StartupWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Open Trace Project"
+        Title="RegProbe"
         Width="280"
         Height="108"
         WindowStyle="None"
@@ -22,7 +22,7 @@
                 BorderThickness="1"
                 CornerRadius="10">
             <StackPanel>
-                <TextBlock Text="Open Trace Project"
+                <TextBlock Text="RegProbe"
                            FontSize="18"
                            FontWeight="SemiBold"
                            FontFamily="{DynamicResource FontFamilyDisplay}"

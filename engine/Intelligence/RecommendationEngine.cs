@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using OpenTraceProject.Core.Intelligence;
-using OpenTraceProject.Core.Services;
+using RegProbe.Core.Intelligence;
+using RegProbe.Core.Services;
 
-namespace OpenTraceProject.Engine.Intelligence;
+namespace RegProbe.Engine.Intelligence;
 
 public sealed class RecommendationEngine : IRecommendationEngine
 {

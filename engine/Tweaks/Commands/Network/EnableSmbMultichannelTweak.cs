@@ -2,11 +2,11 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Commands;
-using OpenTraceProject.Engine.Tweaks.Commands;
+using RegProbe.Core;
+using RegProbe.Core.Commands;
+using RegProbe.Engine.Tweaks.Commands;
 
-namespace OpenTraceProject.Engine.Tweaks.Commands.Network;
+namespace RegProbe.Engine.Tweaks.Commands.Network;
 
 public sealed class EnableSmbMultichannelTweak : CommandTweak
 {

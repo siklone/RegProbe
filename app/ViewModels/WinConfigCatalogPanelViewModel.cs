@@ -7,12 +7,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using OpenTraceProject.App.Diagnostics;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.Utilities;
-using OpenTraceProject.Infrastructure;
+using RegProbe.App.Diagnostics;
+using RegProbe.App.Services;
+using RegProbe.App.Utilities;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class WinConfigCatalogPanelViewModel : ViewModelBase
 {

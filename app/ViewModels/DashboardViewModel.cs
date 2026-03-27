@@ -16,15 +16,15 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
-using OpenTraceProject.App.Models;
-using OpenTraceProject.App.Diagnostics;
-using OpenTraceProject.App.HardwareDb;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.Utilities;
-using OpenTraceProject.App.ViewModels.Hardware;
-using OpenTraceProject.Infrastructure;
+using RegProbe.App.Models;
+using RegProbe.App.Diagnostics;
+using RegProbe.App.HardwareDb;
+using RegProbe.App.Services;
+using RegProbe.App.Utilities;
+using RegProbe.App.ViewModels.Hardware;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 /// <summary>
 /// Comprehensive Dashboard showing detailed System Information similar to msinfo32.

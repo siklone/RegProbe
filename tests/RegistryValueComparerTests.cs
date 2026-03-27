@@ -1,5 +1,5 @@
 using Microsoft.Win32;
-using OpenTraceProject.Core.Registry;
+using RegProbe.Core.Registry;
 
 public sealed class RegistryValueComparerTests
 {

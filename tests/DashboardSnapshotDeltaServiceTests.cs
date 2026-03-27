@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using OpenTraceProject.App.Services;
+using RegProbe.App.Services;
 
 public sealed class DashboardSnapshotDeltaServiceTests
 {
@@ -56,7 +56,7 @@ public sealed class DashboardSnapshotDeltaServiceTests
     [Fact]
     public void UpdateAndSave_PersistsSnapshotAndReportsNoChangesOnSecondRun()
     {
-        var tempDirectory = Path.Combine(Path.GetTempPath(), "OpenTraceProject.Tests", Guid.NewGuid().ToString("N"));
+        var tempDirectory = Path.Combine(Path.GetTempPath(), "RegProbe.Tests", Guid.NewGuid().ToString("N"));
         var snapshotPath = Path.Combine(tempDirectory, "dashboard-snapshot.json");
 
         try

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Core.Plugins;
+namespace RegProbe.Core.Plugins;
 
 /// <summary>
 /// Securely loads and manages plugins

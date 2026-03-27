@@ -2,10 +2,10 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Infrastructure;
+using RegProbe.Infrastructure;
 using Xunit;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 /// <summary>
 /// Unit tests for RollbackStateStore.
@@ -21,7 +21,7 @@ public sealed class RollbackStateStoreTests : IDisposable
     public RollbackStateStoreTests()
     {
         // Create isolated test directory
-        _testDir = Path.Combine(Path.GetTempPath(), $"OpenTraceProjectTest_{Guid.NewGuid():N}");
+        _testDir = Path.Combine(Path.GetTempPath(), $"RegProbeTest_{Guid.NewGuid():N}");
         Directory.CreateDirectory(_testDir);
         
         _paths = new AppPaths(_testDir);

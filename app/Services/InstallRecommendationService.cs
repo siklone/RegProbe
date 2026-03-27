@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.Win32;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public sealed class InstallRecommendationService
 {

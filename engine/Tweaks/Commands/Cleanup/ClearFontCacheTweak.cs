@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Engine.Tweaks.Commands.Cleanup;
+namespace RegProbe.Engine.Tweaks.Commands.Cleanup;
 
 public sealed class ClearFontCacheTweak : FileCleanupTweak
 {

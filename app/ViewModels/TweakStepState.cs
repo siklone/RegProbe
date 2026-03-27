@@ -1,4 +1,4 @@
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public enum TweakStepState
 {

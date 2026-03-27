@@ -1,6 +1,6 @@
-using OpenTraceProject.App.Services;
+using RegProbe.App.Services;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class WinConfigCatalogParserTests
 {

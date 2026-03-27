@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine.Tweaks;
+using RegProbe.Core;
+using RegProbe.Engine.Tweaks;
 using Xunit;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 /// <summary>
 /// Unit tests for CompositeTweak - a tweak that aggregates multiple sub-tweaks.

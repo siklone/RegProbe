@@ -1,9 +1,9 @@
-using OpenTraceProject.Core.Commands;
-using OpenTraceProject.Core.Files;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Core.Tasks;
+using RegProbe.Core.Commands;
+using RegProbe.Core.Files;
+using RegProbe.Core.Registry;
+using RegProbe.Core.Tasks;
 
-namespace OpenTraceProject.Core.Services;
+namespace RegProbe.Core.Services;
 
 public sealed record TweakContext(
     IRegistryAccessor LocalRegistry,

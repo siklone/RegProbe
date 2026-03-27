@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Media;
-using OpenTraceProject.App.HardwareDb.Models;
+using RegProbe.App.HardwareDb.Models;
 
-namespace OpenTraceProject.App.HardwareDb;
+namespace RegProbe.App.HardwareDb;
 
 public static class HardwareIconResolver
 {

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using OpenTraceProject.Core.Services;
+using RegProbe.Core.Services;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public sealed record ElevatedServiceResponse(
     Guid RequestId,

@@ -6,10 +6,10 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.Core.Commands;
-using OpenTraceProject.Core.Registry;
+using RegProbe.Core.Commands;
+using RegProbe.Core.Registry;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public sealed class ElevatedRegistryAccessor : IRegistryAccessor
 {

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Infrastructure.Data;
+namespace RegProbe.Infrastructure.Data;
 
 /// <summary>
 /// Provides data fetching with multiple sources and graceful fallbacks.

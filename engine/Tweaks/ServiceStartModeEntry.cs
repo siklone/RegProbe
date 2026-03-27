@@ -1,6 +1,6 @@
-using OpenTraceProject.Core.Services;
+using RegProbe.Core.Services;
 
-namespace OpenTraceProject.Engine.Tweaks;
+namespace RegProbe.Engine.Tweaks;
 
 public sealed record ServiceStartModeEntry(
     string ServiceName,

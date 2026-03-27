@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 
-namespace OpenTraceProject.App.Services.OsDetection;
+namespace RegProbe.App.Services.OsDetection;
 
 public sealed class RegistryOsProvider
 {

@@ -1,7 +1,7 @@
 using System;
-using OpenTraceProject.Core.Commands;
+using RegProbe.Core.Commands;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public sealed record ElevatedCommandResponse(
     Guid RequestId,

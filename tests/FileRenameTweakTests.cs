@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Core.Files;
+using RegProbe.Core;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Core.Files;
 using Xunit;
 
 public sealed class FileRenameTweakTests

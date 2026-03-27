@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Tasks;
+using RegProbe.Core.Tasks;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public sealed class ElevatedScheduledTaskManager : IScheduledTaskManager
 {

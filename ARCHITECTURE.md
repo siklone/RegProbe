@@ -2,7 +2,7 @@
 
 ## Overview
 
-Open Trace Project follows a clean, layered architecture with clear separation of concerns.
+RegProbe follows a clean, layered architecture with clear separation of concerns.
 
 ## Layer Diagram
 
@@ -89,8 +89,8 @@ public interface ITweakProvider
 **Executable Discovery**:
 - The app is not always-admin; admin-required operations run via ElevatedHost.
 - The UI resolves the ElevatedHost path via `app/Utilities/ElevatedHostLocator.cs`.
-- You can override discovery with the env var `OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH`.
-- Recommended publish layout: `app/.../win-x64/ElevatedHost/OpenTraceProject.ElevatedHost.exe`.
+- You can override discovery with the env var `REGPROBE_ELEVATED_HOST_PATH`.
+- Recommended publish layout: `app/.../win-x64/ElevatedHost/RegProbe.ElevatedHost.exe`.
 
 ## Design Patterns
 

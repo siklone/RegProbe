@@ -1,4 +1,4 @@
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public enum ElevatedHostRequestType
 {

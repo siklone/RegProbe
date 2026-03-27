@@ -1,4 +1,4 @@
-using OpenTraceProject.App.Services;
+using RegProbe.App.Services;
 
 public sealed class ConfigurationWorkspaceClassifierTests
 {

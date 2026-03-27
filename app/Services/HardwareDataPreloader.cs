@@ -9,11 +9,11 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.App.HardwareDb;
-using OpenTraceProject.App.Services.Hardware;
-using OpenTraceProject.App.Services.OsDetection;
+using RegProbe.App.HardwareDb;
+using RegProbe.App.Services.Hardware;
+using RegProbe.App.Services.OsDetection;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public interface IHardwareDataPreloader
 {
@@ -25,8 +25,8 @@ public interface IHardwareDataPreloader
 public sealed class HardwareDataPreloader : IHardwareDataPreloader
 {
     private readonly IMetricCacheService _cache;
-    private readonly OpenTraceProject.App.Services.OsDetection.IOsDetectionService _osService;
-    private readonly OpenTraceProject.App.Services.Hardware.IMotherboardProvider _motherboardProvider;
+    private readonly RegProbe.App.Services.OsDetection.IOsDetectionService _osService;
+    private readonly RegProbe.App.Services.Hardware.IMotherboardProvider _motherboardProvider;
 
     private bool _isPreloadComplete;
     private DateTime? _lastPreloadTime;
@@ -36,8 +36,8 @@ public sealed class HardwareDataPreloader : IHardwareDataPreloader
 
     public HardwareDataPreloader(
         IMetricCacheService cache,
-        OpenTraceProject.App.Services.OsDetection.IOsDetectionService osService,
-        OpenTraceProject.App.Services.Hardware.IMotherboardProvider motherboardProvider)
+        RegProbe.App.Services.OsDetection.IOsDetectionService osService,
+        RegProbe.App.Services.Hardware.IMotherboardProvider motherboardProvider)
     {
         _cache = cache;
         _osService = osService;

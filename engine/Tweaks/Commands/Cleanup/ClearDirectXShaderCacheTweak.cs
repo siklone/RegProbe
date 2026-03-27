@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Engine.Tweaks.Commands.Cleanup;
+namespace RegProbe.Engine.Tweaks.Commands.Cleanup;
 
 public sealed class ClearDirectXShaderCacheTweak : FileCleanupTweak
 {

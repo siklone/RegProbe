@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Infrastructure;
+using RegProbe.Core;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.Engine;
+namespace RegProbe.Engine;
 
 public sealed class TweakExecutionPipeline
 {

@@ -36,7 +36,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$GuestScriptPath" -Shar
 $registerScript = @"
 `$action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-NoProfile -ExecutionPolicy Bypass -File "$GuestScriptPath" -SharedRoot "$SharedRootGuest"'
 `$trigger = New-ScheduledTaskTrigger -AtStartup
-Register-ScheduledTask -TaskName 'OpenTraceProjectValidationAgent' -Action `$action -Trigger `$trigger -User 'SYSTEM' -RunLevel Highest -Force
+Register-ScheduledTask -TaskName 'RegProbeValidationAgent' -Action `$action -Trigger `$trigger -User 'SYSTEM' -RunLevel Highest -Force
 "@
 
 $tempRegister = Join-Path $env:TEMP 'register-guest-validation-agent.ps1'

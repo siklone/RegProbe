@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Registry;
+using RegProbe.Core;
+using RegProbe.Core.Registry;
 
-namespace OpenTraceProject.Engine.Tweaks.Power;
+namespace RegProbe.Engine.Tweaks.Power;
 
 public static class NetworkAdapterPowerTweaks
 {

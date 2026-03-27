@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Registry;
+using RegProbe.Core.Registry;
 
-namespace OpenTraceProject.Infrastructure.Registry;
+namespace RegProbe.Infrastructure.Registry;
 
 /// <summary>
 /// Uses a local accessor for reads and an elevated accessor for writes/deletes.

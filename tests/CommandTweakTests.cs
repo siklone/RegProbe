@@ -4,19 +4,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using Moq;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine.Tweaks.Commands.Power;
-using OpenTraceProject.Engine.Tweaks.Commands.Cleanup;
-using OpenTraceProject.Engine.Tweaks.Commands.Network;
-using OpenTraceProject.Engine.Tweaks.Commands.Privacy;
-using OpenTraceProject.Engine.Tweaks.Commands.RegistryOps;
-using OpenTraceProject.Engine.Tweaks.Commands.Security;
-using OpenTraceProject.Core.Commands;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Engine.Tweaks;
+using RegProbe.Core;
+using RegProbe.Engine.Tweaks.Commands.Power;
+using RegProbe.Engine.Tweaks.Commands.Cleanup;
+using RegProbe.Engine.Tweaks.Commands.Network;
+using RegProbe.Engine.Tweaks.Commands.Privacy;
+using RegProbe.Engine.Tweaks.Commands.RegistryOps;
+using RegProbe.Engine.Tweaks.Commands.Security;
+using RegProbe.Core.Commands;
+using RegProbe.Core.Registry;
+using RegProbe.Engine.Tweaks;
 using Xunit;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class CommandTweakTests
 {

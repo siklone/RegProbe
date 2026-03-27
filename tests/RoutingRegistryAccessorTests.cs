@@ -3,10 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using Moq;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Infrastructure.Registry;
+using RegProbe.Core.Registry;
+using RegProbe.Infrastructure.Registry;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class RoutingRegistryAccessorTests
 {

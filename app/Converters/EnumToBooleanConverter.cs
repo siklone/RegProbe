@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace OpenTraceProject.App.Converters;
+namespace RegProbe.App.Converters;
 
 /// <summary>
 /// Converts an Enum (or string) to Boolean based on a parameter.

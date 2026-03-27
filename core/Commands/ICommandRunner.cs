@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Core.Commands;
+namespace RegProbe.Core.Commands;
 
 public interface ICommandRunner
 {

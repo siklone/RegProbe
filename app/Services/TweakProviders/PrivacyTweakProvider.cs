@@ -4,15 +4,15 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Core.Services;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Engine.Tweaks.Commands.Privacy;
-using OpenTraceProject.Engine.Tweaks.Misc;
+using RegProbe.Core;
+using RegProbe.Core.Registry;
+using RegProbe.Core.Services;
+using RegProbe.Engine;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Commands.Privacy;
+using RegProbe.Engine.Tweaks.Misc;
 
-namespace OpenTraceProject.App.Services.TweakProviders;
+namespace RegProbe.App.Services.TweakProviders;
 
 public sealed class PrivacyTweakProvider : BaseTweakProvider
 {

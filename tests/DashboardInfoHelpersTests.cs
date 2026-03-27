@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
-using OpenTraceProject.App.ViewModels;
+using RegProbe.App.ViewModels;
 using Xunit;
 
 public sealed class DashboardInfoHelpersTests

@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace OpenTraceProject.App.Views;
+namespace RegProbe.App.Views;
 
 public partial class BloatwareView : UserControl
 {

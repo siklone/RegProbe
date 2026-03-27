@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using OpenTraceProject.Infrastructure;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class TweakInventoryStateStoreTests
 {

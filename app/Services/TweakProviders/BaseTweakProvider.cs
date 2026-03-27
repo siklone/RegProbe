@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Core.Services;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Engine.Services;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Engine.Tweaks.Commands.RegistryOps;
+using RegProbe.Core;
+using RegProbe.Core.Registry;
+using RegProbe.Core.Services;
+using RegProbe.Engine;
+using RegProbe.Engine.Services;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Commands.RegistryOps;
 using Microsoft.Win32;
 
-namespace OpenTraceProject.App.Services.TweakProviders;
+namespace RegProbe.App.Services.TweakProviders;
 
 /// <summary>
 /// Wrapper that adds documentation metadata to any ITweak.

@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.App.Services.OsDetection;
+namespace RegProbe.App.Services.OsDetection;
 
 public sealed class OsInfo
 {

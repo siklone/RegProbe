@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Engine;
+namespace RegProbe.Engine;
 
 public sealed record TweakExecutionReport(
     string TweakId,

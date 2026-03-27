@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 /// <summary>
 /// Represents a collapsible category group containing tweaks.
@@ -250,7 +250,7 @@ public sealed class CategoryGroupViewModel : ViewModelBase
     {
         try
         {
-            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "OpenTraceProject_Diagnostics.log");
+            var logPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "RegProbe_Diagnostics.log");
             var timestamp = System.DateTime.Now.ToString("HH:mm:ss.fff");
             System.IO.File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
         }

@@ -5,7 +5,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Implementation of INotificationService that displays toast notifications.

@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class PriorityCalculatorViewModel : ViewModelBase
 {

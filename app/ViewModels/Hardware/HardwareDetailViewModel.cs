@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using OpenTraceProject.App.HardwareDb;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.ViewModels;
-using OpenTraceProject.App.Models;
-using OpenTraceProject.App.Diagnostics;
-using OpenTraceProject.App.HardwareDb.Models;
+using RegProbe.App.HardwareDb;
+using RegProbe.App.Services;
+using RegProbe.App.ViewModels;
+using RegProbe.App.Models;
+using RegProbe.App.Diagnostics;
+using RegProbe.App.HardwareDb.Models;
 
-namespace OpenTraceProject.App.ViewModels.Hardware;
+namespace RegProbe.App.ViewModels.Hardware;
 
 public abstract class HardwareDetailViewModelBase : ViewModelBase, IDisposable
 {

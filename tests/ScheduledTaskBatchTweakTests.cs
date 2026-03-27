@@ -2,9 +2,9 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Moq;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Tasks;
-using OpenTraceProject.Engine.Tweaks;
+using RegProbe.Core;
+using RegProbe.Core.Tasks;
+using RegProbe.Engine.Tweaks;
 
 public sealed class ScheduledTaskBatchTweakTests
 {

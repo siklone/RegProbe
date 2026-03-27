@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Infrastructure;
+using RegProbe.Core;
+using RegProbe.Engine;
+using RegProbe.Infrastructure;
 using Xunit;
 
 public sealed class TweakExecutionPipelineTests

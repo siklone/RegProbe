@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace OpenTraceProject.Core.Commands;
+namespace RegProbe.Core.Commands;
 
 public sealed record CommandRequest(
     string Executable,

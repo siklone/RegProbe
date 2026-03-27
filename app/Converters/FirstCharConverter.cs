@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace OpenTraceProject.App.Converters;
+namespace RegProbe.App.Converters;
 
 /// <summary>
 /// Converts a string to its first character (for icon placeholders).

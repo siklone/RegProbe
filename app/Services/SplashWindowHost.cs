@@ -2,9 +2,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using OpenTraceProject.App.ViewModels;
+using RegProbe.App.ViewModels;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 internal sealed class SplashWindowHost : IDisposable
 {

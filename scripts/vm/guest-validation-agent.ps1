@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$SharedRoot,
 
-    [string]$TaskName = 'OpenTraceProjectValidationAgent'
+    [string]$TaskName = 'RegProbeValidationAgent'
 )
 
 $ErrorActionPreference = 'Stop'

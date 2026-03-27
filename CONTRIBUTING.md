@@ -1,4 +1,4 @@
-# Contributing to Open Trace Project
+# Contributing to RegProbe
 
 Thank you for your interest in contributing! This document provides guidelines and instructions.
 
@@ -13,8 +13,8 @@ Thank you for your interest in contributing! This document provides guidelines a
 ### 1. Fork and Clone
 
 ```bash
-git clone https://github.com/siklone/Open-Trace-Project.git
-cd Open-Trace-Project
+git clone https://github.com/siklone/RegProbe.git
+cd RegProbe
 ```
 
 ### 2. Sync `main`
@@ -103,10 +103,10 @@ dotnet run --project app/app.csproj
 
 ### Debug
 
-Open `OpenTraceProject.sln` in Visual Studio and press F5.
+Open `RegProbe.sln` in Visual Studio and press F5.
 
 > Tip: If you run from `dotnet run` and the app can't find the ElevatedHost binary, set the env var:
-> `OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH=C:\\path\\to\\OpenTraceProject.ElevatedHost.exe`
+> `REGPROBE_ELEVATED_HOST_PATH=C:\\path\\to\\RegProbe.ElevatedHost.exe`
 
 ## Adding New Tweaks
 

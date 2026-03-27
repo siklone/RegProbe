@@ -1,18 +1,18 @@
 using System.Linq;
 using Moq;
 using Microsoft.Win32;
-using OpenTraceProject.App.Services.TweakProviders;
-using OpenTraceProject.Core.Commands;
-using OpenTraceProject.Core.Files;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Core.Services;
-using OpenTraceProject.Core.Tasks;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Engine.Tweaks.Commands.RegistryOps;
+using RegProbe.App.Services.TweakProviders;
+using RegProbe.Core.Commands;
+using RegProbe.Core.Files;
+using RegProbe.Core.Registry;
+using RegProbe.Core.Services;
+using RegProbe.Core.Tasks;
+using RegProbe.Engine;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Commands.RegistryOps;
 using Xunit;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class NohutoCoverageTweakProviderTests
 {

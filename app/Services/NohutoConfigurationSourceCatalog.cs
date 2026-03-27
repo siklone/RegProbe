@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public sealed class NohutoRepositoryDefinition
 {

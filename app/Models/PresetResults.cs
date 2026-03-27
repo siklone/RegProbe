@@ -1,4 +1,4 @@
-namespace OpenTraceProject.App.Models;
+namespace RegProbe.App.Models;
 
 /// <summary>
 /// Result of applying a preset.

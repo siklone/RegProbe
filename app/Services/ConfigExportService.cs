@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Infrastructure;
+using RegProbe.Core;
+using RegProbe.Engine;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Service for exporting and importing application configuration.

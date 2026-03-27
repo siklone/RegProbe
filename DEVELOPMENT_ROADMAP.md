@@ -2,7 +2,7 @@
 
 > Archived note (2026-03-24): this roadmap contains historical design work for a telemetry-heavy surface that is no longer part of the shipped app. Keep it as background only; the current product direction is tweak workflow, hardware details, and evidence-backed validation.
 
-**Project:** Open Trace Project
+**Project:** RegProbe
 **Created:** January 19, 2026
 **Status:** APPROVED - Ready for Implementation
 
@@ -27,7 +27,7 @@
 
 ## Executive Summary
 
-This roadmap outlines major architectural improvements to the Open Trace Project application, focusing on:
+This roadmap outlines major architectural improvements to the RegProbe application, focusing on:
 
 - **Single Instance Enforcement**: Only one app instance can run at a time
 - **Multi-threaded Architecture**: Dedicated worker threads for responsiveness on multi-core CPUs
@@ -48,8 +48,8 @@ This roadmap outlines major architectural improvements to the Open Trace Project
 
 public sealed class SingleInstanceManager : IDisposable
 {
-    private const string MutexName = "Global\\OpenTraceProject_SingleInstance_v2";
-    private const string PipeName = "OpenTraceProject_IPC_v2";
+    private const string MutexName = "Global\\RegProbe_SingleInstance_v2";
+    private const string PipeName = "RegProbe_IPC_v2";
 
     private Mutex? _mutex;
     private NamedPipeServerStream? _pipeServer;
@@ -148,7 +148,7 @@ public sealed class SingleInstanceManager : IDisposable
             MessageBox.Show(
                 "Another instance appears to be running but not responding.\n" +
                 "Please close it manually or restart your computer.",
-                "Open Trace Project",
+                "RegProbe",
                 MessageBoxButton.OK,
                 MessageBoxImage.Warning);
         }
@@ -746,7 +746,7 @@ public class PreloadErrorRecovery
 
 ```sql
 -- Hardware Specs Database
--- Location: %APPDATA%/OpenTraceProject/hardware.db
+-- Location: %APPDATA%/RegProbe/hardware.db
 
 CREATE TABLE IF NOT EXISTS cpu_specs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -1040,7 +1040,7 @@ public class HardwareDatabase
     {
         var dbPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "OpenTraceProject", "hardware.db");
+            "RegProbe", "hardware.db");
 
         Directory.CreateDirectory(Path.GetDirectoryName(dbPath)!);
 
@@ -1369,7 +1369,7 @@ public class CpuDataProvider
 ```xml
 <!-- app/Views/Components/HardwareCardView.xaml -->
 
-<UserControl x:Class="OpenTraceProject.App.Views.Components.HardwareCardView"
+<UserControl x:Class="RegProbe.App.Views.Components.HardwareCardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
@@ -1716,7 +1716,7 @@ public class GpuCardViewModel : HardwareCardViewModelBase
 ```xml
 <!-- app/Views/HardwareDetailsView.xaml (Redesigned) -->
 
-<UserControl x:Class="OpenTraceProject.App.Views.HardwareDetailsView">
+<UserControl x:Class="RegProbe.App.Views.HardwareDetailsView">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>  <!-- Header -->

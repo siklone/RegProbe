@@ -1,8 +1,8 @@
-#define MyAppName "Open Trace Project"
+#define MyAppName "RegProbe"
 #define MyAppVersion "1.0.0"
-#define MyAppPublisher "Open Trace Project"
-#define MyAppURL "https://github.com/siklone/Open-Trace-Project"
-#define MyAppExeName "OpenTraceProject.App.exe"
+#define MyAppPublisher "RegProbe"
+#define MyAppURL "https://github.com/siklone/RegProbe"
+#define MyAppExeName "RegProbe.App.exe"
 
 [Setup]
 AppId={{B8E7C3D0-1234-5678-9ABC-DEF012345678}
@@ -18,7 +18,7 @@ AllowNoIcons=yes
 LicenseFile=license.txt
 PrivilegesRequired=admin
 OutputDir=output
-OutputBaseFilename=OpenTraceProject_Setup_{#MyAppVersion}
+OutputBaseFilename=RegProbe_Setup_{#MyAppVersion}
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
@@ -56,7 +56,7 @@ begin
   Result := True;
   if not RegKeyExists(HKLM, 'SOFTWARE\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App\8.0.0') then
   begin
-    if MsgBox('Open Trace Project requires .NET 8 Desktop Runtime.' + #13#10 +
+    if MsgBox('RegProbe requires .NET 8 Desktop Runtime.' + #13#10 +
               'Would you like to download it now?', mbConfirmation, MB_YESNO) = IDYES then
     begin
       ShellExec('open', 'https://dotnet.microsoft.com/download/dotnet/8.0', '', '', SW_SHOWNORMAL, ewNoWait, Result);

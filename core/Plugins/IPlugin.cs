@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Core.Plugins;
+namespace RegProbe.Core.Plugins;
 
 /// <summary>
-/// Base interface for all Open Trace Project plugins
+/// Base interface for all RegProbe plugins
 /// </summary>
 public interface IPlugin : IDisposable
 {

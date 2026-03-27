@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace OpenTraceProject.Infrastructure.Processes;
+namespace RegProbe.Infrastructure.Processes;
 
 /// <summary>
 /// Manages process priority levels.

@@ -1,4 +1,4 @@
-namespace OpenTraceProject.Engine;
+namespace RegProbe.Engine;
 
 public sealed class TweakExecutionOptions
 {

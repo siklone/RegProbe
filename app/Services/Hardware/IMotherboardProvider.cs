@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.App.Services.Hardware
+namespace RegProbe.App.Services.Hardware
 {
     public interface IMotherboardProvider
     {

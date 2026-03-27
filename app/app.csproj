@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <AssemblyName>OpenTraceProject.App</AssemblyName>
+    <AssemblyName>RegProbe.App</AssemblyName>
 
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>OpenTraceProject.Tests</_Parameter1>
+      <_Parameter1>RegProbe.Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 
@@ -207,7 +207,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <BundledPluginAssemblies Include="$(MSBuildProjectDirectory)\..\plugins-devtools\bin\$(Configuration)\$(TargetFramework)\OpenTraceProject.Plugins.DevTools.dll" Condition="Exists('$(MSBuildProjectDirectory)\..\plugins-devtools\bin\$(Configuration)\$(TargetFramework)\OpenTraceProject.Plugins.DevTools.dll')" />
+      <BundledPluginAssemblies Include="$(MSBuildProjectDirectory)\..\plugins-devtools\bin\$(Configuration)\$(TargetFramework)\RegProbe.Plugins.DevTools.dll" Condition="Exists('$(MSBuildProjectDirectory)\..\plugins-devtools\bin\$(Configuration)\$(TargetFramework)\RegProbe.Plugins.DevTools.dll')" />
     </ItemGroup>
 
     <MakeDir Directories="$(BundledPluginsDestinationDir)" />
@@ -220,7 +220,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <BundledPluginAssemblies Include="$(MSBuildProjectDirectory)\..\plugins-devtools\bin\$(Configuration)\$(TargetFramework)\OpenTraceProject.Plugins.DevTools.dll" Condition="Exists('$(MSBuildProjectDirectory)\..\plugins-devtools\bin\$(Configuration)\$(TargetFramework)\OpenTraceProject.Plugins.DevTools.dll')" />
+      <BundledPluginAssemblies Include="$(MSBuildProjectDirectory)\..\plugins-devtools\bin\$(Configuration)\$(TargetFramework)\RegProbe.Plugins.DevTools.dll" Condition="Exists('$(MSBuildProjectDirectory)\..\plugins-devtools\bin\$(Configuration)\$(TargetFramework)\RegProbe.Plugins.DevTools.dll')" />
     </ItemGroup>
 
     <MakeDir Directories="$(BundledPluginsDestinationDir)" />

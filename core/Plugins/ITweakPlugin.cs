@@ -1,4 +1,4 @@
-namespace OpenTraceProject.Core.Plugins;
+namespace RegProbe.Core.Plugins;
 
 public interface ITweakPlugin
 {

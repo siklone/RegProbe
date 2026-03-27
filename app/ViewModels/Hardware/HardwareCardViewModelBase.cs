@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
-namespace OpenTraceProject.App.ViewModels.Hardware;
+namespace RegProbe.App.ViewModels.Hardware;
 
 /// <summary>
 /// Base class for hardware card view models.

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace OpenTraceProject.App.Utilities;
+namespace RegProbe.App.Utilities;
 
 /// <summary>
 /// Manages application paths for both installed and portable modes.
@@ -76,7 +76,7 @@ public static class ApplicationPaths
 
         var appDataDir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "OpenTraceProject");
+            "RegProbe");
         EnsureDirectoryExists(appDataDir);
         return appDataDir;
     }

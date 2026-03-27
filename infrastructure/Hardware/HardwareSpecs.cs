@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.Infrastructure.Hardware;
+namespace RegProbe.Infrastructure.Hardware;
 
 public sealed record CpuSpecs
 {

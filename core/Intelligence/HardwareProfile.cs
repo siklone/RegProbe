@@ -1,4 +1,4 @@
-namespace OpenTraceProject.Core.Intelligence;
+namespace RegProbe.Core.Intelligence;
 
 /// <summary>
 /// Represents hardware profile information for recommendation engine.

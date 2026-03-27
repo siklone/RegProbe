@@ -198,7 +198,7 @@ function Get-ShellHealth {
         explorer = [bool]($processes -match '\bexplorer\.exe\b')
         sihost = [bool]($processes -match '\bsihost\.exe\b')
         shellhost = [bool]($processes -match '\bShellHost\.exe\b')
-        app = [bool]($processes -match '\bOpenTraceProject\.App\.exe\b')
+        app = [bool]($processes -match '\bRegProbe\.App\.exe\b')
         process_dump = $processes
     }
 }

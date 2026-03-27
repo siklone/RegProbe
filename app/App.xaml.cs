@@ -4,15 +4,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using OpenTraceProject.App.Diagnostics;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.Services.Hardware;
-using OpenTraceProject.App.Services.OsDetection;
-using OpenTraceProject.App.ViewModels;
-using OpenTraceProject.Infrastructure;
-using OpenTraceProject.Infrastructure.Hardware;
+using RegProbe.App.Diagnostics;
+using RegProbe.App.Services;
+using RegProbe.App.Services.Hardware;
+using RegProbe.App.Services.OsDetection;
+using RegProbe.App.ViewModels;
+using RegProbe.Infrastructure;
+using RegProbe.Infrastructure.Hardware;
 
-namespace OpenTraceProject.App;
+namespace RegProbe.App;
 
 public partial class App : Application
 {
@@ -256,7 +256,7 @@ public partial class App : Application
             {
                 MessageBox.Show(
                     $"Unexpected error: {e.Exception.Message}\n\nDetails were written to the application logs and CrashLogs.",
-                    "Open Trace Project",
+                    "RegProbe",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }

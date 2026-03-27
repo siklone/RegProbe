@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Input;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class RelayCommand : ICommand
 {

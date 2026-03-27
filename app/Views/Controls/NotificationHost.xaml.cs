@@ -1,9 +1,9 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using OpenTraceProject.App.Services;
+using RegProbe.App.Services;
 
-namespace OpenTraceProject.App.Views.Controls;
+namespace RegProbe.App.Views.Controls;
 
 /// <summary>
 /// Host control for displaying toast notifications.

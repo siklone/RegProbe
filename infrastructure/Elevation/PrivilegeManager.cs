@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public sealed class PrivilegeManager : IDisposable
 {

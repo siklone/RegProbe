@@ -1,8 +1,8 @@
 using System;
-using OpenTraceProject.App.Services.OsDetection;
-using OpenTraceProject.App.Services.Hardware;
+using RegProbe.App.Services.OsDetection;
+using RegProbe.App.Services.Hardware;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public static class AppServices
 {

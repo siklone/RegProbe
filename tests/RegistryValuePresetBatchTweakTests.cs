@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Infrastructure.Registry;
+using RegProbe.Core;
+using RegProbe.Core.Registry;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Infrastructure.Registry;
 using Xunit;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class RegistryValuePresetBatchTweakTests
 {
@@ -153,6 +153,6 @@ public sealed class RegistryValuePresetBatchTweakTests
 
     private static string BuildRootPath()
     {
-        return $@"Software\OpenTraceProject\Tests\RegistryValuePresetBatchTweak\{Guid.NewGuid():N}";
+        return $@"Software\RegProbe\Tests\RegistryValuePresetBatchTweak\{Guid.NewGuid():N}";
     }
 }

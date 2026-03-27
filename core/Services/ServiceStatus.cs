@@ -1,4 +1,4 @@
-namespace OpenTraceProject.Core.Services;
+namespace RegProbe.Core.Services;
 
 public enum ServiceStatus
 {

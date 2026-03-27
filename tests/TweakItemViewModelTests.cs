@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.App.ViewModels;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Infrastructure;
+using RegProbe.App.ViewModels;
+using RegProbe.Core;
+using RegProbe.Engine;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class TweakItemViewModelTests
 {

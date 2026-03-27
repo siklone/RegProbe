@@ -1,7 +1,7 @@
 # Development Status & Known Issues
 
 **Last Updated:** January 20, 2026
-**Project:** Open Trace Project - .NET 8 desktop app
+**Project:** RegProbe - .NET 8 desktop app
 **Branch:** main
 
 > Runtime validation is performed in the `Win25H2Clean` VMware VM. The host machine is reserved for source edits and offline preparation only. See `Docs/VM_WORKFLOW.md`.
@@ -387,7 +387,7 @@ var result = await preloader.RunAllAsync(ct);
 **Root Cause:**
 - Application was running on **Linux WSL2** (`uname -r` shows `6.6.87.2-microsoft-standard-WSL2`)
 - Power tweaks require:
-  1. **Elevated Host** (OpenTraceProject.ElevatedHost.exe) - Windows executable
+  1. **Elevated Host** (RegProbe.ElevatedHost.exe) - Windows executable
   2. **Windows Registry** (`HKEY_LOCAL_MACHINE`) - doesn't exist on Linux
   3. **Windows Named Pipes** - not compatible with Linux
 - `ElevatedHostClient` tried to connect for 30 seconds before giving up
@@ -414,7 +414,7 @@ var result = await preloader.RunAllAsync(ct);
 
 **Solution:**
 - Added `LogToFile()` helper methods to multiple ViewModels
-- Logs written to `%TEMP%\OpenTraceProject_Debug.log`
+- Logs written to `%TEMP%\RegProbe_Debug.log`
 - Tracks:
   - Navigation between pages
   - Category expansion/collapse
@@ -610,7 +610,7 @@ var result = await preloader.RunAllAsync(ct);
 
 **Solution:**
 - ElevatedHost path discovery now checks common publish layouts, RID folders, and dev bin outputs.
-- Env var override supported: `OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH`.
+- Env var override supported: `REGPROBE_ELEVATED_HOST_PATH`.
 - Tweaks page shows a clear warning banner if the host executable is missing.
 
 **Files Changed:**
@@ -1144,7 +1144,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 - Build/publish configuration might still fail to copy the ElevatedHost into the app output directory.
 
 **Recommendation:**
-- Verify ElevatedHost exists in the publish output (`ElevatedHost/OpenTraceProject.ElevatedHost.exe`)
+- Verify ElevatedHost exists in the publish output (`ElevatedHost/RegProbe.ElevatedHost.exe`)
 - Add a post-build/publish copy step if missing (and/or CI check)
 - Consider a startup health check in addition to the Tweaks page banner
 
@@ -1274,7 +1274,7 @@ CPU speed and GPU memory totals were also inaccurate on some systems.
 
 - [x] **Warn when ElevatedHost is missing**
   - Tweaks page shows a warning banner when the host executable isn't found
-  - Remaining work: ensure publish output copies `ElevatedHost/OpenTraceProject.ElevatedHost.exe` reliably (CI/build step)
+  - Remaining work: ensure publish output copies `ElevatedHost/RegProbe.ElevatedHost.exe` reliably (CI/build step)
 
 - [ ] **Implement Tweak State Persistence**
   - Save original values to durable storage before applying
@@ -1407,9 +1407,9 @@ Key recent commits (not exhaustive):
 
 If you encounter issues:
 
-1. Check `%TEMP%\OpenTraceProject_Debug.log` for detailed error messages
+1. Check `%TEMP%\RegProbe_Debug.log` for detailed error messages
 2. Ensure you're running on **Windows 10/11 native** (not WSL2)
-3. Check if `OpenTraceProject.ElevatedHost.exe` exists in the application directory
+3. Check if `RegProbe.ElevatedHost.exe` exists in the application directory
 4. Verify UAC is enabled and you can accept elevation prompts
 5. Open an issue on GitHub with:
    - OS version (`winver` output)

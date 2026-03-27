@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace OpenTraceProject.App.Diagnostics;
+namespace RegProbe.App.Diagnostics;
 
 public static class AppDiagnostics
 {
@@ -72,27 +72,27 @@ public static class AppDiagnostics
                             {
                                 File.AppendAllText(testFile, "test");
                                 File.Delete(testFile);
-                                logPath = Path.Combine(testDir, "OpenTraceProject_Diagnostics.log");
+                                logPath = Path.Combine(testDir, "RegProbe_Diagnostics.log");
                             }
                             catch
                             {
                                 // Not writable, fall back
-                                logPath = Path.Combine(AppContext.BaseDirectory, "OpenTraceProject_Diagnostics.log");
+                                logPath = Path.Combine(AppContext.BaseDirectory, "RegProbe_Diagnostics.log");
                             }
                         }
                         else
                         {
-                            logPath = Path.Combine(AppContext.BaseDirectory, "OpenTraceProject_Diagnostics.log");
+                            logPath = Path.Combine(AppContext.BaseDirectory, "RegProbe_Diagnostics.log");
                         }
                     }
                     catch
                     {
-                        logPath = Path.Combine(AppContext.BaseDirectory, "OpenTraceProject_Diagnostics.log");
+                        logPath = Path.Combine(AppContext.BaseDirectory, "RegProbe_Diagnostics.log");
                     }
                 }
                 else
                 {
-                    logPath = Path.Combine(AppContext.BaseDirectory, "OpenTraceProject_Diagnostics.log");
+                    logPath = Path.Combine(AppContext.BaseDirectory, "RegProbe_Diagnostics.log");
                 }
 
                 var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
@@ -123,7 +123,7 @@ public static class AppDiagnostics
                         // and capture the exception message for diagnosis.
                         try
                         {
-                            var marker = Path.Combine(AppContext.BaseDirectory, $"OpenTraceProject_Debug_write_error_{DateTime.Now:yyyyMMddHHmmssfff}.txt");
+                            var marker = Path.Combine(AppContext.BaseDirectory, $"RegProbe_Debug_write_error_{DateTime.Now:yyyyMMddHHmmssfff}.txt");
                             File.AppendAllText(marker, ex1 + "\n" + ex2 + "\n" + line);
                         }
                         catch

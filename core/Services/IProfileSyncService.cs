@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Core.Services;
+namespace RegProbe.Core.Services;
 
 public interface IProfileSyncService
 {

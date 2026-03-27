@@ -11,33 +11,33 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Intelligence;
-using OpenTraceProject.Core.Models;
-using OpenTraceProject.Core.Services;
-using OpenTraceProject.Infrastructure.Elevation;
-using OpenTraceProject.Infrastructure.Registry;
-using OpenTraceProject.Infrastructure.Services;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Engine.Services;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Engine.Tweaks.Commands.Power;
-using OpenTraceProject.Engine.Tweaks.Commands.Cleanup;
-using OpenTraceProject.Engine.Tweaks.Commands.Performance;
-using OpenTraceProject.Engine.Tweaks.Commands.Network;
-using OpenTraceProject.Engine.Tweaks.Commands.System;
-using OpenTraceProject.Engine.Tweaks.Misc;
-using OpenTraceProject.Engine.Tweaks.Peripheral;
-using OpenTraceProject.Engine.Tweaks.Power;
-using OpenTraceProject.App.Utilities;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.Infrastructure;
-using OpenTraceProject.Core.Commands;
-using OpenTraceProject.Core.Files;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Core.Tasks;
+using RegProbe.Core;
+using RegProbe.Core.Intelligence;
+using RegProbe.Core.Models;
+using RegProbe.Core.Services;
+using RegProbe.Infrastructure.Elevation;
+using RegProbe.Infrastructure.Registry;
+using RegProbe.Infrastructure.Services;
+using RegProbe.Engine;
+using RegProbe.Engine.Services;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Engine.Tweaks.Commands.Power;
+using RegProbe.Engine.Tweaks.Commands.Cleanup;
+using RegProbe.Engine.Tweaks.Commands.Performance;
+using RegProbe.Engine.Tweaks.Commands.Network;
+using RegProbe.Engine.Tweaks.Commands.System;
+using RegProbe.Engine.Tweaks.Misc;
+using RegProbe.Engine.Tweaks.Peripheral;
+using RegProbe.Engine.Tweaks.Power;
+using RegProbe.App.Utilities;
+using RegProbe.App.Services;
+using RegProbe.Infrastructure;
+using RegProbe.Core.Commands;
+using RegProbe.Core.Files;
+using RegProbe.Core.Registry;
+using RegProbe.Core.Tasks;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class TweaksViewModel : ViewModelBase, IDisposable
 {
@@ -545,7 +545,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
 	public string ElevatedHostStatusMessage => IsElevatedHostAvailable
 		? string.Empty
-		: $"ElevatedHost not found. Expected at: {_elevatedHostExecutablePath}. Build OpenTraceProject.ElevatedHost or set {ElevatedHostDefaults.OverridePathEnvVar}.";
+		: $"ElevatedHost not found. Expected at: {_elevatedHostExecutablePath}. Build RegProbe.ElevatedHost or set {ElevatedHostDefaults.OverridePathEnvVar}.";
 
 	public ObservableCollection<TweakItemViewModel> Tweaks { get; }
 

@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using OpenTraceProject.App.Services;
+using RegProbe.App.Services;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class TweakProvenanceCatalogServiceTests : IDisposable
 {
@@ -12,7 +12,7 @@ public sealed class TweakProvenanceCatalogServiceTests : IDisposable
 
     public TweakProvenanceCatalogServiceTests()
     {
-        _rootDirectory = Path.Combine(Path.GetTempPath(), "OpenTraceProject-ProvenanceTests", Guid.NewGuid().ToString("N"));
+        _rootDirectory = Path.Combine(Path.GetTempPath(), "RegProbe-ProvenanceTests", Guid.NewGuid().ToString("N"));
         _docsRoot = Path.Combine(_rootDirectory, "Docs");
         Directory.CreateDirectory(Path.Combine(_docsRoot, "tweaks"));
 

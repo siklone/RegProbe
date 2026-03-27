@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public interface IMetricCacheService
 {

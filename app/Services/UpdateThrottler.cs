@@ -1,4 +1,4 @@
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Throttles UI updates to maintain 60 FPS (16.67ms frame budget).

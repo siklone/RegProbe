@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Services;
+using RegProbe.Core;
+using RegProbe.Core.Services;
 
-namespace OpenTraceProject.Engine.Services;
+namespace RegProbe.Engine.Services;
 
 public interface ITweakProvider
 {

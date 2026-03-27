@@ -9,9 +9,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Infrastructure;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public sealed class WinConfigCatalogCategory
 {
@@ -186,7 +186,7 @@ public sealed class WinConfigCatalogService : IDisposable
     {
         _paths = paths ?? throw new ArgumentNullException(nameof(paths));
         _httpClient = new HttpClient();
-        _httpClient.DefaultRequestHeaders.Add("User-Agent", "OpenTraceProject-WinConfigCatalog");
+        _httpClient.DefaultRequestHeaders.Add("User-Agent", "RegProbe-WinConfigCatalog");
         _httpClient.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
     }
 

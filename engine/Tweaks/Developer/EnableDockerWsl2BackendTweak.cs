@@ -4,9 +4,9 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Engine.Tweaks.Developer;
+namespace RegProbe.Engine.Tweaks.Developer;
 
 public sealed class EnableDockerWsl2BackendTweak : ITweak
 {

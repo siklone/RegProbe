@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 
-namespace OpenTraceProject.App.Utilities;
+namespace RegProbe.App.Utilities;
 
 /// <summary>
 /// Provides string interning/pooling to reduce memory usage for repeated strings.

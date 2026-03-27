@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace OpenTraceProject.App.HardwareDb;
+namespace RegProbe.App.HardwareDb;
 
 public static class HardwareNameNormalizer
 {

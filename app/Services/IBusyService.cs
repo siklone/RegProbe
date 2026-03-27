@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public interface IBusyService : INotifyPropertyChanged
 {

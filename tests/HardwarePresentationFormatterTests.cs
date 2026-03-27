@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using OpenTraceProject.App.Services;
+using RegProbe.App.Services;
 
 public sealed class HardwarePresentationFormatterTests
 {

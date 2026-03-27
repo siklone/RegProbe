@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using OpenTraceProject.App.Diagnostics;
-using OpenTraceProject.App.HardwareDb;
-using OpenTraceProject.App.Utilities;
+using RegProbe.App.Diagnostics;
+using RegProbe.App.HardwareDb;
+using RegProbe.App.Utilities;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public enum HardwareAuditSeverity
 {

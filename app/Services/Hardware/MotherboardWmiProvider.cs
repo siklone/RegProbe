@@ -6,7 +6,7 @@ using System.Management;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 
-namespace OpenTraceProject.App.Services.Hardware;
+namespace RegProbe.App.Services.Hardware;
 
 public sealed class MotherboardWmiProvider : IMotherboardProvider
 {

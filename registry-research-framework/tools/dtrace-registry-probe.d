@@ -1,4 +1,4 @@
 /*
-  Open Trace Project DTrace placeholder.
+  RegProbe DTrace placeholder.
   Define registry read probes here when DTrace is available in the VM lane.
 */

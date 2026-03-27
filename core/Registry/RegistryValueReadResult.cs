@@ -1,3 +1,3 @@
-namespace OpenTraceProject.Core.Registry;
+namespace RegProbe.Core.Registry;
 
 public sealed record RegistryValueReadResult(bool Exists, RegistryValueData? Value);

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Tasks;
+using RegProbe.Core;
+using RegProbe.Core.Tasks;
 
-namespace OpenTraceProject.Engine.Tweaks;
+namespace RegProbe.Engine.Tweaks;
 
 public sealed class ScheduledTaskBatchTweak : ITweak
 {

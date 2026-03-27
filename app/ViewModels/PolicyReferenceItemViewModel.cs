@@ -1,9 +1,9 @@
 using System;
 using System.Windows.Input;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.Utilities;
+using RegProbe.App.Services;
+using RegProbe.App.Utilities;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class PolicyReferenceItemViewModel
 {

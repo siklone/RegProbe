@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Engine.Tweaks;
+namespace RegProbe.Engine.Tweaks;
 
 public sealed class CompositeTweak : ITweak
 {

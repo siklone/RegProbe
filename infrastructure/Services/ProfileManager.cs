@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Models;
-using OpenTraceProject.Core.Services;
+using RegProbe.Core.Models;
+using RegProbe.Core.Services;
 
-namespace OpenTraceProject.Infrastructure.Services;
+namespace RegProbe.Infrastructure.Services;
 
 public sealed class ProfileManager : IProfileManager
 {
@@ -167,7 +167,7 @@ public sealed class ProfileManager : IProfileManager
         {
             Name = "Gaming Optimization",
             Description = "Optimized settings for gaming performance. Maximizes FPS, reduces input lag, and minimizes background interference.",
-            Author = "OpenTraceProject",
+            Author = "RegProbe",
             CreatedDate = DateTime.Now,
             Version = "1.0",
             SelectedTweakIds = tweakIds,
@@ -240,7 +240,7 @@ public sealed class ProfileManager : IProfileManager
         {
             Name = "Privacy Protection",
             Description = "Maximum privacy settings. Disables telemetry, tracking, and data collection features across Windows.",
-            Author = "OpenTraceProject",
+            Author = "RegProbe",
             CreatedDate = DateTime.Now,
             Version = "1.0",
             SelectedTweakIds = tweakIds,
@@ -307,7 +307,7 @@ public sealed class ProfileManager : IProfileManager
         {
             Name = "Performance Optimization",
             Description = "Comprehensive performance tweaks. Optimizes system responsiveness, reduces resource usage, and improves overall speed.",
-            Author = "OpenTraceProject",
+            Author = "RegProbe",
             CreatedDate = DateTime.Now,
             Version = "1.0",
             SelectedTweakIds = tweakIds,
@@ -362,7 +362,7 @@ public sealed class ProfileManager : IProfileManager
         {
             Name = "Minimal & Safe",
             Description = "Conservative tweaks with minimal risk. Only safe, universally beneficial changes that remove common annoyances.",
-            Author = "OpenTraceProject",
+            Author = "RegProbe",
             CreatedDate = DateTime.Now,
             Version = "1.0",
             SelectedTweakIds = tweakIds,

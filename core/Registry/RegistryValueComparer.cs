@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Win32;
 
-namespace OpenTraceProject.Core.Registry;
+namespace RegProbe.Core.Registry;
 
 public static class RegistryValueComparer
 {

@@ -5,9 +5,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using OpenTraceProject.App.Diagnostics;
+using RegProbe.App.Diagnostics;
 
-namespace OpenTraceProject.App.Behaviors;
+namespace RegProbe.App.Behaviors;
 
 public enum TransitionType
 {

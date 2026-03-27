@@ -26,7 +26,7 @@ OUTPUT_BIBLIOGRAPHY_MD = TWEAKS_ROOT / "windows-internals-bibliography.md"
 OVERRIDES_JSON = TWEAKS_ROOT / "tweak-provenance-overrides.json"
 LOCAL_MIRRORS_ROOT = TWEAKS_ROOT / "_source-mirrors"
 
-USER_AGENT = "OpenTraceProject-ProvenanceGenerator"
+USER_AGENT = "RegProbe-ProvenanceGenerator"
 TEXT_EXTENSIONS = {
     ".md",
     ".txt",

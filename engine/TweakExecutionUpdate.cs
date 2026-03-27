@@ -1,7 +1,7 @@
 using System;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Engine;
+namespace RegProbe.Engine;
 
 public sealed record TweakExecutionUpdate(
     string TweakId,

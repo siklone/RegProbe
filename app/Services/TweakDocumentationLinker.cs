@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Text;
-using OpenTraceProject.App.Utilities;
-using OpenTraceProject.App.ViewModels;
+using RegProbe.App.Utilities;
+using RegProbe.App.ViewModels;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public sealed class TweakDocumentationLinker
 {

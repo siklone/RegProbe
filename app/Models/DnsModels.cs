@@ -1,4 +1,4 @@
-namespace OpenTraceProject.App.Models;
+namespace RegProbe.App.Models;
 
 /// <summary>
 /// Represents a DNS provider configuration.

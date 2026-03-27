@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Core.Tasks;
+namespace RegProbe.Core.Tasks;
 
 public interface IScheduledTaskManager
 {

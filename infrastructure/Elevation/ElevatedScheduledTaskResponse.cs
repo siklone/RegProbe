@@ -1,7 +1,7 @@
 using System;
-using OpenTraceProject.Core.Tasks;
+using RegProbe.Core.Tasks;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public sealed record ElevatedScheduledTaskResponse(
     Guid RequestId,

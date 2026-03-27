@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace OpenTraceProject.App.HardwareDb;
+namespace RegProbe.App.HardwareDb;
 
 public static class HardwareIconSourceDb
 {

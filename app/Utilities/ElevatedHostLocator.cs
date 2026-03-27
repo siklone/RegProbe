@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using OpenTraceProject.Infrastructure.Elevation;
+using RegProbe.Infrastructure.Elevation;
 
-namespace OpenTraceProject.App.Utilities;
+namespace RegProbe.App.Utilities;
 
 public static class ElevatedHostLocator
 {
@@ -131,8 +131,8 @@ public static class ElevatedHostLocator
             var current = new DirectoryInfo(baseDirectory);
             while (current is not null)
             {
-                if (File.Exists(Path.Combine(current.FullName, "OpenTraceProject.slnx"))
-                    || File.Exists(Path.Combine(current.FullName, "OpenTraceProject.sln"))
+                if (File.Exists(Path.Combine(current.FullName, "RegProbe.slnx"))
+                    || File.Exists(Path.Combine(current.FullName, "RegProbe.sln"))
                     || Directory.Exists(Path.Combine(current.FullName, ".git")))
                 {
                     return current.FullName;
@@ -237,7 +237,7 @@ public static class ElevatedHostLocator
     {
         try
         {
-            var logPath = Path.Combine(Path.GetTempPath(), "OpenTraceProject_Diagnostics.log");
+            var logPath = Path.Combine(Path.GetTempPath(), "RegProbe_Diagnostics.log");
             var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
             var overridePath = Environment.GetEnvironmentVariable(ElevatedHostDefaults.OverridePathEnvVar) ?? string.Empty;
 

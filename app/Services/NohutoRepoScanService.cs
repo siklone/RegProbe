@@ -8,9 +8,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Infrastructure;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Tracks the four nohuto repositories that act as the configuration intelligence feed
@@ -31,7 +31,7 @@ public sealed class NohutoRepoScanService : IDisposable
     {
         _paths = paths ?? throw new ArgumentNullException(nameof(paths));
         _httpClient = new HttpClient();
-        _httpClient.DefaultRequestHeaders.Add("User-Agent", "OpenTraceProject-NohutoScan");
+        _httpClient.DefaultRequestHeaders.Add("User-Agent", "RegProbe-NohutoScan");
         _httpClient.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
     }
 

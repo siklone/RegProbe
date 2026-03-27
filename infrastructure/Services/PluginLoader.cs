@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using OpenTraceProject.Core.Plugins;
+using RegProbe.Core.Plugins;
 
-namespace OpenTraceProject.Infrastructure.Services;
+namespace RegProbe.Infrastructure.Services;
 
 public sealed class PluginLoader
 {

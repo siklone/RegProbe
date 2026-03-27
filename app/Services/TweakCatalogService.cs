@@ -5,17 +5,17 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.App.Services.TweakProviders;
-using OpenTraceProject.App.Utilities;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Services;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Engine.Services;
-using OpenTraceProject.Infrastructure;
-using OpenTraceProject.Infrastructure.Elevation;
-using OpenTraceProject.Infrastructure.Registry;
+using RegProbe.App.Services.TweakProviders;
+using RegProbe.App.Utilities;
+using RegProbe.Core;
+using RegProbe.Core.Services;
+using RegProbe.Engine;
+using RegProbe.Engine.Services;
+using RegProbe.Infrastructure;
+using RegProbe.Infrastructure.Elevation;
+using RegProbe.Infrastructure.Registry;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public sealed record TweakCatalogEntry(string Category, ITweak Tweak);
 

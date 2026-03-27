@@ -2,10 +2,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine.Tweaks;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Infrastructure.Registry;
+using RegProbe.Core;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Core.Registry;
+using RegProbe.Infrastructure.Registry;
 using Xunit;
 
 public sealed class RegistryValueBatchTweakTests
@@ -240,6 +240,6 @@ public sealed class RegistryValueBatchTweakTests
 
     private static string BuildKeyPath(string suffix)
     {
-        return $"Software\\OpenTraceProject\\Tests\\RegistryValueBatchTweak\\{suffix}\\{Guid.NewGuid():N}";
+        return $"Software\\RegProbe\\Tests\\RegistryValueBatchTweak\\{suffix}\\{Guid.NewGuid():N}";
     }
 }

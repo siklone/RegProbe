@@ -5,22 +5,22 @@ using System.CommandLine.Invocation;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine;
-using OpenTraceProject.Infrastructure.Elevation;
+using RegProbe.App.Services;
+using RegProbe.Core;
+using RegProbe.Engine;
+using RegProbe.Infrastructure.Elevation;
 
-namespace OpenTraceProject.CLI;
+namespace RegProbe.CLI;
 
 /// <summary>
-/// Open Trace Project Command Line Interface.
+/// RegProbe Command Line Interface.
 /// Provides automation capabilities for system optimization.
 /// </summary>
 class Program
 {
     static async Task<int> Main(string[] args)
     {
-        var rootCommand = new RootCommand("Open Trace Project CLI - System optimization tool")
+        var rootCommand = new RootCommand("RegProbe CLI - System optimization tool")
         {
             Name = "winopt"
         };
@@ -420,7 +420,7 @@ class Program
         infoCommand.SetHandler(() =>
         {
             Console.WriteLine("=======================================");
-            Console.WriteLine(" Open Trace Project - System Information");
+            Console.WriteLine(" RegProbe - System Information");
             Console.WriteLine("=======================================");
             Console.WriteLine($"  OS:         {Environment.OSVersion}");
             Console.WriteLine($"  Machine:    {Environment.MachineName}");
@@ -555,7 +555,7 @@ class Program
         }
 
         error = $"Tweak requires elevation, but ElevatedHost was not found at: {catalog.ElevatedHostPath}. " +
-                $"Build OpenTraceProject.ElevatedHost or set {ElevatedHostDefaults.OverridePathEnvVar}.";
+                $"Build RegProbe.ElevatedHost or set {ElevatedHostDefaults.OverridePathEnvVar}.";
         return false;
     }
 }

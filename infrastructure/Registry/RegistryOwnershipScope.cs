@@ -2,9 +2,9 @@ using System;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using Microsoft.Win32;
-using OpenTraceProject.Infrastructure.Elevation;
+using RegProbe.Infrastructure.Elevation;
 
-namespace OpenTraceProject.Infrastructure.Registry;
+namespace RegProbe.Infrastructure.Registry;
 
 public sealed class RegistryOwnershipScope : IDisposable
 {

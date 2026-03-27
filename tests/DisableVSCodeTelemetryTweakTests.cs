@@ -3,10 +3,10 @@ using System.IO;
 using System.Text.Json.Nodes;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine.Tweaks.Misc;
+using RegProbe.Core;
+using RegProbe.Engine.Tweaks.Misc;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class DisableVSCodeTelemetryTweakTests
 {
@@ -121,7 +121,7 @@ public sealed class DisableVSCodeTelemetryTweakTests
 
     private static string CreateTempDirectory()
     {
-        var path = Path.Combine(Path.GetTempPath(), "OpenTraceProject.Tests", Guid.NewGuid().ToString("N"));
+        var path = Path.Combine(Path.GetTempPath(), "RegProbe.Tests", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(path);
         return path;
     }

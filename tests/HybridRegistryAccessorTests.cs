@@ -2,17 +2,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 using Microsoft.Win32;
-using OpenTraceProject.Core.Registry;
-using OpenTraceProject.Infrastructure.Registry;
+using RegProbe.Core.Registry;
+using RegProbe.Infrastructure.Registry;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public sealed class HybridRegistryAccessorTests
 {
     private static readonly RegistryValueReference SampleReference = new(
         RegistryHive.LocalMachine,
         RegistryView.Registry64,
-        @"Software\OpenTraceProject\Tests",
+        @"Software\RegProbe\Tests",
         "Sample");
 
     [Fact]

@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Core.Files;
+namespace RegProbe.Core.Files;
 
 public interface IFileSystemAccessor
 {

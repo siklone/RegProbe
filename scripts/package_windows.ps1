@@ -42,7 +42,7 @@ if (!(Test-Path $projectPath)) {
 
 $readyToRunValue = if ($ReadyToRun.IsPresent) { "true" } else { "false" }
 
-Write-Host "Publishing OpenTraceProject.App ($Configuration, $Runtime)..."
+Write-Host "Publishing RegProbe.App ($Configuration, $Runtime)..."
 Write-Host "PublishReadyToRun=$readyToRunValue"
 dotnet publish $projectPath -c $Configuration -r $Runtime --self-contained:$SelfContained /p:PublishReadyToRun=$readyToRunValue
 
@@ -62,11 +62,11 @@ if (Test-Path $docsSource) {
 
 # Ensure ElevatedHost is present in publish output
 $hostTargetDir = Join-Path $publishDir "ElevatedHost"
-$hostTargetExe = Join-Path $hostTargetDir "OpenTraceProject.ElevatedHost.exe"
+$hostTargetExe = Join-Path $hostTargetDir "RegProbe.ElevatedHost.exe"
 if (!(Test-Path $hostTargetExe)) {
     $candidates = @(
-        Join-Path $repoRoot "elevated-host\bin\$Configuration\net8.0-windows\$Runtime\OpenTraceProject.ElevatedHost.exe",
-        Join-Path $repoRoot "elevated-host\bin\$Configuration\net8.0-windows\$Runtime\publish\OpenTraceProject.ElevatedHost.exe"
+        Join-Path $repoRoot "elevated-host\bin\$Configuration\net8.0-windows\$Runtime\RegProbe.ElevatedHost.exe",
+        Join-Path $repoRoot "elevated-host\bin\$Configuration\net8.0-windows\$Runtime\publish\RegProbe.ElevatedHost.exe"
     ) | Where-Object { Test-Path $_ }
 
     if ($candidates.Count -gt 0) {
@@ -81,7 +81,7 @@ New-Item -ItemType Directory -Path $distDir -Force | Out-Null
 
 $version = Get-Version -RepoRoot $repoRoot
 $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-$zipName = "OpenTraceProject-$version-$Runtime-$Configuration-$timestamp.zip"
+$zipName = "RegProbe-$version-$Runtime-$Configuration-$timestamp.zip"
 $zipPath = Join-Path $distDir $zipName
 
 if (Test-Path $zipPath) {

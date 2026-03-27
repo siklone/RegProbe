@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace OpenTraceProject.App.ViewModels.Base;
+namespace RegProbe.App.ViewModels.Base;
 
 public abstract class ViewModelBase : INotifyPropertyChanged
 {

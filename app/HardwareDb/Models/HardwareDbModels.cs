@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OpenTraceProject.App.HardwareDb.Models;
+namespace RegProbe.App.HardwareDb.Models;
 
 public sealed class HardwareComparisonResult
 {

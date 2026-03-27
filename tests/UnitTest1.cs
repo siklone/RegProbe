@@ -1,13 +1,13 @@
-using OpenTraceProject.Infrastructure;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 public class UnitTest1
 {
     [Fact]
     public void AppPathsBuildsExpectedLocations()
     {
-        var basePath = Path.Combine(Path.GetTempPath(), "OpenTraceProjectTests", Guid.NewGuid().ToString("N"));
+        var basePath = Path.Combine(Path.GetTempPath(), "RegProbeTests", Guid.NewGuid().ToString("N"));
         var paths = new AppPaths(basePath);
 
         Assert.EndsWith(Path.Combine(AppPaths.AppFolderName, "settings.json"), paths.SettingsFilePath, StringComparison.OrdinalIgnoreCase);
@@ -17,7 +17,7 @@ public class UnitTest1
     [Fact]
     public async Task SettingsStorePersistsSettings()
     {
-        var basePath = Path.Combine(Path.GetTempPath(), "OpenTraceProjectTests", Guid.NewGuid().ToString("N"));
+        var basePath = Path.Combine(Path.GetTempPath(), "RegProbeTests", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(basePath);
 
         try

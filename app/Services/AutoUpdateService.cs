@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Auto-update service that checks GitHub releases for new versions.
@@ -19,7 +19,7 @@ public class AutoUpdateService : IDisposable
     private readonly string _repo;
     private bool _isDisposed;
 
-    public AutoUpdateService(string owner = "siklone", string repo = "Open-Trace-Project")
+    public AutoUpdateService(string owner = "siklone", string repo = "RegProbe")
     {
         _owner = owner;
         _repo = repo;
@@ -27,7 +27,7 @@ public class AutoUpdateService : IDisposable
         {
             DefaultRequestHeaders =
             {
-                { "User-Agent", "OpenTraceProject-AutoUpdate" },
+                { "User-Agent", "RegProbe-AutoUpdate" },
                 { "Accept", "application/vnd.github.v3+json" }
             }
         };
@@ -81,7 +81,7 @@ public class AutoUpdateService : IDisposable
 
         try
         {
-            var tempPath = Path.Combine(Path.GetTempPath(), $"OpenTraceProject_Update_{update.LatestVersion}.exe");
+            var tempPath = Path.Combine(Path.GetTempPath(), $"RegProbe_Update_{update.LatestVersion}.exe");
 
             // Download with progress
             using var response = await _httpClient.GetAsync(update.DownloadUrl, HttpCompletionOption.ResponseHeadersRead);

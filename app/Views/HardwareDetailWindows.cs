@@ -1,6 +1,6 @@
-using OpenTraceProject.App.ViewModels.Hardware;
+using RegProbe.App.ViewModels.Hardware;
 
-namespace OpenTraceProject.App.Views;
+namespace RegProbe.App.Views;
 
 public sealed class OsDetailWindow : HardwareDetailWindow
 {

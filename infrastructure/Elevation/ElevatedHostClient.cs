@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public sealed class ElevatedHostClient : IElevatedHostClient
 {
@@ -272,7 +272,7 @@ public sealed class ElevatedHostClient : IElevatedHostClient
     {
         try
         {
-            var logPath = Path.Combine(Path.GetTempPath(), "OpenTraceProject_Diagnostics.log");
+            var logPath = Path.Combine(Path.GetTempPath(), "RegProbe_Diagnostics.log");
             var timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
             File.AppendAllText(logPath, $"[{timestamp}] {message}\n");
         }

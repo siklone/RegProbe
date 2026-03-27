@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using OpenTraceProject.Core.Services;
-using OpenTraceProject.Infrastructure.Security;
+using RegProbe.Core.Services;
+using RegProbe.Infrastructure.Security;
 
-namespace OpenTraceProject.Infrastructure.Services;
+namespace RegProbe.Infrastructure.Services;
 
 public sealed class ProfileSyncService : IProfileSyncService
 {

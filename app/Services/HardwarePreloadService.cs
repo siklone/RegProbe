@@ -9,12 +9,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
-using OpenTraceProject.App.Diagnostics;
-using OpenTraceProject.App.HardwareDb;
-using OpenTraceProject.App.ViewModels;
-using OpenTraceProject.App.ViewModels.Hardware;
+using RegProbe.App.Diagnostics;
+using RegProbe.App.HardwareDb;
+using RegProbe.App.ViewModels;
+using RegProbe.App.ViewModels.Hardware;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public sealed class HardwarePreloadService
 {

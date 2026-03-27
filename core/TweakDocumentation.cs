@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.Core;
+namespace RegProbe.Core;
 
 /// <summary>
 /// Represents documentation source information for a tweak.

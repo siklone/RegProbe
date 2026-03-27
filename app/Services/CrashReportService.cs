@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Net.Http;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Crash reporting service for logging unhandled exceptions.
@@ -18,7 +18,7 @@ public class CrashReportService
 {
     private static readonly string CrashLogDirectory = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "OpenTraceProject", "CrashLogs");
+        "RegProbe", "CrashLogs");
 
     private static string? _remoteEndpoint;
     private static bool _isInitialized;

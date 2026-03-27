@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Diagnostics;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.Utilities;
+using RegProbe.App.Services;
+using RegProbe.App.Utilities;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class WinConfigCatalogCategoryViewModel
 {

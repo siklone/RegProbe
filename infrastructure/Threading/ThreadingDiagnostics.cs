@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OpenTraceProject.Infrastructure.Threading;
+namespace RegProbe.Infrastructure.Threading;
 
 /// <summary>
 /// Collects and reports threading performance metrics.

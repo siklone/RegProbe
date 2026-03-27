@@ -1,10 +1,10 @@
 using System;
 using System.Management;
 using Microsoft.Win32;
-using OpenTraceProject.App.Diagnostics;
-using OpenTraceProject.App.HardwareDb;
+using RegProbe.App.Diagnostics;
+using RegProbe.App.HardwareDb;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public sealed record OsDetectionResult(
     string ProductName,

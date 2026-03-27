@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Caches WMI query results to reduce expensive WMI overhead.

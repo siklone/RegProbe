@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace OpenTraceProject.Infrastructure.Processes;
+namespace RegProbe.Infrastructure.Processes;
 
 /// <summary>
 /// Provides memory management operations for processes.

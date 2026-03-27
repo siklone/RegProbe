@@ -1,9 +1,9 @@
-using OpenTraceProject.App.HardwareDb;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.Diagnostics;
-using BaseViewModel = OpenTraceProject.App.ViewModels.Base.HardwareDetailViewModelBase;
+using RegProbe.App.HardwareDb;
+using RegProbe.App.Services;
+using RegProbe.App.Diagnostics;
+using BaseViewModel = RegProbe.App.ViewModels.Base.HardwareDetailViewModelBase;
 
-namespace OpenTraceProject.App.ViewModels.Hardware;
+namespace RegProbe.App.ViewModels.Hardware;
 
 public sealed class MotherboardDetailViewModel : BaseViewModel
 {

@@ -1,8 +1,8 @@
-using OpenTraceProject.App.Models;
-using OpenTraceProject.Core;
-using OpenTraceProject.Engine;
+using RegProbe.App.Models;
+using RegProbe.Core;
+using RegProbe.Engine;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Service for managing and applying optimization presets.
@@ -283,7 +283,7 @@ public class PresetService
     {
         try
         {
-            var resolverType = Type.GetType("OpenTraceProject.App.Services.OsDetectionResolver, OpenTraceProject.App");
+            var resolverType = Type.GetType("RegProbe.App.Services.OsDetectionResolver, RegProbe.App");
             if (resolverType != null)
             {
                 var resolveMethod = resolverType.GetMethod("Resolve", new[] { typeof(bool) });

@@ -1,6 +1,6 @@
-# Open Trace Project - Ecosystem Foundations
+# RegProbe - Ecosystem Foundations
 
-This document summarizes the foundational architecture implemented for the Open Trace Project ecosystem scaling plan.
+This document summarizes the foundational architecture implemented for the RegProbe ecosystem scaling plan.
 
 > **Status (2025-12-30):** This file is a roadmap + experimental foundation notes. The current desktop app does **not** ship a marketplace, cloud preset repo, or telemetry backend. Treat these sections as future work unless you confirm the code paths are wired into the UI and build.
 
@@ -251,7 +251,7 @@ info = api.GetSystemInfo()
 - `core/Remote/RemoteCommandHandler.cs`
 
 ### Features
-- **Fleet Management**: Centralized control of multiple Open Trace Project installations
+- **Fleet Management**: Centralized control of multiple RegProbe installations
 - **WebSocket Communication**: Real-time command/response
 - **Agent Registration**: Automatic enrollment with management server
 - **Heartbeat Monitoring**: Detect offline agents
@@ -310,7 +310,7 @@ TweakEngine / PluginLoader / ScriptEngine
 
 ```
 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                     Open Trace Project UI                     â”‚
+â”‚                     RegProbe UI                     â”‚
 â”‚  (Desktop application - MonitorView, TweaksView, SettingsView)  â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
                      â”‚
@@ -440,7 +440,7 @@ dotnet add package pythonnet             # Python support
 - [ ] Test script execution (after installing NLua/pythonnet)
 
 ### Unit Testing (Future)
-- [ ] Create test project: `OpenTraceProject.Tests`
+- [ ] Create test project: `RegProbe.Tests`
 - [ ] Mock plugin loading tests
 - [ ] Telemetry serialization tests
 - [ ] Cryptographic hash chain verification tests
@@ -544,7 +544,7 @@ dotnet add package pythonnet             # Python support
 
 ## License & Attribution
 
-This ecosystem foundation is part of the **Open Trace Project** project.
+This ecosystem foundation is part of the **RegProbe** project.
 
 - **Core Architecture**: Custom implementation
 - **LibreHardwareMonitor**: GPL-3.0 (hardware monitoring)

@@ -1,10 +1,10 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.ViewModels;
+using RegProbe.App.Services;
+using RegProbe.App.ViewModels;
 
-namespace OpenTraceProject.App;
+namespace RegProbe.App;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -26,7 +26,7 @@ public partial class MainWindow : Window
         NotificationHost.NotificationService = Notifications;
 
         // Show welcome notification
-        Notifications.ShowInfo("Open Trace Project is ready", "Welcome");
+        Notifications.ShowInfo("RegProbe is ready", "Welcome");
     }
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)

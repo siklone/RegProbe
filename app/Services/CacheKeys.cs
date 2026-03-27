@@ -1,4 +1,4 @@
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public static class CacheKeys
 {

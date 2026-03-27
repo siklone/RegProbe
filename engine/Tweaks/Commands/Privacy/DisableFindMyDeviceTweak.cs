@@ -1,10 +1,10 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Commands;
+using RegProbe.Core;
+using RegProbe.Core.Commands;
 
-namespace OpenTraceProject.Engine.Tweaks.Commands.Privacy;
+namespace RegProbe.Engine.Tweaks.Commands.Privacy;
 
 public sealed class DisableFindMyDeviceTweak : CommandTweak
 {

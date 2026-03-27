@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using OpenTraceProject.Core.Intelligence;
+using RegProbe.Core.Intelligence;
 
-namespace OpenTraceProject.Core.Services;
+namespace RegProbe.Core.Services;
 
 public interface IRecommendationEngine
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 /// <summary>
 /// Service for displaying toast notifications to the user.

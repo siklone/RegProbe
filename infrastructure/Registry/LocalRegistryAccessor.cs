@@ -3,9 +3,9 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.Core.Registry;
+using RegProbe.Core.Registry;
 
-namespace OpenTraceProject.Infrastructure.Registry;
+namespace RegProbe.Infrastructure.Registry;
 
 public sealed class LocalRegistryAccessor : IRegistryAccessor
 {

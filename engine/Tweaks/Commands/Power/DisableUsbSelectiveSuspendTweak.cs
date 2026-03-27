@@ -4,10 +4,10 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Commands;
+using RegProbe.Core;
+using RegProbe.Core.Commands;
 
-namespace OpenTraceProject.Engine.Tweaks.Commands.Power;
+namespace RegProbe.Engine.Tweaks.Commands.Power;
 
 public sealed class DisableUsbSelectiveSuspendTweak : ITweak
 {

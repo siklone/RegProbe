@@ -1,10 +1,10 @@
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
-using OpenTraceProject.Core;
-using OpenTraceProject.Core.Commands;
+using RegProbe.Core;
+using RegProbe.Core.Commands;
 
-namespace OpenTraceProject.Engine.Tweaks.Commands.Cleanup;
+namespace RegProbe.Engine.Tweaks.Commands.Cleanup;
 
 public sealed class ClearEventLogsTweak : CommandTweak
 {

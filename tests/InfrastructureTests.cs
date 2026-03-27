@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using OpenTraceProject.Infrastructure;
+using RegProbe.Infrastructure;
 using Xunit;
 
-namespace OpenTraceProject.Tests;
+namespace RegProbe.Tests;
 
 /// <summary>
 /// Unit tests for AppPaths and AppSettings infrastructure classes.
@@ -186,10 +186,10 @@ public sealed class AppPathsTests : IDisposable
     }
 
     [Fact]
-    public void AppFolderName_IsOpenTraceProject()
+    public void AppFolderName_IsRegProbe()
     {
         // Assert
-        Assert.Equal("OpenTraceProject", AppPaths.AppFolderName);
+        Assert.Equal("RegProbe", AppPaths.AppFolderName);
     }
 }
 

@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Management;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.App.Services.OsDetection;
+namespace RegProbe.App.Services.OsDetection;
 
 public sealed class OsActivationChecker
 {

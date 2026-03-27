@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenTraceProject.Core.Registry;
+namespace RegProbe.Core.Registry;
 
 public interface IRegistryAccessor
 {

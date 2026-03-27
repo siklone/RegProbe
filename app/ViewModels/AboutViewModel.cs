@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using System.Windows.Input;
-using OpenTraceProject.App.Utilities;
-using OpenTraceProject.Infrastructure;
+using RegProbe.App.Utilities;
+using RegProbe.Infrastructure;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class AboutViewModel : ViewModelBase
 {

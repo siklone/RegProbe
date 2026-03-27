@@ -2,9 +2,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using OpenTraceProject.App.Utilities;
+using RegProbe.App.Utilities;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public interface IAsyncCommand : ICommand
 {

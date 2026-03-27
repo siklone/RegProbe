@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using OpenTraceProject.Core.Commands;
+using RegProbe.Core.Commands;
 
-namespace OpenTraceProject.Infrastructure.Commands;
+namespace RegProbe.Infrastructure.Commands;
 
 public sealed class CommandAllowlist
 {

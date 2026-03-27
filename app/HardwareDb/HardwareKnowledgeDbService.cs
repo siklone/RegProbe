@@ -5,9 +5,9 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.App.HardwareDb.Models;
+using RegProbe.App.HardwareDb.Models;
 
-namespace OpenTraceProject.App.HardwareDb;
+namespace RegProbe.App.HardwareDb;
 
 public sealed class HardwareKnowledgeDbService
 {

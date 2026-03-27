@@ -5,12 +5,12 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using ServiceStartMode = OpenTraceProject.Core.Services.ServiceStartMode;
-using ServiceStatus = OpenTraceProject.Core.Services.ServiceStatus;
-using ServiceInfo = OpenTraceProject.Core.Services.ServiceInfo;
-using IServiceManager = OpenTraceProject.Core.Services.IServiceManager;
+using ServiceStartMode = RegProbe.Core.Services.ServiceStartMode;
+using ServiceStatus = RegProbe.Core.Services.ServiceStatus;
+using ServiceInfo = RegProbe.Core.Services.ServiceInfo;
+using IServiceManager = RegProbe.Core.Services.IServiceManager;
 
-namespace OpenTraceProject.ElevatedHost;
+namespace RegProbe.ElevatedHost;
 
 internal sealed class LocalServiceManager : IServiceManager
 {

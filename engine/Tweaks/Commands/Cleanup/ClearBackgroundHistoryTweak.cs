@@ -4,9 +4,9 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Engine.Tweaks.Commands.Cleanup;
+namespace RegProbe.Engine.Tweaks.Commands.Cleanup;
 
 public sealed class ClearBackgroundHistoryTweak : FileCleanupTweak
 {

@@ -2,10 +2,10 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using OpenTraceProject.App.Services;
-using OpenTraceProject.App.ViewModels;
+using RegProbe.App.Services;
+using RegProbe.App.ViewModels;
 
-namespace OpenTraceProject.App;
+namespace RegProbe.App;
 
 public partial class StartupWindow : Window
 {

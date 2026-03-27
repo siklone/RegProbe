@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
-using OpenTraceProject.App.HardwareDb;
-using OpenTraceProject.App.Services.Hardware;
-using OpenTraceProject.App.Services.OsDetection;
-using OpenTraceProject.App.Diagnostics;
-using BaseViewModel = OpenTraceProject.App.ViewModels.Base.HardwareDetailViewModelBase;
+using RegProbe.App.HardwareDb;
+using RegProbe.App.Services.Hardware;
+using RegProbe.App.Services.OsDetection;
+using RegProbe.App.Diagnostics;
+using BaseViewModel = RegProbe.App.ViewModels.Base.HardwareDetailViewModelBase;
 
-namespace OpenTraceProject.App.Services;
+namespace RegProbe.App.Services;
 
 public static class HardwareDetailWindowFactory
 {

@@ -1,7 +1,7 @@
 using System;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.App.ViewModels;
+namespace RegProbe.App.ViewModels;
 
 public sealed class TweakStepStatusViewModel : ViewModelBase
 {

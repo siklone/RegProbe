@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenTraceProject.Core;
+using RegProbe.Core;
 
-namespace OpenTraceProject.Engine.Tweaks.Developer;
+namespace RegProbe.Engine.Tweaks.Developer;
 
 public sealed class SetWsl2MemoryLimitTweak : ITweak
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public sealed record ElevatedHostRequest(
     Guid RequestId,

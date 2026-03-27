@@ -1,10 +1,10 @@
-namespace OpenTraceProject.Infrastructure.Elevation;
+namespace RegProbe.Infrastructure.Elevation;
 
 public static class ElevatedHostDefaults
 {
-    public const string PipeName = "OpenTraceProject.ElevatedHost";
-    public const string ExecutableName = "OpenTraceProject.ElevatedHost.exe";
-    public const string OverridePathEnvVar = "OPEN_TRACE_PROJECT_ELEVATED_HOST_PATH";
+    public const string PipeName = "RegProbe.ElevatedHost";
+    public const string ExecutableName = "RegProbe.ElevatedHost.exe";
+    public const string OverridePathEnvVar = "REGPROBE_ELEVATED_HOST_PATH";
 
     public static string GetPipeNameForProcess(int parentProcessId)
     {
