@@ -11,16 +11,20 @@
     ],
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
-    "re_audit_date": "2026-03-26T23:12:54.708905Z",
+    "re_audit_date": "2026-03-26T23:43:48.143095Z",
     "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
     "re_audit_priority": 1,
-    "new_tools_applied": [],
+    "new_tools_applied": [
+      "wpr",
+      "vm-reboot",
+      "vm-benchmark-runner"
+    ],
     "new_cross_layer": true,
     "new_class": "B",
     "class_changed": false,
     "frida_kernel_guard_applied": true,
     "dead_flag_four_conditions_met": false,
-    "notes": "Bootstrapped from the current research record and evidence audit. Replace with fresh v3.1 runtime output after re-audit runs.",
+    "notes": "Ran the v3.1 faz3 behavior lane from baseline-20260327-shell-stable. The runner reached the reboot point, but Explorer did not return and no CPU or memory workload artifacts were produced. The VM was recovered by snapshot revert and the incident is logged in research/vm-incidents.json.",
     "new_pipeline_version": "v3.1"
   }
 }

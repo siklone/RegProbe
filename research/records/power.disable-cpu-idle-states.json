@@ -4,7 +4,7 @@
   "record_id": "power.disable-cpu-idle-states",
   "tweak_id": "power.disable-cpu-idle-states",
   "record_status": "validated",
-  "summary": "Validated observed implementation only. This record has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, a machine-checkable apply and restore pass for the app's current profile, a current-build Ghidra no-match follow-up on ntoskrnl.exe, and a rebooted benchmark attempt that broke shell availability before workloads started and required a snapshot recovery.",
+  "summary": "Validated observed implementation only. This record has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, a machine-checkable apply and restore pass for the app's current profile, a current-build Ghidra no-match follow-up on ntoskrnl.exe, and repeated rebooted benchmark attempts that broke shell availability before workloads started and required snapshot recovery.",
   "setting": {
     "name": "CPU Idle States Bundle",
     "category": "Power",
@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "CPU idle states let Windows save power when the processor has little to do. This tweak tries to reduce or bypass that behavior for latency-focused systems.",
     "why_people_change_it": "People change it when chasing minimum latency for gaming, audio work, or other timing-sensitive workloads.",
-    "tradeoffs_overview": "Reducing idle-state behavior can increase responsiveness in some narrow cases, but it can also raise heat and power consumption. The current app still uses raw power-manager registry values instead of a supported Microsoft control surface, and the first rebooted benchmark lane on Win25H2Clean dropped shell availability before any workload ran.",
-    "professional_notes": "The app writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The local Power.txt notes also track these values with observed internal defaults of DisableIdleStatesAtBoot=0, ExitLatencyCheckEnabled=0, and IdleStateTimeout=500. The Win25H2Clean VM probe then showed the live baseline on this build as all three values missing, and confirmed a reversible apply of DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1 before restoring back to missing. A current-build Ghidra follow-up then probed ntoskrnl.exe twice, once with the registry value names and once with the internal pseudocode names from the repo notes, and both passes came back with no string/xref matches. A later rebooted benchmark attempt from the shell-stable snapshot failed before any CPU or memory workload ran because Explorer did not return after the first reboot and the VM had to be recovered from snapshot. That is enough to keep the bundle well-scoped and evidence-backed, but not enough to treat it as an app-ready supported control surface.",
+    "tradeoffs_overview": "Reducing idle-state behavior can increase responsiveness in some narrow cases, but it can also raise heat and power consumption. The current app still uses raw power-manager registry values instead of a supported Microsoft control surface, and repeated rebooted benchmark lanes on Win25H2Clean dropped shell availability before any workload ran.",
+    "professional_notes": "The app writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The local Power.txt notes also track these values with observed internal defaults of DisableIdleStatesAtBoot=0, ExitLatencyCheckEnabled=0, and IdleStateTimeout=500. The Win25H2Clean VM probe then showed the live baseline on this build as all three values missing, and confirmed a reversible apply of DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1 before restoring back to missing. A current-build Ghidra follow-up then probed ntoskrnl.exe twice, once with the registry value names and once with the internal pseudocode names from the repo notes, and both passes came back with no string/xref matches. The later rebooted benchmark attempts from shell-stable snapshots failed before any CPU or memory workload ran because Explorer did not return after reboot and the VM had to be recovered from snapshot. That is enough to keep the bundle well-scoped and evidence-backed, but not enough to treat it as an app-ready supported control surface.",
     "targets": [
       {
         "target_id": "cpu-idle-states-registry-bundle",
@@ -138,9 +138,9 @@
       ],
       "good_when": "You are comparing the app's raw idle-state bundle against the current observed baseline.",
       "bad_when": "You want only supported Microsoft power controls.",
-      "tradeoffs": [
+        "tradeoffs": [
         "Can reduce idle-state behavior in latency-focused experiments.",
-        "Can also raise heat and power use, and the first rebooted benchmark lane on Win25H2Clean dropped shell availability before any workload ran."
+        "Can also raise heat and power use, and repeated rebooted benchmark lanes on Win25H2Clean dropped shell availability before any workload ran."
       ],
       "apply_allowed": false,
       "evidence_ids": [
@@ -236,7 +236,7 @@
       "kind": "vm-incident",
       "title": "Win25H2Clean rebooted CPU idle benchmark incident",
       "location": "research/vm-incidents.json and research/notes/cpu-idle-states-follow-up-20260327.md",
-      "summary": "A rebooted benchmark attempt from the shell-stable snapshot did not reach the CPU or memory workload phases because Explorer did not return after reboot and the VM needed a snapshot recovery.",
+      "summary": "Repeated rebooted benchmark attempts from shell-stable snapshots did not reach the CPU or memory workload phases because Explorer did not return after reboot and the VM needed snapshot recovery.",
       "supports": [
         "incident-review",
         "version-scope",
@@ -252,10 +252,10 @@
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead, and the first rebooted benchmark lane broke shell availability before any workload ran. That keeps the record active and evidence-backed, but it still is not an app-ready supported control surface.",
+    "why": "The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead, and repeated rebooted benchmark lanes broke shell availability before any workload ran. That keeps the record active and evidence-backed, but it still is not an app-ready supported control surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-21T10:10:55+03:00",
+  "last_reviewed_utc": "2026-03-27T03:10:00+03:00",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
     "exact_quote_or_path": "before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null",

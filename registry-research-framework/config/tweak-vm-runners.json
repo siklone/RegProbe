@@ -17,7 +17,12 @@
   "behavior": {
     "power.disable-cpu-idle-states": {
       "script": "scripts/vm/run-cpu-idle-states-benchmark.ps1",
-      "args": []
+      "args": [
+        "-RecordId",
+        "power.disable-cpu-idle-states",
+        "-SnapshotName",
+        "baseline-20260327-shell-stable"
+      ]
     },
     "system.disable-startup-delay": {
       "script": "scripts/vm/run-startup-delay-wpr-trace.ps1",

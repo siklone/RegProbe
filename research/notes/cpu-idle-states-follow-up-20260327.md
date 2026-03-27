@@ -1,12 +1,12 @@
 CPU idle states follow-up on Win25H2Clean
 
 - Record: `power.disable-cpu-idle-states`
-- Snapshot: `baseline-20260325-shell-stable`
+- Snapshot: `baseline-20260327-shell-stable`
 
 What this pass added:
 
 - a current-build Ghidra check on `C:/Windows/System32/ntoskrnl.exe`
-- a rebooted benchmark attempt for the raw bundle
+- a v3.1 behavior-lane benchmark attempt for the raw bundle
 
 ## Ghidra follow-up
 
@@ -14,11 +14,11 @@ Two current-build string/xref passes were run on `ntoskrnl.exe`.
 
 Registry-name probe:
 
-- `research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md`
+- `evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md`
 
 Internal-symbol probe:
 
-- `research/evidence-files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md`
+- `evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md`
 
 Result:
 
@@ -33,21 +33,23 @@ So this pass did not produce a current-build kernel decompilation lead for the b
 
 ## Rebooted benchmark attempt
 
-Script:
+Framework manifest:
 
-- `scripts/vm/run-cpu-idle-states-benchmark.ps1`
+- `evidence/records/power.disable-cpu-idle-states/behavior-lane.json`
 
-Host artifact root:
+Framework log:
 
-- `research/evidence-files/vm-tooling-staging/cpu-idle-states-20260327-002948`
+- `evidence/records/power.disable-cpu-idle-states/behavior-lane.log`
 
 What happened:
 
-- the bundle write lane started from `baseline-20260325-shell-stable`
+- the v3.1 behavior lane invoked `scripts/vm/run-cpu-idle-states-benchmark.ps1`
+- the bundle write lane started from `baseline-20260327-shell-stable`
 - the benchmark pass requested a reboot before any CPU or memory workload ran
 - `Explorer` did not come back in time
 - the guest later dropped to `not-running`
 - recovery required a snapshot revert and a clean VM start
+- the host staging folder for `cpu-idle-states-20260327-024350` only contained setup scripts because the run failed before the workload phase
 
 Incident log:
 

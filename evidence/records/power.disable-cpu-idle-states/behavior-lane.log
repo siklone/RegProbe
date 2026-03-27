@@ -1,0 +1,13 @@
+﻿powershell.exe : Explorer did not come back in time.
+At \registry-research-framework\tools\wpr-boot-trace.ps1:79 
+char:15
++ ...   $output = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Explorer did not come back in time.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+At \scripts\vm\run-cpu-idle-states-benchmark.ps1:194 char:5
++     throw 'Explorer did not come back in time.'
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Explorer did not come back in time.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Explorer did not come back in time.

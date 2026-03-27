@@ -1,10 +1,10 @@
 ﻿{
     "schema_version":  "1.0",
-    "generated_utc":  "2026-03-26T21:46:38.6571564Z",
+    "generated_utc":  "2026-03-27T00:12:27.8351262Z",
     "summary":  {
-                    "total_incidents":  3,
-                    "shell_recovered":  3,
-                    "needed_snapshot_revert":  2
+                    "total_incidents":  4,
+                    "shell_recovered":  4,
+                    "needed_snapshot_revert":  3
                 },
     "incidents":  [
                       {
@@ -54,6 +54,22 @@
                           "needed_snapshot_revert":  true,
                           "recorded_utc":  "2026-03-26T21:46:38.6082368Z",
                           "notes":  "Recovered by reverting to baseline-20260325-shell-stable and starting the VM again. Partial benchmark folder only contains setup scripts because the run failed before CPU or memory workloads started."
+                      },
+                      {
+                          "incident_id":  "20260327031227-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-states-20260327-024350",
+                          "family":  "power-benchmark",
+                          "snapshot_name":  "baseline-20260327-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "behavior-lane-reboot",
+                          "symptom":  "Explorer did not return after reboot during the v3.1 behavior lane; the guest later dropped to not-running before any CPU or memory workload started.",
+                          "shell_recovered":  true,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-27T00:12:27.7902172Z",
+                          "notes":  "Recovered by reverting to baseline-20260327-shell-stable, starting the VM again, and verifying explorer, sihost, ShellHost, and ctfmon. The host staging folder only contained setup scripts because the run failed before benchmark artifacts were produced."
                       }
                   ]
 }
