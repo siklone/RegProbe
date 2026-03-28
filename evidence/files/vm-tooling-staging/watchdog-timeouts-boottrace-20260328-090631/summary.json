@@ -1,0 +1,70 @@
+﻿{
+    "generated_utc":  "2026-03-28T06:06:32.1051975Z",
+    "probe_name":  "watchdog-timeouts-boottrace-20260328-090631",
+    "lane_label":  "power.session-watchdog-timeouts",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631",
+    "status":  "ok",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-28T06:07:00.1660195Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  true
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-28T06:31:49.2750842Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  false
+                                   }
+                    },
+    "boot_cycle":  {
+                       "previous_last_boot_utc":  "2026-03-25T14:14:21.5000000+03:00",
+                       "current_last_boot_utc":  "2026-03-28T09:09:02.5000000+03:00",
+                       "stop_mode":  "soft"
+                   },
+    "summary":  {
+                    "generated_utc":  "2026-03-28T06:17:51.6169982Z",
+                    "lane_label":  "power.session-watchdog-timeouts",
+                    "phase":  "completed",
+                    "guest_root":  "C:\\Tools\\ValidationController\\watchdog-timeouts-boottrace\\watchdog-timeouts-boottrace-20260328-090631",
+                    "guest_etl_path":  "C:\\Tools\\ValidationController\\watchdog-timeouts-boottrace\\watchdog-timeouts-boottrace-20260328-090631\\watchdog-timeouts-boot.etl",
+                    "baseline":  {
+                                     "WatchdogResumeTimeout":  120,
+                                     "WatchdogSleepTimeout":  300,
+                                     "PowerSettingProfile":  0
+                                 },
+                    "after_boot":  {
+                                       "WatchdogResumeTimeout":  120,
+                                       "WatchdogSleepTimeout":  300,
+                                       "PowerSettingProfile":  0
+                                   },
+                    "etl_exists":  true
+                },
+    "raw_etl_captured":  true,
+    "repo_etl_placeholder":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md",
+    "recovery":  {
+                     "performed":  false,
+                     "shell_healthy_after_recovery":  false
+                 },
+    "errors":  [
+
+               ]
+}

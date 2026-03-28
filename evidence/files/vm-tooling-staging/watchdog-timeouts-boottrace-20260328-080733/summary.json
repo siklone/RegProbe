@@ -1,0 +1,34 @@
+﻿{
+    "generated_utc":  "2026-03-28T05:07:33.1174529Z",
+    "probe_name":  "watchdog-timeouts-boottrace-20260328-080733",
+    "lane_label":  "power.session-watchdog-timeouts",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-080733",
+    "status":  "failed",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-28T05:10:37.5824156Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  true
+                                    }
+                     },
+    "shell_after":  null,
+    "summary":  null,
+    "raw_etl_captured":  false,
+    "repo_etl_placeholder":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-080733/watchdog-timeouts-boot.etl.md",
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "errors":  [
+                   "Guest reboot cycle did not complete in time."
+               ]
+}

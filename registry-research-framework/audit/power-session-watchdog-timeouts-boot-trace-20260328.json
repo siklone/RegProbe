@@ -1,0 +1,48 @@
+{
+  "lane_label": "power.session-watchdog-timeouts",
+  "generated_utc": "2026-03-28T06:35:00Z",
+  "snapshot_name": "baseline-20260327-regprobe-visible-shell-stable",
+  "status": "ok",
+  "successful_probe": {
+    "probe_name": "watchdog-timeouts-boottrace-20260328-090631",
+    "summary_path": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json",
+    "etl_placeholder_path": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md",
+    "boot_cycle": {
+      "previous_last_boot_utc": "2026-03-25T14:14:21.5000000+03:00",
+      "current_last_boot_utc": "2026-03-28T09:09:02.5000000+03:00",
+      "stop_mode": "soft"
+    },
+    "baseline": {
+      "WatchdogResumeTimeout": 120,
+      "WatchdogSleepTimeout": 300,
+      "PowerSettingProfile": 0
+    },
+    "after_boot": {
+      "WatchdogResumeTimeout": 120,
+      "WatchdogSleepTimeout": 300,
+      "PowerSettingProfile": 0
+    },
+    "raw_etl_captured": true,
+    "shell_healthy_before": true,
+    "shell_healthy_after": true
+  },
+  "failed_probes": [
+    {
+      "probe_name": "watchdog-timeouts-boottrace-20260328-080733",
+      "summary_path": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-080733/summary.json",
+      "failure": "Guest reboot cycle did not complete in time."
+    },
+    {
+      "probe_name": "watchdog-timeouts-boottrace-20260328-083218",
+      "summary_path": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-083218/summary.json",
+      "failure": "Guest reboot was requested, but VMware Tools never went away within 600 seconds. Last tools state: running"
+    },
+    {
+      "probe_name": "watchdog-timeouts-boottrace-20260328-084847",
+      "summary_path": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-084847/summary.json",
+      "failure": "vmrun failed (-1): Error: Unrecognized command: restartGuest"
+    }
+  ],
+  "notes_path": "research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md",
+  "next_gate": "runtime-static merge for the watchdog timeout pair"
+}

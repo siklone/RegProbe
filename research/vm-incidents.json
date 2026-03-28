@@ -1,10 +1,10 @@
 ﻿{
     "schema_version":  "1.0",
-    "generated_utc":  "2026-03-27T20:40:43.7929132Z",
+    "generated_utc":  "2026-03-28T06:01:53.6986815Z",
     "summary":  {
-                    "total_incidents":  18,
+                    "total_incidents":  22,
                     "shell_recovered":  4,
-                    "needed_snapshot_revert":  17
+                    "needed_snapshot_revert":  21
                 },
     "incidents":  [
                       {
@@ -294,6 +294,70 @@
                           "needed_snapshot_revert":  true,
                           "recorded_utc":  "2026-03-27T20:40:43.7727166Z",
                           "notes":  "Behavior lane failed during stage revert-snapshot. Recovered by snapshot revert."
+                      },
+                      {
+                          "incident_id":  "20260328082113-power-session-watchdog-timeouts",
+                          "record_id":  "power.session-watchdog-timeouts",
+                          "tweak_id":  "power.session-watchdog-timeouts",
+                          "test_id":  "watchdog-timeouts-boottrace-20260328-080733",
+                          "family":  "power.session-watchdog-timeouts",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                          "value_name":  "WatchdogResumeTimeout|WatchdogSleepTimeout",
+                          "value_state":  "baseline-read-only",
+                          "symptom":  "Guest reboot cycle did not complete in time.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T05:21:13.9238412Z",
+                          "notes":  "Boot trace lane failed before the final summary could be captured."
+                      },
+                      {
+                          "incident_id":  "20260328084313-power-session-watchdog-timeouts",
+                          "record_id":  "power.session-watchdog-timeouts",
+                          "tweak_id":  "power.session-watchdog-timeouts",
+                          "test_id":  "watchdog-timeouts-boottrace-20260328-083218",
+                          "family":  "power.session-watchdog-timeouts",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                          "value_name":  "WatchdogResumeTimeout|WatchdogSleepTimeout",
+                          "value_state":  "baseline-read-only",
+                          "symptom":  "Guest reboot was requested, but VMware Tools never went away within 600 seconds. Last tools state: running",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T05:43:13.5877684Z",
+                          "notes":  "Boot trace lane failed before the final summary could be captured."
+                      },
+                      {
+                          "incident_id":  "20260328084937-power-session-watchdog-timeouts",
+                          "record_id":  "power.session-watchdog-timeouts",
+                          "tweak_id":  "power.session-watchdog-timeouts",
+                          "test_id":  "watchdog-timeouts-boottrace-20260328-084847",
+                          "family":  "power.session-watchdog-timeouts",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                          "value_name":  "WatchdogResumeTimeout|WatchdogSleepTimeout",
+                          "value_state":  "baseline-read-only",
+                          "symptom":  "vmrun failed (-1): Error: Unrecognized command: restartGuest",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T05:49:37.8478486Z",
+                          "notes":  "Boot trace lane failed before the final summary could be captured."
+                      },
+                      {
+                          "incident_id":  "20260328090153-power-session-watchdog-timeouts",
+                          "record_id":  "power.session-watchdog-timeouts",
+                          "tweak_id":  "power.session-watchdog-timeouts",
+                          "test_id":  "watchdog-timeouts-boottrace-20260328-085107",
+                          "family":  "power.session-watchdog-timeouts",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                          "value_name":  "WatchdogResumeTimeout|WatchdogSleepTimeout",
+                          "value_state":  "baseline-read-only",
+                          "symptom":  "Guest reboot was requested, but VMware Tools never went away within 600 seconds. Last tools state: running",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T06:01:53.6779562Z",
+                          "notes":  "Boot trace lane failed before the final summary could be captured."
                       }
                   ]
 }
