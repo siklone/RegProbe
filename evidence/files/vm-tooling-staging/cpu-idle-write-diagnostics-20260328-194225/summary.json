@@ -1,0 +1,32 @@
+﻿{
+    "generated_utc":  "2026-03-28T16:42:25.8305280Z",
+    "probe_name":  "cpu-idle-write-diagnostics-20260328-194225",
+    "record_id":  "power.disable-cpu-idle-states",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194225",
+    "status":  "failed",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-28T16:43:21.0214436Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  true
+                                    }
+                     },
+    "shell_after":  null,
+    "result":  null,
+    "errors":  [
+                   "Write diagnostics did not produce a guest result file. Wrapper detail: no wrapper error file"
+               ],
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 }
+}

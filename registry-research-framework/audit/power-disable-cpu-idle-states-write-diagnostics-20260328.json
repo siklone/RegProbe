@@ -1,0 +1,41 @@
+{
+  "lane_label": "power.disable-cpu-idle-states",
+  "generated_utc": "2026-03-28T16:49:48.0810949Z",
+  "status": "write-diagnostics-reviewed",
+  "runner": "scripts/vm/run-cpu-idle-states-write-diagnostics.ps1",
+  "attempts": [
+    {
+      "summary_path": "evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-191358/summary.json",
+      "guest_output_root": "C:\\Tools\\ValidationController\\cpu-idle-write-diag",
+      "status": "failed",
+      "result_file_produced": false,
+      "wrapper_error_produced": false,
+      "shell_recovered": true
+    },
+    {
+      "summary_path": "evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-193355/summary.json",
+      "guest_output_root": "C:\\Tools\\ValidationController\\cpu-idle-write-diag",
+      "status": "failed",
+      "result_file_produced": false,
+      "wrapper_error_produced": false,
+      "shell_recovered": true
+    },
+    {
+      "summary_path": "evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194225/summary.json",
+      "guest_output_root": "C:\\Tools\\ValidationController\\cpu-idle-write-diag",
+      "status": "failed",
+      "result_file_produced": false,
+      "wrapper_error_produced": false,
+      "shell_recovered": true
+    },
+    {
+      "summary_path": "evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194947/summary.json",
+      "guest_output_root": "C:\\Tools\\ValidationController\\controller",
+      "status": "failed",
+      "result_file_produced": false,
+      "wrapper_error_produced": false,
+      "shell_recovered": true
+    }
+  ],
+  "conclusion": "A dedicated CPU idle write-diagnostics lane still did not produce guest-side result telemetry, even when the guest output root changed to an existing ValidationController directory. That tightens the remaining blocker toward guest execution or tooling semantics rather than a missing ordinary rerun."
+}

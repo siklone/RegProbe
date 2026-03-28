@@ -1,10 +1,10 @@
 ﻿{
     "schema_version":  "1.0",
-    "generated_utc":  "2026-03-28T06:01:53.6986815Z",
+    "generated_utc":  "2026-03-28T16:53:43.3745979Z",
     "summary":  {
-                    "total_incidents":  22,
+                    "total_incidents":  26,
                     "shell_recovered":  4,
-                    "needed_snapshot_revert":  21
+                    "needed_snapshot_revert":  25
                 },
     "incidents":  [
                       {
@@ -358,6 +358,70 @@
                           "needed_snapshot_revert":  true,
                           "recorded_utc":  "2026-03-28T06:01:53.6779562Z",
                           "notes":  "Boot trace lane failed before the final summary could be captured."
+                      },
+                      {
+                          "incident_id":  "20260328192250-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-write-diagnostics-20260328-191358",
+                          "family":  "power-runtime-diagnostics",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "write-diagnostics",
+                          "symptom":  "vmrun failed (-1): Error: A file was not found",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T16:22:50.2482463Z",
+                          "notes":  "CPU idle write diagnostics failed before a healthy completion and required snapshot recovery."
+                      },
+                      {
+                          "incident_id":  "20260328193755-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-write-diagnostics-20260328-193355",
+                          "family":  "power-runtime-diagnostics",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "write-diagnostics",
+                          "symptom":  "Write diagnostics did not produce a guest result file. Wrapper detail: no wrapper error file",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T16:37:55.6282648Z",
+                          "notes":  "CPU idle write diagnostics failed before a healthy completion and required snapshot recovery."
+                      },
+                      {
+                          "incident_id":  "20260328194554-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-write-diagnostics-20260328-194225",
+                          "family":  "power-runtime-diagnostics",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "write-diagnostics",
+                          "symptom":  "Write diagnostics did not produce a guest result file. Wrapper detail: no wrapper error file",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T16:45:54.4616071Z",
+                          "notes":  "CPU idle write diagnostics failed before a healthy completion and required snapshot recovery."
+                      },
+                      {
+                          "incident_id":  "20260328195343-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-write-diagnostics-20260328-194947",
+                          "family":  "power-runtime-diagnostics",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "write-diagnostics",
+                          "symptom":  "Write diagnostics did not produce a guest result file. Wrapper detail: no wrapper error file",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T16:53:43.3544428Z",
+                          "notes":  "CPU idle write diagnostics failed before a healthy completion and required snapshot recovery."
                       }
                   ]
 }
