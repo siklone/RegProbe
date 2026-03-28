@@ -1,0 +1,33 @@
+{
+  "bingrep": {
+    "executed": false,
+    "ascii_hits": 0,
+    "wide_hits": 0,
+    "hit_files": [],
+    "output_file": null
+  },
+  "floss": {
+    "executed": false,
+    "hits": 0,
+    "output_file": null
+  },
+  "capa": {
+    "executed": false,
+    "registry_read_capability": false,
+    "matched_rules": [],
+    "target_binary": null,
+    "output_file": null
+  },
+  "ghidra": {
+    "executed": true,
+    "trigger": "kernel-power-nextgate-candidate",
+    "pdb_loaded": false,
+    "pdb_source": null,
+    "string_xref_found": true,
+    "function_name": null,
+    "decompile_snippet": "The current-build ntoskrnl.exe pass found exact string xrefs for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifacts at 140c62b88 and 140c62bb8.",
+    "call_graph_depth": null,
+    "output_file": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md",
+    "ghidra_no_function_fallback": true
+  }
+}

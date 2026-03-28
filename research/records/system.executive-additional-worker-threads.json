@@ -1,0 +1,221 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.executive-additional-worker-threads",
+  "tweak_id": "system.executive-additional-worker-threads",
+  "record_status": "draft",
+  "summary": "Draft candidate record only. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, exact current-build ntoskrnl string hits, and preserved Ghidra fallback artifacts for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. That is enough to keep the pair active as a research lane, but the semantics still rely on unresolved current-build code blocks, there is no direct live runtime read, and there is no shipped RegProbe mapping.",
+  "validation_proof": {
+    "source_url": "research/notes/system-executive-additional-worker-threads-candidate-package-20260328.md",
+    "exact_quote_or_path": "A clean VM export at session-manager-executive-baseline-20260328-095048 confirmed AdditionalCriticalWorkerThreads = 0 and AdditionalDelayedWorkerThreads = 0 under Session Manager\\Executive. The current-build ntoskrnl.exe pass also preserved exact string hits and forced-boundary Ghidra artifacts at 140c62b88 and 140c62bb8.",
+    "key_found_on_page": true,
+    "notes": "This proof anchors the Executive worker-thread pair to a real clean-baseline export plus current-build ntoskrnl string and Ghidra fallback evidence. It is strong enough for an active candidate record, but still too weak for a shipped mapping or a claimed non-default profile."
+  },
+  "setting": {
+    "name": "Executive Additional Worker Threads",
+    "category": "System",
+    "area": "Session Manager Executive Worker Threads",
+    "scope": "device",
+    "casual_explanation": "These values appear to control extra executive worker threads for internal critical and delayed work queues. They are low-level kernel-adjacent knobs and are being tracked as research only.",
+    "why_people_change_it": "Advanced researchers may inspect these values when studying executive worker pool sizing, boot-time work scheduling, or internal queue behavior under Session Manager Executive.",
+    "tradeoffs_overview": "The pair is boot-relevant and kernel-adjacent. The names are suggestive, and current-build static evidence exists, but the repo still does not have a safe shipped mapping or a validated non-default profile.",
+    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\\AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. A clean Win25H2Clean export confirmed both values at 0 on the baseline. The first string pass found exact Unicode hits for both names in current-build ntoskrnl.exe and no exact hits in smss.exe. The improved Ghidra fallback then preserved forced-boundary reviewable artifacts at 140c62b88 and 140c62bb8, but the blocks still do not provide a clean high-confidence semantic map. This is enough to keep the pair as a draft candidate lane, not enough to publish it as an end-user tweak.",
+    "targets": [
+      {
+        "target_id": "session-manager-executive-worker-thread-pair",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "AdditionalCriticalWorkerThreads / AdditionalDelayedWorkerThreads",
+        "value_type": "REG_DWORD pair",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The clean VM baseline currently exposes both Executive worker-thread values as 0.",
+            "evidence_ids": [
+              "vm-session-manager-executive-baseline-20260328"
+            ]
+          },
+          {
+            "state_kind": "feature-dependent",
+            "label": "Undocumented custom DWORD pair",
+            "meaning": "The evidence so far only proves that the pair exists and is referenced in current-build ntoskrnl. A safe non-default profile is not validated yet.",
+            "evidence_ids": [
+              "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
+              "kernel-power-existing-next-gate-20260328"
+            ]
+          }
+        ],
+        "notes": "Keep the pair together. The lane is stronger when AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads are treated as one candidate surface."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "There is no current RegProbe provider or UI mapping for the Executive worker-thread pair. The lane is still research-only intake.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current Win25H2Clean baseline with the Session Manager Executive key populated",
+      "states": [
+        {
+          "target_id": "session-manager-executive-worker-thread-pair",
+          "state_kind": "value",
+          "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+          "rationale": "Leave the currently observed Executive worker-thread pair unchanged until a stronger semantic map exists."
+        }
+      ],
+      "notes": "UuidSequenceNumber was also present in the same baseline export, but it remains a separate candidate lane.",
+      "evidence_ids": [
+        "vm-session-manager-executive-baseline-20260328"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-baseline",
+      "label": "Observed baseline",
+      "intended_for": [
+        "Registry research tracking",
+        "Kernel executive documentation"
+      ],
+      "avoid_for": [
+        "End-user presets",
+        "General system tuning"
+      ],
+      "states": [
+        {
+          "target_id": "session-manager-executive-worker-thread-pair",
+          "state_kind": "value",
+          "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+          "rationale": "Keep the pair at the current observed baseline while evidence gathering continues."
+        }
+      ],
+      "good_when": "You want to document the current baseline without inventing a non-default worker-thread profile.",
+      "bad_when": "You want a shipped tweak or a claimed performance recommendation.",
+      "tradeoffs": [
+        "Preserves the current observed Executive worker-thread pair.",
+        "Keeps the lane documentation-only until a stronger semantic map exists."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "vm-session-manager-executive-baseline-20260328"
+      ]
+    },
+    {
+      "profile_id": "research-candidate-pair",
+      "label": "Research candidate pair",
+      "intended_for": [
+        "Advanced kernel executive research"
+      ],
+      "avoid_for": [
+        "General users",
+        "Published presets"
+      ],
+      "states": [
+        {
+          "target_id": "session-manager-executive-worker-thread-pair",
+          "state_kind": "feature-dependent",
+          "rationale": "Treat the pair as an active research target rather than a validated preset."
+        }
+      ],
+      "good_when": "You are collecting additional runtime or static evidence for the Executive worker-thread pair.",
+      "bad_when": "You need a documented end-user recommendation.",
+      "tradeoffs": [
+        "Keeps the lane active for further research.",
+        "Does not provide a validated non-default value pair yet."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
+        "kernel-power-existing-next-gate-20260328"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "vm-session-manager-executive-baseline-20260328",
+      "kind": "registry-observation",
+      "title": "Win25H2Clean Session Manager Executive baseline export",
+      "location": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg and evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
+      "summary": "A clean VM baseline export confirmed AdditionalCriticalWorkerThreads = 0 and AdditionalDelayedWorkerThreads = 0 under Session Manager\\Executive, with UuidSequenceNumber also present as adjacent context.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
+      "kind": "decompilation",
+      "title": "Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair",
+      "location": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+      "summary": "The current-build ntoskrnl.exe pass found exact string hits for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifacts at 140c62b88 and 140c62bb8.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "kernel-power-existing-static-probe-20260328",
+      "kind": "inference",
+      "title": "Kernel power static probe summary for existing Session Manager candidates",
+      "location": "registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json and research/notes/kernel-power-existing-static-triage-20260328.md",
+      "summary": "The first static probe confirmed exact Unicode hits in ntoskrnl.exe for the Executive worker-thread pair and no exact hits in smss.exe.",
+      "supports": [
+        "path",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "kernel-power-existing-next-gate-20260328",
+      "kind": "inference",
+      "title": "Kernel power next-gate intake summary",
+      "location": "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json and research/notes/kernel-power-next-gate-ghidra-review-20260328.md",
+      "summary": "The 2026-03-28 intake review kept the Executive worker-thread pair active as the second next-gate lane after the stronger watchdog pair.",
+      "supports": [
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The Executive worker-thread pair now has a clean baseline export, exact ntoskrnl string hits, and current-build Ghidra fallback artifacts for both values. That is enough to keep the pair active as a draft candidate lane, but the semantics still depend on unresolved current-build code blocks, there is no direct live runtime read, and there is no shipped RegProbe mapping.",
+    "blocking_issues": [
+      "No shipped RegProbe provider or UI mapping exists for the Executive worker-thread pair yet.",
+      "The current semantic lead still depends on forced-boundary ntoskrnl Ghidra review rather than a clean primary code path or Microsoft registry contract.",
+      "The lane still lacks a direct live read or a safe non-default diff for the exact Executive worker-thread values."
+    ]
+  },
+  "open_questions": [
+    "Can a cleaner symbol or binary target produce a higher-confidence semantic map than the current forced-boundary ntoskrnl fallback blocks?",
+    "Does any boot-time runtime lane expose a direct read of AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads?",
+    "Should this pair ever become a shipped tweak, or should it stay documentation-only even if semantics converge?"
+  ],
+  "tested_on": [
+    {
+      "environment": "VMware Workstation guest",
+      "os": "Windows 11 25H2",
+      "edition": "Win25H2Clean",
+      "notes": "Baseline export ran on the visible-shell RegProbe baseline after the 2026-03-28 reboot-verified watchdog work."
+    }
+  ],
+  "last_reviewed_utc": "2026-03-28T10:10:00+03:00"
+}

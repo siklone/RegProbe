@@ -1,0 +1,14 @@
+{
+  "lane_label": "system.executive-additional-worker-threads",
+  "generated_utc": "2026-03-28T07:10:00Z",
+  "status": "draft-record-created",
+  "research_record": "research/records/system.executive-additional-worker-threads.json",
+  "v31_evidence_root": "evidence/records/system.executive-additional-worker-threads",
+  "supporting_inputs": [
+    "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json",
+    "registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json",
+    "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/metadata.json"
+  ],
+  "notes_path": "research/notes/system-executive-additional-worker-threads-candidate-package-20260328.md",
+  "next_gate": "direct runtime read or cleaner code-path confirmation before any app mapping"
+}

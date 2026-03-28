@@ -1,0 +1,19 @@
+{
+  "class": "C",
+  "pipeline_version": "v3.1",
+  "reason": "The Executive worker-thread pair now has a clean baseline export, exact ntoskrnl string hits, and current-build Ghidra fallback artifacts for both values. That is enough to keep the pair active as a draft candidate lane, but the semantics still depend on unresolved current-build code blocks, there is no direct live runtime read, and there is no shipped RegProbe mapping.",
+  "cross_layer_satisfied": false,
+  "layers_used": [
+    "static_ghidra"
+  ],
+  "layer_count": 1,
+  "frida_kernel_guard_applied": true,
+  "dead_flag_checks": {
+    "etw_executed": false,
+    "boot_phase_included": false,
+    "correct_tool_used": true,
+    "trigger_condition_tested": false
+  },
+  "class_ready_basis": "candidate-lane",
+  "next_missing_layer": "app-mapping"
+}

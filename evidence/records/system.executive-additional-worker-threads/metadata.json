@@ -1,0 +1,23 @@
+{
+  "$schema": "registry-evidence-v3.1/metadata",
+  "tweak_id": "system.executive-additional-worker-threads",
+  "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+  "value_name": "AdditionalCriticalWorkerThreads + AdditionalDelayedWorkerThreads",
+  "value_type": "REG_DWORD pair",
+  "value_data_before": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+  "value_data_after": "custom DWORD pair (research-only)",
+  "enrichment": {
+    "hive": "HKLM",
+    "suspected_layer": "kernel",
+    "boot_phase_relevant": true,
+    "acl_owner": null,
+    "acl_sddl": null,
+    "acl_user_readable": null,
+    "source": "repo_research",
+    "official_doc_exists": false,
+    "reactos_reference": false,
+    "geoff_chappell_reference": false,
+    "pdb_symbol_match": null,
+    "source_repositories": []
+  }
+}

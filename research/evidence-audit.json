@@ -1,22 +1,22 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T06:45:47.695476Z",
+  "generated_utc": "2026-03-28T06:57:15.955770Z",
   "summary": {
-    "total_active_records": 243,
+    "total_active_records": 244,
     "class_counts": {
       "A": 241,
       "B": 1,
-      "C": 1
+      "C": 2
     },
     "lane_counts": {
       "official-policy": 236,
       "runtime": 5,
-      "system": 2
+      "system": 3
     },
     "next_missing_layer_counts": {
       "none": 241,
       "decision-gate": 1,
-      "app-mapping": 1
+      "app-mapping": 2
     },
     "re_audit_required_count": 0
   },
@@ -9141,6 +9141,53 @@
       "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/system.enable-indexing-encrypted-items.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "system.executive-additional-worker-threads",
+      "tweak_id": "system.executive-additional-worker-threads",
+      "evidence_class": "C",
+      "lane": "system",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": true,
+      "ghidra_no_function_fallback": true,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "app-mapping",
+      "cross_layer_satisfied": false,
+      "layers_used": [
+        "static_ghidra"
+      ],
+      "tools_used": [
+        "ghidra",
+        "ghidra_no_function_fallback"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": false,
+        "correct_tool_used": true,
+        "trigger_condition_tested": false
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.1",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "medium",
+      "source_file": "research/records/system.executive-additional-worker-threads.json",
       "incident_ids": []
     },
     {

@@ -1,0 +1,172 @@
+{
+  "$schema": "registry-evidence-v3.1/full-evidence",
+  "record_id": "system.executive-additional-worker-threads",
+  "tweak_id": "system.executive-additional-worker-threads",
+  "metadata": {
+    "$schema": "registry-evidence-v3.1/metadata",
+    "tweak_id": "system.executive-additional-worker-threads",
+    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+    "value_name": "AdditionalCriticalWorkerThreads + AdditionalDelayedWorkerThreads",
+    "value_type": "REG_DWORD pair",
+    "value_data_before": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+    "value_data_after": "custom DWORD pair (research-only)",
+    "enrichment": {
+      "hive": "HKLM",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "acl_owner": null,
+      "acl_sddl": null,
+      "acl_user_readable": null,
+      "source": "repo_research",
+      "official_doc_exists": false,
+      "reactos_reference": false,
+      "geoff_chappell_reference": false,
+      "pdb_symbol_match": null,
+      "source_repositories": []
+    }
+  },
+  "runtime": {
+    "etw": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": false,
+      "trace_file": null
+    },
+    "procmon": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "trace_file": null
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: the Executive worker-thread pair lives under HKLM\\\\SYSTEM and stays out of Frida.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    },
+    "registry_observation": {
+      "executed": true,
+      "query_exit_code": 0,
+      "export_exit_code": 0,
+      "timestamp": "2026-03-28T06:50:53.0500795Z",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "observation": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+      "output_files": [
+        "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
+        "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg",
+        "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/metadata.json"
+      ]
+    }
+  },
+  "static": {
+    "bingrep": {
+      "executed": false,
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "hit_files": [],
+      "output_file": null
+    },
+    "floss": {
+      "executed": false,
+      "hits": 0,
+      "output_file": null
+    },
+    "capa": {
+      "executed": false,
+      "registry_read_capability": false,
+      "matched_rules": [],
+      "target_binary": null,
+      "output_file": null
+    },
+    "ghidra": {
+      "executed": true,
+      "trigger": "kernel-power-nextgate-candidate",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "string_xref_found": true,
+      "function_name": null,
+      "decompile_snippet": "The current-build ntoskrnl.exe pass found exact string xrefs for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifacts at 140c62b88 and 140c62bb8.",
+      "call_graph_depth": null,
+      "output_file": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md",
+      "ghidra_no_function_fallback": true
+    }
+  },
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": false,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": null
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
+  },
+  "classification": {
+    "class": "C",
+    "pipeline_version": "v3.1",
+    "reason": "The Executive worker-thread pair now has a clean baseline export, exact ntoskrnl string hits, and current-build Ghidra fallback artifacts for both values. That is enough to keep the pair active as a draft candidate lane, but the semantics still depend on unresolved current-build code blocks, there is no direct live runtime read, and there is no shipped RegProbe mapping.",
+    "cross_layer_satisfied": false,
+    "layers_used": [
+      "static_ghidra"
+    ],
+    "layer_count": 1,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": false,
+      "correct_tool_used": true,
+      "trigger_condition_tested": false
+    },
+    "class_ready_basis": "candidate-lane",
+    "next_missing_layer": "app-mapping"
+  },
+  "timeline": [
+    {
+      "step": "faz0_intake",
+      "timestamp": "2026-03-28T00:08:28Z"
+    },
+    {
+      "step": "faz2_static_triage",
+      "timestamp": "2026-03-28T00:32:36Z"
+    },
+    {
+      "step": "faz3_registry_baseline_export",
+      "timestamp": "2026-03-28T06:50:53.0500795Z"
+    },
+    {
+      "step": "classification",
+      "timestamp": "2026-03-28T07:10:00Z"
+    }
+  ],
+  "artifact_refs": [],
+  "research_record": "research/records/system.executive-additional-worker-threads.json",
+  "research_record_fallback": "research/records/system.executive-additional-worker-threads.review.json"
+}

@@ -1,0 +1,42 @@
+{
+  "etw": {
+    "executed": false,
+    "events_found": false,
+    "reading_process": null,
+    "reading_pid": null,
+    "operation": null,
+    "timestamp": null,
+    "boot_phase_included": false,
+    "trace_file": null
+  },
+  "procmon": {
+    "executed": false,
+    "events_found": false,
+    "reading_process": null,
+    "trace_file": null
+  },
+  "frida": {
+    "executed": false,
+    "skip_reason": "KERNEL_GUARD: the Executive worker-thread pair lives under HKLM\\\\SYSTEM and stays out of Frida.",
+    "result_valid": false
+  },
+  "dtrace": {
+    "executed": false,
+    "events_found": false,
+    "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+    "output_file": null
+  },
+  "registry_observation": {
+    "executed": true,
+    "query_exit_code": 0,
+    "export_exit_code": 0,
+    "timestamp": "2026-03-28T06:50:53.0500795Z",
+    "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+    "observation": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+    "output_files": [
+      "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
+      "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg",
+      "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/metadata.json"
+    ]
+  }
+}
