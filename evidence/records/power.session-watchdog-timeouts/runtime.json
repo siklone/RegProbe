@@ -10,10 +10,10 @@
     "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt"
   },
   "procmon": {
-    "executed": false,
-    "events_found": false,
-    "reading_process": null,
-    "trace_file": null
+    "executed": true,
+    "events_found": true,
+    "reading_process": "System (PID 4) during boot; targeted post-boot DcomLaunch/Power trigger produced no matching reads",
+    "trace_file": "evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary.json and evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary-collect.json and evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/watchdog-procmon-bootlog.hits.csv and evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/summary.json and evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/watchdog-power-trigger.txt"
   },
   "frida": {
     "executed": false,

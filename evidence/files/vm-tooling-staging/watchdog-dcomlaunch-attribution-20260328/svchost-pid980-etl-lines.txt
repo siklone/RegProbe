@@ -1,0 +1,20 @@
+﻿Microsoft-Windows-Kernel-Process/ProcessStart/win:Start,   25612590,     services.exe ( 824),        828,   0, , , , ,        "Unknown" ( 980), 13, 03/28/2026 06:09:29.529,     services.exe ( 824), 11, 0, 0, 1, 1, S-1-16-16384, "\Device\HarddiskVolume3\Windows\System32\svchost.exe", 0x000230c0, 0x00e1a740, "", "", 0
+                P-Start,   25612591,      svchost.exe ( 980),        824,          0, 0x0000cc0d8bcef080, 0x0000000134e3e000, 0x00000000, S-1-5-18, C:\Windows\system32\svchost.exe -k DcomLaunch -p, <none>, <none>
+Microsoft-Windows-Kernel-Process/ThreadStart/win:Start,   25613949,     services.exe ( 824),        828,   0, , , , ,      svchost.exe ( 980), 984, 0xfffff503a48c0000, 0xfffff503a48ba000, 0x0000001ffc480000, 0x0000001ffc47c000, 0x00007ff6adfa4fe0, 0x00007ff6adfa4fe0, 0x0000001ffc21a000, 0
+                T-Start,   25613950,      svchost.exe ( 980),        984, 0xfffff503a48c0000, 0xfffff503a48ba000, 0x0000001ffc47c000, 0x0000001ffc480000, 0x0000001ffc21a000,    0x00000000,       8,       5,     2,  0x00,      svchost.exe!0x00007ff6adfa4fe0,  "Unknown"
+            ReadyThread,   25613954,     services.exe ( 824),        828,      svchost.exe ( 980),        984,         None,               0,   0,      
+                CSwitch,   25613992,      svchost.exe ( 980),        984,    8,   -1,          42,       42,             Idle (   0),          0,    0,   -1,         Running,        Executive,  NonSwap,    638,   2,   2,          0,    0,    0,     Utility,   Important
+                CSwitch,   25614005,             Idle (   0),          0,    0,   -1,           0,        0,      svchost.exe ( 980),        984,    8,   -1,         Waiting,        Suspended,  NonSwap,     13,   2,   1,    5159936,    0,    0,   Important,     Utility
+            ReadyThread,   25621646,     services.exe ( 824),        828,      svchost.exe ( 980),        984,       Unwait,               0,   0,      
+                CSwitch,   25621726,      svchost.exe ( 980),        984,    8,   -1,        7722,        0,             Idle (   0),          0,    0,   -1,         Running,        Executive,  NonSwap,   5084,   2,   2,          0,    0,    0,     Utility,   Important
+Microsoft-Windows-Kernel-Process/ImageLoad/win:Info,   25621792,      svchost.exe ( 980),        984,   2, , , , , 0x00007ff6adfa0000, 0x0000000000013000,      svchost.exe ( 980), 143552, 14788416, 0x00007ff6adfa0000, "\Device\HarddiskVolume3\Windows\System32\svchost.exe"
+                ImageId,   25621793,      svchost.exe ( 980), 0x00007ff6adfa0000, 0x00013000,    0x00e1a740, "svchost.exe"
+             DbgId/RSDS,   25621793,      svchost.exe ( 980), 0x00007ff6adfa0000, {2c75113f-d2cc-27ca-51ca-643c28bed3b1}, 0x00000001, "svchost.pdb"
+   UnknownEvent/Classic,   25621793,      svchost.exe ( 980),        984,   2, {b3e675d7-2554-4f18-830b-2762732560de}, 0x26,  0x00,  0x0002, 20
+   UnknownEvent/Classic,   25621793,      svchost.exe ( 980),        984,   2, {b3e675d7-2554-4f18-830b-2762732560de}, 0x28,  0x00,  0x0001, 12
+                I-Start,   25621793,      svchost.exe ( 980), 0x00007ff6adfa0000, 0x00007ff6adfb3000, 0x000230c0,    0x00e1a740, 0x00007ff6adfa0000, "C:\Windows\System32\svchost.exe", , "\Device\HarddiskVolume3\Windows\System32\svchost.exe"
+Microsoft-Windows-Kernel-Process/ImageLoad/win:Info,   25621817,      svchost.exe ( 980),        984,   2, , , , , 0x00007ffb02240000, 0x0000000000269000,      svchost.exe ( 980), 2572841, 244743817, 0x00007ffb02240000, "\Device\HarddiskVolume3\Windows\System32\ntdll.dll"
+                ImageId,   25621818,      svchost.exe ( 980), 0x00007ffb02240000, 0x00269000,    0x0e967e89, "ntdll.dll"
+             DbgId/RSDS,   25621818,      svchost.exe ( 980), 0x00007ffb02240000, {21eb609f-5cd4-2f73-8b9a-d508893634bd}, 0x00000001, "ntdll.pdb"
+   UnknownEvent/Classic,   25621818,      svchost.exe ( 980),        984,   2, {b3e675d7-2554-4f18-830b-2762732560de}, 0x26,  0x00,  0x0002, 20
+   UnknownEvent/Classic,   25621818,      svchost.exe ( 980),        984,   2, {b3e675d7-2554-4f18-830b-2762732560de}, 0x28,  0x00,  0x0001, 12

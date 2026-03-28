@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T10:41:22.881749Z",
+  "generated_utc": "2026-03-28T11:28:10.518310Z",
   "summary": {
     "total_records": 298,
     "class_counts": {
@@ -6833,15 +6833,15 @@
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The runtime story now includes both the host-side ETL review and a working Procmon boot-log capture. Together they confirm that the candidate surface is touched during boot, but they still do not show a direct read of WatchdogResumeTimeout or WatchdogSleepT...",
+        "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, and a targeted post-boot DcomLaunch/Power trigger that stayed shell-safe while still returning no matching hits. Together they confirm the candidate surface is real, but they still...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md",
+            "url": "research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md",
             "kind": "validation-proof",
-            "summary": "The host-side ETL parse now proves boot-time access to Session Manager\\Power. The strongest readers in this pass were System (PID 4) during boot and svchost.exe (PID 980) later..."
+            "summary": "The ETL svchost lead is now narrowed to the DcomLaunch service host group, which includes the Power service on the current Win25H2Clean baseline."
           },
           {
             "title": "Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair",

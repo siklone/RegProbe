@@ -1,7 +1,7 @@
 {
   "class": "C",
   "pipeline_version": "v3.1",
-  "reason": "The watchdog timeout pair now has a clean baseline export, exact current-build ntoskrnl string hits plus Ghidra fallback artifacts, a repo-side PoFx pseudocode lead, a successful reboot-verified boot trace, and a host-side ETL registry review that shows real Session Manager\\Power access by System and svchost.exe during boot. That gives the candidate a credible cross-layer evidence base, but there is still no shipped app mapping, no validated non-default profile, and no direct live read of the exact watchdog values.",
+  "reason": "The watchdog timeout pair now has a clean baseline export, exact current-build ntoskrnl string hits plus Ghidra fallback artifacts, a repo-side PoFx pseudocode lead, a successful reboot-verified boot trace, a host-side ETL registry review, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, and two Procmon passes: a working boot-log review with adjacent Session Manager\\Power hits and a shell-safe post-boot DcomLaunch/Power trigger that still returned no exact watchdog reads. That gives the candidate a credible cross-layer evidence base, but there is still no shipped app mapping, no validated non-default profile, and no direct live read of the exact watchdog values themselves.",
   "cross_layer_satisfied": true,
   "layers_used": [
     "runtime_etw",

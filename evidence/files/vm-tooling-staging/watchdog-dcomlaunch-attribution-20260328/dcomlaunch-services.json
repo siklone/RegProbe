@@ -1,0 +1,50 @@
+﻿[
+    {
+        "Name":  "LSM",
+        "DisplayName":  "Local Session Manager",
+        "State":  "Running",
+        "StartMode":  "Auto",
+        "ProcessId":  872,
+        "PathName":  "C:\\Windows\\system32\\svchost.exe -k DcomLaunch -p"
+    },
+    {
+        "Name":  "BrokerInfrastructure",
+        "DisplayName":  "Background Tasks Infrastructure Service",
+        "State":  "Running",
+        "StartMode":  "Auto",
+        "ProcessId":  984,
+        "PathName":  "C:\\Windows\\system32\\svchost.exe -k DcomLaunch -p"
+    },
+    {
+        "Name":  "DcomLaunch",
+        "DisplayName":  "DCOM Server Process Launcher",
+        "State":  "Running",
+        "StartMode":  "Auto",
+        "ProcessId":  984,
+        "PathName":  "C:\\Windows\\system32\\svchost.exe -k DcomLaunch -p"
+    },
+    {
+        "Name":  "PlugPlay",
+        "DisplayName":  "Plug and Play",
+        "State":  "Running",
+        "StartMode":  "Manual",
+        "ProcessId":  984,
+        "PathName":  "C:\\Windows\\system32\\svchost.exe -k DcomLaunch -p"
+    },
+    {
+        "Name":  "Power",
+        "DisplayName":  "Power",
+        "State":  "Running",
+        "StartMode":  "Auto",
+        "ProcessId":  984,
+        "PathName":  "C:\\Windows\\system32\\svchost.exe -k DcomLaunch -p"
+    },
+    {
+        "Name":  "SystemEventsBroker",
+        "DisplayName":  "System Events Broker",
+        "State":  "Running",
+        "StartMode":  "Auto",
+        "ProcessId":  984,
+        "PathName":  "C:\\Windows\\system32\\svchost.exe -k DcomLaunch -p"
+    }
+]

@@ -1,0 +1,9 @@
+﻿MODE=capture
+REGISTRY_PATH=HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power
+VALUE_NAME=WatchdogSleepTimeout
+PML_EXISTS=True
+CSV_EXISTS=True
+HITSCSV_EXISTS=False
+MATCH_COUNT=0
+ORIGINAL={"path_exists":true,"value_exists":true,"value":300,"value_type":"System.Int32"}
+RESTORED={"path_exists":true,"value_exists":true,"value":300,"value_type":"System.Int32"}
