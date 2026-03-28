@@ -4,12 +4,12 @@
   "record_id": "system.executive-additional-worker-threads",
   "tweak_id": "system.executive-additional-worker-threads",
   "record_status": "draft",
-  "summary": "Draft candidate record only. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\\Executive, an ETW-specific keyword review, a successful Procmon boot-log lane with exact-value filtering, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, and a supporting ReactOS semantic hypothesis for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. That is enough to keep the pair active as a research lane, but the semantics still rely on unresolved current-build code blocks, the exact worker-thread values still do not show up in runtime payloads, and there is no shipped RegProbe mapping.",
+  "summary": "Draft candidate record only. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\\Executive, an ETW-specific keyword review, a successful Procmon boot-log lane with exact-value filtering, a shell-safe post-boot stress trigger lane with exact-value filtering, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, and a supporting ReactOS semantic hypothesis for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. That is enough to keep the pair active as a research lane, but the semantics still rely on unresolved current-build code blocks, the exact worker-thread values still do not show up in runtime payloads, and there is no shipped RegProbe mapping.",
   "validation_proof": {
-    "source_url": "research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md",
-    "exact_quote_or_path": "The Executive worker-thread lane now has a real Procmon boot-log run on the clean RegProbe baseline. The lane completed a host-driven boot cycle, produced a real boot-log PML, and successfully converted it to CSV. Even with a full boot-log capture, the filtered lane still returned MATCH_COUNT=0 for AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber.",
+    "source_url": "research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md",
+    "exact_quote_or_path": "The Executive pair is no longer waiting on \"maybe a post-boot stress condition will surface it.\" A real post-boot stressed Procmon lane now exists, stayed shell-safe, and still failed to produce an exact read for either worker-thread value or the adjacent UuidSequenceNumber value.",
     "key_found_on_page": true,
-    "notes": "This proof anchors the Executive worker-thread pair to a real clean-baseline export, a bounded boot-time runtime extract, a successful exact-value Procmon boot-log lane, plus current-build ntoskrnl string and Ghidra fallback evidence. It is strong enough for an active candidate record, but still too weak for a shipped mapping or a claimed non-default profile because the exact worker-thread pair does not yet appear in the runtime payload."
+    "notes": "This proof anchors the Executive worker-thread pair to a real clean-baseline export, a bounded boot-time runtime extract, a successful exact-value Procmon boot-log lane, a successful shell-safe post-boot stress trigger lane, plus current-build ntoskrnl string and Ghidra fallback evidence. It is strong enough for an active candidate record, but still too weak for a shipped mapping or a claimed non-default profile because the exact worker-thread pair does not yet appear in the runtime payload."
   },
   "setting": {
     "name": "Executive Additional Worker Threads",
@@ -19,7 +19,7 @@
     "casual_explanation": "These values appear to control extra executive worker threads for internal critical and delayed work queues. They are low-level kernel-adjacent knobs and are being tracked as research only.",
     "why_people_change_it": "Advanced researchers may inspect these values when studying executive worker pool sizing, boot-time work scheduling, or internal queue behavior under Session Manager Executive.",
     "tradeoffs_overview": "The pair is boot-relevant and kernel-adjacent. The names are suggestive, and current-build static evidence exists, but the repo still does not have a safe shipped mapping or a validated non-default profile.",
-    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\\AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. A clean Win25H2Clean export confirmed both values at 0 on the baseline. The first string pass found exact Unicode hits for both names in current-build ntoskrnl.exe and no exact hits in smss.exe. The improved Ghidra fallback then preserved forced-boundary reviewable artifacts at 140c62b88 and 140c62bb8, but the blocks still do not provide a clean high-confidence semantic map. A bounded host-side ETL extract from the successful boot trace now also proves that System (PID 4) touches Session Manager\\Executive during early boot and actively queries plus sets the adjacent UuidSequenceNumber value in the same path. An ETW-specific keyword review over that extract tightened the lane again and still surfaced only Session Manager\\Executive path activity plus adjacent UuidSequenceNumber traffic. A real Procmon boot-log lane now completes on the same baseline, produces a PML plus CSV, and still returns zero filtered hits for AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber. A supporting ReactOS source pass also found both value names in the registry data table and found matching internal variables in ntoskrnl work-queue code where the additional worker-thread counts are clamped and then added to the base delayed and critical worker counts. That ReactOS lead is useful for semantics, but it is still supporting-only because the registry table maps both names to DummyData and ReactOS is not current-build Windows. This is enough to keep the pair as a draft candidate lane, not enough to publish it as an end-user tweak.",
+    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\\AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. A clean Win25H2Clean export confirmed both values at 0 on the baseline. The first string pass found exact Unicode hits for both names in current-build ntoskrnl.exe and no exact hits in smss.exe. The improved Ghidra fallback then preserved forced-boundary reviewable artifacts at 140c62b88 and 140c62bb8, but the blocks still do not provide a clean high-confidence semantic map. A bounded host-side ETL extract from the successful boot trace now also proves that System (PID 4) touches Session Manager\\Executive during early boot and actively queries plus sets the adjacent UuidSequenceNumber value in the same path. An ETW-specific keyword review over that extract tightened the lane again and still surfaced only Session Manager\\Executive path activity plus adjacent UuidSequenceNumber traffic. A real Procmon boot-log lane now completes on the same baseline, produces a PML plus CSV, and still returns zero filtered hits for AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber. A second shell-safe post-boot stress trigger lane then broadened the runtime surface with service enumeration, CIM service export, event-log enumeration, and parallel service and file pressure, yet still produced a real PML plus CSV with zero exact hits for the worker-thread pair or the adjacent UuidSequenceNumber value. A supporting ReactOS source pass also found both value names in the registry data table and found matching internal variables in ntoskrnl work-queue code where the additional worker-thread counts are clamped and then added to the base delayed and critical worker counts. That ReactOS lead is useful for semantics, but it is still supporting-only because the registry table maps both names to DummyData and ReactOS is not current-build Windows. This is enough to keep the pair as a draft candidate lane, not enough to publish it as an end-user tweak.",
     "targets": [
       {
         "target_id": "session-manager-executive-worker-thread-pair",
@@ -40,7 +40,7 @@
           {
             "state_kind": "feature-dependent",
             "label": "Undocumented custom DWORD pair",
-            "meaning": "The evidence so far only proves that the pair exists, is referenced in current-build ntoskrnl, and still avoids an exact-value Procmon boot-log hit on the current baseline. A safe non-default profile is not validated yet.",
+            "meaning": "The evidence so far only proves that the pair exists, is referenced in current-build ntoskrnl, and still avoids an exact-value Procmon boot-log or shell-safe stress-trigger hit on the current baseline. A safe non-default profile is not validated yet.",
             "evidence_ids": [
               "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
               "kernel-power-existing-next-gate-20260328"
@@ -136,6 +136,7 @@
         "vm-executive-etl-registry-review-20260328",
         "vm-executive-etw-keyword-review-20260328",
         "vm-executive-procmon-bootlog-20260328",
+        "vm-executive-stress-trigger-20260328",
         "reactos-executive-worker-threads-hypothesis-20260328"
       ]
     }
@@ -232,6 +233,18 @@
       "strength": "medium"
     },
     {
+      "evidence_id": "vm-executive-stress-trigger-20260328",
+      "kind": "procmon-trace",
+      "title": "Shell-safe post-boot stress trigger for the Executive worker-thread pair",
+      "location": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt and research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md",
+      "summary": "A shell-safe post-boot stress trigger lane combined service enumeration, event-log enumeration, CIM service export, and parallel service and file pressure on the clean RegProbe baseline. The lane produced a real PML plus CSV and still returned zero filtered hits for AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "reactos-executive-worker-threads-hypothesis-20260328",
       "kind": "open-source-reference",
       "title": "ReactOS semantic hypothesis for the Executive worker-thread pair",
@@ -251,16 +264,16 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\\Executive activity from System (PID 4), a successful Procmon boot-log lane with zero exact-value hits, exact ntoskrnl string hits, and current-build Ghidra fallback artifacts for both values. That is enough to keep the pair active as a draft candidate lane, but the semantics still depend on unresolved current-build code blocks, the exact worker-thread pair still does not appear in runtime payloads, and there is no shipped RegProbe mapping.",
+    "why": "The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\\Executive activity from System (PID 4), a successful Procmon boot-log lane with zero exact-value hits, a shell-safe post-boot stress trigger lane with zero exact-value hits, exact ntoskrnl string hits, and current-build Ghidra fallback artifacts for both values. That is enough to keep the pair active as a draft candidate lane, but the semantics still depend on unresolved current-build code blocks, the exact worker-thread pair still does not appear in runtime payloads, and there is no shipped RegProbe mapping.",
     "blocking_issues": [
       "No shipped RegProbe provider or UI mapping exists for the Executive worker-thread pair yet.",
       "The current semantic lead still depends on forced-boundary ntoskrnl Ghidra review rather than a clean primary code path or Microsoft registry contract.",
-      "Even a successful Procmon boot-log lane still returns zero exact hits for the Executive worker-thread values, so the lane still lacks a direct live read or a safe non-default diff."
+      "Even successful Procmon boot-log and shell-safe post-boot stress trigger lanes still return zero exact hits for the Executive worker-thread values, so the lane still lacks a direct live read or a safe non-default diff."
     ]
   },
   "open_questions": [
     "Can a cleaner symbol or binary target produce a higher-confidence semantic map than the current forced-boundary ntoskrnl fallback blocks?",
-    "Does any boot-time runtime lane expose a direct read of AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads, or is the current Executive runtime signal limited to adjacent values such as UuidSequenceNumber and negative Procmon boot-log results?",
+    "Does any runtime lane expose a direct read of AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads, or is the current Executive runtime signal limited to adjacent values such as UuidSequenceNumber plus negative Procmon boot-log and post-boot stress-trigger results?",
     "Should this pair ever become a shipped tweak, or should it stay documentation-only even if semantics converge?"
   ],
   "tested_on": [
@@ -268,8 +281,8 @@
       "environment": "VMware Workstation guest",
       "os": "Windows 11 25H2",
       "edition": "Win25H2Clean",
-      "notes": "Baseline export ran on the visible-shell RegProbe baseline after the 2026-03-28 reboot-verified watchdog work. The bounded ETL review reused the successful boot trace from the same baseline, and the Procmon boot-log follow-up completed cleanly on baseline-20260327-regprobe-visible-shell-stable."
+      "notes": "Baseline export ran on the visible-shell RegProbe baseline after the 2026-03-28 reboot-verified watchdog work. The bounded ETL review reused the successful boot trace from the same baseline, the Procmon boot-log follow-up completed cleanly on baseline-20260327-regprobe-visible-shell-stable, and the shell-safe post-boot stress trigger lane also completed cleanly on the same baseline."
     }
   ],
-  "last_reviewed_utc": "2026-03-28T15:15:00Z"
+  "last_reviewed_utc": "2026-03-28T16:05:00Z"
 }

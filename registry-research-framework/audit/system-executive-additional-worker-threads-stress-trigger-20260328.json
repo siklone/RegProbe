@@ -1,0 +1,22 @@
+{
+  "lane_label": "system.executive-additional-worker-threads",
+  "generated_utc": "2026-03-28T16:02:02.9096269Z",
+  "status": "postboot-stress-trigger-reviewed",
+  "probe_summary_path": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json",
+  "probe_text_path": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt",
+  "tasklist_path": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress-tasklist.txt",
+  "sc_all_path": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress-sc-all.txt",
+  "event_logs_path": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress-event-logs.txt",
+  "system_events_path": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress-system-events.json",
+  "cim_services_path": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress-cim-services.json",
+  "stress_jobs_path": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress-stress-jobs.json",
+  "pml_placeholder_path": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.pml.md",
+  "shell_healthy_before": true,
+  "shell_healthy_after": true,
+  "pml_captured": true,
+  "csv_captured": true,
+  "match_count": 0,
+  "exact_value_hits": [],
+  "adjacent_hits": [],
+  "conclusion": "A shell-safe post-boot stress trigger lane produced a real PML and CSV plus service and event-log context, but still yielded zero matching reads for AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber on the current Win25H2Clean baseline."
+}

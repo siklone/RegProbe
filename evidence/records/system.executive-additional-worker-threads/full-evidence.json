@@ -1,183 +1,193 @@
-{
-  "$schema": "registry-evidence-v3.1/full-evidence",
-  "record_id": "system.executive-additional-worker-threads",
-  "tweak_id": "system.executive-additional-worker-threads",
-  "metadata": {
-    "$schema": "registry-evidence-v3.1/metadata",
-    "tweak_id": "system.executive-additional-worker-threads",
-    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
-    "value_name": "AdditionalCriticalWorkerThreads + AdditionalDelayedWorkerThreads",
-    "value_type": "REG_DWORD pair",
-    "value_data_before": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
-    "value_data_after": "custom DWORD pair (research-only)",
-    "enrichment": {
-      "hive": "HKLM",
-      "suspected_layer": "kernel",
-      "boot_phase_relevant": true,
-      "acl_owner": null,
-      "acl_sddl": null,
-      "acl_user_readable": null,
-      "source": "repo_research",
-      "official_doc_exists": false,
-      "reactos_reference": true,
-      "geoff_chappell_reference": false,
-      "pdb_symbol_match": null,
-      "source_repositories": [
-        "reactos/3908cbf5b437e86f02d3d5fd56ad55387375a428"
-      ]
-    }
-  },
-  "runtime": {
-    "etw": {
-      "executed": true,
-      "events_found": true,
-      "reading_process": "System (PID 4)",
-      "reading_pid": null,
-      "operation": "RegKcbCreate/RegOpenKey/RegQueryValue/RegSetValue around Session Manager\\\\Executive",
-      "timestamp": "2026-03-28T13:47:39Z",
-      "boot_phase_included": true,
-      "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt and evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json and evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt"
-    },
-    "procmon": {
-      "executed": true,
-      "events_found": false,
-      "reading_process": null,
-      "trace_file": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/executive-worker-threads-procmon-bootlog.pml.md"
-    },
-    "frida": {
-      "executed": false,
-      "skip_reason": "KERNEL_GUARD: the Executive worker-thread pair lives under HKLM\\\\SYSTEM and stays out of Frida.",
-      "result_valid": false
-    },
-    "dtrace": {
-      "executed": false,
-      "events_found": false,
-      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
-      "output_file": null
-    },
-    "registry_observation": {
-      "executed": true,
-      "query_exit_code": 0,
-      "export_exit_code": 0,
-      "timestamp": "2026-03-28T06:50:53.0500795Z",
-      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
-      "observation": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
-      "output_files": [
-        "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
-        "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg",
-        "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/metadata.json"
-      ]
-    }
-  },
-  "static": {
-    "bingrep": {
-      "executed": false,
-      "ascii_hits": 0,
-      "wide_hits": 0,
-      "hit_files": [],
-      "output_file": null
-    },
-    "floss": {
-      "executed": false,
-      "hits": 0,
-      "output_file": null
-    },
-    "capa": {
-      "executed": false,
-      "registry_read_capability": false,
-      "matched_rules": [],
-      "target_binary": null,
-      "output_file": null
-    },
-    "ghidra": {
-      "executed": true,
-      "trigger": "kernel-power-nextgate-candidate",
-      "pdb_loaded": false,
-      "pdb_source": null,
-      "string_xref_found": true,
-      "function_name": null,
-      "decompile_snippet": "The current-build ntoskrnl.exe pass found exact string xrefs for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifacts at 140c62b88 and 140c62bb8.",
-      "call_graph_depth": null,
-      "output_file": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md",
-      "ghidra_no_function_fallback": true
-    }
-  },
-  "behavior": {
-    "typeperf": {
-      "executed": false,
-      "counter": null,
-      "before_average": null,
-      "after_average": null,
-      "delta_percent": null,
-      "sample_count": null,
-      "before_file": null,
-      "after_file": null
-    },
-    "wpr": {
-      "executed": false,
-      "boot_time_before_ms": null,
-      "boot_time_after_ms": null,
-      "cpu_delta": null,
-      "trace_file": null
-    },
-    "benchmark": {
-      "executed": false,
-      "summary": null,
-      "output_file": null
-    },
-    "registry_sideeffects": {
-      "executed": false,
-      "sideeffect_count": null,
-      "diff_file": null
-    }
-  },
-  "classification": {
-    "class": "C",
-    "pipeline_version": "v3.1",
-    "reason": "The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\\\\Executive activity from System (PID 4), an ETW-specific keyword review, a successful Procmon boot-log lane with zero exact-value hits, current-build ntoskrnl string hits plus Ghidra fallback artifacts, and a supporting ReactOS semantic hypothesis for both values. That gives the lane credible cross-layer evidence, but the semantics still depend on unresolved current-build code blocks, the exact worker-thread pair still does not appear in runtime payloads, and there is no shipped RegProbe mapping.",
-    "cross_layer_satisfied": true,
-    "layers_used": [
-      "runtime_etw",
-      "static_ghidra"
-    ],
-    "layer_count": 2,
-    "frida_kernel_guard_applied": true,
-    "dead_flag_checks": {
-      "etw_executed": true,
-      "boot_phase_included": true,
-      "correct_tool_used": true,
-      "trigger_condition_tested": true
-    },
-    "class_ready_basis": "candidate-lane",
-    "next_missing_layer": "app-mapping"
-  },
-  "timeline": [
-    {
-      "step": "faz0_intake",
-      "timestamp": "2026-03-28T00:08:28Z"
-    },
-    {
-      "step": "faz2_static_triage",
-      "timestamp": "2026-03-28T00:32:36Z"
-    },
-    {
-      "step": "faz3_registry_baseline_export",
-      "timestamp": "2026-03-28T06:50:53.0500795Z"
-    },
-    {
-      "step": "faz3_etl_registry_review",
-      "timestamp": "2026-03-28T13:47:39Z"
-    },
-    {
-      "step": "faz1_procmon_bootlog",
-      "timestamp": "2026-03-28T14:50:12Z"
-    },
-    {
-      "step": "classification",
-      "timestamp": "2026-03-28T14:50:12Z"
-    }
-  ],
-  "artifact_refs": [],
-  "research_record": "research/records/system.executive-additional-worker-threads.json",
-  "research_record_fallback": "research/records/system.executive-additional-worker-threads.review.json"
+﻿{
+    "$schema":  "registry-evidence-v3.1/full-evidence",
+    "record_id":  "system.executive-additional-worker-threads",
+    "tweak_id":  "system.executive-additional-worker-threads",
+    "metadata":  {
+                     "$schema":  "registry-evidence-v3.1/metadata",
+                     "tweak_id":  "system.executive-additional-worker-threads",
+                     "key_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+                     "value_name":  "AdditionalCriticalWorkerThreads + AdditionalDelayedWorkerThreads",
+                     "value_type":  "REG_DWORD pair",
+                     "value_data_before":  "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+                     "value_data_after":  "custom DWORD pair (research-only)",
+                     "enrichment":  {
+                                        "hive":  "HKLM",
+                                        "suspected_layer":  "kernel",
+                                        "boot_phase_relevant":  true,
+                                        "acl_owner":  null,
+                                        "acl_sddl":  null,
+                                        "acl_user_readable":  null,
+                                        "source":  "repo_research",
+                                        "official_doc_exists":  false,
+                                        "reactos_reference":  true,
+                                        "geoff_chappell_reference":  false,
+                                        "pdb_symbol_match":  null,
+                                        "source_repositories":  [
+                                                                    "reactos/3908cbf5b437e86f02d3d5fd56ad55387375a428"
+                                                                ]
+                                    }
+                 },
+    "runtime":  {
+                    "etw":  {
+                                "executed":  true,
+                                "events_found":  true,
+                                "reading_process":  "System (PID 4)",
+                                "reading_pid":  null,
+                                "operation":  "RegKcbCreate/RegOpenKey/RegQueryValue/RegSetValue around Session Manager\\\\Executive",
+                                "timestamp":  "2026-03-28T13:47:39Z",
+                                "boot_phase_included":  true,
+                                "trace_file":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt and evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json and evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt"
+                            },
+                    "procmon":  {
+                                    "executed":  true,
+                                    "events_found":  false,
+                                    "reading_process":  null,
+                                    "trace_file":  "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/executive-worker-threads-procmon-bootlog.pml.md and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.pml.md and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt"
+                                },
+                    "frida":  {
+                                  "executed":  false,
+                                  "skip_reason":  "KERNEL_GUARD: the Executive worker-thread pair lives under HKLM\\\\SYSTEM and stays out of Frida.",
+                                  "result_valid":  false
+                              },
+                    "dtrace":  {
+                                   "executed":  false,
+                                   "events_found":  false,
+                                   "script_file":  "registry-research-framework/tools/dtrace-registry-probe.d",
+                                   "output_file":  null
+                               },
+                    "registry_observation":  {
+                                                 "executed":  true,
+                                                 "query_exit_code":  0,
+                                                 "export_exit_code":  0,
+                                                 "timestamp":  "2026-03-28T06:50:53.0500795Z",
+                                                 "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+                                                 "observation":  "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+                                                 "output_files":  [
+                                                                      "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
+                                                                      "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg",
+                                                                      "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/metadata.json"
+                                                                  ]
+                                             }
+                },
+    "static":  {
+                   "bingrep":  {
+                                   "executed":  false,
+                                   "ascii_hits":  0,
+                                   "wide_hits":  0,
+                                   "hit_files":  [
+
+                                                 ],
+                                   "output_file":  null
+                               },
+                   "floss":  {
+                                 "executed":  false,
+                                 "hits":  0,
+                                 "output_file":  null
+                             },
+                   "capa":  {
+                                "executed":  false,
+                                "registry_read_capability":  false,
+                                "matched_rules":  [
+
+                                                  ],
+                                "target_binary":  null,
+                                "output_file":  null
+                            },
+                   "ghidra":  {
+                                  "executed":  true,
+                                  "trigger":  "kernel-power-nextgate-candidate",
+                                  "pdb_loaded":  false,
+                                  "pdb_source":  null,
+                                  "string_xref_found":  true,
+                                  "function_name":  null,
+                                  "decompile_snippet":  "The current-build ntoskrnl.exe pass found exact string xrefs for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifacts at 140c62b88 and 140c62bb8.",
+                                  "call_graph_depth":  null,
+                                  "output_file":  "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md",
+                                  "ghidra_no_function_fallback":  true
+                              }
+               },
+    "behavior":  {
+                     "typeperf":  {
+                                      "executed":  false,
+                                      "counter":  null,
+                                      "before_average":  null,
+                                      "after_average":  null,
+                                      "delta_percent":  null,
+                                      "sample_count":  null,
+                                      "before_file":  null,
+                                      "after_file":  null
+                                  },
+                     "wpr":  {
+                                 "executed":  false,
+                                 "boot_time_before_ms":  null,
+                                 "boot_time_after_ms":  null,
+                                 "cpu_delta":  null,
+                                 "trace_file":  null
+                             },
+                     "benchmark":  {
+                                       "executed":  false,
+                                       "summary":  null,
+                                       "output_file":  null
+                                   },
+                     "registry_sideeffects":  {
+                                                  "executed":  false,
+                                                  "sideeffect_count":  null,
+                                                  "diff_file":  null
+                                              }
+                 },
+    "classification":  {
+                           "class":  "C",
+                           "pipeline_version":  "v3.1",
+                           "reason":  "The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\\Executive activity from System (PID 4), a successful Procmon boot-log lane with zero exact-value hits, a shell-safe post-boot stress trigger lane with zero exact-value hits, and current-build ntoskrnl string hits plus Ghidra fallback artifacts for both values. That gives the lane credible cross-layer evidence, but the semantics still depend on unresolved current-build code blocks, the exact worker-thread pair still does not appear in runtime payloads, and there is no shipped RegProbe mapping.",
+                           "cross_layer_satisfied":  true,
+                           "layers_used":  [
+                                               "runtime_etw",
+                                               "static_ghidra"
+                                           ],
+                           "layer_count":  2,
+                           "frida_kernel_guard_applied":  true,
+                           "dead_flag_checks":  {
+                                                    "etw_executed":  true,
+                                                    "boot_phase_included":  true,
+                                                    "correct_tool_used":  true,
+                                                    "trigger_condition_tested":  true
+                                                },
+                           "class_ready_basis":  "candidate-lane",
+                           "next_missing_layer":  "app-mapping"
+                       },
+    "timeline":  [
+                     {
+                         "step":  "faz0_intake",
+                         "timestamp":  "2026-03-28T00:08:28Z"
+                     },
+                     {
+                         "step":  "faz2_static_triage",
+                         "timestamp":  "2026-03-28T00:32:36Z"
+                     },
+                     {
+                         "step":  "faz3_registry_baseline_export",
+                         "timestamp":  "2026-03-28T06:50:53.0500795Z"
+                     },
+                     {
+                         "step":  "faz3_etl_registry_review",
+                         "timestamp":  "2026-03-28T13:47:39Z"
+                     },
+                     {
+                         "step":  "faz1_procmon_bootlog",
+                         "timestamp":  "2026-03-28T14:50:12Z"
+                     },
+                     {
+                         "step":  "faz1_procmon_stress_trigger",
+                         "timestamp":  "2026-03-28T16:02:02Z"
+                     },
+                     {
+                         "step":  "classification",
+                         "timestamp":  "2026-03-28T16:05:00Z"
+                     }
+                 ],
+    "artifact_refs":  [
+
+                      ],
+    "research_record":  "research/records/system.executive-additional-worker-threads.json",
+    "research_record_fallback":  "research/records/system.executive-additional-worker-threads.review.json"
 }

@@ -1,0 +1,78 @@
+﻿{
+    "generated_utc":  "2026-03-28T16:02:02.9096269Z",
+    "probe_name":  "executive-worker-threads-stress-20260328-184856",
+    "lane_label":  "system.executive-additional-worker-threads",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856",
+    "trigger":  "tasklist /svc + sc query all + wevtutil el + CIM service export + parallel service/event/file stress",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-28T15:50:09.9019638Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  true
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-28T16:02:02.6239297Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  true
+                                   }
+                    },
+    "copied":  {
+                   "pml":  true,
+                   "csv":  true,
+                   "hits":  false,
+                   "txt":  true,
+                   "tasklist":  true,
+                   "sc_all":  true,
+                   "event_logs":  true,
+                   "system_events":  true,
+                   "cim_services":  true,
+                   "stress_jobs":  true,
+                   "wrapper_error":  false
+               },
+    "repo_copied":  {
+                        "txt":  true,
+                        "hits":  false,
+                        "tasklist":  true,
+                        "sc_all":  true,
+                        "event_logs":  true,
+                        "system_events":  true,
+                        "cim_services":  true,
+                        "stress_jobs":  true,
+                        "wrapper_error":  false
+                    },
+    "hit_count":  0,
+    "hit_processes":  [
+
+                      ],
+    "hit_paths":  [
+
+                  ],
+    "match_fragments":  [
+                            "AdditionalCriticalWorkerThreads",
+                            "AdditionalDelayedWorkerThreads",
+                            "UuidSequenceNumber"
+                        ],
+    "probe_error_present":  false,
+    "wrapper_error_present":  false,
+    "status":  "no-hits"
+}
