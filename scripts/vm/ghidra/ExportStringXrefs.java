@@ -25,6 +25,7 @@ import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.listing.InstructionIterator;
 import ghidra.program.model.listing.Listing;
+import ghidra.program.model.mem.Memory;
 import ghidra.program.model.symbol.Reference;
 import ghidra.program.model.symbol.ReferenceIterator;
 import ghidra.program.model.symbol.ReferenceManager;
@@ -36,6 +37,8 @@ public class ExportStringXrefs extends GhidraScript {
     private static final int MAX_DECOMPILE_LINES = 60;
     private static final int MAX_DISASSEMBLY_LINES = 120;
     private static final long DISASSEMBLY_WINDOW_BYTES = 0xC8;
+    private static final long INSTRUCTION_SEARCH_WINDOW_BYTES = 0x40;
+    private static final int MAX_BYTE_WINDOW = 64;
     private static final Pattern PROBE_TIMESTAMP_PATTERN = Pattern.compile("^(.*)-\\d{8}-\\d{6}$");
 
     private static final class MatchEvidence {
@@ -240,28 +243,8 @@ public class ExportStringXrefs extends GhidraScript {
     }
 
     private Address resolveInstructionAddress(Listing listing, Address address) {
-        Instruction instruction = listing.getInstructionContaining(address);
-        if (instruction != null) {
-            return instruction.getAddress();
-        }
-
-        disassemble(address);
-        instruction = listing.getInstructionContaining(address);
-        if (instruction != null) {
-            return instruction.getAddress();
-        }
-
-        instruction = listing.getInstructionAt(address);
-        if (instruction != null) {
-            return instruction.getAddress();
-        }
-
-        instruction = listing.getInstructionAfter(address);
-        if (instruction != null) {
-            return instruction.getAddress();
-        }
-
-        return address;
+        Address anchored = findNearbyInstructionAddress(listing, address, INSTRUCTION_SEARCH_WINDOW_BYTES);
+        return anchored == null ? address : anchored;
     }
 
     private Function tryRecoverFunction(Listing listing, Address address, MatchEvidence result) {
@@ -287,6 +270,26 @@ public class ExportStringXrefs extends GhidraScript {
         }
         catch (Exception ex) {
             println("MATCH " + address + " createFunction failed: " + ex.getMessage());
+        }
+
+        Address nearbyInstruction = findNearbyInstructionAddress(listing, address, INSTRUCTION_SEARCH_WINDOW_BYTES);
+        if (nearbyInstruction != null && !nearbyInstruction.equals(address)) {
+            function = listing.getFunctionContaining(nearbyInstruction);
+            if (function != null) {
+                result.naturallyResolved = true;
+                return function;
+            }
+
+            try {
+                Function forced = createFunction(nearbyInstruction, null);
+                if (forced != null) {
+                    result.forcedBoundary = true;
+                    return forced;
+                }
+            }
+            catch (Exception ex) {
+                println("MATCH " + nearbyInstruction + " createFunction failed: " + ex.getMessage());
+            }
         }
 
         function = listing.getFunctionContaining(address);
@@ -350,9 +353,97 @@ public class ExportStringXrefs extends GhidraScript {
         }
 
         if (emitted == 0) {
-            return "// no disassembly available in range";
+            Address anchored = findNearbyInstructionAddress(listing, center, INSTRUCTION_SEARCH_WINDOW_BYTES);
+            if (anchored != null && !anchored.equals(center)) {
+                return disassemblySnippet(listing, anchored);
+            }
+            return byteSnippet(center);
         }
 
+        return builder.toString().trim();
+    }
+
+    private Address findNearbyInstructionAddress(Listing listing, Address center, long maxDistance) {
+        for (long offset = 0; offset <= maxDistance; offset++) {
+            for (Address candidate : candidateAddresses(center, offset)) {
+                Instruction instruction = listing.getInstructionContaining(candidate);
+                if (instruction != null) {
+                    return instruction.getAddress();
+                }
+
+                instruction = listing.getInstructionAt(candidate);
+                if (instruction != null) {
+                    return instruction.getAddress();
+                }
+
+                try {
+                    disassemble(candidate);
+                }
+                catch (Exception ex) {
+                }
+
+                instruction = listing.getInstructionContaining(candidate);
+                if (instruction != null) {
+                    return instruction.getAddress();
+                }
+
+                instruction = listing.getInstructionAt(candidate);
+                if (instruction != null) {
+                    return instruction.getAddress();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private List<Address> candidateAddresses(Address center, long offset) {
+        List<Address> addresses = new ArrayList<>();
+        addresses.add(center);
+        if (offset == 0) {
+            return addresses;
+        }
+
+        try {
+            addresses.add(center.subtractNoWrap(offset));
+        }
+        catch (Exception ex) {
+        }
+
+        try {
+            addresses.add(center.addNoWrap(offset));
+        }
+        catch (Exception ex) {
+        }
+
+        return addresses;
+    }
+
+    private String byteSnippet(Address center) {
+        Memory memory = currentProgram.getMemory();
+        Address start = safeAdjust(center, -32);
+        byte[] bytes = new byte[MAX_BYTE_WINDOW];
+        int read;
+        try {
+            read = memory.getBytes(start, bytes);
+        }
+        catch (Exception ex) {
+            return "// no disassembly or bytes available: " + ex.getMessage();
+        }
+
+        if (read <= 0) {
+            return "// no disassembly or bytes available";
+        }
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("// raw bytes fallback").append(System.lineSeparator());
+        builder.append(start).append(": ");
+        for (int i = 0; i < read; i++) {
+            builder.append(String.format("%02X", bytes[i] & 0xff));
+            if (i + 1 < read) {
+                builder.append(' ');
+            }
+        }
         return builder.toString().trim();
     }
 

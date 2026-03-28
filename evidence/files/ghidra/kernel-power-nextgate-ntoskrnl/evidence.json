@@ -1,0 +1,49 @@
+﻿{
+    "binary":  "ntoskrnl.exe",
+    "probe":  "kernel-power-nextgate-ntoskrnl",
+    "timestamp":  "2026-03-28T00:56:49.568025400Z",
+    "ghidra_no_function_fallback":  true,
+    "matches":  [
+                    {
+                        "address":  "140c63608",
+                        "function":  "FUN_140c635fe",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  60,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "140c635d8",
+                        "function":  "FUN_140c635ce",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  60,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "140c62b88",
+                        "function":  "FUN_140c62b7e",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  60,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "140c62bb8",
+                        "function":  "FUN_140c62bae",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  55,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    }
+                ],
+    "exit_code":  0,
+    "status":  "completed",
+    "failure":  null,
+    "markdown_exists":  true,
+    "run_log_exists":  true
+}

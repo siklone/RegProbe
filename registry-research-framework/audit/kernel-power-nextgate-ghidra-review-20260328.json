@@ -1,0 +1,33 @@
+{
+  "generated_utc": "2026-03-28T01:20:00Z",
+  "source_queue": "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json",
+  "source_probe": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+  "status": "split-by-quality",
+  "watchdog_pair": {
+    "lane_label": "power.session-watchdog-timeouts",
+    "candidates": [
+      "power.session-watchdog-resume-timeout",
+      "power.session-watchdog-sleep-timeout"
+    ],
+    "xref_count": 2,
+    "forced_boundary_only": true,
+    "static_quality": "medium",
+    "next_step": "Keep together in the next static and runtime-prep lane. The names exist in ntoskrnl and resolve to stable xref addresses, but the current forced-boundary decompilation is not trustworthy enough to claim semantics on its own."
+  },
+  "executive_pair": {
+    "lane_label": "system.executive-additional-worker-threads",
+    "candidates": [
+      "system.executive-additional-critical-worker-threads",
+      "system.executive-additional-delayed-worker-threads"
+    ],
+    "xref_count": 2,
+    "forced_boundary_only": true,
+    "static_quality": "low",
+    "next_step": "Keep together, but hold them below the watchdog pair. They have stable xref addresses in ntoskrnl, yet the current forced-boundary decompilation is garbage-level and needs a better static follow-up before any runtime lane."
+  },
+  "notes": [
+    "The improved fallback no longer ends with 'no disassembly available'; it now records forced-boundary decompilation for every unresolved xref.",
+    "The new decompilation output is structurally useful as a proof artifact, but still not semantically trustworthy for these four addresses.",
+    "Hooke's host-side triage and the local Ghidra review both favor the watchdog pair over the Executive worker-thread pair."
+  ]
+}
