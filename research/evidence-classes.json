@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T13:49:49.589592Z",
+  "generated_utc": "2026-03-28T14:56:11.875078Z",
   "summary": {
     "total_records": 298,
     "class_counts": {
@@ -16866,15 +16866,15 @@
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "This proof anchors the Executive worker-thread pair to a real clean-baseline export, a bounded boot-time runtime extract, plus current-build ntoskrnl string and Ghidra fallback evidence. It is strong enough for an active candidate record, but still too weak...",
+        "summary": "This proof anchors the Executive worker-thread pair to a real clean-baseline export, a bounded boot-time runtime extract, a successful exact-value Procmon boot-log lane, plus current-build ntoskrnl string and Ghidra fallback evidence. It is strong enough fo...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md",
+            "url": "research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md",
             "kind": "validation-proof",
-            "summary": "A bounded host-side xperf -a dumper extract from the successful boot ETL now proves boot-time access to Session Manager\\Executive. The strongest early reader in this extract is..."
+            "summary": "The Executive worker-thread lane now has a real Procmon boot-log run on the clean RegProbe baseline. The lane completed a host-driven boot cycle, produced a real boot-log PML, a..."
           },
           {
             "title": "Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair",
@@ -16894,6 +16894,12 @@
             "url": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg and evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
             "kind": "registry-observation",
             "summary": "A clean VM baseline export confirmed AdditionalCriticalWorkerThreads = 0 and AdditionalDelayedWorkerThreads = 0 under Session Manager\\Executive, with UuidSequenceNumber also pre..."
+          },
+          {
+            "title": "Procmon boot-log review for the Executive worker-thread pair",
+            "url": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json and research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md",
+            "kind": "procmon-trace",
+            "summary": "A real Procmon boot-log lane completed cleanly on the RegProbe baseline, produced a PML plus CSV, and still returned zero filtered hits for AdditionalCriticalWorkerThreads, Addi..."
           }
         ]
       },

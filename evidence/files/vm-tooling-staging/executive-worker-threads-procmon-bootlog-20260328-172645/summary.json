@@ -1,0 +1,134 @@
+﻿{
+    "generated_utc":  "2026-03-28T14:26:45.9761585Z",
+    "probe_name":  "executive-worker-threads-procmon-bootlog-20260328-172645",
+    "lane_label":  "system.executive-additional-worker-threads",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645",
+    "status":  "procmon-bootlog-captured",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-28T14:36:20.7078939Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  true
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-28T14:50:12.5913597Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  false
+                                   }
+                    },
+    "boot_cycle":  {
+                       "previous_last_boot_utc":  "2026-03-25T14:14:21.5000000+03:00",
+                       "current_last_boot_utc":  "2026-03-28T17:38:34.5000000+03:00",
+                       "stop_mode":  "soft"
+                   },
+    "arm_summary_path":  "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-arm.json",
+    "collect_summary_path":  "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json",
+    "procmon_pml_placeholder":  "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/executive-worker-threads-procmon-bootlog.pml.md",
+    "raw_artifacts_copied":  false,
+    "pml_captured":  true,
+    "csv_captured":  true,
+    "hits_captured":  false,
+    "arm_summary":  {
+                        "generated_utc":  "2026-03-28T14:36:43.1210615Z",
+                        "procmon_state_after":  {
+                                                    "Logfile":  "C:\\Tools\\Perf\\Procmon\\shortcut-arrow-noarrow.pml",
+                                                    "SourcePath":  "",
+                                                    "FlightRecorder":  0,
+                                                    "RingBufferSize":  0,
+                                                    "RingBufferMin":  0
+                                                },
+                        "procmon_exists":  true,
+                        "arm_result":  "no-enable-variant-returned-zero",
+                        "commands":  {
+                                         "direct_enable":  {
+                                                               "exit_code":  1,
+                                                               "output":  ""
+                                                           },
+                                         "minimized_enable":  {
+                                                                  "exit_code":  1,
+                                                                  "output":  ""
+                                                              }
+                                     },
+                        "guest_root":  "C:\\Tools\\ValidationController\\executive-worker-threads-procmon-bootlog\\executive-worker-threads-procmon-bootlog-20260328-172645",
+                        "phase":  "arm",
+                        "procmon_path":  "C:\\Tools\\Sysinternals\\Procmon64.exe",
+                        "procmon_state_before":  {
+                                                     "Logfile":  "C:\\Tools\\Perf\\Procmon\\shortcut-arrow-noarrow.pml",
+                                                     "SourcePath":  "",
+                                                     "FlightRecorder":  0,
+                                                     "RingBufferSize":  0,
+                                                     "RingBufferMin":  0
+                                                 },
+                        "errors":  [
+
+                                   ]
+                    },
+    "collect_summary":  {
+                            "hits_exists":  false,
+                            "procmon_path":  "C:\\Tools\\Sysinternals\\Procmon64.exe",
+                            "match_count":  0,
+                            "csv_length":  405998123,
+                            "procmon_state_before":  {
+                                                         "Logfile":  "C:\\Tools\\Perf\\Procmon\\shortcut-arrow-noarrow.pml",
+                                                         "SourcePath":  "",
+                                                         "FlightRecorder":  0,
+                                                         "RingBufferSize":  0,
+                                                         "RingBufferMin":  0
+                                                     },
+                            "pml_length":  991806035,
+                            "procmon_exists":  true,
+                            "errors":  [
+
+                                       ],
+                            "bootlog_candidates_before":  {
+
+                                                          },
+                            "csv_exists":  true,
+                            "phase":  "collect",
+                            "bootlog_candidates_after":  {
+
+                                                         },
+                            "guest_root":  "C:\\Tools\\ValidationController\\executive-worker-threads-procmon-bootlog\\executive-worker-threads-procmon-bootlog-20260328-172645",
+                            "generated_utc":  "2026-03-28T14:45:58.1643990Z",
+                            "pml_exists":  true,
+                            "commands":  {
+                                             "convert_bootlog":  {
+                                                                     "exit_code":  0,
+                                                                     "output":  ""
+                                                                 },
+                                             "save_as_csv":  {
+                                                                 "exit_code":  0,
+                                                                 "output":  ""
+                                                             }
+                                         },
+                            "procmon_state_after":  {
+                                                        "Logfile":  "C:\\Tools\\Perf\\Procmon\\shortcut-arrow-noarrow.pml",
+                                                        "SourcePath":  "",
+                                                        "FlightRecorder":  0,
+                                                        "RingBufferSize":  0,
+                                                        "RingBufferMin":  0
+                                                    }
+                        },
+    "errors":  [
+
+               ]
+}

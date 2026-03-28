@@ -1,0 +1,26 @@
+{
+  "lane_label": "system.executive-additional-worker-threads",
+  "generated_utc": "2026-03-28T14:50:12.5913597Z",
+  "status": "procmon-bootlog-reviewed",
+  "summary_path": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json",
+  "arm_summary_path": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-arm.json",
+  "collect_summary_path": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json",
+  "hits_path": null,
+  "pml_placeholder_path": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/executive-worker-threads-procmon-bootlog.pml.md",
+  "shell_healthy_before": true,
+  "shell_healthy_after": true,
+  "boot_cycle_advanced": true,
+  "arm_enable_exit_codes": {
+    "direct_enable": 1,
+    "minimized_enable": 1
+  },
+  "convert_bootlog_exit_code": 0,
+  "save_as_exit_code": 0,
+  "pml_captured": true,
+  "csv_captured": true,
+  "match_count": 0,
+  "reading_processes": [],
+  "adjacent_hits": [],
+  "exact_value_hits": [],
+  "conclusion": "The Executive worker-thread Procmon boot-log lane now completes cleanly on Win25H2Clean and proves that Procmon boot logging itself is not the blocker. Even with a real PML and CSV, the filtered lane still returns zero matching reads for AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber."
+}

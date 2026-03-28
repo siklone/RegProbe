@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T13:49:49.589592Z",
+  "generated_utc": "2026-03-28T14:56:19.015619Z",
   "summary": {
     "total_active_records": 244,
     "class_counts": {
@@ -9151,7 +9151,7 @@
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": false,
+      "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": true,
       "wpr": true,
@@ -9161,11 +9161,13 @@
       "next_missing_layer": "app-mapping",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_procmon",
         "static_ghidra",
         "behavior_wpr"
       ],
       "tools_used": [
         "etw",
+        "procmon",
         "ghidra",
         "ghidra_no_function_fallback",
         "wpr"
