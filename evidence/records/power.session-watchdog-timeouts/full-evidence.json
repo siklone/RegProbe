@@ -37,10 +37,10 @@
       "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt"
     },
     "procmon": {
-      "executed": false,
-      "events_found": false,
-      "reading_process": null,
-      "trace_file": null
+      "executed": true,
+      "events_found": true,
+      "reading_process": "System (PID 4)",
+      "trace_file": "evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary.json and evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary-collect.json and evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/watchdog-procmon-bootlog.hits.csv"
     },
     "frida": {
       "executed": false,
@@ -119,7 +119,7 @@
   "classification": {
     "class": "C",
     "pipeline_version": "v3.1",
-    "reason": "The watchdog timeout pair now has a clean baseline export, exact current-build ntoskrnl string hits plus Ghidra fallback artifacts, a repo-side PoFx pseudocode lead, a successful reboot-verified boot trace, and a host-side ETL registry review that shows real Session Manager\\Power access by System and svchost.exe during boot. That gives the candidate a credible cross-layer evidence base, but there is still no shipped app mapping, no validated non-default profile, and no direct live read of the exact watchdog values.",
+    "reason": "The watchdog timeout pair now has a clean baseline export, exact current-build ntoskrnl string hits plus Ghidra fallback artifacts, a repo-side PoFx pseudocode lead, a successful reboot-verified boot trace, a host-side ETL registry review, and a working Procmon boot-log run that reproduces adjacent Session Manager\\Power traffic from System during boot. That gives the candidate a credible cross-layer evidence base, but there is still no shipped app mapping, no validated non-default profile, and no direct live read of the exact watchdog values themselves.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_etw",
@@ -153,6 +153,10 @@
     {
       "step": "faz3_boot_trace",
       "timestamp": "2026-03-28T06:06:32.1051975Z"
+    },
+    {
+      "step": "faz1_procmon_bootlog",
+      "timestamp": "2026-03-28T10:38:18Z"
     },
     {
       "step": "faz3_etl_registry_review",

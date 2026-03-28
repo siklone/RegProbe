@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T08:02:28.485376Z",
+  "generated_utc": "2026-03-28T10:41:22.881749Z",
   "summary": {
     "total_records": 298,
     "class_counts": {
@@ -6833,7 +6833,7 @@
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "This proof upgrades the runtime story from a reboot-verified baseline to a path-level boot ETW review. It is enough to confirm the candidate surface is actually touched during boot, but not enough to claim a shipped app mapping or a validated non-default pr...",
+        "summary": "The runtime story now includes both the host-side ETL review and a working Procmon boot-log capture. Together they confirm that the candidate surface is touched during boot, but they still do not show a direct read of WatchdogResumeTimeout or WatchdogSleepT...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [

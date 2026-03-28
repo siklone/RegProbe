@@ -1,0 +1,31 @@
+{
+  "lane_label": "power.session-watchdog-timeouts",
+  "generated_utc": "2026-03-28T10:38:18.0146802Z",
+  "status": "procmon-bootlog-reviewed",
+  "summary_path": "evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary.json",
+  "arm_summary_path": "evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary-arm.json",
+  "collect_summary_path": "evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary-collect.json",
+  "hits_path": "evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/watchdog-procmon-bootlog.hits.csv",
+  "pml_placeholder_path": "evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/watchdog-procmon-bootlog.pml.md",
+  "shell_healthy_before": true,
+  "shell_healthy_after": true,
+  "boot_cycle_advanced": true,
+  "arm_enable_exit_codes": {
+    "direct_enable": 1,
+    "minimized_enable": 1
+  },
+  "convert_bootlog_exit_code": 0,
+  "save_as_exit_code": 0,
+  "pml_captured": true,
+  "csv_captured": true,
+  "match_count": 18,
+  "reading_processes": [
+    "System (PID 4)"
+  ],
+  "adjacent_hits": [
+    "SystemPowerPolicy",
+    "ShutdownOccurred"
+  ],
+  "exact_value_hits": [],
+  "conclusion": "The Procmon boot-log lane now works on Win25H2Clean and confirms boot-time Session Manager\\\\Power traffic, but it still does not show direct WatchdogResumeTimeout or WatchdogSleepTimeout reads."
+}
