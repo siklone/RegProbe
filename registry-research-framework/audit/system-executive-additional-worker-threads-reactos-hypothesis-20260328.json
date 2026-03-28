@@ -1,0 +1,12 @@
+{
+  "lane_label": "system.executive-additional-worker-threads",
+  "generated_utc": "2026-03-28T15:15:00Z",
+  "status": "reactos-hypothesis-reviewed",
+  "source_repository": "https://github.com/reactos/reactos",
+  "source_commit": "3908cbf5b437e86f02d3d5fd56ad55387375a428",
+  "exact_name_hits": true,
+  "semantic_lead": true,
+  "wiring_limit": "ReactOS cmdata maps the Executive pair to DummyData, so the source is supporting-only and not promotion-grade proof.",
+  "adjacent_lane_correction": "ReactOS places UuidSequenceNumber under \\Registry\\Machine\\Software\\Microsoft\\Rpc, which supports treating it as an adjacent lane rather than direct proof for Session Manager\\Executive worker-thread values.",
+  "recommended_next_step": "Use the ReactOS hypothesis as supporting evidence, then decide between a WinDbg kernel breakpoint lane and a stress-trigger runtime lane."
+}

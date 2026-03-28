@@ -1,0 +1,29 @@
+{
+  "generated_utc": "2026-03-28T15:15:00Z",
+  "lane_label": "system.executive-additional-worker-threads",
+  "status": "reactos-hypothesis-reviewed",
+  "source_repository": "https://github.com/reactos/reactos",
+  "source_commit": "3908cbf5b437e86f02d3d5fd56ad55387375a428",
+  "hits": {
+    "AdditionalCriticalWorkerThreads": [
+      "ntoskrnl/config/cmdata.c:491",
+      "ntoskrnl/ex/work.c:36",
+      "ntoskrnl/ex/work.c:543",
+      "ntoskrnl/ex/work.c:544",
+      "ntoskrnl/ex/work.c:548"
+    ],
+    "AdditionalDelayedWorkerThreads": [
+      "ntoskrnl/config/cmdata.c:498",
+      "ntoskrnl/ex/work.c:37",
+      "ntoskrnl/ex/work.c:541",
+      "ntoskrnl/ex/work.c:542",
+      "ntoskrnl/ex/work.c:547"
+    ],
+    "UuidSequenceNumber": [
+      "ntoskrnl/ex/uuid.c:82",
+      "ntoskrnl/ex/uuid.c:137"
+    ]
+  },
+  "hypothesis": "ReactOS suggests that the Executive pair controls additional delayed and critical worker-thread counts, capped before being added to base queue sizes.",
+  "limit": "The ReactOS registry table currently maps the Executive pair to DummyData, so this remains supporting-only evidence rather than promotion-grade proof."
+}
