@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T12:27:29.227668Z",
+  "generated_utc": "2026-03-28T13:49:49.589592Z",
   "summary": {
     "total_records": 298,
     "class_counts": {
@@ -16866,15 +16866,15 @@
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "This proof anchors the Executive worker-thread pair to a real clean-baseline export plus current-build ntoskrnl string and Ghidra fallback evidence. It is strong enough for an active candidate record, but still too weak for a shipped mapping or a claimed no...",
+        "summary": "This proof anchors the Executive worker-thread pair to a real clean-baseline export, a bounded boot-time runtime extract, plus current-build ntoskrnl string and Ghidra fallback evidence. It is strong enough for an active candidate record, but still too weak...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "research/notes/system-executive-additional-worker-threads-candidate-package-20260328.md",
+            "url": "research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md",
             "kind": "validation-proof",
-            "summary": "A clean VM export at session-manager-executive-baseline-20260328-095048 confirmed AdditionalCriticalWorkerThreads = 0 and AdditionalDelayedWorkerThreads = 0 under Session Manage..."
+            "summary": "A bounded host-side xperf -a dumper extract from the successful boot ETL now proves boot-time access to Session Manager\\Executive. The strongest early reader in this extract is..."
           },
           {
             "title": "Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair",

@@ -1,0 +1,8 @@
+﻿           RegKcbCreate,     129613, 0xffffe2829857a020, \REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Executive
+             RegOpenKey,     129702, 0x0000000000000000,           System (   4),          8, 0x00000000,          97, \Registry\Machine\System\CurrentControlSet\Control\Session Manager\Executive
+          RegQueryValue,     129710, 0xffffe2829857a020,           System (   4),          8, 0x00000000,           2,    2, UuidSequenceNumber
+           RegKcbDelete,     129718, 0xffffe2829857a020, \REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Executive
+           RegKcbCreate,     129728, 0xffffe2829857a020, \REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Executive
+             RegOpenKey,     129733, 0x0000000000000000,           System (   4),          8, 0x00000000,          10, \Registry\Machine\System\CurrentControlSet\Control\Session Manager\Executive
+            RegSetValue,     129762, 0xffffe2829857a020,           System (   4),          8, 0x00000000,          26, UuidSequenceNumber
+           RegKcbDelete,     129773, 0xffffe2829857a020, \REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Session Manager\Executive

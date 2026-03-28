@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T12:27:29.369509Z",
+  "generated_utc": "2026-03-28T13:49:49.589592Z",
   "summary": {
     "total_active_records": 244,
     "class_counts": {
@@ -9154,31 +9154,34 @@
       "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": true,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
       "next_missing_layer": "app-mapping",
-      "cross_layer_satisfied": false,
+      "cross_layer_satisfied": true,
       "layers_used": [
-        "static_ghidra"
+        "static_ghidra",
+        "behavior_wpr"
       ],
       "tools_used": [
+        "etw",
         "ghidra",
-        "ghidra_no_function_fallback"
+        "ghidra_no_function_fallback",
+        "wpr"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
-        "etw_executed": false,
-        "boot_phase_included": false,
+        "etw_executed": true,
+        "boot_phase_included": true,
         "correct_tool_used": true,
-        "trigger_condition_tested": false
+        "trigger_condition_tested": true
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",

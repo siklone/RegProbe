@@ -7,6 +7,7 @@
 ## Why
 
 - baseline existence is confirmed on Win25H2Clean
+- a bounded boot-time ETL extract proves early `Session Manager\Executive` activity from `System (PID 4)`
 - current-build ntoskrnl exact string hits and Ghidra fallback artifacts exist
 - both values are present together at `0` on the clean baseline
 

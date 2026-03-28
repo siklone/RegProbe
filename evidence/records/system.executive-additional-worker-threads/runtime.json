@@ -1,13 +1,13 @@
 {
   "etw": {
-    "executed": false,
-    "events_found": false,
-    "reading_process": null,
+    "executed": true,
+    "events_found": true,
+    "reading_process": "System (PID 4)",
     "reading_pid": null,
-    "operation": null,
-    "timestamp": null,
-    "boot_phase_included": false,
-    "trace_file": null
+    "operation": "RegKcbCreate/RegOpenKey/RegQueryValue/RegSetValue around Session Manager\\\\Executive",
+    "timestamp": "2026-03-28T13:47:39Z",
+    "boot_phase_included": true,
+    "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt"
   },
   "procmon": {
     "executed": false,

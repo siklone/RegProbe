@@ -1,0 +1,21 @@
+{
+  "lane_label": "system.executive-additional-worker-threads",
+  "generated_utc": "2026-03-28T13:47:39.4823007Z",
+  "status": "host-etl-registry-review-imported",
+  "source_etl_placeholder": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md",
+  "filtered_dump": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt",
+  "pattern_counts": {
+    "SessionManagerExecutive": 6,
+    "UuidSequenceNumber": 2,
+    "AdditionalCriticalWorkerThreads": 0,
+    "AdditionalDelayedWorkerThreads": 0
+  },
+  "reading_processes": [
+    "System (PID 4)"
+  ],
+  "adjacent_values_seen": [
+    "UuidSequenceNumber"
+  ],
+  "exact_values_seen": [],
+  "conclusion": "Boot-time access to Session Manager\\Executive is proven, but the bounded ETL extract still does not expose a direct read of AdditionalCriticalWorkerThreads or AdditionalDelayedWorkerThreads."
+}
