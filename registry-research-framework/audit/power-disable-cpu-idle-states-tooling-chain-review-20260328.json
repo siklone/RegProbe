@@ -1,0 +1,24 @@
+{
+  "lane_label": "power.disable-cpu-idle-states",
+  "generated_utc": "2026-03-28T17:20:29Z",
+  "status": "tooling-chain-narrowed",
+  "minimal_vmware_tooling_smoke": {
+    "summary_path": "evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/summary.json",
+    "environment_path": "evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/environment.json",
+    "script_result_path": "evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/script-result.json",
+    "write_test_path": "evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/write-test.txt",
+    "status": "ok",
+    "guest_execution_ok": true,
+    "guest_write_ok": true,
+    "host_copy_back_ok": true
+  },
+  "minimal_regwrite_diagnostic": {
+    "summary_path": "evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/summary.json",
+    "result_path": "evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json",
+    "status": "ok",
+    "provider_write_ok": true,
+    "regexe_write_ok": true,
+    "restore_to_missing_ok": true
+  },
+  "conclusion": "The broad VMware guest execution and copy-back chain is healthy on the visible-shell baseline, and the raw CPU idle-state bundle can be written and restored directly under C:\\RegProbe-Diag. The unresolved blocker is therefore narrowed to the heavier ValidationController or WPR or reboot orchestration used by the failing runtime and benchmark lanes."
+}

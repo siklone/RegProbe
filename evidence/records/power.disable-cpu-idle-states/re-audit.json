@@ -18,14 +18,16 @@
       "etw",
       "vm-runtime-runner",
       "wpr",
-      "vm-benchmark-runner"
+      "vm-benchmark-runner",
+      "vm-minimal-smoke",
+      "vm-minimal-regwrite"
     ],
     "new_cross_layer": true,
     "new_class": "B",
     "class_changed": false,
     "frida_kernel_guard_applied": true,
     "dead_flag_four_conditions_met": true,
-    "notes": "Runtime lane failed before candidate/post-boot confirmation (evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json); behavior lane failed before workload start (evidence/records/power.disable-cpu-idle-states/behavior-lane.log). The record remains a final decision-gate B because the raw bundle is still not an app-ready supported control surface.",
+    "notes": "Runtime lane failed before candidate or post-boot confirmation (evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json); behavior lane failed before workload start (evidence/records/power.disable-cpu-idle-states/behavior-lane.log); minimal VMware smoke succeeded (evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/summary.json); minimal direct regwrite succeeded and restored the bundle to missing (evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/summary.json). The record remains a final decision-gate B because the raw bundle is still not an app-ready supported control surface.",
     "new_pipeline_version": "v3.1"
   }
 }

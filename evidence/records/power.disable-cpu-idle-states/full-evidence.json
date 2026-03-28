@@ -119,7 +119,7 @@
   "classification": {
     "class": "B",
     "pipeline_version": "v3.1",
-    "reason": "The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead. On the fresh visible-shell baseline, the v3.1 runtime lane still failed during the set-candidate stage before reboot, and the corrected benchmark lane still failed before any workload started because Explorer did not come back in time during the snapshot-restore boot path. That keeps the record active and evidence-backed, but it still is not an app-ready supported control surface.",
+    "reason": "The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead. On the fresh visible-shell baseline, the v3.1 runtime lane still failed during the set-candidate phase before reboot and the corrected benchmark lane still failed before any workload started because Explorer did not come back in time during the snapshot-restore boot path. An earlier dedicated write-diagnostics lane still produced no guest-side result file, but follow-up minimal VMware smoke and direct registry-write diagnostics both succeeded under C:/RegProbe-Diag. That proves the generic guest execution chain and the raw bundle writes themselves are healthy on this baseline. The remaining blocker is therefore the heavier ValidationController, WPR, or reboot orchestration, and the record still is not an app-ready supported control surface.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "static_ghidra",
@@ -141,19 +141,27 @@
   "timeline": [
     {
       "step": "bootstrap_record_load",
-      "timestamp": "2026-03-27T20:42:57.792362Z"
+      "timestamp": "2026-03-28T17:23:23.920015Z"
     },
     {
-      "step": "faz3",
-      "timestamp": "2026-03-27T20:42:57.792362Z"
+      "step": "vm_tooling_minimal_diagnostic",
+      "timestamp": "2026-03-28T17:11:20.7563099Z"
+    },
+    {
+      "step": "cpu_idle_minimal_regwrite",
+      "timestamp": "2026-03-28T17:18:21.5785047Z"
+    },
+    {
+      "step": "faz5",
+      "timestamp": "2026-03-28T17:23:23.920015Z"
     },
     {
       "step": "classification",
-      "timestamp": "2026-03-27T20:42:57.792362Z"
+      "timestamp": "2026-03-28T17:23:23.920015Z"
     },
     {
       "step": "last_reviewed",
-      "timestamp": "2026-03-27T23:31:00+03:00"
+      "timestamp": "2026-03-28T20:20:29+03:00"
     }
   ],
   "artifact_refs": [],

@@ -1,0 +1,40 @@
+﻿{
+    "generated_utc":  "2026-03-28T17:18:40.7345605Z",
+    "final_state":  {
+                        "DisableIdleStatesAtBoot":  null,
+                        "IdleStateTimeout":  null,
+                        "ExitLatencyCheckEnabled":  null
+                    },
+    "steps":  [
+                  {
+                      "label":  "provider-write",
+                      "before":  {
+                                     "DisableIdleStatesAtBoot":  null,
+                                     "IdleStateTimeout":  null,
+                                     "ExitLatencyCheckEnabled":  null
+                                 },
+                      "ok":  true,
+                      "error":  null,
+                      "after":  {
+                                    "DisableIdleStatesAtBoot":  1,
+                                    "IdleStateTimeout":  0,
+                                    "ExitLatencyCheckEnabled":  1
+                                }
+                  },
+                  {
+                      "label":  "regexe-write",
+                      "before":  {
+                                     "DisableIdleStatesAtBoot":  null,
+                                     "IdleStateTimeout":  null,
+                                     "ExitLatencyCheckEnabled":  null
+                                 },
+                      "ok":  true,
+                      "error":  null,
+                      "after":  {
+                                    "DisableIdleStatesAtBoot":  1,
+                                    "IdleStateTimeout":  0,
+                                    "ExitLatencyCheckEnabled":  1
+                                }
+                  }
+              ]
+}

@@ -1,0 +1,29 @@
+﻿{
+    "generated_utc":  "2026-03-28T17:18:21.5785047Z",
+    "probe_name":  "cpu-idle-minimal-regwrite-20260328-201526",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526",
+    "guest_root":  "C:\\RegProbe-Diag",
+    "copied_result":  true,
+    "provider_write_ok":  true,
+    "regexe_write_ok":  true,
+    "provider_after":  {
+                           "DisableIdleStatesAtBoot":  1,
+                           "IdleStateTimeout":  0,
+                           "ExitLatencyCheckEnabled":  1
+                       },
+    "regexe_after":  {
+                         "DisableIdleStatesAtBoot":  1,
+                         "IdleStateTimeout":  0,
+                         "ExitLatencyCheckEnabled":  1
+                     },
+    "final_state":  {
+                        "DisableIdleStatesAtBoot":  null,
+                        "IdleStateTimeout":  null,
+                        "ExitLatencyCheckEnabled":  null
+                    },
+    "status":  "ok",
+    "errors":  [
+
+               ]
+}
