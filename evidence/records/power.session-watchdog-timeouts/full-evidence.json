@@ -1,0 +1,165 @@
+{
+  "$schema": "registry-evidence-v3.1/full-evidence",
+  "record_id": "power.session-watchdog-timeouts",
+  "tweak_id": "power.session-watchdog-timeouts",
+  "metadata": {
+    "$schema": "registry-evidence-v3.1/metadata",
+    "tweak_id": "power.session-watchdog-timeouts",
+    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+    "value_name": "WatchdogResumeTimeout + WatchdogSleepTimeout",
+    "value_type": "REG_DWORD pair",
+    "value_data_before": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+    "value_data_after": "custom DWORD pair (research-only)",
+    "enrichment": {
+      "hive": "HKLM",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "acl_owner": null,
+      "acl_sddl": null,
+      "acl_user_readable": null,
+      "source": "repo_research",
+      "official_doc_exists": false,
+      "reactos_reference": false,
+      "geoff_chappell_reference": false,
+      "pdb_symbol_match": null,
+      "source_repositories": []
+    }
+  },
+  "runtime": {
+    "etw": {
+      "executed": true,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": "boot-trace-baseline",
+      "timestamp": "2026-03-28T06:06:32.1051975Z",
+      "boot_phase_included": true,
+      "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md"
+    },
+    "procmon": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "trace_file": null
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: the watchdog pair lives under HKLM\\\\SYSTEM and stays out of Frida.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "static": {
+    "bingrep": {
+      "executed": false,
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "hit_files": [],
+      "output_file": null
+    },
+    "floss": {
+      "executed": false,
+      "hits": 0,
+      "output_file": null
+    },
+    "capa": {
+      "executed": false,
+      "registry_read_capability": false,
+      "matched_rules": [],
+      "target_binary": null,
+      "output_file": null
+    },
+    "ghidra": {
+      "executed": true,
+      "trigger": "kernel-power-nextgate-candidate",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "string_xref_found": true,
+      "function_name": null,
+      "decompile_snippet": "The current-build ntoskrnl.exe pass found exact string xrefs for WatchdogResumeTimeout and WatchdogSleepTimeout. Repo-side PoFxInitPowerManagement pseudocode then ties the pair to the directed power-up and directed power-down watchdog timeout globals.",
+      "call_graph_depth": null,
+      "output_file": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c",
+      "ghidra_no_function_fallback": true
+    }
+  },
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": true,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md"
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
+  },
+  "classification": {
+    "class": "C",
+    "pipeline_version": "v3.1",
+    "reason": "The watchdog timeout pair now has a clean baseline export, exact current-build ntoskrnl string hits plus Ghidra fallback artifacts, a repo-side PoFx pseudocode lead, and a successful reboot-verified boot trace that preserved the same values after boot. That gives the candidate a credible cross-layer evidence base, but there is still no shipped app mapping, no validated non-default profile, and no direct live read of the exact values.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "runtime_etw",
+      "static_ghidra",
+      "behavior_wpr"
+    ],
+    "layer_count": 3,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": true,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "candidate-lane",
+    "next_missing_layer": "app-mapping"
+  },
+  "timeline": [
+    {
+      "step": "faz0_intake",
+      "timestamp": "2026-03-28T00:08:28Z"
+    },
+    {
+      "step": "faz2_static_triage",
+      "timestamp": "2026-03-28T00:32:36Z"
+    },
+    {
+      "step": "faz3_runtime_prep",
+      "timestamp": "2026-03-28T05:00:10Z"
+    },
+    {
+      "step": "faz3_boot_trace",
+      "timestamp": "2026-03-28T06:06:32.1051975Z"
+    },
+    {
+      "step": "classification",
+      "timestamp": "2026-03-28T06:40:00Z"
+    }
+  ],
+  "artifact_refs": [],
+  "research_record": "research/records/power.session-watchdog-timeouts.json",
+  "research_record_fallback": "research/records/power.session-watchdog-timeouts.review.json"
+}

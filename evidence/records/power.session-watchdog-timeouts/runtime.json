@@ -1,0 +1,29 @@
+{
+  "etw": {
+    "executed": true,
+    "events_found": false,
+    "reading_process": null,
+    "reading_pid": null,
+    "operation": "boot-trace-baseline",
+    "timestamp": "2026-03-28T06:06:32.1051975Z",
+    "boot_phase_included": true,
+    "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md"
+  },
+  "procmon": {
+    "executed": false,
+    "events_found": false,
+    "reading_process": null,
+    "trace_file": null
+  },
+  "frida": {
+    "executed": false,
+    "skip_reason": "KERNEL_GUARD: the watchdog pair lives under HKLM\\\\SYSTEM and stays out of Frida.",
+    "result_valid": false
+  },
+  "dtrace": {
+    "executed": false,
+    "events_found": false,
+    "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+    "output_file": null
+  }
+}

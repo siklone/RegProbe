@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T20:42:56.164372Z",
+  "generated_utc": "2026-03-28T06:45:34.339090Z",
   "summary": {
-    "total_records": 296,
+    "total_records": 297,
     "class_counts": {
       "A": 241,
       "B": 1,
-      "C": 0,
+      "C": 1,
       "D": 0,
       "E": 54
     },
     "action_state_counts": {
       "actionable": 241,
       "archived": 54,
-      "research-gated": 1
+      "research-gated": 2
     }
   },
   "classes": {
@@ -6814,6 +6814,67 @@
             "summary": "Matched 5 audit token(s) in win-registry."
           }
         ]
+      }
+    },
+    {
+      "record_id": "power.session-watchdog-timeouts",
+      "tweak_id": "power.session-watchdog-timeouts",
+      "record_status": "draft",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Value Model Partial",
+      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "This proof anchors the pair to a reboot-verified baseline on Win25H2Clean. It is enough to confirm the candidate surface exists and survives boot, but not enough to claim a shipped app mapping or a validated non-default profile.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md",
+            "kind": "validation-proof",
+            "summary": "Successful run: watchdog-timeouts-boottrace-20260328-090631. Boot cycle advanced from 2026-03-25T14:14:21.5000000+03:00 to 2026-03-28T09:09:02.5000000+03:00 and preserved Watchd..."
+          },
+          {
+            "title": "Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair",
+            "url": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+            "kind": "decompilation",
+            "summary": "The current-build ntoskrnl.exe pass found exact string hits for WatchdogResumeTimeout and WatchdogSleepTimeout and preserved reviewable fallback artifacts for the next-gate watc..."
+          },
+          {
+            "title": "Repo PoFxInitPowerManagement pseudocode lead",
+            "url": "Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c and research/notes/power-session-watchdog-timeouts-runtime-prep-20260328.md",
+            "kind": "repo-doc",
+            "summary": "The repo-side pseudocode ties PopWatchdogResumeTimeout and PopWatchdogSleepTimeout to the directed power-up and directed power-down watchdog timeout globals, giving the pair a s..."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "A clean VM baseline export confirmed WatchdogResumeTimeout = 120 and WatchdogSleepTimeout = 300 under Session Manager\\Power, with adjacent PowerSettingProfile = 0.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean Session Manager Power baseline export",
+            "url": "evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg and evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt",
+            "kind": "registry-observation",
+            "summary": "A clean VM baseline export confirmed WatchdogResumeTimeout = 120 and WatchdogSleepTimeout = 300 under Session Manager\\Power, with adjacent PowerSettingProfile = 0."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {

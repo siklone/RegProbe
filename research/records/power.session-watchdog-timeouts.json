@@ -1,0 +1,239 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.session-watchdog-timeouts",
+  "tweak_id": "power.session-watchdog-timeouts",
+  "record_status": "draft",
+  "summary": "Draft candidate record only. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, and a successful reboot-verified boot trace baseline. The pair is strong enough to stay active as a candidate lane, but there is still no shipped app mapping and no direct live read of the exact values yet.",
+  "validation_proof": {
+    "source_url": "research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md",
+    "exact_quote_or_path": "Successful run: watchdog-timeouts-boottrace-20260328-090631. Boot cycle advanced from 2026-03-25T14:14:21.5000000+03:00 to 2026-03-28T09:09:02.5000000+03:00 and preserved WatchdogResumeTimeout = 120 plus WatchdogSleepTimeout = 300 after boot.",
+    "key_found_on_page": true,
+    "notes": "This proof anchors the pair to a reboot-verified baseline on Win25H2Clean. It is enough to confirm the candidate surface exists and survives boot, but not enough to claim a shipped app mapping or a validated non-default profile."
+  },
+  "setting": {
+    "name": "Session Manager Watchdog Timeouts",
+    "category": "Power",
+    "area": "Directed Power Watchdog Timeouts",
+    "scope": "device",
+    "casual_explanation": "These values appear to control watchdog timeout behavior around directed power transitions. They are not normal user-facing power options and are being tracked as a low-level research lane rather than a supported tweak.",
+    "why_people_change_it": "Advanced researchers may look at these values when investigating resume and sleep watchdog behavior, power transition timing, or kernel power management internals.",
+    "tradeoffs_overview": "The pair is kernel-adjacent and boot-relevant. The current evidence shows that the values exist and participate in the power-management path, but the repo still does not have a safe shipped mapping or a validated non-default profile for end users.",
+    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\WatchdogResumeTimeout and WatchdogSleepTimeout. A clean baseline export on Win25H2Clean confirmed 120 and 300 respectively, with adjacent PowerSettingProfile = 0. The current-build ntoskrnl.exe string passes found exact hits for both names, and the improved Ghidra fallback preserved reviewable artifacts even when natural function boundaries were weak. Repo-side PoFxInitPowerManagement pseudocode then linked the pair to PopFxDirectedPowerUpTimeoutMs and PopFxDirectedPowerDownTimeoutMs. A successful host-driven boot trace on baseline-20260327-regprobe-visible-shell-stable preserved the same 120/300 values after reboot and captured the ETL to host staging. That is enough to keep the candidate active, but not enough to publish a shipped preset or app mapping.",
+    "targets": [
+      {
+        "target_id": "session-watchdog-timeout-pair",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
+        "value_type": "REG_DWORD pair",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The clean VM baseline currently exposes WatchdogResumeTimeout = 120 and WatchdogSleepTimeout = 300.",
+            "evidence_ids": [
+              "vm-session-manager-power-baseline-20260328",
+              "vm-watchdog-boot-trace-20260328"
+            ]
+          },
+          {
+            "state_kind": "feature-dependent",
+            "label": "Undocumented custom DWORD pair",
+            "meaning": "The evidence so far only proves that the pair exists and flows through the power-management path. A safe non-default profile is not validated yet.",
+            "evidence_ids": [
+              "ghidra-watchdog-nextgate-ntoskrnl-20260328",
+              "repo-pofx-pseudocode-watchdog"
+            ]
+          }
+        ],
+        "notes": "Keep the pair together. The current evidence is strongest when WatchdogResumeTimeout and WatchdogSleepTimeout are treated as one lane."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "There is no current RegProbe provider or UI mapping for this candidate. The pair is still in research-only intake.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current Win25H2Clean baseline with the Session Manager Power key populated",
+      "states": [
+        {
+          "target_id": "session-watchdog-timeout-pair",
+          "state_kind": "value",
+          "value": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+          "rationale": "Leave the currently observed watchdog timeout pair unchanged until a stronger supported mapping exists."
+        }
+      ],
+      "notes": "PowerSettingProfile = 0 was also present in the same baseline export, but it remains adjacent context rather than part of this pair.",
+      "evidence_ids": [
+        "vm-session-manager-power-baseline-20260328",
+        "vm-watchdog-boot-trace-20260328"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-baseline",
+      "label": "Observed baseline",
+      "intended_for": [
+        "Registry research tracking",
+        "Kernel power documentation"
+      ],
+      "avoid_for": [
+        "End-user presets",
+        "General system tuning"
+      ],
+      "states": [
+        {
+          "target_id": "session-watchdog-timeout-pair",
+          "state_kind": "value",
+          "value": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+          "rationale": "Keep the pair at the current observed baseline while evidence gathering continues."
+        }
+      ],
+      "good_when": "You want to document the current baseline without inventing a non-default tuning profile.",
+      "bad_when": "You want a shipped tweak or a claimed performance profile.",
+      "tradeoffs": [
+        "Preserves the current observed watchdog pair.",
+        "Keeps the lane documentation-only until a supported mapping exists."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "vm-session-manager-power-baseline-20260328",
+        "vm-watchdog-boot-trace-20260328"
+      ]
+    },
+    {
+      "profile_id": "research-candidate-pair",
+      "label": "Research candidate pair",
+      "intended_for": [
+        "Advanced kernel-power research"
+      ],
+      "avoid_for": [
+        "General users",
+        "Published presets"
+      ],
+      "states": [
+        {
+          "target_id": "session-watchdog-timeout-pair",
+          "state_kind": "feature-dependent",
+          "rationale": "Treat the pair as an active research target rather than a validated preset."
+        }
+      ],
+      "good_when": "You are collecting additional runtime or static evidence for the watchdog timeout pair.",
+      "bad_when": "You need a documented end-user recommendation.",
+      "tradeoffs": [
+        "Keeps the lane active for further research.",
+        "Does not provide a validated non-default value pair yet."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "ghidra-watchdog-nextgate-ntoskrnl-20260328",
+        "repo-pofx-pseudocode-watchdog",
+        "vm-watchdog-boot-trace-20260328"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "vm-session-manager-power-baseline-20260328",
+      "kind": "registry-observation",
+      "title": "Win25H2Clean Session Manager Power baseline export",
+      "location": "evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg and evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt",
+      "summary": "A clean VM baseline export confirmed WatchdogResumeTimeout = 120 and WatchdogSleepTimeout = 300 under Session Manager\\Power, with adjacent PowerSettingProfile = 0.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ghidra-watchdog-nextgate-ntoskrnl-20260328",
+      "kind": "decompilation",
+      "title": "Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair",
+      "location": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+      "summary": "The current-build ntoskrnl.exe pass found exact string hits for WatchdogResumeTimeout and WatchdogSleepTimeout and preserved reviewable fallback artifacts for the next-gate watchdog lane.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-pofx-pseudocode-watchdog",
+      "kind": "repo-doc",
+      "title": "Repo PoFxInitPowerManagement pseudocode lead",
+      "location": "Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c and research/notes/power-session-watchdog-timeouts-runtime-prep-20260328.md",
+      "summary": "The repo-side pseudocode ties PopWatchdogResumeTimeout and PopWatchdogSleepTimeout to the directed power-up and directed power-down watchdog timeout globals, giving the pair a subsystem-level semantic lead.",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-watchdog-boot-trace-20260328",
+      "kind": "etw-trace",
+      "title": "Win25H2Clean reboot-verified watchdog timeout boot trace",
+      "location": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md",
+      "summary": "A successful host-driven boot trace on the current visible-shell baseline confirmed a real reboot cycle, preserved the same 120/300 values after boot, and kept shell health intact.",
+      "supports": [
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "kernel-power-existing-next-gate-20260328",
+      "kind": "inference",
+      "title": "Kernel power next-gate intake summary",
+      "location": "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json and research/notes/kernel-power-next-gate-ghidra-review-20260328.md",
+      "summary": "The 2026-03-28 intake review ranked the watchdog pair above the Executive worker-thread values because the baseline existence, exact string hits, and Ghidra artifacts were already stronger.",
+      "supports": [
+        "version-scope",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and Ghidra fallback artifacts, repo-side PoFx pseudocode, and a successful reboot-verified boot trace that preserved the same values after boot. That is strong enough to keep the pair active as a candidate record, but there is still no shipped app mapping, no direct live read of the exact values, and no validated non-default profile.",
+    "blocking_issues": [
+      "No shipped RegProbe provider or UI mapping exists for the watchdog timeout pair yet.",
+      "The current semantic lead still depends on repo-side pseudocode plus forced-boundary Ghidra review rather than a primary Microsoft registry contract.",
+      "The lane still lacks a direct live read of WatchdogResumeTimeout and WatchdogSleepTimeout."
+    ]
+  },
+  "open_questions": [
+    "Can the exact watchdog pair be captured in a direct runtime read rather than only a reboot-verified boot trace baseline?",
+    "Does a better symbol or binary target produce a cleaner current-build code path than the current forced-boundary ntoskrnl fallback?",
+    "Should this pair ever become a shipped tweak, or should it stay documentation-only even if semantics converge?"
+  ],
+  "tested_on": [
+    {
+      "environment": "VMware Workstation guest",
+      "os": "Windows 11 25H2",
+      "edition": "Win25H2Clean",
+      "notes": "Baseline export and successful host-driven boot trace both ran on baseline-20260327-regprobe-visible-shell-stable."
+    }
+  ],
+  "last_reviewed_utc": "2026-03-28T09:40:00+03:00"
+}

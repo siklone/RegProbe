@@ -1,20 +1,22 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-27T20:42:56.000244Z",
+  "generated_utc": "2026-03-28T06:45:47.695476Z",
   "summary": {
-    "total_active_records": 242,
+    "total_active_records": 243,
     "class_counts": {
       "A": 241,
-      "B": 1
+      "B": 1,
+      "C": 1
     },
     "lane_counts": {
       "official-policy": 236,
       "runtime": 5,
-      "system": 1
+      "system": 2
     },
     "next_missing_layer_counts": {
       "none": 241,
-      "decision-gate": 1
+      "decision-gate": 1,
+      "app-mapping": 1
     },
     "re_audit_required_count": 0
   },
@@ -3790,6 +3792,63 @@
       "confidence": "high",
       "source_file": "research/records/power.optimize-gaming-network.json",
       "incident_ids": []
+    },
+    {
+      "record_id": "power.session-watchdog-timeouts",
+      "tweak_id": "power.session-watchdog-timeouts",
+      "evidence_class": "C",
+      "lane": "system",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": true,
+      "ghidra_no_function_fallback": true,
+      "wpr": true,
+      "benchmark": false,
+      "reboot_tested": true,
+      "incident_seen": true,
+      "next_missing_layer": "app-mapping",
+      "cross_layer_satisfied": true,
+      "layers_used": [
+        "static_ghidra",
+        "behavior_wpr",
+        "runtime_reboot"
+      ],
+      "tools_used": [
+        "etw",
+        "ghidra",
+        "ghidra_no_function_fallback",
+        "wpr",
+        "reboot"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": true,
+        "boot_phase_included": true,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.1",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "medium",
+      "source_file": "research/records/power.session-watchdog-timeouts.json",
+      "incident_ids": [
+        "20260328082113-power-session-watchdog-timeouts",
+        "20260328084313-power-session-watchdog-timeouts",
+        "20260328084937-power-session-watchdog-timeouts",
+        "20260328090153-power-session-watchdog-timeouts"
+      ]
     },
     {
       "record_id": "privacy.block-microsoft-accounts",

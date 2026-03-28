@@ -1,0 +1,21 @@
+{
+  "class": "C",
+  "pipeline_version": "v3.1",
+  "reason": "The watchdog timeout pair now has a clean baseline export, exact current-build ntoskrnl string hits plus Ghidra fallback artifacts, a repo-side PoFx pseudocode lead, and a successful reboot-verified boot trace that preserved the same values after boot. That gives the candidate a credible cross-layer evidence base, but there is still no shipped app mapping, no validated non-default profile, and no direct live read of the exact values.",
+  "cross_layer_satisfied": true,
+  "layers_used": [
+    "runtime_etw",
+    "static_ghidra",
+    "behavior_wpr"
+  ],
+  "layer_count": 3,
+  "frida_kernel_guard_applied": true,
+  "dead_flag_checks": {
+    "etw_executed": true,
+    "boot_phase_included": true,
+    "correct_tool_used": true,
+    "trigger_condition_tested": true
+  },
+  "class_ready_basis": "candidate-lane",
+  "next_missing_layer": "app-mapping"
+}
