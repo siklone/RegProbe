@@ -1,0 +1,40 @@
+{
+  "lane_label": "power.disable-cpu-idle-states",
+  "generated_utc": "2026-03-28T20:15:00Z",
+  "status": "stepwise-runtime-reviewed",
+  "runner_pattern": "stepwise-a-b-c-d",
+  "scripts": [
+    "scripts/vm/run-cpu-idle-states-orchestration-step.ps1",
+    "scripts/vm/run-cpu-idle-states-orchestration-step-a.ps1",
+    "scripts/vm/run-cpu-idle-states-orchestration-step-b.ps1",
+    "scripts/vm/run-cpu-idle-states-orchestration-step-c.ps1",
+    "scripts/vm/run-cpu-idle-states-orchestration-step-d.ps1"
+  ],
+  "fixed_substeps": [
+    {
+      "stage": "A",
+      "original_failure": "PowerShell provider path creation under WPR-started candidate write",
+      "original_error": "Cannot delete a subkey tree because the subkey does not exist.",
+      "fix": "Switched the candidate write to reg.exe add operations."
+    },
+    {
+      "stage": "B",
+      "original_failure": "Guest reboot primitive",
+      "original_error": "vmrun restartGuest unsupported or guest reboot cycle never observed",
+      "fix": "Switched to the host-driven soft-stop or start reboot pattern."
+    }
+  ],
+  "final_session": {
+    "session_path": "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327/session.json",
+    "step_a_summary": "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327/step-a-summary.json",
+    "step_b_summary": "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327/step-b-summary.json",
+    "step_c_summary": "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327/step-c-summary.json",
+    "step_d_summary": "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327/step-d-summary.json",
+    "candidate_persisted_after_reboot": true,
+    "restore_returned_to_missing": true,
+    "wpr_stop_succeeded": true,
+    "etl_exists": false,
+    "etl_copied_to_host": false
+  },
+  "conclusion": "The CPU idle runtime lane can now be executed as independent, testable steps. The candidate write and reboot stages are fixed under the stepwise runner. The remaining blocker is specifically WPR or ETL materialization, not the broader orchestration chain."
+}

@@ -1,10 +1,10 @@
 ﻿{
     "schema_version":  "1.0",
-    "generated_utc":  "2026-03-28T16:53:43.3745979Z",
+    "generated_utc":  "2026-03-28T19:42:15.7263672Z",
     "summary":  {
-                    "total_incidents":  26,
+                    "total_incidents":  32,
                     "shell_recovered":  4,
-                    "needed_snapshot_revert":  25
+                    "needed_snapshot_revert":  31
                 },
     "incidents":  [
                       {
@@ -422,6 +422,102 @@
                           "needed_snapshot_revert":  true,
                           "recorded_utc":  "2026-03-28T16:53:43.3544428Z",
                           "notes":  "CPU idle write diagnostics failed before a healthy completion and required snapshot recovery."
+                      },
+                      {
+                          "incident_id":  "20260328204405-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-stepwise-20260328-203615",
+                          "family":  "power-runtime-stepwise",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "cpu-idle-step-a",
+                          "symptom":  "vmrun failed (1): Guest program exited with non-zero exit code: 1",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T17:44:05.9768359Z",
+                          "notes":  "Stepwise CPU idle orchestration failed during stage set-candidate."
+                      },
+                      {
+                          "incident_id":  "20260328210158-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-stepwise-20260328-205218",
+                          "family":  "power-runtime-stepwise",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "cpu-idle-step-a",
+                          "symptom":  "vmrun failed (1): Guest program exited with non-zero exit code: 1",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T18:01:58.7696503Z",
+                          "notes":  "Stepwise CPU idle orchestration failed during stage set-candidate."
+                      },
+                      {
+                          "incident_id":  "20260328212101-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-stepwise-20260328-211230",
+                          "family":  "power-runtime-stepwise",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "cpu-idle-step-a",
+                          "symptom":  "Guest action set-candidate failed: Cannot delete a subkey tree because the subkey does not exist.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T18:21:01.5636128Z",
+                          "notes":  "Stepwise CPU idle orchestration failed during stage set-candidate."
+                      },
+                      {
+                          "incident_id":  "20260328214001-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-stepwise-20260328-213007",
+                          "family":  "power-runtime-stepwise",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "cpu-idle-step-b",
+                          "symptom":  "vmrun failed (-1): Error: Unrecognized command: restartGuest",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T18:40:01.5617270Z",
+                          "notes":  "Stepwise CPU idle orchestration failed during stage restart-guest."
+                      },
+                      {
+                          "incident_id":  "20260328221233-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-stepwise-20260328-215208",
+                          "family":  "power-runtime-stepwise",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "cpu-idle-step-b",
+                          "symptom":  "Guest did not complete a reboot cycle in time.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T19:12:33.0496794Z",
+                          "notes":  "Stepwise CPU idle orchestration failed during stage restart-guest."
+                      },
+                      {
+                          "incident_id":  "20260328224215-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-stepwise-20260328-222242",
+                          "family":  "power-runtime-stepwise",
+                          "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "cpu-idle-step-b",
+                          "symptom":  "Guest did not complete a reboot cycle in time.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T19:42:15.7081415Z",
+                          "notes":  "Stepwise CPU idle orchestration failed during stage restart-guest."
                       }
                   ]
 }

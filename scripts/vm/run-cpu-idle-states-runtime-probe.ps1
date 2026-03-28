@@ -47,6 +47,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $registryPath = 'Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power'
+$regExePath = 'HKLM\SYSTEM\CurrentControlSet\Control\Power'
 $valueNames = @('DisableIdleStatesAtBoot', 'IdleStateTimeout', 'ExitLatencyCheckEnabled')
 $wpr = 'C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\wpr.exe'
 
@@ -83,10 +84,12 @@ switch ($Action) {
         Write-State (Get-BundleState)
     }
     'set-candidate' {
-        New-Item -Path $registryPath -Force | Out-Null
-        New-ItemProperty -Path $registryPath -Name 'DisableIdleStatesAtBoot' -Value 1 -PropertyType DWord -Force | Out-Null
-        New-ItemProperty -Path $registryPath -Name 'IdleStateTimeout' -Value 0 -PropertyType DWord -Force | Out-Null
-        New-ItemProperty -Path $registryPath -Name 'ExitLatencyCheckEnabled' -Value 1 -PropertyType DWord -Force | Out-Null
+        & reg.exe add $regExePath /v DisableIdleStatesAtBoot /t REG_DWORD /d 1 /f | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw "reg.exe add failed for DisableIdleStatesAtBoot with exit code $LASTEXITCODE" }
+        & reg.exe add $regExePath /v IdleStateTimeout /t REG_DWORD /d 0 /f | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw "reg.exe add failed for IdleStateTimeout with exit code $LASTEXITCODE" }
+        & reg.exe add $regExePath /v ExitLatencyCheckEnabled /t REG_DWORD /d 1 /f | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw "reg.exe add failed for ExitLatencyCheckEnabled with exit code $LASTEXITCODE" }
         Write-State (Get-BundleState)
     }
     'read-state' {
@@ -174,6 +177,44 @@ function Copy-FromGuest {
         $GuestPath,
         $HostPath
     ) | Out-Null
+}
+
+function Wait-VmPoweredOff {
+    param([int]$TimeoutSeconds = 300)
+
+    $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+    while ((Get-Date) -lt $deadline) {
+        try {
+            $running = Invoke-Vmrun -Arguments @('-T', 'ws', 'list')
+            if ($running -notmatch [regex]::Escape($VmPath)) {
+                return
+            }
+        }
+        catch {
+        }
+
+        Start-Sleep -Seconds 5
+    }
+
+    throw "VM did not power off within $TimeoutSeconds seconds."
+}
+
+function Restart-GuestCycle {
+    $stopMode = 'soft'
+    Invoke-Vmrun -Arguments @('-T', 'ws', 'stop', $VmPath, 'soft') -IgnoreExitCode | Out-Null
+    try {
+        Wait-VmPoweredOff -TimeoutSeconds 240
+    }
+    catch {
+        $stopMode = 'hard'
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'stop', $VmPath, 'hard') -IgnoreExitCode | Out-Null
+        Wait-VmPoweredOff -TimeoutSeconds 90
+    }
+
+    Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath) -IgnoreExitCode | Out-Null
+    Wait-GuestReady
+    Start-Sleep -Seconds 5
+    return $stopMode
 }
 
 function Wait-GuestReady {
@@ -346,7 +387,7 @@ try {
     $summary.candidate_applied = Invoke-GuestAction -Action 'set-candidate'
 
     $summary.last_stage = 'restart-guest'
-    Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'restartGuest', $VmPath) | Out-Null
+    $summary.reboot_mode = Restart-GuestCycle
     $summary.last_stage = 'wait-tools-post-reboot'
     Wait-GuestReady
     $summary.last_stage = 'settle-post-reboot'

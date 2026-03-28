@@ -1,0 +1,50 @@
+﻿{
+    "generated_utc":  "2026-03-28T20:14:48.7404745Z",
+    "record_id":  "power.disable-cpu-idle-states",
+    "session_id":  "cpu-idle-stepwise-20260328-225327",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "host_root":  "H:\\Temp\\vm-tooling-staging\\cpu-idle-stepwise-20260328-225327",
+    "repo_root":  "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327",
+    "guest_root":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260328-225327",
+    "guest_payload_path":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260328-225327\\cpu-idle-stepwise-payload.ps1",
+    "guest_etl_path":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260328-225327\\cpu-idle-stepwise.etl",
+    "completed_steps":  [
+                            "A",
+                            "B",
+                            "C",
+                            "D"
+                        ],
+    "next_step":  "",
+    "phase_status":  {
+                         "A":  {
+                                   "status":  "ok",
+                                   "failed_stage":  null,
+                                   "summary_file":  "step-a-summary.json"
+                               },
+                         "B":  {
+                                   "status":  "ok",
+                                   "failed_stage":  null,
+                                   "summary_file":  "step-b-summary.json"
+                               },
+                         "D":  {
+                                   "status":  "ok",
+                                   "failed_stage":  null,
+                                   "summary_file":  "step-d-summary.json"
+                               },
+                         "C":  {
+                                   "status":  "ok",
+                                   "failed_stage":  null,
+                                   "summary_file":  "step-c-summary.json"
+                               }
+                     },
+    "artifacts":  {
+                      "baseline":  "baseline.json",
+                      "wpr_start":  "wpr-start.json",
+                      "candidate":  "candidate.json",
+                      "post_boot":  "post-boot.json",
+                      "wpr_stop":  "wpr-stop.json",
+                      "restore":  "restore.json",
+                      "restore_after_boot":  "restore-after-boot.json",
+                      "etl_placeholder":  "cpu-idle-stepwise.etl.md"
+                  }
+}

@@ -251,10 +251,42 @@ function Read-BundleState {
     return Get-Content -Path $hostOut -Raw | ConvertFrom-Json
 }
 
+function Wait-VmPoweredOff {
+    param([int]$TimeoutSeconds = 300)
+
+    $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+    while ((Get-Date) -lt $deadline) {
+        try {
+            $running = Invoke-Vmrun -Arguments @('-T', 'ws', 'list')
+            if ($running -notmatch [regex]::Escape($VmPath)) {
+                return
+            }
+        }
+        catch {
+        }
+
+        Start-Sleep -Seconds 5
+    }
+
+    throw "VM did not power off within $TimeoutSeconds seconds."
+}
+
 function Restart-Guest {
-    Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'restartGuest', $VmPath) | Out-Null
+    $stopMode = 'soft'
+    Invoke-Vmrun -Arguments @('-T', 'ws', 'stop', $VmPath, 'soft') -IgnoreExitCode | Out-Null
+    try {
+        Wait-VmPoweredOff -TimeoutSeconds 240
+    }
+    catch {
+        $stopMode = 'hard'
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'stop', $VmPath, 'hard') -IgnoreExitCode | Out-Null
+        Wait-VmPoweredOff -TimeoutSeconds 90
+    }
+
+    Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath) -IgnoreExitCode | Out-Null
     Wait-GuestReady
     Wait-Explorer
+    return $stopMode
 }
 
 function Get-ShellHealth {
