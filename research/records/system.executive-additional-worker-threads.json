@@ -4,7 +4,7 @@
   "record_id": "system.executive-additional-worker-threads",
   "tweak_id": "system.executive-additional-worker-threads",
   "record_status": "draft",
-  "summary": "Draft candidate record only. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\\Executive, a successful Procmon boot-log lane with exact-value filtering, exact current-build ntoskrnl string hits, and preserved Ghidra fallback artifacts for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. That is enough to keep the pair active as a research lane, but the semantics still rely on unresolved current-build code blocks, the exact worker-thread values still do not show up in runtime payloads, and there is no shipped RegProbe mapping.",
+  "summary": "Draft candidate record only. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\\Executive, an ETW-specific keyword review, a successful Procmon boot-log lane with exact-value filtering, exact current-build ntoskrnl string hits, and preserved Ghidra fallback artifacts for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. That is enough to keep the pair active as a research lane, but the semantics still rely on unresolved current-build code blocks, the exact worker-thread values still do not show up in runtime payloads, and there is no shipped RegProbe mapping.",
   "validation_proof": {
     "source_url": "research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md",
     "exact_quote_or_path": "The Executive worker-thread lane now has a real Procmon boot-log run on the clean RegProbe baseline. The lane completed a host-driven boot cycle, produced a real boot-log PML, and successfully converted it to CSV. Even with a full boot-log capture, the filtered lane still returned MATCH_COUNT=0 for AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber.",
@@ -19,7 +19,7 @@
     "casual_explanation": "These values appear to control extra executive worker threads for internal critical and delayed work queues. They are low-level kernel-adjacent knobs and are being tracked as research only.",
     "why_people_change_it": "Advanced researchers may inspect these values when studying executive worker pool sizing, boot-time work scheduling, or internal queue behavior under Session Manager Executive.",
     "tradeoffs_overview": "The pair is boot-relevant and kernel-adjacent. The names are suggestive, and current-build static evidence exists, but the repo still does not have a safe shipped mapping or a validated non-default profile.",
-    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\\AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. A clean Win25H2Clean export confirmed both values at 0 on the baseline. The first string pass found exact Unicode hits for both names in current-build ntoskrnl.exe and no exact hits in smss.exe. The improved Ghidra fallback then preserved forced-boundary reviewable artifacts at 140c62b88 and 140c62bb8, but the blocks still do not provide a clean high-confidence semantic map. A bounded host-side ETL extract from the successful boot trace now also proves that System (PID 4) touches Session Manager\\Executive during early boot and actively queries plus sets the adjacent UuidSequenceNumber value in the same path. A real Procmon boot-log lane now completes on the same baseline, produces a PML plus CSV, and still returns zero filtered hits for AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber. That upgrades the lane from static-only candidate packaging to a runtime-backed draft lane, but it still does not surface a direct live read of the exact worker-thread pair. This is enough to keep the pair as a draft candidate lane, not enough to publish it as an end-user tweak.",
+    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\\AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. A clean Win25H2Clean export confirmed both values at 0 on the baseline. The first string pass found exact Unicode hits for both names in current-build ntoskrnl.exe and no exact hits in smss.exe. The improved Ghidra fallback then preserved forced-boundary reviewable artifacts at 140c62b88 and 140c62bb8, but the blocks still do not provide a clean high-confidence semantic map. A bounded host-side ETL extract from the successful boot trace now also proves that System (PID 4) touches Session Manager\\Executive during early boot and actively queries plus sets the adjacent UuidSequenceNumber value in the same path. An ETW-specific keyword review over that extract tightened the lane again and still surfaced only Session Manager\\Executive path activity plus adjacent UuidSequenceNumber traffic. A real Procmon boot-log lane now completes on the same baseline, produces a PML plus CSV, and still returns zero filtered hits for AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber. That upgrades the lane from static-only candidate packaging to a runtime-backed draft lane, but it still does not surface a direct live read of the exact worker-thread pair. This is enough to keep the pair as a draft candidate lane, not enough to publish it as an end-user tweak.",
     "targets": [
       {
         "target_id": "session-manager-executive-worker-thread-pair",
@@ -134,6 +134,7 @@
         "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
         "kernel-power-existing-next-gate-20260328",
         "vm-executive-etl-registry-review-20260328",
+        "vm-executive-etw-keyword-review-20260328",
         "vm-executive-procmon-bootlog-20260328"
       ]
     }
@@ -197,6 +198,19 @@
       "title": "Bounded host-side ETL review for Session Manager Executive",
       "location": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt and research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md",
       "summary": "A bounded host-side ETL extract from the successful boot trace proved early-boot access to Session Manager\\Executive by System (PID 4) and captured adjacent UuidSequenceNumber query and set activity. The exact worker-thread pair names still did not appear in the bounded runtime payload.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-executive-etw-keyword-review-20260328",
+      "kind": "etw-trace",
+      "title": "ETW-specific keyword review for the Executive worker-thread pair",
+      "location": "evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json and evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt and research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md",
+      "summary": "An exact-keyword review over the bounded Executive ETW extract still surfaced only Session Manager Executive path activity plus adjacent UuidSequenceNumber traffic. The worker-thread pair names remained absent.",
       "supports": [
         "path",
         "behavior",

@@ -1,0 +1,45 @@
+{
+  "lane_label": "system.executive-additional-worker-threads",
+  "generated_utc": "2026-03-28T15:02:26.9079484Z",
+  "status": "follow-up-package-recorded",
+  "current_lane_state": "draft-class-c",
+  "applied_now": {
+    "step": "etw-specific-keyword-review",
+    "summary_path": "evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json",
+    "filtered_output_path": "evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt",
+    "counts": {
+      "session_manager_executive": 6,
+      "additional_critical_worker_threads": 0,
+      "additional_delayed_worker_threads": 0,
+      "uuid_sequence_number": 2
+    },
+    "exact_value_hits": [],
+    "adjacent_hits": [
+      "UuidSequenceNumber"
+    ],
+    "conclusion": "The ETW-specific filter tightened the lane but still surfaced only Session Manager Executive path activity plus adjacent UuidSequenceNumber traffic."
+  },
+  "next_steps": [
+    {
+      "step": "kernel-breakpoint",
+      "label": "WinDbg breakpoint on nt!CmQueryValueKey",
+      "status": "decision-gated",
+      "why": "Strongest path to the exact reader and call stack for kernel or early-boot registry access.",
+      "environment_requirement": "dedicated kernel-debug-capable VM"
+    },
+    {
+      "step": "reactos-grep",
+      "label": "ReactOS hypothesis grep",
+      "status": "ready",
+      "why": "Cheap source-side hypothesis pass for AdditionalCriticalWorkerThreads, AdditionalDelayedWorkerThreads, and UuidSequenceNumber.",
+      "evidence_grade": "supporting-only"
+    },
+    {
+      "step": "stress-trigger-lane",
+      "label": "Executive stress and trigger lane",
+      "status": "queued",
+      "why": "The worker-thread pair may only surface under queue pressure, service-start pressure, or a boot-adjacent load condition."
+    }
+  ],
+  "recommendation": "Keep the ETW keyword review as the current lightweight negative proof, run a cheap ReactOS/source hypothesis pass next, then decide whether the remaining uncertainty justifies a kernel-debug lane or a stress-trigger runtime lane."
+}

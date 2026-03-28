@@ -1,0 +1,23 @@
+﻿{
+    "generated_utc":  "2026-03-28T15:02:26.9079484Z",
+    "lane_label":  "system.executive-additional-worker-threads",
+    "status":  "etw-keyword-review-complete",
+    "input_path":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt",
+    "filtered_output_path":  "evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt",
+    "total_lines":  8,
+    "filtered_line_count":  8,
+    "counts":  {
+                   "session_manager_executive":  6,
+                   "additional_critical_worker_threads":  0,
+                   "additional_delayed_worker_threads":  0,
+                   "uuid_sequence_number":  2
+               },
+    "exact_value_hits":  [
+
+                         ],
+    "adjacent_hits":  [
+                          "UuidSequenceNumber"
+                      ],
+    "strongest_process":  "System (PID 4)",
+    "conclusion":  "The ETW-specific keyword review still surfaced only Session Manager\\\\Executive path activity plus adjacent UuidSequenceNumber traffic. The exact Executive worker-thread pair names remained absent from the ETW-derived dump."
+}
