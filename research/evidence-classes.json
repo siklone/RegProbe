@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T11:57:37.295944Z",
+  "generated_utc": "2026-03-28T12:27:29.227668Z",
   "summary": {
     "total_records": 298,
     "class_counts": {
@@ -6833,15 +6833,15 @@
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger that stayed shell-safe while still returning no matching hits, and an S1-specific Procmon attempt that disturbed the VMware guest-ops c...",
+        "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger that stayed shell-safe while still returning no matching hits, and two separate S1-specific Procmon attempts. One disturbed the VMware...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md",
+            "url": "research/notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md",
             "kind": "validation-proof",
-            "summary": "The ETL svchost lead is now narrowed to the DcomLaunch service host group, which includes the Power service on the current Win25H2Clean baseline."
+            "summary": "The scheduled-task decoupling did not fix the lane: the guest-side task did not leave behind a usable probe bundle, the task itself was not present when queried after recovery,..."
           },
           {
             "title": "Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair",

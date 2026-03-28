@@ -1,0 +1,38 @@
+{
+  "record_id": "power.session-watchdog-timeouts",
+  "generated_utc": "2026-03-28T12:22:28.4872537Z",
+  "probe_name": "watchdog-s1-scheduled-procmon-20260328-150559",
+  "lane_label": "power.session-watchdog-timeouts",
+  "snapshot_name": "baseline-20260327-regprobe-visible-shell-stable",
+  "status": "copy-incomplete",
+  "shell_before_healthy": true,
+  "shell_after_healthy": true,
+  "tools_transition_pattern": [
+    "running",
+    "installed"
+  ],
+  "guest_artifacts_copied": {
+    "summary": false,
+    "pml": false,
+    "csv": false,
+    "hits": false,
+    "txt": false,
+    "before": false,
+    "after": false,
+    "lastwake": false,
+    "kernelpower": false,
+    "taskquery": false,
+    "wrapper_error": false
+  },
+  "live_postmortem": {
+    "task_found": false,
+    "wake_history_count": 0,
+    "fresh_kernel_power_sleep_resume_event_found": false
+  },
+  "conclusion": "Moving the S1 watchdog payload into a guest-side scheduled task did not recover a usable in-guest evidence lane. The current VMware baseline still fails before leaving a decisive sleep/resume trace for the watchdog pair.",
+  "source_artifacts": [
+    "evidence/files/vm-tooling-staging/watchdog-s1-scheduled-procmon-20260328-150559/summary.json",
+    "evidence/files/vm-tooling-staging/watchdog-s1-scheduled-procmon-20260328-150559/watchdog-s1-scheduled-procmon-live-postmortem.txt",
+    "research/notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md"
+  ]
+}
