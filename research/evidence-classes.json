@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T06:56:43.136632Z",
+  "generated_utc": "2026-03-28T07:37:53.181236Z",
   "summary": {
     "total_records": 298,
     "class_counts": {
@@ -6833,15 +6833,15 @@
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "This proof anchors the pair to a reboot-verified baseline on Win25H2Clean. It is enough to confirm the candidate surface exists and survives boot, but not enough to claim a shipped app mapping or a validated non-default profile.",
+        "summary": "This proof upgrades the runtime story from a reboot-verified baseline to a path-level boot ETW review. It is enough to confirm the candidate surface is actually touched during boot, but not enough to claim a shipped app mapping or a validated non-default pr...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md",
+            "url": "research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md",
             "kind": "validation-proof",
-            "summary": "Successful run: watchdog-timeouts-boottrace-20260328-090631. Boot cycle advanced from 2026-03-25T14:14:21.5000000+03:00 to 2026-03-28T09:09:02.5000000+03:00 and preserved Watchd..."
+            "summary": "The host-side ETL parse now proves boot-time access to Session Manager\\Power. The strongest readers in this pass were System (PID 4) during boot and svchost.exe (PID 980) later..."
           },
           {
             "title": "Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair",

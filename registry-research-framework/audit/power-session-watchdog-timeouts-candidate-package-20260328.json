@@ -1,14 +1,15 @@
 {
   "lane_label": "power.session-watchdog-timeouts",
-  "generated_utc": "2026-03-28T06:40:00Z",
-  "status": "draft-record-created",
+  "generated_utc": "2026-03-28T12:35:00Z",
+  "status": "etl-registry-review-imported",
   "research_record": "research/records/power.session-watchdog-timeouts.json",
   "v31_evidence_root": "evidence/records/power.session-watchdog-timeouts",
   "supporting_inputs": [
     "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json",
     "registry-research-framework/audit/power-session-watchdog-timeouts-runtime-prep-20260328.json",
-    "registry-research-framework/audit/power-session-watchdog-timeouts-boot-trace-20260328.json"
+    "registry-research-framework/audit/power-session-watchdog-timeouts-boot-trace-20260328.json",
+    "registry-research-framework/audit/power-session-watchdog-timeouts-etl-registry-review-20260328.json"
   ],
   "notes_path": "research/notes/power-session-watchdog-timeouts-candidate-package-20260328.md",
-  "next_gate": "direct runtime read or cleaner code-path confirmation before any app mapping"
+  "next_gate": "exact watchdog pair live read or a shipped app mapping before any promotion beyond the draft lane"
 }

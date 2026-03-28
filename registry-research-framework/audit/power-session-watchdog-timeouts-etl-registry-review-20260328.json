@@ -1,0 +1,24 @@
+{
+  "lane_label": "power.session-watchdog-timeouts",
+  "generated_utc": "2026-03-28T12:35:00Z",
+  "status": "host-etl-registry-review-imported",
+  "source_etl_placeholder": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md",
+  "filtered_dump": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt",
+  "pattern_counts": {
+    "SessionManagerPower": 81,
+    "SystemPowerPolicy": 19,
+    "ShutdownOccurred": 1,
+    "WatchdogResumeTimeout": 0,
+    "WatchdogSleepTimeout": 0
+  },
+  "reading_processes": [
+    "System (PID 4)",
+    "svchost.exe (PID 980)"
+  ],
+  "adjacent_values_seen": [
+    "SystemPowerPolicy",
+    "ShutdownOccurred"
+  ],
+  "exact_values_seen": [],
+  "conclusion": "Boot-time access to Session Manager\\Power is proven, but the parsed ETL still does not expose a direct read of WatchdogResumeTimeout or WatchdogSleepTimeout."
+}

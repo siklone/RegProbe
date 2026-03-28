@@ -1,0 +1,42 @@
+Filtered host-side registry review for watchdog boot trace
+Probe folder: evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631
+Source ETL placeholder: evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md
+Parser: xperf -a dumper on the kernel registry provider
+
+Summary counts
+- Session Manager\Power hits: 81
+- SystemPowerPolicy hits: 19
+- ShutdownOccurred hits: 1
+- WatchdogResumeTimeout hits: 0
+- WatchdogSleepTimeout hits: 0
+
+Conclusion
+- Boot-time access to HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power is proven.
+- The parsed ETL shows both System (PID 4) and svchost.exe (PID 980) touching the path.
+- Adjacent value activity is visible for SystemPowerPolicy and ShutdownOccurred.
+- This pass still did not recover a direct read of WatchdogResumeTimeout or WatchdogSleepTimeout.
+
+Representative events
+
+[System early boot]
+RegCreateKey, 86929, System (4), Session Manager\Power
+RegCreateKey, 87020, System (4), Session Manager\Power
+RegCreateKey, 96763, System (4), Session Manager\Power
+
+[System adjacent queries]
+RegCreateKey, 631187, System (4), Control\Session Manager\Power
+RegQueryValue, 631239, System (4), SystemPowerPolicy
+RegCreateKey, 631340, System (4), Control\Session Manager\Power
+RegQueryValue, 631351, System (4), SystemPowerPolicy
+
+[System later boot]
+RegCreateKey, 4353781, System (4), \Registry\Machine\SYSTEM\CurrentControlSet\Control\Session Manager\Power
+RegQueryValue, 4353786, System (4), ShutdownOccurred
+
+[svchost follow-up]
+RegOpenKey, 26148421, svchost.exe (980), SYSTEM\CurrentControlSet\Control\Session Manager\Power
+RegOpenKey, 27929775, svchost.exe (980), SYSTEM\CurrentControlSet\Control\Session Manager\Power
+RegOpenKey, 27971411, svchost.exe (980), SYSTEM\CurrentControlSet\Control\Session Manager\Power
+
+[Absence note]
+No exact WatchdogResumeTimeout or WatchdogSleepTimeout event payloads were recovered in this filtered review.

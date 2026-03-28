@@ -78,7 +78,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `996a45b975762ceb94c99cffc36f106f56ed3e287366be3425ee9fdb79faa65f` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `453abb60e2f46d55c680a76faab4eca1f11d38d48ab38ae964a4f134352a7645` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `b103dfb5b2b112ed75d28ef9daebeaf2bb8fd9e0d1e5bf8796dd3eb4e29ea013` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
-| `power.session-watchdog-timeouts` | draft | Class C | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `37c8258c42a74c14397081a4fe0ca6f3aff02c7a3cef119203078102d79f3dfb` | `12e6921d6278422abda8d5aa188105f8d4ea638774fd0e624290eb487f3180c4` | 5 |
+| `power.session-watchdog-timeouts` | draft | Class C | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `1cbeed3cda63ecd6f95c3b2d284fe58531a79a4a19050da479ec21e48e8e87c6` | `da4e85352bb751e5321deca4f09e2a4bc342ebdf15b8ffab8edff3d8da6462af` | 6 |
 | `system.executive-additional-worker-threads` | draft | Class C | `research/records/system.executive-additional-worker-threads.json` | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) | `09196fbd2fcfcd52cf8782c31381226ca67eb8797c38eef1d6eae83634cc943f` | `55162ebb1b32a1e193c60ede130bc4b9fa43f9e848efabbf29bb451b6fcd0633` | 4 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `6ce0e5db2707ec9cbf72aa19ccf4a8e60cbfe2e7be762f6f1331aadfc5d5e150` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `4893acbb2b403e5e4019cb4a2a6b24eb9df08c9ca701abe536ee94bd2132f1f9` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
@@ -1835,10 +1835,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class C`
 - Source file: `research/records/power.session-watchdog-timeouts.json`
 - V3.1 evidence root: [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts)
-- Source SHA256: `37c8258c42a74c14397081a4fe0ca6f3aff02c7a3cef119203078102d79f3dfb`
-- Proof SHA256: `12e6921d6278422abda8d5aa188105f8d4ea638774fd0e624290eb487f3180c4`
+- Source SHA256: `1cbeed3cda63ecd6f95c3b2d284fe58531a79a4a19050da479ec21e48e8e87c6`
+- Proof SHA256: `da4e85352bb751e5321deca4f09e2a4bc342ebdf15b8ffab8edff3d8da6462af`
 
-**Summary:** Draft candidate record only. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, and a successful reboot-verified boot trace baseline. The pair is strong enough to stay active as a candidate lane, but there is still no shipped app mapping and no direct live read of the exact values yet.
+**Summary:** Draft candidate record only. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, and a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power. The pair is strong enough to stay active as a candidate lane, but there is still no shipped app mapping and no direct live read of the exact watchdog values yet.
 
 **Evidence**
 
@@ -1848,15 +1848,16 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ghidra-watchdog-nextgate-ntoskrnl-20260328` | `decompilation` | Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair | [evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) |
 | `repo-pofx-pseudocode-watchdog` | `repo-doc` | Repo PoFxInitPowerManagement pseudocode lead | [Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c](../Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c) and [research/notes/power-session-watchdog-timeouts-runtime-prep-20260328.md](notes/power-session-watchdog-timeouts-runtime-prep-20260328.md) |
 | `vm-watchdog-boot-trace-20260328` | `etw-trace` | Win25H2Clean reboot-verified watchdog timeout boot trace | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/summary.json](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md](notes/power-session-watchdog-timeouts-boot-trace-20260328.md) |
+| `vm-watchdog-etl-registry-review-20260328` | `etw-trace` | Host-side ETL registry review for Session Manager Power | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt) and [research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md](notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md) |
 | `kernel-power-existing-next-gate-20260328` | `inference` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md](notes/power-session-watchdog-timeouts-boot-trace-20260328.md) |
-| Exact quote / path | Successful run: watchdog-timeouts-boottrace-20260328-090631. Boot cycle advanced from 2026-03-25T14:14:21.5000000+03:00 to 2026-03-28T09:09:02.5000000+03:00 and preserved WatchdogResumeTimeout = 120 plus WatchdogSleepTimeout = 300 after boot. |
-| Notes | This proof anchors the pair to a reboot-verified baseline on Win25H2Clean. It is enough to confirm the candidate surface exists and survives boot, but not enough to claim a shipped app mapping or a validated non-default profile. |
+| Source | [research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md](notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md) |
+| Exact quote / path | The host-side ETL parse now proves boot-time access to Session Manager/Power. The strongest readers in this pass were System (PID 4) during boot and svchost.exe (PID 980) later in the session. |
+| Notes | This proof upgrades the runtime story from a reboot-verified baseline to a path-level boot ETW review. It is enough to confirm the candidate surface is actually touched during boot, but not enough to claim a shipped app mapping or a validated non-default profile. |
 
 ---
 

@@ -4,12 +4,12 @@
   "record_id": "power.session-watchdog-timeouts",
   "tweak_id": "power.session-watchdog-timeouts",
   "record_status": "draft",
-  "summary": "Draft candidate record only. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, and a successful reboot-verified boot trace baseline. The pair is strong enough to stay active as a candidate lane, but there is still no shipped app mapping and no direct live read of the exact values yet.",
+  "summary": "Draft candidate record only. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, and a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power. The pair is strong enough to stay active as a candidate lane, but there is still no shipped app mapping and no direct live read of the exact watchdog values yet.",
   "validation_proof": {
-    "source_url": "research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md",
-    "exact_quote_or_path": "Successful run: watchdog-timeouts-boottrace-20260328-090631. Boot cycle advanced from 2026-03-25T14:14:21.5000000+03:00 to 2026-03-28T09:09:02.5000000+03:00 and preserved WatchdogResumeTimeout = 120 plus WatchdogSleepTimeout = 300 after boot.",
+    "source_url": "research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md",
+    "exact_quote_or_path": "The host-side ETL parse now proves boot-time access to Session Manager\\Power. The strongest readers in this pass were System (PID 4) during boot and svchost.exe (PID 980) later in the session.",
     "key_found_on_page": true,
-    "notes": "This proof anchors the pair to a reboot-verified baseline on Win25H2Clean. It is enough to confirm the candidate surface exists and survives boot, but not enough to claim a shipped app mapping or a validated non-default profile."
+    "notes": "This proof upgrades the runtime story from a reboot-verified baseline to a path-level boot ETW review. It is enough to confirm the candidate surface is actually touched during boot, but not enough to claim a shipped app mapping or a validated non-default profile."
   },
   "setting": {
     "name": "Session Manager Watchdog Timeouts",
@@ -19,7 +19,7 @@
     "casual_explanation": "These values appear to control watchdog timeout behavior around directed power transitions. They are not normal user-facing power options and are being tracked as a low-level research lane rather than a supported tweak.",
     "why_people_change_it": "Advanced researchers may look at these values when investigating resume and sleep watchdog behavior, power transition timing, or kernel power management internals.",
     "tradeoffs_overview": "The pair is kernel-adjacent and boot-relevant. The current evidence shows that the values exist and participate in the power-management path, but the repo still does not have a safe shipped mapping or a validated non-default profile for end users.",
-    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\WatchdogResumeTimeout and WatchdogSleepTimeout. A clean baseline export on Win25H2Clean confirmed 120 and 300 respectively, with adjacent PowerSettingProfile = 0. The current-build ntoskrnl.exe string passes found exact hits for both names, and the improved Ghidra fallback preserved reviewable artifacts even when natural function boundaries were weak. Repo-side PoFxInitPowerManagement pseudocode then linked the pair to PopFxDirectedPowerUpTimeoutMs and PopFxDirectedPowerDownTimeoutMs. A successful host-driven boot trace on baseline-20260327-regprobe-visible-shell-stable preserved the same 120/300 values after reboot and captured the ETL to host staging. That is enough to keep the candidate active, but not enough to publish a shipped preset or app mapping.",
+    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\WatchdogResumeTimeout and WatchdogSleepTimeout. A clean baseline export on Win25H2Clean confirmed 120 and 300 respectively, with adjacent PowerSettingProfile = 0. The current-build ntoskrnl.exe string passes found exact hits for both names, and the improved Ghidra fallback preserved reviewable artifacts even when natural function boundaries were weak. Repo-side PoFxInitPowerManagement pseudocode then linked the pair to PopFxDirectedPowerUpTimeoutMs and PopFxDirectedPowerDownTimeoutMs. A successful host-driven boot trace on baseline-20260327-regprobe-visible-shell-stable preserved the same 120/300 values after reboot and captured the ETL to host staging. A follow-up host-side xperf registry review then showed repeated boot-time access to Session Manager\\Power by System (PID 4) and later svchost.exe (PID 980), including adjacent SystemPowerPolicy and ShutdownOccurred activity. That is enough to keep the candidate active, but not enough to publish a shipped preset or app mapping because the exact watchdog pair still does not show up as a direct live read.",
     "targets": [
       {
         "target_id": "session-watchdog-timeout-pair",
@@ -196,6 +196,19 @@
       "strength": "high"
     },
     {
+      "evidence_id": "vm-watchdog-etl-registry-review-20260328",
+      "kind": "etw-trace",
+      "title": "Host-side ETL registry review for Session Manager Power",
+      "location": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt and research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md",
+      "summary": "A filtered xperf dump of the successful boot trace proved repeated boot-time access to Session Manager\\Power by System and later svchost.exe, with adjacent SystemPowerPolicy and ShutdownOccurred activity. The exact watchdog pair names were still absent in the parsed event payloads.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "kernel-power-existing-next-gate-20260328",
       "kind": "inference",
       "title": "Kernel power next-gate intake summary",
@@ -215,11 +228,11 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and Ghidra fallback artifacts, repo-side PoFx pseudocode, and a successful reboot-verified boot trace that preserved the same values after boot. That is strong enough to keep the pair active as a candidate record, but there is still no shipped app mapping, no direct live read of the exact values, and no validated non-default profile.",
+    "why": "The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and Ghidra fallback artifacts, repo-side PoFx pseudocode, a successful reboot-verified boot trace, and a host-side ETL registry review that shows real boot-time access to Session Manager\\Power. That is strong enough to keep the pair active as a candidate record, but there is still no shipped app mapping, no direct live read of the exact watchdog values, and no validated non-default profile.",
     "blocking_issues": [
       "No shipped RegProbe provider or UI mapping exists for the watchdog timeout pair yet.",
       "The current semantic lead still depends on repo-side pseudocode plus forced-boundary Ghidra review rather than a primary Microsoft registry contract.",
-      "The lane still lacks a direct live read of WatchdogResumeTimeout and WatchdogSleepTimeout."
+      "The ETL review proves path-level boot access, but the lane still lacks a direct live read of WatchdogResumeTimeout and WatchdogSleepTimeout."
     ]
   },
   "open_questions": [
@@ -235,5 +248,5 @@
       "notes": "Baseline export and successful host-driven boot trace both ran on baseline-20260327-regprobe-visible-shell-stable."
     }
   ],
-  "last_reviewed_utc": "2026-03-28T09:40:00+03:00"
+  "last_reviewed_utc": "2026-03-28T15:35:00+03:00"
 }

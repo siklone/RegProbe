@@ -1,13 +1,13 @@
 {
   "etw": {
     "executed": true,
-    "events_found": false,
-    "reading_process": null,
+    "events_found": true,
+    "reading_process": "System (PID 4); svchost.exe (PID 980)",
     "reading_pid": null,
-    "operation": "boot-trace-baseline",
-    "timestamp": "2026-03-28T06:06:32.1051975Z",
+    "operation": "RegCreateKey/RegOpenKey/RegQueryValue/RegSetValue around Session Manager\\\\Power",
+    "timestamp": "2026-03-28T12:35:00Z",
     "boot_phase_included": true,
-    "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md"
+    "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt"
   },
   "procmon": {
     "executed": false,
