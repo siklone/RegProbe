@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T11:28:10.518310Z",
+  "generated_utc": "2026-03-28T11:57:37.295944Z",
   "summary": {
     "total_records": 298,
     "class_counts": {
@@ -6833,7 +6833,7 @@
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, and a targeted post-boot DcomLaunch/Power trigger that stayed shell-safe while still returning no matching hits. Together they confirm the candidate surface is real, but they still...",
+        "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger that stayed shell-safe while still returning no matching hits, and an S1-specific Procmon attempt that disturbed the VMware guest-ops c...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [

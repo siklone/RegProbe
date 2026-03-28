@@ -1,0 +1,82 @@
+﻿{
+    "generated_utc":  "2026-03-28T11:51:21.0848986Z",
+    "probe_name":  "watchdog-s1-procmon-20260328-144402",
+    "lane_label":  "power.session-watchdog-timeouts",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "host_output_root":  "evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-28T11:44:32.6548528Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  true
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-28T11:51:20.9981269Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  true
+                                   }
+                    },
+    "tools_transitions":  [
+                              "2026-03-28T14:44:38.1870067+03:00 running",
+                              "2026-03-28T14:44:44.7379547+03:00 running",
+                              "2026-03-28T14:44:52.2611254+03:00 running",
+                              "2026-03-28T14:44:58.4458852+03:00 running",
+                              "2026-03-28T14:45:06.0322726+03:00 running",
+                              "2026-03-28T14:45:13.8045332+03:00 running",
+                              "2026-03-28T14:45:21.6399918+03:00 running",
+                              "2026-03-28T14:45:30.4188435+03:00 running",
+                              "2026-03-28T14:45:39.1104831+03:00 running",
+                              "2026-03-28T14:45:45.2649258+03:00 running",
+                              "2026-03-28T14:45:52.4880051+03:00 running",
+                              "2026-03-28T14:45:58.8839807+03:00 running",
+                              "2026-03-28T14:46:04.9260304+03:00 running",
+                              "2026-03-28T14:47:15.1314870+03:00 installed",
+                              "2026-03-28T14:47:29.1838300+03:00 installed",
+                              "2026-03-28T14:47:34.8276292+03:00 installed"
+                          ],
+    "vmrun_exit_code":  -1,
+    "timed_out":  false,
+    "copied":  {
+                   "summary":  false,
+                   "pml":  false,
+                   "csv":  false,
+                   "hits":  false,
+                   "txt":  false,
+                   "before":  false,
+                   "after":  false,
+                   "lastwake":  false,
+                   "kernelpower":  false,
+                   "wrapper_error":  false
+               },
+    "repo_copied":  {
+                        "txt":  false,
+                        "hits":  false,
+                        "before":  false,
+                        "after":  false,
+                        "lastwake":  false,
+                        "kernelpower":  false,
+                        "wrapper_error":  false
+                    },
+    "guest_summary":  null,
+    "probe_error_present":  false,
+    "wrapper_error_present":  false,
+    "status":  "copy-incomplete"
+}

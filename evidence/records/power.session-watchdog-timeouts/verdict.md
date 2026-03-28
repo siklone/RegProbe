@@ -14,12 +14,13 @@
 - a working Procmon boot-log pass reproduced adjacent Session Manager\Power traffic from System during boot
 - the svchost lead is now narrowed to the DcomLaunch service host group that contains the Power service
 - a shell-safe post-boot DcomLaunch/Power Procmon trigger still produced no matching watchdog reads
+- an S1-specific Procmon follow-up disturbed guest ops and did not leave behind usable in-guest artifacts or wake-history confirmation
 
 ## Why not higher
 
 - no shipped RegProbe mapping exists yet
 - no validated non-default timeout pair exists yet
-- no direct live read of WatchdogResumeTimeout or WatchdogSleepTimeout has been captured yet, even after the targeted DcomLaunch/Power follow-up
+- no direct live read of WatchdogResumeTimeout or WatchdogSleepTimeout has been captured yet, even after the targeted DcomLaunch/Power follow-up and the first S1-specific attempt
 
 ## Current posture
 

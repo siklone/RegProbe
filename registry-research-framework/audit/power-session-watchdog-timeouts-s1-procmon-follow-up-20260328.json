@@ -1,0 +1,17 @@
+{
+  "lane_label": "power.session-watchdog-timeouts",
+  "generated_utc": "2026-03-28T11:51:21.0848986Z",
+  "status": "s1-procmon-attempt-reviewed",
+  "summary_path": "evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/summary.json",
+  "lastwake_postcheck_path": "evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-lastwake-postcheck.txt",
+  "kernelpower_postcheck_path": "evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-kernelpower-postcheck.txt",
+  "runner_path": "scripts/vm/run-session-watchdog-timeouts-s1-procmon-probe.ps1",
+  "shell_healthy_before": true,
+  "shell_healthy_after": true,
+  "vmrun_exit_code": -1,
+  "timed_out": false,
+  "guest_payload_artifacts_captured": false,
+  "wake_history_count_zero": true,
+  "fresh_kernel_power_sleep_resume_event_found": false,
+  "conclusion": "The S1-specific Procmon attempt disturbed the VMware guest-ops channel enough to lose the in-guest payload artifacts, while post-checks still showed Wake History Count - 0 and no fresh Kernel-Power sleep/resume entry. On the current Win25H2Clean VMware baseline, this is not yet a decisive in-guest S1 evidence lane."
+}

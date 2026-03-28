@@ -4,12 +4,12 @@
   "record_id": "power.session-watchdog-timeouts",
   "tweak_id": "power.session-watchdog-timeouts",
   "record_status": "draft",
-  "summary": "Draft candidate record only. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, a shell-safe post-boot Procmon trigger against that DcomLaunch/Power lane that still returned no matching hits, and a VM sleep-capability probe that shows the current VMware baseline is S1-only. The pair is strong enough to stay active as a candidate lane, but there is still no shipped app mapping and no direct live read of the exact watchdog values yet.",
+  "summary": "Draft candidate record only. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, a shell-safe post-boot Procmon trigger against that DcomLaunch/Power lane that still returned no matching hits, an S1-specific Procmon follow-up that disturbed the guest-ops channel without yielding usable in-guest artifacts, and a VM sleep-capability probe that shows the current VMware baseline is S1-only. The pair is strong enough to stay active as a candidate lane, but there is still no shipped app mapping and no direct live read of the exact watchdog values yet.",
   "validation_proof": {
     "source_url": "research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md",
     "exact_quote_or_path": "The ETL svchost lead is now narrowed to the DcomLaunch service host group, which includes the Power service on the current Win25H2Clean baseline.",
     "key_found_on_page": true,
-    "notes": "The runtime story now includes the ETL review, the Procmon boot-log review, and a targeted post-boot DcomLaunch/Power trigger that stayed shell-safe while still returning no matching hits. Together they confirm the candidate surface is real, but they still do not show a direct read of WatchdogResumeTimeout or WatchdogSleepTimeout."
+    "notes": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger that stayed shell-safe while still returning no matching hits, and an S1-specific Procmon attempt that disturbed the VMware guest-ops channel without leaving usable in-guest artifacts. Together they confirm the candidate surface is real, but they still do not show a direct read of WatchdogResumeTimeout or WatchdogSleepTimeout."
   },
   "setting": {
     "name": "Session Manager Watchdog Timeouts",
@@ -19,7 +19,7 @@
     "casual_explanation": "These values appear to control watchdog timeout behavior around directed power transitions. They are not normal user-facing power options and are being tracked as a low-level research lane rather than a supported tweak.",
     "why_people_change_it": "Advanced researchers may look at these values when investigating resume and sleep watchdog behavior, power transition timing, or kernel power management internals.",
     "tradeoffs_overview": "The pair is kernel-adjacent and boot-relevant. The current evidence shows that the values exist and participate in the power-management path, but the repo still does not have a safe shipped mapping or a validated non-default profile for end users.",
-    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\WatchdogResumeTimeout and WatchdogSleepTimeout. A clean baseline export on Win25H2Clean confirmed 120 and 300 respectively, with adjacent PowerSettingProfile = 0. The current-build ntoskrnl.exe string passes found exact hits for both names, and the improved Ghidra fallback preserved reviewable artifacts even when natural function boundaries were weak. Repo-side PoFxInitPowerManagement pseudocode then linked the pair to PopFxDirectedPowerUpTimeoutMs and PopFxDirectedPowerDownTimeoutMs. A successful host-driven boot trace on baseline-20260327-regprobe-visible-shell-stable preserved the same 120/300 values after reboot and captured the ETL to host staging. A follow-up host-side xperf registry review then showed repeated boot-time access to Session Manager\\Power by System (PID 4) and later svchost.exe (PID 980), including adjacent SystemPowerPolicy and ShutdownOccurred activity. A dedicated Procmon boot-log lane on the same baseline then proved that Procmon can convert the boot log into a large PML and CSV for this family, with 18 filtered hits from System (PID 4) on the same adjacent Session Manager\\Power values. That Procmon pass sharpened the runtime story instead of changing it: the exact watchdog pair still did not show up in the filtered boot-log hits. The later attribution follow-up then narrowed the ETL svchost lead to the DcomLaunch group and confirmed that Power is one of the services hosted there on the current VM baseline. A targeted post-boot Procmon probe against that DcomLaunch/Power lane stayed shell-safe, produced a real PML and CSV, and exported tasklist and service snapshots, but it still returned zero matching reads for the watchdog pair or the adjacent Session Manager\\Power values. A VM capability probe then showed that the current Win25H2Clean VMware baseline exposes only Standby (S1), with no S3, hibernate, or S0 low power idle path available. That narrows the most realistic next runtime lane to an S1-specific transition or a different validation environment. The candidate stays active, but it is still not ready for a shipped preset or app mapping because the exact watchdog pair does not show up as a direct live read.",
+    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\WatchdogResumeTimeout and WatchdogSleepTimeout. A clean baseline export on Win25H2Clean confirmed 120 and 300 respectively, with adjacent PowerSettingProfile = 0. The current-build ntoskrnl.exe string passes found exact hits for both names, and the improved Ghidra fallback preserved reviewable artifacts even when natural function boundaries were weak. Repo-side PoFxInitPowerManagement pseudocode then linked the pair to PopFxDirectedPowerUpTimeoutMs and PopFxDirectedPowerDownTimeoutMs. A successful host-driven boot trace on baseline-20260327-regprobe-visible-shell-stable preserved the same 120/300 values after reboot and captured the ETL to host staging. A follow-up host-side xperf registry review then showed repeated boot-time access to Session Manager\\Power by System (PID 4) and later svchost.exe (PID 980), including adjacent SystemPowerPolicy and ShutdownOccurred activity. A dedicated Procmon boot-log lane on the same baseline then proved that Procmon can convert the boot log into a large PML and CSV for this family, with 18 filtered hits from System (PID 4) on the same adjacent Session Manager\\Power values. That Procmon pass sharpened the runtime story instead of changing it: the exact watchdog pair still did not show up in the filtered boot-log hits. The later attribution follow-up then narrowed the ETL svchost lead to the DcomLaunch group and confirmed that Power is one of the services hosted there on the current VM baseline. A targeted post-boot Procmon probe against that DcomLaunch/Power lane stayed shell-safe, produced a real PML and CSV, and exported tasklist and service snapshots, but it still returned zero matching reads for the watchdog pair or the adjacent Session Manager\\Power values. An S1-specific Procmon follow-up then tried to force the only sleep state exposed by this VMware baseline with `rundll32.exe powrprof.dll,SetSuspendState 0,1,0`. That attempt preserved shell health, but the guest-ops channel dropped out mid-transition and the in-guest payload did not leave behind a usable PML, CSV, or summary. Immediate post-checks then showed `Wake History Count - 0` and no fresh sleep/resume Kernel-Power event, which makes the current VMware S1 path a poor decisive runtime lane. A VM capability probe already showed that this baseline exposes only Standby (S1), with no S3, hibernate, or S0 low power idle path available. The candidate stays active, but it is still not ready for a shipped preset or app mapping because the exact watchdog pair does not show up as a direct live read and the current VMware environment does not yet provide a reliable in-guest S1 evidence path.",
     "targets": [
       {
         "target_id": "session-watchdog-timeout-pair",
@@ -138,7 +138,8 @@
         "repo-pofx-pseudocode-watchdog",
         "vm-watchdog-boot-trace-20260328",
         "vm-watchdog-dcomlaunch-attribution-20260328",
-        "vm-watchdog-postboot-power-trigger-20260328"
+        "vm-watchdog-postboot-power-trigger-20260328",
+        "vm-watchdog-s1-procmon-follow-up-20260328"
       ]
     }
   ],
@@ -262,6 +263,18 @@
       "strength": "high"
     },
     {
+      "evidence_id": "vm-watchdog-s1-procmon-follow-up-20260328",
+      "kind": "vm-observation",
+      "title": "S1-specific Procmon follow-up for the watchdog lane",
+      "location": "evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/summary.json and evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-lastwake-postcheck.txt and evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-kernelpower-postcheck.txt and research/notes/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.md",
+      "summary": "An S1-specific Procmon attempt tried to force the only available sleep state on the current VMware baseline. Shell health recovered, but the guest-ops channel dropped during the transition, no usable in-guest Procmon artifacts survived, wake history stayed at zero, and post-checks did not show a fresh sleep/resume Kernel-Power event.",
+      "supports": [
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "kernel-power-existing-next-gate-20260328",
       "kind": "inference",
       "title": "Kernel power next-gate intake summary",
@@ -286,11 +299,11 @@
       "No shipped RegProbe provider or UI mapping exists for the watchdog timeout pair yet.",
       "The current semantic lead still depends on repo-side pseudocode plus forced-boundary Ghidra review rather than a primary Microsoft registry contract.",
       "The ETL review, the Procmon boot-log review, and the targeted post-boot DcomLaunch/Power Procmon trigger all stop short of a direct live read of WatchdogResumeTimeout and WatchdogSleepTimeout.",
-      "The current Win25H2Clean VMware baseline only exposes Standby (S1), so deeper sleep-state live-read attempts may require a different environment."
+      "The current Win25H2Clean VMware baseline only exposes Standby (S1), and the first S1-specific Procmon follow-up disturbed guest ops without yielding usable in-guest artifacts or a fresh wake-history signal."
     ]
   },
   "open_questions": [
-    "Can the exact watchdog pair be captured in a direct runtime read on an S1 transition rather than only adjacent values in the ETL review and a no-hit DcomLaunch/Power post-boot Procmon trigger?",
+    "Can the exact watchdog pair be captured in a direct runtime read on an S1 transition, or does the current VMware baseline need a different suspend/resume control path before that lane becomes usable?",
     "Does a better symbol or binary target produce a cleaner current-build code path than the current forced-boundary ntoskrnl fallback?",
     "Should this pair ever become a shipped tweak, or should it stay documentation-only even if semantics converge?",
     "Is a different validation environment needed if the decisive trigger depends on S3, hibernate, or modern standby semantics?"
@@ -303,5 +316,5 @@
       "notes": "Baseline export and successful host-driven boot trace both ran on baseline-20260327-regprobe-visible-shell-stable."
     }
   ],
-  "last_reviewed_utc": "2026-03-28T11:27:14Z"
+  "last_reviewed_utc": "2026-03-28T11:51:21Z"
 }
