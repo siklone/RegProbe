@@ -1,0 +1,21 @@
+{
+  "lane_label": "power.session-watchdog-timeouts",
+  "generated_utc": "2026-03-28T07:45:36.6557177Z",
+  "status": "sleep-capability-confirmed",
+  "summary_path": "evidence/files/vm-tooling-staging/watchdog-sleep-capability-20260328-104406/summary.json",
+  "powercfg_text_path": "evidence/files/vm-tooling-staging/watchdog-sleep-capability-20260328-104406/powercfg-a.txt",
+  "available_states": [
+    "Standby (S1)"
+  ],
+  "unavailable_states": [
+    "Standby (S2)",
+    "Standby (S3)",
+    "Hibernate",
+    "Standby (S0 Low Power Idle)",
+    "Hybrid Sleep",
+    "Fast Startup"
+  ],
+  "shell_healthy_before": true,
+  "shell_healthy_after": true,
+  "conclusion": "The current Win25H2Clean VMware baseline is S1-only for the watchdog lane. Exact sleep/resume live-read work should target S1 or move to a different environment."
+}

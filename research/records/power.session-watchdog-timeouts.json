@@ -4,7 +4,7 @@
   "record_id": "power.session-watchdog-timeouts",
   "tweak_id": "power.session-watchdog-timeouts",
   "record_status": "draft",
-  "summary": "Draft candidate record only. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, and a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power. The pair is strong enough to stay active as a candidate lane, but there is still no shipped app mapping and no direct live read of the exact watchdog values yet.",
+  "summary": "Draft candidate record only. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power, and a VM sleep-capability probe that shows the current VMware baseline is S1-only. The pair is strong enough to stay active as a candidate lane, but there is still no shipped app mapping and no direct live read of the exact watchdog values yet.",
   "validation_proof": {
     "source_url": "research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md",
     "exact_quote_or_path": "The host-side ETL parse now proves boot-time access to Session Manager\\Power. The strongest readers in this pass were System (PID 4) during boot and svchost.exe (PID 980) later in the session.",
@@ -19,7 +19,7 @@
     "casual_explanation": "These values appear to control watchdog timeout behavior around directed power transitions. They are not normal user-facing power options and are being tracked as a low-level research lane rather than a supported tweak.",
     "why_people_change_it": "Advanced researchers may look at these values when investigating resume and sleep watchdog behavior, power transition timing, or kernel power management internals.",
     "tradeoffs_overview": "The pair is kernel-adjacent and boot-relevant. The current evidence shows that the values exist and participate in the power-management path, but the repo still does not have a safe shipped mapping or a validated non-default profile for end users.",
-    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\WatchdogResumeTimeout and WatchdogSleepTimeout. A clean baseline export on Win25H2Clean confirmed 120 and 300 respectively, with adjacent PowerSettingProfile = 0. The current-build ntoskrnl.exe string passes found exact hits for both names, and the improved Ghidra fallback preserved reviewable artifacts even when natural function boundaries were weak. Repo-side PoFxInitPowerManagement pseudocode then linked the pair to PopFxDirectedPowerUpTimeoutMs and PopFxDirectedPowerDownTimeoutMs. A successful host-driven boot trace on baseline-20260327-regprobe-visible-shell-stable preserved the same 120/300 values after reboot and captured the ETL to host staging. A follow-up host-side xperf registry review then showed repeated boot-time access to Session Manager\\Power by System (PID 4) and later svchost.exe (PID 980), including adjacent SystemPowerPolicy and ShutdownOccurred activity. That is enough to keep the candidate active, but not enough to publish a shipped preset or app mapping because the exact watchdog pair still does not show up as a direct live read.",
+    "professional_notes": "The tracked values are HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\WatchdogResumeTimeout and WatchdogSleepTimeout. A clean baseline export on Win25H2Clean confirmed 120 and 300 respectively, with adjacent PowerSettingProfile = 0. The current-build ntoskrnl.exe string passes found exact hits for both names, and the improved Ghidra fallback preserved reviewable artifacts even when natural function boundaries were weak. Repo-side PoFxInitPowerManagement pseudocode then linked the pair to PopFxDirectedPowerUpTimeoutMs and PopFxDirectedPowerDownTimeoutMs. A successful host-driven boot trace on baseline-20260327-regprobe-visible-shell-stable preserved the same 120/300 values after reboot and captured the ETL to host staging. A follow-up host-side xperf registry review then showed repeated boot-time access to Session Manager\\Power by System (PID 4) and later svchost.exe (PID 980), including adjacent SystemPowerPolicy and ShutdownOccurred activity. A VM capability probe then showed that the current Win25H2Clean VMware baseline exposes only Standby (S1), with no S3, hibernate, or S0 low power idle path available. That narrows the most realistic next runtime lane to an S1-specific transition or a different validation environment. The candidate stays active, but it is still not ready for a shipped preset or app mapping because the exact watchdog pair does not show up as a direct live read.",
     "targets": [
       {
         "target_id": "session-watchdog-timeout-pair",
@@ -209,6 +209,18 @@
       "strength": "high"
     },
     {
+      "evidence_id": "vm-watchdog-sleep-capability-20260328",
+      "kind": "vm-observation",
+      "title": "Win25H2Clean sleep capability for the watchdog lane",
+      "location": "evidence/files/vm-tooling-staging/watchdog-sleep-capability-20260328-104406/summary.json and evidence/files/vm-tooling-staging/watchdog-sleep-capability-20260328-104406/powercfg-a.txt and research/notes/power-session-watchdog-timeouts-sleep-capability-20260328.md",
+      "summary": "The current VMware baseline exposes only Standby (S1). S3, hibernate, and S0 low power idle are unavailable, which constrains the next exact live-read attempt to an S1 transition or a different environment.",
+      "supports": [
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "kernel-power-existing-next-gate-20260328",
       "kind": "inference",
       "title": "Kernel power next-gate intake summary",
@@ -232,13 +244,15 @@
     "blocking_issues": [
       "No shipped RegProbe provider or UI mapping exists for the watchdog timeout pair yet.",
       "The current semantic lead still depends on repo-side pseudocode plus forced-boundary Ghidra review rather than a primary Microsoft registry contract.",
-      "The ETL review proves path-level boot access, but the lane still lacks a direct live read of WatchdogResumeTimeout and WatchdogSleepTimeout."
+      "The ETL review proves path-level boot access, but the lane still lacks a direct live read of WatchdogResumeTimeout and WatchdogSleepTimeout.",
+      "The current Win25H2Clean VMware baseline only exposes Standby (S1), so deeper sleep-state live-read attempts may require a different environment."
     ]
   },
   "open_questions": [
-    "Can the exact watchdog pair be captured in a direct runtime read rather than only a reboot-verified boot trace baseline?",
+    "Can the exact watchdog pair be captured in a direct runtime read on an S1 transition rather than only a reboot-verified boot trace baseline?",
     "Does a better symbol or binary target produce a cleaner current-build code path than the current forced-boundary ntoskrnl fallback?",
-    "Should this pair ever become a shipped tweak, or should it stay documentation-only even if semantics converge?"
+    "Should this pair ever become a shipped tweak, or should it stay documentation-only even if semantics converge?",
+    "Is a different validation environment needed if the decisive trigger depends on S3, hibernate, or modern standby semantics?"
   ],
   "tested_on": [
     {
@@ -248,5 +262,5 @@
       "notes": "Baseline export and successful host-driven boot trace both ran on baseline-20260327-regprobe-visible-shell-stable."
     }
   ],
-  "last_reviewed_utc": "2026-03-28T15:35:00+03:00"
+  "last_reviewed_utc": "2026-03-28T10:46:00Z"
 }

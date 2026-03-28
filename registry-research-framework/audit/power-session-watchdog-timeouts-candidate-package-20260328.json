@@ -8,8 +8,9 @@
     "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json",
     "registry-research-framework/audit/power-session-watchdog-timeouts-runtime-prep-20260328.json",
     "registry-research-framework/audit/power-session-watchdog-timeouts-boot-trace-20260328.json",
-    "registry-research-framework/audit/power-session-watchdog-timeouts-etl-registry-review-20260328.json"
+    "registry-research-framework/audit/power-session-watchdog-timeouts-etl-registry-review-20260328.json",
+    "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json"
   ],
   "notes_path": "research/notes/power-session-watchdog-timeouts-candidate-package-20260328.md",
-  "next_gate": "exact watchdog pair live read or a shipped app mapping before any promotion beyond the draft lane"
+  "next_gate": "exact watchdog pair live read on an S1 path or in a richer sleep-state environment before any promotion beyond the draft lane"
 }
