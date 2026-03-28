@@ -1,0 +1,37 @@
+{
+  "generated_utc": "2026-03-28T05:05:00Z",
+  "lane_label": "power.session-watchdog-timeouts",
+  "status": "ready-for-boot-etw-prep",
+  "registry_root": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+  "values": [
+    {
+      "candidate_id": "power.session-watchdog-resume-timeout",
+      "value_name": "WatchdogResumeTimeout",
+      "value_type": "REG_DWORD",
+      "baseline_data": 120
+    },
+    {
+      "candidate_id": "power.session-watchdog-sleep-timeout",
+      "value_name": "WatchdogSleepTimeout",
+      "value_type": "REG_DWORD",
+      "baseline_data": 300
+    }
+  ],
+  "baseline_export": {
+    "query": "evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt",
+    "reg": "evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg",
+    "metadata": "evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/metadata.json"
+  },
+  "static_sources": [
+    "Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c",
+    "evidence/files/vm-tooling-staging/registry-batch-string-20260328-003236/results.json",
+    "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md",
+    "registry-research-framework/audit/kernel-power-nextgate-ghidra-review-20260328.json"
+  ],
+  "next_steps": [
+    "Keep the pair together for the next lane; do not split them into separate records yet.",
+    "Use a boot-adjacent ETW or WPR lane next because both values live under HKLM\\SYSTEM and the current repo semantics are still boot and power-manager oriented.",
+    "Do not use Frida for this lane.",
+    "Treat the current Ghidra output as structural evidence only; it is not strong enough yet to claim final semantics."
+  ]
+}
