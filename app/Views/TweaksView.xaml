@@ -18,7 +18,7 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#777777"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="16,9,14,9"/>
+            <Setter Property="Padding" Value="18,10,14,10"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -49,7 +49,7 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#777777"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="16,9,14,9"/>
+            <Setter Property="Padding" Value="18,10,14,10"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -81,7 +81,7 @@
             <Setter Property="Background" Value="#151515"/>
             <Setter Property="BorderBrush" Value="#252525"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Padding" Value="10,4"/>
             <Setter Property="Margin" Value="0,0,8,8"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
@@ -188,7 +188,8 @@
             <Setter Property="Foreground" Value="#909090"/>
             <Setter Property="BorderBrush" Value="#252525"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Padding" Value="12,5"/>
+            <Setter Property="MinWidth" Value="76"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
@@ -231,8 +232,22 @@
             </Setter>
         </Style>
 
+        <Style x:Key="SectionEyebrowStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="#696969"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
+        </Style>
+
+        <Style x:Key="CountBadgeStyle" TargetType="Border">
+            <Setter Property="Background" Value="#141414"/>
+            <Setter Property="BorderBrush" Value="#242424"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,5"/>
+        </Style>
+
         <DataTemplate x:Key="TweakRowTemplate" DataType="{x:Type viewModels:TweakItemViewModel}">
-            <Border BorderBrush="#161616" BorderThickness="0,0,0,1" Padding="0">
+            <Border BorderBrush="#191919" BorderThickness="0,0,0,0.5" Padding="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -240,7 +255,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox Grid.Column="0" Margin="0,14,16,0" VerticalAlignment="Top" IsChecked="{Binding IsSelected, Mode=TwoWay}">
+                    <CheckBox Grid.Column="0" Margin="0,18,18,0" VerticalAlignment="Top" IsChecked="{Binding IsSelected, Mode=TwoWay}">
                         <CheckBox.Template>
                             <ControlTemplate TargetType="CheckBox">
                                 <Border x:Name="Root" Width="14" Height="14" Background="Transparent" BorderBrush="#343434" BorderThickness="1" CornerRadius="2">
@@ -257,9 +272,9 @@
                         </CheckBox.Template>
                     </CheckBox>
 
-                    <StackPanel Grid.Column="1" Margin="0,12,16,12">
+                    <StackPanel Grid.Column="1" Margin="0,14,20,14">
                         <WrapPanel>
-                            <TextBlock Text="{Binding Name}" Margin="0,0,8,4" FontSize="13" FontWeight="SemiBold" Foreground="#ECECEC"/>
+                            <TextBlock Text="{Binding Name}" Margin="0,0,10,5" FontSize="14" FontWeight="SemiBold" Foreground="#ECECEC"/>
                             <Border Margin="0,0,6,4" Padding="7,2" CornerRadius="4" Background="#191919" BorderBrush="#2B2B2B" BorderThickness="1">
                                 <Border.Style>
                                     <Style TargetType="Border">
@@ -324,22 +339,22 @@
                             </Border>
                         </WrapPanel>
 
-                        <TextBlock Text="{Binding FriendlyDescription}" Margin="0,0,0,4" FontSize="11" Foreground="#8A8A8A" TextWrapping="Wrap"/>
-                        <TextBlock Text="{Binding ResearchGateMessage}" Margin="0,0,0,4" FontSize="10" Foreground="#A0726B" TextWrapping="Wrap" Visibility="{Binding HasResearchGateMessage, Converter={StaticResource BoolToVisibility}}"/>
-                        <TextBlock FontSize="10" Foreground="#5F5F5F" TextWrapping="Wrap">
+                        <TextBlock Text="{Binding FriendlyDescription}" Margin="0,1,0,0" FontSize="11" Foreground="#8A8A8A" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding ResearchGateMessage}" Margin="0,6,0,0" FontSize="10" Foreground="#A0726B" TextWrapping="Wrap" Visibility="{Binding HasResearchGateMessage, Converter={StaticResource BoolToVisibility}}"/>
+                        <TextBlock Margin="0,8,0,0" FontSize="10" Foreground="#666666" TextWrapping="Wrap">
                             <Run Text="{Binding ImpactAreaLabel, Mode=OneWay}"/>
-                            <Run Text=" | "/>
+                            <Run Text=" / "/>
                             <Run Text="{Binding CurrentValue, Mode=OneWay}"/>
                             <Run Text=" -> "/>
                             <Run Text="{Binding TargetValue, Mode=OneWay}"/>
-                            <Run Text=" | "/>
+                            <Run Text=" / "/>
                             <Run Text="{Binding LastUpdatedText, Mode=OneWay}"/>
                         </TextBlock>
-                        <TextBlock Text="{Binding BatchSummaryLine}" Margin="0,2,0,0" FontSize="10" Foreground="#666666" TextWrapping="Wrap" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
+                        <TextBlock Text="{Binding BatchSummaryLine}" Margin="0,4,0,0" FontSize="10" Foreground="#5B5B5B" TextWrapping="Wrap" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,12,0,0" VerticalAlignment="Top">
-                        <Button Content="Previous" Command="{Binding RollbackCommand}" ToolTip="{Binding RollbackActionTooltip}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,6,0"/>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,14,0,0" VerticalAlignment="Top">
+                        <Button Content="Revert" Command="{Binding RollbackCommand}" ToolTip="{Binding RollbackActionTooltip}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,6,0"/>
                         <Button Content="{Binding ActionButtonText}" Command="{Binding ApplyCommand}" ToolTip="{Binding PrimaryActionTooltip}" Style="{StaticResource ApplyButtonStyle}"/>
                     </StackPanel>
                 </Grid>
@@ -349,7 +364,7 @@
 
     <Grid Background="#0D0D0D">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="184"/>
+            <ColumnDefinition Width="196"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -357,10 +372,16 @@
             <Grid Margin="0,16,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Command="{Binding ClearCategorySelectionCommand}" Tag="{Binding IsAllCategoriesSelected}" Style="{StaticResource SidebarButtonStyle}">
+                <StackPanel Grid.Row="0" Margin="18,0,14,10">
+                    <TextBlock Text="{Binding WorkspaceCategoryHeader}" Style="{StaticResource SectionEyebrowStyle}"/>
+                    <TextBlock Text="{Binding SelectedCategoryLabel}" Margin="0,4,0,0" FontSize="16" FontWeight="SemiBold" Foreground="#F4F4F4"/>
+                </StackPanel>
+
+                <Button Grid.Row="1" Command="{Binding ClearCategorySelectionCommand}" Tag="{Binding IsAllCategoriesSelected}" Style="{StaticResource SidebarButtonStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -371,7 +392,7 @@
                     </Grid>
                 </Button>
 
-                <ListBox Grid.Row="1" Margin="0,8,0,0" ItemsSource="{Binding CategoryGroups}" SelectedValuePath="CategoryName" SelectedValue="{Binding SelectedCategoryName, Mode=TwoWay}" Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource SidebarItemStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox Grid.Row="2" Margin="0,8,0,0" ItemsSource="{Binding CategoryGroups}" SelectedValuePath="CategoryName" SelectedValue="{Binding SelectedCategoryName, Mode=TwoWay}" Background="Transparent" BorderThickness="0" ItemContainerStyle="{StaticResource SidebarItemStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type viewModels:CategoryGroupViewModel}">
                             <Grid>
@@ -397,10 +418,23 @@
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" BorderBrush="#171717" BorderThickness="0,0,0,1" Padding="20,18,24,12">
-                <StackPanel>
-                    <TextBlock Text="{Binding CurrentWorkspaceLabel}" FontSize="16" FontWeight="SemiBold" Foreground="#FFFFFF"/>
-                    <TextBlock Text="{Binding CurrentWorkspaceDescription}" Margin="0,3,0,0" FontSize="11" Foreground="#5C5C5C" TextWrapping="Wrap"/>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+                        <TextBlock Text="Workspace shell" Style="{StaticResource SectionEyebrowStyle}"/>
+                        <TextBlock Text="{Binding CurrentWorkspaceLabel}" Margin="0,4,0,0" FontSize="20" FontWeight="SemiBold" Foreground="#FFFFFF"/>
+                        <TextBlock Text="{Binding CurrentWorkspaceDescription}" Margin="0,5,0,0" FontSize="11" Foreground="#707070" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding WorkspaceStatusHint}" Margin="0,8,0,0" FontSize="11" Foreground="#585858" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <Border Grid.Column="1" VerticalAlignment="Top" Style="{StaticResource CountBadgeStyle}">
+                        <TextBlock Text="{Binding CurrentWorkspaceCountLabel}" FontSize="11" FontWeight="SemiBold" Foreground="#CFCFCF"/>
+                    </Border>
+                </Grid>
             </Border>
 
             <Border Grid.Row="1" BorderBrush="#171717" BorderThickness="0,0,0,1" Padding="20,10,24,6">
@@ -410,29 +444,35 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <WrapPanel>
-                        <TextBox Width="320" Margin="0,0,12,8" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SearchBoxStyle}" Tag="{Binding SearchPlaceholder}" ToolTip="{Binding SearchPlaceholder}"/>
-                        <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource ChipStyle}"><TextBlock Text="Safe"/></CheckBox>
-                        <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
-                        <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
-                        <CheckBox Tag="Favorites" IsChecked="{Binding ShowFavoritesOnly}" Style="{StaticResource ChipStyle}">
-                            <TextBlock>
-                                <Run Text="Favorites"/>
-                                <Run Text=" "/>
+                    <StackPanel>
+                        <TextBlock Text="Filters" Margin="0,0,0,8" Style="{StaticResource SectionEyebrowStyle}"/>
+                        <WrapPanel>
+                            <TextBox Width="360" Margin="0,0,12,8" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SearchBoxStyle}" Tag="{Binding SearchPlaceholder}" ToolTip="{Binding SearchPlaceholder}"/>
+                            <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource ChipStyle}"><TextBlock Text="Safe"/></CheckBox>
+                            <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
+                            <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
+                            <CheckBox Tag="Favorites" IsChecked="{Binding ShowFavoritesOnly}" Style="{StaticResource ChipStyle}">
+                                <TextBlock>
+                                    <Run Text="Favorites"/>
+                                    <Run Text=" "/>
                                     <Run Text="{Binding FavoritesCount, Mode=OneWay}"/>
-                            </TextBlock>
-                        </CheckBox>
-                        <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource ChipStyle}" Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"><TextBlock Text="Class A"/></CheckBox>
-                        <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource ChipStyle}" Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"><TextBlock Text="Class B"/></CheckBox>
-                    </WrapPanel>
+                                </TextBlock>
+                            </CheckBox>
+                            <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource ChipStyle}" Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"><TextBlock Text="Class A"/></CheckBox>
+                            <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource ChipStyle}" Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"><TextBlock Text="Class B"/></CheckBox>
+                        </WrapPanel>
+                    </StackPanel>
 
-                    <WrapPanel Grid.Column="1" HorizontalAlignment="Right">
-                        <Button Content="Select all" Command="{Binding SelectAllCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
-                        <Button Content="Clear" Command="{Binding DeselectAllCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
-                        <Button Content="Detect" Command="{Binding DetectSelectedCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
-                        <Button Content="Apply" Command="{Binding ApplySelectedCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
-                        <Button Content="Previous" Command="{Binding RollbackSelectedCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,0,8"/>
-                    </WrapPanel>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                        <TextBlock Text="Selection" Margin="0,0,0,8" HorizontalAlignment="Right" Style="{StaticResource SectionEyebrowStyle}"/>
+                        <WrapPanel HorizontalAlignment="Right">
+                            <Button Content="Select" Command="{Binding SelectAllCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
+                            <Button Content="Clear" Command="{Binding DeselectAllCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
+                            <Button Content="Refresh" Command="{Binding DetectSelectedCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
+                            <Button Content="Apply" Command="{Binding ApplySelectedCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
+                            <Button Content="Revert" Command="{Binding RollbackSelectedCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,0,8"/>
+                        </WrapPanel>
+                    </StackPanel>
                 </Grid>
             </Border>
 

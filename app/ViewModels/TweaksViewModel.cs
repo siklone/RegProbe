@@ -587,8 +587,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Workspace" : "Configuration";
 
     public string CurrentWorkspaceDescription => IsMaintenanceWorkspaceSelected
-        ? "One-off cleanup, repair, and recovery tasks for when Windows needs intervention."
-        : "Registry-backed settings and feature switches that stay in place until you change them again.";
+        ? "Cleanup, repair, and recovery actions for the moments when Windows needs direct intervention."
+        : "Registry-backed settings and feature switches that stay in place until you deliberately change them.";
 
     public string CurrentMainTabEyebrow => CurrentTab switch
     {
@@ -612,20 +612,20 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public bool IsPolicyReferenceTabSelected => SelectedMainTabIndex == 1;
 
     public string CurrentWorkspaceCountLabel => IsMaintenanceWorkspaceSelected
-        ? $"{CurrentWorkspaceItemCount} tasks available"
-        : $"{CurrentWorkspaceItemCount} settings available";
+        ? $"{CurrentWorkspaceItemCount} tasks"
+        : $"{CurrentWorkspaceItemCount} settings";
 
     public string WorkspaceCategoryHeader => IsMaintenanceWorkspaceSelected ? "Task Groups" : "Configuration Areas";
 
-    public string AllItemsLabel => "All";
+    public string AllItemsLabel => "Everything";
 
     public string SearchPlaceholder => IsMaintenanceWorkspaceSelected
-        ? "Search workspace tasks..."
-        : "Search settings and feature switches...";
+        ? "Search cleanup, repair, and recovery tasks..."
+        : "Search settings, features, and switches...";
 
     public string WorkspaceStatusHint => IsMaintenanceWorkspaceSelected
-        ? "Use these when you want to clean up caches, reset a component, or recover from a common Windows issue."
-        : "Use these when you want Windows to behave differently and keep that behavior in place.";
+        ? "Use filters when you need a targeted repair path, a reset, or a one-off maintenance action."
+        : "Search by behavior, narrow to one area, or keep favorites close for the settings you revisit often.";
 
     public string EmptyStateTitle => IsMaintenanceWorkspaceSelected
         ? "No workspace tasks match"

@@ -65,7 +65,8 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   Background="Transparent">
-        <Grid Margin="20,18,24,24">
+        <Grid Margin="20,18,24,24"
+              MaxWidth="920">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -84,7 +85,7 @@
                            Foreground="#FFFFFF"/>
                 <TextBlock Margin="0,6,0,0"
                            Style="{StaticResource SectionBodyTextStyle}"
-                           Text="Registry research and configuration workspace with rollback, evidence gating, and reproducible runtime probes."/>
+                           Text="A focused Windows configuration shell with reversible changes, logging, and a cleaner day-to-day workspace."/>
             </StackPanel>
 
             <Border Grid.Row="1"
@@ -107,11 +108,12 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Version"
                                    Style="{StaticResource SectionEyebrowTextStyle}"/>
-                        <TextBlock Grid.Column="1"
-                                   Text="{Binding AppVersion}"
-                                   FontSize="13"
-                                   FontWeight="SemiBold"
-                                   Foreground="#F0F0F0"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding AppVersion}"
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Foreground="#F0F0F0"
+                                       FontFamily="{DynamicResource FontFamilyMono}"/>
                     </Grid>
 
                     <Border Grid.Row="1"
@@ -128,7 +130,8 @@
                                        Text="{Binding BuildConfiguration}"
                                        FontSize="13"
                                        FontWeight="SemiBold"
-                                       Foreground="#F0F0F0"/>
+                                       Foreground="#F0F0F0"
+                                       FontFamily="{DynamicResource FontFamilyMono}"/>
                         </Grid>
                     </Border>
 
@@ -146,7 +149,8 @@
                                        Text="{Binding Framework}"
                                        FontSize="13"
                                        FontWeight="SemiBold"
-                                       Foreground="#F0F0F0"/>
+                                       Foreground="#F0F0F0"
+                                       FontFamily="{DynamicResource FontFamilyMono}"/>
                         </Grid>
                     </Border>
 
@@ -164,7 +168,8 @@
                                        Text="{Binding Architecture}"
                                        FontSize="13"
                                        FontWeight="SemiBold"
-                                       Foreground="#F0F0F0"/>
+                                       Foreground="#F0F0F0"
+                                       FontFamily="{DynamicResource FontFamilyMono}"/>
                         </Grid>
                     </Border>
 
@@ -182,7 +187,8 @@
                                        Text="{Binding LogFileSizeFormatted}"
                                        FontSize="13"
                                        FontWeight="SemiBold"
-                                       Foreground="#F0F0F0"/>
+                                       Foreground="#F0F0F0"
+                                       FontFamily="{DynamicResource FontFamilyMono}"/>
                         </Grid>
                     </Border>
                 </Grid>

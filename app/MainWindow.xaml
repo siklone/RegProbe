@@ -216,11 +216,20 @@
                 BorderThickness="0,0,0,1">
             <Grid Margin="16,0">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
+                <TextBlock VerticalAlignment="Center"
+                           Margin="0,0,18,0"
+                           Text="Workspace shell"
+                           Foreground="#505050"
+                           FontFamily="{DynamicResource FontFamilyDisplay}"
+                           FontSize="11"/>
+
                 <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
                             VerticalAlignment="Center">
                     <Button Content="Configuration"
                             Command="{Binding ShowConfigurationCommand}"
@@ -232,7 +241,7 @@
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1"
+                <StackPanel Grid.Column="2"
                             Orientation="Horizontal"
                             VerticalAlignment="Center">
                     <Button Content="Settings"

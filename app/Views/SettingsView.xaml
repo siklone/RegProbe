@@ -74,7 +74,8 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   Background="Transparent">
-        <Grid Margin="20,18,24,24">
+        <Grid Margin="20,18,24,24"
+              MaxWidth="920">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -93,7 +94,7 @@
                            Foreground="#FFFFFF"/>
                 <TextBlock Margin="0,6,0,0"
                            Style="{StaticResource SectionBodyTextStyle}"
-                           Text="Theme preferences live here. Changes save as soon as you make them."/>
+                           Text="Only shell-level preferences live here. The page stays intentionally small."/>
             </StackPanel>
 
             <Border Grid.Row="1"
