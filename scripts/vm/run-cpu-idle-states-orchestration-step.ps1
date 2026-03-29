@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('A', 'B', 'C', 'D')]
+    [ValidateSet('A', 'B', 'C1', 'C2', 'C3', 'C4', 'D')]
     [string]$Step,
 
     [string]$SessionId = '',
@@ -12,13 +12,19 @@ param(
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestRootBase = 'C:\RegProbe-Diag',
     [string]$RecordId = 'power.disable-cpu-idle-states',
-    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
+    [string]$SnapshotName = '',
     [string]$IncidentLogPath = '',
     [int]$SettleSeconds = 20,
     [switch]$PerformReboot
 )
 
 $ErrorActionPreference = 'Stop'
+
+. (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
+
+if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
+    $SnapshotName = Resolve-DefaultVmSnapshotName
+}
 
 if ([string]::IsNullOrWhiteSpace($IncidentLogPath)) {
     $IncidentLogPath = Join-Path $PSScriptRoot '..\..\research\vm-incidents.json'
@@ -36,7 +42,7 @@ if ($Step -eq 'A' -and [string]::IsNullOrWhiteSpace($SessionId)) {
 }
 
 if ([string]::IsNullOrWhiteSpace($SessionId)) {
-    throw 'SessionId is required for steps B, C, and D.'
+    throw 'SessionId is required for steps B, C1, C2, C3, C4, and D.'
 }
 
 $hostRoot = Join-Path $HostOutputRoot $SessionId
@@ -58,7 +64,7 @@ New-Item -ItemType Directory -Path $repoRootOut -Force | Out-Null
 $guestPayload = @'
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('set-baseline', 'set-candidate', 'read-state', 'start-wpr', 'stop-wpr', 'restore-baseline')]
+    [ValidateSet('set-baseline', 'set-candidate', 'read-state', 'start-wpr', 'stop-wpr', 'check-etl', 'restore-baseline')]
     [string]$Action,
 
     [Parameter(Mandatory = $true)]
@@ -143,11 +149,14 @@ try {
         'start-wpr' {
             & $wpr -cancel | Out-Null
             & $wpr -start GeneralProfile -filemode | Out-Null
+            $statusOutput = (& $wpr -status 2>&1 | Out-String).Trim()
             [ordered]@{
                 generated_utc = [DateTime]::UtcNow.ToString('o')
                 action = 'start-wpr'
                 status = 'ok'
                 started = $true
+                status_output = $statusOutput
+                status_mentions_wpr = [bool]($statusOutput -match 'WPR')
             } | ConvertTo-Json -Depth 6 | Set-Content -Path $OutputPath -Encoding UTF8
         }
         'stop-wpr' {
@@ -164,6 +173,22 @@ try {
                 stopped = $true
                 etl_path = $EtlPath
                 etl_exists = [bool](Test-Path $EtlPath)
+            } | ConvertTo-Json -Depth 6 | Set-Content -Path $OutputPath -Encoding UTF8
+        }
+        'check-etl' {
+            if ([string]::IsNullOrWhiteSpace($EtlPath)) {
+                throw 'EtlPath is required for check-etl.'
+            }
+
+            $item = if (Test-Path $EtlPath) { Get-Item -Path $EtlPath } else { $null }
+            [ordered]@{
+                generated_utc = [DateTime]::UtcNow.ToString('o')
+                action = 'check-etl'
+                status = 'ok'
+                etl_path = $EtlPath
+                exists = [bool](Test-Path $EtlPath)
+                length_bytes = if ($item) { [int64]$item.Length } else { 0 }
+                last_write_utc = if ($item) { $item.LastWriteTimeUtc.ToString('o') } else { $null }
             } | ConvertTo-Json -Depth 6 | Set-Content -Path $OutputPath -Encoding UTF8
         }
     }
@@ -225,7 +250,7 @@ function Get-ShellHealth {
 }
 
 function Wait-ShellHealthy {
-    param([int]$TimeoutSeconds = 300)
+    param([int]$TimeoutSeconds = 600)
 
     $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
     while ((Get-Date) -lt $deadline) {
@@ -441,10 +466,11 @@ function New-Session {
         phase_status = [ordered]@{}
         artifacts = [ordered]@{
             baseline = 'baseline.json'
-            wpr_start = 'wpr-start.json'
             candidate = 'candidate.json'
             post_boot = 'post-boot.json'
+            wpr_start = 'wpr-start.json'
             wpr_stop = 'wpr-stop.json'
+            etl_check = 'etl-check.json'
             restore = 'restore.json'
             restore_after_boot = 'restore-after-boot.json'
             etl_placeholder = 'cpu-idle-stepwise.etl.md'
@@ -568,8 +594,6 @@ try {
             Copy-ToGuest -HostPath $hostPayloadPath -GuestPath $guestPayloadPath
             $summary.failed_stage = 'set-baseline'
             $summary.baseline = Invoke-GuestActionAndCopy -Action 'set-baseline' -OutputFileName 'baseline.json'
-            $summary.failed_stage = 'start-wpr'
-            $summary.wpr_start = Invoke-GuestActionAndCopy -Action 'start-wpr' -OutputFileName 'wpr-start.json'
             $summary.failed_stage = 'set-candidate'
             $summary.candidate = Invoke-GuestActionAndCopy -Action 'set-candidate' -OutputFileName 'candidate.json'
             $summary.status = 'ok'
@@ -588,40 +612,81 @@ try {
             }
             $summary.failed_stage = 'wait-tools-post-reboot'
             Wait-GuestReady
+            $summary.failed_stage = 'shell-settle-post-reboot'
+            Start-Sleep -Seconds 15
             $summary.failed_stage = 'wait-shell-post-reboot'
-            $summary.shell_after_reboot = Wait-ShellHealthy
+            $summary.shell_after_reboot = Wait-ShellHealthy -TimeoutSeconds 600
             $summary.failed_stage = 'settle'
             Start-Sleep -Seconds $SettleSeconds
             $summary.failed_stage = 'read-post-boot'
             $summary.post_boot = Invoke-GuestActionAndCopy -Action 'read-state' -OutputFileName 'post-boot.json'
-            $summary.failed_stage = 'stop-wpr'
-            $summary.wpr_stop = Invoke-GuestActionAndCopy -Action 'stop-wpr' -OutputFileName 'wpr-stop.json' -EtlPath $guestEtlPath
             $summary.status = 'ok'
             $summary.failed_stage = $null
             if ($session.completed_steps -notcontains 'B') {
                 $session.completed_steps += 'B'
             }
-            $session.next_step = 'C'
+            $session.next_step = 'C1'
         }
-        'C' {
+        'C1' {
+            $summary.failed_stage = 'start-wpr'
+            $summary.wpr_start = Invoke-GuestActionAndCopy -Action 'start-wpr' -OutputFileName 'wpr-start.json'
+            $summary.status = 'ok'
+            $summary.failed_stage = $null
+            if ($session.completed_steps -notcontains 'C1') {
+                $session.completed_steps += 'C1'
+            }
+            $session.next_step = 'C2'
+        }
+        'C2' {
+            $summary.failed_stage = 'stop-wpr'
+            $summary.wpr_stop = Invoke-GuestActionAndCopy -Action 'stop-wpr' -OutputFileName 'wpr-stop.json' -EtlPath $guestEtlPath
+            $summary.status = 'ok'
+            $summary.failed_stage = $null
+            if ($session.completed_steps -notcontains 'C2') {
+                $session.completed_steps += 'C2'
+            }
+            $session.next_step = 'C3'
+        }
+        'C3' {
+            $summary.failed_stage = 'check-etl'
+            $summary.etl_check = Invoke-GuestActionAndCopy -Action 'check-etl' -OutputFileName 'etl-check.json' -EtlPath $guestEtlPath
+            $summary.status = 'ok'
+            $summary.failed_stage = $null
+            if ($session.completed_steps -notcontains 'C3') {
+                $session.completed_steps += 'C3'
+            }
+            $session.next_step = 'C4'
+        }
+        'C4' {
             $summary.failed_stage = 'collect-baseline'
-            $summary.baseline_collected = Copy-FromGuestBestEffort -GuestPath (Join-Path $guestRoot 'baseline.json') -HostPath (Join-Path $hostRoot 'baseline.json') -RepoPath (Join-Path $repoRootOut 'baseline.json')
-            $summary.failed_stage = 'collect-wpr-start'
-            $summary.wpr_start_collected = Copy-FromGuestBestEffort -GuestPath (Join-Path $guestRoot 'wpr-start.json') -HostPath (Join-Path $hostRoot 'wpr-start.json') -RepoPath (Join-Path $repoRootOut 'wpr-start.json')
+            $summary.baseline_present = [bool](Test-Path (Join-Path $repoRootOut 'baseline.json'))
             $summary.failed_stage = 'collect-candidate'
-            $summary.candidate_collected = Copy-FromGuestBestEffort -GuestPath (Join-Path $guestRoot 'candidate.json') -HostPath (Join-Path $hostRoot 'candidate.json') -RepoPath (Join-Path $repoRootOut 'candidate.json')
+            $summary.candidate_present = [bool](Test-Path (Join-Path $repoRootOut 'candidate.json'))
             $summary.failed_stage = 'collect-post-boot'
-            $summary.post_boot_collected = Copy-FromGuestBestEffort -GuestPath (Join-Path $guestRoot 'post-boot.json') -HostPath (Join-Path $hostRoot 'post-boot.json') -RepoPath (Join-Path $repoRootOut 'post-boot.json')
+            $summary.post_boot_present = [bool](Test-Path (Join-Path $repoRootOut 'post-boot.json'))
+            $summary.failed_stage = 'collect-wpr-start'
+            $summary.wpr_start_present = [bool](Test-Path (Join-Path $repoRootOut 'wpr-start.json'))
             $summary.failed_stage = 'collect-wpr-stop'
-            $summary.wpr_stop_collected = Copy-FromGuestBestEffort -GuestPath (Join-Path $guestRoot 'wpr-stop.json') -HostPath (Join-Path $hostRoot 'wpr-stop.json') -RepoPath (Join-Path $repoRootOut 'wpr-stop.json')
+            $summary.wpr_stop_present = [bool](Test-Path (Join-Path $repoRootOut 'wpr-stop.json'))
+            $summary.failed_stage = 'collect-etl-check'
+            $summary.etl_check_present = [bool](Test-Path (Join-Path $repoRootOut 'etl-check.json'))
             $summary.failed_stage = 'collect-etl'
             $summary.etl_copied_to_host = Copy-FromGuestBestEffort -GuestPath $guestEtlPath -HostPath $hostEtlPath
             $summary.failed_stage = 'write-placeholder'
             Write-EtlPlaceholder
+            $summary.collected_files = @(
+                'baseline.json',
+                'candidate.json',
+                'post-boot.json',
+                'wpr-start.json',
+                'wpr-stop.json',
+                'etl-check.json',
+                'cpu-idle-stepwise.etl.md'
+            )
             $summary.status = 'ok'
             $summary.failed_stage = $null
-            if ($session.completed_steps -notcontains 'C') {
-                $session.completed_steps += 'C'
+            if ($session.completed_steps -notcontains 'C4') {
+                $session.completed_steps += 'C4'
             }
             $session.next_step = if ($session.completed_steps -contains 'D') { '' } else { 'D' }
         }
@@ -633,8 +698,10 @@ try {
                 $summary.reboot_mode = Restart-GuestCycle
                 $summary.failed_stage = 'restore-wait-tools'
                 Wait-GuestReady
+                $summary.failed_stage = 'restore-shell-settle'
+                Start-Sleep -Seconds 15
                 $summary.failed_stage = 'restore-wait-shell'
-                $summary.restore_shell = Wait-ShellHealthy
+                $summary.restore_shell = Wait-ShellHealthy -TimeoutSeconds 600
                 $summary.failed_stage = 'restore-read-state'
                 $summary.restore_after_boot = Invoke-GuestActionAndCopy -Action 'read-state' -OutputFileName 'restore-after-boot.json'
             }

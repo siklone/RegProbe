@@ -22,13 +22,10 @@ The live product surface is configuration-focused:
 
 - `Configuration`
 - `Policy Reference`
-- `Services`
-- `Bloatware`
-- `Startup`
 - `Settings`
 - `About`
 
-The old hardware dashboard and hardware detail surface are no longer part of the shipped app.
+The old hardware dashboard, services panel, bloatware browser, startup manager, and disk-health surface are no longer part of the shipped app. Config export/import now stays focused on the current workspace state and no longer carries startup payload data.
 
 ## Research Surface
 
@@ -48,7 +45,9 @@ This repo cross-checks official Microsoft sources, repo evidence, and VM runtime
 Runtime validation happens in the VMware guest, not on the host machine.
 
 - supported VM: `Win25H2Clean`
+- canonical runtime baseline snapshot: `RegProbe-Baseline-20260328`
 - use the VM for live app runs, registry experiments, performance tests, Procmon captures, WPR/WPA traces, ETW, and Ghidra headless analysis
+- the canonical baseline keeps Defender enabled and applies bounded exclusions only for trusted tooling paths and processes
 - use the host only for source edits, docs, and offline artifact prep
 - workflow details live in [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
 
@@ -135,4 +134,3 @@ $env:REGPROBE_ELEVATED_HOST_PATH = "C:\path\to\RegProbe.ElevatedHost.exe"
 - [research/evidence-atlas.md](research/evidence-atlas.md)
 - [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
 - [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
-- [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)

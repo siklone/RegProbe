@@ -1,0 +1,36 @@
+{
+  "generated_utc": "2026-03-29T00:24:32.0000000Z",
+  "probe_name": "watchdog-timeouts-boottrace-20260329-024632",
+  "lane_label": "power.session-watchdog-timeouts",
+  "snapshot_name": "RegProbe-Baseline-20260328",
+  "host_output_root": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632",
+  "status": "failed",
+  "failed_step": "copy",
+  "raw_etl_captured": false,
+  "summary": {
+    "phase": "completed",
+    "guest_etl_path": "C:\\Tools\\ValidationController\\watchdog-timeouts-boottrace\\watchdog-timeouts-boottrace-20260329-024632\\watchdog-timeouts-boot.etl",
+    "etl_exists": true,
+    "baseline": {
+      "WatchdogResumeTimeout": 120,
+      "WatchdogSleepTimeout": 300,
+      "PowerSettingProfile": 0
+    },
+    "after_boot": {
+      "WatchdogResumeTimeout": 120,
+      "WatchdogSleepTimeout": 300,
+      "PowerSettingProfile": 0
+    }
+  },
+  "step_summary_files": {
+    "arm": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-arm-summary.json",
+    "boot": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-boot-summary.json",
+    "stop": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-stop-summary.json",
+    "etl": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-etl-summary.json",
+    "copy": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-copy-summary.json",
+    "session": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/session.json"
+  },
+  "errors": [
+    "The lane now isolates its first failing primitive explicitly: guest-side ETL creation succeeded, but raw ETL copy-back to the host did not complete."
+  ]
+}

@@ -1,15 +1,25 @@
 [CmdletBinding()]
 param(
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestRoot = 'C:\RegProbe-Diag',
-    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable'
+    [string]$SnapshotName = ''
 )
 
 $ErrorActionPreference = 'Stop'
+
+. (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
+
+if ([string]::IsNullOrWhiteSpace($VmPath)) {
+    $VmPath = Resolve-CanonicalVmPath
+}
+
+if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
+    $SnapshotName = Resolve-DefaultVmSnapshotName
+}
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $repoEvidenceRoot = Join-Path $repoRoot 'evidence\files\vm-tooling-staging'
@@ -167,16 +177,24 @@ function Copy-ToGuest {
 function Copy-FromGuestBestEffort {
     param([string]$GuestPath, [string]$HostPath)
 
-    try {
-        Invoke-Vmrun -Arguments @(
-            '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
-            'CopyFileFromGuestToHost', $VmPath, $GuestPath, $HostPath
-        ) | Out-Null
-        return $true
+    for ($attempt = 1; $attempt -le 5; $attempt++) {
+        try {
+            Invoke-Vmrun -Arguments @(
+                '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
+                'CopyFileFromGuestToHost', $VmPath, $GuestPath, $HostPath
+            ) | Out-Null
+
+            if (Test-Path $HostPath) {
+                return $true
+            }
+        }
+        catch {
+        }
+
+        Start-Sleep -Seconds 2
     }
-    catch {
-        return $false
-    }
+
+    return $false
 }
 
 function Invoke-GuestPowerShell {
@@ -244,7 +262,9 @@ if ($summary.copied.script_result) {
     Copy-Item -Path $hostScriptResultPath -Destination (Join-Path $repoRootOut 'script-result.json') -Force
     $scriptResult = Get-Content -Path $hostScriptResultPath -Raw | ConvertFrom-Json
     $summary.script_result_status = $scriptResult.status
-    $summary.script_result_error = $scriptResult.error
+    if ($scriptResult.PSObject.Properties.Name -contains 'error') {
+        $summary.script_result_error = $scriptResult.error
+    }
 }
 
 if ($summary.copied.write_test) {

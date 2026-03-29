@@ -1,0 +1,205 @@
+﻿{
+    "generated_utc":  "2026-03-28T21:44:32.5983997Z",
+    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+    "source_snapshot":  "baseline-20260327-regprobe-visible-shell-stable",
+    "target_snapshot":  "RegProbe-Baseline-20260328",
+    "host_output_root":  "evidence/files/vm-tooling-staging/regprobe-baseline-setup-20260329-004430",
+    "validation":  {
+                       "tooling_minimal":  "evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260329-010950/summary.json",
+                       "app_launch_smoke":  "evidence/files/vm-tooling-staging/regprobe-baseline-app-launch-smoke-20260329.json",
+                       "shell_health":  "evidence/files/vm-tooling-staging/regprobe-baseline-setup-20260329-004430/shell-health.json"
+                   },
+    "defender_exclusions":  {
+                                "apply":  {
+                                              "generated_utc":  "2026-03-28T21:51:56.4237357Z",
+                                              "mode":  "apply",
+                                              "exclusion_paths_requested":  [
+                                                                                "C:\\Tools",
+                                                                                "C:\\RegProbe-Diag"
+                                                                            ],
+                                              "exclusion_processes_requested":  [
+                                                                                    "powershell.exe",
+                                                                                    "Procmon64.exe",
+                                                                                    "wpr.exe",
+                                                                                    "wpa.exe",
+                                                                                    "xperf.exe",
+                                                                                    "java.exe",
+                                                                                    "javaw.exe",
+                                                                                    "diskspd.exe",
+                                                                                    "winsat.exe",
+                                                                                    "RegProbe.App.exe",
+                                                                                    "RegProbe.ElevatedHost.exe"
+                                                                                ],
+                                              "execution_policy_requested":  "RemoteSigned",
+                                              "applied_paths":  [
+                                                                    "C:\\Tools",
+                                                                    "C:\\RegProbe-Diag"
+                                                                ],
+                                              "applied_processes":  [
+                                                                        "powershell.exe",
+                                                                        "Procmon64.exe",
+                                                                        "wpr.exe",
+                                                                        "wpa.exe",
+                                                                        "xperf.exe",
+                                                                        "java.exe",
+                                                                        "javaw.exe",
+                                                                        "diskspd.exe",
+                                                                        "winsat.exe",
+                                                                        "RegProbe.App.exe",
+                                                                        "RegProbe.ElevatedHost.exe"
+                                                                    ],
+                                              "before":  {
+                                                             "exclusion_paths":  [
+
+                                                                                 ],
+                                                             "exclusion_processes":  [
+
+                                                                                     ],
+                                                             "execution_policy":  {
+                                                                                      "MachinePolicy":  "Undefined",
+                                                                                      "UserPolicy":  "Undefined",
+                                                                                      "Process":  "Bypass",
+                                                                                      "CurrentUser":  "Undefined",
+                                                                                      "LocalMachine":  "RemoteSigned"
+                                                                                  }
+                                                         },
+                                              "after":  {
+                                                            "exclusion_paths":  [
+                                                                                    "C:\\RegProbe-Diag",
+                                                                                    "C:\\Tools"
+                                                                                ],
+                                                            "exclusion_processes":  [
+                                                                                        "diskspd.exe",
+                                                                                        "java.exe",
+                                                                                        "javaw.exe",
+                                                                                        "powershell.exe",
+                                                                                        "Procmon64.exe",
+                                                                                        "RegProbe.App.exe",
+                                                                                        "RegProbe.ElevatedHost.exe",
+                                                                                        "winsat.exe",
+                                                                                        "wpa.exe",
+                                                                                        "wpr.exe",
+                                                                                        "xperf.exe"
+                                                                                    ],
+                                                            "execution_policy":  {
+                                                                                     "MachinePolicy":  "Undefined",
+                                                                                     "UserPolicy":  "Undefined",
+                                                                                     "Process":  "Bypass",
+                                                                                     "CurrentUser":  "Undefined",
+                                                                                     "LocalMachine":  "RemoteSigned"
+                                                                                 }
+                                                        },
+                                              "status":  "ok",
+                                              "errors":  [
+
+                                                         ]
+                                          },
+                                "readback":  {
+                                                 "generated_utc":  "2026-03-28T22:05:11.3949385Z",
+                                                 "mode":  "read",
+                                                 "exclusion_paths_requested":  [
+                                                                                   "C:\\Tools",
+                                                                                   "C:\\RegProbe-Diag"
+                                                                               ],
+                                                 "exclusion_processes_requested":  [
+                                                                                       "powershell.exe",
+                                                                                       "Procmon64.exe",
+                                                                                       "wpr.exe",
+                                                                                       "wpa.exe",
+                                                                                       "xperf.exe",
+                                                                                       "java.exe",
+                                                                                       "javaw.exe",
+                                                                                       "diskspd.exe",
+                                                                                       "winsat.exe",
+                                                                                       "RegProbe.App.exe",
+                                                                                       "RegProbe.ElevatedHost.exe"
+                                                                                   ],
+                                                 "execution_policy_requested":  "RemoteSigned",
+                                                 "applied_paths":  [
+
+                                                                   ],
+                                                 "applied_processes":  [
+
+                                                                       ],
+                                                 "before":  {
+                                                                "exclusion_paths":  [
+                                                                                        "C:\\RegProbe-Diag",
+                                                                                        "C:\\Tools"
+                                                                                    ],
+                                                                "exclusion_processes":  [
+                                                                                            "diskspd.exe",
+                                                                                            "java.exe",
+                                                                                            "javaw.exe",
+                                                                                            "powershell.exe",
+                                                                                            "Procmon64.exe",
+                                                                                            "RegProbe.App.exe",
+                                                                                            "RegProbe.ElevatedHost.exe",
+                                                                                            "winsat.exe",
+                                                                                            "wpa.exe",
+                                                                                            "wpr.exe",
+                                                                                            "xperf.exe"
+                                                                                        ],
+                                                                "execution_policy":  {
+                                                                                         "MachinePolicy":  "Undefined",
+                                                                                         "UserPolicy":  "Undefined",
+                                                                                         "Process":  "Bypass",
+                                                                                         "CurrentUser":  "Undefined",
+                                                                                         "LocalMachine":  "RemoteSigned"
+                                                                                     }
+                                                            },
+                                                 "after":  {
+                                                               "exclusion_paths":  [
+                                                                                       "C:\\RegProbe-Diag",
+                                                                                       "C:\\Tools"
+                                                                                   ],
+                                                               "exclusion_processes":  [
+                                                                                           "diskspd.exe",
+                                                                                           "java.exe",
+                                                                                           "javaw.exe",
+                                                                                           "powershell.exe",
+                                                                                           "Procmon64.exe",
+                                                                                           "RegProbe.App.exe",
+                                                                                           "RegProbe.ElevatedHost.exe",
+                                                                                           "winsat.exe",
+                                                                                           "wpa.exe",
+                                                                                           "wpr.exe",
+                                                                                           "xperf.exe"
+                                                                                       ],
+                                                               "execution_policy":  {
+                                                                                        "MachinePolicy":  "Undefined",
+                                                                                        "UserPolicy":  "Undefined",
+                                                                                        "Process":  "Bypass",
+                                                                                        "CurrentUser":  "Undefined",
+                                                                                        "LocalMachine":  "RemoteSigned"
+                                                                                    }
+                                                           },
+                                                 "status":  "ok",
+                                                 "errors":  [
+
+                                                            ]
+                                             }
+                            },
+    "snapshot_lists":  {
+                           "before":  [
+                                          "baseline-20260324-high-risk-lane",
+                                          "baseline-20260325-defender-on",
+                                          "baseline-20260325-shell-stable",
+                                          "baseline-20260327-shell-stable",
+                                          "baseline-20260327-regprobe-visible-shell-stable"
+                                      ],
+                           "after":  [
+                                         "RegProbe-Baseline-20260328"
+                                     ]
+                       },
+    "deleted_snapshots":  [
+                              "baseline-20260324-high-risk-lane",
+                              "baseline-20260325-defender-on",
+                              "baseline-20260325-shell-stable",
+                              "baseline-20260327-shell-stable",
+                              "baseline-20260327-regprobe-visible-shell-stable"
+                          ],
+    "status":  "ok",
+    "errors":  [
+
+               ]
+}

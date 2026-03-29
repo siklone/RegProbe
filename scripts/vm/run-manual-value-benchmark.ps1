@@ -24,7 +24,7 @@ param(
     [string]$SnapshotName = '',
     [string]$IncidentLogPath = '',
 
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
@@ -33,6 +33,16 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+
+. (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
+
+if ([string]::IsNullOrWhiteSpace($VmPath)) {
+    $VmPath = Resolve-CanonicalVmPath
+}
+
+if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
+    $SnapshotName = Resolve-DefaultVmSnapshotName
+}
 
 if ([string]::IsNullOrWhiteSpace($IncidentLogPath)) {
     $IncidentLogPath = Join-Path $PSScriptRoot '..\..\research\vm-incidents.json'

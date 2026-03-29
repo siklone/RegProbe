@@ -1,332 +1,334 @@
-{
-  "$schema": "../setting-research.schema.json",
-  "schema_version": "1.1",
-  "record_id": "power.disable-cpu-idle-states",
-  "tweak_id": "power.disable-cpu-idle-states",
-  "record_status": "validated",
-  "summary": "Validated observed implementation only. This record has a concrete Win25H2Clean baseline for the raw CPU idle-state bundle, a machine-checkable apply and restore pass for the app's current profile, a current-build Ghidra no-match follow-up on ntoskrnl.exe, a fresh v3.1 runtime rerun on baseline-20260327-regprobe-visible-shell-stable that still fails during the set-candidate phase before reboot, a corrected benchmark rerun on the same baseline that still fails before any CPU or memory workload starts because Explorer does not come back in time during the snapshot-restore boot path, an earlier write-diagnostics lane that still could not emit a guest-side result file or wrapper error, a later minimal VMware smoke plus direct registry write diagnostic that both succeeded, and a final stepwise A/B/C/D runtime package that fixed the candidate-write and reboot substeps. That leaves a narrower remaining blocker: WPR stop returns success, but the expected ETL file still does not materialize for host collection.",
-  "setting": {
-    "name": "CPU Idle States Bundle",
-    "category": "Power",
-    "area": "Processor Idle Behavior",
-    "scope": "device",
-    "casual_explanation": "CPU idle states let Windows save power when the processor has little to do. This tweak tries to reduce or bypass that behavior for latency-focused systems.",
-    "why_people_change_it": "People change it when chasing minimum latency for gaming, audio work, or other timing-sensitive workloads.",
-    "tradeoffs_overview": "Reducing idle-state behavior can increase responsiveness in some narrow cases, but it can also raise heat and power consumption. The current app still uses raw power-manager registry values instead of a supported Microsoft control surface. Follow-up minimal diagnostics proved that the general VMware guest execution chain and the direct raw bundle writes themselves both succeed. A later stepwise runtime package then fixed the candidate-write and reboot substeps too, so the remaining blocker is now narrower than a broad tooling failure: the trace side still does not materialize an ETL file even when WPR stop returns success.",
-    "professional_notes": "The app writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The local Power.txt notes also track these values with observed internal defaults of DisableIdleStatesAtBoot=0, ExitLatencyCheckEnabled=0, and IdleStateTimeout=500. The Win25H2Clean VM probe then showed the live baseline on this build as all three values missing, and confirmed a reversible apply of DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1 before restoring back to missing. A current-build Ghidra follow-up then probed ntoskrnl.exe twice, once with the registry value names and once with the internal pseudocode names from the repo notes, and both passes came back with no string or xref matches. The original rebooted benchmark attempts from older shell-stable snapshots failed before any CPU or memory workload ran because Explorer did not return after reboot and the VM had to be recovered from snapshot. The later v3.1 runtime lane on the fresh baseline improved the evidence shape again by capturing baseline plus ETW start under the canonical evidence root, but it still failed during the set-candidate phase before reboot. After the wrapper parameter bug was fixed and automatic recovery was added, the corrected benchmark rerun on the same visible-shell baseline still failed before any workload started because Explorer did not come back in time during the snapshot-restore boot path. A later dedicated write-diagnostics runner then tried to isolate the write stage itself with provider and reg.exe methods, both with and without WPR, under two different guest output roots. Those diagnostics still did not emit a guest-side result file or wrapper error, even though shell recovery stayed clean after snapshot restore. Follow-up minimal VMware tooling smoke then proved that the generic guest execution and host copy-back chain was healthy under C:\\RegProbe-Diag, and a direct minimal registry-write diagnostic showed both provider and reg.exe writes succeeding and restoring the bundle back to missing under the same guest root. A later stepwise orchestration package then split the runtime lane into Step A baseline plus WPR start plus candidate write, Step B reboot plus settle plus post-boot read plus WPR stop, Step C host collection, and Step D restore verification. That exposed two concrete bugs and fixed both: Step A originally failed because the PowerShell provider path creation under WPR returned a misleading subkey-tree deletion error, so the candidate write was switched to reg.exe add; Step B originally failed because guest reboot primitives were unreliable, so the lane switched to the host-driven stop-soft or start cycle already proven in the watchdog boot trace. In the final stepwise session, the candidate bundle persisted across reboot and the restore phase returned the bundle to missing after a second reboot. The remaining blocker is now specifically the trace side: WPR stop returns success, but the expected ETL file still does not materialize at the guest path for host collection. This is enough to keep the bundle well-scoped and evidence-backed, but not enough to treat it as an app-ready supported control surface.",
-    "targets": [
-      {
-        "target_id": "cpu-idle-states-registry-bundle",
-        "location_kind": "registry",
-        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
-        "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
-        "value_type": "REG_DWORD bundle",
-        "allowed_values": [
-          {
-            "state_kind": "missing",
-            "value": null,
-            "label": "Observed Win25H2Clean baseline",
-            "meaning": "The current 25H2 VM baseline leaves DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled unset.",
-            "evidence_ids": [
-              "ms-cpu-idle-states",
-              "repo-power-doc",
-              "vm-cpu-idle-bundle-probe"
-            ]
-          },
-          {
-            "state_kind": "value",
-            "value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1",
-            "label": "Observed app latency-focused bundle",
-            "meaning": "The current app writes the raw latency-focused bundle that the VM probe applied and restored cleanly.",
-            "evidence_ids": [
-              "app-power-provider",
-              "nohuto-power-disable-idle-states-trace",
-              "repo-power-doc",
-              "vm-cpu-idle-bundle-probe"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "app_current_implementation": {
-    "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
-    "notes": "The app writes a raw CPU idle-state registry bundle, but this review did not find a primary Microsoft registry surface that validates it as a supported tuning method.",
-    "writes": [
-      {
-        "target_id": "cpu-idle-states-registry-bundle",
-        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
-        "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
-        "value_type": "REG_DWORD bundle",
-        "state_kind": "value",
-        "value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1"
-      }
-    ]
-  },
-  "windows_defaults": [
-    {
-      "label": "Observed Win25H2Clean baseline",
-      "applies_to": "Current 25H2 builds where the raw CPU idle-state bundle is left unset",
-      "states": [
-        {
-          "target_id": "cpu-idle-states-registry-bundle",
-          "state_kind": "missing",
-          "value": null,
-          "rationale": "Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior."
-        }
-      ],
-      "notes": "This is the current observed VM baseline, not a primary Microsoft registry contract.",
-      "evidence_ids": [
-        "ms-cpu-idle-states",
-        "repo-power-doc",
-        "vm-cpu-idle-bundle-probe"
-      ]
-    }
-  ],
-  "recommended_profiles": [
-    {
-      "profile_id": "windows-default",
-      "label": "Windows default",
-      "intended_for": [
-        "General users",
-        "Battery-sensitive laptops",
-        "Systems using standard Windows processor power management"
-      ],
-      "avoid_for": [
-        "None until a supported Microsoft mapping is confirmed"
-      ],
-      "states": [
-        {
-          "target_id": "cpu-idle-states-registry-bundle",
-          "state_kind": "missing",
-          "value": null,
-          "rationale": "Keep the raw CPU idle-state bundle unset and stay on the current observed baseline."
-        }
-      ],
-      "good_when": "You want supported Windows processor power management behavior.",
-      "bad_when": "You are trying to force undocumented raw registry tuning.",
-      "tradeoffs": [
-        "Windows keeps its current Windows-managed idle-state behavior.",
-        "The app's raw bundle stays documented but research-gated."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "ms-cpu-idle-states",
-        "repo-power-doc",
-        "vm-cpu-idle-bundle-probe"
-      ]
-    },
-    {
-      "profile_id": "current-app-profile",
-      "label": "Current app profile",
-      "intended_for": [
-        "Latency experiments",
-        "Advanced VM-only power research"
-      ],
-      "avoid_for": [
-        "Battery-sensitive systems",
-        "General users"
-      ],
-      "states": [
-        {
-          "target_id": "cpu-idle-states-registry-bundle",
-          "state_kind": "value",
-          "value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1",
-          "rationale": "Use the current app bundle that the VM probe applied and restored cleanly."
-        }
-      ],
-      "good_when": "You are comparing the app's raw idle-state bundle against the current observed baseline.",
-      "bad_when": "You want only supported Microsoft power controls.",
-        "tradeoffs": [
-        "Can reduce idle-state behavior in latency-focused experiments.",
-        "Can also raise heat and power use, and repeated rebooted benchmark lanes on Win25H2Clean dropped shell availability before any workload ran."
-      ],
-      "apply_allowed": false,
-      "evidence_ids": [
-        "app-power-provider",
-        "nohuto-power-disable-idle-states-trace",
-        "repo-power-doc",
-        "vm-cpu-idle-bundle-probe"
-      ]
-    }
-  ],
-  "evidence": [
-    {
-      "evidence_id": "ms-cpu-idle-states",
-      "kind": "official-doc",
-      "title": "Microsoft Learn: Introduction to Processor Idle States",
-      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states",
-      "summary": "Microsoft documents processor idle states as a Windows power-management feature area, but this source does not publish the raw registry bundle used by the app.",
-      "supports": [
-        "behavior",
-        "side-effects",
-        "version-scope",
-        "app-mismatch"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "app-power-provider",
-      "kind": "repo-code",
-      "title": "Current app implementation",
-      "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
-      "summary": "The provider writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under the Power key.",
-      "supports": [
-        "path",
-        "value",
-        "ui-mapping",
-        "app-mismatch"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "nohuto-power-disable-idle-states-trace",
-      "kind": "registry-observation",
-      "title": "nohuto power trace for DisableIdleStatesAtBoot",
-      "location": "research/_source-mirrors/win-registry/records/Power.txt",
-      "summary": "Power.txt lists DisableIdleStatesAtBoot in the power values block, matching the first element of the app's raw idle-states bundle.",
-      "supports": [
-        "path",
-        "value",
-        "behavior"
-      ],
-      "strength": "medium"
-    },
-    {
-      "evidence_id": "vm-cpu-idle-bundle-probe",
-      "kind": "vm-test",
-      "title": "Win25H2Clean reversible probe for the CPU idle-state bundle",
-      "location": "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
-      "summary": "The current 25H2 VM baseline had all three values missing, the app bundle wrote DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1, and the probe restored all three back to missing.",
-      "supports": [
-        "path",
-        "value",
-        "behavior",
-        "rollback"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "repo-power-doc",
-      "kind": "repo-doc",
-      "title": "Repo power notes",
-      "location": "Docs/power/power.md",
-      "summary": "The repo tracks these power-manager values as research notes, but this review did not find a primary Microsoft registry mapping for publishing them as a validated preset.",
-      "supports": [
-        "ui-mapping",
-        "app-mismatch"
-      ],
-      "strength": "medium"
-    },
-    {
-      "evidence_id": "ghidra-cpu-idle-no-match-20260327",
-      "kind": "ghidra-trace",
-      "title": "Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes",
-      "location": "evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
-      "summary": "Two current-build ntoskrnl.exe probes looked for the registry names and for the internal pseudocode names tracked in the repo notes. Both came back with no matching strings or xrefs, so this pass did not produce a current-build kernel decompilation lead for the bundle.",
-      "supports": [
-        "version-scope",
-        "open-question"
-      ],
-      "strength": "medium"
-    },
-    {
-      "evidence_id": "vm-cpu-idle-benchmark-incident-20260327",
-      "kind": "vm-incident",
-      "title": "Win25H2Clean rebooted CPU idle benchmark incident",
-      "location": "research/vm-incidents.json and research/notes/cpu-idle-states-follow-up-20260327.md and evidence/records/power.disable-cpu-idle-states/behavior-lane.log",
-      "summary": "Repeated rebooted benchmark attempts from older shell-stable snapshots did not reach the CPU or memory workload phases because Explorer did not return after reboot. After the wrapper parameter bug was fixed and automatic recovery was added, a benchmark rerun on baseline-20260327-regprobe-visible-shell-stable still failed before any CPU or memory workload artifacts were produced because Explorer did not come back in time during the snapshot-restore boot path.",
-      "supports": [
-        "incident-review",
-        "version-scope",
-        "side-effects"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "vm-cpu-idle-runtime-lane-20260327",
-      "kind": "vm-test",
-      "title": "Win25H2Clean v3.1 runtime lane for the CPU idle-state bundle",
-      "location": "evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/summary.json and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md",
-      "summary": "The original v3.1 runtime lane captured the baseline state with all three values missing and started a WPR GeneralProfile trace, but the guest program returned non-zero before the candidate or post-boot stage completed. A rerun on baseline-20260327-regprobe-visible-shell-stable reproduced the failure more precisely: baseline capture and WPR start succeeded, but the lane still failed during the set-candidate stage before reboot and then required snapshot recovery.",
-      "supports": [
-        "version-scope",
-        "incident-review",
-        "side-effects"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "vm-cpu-idle-write-diagnostics-20260328",
-      "kind": "vm-test",
-      "title": "Win25H2Clean write diagnostics for the CPU idle-state bundle",
-      "location": "evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-191358/summary.json and evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-193355/summary.json and evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194225/summary.json and evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194947/summary.json and research/notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md",
-      "summary": "A dedicated write-diagnostics lane tried to isolate provider and reg.exe writes under two guest output roots. All four attempts failed before any guest-side result file or wrapper error was produced, while shell recovery after snapshot restore stayed clean. That made the remaining blocker look more like guest execution or tooling semantics than a missing ordinary rerun.",
-      "supports": [
-        "version-scope",
-        "incident-review",
-        "open-question"
-      ],
-      "strength": "medium"
-    },
-    {
-      "evidence_id": "vm-vmware-tooling-minimal-diagnostic-20260328",
-      "kind": "vm-test",
-      "title": "Win25H2Clean minimal VMware guest tooling smoke",
-      "location": "evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/summary.json and evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/environment.json and evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/script-result.json and research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md",
-      "summary": "A minimal vmrun guest execution and copy-back smoke under C:\\RegProbe-Diag wrote a text file, emitted environment and result JSON, and copied all three artifacts back to the repo evidence root. That disproves a broad failure of the VMware guest execution or host copy chain on this baseline.",
-      "supports": [
-        "version-scope",
-        "open-question"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "vm-cpu-idle-minimal-regwrite-20260328",
-      "kind": "vm-test",
-      "title": "Win25H2Clean minimal direct registry write diagnostic for the CPU idle-state bundle",
-      "location": "evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/summary.json and evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json and research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md",
-      "summary": "A direct guest-side diagnostic under C:\\RegProbe-Diag wrote DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1 with both the PowerShell provider and reg.exe, then restored the bundle to missing and copied the result back successfully. That narrows the remaining CPU idle blocker away from simple registry write rights and toward the heavier WPR or reboot orchestration.",
-      "supports": [
-        "path",
-        "value",
-        "rollback",
-        "open-question"
-      ],
-      "strength": "high"
-    },
-    {
-      "evidence_id": "vm-cpu-idle-stepwise-orchestration-20260328",
-      "kind": "vm-test",
-      "title": "Win25H2Clean stepwise CPU idle orchestration package",
-      "location": "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327/session.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327/step-a-summary.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327/step-b-summary.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327/step-c-summary.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-225327/step-d-summary.json and research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260328.md",
-      "summary": "The runtime lane was split into four independent steps. Step A and Step B each exposed a concrete bug and both were fixed inside the stepwise runner: candidate write moved from the failing provider path-creation call to reg.exe add, and reboot moved from unreliable guest-initiated commands to the host-driven stop-soft or start cycle. The final stepwise session preserved the candidate bundle across reboot and restored the baseline after a second reboot, but WPR stop still reported success without materializing an ETL file for host collection.",
-      "supports": [
-        "path",
-        "value",
-        "rollback",
-        "version-scope",
-        "open-question"
-      ],
-      "strength": "high"
-    }
-  ],
-  "decision": {
-    "confidence": "high",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
-    "restore_default_supported": false,
-    "restore_previous_supported": true,
-    "needs_vm_validation": false,
-    "why": "The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead. An earlier dedicated write-diagnostics lane produced no guest-side result file, but follow-up minimal VMware smoke and direct registry-write diagnostics both succeeded under C:\\RegProbe-Diag. A later stepwise runtime package then fixed the candidate-write and reboot substeps too: the candidate bundle now survives the rebooted runtime pass, and the restore phase returns the machine to baseline. That means the unresolved blocker is no longer generic guest execution, registry write rights, set-candidate, or reboot. The remaining blocker is now specifically WPR or ETL materialization on this baseline, and the record still is not an app-ready supported control surface.",
-    "blocking_issues": []
-  },
-  "last_reviewed_utc": "2026-03-28T23:15:00+03:00",
-  "validation_proof": {
-    "source_url": "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
-    "exact_quote_or_path": "before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null",
-    "key_found_on_page": true,
-    "notes": "Guest VM probe captured the exact before, after, and restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. Later rebooted benchmark lanes failed before any CPU or memory workload started because Explorer did not return after reboot, and the VM had to be recovered from snapshot. A fresh v3.1 runtime rerun on baseline-20260327-regprobe-visible-shell-stable then captured baseline plus ETW start under the canonical evidence root, but still failed during the set-candidate stage before reboot and again required snapshot recovery. After the wrapper parameter bug was fixed and automatic recovery was added, the corrected benchmark lane on the same baseline still failed before any workload started because Explorer did not come back in time during the snapshot-restore boot path. A later dedicated write-diagnostics runner also failed to emit a guest-side result file or wrapper error under two guest output roots. Follow-up minimal VMware smoke then wrote and copied back a text file plus JSON artifacts successfully, and a direct minimal registry diagnostic showed both provider and reg.exe writes succeeding and restoring the bundle back to missing under C:\\RegProbe-Diag. A later stepwise orchestration package then fixed the candidate-write and reboot substeps and completed baseline apply, rebooted post-boot read, host collection, and restore verification. That proves the unresolved ambiguity is no longer a broad guest execution, registry write, set-candidate, or reboot failure. The remaining ambiguity is now specifically WPR or ETL materialization."
-  }
+﻿{
+    "$schema":  "../setting-research.schema.json",
+    "schema_version":  "1.1",
+    "record_id":  "power.disable-cpu-idle-states",
+    "tweak_id":  "power.disable-cpu-idle-states",
+    "record_status":  "validated",
+    "summary":  "Validated observed implementation only. This record now has a Defender-excluded canonical VM baseline, a successful stepwise A/B/C1/C2/C3/C4/D runtime package on RegProbe-Baseline-20260328, and a machine-checkable apply, reboot, WPR, ETL, copy-back, and restore pass for the app\u0027s current profile. The remaining blocker is no longer guest execution, registry write rights, reboot orchestration, WPR stop, ETL existence, or host collection. The record stays Class B because the app still exposes a raw power-manager registry bundle rather than a supported Microsoft control surface.",
+    "setting":  {
+                    "name":  "CPU Idle States Bundle",
+                    "category":  "Power",
+                    "area":  "Processor Idle Behavior",
+                    "scope":  "device",
+                    "casual_explanation":  "CPU idle states let Windows save power when the processor has little to do. This tweak tries to reduce or bypass that behavior for latency-focused systems.",
+                    "why_people_change_it":  "People change it when chasing minimum latency for gaming, audio work, or other timing-sensitive workloads.",
+                    "tradeoffs_overview":  "Reducing idle-state behavior can increase responsiveness in some narrow cases, but it can also raise heat and power consumption. The new excluded-baseline stepwise runtime package proved that the current raw bundle can be applied, survive reboot, emit and copy back a WPR trace, and restore cleanly. The remaining question is not runtime execution anymore; it is whether this raw bundle is acceptable as an app-ready supported surface.",
+                    "professional_notes":  "The app writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The local Power.txt notes also track these values with observed internal defaults of DisableIdleStatesAtBoot=0, ExitLatencyCheckEnabled=0, and IdleStateTimeout=500. The Win25H2Clean VM probe then showed the live baseline on this build as all three values missing, and confirmed a reversible apply of DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1 before restoring back to missing. A current-build Ghidra follow-up then probed ntoskrnl.exe twice, once with the registry value names and once with the internal pseudocode names from the repo notes, and both passes came back with no string or xref matches. Earlier rebooted benchmark and runtime attempts from older shell-stable snapshots failed before any workload started or before post-boot state could be confirmed. Follow-up minimal VMware smoke and direct registry-write diagnostics then proved that generic guest execution, host copy-back, and the raw bundle writes themselves were healthy under C:\\RegProbe-Diag. The final excluded-baseline stepwise session on RegProbe-Baseline-20260328 completed the full chain: baseline read, candidate write, soft reboot, post-boot read, WPR start, WPR stop, guest-side ETL existence check, ETL copy-back to the host, baseline restore, and post-restore reboot verification. That means the remaining blocker is no longer an orchestration gap. The record stays decision-gated because it is still a raw power-manager registry bundle without a supported Microsoft publish surface.",
+                    "targets":  [
+                                    {
+                                        "target_id":  "cpu-idle-states-registry-bundle",
+                                        "location_kind":  "registry",
+                                        "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                                        "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                                        "value_type":  "REG_DWORD bundle",
+                                        "allowed_values":  [
+                                                               {
+                                                                   "state_kind":  "missing",
+                                                                   "value":  null,
+                                                                   "label":  "Observed Win25H2Clean baseline",
+                                                                   "meaning":  "The current 25H2 VM baseline leaves DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled unset.",
+                                                                   "evidence_ids":  [
+                                                                                        "ms-cpu-idle-states",
+                                                                                        "repo-power-doc",
+                                                                                        "vm-cpu-idle-bundle-probe"
+                                                                                    ]
+                                                               },
+                                                               {
+                                                                   "state_kind":  "value",
+                                                                   "value":  "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1",
+                                                                   "label":  "Observed app latency-focused bundle",
+                                                                   "meaning":  "The current app writes the raw latency-focused bundle that the VM probe applied and restored cleanly.",
+                                                                   "evidence_ids":  [
+                                                                                        "app-power-provider",
+                                                                                        "nohuto-power-disable-idle-states-trace",
+                                                                                        "repo-power-doc",
+                                                                                        "vm-cpu-idle-bundle-probe"
+                                                                                    ]
+                                                               }
+                                                           ]
+                                    }
+                                ]
+                },
+    "app_current_implementation":  {
+                                       "status":  "matches-research",
+                                       "provider_source":  "app/Services/TweakProviders/PowerTweakProvider.cs",
+                                       "notes":  "The app writes a raw CPU idle-state registry bundle, but this review did not find a primary Microsoft registry surface that validates it as a supported tuning method.",
+                                       "writes":  [
+                                                      {
+                                                          "target_id":  "cpu-idle-states-registry-bundle",
+                                                          "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                                                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                                                          "value_type":  "REG_DWORD bundle",
+                                                          "state_kind":  "value",
+                                                          "value":  "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1"
+                                                      }
+                                                  ]
+                                   },
+    "windows_defaults":  [
+                             {
+                                 "label":  "Observed Win25H2Clean baseline",
+                                 "applies_to":  "Current 25H2 builds where the raw CPU idle-state bundle is left unset",
+                                 "states":  [
+                                                {
+                                                    "target_id":  "cpu-idle-states-registry-bundle",
+                                                    "state_kind":  "missing",
+                                                    "value":  null,
+                                                    "rationale":  "Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior."
+                                                }
+                                            ],
+                                 "notes":  "This is the current observed VM baseline, not a primary Microsoft registry contract.",
+                                 "evidence_ids":  [
+                                                      "ms-cpu-idle-states",
+                                                      "repo-power-doc",
+                                                      "vm-cpu-idle-bundle-probe"
+                                                  ]
+                             }
+                         ],
+    "recommended_profiles":  [
+                                 {
+                                     "profile_id":  "windows-default",
+                                     "label":  "Windows default",
+                                     "intended_for":  [
+                                                          "General users",
+                                                          "Battery-sensitive laptops",
+                                                          "Systems using standard Windows processor power management"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "None until a supported Microsoft mapping is confirmed"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "cpu-idle-states-registry-bundle",
+                                                        "state_kind":  "missing",
+                                                        "value":  null,
+                                                        "rationale":  "Keep the raw CPU idle-state bundle unset and stay on the current observed baseline."
+                                                    }
+                                                ],
+                                     "good_when":  "You want supported Windows processor power management behavior.",
+                                     "bad_when":  "You are trying to force undocumented raw registry tuning.",
+                                     "tradeoffs":  [
+                                                       "Windows keeps its current Windows-managed idle-state behavior.",
+                                                       "The app\u0027s raw bundle stays documented but research-gated."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "ms-cpu-idle-states",
+                                                          "repo-power-doc",
+                                                          "vm-cpu-idle-bundle-probe"
+                                                      ]
+                                 },
+                                 {
+                                     "profile_id":  "current-app-profile",
+                                     "label":  "Current app profile",
+                                     "intended_for":  [
+                                                          "Latency experiments",
+                                                          "Advanced VM-only power research"
+                                                      ],
+                                     "avoid_for":  [
+                                                       "Battery-sensitive systems",
+                                                       "General users"
+                                                   ],
+                                     "states":  [
+                                                    {
+                                                        "target_id":  "cpu-idle-states-registry-bundle",
+                                                        "state_kind":  "value",
+                                                        "value":  "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1",
+                                                        "rationale":  "Use the current app bundle that the VM probe applied and restored cleanly."
+                                                    }
+                                                ],
+                                     "good_when":  "You are comparing the app\u0027s raw idle-state bundle against the current observed baseline.",
+                                     "bad_when":  "You want only supported Microsoft power controls.",
+                                     "tradeoffs":  [
+                                                       "Can reduce idle-state behavior in latency-focused experiments.",
+                                                       "Can also raise heat and power use, and repeated rebooted benchmark lanes on Win25H2Clean dropped shell availability before any workload ran."
+                                                   ],
+                                     "apply_allowed":  false,
+                                     "evidence_ids":  [
+                                                          "app-power-provider",
+                                                          "nohuto-power-disable-idle-states-trace",
+                                                          "repo-power-doc",
+                                                          "vm-cpu-idle-bundle-probe"
+                                                      ]
+                                 }
+                             ],
+    "evidence":  [
+                     {
+                         "evidence_id":  "ms-cpu-idle-states",
+                         "kind":  "official-doc",
+                         "title":  "Microsoft Learn: Introduction to Processor Idle States",
+                         "location":  "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states",
+                         "summary":  "Microsoft documents processor idle states as a Windows power-management feature area, but this source does not publish the raw registry bundle used by the app.",
+                         "supports":  [
+                                          "behavior",
+                                          "side-effects",
+                                          "version-scope",
+                                          "app-mismatch"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "app-power-provider",
+                         "kind":  "repo-code",
+                         "title":  "Current app implementation",
+                         "location":  "app/Services/TweakProviders/PowerTweakProvider.cs",
+                         "summary":  "The provider writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under the Power key.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "ui-mapping",
+                                          "app-mismatch"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "nohuto-power-disable-idle-states-trace",
+                         "kind":  "registry-observation",
+                         "title":  "nohuto power trace for DisableIdleStatesAtBoot",
+                         "location":  "research/_source-mirrors/win-registry/records/Power.txt",
+                         "summary":  "Power.txt lists DisableIdleStatesAtBoot in the power values block, matching the first element of the app\u0027s raw idle-states bundle.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "behavior"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "vm-cpu-idle-bundle-probe",
+                         "kind":  "vm-test",
+                         "title":  "Win25H2Clean reversible probe for the CPU idle-state bundle",
+                         "location":  "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
+                         "summary":  "The current 25H2 VM baseline had all three values missing, the app bundle wrote DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1, and the probe restored all three back to missing.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "behavior",
+                                          "rollback"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "repo-power-doc",
+                         "kind":  "repo-doc",
+                         "title":  "Repo power notes",
+                         "location":  "Docs/power/power.md",
+                         "summary":  "The repo tracks these power-manager values as research notes, but this review did not find a primary Microsoft registry mapping for publishing them as a validated preset.",
+                         "supports":  [
+                                          "ui-mapping",
+                                          "app-mismatch"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "ghidra-cpu-idle-no-match-20260327",
+                         "kind":  "ghidra-trace",
+                         "title":  "Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes",
+                         "location":  "evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
+                         "summary":  "Two current-build ntoskrnl.exe probes looked for the registry names and for the internal pseudocode names tracked in the repo notes. Both came back with no matching strings or xrefs, so this pass did not produce a current-build kernel decompilation lead for the bundle.",
+                         "supports":  [
+                                          "version-scope",
+                                          "open-question"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "vm-cpu-idle-benchmark-incident-20260327",
+                         "kind":  "vm-incident",
+                         "title":  "Win25H2Clean rebooted CPU idle benchmark incident",
+                         "location":  "research/vm-incidents.json and research/notes/cpu-idle-states-follow-up-20260327.md and evidence/records/power.disable-cpu-idle-states/behavior-lane.log",
+                         "summary":  "Repeated rebooted benchmark attempts from older shell-stable snapshots did not reach the CPU or memory workload phases because Explorer did not return after reboot. After the wrapper parameter bug was fixed and automatic recovery was added, a benchmark rerun on baseline-20260327-regprobe-visible-shell-stable still failed before any CPU or memory workload artifacts were produced because Explorer did not come back in time during the snapshot-restore boot path.",
+                         "supports":  [
+                                          "incident-review",
+                                          "version-scope",
+                                          "side-effects"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "vm-cpu-idle-runtime-lane-20260327",
+                         "kind":  "vm-test",
+                         "title":  "Win25H2Clean v3.1 runtime lane for the CPU idle-state bundle",
+                         "location":  "evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/summary.json and evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md",
+                         "summary":  "The original v3.1 runtime lane captured the baseline state with all three values missing and started a WPR GeneralProfile trace, but the guest program returned non-zero before the candidate or post-boot stage completed. A rerun on baseline-20260327-regprobe-visible-shell-stable reproduced the failure more precisely: baseline capture and WPR start succeeded, but the lane still failed during the set-candidate stage before reboot and then required snapshot recovery.",
+                         "supports":  [
+                                          "version-scope",
+                                          "incident-review",
+                                          "side-effects"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "vm-cpu-idle-write-diagnostics-20260328",
+                         "kind":  "vm-test",
+                         "title":  "Win25H2Clean write diagnostics for the CPU idle-state bundle",
+                         "location":  "evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-191358/summary.json and evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-193355/summary.json and evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194225/summary.json and evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194947/summary.json and research/notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md",
+                         "summary":  "A dedicated write-diagnostics lane tried to isolate provider and reg.exe writes under two guest output roots. All four attempts failed before any guest-side result file or wrapper error was produced, while shell recovery after snapshot restore stayed clean. That made the remaining blocker look more like guest execution or tooling semantics than a missing ordinary rerun.",
+                         "supports":  [
+                                          "version-scope",
+                                          "incident-review",
+                                          "open-question"
+                                      ],
+                         "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "vm-vmware-tooling-minimal-diagnostic-20260328",
+                         "kind":  "vm-test",
+                         "title":  "Win25H2Clean minimal VMware guest tooling smoke",
+                         "location":  "evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/summary.json and evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/environment.json and evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/script-result.json and research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md",
+                         "summary":  "A minimal vmrun guest execution and copy-back smoke under C:\\RegProbe-Diag wrote a text file, emitted environment and result JSON, and copied all three artifacts back to the repo evidence root. That disproves a broad failure of the VMware guest execution or host copy chain on this baseline.",
+                         "supports":  [
+                                          "version-scope",
+                                          "open-question"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "vm-cpu-idle-minimal-regwrite-20260328",
+                         "kind":  "vm-test",
+                         "title":  "Win25H2Clean minimal direct registry write diagnostic for the CPU idle-state bundle",
+                         "location":  "evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/summary.json and evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json and research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md",
+                         "summary":  "A direct guest-side diagnostic under C:\\RegProbe-Diag wrote DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1 with both the PowerShell provider and reg.exe, then restored the bundle to missing and copied the result back successfully. That narrows the remaining CPU idle blocker away from simple registry write rights and toward the heavier WPR or reboot orchestration.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "rollback",
+                                          "open-question"
+                                      ],
+                         "strength":  "high"
+                     },
+                     {
+                         "evidence_id":  "vm-cpu-idle-stepwise-orchestration-20260329",
+                         "kind":  "vm-test",
+                         "title":  "Win25H2Clean excluded-baseline stepwise CPU idle orchestration package",
+                         "location":  "evidence/files/vm-tooling-staging/cpu-idle-runtime-20260329-015521/summary.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/session.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-a-summary.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-b-summary.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c1-summary.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c2-summary.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c3-summary.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c4-summary.json and evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-d-summary.json and research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md",
+                         "summary":  "On the Defender-excluded RegProbe-Baseline-20260328 snapshot, the runtime lane completed all explicit substeps. The candidate bundle survived reboot, WPR start and WPR stop both succeeded, the ETL existed in the guest, the ETL copied back to the host, and the restore phase returned all three values to the observed baseline. This removed the earlier ETL-materialization blocker and left only the product supportability decision gate.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "rollback",
+                                          "version-scope",
+                                          "open-question"
+                                      ],
+                         "strength":  "high"
+                     }
+                 ],
+    "decision":  {
+                     "confidence":  "high",
+                     "apply_allowed":  false,
+                     "recommended_for_general_users":  false,
+                     "restore_default_supported":  false,
+                     "restore_previous_supported":  true,
+                     "needs_vm_validation":  false,
+                     "why":  "The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead. Follow-up minimal VMware smoke and direct registry-write diagnostics then proved that generic guest execution, host copy-back, and the raw bundle writes themselves were healthy under C:/RegProbe-Diag. The final excluded-baseline stepwise runtime package on RegProbe-Baseline-20260328 then completed baseline apply, rebooted post-boot read, WPR start, WPR stop, ETL existence, host copy-back, restore, and post-restore verification. The unresolved blocker is now no longer a runtime-orchestration gap. The record stays Class B because it is still not an app-ready supported Microsoft control surface.",
+                     "blocking_issues":  [
+
+                                         ]
+                 },
+    "last_reviewed_utc":  "2026-03-29T02:20:00+03:00",
+    "validation_proof":  {
+                             "source_url":  "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
+                             "exact_quote_or_path":  "before: all three values null; after: DisableIdleStatesAtBoot=1, IdleStateTimeout=0, ExitLatencyCheckEnabled=1; restored: all three values null",
+                             "key_found_on_page":  true,
+                             "notes":  "Guest VM probes captured the exact before, after, and restored registry bundle, and the excluded-baseline stepwise runtime package completed apply, reboot, WPR, ETL existence, host copy-back, and restore verification on RegProbe-Baseline-20260328. That removes the earlier ETL-materialization blocker from the runtime lane. The remaining issue is not execution or reversibility; it is whether this raw bundle should be published as a supported app surface."
+                         }
 }

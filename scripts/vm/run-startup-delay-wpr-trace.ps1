@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
@@ -8,12 +8,22 @@ param(
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\startup-delay-wpr',
     [string]$RecordId = 'system.disable-startup-delay',
-    [string]$SnapshotName = 'baseline-20260325-shell-stable',
+    [string]$SnapshotName = '',
     [string]$IncidentLogPath = '',
     [int]$ExplorerSettleSeconds = 20
 )
 
 $ErrorActionPreference = 'Stop'
+
+. (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
+
+if ([string]::IsNullOrWhiteSpace($VmPath)) {
+    $VmPath = Resolve-CanonicalVmPath
+}
+
+if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
+    $SnapshotName = Resolve-DefaultVmSnapshotName -Fallback 'baseline-20260325-shell-stable'
+}
 
 if ([string]::IsNullOrWhiteSpace($IncidentLogPath)) {
     $IncidentLogPath = Join-Path $PSScriptRoot '..\..\research\vm-incidents.json'

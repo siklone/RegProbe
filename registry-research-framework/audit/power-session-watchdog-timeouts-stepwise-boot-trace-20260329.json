@@ -1,0 +1,31 @@
+{
+  "generated_utc": "2026-03-29T00:24:32.0000000Z",
+  "record_id": "power.session-watchdog-timeouts",
+  "lane_label": "power.session-watchdog-timeouts",
+  "snapshot_name": "RegProbe-Baseline-20260328",
+  "migration_source_script": "scripts/vm/run-session-watchdog-timeouts-boot-trace.ps1",
+  "stepwise_propagation_status": "partial-success",
+  "failed_step": "copy",
+  "artifacts": {
+    "summary": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/summary.json",
+    "session": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/session.json",
+    "step_arm": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-arm-summary.json",
+    "step_boot": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-boot-summary.json",
+    "step_stop": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-stop-summary.json",
+    "step_etl": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-etl-summary.json",
+    "step_copy": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-copy-summary.json",
+    "note": "research/notes/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.md"
+  },
+  "result": {
+    "arm": "ok",
+    "boot": "ok",
+    "stop": "ok",
+    "etl": "ok",
+    "copy": "failed"
+  },
+  "notes": [
+    "The propagated stepwise shape now exposes the watchdog lane's first failing primitive explicitly.",
+    "The guest-side ETL existed and the baseline values stayed stable across the rebooted trace.",
+    "The remaining problem for this lane is raw ETL copy-back, not WPR stop or guest-side ETL creation."
+  ]
+}

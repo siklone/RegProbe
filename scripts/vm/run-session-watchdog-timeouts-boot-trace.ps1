@@ -1,17 +1,27 @@
 [CmdletBinding()]
 param(
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\watchdog-timeouts-boottrace',
-    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
+    [string]$SnapshotName = '',
     [string]$IncidentLogPath = '',
     [int]$PostBootSettleSeconds = 30
 )
 
 $ErrorActionPreference = 'Stop'
+
+. (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
+
+if ([string]::IsNullOrWhiteSpace($VmPath)) {
+    $VmPath = Resolve-CanonicalVmPath
+}
+
+if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
+    $SnapshotName = Resolve-DefaultVmSnapshotName
+}
 
 if ([string]::IsNullOrWhiteSpace($IncidentLogPath)) {
     $IncidentLogPath = Join-Path $PSScriptRoot '..\..\research\vm-incidents.json'
@@ -32,6 +42,12 @@ $guestLastBootOutputPath = Join-Path $guestRoot 'lastboot.txt'
 $hostLastBootOutputPath = Join-Path $hostRoot 'lastboot.txt'
 $hostSummaryPath = Join-Path $hostRoot 'summary.json'
 $repoSummaryPath = Join-Path $repoRootOut 'summary.json'
+$repoSessionPath = Join-Path $repoRootOut 'session.json'
+$repoStepArmPath = Join-Path $repoRootOut 'step-arm-summary.json'
+$repoStepBootPath = Join-Path $repoRootOut 'step-boot-summary.json'
+$repoStepStopPath = Join-Path $repoRootOut 'step-stop-summary.json'
+$repoStepEtlPath = Join-Path $repoRootOut 'step-etl-summary.json'
+$repoStepCopyPath = Join-Path $repoRootOut 'step-copy-summary.json'
 $hostEtlPath = Join-Path $hostRoot 'watchdog-timeouts-boot.etl'
 $guestEtlPath = Join-Path $guestRoot 'watchdog-timeouts-boot.etl'
 $guestStatePath = Join-Path $guestRoot 'state.json'
@@ -279,6 +295,47 @@ function Copy-FromGuest {
     ) | Out-Null
 }
 
+function Copy-FromGuestBounded {
+    param(
+        [string]$GuestPath,
+        [string]$HostPath,
+        [int]$TimeoutSeconds = 180
+    )
+
+    $stdoutPath = Join-Path $hostRoot ("copy-{0}.stdout.txt" -f ([IO.Path]::GetFileName($HostPath)))
+    $stderrPath = Join-Path $hostRoot ("copy-{0}.stderr.txt" -f ([IO.Path]::GetFileName($HostPath)))
+    if (Test-Path $stdoutPath) { Remove-Item -Path $stdoutPath -Force }
+    if (Test-Path $stderrPath) { Remove-Item -Path $stderrPath -Force }
+    if (Test-Path $HostPath) { Remove-Item -Path $HostPath -Force }
+
+    $argumentList = @(
+        '-T', 'ws',
+        '-gu', $GuestUser,
+        '-gp', $GuestPassword,
+        'CopyFileFromGuestToHost',
+        $VmPath,
+        $GuestPath,
+        $HostPath
+    )
+
+    $process = Start-Process -FilePath $VmrunPath -ArgumentList $argumentList -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+    if (-not $process.WaitForExit($TimeoutSeconds * 1000)) {
+        try { $process.Kill() } catch {}
+        throw "vmrun copy timed out after $TimeoutSeconds seconds for $GuestPath"
+    }
+
+    if ($process.ExitCode -ne 0) {
+        $stderr = if (Test-Path $stderrPath) { (Get-Content -Path $stderrPath -Raw).Trim() } else { '' }
+        $stdout = if (Test-Path $stdoutPath) { (Get-Content -Path $stdoutPath -Raw).Trim() } else { '' }
+        $detail = ($stderr, $stdout | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }) -join ' '
+        throw "vmrun copy failed with exit code $($process.ExitCode) for $GuestPath. $detail".Trim()
+    }
+
+    if (-not (Test-Path $HostPath)) {
+        throw "vmrun copy reported success but host file was missing for $GuestPath"
+    }
+}
+
 function Invoke-GuestPowerShell {
     param([string[]]$ArgumentList)
 
@@ -346,6 +403,14 @@ $summary = [ordered]@{
         performed = $false
         shell_healthy_after_recovery = $false
     }
+    step_summary_files = [ordered]@{
+        arm = "evidence/files/vm-tooling-staging/$probeName/step-arm-summary.json"
+        boot = "evidence/files/vm-tooling-staging/$probeName/step-boot-summary.json"
+        stop = "evidence/files/vm-tooling-staging/$probeName/step-stop-summary.json"
+        etl = "evidence/files/vm-tooling-staging/$probeName/step-etl-summary.json"
+        copy = "evidence/files/vm-tooling-staging/$probeName/step-copy-summary.json"
+        session = "evidence/files/vm-tooling-staging/$probeName/session.json"
+    }
     errors = @()
 }
 
@@ -379,6 +444,16 @@ try {
         '-StatePath', $guestStatePath
     )
 
+    [ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        step = 'arm'
+        status = 'ok'
+        snapshot_name = $SnapshotName
+        guest_root = $guestRoot
+        guest_etl_path = $guestEtlPath
+        state_path = $guestStatePath
+    } | ConvertTo-Json -Depth 6 | Set-Content -Path $repoStepArmPath -Encoding UTF8
+
     $previousBoot = Get-GuestLastBootUpTime
     if ($null -eq $previousBoot) {
         throw 'Failed to capture guest LastBootUpTime before reboot.'
@@ -386,6 +461,15 @@ try {
 
     $summary.boot_cycle = Invoke-HostBootCycle -PreviousBootUpTime $previousBoot
     Start-Sleep -Seconds $PostBootSettleSeconds
+
+    [ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        step = 'boot'
+        status = 'ok'
+        snapshot_name = $SnapshotName
+        boot_cycle = $summary.boot_cycle
+        post_boot_settle_seconds = $PostBootSettleSeconds
+    } | ConvertTo-Json -Depth 6 | Set-Content -Path $repoStepBootPath -Encoding UTF8
 
     Invoke-GuestPowerShell -ArgumentList @(
         '-NoProfile',
@@ -397,10 +481,63 @@ try {
         '-StatePath', $guestStatePath
     )
 
+    [ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        step = 'stop'
+        status = 'ok'
+        snapshot_name = $SnapshotName
+        guest_etl_path = $guestEtlPath
+        guest_state_path = $guestStatePath
+    } | ConvertTo-Json -Depth 6 | Set-Content -Path $repoStepStopPath -Encoding UTF8
+
     Copy-FromGuest -GuestPath $guestStatePath -HostPath $hostSummaryPath
-    Copy-FromGuest -GuestPath $guestEtlPath -HostPath $hostEtlPath
-    $summary.raw_etl_captured = [bool](Test-Path $hostEtlPath)
     $summary.summary = Get-Content -Path $hostSummaryPath -Raw | ConvertFrom-Json
+
+    [ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        step = 'etl'
+        status = if ($summary.summary.etl_exists) { 'ok' } else { 'missing' }
+        snapshot_name = $SnapshotName
+        guest_etl_path = $guestEtlPath
+        etl_exists = [bool]$summary.summary.etl_exists
+        baseline = $summary.summary.baseline
+        after_boot = $summary.summary.after_boot
+    } | ConvertTo-Json -Depth 8 | Set-Content -Path $repoStepEtlPath -Encoding UTF8
+
+    $copyStatus = 'ok'
+    $copyError = $null
+    try {
+        Copy-FromGuestBounded -GuestPath $guestEtlPath -HostPath $hostEtlPath
+    }
+    catch {
+        $copyStatus = 'failed'
+        $copyError = $_.Exception.Message
+    }
+
+    $summary.raw_etl_captured = [bool](Test-Path $hostEtlPath)
+    if (-not $summary.raw_etl_captured) {
+        $probeFailed = $true
+        if ($copyStatus -eq 'ok') {
+            $copyStatus = 'missing'
+        }
+        if ($copyError) {
+            $summary.errors += $copyError
+        }
+        else {
+            $summary.errors += 'The watchdog boot trace ETL did not copy back to the host.'
+        }
+    }
+
+    [ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        step = 'copy'
+        status = $copyStatus
+        snapshot_name = $SnapshotName
+        guest_etl_path = $guestEtlPath
+        host_etl_path = $hostEtlPath
+        raw_etl_captured = $summary.raw_etl_captured
+        error = $copyError
+    } | ConvertTo-Json -Depth 6 | Set-Content -Path $repoStepCopyPath -Encoding UTF8
 
     $summary.shell_after = Get-ShellHealth | ConvertFrom-Json
     if (-not $summary.shell_after.shell_healthy) {
@@ -433,6 +570,22 @@ finally {
 $summary.status = if ($probeFailed) { 'failed' } else { 'ok' }
 $summary | ConvertTo-Json -Depth 10 | Set-Content -Path $hostSummaryPath -Encoding UTF8
 $summary | ConvertTo-Json -Depth 10 | Set-Content -Path $repoSummaryPath -Encoding UTF8
+
+[ordered]@{
+    generated_utc = [DateTime]::UtcNow.ToString('o')
+    probe_name = $probeName
+    snapshot_name = $SnapshotName
+    status = $summary.status
+    completed_steps = @(
+        if (Test-Path $repoStepArmPath) { 'arm' }
+        if (Test-Path $repoStepBootPath) { 'boot' }
+        if (Test-Path $repoStepStopPath) { 'stop' }
+        if (Test-Path $repoStepEtlPath) { 'etl' }
+        if (Test-Path $repoStepCopyPath) { 'copy' }
+    )
+    summary_file = "summary.json"
+    step_summary_files = $summary.step_summary_files
+} | ConvertTo-Json -Depth 8 | Set-Content -Path $repoSessionPath -Encoding UTF8
 
 $etlPlaceholder = @(
     '# External Evidence Placeholder',

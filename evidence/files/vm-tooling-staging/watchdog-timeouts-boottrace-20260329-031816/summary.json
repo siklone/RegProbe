@@ -1,0 +1,19 @@
+{
+  "generated_utc": "2026-03-29T00:38:16.0000000Z",
+  "probe_name": "watchdog-timeouts-boottrace-20260329-031816",
+  "lane_label": "power.session-watchdog-timeouts",
+  "snapshot_name": "RegProbe-Baseline-20260328",
+  "host_output_root": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816",
+  "status": "failed",
+  "failed_step": "stop",
+  "raw_etl_captured": false,
+  "step_summary_files": {
+    "arm": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-arm-summary.json",
+    "boot": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-boot-summary.json",
+    "stop": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-stop-summary.json",
+    "session": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/session.json"
+  },
+  "errors": [
+    "The propagated watchdog lane completed arm and boot, but the stop stage did not finish before the host-side timeout."
+  ]
+}

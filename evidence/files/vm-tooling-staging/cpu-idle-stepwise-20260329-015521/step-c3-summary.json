@@ -1,0 +1,27 @@
+﻿{
+    "generated_utc":  "2026-03-28T23:10:27.3135442Z",
+    "repo_root":  "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521",
+    "guest_root":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260329-015521",
+    "step":  "C3",
+    "errors":  [
+
+               ],
+    "etl_check":  {
+                      "generated_utc":  "2026-03-28T23:10:25.8351040Z",
+                      "action":  "check-etl",
+                      "status":  "ok",
+                      "etl_path":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260329-015521\\cpu-idle-stepwise.etl",
+                      "exists":  true,
+                      "length_bytes":  40894464,
+                      "last_write_utc":  "2026-03-28T23:10:22.1743121Z"
+                  },
+    "session_id":  "cpu-idle-stepwise-20260329-015521",
+    "record_id":  "power.disable-cpu-idle-states",
+    "snapshot_name":  "RegProbe-Baseline-20260328",
+    "recovery":  {
+                     "performed":  false,
+                     "shell_healthy_after_recovery":  false
+                 },
+    "failed_stage":  null,
+    "status":  "ok"
+}

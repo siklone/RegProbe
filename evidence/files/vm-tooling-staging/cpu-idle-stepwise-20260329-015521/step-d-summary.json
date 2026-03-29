@@ -1,0 +1,62 @@
+﻿{
+    "snapshot_name":  "RegProbe-Baseline-20260328",
+    "failed_stage":  null,
+    "recovery":  {
+                     "performed":  false,
+                     "shell_healthy_after_recovery":  false
+                 },
+    "restore":  {
+                    "generated_utc":  "2026-03-28T23:10:51.5245130Z",
+                    "action":  "restore-baseline",
+                    "status":  "ok",
+                    "state":  {
+                                  "generated_utc":  "2026-03-28T23:10:51.6101897Z",
+                                  "last_boot_utc":  "2026-03-28T23:02:17.5000000Z",
+                                  "values":  {
+                                                 "DisableIdleStatesAtBoot":  null,
+                                                 "IdleStateTimeout":  null,
+                                                 "ExitLatencyCheckEnabled":  null
+                                             }
+                              }
+                },
+    "restore_after_boot":  {
+                               "generated_utc":  "2026-03-28T23:11:52.0305087Z",
+                               "action":  "read-state",
+                               "status":  "ok",
+                               "state":  {
+                                             "generated_utc":  "2026-03-28T23:11:52.3874375Z",
+                                             "last_boot_utc":  "2026-03-28T23:11:26.5000000Z",
+                                             "values":  {
+                                                            "DisableIdleStatesAtBoot":  null,
+                                                            "IdleStateTimeout":  null,
+                                                            "ExitLatencyCheckEnabled":  null
+                                                        }
+                                         }
+                           },
+    "step":  "D",
+    "guest_root":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260329-015521",
+    "restore_shell":  {
+                          "generated_utc":  "2026-03-28T23:11:50.1507156Z",
+                          "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                          "vm_running":  true,
+                          "tools_state":  "running",
+                          "process_query_error":  null,
+                          "shell_healthy":  true,
+                          "checks":  {
+                                         "explorer":  true,
+                                         "sihost":  true,
+                                         "shellhost":  true,
+                                         "ctfmon":  true,
+                                         "app":  false
+                                     }
+                      },
+    "record_id":  "power.disable-cpu-idle-states",
+    "generated_utc":  "2026-03-28T23:11:54.5651388Z",
+    "status":  "ok",
+    "session_id":  "cpu-idle-stepwise-20260329-015521",
+    "errors":  [
+
+               ],
+    "repo_root":  "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521",
+    "reboot_mode":  "soft"
+}

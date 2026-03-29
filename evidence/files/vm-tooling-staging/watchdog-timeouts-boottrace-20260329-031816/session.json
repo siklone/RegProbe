@@ -1,0 +1,17 @@
+{
+  "generated_utc": "2026-03-29T00:38:16.0000000Z",
+  "probe_name": "watchdog-timeouts-boottrace-20260329-031816",
+  "snapshot_name": "RegProbe-Baseline-20260328",
+  "status": "failed",
+  "failed_step": "stop",
+  "completed_steps": [
+    "arm",
+    "boot"
+  ],
+  "summary_file": "summary.json",
+  "step_summary_files": {
+    "arm": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-arm-summary.json",
+    "boot": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-boot-summary.json",
+    "stop": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-stop-summary.json"
+  }
+}

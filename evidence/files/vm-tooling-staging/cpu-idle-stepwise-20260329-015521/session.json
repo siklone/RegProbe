@@ -1,0 +1,69 @@
+﻿{
+    "generated_utc":  "2026-03-28T23:11:54.5389683Z",
+    "record_id":  "power.disable-cpu-idle-states",
+    "session_id":  "cpu-idle-stepwise-20260329-015521",
+    "snapshot_name":  "RegProbe-Baseline-20260328",
+    "host_root":  "H:\\Temp\\vm-tooling-staging\\cpu-idle-stepwise-20260329-015521",
+    "repo_root":  "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521",
+    "guest_root":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260329-015521",
+    "guest_payload_path":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260329-015521\\cpu-idle-stepwise-payload.ps1",
+    "guest_etl_path":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260329-015521\\cpu-idle-stepwise.etl",
+    "completed_steps":  [
+                            "A",
+                            "B",
+                            "C1",
+                            "C2",
+                            "C3",
+                            "C4",
+                            "D"
+                        ],
+    "next_step":  "",
+    "phase_status":  {
+                         "A":  {
+                                   "status":  "ok",
+                                   "failed_stage":  null,
+                                   "summary_file":  "step-a-summary.json"
+                               },
+                         "B":  {
+                                   "status":  "ok",
+                                   "failed_stage":  null,
+                                   "summary_file":  "step-b-summary.json"
+                               },
+                         "C1":  {
+                                    "status":  "ok",
+                                    "failed_stage":  null,
+                                    "summary_file":  "step-c1-summary.json"
+                                },
+                         "C2":  {
+                                    "status":  "ok",
+                                    "failed_stage":  null,
+                                    "summary_file":  "step-c2-summary.json"
+                                },
+                         "C3":  {
+                                    "status":  "ok",
+                                    "failed_stage":  null,
+                                    "summary_file":  "step-c3-summary.json"
+                                },
+                         "C4":  {
+                                    "status":  "ok",
+                                    "failed_stage":  null,
+                                    "summary_file":  "step-c4-summary.json"
+                                },
+                         "D":  {
+                                   "status":  "ok",
+                                   "failed_stage":  null,
+                                   "summary_file":  "step-d-summary.json"
+                               }
+                     },
+    "artifacts":  {
+                      "baseline":  "baseline.json",
+                      "candidate":  "candidate.json",
+                      "post_boot":  "post-boot.json",
+                      "wpr_start":  "wpr-start.json",
+                      "wpr_stop":  "wpr-stop.json",
+                      "etl_check":  "etl-check.json",
+                      "restore":  "restore.json",
+                      "restore_after_boot":  "restore-after-boot.json",
+                      "etl_placeholder":  "cpu-idle-stepwise.etl.md"
+                  }
+}

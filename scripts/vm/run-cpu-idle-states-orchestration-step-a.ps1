@@ -8,7 +8,7 @@ param(
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestRootBase = 'C:\RegProbe-Diag',
     [string]$RecordId = 'power.disable-cpu-idle-states',
-    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
+    [string]$SnapshotName = '',
     [string]$IncidentLogPath = ''
 )
 

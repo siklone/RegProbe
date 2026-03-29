@@ -9,19 +9,24 @@ param(
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestRootBase = 'C:\RegProbe-Diag',
     [string]$RecordId = 'power.disable-cpu-idle-states',
-    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
+    [string]$SnapshotName = '',
     [string]$IncidentLogPath = ''
 )
 
-& (Join-Path $PSScriptRoot 'run-cpu-idle-states-orchestration-step.ps1') `
-    -Step C `
-    -SessionId $SessionId `
-    -VmPath $VmPath `
-    -VmrunPath $VmrunPath `
-    -GuestUser $GuestUser `
-    -GuestPassword $GuestPassword `
-    -HostOutputRoot $HostOutputRoot `
-    -GuestRootBase $GuestRootBase `
-    -RecordId $RecordId `
-    -SnapshotName $SnapshotName `
-    -IncidentLogPath $IncidentLogPath
+$common = @{
+    SessionId = $SessionId
+    VmPath = $VmPath
+    VmrunPath = $VmrunPath
+    GuestUser = $GuestUser
+    GuestPassword = $GuestPassword
+    HostOutputRoot = $HostOutputRoot
+    GuestRootBase = $GuestRootBase
+    RecordId = $RecordId
+    SnapshotName = $SnapshotName
+    IncidentLogPath = $IncidentLogPath
+}
+
+& (Join-Path $PSScriptRoot 'run-cpu-idle-states-orchestration-step.ps1') -Step C1 @common
+& (Join-Path $PSScriptRoot 'run-cpu-idle-states-orchestration-step.ps1') -Step C2 @common
+& (Join-Path $PSScriptRoot 'run-cpu-idle-states-orchestration-step.ps1') -Step C3 @common
+& (Join-Path $PSScriptRoot 'run-cpu-idle-states-orchestration-step.ps1') -Step C4 @common

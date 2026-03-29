@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-28T20:20:52.425633Z",
+  "generated_utc": "2026-03-29T00:42:09.786396Z",
   "summary": {
     "total_records": 298,
     "class_counts": {
@@ -5808,7 +5808,7 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "Guest VM probe captured the exact before, after, and restored registry bundle and returned the machine to baseline. The repo power notes also track these values with internal defaults of 0, 500, and 0 when the raw bundle is present. Later rebooted benchmark...",
+        "summary": "Guest VM probes captured the exact before, after, and restored registry bundle, and the excluded-baseline stepwise runtime package completed apply, reboot, WPR, ETL existence, host copy-back, and restore verification on RegProbe-Baseline-20260328. That remo...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [

@@ -1,10 +1,10 @@
 ﻿{
     "schema_version":  "1.0",
-    "generated_utc":  "2026-03-28T19:42:15.7263672Z",
+    "generated_utc":  "2026-03-29T00:38:57.2775422Z",
     "summary":  {
-                    "total_incidents":  32,
+                    "total_incidents":  35,
                     "shell_recovered":  4,
-                    "needed_snapshot_revert":  31
+                    "needed_snapshot_revert":  34
                 },
     "incidents":  [
                       {
@@ -518,6 +518,54 @@
                           "needed_snapshot_revert":  true,
                           "recorded_utc":  "2026-03-28T19:42:15.7081415Z",
                           "notes":  "Stepwise CPU idle orchestration failed during stage restart-guest."
+                      },
+                      {
+                          "incident_id":  "20260329015004-power-disable-cpu-idle-states",
+                          "record_id":  "power.disable-cpu-idle-states",
+                          "tweak_id":  "power.disable-cpu-idle-states",
+                          "test_id":  "cpu-idle-stepwise-20260329-013837",
+                          "family":  "power-runtime-stepwise",
+                          "snapshot_name":  "RegProbe-Baseline-20260328",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                          "value_name":  "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+                          "value_state":  "cpu-idle-step-b",
+                          "symptom":  "Guest reached VMware Tools ready state, but the shell did not become healthy in time.",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-28T22:50:04.5517567Z",
+                          "notes":  "Stepwise CPU idle orchestration failed during stage wait-shell-post-reboot."
+                      },
+                      {
+                          "incident_id":  "20260329031714-power-session-watchdog-timeouts",
+                          "record_id":  "power.session-watchdog-timeouts",
+                          "tweak_id":  "power.session-watchdog-timeouts",
+                          "test_id":  "watchdog-timeouts-boottrace-20260329-024632",
+                          "family":  "power.session-watchdog-timeouts",
+                          "snapshot_name":  "RegProbe-Baseline-20260328",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                          "value_name":  "WatchdogResumeTimeout|WatchdogSleepTimeout",
+                          "value_state":  "baseline-read-only",
+                          "symptom":  "vmrun failed (-1): ",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-29T00:17:14.8060718Z",
+                          "notes":  "Boot trace lane failed before the final summary could be captured."
+                      },
+                      {
+                          "incident_id":  "20260329033857-power-session-watchdog-timeouts",
+                          "record_id":  "power.session-watchdog-timeouts",
+                          "tweak_id":  "power.session-watchdog-timeouts",
+                          "test_id":  "watchdog-timeouts-boottrace-20260329-031816",
+                          "family":  "power.session-watchdog-timeouts",
+                          "snapshot_name":  "RegProbe-Baseline-20260328",
+                          "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                          "value_name":  "WatchdogResumeTimeout|WatchdogSleepTimeout",
+                          "value_state":  "baseline-read-only",
+                          "symptom":  "vmrun failed (-1): ",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-29T00:38:57.2590676Z",
+                          "notes":  "Boot trace lane failed before the final summary could be captured."
                       }
                   ]
 }

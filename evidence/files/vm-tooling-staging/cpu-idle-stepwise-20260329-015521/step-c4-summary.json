@@ -1,0 +1,34 @@
+﻿{
+    "wpr_start_present":  true,
+    "status":  "ok",
+    "post_boot_present":  true,
+    "failed_stage":  null,
+    "session_id":  "cpu-idle-stepwise-20260329-015521",
+    "etl_check_present":  true,
+    "collected_files":  [
+                            "baseline.json",
+                            "candidate.json",
+                            "post-boot.json",
+                            "wpr-start.json",
+                            "wpr-stop.json",
+                            "etl-check.json",
+                            "cpu-idle-stepwise.etl.md"
+                        ],
+    "generated_utc":  "2026-03-28T23:10:49.8186186Z",
+    "etl_copied_to_host":  true,
+    "candidate_present":  true,
+    "wpr_stop_present":  true,
+    "baseline_present":  true,
+    "errors":  [
+
+               ],
+    "record_id":  "power.disable-cpu-idle-states",
+    "guest_root":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260329-015521",
+    "step":  "C4",
+    "snapshot_name":  "RegProbe-Baseline-20260328",
+    "repo_root":  "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521",
+    "recovery":  {
+                     "performed":  false,
+                     "shell_healthy_after_recovery":  false
+                 }
+}

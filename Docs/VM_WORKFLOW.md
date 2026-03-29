@@ -1,19 +1,76 @@
-﻿# VM Workflow
+# VM Workflow
 
-This repository is validated in the `Win25H2Clean` VMware VM.
+Runtime validation for this repository happens in the `Win25H2Clean` VMware guest.
 
 ## Rule
 
 - Do not run live app validation on the host.
-- Keep the VM visible in VMware Workstation. Do not switch the validation lane to `nogui`.
+- Keep the guest visible in VMware Workstation. Do not switch validation lanes to `nogui`.
 - Use the VM for:
+  - live RegProbe runs
   - registry and policy experiments
-  - performance testing
   - Procmon captures
   - WPR/WPA traces
+  - ETW collection
   - Ghidra headless analysis
+- Use the host only for source editing, docs, artifact review, and offline prep.
 
-## Tooling Available in the VM
+## Canonical Baseline
+
+- VM identity: `Win25H2Clean`
+- Canonical runtime snapshot: `RegProbe-Baseline-20260328`
+- Seed snapshot used to build the canonical baseline: `baseline-20260327-regprobe-visible-shell-stable`
+
+New runtime work should start from `RegProbe-Baseline-20260328`, not from older shell-stable snapshots.
+
+The baseline wrapper lives at:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\new-regprobe-defender-excluded-baseline.ps1
+```
+
+The shared snapshot resolver used by active research scripts lives at:
+
+```text
+scripts/vm/_resolve-vm-baseline.ps1
+registry-research-framework/config/vm-baselines.json
+```
+
+## Defender Exclusion Rule
+
+Defender stays enabled. We do not disable real-time protection. The canonical baseline applies bounded exclusions only for trusted tooling roots and processes:
+
+- Paths:
+  - `C:\Tools`
+  - `C:\RegProbe-Diag`
+- Processes:
+  - `powershell.exe`
+  - `Procmon64.exe`
+  - `wpr.exe`
+  - `wpa.exe`
+  - `xperf.exe`
+  - `java.exe`
+  - `javaw.exe`
+  - `diskspd.exe`
+  - `winsat.exe`
+  - `RegProbe.App.exe`
+  - `RegProbe.ElevatedHost.exe`
+
+Do not add broad user-profile exclusions, `%TEMP%`, or entire drives.
+
+The guest-side exclusion helper is:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\apply-defender-tooling-exclusions.ps1
+```
+
+The baseline audit package is tracked in:
+
+```text
+registry-research-framework/audit/regprobe-baseline-defender-exclusions-20260328.json
+```
+
+## Tooling Available In The VM
 
 ### Performance
 - WPR
@@ -21,11 +78,10 @@ This repository is validated in the `Win25H2Clean` VMware VM.
 - xperf
 - WinSAT
 - DiskSpd
-- AIDA64 Extreme (manual visible cross-check)
 
-### Process / File Tracing
+### Process And Registry Tracing
 - Procmon
-- Safe Procmon wrapper with capture limits
+- safe Procmon wrapper
 
 ### Reverse Engineering
 - Ghidra
@@ -42,154 +98,133 @@ This repository is validated in the `Win25H2Clean` VMware VM.
 - `C:\Tools\Scripts\xperf.cmd`
 - `C:\Tools\Scripts\ghidra-headless.cmd`
 - `C:\Tools\Perf\diskspd.exe`
-- `C:\Tools\AIDA64Extreme\aida64.exe`
 - `C:\Tools\Java\jdk-21.0.10+7`
 - `C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC`
 
-## Safe Procmon Capture
-
-Use the wrapper instead of raw Procmon for experiments that may generate a lot of data:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File C:\Tools\Scripts\procmon-safe.ps1 -DurationSeconds 90 -MaxMegabytes 256
-```
-
-The wrapper:
-
-- starts Procmon with a backing file
-- stops after the requested duration
-- stops early if the backing file reaches the configured size limit
-
-## WPR / WPA
-
-Start a capture:
-
-```cmd
-C:\Tools\Scripts\wpr-start-general.cmd
-```
-
-Stop a capture and write the ETL:
-
-```cmd
-C:\Tools\Scripts\wpr-stop.cmd C:\Tools\Perf\capture.etl
-```
-
-Open the result:
-
-```cmd
-C:\Tools\Scripts\wpa.cmd C:\Tools\Perf\capture.etl
-```
-
-## Ghidra Headless
-
-Example:
-
-```cmd
-C:\Tools\Scripts\ghidra-headless.cmd C:\Tools\GhidraProjects\RegProbe analysis -import C:\Path\To\Binary.exe
-```
-
 ## Validation Smokes
 
-Tool-health smoke:
+Minimal tooling smoke:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File C:\Tools\Scripts\tool-health-smoke.ps1
+powershell -ExecutionPolicy Bypass -File scripts\vm\run-vm-tooling-minimal-diagnostic.ps1
 ```
 
-Published app launch smoke:
+Visible app launch smoke:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File C:\Tools\Scripts\app-launch-smoke.ps1 -PublishZipPath C:\Tools\Inbound\app-publish.zip
+powershell -ExecutionPolicy Bypass -File scripts\vm\run-app-launch-smoke-host.ps1
 ```
 
-The active benchmark lane is:
-
-- `WinSAT CPU + WPR`
-- `WinSAT mem + WPR`
-- `DiskSpd + WPR`
-- `AIDA64` for manual visible cross-check
-
-Manual reboot-sensitive comparison runs can use:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts\vm\run-manual-value-benchmark.ps1 -TestName priority-control -RegistryPath HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl -ValueName Win32PrioritySeparation -BaselineValue 2 -CandidateValue 38
-```
-
-The active suite avoids EULA-gated third-party stress tools.
-
-## Shell Health And Incidents
-
-Check the shell before and after risky families:
+Shell health check:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\vm\get-vm-shell-health.ps1
 ```
 
-If a test drops the desktop, shell host, input, Store app startup, or app launch path, log it:
+The canonical baseline is considered healthy only when:
+
+- `explorer.exe` is present
+- `sihost.exe` is present
+- `ShellHost.exe` is present
+- `ctfmon.exe` is present
+
+## Stepwise WPR And Reboot Lanes
+
+Reboot-sensitive and WPR-heavy research lanes should use explicit substeps instead of one monolithic script.
+
+Canonical step shape:
+
+- `A`: baseline read plus candidate write
+- `B`: reboot plus post-boot confirmation
+- `C1`: WPR start plus proof that tracing is active
+- `C2`: WPR stop to a known ETL path
+- `C3`: guest-side ETL existence check
+- `C4`: host copy-back of the ETL or explicit copy failure
+- `D`: restore baseline plus post-restore confirmation
+
+Why this matters:
+
+- every step can be rerun on its own
+- every step writes its own summary
+- the first failing primitive is visible without reinterpreting the whole lane
+
+The current reference implementation is the CPU idle lane:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\run-cpu-idle-states-runtime-probe.ps1
+```
+
+Step wrappers also exist for direct inspection:
+
+- `scripts/vm/run-cpu-idle-states-orchestration-step-a.ps1`
+- `scripts/vm/run-cpu-idle-states-orchestration-step-b.ps1`
+- `scripts/vm/run-cpu-idle-states-orchestration-step-c1.ps1`
+- `scripts/vm/run-cpu-idle-states-orchestration-step-c2.ps1`
+- `scripts/vm/run-cpu-idle-states-orchestration-step-c3.ps1`
+- `scripts/vm/run-cpu-idle-states-orchestration-step-c4.ps1`
+- `scripts/vm/run-cpu-idle-states-orchestration-step-d.ps1`
+
+The successful excluded-baseline reference package is:
+
+```text
+evidence/files/vm-tooling-staging/cpu-idle-runtime-20260329-015521/summary.json
+evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/session.json
+```
+
+## Procmon And WPR Helpers
+
+Safe Procmon capture:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File C:\Tools\Scripts\procmon-safe.ps1 -DurationSeconds 90 -MaxMegabytes 256
+```
+
+Manual WPR start:
+
+```cmd
+C:\Tools\Scripts\wpr-start-general.cmd
+```
+
+Manual WPR stop:
+
+```cmd
+C:\Tools\Scripts\wpr-stop.cmd C:\Tools\Perf\capture.etl
+```
+
+Open an ETL in WPA:
+
+```cmd
+C:\Tools\Scripts\wpa.cmd C:\Tools\Perf\capture.etl
+```
+
+## Shell Incidents
+
+If a lane drops the desktop, shell host, input, or app launch path, log it:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\vm\log-vm-incident.ps1 -RecordId system.disable-shortcut-arrow -TestId shortcut-arrow-noarrow-probe -Symptom "Desktop disappeared after Explorer restart"
 ```
 
-Incidents are tracked in `research\vm-incidents.json` and folded into `research\evidence-audit.json`.
+Incidents are tracked in:
 
-Before Explorer, graphics, input, or Defender work, capture a shell-stable snapshot:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts\vm\ensure-shell-stable-snapshot.ps1
-```
-
-## Snapshot Rule For High-Risk Lanes
-
-Before testing high-risk families, create or revert a clean VM snapshot.
-
-Use this for lanes like:
-
-- Defender policy keys
-- `stornvme`
-- `USBHUB3`
-- `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows`
-
-Example:
-
-```powershell
-& "C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe" snapshot H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx baseline-20260324-high-risk-lane
-```
-
-Dump collection for these lanes can use:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts\vm\export-high-risk-dumps.ps1
-```
-
-That script exports:
-
-- Defender policy root
-- Defender `Policy Manager`
-- `Control\Power`
-- `stornvme`
-- `USBHUB3`
-- `CurrentVersion\Windows`
-
-The exporter will start the VM if it is powered off. Missing keys are written as metadata instead of being treated as a script failure.
+- `research\vm-incidents.json`
+- `research\evidence-audit.json`
 
 ## Cleanup
 
-Host cleanup keeps only referenced artifacts and the current offline tool cache:
+Host cleanup:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\vm\cleanup-host-validation-artifacts.ps1 -Apply
 ```
 
-Guest cleanup archives desktop clutter, drops old validation output, and removes OCCT leftovers:
+Guest cleanup:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\vm\cleanup-guest-validation-artifacts.ps1 -Apply
 ```
 
-## Bootstrapping Notes
+## Notes
 
-- The tooling is staged through the VM shared folder during setup.
-- `JAVA_HOME` and `GHIDRA_HOME` are set in the VM machine environment.
-- Procmon EULA is pre-accepted in the guest profile used for validation.
-
+- Historical evidence can still mention older snapshot names. Do not rewrite those records just to normalize naming.
+- The canonical baseline may change later, but active runtime scripts should resolve their default snapshot through the shared baseline config instead of hardcoding a snapshot name.
