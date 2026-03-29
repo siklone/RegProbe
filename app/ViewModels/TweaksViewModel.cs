@@ -10,10 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
-using Microsoft.Win32;
 using RegProbe.Core;
-using RegProbe.Core.Models;
-using RegProbe.Core.Services;
 using RegProbe.Infrastructure.Elevation;
 using RegProbe.Infrastructure.Registry;
 using RegProbe.Infrastructure.Services;
@@ -41,7 +38,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 {
     private bool _isDisposed;
     private readonly ITweakLogStore _logStore;
-    private readonly RelayCommand _exportLogsCommand;
     private readonly RelayCommand _previewAllCommand;
     private readonly RelayCommand _applyAllCommand;
     private readonly RelayCommand _verifyAllCommand;
@@ -81,7 +77,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
     private readonly WorkspaceHealthCoordinator _healthCoordinator;
     private readonly WorkspaceInventoryCoordinator _inventoryCoordinator;
-    private readonly WorkspaceOperationsCoordinator _operationsCoordinator;
     private readonly WorkspaceSupportCoordinator _supportCoordinator;
     private readonly WorkspaceActionCoordinator _workspaceActionCoordinator;
     private readonly IAppLogger _appLogger;
@@ -110,7 +105,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _browseCoordinator = new WorkspaceBrowseCoordinator(_shellState, _presentationState, _showContributorEvidenceUi);
         _configurationCoordinator = new ConfigurationWorkspaceCoordinator(this);
         _supportCoordinator = new WorkspaceSupportCoordinator();
-        _supportCoordinator.PropertyChanged += OnSupportCoordinatorPropertyChanged;
         _healthCoordinator = new WorkspaceHealthCoordinator();
         _healthCoordinator.PropertyChanged += OnHealthCoordinatorPropertyChanged;
         var paths = AppPaths.FromEnvironment();
@@ -118,21 +112,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _appLogger = new FileAppLogger(paths);
         var logger = _appLogger;
         _logStore = new FileTweakLogStore(paths);
-        var profileManager = new ProfileManager(paths);
-        _operationsCoordinator = new WorkspaceOperationsCoordinator(
-            _logStore,
-            profileManager,
-            _appLogger,
-            paths.LogDirectory,
-            paths.TweakLogFilePath);
-        _operationsCoordinator.PropertyChanged += OnOperationsCoordinatorPropertyChanged;
         _rollbackStore = new RollbackStateStore(paths);
         _favoritesStore = new FavoritesStore(paths);
         _collectionCoordinator = new WorkspaceCollectionCoordinator(_favoritesStore, GetWorkspaceKind);
         _inventoryCoordinator = new WorkspaceInventoryCoordinator(new TweakInventoryStateStore(paths));
         _inventoryCoordinator.PropertyChanged += OnInventoryCoordinatorPropertyChanged;
 		_pipeline = new TweakExecutionPipeline(logger, _logStore, _rollbackStore);
-		var settingsStore = new SettingsStore(paths);
 		_isElevated = ProcessElevation.IsElevated();
 		_elevatedHostExecutablePath = ElevatedHostLocator.GetExecutablePath();
 		_isElevatedHostAvailable = File.Exists(_elevatedHostExecutablePath);
@@ -183,7 +168,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         RepairsRowsView.SortDescriptions.Add(new SortDescription(nameof(RepairsItemViewModel.Risk), ListSortDirection.Ascending));
         RepairsRowsView.SortDescriptions.Add(new SortDescription(nameof(RepairsItemViewModel.Name), ListSortDirection.Ascending));
 
-        _exportLogsCommand = new RelayCommand(_ => _ = _operationsCoordinator.ExportLogsAsync(), _ => !IsExporting);
         _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Preview", GetAllFilteredTweaks, (item, token) => item.RunPreviewAsync(token)), _ => CanRunBulkInspectable(GetAllFilteredTweaks));
         _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Apply", GetAllActionableFilteredTweaks, (item, token) => item.RunApplyAsync(token)), _ => CanRunBulkMutating(GetAllActionableFilteredTweaks));
         _verifyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Verify", GetAllFilteredTweaks, (item, token) => item.RunVerifyAsync(token)), _ => CanRunBulkInspectable(GetAllFilteredTweaks));
@@ -217,10 +201,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _supportCoordinator.ApplyCatalogs(Tweaks);
         WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
         UpdateFilterSummary();
-        _supportCoordinator.Initialize();
         _healthCoordinator.Refresh(Tweaks);
         RefreshSummaryStats();
-        _ = _operationsCoordinator.InitializePresetsAsync();
 
     }
 
@@ -252,8 +234,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public ICollectionView RepairsRowsView { get; }
 
     public ObservableCollection<CategoryGroupViewModel> CategoryGroups => _presentationState.CategoryGroups;
-
-    public ICommand ExportLogsCommand => _exportLogsCommand;
 
     public ICommand PreviewAllCommand => _previewAllCommand;
 
@@ -355,28 +335,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public int TweaksRolledBack => _presentationState.TweaksRolledBack;
 
-    public long LogFileSizeBytes => _operationsCoordinator.LogFileSizeBytes;
-
-    public string LogFileSizeFormatted => _operationsCoordinator.LogFileSizeFormatted;
-
-    public int DocsMissingCount => _supportCoordinator.DocsMissingCount;
-
-    public string DocsCoverageSummary => _supportCoordinator.DocsCoverageSummary;
-
-    public string DocsCoverageReportPath => _supportCoordinator.DocsCoverageReportPath;
-
-    public bool DocsCoverageOk => _supportCoordinator.DocsCoverageOk;
-
-    public bool DocsCoverageWarn => _supportCoordinator.DocsCoverageWarn;
-
-    public bool DocsCoverageCritical => _supportCoordinator.DocsCoverageCritical;
-
-    public int ProvenanceReviewCount => _supportCoordinator.ProvenanceReviewCount;
-
-    public string ProvenanceCoverageSummary => _supportCoordinator.ProvenanceCoverageSummary;
-
-    public string ProvenanceReportPath => _supportCoordinator.ProvenanceReportPath;
-
     public int ScorableTweaksMeasuredTotal => _healthCoordinator.ScorableTweaksMeasuredTotal;
 
     public int ScorableTweaksApplied => _healthCoordinator.ScorableTweaksApplied;
@@ -387,8 +345,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string HealthStatusMessage => _healthCoordinator.HealthStatusMessage;
 
-    public string ExportStatusMessage => _operationsCoordinator.ExportStatusMessage;
-
     public string BulkStatusMessage
     {
         get => _bulkStatusMessage;
@@ -396,8 +352,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     }
 
     public string InventoryStatusMessage => _inventoryCoordinator.InventoryStatusMessage;
-
-    public bool IsExporting => _operationsCoordinator.IsExporting;
 
     public bool IsBulkRunning
     {
@@ -787,16 +741,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(e.PropertyName);
     }
 
-    private void OnSupportCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        if (string.IsNullOrWhiteSpace(e.PropertyName))
-        {
-            return;
-        }
-
-        OnPropertyChanged(e.PropertyName);
-    }
-
     private void OnHealthCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(e.PropertyName))
@@ -805,21 +749,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
 
         OnPropertyChanged(e.PropertyName);
-    }
-
-    private void OnOperationsCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        if (string.IsNullOrWhiteSpace(e.PropertyName))
-        {
-            return;
-        }
-
-        OnPropertyChanged(e.PropertyName);
-
-        if (e.PropertyName == nameof(WorkspaceOperationsCoordinator.IsExporting))
-        {
-            _exportLogsCommand.RaiseCanExecuteChanged();
-        }
     }
 
     private void OnInventoryCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -876,7 +805,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             Tweaks.Count(t => t.ShowInApp && t.IsApplied),
             Tweaks.Count(t => t.ShowInApp && t.WasRolledBack));
         RaiseWorkspaceMetricsChanged();
-        RefreshLogFileSize();
         _inventoryCoordinator.UpdateStatusMessage(Tweaks);
     }
 
@@ -914,11 +842,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         Func<TweakItemViewModel, CancellationToken, Task> runner)
     {
         return RunBulkAsync(label, getTweaks, runner);
-    }
-
-    private void RefreshLogFileSize()
-    {
-        _operationsCoordinator.RefreshLogFileSize();
     }
 
     private void SetDetailsExpanded(bool isExpanded)
@@ -1029,8 +952,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _presentationState.PropertyChanged -= OnPresentationStatePropertyChanged;
         _healthCoordinator.PropertyChanged -= OnHealthCoordinatorPropertyChanged;
         _inventoryCoordinator.PropertyChanged -= OnInventoryCoordinatorPropertyChanged;
-        _supportCoordinator.PropertyChanged -= OnSupportCoordinatorPropertyChanged;
-        _operationsCoordinator.PropertyChanged -= OnOperationsCoordinatorPropertyChanged;
         Tweaks.CollectionChanged -= OnTweaksCollectionChanged;
 
     }
