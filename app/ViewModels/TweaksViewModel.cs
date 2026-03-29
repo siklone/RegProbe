@@ -53,13 +53,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _applySelectedCommand;
     private readonly RelayCommand _verifySelectedCommand;
     private readonly RelayCommand _rollbackSelectedCommand;
-    private readonly RelayCommand _loadPresetCommand;
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _clearCategorySelectionCommand;
-    private readonly RelayCommand _openLogFolderCommand;
-    private readonly RelayCommand _openCsvLogCommand;
-    private readonly RelayCommand _openDocsCoverageReportCommand;
-    private readonly RelayCommand _openProvenanceReportCommand;
     private readonly RelayCommand _filterAppliedCommand;
     private readonly RelayCommand _filterRolledBackCommand;
     private readonly RelayCommand _showSettingsWorkspaceCommand;
@@ -78,7 +73,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly TweaksPresentationStateViewModel _presentationState = new();
     private readonly bool _showContributorEvidenceUi = ContributorMode.IsEnabled;
     private readonly IFavoritesStore _favoritesStore;
-    private readonly IProfileSyncService _syncService = new ProfileSyncService();
     private readonly TweakExecutionPipeline _pipeline;
     private readonly IRollbackStateStore _rollbackStore;
     private readonly WorkspaceBrowseCoordinator _browseCoordinator;
@@ -209,22 +203,14 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _rollbackSelectedCommand = new RelayCommand(
             _ => _ = RunBulkAsync("Rollback Selected", GetSelectedActionableTweaks, (item, token) => item.RunRollbackAsync(token)),
             _ => CanRunBulkMutating(GetSelectedActionableTweaks));
-        _loadPresetCommand = new RelayCommand(async parameter => await _operationsCoordinator.LoadPresetAsync(parameter, Tweaks));
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _clearCategorySelectionCommand = new RelayCommand(_ => SelectedCategoryName = string.Empty);
-        _openLogFolderCommand = new RelayCommand(_ => _operationsCoordinator.OpenLogFolder());
-        _openCsvLogCommand = new RelayCommand(_ => _operationsCoordinator.OpenCsvLog());
-        _openDocsCoverageReportCommand = new RelayCommand(_ => _supportCoordinator.OpenDocsCoverageReport());
-        _openProvenanceReportCommand = new RelayCommand(_ => _supportCoordinator.OpenProvenanceReport());
         _filterAppliedCommand = new RelayCommand(_ => _configurationCoordinator.ShowAppliedOnly());
         _filterRolledBackCommand = new RelayCommand(_ => _configurationCoordinator.ShowRolledBackOnly());
         _showSettingsWorkspaceCommand = new RelayCommand(_ => _configurationCoordinator.ShowConfigurationWorkspace());
         _showMaintenanceWorkspaceCommand = new RelayCommand(_ => SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance);
         _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
         _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
-        ExportPresetCommand = new RelayCommand(async _ => await _operationsCoordinator.ExportPresetsAsync(Tweaks));
-        ImportPresetCommand = new RelayCommand(async _ => await _operationsCoordinator.ImportPresetsAsync(Tweaks));
-        CreateSnapshotCommand = new RelayCommand(_ => _operationsCoordinator.CreateSnapshot());
 
         _catalogCoordinator.LoadInitialTweaks(Tweaks);
         _inventoryCoordinator.LoadCachedInventoryState(Tweaks);
@@ -291,19 +277,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public ICommand RollbackSelectedCommand => _rollbackSelectedCommand;
 
-    public ICommand LoadPresetCommand => _loadPresetCommand;
-
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
 
     public ICommand ClearCategorySelectionCommand => _clearCategorySelectionCommand;
-
-    public ICommand OpenLogFolderCommand => _openLogFolderCommand;
-
-    public ICommand OpenCsvLogCommand => _openCsvLogCommand;
-
-    public ICommand OpenDocsCoverageReportCommand => _openDocsCoverageReportCommand;
-
-    public ICommand OpenProvenanceReportCommand => _openProvenanceReportCommand;
 
     public ICommand FilterAppliedCommand => _filterAppliedCommand;
 
@@ -316,9 +292,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public ICommand ExpandAllDetailsCommand => _expandAllDetailsCommand;
 
     public ICommand CollapseAllDetailsCommand => _collapseAllDetailsCommand;
-    public ICommand ExportPresetCommand { get; }
-    public ICommand ImportPresetCommand { get; }
-    public ICommand CreateSnapshotCommand { get; }
 
     public int ScorableTweaksTotal => _healthCoordinator.ScorableTweaksTotal;
 
@@ -962,18 +935,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             item.IsBulkLocked = isLocked;
         }
-    }
-
-    public async Task ExportEncryptedProfileAsync(string filePath, string password)
-    {
-        var enabledIds = AllTweaks.Where(t => t.AppliedStatus == TweakAppliedStatus.Applied).Select(t => t.Id).ToList();
-        await _syncService.ExportProfileAsync(filePath, password, enabledIds);
-    }
-
-    public async Task ImportEncryptedProfileAsync(string filePath, string password)
-    {
-        var enabledIds = await _syncService.ImportProfileAsync(filePath, password);
-        // Sync logic to match imported IDs with existing tweaks
     }
 
     public async Task DetectAllTweaksAsync(
