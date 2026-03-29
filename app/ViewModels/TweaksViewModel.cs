@@ -85,6 +85,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly WorkspaceCatalogCoordinator _catalogCoordinator;
     private readonly WorkspaceCollectionCoordinator _collectionCoordinator;
     private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
+    private readonly WorkspaceHealthCoordinator _healthCoordinator;
     private readonly WorkspaceInventoryCoordinator _inventoryCoordinator;
     private readonly WorkspaceOperationsCoordinator _operationsCoordinator;
     private readonly WorkspaceSupportCoordinator _supportCoordinator;
@@ -116,6 +117,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _configurationCoordinator = new ConfigurationWorkspaceCoordinator(this);
         _supportCoordinator = new WorkspaceSupportCoordinator();
         _supportCoordinator.PropertyChanged += OnSupportCoordinatorPropertyChanged;
+        _healthCoordinator = new WorkspaceHealthCoordinator();
+        _healthCoordinator.PropertyChanged += OnHealthCoordinatorPropertyChanged;
         var paths = AppPaths.FromEnvironment();
         paths.EnsureDirectories();
         _appLogger = new FileAppLogger(paths);
@@ -229,6 +232,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
         UpdateFilterSummary();
         _supportCoordinator.Initialize();
+        _healthCoordinator.Refresh(Tweaks);
         RefreshSummaryStats();
         _ = _operationsCoordinator.InitializePresetsAsync();
 
@@ -316,7 +320,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public ICommand ImportPresetCommand { get; }
     public ICommand CreateSnapshotCommand { get; }
 
-    public int ScorableTweaksTotal => Tweaks.Count(IsScorableForHealth);
+    public int ScorableTweaksTotal => _healthCoordinator.ScorableTweaksTotal;
 
     public int TotalTweaksAvailable => _presentationState.TotalTweaksAvailable;
 
@@ -400,40 +404,15 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string ProvenanceReportPath => _supportCoordinator.ProvenanceReportPath;
 
-    public int ScorableTweaksMeasuredTotal => Tweaks.Count(t => IsScorableForHealth(t) && t.AppliedStatus != TweakAppliedStatus.Unknown);
+    public int ScorableTweaksMeasuredTotal => _healthCoordinator.ScorableTweaksMeasuredTotal;
 
-    public int ScorableTweaksApplied => Tweaks.Count(t => IsScorableForHealth(t) && t.IsApplied);
+    public int ScorableTweaksApplied => _healthCoordinator.ScorableTweaksApplied;
 
-    public int GlobalOptimizationScore
-    {
-        get
-        {
-            var total = ScorableTweaksMeasuredTotal;
-            if (total == 0)
-            {
-                return 0;
-            }
+    public int GlobalOptimizationScore => _healthCoordinator.GlobalOptimizationScore;
 
-            var applied = ScorableTweaksApplied;
-            return (int)Math.Round((double)applied / total * 100, MidpointRounding.AwayFromZero);
-        }
-    }
+    public string HealthCalculationSummary => _healthCoordinator.HealthCalculationSummary;
 
-    public string HealthCalculationSummary => ScorableTweaksMeasuredTotal == 0
-        ? "Health is calculated from detected states. Run Detect to refresh current states."
-        : $"{ScorableTweaksApplied} / {ScorableTweaksMeasuredTotal} detected settings applied (Safe+Advanced; excludes Demo/Risky).";
-
-    public string HealthStatusMessage => GlobalOptimizationScore switch
-    {
-        >= 90 => "Excellent optimization level",
-        >= 70 => "Good optimization level",
-        >= 40 => "Moderate optimization level",
-        _ => "System needs optimization"
-    };
-
-    private static bool IsScorableForHealth(TweakItemViewModel tweak) =>
-        !tweak.Id.StartsWith("demo.", StringComparison.OrdinalIgnoreCase)
-        && tweak.Risk != TweakRiskLevel.Risky;
+    public string HealthStatusMessage => _healthCoordinator.HealthStatusMessage;
 
     public string ExportStatusMessage => _operationsCoordinator.ExportStatusMessage;
 
@@ -727,12 +706,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void RaiseHealthMetricsChanged()
     {
-        OnPropertyChanged(nameof(GlobalOptimizationScore));
-        OnPropertyChanged(nameof(HealthStatusMessage));
-        OnPropertyChanged(nameof(ScorableTweaksTotal));
-        OnPropertyChanged(nameof(ScorableTweaksMeasuredTotal));
-        OnPropertyChanged(nameof(ScorableTweaksApplied));
-        OnPropertyChanged(nameof(HealthCalculationSummary));
+        _healthCoordinator.Refresh(Tweaks);
     }
 
     private void UpdateSelectionCount()
@@ -841,6 +815,16 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     }
 
     private void OnSupportCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(e.PropertyName))
+        {
+            return;
+        }
+
+        OnPropertyChanged(e.PropertyName);
+    }
+
+    private void OnHealthCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(e.PropertyName))
         {
@@ -1041,12 +1025,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _inventoryCoordinator.SaveSnapshot(Tweaks);
         _inventoryCoordinator.UpdateStatusMessage(Tweaks);
 
-        // Trigger health score recalculation
-        OnPropertyChanged(nameof(GlobalOptimizationScore));
-        OnPropertyChanged(nameof(ScorableTweaksMeasuredTotal));
-        OnPropertyChanged(nameof(ScorableTweaksApplied));
-        OnPropertyChanged(nameof(HealthCalculationSummary));
-        OnPropertyChanged(nameof(HealthStatusMessage));
+        _healthCoordinator.Refresh(Tweaks);
 
         if (!skipElevationPrompts && !skipExpensiveOperations)
         {
@@ -1087,6 +1066,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         // Unsubscribe collection changed events
         _shellState.PropertyChanged -= OnShellStatePropertyChanged;
         _presentationState.PropertyChanged -= OnPresentationStatePropertyChanged;
+        _healthCoordinator.PropertyChanged -= OnHealthCoordinatorPropertyChanged;
         _inventoryCoordinator.PropertyChanged -= OnInventoryCoordinatorPropertyChanged;
         _supportCoordinator.PropertyChanged -= OnSupportCoordinatorPropertyChanged;
         _operationsCoordinator.PropertyChanged -= OnOperationsCoordinatorPropertyChanged;
