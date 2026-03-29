@@ -138,6 +138,51 @@
             </Setter>
         </Style>
 
+        <Style x:Key="SearchBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="#121212"/>
+            <Setter Property="Foreground" Value="#E8E8E8"/>
+            <Setter Property="BorderBrush" Value="#232323"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,7"/>
+            <Setter Property="CaretBrush" Value="#E8E8E8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                              Margin="{TemplateBinding Padding}"/>
+                                <TextBlock Margin="10,0,10,0"
+                                           VerticalAlignment="Center"
+                                           Foreground="#575757"
+                                           IsHitTestVisible="False"
+                                           Text="{TemplateBinding Tag}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text.Length, RelativeSource={RelativeSource TemplatedParent}}" Value="0">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#343434"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="FlatButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#151515"/>
             <Setter Property="Foreground" Value="#909090"/>
@@ -366,11 +411,17 @@
                     </Grid.ColumnDefinitions>
 
                     <WrapPanel>
-                        <TextBox Width="320" Margin="0,0,12,8" Padding="10,7" Background="#121212" Foreground="#E8E8E8" BorderBrush="#232323" BorderThickness="1" CaretBrush="#E8E8E8" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Search settings and feature switches..."/>
+                        <TextBox Width="320" Margin="0,0,12,8" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SearchBoxStyle}" Tag="{Binding SearchPlaceholder}" ToolTip="{Binding SearchPlaceholder}"/>
                         <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource ChipStyle}"><TextBlock Text="Safe"/></CheckBox>
                         <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
                         <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
-                        <CheckBox Tag="Favorites" IsChecked="{Binding ShowFavoritesOnly}" Style="{StaticResource ChipStyle}"><TextBlock Text="Favorites"/></CheckBox>
+                        <CheckBox Tag="Favorites" IsChecked="{Binding ShowFavoritesOnly}" Style="{StaticResource ChipStyle}">
+                            <TextBlock>
+                                <Run Text="Favorites"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding FavoritesCount}"/>
+                            </TextBlock>
+                        </CheckBox>
                         <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource ChipStyle}" Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"><TextBlock Text="Class A"/></CheckBox>
                         <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource ChipStyle}" Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"><TextBlock Text="Class B"/></CheckBox>
                     </WrapPanel>

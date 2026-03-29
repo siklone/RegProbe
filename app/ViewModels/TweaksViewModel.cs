@@ -584,11 +584,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public bool IsMaintenanceWorkspaceSelected => SelectedWorkspace == ConfigurationWorkspaceKind.Maintenance;
 
-    public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Maintenance" : "Windows Settings";
+    public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Workspace" : "Configuration";
 
     public string CurrentWorkspaceDescription => IsMaintenanceWorkspaceSelected
-        ? "One-click cleanup and repair tasks for when Windows feels messy, slow, or stuck."
-        : "PC behavior and feature switches that stay in place until you change them again.";
+        ? "One-off cleanup, repair, and recovery tasks for when Windows needs intervention."
+        : "Registry-backed settings and feature switches that stay in place until you change them again.";
 
     public string CurrentMainTabEyebrow => CurrentTab switch
     {
@@ -617,22 +617,22 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string WorkspaceCategoryHeader => IsMaintenanceWorkspaceSelected ? "Task Groups" : "Configuration Areas";
 
-    public string AllItemsLabel => IsMaintenanceWorkspaceSelected ? "All Tasks" : "All Settings";
+    public string AllItemsLabel => "All";
 
     public string SearchPlaceholder => IsMaintenanceWorkspaceSelected
-        ? "Search cleanup and repair tasks..."
-        : "Search Windows settings and feature switches...";
+        ? "Search workspace tasks..."
+        : "Search settings and feature switches...";
 
     public string WorkspaceStatusHint => IsMaintenanceWorkspaceSelected
-        ? "Use these when you want to clean up caches, reset a component, or fix a common Windows issue."
+        ? "Use these when you want to clean up caches, reset a component, or recover from a common Windows issue."
         : "Use these when you want Windows to behave differently and keep that behavior in place.";
 
     public string EmptyStateTitle => IsMaintenanceWorkspaceSelected
-        ? "No cleanup tasks match"
+        ? "No workspace tasks match"
         : "No settings match";
 
     public string EmptyStateDescription => IsMaintenanceWorkspaceSelected
-        ? "Try a simpler search or switch back to Windows Settings."
+        ? "Try a broader search or switch back to Configuration."
         : "Try a simpler search or pick a different area.";
 
     public bool ShowDnsConfigurationPanel =>
