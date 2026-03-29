@@ -1,0 +1,43 @@
+{
+  "generated_utc": "2026-03-29T16:00:00Z",
+  "status": "partial",
+  "snapshot_name": "RegProbe-Baseline-Clean-20260329",
+  "tool_script": "registry-research-framework/tools/run-power-control-docs-first-trigger-etw-capture.ps1",
+  "family": "power-control-docs-first",
+  "target_candidates": [
+    "power.control.class1-initial-unpark-count",
+    "power.control.hibernate-enabled-default",
+    "power.control.mf-buffering-threshold",
+    "power.control.perf-calculate-actual-utilization",
+    "power.control.timer-rebase-threshold-on-drips-exit"
+  ],
+  "useful_probe_root": "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522",
+  "notes_path": "research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md",
+  "findings": [
+    {
+      "candidate_id": "power.control.class1-initial-unpark-count",
+      "status": "copy-incomplete",
+      "shell_before_healthy": true,
+      "shell_after_healthy": false,
+      "guest_invoke_error": "vmrun failed (-1): Error: VMware Tools are not running in the guest",
+      "summary_path": "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-class1-initial-unpark-count/summary.json",
+      "filtered_artifacts_available": false,
+      "exact_runtime_read": false
+    },
+    {
+      "candidate_id": "power.control.hibernate-enabled-default",
+      "status": "copy-incomplete",
+      "shell_before_healthy": true,
+      "shell_after_healthy": true,
+      "guest_invoke_error": "vmrun failed (1): Guest program exited with non-zero exit code: 1",
+      "summary_path": "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json",
+      "filtered_path": "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw.txt",
+      "filtered_csv_path": "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw.filtered.csv",
+      "trigger_log_path": "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log",
+      "exact_runtime_read": false,
+      "environment_limit": "powercfg /hibernate on is unsupported because the current VMware baseline firmware does not support hibernation."
+    }
+  ],
+  "conclusion": "The cheaper trigger-based ETW path is not yet stable enough to decide the remaining five docs-first power-control candidates on the current VMware baseline. The most useful partial result proved that HibernateEnabledDefault cannot be exercised with a real hibernation trigger here, while Class1InitialUnparkCount still loses VMware Tools before copy-back.",
+  "recommended_next_step": "Either harden guest-summary copy-back for long ETW runs and rerun candidates individually, or escalate the remaining five to a WinDbg/kernel-breakpoint lane."
+}

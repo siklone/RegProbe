@@ -1,0 +1,66 @@
+﻿{
+    "generated_utc":  "2026-03-29T15:56:51.5120394Z",
+    "candidate_id":  "power.control.class1-initial-unpark-count",
+    "value_name":  "Class1InitialUnparkCount",
+    "trigger_profile":  "processor-plan-toggle",
+    "snapshot_name":  "RegProbe-Baseline-Clean-20260329",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-29T15:51:20.1186420Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  false
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-29T15:56:46.4469343Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  false,
+                        "tools_state":  "not-running",
+                        "process_query_error":  null,
+                        "shell_healthy":  false,
+                        "checks":  {
+                                       "explorer":  false,
+                                       "sihost":  false,
+                                       "shellhost":  false,
+                                       "ctfmon":  false,
+                                       "app":  false
+                                   }
+                    },
+    "guest_invoke_error":  "vmrun failed (-1): Error: VMware Tools are not running in the guest",
+    "copied":  {
+                   "summary":  false,
+                   "filtered":  false,
+                   "filtered_csv":  false,
+                   "trigger_log":  false,
+                   "error":  false
+               },
+    "status":  "copy-incomplete",
+    "exact_query_hits":  0,
+    "exact_runtime_read":  false,
+    "guest_summary":  {
+                          "generated_utc":  "2026-03-29T15:56:51.5068502Z",
+                          "value_name":  "Class1InitialUnparkCount",
+                          "trigger_profile":  "processor-plan-toggle",
+                          "status":  "copy-incomplete",
+                          "exact_runtime_read":  false,
+                          "exact_query_hits":  0,
+                          "errors":  [
+                                         "Failed to copy guest ETW summary back to the host."
+                                     ]
+                      },
+    "artifacts":  {
+                      "summary":  "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-class1-initial-unpark-count/summary.json",
+                      "filtered":  null,
+                      "filtered_csv":  null,
+                      "trigger_log":  null,
+                      "error":  null
+                  }
+}
