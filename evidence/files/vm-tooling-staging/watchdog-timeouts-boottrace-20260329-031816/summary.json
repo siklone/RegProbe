@@ -1,19 +1,47 @@
-{
-  "generated_utc": "2026-03-29T00:38:16.0000000Z",
-  "probe_name": "watchdog-timeouts-boottrace-20260329-031816",
-  "lane_label": "power.session-watchdog-timeouts",
-  "snapshot_name": "RegProbe-Baseline-20260328",
-  "host_output_root": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816",
-  "status": "failed",
-  "failed_step": "stop",
-  "raw_etl_captured": false,
-  "step_summary_files": {
-    "arm": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-arm-summary.json",
-    "boot": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-boot-summary.json",
-    "stop": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-stop-summary.json",
-    "session": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/session.json"
-  },
-  "errors": [
-    "The propagated watchdog lane completed arm and boot, but the stop stage did not finish before the host-side timeout."
-  ]
+﻿{
+    "generated_utc":  "2026-03-29T00:18:16.6240890Z",
+    "probe_name":  "watchdog-timeouts-boottrace-20260329-031816",
+    "lane_label":  "power.session-watchdog-timeouts",
+    "snapshot_name":  "RegProbe-Baseline-20260328",
+    "host_output_root":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816",
+    "status":  "failed",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-29T00:23:31.7011570Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  true
+                                    }
+                     },
+    "shell_after":  null,
+    "boot_cycle":  {
+                       "previous_last_boot_utc":  "2026-03-25T14:14:21.5000000+03:00",
+                       "current_last_boot_utc":  "2026-03-29T03:27:12.5000000+03:00",
+                       "stop_mode":  "soft"
+                   },
+    "summary":  null,
+    "raw_etl_captured":  false,
+    "repo_etl_placeholder":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/watchdog-timeouts-boot.etl.md",
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "step_summary_files":  {
+                               "arm":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-arm-summary.json",
+                               "boot":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-boot-summary.json",
+                               "stop":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-stop-summary.json",
+                               "etl":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-etl-summary.json",
+                               "copy":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/step-copy-summary.json",
+                               "session":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-031816/session.json"
+                           },
+    "errors":  [
+                   "vmrun failed (-1): "
+               ]
 }
