@@ -114,6 +114,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly TweakProvenanceCatalogService _provenanceCatalogService = new();
     private readonly TweakEvidenceClassCatalogService _evidenceClassCatalogService = new();
     private readonly ConfigurationWorkspaceClassifier _workspaceClassifier = new();
+    private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
     private readonly IAppLogger _appLogger;
     private readonly IBusyService _busyService;
 
@@ -231,9 +232,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
         _openDocsCoverageReportCommand = new RelayCommand(_ => OpenDocsCoverageReport());
         _openProvenanceReportCommand = new RelayCommand(_ => OpenProvenanceReport());
-        _filterAppliedCommand = new RelayCommand(_ => StatusFilter = "applied");
-        _filterRolledBackCommand = new RelayCommand(_ => StatusFilter = "rolledback");
-        _showSettingsWorkspaceCommand = new RelayCommand(_ => SelectedWorkspace = ConfigurationWorkspaceKind.Settings);
+        _configurationCoordinator = new ConfigurationWorkspaceCoordinator(this);
+        _filterAppliedCommand = new RelayCommand(_ => _configurationCoordinator.ShowAppliedOnly());
+        _filterRolledBackCommand = new RelayCommand(_ => _configurationCoordinator.ShowRolledBackOnly());
+        _showSettingsWorkspaceCommand = new RelayCommand(_ => _configurationCoordinator.ShowConfigurationWorkspace());
         _showMaintenanceWorkspaceCommand = new RelayCommand(_ => SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance);
         _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
         _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
@@ -254,7 +256,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _provenanceCatalogService.Apply(Tweaks);
         _evidenceClassCatalogService.Apply(Tweaks);
         WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
-        PolicyReference = new PolicyReferencePanelViewModel(OpenPolicyReferenceEntry);
+        PolicyReference = new PolicyReferencePanelViewModel(_configurationCoordinator.OpenPolicyReferenceEntry);
         UpdateFilterSummary();
         LoadDocsCoverageReport();
         LoadProvenanceCoverageReport();
@@ -1497,20 +1499,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private void RefreshPolicyReferencePanel()
     {
         PolicyReference?.Refresh(Tweaks);
-    }
-
-    private void OpenPolicyReferenceEntry(PolicyReferenceEntry entry)
-    {
-        if (entry is null)
-        {
-            return;
-        }
-
-        SelectedMainTabIndex = 0;
-        SelectedWorkspace = ConfigurationWorkspaceKind.Settings;
-        SelectedCategoryName = string.Empty;
-        StatusFilter = string.Empty;
-        SearchText = entry.SearchFragment;
     }
 
     internal void FocusMaintenanceWorkspace(string categoryName)

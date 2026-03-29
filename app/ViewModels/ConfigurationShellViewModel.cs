@@ -3,18 +3,31 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
+using RegProbe.Core.Commands;
 
 namespace RegProbe.App.ViewModels;
 
 public sealed class ConfigurationShellViewModel : ViewModelBase
 {
+    private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
+
     public ConfigurationShellViewModel(TweaksViewModel workspace)
     {
         Workspace = workspace ?? throw new ArgumentNullException(nameof(workspace));
+        _configurationCoordinator = new ConfigurationWorkspaceCoordinator(Workspace);
         Workspace.PropertyChanged += OnWorkspacePropertyChanged;
+        ShowConfigurationWorkspaceCommand = new RelayCommand(_ => _configurationCoordinator.ShowConfigurationWorkspace());
+        ShowAppliedOnlyCommand = new RelayCommand(_ => _configurationCoordinator.ShowAppliedOnly());
+        ShowRolledBackOnlyCommand = new RelayCommand(_ => _configurationCoordinator.ShowRolledBackOnly());
     }
 
     public TweaksViewModel Workspace { get; }
+
+    public ICommand ShowConfigurationWorkspaceCommand { get; }
+
+    public ICommand ShowAppliedOnlyCommand { get; }
+
+    public ICommand ShowRolledBackOnlyCommand { get; }
 
     public ObservableCollection<CategoryGroupViewModel> CategoryGroups => Workspace.CategoryGroups;
 
@@ -121,6 +134,16 @@ public sealed class ConfigurationShellViewModel : ViewModelBase
     public string ClearCategorySelectionText => Workspace.ClearCategorySelectionText;
 
     public bool CanClearCategorySelection => Workspace.CanClearCategorySelection;
+
+    public void ShowConfigurationWorkspace()
+    {
+        _configurationCoordinator.ShowConfigurationWorkspace();
+    }
+
+    public void ClearFilters()
+    {
+        _configurationCoordinator.ClearFilters();
+    }
 
     private void OnWorkspacePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {

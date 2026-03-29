@@ -216,7 +216,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     private void ShowConfiguration()
     {
-        _workspaceViewModel.SelectedWorkspace = ConfigurationWorkspaceKind.Settings;
+        _configurationViewModel.ShowConfigurationWorkspace();
         CurrentViewModel = _configurationViewModel;
         SyncSearchText();
         RaiseShellViewStateChanged();
@@ -250,10 +250,10 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     private void OnClearFilters()
     {
-        ShowConfiguration();
+        _configurationViewModel.ClearFilters();
+        CurrentViewModel = _configurationViewModel;
+        RaiseShellViewStateChanged();
         SearchText = string.Empty;
-        _workspaceViewModel.StatusFilter = string.Empty;
-        _workspaceViewModel.ShowFavoritesOnly = false;
     }
 
     private void OnWorkspaceViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
