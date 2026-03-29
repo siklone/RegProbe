@@ -1,10 +1,10 @@
 ﻿{
     "schema_version":  "1.0",
-    "generated_utc":  "2026-03-29T00:38:57.2775422Z",
+    "generated_utc":  "2026-03-29T06:57:05.6517238Z",
     "summary":  {
-                    "total_incidents":  35,
+                    "total_incidents":  39,
                     "shell_recovered":  4,
-                    "needed_snapshot_revert":  34
+                    "needed_snapshot_revert":  38
                 },
     "incidents":  [
                       {
@@ -566,6 +566,39 @@
                           "needed_snapshot_revert":  true,
                           "recorded_utc":  "2026-03-29T00:38:57.2590676Z",
                           "notes":  "Boot trace lane failed before the final summary could be captured."
+                      },
+                      {
+                          "incident_id":  "20260329093844-research-batch-existence-probe",
+                          "record_id":  "research.batch-existence-probe",
+                          "tweak_id":  "research.batch-existence-probe",
+                          "test_id":  "registry-batch-existence-96-20260329-093400",
+                          "family":  "batch-existence-probe",
+                          "snapshot_name":  "RegProbe-Baseline-20260328",
+                          "registry_path":  "multiple",
+                          "value_name":  "multiple",
+                          "value_state":  "read-only",
+                          "symptom":  "vmrun failed (-1): Error: The virtual machine is not powered on: H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-29T06:38:44.6060349Z",
+                          "notes":  "Batch existence probe failed before results could be captured."
+                      },
+                      {
+                          "incident_id":  "20260329095213-research-batch-existence-probe",
+                          "record_id":  "research.batch-existence-probe",
+                          "tweak_id":  "research.batch-existence-probe",
+                          "test_id":  "registry-batch-existence-96-20260329-094524",
+                          "family":  "batch-existence-probe",
+                          "snapshot_name":  "RegProbe-Baseline-20260328",
+                          "registry_path":  "multiple",
+                          "value_name":  "multiple",
+                          "value_state":  "read-only",
+                          "symptom":  "vmrun failed (-1): Error: The virtual machine is not powered on: H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                          "shell_recovered":  false,
+                          "needed_snapshot_revert":  true,
+                          "recorded_utc":  "2026-03-29T06:52:13.4002029Z",
+                          "notes":  "Batch existence probe failed before results could be captured."
+                      },
                       }
                   ]
 }

@@ -3,18 +3,28 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ManifestPath,
 
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\batch-existence',
-    [string]$SnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
+    [string]$SnapshotName = '',
+    [switch]$SkipSnapshot,
     [string]$ProbePrefix = 'registry-batch-existence',
     [string]$IncidentLogPath = ''
 )
 
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
+
+if ([string]::IsNullOrWhiteSpace($VmPath)) {
+    $VmPath = Resolve-CanonicalVmPath
+}
+
+if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
+    $SnapshotName = Resolve-DefaultVmSnapshotName
+}
 
 if ([string]::IsNullOrWhiteSpace($IncidentLogPath)) {
     $IncidentLogPath = Join-Path $PSScriptRoot '..\..\research\vm-incidents.json'
@@ -258,6 +268,13 @@ function Wait-GuestReady {
     throw 'Guest did not return to a running VMware Tools state in time.'
 }
 
+function Ensure-VmStarted {
+    $running = Invoke-Vmrun -Arguments @('-T', 'ws', 'list') -IgnoreExitCode
+    if ($running -notmatch [Regex]::Escape($VmPath)) {
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath, 'gui') -IgnoreExitCode | Out-Null
+    }
+}
+
 function Get-ShellHealth {
     $processes = Invoke-Vmrun -Arguments @(
         '-T', 'ws',
@@ -318,12 +335,12 @@ function Invoke-GuestPowerShell {
 }
 
 function Restore-HealthySnapshot {
-    if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
+    if ($SkipSnapshot -or [string]::IsNullOrWhiteSpace($SnapshotName)) {
         return
     }
 
     Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $VmPath, $SnapshotName) | Out-Null
-    Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath) -IgnoreExitCode | Out-Null
+    Ensure-VmStarted
     Wait-GuestReady
 }
 
@@ -375,11 +392,11 @@ $probeFailed = $false
 $needsRecovery = $false
 
 try {
-    if (-not [string]::IsNullOrWhiteSpace($SnapshotName)) {
+    if (-not $SkipSnapshot -and -not [string]::IsNullOrWhiteSpace($SnapshotName)) {
         Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $VmPath, $SnapshotName) | Out-Null
     }
 
-    Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath) -IgnoreExitCode | Out-Null
+    Ensure-VmStarted
     Wait-GuestReady
 
     $summary.shell_before = Get-ShellHealth
@@ -429,7 +446,7 @@ catch {
     Log-Incident -TestId $probeName -Symptom $_.Exception.Message -ShellRecovered:$false -NeededSnapshotRevert:$true -Notes 'Batch existence probe failed before results could be captured.'
 }
 finally {
-    if ($needsRecovery -and -not [string]::IsNullOrWhiteSpace($SnapshotName)) {
+    if ($needsRecovery -and -not $SkipSnapshot -and -not [string]::IsNullOrWhiteSpace($SnapshotName)) {
         try {
             Restore-HealthySnapshot
             $recoveredShell = Get-ShellHealth

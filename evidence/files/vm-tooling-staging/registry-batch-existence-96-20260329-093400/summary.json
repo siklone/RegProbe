@@ -1,0 +1,18 @@
+﻿{
+    "generated_utc":  "2026-03-29T06:34:00.5823678Z",
+    "probe_name":  "registry-batch-existence-96-20260329-093400",
+    "manifest":  "registry-research-framework/audit/kernel-power-96-phase0-candidates-20260329.json",
+    "snapshot_name":  "RegProbe-Baseline-20260328",
+    "host_output_root":  "evidence/files/vm-tooling-staging/registry-batch-existence-96-20260329-093400",
+    "status":  "failed",
+    "shell_before":  null,
+    "shell_after":  null,
+    "results":  null,
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "errors":  [
+                   "vmrun failed (-1): Error: The virtual machine is not powered on: H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx"
+               ]
+}
