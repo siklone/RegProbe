@@ -169,8 +169,7 @@
                 </StackPanel>
 
                 <Grid Grid.Column="1"
-                      MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                      MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"/>
+                      MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"/>
 
                 <StackPanel Grid.Column="2"
                             Orientation="Horizontal"
