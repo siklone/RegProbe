@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.ComponentModel;
 using RegProbe.App.Services;
 using RegProbe.App.Services.TweakProviders;
 using RegProbe.App.Utilities;
@@ -55,18 +56,20 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         };
 
         _workspaceViewModel = new TweaksViewModel(providers, _busyService);
+        _workspaceViewModel.PropertyChanged += OnWorkspaceViewModelPropertyChanged;
         _settingsViewModel = new SettingsViewModel();
         _aboutViewModel = new AboutViewModel();
 
         _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
 
+        ShowConfigurationCommand = new RelayCommand(_ => ShowConfiguration());
         ShowWorkspaceCommand = new RelayCommand(_ => ShowWorkspace());
         ShowSettingsCommand = new RelayCommand(_ => ShowSettings());
         ShowAboutCommand = new RelayCommand(_ => ShowAbout());
         FocusSearchCommand = new RelayCommand(_ => OnFocusSearchRequested());
         ClearFiltersCommand = new RelayCommand(_ => OnClearFilters());
 
-        ShowWorkspace();
+        ShowConfiguration();
 
         _ = Task.Run(async () =>
         {
@@ -93,6 +96,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public RelayCommand ShowWorkspaceCommand { get; }
 
+    public RelayCommand ShowConfigurationCommand { get; }
+
     public RelayCommand ShowSettingsCommand { get; }
 
     public RelayCommand ShowAboutCommand { get; }
@@ -113,6 +118,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
                 LogToFile($"CurrentViewModel setter: Setting to {value?.GetType().Name}");
                 if (SetProperty(ref _currentViewModel, value))
                 {
+                    OnPropertyChanged(nameof(IsConfigurationViewActive));
                     OnPropertyChanged(nameof(IsWorkspaceViewActive));
                     OnPropertyChanged(nameof(IsSettingsViewActive));
                     OnPropertyChanged(nameof(IsAboutViewActive));
@@ -129,7 +135,13 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         }
     }
 
-    public bool IsWorkspaceViewActive => ReferenceEquals(CurrentViewModel, _workspaceViewModel);
+    public bool IsConfigurationViewActive =>
+        ReferenceEquals(CurrentViewModel, _workspaceViewModel) &&
+        _workspaceViewModel.SelectedWorkspace == ConfigurationWorkspaceKind.Settings;
+
+    public bool IsWorkspaceViewActive =>
+        ReferenceEquals(CurrentViewModel, _workspaceViewModel) &&
+        _workspaceViewModel.SelectedWorkspace == ConfigurationWorkspaceKind.Maintenance;
 
     public bool IsSettingsViewActive => ReferenceEquals(CurrentViewModel, _settingsViewModel);
 
@@ -219,6 +231,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public void Dispose()
     {
+        _workspaceViewModel.PropertyChanged -= OnWorkspaceViewModelPropertyChanged;
+
         if (_workspaceViewModel is IDisposable workspaceDisposable)
         {
             workspaceDisposable.Dispose();
@@ -253,34 +267,68 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         }, DispatcherPriority.ContextIdle);
     }
 
-    private void ShowWorkspace()
+    private void ShowConfiguration()
     {
+        _workspaceViewModel.SelectedWorkspace = ConfigurationWorkspaceKind.Settings;
         CurrentViewModel = _workspaceViewModel;
         SyncSearchText();
+        RaiseShellViewStateChanged();
+    }
+
+    private void ShowWorkspace()
+    {
+        _workspaceViewModel.SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance;
+        CurrentViewModel = _workspaceViewModel;
+        SyncSearchText();
+        RaiseShellViewStateChanged();
     }
 
     private void ShowSettings()
     {
         CurrentViewModel = _settingsViewModel;
+        RaiseShellViewStateChanged();
     }
 
     private void ShowAbout()
     {
         CurrentViewModel = _aboutViewModel;
+        RaiseShellViewStateChanged();
     }
 
     private void OnFocusSearchRequested()
     {
-        ShowWorkspace();
+        ShowConfiguration();
         FocusSearchRequested?.Invoke();
     }
 
     private void OnClearFilters()
     {
-        ShowWorkspace();
+        ShowConfiguration();
         SearchText = string.Empty;
         _workspaceViewModel.StatusFilter = string.Empty;
         _workspaceViewModel.ShowFavoritesOnly = false;
+    }
+
+    private void OnWorkspaceViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (!ReferenceEquals(CurrentViewModel, _workspaceViewModel))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(e.PropertyName) ||
+            e.PropertyName == nameof(TweaksViewModel.SelectedWorkspace))
+        {
+            RaiseShellViewStateChanged();
+        }
+    }
+
+    private void RaiseShellViewStateChanged()
+    {
+        OnPropertyChanged(nameof(IsConfigurationViewActive));
+        OnPropertyChanged(nameof(IsWorkspaceViewActive));
+        OnPropertyChanged(nameof(IsSettingsViewActive));
+        OnPropertyChanged(nameof(IsAboutViewActive));
     }
 
     private void SyncSearchText()

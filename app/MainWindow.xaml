@@ -12,7 +12,7 @@
         Height="820"
         MinWidth="980"
         MinHeight="680"
-        Background="{DynamicResource ShellWindowBackgroundBrush}"
+        Background="#0D0D0D"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="False"
@@ -22,14 +22,15 @@
         TextOptions.TextRenderingMode="ClearType">
 
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="44"
+        <WindowChrome CaptionHeight="34"
                       ResizeBorderThickness="6"
                       GlassFrameThickness="0"
                       CornerRadius="0"/>
     </WindowChrome.WindowChrome>
 
     <Window.InputBindings>
-        <KeyBinding Key="D1" Modifiers="Control" Command="{Binding ShowWorkspaceCommand}"/>
+        <KeyBinding Key="D1" Modifiers="Control" Command="{Binding ShowConfigurationCommand}"/>
+        <KeyBinding Key="D2" Modifiers="Control" Command="{Binding ShowWorkspaceCommand}"/>
         <KeyBinding Key="OemComma" Modifiers="Control" Command="{Binding ShowSettingsCommand}"/>
         <KeyBinding Key="F1" Command="{Binding ShowAboutCommand}"/>
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
@@ -39,54 +40,91 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 
+        <Style x:Key="TrafficDotStyle" TargetType="Ellipse">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+        </Style>
+
         <Style x:Key="ShellWindowControlButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="44"/>
-            <Setter Property="Height" Value="44"/>
+            <Setter Property="Width" Value="46"/>
+            <Setter Property="Height" Value="34"/>
             <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#8D8D8D"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Focusable" Value="False"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-        </Style>
-
-        <Style x:Key="ShellHeaderButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{DynamicResource ShellTopNavItemBrush}"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ShellTopNavBorderBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="14,9"/>
-            <Setter Property="Margin" Value="0,0,8,0"/>
-            <Setter Property="MinWidth" Value="120"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
-            <Setter Property="FontSize" Value="12"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="Border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="10"
-                                Padding="{TemplateBinding Padding}">
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ShellTopNavHoverBrush}"/>
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
-                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                                <Setter TargetName="Root" Property="Background" Value="#181818"/>
+                                <Setter Property="Foreground" Value="#F3F3F3"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="#202020"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Root" Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CloseWindowButtonStyle" TargetType="Button" BasedOn="{StaticResource ShellWindowControlButtonStyle}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#C0392B"/>
+                    <Setter Property="Foreground" Value="#F6F6F6"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ShellTopTabButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#676767"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,6,12,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                            <Border x:Name="Accent"
+                                    Width="24"
+                                    Height="2"
+                                    Background="#C0392B"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Center"
+                                    Opacity="0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#D8D8D8"/>
                             </Trigger>
                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}"/>
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
-                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                                <Setter Property="Foreground" Value="#F3F3F3"/>
                                 <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter TargetName="Accent" Property="Opacity" Value="1"/>
                             </DataTrigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
+                                <Setter Property="Opacity" Value="0.45"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -95,17 +133,17 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="{DynamicResource ShellWindowBackgroundBrush}">
+    <Grid Background="#0D0D0D">
         <Grid.RowDefinitions>
+            <RowDefinition Height="34"/>
             <RowDefinition Height="44"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0"
                 Panel.ZIndex="100"
-                Background="{DynamicResource ShellTitleBarBackgroundBrush}"
-                BorderBrush="{DynamicResource ShellTitleBarBorderBrush}"
+                Background="#111111"
+                BorderBrush="#1E1E1E"
                 BorderThickness="0,0,0,1">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -114,38 +152,25 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0"
-                        Margin="14,9,0,9"
-                        Padding="10,0"
-                        Background="{DynamicResource ShellBrandChipBrush}"
-                        BorderBrush="{DynamicResource ShellBrandChipBorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="10"
-                        VerticalAlignment="Stretch"
-                        WindowChrome.IsHitTestVisibleInChrome="True">
-                    <TextBlock Text="RP"
+                <StackPanel Grid.Column="0"
+                            Orientation="Horizontal"
+                            Margin="14,0,0,0"
+                            VerticalAlignment="Center"
+                            WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Ellipse Style="{StaticResource TrafficDotStyle}" Fill="#FF5F57"/>
+                    <Ellipse Style="{StaticResource TrafficDotStyle}" Fill="#FEBC2E"/>
+                    <Ellipse Style="{StaticResource TrafficDotStyle}" Fill="#28C840"/>
+                    <TextBlock Text="RegProbe"
+                               Margin="8,0,0,0"
                                VerticalAlignment="Center"
-                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                               Foreground="#666666"
                                FontFamily="{DynamicResource FontFamilyDisplay}"
-                               FontWeight="Bold"
                                FontSize="12"/>
-                </Border>
+                </StackPanel>
 
                 <Grid Grid.Column="1"
-                      Margin="14,0,0,0"
                       MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                      MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="RegProbe"
-                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                   FontFamily="{DynamicResource FontFamilyDisplay}"
-                                   FontSize="13"
-                                   FontWeight="SemiBold"/>
-                        <TextBlock Text="Registry research and reversible configuration workspace"
-                                   Foreground="{DynamicResource ForegroundLightBrush}"
-                                   FontSize="10"/>
-                    </StackPanel>
-                </Grid>
+                      MouseLeftButtonUp="TitleBar_MouseLeftButtonUp"/>
 
                 <StackPanel Grid.Column="2"
                             Orientation="Horizontal"
@@ -155,217 +180,180 @@
                             ToolTip="Minimize"
                             Style="{StaticResource ShellWindowControlButtonStyle}">
                         <Path Data="M 0,0 H 10"
-                              Stroke="{DynamicResource ForegroundLightBrush}"
-                              StrokeThickness="1.2"
+                              Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                              StrokeThickness="1.1"
                               StrokeStartLineCap="Square"
-                              StrokeEndLineCap="Square"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Center"
-                              Margin="0,10,0,0"/>
+                              StrokeEndLineCap="Square"/>
                     </Button>
 
                     <Button x:Name="MaximizeButton"
                             Click="MaximizeButton_Click"
                             ToolTip="Maximize"
                             Style="{StaticResource ShellWindowControlButtonStyle}">
-                        <Grid>
-                            <Rectangle Width="10"
-                                       Height="10"
-                                       Stroke="{DynamicResource ForegroundLightBrush}"
-                                       StrokeThickness="1"
-                                       Fill="Transparent"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                        </Grid>
+                        <Rectangle Width="10"
+                                   Height="10"
+                                   Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                   StrokeThickness="1"
+                                   Fill="Transparent"/>
                     </Button>
 
                     <Button x:Name="CloseButton"
                             Click="CloseButton_Click"
-                            ToolTip="Close">
-                        <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource ShellWindowControlButtonStyle}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border x:Name="Root" Background="Transparent">
-                                                <Path Data="M 0,0 L 10,10 M 10,0 L 0,10"
-                                                      Stroke="{DynamicResource ForegroundLightBrush}"
-                                                      StrokeThickness="1.1"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"/>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource DangerBrush}"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
+                            ToolTip="Close"
+                            Style="{StaticResource CloseWindowButtonStyle}">
+                        <Path Data="M 0,0 L 10,10 M 10,0 L 0,10"
+                              Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                              StrokeThickness="1.1"/>
                     </Button>
                 </StackPanel>
             </Grid>
         </Border>
 
         <Border Grid.Row="1"
-                Margin="16,12,16,0"
-                Style="{StaticResource ShellSubtlePanelStyle}"
-                Padding="12">
-            <Grid>
+                Panel.ZIndex="90"
+                Background="#111111"
+                BorderBrush="#1A1A1A"
+                BorderThickness="0,0,0,1">
+            <Grid Margin="16,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center">
                     <Button Content="Configuration"
+                            Command="{Binding ShowConfigurationCommand}"
+                            Tag="{Binding IsConfigurationViewActive}"
+                            Style="{StaticResource ShellTopTabButtonStyle}"/>
+                    <Button Content="Workspace"
                             Command="{Binding ShowWorkspaceCommand}"
                             Tag="{Binding IsWorkspaceViewActive}"
-                            Style="{StaticResource ShellHeaderButtonStyle}"/>
-                    <Button Content="Settings"
-                            Command="{Binding ShowSettingsCommand}"
-                            Tag="{Binding IsSettingsViewActive}"
-                            Style="{StaticResource ShellHeaderButtonStyle}"/>
-                    <Button Content="About"
-                            Command="{Binding ShowAboutCommand}"
-                            Tag="{Binding IsAboutViewActive}"
-                            Style="{StaticResource ShellHeaderButtonStyle}"/>
+                            Style="{StaticResource ShellTopTabButtonStyle}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1"
                             Orientation="Horizontal"
                             VerticalAlignment="Center">
-                    <TextBlock Text="Ctrl+1  Ctrl+,  F1"
-                               Margin="0,0,16,0"
+                    <Button Content="Settings"
+                            Command="{Binding ShowSettingsCommand}"
+                            Tag="{Binding IsSettingsViewActive}"
+                            Style="{StaticResource ShellTopTabButtonStyle}"/>
+                    <Button Content="About"
+                            Command="{Binding ShowAboutCommand}"
+                            Tag="{Binding IsAboutViewActive}"
+                            Style="{StaticResource ShellTopTabButtonStyle}"/>
+                    <TextBlock Text="{Binding AppVersionLabel}"
+                               Margin="12,0,0,0"
                                VerticalAlignment="Center"
-                               Foreground="{DynamicResource MutedForegroundBrush}"
+                               Foreground="#484848"
                                FontFamily="{DynamicResource FontFamilyMono}"
-                               FontSize="10"/>
-                    <Border Padding="10,6"
-                            Background="{DynamicResource ShellPanelRaisedBrush}"
-                            BorderBrush="{DynamicResource ShellHairlineBrush}"
-                            BorderThickness="1"
-                            CornerRadius="10">
-                        <TextBlock Text="{Binding AppVersionLabel}"
-                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                   FontFamily="{DynamicResource FontFamilyMono}"
-                                   FontSize="10"/>
-                    </Border>
+                               FontSize="11"/>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <Border Grid.Row="2"
-                Margin="16,12,16,16"
-                Style="{StaticResource ShellPanelStyle}"
-                Padding="0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Margin="0">
-                    <Border Background="{DynamicResource DangerBrush}"
-                            Padding="16,12"
-                            CornerRadius="14,14,0,0"
-                            Visibility="{Binding HasPendingRollbacks, Converter={StaticResource BoolToVisibility}}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0">
+                <Border Background="#5A211B"
+                        Padding="16,12"
+                        Visibility="{Binding HasPendingRollbacks, Converter={StaticResource BoolToVisibility}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0"
-                                       Text="&#xE7BA;"
-                                       FontFamily="Segoe MDL2 Assets"
-                                       FontSize="18"
-                                       VerticalAlignment="Center"
-                                       Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                       Margin="0,0,12,0"/>
+                        <TextBlock Grid.Column="0"
+                                   Text="&#xE7BA;"
+                                   FontFamily="Segoe MDL2 Assets"
+                                   FontSize="18"
+                                   VerticalAlignment="Center"
+                                   Foreground="#FFF3F1"
+                                   Margin="0,0,12,0"/>
 
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="Crash Recovery Required"
-                                           Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                           FontWeight="SemiBold"
-                                           FontSize="13"/>
-                                <TextBlock Text="{Binding PendingRollbackMessage}"
-                                           Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                           FontSize="11"
-                                           TextWrapping="Wrap"
-                                           Margin="0,2,0,0"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="2"
-                                        Orientation="Horizontal"
-                                        VerticalAlignment="Center">
-                                <Button Command="{Binding RecoverPendingRollbacksCommand}"
-                                        Style="{StaticResource AppQuietActionButtonStyle}"
-                                        Background="{DynamicResource SuccessBrush}"
-                                        Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                        Margin="0,0,8,0"
-                                        Content="Recover"/>
-                                <Button Command="{Binding DismissPendingRollbacksCommand}"
-                                        Style="{StaticResource AppQuietActionButtonStyle}"
-                                        Background="Transparent"
-                                        BorderBrush="{DynamicResource ForegroundOnAccentBrush}"
-                                        Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                        Content="Dismiss"/>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border Background="{DynamicResource AccentDarkBlueBrush}"
-                            Padding="16,12"
-                            Visibility="{Binding IsRecovering, Converter={StaticResource BoolToVisibility}}">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="&#xE72C;"
-                                       FontFamily="Segoe MDL2 Assets"
-                                       FontSize="16"
-                                       VerticalAlignment="Center"
-                                       Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                       Margin="0,0,12,0"/>
-                            <TextBlock Text="Recovering pending rollbacks..."
-                                       Foreground="{DynamicResource ForegroundOnAccentBrush}"
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="Crash recovery required"
+                                       Foreground="#FFF3F1"
                                        FontWeight="SemiBold"
-                                       FontSize="13"
-                                       VerticalAlignment="Center"/>
+                                       FontSize="13"/>
+                            <TextBlock Text="{Binding PendingRollbackMessage}"
+                                       Foreground="#F4D8D3"
+                                       FontSize="11"
+                                       TextWrapping="Wrap"
+                                       Margin="0,2,0,0"/>
                         </StackPanel>
-                    </Border>
-                </StackPanel>
 
-                <Border Grid.Row="1"
-                        Margin="14"
-                        Background="{DynamicResource ShellSubtleFillBrush}"
-                        CornerRadius="12">
-                    <ContentControl Content="{Binding CurrentViewModel}">
-                        <i:Interaction.Behaviors>
-                            <behaviors:NavigationTransitionBehavior Transition="FadeAndSlide"/>
-                        </i:Interaction.Behaviors>
-                    </ContentControl>
+                        <StackPanel Grid.Column="2"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <Button Command="{Binding RecoverPendingRollbacksCommand}"
+                                    Style="{StaticResource AppQuietActionButtonStyle}"
+                                    Background="#1F5C39"
+                                    Foreground="#F0FFF5"
+                                    Margin="0,0,8,0"
+                                    Content="Recover"/>
+                            <Button Command="{Binding DismissPendingRollbacksCommand}"
+                                    Style="{StaticResource AppQuietActionButtonStyle}"
+                                    Background="Transparent"
+                                    BorderBrush="#F0D3CE"
+                                    Foreground="#F0D3CE"
+                                    Content="Dismiss"/>
+                        </StackPanel>
+                    </Grid>
                 </Border>
-            </Grid>
-        </Border>
+
+                <Border Background="#173245"
+                        Padding="16,12"
+                        Visibility="{Binding IsRecovering, Converter={StaticResource BoolToVisibility}}">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <TextBlock Text="&#xE72C;"
+                                   FontFamily="Segoe MDL2 Assets"
+                                   FontSize="16"
+                                   VerticalAlignment="Center"
+                                   Foreground="#EAF6FF"
+                                   Margin="0,0,12,0"/>
+                        <TextBlock Text="Recovering pending rollbacks..."
+                                   Foreground="#EAF6FF"
+                                   FontWeight="SemiBold"
+                                   FontSize="13"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <Border Grid.Row="1"
+                    Background="#0D0D0D">
+                <ContentControl Content="{Binding CurrentViewModel}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:NavigationTransitionBehavior Transition="FadeAndSlide"/>
+                    </i:Interaction.Behaviors>
+                </ContentControl>
+            </Border>
+        </Grid>
 
         <Grid Panel.ZIndex="100"
               IsHitTestVisible="False"
               Visibility="{Binding IsStartupScanActive, Converter={StaticResource BoolToVisibility}}">
             <Border HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Width="252"
-                    Margin="0,0,28,28"
+                    Width="240"
+                    Margin="0,0,24,24"
                     Padding="16,14"
-                    Background="{DynamicResource ShellPanelAltBrush}"
-                    BorderBrush="{DynamicResource ShellHairlineBrush}"
-                    BorderThickness="1"
-                    CornerRadius="14"
-                    Opacity="0.98">
+                    Background="#131313"
+                    BorderBrush="#232323"
+                    BorderThickness="1">
                 <StackPanel>
                     <TextBlock Text="Background scan"
-                               Foreground="{DynamicResource ForegroundBrightestBrush}"
+                               Foreground="#F3F3F3"
                                FontSize="13"
                                FontWeight="SemiBold"/>
                     <ProgressBar Height="4"
