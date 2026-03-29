@@ -37,17 +37,4 @@ public sealed class ConfigurationWorkspaceCoordinator
         _workspace.ShowFavoritesOnly = false;
     }
 
-    public void OpenPolicyReferenceEntry(PolicyReferenceEntry entry)
-    {
-        if (entry is null)
-        {
-            return;
-        }
-
-        _workspace.SelectedMainTabIndex = 0;
-        ShowConfigurationWorkspace();
-        _workspace.SelectedCategoryName = string.Empty;
-        _workspace.StatusFilter = string.Empty;
-        _workspace.SearchText = entry.SearchFragment;
-    }
 }

@@ -1,17 +1,9 @@
-using System;
-using System.Linq;
 using RegProbe.App.Services;
 
 namespace RegProbe.App.ViewModels;
 
 public sealed class TweaksShellStateViewModel : ViewModelBase
 {
-    private static readonly string[] MainTabNames =
-    [
-        "Configuration",
-        "Policy Reference"
-    ];
-
     private string _searchText = string.Empty;
     private string _statusFilter = string.Empty;
     private bool _showSafe = true;
@@ -24,29 +16,7 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
     private bool _showClassD = true;
     private string _selectedCategoryName = string.Empty;
     private ConfigurationWorkspaceKind _selectedWorkspace = ConfigurationWorkspaceKind.Settings;
-    private int _selectedMainTabIndex;
-    private string _currentTab = "Configuration";
     private bool _isFlatView;
-
-    public string CurrentTab
-    {
-        get => _currentTab;
-        set
-        {
-            var normalized = NormalizeMainTabName(value);
-            if (SetProperty(ref _currentTab, normalized))
-            {
-                var tabIndex = GetMainTabIndex(normalized);
-                if (_selectedMainTabIndex != tabIndex)
-                {
-                    _selectedMainTabIndex = tabIndex;
-                    OnPropertyChanged(nameof(SelectedMainTabIndex));
-                }
-
-                RaiseMainTabPropertiesChanged();
-            }
-        }
-    }
 
     public ConfigurationWorkspaceKind SelectedWorkspace
     {
@@ -56,26 +26,6 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
             if (SetProperty(ref _selectedWorkspace, value))
             {
                 RaiseWorkspacePropertiesChanged();
-            }
-        }
-    }
-
-    public int SelectedMainTabIndex
-    {
-        get => _selectedMainTabIndex;
-        set
-        {
-            var normalized = NormalizeMainTabIndex(value);
-            if (SetProperty(ref _selectedMainTabIndex, normalized))
-            {
-                var tabName = GetMainTabName(normalized);
-                if (!string.Equals(_currentTab, tabName, StringComparison.Ordinal))
-                {
-                    _currentTab = tabName;
-                    OnPropertyChanged(nameof(CurrentTab));
-                }
-
-                RaiseMainTabPropertiesChanged();
             }
         }
     }
@@ -184,28 +134,6 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         ? "One-off cleanup, reset, and recovery actions."
         : "Registry-backed settings and feature switches that remain in place until you change them.";
 
-    public string CurrentMainTabEyebrow => CurrentTab switch
-    {
-        "Policy Reference" => "Policy Reference",
-        _ => "Configuration"
-    };
-
-    public string CurrentMainTabTitle => CurrentTab switch
-    {
-        "Policy Reference" => "Windows Policy Reference",
-        _ => CurrentWorkspaceLabel
-    };
-
-    public string CurrentMainTabSubtitle => CurrentTab switch
-    {
-        "Policy Reference" => "See which parts of Windows and installed components are driven by policy paths.",
-        _ => CurrentWorkspaceDescription
-    };
-
-    public bool IsConfigurationTabSelected => SelectedMainTabIndex == 0;
-
-    public bool IsPolicyReferenceTabSelected => SelectedMainTabIndex == 1;
-
     public string WorkspaceCategoryHeader => IsMaintenanceWorkspaceSelected ? "Categories" : "Configuration Areas";
 
     public string AllItemsLabel => "All";
@@ -294,8 +222,6 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         OnPropertyChanged(nameof(InventorySummaryLabel));
         OnPropertyChanged(nameof(SelectedCategoryLabel));
         OnPropertyChanged(nameof(SelectedCategoryContext));
-        OnPropertyChanged(nameof(CurrentMainTabTitle));
-        OnPropertyChanged(nameof(CurrentMainTabSubtitle));
     }
 
     private void RaiseCategoryPropertiesChanged()
@@ -305,50 +231,4 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         OnPropertyChanged(nameof(CanClearCategorySelection));
         OnPropertyChanged(nameof(SelectedCategoryContext));
     }
-
-    private void RaiseMainTabPropertiesChanged()
-    {
-        OnPropertyChanged(nameof(CurrentMainTabEyebrow));
-        OnPropertyChanged(nameof(CurrentMainTabTitle));
-        OnPropertyChanged(nameof(CurrentMainTabSubtitle));
-        OnPropertyChanged(nameof(IsConfigurationTabSelected));
-        OnPropertyChanged(nameof(IsPolicyReferenceTabSelected));
-    }
-
-    private static string NormalizeMainTabName(string? value)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            return MainTabNames[0];
-        }
-
-        var match = MainTabNames.FirstOrDefault(tab => string.Equals(tab, value, StringComparison.OrdinalIgnoreCase));
-        return match ?? MainTabNames[0];
-    }
-
-    private static int NormalizeMainTabIndex(int value)
-    {
-        if (value < 0)
-        {
-            return 0;
-        }
-
-        return value >= MainTabNames.Length ? MainTabNames.Length - 1 : value;
-    }
-
-    private static int GetMainTabIndex(string? value)
-    {
-        var normalized = NormalizeMainTabName(value);
-        for (var i = 0; i < MainTabNames.Length; i++)
-        {
-            if (string.Equals(MainTabNames[i], normalized, StringComparison.Ordinal))
-            {
-                return i;
-            }
-        }
-
-        return 0;
-    }
-
-    private static string GetMainTabName(int index) => MainTabNames[NormalizeMainTabIndex(index)];
 }

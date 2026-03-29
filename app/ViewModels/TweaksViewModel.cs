@@ -97,26 +97,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     /// </summary>
     public DnsConfigurationViewModel DnsConfiguration { get; } = new();
     public WinConfigCatalogPanelViewModel WinConfigCatalog { get; }
-    public PolicyReferencePanelViewModel PolicyReference => _supportCoordinator.PolicyReference;
-
-    public RelayCommand SetTabCommand { get; }
-
-    public string CurrentTab
-    {
-        get => _shellState.CurrentTab;
-        set => _shellState.CurrentTab = value;
-    }
 
     public ConfigurationWorkspaceKind SelectedWorkspace
     {
         get => _shellState.SelectedWorkspace;
         set => _shellState.SelectedWorkspace = value;
-    }
-
-    public int SelectedMainTabIndex
-    {
-        get => _shellState.SelectedMainTabIndex;
-        set => _shellState.SelectedMainTabIndex = value;
     }
 
     public TweaksViewModel(
@@ -129,7 +114,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _presentationState.PropertyChanged += OnPresentationStatePropertyChanged;
         _browseCoordinator = new WorkspaceBrowseCoordinator(_shellState, _presentationState, _showContributorEvidenceUi);
         _configurationCoordinator = new ConfigurationWorkspaceCoordinator(this);
-        _supportCoordinator = new WorkspaceSupportCoordinator(_configurationCoordinator.OpenPolicyReferenceEntry);
+        _supportCoordinator = new WorkspaceSupportCoordinator();
         _supportCoordinator.PropertyChanged += OnSupportCoordinatorPropertyChanged;
         var paths = AppPaths.FromEnvironment();
         paths.EnsureDirectories();
@@ -237,18 +222,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ExportPresetCommand = new RelayCommand(async _ => await _operationsCoordinator.ExportPresetsAsync(Tweaks));
         ImportPresetCommand = new RelayCommand(async _ => await _operationsCoordinator.ImportPresetsAsync(Tweaks));
         CreateSnapshotCommand = new RelayCommand(_ => _operationsCoordinator.CreateSnapshot());
-        SetTabCommand = new RelayCommand(param =>
-        {
-            if (param is string tabName)
-                CurrentTab = tabName;
-        });
 
         _catalogCoordinator.LoadInitialTweaks(Tweaks);
         _inventoryCoordinator.LoadCachedInventoryState(Tweaks);
         _supportCoordinator.ApplyCatalogs(Tweaks);
         WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
         UpdateFilterSummary();
-        _supportCoordinator.Initialize(Tweaks);
+        _supportCoordinator.Initialize();
         RefreshSummaryStats();
         _ = _operationsCoordinator.InitializePresetsAsync();
 
@@ -355,15 +335,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string CurrentWorkspaceLabel => _shellState.CurrentWorkspaceLabel;
 
     public string CurrentWorkspaceDescription => _shellState.CurrentWorkspaceDescription;
-
-    public string CurrentMainTabEyebrow => _shellState.CurrentMainTabEyebrow;
-
-    public string CurrentMainTabTitle => _shellState.CurrentMainTabTitle;
-
-    public string CurrentMainTabSubtitle => _shellState.CurrentMainTabSubtitle;
-
-    public bool IsConfigurationTabSelected => _shellState.IsConfigurationTabSelected;
-    public bool IsPolicyReferenceTabSelected => _shellState.IsPolicyReferenceTabSelected;
 
     public string CurrentWorkspaceCountLabel => IsMaintenanceWorkspaceSelected
         ? $"{CurrentWorkspaceItemCount} repairs"
@@ -723,7 +694,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             RaiseHealthMetricsChanged();
             RefreshSummaryStats();
             _inventoryCoordinator.ScheduleSnapshotSave(Tweaks);
-            RefreshPolicyReferencePanel();
             if (HasStatusFilter)
             {
                 RefreshFilteredViews();
@@ -753,7 +723,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         RaiseHealthMetricsChanged();
         RaiseWorkspaceMetricsChanged();
         RefreshSummaryStats();
-        RefreshPolicyReferencePanel();
     }
 
     private void RaiseHealthMetricsChanged()
@@ -954,15 +923,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _inventoryCoordinator.UpdateStatusMessage(Tweaks);
     }
 
-    private void RefreshPolicyReferencePanel()
-    {
-        _supportCoordinator.RefreshPolicyReferencePanel(Tweaks);
-    }
-
     internal void FocusMaintenanceWorkspace(string categoryName)
     {
-        SelectedMainTabIndex = 0;
-        CurrentTab = "Configuration";
         SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance;
         SelectedCategoryName = categoryName;
         StatusFilter = string.Empty;

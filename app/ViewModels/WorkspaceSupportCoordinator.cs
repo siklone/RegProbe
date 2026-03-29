@@ -20,13 +20,6 @@ public sealed class WorkspaceSupportCoordinator : ViewModelBase
     private readonly TweakProvenanceCatalogService _provenanceCatalogService = new();
     private readonly TweakEvidenceClassCatalogService _evidenceClassCatalogService = new();
 
-    public WorkspaceSupportCoordinator(Action<PolicyReferenceEntry> openPolicyReferenceEntry)
-    {
-        PolicyReference = new PolicyReferencePanelViewModel(openPolicyReferenceEntry);
-    }
-
-    public PolicyReferencePanelViewModel PolicyReference { get; }
-
     public int DocsMissingCount
     {
         get => _docsMissingCount;
@@ -85,16 +78,10 @@ public sealed class WorkspaceSupportCoordinator : ViewModelBase
         _evidenceClassCatalogService.Apply(tweakList);
     }
 
-    public void Initialize(IEnumerable<TweakItemViewModel> tweaks)
+    public void Initialize()
     {
         LoadDocsCoverageReport();
         LoadProvenanceCoverageReport();
-        RefreshPolicyReferencePanel(tweaks);
-    }
-
-    public void RefreshPolicyReferencePanel(IEnumerable<TweakItemViewModel> tweaks)
-    {
-        PolicyReference.Refresh(tweaks ?? Enumerable.Empty<TweakItemViewModel>());
     }
 
     public void OpenDocsCoverageReport()
