@@ -16,8 +16,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 243 |
-| Class B | 3 |
-| Class C | 5 |
+| Class B | 4 |
+| Class C | 4 |
 | Class E | 54 |
 
 ## Record index
@@ -80,7 +80,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `b103dfb5b2b112ed75d28ef9daebeaf2bb8fd9e0d1e5bf8796dd3eb4e29ea013` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
 | `power.control.class1-initial-unpark-count` | draft | Class C | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `8839892238b6445bb644725484114c763d3dddd6b2b2660fef6f9fc5814ad87c` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 6 |
 | `power.control.hibernate-enabled` | draft | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `6c21df45712ef4b051c4ef9ccdf72ca465dcfbec51781ed1c79e8b0234de2a4f` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 5 |
-| `power.control.hibernate-enabled-default` | draft | Class C | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `82ae80e5c008348901cbcb43aba74778b28585e72714226f5589560e283ddb04` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 6 |
+| `power.control.hibernate-enabled-default` | draft | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `e4a43cf36d0469a04b74ffda95a33fa9eefd5e6265631d89e68d04bb579cca07` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 8 |
 | `power.control.lid-reliability-state` | draft | Class A | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `de78b98f5ddb7704eef29828abb84265225420b4785d1a85f15b179cc2dea257` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 5 |
 | `power.control.mf-buffering-threshold` | draft | Class C | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `b63989104436a1e6990858ef18bbffcab647d1d35c864c0adb5d91a862e3b983` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 6 |
 | `power.control.perf-calculate-actual-utilization` | draft | Class C | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `076df2d33cf9a8900b86f14eacd64ba0fea6da8a3e0b5cef047279a00adcdb29` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 6 |
@@ -1911,13 +1911,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.hibernate-enabled-default`
 
 - Status: `draft`
-- Evidence class: `Class C`
+- Evidence class: `Class B`
 - Source file: `research/records/power.control.hibernate-enabled-default.json`
 - V3.1 evidence root: [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default)
-- Source SHA256: `82ae80e5c008348901cbcb43aba74778b28585e72714226f5589560e283ddb04`
+- Source SHA256: `e4a43cf36d0469a04b74ffda95a33fa9eefd5e6265631d89e68d04bb579cca07`
 - Proof SHA256: `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916`
 
-**Summary:** Draft candidate package for HibernateEnabledDefault under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for HibernateEnabledDefault. A follow-up guest-processed post-boot Procmon trigger batch using powercfg, powercfg /energy, CPU stress, and profile-specific probes also completed shell-safe but still did not capture an exact runtime read for HibernateEnabledDefault.
+**Summary:** Draft candidate package for HibernateEnabledDefault under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for HibernateEnabledDefault. A follow-up guest-processed post-boot Procmon trigger batch using powercfg, powercfg /energy, CPU stress, and profile-specific probes also completed shell-safe but still did not capture an exact runtime read for HibernateEnabledDefault. A later trigger-based ETW follow-up then confirmed the current VMware firmware does not support hibernation, so a real hibernation trigger could not be exercised on this baseline. The new guest-return ETW lane materialized the trace inside the guest and returned a compact summary without copy-back, but it still only reached an exact line without an exact query read.
 
 **Evidence**
 
@@ -1929,6 +1929,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) |
+| `vm-power-control-trigger-etw-followup-20260329` | `etw-trace` | Trigger-based ETW follow-up for HibernateEnabledDefault | [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log) and [research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-follow-up-20260329.md) |
+| `vm-power-control-trigger-etw-guestvar-20260329` | `etw-trace` | Guest-return ETW trigger follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-trigger-etw-guestvar-20260329-233504/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-233504/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-guestvar-20260329-233504/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-233504/results.json) and [research/notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md) |
 
 **Validation proof**
 
@@ -1937,6 +1939,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md:154](../Docs/power/power.md:154) shows `HibernateEnabledDefault` with observed literal `1` in the repo power notes. |
 | Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for HibernateEnabledDefault. App surfacing is tracked separately from evidence classification. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | B |
+| Reason | current_blocker |
+| Priority | 1 |
+| New pipeline version | v3.1 |
 
 ---
 

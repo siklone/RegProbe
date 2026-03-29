@@ -1,3 +1,10 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "record_id": "power.control.hibernate-enabled-default",
+      "evidence_class": "B",
+      "reason_code": "vm_firmware_limitation",
+      "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline cannot exercise a real hibernation trigger (`vm_firmware_limitation`), so runtime promotion stays decision-gated."
+    }
+  ]
 }

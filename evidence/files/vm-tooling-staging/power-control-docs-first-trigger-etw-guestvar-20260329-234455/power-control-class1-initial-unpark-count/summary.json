@@ -1,0 +1,56 @@
+﻿{
+    "generated_utc":  "2026-03-29T20:57:39.8025035Z",
+    "candidate_id":  "power.control.class1-initial-unpark-count",
+    "value_name":  "Class1InitialUnparkCount",
+    "trigger_profile":  "processor-plan-toggle",
+    "snapshot_name":  "RegProbe-Baseline-Clean-20260329",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-29T20:50:55.7165047Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  false
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-29T20:57:34.7409095Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  false,
+                        "tools_state":  "not-running",
+                        "process_query_error":  null,
+                        "shell_healthy":  false,
+                        "checks":  {
+                                       "explorer":  false,
+                                       "sihost":  false,
+                                       "shellhost":  false,
+                                       "ctfmon":  false,
+                                       "app":  false
+                                   }
+                    },
+    "guest_invoke_error":  "vmrun failed (-1): Error: VMware Tools are not running in the guest",
+    "guestvar_returned":  false,
+    "status":  "no-guestvar",
+    "exact_query_hits":  0,
+    "exact_runtime_read":  false,
+    "guest_summary":  {
+                          "generated_utc":  "2026-03-29T20:57:39.7989966Z",
+                          "value_name":  "Class1InitialUnparkCount",
+                          "trigger_profile":  "processor-plan-toggle",
+                          "status":  "no-guestvar",
+                          "exact_runtime_read":  false,
+                          "exact_query_hits":  0,
+                          "errors":  [
+                                         "Guest summary was not returned through guestVar."
+                                     ]
+                      },
+    "artifacts":  {
+                      "summary":  "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-234455/power-control-class1-initial-unpark-count/summary.json"
+                  }
+}

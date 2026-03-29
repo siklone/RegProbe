@@ -2,14 +2,14 @@
   "$schema": "registry-evidence-v3.1/runtime-evidence",
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
       "operation": null,
       "timestamp": null,
       "boot_phase_included": true,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log and research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md"
     },
     "procmon": {
       "executed": true,
@@ -32,6 +32,8 @@
   "source_evidence_ids": [
     "vm-power-control-phase0-20260329",
     "vm-power-control-runtime-batch-20260329",
-    "vm-power-control-postboot-trigger-20260329"
+    "vm-power-control-postboot-trigger-20260329",
+    "vm-power-control-trigger-etw-followup-20260329",
+    "vm-power-control-trigger-etw-guestvar-20260329"
   ]
 }

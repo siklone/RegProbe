@@ -1,0 +1,63 @@
+﻿{
+    "generated_utc":  "2026-03-29T21:39:41.0997297Z",
+    "candidate_id":  "power.control.timer-rebase-threshold-on-drips-exit",
+    "value_name":  "TimerRebaseThresholdOnDripsExit",
+    "trigger_profile":  "drips-diagnostics",
+    "snapshot_name":  "RegProbe-Baseline-Clean-20260329",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-29T21:37:25.0190333Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  false
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-29T21:39:41.0272080Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  false
+                                   }
+                    },
+    "guest_invoke_error":  null,
+    "guestvar_returned":  true,
+    "status":  "exact-line-no-query",
+    "exact_query_hits":  0,
+    "exact_runtime_read":  false,
+    "guest_summary":  {
+                          "generated_utc":  "2026-03-29T21:37:37.4261138Z",
+                          "value_name":  "TimerRebaseThresholdOnDripsExit",
+                          "trigger_profile":  "drips-diagnostics",
+                          "status":  "exact-line-no-query",
+                          "etl_exists":  true,
+                          "csv_exists":  true,
+                          "etl_length":  12410880,
+                          "csv_line_count":  90731,
+                          "exact_runtime_read":  false,
+                          "exact_query_hits":  0,
+                          "exact_line_count":  1,
+                          "path_line_count":  0,
+                          "trigger_failure_count":  1,
+                          "errors":  [
+
+                                     ]
+                      },
+    "artifacts":  {
+                      "summary":  "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-234455/power-control-timer-rebase-threshold-on-drips-exit/summary.json"
+                  }
+}

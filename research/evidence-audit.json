@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-29T14:07:36.268207Z",
+  "generated_utc": "2026-03-29T21:44:38.841581Z",
   "summary": {
     "total_active_records": 251,
     "class_counts": {
       "A": 243,
-      "C": 5,
-      "B": 3
+      "C": 4,
+      "B": 4
     },
     "lane_counts": {
       "official-policy": 236,
@@ -16,11 +16,11 @@
     },
     "next_missing_layer_counts": {
       "none": 243,
-      "runtime-trace": 5,
-      "decision-gate": 2,
+      "runtime-trace": 4,
+      "decision-gate": 3,
       "incident-review": 1
     },
-    "re_audit_required_count": 4
+    "re_audit_required_count": 5
   },
   "entries": [
     {
@@ -3367,7 +3367,7 @@
     {
       "record_id": "power.control.hibernate-enabled-default",
       "tweak_id": "power.control.hibernate-enabled-default",
-      "evidence_class": "C",
+      "evidence_class": "B",
       "lane": "early-boot",
       "class_ready_basis": "pending",
       "official": false,
@@ -3375,37 +3375,40 @@
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": true,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "runtime-trace",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
         "static_ghidra",
+        "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
+        "etw",
         "procmon",
         "ghidra",
         "ghidra_no_function_fallback",
+        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",

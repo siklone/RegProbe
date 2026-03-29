@@ -1,0 +1,51 @@
+{
+  "generated_utc": "2026-03-29T21:45:00Z",
+  "vm": "Win25H2Clean",
+  "snapshot": "RegProbe-Baseline-Clean-20260329",
+  "lane": "power-control-docs-first-trigger-etw-guestvar-follow-up",
+  "tool": "registry-research-framework/tools/run-power-control-docs-first-trigger-etw-guestvar.ps1",
+  "transport": "guest-return-via-guestinfo",
+  "artifacts": {
+    "hibernate_single": "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-233504/summary.json",
+    "remaining_batch": "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-234455/summary.json",
+    "note": "research/notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md"
+  },
+  "results": [
+    {
+      "candidate_id": "power.control.hibernate-enabled-default",
+      "status": "exact-line-no-query",
+      "exact_runtime_read": false,
+      "exact_query_hits": 0,
+      "exact_line_count": 1,
+      "environment_limit": "vm_firmware_limitation"
+    },
+    {
+      "candidate_id": "power.control.class1-initial-unpark-count",
+      "status": "no-guestvar",
+      "exact_runtime_read": false,
+      "exact_query_hits": 0,
+      "environment_limit": "vmware_tools_drop"
+    },
+    {
+      "candidate_id": "power.control.mf-buffering-threshold",
+      "status": "exact-line-no-query",
+      "exact_runtime_read": false,
+      "exact_query_hits": 0,
+      "exact_line_count": 1
+    },
+    {
+      "candidate_id": "power.control.perf-calculate-actual-utilization",
+      "status": "no-guestvar",
+      "exact_runtime_read": false,
+      "exact_query_hits": 0,
+      "environment_limit": "vmware_tools_drop"
+    },
+    {
+      "candidate_id": "power.control.timer-rebase-threshold-on-drips-exit",
+      "status": "exact-line-no-query",
+      "exact_runtime_read": false,
+      "exact_query_hits": 0,
+      "exact_line_count": 1
+    }
+  ]
+}
