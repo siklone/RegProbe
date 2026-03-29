@@ -186,6 +186,19 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public TweakRiskLevel Risk => _tweak.Risk;
 
+    public bool IsAdvancedRisk => Risk == TweakRiskLevel.Advanced;
+
+    public bool IsRisky => Risk == TweakRiskLevel.Risky;
+
+    public string RepairsRiskHint => Risk switch
+    {
+        TweakRiskLevel.Advanced => "Deeper repair action. Use when the normal path is not enough.",
+        TweakRiskLevel.Risky => "High-consequence repair. Verify Windows behavior immediately after running it.",
+        _ => string.Empty
+    };
+
+    public bool HasRepairsRiskHint => !string.IsNullOrWhiteSpace(RepairsRiskHint);
+
     public bool RequiresElevation => _tweak.RequiresElevation;
 
     public bool IsElevated => _isElevated;

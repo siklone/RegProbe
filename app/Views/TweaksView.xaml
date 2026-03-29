@@ -222,6 +222,21 @@
             </Style.Triggers>
         </Style>
 
+        <Style x:Key="RepairsActionButtonStyle" TargetType="Button" BasedOn="{StaticResource ApplyButtonStyle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsAdvancedRisk}" Value="True">
+                    <Setter Property="Background" Value="#20170F"/>
+                    <Setter Property="BorderBrush" Value="#5A4020"/>
+                    <Setter Property="Foreground" Value="#E0AF63"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsRisky}" Value="True">
+                    <Setter Property="Background" Value="#261614"/>
+                    <Setter Property="BorderBrush" Value="#8E3A31"/>
+                    <Setter Property="Foreground" Value="#E7A096"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
         <Style x:Key="TweakListItemStyle" TargetType="ListBoxItem">
             <Setter Property="Template">
                 <Setter.Value>
@@ -353,6 +368,27 @@
                         <TextBlock Text="{Binding FriendlyDescription}" Margin="0,2,0,0" FontSize="11" Foreground="#8A8A8A" TextWrapping="Wrap" MaxWidth="820"/>
                         <TextBlock Text="{Binding ResearchGateMessage}" Margin="0,7,0,0" FontSize="10" Foreground="#33FFFFFF" TextWrapping="Wrap" Visibility="{Binding HasResearchGateMessage, Converter={StaticResource BoolToVisibility}}"/>
                         <TextBlock Text="{Binding RowMetaText}" Margin="0,10,0,0" FontSize="10" Foreground="#666666" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding RepairsRiskHint}"
+                                   Margin="0,6,0,0"
+                                   FontSize="10"
+                                   Foreground="#B78763"
+                                   TextWrapping="Wrap"
+                                   Visibility="{Binding DataContext.IsMaintenanceWorkspaceSelected, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding DataContext.IsMaintenanceWorkspaceSelected, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True"/>
+                                                <Condition Binding="{Binding HasRepairsRiskHint}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                         <TextBlock Text="{Binding BatchSummaryLine}" Margin="0,5,0,0" FontSize="10" Foreground="#5B5B5B" TextWrapping="Wrap" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
                     </StackPanel>
 
@@ -373,7 +409,7 @@
                         <Button Content="{Binding RepairsActionButtonText}"
                                 Command="{Binding ApplyCommand}"
                                 ToolTip="{Binding PrimaryActionTooltip}"
-                                Style="{StaticResource ApplyButtonStyle}"
+                                Style="{StaticResource RepairsActionButtonStyle}"
                                 MinWidth="86"
                                 Visibility="{Binding DataContext.IsMaintenanceWorkspaceSelected, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
                     </StackPanel>
