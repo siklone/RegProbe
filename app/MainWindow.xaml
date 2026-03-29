@@ -30,7 +30,7 @@
 
     <Window.InputBindings>
         <KeyBinding Key="D1" Modifiers="Control" Command="{Binding ShowConfigurationCommand}"/>
-        <KeyBinding Key="D2" Modifiers="Control" Command="{Binding ShowWorkspaceCommand}"/>
+        <KeyBinding Key="D2" Modifiers="Control" Command="{Binding ShowRepairsCommand}"/>
         <KeyBinding Key="OemComma" Modifiers="Control" Command="{Binding ShowSettingsCommand}"/>
         <KeyBinding Key="F1" Command="{Binding ShowAboutCommand}"/>
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
@@ -229,8 +229,8 @@
                             Margin="0,0,6,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="Repairs"
-                            Command="{Binding ShowWorkspaceCommand}"
-                            Tag="{Binding IsWorkspaceViewActive}"
+                            Command="{Binding ShowRepairsCommand}"
+                            Tag="{Binding IsRepairsViewActive}"
                             Margin="0,0,6,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="Settings"

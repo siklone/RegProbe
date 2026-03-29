@@ -21,6 +21,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private readonly IRollbackStateStore _rollbackStore;
     private readonly IBusyService _busyService = new BusyService();
     private readonly TweaksViewModel _workspaceViewModel;
+    private readonly ConfigurationShellViewModel _configurationViewModel;
+    private readonly RepairsShellViewModel _repairsViewModel;
     private readonly SettingsViewModel _settingsViewModel;
     private readonly AboutViewModel _aboutViewModel;
 
@@ -56,13 +58,15 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
         _workspaceViewModel = new TweaksViewModel(providers, _busyService);
         _workspaceViewModel.PropertyChanged += OnWorkspaceViewModelPropertyChanged;
+        _configurationViewModel = new ConfigurationShellViewModel(_workspaceViewModel);
+        _repairsViewModel = new RepairsShellViewModel(_workspaceViewModel);
         _settingsViewModel = new SettingsViewModel();
         _aboutViewModel = new AboutViewModel();
 
         _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
 
         ShowConfigurationCommand = new RelayCommand(_ => ShowConfiguration());
-        ShowWorkspaceCommand = new RelayCommand(_ => ShowWorkspace());
+        ShowRepairsCommand = new RelayCommand(_ => ShowRepairs());
         ShowSettingsCommand = new RelayCommand(_ => ShowSettings());
         ShowAboutCommand = new RelayCommand(_ => ShowAbout());
         FocusSearchCommand = new RelayCommand(_ => OnFocusSearchRequested());
@@ -93,7 +97,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public ICommand DismissPendingRollbacksCommand { get; }
 
-    public RelayCommand ShowWorkspaceCommand { get; }
+    public RelayCommand ShowRepairsCommand { get; }
 
     public RelayCommand ShowConfigurationCommand { get; }
 
@@ -118,7 +122,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
                 if (SetProperty(ref _currentViewModel, value))
                 {
                     OnPropertyChanged(nameof(IsConfigurationViewActive));
-                    OnPropertyChanged(nameof(IsWorkspaceViewActive));
+                    OnPropertyChanged(nameof(IsRepairsViewActive));
                     OnPropertyChanged(nameof(IsSettingsViewActive));
                     OnPropertyChanged(nameof(IsAboutViewActive));
                 }
@@ -134,13 +138,9 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         }
     }
 
-    public bool IsConfigurationViewActive =>
-        ReferenceEquals(CurrentViewModel, _workspaceViewModel) &&
-        _workspaceViewModel.SelectedWorkspace == ConfigurationWorkspaceKind.Settings;
+    public bool IsConfigurationViewActive => ReferenceEquals(CurrentViewModel, _configurationViewModel);
 
-    public bool IsWorkspaceViewActive =>
-        ReferenceEquals(CurrentViewModel, _workspaceViewModel) &&
-        _workspaceViewModel.SelectedWorkspace == ConfigurationWorkspaceKind.Maintenance;
+    public bool IsRepairsViewActive => ReferenceEquals(CurrentViewModel, _repairsViewModel);
 
     public bool IsSettingsViewActive => ReferenceEquals(CurrentViewModel, _settingsViewModel);
 
@@ -217,15 +217,15 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private void ShowConfiguration()
     {
         _workspaceViewModel.SelectedWorkspace = ConfigurationWorkspaceKind.Settings;
-        CurrentViewModel = _workspaceViewModel;
+        CurrentViewModel = _configurationViewModel;
         SyncSearchText();
         RaiseShellViewStateChanged();
     }
 
-    private void ShowWorkspace()
+    private void ShowRepairs()
     {
         _workspaceViewModel.SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance;
-        CurrentViewModel = _workspaceViewModel;
+        CurrentViewModel = _repairsViewModel;
         SyncSearchText();
         RaiseShellViewStateChanged();
     }
@@ -258,7 +258,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     private void OnWorkspaceViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (!ReferenceEquals(CurrentViewModel, _workspaceViewModel))
+        if (!ReferenceEquals(CurrentViewModel, _configurationViewModel) &&
+            !ReferenceEquals(CurrentViewModel, _repairsViewModel))
         {
             return;
         }
@@ -273,7 +274,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private void RaiseShellViewStateChanged()
     {
         OnPropertyChanged(nameof(IsConfigurationViewActive));
-        OnPropertyChanged(nameof(IsWorkspaceViewActive));
+        OnPropertyChanged(nameof(IsRepairsViewActive));
         OnPropertyChanged(nameof(IsSettingsViewActive));
         OnPropertyChanged(nameof(IsAboutViewActive));
     }

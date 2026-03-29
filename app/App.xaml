@@ -28,6 +28,12 @@
             </Style>
 
             <!-- View-ViewModel Mapping -->
+            <DataTemplate DataType="{x:Type viewModels:ConfigurationShellViewModel}">
+                <views:ConfigurationView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:RepairsShellViewModel}">
+                <views:RepairsView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:TweaksViewModel}">
                 <views:TweaksView />
             </DataTemplate>
