@@ -1,0 +1,151 @@
+﻿{
+    "generated_utc":  "2026-03-29T07:32:35.3755838Z",
+    "source_follow_up":  "registry-research-framework/audit/kernel-power-96-phase0-follow-up-20260329.json",
+    "source_summary":  "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/summary.json",
+    "source_results":  "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json",
+    "status":  "ready-for-candidate-packaging",
+    "total_candidates":  7,
+    "all_string_hits":  true,
+    "all_docs_exact_hits":  true,
+    "recommended_lane":  "candidate-package",
+    "candidates":  [
+                       {
+                           "candidate_id":  "power.control.class1-initial-unpark-count",
+                           "family":  "power-control",
+                           "value_name":  "Class1InitialUnparkCount",
+                           "string_hit":  true,
+                           "primary_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                           "docs_exact_hits":  [
+                                                   {
+                                                       "path":  "Docs/power/power.md",
+                                                       "line":  104
+                                                   },
+                                                   {
+                                                       "path":  "Docs/tweaks/tweak-provenance-overrides.json",
+                                                       "line":  539
+                                                   },
+                                                   {
+                                                       "path":  "Docs/tweaks/tweak-provenance-overrides.json",
+                                                       "line":  541
+                                                   },
+                                                   {
+                                                       "path":  "Docs/tweaks/tweak-provenance.json",
+                                                       "line":  4352
+                                                   },
+                                                   {
+                                                       "path":  "Docs/tweaks/tweak-provenance.json",
+                                                       "line":  4360
+                                                   },
+                                                   {
+                                                       "path":  "Docs/tweaks/tweak-provenance.md",
+                                                       "line":  124
+                                                   }
+                                               ],
+                           "docs_exact_hit_count":  6
+                       },
+                       {
+                           "candidate_id":  "power.control.hibernate-enabled",
+                           "family":  "power-control",
+                           "value_name":  "HibernateEnabled",
+                           "string_hit":  true,
+                           "primary_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                           "docs_exact_hits":  [
+                                                   {
+                                                       "path":  "Docs/power/power.md",
+                                                       "line":  154
+                                                   },
+                                                   {
+                                                       "path":  "Docs/power/power.md",
+                                                       "line":  367
+                                                   },
+                                                   {
+                                                       "path":  "Docs/power/power.md",
+                                                       "line":  378
+                                                   }
+                                               ],
+                           "docs_exact_hit_count":  3
+                       },
+                       {
+                           "candidate_id":  "power.control.hibernate-enabled-default",
+                           "family":  "power-control",
+                           "value_name":  "HibernateEnabledDefault",
+                           "string_hit":  true,
+                           "primary_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                           "docs_exact_hits":  [
+                                                   {
+                                                       "path":  "Docs/power/power.md",
+                                                       "line":  154
+                                                   },
+                                                   {
+                                                       "path":  "Docs/power/power.md",
+                                                       "line":  367
+                                                   }
+                                               ],
+                           "docs_exact_hit_count":  2
+                       },
+                       {
+                           "candidate_id":  "power.control.lid-reliability-state",
+                           "family":  "power-control",
+                           "value_name":  "LidReliabilityState",
+                           "string_hit":  true,
+                           "primary_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                           "docs_exact_hits":  [
+                                                   {
+                                                       "path":  "Docs/power/power.md",
+                                                       "line":  170
+                                                   }
+                                               ],
+                           "docs_exact_hit_count":  1
+                       },
+                       {
+                           "candidate_id":  "power.control.mf-buffering-threshold",
+                           "family":  "power-control",
+                           "value_name":  "MfBufferingThreshold",
+                           "string_hit":  true,
+                           "primary_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                           "docs_exact_hits":  [
+                                                   {
+                                                       "path":  "Docs/power/power.md",
+                                                       "line":  173
+                                                   }
+                                               ],
+                           "docs_exact_hit_count":  1
+                       },
+                       {
+                           "candidate_id":  "power.control.perf-calculate-actual-utilization",
+                           "family":  "power-control",
+                           "value_name":  "PerfCalculateActualUtilization",
+                           "string_hit":  true,
+                           "primary_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                           "docs_exact_hits":  [
+                                                   {
+                                                       "path":  "Docs/power/power.md",
+                                                       "line":  181
+                                                   },
+                                                   {
+                                                       "path":  "Docs/tweaks/tweak-provenance-overrides.json",
+                                                       "line":  633
+                                                   },
+                                                   {
+                                                       "path":  "Docs/tweaks/tweak-provenance.json",
+                                                       "line":  4879
+                                                   }
+                                               ],
+                           "docs_exact_hit_count":  3
+                       },
+                       {
+                           "candidate_id":  "power.control.timer-rebase-threshold-on-drips-exit",
+                           "family":  "power-control",
+                           "value_name":  "TimerRebaseThresholdOnDripsExit",
+                           "string_hit":  true,
+                           "primary_binary":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                           "docs_exact_hits":  [
+                                                   {
+                                                       "path":  "Docs/power/power.md",
+                                                       "line":  206
+                                                   }
+                                               ],
+                           "docs_exact_hit_count":  1
+                       }
+                   ]
+}

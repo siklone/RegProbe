@@ -1,0 +1,71 @@
+﻿{
+    "generated_utc":  "2026-03-29T07:23:06.2715417Z",
+    "source_follow_up":  "registry-research-framework/audit/kernel-power-96-phase0-follow-up-20260329.json",
+    "probe_kind":  "static-string-first",
+    "snapshot_name":  "RegProbe-Baseline-20260328",
+    "candidates":  [
+                       {
+                           "candidate_id":  "power.control.class1-initial-unpark-count",
+                           "needle":  "Class1InitialUnparkCount",
+                           "family":  "power-control",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.hibernate-enabled",
+                           "needle":  "HibernateEnabled",
+                           "family":  "power-control",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.hibernate-enabled-default",
+                           "needle":  "HibernateEnabledDefault",
+                           "family":  "power-control",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.lid-reliability-state",
+                           "needle":  "LidReliabilityState",
+                           "family":  "power-control",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.mf-buffering-threshold",
+                           "needle":  "MfBufferingThreshold",
+                           "family":  "power-control",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.perf-calculate-actual-utilization",
+                           "needle":  "PerfCalculateActualUtilization",
+                           "family":  "power-control",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.timer-rebase-threshold-on-drips-exit",
+                           "needle":  "TimerRebaseThresholdOnDripsExit",
+                           "family":  "power-control",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll"
+                                        ]
+                       }
+                   ]
+}
