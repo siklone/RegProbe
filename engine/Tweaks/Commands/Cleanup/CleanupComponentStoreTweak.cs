@@ -6,9 +6,11 @@ using RegProbe.Core.Commands;
 
 namespace RegProbe.Engine.Tweaks.Commands.Cleanup;
 
-public sealed class CleanupComponentStoreTweak : CommandTweak
+public sealed class CleanupComponentStoreTweak : CommandTweak, ITweakStepTimeouts
 {
     private const string System32DismExe = "dism.exe";
+    private static readonly TimeSpan AnalyzeTimeout = TimeSpan.FromMinutes(5);
+    private static readonly TimeSpan ApplyTimeout = TimeSpan.FromMinutes(20);
 
     public CleanupComponentStoreTweak(ICommandRunner commandRunner)
         : base(
@@ -43,18 +45,9 @@ public sealed class CleanupComponentStoreTweak : CommandTweak
 
     protected override bool ParseDetectedState(CommandResult result, out string state)
     {
-        var output = result.StandardOutput;
-        if (output.Contains("Component Store Cleanup Recommended", StringComparison.OrdinalIgnoreCase) &&
-            output.Contains("Yes", StringComparison.OrdinalIgnoreCase))
+        if (TryGetCleanupRecommendation(result.StandardOutput, out var cleanupRecommended))
         {
-            state = "Cleanup recommended";
-            return true;
-        }
-
-        if (output.Contains("Component Store Cleanup Recommended", StringComparison.OrdinalIgnoreCase) &&
-            output.Contains("No", StringComparison.OrdinalIgnoreCase))
-        {
-            state = "Cleanup not needed";
+            state = cleanupRecommended ? "Cleanup recommended" : "Cleanup not needed";
             return true;
         }
 
@@ -64,8 +57,50 @@ public sealed class CleanupComponentStoreTweak : CommandTweak
 
     protected override bool VerifyApplied(CommandResult result)
     {
-        var output = result.StandardOutput;
-        return output.Contains("Component Store Cleanup Recommended", StringComparison.OrdinalIgnoreCase) &&
-               output.Contains("No", StringComparison.OrdinalIgnoreCase);
+        return TryGetCleanupRecommendation(result.StandardOutput, out var cleanupRecommended)
+            && !cleanupRecommended;
+    }
+
+    public TimeSpan? GetStepTimeout(TweakAction action)
+    {
+        return action switch
+        {
+            TweakAction.Detect => AnalyzeTimeout,
+            TweakAction.Apply => ApplyTimeout,
+            TweakAction.Verify => AnalyzeTimeout,
+            _ => null
+        };
+    }
+
+    private static bool TryGetCleanupRecommendation(string output, out bool cleanupRecommended)
+    {
+        foreach (var rawLine in output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+        {
+            var line = rawLine.Trim();
+            if (!line.Contains("Component Store Cleanup Recommended", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var separatorIndex = line.LastIndexOf(':');
+            var value = separatorIndex >= 0
+                ? line[(separatorIndex + 1)..].Trim()
+                : string.Empty;
+
+            if (value.Equals("Yes", StringComparison.OrdinalIgnoreCase))
+            {
+                cleanupRecommended = true;
+                return true;
+            }
+
+            if (value.Equals("No", StringComparison.OrdinalIgnoreCase))
+            {
+                cleanupRecommended = false;
+                return true;
+            }
+        }
+
+        cleanupRecommended = false;
+        return false;
     }
 }

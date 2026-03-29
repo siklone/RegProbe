@@ -300,6 +300,19 @@ public sealed class CommandTweakTests
     }
 
     [Fact]
+    public void CleanupComponentStoreTweak_UsesLongRunningTimeouts_ForDismSteps()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        var tweak = new CleanupComponentStoreTweak(mockRunner.Object);
+        var timeoutProvider = Assert.IsAssignableFrom<ITweakStepTimeouts>(tweak);
+
+        Assert.Equal(TimeSpan.FromMinutes(5), timeoutProvider.GetStepTimeout(TweakAction.Detect));
+        Assert.Equal(TimeSpan.FromMinutes(20), timeoutProvider.GetStepTimeout(TweakAction.Apply));
+        Assert.Equal(TimeSpan.FromMinutes(5), timeoutProvider.GetStepTimeout(TweakAction.Verify));
+        Assert.Null(timeoutProvider.GetStepTimeout(TweakAction.Rollback));
+    }
+
+    [Fact]
     public async Task DisableReservedStorageTweak_DetectAsync_WhenEnabled_ReturnsDetectedStatus()
     {
         // Arrange
