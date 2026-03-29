@@ -136,7 +136,7 @@
     <Grid Background="#0D0D0D">
         <Grid.RowDefinitions>
             <RowDefinition Height="34"/>
-            <RowDefinition Height="44"/>
+            <RowDefinition Height="46"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -214,7 +214,7 @@
                 Background="#111111"
                 BorderBrush="#1A1A1A"
                 BorderThickness="0,0,0,1">
-            <Grid Margin="16,0">
+            <Grid Margin="20,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -222,7 +222,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock VerticalAlignment="Center"
-                           Margin="0,0,18,0"
+                           Margin="0,0,24,0"
                            Text="Views"
                            Foreground="#505050"
                            FontFamily="{DynamicResource FontFamilyDisplay}"
@@ -234,6 +234,7 @@
                     <Button Content="Configuration"
                             Command="{Binding ShowConfigurationCommand}"
                             Tag="{Binding IsConfigurationViewActive}"
+                            Margin="0,0,6,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="Workspace"
                             Command="{Binding ShowWorkspaceCommand}"
@@ -247,13 +248,14 @@
                     <Button Content="Settings"
                             Command="{Binding ShowSettingsCommand}"
                             Tag="{Binding IsSettingsViewActive}"
+                            Margin="0,0,6,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="About"
                             Command="{Binding ShowAboutCommand}"
                             Tag="{Binding IsAboutViewActive}"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <TextBlock Text="{Binding AppVersionLabel}"
-                               Margin="16,0,0,0"
+                               Margin="20,0,0,0"
                                VerticalAlignment="Center"
                                Foreground="#484848"
                                FontFamily="{DynamicResource FontFamilyMono}"

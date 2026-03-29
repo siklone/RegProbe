@@ -587,8 +587,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Workspace" : "Configuration";
 
     public string CurrentWorkspaceDescription => IsMaintenanceWorkspaceSelected
-        ? "Cleanup, repair, and recovery actions for the moments when Windows needs direct intervention."
-        : "Registry-backed settings and feature switches that stay in place until you deliberately change them.";
+        ? "Recovery, cleanup, and repair tasks for the moments when Windows needs direct intervention."
+        : "Registry-backed settings and feature switches that remain in place until you change them.";
 
     public string CurrentMainTabEyebrow => CurrentTab switch
     {
@@ -624,8 +624,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         : "Search settings, features, and switches...";
 
     public string WorkspaceStatusHint => IsMaintenanceWorkspaceSelected
-        ? "Use filters when you need a targeted repair path, a reset, or a one-off maintenance action."
-        : "Search by behavior, narrow to one area, or keep favorites close for the settings you revisit often.";
+        ? "Use filters for a targeted repair path, a reset, or a one-off maintenance action."
+        : "Search by behavior, narrow to one area, or keep favorites close for the settings you revisit most.";
 
     public string EmptyStateTitle => IsMaintenanceWorkspaceSelected
         ? "No workspace tasks match"
@@ -1444,7 +1444,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         var filterState = string.IsNullOrWhiteSpace(SearchText) && !ShowFavoritesOnly
             ? "live"
             : "filtered";
-        FilterSummary = $"{visible} of {total} {noun} shown / {scope} / {filterState}.";
+        FilterSummary = $"{visible} of {total} {noun} / {scope} / {filterState}.";
         _previewAllCommand.RaiseCanExecuteChanged();
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
