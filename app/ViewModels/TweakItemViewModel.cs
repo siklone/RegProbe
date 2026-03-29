@@ -25,7 +25,7 @@ namespace RegProbe.App.ViewModels;
 
 public sealed class TweakItemViewModel : ViewModelBase
 {
-    private const string PublicResearchGateExplanation = "This setting is still under evidence review and is not available as a one-click action yet.";
+    private const string PublicResearchGateExplanation = "Evidence pending";
     private static readonly SolidColorBrush AppliedStatusBrush = CreateFrozenBrush("#A3BE8C");
     private static readonly SolidColorBrush NotAppliedStatusBrush = CreateFrozenBrush("#EBCB8B");
     private static readonly SolidColorBrush MixedStatusBrush = CreateFrozenBrush("#D08770");
@@ -102,7 +102,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     private string _evidenceClassTitle = "Key Known, Value Semantics Unknown";
     private string _evidenceClassDescription = "The key exists, but value semantics are not trusted enough yet for an app-ready surface.";
     private string _evidenceClassActionState = "research-gated";
-    private string _evidenceClassGatingReason = "No derived evidence class is loaded for this tweak yet.";
+    private string _evidenceClassGatingReason = "Evidence pending";
     private bool _isEvidenceClassActionable;
     private bool _showInApp = true;
     private string _validatedSemanticsSummary = string.Empty;
@@ -847,7 +847,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         ? "Restore the previous value captured before Apply."
         : PublicEvidenceClassGatingReason;
 
-    public string ResearchGateMessage => IsEvidenceClassActionable ? string.Empty : PublicEvidenceClassGatingReason;
+    public string ResearchGateMessage => IsEvidenceClassActionable ? string.Empty : "Evidence pending";
 
     public bool HasResearchGateMessage => !string.IsNullOrWhiteSpace(ResearchGateMessage);
 
@@ -963,7 +963,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             : entry.ClassDescription;
         _evidenceClassActionState = string.IsNullOrWhiteSpace(entry.ActionState) ? "research-gated" : entry.ActionState;
         _evidenceClassGatingReason = string.IsNullOrWhiteSpace(entry.GatingReason)
-            ? "No derived evidence class is loaded for this tweak yet."
+            ? "Evidence pending"
             : entry.GatingReason;
         _isEvidenceClassActionable = entry.IsActionable;
         _showInApp = entry.ShowInApp;

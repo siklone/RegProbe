@@ -584,10 +584,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public bool IsMaintenanceWorkspaceSelected => SelectedWorkspace == ConfigurationWorkspaceKind.Maintenance;
 
-    public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Workspace" : "Configuration";
+    public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Repairs" : "Configuration";
 
     public string CurrentWorkspaceDescription => IsMaintenanceWorkspaceSelected
-        ? "Recovery, cleanup, and repair tasks for the moments when Windows needs direct intervention."
+        ? "One-off cleanup, reset, and recovery actions."
         : "Registry-backed settings and feature switches that remain in place until you change them.";
 
     public string CurrentMainTabEyebrow => CurrentTab switch
@@ -612,15 +612,15 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public bool IsPolicyReferenceTabSelected => SelectedMainTabIndex == 1;
 
     public string CurrentWorkspaceCountLabel => IsMaintenanceWorkspaceSelected
-        ? $"{CurrentWorkspaceItemCount} tasks"
+        ? $"{CurrentWorkspaceItemCount} repairs"
         : $"{CurrentWorkspaceItemCount} settings";
 
-    public string WorkspaceCategoryHeader => IsMaintenanceWorkspaceSelected ? "Task Groups" : "Configuration Areas";
+    public string WorkspaceCategoryHeader => IsMaintenanceWorkspaceSelected ? "Categories" : "Configuration Areas";
 
-    public string AllItemsLabel => "Everything";
+    public string AllItemsLabel => "All";
 
     public string SearchPlaceholder => IsMaintenanceWorkspaceSelected
-        ? "Search cleanup, repair, and recovery tasks..."
+        ? "Search cleanup, reset, and recovery actions..."
         : "Search settings, features, and switches...";
 
     public string WorkspaceStatusHint => IsMaintenanceWorkspaceSelected
@@ -628,11 +628,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         : "Search by behavior, narrow to one area, or keep favorites close for the settings you revisit most.";
 
     public string EmptyStateTitle => IsMaintenanceWorkspaceSelected
-        ? "No workspace tasks match"
+        ? "No repairs match"
         : "No settings match";
 
     public string EmptyStateDescription => IsMaintenanceWorkspaceSelected
-        ? "Try a broader search or switch back to Configuration."
+        ? "Try a broader search or choose another category."
         : "Try a simpler search or pick a different area.";
 
     public bool ShowDnsConfigurationPanel =>
@@ -1439,7 +1439,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     {
         var total = CurrentWorkspaceItemCount;
         var visible = TweaksView.Cast<object>().Count();
-        var noun = IsMaintenanceWorkspaceSelected ? "tasks" : "settings";
+        var noun = IsMaintenanceWorkspaceSelected ? "repairs" : "settings";
         var scope = IsAllCategoriesSelected ? "all areas" : SelectedCategoryLabel;
         var filterState = string.IsNullOrWhiteSpace(SearchText) && !ShowFavoritesOnly
             ? "live"
