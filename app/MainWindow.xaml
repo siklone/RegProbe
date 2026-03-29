@@ -223,7 +223,7 @@
 
                 <TextBlock VerticalAlignment="Center"
                            Margin="0,0,18,0"
-                           Text="Workspace shell"
+                           Text="Views"
                            Foreground="#505050"
                            FontFamily="{DynamicResource FontFamilyDisplay}"
                            FontSize="11"/>
@@ -253,7 +253,7 @@
                             Tag="{Binding IsAboutViewActive}"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <TextBlock Text="{Binding AppVersionLabel}"
-                               Margin="12,0,0,0"
+                               Margin="16,0,0,0"
                                VerticalAlignment="Center"
                                Foreground="#484848"
                                FontFamily="{DynamicResource FontFamilyMono}"

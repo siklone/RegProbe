@@ -246,6 +246,13 @@
             <Setter Property="Padding" Value="10,5"/>
         </Style>
 
+        <Style x:Key="ToolbarLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="#5E5E5E"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
+        </Style>
+
         <DataTemplate x:Key="TweakRowTemplate" DataType="{x:Type viewModels:TweakItemViewModel}">
             <Border BorderBrush="#191919" BorderThickness="0,0,0,0.5" Padding="0">
                 <Grid>
@@ -339,17 +346,9 @@
                             </Border>
                         </WrapPanel>
 
-                        <TextBlock Text="{Binding FriendlyDescription}" Margin="0,1,0,0" FontSize="11" Foreground="#8A8A8A" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding FriendlyDescription}" Margin="0,1,0,0" FontSize="11" Foreground="#8A8A8A" TextWrapping="Wrap" MaxWidth="760"/>
                         <TextBlock Text="{Binding ResearchGateMessage}" Margin="0,6,0,0" FontSize="10" Foreground="#A0726B" TextWrapping="Wrap" Visibility="{Binding HasResearchGateMessage, Converter={StaticResource BoolToVisibility}}"/>
-                        <TextBlock Margin="0,8,0,0" FontSize="10" Foreground="#666666" TextWrapping="Wrap">
-                            <Run Text="{Binding ImpactAreaLabel, Mode=OneWay}"/>
-                            <Run Text=" / "/>
-                            <Run Text="{Binding CurrentValue, Mode=OneWay}"/>
-                            <Run Text=" -> "/>
-                            <Run Text="{Binding TargetValue, Mode=OneWay}"/>
-                            <Run Text=" / "/>
-                            <Run Text="{Binding LastUpdatedText, Mode=OneWay}"/>
-                        </TextBlock>
+                        <TextBlock Text="{Binding RowMetaText}" Margin="0,8,0,0" FontSize="10" Foreground="#666666" TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding BatchSummaryLine}" Margin="0,4,0,0" FontSize="10" Foreground="#5B5B5B" TextWrapping="Wrap" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
                     </StackPanel>
 
@@ -466,7 +465,7 @@
                     <StackPanel Grid.Column="1" HorizontalAlignment="Right">
                         <TextBlock Text="Selection" Margin="0,0,0,8" HorizontalAlignment="Right" Style="{StaticResource SectionEyebrowStyle}"/>
                         <WrapPanel HorizontalAlignment="Right">
-                            <Button Content="Select" Command="{Binding SelectAllCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
+                            <Button Content="Select all" Command="{Binding SelectAllCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
                             <Button Content="Clear" Command="{Binding DeselectAllCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
                             <Button Content="Refresh" Command="{Binding DetectSelectedCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
                             <Button Content="Apply" Command="{Binding ApplySelectedCommand}" Style="{StaticResource FlatButtonStyle}" Margin="0,0,8,8"/>
@@ -482,8 +481,14 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="{Binding FilterSummary}" FontSize="11" Foreground="#5C5C5C"/>
-                    <TextBlock Grid.Column="1" Text="{Binding InventoryStatusMessage}" FontSize="11" Foreground="#5C5C5C" TextAlignment="Right"/>
+                    <StackPanel>
+                        <TextBlock Text="View state" Style="{StaticResource ToolbarLabelStyle}"/>
+                        <TextBlock Text="{Binding FilterSummary}" Margin="0,4,0,0" FontSize="11" Foreground="#6A6A6A"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                        <TextBlock Text="Inventory" HorizontalAlignment="Right" Style="{StaticResource ToolbarLabelStyle}"/>
+                        <TextBlock Text="{Binding InventoryStatusMessage}" Margin="0,4,0,0" FontSize="11" Foreground="#6A6A6A" TextAlignment="Right"/>
+                    </StackPanel>
                 </Grid>
             </Border>
 

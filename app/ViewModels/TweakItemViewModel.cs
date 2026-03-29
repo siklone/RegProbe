@@ -749,6 +749,30 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
+    public string RowMetaText
+    {
+        get
+        {
+            var segments = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(ImpactAreaLabel))
+            {
+                segments.Add(ImpactAreaLabel);
+            }
+
+            if (!string.IsNullOrWhiteSpace(CurrentValue) || !string.IsNullOrWhiteSpace(TargetValue))
+            {
+                var current = string.IsNullOrWhiteSpace(CurrentValue) ? "Unknown" : CurrentValue;
+                var target = string.IsNullOrWhiteSpace(TargetValue) ? "Optimized" : TargetValue;
+                segments.Add($"{current} -> {target}");
+            }
+
+            segments.Add(HasDetectedState ? InventoryFreshnessText : LastUpdatedText);
+
+            return string.Join(" / ", segments.Where(segment => !string.IsNullOrWhiteSpace(segment)));
+        }
+    }
+
     public bool IsRecommended
     {
         get => _isRecommended;

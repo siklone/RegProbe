@@ -85,7 +85,7 @@
                            Foreground="#FFFFFF"/>
                 <TextBlock Margin="0,6,0,0"
                            Style="{StaticResource SectionBodyTextStyle}"
-                           Text="A focused Windows configuration shell with reversible changes, logging, and a cleaner day-to-day workspace."/>
+                           Text="A focused Windows configuration shell with reversible changes, clean logging, and a calmer day-to-day workspace."/>
             </StackPanel>
 
             <Border Grid.Row="1"
@@ -207,7 +207,7 @@
                                Style="{StaticResource SectionTitleTextStyle}"/>
                     <TextBlock Margin="0,6,0,10"
                                Style="{StaticResource SectionBodyTextStyle}"
-                               Text="Open the project repository for source, issue context, and implementation history."/>
+                               Text="Open the canonical repository for source, release history, and implementation context."/>
                     <Button Content="{Binding RepositoryUrl}"
                             Command="{Binding OpenUrlCommand}"
                             CommandParameter="{Binding RepositoryUrl}"
@@ -228,7 +228,7 @@
                                Style="{StaticResource SectionTitleTextStyle}"/>
                     <TextBlock Margin="0,6,0,10"
                                Style="{StaticResource SectionBodyTextStyle}"
-                               Text="Open the local tweak log if you need to inspect recent commands, detections, or failures."/>
+                               Text="Open the local tweak log when you need recent commands, detections, or failure details."/>
                     <Button Content="Open tweak log"
                             Command="{Binding OpenLogFileCommand}"
                             Style="{StaticResource InlineLinkButtonStyle}"/>

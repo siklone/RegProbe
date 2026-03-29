@@ -1440,7 +1440,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         var total = CurrentWorkspaceItemCount;
         var visible = TweaksView.Cast<object>().Count();
         var noun = IsMaintenanceWorkspaceSelected ? "tasks" : "settings";
-        FilterSummary = $"Showing {visible} of {total} {noun}.";
+        var scope = IsAllCategoriesSelected ? "all areas" : SelectedCategoryLabel;
+        var filterState = string.IsNullOrWhiteSpace(SearchText) && !ShowFavoritesOnly
+            ? "live"
+            : "filtered";
+        FilterSummary = $"{visible} of {total} {noun} shown / {scope} / {filterState}.";
         _previewAllCommand.RaiseCanExecuteChanged();
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
@@ -1550,7 +1554,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             OnPropertyChanged(nameof(SelectedCategoryLabel));
             OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
             TweaksView.Refresh();
-            FilterSummary = $"Showing {TweaksView.Cast<object>().Count()} of {CurrentWorkspaceItemCount} {(IsMaintenanceWorkspaceSelected ? "tasks" : "settings")}.";
+            UpdateFilterSummary(rebuildCategoryGroups: false);
         }
     }
 
