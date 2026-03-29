@@ -92,26 +92,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private int _bulkProgressCurrent;
     private int _bulkProgressTotal;
     private int _selectedCount;
-    private string _searchText = string.Empty;
-    private string _statusFilter = string.Empty; // "applied", "rolledback", or empty for all
-    private bool _showSafe = true;
-    private bool _showAdvanced = true;
-    private bool _showRisky = true;
-    private bool _showFavoritesOnly = false;
-    private bool _showClassA = true;
-    private bool _showClassB = true;
-    private bool _showClassC = true;
-    private bool _showClassD = true;
-    private string _selectedCategoryName = string.Empty;
-    private ConfigurationWorkspaceKind _selectedWorkspace = ConfigurationWorkspaceKind.Settings;
-    private int _selectedMainTabIndex;
-    private static readonly string[] MainTabNames =
-    [
-        "Configuration",
-        "Policy Reference"
-    ];
+    private readonly TweaksShellStateViewModel _shellState = new();
     private bool _hasVisibleTweaks;
-    private bool _isFlatView;
     private readonly bool _showContributorEvidenceUi = ContributorMode.IsEnabled;
     private readonly IFavoritesStore _favoritesStore;
     private readonly ITweakInventoryStateStore _inventoryStateStore;
@@ -153,67 +135,24 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public WinConfigCatalogPanelViewModel WinConfigCatalog { get; }
     public PolicyReferencePanelViewModel PolicyReference { get; }
 
-    private string _currentTab = "Configuration";
+    public RelayCommand SetTabCommand { get; }
+
     public string CurrentTab
     {
-        get => _currentTab;
-        set
-        {
-            var normalized = NormalizeMainTabName(value);
-            if (SetProperty(ref _currentTab, normalized))
-            {
-                var tabIndex = GetMainTabIndex(normalized);
-                if (_selectedMainTabIndex != tabIndex)
-                {
-                    _selectedMainTabIndex = tabIndex;
-                    OnPropertyChanged(nameof(SelectedMainTabIndex));
-                }
-
-                RaiseMainTabPropertiesChanged();
-            }
-        }
+        get => _shellState.CurrentTab;
+        set => _shellState.CurrentTab = value;
     }
 
     public ConfigurationWorkspaceKind SelectedWorkspace
     {
-        get => _selectedWorkspace;
-        set
-        {
-            if (SetProperty(ref _selectedWorkspace, value))
-            {
-                RaiseWorkspacePropertiesChanged();
-
-                if (!string.IsNullOrWhiteSpace(_selectedCategoryName) && !CurrentWorkspaceContainsCategory(_selectedCategoryName))
-                {
-                    SelectedCategoryName = string.Empty;
-                }
-
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.SelectedWorkspace;
+        set => _shellState.SelectedWorkspace = value;
     }
-
-    public RelayCommand SetTabCommand { get; }
 
     public int SelectedMainTabIndex
     {
-        get => _selectedMainTabIndex;
-        set
-        {
-            var normalized = NormalizeMainTabIndex(value);
-            if (SetProperty(ref _selectedMainTabIndex, normalized))
-            {
-                var tabName = GetMainTabName(normalized);
-                if (!string.Equals(_currentTab, tabName, StringComparison.Ordinal))
-                {
-                    _currentTab = tabName;
-                    OnPropertyChanged(nameof(CurrentTab));
-                }
-
-                RaiseMainTabPropertiesChanged();
-            }
-        }
+        get => _shellState.SelectedMainTabIndex;
+        set => _shellState.SelectedMainTabIndex = value;
     }
 
     public TweaksViewModel(
@@ -222,6 +161,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     {
         _busyService = busyService ?? throw new ArgumentNullException(nameof(busyService));
         _providerList = providers;
+        _shellState.PropertyChanged += OnShellStatePropertyChanged;
         var paths = AppPaths.FromEnvironment();
         paths.EnsureDirectories();
         _appLogger = new FileAppLogger(paths);
@@ -580,88 +520,56 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ? MaintenanceWorkspaceCount
         : SettingsWorkspaceCount;
 
-    public bool IsSettingsWorkspaceSelected => SelectedWorkspace == ConfigurationWorkspaceKind.Settings;
+    public bool IsSettingsWorkspaceSelected => _shellState.IsSettingsWorkspaceSelected;
 
-    public bool IsMaintenanceWorkspaceSelected => SelectedWorkspace == ConfigurationWorkspaceKind.Maintenance;
+    public bool IsMaintenanceWorkspaceSelected => _shellState.IsMaintenanceWorkspaceSelected;
 
-    public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Repairs" : "Configuration";
+    public string CurrentWorkspaceLabel => _shellState.CurrentWorkspaceLabel;
 
-    public string CurrentWorkspaceDescription => IsMaintenanceWorkspaceSelected
-        ? "One-off cleanup, reset, and recovery actions."
-        : "Registry-backed settings and feature switches that remain in place until you change them.";
+    public string CurrentWorkspaceDescription => _shellState.CurrentWorkspaceDescription;
 
-    public string CurrentMainTabEyebrow => CurrentTab switch
-    {
-        "Policy Reference" => "Policy Reference",
-        _ => "Configuration"
-    };
+    public string CurrentMainTabEyebrow => _shellState.CurrentMainTabEyebrow;
 
-    public string CurrentMainTabTitle => CurrentTab switch
-    {
-        "Policy Reference" => "Windows Policy Reference",
-        _ => CurrentWorkspaceLabel
-    };
+    public string CurrentMainTabTitle => _shellState.CurrentMainTabTitle;
 
-    public string CurrentMainTabSubtitle => CurrentTab switch
-    {
-        "Policy Reference" => "See which parts of Windows and installed components are driven by policy paths.",
-        _ => CurrentWorkspaceDescription
-    };
+    public string CurrentMainTabSubtitle => _shellState.CurrentMainTabSubtitle;
 
-    public bool IsConfigurationTabSelected => SelectedMainTabIndex == 0;
-    public bool IsPolicyReferenceTabSelected => SelectedMainTabIndex == 1;
+    public bool IsConfigurationTabSelected => _shellState.IsConfigurationTabSelected;
+    public bool IsPolicyReferenceTabSelected => _shellState.IsPolicyReferenceTabSelected;
 
     public string CurrentWorkspaceCountLabel => IsMaintenanceWorkspaceSelected
         ? $"{CurrentWorkspaceItemCount} repairs"
         : $"{CurrentWorkspaceItemCount} settings";
 
-    public string WorkspaceCategoryHeader => IsMaintenanceWorkspaceSelected ? "Categories" : "Configuration Areas";
+    public string WorkspaceCategoryHeader => _shellState.WorkspaceCategoryHeader;
 
-    public string AllItemsLabel => "All";
+    public string AllItemsLabel => _shellState.AllItemsLabel;
 
-    public string SearchPlaceholder => IsMaintenanceWorkspaceSelected
-        ? "Search cleanup, reset, and recovery actions..."
-        : "Search settings, features, and switches...";
+    public string SearchPlaceholder => _shellState.SearchPlaceholder;
 
-    public string ToolbarSectionLabel => IsMaintenanceWorkspaceSelected ? "Repair filters" : "Configuration filters";
+    public string ToolbarSectionLabel => _shellState.ToolbarSectionLabel;
 
-    public string ToolbarSectionHint => IsMaintenanceWorkspaceSelected
-        ? "Surface one-off cleanup and recovery actions fast."
-        : "Narrow the list to the settings you actively manage.";
+    public string ToolbarSectionHint => _shellState.ToolbarSectionHint;
 
-    public string CurrentWorkspaceModeNote => IsMaintenanceWorkspaceSelected
-        ? "Run these when Windows needs intervention, then get out of the way."
-        : "These settings stay in place until you choose a different default.";
+    public string CurrentWorkspaceModeNote => _shellState.CurrentWorkspaceModeNote;
 
-    public string WorkspaceStatusHint => IsMaintenanceWorkspaceSelected
-        ? "Use filters for a targeted repair path, a reset, or a one-off maintenance action."
-        : "Search by behavior, narrow to one area, or keep favorites close for the settings you revisit most.";
+    public string WorkspaceStatusHint => _shellState.WorkspaceStatusHint;
 
-    public string EmptyStateTitle => IsMaintenanceWorkspaceSelected
-        ? "No repairs match"
-        : "No settings match";
+    public string EmptyStateTitle => _shellState.EmptyStateTitle;
 
-    public string EmptyStateDescription => IsMaintenanceWorkspaceSelected
-        ? "Try a broader search or choose another category."
-        : "Try a simpler search or pick a different area.";
+    public string EmptyStateDescription => _shellState.EmptyStateDescription;
 
-    public string EmptyStateActionText => IsMaintenanceWorkspaceSelected
-        ? "Show all repairs"
-        : "Show all settings";
+    public string EmptyStateActionText => _shellState.EmptyStateActionText;
 
-    public bool CanClearCategorySelection => !IsAllCategoriesSelected;
+    public bool CanClearCategorySelection => _shellState.CanClearCategorySelection;
 
-    public string ClearCategorySelectionText => IsMaintenanceWorkspaceSelected
-        ? "Browse all repair categories"
-        : "Browse all areas";
+    public string ClearCategorySelectionText => _shellState.ClearCategorySelectionText;
 
-    public string FilterSummaryLabel => IsMaintenanceWorkspaceSelected ? "Repair scope" : "Configuration scope";
+    public string FilterSummaryLabel => _shellState.FilterSummaryLabel;
 
-    public string InventorySummaryLabel => IsMaintenanceWorkspaceSelected ? "Repair status" : "Configuration status";
+    public string InventorySummaryLabel => _shellState.InventorySummaryLabel;
 
-    public string SelectedCategoryContext => IsAllCategoriesSelected
-        ? (IsMaintenanceWorkspaceSelected ? "Browsing all repair categories" : "Browsing all configuration areas")
-        : (IsMaintenanceWorkspaceSelected ? $"{SelectedCategoryLabel} repair category" : $"{SelectedCategoryLabel} area");
+    public string SelectedCategoryContext => _shellState.SelectedCategoryContext;
 
     public bool ShowDnsConfigurationPanel =>
         IsSettingsWorkspaceSelected &&
@@ -872,51 +780,25 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public bool IsFlatView
     {
-        get => _isFlatView;
-        set
-        {
-            if (SetProperty(ref _isFlatView, value))
-            {
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.IsFlatView;
+        set => _shellState.IsFlatView = value;
     }
 
     public string SearchText
     {
-        get => _searchText;
-        set
-        {
-            if (SetProperty(ref _searchText, value))
-            {
-                TriggerSearchUpdate();
-            }
-        }
+        get => _shellState.SearchText;
+        set => _shellState.SearchText = value;
     }
 
     public string StatusFilter
     {
-        get => _statusFilter;
-        set
-        {
-            if (SetProperty(ref _statusFilter, value))
-            {
-                OnPropertyChanged(nameof(StatusFilterLabel));
-                OnPropertyChanged(nameof(HasStatusFilter));
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.StatusFilter;
+        set => _shellState.StatusFilter = value;
     }
 
-    public string StatusFilterLabel => _statusFilter switch
-    {
-        "applied" => "Applied Settings",
-        "rolledback" => "Rolled Back Settings",
-        _ => ""
-    };
+    public string StatusFilterLabel => _shellState.StatusFilterLabel;
 
-    public bool HasStatusFilter => !string.IsNullOrEmpty(_statusFilter);
+    public bool HasStatusFilter => _shellState.HasStatusFilter;
 
     private void TriggerSearchUpdate()
     {
@@ -939,130 +821,63 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public bool ShowSafe
     {
-        get => _showSafe;
-        set
-        {
-            if (SetProperty(ref _showSafe, value))
-            {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.ShowSafe;
+        set => _shellState.ShowSafe = value;
     }
 
     public bool ShowAdvanced
     {
-        get => _showAdvanced;
-        set
-        {
-            if (SetProperty(ref _showAdvanced, value))
-            {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.ShowAdvanced;
+        set => _shellState.ShowAdvanced = value;
     }
 
     public bool ShowRisky
     {
-        get => _showRisky;
-        set
-        {
-            if (SetProperty(ref _showRisky, value))
-            {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.ShowRisky;
+        set => _shellState.ShowRisky = value;
     }
 
     public bool ShowFavoritesOnly
     {
-        get => _showFavoritesOnly;
-        set
-        {
-            if (SetProperty(ref _showFavoritesOnly, value))
-            {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.ShowFavoritesOnly;
+        set => _shellState.ShowFavoritesOnly = value;
     }
 
     public bool ShowContributorEvidenceUi => _showContributorEvidenceUi;
 
     public bool ShowClassA
     {
-        get => _showClassA;
-        set
-        {
-            if (SetProperty(ref _showClassA, value))
-            {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.ShowClassA;
+        set => _shellState.ShowClassA = value;
     }
 
     public bool ShowClassB
     {
-        get => _showClassB;
-        set
-        {
-            if (SetProperty(ref _showClassB, value))
-            {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.ShowClassB;
+        set => _shellState.ShowClassB = value;
     }
 
     public bool ShowClassC
     {
-        get => _showClassC;
-        set
-        {
-            if (SetProperty(ref _showClassC, value))
-            {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.ShowClassC;
+        set => _shellState.ShowClassC = value;
     }
 
     public bool ShowClassD
     {
-        get => _showClassD;
-        set
-        {
-            if (SetProperty(ref _showClassD, value))
-            {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
+        get => _shellState.ShowClassD;
+        set => _shellState.ShowClassD = value;
     }
 
     public string SelectedCategoryName
     {
-        get => _selectedCategoryName;
-        set
-        {
-            if (SetProperty(ref _selectedCategoryName, value))
-            {
-                OnPropertyChanged(nameof(IsAllCategoriesSelected));
-                OnPropertyChanged(nameof(SelectedCategoryLabel));
-                OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
-                TweaksView.Refresh();
-                // Keep sidebar scroll/selection stable when only switching category.
-                UpdateFilterSummary(rebuildCategoryGroups: false);
-            }
-        }
+        get => _shellState.SelectedCategoryName;
+        set => _shellState.SelectedCategoryName = value;
     }
 
-    public bool IsAllCategoriesSelected => string.IsNullOrWhiteSpace(_selectedCategoryName);
+    public bool IsAllCategoriesSelected => _shellState.IsAllCategoriesSelected;
 
-    public string SelectedCategoryLabel => IsAllCategoriesSelected ? AllItemsLabel : _selectedCategoryName;
+    public string SelectedCategoryLabel => _shellState.SelectedCategoryLabel;
 
     public int FavoritesCount => Tweaks.Count(t => t.IsFavorite);
 
@@ -1264,7 +1079,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             RefreshSummaryStats();
             ScheduleInventorySnapshotSave();
             RefreshPolicyReferencePanel();
-            if (!string.IsNullOrEmpty(_statusFilter))
+            if (HasStatusFilter)
             {
                 TweaksView.Refresh();
                 UpdateFilterSummary();
@@ -1287,7 +1102,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(FavoritesCount));
 
         // Refresh view if showing favorites only
-        if (_showFavoritesOnly)
+        if (ShowFavoritesOnly)
         {
             TweaksView.Refresh();
             UpdateFilterSummary();
@@ -1317,7 +1132,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
         UpdateSelectionCount();
         RaiseHealthMetricsChanged();
-        RaiseWorkspacePropertiesChanged();
+        RaiseWorkspaceMetricsChanged();
         RefreshSummaryStats();
         RefreshPolicyReferencePanel();
     }
@@ -1384,80 +1199,80 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
         if (includeCategoryFilter && !IsAllCategoriesSelected)
         {
-            if (!string.Equals(item.Category, _selectedCategoryName, StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(item.Category, SelectedCategoryName, StringComparison.OrdinalIgnoreCase))
             {
                 return false;
             }
         }
 
         // Status filter (applied/rolled back)
-        if (!string.IsNullOrEmpty(_statusFilter))
+        if (!string.IsNullOrEmpty(StatusFilter))
         {
-            if (_statusFilter == "applied" && !item.IsApplied)
+            if (StatusFilter == "applied" && !item.IsApplied)
             {
                 return false;
             }
-            if (_statusFilter == "rolledback" && !item.WasRolledBack)
+            if (StatusFilter == "rolledback" && !item.WasRolledBack)
             {
                 return false;
             }
         }
 
         // Favorites filter
-        if (_showFavoritesOnly && !item.IsFavorite)
+        if (ShowFavoritesOnly && !item.IsFavorite)
         {
             return false;
         }
 
-        if (item.Risk == TweakRiskLevel.Safe && !_showSafe)
+        if (item.Risk == TweakRiskLevel.Safe && !ShowSafe)
         {
             return false;
         }
 
-        if (item.Risk == TweakRiskLevel.Advanced && !_showAdvanced)
+        if (item.Risk == TweakRiskLevel.Advanced && !ShowAdvanced)
         {
             return false;
         }
 
-        if (item.Risk == TweakRiskLevel.Risky && !_showRisky)
+        if (item.Risk == TweakRiskLevel.Risky && !ShowRisky)
         {
             return false;
         }
 
         if (_showContributorEvidenceUi)
         {
-            if (item.EvidenceClassId == "A" && !_showClassA)
+            if (item.EvidenceClassId == "A" && !ShowClassA)
             {
                 return false;
             }
 
-            if (item.EvidenceClassId == "B" && !_showClassB)
+            if (item.EvidenceClassId == "B" && !ShowClassB)
             {
                 return false;
             }
 
-            if (item.EvidenceClassId == "C" && !_showClassC)
+            if (item.EvidenceClassId == "C" && !ShowClassC)
             {
                 return false;
             }
 
-            if (item.EvidenceClassId == "D" && !_showClassD)
+            if (item.EvidenceClassId == "D" && !ShowClassD)
             {
                 return false;
             }
         }
 
-        if (string.IsNullOrWhiteSpace(_searchText))
+        if (string.IsNullOrWhiteSpace(SearchText))
         {
             item.IsHighlighted = false;
             return true;
         }
 
-        bool matches = item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
-            || item.Description.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
-            || item.Id.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
-            || item.RegistryPath.Contains(_searchText, StringComparison.OrdinalIgnoreCase)
-            || item.Risk.ToString().Contains(_searchText, StringComparison.OrdinalIgnoreCase);
+        bool matches = item.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+            || item.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+            || item.Id.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+            || item.RegistryPath.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+            || item.Risk.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
 
         item.IsHighlighted = matches;
         return matches;
@@ -1573,16 +1388,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             CategoryGroups.Add(g);
         }
 
-        if (!string.IsNullOrWhiteSpace(_selectedCategoryName)
-            && !CategoryGroups.Any(g => string.Equals(g.CategoryName, _selectedCategoryName, StringComparison.OrdinalIgnoreCase)))
+        if (!string.IsNullOrWhiteSpace(SelectedCategoryName)
+            && !CategoryGroups.Any(g => string.Equals(g.CategoryName, SelectedCategoryName, StringComparison.OrdinalIgnoreCase)))
         {
-            _selectedCategoryName = string.Empty;
-            OnPropertyChanged(nameof(SelectedCategoryName));
-            OnPropertyChanged(nameof(IsAllCategoriesSelected));
-            OnPropertyChanged(nameof(SelectedCategoryLabel));
-            OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
-            TweaksView.Refresh();
-            UpdateFilterSummary(rebuildCategoryGroups: false);
+            SelectedCategoryName = string.Empty;
         }
     }
 
@@ -1595,82 +1404,60 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             GetWorkspaceKind(t) == SelectedWorkspace &&
             string.Equals(t.Category, categoryName, StringComparison.OrdinalIgnoreCase));
 
-    private void RaiseWorkspacePropertiesChanged()
+    private void OnShellStatePropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(e.PropertyName))
+        {
+            return;
+        }
+
+        OnPropertyChanged(e.PropertyName);
+
+        switch (e.PropertyName)
+        {
+            case nameof(TweaksShellStateViewModel.SearchText):
+                TriggerSearchUpdate();
+                break;
+            case nameof(TweaksShellStateViewModel.StatusFilter):
+            case nameof(TweaksShellStateViewModel.ShowSafe):
+            case nameof(TweaksShellStateViewModel.ShowAdvanced):
+            case nameof(TweaksShellStateViewModel.ShowRisky):
+            case nameof(TweaksShellStateViewModel.ShowFavoritesOnly):
+            case nameof(TweaksShellStateViewModel.ShowClassA):
+            case nameof(TweaksShellStateViewModel.ShowClassB):
+            case nameof(TweaksShellStateViewModel.ShowClassC):
+            case nameof(TweaksShellStateViewModel.ShowClassD):
+            case nameof(TweaksShellStateViewModel.IsFlatView):
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+                break;
+            case nameof(TweaksShellStateViewModel.SelectedCategoryName):
+                OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
+                TweaksView.Refresh();
+                UpdateFilterSummary(rebuildCategoryGroups: false);
+                break;
+            case nameof(TweaksShellStateViewModel.SelectedWorkspace):
+                if (!string.IsNullOrWhiteSpace(SelectedCategoryName) && !CurrentWorkspaceContainsCategory(SelectedCategoryName))
+                {
+                    SelectedCategoryName = string.Empty;
+                }
+
+                RaiseWorkspaceMetricsChanged();
+                OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
+                TweaksView.Refresh();
+                UpdateFilterSummary();
+                break;
+        }
+    }
+
+    private void RaiseWorkspaceMetricsChanged()
     {
         OnPropertyChanged(nameof(SettingsWorkspaceCount));
         OnPropertyChanged(nameof(MaintenanceWorkspaceCount));
         OnPropertyChanged(nameof(CurrentWorkspaceItemCount));
-        OnPropertyChanged(nameof(IsSettingsWorkspaceSelected));
-        OnPropertyChanged(nameof(IsMaintenanceWorkspaceSelected));
-        OnPropertyChanged(nameof(CurrentWorkspaceLabel));
-        OnPropertyChanged(nameof(CurrentWorkspaceDescription));
         OnPropertyChanged(nameof(CurrentWorkspaceCountLabel));
-        OnPropertyChanged(nameof(WorkspaceCategoryHeader));
-        OnPropertyChanged(nameof(AllItemsLabel));
-        OnPropertyChanged(nameof(SearchPlaceholder));
-        OnPropertyChanged(nameof(ToolbarSectionLabel));
-        OnPropertyChanged(nameof(ToolbarSectionHint));
-        OnPropertyChanged(nameof(CurrentWorkspaceModeNote));
-        OnPropertyChanged(nameof(WorkspaceStatusHint));
-        OnPropertyChanged(nameof(EmptyStateTitle));
-        OnPropertyChanged(nameof(EmptyStateDescription));
-        OnPropertyChanged(nameof(EmptyStateActionText));
-        OnPropertyChanged(nameof(CanClearCategorySelection));
-        OnPropertyChanged(nameof(ClearCategorySelectionText));
-        OnPropertyChanged(nameof(FilterSummaryLabel));
-        OnPropertyChanged(nameof(InventorySummaryLabel));
-        OnPropertyChanged(nameof(SelectedCategoryLabel));
-        OnPropertyChanged(nameof(SelectedCategoryContext));
         OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
-        OnPropertyChanged(nameof(CurrentMainTabTitle));
-        OnPropertyChanged(nameof(CurrentMainTabSubtitle));
     }
-
-    private void RaiseMainTabPropertiesChanged()
-    {
-        OnPropertyChanged(nameof(CurrentMainTabEyebrow));
-        OnPropertyChanged(nameof(CurrentMainTabTitle));
-        OnPropertyChanged(nameof(CurrentMainTabSubtitle));
-        OnPropertyChanged(nameof(IsConfigurationTabSelected));
-        OnPropertyChanged(nameof(IsPolicyReferenceTabSelected));
-    }
-
-    private static string NormalizeMainTabName(string? value)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            return MainTabNames[0];
-        }
-
-        var match = MainTabNames.FirstOrDefault(tab => string.Equals(tab, value, StringComparison.OrdinalIgnoreCase));
-        return match ?? MainTabNames[0];
-    }
-
-    private static int NormalizeMainTabIndex(int value)
-    {
-        if (value < 0)
-        {
-            return 0;
-        }
-
-        return value >= MainTabNames.Length ? MainTabNames.Length - 1 : value;
-    }
-
-    private static int GetMainTabIndex(string? value)
-    {
-        var normalized = NormalizeMainTabName(value);
-        for (var i = 0; i < MainTabNames.Length; i++)
-        {
-            if (string.Equals(MainTabNames[i], normalized, StringComparison.Ordinal))
-            {
-                return i;
-            }
-        }
-
-        return 0;
-    }
-
-    private static string GetMainTabName(int index) => MainTabNames[NormalizeMainTabIndex(index)];
 
     public void ExpandAllCategories()
     {
@@ -1690,23 +1477,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void ResetFilters()
     {
-        SearchText = string.Empty;
-        StatusFilter = string.Empty;
-        ShowSafe = true;
-        ShowAdvanced = true;
-        ShowRisky = true;
-        ShowFavoritesOnly = false;
-        ShowClassA = true;
-        ShowClassB = true;
-        ShowClassC = true;
-        ShowClassD = true;
-        SelectedCategoryName = string.Empty;
+        _shellState.ResetFilters();
     }
 
     private void RefreshSummaryStats()
     {
         TotalTweaksAvailable = Tweaks.Count(t => t.ShowInApp);
-        RaiseWorkspacePropertiesChanged();
+        RaiseWorkspaceMetricsChanged();
         TweaksApplied = Tweaks.Count(t => t.ShowInApp && t.IsApplied);
         TweaksRolledBack = Tweaks.Count(t => t.ShowInApp && t.WasRolledBack);
         RefreshLogFileSize();
@@ -2433,6 +2210,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _inventorySaveCts?.Dispose();
 
         // Unsubscribe collection changed events
+        _shellState.PropertyChanged -= OnShellStatePropertyChanged;
         Tweaks.CollectionChanged -= OnTweaksCollectionChanged;
 
         // Unsubscribe tweak property changed events
