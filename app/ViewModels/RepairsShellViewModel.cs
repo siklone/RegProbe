@@ -23,6 +23,11 @@ public sealed class RepairsShellViewModel : WorkspaceShellViewModelBase
 
     public ICollectionView RepairsRowsView => Workspace.RepairsRowsView;
 
+    public void ShowRepairsWorkspace()
+    {
+        _repairsCoordinator.ShowCleanupWorkspace();
+    }
+
     protected override void AfterWorkspacePropertyChanged(PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(TweaksViewModel.IsBulkRunning) && RunFastCleanCommand is RelayCommand relayCommand)

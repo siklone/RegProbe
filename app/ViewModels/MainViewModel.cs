@@ -1,9 +1,7 @@
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Threading;
+using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using RegProbe.App.Services;
 using RegProbe.App.Services.TweakProviders;
 using RegProbe.App.Utilities;
@@ -14,16 +12,11 @@ namespace RegProbe.App.ViewModels;
 
 public sealed class MainViewModel : ViewModelBase, IDisposable
 {
-    private ViewModelBase? _currentViewModel;
-    private string _searchText = string.Empty;
-    private readonly RelayCommand _clearSearchCommand;
     private readonly IBusyService _busyService = new BusyService();
     private readonly TweaksViewModel _workspaceViewModel;
-    private readonly ConfigurationShellViewModel _configurationViewModel;
-    private readonly RepairsShellViewModel _repairsViewModel;
     private readonly SettingsViewModel _settingsViewModel;
-    private readonly AboutViewModel _aboutViewModel;
     private readonly MainRecoveryCoordinator _recoveryCoordinator;
+    private readonly MainShellCoordinator _shellCoordinator;
 
     public MainViewModel()
     {
@@ -48,24 +41,22 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         };
 
         _workspaceViewModel = new TweaksViewModel(providers, _busyService);
-        _workspaceViewModel.PropertyChanged += OnWorkspaceViewModelPropertyChanged;
-        _configurationViewModel = new ConfigurationShellViewModel(_workspaceViewModel);
-        _repairsViewModel = new RepairsShellViewModel(_workspaceViewModel);
         _settingsViewModel = new SettingsViewModel();
-        _aboutViewModel = new AboutViewModel();
+        var configurationViewModel = new ConfigurationShellViewModel(_workspaceViewModel);
+        var repairsViewModel = new RepairsShellViewModel(_workspaceViewModel);
+        var aboutViewModel = new AboutViewModel();
+
         _recoveryCoordinator = new MainRecoveryCoordinator(rollbackStore, _workspaceViewModel, LogToFile);
         _recoveryCoordinator.PropertyChanged += OnRecoveryCoordinatorPropertyChanged;
 
-        _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
-
-        ShowConfigurationCommand = new RelayCommand(_ => ShowConfiguration());
-        ShowRepairsCommand = new RelayCommand(_ => ShowRepairs());
-        ShowSettingsCommand = new RelayCommand(_ => ShowSettings());
-        ShowAboutCommand = new RelayCommand(_ => ShowAbout());
-        FocusSearchCommand = new RelayCommand(_ => OnFocusSearchRequested());
-        ClearFiltersCommand = new RelayCommand(_ => OnClearFilters());
-
-        ShowConfiguration();
+        _shellCoordinator = new MainShellCoordinator(
+            configurationViewModel,
+            repairsViewModel,
+            _settingsViewModel,
+            aboutViewModel,
+            LogToFile);
+        _shellCoordinator.PropertyChanged += OnShellCoordinatorPropertyChanged;
+        _shellCoordinator.Initialize();
 
         _ = Task.Run(async () =>
         {
@@ -83,94 +74,40 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public ICommand DismissPendingRollbacksCommand => _recoveryCoordinator.DismissPendingRollbacksCommand;
 
-    public RelayCommand ShowRepairsCommand { get; }
+    public RelayCommand ShowRepairsCommand => _shellCoordinator.ShowRepairsCommand;
 
-    public RelayCommand ShowConfigurationCommand { get; }
+    public RelayCommand ShowConfigurationCommand => _shellCoordinator.ShowConfigurationCommand;
 
-    public RelayCommand ShowSettingsCommand { get; }
+    public RelayCommand ShowSettingsCommand => _shellCoordinator.ShowSettingsCommand;
 
-    public RelayCommand ShowAboutCommand { get; }
+    public RelayCommand ShowAboutCommand => _shellCoordinator.ShowAboutCommand;
 
-    public RelayCommand FocusSearchCommand { get; }
+    public RelayCommand FocusSearchCommand => _shellCoordinator.FocusSearchCommand;
 
-    public RelayCommand ClearFiltersCommand { get; }
+    public RelayCommand ClearFiltersCommand => _shellCoordinator.ClearFiltersCommand;
 
-    public event Action? FocusSearchRequested;
+    public ViewModelBase? CurrentViewModel => _shellCoordinator.CurrentViewModel;
 
-    public ViewModelBase? CurrentViewModel
-    {
-        get => _currentViewModel;
-        private set
-        {
-            try
-            {
-                LogToFile($"CurrentViewModel setter: Setting to {value?.GetType().Name}");
-                if (SetProperty(ref _currentViewModel, value))
-                {
-                    OnPropertyChanged(nameof(IsConfigurationViewActive));
-                    OnPropertyChanged(nameof(IsRepairsViewActive));
-                    OnPropertyChanged(nameof(IsSettingsViewActive));
-                    OnPropertyChanged(nameof(IsAboutViewActive));
-                }
+    public bool IsConfigurationViewActive => _shellCoordinator.IsConfigurationViewActive;
 
-                LogToFile("CurrentViewModel setter: Set complete");
-            }
-            catch (Exception ex)
-            {
-                LogToFile($"CRASH in CurrentViewModel setter: {ex.Message}");
-                LogToFile($"Stack: {ex.StackTrace}");
-                throw;
-            }
-        }
-    }
+    public bool IsRepairsViewActive => _shellCoordinator.IsRepairsViewActive;
 
-    public bool IsConfigurationViewActive => ReferenceEquals(CurrentViewModel, _configurationViewModel);
+    public bool IsSettingsViewActive => _shellCoordinator.IsSettingsViewActive;
 
-    public bool IsRepairsViewActive => ReferenceEquals(CurrentViewModel, _repairsViewModel);
+    public bool IsAboutViewActive => _shellCoordinator.IsAboutViewActive;
 
-    public bool IsSettingsViewActive => ReferenceEquals(CurrentViewModel, _settingsViewModel);
+    public bool HasPendingRollbacks => _recoveryCoordinator.HasPendingRollbacks;
 
-    public bool IsAboutViewActive => ReferenceEquals(CurrentViewModel, _aboutViewModel);
+    public int PendingRollbackCount => _recoveryCoordinator.PendingRollbackCount;
 
-    public string SearchText
-    {
-        get => _searchText;
-        set
-        {
-            if (SetProperty(ref _searchText, value))
-            {
-                SyncSearchText();
-                _clearSearchCommand.RaiseCanExecuteChanged();
-            }
-        }
-    }
+    public string PendingRollbackMessage => _recoveryCoordinator.PendingRollbackMessage;
 
-    public RelayCommand ClearSearchCommand => _clearSearchCommand;
-
-    public bool HasPendingRollbacks
-    {
-        get => _recoveryCoordinator.HasPendingRollbacks;
-    }
-
-    public int PendingRollbackCount
-    {
-        get => _recoveryCoordinator.PendingRollbackCount;
-    }
-
-    public string PendingRollbackMessage
-    {
-        get => _recoveryCoordinator.PendingRollbackMessage;
-    }
-
-    public bool IsRecovering
-    {
-        get => _recoveryCoordinator.IsRecovering;
-    }
+    public bool IsRecovering => _recoveryCoordinator.IsRecovering;
 
     public void Dispose()
     {
-        _workspaceViewModel.PropertyChanged -= OnWorkspaceViewModelPropertyChanged;
         _recoveryCoordinator.PropertyChanged -= OnRecoveryCoordinatorPropertyChanged;
+        _shellCoordinator.PropertyChanged -= OnShellCoordinatorPropertyChanged;
 
         if (_workspaceViewModel is IDisposable workspaceDisposable)
         {
@@ -183,71 +120,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         }
     }
 
-    private void ShowConfiguration()
-    {
-        _configurationViewModel.ShowConfigurationWorkspace();
-        CurrentViewModel = _configurationViewModel;
-        SyncSearchText();
-        RaiseShellViewStateChanged();
-    }
-
-    private void ShowRepairs()
-    {
-        _workspaceViewModel.SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance;
-        CurrentViewModel = _repairsViewModel;
-        SyncSearchText();
-        RaiseShellViewStateChanged();
-    }
-
-    private void ShowSettings()
-    {
-        CurrentViewModel = _settingsViewModel;
-        RaiseShellViewStateChanged();
-    }
-
-    private void ShowAbout()
-    {
-        CurrentViewModel = _aboutViewModel;
-        RaiseShellViewStateChanged();
-    }
-
-    private void OnFocusSearchRequested()
-    {
-        ShowConfiguration();
-        FocusSearchRequested?.Invoke();
-    }
-
-    private void OnClearFilters()
-    {
-        _configurationViewModel.ClearFilters();
-        CurrentViewModel = _configurationViewModel;
-        RaiseShellViewStateChanged();
-        SearchText = string.Empty;
-    }
-
-    private void OnWorkspaceViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        if (!ReferenceEquals(CurrentViewModel, _configurationViewModel) &&
-            !ReferenceEquals(CurrentViewModel, _repairsViewModel))
-        {
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(e.PropertyName) ||
-            e.PropertyName == nameof(TweaksViewModel.SelectedWorkspace))
-        {
-            RaiseShellViewStateChanged();
-        }
-    }
-
-    private void RaiseShellViewStateChanged()
-    {
-        OnPropertyChanged(nameof(IsConfigurationViewActive));
-        OnPropertyChanged(nameof(IsRepairsViewActive));
-        OnPropertyChanged(nameof(IsSettingsViewActive));
-        OnPropertyChanged(nameof(IsAboutViewActive));
-    }
-
     private void OnRecoveryCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(e.PropertyName))
@@ -258,9 +130,14 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(e.PropertyName);
     }
 
-    private void SyncSearchText()
+    private void OnShellCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        _workspaceViewModel.SearchText = _searchText;
+        if (string.IsNullOrWhiteSpace(e.PropertyName))
+        {
+            return;
+        }
+
+        OnPropertyChanged(e.PropertyName);
     }
 
     private static void LogToFile(string message)
