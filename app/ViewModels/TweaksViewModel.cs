@@ -86,12 +86,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly ObservableCollection<RepairsItemViewModel> _repairsRows = new();
     private readonly bool _showContributorEvidenceUi = ContributorMode.IsEnabled;
     private readonly IFavoritesStore _favoritesStore;
-    private readonly ITweakInventoryStateStore _inventoryStateStore;
     private CancellationTokenSource? _searchCts;
-    private CancellationTokenSource? _inventorySaveCts;
-    private bool _isApplyingCachedInventory;
-    private bool _isBackgroundRefreshRunning;
-    private string _inventoryStatusMessage = "Status check not available yet.";
     private readonly IProfileSyncService _syncService = new ProfileSyncService();
     private readonly PluginLoader _pluginLoader = new();
     private readonly TweakExecutionPipeline _pipeline;
@@ -99,6 +94,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly IRollbackStateStore _rollbackStore;
     private readonly ConfigurationWorkspaceClassifier _workspaceClassifier = new();
     private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
+    private readonly WorkspaceInventoryCoordinator _inventoryCoordinator;
     private readonly WorkspaceOperationsCoordinator _operationsCoordinator;
     private readonly WorkspaceSupportCoordinator _supportCoordinator;
     private readonly WorkspaceActionCoordinator _workspaceActionCoordinator;
@@ -159,7 +155,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _operationsCoordinator.PropertyChanged += OnOperationsCoordinatorPropertyChanged;
         _rollbackStore = new RollbackStateStore(paths);
         _favoritesStore = new FavoritesStore(paths);
-        _inventoryStateStore = new TweakInventoryStateStore(paths);
+        _inventoryCoordinator = new WorkspaceInventoryCoordinator(new TweakInventoryStateStore(paths));
+        _inventoryCoordinator.PropertyChanged += OnInventoryCoordinatorPropertyChanged;
 		_pipeline = new TweakExecutionPipeline(logger, _logStore, _rollbackStore);
 		var settingsStore = new SettingsStore(paths);
 		_isElevated = ProcessElevation.IsElevated();
@@ -246,7 +243,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         LoadProviderTweaks();
         LoadPlugins();
         ApplyTweakMetadata();
-        LoadCachedInventoryState();
+        _inventoryCoordinator.LoadCachedInventoryState(Tweaks);
         _supportCoordinator.ApplyCatalogs(Tweaks);
         WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
         UpdateFilterSummary();
@@ -628,11 +625,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         private set => SetProperty(ref _bulkStatusMessage, value);
     }
 
-    public string InventoryStatusMessage
-    {
-        get => _inventoryStatusMessage;
-        private set => SetProperty(ref _inventoryStatusMessage, value);
-    }
+    public string InventoryStatusMessage => _inventoryCoordinator.InventoryStatusMessage;
 
     public bool IsExporting => _operationsCoordinator.IsExporting;
 
@@ -895,7 +888,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             RaiseHealthMetricsChanged();
             RefreshSummaryStats();
-            ScheduleInventorySnapshotSave();
+            _inventoryCoordinator.ScheduleSnapshotSave(Tweaks);
             RefreshPolicyReferencePanel();
             if (HasStatusFilter)
             {
@@ -1296,6 +1289,16 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
+    private void OnInventoryCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(e.PropertyName))
+        {
+            return;
+        }
+
+        OnPropertyChanged(e.PropertyName);
+    }
+
     private void RaiseWorkspaceMetricsChanged()
     {
         OnPropertyChanged(nameof(SettingsWorkspaceCount));
@@ -1341,7 +1344,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             Tweaks.Count(t => t.ShowInApp && t.WasRolledBack));
         RaiseWorkspaceMetricsChanged();
         RefreshLogFileSize();
-        UpdateInventoryStatusMessage();
+        _inventoryCoordinator.UpdateStatusMessage(Tweaks);
     }
 
     private void RefreshPolicyReferencePanel()
@@ -1427,107 +1430,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             _repairsRows.Add(new RepairsItemViewModel(item));
         }
-    }
-
-    private void LoadCachedInventoryState()
-    {
-        var cachedStates = _inventoryStateStore.Load();
-        if (cachedStates.Count == 0)
-        {
-            UpdateInventoryStatusMessage();
-            return;
-        }
-
-        _isApplyingCachedInventory = true;
-        try
-        {
-            var appliedCount = 0;
-            DateTimeOffset? latestTimestamp = null;
-
-            foreach (var tweak in Tweaks)
-            {
-                if (!cachedStates.TryGetValue(tweak.Id, out var cachedState))
-                {
-                    continue;
-                }
-
-                tweak.ApplyCachedInventoryState(cachedState);
-                appliedCount++;
-
-                if (cachedState.LastDetectedAtUtc.HasValue)
-                {
-                    if (!latestTimestamp.HasValue || cachedState.LastDetectedAtUtc > latestTimestamp)
-                    {
-                        latestTimestamp = cachedState.LastDetectedAtUtc;
-                    }
-                }
-            }
-
-            if (appliedCount > 0)
-            {
-                var latestText = latestTimestamp.HasValue
-                    ? latestTimestamp.Value.ToLocalTime().ToString("HH:mm:ss")
-                    : "unknown time";
-                InventoryStatusMessage = $"Loaded last checked status for {appliedCount} settings (last: {latestText}).";
-            }
-        }
-        finally
-        {
-            _isApplyingCachedInventory = false;
-        }
-    }
-
-    private void UpdateInventoryStatusMessage()
-    {
-        var inventoryTweaks = Tweaks.ToList();
-        var total = inventoryTweaks.Count;
-        var detected = inventoryTweaks.Count(t => t.AppliedStatus != TweakAppliedStatus.Unknown);
-        var requiresPrompt = inventoryTweaks.Count(t => t.WillPromptForDetect);
-
-        var suffix = _isBackgroundRefreshRunning
-            ? " Refreshing in background..."
-            : string.Empty;
-
-        InventoryStatusMessage = requiresPrompt > 0
-            ? $"Live status: {detected}/{total} checked. {requiresPrompt} need admin confirmation.{suffix}"
-            : $"Live status: {detected}/{total} checked.{suffix}";
-    }
-
-    private async void ScheduleInventorySnapshotSave()
-    {
-        if (_isApplyingCachedInventory)
-        {
-            return;
-        }
-
-        _inventorySaveCts?.Cancel();
-        _inventorySaveCts?.Dispose();
-        _inventorySaveCts = new CancellationTokenSource();
-        var token = _inventorySaveCts.Token;
-
-        try
-        {
-            await Task.Delay(400, token);
-            token.ThrowIfCancellationRequested();
-            SaveInventorySnapshot();
-        }
-        catch (OperationCanceledException)
-        {
-            // Debounced by a newer save request.
-        }
-        catch
-        {
-            // Best-effort cache write.
-        }
-    }
-
-    private void SaveInventorySnapshot()
-    {
-        var snapshot = Tweaks
-            .Select(t => t.ExportInventoryState())
-            .ToList();
-
-        _inventoryStateStore.Save(snapshot);
     }
 
     private void RefreshLogFileSize()
@@ -1658,8 +1560,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 // Silently ignore detection failures for individual tweaks
             }
         }
-        SaveInventorySnapshot();
-        UpdateInventoryStatusMessage();
+        _inventoryCoordinator.SaveSnapshot(Tweaks);
+        _inventoryCoordinator.UpdateStatusMessage(Tweaks);
 
         // Trigger health score recalculation
         OnPropertyChanged(nameof(GlobalOptimizationScore));
@@ -1679,26 +1581,14 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public async Task RefreshInventoryInBackgroundAsync(CancellationToken ct = default)
     {
-        if (_isBackgroundRefreshRunning)
-        {
-            return;
-        }
-
-        _isBackgroundRefreshRunning = true;
-        UpdateInventoryStatusMessage();
-        try
-        {
-            await DetectAllTweaksAsync(
-                ct: ct,
+        await _inventoryCoordinator.RunBackgroundRefreshAsync(
+            Tweaks,
+            async token => await DetectAllTweaksAsync(
+                ct: token,
                 forceRedetect: true,
                 skipElevationPrompts: true,
-                skipExpensiveOperations: false);
-        }
-        finally
-        {
-            _isBackgroundRefreshRunning = false;
-            UpdateInventoryStatusMessage();
-        }
+                skipExpensiveOperations: false),
+            ct);
     }
 
     public void Dispose()
@@ -1714,12 +1604,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _searchCts?.Cancel();
         _searchCts?.Dispose();
         _workspaceActionCoordinator.Dispose();
-        _inventorySaveCts?.Cancel();
-        _inventorySaveCts?.Dispose();
+        _inventoryCoordinator.Dispose();
 
         // Unsubscribe collection changed events
         _shellState.PropertyChanged -= OnShellStatePropertyChanged;
         _presentationState.PropertyChanged -= OnPresentationStatePropertyChanged;
+        _inventoryCoordinator.PropertyChanged -= OnInventoryCoordinatorPropertyChanged;
         _supportCoordinator.PropertyChanged -= OnSupportCoordinatorPropertyChanged;
         _operationsCoordinator.PropertyChanged -= OnOperationsCoordinatorPropertyChanged;
         Tweaks.CollectionChanged -= OnTweaksCollectionChanged;
